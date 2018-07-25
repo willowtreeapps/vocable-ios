@@ -113,13 +113,6 @@ class FaceNode: SCNNode {
     init(faceGeometry: ARSCNFaceGeometry) {
         super.init()
 
-//        let material = SCNMaterial()
-//        material.lightingModel = .physicallyBased
-//        material.diffuse.contents = UIColor.white.withAlphaComponent(0.7)
-//        faceGeometry.materials = [ material ]
-//        faceMeshNode.geometry = faceGeometry
-//        self.addChildNode(faceMeshNode)
-
         let cone = SCNCone(topRadius: 0.003, bottomRadius: 0.0, height: 0.4)
 
         let eyeMaterial = SCNMaterial()
