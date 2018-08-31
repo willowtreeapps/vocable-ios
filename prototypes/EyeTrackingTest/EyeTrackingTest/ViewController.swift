@@ -15,10 +15,17 @@ let phoneScreenSize = CGSize(width: 0.0623908297, height: 0.135096943231532)
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
-    
+
+    let trackingView: UIView = UIView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 40, height: 40)
+        trackingView.layer.cornerRadius = 20.0
+        trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.5)
+        self.sceneView.addSubview(trackingView)
+
         // Set the view's delegate
         sceneView.delegate = self
         // Show statistics such as fps and timing information
@@ -39,7 +46,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         sceneView.scene.rootNode.addChildNode(self.cameraIntersectionPlaneNode)
 //        self.cameraIntersectionPlaneNode.isHidden = true
-        self.cameraIntersectionPlaneNode.position.z = Float(Measurement(value: -5.0, unit: UnitLength.inches).converted(to: UnitLength.meters).value)
+
+        // -3.8 ~= screen size
+        // -5.0 = inset size
+        self.cameraIntersectionPlaneNode.position.z = Float(Measurement(value: -3.8, unit: UnitLength.inches).converted(to: UnitLength.meters).value)
+//        self.cameraIntersectionPlaneNode.position.x = Float(phoneScreenSize.height/2.0)
 
         sceneView.scene.rootNode.addChildNode(self.faceIntersectionNode)
         self.faceIntersectionNode.isHidden = true
@@ -121,7 +132,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             return
         }
 
-        let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(0.0, 0.0, 0.5, 1.0))
+        let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(0.0, 0.0, 1.0, 1.0))
         let hits = self.intersect(lineSegement: intersectionLine, in: faceNode, with: self.cameraIntersectionPlaneNode)
 
         if let firstHit = hits.first {
@@ -137,6 +148,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.faceIntersectionNode.displayText = String(format: "(%.2f, %.2f)", unitPosition.x, unitPosition.y)
             self.faceIntersectionNode.position = firstHit.worldCoordinates
             self.faceIntersectionNode.position.z += 0.00001
+
+            DispatchQueue.main.async {
+                self.trackingView.center = screenPosition
+            }
         } else {
             self.faceIntersectionNode.isHidden = true
             self.faceIntersectionNode.displayText = nil
