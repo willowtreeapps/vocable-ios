@@ -11,12 +11,14 @@ import SceneKit
 
 class FaceNode: SCNNode {
 
-    var showEyeCones: Bool = true
+    var showEyeCones: Bool = false
     var showEyeSpheres: Bool = false
     var showLookAtDirection: Bool = true
     var showLookAtSphereTrail: Bool = false
+    var showFaceCone: Bool = true
 
     var faceMeshNode = SCNNode()
+    var faceConeNode = SCNNode()
 
     var eyeLaserLeft = SCNNode()
     var eyeSphereLeft = SCNNode()
@@ -32,10 +34,20 @@ class FaceNode: SCNNode {
     init(faceGeometry: ARSCNFaceGeometry) {
         super.init()
 
-        let cone = SCNCone(topRadius: 0.001, bottomRadius: 0.001, height: 2.0)
+        let cone = SCNCone(topRadius: 0.001, bottomRadius: 0.001, height: 0.5)
 
         let eyeMaterial = SCNMaterial()
         eyeMaterial.diffuse.contents = UIColor.red
+
+        if showFaceCone {
+            cone.materials = [ eyeMaterial ]
+            let coneNode = SCNNode()
+            coneNode.geometry = cone
+            coneNode.eulerAngles.x = .pi / 2.0
+            coneNode.position.z = Float(cone.height / 2.0)
+            faceConeNode.addChildNode(coneNode)
+            self.addChildNode(faceConeNode)
+        }
 
         if showEyeCones {
             cone.materials = [ eyeMaterial ]
@@ -68,16 +80,18 @@ class FaceNode: SCNNode {
 
         if showLookAtDirection {
             // look at node
-            let lookAtConeNode = SCNNode()
-            lookAtConeNode.geometry = cone
-            lookAtConeNode.eulerAngles.x = -.pi / 2.0
-            lookAtConeNode.position.z = -Float(cone.height / 2.0)
+            let lookAtCone = SCNCone(topRadius: 0.001, bottomRadius: 0.001, height: 0.5)
 
             let lookAtMaterial = SCNMaterial()
-            lookAtMaterial.diffuse.contents = UIColor.blue.withAlphaComponent(0.2)
-            lookAtMaterial.isDoubleSided = true
+            lookAtMaterial.diffuse.contents = UIColor.blue
+            lookAtCone.materials = [ lookAtMaterial ]
 
-            cone.materials = [ lookAtMaterial ]
+            let lookAtConeNode = SCNNode()
+            lookAtConeNode.geometry = lookAtCone
+            lookAtConeNode.eulerAngles.x = -.pi / 2.0
+            lookAtConeNode.position.z = -Float(lookAtCone.height / 2.0)
+
+
             lookAtNode.addChildNode(lookAtConeNode)
             self.addChildNode(lookAtNode)
 
@@ -89,7 +103,7 @@ class FaceNode: SCNNode {
             // add line of spheres
             let sphereGeometry = SCNSphere(radius: 0.002)
 
-            for _ in 0..<10 {
+            for _ in 0..<30 {
                 let sphereNode = SCNNode()
                 sphereNode.geometry = sphereGeometry
                 self.addChildNode(sphereNode)
@@ -114,14 +128,27 @@ class FaceNode: SCNNode {
         lookAtNode.look(at: SCNVector3(worldLookAt.x, worldLookAt.y, worldLookAt.z))
 
         // layout sphere line
-        let lookAt = faceAnchor.lookAtPoint
         for i in 0..<lookSpheres.count {
             let sphereNode = lookSpheres[i]
             let stepFactor: Float = Float(i+1)/Float(lookSpheres.count)
-            let newPosition = SCNVector3(lookAt.x * stepFactor, lookAt.y * stepFactor, lookAt.z * stepFactor)
+            let endPosition = lookAtNode.convertPosition(lookAtEnd.position, to: self)
+            let newPosition = lookAtNode.position.interpolate(to: endPosition, fraction: stepFactor)
             sphereNode.position = newPosition
         }
 
+    }
+
+}
+
+extension SCNVector3 {
+
+    func interpolate(to other: SCNVector3, fraction: Float) -> SCNVector3 {
+        let x = self.x + (other.x - self.x) * fraction
+        let y = self.y + (other.y - self.y) * fraction
+        let z = self.z + (other.z - self.z) * fraction
+        let result = SCNVector3(x: x, y: y, z: z)
+//        print("interp from: \(self) to \(other), result: \(result)")
+        return result
     }
 
 }
