@@ -115,32 +115,69 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     }
 
-    // Awesome example, thoroughly documented by kevin!
-    // LEAVE AS IS, even though we have better methods below. This is edification. 
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        // Present an error message to the user
+    }
+
+    func sessionWasInterrupted(_ session: ARSession) {
+        // Inform the user that the session has been interrupted, for example, by presenting an overlay
+    }
+
+    func sessionInterruptionEnded(_ session: ARSession) {
+        // Reset tracking and/or remove existing anchors if consistent tracking is required
+    }
+
+    // MARK: - Updating Face Intersection
+
     func updateFacewiseHitTest(faceAnchor: ARFaceAnchor) {
-        // Get the position of the face and the position of a point ahead of the nose.
-        // Multiplying with the face anchor transform takes a point in its coordinate space
-        // and gives us a point in its parent's coordinate space.
-        let faceOrigin = simd_mul(faceAnchor.transform, simd_make_float4(0.0, 0.0, 0.0, 1.0))
-        let faceEnd = simd_mul(faceAnchor.transform, simd_make_float4(0.0, 0.0, 0.5, 1.0))
+        guard let faceNode = self.faceNode else {
+            assertionFailure("Can't update, there is no face node!")
+            return
+        }
 
-         // Get these two positions represented in the coordinate space of the intersection plane.
-         // Multiplying with the inverse of the intersection node transform takes a point in its parent's
-         //coordinate space and gives us a point in its coordinate space.
-        let intersectionPlaneTransform = self.cameraIntersectionPlaneNode.simdTransform
-        let inverseIntersectionPlaneTransform = simd_inverse(intersectionPlaneTransform)
-        let faceOriginInPlane = simd_mul(inverseIntersectionPlaneTransform, faceOrigin)
-        let faceEndInPlane = simd_mul(inverseIntersectionPlaneTransform, faceEnd)
-
-        let hits = self.cameraIntersectionPlaneNode.hitTestWithSegment(from: SCNVector3FromSIMDFloat4(faceOriginInPlane), to: SCNVector3FromSIMDFloat4(faceEndInPlane), options: [ SCNHitTestOption.ignoreChildNodes.rawValue: NSNumber(booleanLiteral: true) ])
+        let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(0.0, 0.0, 0.5, 1.0))
+        let hits = self.intersect(lineSegement: intersectionLine, in: faceNode, with: self.cameraIntersectionPlaneNode)
 
         if let firstHit = hits.first {
+            print("plane hit: \(firstHit.localCoordinates)")
+            let unitPosition = self.unitPositionInPlane(for: firstHit)
+            print("plane hit unit: \(unitPosition)")
+            let screenPosition = self.screenPosition(fromUnitPosition: unitPosition)
+            print("plane to screen: \(screenPosition)")
+
             if self.faceIntersectionNode.isHidden == true {
                 self.faceIntersectionNode.isHidden = false
             }
             self.faceIntersectionNode.position = firstHit.worldCoordinates
             self.faceIntersectionNode.position.z += 0.00001
         }
+    }
+
+    /// Calculates the position of the hit test in the [0.0...1.0] domain using the coordinate orientation of UIKit.
+    func unitPositionInPlane(for hit: SCNHitTestResult) -> CGPoint {
+
+        guard let plane = hit.node.geometry as? SCNPlane else {
+            assertionFailure("Getting unit position in non-plane geometry is unsupported")
+            return CGPoint.zero
+        }
+
+        let localX = CGFloat(hit.localCoordinates.x)
+        let localY = CGFloat(hit.localCoordinates.y)
+
+        let unitX = ((plane.width / 2.0) + localX) / plane.width
+        let unitY = ((plane.height / 2.0) + localY) / plane.height
+
+        // flip the x and y, because for SOME reason, the x component of the hit test goes up and down,
+        // and the y component goes side to side.
+        return CGPoint(x: unitY, y: unitX)
+    }
+
+    func screenPosition(fromUnitPosition unitPosition: CGPoint) -> CGPoint {
+        let screenSize = UIScreen.main.bounds.size
+        let screenX = screenSize.width * unitPosition.x
+        let screenY = screenSize.height * unitPosition.y
+
+        return CGPoint(x: screenX, y: screenY)
     }
 
     func updateLookwiseHitTest(faceAnchor: ARFaceAnchor) {
@@ -155,6 +192,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.lookAtIntersectionNode.position.z += 0.00001
         }
     }
+
+
+    // MARK: - Intersection Helpers
 
     /// Intersect a line segement, specified in the sourceNode's coordinate system, with the targetNode.
     /// - Returns: The result of hit testing the lineSegment against the targetNode.
@@ -176,17 +216,33 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         return targetNode.hitTestWithSegment(from: SCNVector3(lineStartInTarget), to: SCNVector3(lineEndInTarget), options: [ SCNHitTestOption.ignoreChildNodes.rawValue: NSNumber(booleanLiteral: true) ])
     }
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
+
+    // Awesome example, thoroughly documented by kevin!
+    // LEAVE AS IS, even though we have better methods below. This is edification.
+    func oldAndImportant_updateFacewiseHitTest(faceAnchor: ARFaceAnchor) {
+        // Get the position of the face and the position of a point ahead of the nose.
+        // Multiplying with the face anchor transform takes a point in its coordinate space
+        // and gives us a point in its parent's coordinate space.
+        let faceOrigin = simd_mul(faceAnchor.transform, simd_make_float4(0.0, 0.0, 0.0, 1.0))
+        let faceEnd = simd_mul(faceAnchor.transform, simd_make_float4(0.0, 0.0, 0.5, 1.0))
+
+        // Get these two positions represented in the coordinate space of the intersection plane.
+        // Multiplying with the inverse of the intersection node transform takes a point in its parent's
+        //coordinate space and gives us a point in its coordinate space.
+        let intersectionPlaneTransform = self.cameraIntersectionPlaneNode.simdTransform
+        let inverseIntersectionPlaneTransform = simd_inverse(intersectionPlaneTransform)
+        let faceOriginInPlane = simd_mul(inverseIntersectionPlaneTransform, faceOrigin)
+        let faceEndInPlane = simd_mul(inverseIntersectionPlaneTransform, faceEnd)
+
+        let hits = self.cameraIntersectionPlaneNode.hitTestWithSegment(from: SCNVector3FromSIMDFloat4(faceOriginInPlane), to: SCNVector3FromSIMDFloat4(faceEndInPlane), options: [ SCNHitTestOption.ignoreChildNodes.rawValue: NSNumber(booleanLiteral: true) ])
+
+        if let firstHit = hits.first {
+            if self.faceIntersectionNode.isHidden == true {
+                self.faceIntersectionNode.isHidden = false
+            }
+            self.faceIntersectionNode.position = firstHit.worldCoordinates
+            self.faceIntersectionNode.position.z += 0.00001
+        }
     }
 
 }
