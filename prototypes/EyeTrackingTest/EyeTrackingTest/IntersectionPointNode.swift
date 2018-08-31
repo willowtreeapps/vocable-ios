@@ -41,7 +41,7 @@ class IntersectionPointNode: SCNNode {
     }
 
     private lazy var sphereNode: SCNNode = {
-        let sphere = SCNSphere(radius: 0.008)
+        let sphere = SCNSphere(radius: 0.005)
         sphere.materials.first?.isDoubleSided = true
         return SCNNode(geometry: sphere)
     }()
@@ -49,10 +49,8 @@ class IntersectionPointNode: SCNNode {
     private lazy var textNode: SCNNode = {
         let textNode = SCNNode(geometry: self.textGeometry)
 
-        let (minBound, maxBound) = self.textGeometry.boundingBox
-        textNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, 0.0)
-        textNode.scale = SCNVector3Make(0.005, 0.005, 0.005)
-        textNode.position = SCNVector3(-0.01, 0.0, 0.0)
+        textNode.scale = SCNVector3Make(0.003, 0.003, 0.003)
+        textNode.position = SCNVector3(-0.005, 0.0, 0.0)
         textNode.eulerAngles.z = Float.pi / 2.0
 
         return textNode
@@ -72,6 +70,9 @@ class IntersectionPointNode: SCNNode {
 
     func updateText(_ text: String?) {
         self.textGeometry.string = text
+
+        let (minBound, maxBound) = self.textGeometry.boundingBox
+        textNode.pivot = SCNMatrix4MakeTranslation((maxBound.x - minBound.x)/2.0, 0.0, 0.0)
     }
 
 }
