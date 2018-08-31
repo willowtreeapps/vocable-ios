@@ -14,8 +14,25 @@ let phoneScreenSize = CGSize(width: 0.0623908297, height: 0.135096943231532)
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
-    @IBOutlet var sceneView: ARSCNView!
+    enum TrackingMode {
+        case head
+        case eye
+    }
 
+    var trackingMode: TrackingMode = .head {
+        didSet {
+            self.updateConfiguration()
+        }
+    }
+    var showDebug: Bool = true {
+        didSet {
+            self.updateConfiguration()
+        }
+    }
+
+    // MARK: - View Lifecycle
+
+    @IBOutlet var sceneView: ARSCNView!
     let trackingView: UIView = UIView()
 
     override func viewDidLoad() {
@@ -23,7 +40,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 40, height: 40)
         trackingView.layer.cornerRadius = 20.0
-        trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.5)
+        trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.8)
         self.sceneView.addSubview(trackingView)
 
         // Set the view's delegate
@@ -44,19 +61,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Run the view's session
         sceneView.session.run(configuration)
 
-        sceneView.scene.rootNode.addChildNode(self.cameraIntersectionPlaneNode)
-//        self.cameraIntersectionPlaneNode.isHidden = true
+        let rootNode = sceneView.scene.rootNode
 
-        // -3.8 ~= screen size
-        // -5.0 = inset size
-        self.cameraIntersectionPlaneNode.position.z = Float(Measurement(value: -3.8, unit: UnitLength.inches).converted(to: UnitLength.meters).value)
-//        self.cameraIntersectionPlaneNode.position.x = Float(phoneScreenSize.height/2.0)
+        rootNode.addChildNode(self.cameraIntersectionPlaneNode)
+        self.configureIntersectionPlane()
 
-        sceneView.scene.rootNode.addChildNode(self.faceIntersectionNode)
+        rootNode.addChildNode(self.intersectionParent)
+        self.configureIntersectionNodes()
+
+        self.intersectionParent.addChildNode(self.faceIntersectionNode)
         self.faceIntersectionNode.isHidden = true
-
-        sceneView.scene.rootNode.addChildNode(self.lookAtIntersectionNode)
+        self.intersectionParent.addChildNode(self.lookAtIntersectionNode)
         self.lookAtIntersectionNode.isHidden = true
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -64,6 +81,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Pause the view's session
         sceneView.session.pause()
+    }
+
+    func updateConfiguration() {
+        self.configureFaceNode()
+        self.configureIntersectionPlane()
+        self.configureIntersectionNodes()
     }
 
     // MARK: - Nodes and Anchors
@@ -82,8 +105,35 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return node
     }()
 
+    var intersectionParent = SCNNode()
     lazy var faceIntersectionNode = IntersectionPointNode(color: .red)
     lazy var lookAtIntersectionNode = IntersectionPointNode(color: .blue)
+
+    private func configureFaceNode() {
+        self.faceNode?.resetVisibility()
+
+        if self.showDebug {
+            switch self.trackingMode {
+            case .eye:
+                self.faceNode?.showLookAtDirection = true
+            case .head:
+                self.faceNode?.showFaceDirection = true
+            }
+        }
+    }
+
+    private func configureIntersectionPlane() {
+        self.cameraIntersectionPlaneNode.isHidden = !self.showDebug
+
+        // -3.8 ~= screen size
+        // -5.0 = inset size
+        self.cameraIntersectionPlaneNode.position.z = Float(Measurement(value: -3.8, unit: UnitLength.inches).converted(to: UnitLength.meters).value)
+        //        self.cameraIntersectionPlaneNode.position.x = Float(phoneScreenSize.height/2.0)
+    }
+
+    private func configureIntersectionNodes() {
+        self.intersectionParent.isHidden = !self.showDebug
+    }
 
     // MARK: - ARSCNViewDelegate
 
@@ -94,6 +144,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.faceAnchor = faceAnchor
             let faceGeometry = ARSCNFaceGeometry(device: self.sceneView.device!)
             self.faceNode = FaceNode(faceGeometry: faceGeometry!)
+            self.configureFaceNode()
             return faceNode
         }
 
@@ -106,8 +157,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             guard let faceNode = self.faceNode else { return }
             faceNode.updateFace(with: faceAnchor)
 
-            self.updateFacewiseHitTest(faceAnchor: faceAnchor)
-//            self.updateLookwiseHitTest(faceAnchor: faceAnchor)
+            switch self.trackingMode {
+            case .eye:
+                self.updateLookwiseHitTest(faceAnchor: faceAnchor)
+            case .head:
+                self.updateFacewiseHitTest(faceAnchor: faceAnchor)
+            }
         }
 
     }
@@ -135,39 +190,46 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(0.0, 0.0, 1.0, 1.0))
         let hits = self.intersect(lineSegement: intersectionLine, in: faceNode, with: self.cameraIntersectionPlaneNode)
 
-        if let firstHit = hits.first {
-            print("plane hit: \(firstHit.localCoordinates)")
-            let unitPosition = self.unitPositionInPlane(for: firstHit)
-            print("plane hit unit: \(unitPosition)")
-            let screenPosition = self.screenPosition(fromUnitPosition: unitPosition)
-            print("plane to screen: \(screenPosition)")
-
-            if self.faceIntersectionNode.isHidden == true {
-                self.faceIntersectionNode.isHidden = false
-            }
-            self.faceIntersectionNode.displayText = String(format: "(%.2f, %.2f)", unitPosition.x, unitPosition.y)
-            self.faceIntersectionNode.position = firstHit.worldCoordinates
-            self.faceIntersectionNode.position.z += 0.00001
-
-            DispatchQueue.main.async {
-                self.trackingView.center = screenPosition
-            }
-        } else {
-            self.faceIntersectionNode.isHidden = true
-            self.faceIntersectionNode.displayText = nil
-        }
+        updateIntersectionNode(self.faceIntersectionNode, with: hits.first)
+        updateTrackingView(with: hits.first)
     }
 
     func updateLookwiseHitTest(faceAnchor: ARFaceAnchor) {
         let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(faceAnchor.lookAtPoint, w: 0.0))
         let hits = self.intersect(lineSegement: intersectionLine, toWorld: faceAnchor.transform, with: self.cameraIntersectionPlaneNode)
 
-        if let firstHit = hits.first {
-            if self.lookAtIntersectionNode.isHidden == true {
-                self.lookAtIntersectionNode.isHidden = false
+        updateIntersectionNode(self.lookAtIntersectionNode, with: hits.first)
+        updateTrackingView(with: hits.first)
+    }
+
+    func updateIntersectionNode(_ intersectionNode: IntersectionPointNode, with hitTest: SCNHitTestResult?) {
+        if let hitTest = hitTest {
+            if intersectionNode.isHidden == true {
+                intersectionNode.isHidden = false
             }
-            self.lookAtIntersectionNode.position = firstHit.worldCoordinates
-            self.lookAtIntersectionNode.position.z += 0.00001
+
+            let unitPosition = self.unitPositionInPlane(for: hitTest)
+            intersectionNode.displayText = String(format: "(%.2f, %.2f)", unitPosition.x, unitPosition.y)
+            intersectionNode.position = hitTest.worldCoordinates
+            intersectionNode.position.z += 0.00001
+        } else {
+            intersectionNode.isHidden = true
+            intersectionNode.displayText = nil
+        }
+    }
+
+    func updateTrackingView(with hitTest: SCNHitTestResult?) {
+        DispatchQueue.main.async {
+            if let hitTest = hitTest {
+                if self.trackingView.isHidden {
+                    self.trackingView.isHidden = false
+                }
+                let unitPosition = self.unitPositionInPlane(for: hitTest)
+                let screenPosition = self.screenPosition(fromUnitPosition: unitPosition)
+                self.trackingView.center = screenPosition
+            } else {
+                self.trackingView.isHidden = true
+            }
         }
     }
 
