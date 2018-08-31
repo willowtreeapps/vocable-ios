@@ -38,6 +38,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.run(configuration)
 
         sceneView.scene.rootNode.addChildNode(self.cameraIntersectionPlaneNode)
+//        self.cameraIntersectionPlaneNode.isHidden = true
         self.cameraIntersectionPlaneNode.position.z = Float(Measurement(value: -5.0, unit: UnitLength.inches).converted(to: UnitLength.meters).value)
 
         sceneView.scene.rootNode.addChildNode(self.faceIntersectionNode)
@@ -70,23 +71,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return node
     }()
 
-    lazy var faceIntersectionNode: SCNNode = {
-        let sphere = SCNSphere(radius: 0.008)
-        sphere.materials.first?.diffuse.contents = UIColor.red.withAlphaComponent(0.2)
-        sphere.materials.first?.isDoubleSided = true
-
-        let node = SCNNode(geometry: sphere)
-        return node
-    }()
-
-    lazy var lookAtIntersectionNode: SCNNode = {
-        let sphere = SCNSphere(radius: 0.008)
-        sphere.materials.first?.diffuse.contents = UIColor.blue.withAlphaComponent(0.2)
-        sphere.materials.first?.isDoubleSided = true
-
-        let node = SCNNode(geometry: sphere)
-        return node
-    }()
+    lazy var faceIntersectionNode = IntersectionPointNode(color: .red)
+    lazy var lookAtIntersectionNode = IntersectionPointNode(color: .blue)
 
     // MARK: - ARSCNViewDelegate
 
@@ -110,7 +96,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             faceNode.updateFace(with: faceAnchor)
 
             self.updateFacewiseHitTest(faceAnchor: faceAnchor)
-            self.updateLookwiseHitTest(faceAnchor: faceAnchor)
+//            self.updateLookwiseHitTest(faceAnchor: faceAnchor)
         }
 
     }
@@ -148,10 +134,30 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             if self.faceIntersectionNode.isHidden == true {
                 self.faceIntersectionNode.isHidden = false
             }
+            self.faceIntersectionNode.displayText = String(format: "(%.2f, %.2f)", unitPosition.x, unitPosition.y)
             self.faceIntersectionNode.position = firstHit.worldCoordinates
             self.faceIntersectionNode.position.z += 0.00001
+        } else {
+            self.faceIntersectionNode.isHidden = true
+            self.faceIntersectionNode.displayText = nil
         }
     }
+
+    func updateLookwiseHitTest(faceAnchor: ARFaceAnchor) {
+        let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(faceAnchor.lookAtPoint, w: 0.0))
+        let hits = self.intersect(lineSegement: intersectionLine, toWorld: faceAnchor.transform, with: self.cameraIntersectionPlaneNode)
+
+        if let firstHit = hits.first {
+            if self.lookAtIntersectionNode.isHidden == true {
+                self.lookAtIntersectionNode.isHidden = false
+            }
+            self.lookAtIntersectionNode.position = firstHit.worldCoordinates
+            self.lookAtIntersectionNode.position.z += 0.00001
+        }
+    }
+
+
+    // MARK: - Unit-space and Screen-space conversion helpers
 
     /// Calculates the position of the hit test in the [0.0...1.0] domain using the coordinate orientation of UIKit.
     func unitPositionInPlane(for hit: SCNHitTestResult) -> CGPoint {
@@ -178,19 +184,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let screenY = screenSize.height * unitPosition.y
 
         return CGPoint(x: screenX, y: screenY)
-    }
-
-    func updateLookwiseHitTest(faceAnchor: ARFaceAnchor) {
-        let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(faceAnchor.lookAtPoint, w: 0.0))
-        let hits = self.intersect(lineSegement: intersectionLine, toWorld: faceAnchor.transform, with: self.cameraIntersectionPlaneNode)
-
-        if let firstHit = hits.first {
-            if self.lookAtIntersectionNode.isHidden == true {
-                self.lookAtIntersectionNode.isHidden = false
-            }
-            self.lookAtIntersectionNode.position = firstHit.worldCoordinates
-            self.lookAtIntersectionNode.position.z += 0.00001
-        }
     }
 
 

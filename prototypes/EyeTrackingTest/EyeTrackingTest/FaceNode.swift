@@ -13,7 +13,7 @@ class FaceNode: SCNNode {
 
     var showEyeCones: Bool = false
     var showEyeSpheres: Bool = false
-    var showLookAtDirection: Bool = true
+    var showLookAtDirection: Bool = false
     var showLookAtSphereTrail: Bool = false
     var showFaceCone: Bool = true
 
