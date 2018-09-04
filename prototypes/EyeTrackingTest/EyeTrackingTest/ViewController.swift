@@ -24,11 +24,53 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.updateConfiguration()
         }
     }
-    var showDebug: Bool = true {
+    var showDebug: Bool = false {
         didSet {
             self.updateConfiguration()
         }
     }
+
+
+    // MARK: - Demo Interface
+
+    @IBOutlet var buttons: [UIButton]!
+    var animatorsForButtons: [UIButton: UIViewPropertyAnimator] = [:]
+
+    func updateButtonHighlightForTrackingPosition() {
+
+        for button in self.buttons {
+            if button.hitTest(self.view.convert(self.trackingView.center, to: button), with: nil) != nil {
+                button.isHighlighted = true
+
+                let animator: UIViewPropertyAnimator
+                if let a = animatorsForButtons[button] {
+                    animator = a
+                } else {
+                    let springParams = UISpringTimingParameters(dampingRatio: 1.0)
+                    animator = UIViewPropertyAnimator(duration: 0.0, timingParameters: springParams)
+                    animatorsForButtons[button] = animator
+                }
+
+                animator.stopAnimation(true)
+                animator.addAnimations {
+                    button.transform = CGAffineTransform(scaleX: 0.87, y: 0.87)
+                }
+                animator.startAnimation()
+
+            } else {
+                button.isHighlighted = false
+
+                if let animator = animatorsForButtons[button] {
+                    animator.stopAnimation(true)
+                    animator.addAnimations {
+                        button.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    }
+                    animator.startAnimation()
+                }
+            }
+        }
+    }
+
 
     // MARK: - View Lifecycle
 
@@ -41,7 +83,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 40, height: 40)
         trackingView.layer.cornerRadius = 20.0
         trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.8)
-        self.sceneView.addSubview(trackingView)
+        self.view.addSubview(trackingView)
 
         // Set the view's delegate
         sceneView.delegate = self
@@ -227,6 +269,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let unitPosition = self.unitPositionInPlane(for: hitTest)
                 let screenPosition = self.screenPosition(fromUnitPosition: unitPosition)
                 self.trackingView.center = screenPosition
+
+                self.updateButtonHighlightForTrackingPosition()
             } else {
                 self.trackingView.isHidden = true
             }
