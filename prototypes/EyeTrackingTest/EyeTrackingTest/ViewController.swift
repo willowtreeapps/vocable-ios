@@ -30,9 +30,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
 
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            self.showDebug = !self.showDebug
+        }
+    }
+
 
     // MARK: - Demo Interface
 
+    @IBOutlet var buttonStackView: UIStackView!
     @IBOutlet var buttons: [UIButton]!
     var animatorsForButtons: [UIButton: UIViewPropertyAnimator] = [:]
 
@@ -69,6 +76,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 }
             }
         }
+    }
+
+    func configureDemoUI() {
+        self.buttonStackView.isHidden = self.showDebug
     }
 
 
@@ -129,6 +140,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.configureFaceNode()
         self.configureIntersectionPlane()
         self.configureIntersectionNodes()
+
+        self.configureDemoUI()
     }
 
     // MARK: - Nodes and Anchors

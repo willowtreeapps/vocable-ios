@@ -103,6 +103,7 @@
                         <viewLayoutGuide key="safeArea" id="qtf-st-RC0"/>
                     </view>
                     <connections>
+                        <outlet property="buttonStackView" destination="kdg-hA-5q5" id="c7R-2H-8ds"/>
                         <outlet property="sceneView" destination="DBy-2v-XXE" id="0ba-Ox-av4"/>
                         <outletCollection property="buttons" destination="z84-YO-ivB" collectionClass="NSMutableArray" id="Htp-cT-InK"/>
                         <outletCollection property="buttons" destination="QM9-9U-RQj" collectionClass="NSMutableArray" id="Q8H-4m-xF8"/>
