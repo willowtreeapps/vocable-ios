@@ -69,20 +69,52 @@
 			isa = PBXGroup;
 			children = (
 				130C00B720D2AD2A007C3163 /* AppDelegate.swift */,
-				130C00B920D2AD2A007C3163 /* art.scnassets */,
 				130C00BB20D2AD2A007C3163 /* ViewController.swift */,
 				130C00BD20D2AD2A007C3163 /* Main.storyboard */,
+				139EDEE821419C220009A99F /* SceneKit */,
+				139EDEE721419B950009A99F /* Extensions */,
+				139EDEE921419C400009A99F /* Supporting Files */,
+			);
+			path = EyeTrackingTest;
+			sourceTree = "<group>";
+		};
+		139EDEE721419B950009A99F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				13DA8E8820DACDB900B19B70 /* VectorUtils.swift */,
+				13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */,
+				13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		139EDEE821419C220009A99F /* SceneKit */ = {
+			isa = PBXGroup;
+			children = (
+				13C32B87213991190090BB7D /* LineSegment.swift */,
+				139EDEEA21419C870009A99F /* Debug Visualization */,
+			);
+			path = SceneKit;
+			sourceTree = "<group>";
+		};
+		139EDEE921419C400009A99F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				130C00B920D2AD2A007C3163 /* art.scnassets */,
 				130C00C020D2AD2C007C3163 /* Assets.xcassets */,
 				130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */,
 				130C00C520D2AD2C007C3163 /* Info.plist */,
-				13DA8E8820DACDB900B19B70 /* VectorUtils.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		139EDEEA21419C870009A99F /* Debug Visualization */ = {
+			isa = PBXGroup;
+			children = (
 				13B1865D2108E8030099D278 /* FaceNode.swift */,
-				13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */,
-				13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */,
-				13C32B87213991190090BB7D /* LineSegment.swift */,
 				13C32B892139A2440090BB7D /* IntersectionPointNode.swift */,
 			);
-			path = EyeTrackingTest;
+			path = "Debug Visualization";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,7 +342,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H4UN8LXK26;
-				INFOPLIST_FILE = EyeTrackingTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/EyeTrackingTest/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -328,7 +360,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H4UN8LXK26;
-				INFOPLIST_FILE = EyeTrackingTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/EyeTrackingTest/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
