@@ -13,6 +13,11 @@
 		130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00BD20D2AD2A007C3163 /* Main.storyboard */; };
 		130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C020D2AD2C007C3163 /* Assets.xcassets */; };
 		130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */; };
+		13B1865E2108E8030099D278 /* FaceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1865D2108E8030099D278 /* FaceNode.swift */; };
+		13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */; };
+		13C32B86213990EB0090BB7D /* SCNVector4+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */; };
+		13C32B88213991190090BB7D /* LineSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B87213991190090BB7D /* LineSegment.swift */; };
+		13C32B8A2139A2440090BB7D /* IntersectionPointNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B892139A2440090BB7D /* IntersectionPointNode.swift */; };
 		13DA8E8920DACDB900B19B70 /* VectorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA8E8820DACDB900B19B70 /* VectorUtils.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +30,11 @@
 		130C00C020D2AD2C007C3163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		130C00C320D2AD2C007C3163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		130C00C520D2AD2C007C3163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13B1865D2108E8030099D278 /* FaceNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceNode.swift; sourceTree = "<group>"; };
+		13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
+		13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector4+Extensions.swift"; sourceTree = "<group>"; };
+		13C32B87213991190090BB7D /* LineSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSegment.swift; sourceTree = "<group>"; };
+		13C32B892139A2440090BB7D /* IntersectionPointNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionPointNode.swift; sourceTree = "<group>"; };
 		13DA8E8820DACDB900B19B70 /* VectorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +76,11 @@
 				130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */,
 				130C00C520D2AD2C007C3163 /* Info.plist */,
 				13DA8E8820DACDB900B19B70 /* VectorUtils.swift */,
+				13B1865D2108E8030099D278 /* FaceNode.swift */,
+				13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */,
+				13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */,
+				13C32B87213991190090BB7D /* LineSegment.swift */,
+				13C32B892139A2440090BB7D /* IntersectionPointNode.swift */,
 			);
 			path = EyeTrackingTest;
 			sourceTree = "<group>";
@@ -144,7 +159,12 @@
 			files = (
 				130C00BC20D2AD2A007C3163 /* ViewController.swift in Sources */,
 				13DA8E8920DACDB900B19B70 /* VectorUtils.swift in Sources */,
+				13C32B86213990EB0090BB7D /* SCNVector4+Extensions.swift in Sources */,
+				13C32B88213991190090BB7D /* LineSegment.swift in Sources */,
+				13B1865E2108E8030099D278 /* FaceNode.swift in Sources */,
+				13C32B8A2139A2440090BB7D /* IntersectionPointNode.swift in Sources */,
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
+				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

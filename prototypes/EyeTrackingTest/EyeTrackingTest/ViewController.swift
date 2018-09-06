@@ -10,13 +10,92 @@ import UIKit
 import SceneKit
 import ARKit
 
+let phoneScreenSize = CGSize(width: 0.0623908297, height: 0.135096943231532)
+
 class ViewController: UIViewController, ARSCNViewDelegate {
 
+    enum TrackingMode {
+        case head
+        case eye
+    }
+
+    var trackingMode: TrackingMode = .head {
+        didSet {
+            self.updateConfiguration()
+        }
+    }
+    var showDebug: Bool = false {
+        didSet {
+            self.updateConfiguration()
+        }
+    }
+
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            self.showDebug = !self.showDebug
+        }
+    }
+
+
+    // MARK: - Demo Interface
+
+    @IBOutlet var buttonStackView: UIStackView!
+    @IBOutlet var buttons: [UIButton]!
+    var animatorsForButtons: [UIButton: UIViewPropertyAnimator] = [:]
+
+    func updateButtonHighlightForTrackingPosition() {
+
+        for button in self.buttons {
+            if button.hitTest(self.view.convert(self.trackingView.center, to: button), with: nil) != nil {
+                button.isHighlighted = true
+
+                let animator: UIViewPropertyAnimator
+                if let a = animatorsForButtons[button] {
+                    animator = a
+                } else {
+                    let springParams = UISpringTimingParameters(dampingRatio: 1.0)
+                    animator = UIViewPropertyAnimator(duration: 0.0, timingParameters: springParams)
+                    animatorsForButtons[button] = animator
+                }
+
+                animator.stopAnimation(true)
+                animator.addAnimations {
+                    button.transform = CGAffineTransform(scaleX: 0.87, y: 0.87)
+                }
+                animator.startAnimation()
+
+            } else {
+                button.isHighlighted = false
+
+                if let animator = animatorsForButtons[button] {
+                    animator.stopAnimation(true)
+                    animator.addAnimations {
+                        button.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    }
+                    animator.startAnimation()
+                }
+            }
+        }
+    }
+
+    func configureDemoUI() {
+        self.buttonStackView.isHidden = self.showDebug
+    }
+
+
+    // MARK: - View Lifecycle
+
     @IBOutlet var sceneView: ARSCNView!
-    
+    let trackingView: UIView = UIView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 40, height: 40)
+        trackingView.layer.cornerRadius = 20.0
+        trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.8)
+        self.view.addSubview(trackingView)
+
         // Set the view's delegate
         sceneView.delegate = self
         // Show statistics such as fps and timing information
@@ -34,6 +113,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         // Run the view's session
         sceneView.session.run(configuration)
+
+        let rootNode = sceneView.scene.rootNode
+
+        rootNode.addChildNode(self.cameraIntersectionPlaneNode)
+        self.configureIntersectionPlane()
+
+        rootNode.addChildNode(self.intersectionParent)
+        self.configureIntersectionNodes()
+
+        self.intersectionParent.addChildNode(self.faceIntersectionNode)
+        self.faceIntersectionNode.isHidden = true
+        self.intersectionParent.addChildNode(self.lookAtIntersectionNode)
+        self.lookAtIntersectionNode.isHidden = true
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,10 +136,61 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
 
-    // MARK: - ARSCNViewDelegate
+    func updateConfiguration() {
+        self.configureFaceNode()
+        self.configureIntersectionPlane()
+        self.configureIntersectionNodes()
+
+        self.configureDemoUI()
+    }
+
+    // MARK: - Nodes and Anchors
 
     var faceAnchor: ARFaceAnchor? = nil
     var faceNode: FaceNode? = nil
+
+    lazy var cameraIntersectionPlaneNode: SCNNode = {
+        let plane = SCNPlane(width: phoneScreenSize.height, height: phoneScreenSize.width)
+        plane.materials.first?.diffuse.contents = UIColor.white
+        plane.materials.first?.transparency = 0.5
+        plane.materials.first?.writesToDepthBuffer = false
+        plane.materials.first?.isDoubleSided = true
+
+        let node = SCNNode(geometry: plane)
+        return node
+    }()
+
+    var intersectionParent = SCNNode()
+    lazy var faceIntersectionNode = IntersectionPointNode(color: .red)
+    lazy var lookAtIntersectionNode = IntersectionPointNode(color: .blue)
+
+    private func configureFaceNode() {
+        self.faceNode?.resetVisibility()
+
+        if self.showDebug {
+            switch self.trackingMode {
+            case .eye:
+                self.faceNode?.showLookAtDirection = true
+            case .head:
+                self.faceNode?.showFaceDirection = true
+            }
+        }
+    }
+
+    private func configureIntersectionPlane() {
+        self.cameraIntersectionPlaneNode.isHidden = !self.showDebug
+
+        // -3.8 ~= screen size
+        // -5.0 = inset size
+        self.cameraIntersectionPlaneNode.position.z = Float(Measurement(value: -3.8, unit: UnitLength.inches).converted(to: UnitLength.meters).value)
+        //        self.cameraIntersectionPlaneNode.position.x = Float(phoneScreenSize.height/2.0)
+    }
+
+    private func configureIntersectionNodes() {
+        self.intersectionParent.isHidden = !self.showDebug
+    }
+
+    // MARK: - ARSCNViewDelegate
 
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
@@ -55,6 +199,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.faceAnchor = faceAnchor
             let faceGeometry = ARSCNFaceGeometry(device: self.sceneView.device!)
             self.faceNode = FaceNode(faceGeometry: faceGeometry!)
+            self.configureFaceNode()
             return faceNode
         }
 
@@ -64,149 +209,167 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
 
         if anchor == self.faceAnchor, let faceAnchor = anchor as? ARFaceAnchor {
-            self.faceNode?.updateFace(with: faceAnchor)
+            guard let faceNode = self.faceNode else { return }
+            faceNode.updateFace(with: faceAnchor)
 
-//            // check intersection
-            let worldLookAt = simd_mul(node.simdWorldTransform, simd_make_float4(faceAnchor.lookAtPoint))
-            let worldLookAtVector = SCNVector3Make(worldLookAt.x, worldLookAt.y, worldLookAt.z)
-            let intersection = intersectPlane(p_co: SCNVector3Zero, p_no: SCNVector3Make(0.0, 0.0, -1.0), p0: node.position, p1: worldLookAtVector)
-            if let inter = intersection {
-                print(inter)
+            switch self.trackingMode {
+            case .eye:
+                self.updateLookwiseHitTest(faceAnchor: faceAnchor)
+            case .head:
+                self.updateFacewiseHitTest(faceAnchor: faceAnchor)
             }
         }
 
     }
-    
+
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
     }
-    
+
     func sessionWasInterrupted(_ session: ARSession) {
         // Inform the user that the session has been interrupted, for example, by presenting an overlay
     }
-    
+
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
     }
 
-}
+    // MARK: - Updating Face Intersection
 
-class FaceNode: SCNNode {
-
-    var showEyeCones: Bool = false
-    var showEyeSpheres: Bool = false
-    var showLookAtDirection: Bool = true
-    var showLookAtSphereTrail: Bool = false
-
-    var faceMeshNode = SCNNode()
-
-    var eyeLaserLeft = SCNNode()
-    var eyeSphereLeft = SCNNode()
-
-    var eyeLaserRight = SCNNode()
-    var eyeSphereRight = SCNNode()
-
-    var lookAtNode = SCNNode()
-
-    var lookSpheres: [SCNNode] = []
-
-    init(faceGeometry: ARSCNFaceGeometry) {
-        super.init()
-
-//        let material = SCNMaterial()
-//        material.lightingModel = .physicallyBased
-//        material.diffuse.contents = UIColor.white.withAlphaComponent(0.7)
-//        faceGeometry.materials = [ material ]
-//        faceMeshNode.geometry = faceGeometry
-//        self.addChildNode(faceMeshNode)
-
-        let cone = SCNCone(topRadius: 0.003, bottomRadius: 0.0, height: 0.4)
-
-        let eyeMaterial = SCNMaterial()
-        eyeMaterial.diffuse.contents = UIColor.red
-
-        if showEyeCones {
-            cone.materials = [ eyeMaterial ]
-
-            var coneNode = SCNNode()
-            coneNode.geometry = cone
-            coneNode.eulerAngles.x = .pi / 2.0
-            coneNode.position.z = Float(cone.height / 2.0)
-            eyeLaserLeft.addChildNode(coneNode)
-            self.addChildNode(eyeLaserLeft)
-
-            coneNode = SCNNode()
-            coneNode.geometry = cone
-            coneNode.eulerAngles.x = .pi / 2.0
-            coneNode.position.z = Float(cone.height / 2.0)
-            eyeLaserRight.addChildNode(coneNode)
-            self.addChildNode(eyeLaserRight)
+    func updateFacewiseHitTest(faceAnchor: ARFaceAnchor) {
+        guard let faceNode = self.faceNode else {
+            assertionFailure("Can't update, there is no face node!")
+            return
         }
 
-        if showEyeSpheres {
-            let leftSphere = SCNSphere(radius: 0.01)
-            leftSphere.materials = [ eyeMaterial ]
-            eyeSphereLeft.geometry = leftSphere
-            self.addChildNode(eyeSphereLeft)
+        let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(0.0, 0.0, 1.0, 1.0))
+        let hits = self.intersect(lineSegement: intersectionLine, in: faceNode, with: self.cameraIntersectionPlaneNode)
 
-            let rightSphere = SCNSphere(radius: 0.01)
-            eyeSphereRight.geometry = rightSphere
-            self.addChildNode(eyeSphereRight)
+        updateIntersectionNode(self.faceIntersectionNode, with: hits.first)
+        updateTrackingView(with: hits.first)
+    }
+
+    func updateLookwiseHitTest(faceAnchor: ARFaceAnchor) {
+        let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(faceAnchor.lookAtPoint, w: 0.0))
+        let hits = self.intersect(lineSegement: intersectionLine, toWorld: faceAnchor.transform, with: self.cameraIntersectionPlaneNode)
+
+        updateIntersectionNode(self.lookAtIntersectionNode, with: hits.first)
+        updateTrackingView(with: hits.first)
+    }
+
+    func updateIntersectionNode(_ intersectionNode: IntersectionPointNode, with hitTest: SCNHitTestResult?) {
+        if let hitTest = hitTest {
+            if intersectionNode.isHidden == true {
+                intersectionNode.isHidden = false
+            }
+
+            let unitPosition = self.unitPositionInPlane(for: hitTest)
+            intersectionNode.displayText = String(format: "(%.2f, %.2f)", unitPosition.x, unitPosition.y)
+            intersectionNode.position = hitTest.worldCoordinates
+            intersectionNode.position.z += 0.00001
+        } else {
+            intersectionNode.isHidden = true
+            intersectionNode.displayText = nil
         }
+    }
 
-        if showLookAtDirection {
-            // look at node
-            let lookAtConeNode = SCNNode()
-            lookAtConeNode.geometry = cone
-            lookAtConeNode.eulerAngles.x = -.pi / 2.0
-            lookAtConeNode.position.z = -Float(cone.height / 2.0)
+    func updateTrackingView(with hitTest: SCNHitTestResult?) {
+        DispatchQueue.main.async {
+            if let hitTest = hitTest {
+                if self.trackingView.isHidden {
+                    self.trackingView.isHidden = false
+                }
+                let unitPosition = self.unitPositionInPlane(for: hitTest)
+                let screenPosition = self.screenPosition(fromUnitPosition: unitPosition)
+                self.trackingView.center = screenPosition
 
-            let lookAtMaterial = SCNMaterial()
-            lookAtMaterial.diffuse.contents = UIColor.blue
-            lookAtMaterial.isDoubleSided = true
-
-            cone.materials = [ lookAtMaterial ]
-            lookAtNode.addChildNode(lookAtConeNode)
-            self.addChildNode(lookAtNode)
-        }
-
-        if showLookAtSphereTrail {
-            // add line of spheres
-            let sphereGeometry = SCNSphere(radius: 0.002)
-
-            for _ in 0..<10 {
-                let sphereNode = SCNNode()
-                sphereNode.geometry = sphereGeometry
-                self.addChildNode(sphereNode)
-                self.lookSpheres.append(sphereNode)
+                self.updateButtonHighlightForTrackingPosition()
+            } else {
+                self.trackingView.isHidden = true
             }
         }
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 
-    func updateFace(with faceAnchor: ARFaceAnchor) {
+    // MARK: - Unit-space and Screen-space conversion helpers
 
-        eyeLaserLeft.transform = SCNMatrix4(faceAnchor.leftEyeTransform)
-        eyeLaserRight.transform = SCNMatrix4(faceAnchor.rightEyeTransform)
+    /// Calculates the position of the hit test in the [0.0...1.0] domain using the coordinate orientation of UIKit.
+    func unitPositionInPlane(for hit: SCNHitTestResult) -> CGPoint {
 
-        self.eyeSphereLeft.transform = SCNMatrix4(faceAnchor.leftEyeTransform)
-        self.eyeSphereRight.transform = SCNMatrix4(faceAnchor.rightEyeTransform)
-
-        let worldLookAt = simd_mul(self.simdWorldTransform, simd_make_float4(faceAnchor.lookAtPoint))
-        lookAtNode.look(at: SCNVector3(worldLookAt.x, worldLookAt.y, worldLookAt.z))
-
-        // layout sphere line
-        let lookAt = faceAnchor.lookAtPoint
-        for i in 0..<lookSpheres.count {
-            let sphereNode = lookSpheres[i]
-            let stepFactor: Float = Float(i+1)/Float(lookSpheres.count)
-            let newPosition = SCNVector3(lookAt.x * stepFactor, lookAt.y * stepFactor, lookAt.z * stepFactor)
-            sphereNode.position = newPosition
+        guard let plane = hit.node.geometry as? SCNPlane else {
+            assertionFailure("Getting unit position in non-plane geometry is unsupported")
+            return CGPoint.zero
         }
 
+        let localX = CGFloat(hit.localCoordinates.x)
+        let localY = CGFloat(hit.localCoordinates.y)
+
+        let unitX = ((plane.width / 2.0) + localX) / plane.width
+        let unitY = ((plane.height / 2.0) + localY) / plane.height
+
+        // flip the x and y, because for SOME reason, the x component of the hit test goes up and down,
+        // and the y component goes side to side.
+        return CGPoint(x: unitY, y: unitX)
+    }
+
+    func screenPosition(fromUnitPosition unitPosition: CGPoint) -> CGPoint {
+        let screenSize = UIScreen.main.bounds.size
+        let screenX = screenSize.width * unitPosition.x
+        let screenY = screenSize.height * unitPosition.y
+
+        return CGPoint(x: screenX, y: screenY)
+    }
+
+
+    // MARK: - Intersection Helpers
+
+    /// Intersect a line segement, specified in the sourceNode's coordinate system, with the targetNode.
+    /// - Returns: The result of hit testing the lineSegment against the targetNode.
+    func intersect(lineSegement: LineSegment, in sourceNode: SCNNode, with targetNode: SCNNode) -> [SCNHitTestResult] {
+        let rayStartInTarget = sourceNode.convertPosition(lineSegement.start.vector3, to: targetNode)
+        let rayEndInTarget = sourceNode.convertPosition(lineSegement.end.vector3, to: targetNode)
+
+        return targetNode.hitTestWithSegment(from: rayStartInTarget, to: rayEndInTarget, options: [ SCNHitTestOption.ignoreChildNodes.rawValue: NSNumber(booleanLiteral: true) ])
+    }
+
+    /// Given a local-to-world space transform for a line segement, interesct that line segement with the targetNode.
+    /// - Returns: The result of hit testing the lineSegment against the targetNode.
+    func intersect(lineSegement: LineSegment, toWorld: simd_float4x4, with targetNode: SCNNode) -> [SCNHitTestResult] {
+        let lineStartInWorld = simd_mul(toWorld, lineSegement.start.simdVector4)
+        let lineEndInWorld = simd_mul(toWorld, lineSegement.end.simdVector4)
+
+        let lineStartInTarget = targetNode.simdConvertPosition(simd_make_float3(lineStartInWorld), from: nil)
+        let lineEndInTarget = targetNode.simdConvertPosition(simd_make_float3(lineEndInWorld), from: nil)
+
+        return targetNode.hitTestWithSegment(from: SCNVector3(lineStartInTarget), to: SCNVector3(lineEndInTarget), options: [ SCNHitTestOption.ignoreChildNodes.rawValue: NSNumber(booleanLiteral: true) ])
+    }
+
+    // Awesome example, thoroughly documented by kevin!
+    // LEAVE AS IS, even though we have better methods below. This is edification.
+    func oldAndImportant_updateFacewiseHitTest(faceAnchor: ARFaceAnchor) {
+        // Get the position of the face and the position of a point ahead of the nose.
+        // Multiplying with the face anchor transform takes a point in its coordinate space
+        // and gives us a point in its parent's coordinate space.
+        let faceOrigin = simd_mul(faceAnchor.transform, simd_make_float4(0.0, 0.0, 0.0, 1.0))
+        let faceEnd = simd_mul(faceAnchor.transform, simd_make_float4(0.0, 0.0, 0.5, 1.0))
+
+        // Get these two positions represented in the coordinate space of the intersection plane.
+        // Multiplying with the inverse of the intersection node transform takes a point in its parent's
+        //coordinate space and gives us a point in its coordinate space.
+        let intersectionPlaneTransform = self.cameraIntersectionPlaneNode.simdTransform
+        let inverseIntersectionPlaneTransform = simd_inverse(intersectionPlaneTransform)
+        let faceOriginInPlane = simd_mul(inverseIntersectionPlaneTransform, faceOrigin)
+        let faceEndInPlane = simd_mul(inverseIntersectionPlaneTransform, faceEnd)
+
+        let hits = self.cameraIntersectionPlaneNode.hitTestWithSegment(from: SCNVector3FromSIMDFloat4(faceOriginInPlane), to: SCNVector3FromSIMDFloat4(faceEndInPlane), options: [ SCNHitTestOption.ignoreChildNodes.rawValue: NSNumber(booleanLiteral: true) ])
+
+        if let firstHit = hits.first {
+            if self.faceIntersectionNode.isHidden == true {
+                self.faceIntersectionNode.isHidden = false
+            }
+            self.faceIntersectionNode.position = firstHit.worldCoordinates
+            self.faceIntersectionNode.position.z += 0.00001
+        }
     }
 
 }
@@ -231,70 +394,3 @@ func intersectPlane(p_co: SCNVector3, p_no: SCNVector3, p0: SCNVector3, p1: SCNV
         return nil
     }
 }
-
-//# intersection function
-//def isect_line_plane_v3(p0, p1, p_co, p_no, epsilon=1e-6):
-//"""
-//p0, p1: define the line
-//p_co, p_no: define the plane:
-//p_co is a point on the plane (plane coordinate).
-//p_no is a normal vector defining the plane direction;
-//(does not need to be normalized).
-//
-//return a Vector or None (when the intersection can't be found).
-//"""
-//
-//u = sub_v3v3(p1, p0)
-//dot = dot_v3v3(p_no, u)
-//
-//if abs(dot) > epsilon:
-//# the factor of the point between p0 -> p1 (0 - 1)
-//# if 'fac' is between (0 - 1) the point intersects with the segment.
-//# otherwise:
-//#  < 0.0: behind p0.
-//#  > 1.0: infront of p1.
-//w = sub_v3v3(p0, p_co)
-//fac = -dot_v3v3(p_no, w) / dot
-//u = mul_v3_fl(u, fac)
-//return add_v3v3(p0, u)
-//else:
-//# The segment is parallel to plane
-//return None
-//
-//# ----------------------
-//# generic math functions
-//
-//def add_v3v3(v0, v1):
-//return (
-//    v0[0] + v1[0],
-//    v0[1] + v1[1],
-//    v0[2] + v1[2],
-//)
-//
-//
-//def sub_v3v3(v0, v1):
-//return (
-//    v0[0] - v1[0],
-//    v0[1] - v1[1],
-//    v0[2] - v1[2],
-//)
-//
-//
-//def dot_v3v3(v0, v1):
-//return (
-//    (v0[0] * v1[0]) +
-//        (v0[1] * v1[1]) +
-//        (v0[2] * v1[2])
-//)
-//
-//
-//def len_squared_v3(v0):
-//return dot_v3v3(v0, v0)
-//
-//
-//def mul_v3_fl(v0, f):
-//return (
-//    v0[0] * f,
-//    v0[1] * f,
-//    v0[2] * f,
-//)
