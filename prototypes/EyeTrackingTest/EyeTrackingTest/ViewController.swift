@@ -150,6 +150,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var faceNode: FaceNode? = nil
 
     lazy var cameraIntersectionPlaneNode: SCNNode = {
+        // height and width are flipped here, because of the worldAlignment == .camera (https://developer.apple.com/documentation/arkit/arsessionconfiguration/worldalignment/camera)
         let plane = SCNPlane(width: phoneScreenSize.height, height: phoneScreenSize.width)
         plane.materials.first?.diffuse.contents = UIColor.white
         plane.materials.first?.transparency = 0.5
@@ -309,6 +310,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         // flip the x and y, because for SOME reason, the x component of the hit test goes up and down,
         // and the y component goes side to side.
+        // https://developer.apple.com/documentation/arkit/arsessionconfiguration/worldalignment/camera
         return CGPoint(x: unitY, y: unitX)
     }
 
