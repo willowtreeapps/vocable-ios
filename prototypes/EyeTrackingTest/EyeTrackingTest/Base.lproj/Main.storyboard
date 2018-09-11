@@ -17,9 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBy-2v-XXE">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </arscnView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kdg-hA-5q5">
                                 <rect key="frame" x="20" y="40" width="335" height="607"/>
                                 <subviews>
@@ -91,20 +88,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="DBy-2v-XXE" firstAttribute="leading" secondItem="DRc-YL-IXJ" secondAttribute="leading" id="KZJ-2k-qIx"/>
                             <constraint firstItem="kdg-hA-5q5" firstAttribute="top" secondItem="qtf-st-RC0" secondAttribute="top" constant="20" id="Rtp-ZV-SQb"/>
-                            <constraint firstAttribute="trailing" secondItem="DBy-2v-XXE" secondAttribute="trailing" id="Y6b-V3-Brh"/>
                             <constraint firstItem="qtf-st-RC0" firstAttribute="bottom" secondItem="kdg-hA-5q5" secondAttribute="bottom" constant="20" id="YQw-Tc-VRl"/>
                             <constraint firstItem="kdg-hA-5q5" firstAttribute="leading" secondItem="qtf-st-RC0" secondAttribute="leading" constant="20" id="clg-a8-Dr2"/>
-                            <constraint firstItem="DBy-2v-XXE" firstAttribute="top" secondItem="DRc-YL-IXJ" secondAttribute="top" id="krV-eU-5rt"/>
-                            <constraint firstAttribute="bottom" secondItem="DBy-2v-XXE" secondAttribute="bottom" id="wRQ-Ug-AUm"/>
                             <constraint firstItem="qtf-st-RC0" firstAttribute="trailing" secondItem="kdg-hA-5q5" secondAttribute="trailing" constant="20" id="ybI-Vi-fEp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qtf-st-RC0"/>
                     </view>
                     <connections>
                         <outlet property="buttonStackView" destination="kdg-hA-5q5" id="c7R-2H-8ds"/>
-                        <outlet property="sceneView" destination="DBy-2v-XXE" id="0ba-Ox-av4"/>
                         <outletCollection property="buttons" destination="z84-YO-ivB" collectionClass="NSMutableArray" id="Htp-cT-InK"/>
                         <outletCollection property="buttons" destination="QM9-9U-RQj" collectionClass="NSMutableArray" id="Q8H-4m-xF8"/>
                         <outletCollection property="buttons" destination="y2S-58-E4Q" collectionClass="NSMutableArray" id="Brx-8R-SiG"/>

@@ -10,23 +10,12 @@ import UIKit
 import SceneKit
 import ARKit
 
-let phoneScreenSize = CGSize(width: 0.0623908297, height: 0.135096943231532)
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
-    enum TrackingMode {
-        case head
-        case eye
-    }
-
-    var trackingMode: TrackingMode = .head {
+    var showDebug: Bool = true {
         didSet {
-            self.updateConfiguration()
-        }
-    }
-    var showDebug: Bool = false {
-        didSet {
-            self.updateConfiguration()
+            self.configureUI()
         }
     }
 
@@ -78,131 +67,59 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
 
-    func configureDemoUI() {
+    func configureUI() {
         self.buttonStackView.isHidden = self.showDebug
+        self.screenTrackingViewController.showDebug = self.showDebug
     }
 
 
     // MARK: - View Lifecycle
 
-    @IBOutlet var sceneView: ARSCNView!
     let trackingView: UIView = UIView()
+    let screenTrackingViewController: ScreenTrackingViewController = ScreenTrackingViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.screenTrackingViewController.willMove(toParent: self)
+        self.screenTrackingViewController.view.frame = self.view.bounds
+        self.screenTrackingViewController.view.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
+        self.view.addSubview(self.screenTrackingViewController.view)
+        self.addChild(self.screenTrackingViewController)
+        self.screenTrackingViewController.didMove(toParent: self)
+
+        self.view.bringSubviewToFront(self.buttonStackView)
 
         trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 40, height: 40)
         trackingView.layer.cornerRadius = 20.0
         trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.8)
         self.view.addSubview(trackingView)
 
-        // Set the view's delegate
-        sceneView.delegate = self
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
-        sceneView.debugOptions = [ ARSCNDebugOptions.showFeaturePoints ]
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Create a session configuration
-        let configuration = ARFaceTrackingConfiguration()
-        configuration.isLightEstimationEnabled = true
-        configuration.worldAlignment = .camera
-
-        // Run the view's session
-        sceneView.session.run(configuration)
-
-        let rootNode = sceneView.scene.rootNode
-
-        rootNode.addChildNode(self.cameraIntersectionPlaneNode)
-        self.configureIntersectionPlane()
-
-        rootNode.addChildNode(self.intersectionParent)
-        self.configureIntersectionNodes()
-
-        self.intersectionParent.addChildNode(self.faceIntersectionNode)
-        self.faceIntersectionNode.isHidden = true
-        self.intersectionParent.addChildNode(self.lookAtIntersectionNode)
-        self.lookAtIntersectionNode.isHidden = true
-
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // Pause the view's session
-        sceneView.session.pause()
+        self.configureUI()
     }
 
-    func updateConfiguration() {
-        self.configureFaceNode()
-        self.configureIntersectionPlane()
-        self.configureIntersectionNodes()
-
-        self.configureDemoUI()
-    }
 
     // MARK: - Nodes and Anchors
 
     var faceAnchor: ARFaceAnchor? = nil
     var faceNode: FaceNode? = nil
 
-    lazy var cameraIntersectionPlaneNode: SCNNode = {
-        // height and width are flipped here, because of the worldAlignment == .camera (https://developer.apple.com/documentation/arkit/arsessionconfiguration/worldalignment/camera)
-        let plane = SCNPlane(width: phoneScreenSize.height, height: phoneScreenSize.width)
-        plane.materials.first?.diffuse.contents = UIColor.white
-        plane.materials.first?.transparency = 0.5
-        plane.materials.first?.writesToDepthBuffer = false
-        plane.materials.first?.isDoubleSided = true
-
-        let node = SCNNode(geometry: plane)
-        return node
-    }()
-
     var intersectionParent = SCNNode()
     lazy var faceIntersectionNode = IntersectionPointNode(color: .red)
     lazy var lookAtIntersectionNode = IntersectionPointNode(color: .blue)
-
-    private func configureFaceNode() {
-        self.faceNode?.resetVisibility()
-
-        if self.showDebug {
-            switch self.trackingMode {
-            case .eye:
-                self.faceNode?.showLookAtDirection = true
-            case .head:
-                self.faceNode?.showFaceDirection = true
-            }
-        }
-    }
-
-    private func configureIntersectionPlane() {
-        self.cameraIntersectionPlaneNode.isHidden = !self.showDebug
-
-        // -3.8 ~= screen size
-        // -5.0 = inset size
-        self.cameraIntersectionPlaneNode.position.z = Float(Measurement(value: -3.8, unit: UnitLength.inches).converted(to: UnitLength.meters).value)
-        //        self.cameraIntersectionPlaneNode.position.x = Float(phoneScreenSize.height/2.0)
-    }
-
-    private func configureIntersectionNodes() {
-        self.intersectionParent.isHidden = !self.showDebug
-    }
 
     // MARK: - ARSCNViewDelegate
 
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
 
-        if let faceAnchor = anchor as? ARFaceAnchor {
-            self.faceAnchor = faceAnchor
-            let faceGeometry = ARSCNFaceGeometry(device: self.sceneView.device!)
-            self.faceNode = FaceNode(faceGeometry: faceGeometry!)
-            self.configureFaceNode()
-            return faceNode
-        }
+//        if let faceAnchor = anchor as? ARFaceAnchor {
+//            self.faceAnchor = faceAnchor
+//            let faceGeometry = ARSCNFaceGeometry(device: self.sceneView.device!)
+//            self.faceNode = FaceNode()
+//            self.configureFaceNode()
+//            return faceNode
+//        }
 
         return nil
     }
@@ -213,12 +130,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             guard let faceNode = self.faceNode else { return }
             faceNode.updateFace(with: faceAnchor)
 
-            switch self.trackingMode {
+            /*
+            switch self.headTrackingMode {
             case .eye:
                 self.updateLookwiseHitTest(faceAnchor: faceAnchor)
             case .head:
                 self.updateFacewiseHitTest(faceAnchor: faceAnchor)
             }
+            */
         }
 
     }
@@ -237,6 +156,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     // MARK: - Updating Face Intersection
 
+    /*
     func updateFacewiseHitTest(faceAnchor: ARFaceAnchor) {
         guard let faceNode = self.faceNode else {
             assertionFailure("Can't update, there is no face node!")
@@ -373,6 +293,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.faceIntersectionNode.position.z += 0.00001
         }
     }
+ */
 
 }
 
