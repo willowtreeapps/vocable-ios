@@ -18,6 +18,7 @@
 		13B71583214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B71582214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift */; };
 		13B715852148464000B3612A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B715842148464000B3612A /* Constants.swift */; };
 		13B7158721484B6600B3612A /* HeadTrackingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B7158621484B6600B3612A /* HeadTrackingMode.swift */; };
+		13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B715882149509200B3612A /* IntersectionUtilities.swift */; };
 		13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */; };
 		13C32B86213990EB0090BB7D /* SCNVector4+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */; };
 		13C32B88213991190090BB7D /* LineSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B87213991190090BB7D /* LineSegment.swift */; };
@@ -39,6 +40,7 @@
 		13B71582214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTrackingViewControllerDelegate.swift; sourceTree = "<group>"; };
 		13B715842148464000B3612A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		13B7158621484B6600B3612A /* HeadTrackingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadTrackingMode.swift; sourceTree = "<group>"; };
+		13B715882149509200B3612A /* IntersectionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionUtilities.swift; sourceTree = "<group>"; };
 		13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 		13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector4+Extensions.swift"; sourceTree = "<group>"; };
 		13C32B87213991190090BB7D /* LineSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSegment.swift; sourceTree = "<group>"; };
@@ -80,7 +82,6 @@
 				130C00BB20D2AD2A007C3163 /* ViewController.swift */,
 				130C00BD20D2AD2A007C3163 /* Main.storyboard */,
 				13B71581214840B100B3612A /* ScreenTrackingViewController */,
-				139EDEE821419C220009A99F /* SceneKit */,
 				139EDEE721419B950009A99F /* Extensions */,
 				139EDEE921419C400009A99F /* Supporting Files */,
 			);
@@ -101,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				13C32B87213991190090BB7D /* LineSegment.swift */,
+				13B715882149509200B3612A /* IntersectionUtilities.swift */,
 				139EDEEA21419C870009A99F /* Debug Visualization */,
 			);
 			path = SceneKit;
@@ -133,6 +135,7 @@
 				13B7158621484B6600B3612A /* HeadTrackingMode.swift */,
 				139EDEEB21419D700009A99F /* ScreenTrackingViewController.swift */,
 				13B71582214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift */,
+				139EDEE821419C220009A99F /* SceneKit */,
 			);
 			path = ScreenTrackingViewController;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				13C32B8A2139A2440090BB7D /* IntersectionPointNode.swift in Sources */,
 				13B71583214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift in Sources */,
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
+				13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */,
 				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
 				139EDEEC21419D700009A99F /* ScreenTrackingViewController.swift in Sources */,
 				13B7158721484B6600B3612A /* HeadTrackingMode.swift in Sources */,

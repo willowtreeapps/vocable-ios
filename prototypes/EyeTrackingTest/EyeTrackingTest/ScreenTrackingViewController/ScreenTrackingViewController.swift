@@ -14,6 +14,8 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     // MARK: - Public
 
+    weak var delegate: ScreenTrackingViewControllerDelegate?
+
     var headTrackingMode: HeadTrackingMode = .face {
         didSet { self.updateSceneConfiguration() }
     }
@@ -97,7 +99,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
         // configure a common container to un-rotate the scene, due to the strange
         // coordinate space orientation of worldAlignment.camera
         // (https://developer.apple.com/documentation/arkit/arsessionconfiguration/worldalignment/camera)
-        self.containerNode.eulerAngles.z = -Float.pi/2.0
+        self.containerNode.eulerAngles.z = Float.pi/2.0
         self.containerNode.addChildNode(self.hitTestPlane)
         self.containerNode.addChildNode(self.intersectionParentNode)
 
@@ -134,6 +136,107 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
     private func configureFaceNode() {
         self.faceDebugNode.isHidden = !self.showDebug
         self.faceDebugNode.configure(with: self.headTrackingMode)
+    }
+
+
+    // MARK: - ARSCNViewDelegate
+
+    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+        if anchor is ARFaceAnchor {
+            self.faceDebugNode = FaceNode()
+            self.configureFaceNode()
+            return self.faceDebugNode
+        }
+
+        return nil
+    }
+
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        if let faceAnchor = anchor as? ARFaceAnchor {
+            self.faceDebugNode.updateFace(with: faceAnchor)
+
+            switch self.headTrackingMode {
+            case .eye:
+                self.updateLookwiseHitTest(faceAnchor: faceAnchor)
+            case .face:
+                self.updateFacewiseHitTest(faceAnchor: faceAnchor)
+            }
+        }
+    }
+
+
+    // MARK: - Hit Tests
+
+    private func updateFacewiseHitTest(faceAnchor: ARFaceAnchor) {
+        let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(0.0, 0.0, 1.0, 1.0))
+        let hits = IntersectionUtils.intersect(lineSegement: intersectionLine, sourceNode: self.faceDebugNode, targetNode: self.hitTestPlane)
+
+        updateIntersectionNode(self.faceIntersectionNode, with: hits.first)
+        reportIntersectionToDelegate(hits.first)
+    }
+
+    private func updateLookwiseHitTest(faceAnchor: ARFaceAnchor) {
+        let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(faceAnchor.lookAtPoint, w: 0.0))
+        let hits = IntersectionUtils.intersect(lineSegement: intersectionLine, withWorldTransform: faceAnchor.transform, targetNode: self.hitTestPlane)
+
+        updateIntersectionNode(self.lookAtIntersectionNode, with: hits.first)
+        reportIntersectionToDelegate(hits.first)
+    }
+
+    private func updateIntersectionNode(_ intersectionNode: IntersectionPointNode, with hitTest: SCNHitTestResult?) {
+        if let hitTest = hitTest {
+            if intersectionNode.isHidden == true {
+                intersectionNode.isHidden = false
+            }
+
+            let unitPosition = self.unitPositionInPlane(for: hitTest)
+            intersectionNode.displayText = String(format: "(%.2f, %.2f)", unitPosition.x, unitPosition.y)
+            intersectionNode.position = intersectionNode.parent!.convertPosition(hitTest.worldCoordinates, from: nil)
+            intersectionNode.position.z += 0.00001
+        } else {
+            intersectionNode.isHidden = true
+            intersectionNode.displayText = nil
+        }
+    }
+
+    private func reportIntersectionToDelegate(_ hitTest: SCNHitTestResult?) {
+        guard let hitTest = hitTest else { return }
+
+        let unitPosition = self.unitPositionInPlane(for: hitTest)
+        let screenPosition = self.screenPosition(fromUnitPosition: unitPosition)
+        self.delegate?.didUpdateTrackedPosition(screenPosition, for: self)
+    }
+
+
+    // MARK: - Unit-space and Screen-space conversion helpers
+
+    /// Calculates the position of the hit test in the [0.0...1.0] domain using
+    /// the coordinate orientation of UIKit (origin in the top left corner).
+    func unitPositionInPlane(for hit: SCNHitTestResult) -> CGPoint {
+
+        guard let plane = hit.node.geometry as? SCNPlane else {
+            assertionFailure("Getting unit position in non-plane geometry is unsupported")
+            return CGPoint.zero
+        }
+
+        let localX = CGFloat(hit.localCoordinates.x)
+        var localY = CGFloat(hit.localCoordinates.y)
+
+        // flip the y coordinate to match UIKit's coordinate system
+        localY = -localY
+
+        let unitX = ((plane.width / 2.0) + localX) / plane.width
+        let unitY = ((plane.height / 2.0) + localY) / plane.height
+
+        return CGPoint(x: unitX, y: unitY)
+    }
+
+    func screenPosition(fromUnitPosition unitPosition: CGPoint) -> CGPoint {
+        let screenSize = UIScreen.main.bounds.size
+        let screenX = screenSize.width * unitPosition.x
+        let screenY = screenSize.height * unitPosition.y
+
+        return CGPoint(x: screenX, y: screenY)
     }
 
 }
