@@ -135,7 +135,11 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     private func configureFaceNode() {
         self.faceDebugNode.isHidden = !self.showDebug
-        self.faceDebugNode.configure(with: self.headTrackingMode)
+        if !self.faceDebugNode.isHidden {
+            self.faceDebugNode.configure(with: self.headTrackingMode)
+        } else {
+            self.faceDebugNode.resetVisibility()
+        }
     }
 
 
@@ -143,7 +147,6 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         if anchor is ARFaceAnchor {
-            self.faceDebugNode = FaceNode()
             self.configureFaceNode()
             return self.faceDebugNode
         }
@@ -200,11 +203,13 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
     }
 
     private func reportIntersectionToDelegate(_ hitTest: SCNHitTestResult?) {
-        guard let hitTest = hitTest else { return }
-
-        let unitPosition = self.unitPositionInPlane(for: hitTest)
-        let screenPosition = self.screenPosition(fromUnitPosition: unitPosition)
-        self.delegate?.didUpdateTrackedPosition(screenPosition, for: self)
+        if let hitTest = hitTest {
+            let unitPosition = self.unitPositionInPlane(for: hitTest)
+            let screenPosition = self.screenPosition(fromUnitPosition: unitPosition)
+            self.delegate?.didUpdateTrackedPosition(screenPosition, for: self)
+        } else {
+            self.delegate?.didUpdateTrackedPosition(nil, for: self)
+        }
     }
 
 

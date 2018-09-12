@@ -22,7 +22,7 @@ class FaceNode: SCNNode {
         }
     }
 
-    private func resetVisibility() {
+    func resetVisibility() {
         self.showEyeCones = false
         self.showEyeSpheres = false
         self.showLookAtDirection = false
@@ -73,6 +73,10 @@ class FaceNode: SCNNode {
 
     override init() {
         super.init()
+
+        self.name = "faceNode"
+        self.faceConeNode.name = "faceConeNode"
+        self.lookAtNode.name = "lookAtNode"
 
         let cone = SCNCone(topRadius: 0.001, bottomRadius: 0.001, height: 0.5)
 

@@ -11,7 +11,7 @@ import SceneKit
 import ARKit
 
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ScreenTrackingViewControllerDelegate {
 
     var showDebug: Bool = true {
         didSet {
@@ -76,7 +76,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - View Lifecycle
 
     let trackingView: UIView = UIView()
-    let screenTrackingViewController: ScreenTrackingViewController = ScreenTrackingViewController()
+    lazy var screenTrackingViewController: ScreenTrackingViewController = {
+        let vc = ScreenTrackingViewController()
+        vc.delegate = self
+        return vc
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,40 +103,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
 
-    // MARK: - ARSCNViewDelegate
+    // MARK: - ScreenTrackingViewControllerDelegate
 
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-    }
-
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-    }
-
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-    }
-
-    // MARK: - Updating Face Intersection
-
-    /*
-
-    func updateTrackingView(with hitTest: SCNHitTestResult?) {
+    func didUpdateTrackedPosition(_ trackedPositionOnScreen: CGPoint?, for screenTrackingViewController: ScreenTrackingViewController) {
         DispatchQueue.main.async {
-            if let hitTest = hitTest {
-                if self.trackingView.isHidden {
-                    self.trackingView.isHidden = false
-                }
-                let unitPosition = self.unitPositionInPlane(for: hitTest)
-                let screenPosition = self.screenPosition(fromUnitPosition: unitPosition)
-                self.trackingView.center = screenPosition
-
+            if let position = trackedPositionOnScreen {
+                self.trackingView.isHidden = false
+                self.trackingView.center = position
                 self.updateButtonHighlightForTrackingPosition()
             } else {
                 self.trackingView.isHidden = true
             }
         }
     }
- */
 
 }

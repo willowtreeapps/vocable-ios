@@ -92,8 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				13DA8E8820DACDB900B19B70 /* VectorUtils.swift */,
-				13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */,
-				13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -103,6 +101,8 @@
 			children = (
 				13C32B87213991190090BB7D /* LineSegment.swift */,
 				13B715882149509200B3612A /* IntersectionUtilities.swift */,
+				13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */,
+				13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */,
 				139EDEEA21419C870009A99F /* Debug Visualization */,
 			);
 			path = SceneKit;
