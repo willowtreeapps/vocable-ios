@@ -32,6 +32,32 @@ enum IntersectionUtils {
         return targetNode.hitTestWithSegment(from: SCNVector3(lineStartInTarget), to: SCNVector3(lineEndInTarget), options: [ SCNHitTestOption.ignoreChildNodes.rawValue: NSNumber(booleanLiteral: true) ])
     }
 
+    
+    // MARK: - Unit-space and Screen-space conversion helpers
+
+    /// Calculates the position of the hit test in the [0.0...1.0] domain using
+    /// the coordinate orientation of UIKit (origin in the top left corner).
+    static func unitPosition(in plane: SCNPlane, for hit: SCNHitTestResult) -> CGPoint {
+        let localX = CGFloat(hit.localCoordinates.x)
+        var localY = CGFloat(hit.localCoordinates.y)
+
+        // flip the y coordinate to match UIKit's coordinate system
+        localY = -localY
+
+        let unitX = ((plane.width / 2.0) + localX) / plane.width
+        let unitY = ((plane.height / 2.0) + localY) / plane.height
+
+        return CGPoint(x: unitX, y: unitY)
+    }
+
+    static func screenPosition(fromUnitPosition unitPosition: CGPoint) -> CGPoint {
+        let screenSize = UIScreen.main.bounds.size
+        let screenX = screenSize.width * unitPosition.x
+        let screenY = screenSize.height * unitPosition.y
+
+        return CGPoint(x: screenX, y: screenY)
+    }
+
 }
 
 /*

@@ -11,13 +11,13 @@ import SceneKit
 
 class FaceNode: SCNNode {
 
-    func configure(with headTrackingMode: HeadTrackingMode) {
+    func configure(with headTrackingMode: FaceTrackingMode) {
         self.resetVisibility()
 
         switch headTrackingMode {
         case .eye:
             self.showLookAtDirection = true
-        case .face:
+        case .head:
             self.showFaceDirection = true
         }
     }

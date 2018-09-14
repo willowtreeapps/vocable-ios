@@ -16,7 +16,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     weak var delegate: ScreenTrackingViewControllerDelegate?
 
-    var headTrackingMode: HeadTrackingMode = .face {
+    var headTrackingMode: FaceTrackingMode = .head {
         didSet { self.updateSceneConfiguration() }
     }
 
@@ -75,22 +75,15 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
     private var containerNode = SCNNode()
 
     /// The plane used to hit test look vectors
-    private var hitTestPlane: SCNNode = {
-        let plane = SCNPlane(width: Constants.phoneScreenSize.width, height: Constants.phoneScreenSize.height)
-        plane.materials.first?.diffuse.contents = UIColor.white
-        plane.materials.first?.transparency = 0.3
-        plane.materials.first?.isDoubleSided = true
+    private var hitTestPlane = TrackingPlaneNode(trackingMethod: HeadDirectionTrackingMethod())
 
-        let node = SCNNode(geometry: plane)
-        return node
-    }()
-
-    /// A parent for displaying the results of hitTestPlane intersection
+    /// A parent node for displaying the results of hitTestPlane intersection.
+    /// We add the intersection debug node to this parent, so that 'showDebug' mode
+    /// can be enforced by simply hiding the parent, and not complicating the debug node logic
     private var intersectionParentNode = SCNNode()
-    private var faceIntersectionNode = IntersectionPointNode(color: .red)
-    private var lookAtIntersectionNode = IntersectionPointNode(color: .blue)
+    private var intersectionDebugNode = IntersectionPointNode(color: .red)
 
-    /// The node that displays debug face information. Attaches to scene when a face anchor is found.
+    /// A node that displays debug face information. Attaches to the scene when a face anchor is found.
     private var faceDebugNode = FaceNode()
 
     private func setupScene() {
@@ -103,8 +96,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
         self.containerNode.addChildNode(self.hitTestPlane)
         self.containerNode.addChildNode(self.intersectionParentNode)
 
-        self.intersectionParentNode.addChildNode(self.faceIntersectionNode)
-        self.intersectionParentNode.addChildNode(self.lookAtIntersectionNode)
+        self.intersectionParentNode.addChildNode(self.intersectionDebugNode)
     }
 
 
@@ -118,19 +110,19 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     private func configureHitTestPlane() {
         self.hitTestPlane.isHidden = !self.showDebug
+        self.hitTestPlane.trackingMethod = self.headTrackingMode.trackingMethod
 
-        // -3.8 ~= screen size
-        // -5.0 = inset size
+        // move to a coordinate based input on intersection method
+//        // -3.8 ~= screen size
+//        // -5.0 = inset size
         let inchesToMeters = Measurement(value: -3.8, unit: UnitLength.inches).converted(to: UnitLength.meters).value
         self.hitTestPlane.position.z = Float(inchesToMeters)
     }
 
     private func configureIntersectionNodes() {
         self.intersectionParentNode.isHidden = !self.showDebug
-
         // The intersection nodes always begin hidden, and then appear when a hit test succeeds
-        self.faceIntersectionNode.isHidden = true
-        self.lookAtIntersectionNode.isHidden = true
+        self.intersectionDebugNode.isHidden = true
     }
 
     private func configureFaceNode() {
@@ -158,41 +150,25 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
         if let faceAnchor = anchor as? ARFaceAnchor {
             self.faceDebugNode.updateFace(with: faceAnchor)
 
-            switch self.headTrackingMode {
-            case .eye:
-                self.updateLookwiseHitTest(faceAnchor: faceAnchor)
-            case .face:
-                self.updateFacewiseHitTest(faceAnchor: faceAnchor)
-            }
+            let trackingResult = self.hitTestPlane.track(faceAnchor: faceAnchor)
+
+            self.updateIntersectionNode(self.intersectionDebugNode, with: trackingResult)
+            self.reportIntersectionToDelegate(trackingResult)
         }
     }
 
 
-    // MARK: - Hit Tests
+    // MARK: - Intersection Helpers
 
-    private func updateFacewiseHitTest(faceAnchor: ARFaceAnchor) {
-        let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(0.0, 0.0, 1.0, 1.0))
-        let hits = IntersectionUtils.intersect(lineSegement: intersectionLine, sourceNode: self.faceDebugNode, targetNode: self.hitTestPlane)
-
-        updateIntersectionNode(self.faceIntersectionNode, with: hits.first)
-        reportIntersectionToDelegate(hits.first)
-    }
-
-    private func updateLookwiseHitTest(faceAnchor: ARFaceAnchor) {
-        let intersectionLine = LineSegment(start: SCNVector4(0.0, 0.0, 0.0, 1.0), end: SCNVector4(faceAnchor.lookAtPoint, w: 0.0))
-        let hits = IntersectionUtils.intersect(lineSegement: intersectionLine, withWorldTransform: faceAnchor.transform, targetNode: self.hitTestPlane)
-
-        updateIntersectionNode(self.lookAtIntersectionNode, with: hits.first)
-        reportIntersectionToDelegate(hits.first)
-    }
-
-    private func updateIntersectionNode(_ intersectionNode: IntersectionPointNode, with hitTest: SCNHitTestResult?) {
-        if let hitTest = hitTest {
+    private func updateIntersectionNode(_ intersectionNode: IntersectionPointNode, with trackingResult: TrackingResult?) {
+        if let trackingResult = trackingResult {
             if intersectionNode.isHidden == true {
                 intersectionNode.isHidden = false
             }
 
-            let unitPosition = self.unitPositionInPlane(for: hitTest)
+            let unitPosition = trackingResult.unitPositionInPlane
+            let hitTest = trackingResult.hitTest
+
             intersectionNode.displayText = String(format: "(%.2f, %.2f)", unitPosition.x, unitPosition.y)
             intersectionNode.position = intersectionNode.parent!.convertPosition(hitTest.worldCoordinates, from: nil)
             intersectionNode.position.z += 0.00001
@@ -202,46 +178,13 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
         }
     }
 
-    private func reportIntersectionToDelegate(_ hitTest: SCNHitTestResult?) {
-        if let hitTest = hitTest {
-            let unitPosition = self.unitPositionInPlane(for: hitTest)
-            let screenPosition = self.screenPosition(fromUnitPosition: unitPosition)
+    private func reportIntersectionToDelegate(_ trackingResult: TrackingResult?) {
+        if let trackingResult = trackingResult {
+            let screenPosition = IntersectionUtils.screenPosition(fromUnitPosition: trackingResult.unitPositionInPlane)
             self.delegate?.didUpdateTrackedPosition(screenPosition, for: self)
         } else {
             self.delegate?.didUpdateTrackedPosition(nil, for: self)
         }
-    }
-
-
-    // MARK: - Unit-space and Screen-space conversion helpers
-
-    /// Calculates the position of the hit test in the [0.0...1.0] domain using
-    /// the coordinate orientation of UIKit (origin in the top left corner).
-    func unitPositionInPlane(for hit: SCNHitTestResult) -> CGPoint {
-
-        guard let plane = hit.node.geometry as? SCNPlane else {
-            assertionFailure("Getting unit position in non-plane geometry is unsupported")
-            return CGPoint.zero
-        }
-
-        let localX = CGFloat(hit.localCoordinates.x)
-        var localY = CGFloat(hit.localCoordinates.y)
-
-        // flip the y coordinate to match UIKit's coordinate system
-        localY = -localY
-
-        let unitX = ((plane.width / 2.0) + localX) / plane.width
-        let unitY = ((plane.height / 2.0) + localY) / plane.height
-
-        return CGPoint(x: unitX, y: unitY)
-    }
-
-    func screenPosition(fromUnitPosition unitPosition: CGPoint) -> CGPoint {
-        let screenSize = UIScreen.main.bounds.size
-        let screenX = screenSize.width * unitPosition.x
-        let screenY = screenSize.height * unitPosition.y
-
-        return CGPoint(x: screenX, y: screenY)
     }
 
 }
