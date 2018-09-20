@@ -8,6 +8,7 @@
 
 import Foundation
 
+// TODO: rename to FaceTrackingConfiguration, add tracking region
 enum FaceTrackingMode {
     case head
     case eye

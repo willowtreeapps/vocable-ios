@@ -1,5 +1,5 @@
 //
-//  TrackingPlaneNode.swift
+//  TrackingNode.swift
 //  EyeTrackingTest
 //
 //  Created by Duncan Lewis on 9/14/18.
@@ -8,13 +8,12 @@
 
 import ARKit
 
-class TrackingPlaneNode: SCNNode {
+class TrackingNode: SCNNode {
 
     // MARK: - Configuration
 
-    // todo: add tracking region
-
     var trackingMethod: TrackingMethod
+    var trackingRegion: TrackingRegion
 
 
     // MARK: - Face Tracking
@@ -24,16 +23,22 @@ class TrackingPlaneNode: SCNNode {
             return nil
         }
 
-        let unitPosition = IntersectionUtils.unitPosition(in: self.hitTestPlane, for: hitTest)
+        guard let unitPosition = trackingRegion.unitPosition(for: hitTest) else {
+            return nil
+        }
+
         return TrackingResult(hitTest: hitTest, unitPositionInPlane: unitPosition)
     }
 
 
     // MARK: -
 
-    init(trackingMethod: TrackingMethod) {
+    init(trackingMethod: TrackingMethod, trackingRegion: TrackingRegion) {
         self.trackingMethod = trackingMethod
+        self.trackingRegion = trackingRegion
+
         super.init()
+
         self.geometry = self.hitTestPlane
     }
 
@@ -45,7 +50,7 @@ class TrackingPlaneNode: SCNNode {
     // MARK: -
 
     private let hitTestPlane: SCNPlane = {
-        let plane = SCNPlane(width: Constants.phoneScreenSize.width, height: Constants.phoneScreenSize.height)
+        let plane = SCNPlane(width: 100.0, height: 100.0) // psuedo-infinite plane
         plane.materials.first?.diffuse.contents = UIColor.white
         plane.materials.first?.transparency = 0.3
         plane.materials.first?.isDoubleSided = true

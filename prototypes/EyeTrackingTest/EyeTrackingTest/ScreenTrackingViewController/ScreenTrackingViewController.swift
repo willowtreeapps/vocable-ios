@@ -75,7 +75,8 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
     private var containerNode = SCNNode()
 
     /// The plane used to hit test look vectors
-    private var hitTestPlane = TrackingPlaneNode(trackingMethod: HeadDirectionTrackingMethod())
+    private var hitTestPlane = TrackingNode(trackingMethod: HeadDirectionTrackingMethod(),
+                                            trackingRegion: RectangleTrackingRegion(width: Constants.phoneScreenSize.width, height: Constants.phoneScreenSize.height))
 
     /// A parent node for displaying the results of hitTestPlane intersection.
     /// We add the intersection debug node to this parent, so that 'showDebug' mode
