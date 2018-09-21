@@ -16,7 +16,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     weak var delegate: ScreenTrackingViewControllerDelegate?
 
-    var headTrackingMode: FaceTrackingMode = .head {
+    var trackingConfiguration: TrackingConfiguration = TrackingConfiguration.headTracking {
         didSet { self.updateSceneConfiguration() }
     }
 
@@ -75,8 +75,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
     private var containerNode = SCNNode()
 
     /// The plane used to hit test look vectors
-    private var hitTestPlane = TrackingNode(trackingMethod: HeadDirectionTrackingMethod(),
-                                            trackingRegion: RectangleTrackingRegion(width: Constants.phoneScreenSize.width, height: Constants.phoneScreenSize.height))
+    private var hitTestPlane = TrackingNode(trackingConfiguration: TrackingConfiguration.headTracking)
 
     /// A parent node for displaying the results of hitTestPlane intersection.
     /// We add the intersection debug node to this parent, so that 'showDebug' mode
@@ -111,7 +110,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     private func configureHitTestPlane() {
         self.hitTestPlane.isHidden = !self.showDebug
-        self.hitTestPlane.trackingMethod = self.headTrackingMode.trackingMethod
+        self.hitTestPlane.trackingConfiguration = self.trackingConfiguration
 
         // move to a coordinate based input on intersection method
 //        // -3.8 ~= screen size
@@ -129,7 +128,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
     private func configureFaceNode() {
         self.faceDebugNode.isHidden = !self.showDebug
         if !self.faceDebugNode.isHidden {
-            self.faceDebugNode.configure(with: self.headTrackingMode)
+            self.faceDebugNode.configure(with: self.trackingConfiguration)
         } else {
             self.faceDebugNode.resetVisibility()
         }

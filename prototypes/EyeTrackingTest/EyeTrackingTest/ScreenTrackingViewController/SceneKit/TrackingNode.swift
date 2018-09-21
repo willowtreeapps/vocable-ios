@@ -12,8 +12,10 @@ class TrackingNode: SCNNode {
 
     // MARK: - Configuration
 
-    var trackingMethod: TrackingMethod
-    var trackingRegion: TrackingRegion
+    var trackingConfiguration: TrackingConfiguration
+
+    private var trackingMethod: TrackingMethod { return self.trackingConfiguration.trackingMethod }
+    private var trackingRegion: TrackingRegion { return self.trackingConfiguration.trackingRegion }
 
 
     // MARK: - Face Tracking
@@ -33,9 +35,8 @@ class TrackingNode: SCNNode {
 
     // MARK: -
 
-    init(trackingMethod: TrackingMethod, trackingRegion: TrackingRegion) {
-        self.trackingMethod = trackingMethod
-        self.trackingRegion = trackingRegion
+    init(trackingConfiguration config: TrackingConfiguration) {
+        self.trackingConfiguration = config
 
         super.init()
 

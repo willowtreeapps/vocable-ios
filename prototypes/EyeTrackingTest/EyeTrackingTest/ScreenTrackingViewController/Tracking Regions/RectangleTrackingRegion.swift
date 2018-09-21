@@ -8,14 +8,12 @@
 
 import SceneKit
 
+
+/// A simple rectangular tracking region with a width and height.
 struct RectangleTrackingRegion: TrackingRegion {
 
     let width: CGFloat
     let height: CGFloat
-
-    func unitPosition(for hit: SCNHitTestResult) -> CGPoint? {
-        return self.unboundedUnitPosition(for: hit)?.bounded(by: .unitRange)
-    }
 
     func unboundedUnitPosition(for hit: SCNHitTestResult) -> CGPoint? {
         let localX = CGFloat(hit.localCoordinates.x)

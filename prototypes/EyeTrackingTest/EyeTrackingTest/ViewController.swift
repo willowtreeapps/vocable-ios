@@ -19,6 +19,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ScreenTrackingViewCon
         }
     }
 
+    var trackingConfiguration: TrackingConfiguration = .headTracking {
+        didSet {
+            self.configureUI()
+        }
+    }
+
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             self.showDebug = !self.showDebug
@@ -68,8 +74,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ScreenTrackingViewCon
     }
 
     func configureUI() {
+        guard self.isViewLoaded else { return }
+
         self.buttonStackView.isHidden = self.showDebug
         self.screenTrackingViewController.showDebug = self.showDebug
+        self.screenTrackingViewController.trackingConfiguration = self.trackingConfiguration
     }
 
 

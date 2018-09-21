@@ -26,3 +26,12 @@ protocol TrackingRegion {
     func unboundedUnitPosition(for hit: SCNHitTestResult) -> CGPoint?
 
 }
+
+/// Default unitPosition implementation derived from the unboundedUnitPosition method
+extension TrackingRegion {
+
+    func unitPosition(for hit: SCNHitTestResult) -> CGPoint? {
+        return self.unboundedUnitPosition(for: hit)?.bounded(by: .unitRange)
+    }
+
+}
