@@ -50,8 +50,7 @@ class IntersectionPointNode: SCNNode {
         let textNode = SCNNode(geometry: self.textGeometry)
 
         textNode.scale = SCNVector3Make(0.003, 0.003, 0.003)
-        textNode.position = SCNVector3(-0.005, 0.0, 0.0)
-        textNode.eulerAngles.z = Float.pi / 2.0
+        textNode.position = SCNVector3(0.0, 0.005, 0.0)
 
         return textNode
     }()

@@ -13,12 +13,30 @@
 		130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00BD20D2AD2A007C3163 /* Main.storyboard */; };
 		130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C020D2AD2C007C3163 /* Assets.xcassets */; };
 		130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */; };
+		134B6417214C03FC00285AD5 /* LookAtDirectionIntersectionMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A7B915214C033700714057 /* LookAtDirectionIntersectionMethod.swift */; };
+		134B6419214C3A4B00285AD5 /* TrackingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134B6418214C3A4B00285AD5 /* TrackingNode.swift */; };
+		139EDEEC21419D700009A99F /* ScreenTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139EDEEB21419D700009A99F /* ScreenTrackingViewController.swift */; };
+		13A7B912214C027300714057 /* TrackingMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A7B911214C027300714057 /* TrackingMethod.swift */; };
+		13A7B914214C032A00714057 /* HeadDirectionIntersectionMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A7B913214C032A00714057 /* HeadDirectionIntersectionMethod.swift */; };
 		13B1865E2108E8030099D278 /* FaceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1865D2108E8030099D278 /* FaceNode.swift */; };
+		13B71583214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B71582214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift */; };
+		13B715852148464000B3612A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B715842148464000B3612A /* Constants.swift */; };
+		13B7158721484B6600B3612A /* TrackingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B7158621484B6600B3612A /* TrackingConfiguration.swift */; };
+		13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B715882149509200B3612A /* IntersectionUtilities.swift */; };
 		13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */; };
 		13C32B86213990EB0090BB7D /* SCNVector4+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */; };
 		13C32B88213991190090BB7D /* LineSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B87213991190090BB7D /* LineSegment.swift */; };
 		13C32B8A2139A2440090BB7D /* IntersectionPointNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B892139A2440090BB7D /* IntersectionPointNode.swift */; };
 		13DA8E8920DACDB900B19B70 /* VectorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA8E8820DACDB900B19B70 /* VectorUtils.swift */; };
+		13FE39142153F63000B6110F /* TrackingRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE39132153F63000B6110F /* TrackingRegion.swift */; };
+		13FE39172153F93600B6110F /* RectangleTrackingRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE39162153F93600B6110F /* RectangleTrackingRegion.swift */; };
+		13FE391A2154150900B6110F /* Bounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE39192154150900B6110F /* Bounded.swift */; };
+		13FE391C2154166600B6110F /* ClosedRange+UnitSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE391B2154166600B6110F /* ClosedRange+UnitSpace.swift */; };
+		13FE391E215572EC00B6110F /* TrackingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE391D215572EC00B6110F /* TrackingType.swift */; };
+		13FE3922215577E300B6110F /* ConfigurationListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE3921215577E300B6110F /* ConfigurationListTableViewController.swift */; };
+		13FE392421557DA900B6110F /* QuadrilateralTrackingRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */; };
+		13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392621557E5500B6110F /* Quadrilateral.swift */; };
+		13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,12 +48,30 @@
 		130C00C020D2AD2C007C3163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		130C00C320D2AD2C007C3163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		130C00C520D2AD2C007C3163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		134B6418214C3A4B00285AD5 /* TrackingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingNode.swift; sourceTree = "<group>"; };
+		139EDEEB21419D700009A99F /* ScreenTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTrackingViewController.swift; sourceTree = "<group>"; };
+		13A7B911214C027300714057 /* TrackingMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingMethod.swift; sourceTree = "<group>"; };
+		13A7B913214C032A00714057 /* HeadDirectionIntersectionMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadDirectionIntersectionMethod.swift; sourceTree = "<group>"; };
+		13A7B915214C033700714057 /* LookAtDirectionIntersectionMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAtDirectionIntersectionMethod.swift; sourceTree = "<group>"; };
 		13B1865D2108E8030099D278 /* FaceNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceNode.swift; sourceTree = "<group>"; };
+		13B71582214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTrackingViewControllerDelegate.swift; sourceTree = "<group>"; };
+		13B715842148464000B3612A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		13B7158621484B6600B3612A /* TrackingConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingConfiguration.swift; sourceTree = "<group>"; };
+		13B715882149509200B3612A /* IntersectionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionUtilities.swift; sourceTree = "<group>"; };
 		13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 		13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector4+Extensions.swift"; sourceTree = "<group>"; };
 		13C32B87213991190090BB7D /* LineSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSegment.swift; sourceTree = "<group>"; };
 		13C32B892139A2440090BB7D /* IntersectionPointNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionPointNode.swift; sourceTree = "<group>"; };
 		13DA8E8820DACDB900B19B70 /* VectorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorUtils.swift; sourceTree = "<group>"; };
+		13FE39132153F63000B6110F /* TrackingRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingRegion.swift; sourceTree = "<group>"; };
+		13FE39162153F93600B6110F /* RectangleTrackingRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleTrackingRegion.swift; sourceTree = "<group>"; };
+		13FE39192154150900B6110F /* Bounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bounded.swift; sourceTree = "<group>"; };
+		13FE391B2154166600B6110F /* ClosedRange+UnitSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClosedRange+UnitSpace.swift"; sourceTree = "<group>"; };
+		13FE391D215572EC00B6110F /* TrackingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingType.swift; sourceTree = "<group>"; };
+		13FE3921215577E300B6110F /* ConfigurationListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationListTableViewController.swift; sourceTree = "<group>"; };
+		13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralTrackingRegion.swift; sourceTree = "<group>"; };
+		13FE392621557E5500B6110F /* Quadrilateral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quadrilateral.swift; sourceTree = "<group>"; };
+		13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralInterpolator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,20 +105,102 @@
 			isa = PBXGroup;
 			children = (
 				130C00B720D2AD2A007C3163 /* AppDelegate.swift */,
-				130C00B920D2AD2A007C3163 /* art.scnassets */,
+				13FE3921215577E300B6110F /* ConfigurationListTableViewController.swift */,
 				130C00BB20D2AD2A007C3163 /* ViewController.swift */,
 				130C00BD20D2AD2A007C3163 /* Main.storyboard */,
+				13B71581214840B100B3612A /* ScreenTrackingViewController */,
+				139EDEE921419C400009A99F /* Supporting Files */,
+			);
+			path = EyeTrackingTest;
+			sourceTree = "<group>";
+		};
+		139EDEE821419C220009A99F /* SceneKit */ = {
+			isa = PBXGroup;
+			children = (
+				134B6418214C3A4B00285AD5 /* TrackingNode.swift */,
+				13C32B87213991190090BB7D /* LineSegment.swift */,
+				13B715882149509200B3612A /* IntersectionUtilities.swift */,
+				13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */,
+				13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */,
+				139EDEEA21419C870009A99F /* Debug Visualization */,
+			);
+			path = SceneKit;
+			sourceTree = "<group>";
+		};
+		139EDEE921419C400009A99F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				130C00B920D2AD2A007C3163 /* art.scnassets */,
 				130C00C020D2AD2C007C3163 /* Assets.xcassets */,
 				130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */,
 				130C00C520D2AD2C007C3163 /* Info.plist */,
-				13DA8E8820DACDB900B19B70 /* VectorUtils.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		139EDEEA21419C870009A99F /* Debug Visualization */ = {
+			isa = PBXGroup;
+			children = (
 				13B1865D2108E8030099D278 /* FaceNode.swift */,
-				13C32B83213990D60090BB7D /* SCNVector3+Extensions.swift */,
-				13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */,
-				13C32B87213991190090BB7D /* LineSegment.swift */,
 				13C32B892139A2440090BB7D /* IntersectionPointNode.swift */,
 			);
-			path = EyeTrackingTest;
+			path = "Debug Visualization";
+			sourceTree = "<group>";
+		};
+		13A7B917214C033C00714057 /* Tracking Methods */ = {
+			isa = PBXGroup;
+			children = (
+				13A7B911214C027300714057 /* TrackingMethod.swift */,
+				13A7B913214C032A00714057 /* HeadDirectionIntersectionMethod.swift */,
+				13A7B915214C033700714057 /* LookAtDirectionIntersectionMethod.swift */,
+			);
+			path = "Tracking Methods";
+			sourceTree = "<group>";
+		};
+		13B71581214840B100B3612A /* ScreenTrackingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				13B715842148464000B3612A /* Constants.swift */,
+				13FE391D215572EC00B6110F /* TrackingType.swift */,
+				13B7158621484B6600B3612A /* TrackingConfiguration.swift */,
+				139EDEEB21419D700009A99F /* ScreenTrackingViewController.swift */,
+				13B71582214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift */,
+				13A7B917214C033C00714057 /* Tracking Methods */,
+				13FE39152153F63B00B6110F /* Tracking Regions */,
+				13FE3918215414FA00B6110F /* Extensions */,
+				139EDEE821419C220009A99F /* SceneKit */,
+			);
+			path = ScreenTrackingViewController;
+			sourceTree = "<group>";
+		};
+		13FE39152153F63B00B6110F /* Tracking Regions */ = {
+			isa = PBXGroup;
+			children = (
+				13FE39132153F63000B6110F /* TrackingRegion.swift */,
+				13FE39162153F93600B6110F /* RectangleTrackingRegion.swift */,
+				13FE392521557E3D00B6110F /* QuadrilateralTrackingRegion */,
+			);
+			path = "Tracking Regions";
+			sourceTree = "<group>";
+		};
+		13FE3918215414FA00B6110F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				13DA8E8820DACDB900B19B70 /* VectorUtils.swift */,
+				13FE39192154150900B6110F /* Bounded.swift */,
+				13FE391B2154166600B6110F /* ClosedRange+UnitSpace.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		13FE392521557E3D00B6110F /* QuadrilateralTrackingRegion */ = {
+			isa = PBXGroup;
+			children = (
+				13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */,
+				13FE392621557E5500B6110F /* Quadrilateral.swift */,
+				13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */,
+			);
+			path = QuadrilateralTrackingRegion;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,14 +275,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13FE391E215572EC00B6110F /* TrackingType.swift in Sources */,
 				130C00BC20D2AD2A007C3163 /* ViewController.swift in Sources */,
+				13FE391A2154150900B6110F /* Bounded.swift in Sources */,
+				13B715852148464000B3612A /* Constants.swift in Sources */,
 				13DA8E8920DACDB900B19B70 /* VectorUtils.swift in Sources */,
 				13C32B86213990EB0090BB7D /* SCNVector4+Extensions.swift in Sources */,
+				13FE39172153F93600B6110F /* RectangleTrackingRegion.swift in Sources */,
 				13C32B88213991190090BB7D /* LineSegment.swift in Sources */,
+				134B6417214C03FC00285AD5 /* LookAtDirectionIntersectionMethod.swift in Sources */,
+				134B6419214C3A4B00285AD5 /* TrackingNode.swift in Sources */,
+				13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */,
+				13A7B912214C027300714057 /* TrackingMethod.swift in Sources */,
+				13A7B914214C032A00714057 /* HeadDirectionIntersectionMethod.swift in Sources */,
 				13B1865E2108E8030099D278 /* FaceNode.swift in Sources */,
 				13C32B8A2139A2440090BB7D /* IntersectionPointNode.swift in Sources */,
+				13FE391C2154166600B6110F /* ClosedRange+UnitSpace.swift in Sources */,
+				13B71583214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift in Sources */,
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
+				13FE3922215577E300B6110F /* ConfigurationListTableViewController.swift in Sources */,
+				13FE392421557DA900B6110F /* QuadrilateralTrackingRegion.swift in Sources */,
+				13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */,
+				13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */,
 				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
+				139EDEEC21419D700009A99F /* ScreenTrackingViewController.swift in Sources */,
+				13FE39142153F63000B6110F /* TrackingRegion.swift in Sources */,
+				13B7158721484B6600B3612A /* TrackingConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,7 +446,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H4UN8LXK26;
-				INFOPLIST_FILE = EyeTrackingTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/EyeTrackingTest/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -328,7 +464,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H4UN8LXK26;
-				INFOPLIST_FILE = EyeTrackingTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/EyeTrackingTest/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

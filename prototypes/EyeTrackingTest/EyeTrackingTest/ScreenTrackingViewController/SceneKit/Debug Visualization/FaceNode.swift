@@ -11,31 +11,14 @@ import SceneKit
 
 class FaceNode: SCNNode {
 
-    var showEyeCones: Bool = false {
-        didSet {
-            self.eyeLaserLeft.isHidden = !showEyeCones
-            self.eyeLaserRight.isHidden = !showEyeCones
-        }
-    }
-    var showEyeSpheres: Bool = false {
-        didSet {
-            self.eyeSphereLeft.isHidden = !showEyeSpheres
-            self.eyeSphereRight.isHidden = !showEyeSpheres
-        }
-    }
-    var showLookAtDirection: Bool = false {
-        didSet {
-            self.lookAtNode.isHidden = !showLookAtDirection
-        }
-    }
-    var showLookAtSphereTrail: Bool = false {
-        didSet {
-            self.lookSpheres.forEach { $0.isHidden = !showLookAtSphereTrail }
-        }
-    }
-    var showFaceDirection: Bool = false {
-        didSet {
-            self.faceConeNode.isHidden = !showFaceDirection
+    func configure(with trackingConfig: TrackingConfiguration) {
+        self.resetVisibility()
+
+        switch trackingConfig.trackingType {
+        case .eye:
+            self.showLookAtDirection = true
+        case .head:
+            self.showFaceDirection = true
         }
     }
 
@@ -45,6 +28,34 @@ class FaceNode: SCNNode {
         self.showLookAtDirection = false
         self.showLookAtSphereTrail = false
         self.showFaceDirection = false
+    }
+
+    private var showEyeCones: Bool = false {
+        didSet {
+            self.eyeLaserLeft.isHidden = !showEyeCones
+            self.eyeLaserRight.isHidden = !showEyeCones
+        }
+    }
+    private var showEyeSpheres: Bool = false {
+        didSet {
+            self.eyeSphereLeft.isHidden = !showEyeSpheres
+            self.eyeSphereRight.isHidden = !showEyeSpheres
+        }
+    }
+    private var showLookAtDirection: Bool = false {
+        didSet {
+            self.lookAtNode.isHidden = !showLookAtDirection
+        }
+    }
+    private var showLookAtSphereTrail: Bool = false {
+        didSet {
+            self.lookSpheres.forEach { $0.isHidden = !showLookAtSphereTrail }
+        }
+    }
+    private var showFaceDirection: Bool = false {
+        didSet {
+            self.faceConeNode.isHidden = !showFaceDirection
+        }
     }
 
     private var faceConeNode = SCNNode()
@@ -60,8 +71,12 @@ class FaceNode: SCNNode {
 
     private var lookSpheres: [SCNNode] = []
 
-    init(faceGeometry: ARSCNFaceGeometry) {
+    override init() {
         super.init()
+
+        self.name = "faceNode"
+        self.faceConeNode.name = "faceConeNode"
+        self.lookAtNode.name = "lookAtNode"
 
         let cone = SCNCone(topRadius: 0.001, bottomRadius: 0.001, height: 0.5)
 
