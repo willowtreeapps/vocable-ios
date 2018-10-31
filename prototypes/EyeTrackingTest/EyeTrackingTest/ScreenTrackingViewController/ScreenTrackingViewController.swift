@@ -179,11 +179,13 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
     }
 
     private func reportIntersectionToDelegate(_ trackingResult: TrackingResult?) {
-        if let trackingResult = trackingResult {
-            let screenPosition = IntersectionUtils.screenPosition(fromUnitPosition: trackingResult.unitPositionInPlane)
-            self.delegate?.didUpdateTrackedPosition(screenPosition, for: self)
-        } else {
-            self.delegate?.didUpdateTrackedPosition(nil, for: self)
+        DispatchQueue.main.async {
+            if let trackingResult = trackingResult {
+                let screenPosition = IntersectionUtils.screenPosition(fromUnitPosition: trackingResult.unitPositionInPlane)
+                self.delegate?.didUpdateTrackedPosition(screenPosition, for: self)
+            } else {
+                self.delegate?.didUpdateTrackedPosition(nil, for: self)
+            }
         }
     }
 

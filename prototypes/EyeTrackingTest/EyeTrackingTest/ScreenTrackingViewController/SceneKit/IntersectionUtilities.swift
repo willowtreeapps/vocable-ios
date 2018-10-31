@@ -52,8 +52,27 @@ enum IntersectionUtils {
 
     static func screenPosition(fromUnitPosition unitPosition: CGPoint) -> CGPoint {
         let screenSize = UIScreen.main.bounds.size
-        let screenX = screenSize.width * unitPosition.x
-        let screenY = screenSize.height * unitPosition.y
+        let orientation = UIApplication.shared.statusBarOrientation
+
+        var orientedPosition = unitPosition
+        switch orientation {
+        case .landscapeLeft:
+            orientedPosition.x = 1 - unitPosition.y
+            orientedPosition.y = unitPosition.x
+        case .landscapeRight:
+            orientedPosition.x = unitPosition.y
+            orientedPosition.y = 1 - unitPosition.x
+        case .portrait:
+            break
+        case .portraitUpsideDown:
+            orientedPosition.x = 1 - orientedPosition.x
+            orientedPosition.y = 1 - orientedPosition.y
+        case .unknown:
+            break
+        }
+
+        let screenX = screenSize.width * orientedPosition.x
+        let screenY = screenSize.height * orientedPosition.y
 
         return CGPoint(x: screenX, y: screenY)
     }
