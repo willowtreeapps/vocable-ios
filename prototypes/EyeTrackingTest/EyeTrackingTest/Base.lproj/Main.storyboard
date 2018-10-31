@@ -34,9 +34,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="8Zg-PI-PsN"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -46,6 +43,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Configuration" id="8G8-4o-7ZP"/>
+                    <connections>
+                        <segue destination="BV1-FR-VrT" kind="show" identifier="showDemo" id="sIp-3o-G5U"/>
+                        <segue destination="IvX-dq-8eZ" kind="show" identifier="sixKeyboard" id="7CA-qI-4qG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="owq-e8-MjY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -166,6 +167,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="343" y="-179"/>
+        </scene>
+        <!--SixButtonKeyboardViewController-->
+        <scene sceneID="gGD-Tj-hJm">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SixButtonKeyboardViewController" id="IvX-dq-8eZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jHJ-pO-z1P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="342" y="344"/>
         </scene>
     </scenes>
 </document>
