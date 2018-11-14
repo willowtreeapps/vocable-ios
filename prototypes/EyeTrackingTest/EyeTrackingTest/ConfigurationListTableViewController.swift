@@ -13,6 +13,7 @@ class ConfigurationListTableViewController: UITableViewController {
     struct ConfigurationOption {
         let title: String
         let configuration: TrackingConfiguration
+        let segueID: String
     }
 
     var configurationOptions: [ConfigurationOption] = []
@@ -21,8 +22,9 @@ class ConfigurationListTableViewController: UITableViewController {
         super.viewDidLoad()
 
         self.configurationOptions = [
-            ConfigurationOption(title: "Head Tracking", configuration: .headTracking),
-            ConfigurationOption(title: "Eye Tracking", configuration: .eyeTracking)
+            ConfigurationOption(title: "Head Tracking", configuration: .headTracking, segueID: "showDemo"),
+            ConfigurationOption(title: "Eye Tracking", configuration: .eyeTracking, segueID: "showDemo"),
+            ConfigurationOption(title: "Six Keyboard", configuration: .headTracking, segueID: "sixKeyboard"),
         ]
         self.tableView.reloadData()
     }
@@ -43,6 +45,11 @@ class ConfigurationListTableViewController: UITableViewController {
         cell.textLabel?.text = self.configurationOptions[indexPath.row].title
 
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let configuration = self.configurationOptions[indexPath.row]
+        self.performSegue(withIdentifier: configuration.segueID, sender: nil)
     }
 
     // MARK: - Navigation

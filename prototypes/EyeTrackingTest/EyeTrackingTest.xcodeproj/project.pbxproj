@@ -13,6 +13,12 @@
 		130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00BD20D2AD2A007C3163 /* Main.storyboard */; };
 		130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C020D2AD2C007C3163 /* Assets.xcassets */; };
 		130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */; };
+		13204C572180E559005410FC /* SixButtonKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13204C562180E559005410FC /* SixButtonKeyboardViewController.swift */; };
+		13204C592180E564005410FC /* SixButtonKeyboardViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13204C582180E564005410FC /* SixButtonKeyboardViewController.storyboard */; };
+		13204C5B2180EBD1005410FC /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13204C5A2180EBD1005410FC /* KeyView.swift */; };
+		13204C5D2180EC2D005410FC /* KeyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13204C5C2180EC2D005410FC /* KeyView.xib */; };
+		13204C5F2180EC61005410FC /* NibBackedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13204C5E2180EC61005410FC /* NibBackedView.swift */; };
+		1349DA50218FCDF400FC0411 /* TrackingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349DA4F218FCDF400FC0411 /* TrackingEngine.swift */; };
 		134B6417214C03FC00285AD5 /* LookAtDirectionIntersectionMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A7B915214C033700714057 /* LookAtDirectionIntersectionMethod.swift */; };
 		134B6419214C3A4B00285AD5 /* TrackingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134B6418214C3A4B00285AD5 /* TrackingNode.swift */; };
 		139EDEEC21419D700009A99F /* ScreenTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139EDEEB21419D700009A99F /* ScreenTrackingViewController.swift */; };
@@ -27,6 +33,9 @@
 		13C32B86213990EB0090BB7D /* SCNVector4+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */; };
 		13C32B88213991190090BB7D /* LineSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B87213991190090BB7D /* LineSegment.swift */; };
 		13C32B8A2139A2440090BB7D /* IntersectionPointNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C32B892139A2440090BB7D /* IntersectionPointNode.swift */; };
+		13DA0768219121DE0081754A /* TrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA0767219121DE0081754A /* TrackingView.swift */; };
+		13DA076A219297140081754A /* TrackingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA0769219297140081754A /* TrackingButton.swift */; };
+		13DA076C21929D760081754A /* Array+Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA076B21929D760081754A /* Array+Split.swift */; };
 		13DA8E8920DACDB900B19B70 /* VectorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA8E8820DACDB900B19B70 /* VectorUtils.swift */; };
 		13FE39142153F63000B6110F /* TrackingRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE39132153F63000B6110F /* TrackingRegion.swift */; };
 		13FE39172153F93600B6110F /* RectangleTrackingRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE39162153F93600B6110F /* RectangleTrackingRegion.swift */; };
@@ -48,6 +57,12 @@
 		130C00C020D2AD2C007C3163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		130C00C320D2AD2C007C3163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		130C00C520D2AD2C007C3163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13204C562180E559005410FC /* SixButtonKeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixButtonKeyboardViewController.swift; sourceTree = "<group>"; };
+		13204C582180E564005410FC /* SixButtonKeyboardViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SixButtonKeyboardViewController.storyboard; sourceTree = "<group>"; };
+		13204C5A2180EBD1005410FC /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
+		13204C5C2180EC2D005410FC /* KeyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyView.xib; sourceTree = "<group>"; };
+		13204C5E2180EC61005410FC /* NibBackedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibBackedView.swift; sourceTree = "<group>"; };
+		1349DA4F218FCDF400FC0411 /* TrackingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingEngine.swift; sourceTree = "<group>"; };
 		134B6418214C3A4B00285AD5 /* TrackingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingNode.swift; sourceTree = "<group>"; };
 		139EDEEB21419D700009A99F /* ScreenTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTrackingViewController.swift; sourceTree = "<group>"; };
 		13A7B911214C027300714057 /* TrackingMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingMethod.swift; sourceTree = "<group>"; };
@@ -62,6 +77,9 @@
 		13C32B85213990EB0090BB7D /* SCNVector4+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector4+Extensions.swift"; sourceTree = "<group>"; };
 		13C32B87213991190090BB7D /* LineSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSegment.swift; sourceTree = "<group>"; };
 		13C32B892139A2440090BB7D /* IntersectionPointNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionPointNode.swift; sourceTree = "<group>"; };
+		13DA0767219121DE0081754A /* TrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingView.swift; sourceTree = "<group>"; };
+		13DA0769219297140081754A /* TrackingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingButton.swift; sourceTree = "<group>"; };
+		13DA076B21929D760081754A /* Array+Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Split.swift"; sourceTree = "<group>"; };
 		13DA8E8820DACDB900B19B70 /* VectorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorUtils.swift; sourceTree = "<group>"; };
 		13FE39132153F63000B6110F /* TrackingRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingRegion.swift; sourceTree = "<group>"; };
 		13FE39162153F93600B6110F /* RectangleTrackingRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleTrackingRegion.swift; sourceTree = "<group>"; };
@@ -108,10 +126,27 @@
 				13FE3921215577E300B6110F /* ConfigurationListTableViewController.swift */,
 				130C00BB20D2AD2A007C3163 /* ViewController.swift */,
 				130C00BD20D2AD2A007C3163 /* Main.storyboard */,
+				13204C5E2180EC61005410FC /* NibBackedView.swift */,
+				13204C552180E52F005410FC /* 6Keyboard */,
 				13B71581214840B100B3612A /* ScreenTrackingViewController */,
 				139EDEE921419C400009A99F /* Supporting Files */,
 			);
 			path = EyeTrackingTest;
+			sourceTree = "<group>";
+		};
+		13204C552180E52F005410FC /* 6Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				13204C562180E559005410FC /* SixButtonKeyboardViewController.swift */,
+				13204C582180E564005410FC /* SixButtonKeyboardViewController.storyboard */,
+				13204C5A2180EBD1005410FC /* KeyView.swift */,
+				13204C5C2180EC2D005410FC /* KeyView.xib */,
+				1349DA4F218FCDF400FC0411 /* TrackingEngine.swift */,
+				13DA0767219121DE0081754A /* TrackingView.swift */,
+				13DA0769219297140081754A /* TrackingButton.swift */,
+				13DA076B21929D760081754A /* Array+Split.swift */,
+			);
+			path = 6Keyboard;
 			sourceTree = "<group>";
 		};
 		139EDEE821419C220009A99F /* SceneKit */ = {
@@ -261,8 +296,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13204C5D2180EC2D005410FC /* KeyView.xib in Resources */,
 				130C00BA20D2AD2A007C3163 /* art.scnassets in Resources */,
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,
+				13204C592180E564005410FC /* SixButtonKeyboardViewController.storyboard in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
 				130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */,
 			);
@@ -281,12 +318,17 @@
 				13B715852148464000B3612A /* Constants.swift in Sources */,
 				13DA8E8920DACDB900B19B70 /* VectorUtils.swift in Sources */,
 				13C32B86213990EB0090BB7D /* SCNVector4+Extensions.swift in Sources */,
+				1349DA50218FCDF400FC0411 /* TrackingEngine.swift in Sources */,
 				13FE39172153F93600B6110F /* RectangleTrackingRegion.swift in Sources */,
 				13C32B88213991190090BB7D /* LineSegment.swift in Sources */,
+				13204C572180E559005410FC /* SixButtonKeyboardViewController.swift in Sources */,
 				134B6417214C03FC00285AD5 /* LookAtDirectionIntersectionMethod.swift in Sources */,
+				13DA076C21929D760081754A /* Array+Split.swift in Sources */,
 				134B6419214C3A4B00285AD5 /* TrackingNode.swift in Sources */,
 				13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */,
 				13A7B912214C027300714057 /* TrackingMethod.swift in Sources */,
+				13204C5F2180EC61005410FC /* NibBackedView.swift in Sources */,
+				13DA0768219121DE0081754A /* TrackingView.swift in Sources */,
 				13A7B914214C032A00714057 /* HeadDirectionIntersectionMethod.swift in Sources */,
 				13B1865E2108E8030099D278 /* FaceNode.swift in Sources */,
 				13C32B8A2139A2440090BB7D /* IntersectionPointNode.swift in Sources */,
@@ -298,8 +340,10 @@
 				13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */,
 				13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */,
 				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
+				13204C5B2180EBD1005410FC /* KeyView.swift in Sources */,
 				139EDEEC21419D700009A99F /* ScreenTrackingViewController.swift in Sources */,
 				13FE39142153F63000B6110F /* TrackingRegion.swift in Sources */,
+				13DA076A219297140081754A /* TrackingButton.swift in Sources */,
 				13B7158721484B6600B3612A /* TrackingConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

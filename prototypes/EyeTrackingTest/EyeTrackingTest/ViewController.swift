@@ -11,7 +11,7 @@ import SceneKit
 import ARKit
 
 
-class ViewController: UIViewController, ARSCNViewDelegate, ScreenTrackingViewControllerDelegate {
+class ViewController: UIViewController, ScreenTrackingViewControllerDelegate {
 
     var showDebug: Bool = true {
         didSet {
