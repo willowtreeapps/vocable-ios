@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JAA-Tx-jTr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JAA-Tx-jTr">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,61 +18,91 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ncn-tj-XaA" userLabel="Text Container">
-                                <rect key="frame" x="0.0" y="0.0" width="623" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doo-Vf-okT" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="DIo-no-YPo"/>
+                                            <constraint firstAttribute="height" constant="44" id="LVd-Et-7Jf"/>
+                                        </constraints>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backButtonAction:" destination="JAA-Tx-jTr" eventType="touchUpInside" id="qzm-Yc-7pg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwM-1q-7op" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
+                                        <rect key="frame" x="623" y="0.0" width="44" height="44"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="6Ma-vW-slJ"/>
+                                            <constraint firstAttribute="height" constant="44" id="vob-VK-Sjg"/>
+                                        </constraints>
+                                        <state key="normal" title="Speak">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2zw-0N-6sy">
+                                        <rect key="frame" x="64" y="13.5" width="539" height="17"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oyn-bb-Gwf" userLabel="Speak Container">
-                                <rect key="frame" x="623" y="44" width="44" height="331"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwM-1q-7op">
-                                <rect key="frame" x="623" y="0.0" width="44" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="6Ma-vW-slJ"/>
-                                    <constraint firstAttribute="height" constant="44" id="vob-VK-Sjg"/>
+                                    <constraint firstItem="jwM-1q-7op" firstAttribute="leading" secondItem="2zw-0N-6sy" secondAttribute="trailing" constant="20" id="08m-Za-us8"/>
+                                    <constraint firstAttribute="bottom" secondItem="doo-Vf-okT" secondAttribute="bottom" id="5KC-j2-Chv"/>
+                                    <constraint firstItem="2zw-0N-6sy" firstAttribute="leading" secondItem="doo-Vf-okT" secondAttribute="trailing" constant="20" id="8R9-II-XvL"/>
+                                    <constraint firstItem="2zw-0N-6sy" firstAttribute="centerY" secondItem="Ncn-tj-XaA" secondAttribute="centerY" id="Sh6-gJ-ane"/>
+                                    <constraint firstAttribute="bottom" secondItem="jwM-1q-7op" secondAttribute="bottom" id="W2c-W1-xSa"/>
+                                    <constraint firstItem="doo-Vf-okT" firstAttribute="top" secondItem="Ncn-tj-XaA" secondAttribute="top" id="Y5j-UJ-VfV"/>
+                                    <constraint firstItem="jwM-1q-7op" firstAttribute="top" secondItem="Ncn-tj-XaA" secondAttribute="top" id="qDj-Du-GbQ"/>
+                                    <constraint firstItem="doo-Vf-okT" firstAttribute="leading" secondItem="Ncn-tj-XaA" secondAttribute="leading" id="qaX-nO-jGL"/>
+                                    <constraint firstAttribute="trailing" secondItem="jwM-1q-7op" secondAttribute="trailing" id="v4b-pl-v2b"/>
                                 </constraints>
-                                <state key="normal" title="Back">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="q6N-k9-9Gm">
-                                <rect key="frame" x="0.0" y="44" width="623" height="331"/>
+                                <rect key="frame" x="0.0" y="44" width="667" height="331"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="rC8-ES-hMx">
-                                        <rect key="frame" x="0.0" y="0.0" width="206.5" height="331"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="221" height="331"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQg-Xm-MID" userLabel="Top Left Key" customClass="KeyView">
-                                                <rect key="frame" x="0.0" y="0.0" width="206.5" height="164.5"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQg-Xm-MID" userLabel="Top Left Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="221" height="164.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cin-Gu-vRQ" userLabel="Bottom Left Key" customClass="KeyView">
-                                                <rect key="frame" x="0.0" y="166.5" width="206.5" height="164.5"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cin-Gu-vRQ" userLabel="Bottom Left Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="166.5" width="221" height="164.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Sm2-ch-13R">
-                                        <rect key="frame" x="208.5" y="0.0" width="206" height="331"/>
+                                        <rect key="frame" x="223" y="0.0" width="221" height="331"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7j-3t-awc" userLabel="Top Center Key" customClass="KeyView">
-                                                <rect key="frame" x="0.0" y="0.0" width="206" height="164.5"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7j-3t-awc" userLabel="Top Center Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="221" height="164.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCP-zv-BOE" userLabel="Bottom Center Key" customClass="KeyView">
-                                                <rect key="frame" x="0.0" y="166.5" width="206" height="164.5"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCP-zv-BOE" userLabel="Bottom Center Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="166.5" width="221" height="164.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="LXd-pZ-0T4">
-                                        <rect key="frame" x="416.5" y="0.0" width="206.5" height="331"/>
+                                        <rect key="frame" x="446" y="0.0" width="221" height="331"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mnR-sI-wAj" userLabel="Top Right Key" customClass="KeyView">
-                                                <rect key="frame" x="0.0" y="0.0" width="206.5" height="164.5"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mnR-sI-wAj" userLabel="Top Right Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="221" height="164.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tl9-YU-YEl" userLabel="Bottom Right Key" customClass="KeyView">
-                                                <rect key="frame" x="0.0" y="166.5" width="206.5" height="164.5"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tl9-YU-YEl" userLabel="Bottom Right Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="166.5" width="221" height="164.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -81,29 +111,25 @@
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="jwM-1q-7op" firstAttribute="top" secondItem="lgN-Pi-LtB" secondAttribute="top" id="0d8-fB-mAY"/>
+                            <constraint firstItem="lgN-Pi-LtB" firstAttribute="trailing" secondItem="Ncn-tj-XaA" secondAttribute="trailing" id="0fW-JP-fkH"/>
                             <constraint firstAttribute="bottom" secondItem="q6N-k9-9Gm" secondAttribute="bottom" id="7u6-ic-DUe"/>
-                            <constraint firstItem="Ncn-tj-XaA" firstAttribute="top" secondItem="pst-4E-PK6" secondAttribute="top" id="CAX-l1-JMU"/>
-                            <constraint firstAttribute="trailing" secondItem="Oyn-bb-Gwf" secondAttribute="trailing" id="GbK-iQ-orN"/>
-                            <constraint firstItem="Ncn-tj-XaA" firstAttribute="leading" secondItem="pst-4E-PK6" secondAttribute="leading" id="Tse-Vz-fFz"/>
-                            <constraint firstItem="Oyn-bb-Gwf" firstAttribute="top" secondItem="jwM-1q-7op" secondAttribute="bottom" id="Xz1-Sd-JzS"/>
-                            <constraint firstItem="jwM-1q-7op" firstAttribute="leading" secondItem="Ncn-tj-XaA" secondAttribute="trailing" id="cJq-Qp-Pg4"/>
+                            <constraint firstItem="Ncn-tj-XaA" firstAttribute="top" secondItem="lgN-Pi-LtB" secondAttribute="top" id="CAX-l1-JMU"/>
+                            <constraint firstAttribute="trailing" secondItem="q6N-k9-9Gm" secondAttribute="trailing" id="DS5-3U-2Gr"/>
+                            <constraint firstItem="Ncn-tj-XaA" firstAttribute="leading" secondItem="lgN-Pi-LtB" secondAttribute="leading" id="Tse-Vz-fFz"/>
                             <constraint firstItem="q6N-k9-9Gm" firstAttribute="top" secondItem="Ncn-tj-XaA" secondAttribute="bottom" id="dki-w1-UVY"/>
-                            <constraint firstItem="Oyn-bb-Gwf" firstAttribute="leading" secondItem="q6N-k9-9Gm" secondAttribute="trailing" id="fup-Lq-4fq"/>
-                            <constraint firstItem="Oyn-bb-Gwf" firstAttribute="width" secondItem="jwM-1q-7op" secondAttribute="width" id="nXC-DB-VdA"/>
-                            <constraint firstAttribute="bottom" secondItem="Oyn-bb-Gwf" secondAttribute="bottom" id="ndk-iG-Cmn"/>
-                            <constraint firstItem="Ncn-tj-XaA" firstAttribute="height" secondItem="jwM-1q-7op" secondAttribute="height" id="plY-QX-ebP"/>
-                            <constraint firstAttribute="trailing" secondItem="jwM-1q-7op" secondAttribute="trailing" id="snd-Yz-SWY"/>
                             <constraint firstItem="q6N-k9-9Gm" firstAttribute="leading" secondItem="pst-4E-PK6" secondAttribute="leading" id="y9S-ZG-cda"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lgN-Pi-LtB"/>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="doo-Vf-okT" id="wDP-dc-agv"/>
                         <outlet property="bottomCenterKey" destination="gCP-zv-BOE" id="6wo-8X-KaI"/>
                         <outlet property="bottomLeftKey" destination="cin-Gu-vRQ" id="Pd1-Fh-Lwa"/>
                         <outlet property="bottomRightKey" destination="tl9-YU-YEl" id="krl-uZ-tgU"/>
+                        <outlet property="speakButton" destination="jwM-1q-7op" id="jOZ-sw-ldq"/>
+                        <outlet property="textfield" destination="2zw-0N-6sy" id="pHJ-OD-LV8"/>
                         <outlet property="topCenterKey" destination="m7j-3t-awc" id="wB7-J5-Drf"/>
                         <outlet property="topLeftKey" destination="iQg-Xm-MID" id="Kxm-qU-IlI"/>
                         <outlet property="topRightKey" destination="mnR-sI-wAj" id="3bt-vr-ND9"/>
