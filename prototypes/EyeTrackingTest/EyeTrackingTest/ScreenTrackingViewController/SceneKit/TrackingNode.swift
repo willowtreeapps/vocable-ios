@@ -22,7 +22,7 @@ class TrackingNode: SCNNode {
 
     func track(faceAnchor: ARFaceAnchor) -> TrackingResult? {
         guard let hitTest = trackingMethod.intersect(faceAnchor: faceAnchor, withHitTestNode: self) else {
-            return nil
+            return nil 
         }
 
         guard let unitPosition = trackingRegion.unitPosition(for: hitTest) else {
