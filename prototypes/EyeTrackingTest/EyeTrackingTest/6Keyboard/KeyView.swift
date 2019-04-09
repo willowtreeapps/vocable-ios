@@ -77,7 +77,7 @@ class KeyView: NibBackView, Gazeable {
     }
 
     override func didInstantiateBackingNib() {
-        self.contentView.backgroundColor = .black
+        self.contentView.backgroundColor = .lightGray
         self.singleValueLabel.textColor = .white
         self.optionLabels.forEach { $0.textColor = .white }
     }

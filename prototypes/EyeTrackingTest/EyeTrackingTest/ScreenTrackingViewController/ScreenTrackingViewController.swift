@@ -45,6 +45,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
         self.sceneView.delegate = self
 
+        self.sceneView.alpha = 0.0 // for demo, removing bg camera
         self.sceneView.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
         self.sceneView.frame = self.view.bounds
         self.view.addSubview(self.sceneView)

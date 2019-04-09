@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JAA-Tx-jTr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JAA-Tx-jTr">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,14 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ncn-tj-XaA" userLabel="Text Container">
-                                <rect key="frame" x="0.0" y="0.0" width="667" height="44"/>
+                                <rect key="frame" x="8" y="8" width="651" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doo-Vf-okT" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="547" y="0.0" width="44" height="48"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="DIo-no-YPo"/>
-                                            <constraint firstAttribute="height" constant="44" id="LVd-Et-7Jf"/>
                                         </constraints>
                                         <state key="normal" title="Back">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,76 +33,76 @@
                                             <action selector="backButtonAction:" destination="JAA-Tx-jTr" eventType="touchUpInside" id="qzm-Yc-7pg"/>
                                         </connections>
                                     </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2zw-0N-6sy">
+                                        <rect key="frame" x="0.0" y="0.0" width="539" height="48"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwM-1q-7op" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
-                                        <rect key="frame" x="623" y="0.0" width="44" height="44"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="599" y="0.0" width="52" height="48"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="6Ma-vW-slJ"/>
-                                            <constraint firstAttribute="height" constant="44" id="vob-VK-Sjg"/>
+                                            <constraint firstAttribute="width" constant="52" id="rTc-Xr-iPU"/>
                                         </constraints>
                                         <state key="normal" title="Speak">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2zw-0N-6sy">
-                                        <rect key="frame" x="64" y="13.5" width="539" height="17"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="jwM-1q-7op" firstAttribute="leading" secondItem="2zw-0N-6sy" secondAttribute="trailing" constant="20" id="08m-Za-us8"/>
-                                    <constraint firstAttribute="bottom" secondItem="doo-Vf-okT" secondAttribute="bottom" id="5KC-j2-Chv"/>
-                                    <constraint firstItem="2zw-0N-6sy" firstAttribute="leading" secondItem="doo-Vf-okT" secondAttribute="trailing" constant="20" id="8R9-II-XvL"/>
-                                    <constraint firstItem="2zw-0N-6sy" firstAttribute="centerY" secondItem="Ncn-tj-XaA" secondAttribute="centerY" id="Sh6-gJ-ane"/>
-                                    <constraint firstAttribute="bottom" secondItem="jwM-1q-7op" secondAttribute="bottom" id="W2c-W1-xSa"/>
-                                    <constraint firstItem="doo-Vf-okT" firstAttribute="top" secondItem="Ncn-tj-XaA" secondAttribute="top" id="Y5j-UJ-VfV"/>
-                                    <constraint firstItem="jwM-1q-7op" firstAttribute="top" secondItem="Ncn-tj-XaA" secondAttribute="top" id="qDj-Du-GbQ"/>
-                                    <constraint firstItem="doo-Vf-okT" firstAttribute="leading" secondItem="Ncn-tj-XaA" secondAttribute="leading" id="qaX-nO-jGL"/>
-                                    <constraint firstAttribute="trailing" secondItem="jwM-1q-7op" secondAttribute="trailing" id="v4b-pl-v2b"/>
+                                    <constraint firstItem="2zw-0N-6sy" firstAttribute="leading" secondItem="Ncn-tj-XaA" secondAttribute="leading" id="JDq-40-ogZ"/>
+                                    <constraint firstItem="doo-Vf-okT" firstAttribute="leading" secondItem="2zw-0N-6sy" secondAttribute="trailing" constant="8" id="RgH-hv-Tyu"/>
+                                    <constraint firstAttribute="bottom" secondItem="jwM-1q-7op" secondAttribute="bottom" id="X2u-5x-Zo0"/>
+                                    <constraint firstItem="2zw-0N-6sy" firstAttribute="top" secondItem="Ncn-tj-XaA" secondAttribute="top" id="Yo9-nT-13F"/>
+                                    <constraint firstItem="doo-Vf-okT" firstAttribute="top" secondItem="Ncn-tj-XaA" secondAttribute="top" id="ZTo-rh-oSe"/>
+                                    <constraint firstAttribute="bottom" secondItem="doo-Vf-okT" secondAttribute="bottom" id="ZeR-7Q-j0R"/>
+                                    <constraint firstAttribute="bottom" secondItem="2zw-0N-6sy" secondAttribute="bottom" id="aGB-MX-WMX"/>
+                                    <constraint firstItem="jwM-1q-7op" firstAttribute="leading" secondItem="doo-Vf-okT" secondAttribute="trailing" constant="8" id="aXk-t1-6iC"/>
+                                    <constraint firstAttribute="height" constant="48" id="oOf-dv-Xzj"/>
+                                    <constraint firstItem="jwM-1q-7op" firstAttribute="top" secondItem="Ncn-tj-XaA" secondAttribute="top" id="rKg-Xu-K3G"/>
+                                    <constraint firstAttribute="trailing" secondItem="jwM-1q-7op" secondAttribute="trailing" id="viv-jZ-wzh"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="q6N-k9-9Gm">
-                                <rect key="frame" x="0.0" y="44" width="667" height="331"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="q6N-k9-9Gm">
+                                <rect key="frame" x="8" y="64" width="651" height="303"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="rC8-ES-hMx">
-                                        <rect key="frame" x="0.0" y="0.0" width="221" height="331"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="211.5" height="303"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQg-Xm-MID" userLabel="Top Left Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="221" height="164.5"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="211.5" height="150.5"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cin-Gu-vRQ" userLabel="Bottom Left Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="166.5" width="221" height="164.5"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="0.0" y="152.5" width="211.5" height="150.5"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Sm2-ch-13R">
-                                        <rect key="frame" x="223" y="0.0" width="221" height="331"/>
+                                        <rect key="frame" x="219.5" y="0.0" width="212" height="303"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7j-3t-awc" userLabel="Top Center Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="221" height="164.5"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="212" height="150.5"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCP-zv-BOE" userLabel="Bottom Center Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="166.5" width="221" height="164.5"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="0.0" y="152.5" width="212" height="150.5"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="LXd-pZ-0T4">
-                                        <rect key="frame" x="446" y="0.0" width="221" height="331"/>
+                                        <rect key="frame" x="439.5" y="0.0" width="211.5" height="303"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mnR-sI-wAj" userLabel="Top Right Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="221" height="164.5"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="211.5" height="150.5"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tl9-YU-YEl" userLabel="Bottom Right Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="166.5" width="221" height="164.5"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="0.0" y="152.5" width="211.5" height="150.5"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
                                     </stackView>
@@ -111,15 +110,15 @@
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="lgN-Pi-LtB" firstAttribute="trailing" secondItem="Ncn-tj-XaA" secondAttribute="trailing" id="0fW-JP-fkH"/>
-                            <constraint firstAttribute="bottom" secondItem="q6N-k9-9Gm" secondAttribute="bottom" id="7u6-ic-DUe"/>
-                            <constraint firstItem="Ncn-tj-XaA" firstAttribute="top" secondItem="lgN-Pi-LtB" secondAttribute="top" id="CAX-l1-JMU"/>
-                            <constraint firstAttribute="trailing" secondItem="q6N-k9-9Gm" secondAttribute="trailing" id="DS5-3U-2Gr"/>
-                            <constraint firstItem="Ncn-tj-XaA" firstAttribute="leading" secondItem="lgN-Pi-LtB" secondAttribute="leading" id="Tse-Vz-fFz"/>
-                            <constraint firstItem="q6N-k9-9Gm" firstAttribute="top" secondItem="Ncn-tj-XaA" secondAttribute="bottom" id="dki-w1-UVY"/>
-                            <constraint firstItem="q6N-k9-9Gm" firstAttribute="leading" secondItem="pst-4E-PK6" secondAttribute="leading" id="y9S-ZG-cda"/>
+                            <constraint firstItem="Ncn-tj-XaA" firstAttribute="top" secondItem="lgN-Pi-LtB" secondAttribute="top" constant="8" id="5R0-5a-7j8"/>
+                            <constraint firstItem="lgN-Pi-LtB" firstAttribute="bottom" secondItem="q6N-k9-9Gm" secondAttribute="bottom" constant="8" id="7u6-ic-DUe"/>
+                            <constraint firstItem="lgN-Pi-LtB" firstAttribute="trailing" secondItem="q6N-k9-9Gm" secondAttribute="trailing" constant="8" id="DS5-3U-2Gr"/>
+                            <constraint firstItem="lgN-Pi-LtB" firstAttribute="trailing" secondItem="Ncn-tj-XaA" secondAttribute="trailing" constant="8" id="Eqn-Ii-3X5"/>
+                            <constraint firstItem="Ncn-tj-XaA" firstAttribute="leading" secondItem="lgN-Pi-LtB" secondAttribute="leading" constant="8" id="Jv5-wI-2UX"/>
+                            <constraint firstItem="q6N-k9-9Gm" firstAttribute="top" secondItem="Ncn-tj-XaA" secondAttribute="bottom" constant="8" id="Oa1-Ih-xFa"/>
+                            <constraint firstItem="q6N-k9-9Gm" firstAttribute="leading" secondItem="lgN-Pi-LtB" secondAttribute="leading" constant="8" id="y9S-ZG-cda"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lgN-Pi-LtB"/>
                     </view>
