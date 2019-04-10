@@ -143,8 +143,6 @@ class SixButtonKeyboardViewController: UIViewController, ScreenTrackingViewContr
         self.addChild(self.screenTrackingViewController)
         self.screenTrackingViewController.didMove(toParent: self)
 
-        self.screenTrackingViewController.view.alpha = 0.3
-
         trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 40, height: 40)
         trackingView.layer.cornerRadius = 20.0
         trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.8)
@@ -166,6 +164,11 @@ class SixButtonKeyboardViewController: UIViewController, ScreenTrackingViewContr
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        for interactive in interactiveViews {
+            interactive.layer.cornerRadius = 8.0
+            interactive.clipsToBounds = true
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
