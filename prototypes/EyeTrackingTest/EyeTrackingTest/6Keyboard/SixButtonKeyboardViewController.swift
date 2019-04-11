@@ -65,7 +65,7 @@ class SixButtonKeyboardViewController: UIViewController, ScreenTrackingViewContr
             var values: [KeyViewValue] = element
             
             // insert or pad
-            if offset < values.count - 1 {
+            if offset < values.count {
                 values.insert(.back, at: offset)
             }
             while values.count < 6 {
