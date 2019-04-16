@@ -7,17 +7,42 @@
 //
 
 import UIKit
+import AVFoundation
 
-class SixButtonKeyboardViewController: UIViewController, ScreenTrackingViewControllerDelegate {
+
+class SixButtonKeyboardViewController: UIViewController {
 
     let trackingEngine = TrackingEngine()
 
 
     // MARK: - Outlets
-    @IBOutlet var textfield: UITextField!
+    @IBOutlet var textfield: UITextView!
 
     @IBOutlet var backButton: TrackingButton!
     @IBOutlet var speakButton: TrackingButton!
+    
+    @IBOutlet weak var textPrediction1Button: TrackingButton!
+    @IBOutlet weak var textPrediction2Button: TrackingButton!
+    @IBOutlet weak var textPrediction3Button: TrackingButton!
+    @IBOutlet weak var textPrediction4Button: TrackingButton!
+    @IBOutlet weak var textPrediction5Button: TrackingButton!
+    @IBOutlet weak var textPrediction6Button: TrackingButton!
+    
+    lazy var textPredictionTrackingGroup = TrackingGroup(widgets: [
+        self.textPrediction1Button,
+        self.textPrediction2Button,
+        self.textPrediction3Button,
+        self.textPrediction4Button,
+        self.textPrediction5Button,
+        self.textPrediction6Button]
+    )
+    
+    lazy var textPredictionController: TextPredictionController = {
+        let controller = TextPredictionController()
+        controller.delegate = self
+        return controller
+    }()
+    
 
     @IBOutlet var topLeftKey: KeyView!
     @IBOutlet var topCenterKey: KeyView!
@@ -34,9 +59,10 @@ class SixButtonKeyboardViewController: UIViewController, ScreenTrackingViewContr
                  self.bottomRightKey ]
     }
 
-    private var interactiveViews: [TrackingView] {
+    private var interactiveViews: [TrackableWidget] {
         return [ self.backButton, self.speakButton, self.topLeftKey, self.bottomLeftKey,
-                 self.topCenterKey, self.bottomCenterKey, self.topRightKey, self.bottomRightKey ]
+                 self.topCenterKey, self.bottomCenterKey, self.topRightKey, self.bottomRightKey,
+                 self.textPredictionTrackingGroup]
     }
 
 
@@ -84,7 +110,7 @@ class SixButtonKeyboardViewController: UIViewController, ScreenTrackingViewContr
     private func configureKeys(with options: [KeyViewOptions]) {
         for pair in zip(options, self.allKeyViews) {
             pair.1.configure(with: .options(pair.0))
-            pair.1.onGaze = {
+            pair.1.onGaze = { _ in
                 self.configureKeys(withSelectedOption: pair.0)
             }
         }
@@ -93,7 +119,7 @@ class SixButtonKeyboardViewController: UIViewController, ScreenTrackingViewContr
     private func configureKeys(withSelectedOption option: KeyViewOptions) {
         for pair in zip(option.allValues, self.allKeyViews) {
             pair.1.configure(with: .value(pair.0))
-            pair.1.onGaze = {
+            pair.1.onGaze = { _ in
                 self.didSelectValue(pair.0)
             }
         }
@@ -113,7 +139,10 @@ class SixButtonKeyboardViewController: UIViewController, ScreenTrackingViewContr
         case .back:
             break
         }
-
+        DispatchQueue.main.async {
+            let newText = self.textfield.text ?? ""
+            self.textPredictionController.updateState(newText: newText)
+        }
         self.configureKeys(with: self.keyViewOptions)
     }
 
@@ -150,12 +179,26 @@ class SixButtonKeyboardViewController: UIViewController, ScreenTrackingViewContr
 
         self.configureUI()
 
-        self.backButton.onGaze = {
+        self.backButton.onGaze = { _ in
             self.navigationController?.popViewController(animated: true)
+        }
+        
+        self.speakButton.onGaze = { _ in
+            let speech = self.textfield.text ?? ""
+            let utterance = AVSpeechUtterance(string: speech)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            let synthesizer = AVSpeechSynthesizer()
+            synthesizer.speak(utterance)
+        }
+        
+        self.textPredictionTrackingGroup.onGaze = { id in
+            if let id = id {
+                self.textPredictionController.updateSentence(withPredictionAt: id)
+            }
         }
 
         for view in self.interactiveViews {
-            self.trackingEngine.registerView(view)
+            view.add(to: self.trackingEngine)
         }
 
         self.configureKeys(with: self.keyViewOptions)
@@ -165,9 +208,9 @@ class SixButtonKeyboardViewController: UIViewController, ScreenTrackingViewContr
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
-        for interactive in interactiveViews {
-            interactive.layer.cornerRadius = 8.0
-            interactive.clipsToBounds = true
+        self.trackingEngine.applyToEach { trackingView in
+            trackingView.layer.cornerRadius = 8.0
+            trackingView.clipsToBounds = true
         }
     }
 
@@ -178,22 +221,6 @@ class SixButtonKeyboardViewController: UIViewController, ScreenTrackingViewContr
 
     @IBAction func backButtonAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
-    }
-
-    // MARK: - ScreenTrackingViewControllerDelegate
-
-    func didUpdateTrackedPosition(_ trackedPositionOnScreen: CGPoint?, for screenTrackingViewController: ScreenTrackingViewController) {
-        DispatchQueue.main.async {
-            if let position = trackedPositionOnScreen {
-                self.trackingView.isHidden = false
-
-                let positionInView = self.view.convert(position, from: nil)
-                self.trackingView.center = positionInView
-                self.trackingEngine.updateWithTrackedPoint(position)
-            } else {
-                self.trackingView.isHidden = true
-            }
-        }
     }
 
     var showDebug: Bool = true {
@@ -214,4 +241,31 @@ class SixButtonKeyboardViewController: UIViewController, ScreenTrackingViewContr
         }
     }
 
+}
+
+extension SixButtonKeyboardViewController: ScreenTrackingViewControllerDelegate {
+    func didUpdateTrackedPosition(_ trackedPositionOnScreen: CGPoint?, for screenTrackingViewController: ScreenTrackingViewController) {
+        DispatchQueue.main.async {
+            if let position = trackedPositionOnScreen {
+                self.trackingView.isHidden = false
+                
+                let positionInView = self.view.convert(position, from: nil)
+                self.trackingView.center = positionInView
+                self.trackingEngine.updateWithTrackedPoint(position)
+            } else {
+                self.trackingView.isHidden = true
+            }
+        }
+    }
+}
+
+extension SixButtonKeyboardViewController: TextPredictionControllerDelegate {
+    func textPredictionController(_ controller: TextPredictionController, didUpdatePrediction value: String, at index: Int) {
+        let button = self.textPredictionTrackingGroup.widgets[safe: index] as? UIButton
+        button?.setTitle(value, for: .normal)
+    }
+    
+    func textPredictionController(_ controller: TextPredictionController, didUpdateSentence sentence: Sentence) {
+        self.textfield.text = sentence.sentence
+    }
 }

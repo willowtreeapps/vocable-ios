@@ -9,17 +9,29 @@
 import UIKit
 
 
-class TrackingButton: UIButton, Gazeable {
+class TrackingButton: UIButton, TrackableWidget {
+    var id: Int?
+    var parent: TrackableWidget?
     
-    func animateGaze(withDuration: TimeInterval) {
-
+    func add(to engine: TrackingEngine) {
+        engine.registerView(self)
     }
 
-    func cancelAnimation() {
+    private var _onGaze: ((Int?) -> Void)?
 
+    var onGaze: ((Int?) -> Void)? {
+        get {
+            if self._onGaze == nil { return self.parent?.onGaze }
+            return self._onGaze
+            
+        }
+        set {
+            self._onGaze = newValue
+        }
     }
-
-
-    var onGaze: (() -> Void)?
+    
+    func animateGaze(withDuration: TimeInterval) {}
+    
+    func cancelAnimation() {}
 
 }

@@ -61,8 +61,10 @@ enum KeyModel {
     case value(KeyViewValue)
 }
 
-class KeyView: NibBackView, Gazeable {
-
+class KeyView: NibBackView, TrackableWidget {
+    var id: Int?
+    var parent: TrackableWidget?
+    
     @IBOutlet var singleValueLabel: UILabel!
 
     @IBOutlet var topLeftOption: UILabel!
@@ -104,10 +106,24 @@ class KeyView: NibBackView, Gazeable {
 
     // MARK: - TrackingView
 
-    var onGaze: (() -> Void)? = nil
 
     @IBOutlet var animationView: UIView!
     @IBOutlet var animationViewWidthConstraint: NSLayoutConstraint!
+    
+    func add(to engine: TrackingEngine) {
+        engine.registerView(self)
+    }
+    
+    private var _onGaze: ((Int?) -> Void)?
+    var onGaze: ((Int?) -> Void)? {
+        get {
+            if self._onGaze == nil { return self.parent?.onGaze }
+            return self._onGaze
+        }
+        set {
+            self._onGaze = newValue
+        }
+    }
 
     func animateGaze(withDuration duration: TimeInterval) {
         self.animationViewWidthConstraint.constant = 0
@@ -124,5 +140,4 @@ class KeyView: NibBackView, Gazeable {
         self.animationView.isHidden = true
         self.animationViewWidthConstraint.constant = 0
     }
-
 }

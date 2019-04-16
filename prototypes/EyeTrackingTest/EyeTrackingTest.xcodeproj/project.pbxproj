@@ -46,6 +46,10 @@
 		13FE392421557DA900B6110F /* QuadrilateralTrackingRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */; };
 		13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392621557E5500B6110F /* Quadrilateral.swift */; };
 		13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */; };
+		9DB58D032264DF1B00E99C3B /* TextPredictionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */; };
+		9DB58D05226524F800E99C3B /* TrackingGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D04226524F800E99C3B /* TrackingGroup.swift */; };
+		9DB58D072265252300E99C3B /* TrackableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D062265252300E99C3B /* TrackableWidget.swift */; };
+		9DB58D092266170000E99C3B /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D082266170000E99C3B /* Sentence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +94,10 @@
 		13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralTrackingRegion.swift; sourceTree = "<group>"; };
 		13FE392621557E5500B6110F /* Quadrilateral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quadrilateral.swift; sourceTree = "<group>"; };
 		13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralInterpolator.swift; sourceTree = "<group>"; };
+		9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPredictionController.swift; sourceTree = "<group>"; };
+		9DB58D04226524F800E99C3B /* TrackingGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingGroup.swift; sourceTree = "<group>"; };
+		9DB58D062265252300E99C3B /* TrackableWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableWidget.swift; sourceTree = "<group>"; };
+		9DB58D082266170000E99C3B /* Sentence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +153,10 @@
 				13DA0767219121DE0081754A /* TrackingView.swift */,
 				13DA0769219297140081754A /* TrackingButton.swift */,
 				13DA076B21929D760081754A /* Array+Split.swift */,
+				9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */,
+				9DB58D04226524F800E99C3B /* TrackingGroup.swift */,
+				9DB58D062265252300E99C3B /* TrackableWidget.swift */,
+				9DB58D082266170000E99C3B /* Sentence.swift */,
 			);
 			path = 6Keyboard;
 			sourceTree = "<group>";
@@ -327,8 +339,11 @@
 				134B6419214C3A4B00285AD5 /* TrackingNode.swift in Sources */,
 				13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */,
 				13A7B912214C027300714057 /* TrackingMethod.swift in Sources */,
+				9DB58D092266170000E99C3B /* Sentence.swift in Sources */,
 				13204C5F2180EC61005410FC /* NibBackedView.swift in Sources */,
 				13DA0768219121DE0081754A /* TrackingView.swift in Sources */,
+				9DB58D072265252300E99C3B /* TrackableWidget.swift in Sources */,
+				9DB58D032264DF1B00E99C3B /* TextPredictionController.swift in Sources */,
 				13A7B914214C032A00714057 /* HeadDirectionIntersectionMethod.swift in Sources */,
 				13B1865E2108E8030099D278 /* FaceNode.swift in Sources */,
 				13C32B8A2139A2440090BB7D /* IntersectionPointNode.swift in Sources */,
@@ -340,6 +355,7 @@
 				13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */,
 				13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */,
 				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
+				9DB58D05226524F800E99C3B /* TrackingGroup.swift in Sources */,
 				13204C5B2180EBD1005410FC /* KeyView.swift in Sources */,
 				139EDEEC21419D700009A99F /* ScreenTrackingViewController.swift in Sources */,
 				13FE39142153F63000B6110F /* TrackingRegion.swift in Sources */,
