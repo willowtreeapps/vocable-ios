@@ -13,6 +13,14 @@ class TrackingButton: UIButton, TrackableWidget {
     var id: Int?
     var parent: TrackableWidget?
     
+    lazy var animationView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.animatingColor
+        self.addSubview(view)
+        self.sendSubviewToBack(view)
+        return view
+    }()
+    
     func add(to engine: TrackingEngine) {
         engine.registerView(self)
     }
@@ -30,8 +38,30 @@ class TrackingButton: UIButton, TrackableWidget {
         }
     }
     
-    func animateGaze(withDuration: TimeInterval) {}
+    func animateGaze(withDuration duration: TimeInterval) {
+        self.collapseAnimationView()
+        self.layoutIfNeeded()
+        
+        self.animationView.isHidden = false
+        UIView.animate(withDuration: duration) {
+            let tallestSide = self.tallestSide + 20.0
+            self.animationView.frame = CGRect(x: 0, y: 0, width: tallestSide, height: tallestSide)
+            self.animationView.center = self.relativeCenterPoint
+            self.animationView.layer.cornerRadius = tallestSide / 2.0
+            self.animationView.clipsToBounds = true
+            self.layoutIfNeeded()
+        }
+    }
     
-    func cancelAnimation() {}
+    func cancelAnimation() {
+        self.animationView.isHidden = true
+        self.collapseAnimationView()
+    }
+    
+    func collapseAnimationView() {
+        self.animationView.frame = .zero
+        self.animationView.center = self.relativeCenterPoint
+        self.animationView.layer.cornerRadius = 0.0
+    }
 
 }

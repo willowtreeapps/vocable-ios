@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import CoreML
 
 
 class SixButtonKeyboardViewController: UIViewController {
@@ -70,7 +71,7 @@ class SixButtonKeyboardViewController: UIViewController {
 
     let keyViewValues: [KeyViewValue] = {
         var values: [KeyViewValue] = []
-
+        
         let lowercaseLetters = UnicodeScalar("a").value...UnicodeScalar("z").value
         for scalar in lowercaseLetters {
             let letter = String(String.UnicodeScalarView([scalar].compactMap(UnicodeScalar.init)))
@@ -139,10 +140,8 @@ class SixButtonKeyboardViewController: UIViewController {
         case .back:
             break
         }
-        DispatchQueue.main.async {
-            let newText = self.textfield.text ?? ""
-            self.textPredictionController.updateState(newText: newText)
-        }
+        let newText = self.textfield.text ?? ""
+        self.textPredictionController.updateState(newText: newText)
         self.configureKeys(with: self.keyViewOptions)
     }
 
@@ -164,7 +163,6 @@ class SixButtonKeyboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.screenTrackingViewController.willMove(toParent: self)
         self.screenTrackingViewController.view.frame = self.view.bounds
         self.screenTrackingViewController.view.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
@@ -261,11 +259,15 @@ extension SixButtonKeyboardViewController: ScreenTrackingViewControllerDelegate 
 
 extension SixButtonKeyboardViewController: TextPredictionControllerDelegate {
     func textPredictionController(_ controller: TextPredictionController, didUpdatePrediction value: String, at index: Int) {
-        let button = self.textPredictionTrackingGroup.widgets[safe: index] as? UIButton
-        button?.setTitle(value, for: .normal)
+        DispatchQueue.main.async {
+            let button = self.textPredictionTrackingGroup.widgets[safe: index] as? UIButton
+            button?.setTitle(value, for: .normal)
+        }
     }
     
     func textPredictionController(_ controller: TextPredictionController, didUpdateSentence sentence: Sentence) {
-        self.textfield.text = sentence.sentence
+        DispatchQueue.main.async {
+            self.textfield.text = sentence.sentence
+        }
     }
 }

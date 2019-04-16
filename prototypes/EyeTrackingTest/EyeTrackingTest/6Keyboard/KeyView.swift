@@ -65,6 +65,14 @@ class KeyView: NibBackView, TrackableWidget {
     var id: Int?
     var parent: TrackableWidget?
     
+    lazy var animationView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.animatingColor
+        self.addSubview(view)
+//        self.sendSubviewToBack(view)
+        return view
+    }()
+    
     @IBOutlet var singleValueLabel: UILabel!
 
     @IBOutlet var topLeftOption: UILabel!
@@ -105,10 +113,6 @@ class KeyView: NibBackView, TrackableWidget {
     }
 
     // MARK: - TrackingView
-
-
-    @IBOutlet var animationView: UIView!
-    @IBOutlet var animationViewWidthConstraint: NSLayoutConstraint!
     
     func add(to engine: TrackingEngine) {
         engine.registerView(self)
@@ -126,18 +130,28 @@ class KeyView: NibBackView, TrackableWidget {
     }
 
     func animateGaze(withDuration duration: TimeInterval) {
-        self.animationViewWidthConstraint.constant = 0
+        self.collapseAnimationView()
         self.layoutIfNeeded()
 
         self.animationView.isHidden = false
-        self.animationViewWidthConstraint.constant = self.bounds.width
         UIView.animate(withDuration: duration) {
+            let tallestSide = self.tallestSide + 20.0
+            self.animationView.frame = CGRect(x: 0, y: 0, width: tallestSide, height: tallestSide)
+            self.animationView.center = self.relativeCenterPoint
+            self.animationView.layer.cornerRadius = tallestSide / 2.0
+            self.animationView.clipsToBounds = true
             self.layoutIfNeeded()
         }
     }
 
     func cancelAnimation() {
         self.animationView.isHidden = true
-        self.animationViewWidthConstraint.constant = 0
+        self.collapseAnimationView()
+    }
+    
+    func collapseAnimationView() {
+        self.animationView.frame = .zero
+        self.animationView.center = self.relativeCenterPoint
+        self.animationView.layer.cornerRadius = 0.0
     }
 }

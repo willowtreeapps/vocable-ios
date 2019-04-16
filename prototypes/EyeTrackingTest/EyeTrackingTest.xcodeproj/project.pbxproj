@@ -50,6 +50,8 @@
 		9DB58D05226524F800E99C3B /* TrackingGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D04226524F800E99C3B /* TrackingGroup.swift */; };
 		9DB58D072265252300E99C3B /* TrackableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D062265252300E99C3B /* TrackableWidget.swift */; };
 		9DB58D092266170000E99C3B /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D082266170000E99C3B /* Sentence.swift */; };
+		9DB58D47226664C500E99C3B /* UIView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D46226664C500E99C3B /* UIView+Utilities.swift */; };
+		9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +100,8 @@
 		9DB58D04226524F800E99C3B /* TrackingGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingGroup.swift; sourceTree = "<group>"; };
 		9DB58D062265252300E99C3B /* TrackableWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableWidget.swift; sourceTree = "<group>"; };
 		9DB58D082266170000E99C3B /* Sentence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
+		9DB58D46226664C500E99C3B /* UIView+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utilities.swift"; sourceTree = "<group>"; };
+		9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppExtensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +161,8 @@
 				9DB58D04226524F800E99C3B /* TrackingGroup.swift */,
 				9DB58D062265252300E99C3B /* TrackableWidget.swift */,
 				9DB58D082266170000E99C3B /* Sentence.swift */,
+				9DB58D46226664C500E99C3B /* UIView+Utilities.swift */,
+				9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */,
 			);
 			path = 6Keyboard;
 			sourceTree = "<group>";
@@ -327,6 +333,7 @@
 				13FE391E215572EC00B6110F /* TrackingType.swift in Sources */,
 				130C00BC20D2AD2A007C3163 /* ViewController.swift in Sources */,
 				13FE391A2154150900B6110F /* Bounded.swift in Sources */,
+				9DB58D47226664C500E99C3B /* UIView+Utilities.swift in Sources */,
 				13B715852148464000B3612A /* Constants.swift in Sources */,
 				13DA8E8920DACDB900B19B70 /* VectorUtils.swift in Sources */,
 				13C32B86213990EB0090BB7D /* SCNVector4+Extensions.swift in Sources */,
@@ -353,6 +360,7 @@
 				13FE3922215577E300B6110F /* ConfigurationListTableViewController.swift in Sources */,
 				13FE392421557DA900B6110F /* QuadrilateralTrackingRegion.swift in Sources */,
 				13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */,
+				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
 				13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */,
 				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
 				9DB58D05226524F800E99C3B /* TrackingGroup.swift in Sources */,

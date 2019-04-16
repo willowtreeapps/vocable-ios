@@ -84,22 +84,22 @@ class TextPredictionController {
     }
     
     private func matchesByPhrase() -> [String] {
-        let splitSentence = self.sentence.splitSentence
-        var lastPhrase = self.sentence.sentence
-        if splitSentence.count > 2 {
-            let lastElement = splitSentence[splitSentence.count - 1]
-            let secondToLastElement = splitSentence[splitSentence.count - 2]
-            lastPhrase = "\(secondToLastElement) \(lastElement)"
+        return phraseCompletions(neededCompletions: 6)
+    }
+    
+    private func phraseCompletions(neededCompletions: Int) -> [String] {
+        var splitSentence = self.sentence.splitSentence
+        var completions: [String] = []
+        while splitSentence.count > 0 && completions.count < neededCompletions {
+            let phrase = splitSentence.joined(separator: " ")
+            let augmentedString = phrase + " *"
+            let range = NSRange(location: (phrase as NSString).length, length: -1)
+            let checker = UITextChecker()
+            let phraseCompletions = checker.completions(forPartialWordRange: range, in: augmentedString, language: "en_US") ?? []
+            completions.append(contentsOf: phraseCompletions)
+            splitSentence.removeFirst()
         }
-        let augmentedString = lastPhrase + " *"
-        let checker = UITextChecker()
-        let range = NSRange(location: (lastPhrase as NSString).length, length: -1)
-        var joinedArray: [String] = []
-        let guesses = checker.guesses(forWordRange: range, in: augmentedString, language: "en_US") ?? []
-        let completions = checker.completions(forPartialWordRange: range, in: augmentedString, language: "en_US") ?? []
-        joinedArray.append(contentsOf: completions)
-        joinedArray.append(contentsOf: guesses)
-        return joinedArray
+        return completions
     }
     
     private func matchesByWord() -> [String] {
