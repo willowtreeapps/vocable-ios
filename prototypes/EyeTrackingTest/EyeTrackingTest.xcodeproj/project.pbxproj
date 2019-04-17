@@ -160,7 +160,6 @@
 				1349DA4F218FCDF400FC0411 /* TrackingEngine.swift */,
 				13DA0767219121DE0081754A /* TrackingView.swift */,
 				13DA0769219297140081754A /* TrackingButton.swift */,
-				13DA076B21929D760081754A /* Array+Split.swift */,
 				9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */,
 				9DB58D04226524F800E99C3B /* TrackingGroup.swift */,
 				9DB58D062265252300E99C3B /* TrackableWidget.swift */,
@@ -243,6 +242,7 @@
 		13FE3918215414FA00B6110F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				13DA076B21929D760081754A /* Array+Split.swift */,
 				9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */,
 				9DB58D46226664C500E99C3B /* UIView+Utilities.swift */,
 				13DA8E8820DACDB900B19B70 /* VectorUtils.swift */,
