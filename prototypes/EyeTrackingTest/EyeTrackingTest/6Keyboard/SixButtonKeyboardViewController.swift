@@ -17,10 +17,10 @@ class SixButtonKeyboardViewController: UIViewController {
 
 
     // MARK: - Outlets
-    @IBOutlet var textfield: UITextView!
+    @IBOutlet var textfield: TrackingTextView!
 
     @IBOutlet var backButton: TrackingButton!
-    @IBOutlet var speakButton: TrackingButton!
+    @IBOutlet var clearButton: TrackingButton!
     
     @IBOutlet weak var textPrediction1Button: TrackingButton!
     @IBOutlet weak var textPrediction2Button: TrackingButton!
@@ -61,9 +61,16 @@ class SixButtonKeyboardViewController: UIViewController {
     }
 
     private var interactiveViews: [TrackableWidget] {
-        return [ self.backButton, self.speakButton, self.topLeftKey, self.bottomLeftKey,
-                 self.topCenterKey, self.bottomCenterKey, self.topRightKey, self.bottomRightKey,
-                 self.textPredictionTrackingGroup]
+        return [ self.backButton,
+                 self.clearButton,
+                 self.topLeftKey,
+                 self.bottomLeftKey,
+                 self.topCenterKey,
+                 self.bottomCenterKey,
+                 self.topRightKey,
+                 self.bottomRightKey,
+                 self.textPredictionTrackingGroup,
+                 self.textfield]
     }
 
 
@@ -175,31 +182,7 @@ class SixButtonKeyboardViewController: UIViewController {
         trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.8)
         self.view.addSubview(trackingView)
 
-        self.configureUI()
-
-        self.backButton.onGaze = { _ in
-            self.navigationController?.popViewController(animated: true)
-        }
-        
-        self.speakButton.onGaze = { _ in
-            let speech = self.textfield.text ?? ""
-            let utterance = AVSpeechUtterance(string: speech)
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-            let synthesizer = AVSpeechSynthesizer()
-            synthesizer.speak(utterance)
-        }
-        
-        self.textPredictionTrackingGroup.onGaze = { id in
-            if let id = id {
-                self.textPredictionController.updateSentence(withPredictionAt: id)
-            }
-        }
-
-        for view in self.interactiveViews {
-            view.add(to: self.trackingEngine)
-        }
-
-        self.configureKeys(with: self.keyViewOptions)
+        self.configureInitialState()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -215,6 +198,38 @@ class SixButtonKeyboardViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    private func configureInitialState() {
+        self.configureUI()
+        self.backButton.onGaze = { _ in
+            self.navigationController?.popViewController(animated: true)
+        }
+        self.clearButton.onGaze = { _ in
+            self.textPredictionController.updateState(newText: "")
+        }
+        self.textPredictionTrackingGroup.onGaze = { id in
+            if let id = id {
+                self.textPredictionController.updateExpression(withPredictionAt: id)
+            }
+        }
+        self.textfield.onGaze = { _ in
+            let speech = self.textfield.text ?? ""
+            let utterance = AVSpeechUtterance(string: speech)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            let synthesizer = AVSpeechSynthesizer()
+            synthesizer.speak(utterance)
+        }
+        
+        self.allKeyViews.forEach { keyView in
+            keyView.shouldAnimate = true
+        }
+        self.backButton.shouldAnimate = true
+        self.clearButton.shouldAnimate = true
+        for view in self.interactiveViews {
+            view.add(to: self.trackingEngine)
+        }
+        self.configureKeys(with: self.keyViewOptions)
     }
 
     @IBAction func backButtonAction(_ sender: Any) {
@@ -260,14 +275,15 @@ extension SixButtonKeyboardViewController: ScreenTrackingViewControllerDelegate 
 extension SixButtonKeyboardViewController: TextPredictionControllerDelegate {
     func textPredictionController(_ controller: TextPredictionController, didUpdatePrediction value: String, at index: Int) {
         DispatchQueue.main.async {
-            let button = self.textPredictionTrackingGroup.widgets[safe: index] as? UIButton
+            let button = self.textPredictionTrackingGroup.widgets[safe: index] as? TrackingButton
+            button?.shouldAnimate = !value.isEmpty
             button?.setTitle(value, for: .normal)
         }
     }
     
-    func textPredictionController(_ controller: TextPredictionController, didUpdateSentence sentence: Sentence) {
+    func textPredictionController(_ controller: TextPredictionController, didUpdateExpression expression: TextExpression) {
         DispatchQueue.main.async {
-            self.textfield.text = sentence.sentence
+            self.textfield.text = expression.expression
         }
     }
 }

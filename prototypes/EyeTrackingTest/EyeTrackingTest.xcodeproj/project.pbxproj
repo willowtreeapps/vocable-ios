@@ -49,9 +49,11 @@
 		9DB58D032264DF1B00E99C3B /* TextPredictionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */; };
 		9DB58D05226524F800E99C3B /* TrackingGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D04226524F800E99C3B /* TrackingGroup.swift */; };
 		9DB58D072265252300E99C3B /* TrackableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D062265252300E99C3B /* TrackableWidget.swift */; };
-		9DB58D092266170000E99C3B /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D082266170000E99C3B /* Sentence.swift */; };
+		9DB58D092266170000E99C3B /* TextExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D082266170000E99C3B /* TextExpression.swift */; };
 		9DB58D47226664C500E99C3B /* UIView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D46226664C500E99C3B /* UIView+Utilities.swift */; };
 		9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */; };
+		9DC7C03222676AA400A1D503 /* CircularAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7C03122676AA400A1D503 /* CircularAnimatable.swift */; };
+		9DC7C03522677F1700A1D503 /* TrackingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7C03422677F1700A1D503 /* TrackingTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,9 +101,11 @@
 		9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPredictionController.swift; sourceTree = "<group>"; };
 		9DB58D04226524F800E99C3B /* TrackingGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingGroup.swift; sourceTree = "<group>"; };
 		9DB58D062265252300E99C3B /* TrackableWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableWidget.swift; sourceTree = "<group>"; };
-		9DB58D082266170000E99C3B /* Sentence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
+		9DB58D082266170000E99C3B /* TextExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExpression.swift; sourceTree = "<group>"; };
 		9DB58D46226664C500E99C3B /* UIView+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utilities.swift"; sourceTree = "<group>"; };
 		9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppExtensions.swift"; sourceTree = "<group>"; };
+		9DC7C03122676AA400A1D503 /* CircularAnimatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularAnimatable.swift; sourceTree = "<group>"; };
+		9DC7C03422677F1700A1D503 /* TrackingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,9 +164,8 @@
 				9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */,
 				9DB58D04226524F800E99C3B /* TrackingGroup.swift */,
 				9DB58D062265252300E99C3B /* TrackableWidget.swift */,
-				9DB58D082266170000E99C3B /* Sentence.swift */,
-				9DB58D46226664C500E99C3B /* UIView+Utilities.swift */,
-				9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */,
+				9DB58D082266170000E99C3B /* TextExpression.swift */,
+				9DC7C03422677F1700A1D503 /* TrackingTextView.swift */,
 			);
 			path = 6Keyboard;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				13B7158621484B6600B3612A /* TrackingConfiguration.swift */,
 				139EDEEB21419D700009A99F /* ScreenTrackingViewController.swift */,
 				13B71582214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift */,
+				9DC7C03322676DF100A1D503 /* Animations */,
 				13A7B917214C033C00714057 /* Tracking Methods */,
 				13FE39152153F63B00B6110F /* Tracking Regions */,
 				13FE3918215414FA00B6110F /* Extensions */,
@@ -239,6 +243,8 @@
 		13FE3918215414FA00B6110F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */,
+				9DB58D46226664C500E99C3B /* UIView+Utilities.swift */,
 				13DA8E8820DACDB900B19B70 /* VectorUtils.swift */,
 				13FE39192154150900B6110F /* Bounded.swift */,
 				13FE391B2154166600B6110F /* ClosedRange+UnitSpace.swift */,
@@ -254,6 +260,14 @@
 				13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */,
 			);
 			path = QuadrilateralTrackingRegion;
+			sourceTree = "<group>";
+		};
+		9DC7C03322676DF100A1D503 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				9DC7C03122676AA400A1D503 /* CircularAnimatable.swift */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,14 +353,16 @@
 				13C32B86213990EB0090BB7D /* SCNVector4+Extensions.swift in Sources */,
 				1349DA50218FCDF400FC0411 /* TrackingEngine.swift in Sources */,
 				13FE39172153F93600B6110F /* RectangleTrackingRegion.swift in Sources */,
+				9DC7C03522677F1700A1D503 /* TrackingTextView.swift in Sources */,
 				13C32B88213991190090BB7D /* LineSegment.swift in Sources */,
 				13204C572180E559005410FC /* SixButtonKeyboardViewController.swift in Sources */,
 				134B6417214C03FC00285AD5 /* LookAtDirectionIntersectionMethod.swift in Sources */,
 				13DA076C21929D760081754A /* Array+Split.swift in Sources */,
 				134B6419214C3A4B00285AD5 /* TrackingNode.swift in Sources */,
+				9DC7C03222676AA400A1D503 /* CircularAnimatable.swift in Sources */,
 				13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */,
 				13A7B912214C027300714057 /* TrackingMethod.swift in Sources */,
-				9DB58D092266170000E99C3B /* Sentence.swift in Sources */,
+				9DB58D092266170000E99C3B /* TextExpression.swift in Sources */,
 				13204C5F2180EC61005410FC /* NibBackedView.swift in Sources */,
 				13DA0768219121DE0081754A /* TrackingView.swift in Sources */,
 				9DB58D072265252300E99C3B /* TrackableWidget.swift in Sources */,

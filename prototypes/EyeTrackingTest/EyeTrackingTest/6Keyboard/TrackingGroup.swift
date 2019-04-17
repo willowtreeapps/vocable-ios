@@ -30,7 +30,6 @@ class TrackingGroup: TrackableWidget {
     }
     
     private var _onGaze: ((Int?) -> Void)?
-    
     var onGaze: ((Int?) -> Void)? {
         get {
             if self._onGaze == nil { return self.parent?.onGaze }

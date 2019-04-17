@@ -61,7 +61,7 @@ enum KeyModel {
     case value(KeyViewValue)
 }
 
-class KeyView: NibBackView, TrackableWidget {
+class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
     var id: Int?
     var parent: TrackableWidget?
     
@@ -69,9 +69,14 @@ class KeyView: NibBackView, TrackableWidget {
         let view = UIView()
         view.backgroundColor = UIColor.animatingColor
         self.addSubview(view)
-//        self.sendSubviewToBack(view)
         return view
     }()
+    
+    var animationViewSizeRatio: CGFloat {
+        return 4.0 / 3.0
+    }
+    
+    var shouldAnimate = false
     
     @IBOutlet var singleValueLabel: UILabel!
 
@@ -127,31 +132,5 @@ class KeyView: NibBackView, TrackableWidget {
         set {
             self._onGaze = newValue
         }
-    }
-
-    func animateGaze(withDuration duration: TimeInterval) {
-        self.collapseAnimationView()
-        self.layoutIfNeeded()
-
-        self.animationView.isHidden = false
-        UIView.animate(withDuration: duration) {
-            let tallestSide = self.tallestSide + 20.0
-            self.animationView.frame = CGRect(x: 0, y: 0, width: tallestSide, height: tallestSide)
-            self.animationView.center = self.relativeCenterPoint
-            self.animationView.layer.cornerRadius = tallestSide / 2.0
-            self.animationView.clipsToBounds = true
-            self.layoutIfNeeded()
-        }
-    }
-
-    func cancelAnimation() {
-        self.animationView.isHidden = true
-        self.collapseAnimationView()
-    }
-    
-    func collapseAnimationView() {
-        self.animationView.frame = .zero
-        self.animationView.center = self.relativeCenterPoint
-        self.animationView.layer.cornerRadius = 0.0
     }
 }

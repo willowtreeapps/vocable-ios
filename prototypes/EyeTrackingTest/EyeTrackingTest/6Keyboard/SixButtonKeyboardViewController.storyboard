@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="h17-V3-AN7">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="h17-V3-AN7" customClass="TrackingTextView" customModule="EyeTrackingTest" customModuleProvider="target">
                                 <rect key="frame" x="8" y="28" width="498.5" height="75"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -39,7 +39,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwM-1q-7op" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
                                         <rect key="frame" x="127" y="0.0" width="118.5" height="75"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Speak">
+                                        <state key="normal" title="Clear">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
@@ -156,14 +156,14 @@
                         <outlet property="bottomCenterKey" destination="gCP-zv-BOE" id="6wo-8X-KaI"/>
                         <outlet property="bottomLeftKey" destination="cin-Gu-vRQ" id="Pd1-Fh-Lwa"/>
                         <outlet property="bottomRightKey" destination="tl9-YU-YEl" id="krl-uZ-tgU"/>
-                        <outlet property="speakButton" destination="jwM-1q-7op" id="jOZ-sw-ldq"/>
+                        <outlet property="clearButton" destination="jwM-1q-7op" id="wpo-9A-8jg"/>
                         <outlet property="textPrediction1Button" destination="zV7-AX-9kr" id="qNt-p7-n6W"/>
                         <outlet property="textPrediction2Button" destination="cmC-Z8-49f" id="dyx-qh-ltP"/>
                         <outlet property="textPrediction3Button" destination="ae8-du-PmI" id="woA-tD-vvK"/>
                         <outlet property="textPrediction4Button" destination="6Sh-n0-30B" id="MSd-nS-4D5"/>
                         <outlet property="textPrediction5Button" destination="WuU-SD-X5T" id="OgO-PD-7f4"/>
                         <outlet property="textPrediction6Button" destination="MIw-eZ-Ikj" id="PJF-FE-Gtp"/>
-                        <outlet property="textfield" destination="h17-V3-AN7" id="VnL-Tv-wwd"/>
+                        <outlet property="textfield" destination="h17-V3-AN7" id="Sml-wS-O0t"/>
                         <outlet property="topCenterKey" destination="m7j-3t-awc" id="wB7-J5-Drf"/>
                         <outlet property="topLeftKey" destination="iQg-Xm-MID" id="Kxm-qU-IlI"/>
                         <outlet property="topRightKey" destination="mnR-sI-wAj" id="3bt-vr-ND9"/>

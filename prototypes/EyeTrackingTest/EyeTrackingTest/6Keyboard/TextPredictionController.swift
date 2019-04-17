@@ -10,7 +10,7 @@ import UIKit
 
 protocol TextPredictionControllerDelegate: class {
     func textPredictionController(_ controller: TextPredictionController, didUpdatePrediction value: String, at index: Int)
-    func textPredictionController(_ controller: TextPredictionController, didUpdateSentence sentence: Sentence)
+    func textPredictionController(_ controller: TextPredictionController, didUpdateExpression expression: TextExpression)
 }
 
 enum TextPredictionControllerState {
@@ -31,11 +31,13 @@ class TextPredictionController {
     
     var state: TextPredictionControllerState = .idle
     
-    var sentence = Sentence()
+    var expression = TextExpression()
+    
+    private let checker = UITextChecker()
     
     func updateState(newText: String) {
         print("Updated String: \(newText)")
-        self.sentence.sentence = newText
+        self.expression.expression = newText
         self.updateState()
     }
     
@@ -71,11 +73,11 @@ class TextPredictionController {
         self.delegate?.textPredictionController(self, didUpdatePrediction: self.prediction4, at: 3)
         self.delegate?.textPredictionController(self, didUpdatePrediction: self.prediction5, at: 4)
         self.delegate?.textPredictionController(self, didUpdatePrediction: self.prediction6, at: 5)
-        self.delegate?.textPredictionController(self, didUpdateSentence: self.sentence)
+        self.delegate?.textPredictionController(self, didUpdateExpression: self.expression)
     }
     
     private func completions() -> [String] {
-        self.state = self.sentence.sentence.hasExtraWhitespace ? .matchByPhrase : .matchByWord
+        self.state = self.expression.expression.hasExtraWhitespace ? .matchByPhrase : .matchByWord
         return self.matches()
     }
     
@@ -88,42 +90,40 @@ class TextPredictionController {
     }
     
     private func phraseCompletions(neededCompletions: Int) -> [String] {
-        var splitSentence = self.sentence.splitSentence
+        var splitExpression = self.expression.splitExpression
         var completions: [String] = []
-        while splitSentence.count > 0 && completions.count < neededCompletions {
-            let phrase = splitSentence.joined(separator: " ")
+        while splitExpression.count > 0 && completions.count < neededCompletions {
+            let phrase = splitExpression.joined(separator: " ")
             let augmentedString = phrase + " *"
             let range = NSRange(location: (phrase as NSString).length, length: -1)
-            let checker = UITextChecker()
             let phraseCompletions = checker.completions(forPartialWordRange: range, in: augmentedString, language: "en_US") ?? []
             completions.append(contentsOf: phraseCompletions)
-            splitSentence.removeFirst()
+            splitExpression.removeFirst()
         }
         return completions
     }
     
     private func matchesByWord() -> [String] {
-        let fullSentence = self.sentence.sentence
-        let lastWord = self.sentence.lastWord() ?? ""
-        let checker = UITextChecker()
-        let range = NSRange(location: (fullSentence as NSString).length - (lastWord as NSString).length, length: (lastWord as NSString).length)
+        let fullExpression = self.expression.expression
+        let lastWord = self.expression.lastWord() ?? ""
+        let range = NSRange(location: (fullExpression as NSString).length - (lastWord as NSString).length, length: (lastWord as NSString).length)
         var joinedArray: [String] = []
-        let guesses = checker.guesses(forWordRange: range, in: fullSentence, language: "en_US") ?? []
-        let completions = checker.completions(forPartialWordRange: range, in: fullSentence, language: "en_US") ?? []
+        let guesses = checker.guesses(forWordRange: range, in: fullExpression, language: "en_US") ?? []
+        let completions = checker.completions(forPartialWordRange: range, in: fullExpression, language: "en_US") ?? []
         joinedArray.append(contentsOf: completions)
         joinedArray.append(contentsOf: guesses)
         return joinedArray
     }
     
-    func updateSentence(withPredictionAt index: Int) {
+    func updateExpression(withPredictionAt index: Int) {
         let lastWord = self.prediction(index: index)
+        guard !lastWord.isEmpty else { return }
         if self.state == .matchByPhrase {
-            self.sentence.add(word: lastWord)
+            self.expression.add(word: lastWord)
         } else {
-            self.sentence.replaceLastWord(with: lastWord)
-            
+            self.expression.replaceLastWord(with: lastWord)
         }
-        self.sentence.sentence.append(" ")
+        self.expression.expression.append(" ")
         self.updateState()
     }
     
