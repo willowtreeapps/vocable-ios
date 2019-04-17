@@ -63,7 +63,6 @@ class ConfigurationListTableViewController: UITableViewController {
             let selectedConfiguration = self.configurationOptions[selectedIndexPath.row]
             dest.trackingConfiguration = selectedConfiguration.configuration
         }
-
     }
 
 }

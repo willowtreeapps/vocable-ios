@@ -44,6 +44,12 @@ class TrackingEngine {
     func registerView(_ view: TrackingView) {
         self.trackedViews.append(view)
     }
+    
+    func applyToEach(_ completion: (TrackingView) -> Void) {
+        for trackedView in self.trackedViews {
+            completion(trackedView)
+        }
+    }
 
     private var trackedViews: [TrackingView] = []
 
@@ -55,7 +61,7 @@ class TrackingEngine {
         view.animateGaze(withDuration: gazeDuration)
         self.trackingTimer?.invalidate()
         self.trackingTimer = Timer.scheduledTimer(withTimeInterval: gazeDuration, repeats: false, block: { (_) in
-            view.onGaze?()
+            view.onGaze?(view.id)
         })
         
         self.currentTrackedView = view

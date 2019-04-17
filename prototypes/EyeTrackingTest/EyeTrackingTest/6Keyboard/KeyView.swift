@@ -61,8 +61,24 @@ enum KeyModel {
     case value(KeyViewValue)
 }
 
-class KeyView: NibBackView, Gazeable {
-
+class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
+    var id: Int?
+    var parent: TrackableWidget?
+    var gazeableComponent = GazeableTrackingComponent()
+    
+    lazy var animationView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.animatingColor
+        self.addSubview(view)
+        return view
+    }()
+    
+    var animationViewSizeRatio: CGFloat {
+        return 4.0 / 3.0
+    }
+    
+    var isAnimationEnabled = false
+    
     @IBOutlet var singleValueLabel: UILabel!
 
     @IBOutlet var topLeftOption: UILabel!
@@ -103,26 +119,8 @@ class KeyView: NibBackView, Gazeable {
     }
 
     // MARK: - TrackingView
-
-    var onGaze: (() -> Void)? = nil
-
-    @IBOutlet var animationView: UIView!
-    @IBOutlet var animationViewWidthConstraint: NSLayoutConstraint!
-
-    func animateGaze(withDuration duration: TimeInterval) {
-        self.animationViewWidthConstraint.constant = 0
-        self.layoutIfNeeded()
-
-        self.animationView.isHidden = false
-        self.animationViewWidthConstraint.constant = self.bounds.width
-        UIView.animate(withDuration: duration) {
-            self.layoutIfNeeded()
-        }
+    
+    func add(to engine: TrackingEngine) {
+        engine.registerView(self)
     }
-
-    func cancelAnimation() {
-        self.animationView.isHidden = true
-        self.animationViewWidthConstraint.constant = 0
-    }
-
 }

@@ -8,18 +8,26 @@
 
 import UIKit
 
-
-class TrackingButton: UIButton, Gazeable {
+class TrackingButton: UIButton, TrackableWidget, CircularAnimatable {
+    var id: Int?
+    var parent: TrackableWidget?
+    var gazeableComponent = GazeableTrackingComponent()
     
-    func animateGaze(withDuration: TimeInterval) {
-
+    lazy var animationView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.animatingColor
+        self.addSubview(view)
+        self.sendSubviewToBack(view)
+        return view
+    }()
+    
+    var animationViewSizeRatio: CGFloat {
+        return 4.0 / 3.0
     }
-
-    func cancelAnimation() {
-
+    
+    var isAnimationEnabled = false
+    
+    func add(to engine: TrackingEngine) {
+        engine.registerView(self)
     }
-
-
-    var onGaze: (() -> Void)?
-
 }
