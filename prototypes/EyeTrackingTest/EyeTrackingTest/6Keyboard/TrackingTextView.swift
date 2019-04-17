@@ -10,6 +10,7 @@ import UIKit
 
 class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
     var parent: TrackableWidget?
+    var gazeableComponent = GazeableTrackingComponent()
     
     var id: Int?
     
@@ -29,8 +30,4 @@ class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
     }
     
     var shouldAnimate: Bool = true
-    
-    var _onGaze: ((Int?) -> Void)?
-    
-    
 }

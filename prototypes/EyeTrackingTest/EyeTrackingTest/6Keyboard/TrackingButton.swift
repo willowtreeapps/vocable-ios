@@ -8,10 +8,10 @@
 
 import UIKit
 
-
 class TrackingButton: UIButton, TrackableWidget, CircularAnimatable {
     var id: Int?
     var parent: TrackableWidget?
+    var gazeableComponent = GazeableTrackingComponent()
     
     lazy var animationView: UIView = {
         let view = UIView()
@@ -30,6 +30,4 @@ class TrackingButton: UIButton, TrackableWidget, CircularAnimatable {
     func add(to engine: TrackingEngine) {
         engine.registerView(self)
     }
-
-    var _onGaze: ((Int?) -> Void)?
 }

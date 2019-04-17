@@ -11,6 +11,7 @@ import Foundation
 class TrackingGroup: TrackableWidget {
     var id: Int?
     var parent: TrackableWidget?
+    var gazeableComponent = GazeableTrackingComponent()
     
     let widgets: [TrackableWidget]
     

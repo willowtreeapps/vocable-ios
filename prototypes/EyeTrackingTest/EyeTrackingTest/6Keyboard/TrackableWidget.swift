@@ -8,21 +8,25 @@
 
 import UIKit
 
+struct GazeableTrackingComponent {
+    fileprivate var _onGaze: ((Int?) -> Void)?
+}
+
 protocol TrackableWidget: Gazeable {
-    var _onGaze: ((Int?) -> Void)? { get set }
     var parent: TrackableWidget? { get set }
     var id: Int? { get set }
+    var gazeableComponent: GazeableTrackingComponent { get set }
     func add(to engine: TrackingEngine)
 }
 
 extension TrackableWidget {
     var onGaze: ((Int?) -> Void)? {
         get {
-            if self._onGaze == nil { return self.parent?.onGaze }
-            return self._onGaze
+            guard let componentOnGaze = self.gazeableComponent._onGaze else { return self.parent?.onGaze }
+            return componentOnGaze
         }
         set {
-            self._onGaze = newValue
+            self.gazeableComponent._onGaze = newValue
         }
     }
 }

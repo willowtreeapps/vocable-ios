@@ -15,7 +15,6 @@ class SixButtonKeyboardViewController: UIViewController {
 
     let trackingEngine = TrackingEngine()
 
-
     // MARK: - Outlets
     @IBOutlet var textfield: TrackingTextView!
 
