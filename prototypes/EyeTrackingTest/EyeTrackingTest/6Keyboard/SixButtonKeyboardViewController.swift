@@ -43,6 +43,12 @@ class SixButtonKeyboardViewController: UIViewController {
         return controller
     }()
     
+    lazy var textExpression: TextExpression = {
+        let expression = TextExpression()
+        expression.delegate = self
+        return expression
+    }()
+    
 
     @IBOutlet var topLeftKey: KeyView!
     @IBOutlet var topCenterKey: KeyView!
@@ -136,18 +142,14 @@ class SixButtonKeyboardViewController: UIViewController {
         print("selected: \(keyValue)")
         switch keyValue {
         case .character(let text):
-            self.textfield.text?.append(contentsOf: text)
+            self.textExpression.append(text: text)
         case .space:
-            self.textfield.text?.append(" ")
+            self.textExpression.space()
         case .backspace:
-            if self.textfield.text?.isEmpty == false {
-                _ = self.textfield.text?.removeLast()
-            }
+            self.textExpression.backspace()
         case .back:
             break
         }
-        let newText = self.textfield.text ?? ""
-        self.textPredictionController.updateState(newText: newText)
         self.configureKeys(with: self.keyViewOptions)
     }
 
@@ -203,10 +205,10 @@ class SixButtonKeyboardViewController: UIViewController {
     private func configureInitialState() {
         self.configureUI()
         self.backButton.onGaze = { _ in
-            self.navigationController?.popViewController(animated: true)
+            self.textExpression.backspace()
         }
         self.clearButton.onGaze = { _ in
-            self.textPredictionController.updateState(newText: "")
+            self.textExpression.clear()
         }
         self.textPredictionTrackingGroup.onGaze = { id in
             if let id = id {
@@ -214,7 +216,7 @@ class SixButtonKeyboardViewController: UIViewController {
             }
         }
         self.textfield.onGaze = { _ in
-            let speech = self.textfield.text ?? ""
+            let speech = self.textExpression.value
             let utterance = AVSpeechUtterance(string: speech)
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
             let synthesizer = AVSpeechSynthesizer()
@@ -226,6 +228,7 @@ class SixButtonKeyboardViewController: UIViewController {
         }
         self.backButton.isAnimationEnabled = true
         self.clearButton.isAnimationEnabled = true
+        self.textfield.isAnimationEnabled = true
         for view in self.interactiveViews {
             view.add(to: self.trackingEngine)
         }
@@ -272,18 +275,24 @@ extension SixButtonKeyboardViewController: ScreenTrackingViewControllerDelegate 
     }
 }
 
+extension SixButtonKeyboardViewController: TextExpressionDelegate {
+    func textExpression(_ expression: TextExpression, valueChanged value: String) {
+        DispatchQueue.main.async {
+            self.textfield.text = expression.value
+            self.textPredictionController.updateState(withTextExpression: expression)
+        }
+    }
+}
+
 extension SixButtonKeyboardViewController: TextPredictionControllerDelegate {
     func textPredictionController(_ controller: TextPredictionController, didUpdatePrediction value: String, at index: Int) {
         DispatchQueue.main.async {
             let button = self.textPredictionTrackingGroup.widgets[safe: index] as? TrackingButton
-            button?.isAnimationEnabled = !value.isEmpty
+            let isDisplayed = !value.isEmpty
+            button?.alpha = isDisplayed ? 1.0 : 0.0
+            button?.isUserInteractionEnabled = isDisplayed
+            button?.isAnimationEnabled = isDisplayed
             button?.setTitle(value, for: .normal)
-        }
-    }
-    
-    func textPredictionController(_ controller: TextPredictionController, didUpdateExpression expression: TextExpression) {
-        DispatchQueue.main.async {
-            self.textfield.text = expression.value
         }
     }
 }
