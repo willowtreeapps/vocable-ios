@@ -170,6 +170,7 @@ class SixButtonKeyboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.appBackgroundColor
         self.screenTrackingViewController.willMove(toParent: self)
         self.screenTrackingViewController.view.frame = self.view.bounds
         self.screenTrackingViewController.view.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]

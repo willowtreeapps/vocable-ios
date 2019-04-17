@@ -11,4 +11,5 @@ import UIKit
 
 extension UIColor {
     static let animatingColor = UIColor.red.withAlphaComponent(0.5)
+    static let appBackgroundColor = UIColor(red: 248.0 / 255.0, green: 248.0 / 255.0, blue: 248.0 / 255.0, alpha: 1.0)
 }

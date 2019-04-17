@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JAA-Tx-jTr">
-    <device id="ipad9_7" orientation="portrait">
+    <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,20 +14,20 @@
             <objects>
                 <viewController id="JAA-Tx-jTr" customClass="SixButtonKeyboardViewController" customModule="EyeTrackingTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pst-4E-PK6">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="h17-V3-AN7" customClass="TrackingTextView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                <rect key="frame" x="8" y="28" width="498.5" height="75"/>
+                                <rect key="frame" x="8" y="28" width="669.5" height="101"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zAP-OJ-FVG">
-                                <rect key="frame" x="514.5" y="28" width="245.5" height="75"/>
+                                <rect key="frame" x="685.5" y="28" width="330.5" height="101"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doo-Vf-okT" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="119" height="75"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="161" height="101"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Back">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -37,7 +37,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwM-1q-7op" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
-                                        <rect key="frame" x="127" y="0.0" width="118.5" height="75"/>
+                                        <rect key="frame" x="169" y="0.0" width="161.5" height="101"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Clear">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -46,43 +46,43 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="q6N-k9-9Gm">
-                                <rect key="frame" x="8" y="194.5" width="752" height="821.5"/>
+                                <rect key="frame" x="8" y="245.5" width="1008" height="514.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rC8-ES-hMx">
-                                        <rect key="frame" x="0.0" y="0.0" width="245.5" height="821.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="330.5" height="514.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQg-Xm-MID" userLabel="Top Left Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="245.5" height="406.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="330.5" height="253.5"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cin-Gu-vRQ" userLabel="Bottom Left Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="414.5" width="245.5" height="407"/>
+                                                <rect key="frame" x="0.0" y="261.5" width="330.5" height="253"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Sm2-ch-13R">
-                                        <rect key="frame" x="253.5" y="0.0" width="245" height="821.5"/>
+                                        <rect key="frame" x="338.5" y="0.0" width="331" height="514.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7j-3t-awc" userLabel="Top Center Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="245" height="406.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="331" height="253.5"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCP-zv-BOE" userLabel="Bottom Center Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="414.5" width="245" height="407"/>
+                                                <rect key="frame" x="0.0" y="261.5" width="331" height="253"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LXd-pZ-0T4">
-                                        <rect key="frame" x="506.5" y="0.0" width="245.5" height="821.5"/>
+                                        <rect key="frame" x="677.5" y="0.0" width="330.5" height="514.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mnR-sI-wAj" userLabel="Top Right Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="245.5" height="406.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="330.5" height="253.5"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tl9-YU-YEl" userLabel="Bottom Right Key" customClass="KeyView" customModule="EyeTrackingTest" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="414.5" width="245.5" height="407"/>
+                                                <rect key="frame" x="0.0" y="261.5" width="330.5" height="253"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -91,35 +91,35 @@
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UXI-6w-sU4">
-                                <rect key="frame" x="8" y="111" width="752" height="75.5"/>
+                                <rect key="frame" x="8" y="137" width="1008" height="100.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zV7-AX-9kr" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="118.5" height="75.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="161.5" height="100.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmC-Z8-49f" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
-                                        <rect key="frame" x="126.5" y="0.0" width="119" height="75.5"/>
+                                        <rect key="frame" x="169.5" y="0.0" width="161" height="100.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ae8-du-PmI" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
-                                        <rect key="frame" x="253.5" y="0.0" width="118.5" height="75.5"/>
+                                        <rect key="frame" x="338.5" y="0.0" width="161.5" height="100.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Sh-n0-30B" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
-                                        <rect key="frame" x="380" y="0.0" width="118.5" height="75.5"/>
+                                        <rect key="frame" x="508" y="0.0" width="161.5" height="100.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WuU-SD-X5T" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
-                                        <rect key="frame" x="506.5" y="0.0" width="119" height="75.5"/>
+                                        <rect key="frame" x="677.5" y="0.0" width="161" height="100.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MIw-eZ-Ikj" customClass="TrackingButton" customModule="EyeTrackingTest" customModuleProvider="target">
-                                        <rect key="frame" x="633.5" y="0.0" width="118.5" height="75.5"/>
+                                        <rect key="frame" x="846.5" y="0.0" width="161.5" height="100.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </button>
