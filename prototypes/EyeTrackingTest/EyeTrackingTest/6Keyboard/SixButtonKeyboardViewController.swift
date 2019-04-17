@@ -284,7 +284,7 @@ extension SixButtonKeyboardViewController: TextPredictionControllerDelegate {
     
     func textPredictionController(_ controller: TextPredictionController, didUpdateExpression expression: TextExpression) {
         DispatchQueue.main.async {
-            self.textfield.text = expression.expression
+            self.textfield.text = expression.value
         }
     }
 }

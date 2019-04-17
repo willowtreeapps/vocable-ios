@@ -10,22 +10,22 @@ import Foundation
 
 
 class TextExpression {
-    var expression: String = ""
+    var value: String = ""
     
     var wordCount: Int {
-        return expression.split(separator: " ").count
+        return value.split(separator: " ").count
     }
     
     var splitExpression: [String] {
-        let trimmedExpression = self.expression.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedExpression = self.value.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmedExpression.split(separator: " ").map { String($0) }
     }
     
     func add(word: String) {
-        let trimmedExpression = self.expression.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedExpression = self.value.trimmingCharacters(in: .whitespacesAndNewlines)
         var newSplitExpression = trimmedExpression.split(separator: " ").map { String($0) }
         newSplitExpression.append(word)
-        self.expression = newSplitExpression.joined(separator: " ")
+        self.value = newSplitExpression.joined(separator: " ")
     }
     
     func replaceWord(at index: Int, with newWord: String) {
@@ -33,7 +33,7 @@ class TextExpression {
         if newSplitExpression.count > index && index >= 0 {
             newSplitExpression[index] = newWord
         }
-        self.expression = newSplitExpression.joined(separator: " ")
+        self.value = newSplitExpression.joined(separator: " ")
     }
     
     func replaceLastWord(with newWord: String) {

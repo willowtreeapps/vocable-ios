@@ -37,7 +37,7 @@ class TextPredictionController {
     
     func updateState(newText: String) {
         print("Updated String: \(newText)")
-        self.expression.expression = newText
+        self.expression.value = newText
         self.updateState()
     }
     
@@ -77,7 +77,7 @@ class TextPredictionController {
     }
     
     private func completions() -> [String] {
-        self.state = self.expression.expression.hasExtraWhitespace ? .matchByPhrase : .matchByWord
+        self.state = self.expression.value.hasExtraWhitespace ? .matchByPhrase : .matchByWord
         return self.matches()
     }
     
@@ -104,7 +104,7 @@ class TextPredictionController {
     }
     
     private func matchesByWord() -> [String] {
-        let fullExpression = self.expression.expression
+        let fullExpression = self.expression.value
         let lastWord = self.expression.lastWord() ?? ""
         let range = NSRange(location: (fullExpression as NSString).length - (lastWord as NSString).length, length: (lastWord as NSString).length)
         var joinedArray: [String] = []
@@ -123,7 +123,7 @@ class TextPredictionController {
         } else {
             self.expression.replaceLastWord(with: lastWord)
         }
-        self.expression.expression.append(" ")
+        self.expression.value.append(" ")
         self.updateState()
     }
     
