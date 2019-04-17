@@ -222,10 +222,10 @@ class SixButtonKeyboardViewController: UIViewController {
         }
         
         self.allKeyViews.forEach { keyView in
-            keyView.shouldAnimate = true
+            keyView.isAnimationEnabled = true
         }
-        self.backButton.shouldAnimate = true
-        self.clearButton.shouldAnimate = true
+        self.backButton.isAnimationEnabled = true
+        self.clearButton.isAnimationEnabled = true
         for view in self.interactiveViews {
             view.add(to: self.trackingEngine)
         }
@@ -276,7 +276,7 @@ extension SixButtonKeyboardViewController: TextPredictionControllerDelegate {
     func textPredictionController(_ controller: TextPredictionController, didUpdatePrediction value: String, at index: Int) {
         DispatchQueue.main.async {
             let button = self.textPredictionTrackingGroup.widgets[safe: index] as? TrackingButton
-            button?.shouldAnimate = !value.isEmpty
+            button?.isAnimationEnabled = !value.isEmpty
             button?.setTitle(value, for: .normal)
         }
     }

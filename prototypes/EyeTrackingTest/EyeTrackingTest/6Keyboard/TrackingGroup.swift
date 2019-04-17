@@ -30,8 +30,6 @@ class TrackingGroup: TrackableWidget {
         }
     }
     
-    var _onGaze: ((Int?) -> Void)?
-    
     func animateGaze(withDuration: TimeInterval) {
         self.parent?.animateGaze(withDuration: withDuration)
     }

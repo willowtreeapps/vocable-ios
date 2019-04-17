@@ -25,7 +25,7 @@ class TrackingButton: UIButton, TrackableWidget, CircularAnimatable {
         return 4.0 / 3.0
     }
     
-    var shouldAnimate = false
+    var isAnimationEnabled = false
     
     func add(to engine: TrackingEngine) {
         engine.registerView(self)

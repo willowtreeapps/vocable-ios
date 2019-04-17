@@ -77,7 +77,7 @@ class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
         return 4.0 / 3.0
     }
     
-    var shouldAnimate = false
+    var isAnimationEnabled = false
     
     @IBOutlet var singleValueLabel: UILabel!
 

@@ -29,5 +29,5 @@ class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
         return 4.0 / 3.0
     }
     
-    var shouldAnimate: Bool = true
+    var isAnimationEnabled: Bool = false
 }

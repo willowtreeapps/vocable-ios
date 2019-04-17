@@ -11,12 +11,12 @@ import UIKit
 protocol CircularAnimatable {
     var animationView: UIView { get }
     var animationViewSizeRatio: CGFloat { get }
-    var shouldAnimate: Bool { get set }
+    var isAnimationEnabled: Bool { get set }
 }
 
 extension CircularAnimatable where Self: TrackingView {
     func animateGaze(withDuration duration: TimeInterval) {
-        if self.shouldAnimate {
+        if self.isAnimationEnabled {
             self.invalidateAnimationView()
             self.layoutIfNeeded()
             self.animationView.isHidden = false
