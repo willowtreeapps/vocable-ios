@@ -84,12 +84,26 @@ class HotCornersTrackableViewController: UIViewController {
     lazy var sixButtonKeyboardViewController: SixButtonKeyboardViewController = {
         let controller = SixButtonKeyboardViewController.get(from: .sixButtonKeyboardViewController)
         controller.add(to: self)
+        var component = HotCornerGazeableComponent()
+        component.onUpperLeftGaze = { _ in
+            controller.hideFromParentViewController()
+            self.presetsViewController.show(in: self.containerView)
+            self.configure(with: self.presetsViewController)
+        }
+        controller.component = component
         return controller
     }()
     
     lazy var presetsViewController: PresetsViewController = {
         let controller = PresetsViewController.get(from: .presets)
         controller.add(to: self)
+        var component = HotCornerGazeableComponent()
+        component.onUpperLeftGaze = { _ in
+            controller.hideFromParentViewController()
+            self.sixButtonKeyboardViewController.show(in: self.containerView)
+            self.configure(with: self.sixButtonKeyboardViewController)
+        }
+        controller.component = component
         return controller
     }()
     
@@ -117,7 +131,7 @@ class HotCornersTrackableViewController: UIViewController {
         self.view.addSubview(trackingView)
         
         self.sixButtonKeyboardViewController.show(in: self.containerView)
-        self.currentTrackingEngine = self.sixButtonKeyboardViewController.trackingEngine
+        self.configure(with: self.sixButtonKeyboardViewController)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -156,22 +170,12 @@ class HotCornersTrackableViewController: UIViewController {
         self.lowerRightHotCorner.center = CGPoint(x: self.view.bounds.maxX, y: self.view.bounds.maxY)
     }
     
-    func configureOnGazes() {
-        self.upperLeftHotCorner.onGaze = { _ in
-            print("Upper Left")
-        }
-        
-        self.upperRightHotCorner.onGaze = { _ in
-            print("Upper Right")
-        }
-        
-        self.lowerLeftHotCorner.onGaze = { _ in
-            print("Lower Left")
-        }
-        
-        self.lowerRightHotCorner.onGaze = { _ in
-            print("Lower Right")
-        }
+    func configure(with trackable: HotCornerTrackable) {
+        self.currentTrackingEngine = trackable.trackingEngine
+        self.upperLeftHotCorner.onGaze = trackable.component?.onUpperLeftGaze
+        self.upperRightHotCorner.onGaze = trackable.component?.onUpperRightGaze
+        self.lowerLeftHotCorner.onGaze = trackable.component?.onLowerLeftGaze
+        self.lowerRightHotCorner.onGaze = trackable.component?.onLowerRightGaze
     }
 }
 

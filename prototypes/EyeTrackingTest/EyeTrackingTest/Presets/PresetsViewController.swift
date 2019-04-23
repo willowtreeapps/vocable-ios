@@ -7,18 +7,33 @@
 //
 
 import UIKit
+import AVFoundation
 
-class PresetsViewController: HotCornersViewController {
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.upperLeftHotCorner.onGaze = { _ in
-            self.navigationController?.popViewController(animated: false)
-        }
+class PresetsViewController: UIViewController, HotCornerTrackable {
+    var component: HotCornerGazeableComponent?
+    let trackingEngine = TrackingEngine()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .appBackgroundColor
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.trackingEngine.disable()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.segueValue == .presetsCollectionViewSegue, let vc = segue.destination as? PresetsCollectionViewController {
+            vc.presetsDelegate = self
+        }
+    }
+}
+
+extension PresetsViewController: PresetsCollectionViewControllerDelegate {
+    func presetsCollectionViewController(_ presetsCollectionViewController: PresetsCollectionViewController, addWidget widget: TrackableWidget) {
+        widget.add(to: self.trackingEngine)
+    }
+    
+    func presetsCollectionViewController(_ presetsCollectionViewController: PresetsCollectionViewController, didGazeOn value: String) {
+        let utterance = AVSpeechUtterance(string: value)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        let synthesizer = AVSpeechSynthesizer()
+        synthesizer.speak(utterance)
     }
 }

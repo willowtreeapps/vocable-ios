@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7mP-Ii-Raa">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Hot Corners View Controller-->
+        <!--Hot Corners Trackable View Controller-->
         <scene sceneID="xvb-9k-Yel">
             <objects>
-                <viewController id="7mP-Ii-Raa" customClass="HotCornersViewController" customModule="EyeTrackingTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotCornersTrackableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7mP-Ii-Raa" customClass="HotCornersTrackableViewController" customModule="EyeTrackingTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rxx-Eu-UmR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

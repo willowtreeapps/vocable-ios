@@ -9,12 +9,8 @@
 import UIKit
 
 extension UIViewController {
-    func add(to parent: UIViewController, in containerView: UIView?) {
-        let parentView = containerView ?? parent.view
+    func add(to parent: UIViewController) {
         self.willMove(toParent: parent)
-        self.view.frame = parentView?.bounds ?? .zero
-        self.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        parentView?.addSubview(self.view)
         parent.addChild(self)
         self.didMove(toParent: parent)
     }

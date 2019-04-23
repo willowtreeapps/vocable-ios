@@ -10,7 +10,7 @@ import UIKit
 
 class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
     var isTrackingEnabled: Bool = true
-    var animationSpeed: TimeInterval = 2.0
+    var animationSpeed: TimeInterval = 1.0
     
     var animationViewColor: UIColor? {
         didSet {
@@ -31,7 +31,7 @@ class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
         let view = UIView()
         self.addSubview(view)
         self.sendSubviewToBack(view)
-        view.backgroundColor = UIColor.animatingColor
+        view.backgroundColor = .animatingColor
         return view
     }()
 }

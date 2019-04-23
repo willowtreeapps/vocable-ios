@@ -8,24 +8,17 @@
 
 import UIKit
 
-
 class TrackingEngine {
     
-    func disable() {
-        for view in self.trackedViews {
-            view.isTrackingEnabled = false
-        }
-    }
+    var parent: TrackingEngine?
     
-    func enable() {
-        for view in self.trackedViews {
-            view.isTrackingEnabled = true
+    func updateWithTrackedPoint(_ point: CGPoint) -> Bool {
+
+        if self.parent?.updateWithTrackedPoint(point) ?? false {
+            return true
         }
-    }
-
-    func updateWithTrackedPoint(_ point: CGPoint) {
-
-        var foundView: Bool = false
+        
+        var foundView = false
         for view in self.trackedViews {
 
             let positionInView = view.convert(point, from: nil)
@@ -43,13 +36,15 @@ class TrackingEngine {
                 } else {
                     self.startNewTrackingTimer(for: view)
                 }
+                return true
             }
         }
 
-        if foundView == false {
+        if !foundView {
             self.currentTrackedView?.cancelAnimation()
             self.trackingTimer?.invalidate()
         }
+        return foundView
 
     }
 

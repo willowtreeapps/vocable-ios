@@ -8,15 +8,21 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+protocol PresetsCollectionViewControllerDelegate: class {
+    func presetsCollectionViewController(_ presetsCollectionViewController: PresetsCollectionViewController, addWidget widget: TrackableWidget)
+    func presetsCollectionViewController(_ presetsCollectionViewController: PresetsCollectionViewController, didGazeOn value: String)
+}
 
 class PresetsCollectionViewController: UICollectionViewController {
+    
+    weak var presetsDelegate: PresetsCollectionViewControllerDelegate?
+    
     struct Constants {
         static let numberOfColumns = 3
         static let columnSpacing = CGFloat(8.0)
         static let rowSpacing = CGFloat(8.0)
         static let rowHeight = CGFloat(100.0)
-        static let insets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
+        static let insets = UIEdgeInsets(top: 24.0, left: 24.0, bottom: 24.0, right: 24.0)
     }
     
     var presets: [String] = [] {
@@ -27,6 +33,7 @@ class PresetsCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.backgroundColor = .appBackgroundColor
         self.collectionView.registerClass(UICollectionViewCell.self)
         self.collectionView.registerNib(PresetsCollectionViewCell.self)
         self.collectionView.delegate = nil
@@ -53,8 +60,13 @@ class PresetsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let preset = self.presets[indexPath.row]
         let cell = collectionView.dequeueCell(type: PresetsCollectionViewCell.self, for: indexPath)
-        cell.configure(with: presets[indexPath.row])
+        cell.configure(with: preset)
+        cell.onGaze = { _ in
+            self.presetsDelegate?.presetsCollectionViewController(self, didGazeOn: preset)
+        }
+        self.presetsDelegate?.presetsCollectionViewController(self, addWidget: cell)
         return cell
     }
 }

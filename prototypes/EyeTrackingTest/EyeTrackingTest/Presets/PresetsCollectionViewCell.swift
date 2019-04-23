@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PresetsCollectionViewCell: UICollectionViewCell {
+class PresetsCollectionViewCell: TrackingCollectionViewCell {
     @IBOutlet weak var presetsLabel: UILabel!
     
     override func awakeFromNib() {
@@ -16,12 +16,13 @@ class PresetsCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = .white
         self.layer.borderWidth = 3.0
         self.layer.cornerRadius = 5.0
-        self.layer.borderColor = UIColor.mainPageBorderColor.cgColor
+        self.layer.borderColor = UIColor.mainWidgetBorderColor.cgColor
         self.clipsToBounds = true
     }
     
     override func prepareForReuse() {
         self.presetsLabel.text = ""
+        self.onGaze = nil
     }
     
     func configure(with preset: String) {

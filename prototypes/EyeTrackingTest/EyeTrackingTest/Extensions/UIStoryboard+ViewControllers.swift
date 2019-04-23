@@ -16,7 +16,7 @@ enum Storyboard: String {
     case unknown
     
     var name: String {
-        return self.rawValue.capitalized
+        return self.rawValue.capitalizeFirstLetter()
     }
 }
 

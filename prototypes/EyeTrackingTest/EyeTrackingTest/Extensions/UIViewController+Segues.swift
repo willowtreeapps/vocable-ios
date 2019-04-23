@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum Segue: String {
+    case presetsCollectionViewSegue
+    case presetsSegue
+    case unknown
+}
+
 extension UIViewController {
     func perform(segue: Segue, sender: Any?) {
         self.performSegue(withIdentifier: segue.rawValue, sender: sender)

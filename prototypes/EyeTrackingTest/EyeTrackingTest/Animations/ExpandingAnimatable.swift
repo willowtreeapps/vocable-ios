@@ -35,7 +35,7 @@ protocol ExpandingAnimatable: class {
 extension ExpandingAnimatable where Self: TrackingView {
     var isTrackingEnabled: Bool {
         get {
-            return self.animatableComponent._isTrackingEnabled && self.animatableState != .shrinking
+            return self.animatableComponent._isTrackingEnabled && self.animatableState == .idle
         }
         set {
             self.animatableComponent._isTrackingEnabled = newValue
@@ -45,12 +45,13 @@ extension ExpandingAnimatable where Self: TrackingView {
         print("animateGaze")
         if self.animatableState == .idle {
             print("Expanding")
+            self.isTrackingEnabled = false
             self.animatableState = .expanding
             UIView.animate(withDuration: self.animationSpeed, animations:  {
                 print("Inside expanding animation")
                 self.transform = CGAffineTransform(scaleX: self.expandingScale, y: self.expandingScale)
             }, completion: { finished in
-                if self.animatableState == .expanding {
+                if self.animatableState == .expanding && finished {
                     print("Expanded")
                     self.animatableState = .expanded
                 }
@@ -67,9 +68,10 @@ extension ExpandingAnimatable where Self: TrackingView {
                 print("Inside cancel animation")
                 self.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             }, completion: { finished in
-                if self.animatableState == .shrinking {
+                if self.animatableState == .shrinking && finished {
                     print("Idle")
                     self.animatableState = .idle
+                    self.isTrackingEnabled = true
                 }
             })
         }

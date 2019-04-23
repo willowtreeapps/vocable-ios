@@ -10,13 +10,13 @@ import UIKit
 import AVFoundation
 import CoreML
 
-
-class SixButtonKeyboardViewController: UIViewController {
+class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
     struct Constants {
         static let cornerRadius = CGFloat(5.0)
         static let borderWidth = CGFloat(3.0)
     }
-
+    
+    var component: HotCornerGazeableComponent?
     let trackingEngine = TrackingEngine()
 
     // MARK: - Outlets
@@ -53,45 +53,6 @@ class SixButtonKeyboardViewController: UIViewController {
         return expression
     }()
     
-    lazy var upperLeftHotCorner: HotCornerView = {
-        let view = HotCornerView()
-        self.view.addSubview(view)
-        view.frame = CGRect(origin: .zero, size: CGSize(width: 48.0, height: 48.0))
-        view.alpha = 0.0
-        return view
-    }()
-    
-    lazy var upperRightHotCorner: HotCornerView = {
-        let view = HotCornerView()
-        self.view.addSubview(view)
-        view.frame = CGRect(origin: .zero, size: CGSize(width: 48.0, height: 48.0))
-        view.alpha = 0.0
-        return view
-    }()
-    
-    lazy var lowerLeftHotCorner: HotCornerView = {
-        let view = HotCornerView()
-        self.view.addSubview(view)
-        view.frame = CGRect(origin: .zero, size: CGSize(width: 48.0, height: 48.0))
-        view.alpha = 0.0
-        return view
-    }()
-    
-    lazy var lowerRightHotCorner: HotCornerView = {
-        let view = HotCornerView()
-        self.view.addSubview(view)
-        view.frame = CGRect(origin: .zero, size: CGSize(width: 48.0, height: 48.0))
-        view.alpha = 0.0
-        return view
-    }()
-    
-    lazy var hotCornerGroup: TrackingGroup = TrackingGroup(widgets: [
-        self.upperLeftHotCorner,
-        self.upperRightHotCorner,
-        self.lowerLeftHotCorner,
-        self.lowerRightHotCorner]
-    )
-    
 
     @IBOutlet var topLeftKey: KeyView!
     @IBOutlet var topCenterKey: KeyView!
@@ -118,7 +79,7 @@ class SixButtonKeyboardViewController: UIViewController {
                  self.topRightKey,
                  self.bottomRightKey,
                  self.textPredictionTrackingGroup,
-                 self.textfield, self.hotCornerGroup
+                 self.textfield
         ]
     }
 
@@ -196,39 +157,11 @@ class SixButtonKeyboardViewController: UIViewController {
         self.configureKeys(with: self.keyViewOptions)
     }
 
-    // MARK: - View Lifecycle
-
-    let trackingView: UIView = UIView()
-    lazy var screenTrackingViewController: ScreenTrackingViewController = {
-        let vc = ScreenTrackingViewController()
-        vc.delegate = self
-        return vc
-    }()
-
-    func configureUI() {
-        guard self.isViewLoaded else { return }
-
-        self.screenTrackingViewController.showDebug = self.showDebug
-        self.screenTrackingViewController.trackingConfiguration = self.trackingConfiguration
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.appBackgroundColor
-        self.screenTrackingViewController.willMove(toParent: self)
-        self.screenTrackingViewController.view.frame = self.view.bounds
-        self.screenTrackingViewController.view.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
-        self.view.addSubview(self.screenTrackingViewController.view)
-        self.addChild(self.screenTrackingViewController)
-        self.screenTrackingViewController.didMove(toParent: self)
-
-        trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 40, height: 40)
-        trackingView.layer.cornerRadius = 20.0
-        trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.8)
-        self.view.addSubview(trackingView)
         
         self.adjustsFontSize()
-
         self.configureInitialState()
     }
 
@@ -240,7 +173,7 @@ class SixButtonKeyboardViewController: UIViewController {
             if let _ = trackingView as? HotCornerView {} else {
                 trackingView.layer.cornerRadius = Constants.cornerRadius
                 trackingView.clipsToBounds = true
-                trackingView.layer.borderColor = UIColor.mainPageBorderColor.cgColor
+                trackingView.layer.borderColor = UIColor.mainWidgetBorderColor.cgColor
                 trackingView.layer.borderWidth = Constants.borderWidth
             }
         }
@@ -248,38 +181,8 @@ class SixButtonKeyboardViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let hotCorners = [self.upperLeftHotCorner, self.upperRightHotCorner, self.lowerLeftHotCorner, self.lowerRightHotCorner]
-        hotCorners.forEach { view in
-            view.alpha = 1.0
-        }
-        self.trackingEngine.enable()
-        self.configureHotCornerCenters()
-        
         let textBoxHeight = self.textfield.frame.height
         textfield.font = UIFont.systemFont(ofSize: textBoxHeight / 2.8)
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        let hotCorners = [self.upperLeftHotCorner, self.upperRightHotCorner, self.lowerLeftHotCorner, self.lowerRightHotCorner]
-        hotCorners.forEach { view in
-            view.alpha = 0.0
-        }
-        coordinator.animate(alongsideTransition: nil) { _ in
-            self.configureHotCornerCenters()
-            hotCorners.forEach { view in
-                view.alpha = 1.0
-            }
-        }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        let hotCorners = [self.upperLeftHotCorner, self.upperRightHotCorner, self.lowerLeftHotCorner, self.lowerRightHotCorner]
-        hotCorners.forEach { view in
-            view.alpha = 0.0
-        }
-        self.trackingEngine.disable()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -300,7 +203,6 @@ class SixButtonKeyboardViewController: UIViewController {
     }
     
     private func configureInitialState() {
-        self.configureUI()
         self.configureOnGazes()
         self.configureHoverStateColors()
         self.configureTextPredictiveState(for: self.textPrediction1Button, withValue: "")
@@ -317,19 +219,12 @@ class SixButtonKeyboardViewController: UIViewController {
         self.configureKeys(with: self.keyViewOptions)
     }
     
-    func configureHotCornerCenters() {
-        self.upperLeftHotCorner.center = CGPoint(x: 0.0, y: 0.0)
-        self.upperRightHotCorner.center = CGPoint(x: self.view.bounds.maxX, y: 0.0)
-        self.lowerLeftHotCorner.center = CGPoint(x: 0.0, y: self.view.bounds.maxY)
-        self.lowerRightHotCorner.center = CGPoint(x: self.view.bounds.maxX, y: self.view.bounds.maxY)
-    }
-    
     func configureTextPredictiveState(for button: TrackingButton?, withValue value: String) {
         let isDisplayed = !value.isEmpty
         button?.alpha = isDisplayed ? 1.0 : 0.0
         button?.isUserInteractionEnabled = isDisplayed
         button?.isTrackingEnabled = isDisplayed
-        button?.setTitle(value, for: .normal)
+        button?.setTitle("\"\(value) \"", for: .normal)
     }
     
     func configureOnGazes() {
@@ -354,23 +249,6 @@ class SixButtonKeyboardViewController: UIViewController {
             let synthesizer = AVSpeechSynthesizer()
             synthesizer.speak(utterance)
         }
-        
-        self.upperLeftHotCorner.onGaze = { _ in
-            print("Upper Left")
-            self.perform(segue: .presetsSegue, sender: self)
-        }
-        
-        self.upperRightHotCorner.onGaze = { _ in
-            print("Upper Right")
-        }
-        
-        self.lowerLeftHotCorner.onGaze = { _ in
-            print("Lower Left")
-        }
-        
-        self.lowerRightHotCorner.onGaze = { _ in
-            print("Lower Right")
-        }
     }
     
     func configureHoverStateColors() {
@@ -381,40 +259,6 @@ class SixButtonKeyboardViewController: UIViewController {
 
     @IBAction func backButtonAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
-    }
-
-    var showDebug: Bool = true {
-        didSet {
-            self.configureUI()
-        }
-    }
-
-    var trackingConfiguration: TrackingConfiguration = .headTracking {
-        didSet {
-            self.configureUI()
-        }
-    }
-
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
-            self.showDebug = !self.showDebug
-        }
-    }
-
-}
-
-extension SixButtonKeyboardViewController: ScreenTrackingViewControllerDelegate {
-    func didUpdateTrackedPosition(_ trackedPositionOnScreen: CGPoint?, for screenTrackingViewController: ScreenTrackingViewController) {
-        DispatchQueue.main.async {
-            if let position = trackedPositionOnScreen {
-                self.trackingView.isHidden = false
-                let positionInView = self.view.convert(position, from: nil)
-                self.trackingView.center = positionInView
-                self.trackingEngine.updateWithTrackedPoint(position)
-            } else {
-                self.trackingView.isHidden = true
-            }
-        }
     }
 }
 
