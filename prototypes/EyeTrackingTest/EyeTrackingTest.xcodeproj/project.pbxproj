@@ -46,6 +46,21 @@
 		13FE392421557DA900B6110F /* QuadrilateralTrackingRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */; };
 		13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392621557E5500B6110F /* Quadrilateral.swift */; };
 		13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */; };
+		9D3FC1F52268B64C003C5841 /* HotCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3FC1F42268B64C003C5841 /* HotCornerView.swift */; };
+		9D3FC1F72268B923003C5841 /* ExpandingAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3FC1F62268B923003C5841 /* ExpandingAnimatable.swift */; };
+		9D739DF12269FEFA00FEFFAC /* PresetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739DF02269FEFA00FEFFAC /* PresetsViewController.swift */; };
+		9D739DF32269FF6A00FEFFAC /* PresetsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739DF22269FF6A00FEFFAC /* PresetsCollectionViewController.swift */; };
+		9D739DF6226A012000FEFFAC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739DF5226A012000FEFFAC /* CoreDataStack.swift */; };
+		9D739DF9226A01B800FEFFAC /* Eyespeak.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9D739DF7226A01B800FEFFAC /* Eyespeak.xcdatamodeld */; };
+		9D739DFB226A026E00FEFFAC /* PresetsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739DFA226A026E00FEFFAC /* PresetsCollectionViewFlowLayout.swift */; };
+		9D739DFD226A090C00FEFFAC /* Presets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D739DFC226A090C00FEFFAC /* Presets.storyboard */; };
+		9D739DFF226A09F800FEFFAC /* Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739DFE226A09F800FEFFAC /* Segue.swift */; };
+		9D739E01226A0A2F00FEFFAC /* UIViewController+Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739E00226A0A2F00FEFFAC /* UIViewController+Segues.swift */; };
+		9D739E03226A0B3A00FEFFAC /* UIStoryboardSegue+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739E02226A0B3A00FEFFAC /* UIStoryboardSegue+Identifier.swift */; };
+		9D739E05226A0BBE00FEFFAC /* Cell+NibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739E04226A0BBE00FEFFAC /* Cell+NibLoading.swift */; };
+		9D739E07226A0C1500FEFFAC /* PresetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739E06226A0C1500FEFFAC /* PresetsCollectionViewCell.swift */; };
+		9D739E09226A0C2200FEFFAC /* PresetsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D739E08226A0C2200FEFFAC /* PresetsCollectionViewCell.xib */; };
+		9D739E0B226E495200FEFFAC /* HotCornersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739E0A226E495200FEFFAC /* HotCornersViewController.swift */; };
 		9DB58D032264DF1B00E99C3B /* TextPredictionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */; };
 		9DB58D05226524F800E99C3B /* TrackingGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D04226524F800E99C3B /* TrackingGroup.swift */; };
 		9DB58D072265252300E99C3B /* TrackableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D062265252300E99C3B /* TrackableWidget.swift */; };
@@ -98,6 +113,21 @@
 		13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralTrackingRegion.swift; sourceTree = "<group>"; };
 		13FE392621557E5500B6110F /* Quadrilateral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quadrilateral.swift; sourceTree = "<group>"; };
 		13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralInterpolator.swift; sourceTree = "<group>"; };
+		9D3FC1F42268B64C003C5841 /* HotCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerView.swift; sourceTree = "<group>"; };
+		9D3FC1F62268B923003C5841 /* ExpandingAnimatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandingAnimatable.swift; sourceTree = "<group>"; };
+		9D739DF02269FEFA00FEFFAC /* PresetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsViewController.swift; sourceTree = "<group>"; };
+		9D739DF22269FF6A00FEFFAC /* PresetsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsCollectionViewController.swift; sourceTree = "<group>"; };
+		9D739DF5226A012000FEFFAC /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		9D739DF8226A01B800FEFFAC /* Eyespeak.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Eyespeak.xcdatamodel; sourceTree = "<group>"; };
+		9D739DFA226A026E00FEFFAC /* PresetsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		9D739DFC226A090C00FEFFAC /* Presets.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Presets.storyboard; sourceTree = "<group>"; };
+		9D739DFE226A09F800FEFFAC /* Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segue.swift; sourceTree = "<group>"; };
+		9D739E00226A0A2F00FEFFAC /* UIViewController+Segues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Segues.swift"; sourceTree = "<group>"; };
+		9D739E02226A0B3A00FEFFAC /* UIStoryboardSegue+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboardSegue+Identifier.swift"; sourceTree = "<group>"; };
+		9D739E04226A0BBE00FEFFAC /* Cell+NibLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell+NibLoading.swift"; sourceTree = "<group>"; };
+		9D739E06226A0C1500FEFFAC /* PresetsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsCollectionViewCell.swift; sourceTree = "<group>"; };
+		9D739E08226A0C2200FEFFAC /* PresetsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PresetsCollectionViewCell.xib; sourceTree = "<group>"; };
+		9D739E0A226E495200FEFFAC /* HotCornersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornersViewController.swift; sourceTree = "<group>"; };
 		9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPredictionController.swift; sourceTree = "<group>"; };
 		9DB58D04226524F800E99C3B /* TrackingGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingGroup.swift; sourceTree = "<group>"; };
 		9DB58D062265252300E99C3B /* TrackableWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableWidget.swift; sourceTree = "<group>"; };
@@ -143,8 +173,14 @@
 				130C00BB20D2AD2A007C3163 /* ViewController.swift */,
 				130C00BD20D2AD2A007C3163 /* Main.storyboard */,
 				13204C5E2180EC61005410FC /* NibBackedView.swift */,
+				9D739DFE226A09F800FEFFAC /* Segue.swift */,
+				9D739E0A226E495200FEFFAC /* HotCornersViewController.swift */,
 				13204C552180E52F005410FC /* 6Keyboard */,
 				13B71581214840B100B3612A /* ScreenTrackingViewController */,
+				9D739DEF2269FEDE00FEFFAC /* Presets */,
+				9D739DF4226A011100FEFFAC /* CoreData */,
+				13FE3918215414FA00B6110F /* Extensions */,
+				9DC7C03322676DF100A1D503 /* Animations */,
 				139EDEE921419C400009A99F /* Supporting Files */,
 			);
 			path = EyeTrackingTest;
@@ -165,6 +201,7 @@
 				9DB58D062265252300E99C3B /* TrackableWidget.swift */,
 				9DB58D082266170000E99C3B /* TextExpression.swift */,
 				9DC7C03422677F1700A1D503 /* TrackingTextView.swift */,
+				9D3FC1F42268B64C003C5841 /* HotCornerView.swift */,
 			);
 			path = 6Keyboard;
 			sourceTree = "<group>";
@@ -220,10 +257,8 @@
 				13B7158621484B6600B3612A /* TrackingConfiguration.swift */,
 				139EDEEB21419D700009A99F /* ScreenTrackingViewController.swift */,
 				13B71582214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift */,
-				9DC7C03322676DF100A1D503 /* Animations */,
 				13A7B917214C033C00714057 /* Tracking Methods */,
 				13FE39152153F63B00B6110F /* Tracking Regions */,
-				13FE3918215414FA00B6110F /* Extensions */,
 				139EDEE821419C220009A99F /* SceneKit */,
 			);
 			path = ScreenTrackingViewController;
@@ -243,11 +278,14 @@
 			isa = PBXGroup;
 			children = (
 				13DA076B21929D760081754A /* Array+Split.swift */,
+				9D739E00226A0A2F00FEFFAC /* UIViewController+Segues.swift */,
 				9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */,
 				9DB58D46226664C500E99C3B /* UIView+Utilities.swift */,
 				13DA8E8820DACDB900B19B70 /* VectorUtils.swift */,
 				13FE39192154150900B6110F /* Bounded.swift */,
 				13FE391B2154166600B6110F /* ClosedRange+UnitSpace.swift */,
+				9D739E02226A0B3A00FEFFAC /* UIStoryboardSegue+Identifier.swift */,
+				9D739E04226A0BBE00FEFFAC /* Cell+NibLoading.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -262,10 +300,33 @@
 			path = QuadrilateralTrackingRegion;
 			sourceTree = "<group>";
 		};
+		9D739DEF2269FEDE00FEFFAC /* Presets */ = {
+			isa = PBXGroup;
+			children = (
+				9D739DF02269FEFA00FEFFAC /* PresetsViewController.swift */,
+				9D739DF22269FF6A00FEFFAC /* PresetsCollectionViewController.swift */,
+				9D739DFA226A026E00FEFFAC /* PresetsCollectionViewFlowLayout.swift */,
+				9D739DFC226A090C00FEFFAC /* Presets.storyboard */,
+				9D739E06226A0C1500FEFFAC /* PresetsCollectionViewCell.swift */,
+				9D739E08226A0C2200FEFFAC /* PresetsCollectionViewCell.xib */,
+			);
+			path = Presets;
+			sourceTree = "<group>";
+		};
+		9D739DF4226A011100FEFFAC /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				9D739DF5226A012000FEFFAC /* CoreDataStack.swift */,
+				9D739DF7226A01B800FEFFAC /* Eyespeak.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		9DC7C03322676DF100A1D503 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
 				9DC7C03122676AA400A1D503 /* CircularAnimatable.swift */,
+				9D3FC1F62268B923003C5841 /* ExpandingAnimatable.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -330,6 +391,8 @@
 			files = (
 				13204C5D2180EC2D005410FC /* KeyView.xib in Resources */,
 				130C00BA20D2AD2A007C3163 /* art.scnassets in Resources */,
+				9D739DFD226A090C00FEFFAC /* Presets.storyboard in Resources */,
+				9D739E09226A0C2200FEFFAC /* PresetsCollectionViewCell.xib in Resources */,
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,
 				13204C592180E564005410FC /* SixButtonKeyboardViewController.storyboard in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
@@ -345,7 +408,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				13FE391E215572EC00B6110F /* TrackingType.swift in Sources */,
+				9D739DF6226A012000FEFFAC /* CoreDataStack.swift in Sources */,
 				130C00BC20D2AD2A007C3163 /* ViewController.swift in Sources */,
+				9D3FC1F72268B923003C5841 /* ExpandingAnimatable.swift in Sources */,
 				13FE391A2154150900B6110F /* Bounded.swift in Sources */,
 				9DB58D47226664C500E99C3B /* UIView+Utilities.swift in Sources */,
 				13B715852148464000B3612A /* Constants.swift in Sources */,
@@ -354,31 +419,42 @@
 				1349DA50218FCDF400FC0411 /* TrackingEngine.swift in Sources */,
 				13FE39172153F93600B6110F /* RectangleTrackingRegion.swift in Sources */,
 				9DC7C03522677F1700A1D503 /* TrackingTextView.swift in Sources */,
+				9D739DF12269FEFA00FEFFAC /* PresetsViewController.swift in Sources */,
 				13C32B88213991190090BB7D /* LineSegment.swift in Sources */,
+				9D739E03226A0B3A00FEFFAC /* UIStoryboardSegue+Identifier.swift in Sources */,
 				13204C572180E559005410FC /* SixButtonKeyboardViewController.swift in Sources */,
 				134B6417214C03FC00285AD5 /* LookAtDirectionIntersectionMethod.swift in Sources */,
 				13DA076C21929D760081754A /* Array+Split.swift in Sources */,
 				134B6419214C3A4B00285AD5 /* TrackingNode.swift in Sources */,
 				9DC7C03222676AA400A1D503 /* CircularAnimatable.swift in Sources */,
+				9D739DFB226A026E00FEFFAC /* PresetsCollectionViewFlowLayout.swift in Sources */,
 				13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */,
+				9D739E05226A0BBE00FEFFAC /* Cell+NibLoading.swift in Sources */,
 				13A7B912214C027300714057 /* TrackingMethod.swift in Sources */,
+				9D739E07226A0C1500FEFFAC /* PresetsCollectionViewCell.swift in Sources */,
 				9DB58D092266170000E99C3B /* TextExpression.swift in Sources */,
 				13204C5F2180EC61005410FC /* NibBackedView.swift in Sources */,
 				13DA0768219121DE0081754A /* TrackingView.swift in Sources */,
 				9DB58D072265252300E99C3B /* TrackableWidget.swift in Sources */,
+				9D739DFF226A09F800FEFFAC /* Segue.swift in Sources */,
+				9D739DF32269FF6A00FEFFAC /* PresetsCollectionViewController.swift in Sources */,
 				9DB58D032264DF1B00E99C3B /* TextPredictionController.swift in Sources */,
 				13A7B914214C032A00714057 /* HeadDirectionIntersectionMethod.swift in Sources */,
 				13B1865E2108E8030099D278 /* FaceNode.swift in Sources */,
 				13C32B8A2139A2440090BB7D /* IntersectionPointNode.swift in Sources */,
+				9D739DF9226A01B800FEFFAC /* Eyespeak.xcdatamodeld in Sources */,
 				13FE391C2154166600B6110F /* ClosedRange+UnitSpace.swift in Sources */,
 				13B71583214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift in Sources */,
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
+				9D3FC1F52268B64C003C5841 /* HotCornerView.swift in Sources */,
 				13FE3922215577E300B6110F /* ConfigurationListTableViewController.swift in Sources */,
 				13FE392421557DA900B6110F /* QuadrilateralTrackingRegion.swift in Sources */,
 				13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */,
+				9D739E01226A0A2F00FEFFAC /* UIViewController+Segues.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
 				13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */,
 				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
+				9D739E0B226E495200FEFFAC /* HotCornersViewController.swift in Sources */,
 				9DB58D05226524F800E99C3B /* TrackingGroup.swift in Sources */,
 				13204C5B2180EBD1005410FC /* KeyView.swift in Sources */,
 				139EDEEC21419D700009A99F /* ScreenTrackingViewController.swift in Sources */,
@@ -529,8 +605,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7UMFPW78PV;
+				DEVELOPMENT_TEAM = Y32EQUAEWX;
 				INFOPLIST_FILE = "$(SRCROOT)/EyeTrackingTest/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -547,8 +624,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7UMFPW78PV;
+				DEVELOPMENT_TEAM = Y32EQUAEWX;
 				INFOPLIST_FILE = "$(SRCROOT)/EyeTrackingTest/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -582,6 +660,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9D739DF7226A01B800FEFFAC /* Eyespeak.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9D739DF8226A01B800FEFFAC /* Eyespeak.xcdatamodel */,
+			);
+			currentVersion = 9D739DF8226A01B800FEFFAC /* Eyespeak.xcdatamodel */;
+			path = Eyespeak.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 130C00AC20D2AD2A007C3163 /* Project object */;
 }

@@ -82,6 +82,28 @@ class SimpleHeadTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     // Visualizes the direction of the head to help us debug/understand the app's behavior
     var faceDirectionDebugNode = SCNNode()
+    
+    lazy var leftEye: SCNNode = {
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor.red
+        material.isDoubleSided = true
+        let node = SCNNode()
+        let cone = SCNCone(topRadius: 0.0001, bottomRadius: 0.001, height: 0.2)
+        cone.materials = [material]
+        node.geometry = cone
+        return node
+    }()
+    
+    lazy var rightEye: SCNNode = {
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor.red
+        material.isDoubleSided = true
+        let node = SCNNode()
+        let cone = SCNCone(topRadius: 0.0001, bottomRadius: 0.001, height: 0.2)
+        cone.materials = [material]
+        node.geometry = cone
+        return node
+    }()
 
     func setUpScene() {
 
@@ -186,6 +208,7 @@ class SimpleHeadTrackingViewController: UIViewController, ARSCNViewDelegate {
             //
             // NOTE: the 4th component of the SCNVector4 (w) relates to how a vector is treated in matrix multiplication
             // and in our case, we always want it to be 1.0.
+            
             let faceDirectionStart = SCNVector4(0.0, 0.0, 0.0, 1.0)
             let faceDirectionEnd = SCNVector4(0.0, 0.0, 0.5, 1.0)
 
@@ -208,44 +231,60 @@ class SimpleHeadTrackingViewController: UIViewController, ARSCNViewDelegate {
             // the convert function only accepts simd_float3. The 4th component (w) is unused for this operation.
             let faceDirectionStart_inHitTestPlane = self.hitTestNode.simdConvertPosition(simd_make_float3(faceDirectionStart_inWorld), from: nil)
             let faceDirectionEnd_inHitTestPlane = self.hitTestNode.simdConvertPosition(simd_make_float3(faceDirectionEnd_inWorld), from: nil)
+            
+            let leftAnchorToWorld = faceAnchor.leftEyeTransform
+            print(leftAnchorToWorld)
+            let leftEyeStart_inWorld = simd_mul(leftAnchorToWorld, faceDirectionStart.simdVector4)
+            let leftEyeEnd_inWorld = simd_mul(leftAnchorToWorld, faceDirectionEnd.simdVector4)
+            let leftEyeStart_hitTest = self.hitTestNode.simdConvertPosition(simd_make_float3(leftEyeStart_inWorld), from: nil)
+            let leftEyeEnd_hitTest = self.hitTestNode.simdConvertPosition(simd_make_float3(leftEyeEnd_inWorld), from: nil)
 
             // perform a hit test, using the face direction vector
             let results = self.hitTestNode.hitTestWithSegment(from: SCNVector3(faceDirectionStart_inHitTestPlane),
                                                              to: SCNVector3(faceDirectionEnd_inHitTestPlane),
                                                              options: [:])
+            
+            let leftResults = self.hitTestNode.hitTestWithSegment(from: SCNVector3(leftEyeStart_hitTest), to: SCNVector3(leftEyeEnd_hitTest), options: [:])
 
-            // now if we got a hit test result, we can calculate a position on the screen (in UIKit terms) based on the intersection point
-            if let hit = results.first {
-
-                // find the "unit position" in the hit test plane. The unit position is the position of the hit test in
-                /// the [0.0...1.0] domain using the coordinate orientation of UIKit (origin in the top left corner).
-                let localX = CGFloat(hit.localCoordinates.x)
-                var localY = CGFloat(hit.localCoordinates.y)
-
-                // flip the y coordinate to match UIKit's coordinate system
-                localY = -localY
-
-                // using the hitTestNode's geometry, use the plane's height and width to calculate the unit position
-                // from the local coordinates
-                let plane = self.hitTestNode.geometry as! SCNPlane
-                let unitX = ((plane.width / 2.0) + localX) / plane.width
-                let unitY = ((plane.height / 2.0) + localY) / plane.height
-
-                let unitPosition = CGPoint(x: unitX, y: unitY)
-
-                // calculate the screen position from the unit position
-                let screenSize = UIScreen.main.bounds.size
-                let screenX = screenSize.width * unitPosition.x
-                let screenY = screenSize.height * unitPosition.y
-
-                let screenPosition = CGPoint(x: screenX, y: screenY)
-
-                // and we're done! update the on-screen position tracker
+            let faceScreenPosition = screenPosition(results: results)
+            if let position = faceScreenPosition {
                 DispatchQueue.main.async {
-                    self.trackingView.center = screenPosition
+                    self.trackingView.center = position
                 }
             }
+            
+            let leftEyePosition = screenPosition(results: leftResults)
+            print("Left Eye Position: \(leftEyePosition)")
         }
+    }
+    
+    func screenPosition(results: [SCNHitTestResult]) -> CGPoint? {
+        if let hit = results.first {
+            
+            // find the "unit position" in the hit test plane. The unit position is the position of the hit test in
+            /// the [0.0...1.0] domain using the coordinate orientation of UIKit (origin in the top left corner).
+            let localX = CGFloat(hit.localCoordinates.x)
+            var localY = CGFloat(hit.localCoordinates.y)
+            
+            // flip the y coordinate to match UIKit's coordinate system
+            localY = -localY
+            
+            // using the hitTestNode's geometry, use the plane's height and width to calculate the unit position
+            // from the local coordinates
+            let plane = self.hitTestNode.geometry as! SCNPlane
+            let unitX = ((plane.width / 2.0) + localX) / plane.width
+            let unitY = ((plane.height / 2.0) + localY) / plane.height
+            
+            let unitPosition = CGPoint(x: unitX, y: unitY)
+            
+            // calculate the screen position from the unit position
+            let screenSize = UIScreen.main.bounds.size
+            let screenX = screenSize.width * unitPosition.x
+            let screenY = screenSize.height * unitPosition.y
+            
+            return CGPoint(x: screenX, y: screenY)
+        }
+        return nil
     }
 }
 

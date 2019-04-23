@@ -16,6 +16,7 @@ protocol TrackableWidget: Gazeable {
     var parent: TrackableWidget? { get set }
     var id: Int? { get set }
     var gazeableComponent: GazeableTrackingComponent { get set }
+    var isTrackingEnabled: Bool { get set }
     func add(to engine: TrackingEngine)
 }
 

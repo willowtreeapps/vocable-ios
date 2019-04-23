@@ -15,7 +15,9 @@ class ViewController: UIViewController, ScreenTrackingViewControllerDelegate {
 
     var showDebug: Bool = true {
         didSet {
-            self.configureUI()
+            DispatchQueue.main.async {
+                self.configureUI()
+            }
         }
     }
 

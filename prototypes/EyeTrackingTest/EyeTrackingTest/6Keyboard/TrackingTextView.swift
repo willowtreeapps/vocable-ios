@@ -9,6 +9,15 @@
 import UIKit
 
 class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
+    var isTrackingEnabled: Bool = true
+    var animationSpeed: TimeInterval = 2.0
+    
+    var animationViewColor: UIColor? {
+        didSet {
+            self.animationView.backgroundColor = self.animationViewColor
+        }
+    }
+    
     var parent: TrackableWidget?
     var gazeableComponent = GazeableTrackingComponent()
     
@@ -21,13 +30,8 @@ class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
     lazy var animationView: UIView = {
         let view = UIView()
         self.addSubview(view)
+        self.sendSubviewToBack(view)
         view.backgroundColor = UIColor.animatingColor
         return view
     }()
-    
-    var animationViewSizeRatio: CGFloat {
-        return 4.0 / 3.0
-    }
-    
-    var isAnimationEnabled: Bool = false
 }

@@ -10,24 +10,27 @@ import UIKit
 
 protocol CircularAnimatable {
     var animationView: UIView { get }
-    var animationViewSizeRatio: CGFloat { get }
-    var isAnimationEnabled: Bool { get set }
+    var animationViewDiameter: CGFloat { get }
 }
 
 extension CircularAnimatable where Self: TrackingView {
-    func animateGaze(withDuration duration: TimeInterval) {
-        if self.isAnimationEnabled {
+    var animationViewDiameter: CGFloat {
+        let height = self.frame.height
+        let width = self.frame.width
+        let requiredDiameter = sqrt(height * height + width * width)
+        return requiredDiameter
+    }
+    func animateGaze() {
+        if self.isTrackingEnabled {
             self.invalidateAnimationView()
             self.layoutIfNeeded()
             self.animationView.isHidden = false
             
-            UIView.animate(withDuration: duration) {
-                let tallestSide = self.tallestSide * self.animationViewSizeRatio
-                self.animationView.frame = CGRect(x: 0, y: 0, width: tallestSide, height: tallestSide)
+            UIView.animate(withDuration: self.animationSpeed) {
+                self.animationView.frame = CGRect(x: 0, y: 0, width: self.animationViewDiameter, height: self.animationViewDiameter)
                 self.animationView.center = self.relativeCenterPoint
-                self.animationView.layer.cornerRadius = tallestSide / 2.0
+                self.animationView.layer.cornerRadius = self.animationViewDiameter / 2.0
                 self.animationView.clipsToBounds = true
-                self.layoutIfNeeded()
             }
         }
     }

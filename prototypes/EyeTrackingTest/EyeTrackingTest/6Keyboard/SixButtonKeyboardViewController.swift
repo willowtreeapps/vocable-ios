@@ -12,6 +12,10 @@ import CoreML
 
 
 class SixButtonKeyboardViewController: UIViewController {
+    struct Constants {
+        static let cornerRadius = CGFloat(5.0)
+        static let borderWidth = CGFloat(3.0)
+    }
 
     let trackingEngine = TrackingEngine()
 
@@ -49,6 +53,45 @@ class SixButtonKeyboardViewController: UIViewController {
         return expression
     }()
     
+    lazy var upperLeftHotCorner: HotCornerView = {
+        let view = HotCornerView()
+        self.view.addSubview(view)
+        view.frame = CGRect(origin: .zero, size: CGSize(width: 48.0, height: 48.0))
+        view.alpha = 0.0
+        return view
+    }()
+    
+    lazy var upperRightHotCorner: HotCornerView = {
+        let view = HotCornerView()
+        self.view.addSubview(view)
+        view.frame = CGRect(origin: .zero, size: CGSize(width: 48.0, height: 48.0))
+        view.alpha = 0.0
+        return view
+    }()
+    
+    lazy var lowerLeftHotCorner: HotCornerView = {
+        let view = HotCornerView()
+        self.view.addSubview(view)
+        view.frame = CGRect(origin: .zero, size: CGSize(width: 48.0, height: 48.0))
+        view.alpha = 0.0
+        return view
+    }()
+    
+    lazy var lowerRightHotCorner: HotCornerView = {
+        let view = HotCornerView()
+        self.view.addSubview(view)
+        view.frame = CGRect(origin: .zero, size: CGSize(width: 48.0, height: 48.0))
+        view.alpha = 0.0
+        return view
+    }()
+    
+    lazy var hotCornerGroup: TrackingGroup = TrackingGroup(widgets: [
+        self.upperLeftHotCorner,
+        self.upperRightHotCorner,
+        self.lowerLeftHotCorner,
+        self.lowerRightHotCorner]
+    )
+    
 
     @IBOutlet var topLeftKey: KeyView!
     @IBOutlet var topCenterKey: KeyView!
@@ -75,7 +118,8 @@ class SixButtonKeyboardViewController: UIViewController {
                  self.topRightKey,
                  self.bottomRightKey,
                  self.textPredictionTrackingGroup,
-                 self.textfield]
+                 self.textfield, self.hotCornerGroup
+        ]
     }
 
 
@@ -93,7 +137,6 @@ class SixButtonKeyboardViewController: UIViewController {
         values.append(.space)
         values.append(.character("."))
         values.append(.character(","))
-        values.append(.backspace)
 
         return values
     }()
@@ -183,38 +226,127 @@ class SixButtonKeyboardViewController: UIViewController {
         trackingView.layer.cornerRadius = 20.0
         trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.8)
         self.view.addSubview(trackingView)
+        
+        self.adjustsFontSize()
 
         self.configureInitialState()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         self.trackingEngine.applyToEach { trackingView in
-            trackingView.layer.cornerRadius = 8.0
-            trackingView.clipsToBounds = true
+            if let _ = trackingView as? HotCornerView {} else {
+                trackingView.layer.cornerRadius = Constants.cornerRadius
+                trackingView.clipsToBounds = true
+                trackingView.layer.borderColor = UIColor.mainPageBorderColor.cgColor
+                trackingView.layer.borderWidth = Constants.borderWidth
+            }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let hotCorners = [self.upperLeftHotCorner, self.upperRightHotCorner, self.lowerLeftHotCorner, self.lowerRightHotCorner]
+        hotCorners.forEach { view in
+            view.alpha = 1.0
+        }
+        self.trackingEngine.enable()
+        self.configureHotCornerCenters()
+        
+        let textBoxHeight = self.textfield.frame.height
+        textfield.font = UIFont.systemFont(ofSize: textBoxHeight / 2.8)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        let hotCorners = [self.upperLeftHotCorner, self.upperRightHotCorner, self.lowerLeftHotCorner, self.lowerRightHotCorner]
+        hotCorners.forEach { view in
+            view.alpha = 0.0
+        }
+        coordinator.animate(alongsideTransition: nil) { _ in
+            self.configureHotCornerCenters()
+            hotCorners.forEach { view in
+                view.alpha = 1.0
+            }
         }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        let hotCorners = [self.upperLeftHotCorner, self.upperRightHotCorner, self.lowerLeftHotCorner, self.lowerRightHotCorner]
+        hotCorners.forEach { view in
+            view.alpha = 0.0
+        }
+        self.trackingEngine.disable()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.segueValue == .presetsSegue {
+            // prepare the segue
+        }
+    }
+    
+    private func adjustsFontSize() {
+        self.textPrediction1Button.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.textPrediction2Button.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.textPrediction3Button.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.textPrediction4Button.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.textPrediction5Button.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.textPrediction6Button.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.backButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.clearButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     private func configureInitialState() {
         self.configureUI()
+        self.configureOnGazes()
+        self.configureHoverStateColors()
+        self.configureTextPredictiveState(for: self.textPrediction1Button, withValue: "")
+        self.configureTextPredictiveState(for: self.textPrediction2Button, withValue: "")
+        self.configureTextPredictiveState(for: self.textPrediction3Button, withValue: "")
+        self.configureTextPredictiveState(for: self.textPrediction4Button, withValue: "")
+        self.configureTextPredictiveState(for: self.textPrediction5Button, withValue: "")
+        self.configureTextPredictiveState(for: self.textPrediction6Button, withValue: "")
+        
+        self.textPredictionTrackingGroup.isTrackingEnabled = false
+        for view in self.interactiveViews {
+            view.add(to: self.trackingEngine)
+        }
+        self.configureKeys(with: self.keyViewOptions)
+    }
+    
+    func configureHotCornerCenters() {
+        self.upperLeftHotCorner.center = CGPoint(x: 0.0, y: 0.0)
+        self.upperRightHotCorner.center = CGPoint(x: self.view.bounds.maxX, y: 0.0)
+        self.lowerLeftHotCorner.center = CGPoint(x: 0.0, y: self.view.bounds.maxY)
+        self.lowerRightHotCorner.center = CGPoint(x: self.view.bounds.maxX, y: self.view.bounds.maxY)
+    }
+    
+    func configureTextPredictiveState(for button: TrackingButton?, withValue value: String) {
+        let isDisplayed = !value.isEmpty
+        button?.alpha = isDisplayed ? 1.0 : 0.0
+        button?.isUserInteractionEnabled = isDisplayed
+        button?.isTrackingEnabled = isDisplayed
+        button?.setTitle(value, for: .normal)
+    }
+    
+    func configureOnGazes() {
         self.backButton.onGaze = { _ in
             self.textExpression.backspace()
         }
+        
         self.clearButton.onGaze = { _ in
             self.textExpression.clear()
         }
+        
         self.textPredictionTrackingGroup.onGaze = { id in
             if let id = id {
                 self.textPredictionController.updateExpression(withPredictionAt: id)
             }
         }
+        
         self.textfield.onGaze = { _ in
             let speech = self.textExpression.value
             let utterance = AVSpeechUtterance(string: speech)
@@ -223,16 +355,28 @@ class SixButtonKeyboardViewController: UIViewController {
             synthesizer.speak(utterance)
         }
         
-        self.allKeyViews.forEach { keyView in
-            keyView.isAnimationEnabled = true
+        self.upperLeftHotCorner.onGaze = { _ in
+            print("Upper Left")
+            self.perform(segue: .presetsSegue, sender: self)
         }
-        self.backButton.isAnimationEnabled = true
-        self.clearButton.isAnimationEnabled = true
-        self.textfield.isAnimationEnabled = true
-        for view in self.interactiveViews {
-            view.add(to: self.trackingEngine)
+        
+        self.upperRightHotCorner.onGaze = { _ in
+            print("Upper Right")
         }
-        self.configureKeys(with: self.keyViewOptions)
+        
+        self.lowerLeftHotCorner.onGaze = { _ in
+            print("Lower Left")
+        }
+        
+        self.lowerRightHotCorner.onGaze = { _ in
+            print("Lower Right")
+        }
+    }
+    
+    func configureHoverStateColors() {
+        self.backButton.animationViewColor = .backspaceButtonHoverColor
+        self.clearButton.animationViewColor = .clearButtonHoverColor
+        self.textfield.animationViewColor = .speakBoxHoverColer
     }
 
     @IBAction func backButtonAction(_ sender: Any) {
@@ -264,7 +408,6 @@ extension SixButtonKeyboardViewController: ScreenTrackingViewControllerDelegate 
         DispatchQueue.main.async {
             if let position = trackedPositionOnScreen {
                 self.trackingView.isHidden = false
-                
                 let positionInView = self.view.convert(position, from: nil)
                 self.trackingView.center = positionInView
                 self.trackingEngine.updateWithTrackedPoint(position)
@@ -288,11 +431,7 @@ extension SixButtonKeyboardViewController: TextPredictionControllerDelegate {
     func textPredictionController(_ controller: TextPredictionController, didUpdatePrediction value: String, at index: Int) {
         DispatchQueue.main.async {
             let button = self.textPredictionTrackingGroup.widgets[safe: index] as? TrackingButton
-            let isDisplayed = !value.isEmpty
-            button?.alpha = isDisplayed ? 1.0 : 0.0
-            button?.isUserInteractionEnabled = isDisplayed
-            button?.isAnimationEnabled = isDisplayed
-            button?.setTitle(value, for: .normal)
+            self.configureTextPredictiveState(for: button, withValue: value)
         }
     }
 }

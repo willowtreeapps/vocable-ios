@@ -62,6 +62,9 @@ enum KeyModel {
 }
 
 class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
+    var isTrackingEnabled: Bool = true
+    var animationSpeed: TimeInterval = 1.0
+    
     var id: Int?
     var parent: TrackableWidget?
     var gazeableComponent = GazeableTrackingComponent()
@@ -72,12 +75,6 @@ class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
         self.addSubview(view)
         return view
     }()
-    
-    var animationViewSizeRatio: CGFloat {
-        return 4.0 / 3.0
-    }
-    
-    var isAnimationEnabled = false
     
     @IBOutlet var singleValueLabel: UILabel!
 
@@ -93,9 +90,13 @@ class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
     }
 
     override func didInstantiateBackingNib() {
-        self.contentView.backgroundColor = .lightGray
-        self.singleValueLabel.textColor = .white
-        self.optionLabels.forEach { $0.textColor = .white }
+        self.optionLabels.forEach { label in
+            label.adjustsFontSizeToFitWidth = true
+        }
+        self.singleValueLabel.adjustsFontSizeToFitWidth = true
+        self.contentView.backgroundColor = .appBackgroundColor
+        self.singleValueLabel.textColor = .mainTextColor
+        self.optionLabels.forEach { $0.textColor = .mainTextColor }
     }
 
     func configure(with keyModel: KeyModel) {
