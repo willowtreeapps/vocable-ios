@@ -83,6 +83,16 @@ class HotCornersViewController: UIViewController {
         self.lowerRightHotCorner]
     )
     
+    lazy var sixButtonKeyboardViewController: SixButtonKeyboardViewController = {
+        let controller = SixButtonKeyboardViewController.get(from: .sixButtonKeyboardViewController)
+        return controller
+    }()
+    
+    lazy var presetsViewController: PresetsViewController = {
+        let controller = PresetsViewController.get(from: .presets)
+        return controller
+    }()
+    
     @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
