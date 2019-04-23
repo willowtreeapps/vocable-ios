@@ -13,7 +13,7 @@
         <!--Six Button Keyboard View Controller-->
         <scene sceneID="OzE-p3-SJ3">
             <objects>
-                <viewController id="JAA-Tx-jTr" customClass="SixButtonKeyboardViewController" customModule="EyeTrackingTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SixButtonKeyboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JAA-Tx-jTr" customClass="SixButtonKeyboardViewController" customModule="EyeTrackingTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pst-4E-PK6">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -82,16 +82,14 @@ class HotCornersViewController: UIViewController {
         self.lowerLeftHotCorner,
         self.lowerRightHotCorner]
     )
-
+    
+    @IBOutlet weak var containerView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.appBackgroundColor
-        self.screenTrackingViewController.willMove(toParent: self)
-        self.screenTrackingViewController.view.frame = self.view.bounds
-        self.screenTrackingViewController.view.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
-        self.view.addSubview(self.screenTrackingViewController.view)
-        self.addChild(self.screenTrackingViewController)
-        self.screenTrackingViewController.didMove(toParent: self)
+        
+        self.screenTrackingViewController.add(to: self, in: nil)
         
         trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 40, height: 40)
         trackingView.layer.cornerRadius = 20.0

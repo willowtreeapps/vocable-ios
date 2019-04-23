@@ -61,6 +61,9 @@
 		9D739E07226A0C1500FEFFAC /* PresetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739E06226A0C1500FEFFAC /* PresetsCollectionViewCell.swift */; };
 		9D739E09226A0C2200FEFFAC /* PresetsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D739E08226A0C2200FEFFAC /* PresetsCollectionViewCell.xib */; };
 		9D739E0B226E495200FEFFAC /* HotCornersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739E0A226E495200FEFFAC /* HotCornersViewController.swift */; };
+		9D739E0D226F433F00FEFFAC /* HotCornersTracking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D739E0C226F433F00FEFFAC /* HotCornersTracking.storyboard */; };
+		9D739E0F226F451A00FEFFAC /* UIViewController+Children.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739E0E226F451A00FEFFAC /* UIViewController+Children.swift */; };
+		9D739E11226F47C500FEFFAC /* UIStoryboard+ViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739E10226F47C500FEFFAC /* UIStoryboard+ViewControllers.swift */; };
 		9DB58D032264DF1B00E99C3B /* TextPredictionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */; };
 		9DB58D05226524F800E99C3B /* TrackingGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D04226524F800E99C3B /* TrackingGroup.swift */; };
 		9DB58D072265252300E99C3B /* TrackableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D062265252300E99C3B /* TrackableWidget.swift */; };
@@ -128,6 +131,9 @@
 		9D739E06226A0C1500FEFFAC /* PresetsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsCollectionViewCell.swift; sourceTree = "<group>"; };
 		9D739E08226A0C2200FEFFAC /* PresetsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PresetsCollectionViewCell.xib; sourceTree = "<group>"; };
 		9D739E0A226E495200FEFFAC /* HotCornersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornersViewController.swift; sourceTree = "<group>"; };
+		9D739E0C226F433F00FEFFAC /* HotCornersTracking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HotCornersTracking.storyboard; sourceTree = "<group>"; };
+		9D739E0E226F451A00FEFFAC /* UIViewController+Children.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Children.swift"; sourceTree = "<group>"; };
+		9D739E10226F47C500FEFFAC /* UIStoryboard+ViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+ViewControllers.swift"; sourceTree = "<group>"; };
 		9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPredictionController.swift; sourceTree = "<group>"; };
 		9DB58D04226524F800E99C3B /* TrackingGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingGroup.swift; sourceTree = "<group>"; };
 		9DB58D062265252300E99C3B /* TrackableWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableWidget.swift; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 				13204C5E2180EC61005410FC /* NibBackedView.swift */,
 				9D739DFE226A09F800FEFFAC /* Segue.swift */,
 				9D739E0A226E495200FEFFAC /* HotCornersViewController.swift */,
+				9D739E0C226F433F00FEFFAC /* HotCornersTracking.storyboard */,
 				13204C552180E52F005410FC /* 6Keyboard */,
 				13B71581214840B100B3612A /* ScreenTrackingViewController */,
 				9D739DEF2269FEDE00FEFFAC /* Presets */,
@@ -286,6 +293,8 @@
 				13FE391B2154166600B6110F /* ClosedRange+UnitSpace.swift */,
 				9D739E02226A0B3A00FEFFAC /* UIStoryboardSegue+Identifier.swift */,
 				9D739E04226A0BBE00FEFFAC /* Cell+NibLoading.swift */,
+				9D739E0E226F451A00FEFFAC /* UIViewController+Children.swift */,
+				9D739E10226F47C500FEFFAC /* UIStoryboard+ViewControllers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -395,6 +404,7 @@
 				9D739E09226A0C2200FEFFAC /* PresetsCollectionViewCell.xib in Resources */,
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,
 				13204C592180E564005410FC /* SixButtonKeyboardViewController.storyboard in Resources */,
+				9D739E0D226F433F00FEFFAC /* HotCornersTracking.storyboard in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
 				130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */,
 			);
@@ -418,6 +428,7 @@
 				13C32B86213990EB0090BB7D /* SCNVector4+Extensions.swift in Sources */,
 				1349DA50218FCDF400FC0411 /* TrackingEngine.swift in Sources */,
 				13FE39172153F93600B6110F /* RectangleTrackingRegion.swift in Sources */,
+				9D739E0F226F451A00FEFFAC /* UIViewController+Children.swift in Sources */,
 				9DC7C03522677F1700A1D503 /* TrackingTextView.swift in Sources */,
 				9D739DF12269FEFA00FEFFAC /* PresetsViewController.swift in Sources */,
 				13C32B88213991190090BB7D /* LineSegment.swift in Sources */,
@@ -459,6 +470,7 @@
 				13204C5B2180EBD1005410FC /* KeyView.swift in Sources */,
 				139EDEEC21419D700009A99F /* ScreenTrackingViewController.swift in Sources */,
 				13FE39142153F63000B6110F /* TrackingRegion.swift in Sources */,
+				9D739E11226F47C500FEFFAC /* UIStoryboard+ViewControllers.swift in Sources */,
 				13DA076A219297140081754A /* TrackingButton.swift in Sources */,
 				13B7158721484B6600B3612A /* TrackingConfiguration.swift in Sources */,
 			);

@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,7 +42,7 @@
         <!--Presets Collection View Controller-->
         <scene sceneID="8aT-mY-CPf">
             <objects>
-                <collectionViewController id="tLd-Nv-FYp" customClass="PresetsCollectionViewController" customModule="EyeTrackingTest" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="PresetsCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tLd-Nv-FYp" customClass="PresetsCollectionViewController" customModule="EyeTrackingTest" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="rOa-f3-qdv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
