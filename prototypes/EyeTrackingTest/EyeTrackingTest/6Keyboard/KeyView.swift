@@ -62,6 +62,7 @@ enum KeyModel {
 }
 
 class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
+    var hoverBorderColor: UIColor?
     var isTrackingEnabled: Bool = true
     var animationSpeed: TimeInterval = 1.0
     
@@ -103,19 +104,19 @@ class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
         switch keyModel {
         case .value(let value):
             self.singleValueLabel.isHidden = false
-            self.singleValueLabel.text = value.display
+            self.singleValueLabel.textComponentText = value.display
             self.optionLabels.forEach { $0.isHidden = true }
 
         case .options(let options):
             self.singleValueLabel.isHidden = true
 
             self.optionLabels.forEach { $0.isHidden = false }
-            self.topLeftOption.text = options.topLeft?.display
-            self.topCenterOption.text = options.topCenter?.display
-            self.topRightOption.text = options.topRight?.display
-            self.bottomLeftOption.text = options.bottomLeft?.display
-            self.bottomCenterOption.text = options.bottomCenter?.display
-            self.bottomRightOption.text = options.bottomRight?.display
+            self.topLeftOption.textComponentText = options.topLeft?.display
+            self.topCenterOption.textComponentText = options.topCenter?.display
+            self.topRightOption.textComponentText = options.topRight?.display
+            self.bottomLeftOption.textComponentText = options.bottomLeft?.display
+            self.bottomCenterOption.textComponentText = options.bottomCenter?.display
+            self.bottomRightOption.textComponentText = options.bottomRight?.display
         }
     }
 

@@ -156,6 +156,13 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
         }
         self.configureKeys(with: self.keyViewOptions)
     }
+    
+    var topHalfWidgets: [HasTextComponent] {
+        return [self.textPrediction1Button, self.textPrediction2Button,
+                self.textPrediction3Button, self.textPrediction4Button,
+                self.textPrediction5Button, self.textPrediction6Button,
+                self.backButton, self.clearButton, self.textfield]
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -253,8 +260,14 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
     
     func configureHoverStateColors() {
         self.backButton.animationViewColor = .backspaceButtonHoverColor
+        self.backButton.hoverBorderColor = .backspaceButtonHoverBorderColor
         self.clearButton.animationViewColor = .clearButtonHoverColor
-        self.textfield.animationViewColor = .speakBoxHoverColer
+        self.clearButton.hoverBorderColor = .clearButtonHoverBorderColor
+        self.textfield.animationViewColor = .speakBoxHoverColor
+        self.textfield.hoverBorderColor = .speakBoxHoverBorderColor
+        self.topHalfWidgets.forEach { widget in
+            widget.textComponentTextColor = .mainTextColor
+        }
     }
 
     @IBAction func backButtonAction(_ sender: Any) {
@@ -265,7 +278,7 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
 extension SixButtonKeyboardViewController: TextExpressionDelegate {
     func textExpression(_ expression: TextExpression, valueChanged value: String) {
         DispatchQueue.main.async {
-            self.textfield.text = expression.value
+            self.textfield.textComponentText = expression.value
             self.textPredictionController.updateState(withTextExpression: expression)
         }
     }

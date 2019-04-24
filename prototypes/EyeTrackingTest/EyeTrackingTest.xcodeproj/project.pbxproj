@@ -47,6 +47,7 @@
 		13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */; };
 		9D3FC1F52268B64C003C5841 /* HotCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3FC1F42268B64C003C5841 /* HotCornerView.swift */; };
 		9D3FC1F72268B923003C5841 /* ExpandingAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3FC1F62268B923003C5841 /* ExpandingAnimatable.swift */; };
+		9D5CC0D22270D10100F0E3CF /* HasTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5CC0D12270D10100F0E3CF /* HasTextComponent.swift */; };
 		9D739DF12269FEFA00FEFFAC /* PresetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739DF02269FEFA00FEFFAC /* PresetsViewController.swift */; };
 		9D739DF32269FF6A00FEFFAC /* PresetsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739DF22269FF6A00FEFFAC /* PresetsCollectionViewController.swift */; };
 		9D739DF6226A012000FEFFAC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739DF5226A012000FEFFAC /* CoreDataStack.swift */; };
@@ -121,6 +122,7 @@
 		13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralInterpolator.swift; sourceTree = "<group>"; };
 		9D3FC1F42268B64C003C5841 /* HotCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerView.swift; sourceTree = "<group>"; };
 		9D3FC1F62268B923003C5841 /* ExpandingAnimatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandingAnimatable.swift; sourceTree = "<group>"; };
+		9D5CC0D12270D10100F0E3CF /* HasTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasTextComponent.swift; sourceTree = "<group>"; };
 		9D739DF02269FEFA00FEFFAC /* PresetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsViewController.swift; sourceTree = "<group>"; };
 		9D739DF22269FF6A00FEFFAC /* PresetsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsCollectionViewController.swift; sourceTree = "<group>"; };
 		9D739DF5226A012000FEFFAC /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 		13FE3918215414FA00B6110F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9D5CC0D12270D10100F0E3CF /* HasTextComponent.swift */,
 				13DA076B21929D760081754A /* Array+Split.swift */,
 				9D739E00226A0A2F00FEFFAC /* UIViewController+Segues.swift */,
 				9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */,
@@ -435,6 +438,7 @@
 				13B715852148464000B3612A /* Constants.swift in Sources */,
 				13DA8E8920DACDB900B19B70 /* VectorUtils.swift in Sources */,
 				9DDF1F01226F66630072A248 /* HotCornerTrackable.swift in Sources */,
+				9D5CC0D22270D10100F0E3CF /* HasTextComponent.swift in Sources */,
 				13C32B86213990EB0090BB7D /* SCNVector4+Extensions.swift in Sources */,
 				1349DA50218FCDF400FC0411 /* TrackingEngine.swift in Sources */,
 				13FE39172153F93600B6110F /* RectangleTrackingRegion.swift in Sources */,

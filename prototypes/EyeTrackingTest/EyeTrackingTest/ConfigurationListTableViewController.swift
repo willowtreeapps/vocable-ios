@@ -42,7 +42,7 @@ class ConfigurationListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
 
-        cell.textLabel?.text = self.configurationOptions[indexPath.row].title
+        cell.textLabel?.textComponentText = self.configurationOptions[indexPath.row].title
 
         return cell
     }

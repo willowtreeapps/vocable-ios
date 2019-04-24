@@ -9,6 +9,7 @@
 import UIKit
 
 class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
+    var hoverBorderColor: UIColor?
     var isTrackingEnabled: Bool = true
     var animationSpeed: TimeInterval = 1.0
     

@@ -21,12 +21,12 @@ class PresetsCollectionViewCell: TrackingCollectionViewCell {
     }
     
     override func prepareForReuse() {
-        self.presetsLabel.text = ""
+        self.presetsLabel.textComponentText = ""
         self.onGaze = nil
     }
     
     func configure(with preset: String) {
-        self.presetsLabel.text = preset
+        self.presetsLabel.textComponentText = preset
     }
     
 }

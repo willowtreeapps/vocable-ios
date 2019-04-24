@@ -11,6 +11,7 @@ import UIKit
 protocol CircularAnimatable {
     var animationView: UIView { get }
     var animationViewDiameter: CGFloat { get }
+    var hoverBorderColor: UIColor? { get set }
 }
 
 extension CircularAnimatable where Self: TrackingView {
@@ -25,7 +26,7 @@ extension CircularAnimatable where Self: TrackingView {
             self.invalidateAnimationView()
             self.layoutIfNeeded()
             self.animationView.isHidden = false
-            self.layer.borderColor = UIColor.mainHoverBorderColor.cgColor
+            self.layer.borderColor = self.hoverBorderColor?.cgColor ?? UIColor.mainHoverBorderColor.cgColor
             UIView.animate(withDuration: self.animationSpeed, delay: 0.0, options: .curveEaseIn, animations: {
                 self.animationView.frame = CGRect(x: 0, y: 0, width: self.animationViewDiameter, height: self.animationViewDiameter)
                 self.animationView.center = self.relativeCenterPoint

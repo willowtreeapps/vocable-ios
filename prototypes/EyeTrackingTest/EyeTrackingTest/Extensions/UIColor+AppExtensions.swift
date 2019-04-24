@@ -27,5 +27,11 @@ extension UIColor {
     
     static let clearButtonHoverColor = UIColor(rgbRed: 255, green: 141, blue: 141, alpha: 1.0)
     static let backspaceButtonHoverColor = UIColor(rgbRed: 255, green: 197, blue: 197, alpha: 1.0)
-    static let speakBoxHoverColer = UIColor(rgbRed: 194, green: 255, blue: 215, alpha: 1.0)
+    static let speakBoxHoverColor = UIColor(rgbRed: 194, green: 255, blue: 215, alpha: 1.0)
+    
+    static let clearButtonHoverBorderColor = UIColor(rgbRed: 250, green: 49, blue: 49, alpha: 1.0)
+    static let backspaceButtonHoverBorderColor = UIColor(rgbRed: 254, green: 126, blue: 126, alpha: 1.0)
+    static let speakBoxHoverBorderColor = UIColor(rgbRed: 49, green: 208, blue: 103, alpha: 1.0)
+    
+    
 }
