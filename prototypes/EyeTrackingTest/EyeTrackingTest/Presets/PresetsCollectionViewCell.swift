@@ -25,8 +25,8 @@ class PresetsCollectionViewCell: TrackingCollectionViewCell {
         self.onGaze = nil
     }
     
-    func configure(with preset: String) {
-        self.presetsLabel.textComponentText = preset
+    func configure(with preset: PresetModel) {
+        self.presetsLabel.textComponentText = preset.value
     }
     
 }
