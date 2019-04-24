@@ -9,6 +9,17 @@
 import Foundation
 
 class TrackingGroup: TrackableWidget {
+    var isTrackingEnabled: Bool {
+        get {
+            return !self.widgets.map { $0.isTrackingEnabled }.contains(false)
+        }
+        set {
+            self.widgets.forEach { widget in
+                widget.isTrackingEnabled = newValue
+            }
+        }
+    }
+    var animationSpeed: TimeInterval = 1.0
     var id: Int?
     var parent: TrackableWidget?
     var gazeableComponent = GazeableTrackingComponent()
@@ -30,8 +41,8 @@ class TrackingGroup: TrackableWidget {
         }
     }
     
-    func animateGaze(withDuration: TimeInterval) {
-        self.parent?.animateGaze(withDuration: withDuration)
+    func animateGaze() {
+        self.parent?.animateGaze()
     }
     
     func cancelAnimation() {

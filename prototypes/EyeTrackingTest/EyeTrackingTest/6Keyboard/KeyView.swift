@@ -62,6 +62,10 @@ enum KeyModel {
 }
 
 class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
+    var hoverBorderColor: UIColor?
+    var isTrackingEnabled: Bool = true
+    var animationSpeed: TimeInterval = 1.0
+    
     var id: Int?
     var parent: TrackableWidget?
     var gazeableComponent = GazeableTrackingComponent()
@@ -72,12 +76,6 @@ class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
         self.addSubview(view)
         return view
     }()
-    
-    var animationViewSizeRatio: CGFloat {
-        return 4.0 / 3.0
-    }
-    
-    var isAnimationEnabled = false
     
     @IBOutlet var singleValueLabel: UILabel!
 
@@ -93,28 +91,32 @@ class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
     }
 
     override func didInstantiateBackingNib() {
-        self.contentView.backgroundColor = .lightGray
-        self.singleValueLabel.textColor = .white
-        self.optionLabels.forEach { $0.textColor = .white }
+        self.optionLabels.forEach { label in
+            label.adjustsFontSizeToFitWidth = true
+        }
+        self.singleValueLabel.adjustsFontSizeToFitWidth = true
+        self.contentView.backgroundColor = .appBackgroundColor
+        self.singleValueLabel.textColor = .mainTextColor
+        self.optionLabels.forEach { $0.textColor = .mainTextColor }
     }
 
     func configure(with keyModel: KeyModel) {
         switch keyModel {
         case .value(let value):
             self.singleValueLabel.isHidden = false
-            self.singleValueLabel.text = value.display
+            self.singleValueLabel.textComponentText = value.display
             self.optionLabels.forEach { $0.isHidden = true }
 
         case .options(let options):
             self.singleValueLabel.isHidden = true
 
             self.optionLabels.forEach { $0.isHidden = false }
-            self.topLeftOption.text = options.topLeft?.display
-            self.topCenterOption.text = options.topCenter?.display
-            self.topRightOption.text = options.topRight?.display
-            self.bottomLeftOption.text = options.bottomLeft?.display
-            self.bottomCenterOption.text = options.bottomCenter?.display
-            self.bottomRightOption.text = options.bottomRight?.display
+            self.topLeftOption.textComponentText = options.topLeft?.display
+            self.topCenterOption.textComponentText = options.topCenter?.display
+            self.topRightOption.textComponentText = options.topRight?.display
+            self.bottomLeftOption.textComponentText = options.bottomLeft?.display
+            self.bottomCenterOption.textComponentText = options.bottomCenter?.display
+            self.bottomRightOption.textComponentText = options.bottomRight?.display
         }
     }
 

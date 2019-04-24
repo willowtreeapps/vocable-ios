@@ -12,6 +12,7 @@ typealias TrackingView = UIView & TrackableWidget
 
 protocol Gazeable: AnyObject {
     var onGaze: ((Int?) -> Void)? { get set }
-    func animateGaze(withDuration: TimeInterval)
+    var animationSpeed: TimeInterval { get set }
+    func animateGaze()
     func cancelAnimation()
 }

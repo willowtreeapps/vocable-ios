@@ -10,9 +10,13 @@ import UIKit
 import AVFoundation
 import CoreML
 
-
-class SixButtonKeyboardViewController: UIViewController {
-
+class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
+    struct Constants {
+        static let cornerRadius = CGFloat(5.0)
+        static let borderWidth = CGFloat(3.0)
+    }
+    
+    var component: HotCornerGazeableComponent?
     let trackingEngine = TrackingEngine()
 
     // MARK: - Outlets
@@ -43,6 +47,12 @@ class SixButtonKeyboardViewController: UIViewController {
         return controller
     }()
     
+    lazy var textExpression: TextExpression = {
+        let expression = TextExpression()
+        expression.delegate = self
+        return expression
+    }()
+    
 
     @IBOutlet var topLeftKey: KeyView!
     @IBOutlet var topCenterKey: KeyView!
@@ -69,7 +79,8 @@ class SixButtonKeyboardViewController: UIViewController {
                  self.topRightKey,
                  self.bottomRightKey,
                  self.textPredictionTrackingGroup,
-                 self.textfield]
+                 self.textfield
+        ]
     }
 
 
@@ -87,7 +98,6 @@ class SixButtonKeyboardViewController: UIViewController {
         values.append(.space)
         values.append(.character("."))
         values.append(.character(","))
-        values.append(.backspace)
 
         return values
     }()
@@ -136,138 +146,140 @@ class SixButtonKeyboardViewController: UIViewController {
         print("selected: \(keyValue)")
         switch keyValue {
         case .character(let text):
-            self.textfield.text?.append(contentsOf: text)
+            self.textExpression.append(text: text)
         case .space:
-            self.textfield.text?.append(" ")
+            self.textExpression.space()
         case .backspace:
-            if self.textfield.text?.isEmpty == false {
-                _ = self.textfield.text?.removeLast()
-            }
+            self.textExpression.backspace()
         case .back:
             break
         }
-        let newText = self.textfield.text ?? ""
-        self.textPredictionController.updateState(newText: newText)
         self.configureKeys(with: self.keyViewOptions)
     }
-
-    // MARK: - View Lifecycle
-
-    let trackingView: UIView = UIView()
-    lazy var screenTrackingViewController: ScreenTrackingViewController = {
-        let vc = ScreenTrackingViewController()
-        vc.delegate = self
-        return vc
-    }()
-
-    func configureUI() {
-        guard self.isViewLoaded else { return }
-
-        self.screenTrackingViewController.showDebug = self.showDebug
-        self.screenTrackingViewController.trackingConfiguration = self.trackingConfiguration
+    
+    var topHalfWidgets: [HasTextComponent] {
+        return [self.textPrediction1Button, self.textPrediction2Button,
+                self.textPrediction3Button, self.textPrediction4Button,
+                self.textPrediction5Button, self.textPrediction6Button,
+                self.backButton, self.clearButton, self.textfield]
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.appBackgroundColor
-        self.screenTrackingViewController.willMove(toParent: self)
-        self.screenTrackingViewController.view.frame = self.view.bounds
-        self.screenTrackingViewController.view.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
-        self.view.addSubview(self.screenTrackingViewController.view)
-        self.addChild(self.screenTrackingViewController)
-        self.screenTrackingViewController.didMove(toParent: self)
-
-        trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 40, height: 40)
-        trackingView.layer.cornerRadius = 20.0
-        trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.8)
-        self.view.addSubview(trackingView)
-
+        
+        self.adjustsFontSize()
         self.configureInitialState()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         self.trackingEngine.applyToEach { trackingView in
-            trackingView.layer.cornerRadius = 8.0
-            trackingView.clipsToBounds = true
+            if let _ = trackingView as? HotCornerView {} else {
+                trackingView.layer.cornerRadius = Constants.cornerRadius
+                trackingView.clipsToBounds = true
+                trackingView.layer.borderColor = UIColor.mainWidgetBorderColor.cgColor
+                trackingView.layer.borderWidth = Constants.borderWidth
+            }
         }
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let textBoxHeight = self.textfield.frame.height
+        textfield.font = UIFont.systemFont(ofSize: textBoxHeight / 2.8)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.segueValue == .presetsSegue {
+            // prepare the segue
+        }
+    }
+    
+    private func adjustsFontSize() {
+        self.textPrediction1Button.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.textPrediction2Button.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.textPrediction3Button.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.textPrediction4Button.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.textPrediction5Button.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.textPrediction6Button.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.backButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.clearButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     private func configureInitialState() {
-        self.configureUI()
-        self.backButton.onGaze = { _ in
-            self.navigationController?.popViewController(animated: true)
-        }
-        self.clearButton.onGaze = { _ in
-            self.textPredictionController.updateState(newText: "")
-        }
-        self.textPredictionTrackingGroup.onGaze = { id in
-            if let id = id {
-                self.textPredictionController.updateExpression(withPredictionAt: id)
-            }
-        }
-        self.textfield.onGaze = { _ in
-            let speech = self.textfield.text ?? ""
-            let utterance = AVSpeechUtterance(string: speech)
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-            let synthesizer = AVSpeechSynthesizer()
-            synthesizer.speak(utterance)
-        }
+        self.configureOnGazes()
+        self.configureHoverStateColors()
+        self.configureTextPredictiveState(for: self.textPrediction1Button, withValue: "")
+        self.configureTextPredictiveState(for: self.textPrediction2Button, withValue: "")
+        self.configureTextPredictiveState(for: self.textPrediction3Button, withValue: "")
+        self.configureTextPredictiveState(for: self.textPrediction4Button, withValue: "")
+        self.configureTextPredictiveState(for: self.textPrediction5Button, withValue: "")
+        self.configureTextPredictiveState(for: self.textPrediction6Button, withValue: "")
         
-        self.allKeyViews.forEach { keyView in
-            keyView.isAnimationEnabled = true
-        }
-        self.backButton.isAnimationEnabled = true
-        self.clearButton.isAnimationEnabled = true
+        self.textPredictionTrackingGroup.isTrackingEnabled = false
         for view in self.interactiveViews {
             view.add(to: self.trackingEngine)
         }
         self.configureKeys(with: self.keyViewOptions)
     }
+    
+    func configureTextPredictiveState(for button: TrackingButton?, withValue value: String) {
+        let isDisplayed = !value.isEmpty
+        button?.alpha = isDisplayed ? 1.0 : 0.0
+        button?.isUserInteractionEnabled = isDisplayed
+        button?.isTrackingEnabled = isDisplayed
+        button?.setTitle("\"\(value) \"", for: .normal)
+    }
+    
+    func configureOnGazes() {
+        self.backButton.onGaze = { _ in
+            self.textExpression.backspace()
+        }
+        
+        self.clearButton.onGaze = { _ in
+            self.textExpression.clear()
+        }
+        
+        self.textPredictionTrackingGroup.onGaze = { id in
+            if let id = id {
+                self.textPredictionController.updateExpression(withPredictionAt: id)
+            }
+        }
+        
+        self.textfield.onGaze = { _ in
+            let speech = self.textExpression.value
+            let utterance = AVSpeechUtterance(string: speech)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            let synthesizer = AVSpeechSynthesizer()
+            synthesizer.speak(utterance)
+        }
+    }
+    
+    func configureHoverStateColors() {
+        self.backButton.animationViewColor = .backspaceButtonHoverColor
+        self.backButton.hoverBorderColor = .backspaceButtonHoverBorderColor
+        self.clearButton.animationViewColor = .clearButtonHoverColor
+        self.clearButton.hoverBorderColor = .clearButtonHoverBorderColor
+        self.textfield.animationViewColor = .speakBoxHoverColor
+        self.textfield.hoverBorderColor = .speakBoxHoverBorderColor
+        self.topHalfWidgets.forEach { widget in
+            widget.textComponentTextColor = .mainTextColor
+        }
+    }
 
     @IBAction func backButtonAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-
-    var showDebug: Bool = true {
-        didSet {
-            self.configureUI()
-        }
-    }
-
-    var trackingConfiguration: TrackingConfiguration = .headTracking {
-        didSet {
-            self.configureUI()
-        }
-    }
-
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
-            self.showDebug = !self.showDebug
-        }
-    }
-
 }
 
-extension SixButtonKeyboardViewController: ScreenTrackingViewControllerDelegate {
-    func didUpdateTrackedPosition(_ trackedPositionOnScreen: CGPoint?, for screenTrackingViewController: ScreenTrackingViewController) {
+extension SixButtonKeyboardViewController: TextExpressionDelegate {
+    func textExpression(_ expression: TextExpression, valueChanged value: String) {
         DispatchQueue.main.async {
-            if let position = trackedPositionOnScreen {
-                self.trackingView.isHidden = false
-                
-                let positionInView = self.view.convert(position, from: nil)
-                self.trackingView.center = positionInView
-                self.trackingEngine.updateWithTrackedPoint(position)
-            } else {
-                self.trackingView.isHidden = true
-            }
+            self.textfield.textComponentText = expression.value
+            self.textPredictionController.updateState(withTextExpression: expression)
         }
     }
 }
@@ -276,14 +288,7 @@ extension SixButtonKeyboardViewController: TextPredictionControllerDelegate {
     func textPredictionController(_ controller: TextPredictionController, didUpdatePrediction value: String, at index: Int) {
         DispatchQueue.main.async {
             let button = self.textPredictionTrackingGroup.widgets[safe: index] as? TrackingButton
-            button?.isAnimationEnabled = !value.isEmpty
-            button?.setTitle(value, for: .normal)
-        }
-    }
-    
-    func textPredictionController(_ controller: TextPredictionController, didUpdateExpression expression: TextExpression) {
-        DispatchQueue.main.async {
-            self.textfield.text = expression.value
+            self.configureTextPredictiveState(for: button, withValue: value)
         }
     }
 }

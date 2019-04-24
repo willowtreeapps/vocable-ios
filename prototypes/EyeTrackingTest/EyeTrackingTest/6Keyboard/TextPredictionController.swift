@@ -10,7 +10,6 @@ import UIKit
 
 protocol TextPredictionControllerDelegate: class {
     func textPredictionController(_ controller: TextPredictionController, didUpdatePrediction value: String, at index: Int)
-    func textPredictionController(_ controller: TextPredictionController, didUpdateExpression expression: TextExpression)
 }
 
 enum TextPredictionControllerState {
@@ -28,20 +27,12 @@ class TextPredictionController {
     var prediction6: String = ""
     
     weak var delegate: TextPredictionControllerDelegate?
-    
     var state: TextPredictionControllerState = .idle
-    
-    var expression = TextExpression()
-    
+    private var expression = TextExpression()
     private let checker = UITextChecker()
     
-    func updateState(newText: String) {
-        print("Updated String: \(newText)")
-        self.expression.value = newText
-        self.updateState()
-    }
-    
-    private func updateState() {
+    func updateState(withTextExpression expression: TextExpression) {
+        self.expression = expression
         let completions = self.completions()
         self.prediction1 = ""
         self.prediction2 = ""
@@ -73,7 +64,6 @@ class TextPredictionController {
         self.delegate?.textPredictionController(self, didUpdatePrediction: self.prediction4, at: 3)
         self.delegate?.textPredictionController(self, didUpdatePrediction: self.prediction5, at: 4)
         self.delegate?.textPredictionController(self, didUpdatePrediction: self.prediction6, at: 5)
-        self.delegate?.textPredictionController(self, didUpdateExpression: self.expression)
     }
     
     private func completions() -> [String] {
@@ -123,8 +113,7 @@ class TextPredictionController {
         } else {
             self.expression.replaceLastWord(with: lastWord)
         }
-        self.expression.value.append(" ")
-        self.updateState()
+        self.expression.space()
     }
     
     private func prediction(index: Int) -> String {

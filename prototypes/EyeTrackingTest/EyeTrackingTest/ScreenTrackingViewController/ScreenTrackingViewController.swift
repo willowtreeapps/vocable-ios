@@ -193,7 +193,6 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
             case .tracking:
                 let trackingResult = self.hitTestPlane.track(faceAnchor: faceAnchor)
-
                 self.updateIntersectionNode(self.intersectionDebugNode, with: trackingResult)
                 self.reportIntersectionToDelegate(trackingResult)
             }

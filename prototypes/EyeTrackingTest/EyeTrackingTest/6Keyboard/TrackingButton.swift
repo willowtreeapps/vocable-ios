@@ -9,6 +9,16 @@
 import UIKit
 
 class TrackingButton: UIButton, TrackableWidget, CircularAnimatable {
+    var hoverBorderColor: UIColor?
+    var isTrackingEnabled: Bool = true
+    var animationSpeed: TimeInterval = 1.0
+    
+    var animationViewColor: UIColor? {
+        didSet {
+            self.animationView.backgroundColor = self.animationViewColor
+        }
+    }
+    
     var id: Int?
     var parent: TrackableWidget?
     var gazeableComponent = GazeableTrackingComponent()
@@ -20,12 +30,6 @@ class TrackingButton: UIButton, TrackableWidget, CircularAnimatable {
         self.sendSubviewToBack(view)
         return view
     }()
-    
-    var animationViewSizeRatio: CGFloat {
-        return 4.0 / 3.0
-    }
-    
-    var isAnimationEnabled = false
     
     func add(to engine: TrackingEngine) {
         engine.registerView(self)

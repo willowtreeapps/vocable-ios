@@ -8,9 +8,14 @@
 
 import Foundation
 
+protocol TextExpressionDelegate: class {
+    func textExpression(_ expression: TextExpression, valueChanged value: String)
+}
 
 class TextExpression {
-    var value: String = ""
+    private(set) var value: String = ""
+    
+    weak var delegate: TextExpressionDelegate?
     
     var wordCount: Int {
         return value.split(separator: " ").count
@@ -26,6 +31,7 @@ class TextExpression {
         var newSplitExpression = trimmedExpression.split(separator: " ").map { String($0) }
         newSplitExpression.append(word)
         self.value = newSplitExpression.joined(separator: " ")
+        self.delegate?.textExpression(self, valueChanged: self.value)
     }
     
     func replaceWord(at index: Int, with newWord: String) {
@@ -34,6 +40,7 @@ class TextExpression {
             newSplitExpression[index] = newWord
         }
         self.value = newSplitExpression.joined(separator: " ")
+        self.delegate?.textExpression(self, valueChanged: self.value)
     }
     
     func replaceLastWord(with newWord: String) {
@@ -50,5 +57,27 @@ class TextExpression {
     
     func lastWord() -> String? {
         return word(at: self.splitExpression.count - 1)
+    }
+    
+    func backspace() {
+        if self.value.count > 0 {
+            _ = self.value.removeLast()
+        }
+        self.delegate?.textExpression(self, valueChanged: self.value)
+    }
+    
+    func append(text: String) {
+        self.value.append(text)
+        self.delegate?.textExpression(self, valueChanged: self.value)
+    }
+    
+    func clear() {
+        self.value = ""
+        self.delegate?.textExpression(self, valueChanged: self.value)
+    }
+    
+    func space() {
+        self.value.append(" ")
+        self.delegate?.textExpression(self, valueChanged: self.value)
     }
 }
