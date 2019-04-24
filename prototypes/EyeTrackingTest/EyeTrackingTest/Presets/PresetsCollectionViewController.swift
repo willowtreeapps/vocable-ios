@@ -10,7 +10,11 @@ import UIKit
 
 protocol PresetsCollectionViewControllerDelegate: class {
     func presetsCollectionViewController(_ presetsCollectionViewController: PresetsCollectionViewController, addWidget widget: TrackableWidget)
-    func presetsCollectionViewController(_ presetsCollectionViewController: PresetsCollectionViewController, didGazeOn value: String)
+    func presetsCollectionViewController(_ presetsCollectionViewController: PresetsCollectionViewController, didGazeOn model: PresetModel)
+}
+
+struct PresetModel {
+    let value: String
 }
 
 class PresetsCollectionViewController: UICollectionViewController {
@@ -25,7 +29,7 @@ class PresetsCollectionViewController: UICollectionViewController {
         static let insets = UIEdgeInsets(top: 24.0, left: 24.0, bottom: 24.0, right: 24.0)
     }
     
-    var presets: [String] = [] {
+    var presets: [PresetModel] = [] {
         didSet {
             self.collectionView.reloadData()
         }
@@ -41,11 +45,14 @@ class PresetsCollectionViewController: UICollectionViewController {
             layout.delegate = self
         }
         
-        var fakePresets: [String] = []
-        for i in 1...20 {
-            fakePresets.append("This is preset \(i)")
-        }
-        presets.append(contentsOf: fakePresets)
+        self.presets = [PresetModel(value: "Thank you"), PresetModel(value: "Fix my pillow"),
+                        PresetModel(value: "I didn't mean to say that"), PresetModel(value: "I am in pain"),
+                        PresetModel(value: "I want my glasses"), PresetModel(value: "Close the curtain"),
+                        PresetModel(value: "I love you"), PresetModel(value: "I am hungry"),
+                        PresetModel(value: "I am thirsty"), PresetModel(value: "Wash my face"),
+                        PresetModel(value: "Swab my mouth"), PresetModel(value: "I want to be suctioned"),
+                        PresetModel(value: "Don't leave"), PresetModel(value: "Come back later"),
+                        PresetModel(value: "Turn off the light")]
     }
 
     // MARK: UICollectionViewDataSource

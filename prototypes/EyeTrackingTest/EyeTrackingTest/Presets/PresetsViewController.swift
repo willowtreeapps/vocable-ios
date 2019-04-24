@@ -30,8 +30,8 @@ extension PresetsViewController: PresetsCollectionViewControllerDelegate {
         widget.add(to: self.trackingEngine)
     }
     
-    func presetsCollectionViewController(_ presetsCollectionViewController: PresetsCollectionViewController, didGazeOn value: String) {
-        let utterance = AVSpeechUtterance(string: value)
+    func presetsCollectionViewController(_ presetsCollectionViewController: PresetsCollectionViewController, didGazeOn model: PresetModel) {
+        let utterance = AVSpeechUtterance(string: model.value)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         let synthesizer = AVSpeechSynthesizer()
         synthesizer.speak(utterance)
