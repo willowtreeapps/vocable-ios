@@ -10,4 +10,6 @@ import UIKit
 
 protocol ScreenTrackingViewControllerDelegate: AnyObject {
     func didUpdateTrackedPosition(_ trackedPositionOnScreen: CGPoint?, for screenTrackingViewController: ScreenTrackingViewController)
+    func didAddFaceNode(for screenTrackingViewController: ScreenTrackingViewController)
+    func didRemoveFaceNode(for screenTrackingViewController: ScreenTrackingViewController)
 }

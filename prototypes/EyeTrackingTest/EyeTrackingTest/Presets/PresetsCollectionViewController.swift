@@ -25,7 +25,7 @@ class PresetsCollectionViewController: UICollectionViewController {
         static let numberOfColumns = 3
         static let columnSpacing = CGFloat(8.0)
         static let rowSpacing = CGFloat(8.0)
-        static let rowHeight = CGFloat(100.0)
+        static let rowHeight = CGFloat(140.0)
         static let insets = UIEdgeInsets(top: 24.0, left: 24.0, bottom: 24.0, right: 24.0)
     }
     

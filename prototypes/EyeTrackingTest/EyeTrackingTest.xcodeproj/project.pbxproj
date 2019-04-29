@@ -45,6 +45,8 @@
 		13FE392421557DA900B6110F /* QuadrilateralTrackingRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */; };
 		13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392621557E5500B6110F /* Quadrilateral.swift */; };
 		13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */; };
+		9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E0542271F0DC0058DF57 /* CursorView.swift */; };
+		9D15E058227211AB0058DF57 /* FixedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E057227211AB0058DF57 /* FixedQueue.swift */; };
 		9D3FC1F52268B64C003C5841 /* HotCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3FC1F42268B64C003C5841 /* HotCornerView.swift */; };
 		9D3FC1F72268B923003C5841 /* ExpandingAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3FC1F62268B923003C5841 /* ExpandingAnimatable.swift */; };
 		9D5CC0D22270D10100F0E3CF /* HasTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5CC0D12270D10100F0E3CF /* HasTextComponent.swift */; };
@@ -120,6 +122,8 @@
 		13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralTrackingRegion.swift; sourceTree = "<group>"; };
 		13FE392621557E5500B6110F /* Quadrilateral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quadrilateral.swift; sourceTree = "<group>"; };
 		13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralInterpolator.swift; sourceTree = "<group>"; };
+		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
+		9D15E057227211AB0058DF57 /* FixedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedQueue.swift; sourceTree = "<group>"; };
 		9D3FC1F42268B64C003C5841 /* HotCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerView.swift; sourceTree = "<group>"; };
 		9D3FC1F62268B923003C5841 /* ExpandingAnimatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandingAnimatable.swift; sourceTree = "<group>"; };
 		9D5CC0D12270D10100F0E3CF /* HasTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasTextComponent.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 		130C00B620D2AD2A007C3163 /* EyeTrackingTest */ = {
 			isa = PBXGroup;
 			children = (
+				9D15E0562272119E0058DF57 /* Utilities */,
 				130C00B720D2AD2A007C3163 /* AppDelegate.swift */,
 				13FE3921215577E300B6110F /* ConfigurationListTableViewController.swift */,
 				130C00BB20D2AD2A007C3163 /* ViewController.swift */,
@@ -189,6 +194,7 @@
 				13204C5E2180EC61005410FC /* NibBackedView.swift */,
 				9DDF1EF8226F61690072A248 /* HotCornersTrackableViewController.swift */,
 				9D739E0C226F433F00FEFFAC /* HotCornersTracking.storyboard */,
+				9D15E0542271F0DC0058DF57 /* CursorView.swift */,
 				13204C552180E52F005410FC /* 6Keyboard */,
 				13B71581214840B100B3612A /* ScreenTrackingViewController */,
 				9D739DEF2269FEDE00FEFFAC /* Presets */,
@@ -320,6 +326,14 @@
 			path = QuadrilateralTrackingRegion;
 			sourceTree = "<group>";
 		};
+		9D15E0562272119E0058DF57 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				9D15E057227211AB0058DF57 /* FixedQueue.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		9D739DEF2269FEDE00FEFFAC /* Presets */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +462,7 @@
 				13C32B88213991190090BB7D /* LineSegment.swift in Sources */,
 				9D739E03226A0B3A00FEFFAC /* UIStoryboardSegue+Identifier.swift in Sources */,
 				13204C572180E559005410FC /* SixButtonKeyboardViewController.swift in Sources */,
+				9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */,
 				9DDF1EF9226F61690072A248 /* HotCornersTrackableViewController.swift in Sources */,
 				134B6417214C03FC00285AD5 /* LookAtDirectionIntersectionMethod.swift in Sources */,
 				13DA076C21929D760081754A /* Array+Split.swift in Sources */,
@@ -482,6 +497,7 @@
 				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
 				9D739E13226F5EB700FEFFAC /* String+Utilities.swift in Sources */,
 				9DB58D05226524F800E99C3B /* TrackingGroup.swift in Sources */,
+				9D15E058227211AB0058DF57 /* FixedQueue.swift in Sources */,
 				9DDF1F03226F7A160072A248 /* TrackingCollectionViewCell.swift in Sources */,
 				13204C5B2180EBD1005410FC /* KeyView.swift in Sources */,
 				139EDEEC21419D700009A99F /* ScreenTrackingViewController.swift in Sources */,

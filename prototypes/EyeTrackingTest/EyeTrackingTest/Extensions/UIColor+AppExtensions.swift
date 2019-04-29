@@ -33,5 +33,5 @@ extension UIColor {
     static let backspaceButtonHoverBorderColor = UIColor(rgbRed: 254, green: 126, blue: 126, alpha: 1.0)
     static let speakBoxHoverBorderColor = UIColor(rgbRed: 49, green: 208, blue: 103, alpha: 1.0)
     
-    
+    static let backButtonBackgroundColor = UIColor(rgbRed: 232, green: 232, blue: 232, alpha: 1.0)
 }

@@ -14,6 +14,7 @@ class PresetsCollectionViewCell: TrackingCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .white
+        self.presetsLabel.textColor = .mainTextColor
         self.layer.borderWidth = 3.0
         self.layer.cornerRadius = 5.0
         self.layer.borderColor = UIColor.mainWidgetBorderColor.cgColor
