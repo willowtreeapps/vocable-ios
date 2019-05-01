@@ -40,9 +40,8 @@ enum KeyViewValue {
     case character(String)
     case back
     case space
-    case backspace
-
-    var display: String {
+    
+    var smallDisplay: String {
         switch self {
         case .character(let string):
             return string
@@ -50,8 +49,35 @@ enum KeyViewValue {
             return ""
         case .space:
             return "⎵"
-        case .backspace:
-            return "bksp"
+        }
+    }
+
+    var largeDisplay: String {
+        switch self {
+        case .character(let string):
+            return string
+        case .back:
+            return "\u{2190} back"
+        case .space:
+            return "⎵"
+        }
+    }
+    
+    var largeDisplayBackgroundColor: UIColor {
+        switch self {
+        case .back:
+            return .backButtonBackgroundColor
+        default:
+            return KeyView.Constants.normalBackgroundColor
+        }
+    }
+    
+    var largeDisplayTextFont: UIFont {
+        switch self {
+        case .back:
+            return UIFont.systemFont(ofSize: 40.0, weight: .semibold)
+        default:
+            return UIFont.systemFont(ofSize: 64.0, weight: .semibold)
         }
     }
 }
@@ -77,6 +103,10 @@ class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
         return view
     }()
     
+    struct Constants {
+        static let normalBackgroundColor = UIColor.appBackgroundColor
+    }
+    
     @IBOutlet var singleValueLabel: UILabel!
 
     @IBOutlet var topLeftOption: UILabel!
@@ -95,7 +125,7 @@ class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
             label.adjustsFontSizeToFitWidth = true
         }
         self.singleValueLabel.adjustsFontSizeToFitWidth = true
-        self.contentView.backgroundColor = .appBackgroundColor
+        self.contentView.backgroundColor = Constants.normalBackgroundColor
         self.singleValueLabel.textColor = .mainTextColor
         self.optionLabels.forEach { $0.textColor = .mainTextColor }
     }
@@ -104,19 +134,21 @@ class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
         switch keyModel {
         case .value(let value):
             self.singleValueLabel.isHidden = false
-            self.singleValueLabel.textComponentText = value.display
+            self.singleValueLabel.textComponentText = value.largeDisplay
+            self.contentView.backgroundColor = value.largeDisplayBackgroundColor
+            self.singleValueLabel.font = value.largeDisplayTextFont
             self.optionLabels.forEach { $0.isHidden = true }
 
         case .options(let options):
             self.singleValueLabel.isHidden = true
-
+            self.contentView.backgroundColor = Constants.normalBackgroundColor
             self.optionLabels.forEach { $0.isHidden = false }
-            self.topLeftOption.textComponentText = options.topLeft?.display
-            self.topCenterOption.textComponentText = options.topCenter?.display
-            self.topRightOption.textComponentText = options.topRight?.display
-            self.bottomLeftOption.textComponentText = options.bottomLeft?.display
-            self.bottomCenterOption.textComponentText = options.bottomCenter?.display
-            self.bottomRightOption.textComponentText = options.bottomRight?.display
+            self.topLeftOption.textComponentText = options.topLeft?.smallDisplay
+            self.topCenterOption.textComponentText = options.topCenter?.smallDisplay
+            self.topRightOption.textComponentText = options.topRight?.smallDisplay
+            self.bottomLeftOption.textComponentText = options.bottomLeft?.smallDisplay
+            self.bottomCenterOption.textComponentText = options.bottomCenter?.smallDisplay
+            self.bottomRightOption.textComponentText = options.bottomRight?.smallDisplay
         }
     }
 

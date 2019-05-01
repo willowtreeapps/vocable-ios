@@ -149,8 +149,6 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
             self.textExpression.append(text: text)
         case .space:
             self.textExpression.space()
-        case .backspace:
-            self.textExpression.backspace()
         case .back:
             break
         }
@@ -170,6 +168,8 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
         
         self.adjustsFontSize()
         self.configureInitialState()
+        self.backButton.setTitle("\u{2190} bksp", for: .normal)
+        self.textfield.textContainerInset = UIEdgeInsets(top: 4.0, left: 4.0, bottom: 0.0, right: 0.0)
     }
 
     override func viewWillAppear(_ animated: Bool) {

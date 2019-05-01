@@ -21,3 +21,8 @@ struct TrackingResult {
     let hitTest: SCNHitTestResult
     let unitPositionInPlane: CGPoint
 }
+
+struct WorldTrackingResult {
+    let worldCoordinates: SCNVector3
+    let unitPositionInPlane: CGPoint
+}

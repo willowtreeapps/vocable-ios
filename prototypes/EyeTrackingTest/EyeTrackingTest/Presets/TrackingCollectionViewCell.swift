@@ -9,7 +9,7 @@
 import UIKit
 
 class TrackingCollectionViewCell: UICollectionViewCell, TrackableWidget, CircularAnimatable {
-    var hoverBorderColor: UIColor?
+    var hoverBorderColor: UIColor? = .speakBoxHoverBorderColor
     var parent: TrackableWidget?
     var id: Int?
     var gazeableComponent = GazeableTrackingComponent()

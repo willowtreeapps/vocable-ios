@@ -39,6 +39,8 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - View Lifecycle
 
     private let sceneView = ARSCNView(frame: CGRect.zero)
+    
+    let trackingResultQueue = FixedQueue<TrackingResult>(maxSize: 5)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +52,6 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
         self.sceneView.frame = self.view.bounds
         self.view.addSubview(self.sceneView)
 
-        self.setupScene()
-        self.updateSceneConfiguration()
-
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(calibrate))
         self.view.addGestureRecognizer(tapGesture)
     }
@@ -61,6 +60,8 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
 
         // run configuration when the view appears
+        self.setupScene()
+        self.updateSceneConfiguration()
         let configuration = ARFaceTrackingConfiguration()
         configuration.worldAlignment = .camera
         self.sceneView.session.run(configuration, options: [])
@@ -193,8 +194,12 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
             case .tracking:
                 let trackingResult = self.hitTestPlane.track(faceAnchor: faceAnchor)
-                self.updateIntersectionNode(self.intersectionDebugNode, with: trackingResult)
-                self.reportIntersectionToDelegate(trackingResult)
+                self.trackingResultQueue.add(element: trackingResult)
+                let averageUnitPositionInPlane = self.averageUnitPositionInPlane()
+                let averageWorldCoordinates = self.averageWorldCoordinates()
+                let worldTrackingResult = WorldTrackingResult(worldCoordinates: averageWorldCoordinates, unitPositionInPlane: averageUnitPositionInPlane)
+                self.updateIntersectionNode(self.intersectionDebugNode, with: worldTrackingResult)
+                self.reportIntersectionToDelegate(worldTrackingResult)
             }
         }
     }
@@ -202,17 +207,18 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     // MARK: - Intersection Helpers
 
-    private func updateIntersectionNode(_ intersectionNode: IntersectionPointNode, with trackingResult: TrackingResult?) {
+    private func updateIntersectionNode(_ intersectionNode: IntersectionPointNode, with trackingResult: WorldTrackingResult?) {
         if let trackingResult = trackingResult {
             if intersectionNode.isHidden == true {
                 intersectionNode.isHidden = false
             }
-
+            
             let unitPosition = trackingResult.unitPositionInPlane
-            let hitTest = trackingResult.hitTest
+            let worldCoordinates = trackingResult.worldCoordinates
 
             intersectionNode.displayText = String(format: "(%.2f, %.2f)", unitPosition.x, unitPosition.y)
-            intersectionNode.position = intersectionNode.parent!.convertPosition(hitTest.worldCoordinates, from: nil)
+            
+            intersectionNode.position = intersectionNode.parent!.convertPosition(worldCoordinates, from: nil)
             intersectionNode.position.z += 0.00001
         } else {
             intersectionNode.isHidden = true
@@ -220,7 +226,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
         }
     }
 
-    private func reportIntersectionToDelegate(_ trackingResult: TrackingResult?) {
+    private func reportIntersectionToDelegate(_ trackingResult: WorldTrackingResult?) {
         DispatchQueue.main.async {
             if let trackingResult = trackingResult {
                 let screenPosition = IntersectionUtils.screenPosition(fromUnitPosition: trackingResult.unitPositionInPlane)
@@ -230,5 +236,27 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
-
+    
+    func averageUnitPositionInPlane() -> CGPoint {
+        var averageX = CGFloat(0.0)
+        var averageY = CGFloat(0.0)
+        let elements = self.trackingResultQueue.elements
+        elements.forEach { element in
+            averageX += element.unitPositionInPlane.x
+            averageY += element.unitPositionInPlane.y
+        }
+        let count = elements.count > 0 ? elements.count : 1
+        averageX /= CGFloat(count)
+        averageY /= CGFloat(count)
+        return CGPoint(x: averageX, y: averageY)
+    }
+    
+    func averageWorldCoordinates() -> SCNVector3 {
+        let elements = self.trackingResultQueue.elements
+        var averageVector = elements.reduce(into: SCNVector3(), { (result, next) in
+            result += next.hitTest.worldCoordinates
+        })
+        averageVector /= Float(elements.count)
+        return averageVector
+    }
 }

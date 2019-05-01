@@ -107,7 +107,7 @@ class HotCornersTrackableViewController: UIViewController {
         return controller
     }()
     
-    let trackingView: UIView = UIView()
+    let trackingView = CursorView()
     lazy var screenTrackingViewController: ScreenTrackingViewController = {
         let vc = ScreenTrackingViewController()
         vc.add(to: self)
@@ -123,9 +123,7 @@ class HotCornersTrackableViewController: UIViewController {
         
         self.screenTrackingViewController.show(in: self.view)
         
-        trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 40, height: 40)
-        trackingView.layer.cornerRadius = 20.0
-        trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.8)
+        trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 60, height: 60)
         
         self.hotCornerGroup.add(to: self.parentTrackingEngine)
         self.view.addSubview(trackingView)
@@ -195,5 +193,15 @@ extension HotCornersTrackableViewController: ScreenTrackingViewControllerDelegat
                 self.trackingView.isHidden = true
             }
         }
+    }
+    
+    func didAddFaceNode(for screenTrackingViewController: ScreenTrackingViewController) {
+        self.parentTrackingEngine.isUnlocked = true
+        self.currentTrackingEngine?.isUnlocked = true
+    }
+    
+    func didRemoveFaceNode(for screenTrackingViewController: ScreenTrackingViewController) {
+        self.parentTrackingEngine.isUnlocked = false
+        self.currentTrackingEngine?.isUnlocked = false
     }
 }

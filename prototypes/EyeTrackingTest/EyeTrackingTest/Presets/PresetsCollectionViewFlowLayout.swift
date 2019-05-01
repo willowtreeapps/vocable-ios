@@ -71,10 +71,12 @@ class PresetsCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         while currentIndex < collectionViewCount {
             indexPath = IndexPath(row: currentIndex, section: 0)
-            var cellHeight = self.delegate?.collectionView(collectionView, heightForRow: currentRow) ?? 1.0
+//            var cellHeight = self.delegate?.collectionView(collectionView, heightForRow: currentRow) ?? 1.0
+            let numberOfRows = collectionViewCount / numberOfColumns + (collectionViewCount % numberOfColumns == 0 ? 0 : 1)
+            let cellHeight = ((contentBounds.height - insets.top - insets.bottom) - (rowSpacing * CGFloat(numberOfRows - 1))) / CGFloat(numberOfRows)
             if currentX + cellWidth + insets.right > maxContentWidth {
                 currentRow += 1
-                cellHeight = self.delegate?.collectionView(collectionView, heightForRow: currentRow) ?? 1.0
+//                cellHeight = self.delegate?.collectionView(collectionView, heightForRow: currentRow) ?? 1.0
                 currentY += rowSpacing + cellHeight
                 currentX = insets.left
             }
@@ -96,7 +98,7 @@ class PresetsCollectionViewFlowLayout: UICollectionViewFlowLayout {
             contentHeight += self.rowSpacing
         }
         contentHeight += self.insets.bottom
-        return CGSize(width: contentBounds.width, height: contentHeight)
+        return CGSize(width: contentBounds.width, height: contentBounds.height)
     }
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {

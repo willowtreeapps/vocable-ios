@@ -12,6 +12,12 @@ import ARKit
 
 
 class ViewController: UIViewController, ScreenTrackingViewControllerDelegate {
+    func didAddFaceNode(for screenTrackingViewController: ScreenTrackingViewController) {
+    }
+    
+    func didRemoveFaceNode(for screenTrackingViewController: ScreenTrackingViewController) {
+    }
+    
 
     var showDebug: Bool = true {
         didSet {

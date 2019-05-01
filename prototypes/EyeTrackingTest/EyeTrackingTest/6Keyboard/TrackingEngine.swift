@@ -12,6 +12,16 @@ class TrackingEngine {
     
     var parent: TrackingEngine?
     
+    var isUnlocked: Bool = true {
+        willSet {
+            if self.isUnlocked != newValue {
+                self.trackedViews.forEach { view in
+                    view.isTrackingEnabled = newValue
+                }
+            }
+        }
+    }
+    
     func updateWithTrackedPoint(_ point: CGPoint) -> Bool {
 
         if self.parent?.updateWithTrackedPoint(point) ?? false {
