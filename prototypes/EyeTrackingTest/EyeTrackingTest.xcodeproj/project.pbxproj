@@ -47,6 +47,9 @@
 		13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */; };
 		9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E0542271F0DC0058DF57 /* CursorView.swift */; };
 		9D15E058227211AB0058DF57 /* FixedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E057227211AB0058DF57 /* FixedQueue.swift */; };
+		9D2BB540227A35DA002BB068 /* HotCornerTrackable+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2BB53F227A35DA002BB068 /* HotCornerTrackable+Component.swift */; };
+		9D2BB542227A3AFB002BB068 /* PrettyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2BB541227A3AFB002BB068 /* PrettyExtensions.swift */; };
+		9D2BB544227B3BFF002BB068 /* FaceGestureEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2BB543227B3BFF002BB068 /* FaceGestureEngine.swift */; };
 		9D3FC1F52268B64C003C5841 /* HotCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3FC1F42268B64C003C5841 /* HotCornerView.swift */; };
 		9D3FC1F72268B923003C5841 /* ExpandingAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3FC1F62268B923003C5841 /* ExpandingAnimatable.swift */; };
 		9D5CC0D22270D10100F0E3CF /* HasTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5CC0D12270D10100F0E3CF /* HasTextComponent.swift */; };
@@ -124,6 +127,9 @@
 		13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralInterpolator.swift; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9D15E057227211AB0058DF57 /* FixedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedQueue.swift; sourceTree = "<group>"; };
+		9D2BB53F227A35DA002BB068 /* HotCornerTrackable+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HotCornerTrackable+Component.swift"; sourceTree = "<group>"; };
+		9D2BB541227A3AFB002BB068 /* PrettyExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyExtensions.swift; sourceTree = "<group>"; };
+		9D2BB543227B3BFF002BB068 /* FaceGestureEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceGestureEngine.swift; sourceTree = "<group>"; };
 		9D3FC1F42268B64C003C5841 /* HotCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerView.swift; sourceTree = "<group>"; };
 		9D3FC1F62268B923003C5841 /* ExpandingAnimatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandingAnimatable.swift; sourceTree = "<group>"; };
 		9D5CC0D12270D10100F0E3CF /* HasTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasTextComponent.swift; sourceTree = "<group>"; };
@@ -224,6 +230,7 @@
 				9D3FC1F42268B64C003C5841 /* HotCornerView.swift */,
 				9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */,
 				9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */,
+				9D2BB543227B3BFF002BB068 /* FaceGestureEngine.swift */,
 			);
 			path = 6Keyboard;
 			sourceTree = "<group>";
@@ -312,6 +319,8 @@
 				9D739E0E226F451A00FEFFAC /* UIViewController+Children.swift */,
 				9D739E10226F47C500FEFFAC /* UIStoryboard+ViewControllers.swift */,
 				9D739E12226F5EB700FEFFAC /* String+Utilities.swift */,
+				9D2BB53F227A35DA002BB068 /* HotCornerTrackable+Component.swift */,
+				9D2BB541227A3AFB002BB068 /* PrettyExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -451,6 +460,7 @@
 				9DB58D47226664C500E99C3B /* UIView+Utilities.swift in Sources */,
 				13B715852148464000B3612A /* Constants.swift in Sources */,
 				13DA8E8920DACDB900B19B70 /* VectorUtils.swift in Sources */,
+				9D2BB540227A35DA002BB068 /* HotCornerTrackable+Component.swift in Sources */,
 				9DDF1F01226F66630072A248 /* HotCornerTrackable.swift in Sources */,
 				9D5CC0D22270D10100F0E3CF /* HasTextComponent.swift in Sources */,
 				13C32B86213990EB0090BB7D /* SCNVector4+Extensions.swift in Sources */,
@@ -483,7 +493,9 @@
 				13B1865E2108E8030099D278 /* FaceNode.swift in Sources */,
 				13C32B8A2139A2440090BB7D /* IntersectionPointNode.swift in Sources */,
 				9D739DF9226A01B800FEFFAC /* Eyespeak.xcdatamodeld in Sources */,
+				9D2BB542227A3AFB002BB068 /* PrettyExtensions.swift in Sources */,
 				13FE391C2154166600B6110F /* ClosedRange+UnitSpace.swift in Sources */,
+				9D2BB544227B3BFF002BB068 /* FaceGestureEngine.swift in Sources */,
 				13B71583214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift in Sources */,
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
 				9DDF1EFF226F654B0072A248 /* HotCornerGazeableComponent.swift in Sources */,
@@ -651,7 +663,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y32EQUAEWX;
 				INFOPLIST_FILE = "$(SRCROOT)/EyeTrackingTest/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -670,7 +682,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y32EQUAEWX;
 				INFOPLIST_FILE = "$(SRCROOT)/EyeTrackingTest/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

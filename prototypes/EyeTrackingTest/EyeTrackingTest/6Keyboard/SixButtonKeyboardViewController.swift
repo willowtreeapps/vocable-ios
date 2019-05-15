@@ -14,6 +14,7 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
     struct Constants {
         static let cornerRadius = CGFloat(5.0)
         static let borderWidth = CGFloat(3.0)
+        static let textFieldInsets = UIEdgeInsets(value: 4.0)
     }
     
     var component: HotCornerGazeableComponent?
@@ -96,8 +97,8 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
         }
 
         values.append(.space)
-        values.append(.character("."))
-        values.append(.character(","))
+        values.append(.character(.period))
+        values.append(.character(.comma))
 
         return values
     }()
@@ -168,8 +169,8 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
         
         self.adjustsFontSize()
         self.configureInitialState()
-        self.backButton.setTitle("\u{2190} bksp", for: .normal)
-        self.textfield.textContainerInset = UIEdgeInsets(top: 4.0, left: 4.0, bottom: 0.0, right: 0.0)
+        self.backButton.setTitle(.backspaceWithUnicode, for: .normal)
+        self.textfield.textContainerInset = Constants.textFieldInsets
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -190,12 +191,8 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
         super.viewDidAppear(animated)
         let textBoxHeight = self.textfield.frame.height
         textfield.font = UIFont.systemFont(ofSize: textBoxHeight / 2.8)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.segueValue == .presetsSegue {
-            // prepare the segue
-        }
+        self.textfield.runCursor()
+        self.textfield.changeCursorPoint()
     }
     
     private func adjustsFontSize() {
@@ -212,12 +209,12 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
     private func configureInitialState() {
         self.configureOnGazes()
         self.configureHoverStateColors()
-        self.configureTextPredictiveState(for: self.textPrediction1Button, withValue: "")
-        self.configureTextPredictiveState(for: self.textPrediction2Button, withValue: "")
-        self.configureTextPredictiveState(for: self.textPrediction3Button, withValue: "")
-        self.configureTextPredictiveState(for: self.textPrediction4Button, withValue: "")
-        self.configureTextPredictiveState(for: self.textPrediction5Button, withValue: "")
-        self.configureTextPredictiveState(for: self.textPrediction6Button, withValue: "")
+        self.configureTextPredictiveState(for: self.textPrediction1Button, withValue: .empty)
+        self.configureTextPredictiveState(for: self.textPrediction2Button, withValue: .empty)
+        self.configureTextPredictiveState(for: self.textPrediction3Button, withValue: .empty)
+        self.configureTextPredictiveState(for: self.textPrediction4Button, withValue: .empty)
+        self.configureTextPredictiveState(for: self.textPrediction5Button, withValue: .empty)
+        self.configureTextPredictiveState(for: self.textPrediction6Button, withValue: .empty)
         
         self.textPredictionTrackingGroup.isTrackingEnabled = false
         for view in self.interactiveViews {
@@ -265,6 +262,7 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
         self.clearButton.hoverBorderColor = .clearButtonHoverBorderColor
         self.textfield.animationViewColor = .speakBoxHoverColor
         self.textfield.hoverBorderColor = .speakBoxHoverBorderColor
+        
         self.topHalfWidgets.forEach { widget in
             widget.textComponentTextColor = .mainTextColor
         }
@@ -278,7 +276,7 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
 extension SixButtonKeyboardViewController: TextExpressionDelegate {
     func textExpression(_ expression: TextExpression, valueChanged value: String) {
         DispatchQueue.main.async {
-            self.textfield.textComponentText = expression.value
+            self.textfield.text = expression.value
             self.textPredictionController.updateState(withTextExpression: expression)
         }
     }

@@ -37,7 +37,7 @@ extension UIViewController: StoryboardIdentifiable {
 }
 
 extension StoryboardIdentifiable where Self: UIViewController {
-    static func get(from storyboard: Storyboard, bundle: Bundle? = nil) -> Self {
+    static func get(fromStoryboard storyboard: Storyboard, bundle: Bundle? = nil) -> Self {
         return UIStoryboard.get(storyboard: storyboard, bundle: bundle).instantiateViewController(withIdentifier: Self.storyboardIdentifier) as! Self
     }
 }

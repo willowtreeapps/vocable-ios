@@ -9,6 +9,10 @@
 import UIKit
 
 class HotCornersTrackableViewController: UIViewController {
+    struct Constants {
+        static let hotCornerSize = CGSize(width: 48, height: 48)
+        static let trackingViewSize = CGSize(width: 60, height: 60)
+    }
     
     let parentTrackingEngine = TrackingEngine()
     var currentTrackingEngine: TrackingEngine? {
@@ -43,33 +47,33 @@ class HotCornersTrackableViewController: UIViewController {
     }
     
     lazy var upperLeftHotCorner: HotCornerView = {
-        let view = HotCornerView()
+        let view = HotCornerView(location: .upperLeft)
         self.view.addSubview(view)
-        view.frame = CGRect(origin: .zero, size: CGSize(width: 48.0, height: 48.0))
+        view.frame = CGRect(origin: .zero, size: Constants.hotCornerSize)
         view.alpha = 0.0
         return view
     }()
     
     lazy var upperRightHotCorner: HotCornerView = {
-        let view = HotCornerView()
+        let view = HotCornerView(location: .upperRight)
         self.view.addSubview(view)
-        view.frame = CGRect(origin: .zero, size: CGSize(width: 48.0, height: 48.0))
+        view.frame = CGRect(origin: .zero, size: Constants.hotCornerSize)
         view.alpha = 0.0
         return view
     }()
     
     lazy var lowerLeftHotCorner: HotCornerView = {
-        let view = HotCornerView()
+        let view = HotCornerView(location: .lowerLeft)
         self.view.addSubview(view)
-        view.frame = CGRect(origin: .zero, size: CGSize(width: 48.0, height: 48.0))
+        view.frame = CGRect(origin: .zero, size: Constants.hotCornerSize)
         view.alpha = 0.0
         return view
     }()
     
     lazy var lowerRightHotCorner: HotCornerView = {
-        let view = HotCornerView()
+        let view = HotCornerView(location: .lowerRight)
         self.view.addSubview(view)
-        view.frame = CGRect(origin: .zero, size: CGSize(width: 48.0, height: 48.0))
+        view.frame = CGRect(origin: .zero, size: Constants.hotCornerSize)
         view.alpha = 0.0
         return view
     }()
@@ -82,28 +86,24 @@ class HotCornersTrackableViewController: UIViewController {
     )
     
     lazy var sixButtonKeyboardViewController: SixButtonKeyboardViewController = {
-        let controller = SixButtonKeyboardViewController.get(from: .sixButtonKeyboardViewController)
-        controller.add(to: self)
         var component = HotCornerGazeableComponent()
         component.onUpperLeftGaze = { _ in
-            controller.hideFromParentViewController()
-            self.presetsViewController.show(in: self.containerView)
-            self.configure(with: self.presetsViewController)
+            self.showPresetsViewController()
         }
-        controller.component = component
+        component.upperLeftTitle = "Presets"
+        let controller = SixButtonKeyboardViewController.get(fromStoryboard: .sixButtonKeyboardViewController, component: component)
+        controller.add(to: self)
         return controller
     }()
     
     lazy var presetsViewController: PresetsViewController = {
-        let controller = PresetsViewController.get(from: .presets)
-        controller.add(to: self)
         var component = HotCornerGazeableComponent()
         component.onUpperLeftGaze = { _ in
-            controller.hideFromParentViewController()
-            self.sixButtonKeyboardViewController.show(in: self.containerView)
-            self.configure(with: self.sixButtonKeyboardViewController)
+            self.showSixButtonKeyboardViewController()
         }
-        controller.component = component
+        component.upperLeftTitle = "Back"
+        let controller = PresetsViewController.get(fromStoryboard: .presets, component: component)
+        controller.add(to: self)
         return controller
     }()
     
@@ -123,7 +123,7 @@ class HotCornersTrackableViewController: UIViewController {
         
         self.screenTrackingViewController.show(in: self.view)
         
-        trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 60, height: 60)
+        trackingView.frame = CGRect(origin: .zero, size: Constants.trackingViewSize)
         
         self.hotCornerGroup.add(to: self.parentTrackingEngine)
         self.view.addSubview(trackingView)
@@ -170,14 +170,42 @@ class HotCornersTrackableViewController: UIViewController {
     
     func configure(with trackable: HotCornerTrackable) {
         self.currentTrackingEngine = trackable.trackingEngine
+        self.currentTrackingEngine?.isUnlocked = true
         self.upperLeftHotCorner.onGaze = trackable.component?.onUpperLeftGaze
         self.upperRightHotCorner.onGaze = trackable.component?.onUpperRightGaze
         self.lowerLeftHotCorner.onGaze = trackable.component?.onLowerLeftGaze
         self.lowerRightHotCorner.onGaze = trackable.component?.onLowerRightGaze
+        self.upperLeftHotCorner.text = trackable.component?.upperLeftTitle
+        self.upperRightHotCorner.text = trackable.component?.upperRightTitle
+        self.lowerLeftHotCorner.text = trackable.component?.lowerLeftTitle
+        self.lowerRightHotCorner.text = trackable.component?.lowerRightTitle
+    }
+    
+    func showSixButtonKeyboardViewController() {
+        self.presetsViewController.hideFromParentViewController()
+        self.sixButtonKeyboardViewController.show(in: self.containerView)
+        self.configure(with: self.sixButtonKeyboardViewController)
+    }
+    
+    func showPresetsViewController() {
+        self.sixButtonKeyboardViewController.hideFromParentViewController()
+        self.presetsViewController.show(in: self.containerView)
+        self.configure(with: self.presetsViewController)
     }
 }
 
 extension HotCornersTrackableViewController: ScreenTrackingViewControllerDelegate {
+    func didGestureForCalibration() {
+        // do stuff here
+        self.currentTrackingEngine?.isUnlocked = false
+        self.parentTrackingEngine.isUnlocked = false
+    }
+    
+    func didFinishCalibrationGesture() {
+        self.currentTrackingEngine?.isUnlocked = true
+        self.parentTrackingEngine.isUnlocked = true
+    }
+    
     func didUpdateTrackedPosition(_ trackedPositionOnScreen: CGPoint?, for screenTrackingViewController: ScreenTrackingViewController) {
         DispatchQueue.main.async {
             if let position = trackedPositionOnScreen {
@@ -193,15 +221,5 @@ extension HotCornersTrackableViewController: ScreenTrackingViewControllerDelegat
                 self.trackingView.isHidden = true
             }
         }
-    }
-    
-    func didAddFaceNode(for screenTrackingViewController: ScreenTrackingViewController) {
-        self.parentTrackingEngine.isUnlocked = true
-        self.currentTrackingEngine?.isUnlocked = true
-    }
-    
-    func didRemoveFaceNode(for screenTrackingViewController: ScreenTrackingViewController) {
-        self.parentTrackingEngine.isUnlocked = false
-        self.currentTrackingEngine?.isUnlocked = false
     }
 }

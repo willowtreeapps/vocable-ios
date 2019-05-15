@@ -15,9 +15,9 @@ extension UIColor {
     }
     
     static let animatingColor = UIColor(rgbRed: 126, green: 116, blue: 227, alpha: 0.2)
-    static let appBackgroundColor = UIColor(rgbRed: 248, green: 248, blue: 248, alpha: 1.0)
+    static let appBackgroundColor = UIColor(rgbRed: 255, green: 255, blue: 255, alpha: 1.0)
     
-    static let hotCornerColor = UIColor(rgbRed: 113, green: 101, blue: 225, alpha: 0.9)
+    static let hotCornerColor = UIColor(rgbRed: 115, green: 0, blue: 225, alpha: 0.9)
     static let textPredictiveColor = UIColor.hotCornerColor.withAlphaComponent(1.0)
     static let mainHoverBorderColor = UIColor.textPredictiveColor
     
