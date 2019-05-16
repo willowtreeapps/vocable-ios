@@ -12,6 +12,7 @@ class HotCornersTrackableViewController: UIViewController {
     struct Constants {
         static let hotCornerSize = CGSize(width: 48, height: 48)
         static let trackingViewSize = CGSize(width: 60, height: 60)
+        static let initialHotCornerBounds = CGRect(origin: CGPoint(x: -24, y: -24), size: Constants.hotCornerSize)
     }
     
     let parentTrackingEngine = TrackingEngine()
@@ -50,6 +51,7 @@ class HotCornersTrackableViewController: UIViewController {
         let view = HotCornerView(location: .upperLeft)
         self.view.addSubview(view)
         view.frame = CGRect(origin: .zero, size: Constants.hotCornerSize)
+        view.bounds = Constants.initialHotCornerBounds
         view.alpha = 0.0
         return view
     }()
@@ -58,6 +60,7 @@ class HotCornersTrackableViewController: UIViewController {
         let view = HotCornerView(location: .upperRight)
         self.view.addSubview(view)
         view.frame = CGRect(origin: .zero, size: Constants.hotCornerSize)
+        view.bounds = Constants.initialHotCornerBounds
         view.alpha = 0.0
         return view
     }()
@@ -66,6 +69,7 @@ class HotCornersTrackableViewController: UIViewController {
         let view = HotCornerView(location: .lowerLeft)
         self.view.addSubview(view)
         view.frame = CGRect(origin: .zero, size: Constants.hotCornerSize)
+        view.bounds = Constants.initialHotCornerBounds
         view.alpha = 0.0
         return view
     }()
@@ -74,6 +78,7 @@ class HotCornersTrackableViewController: UIViewController {
         let view = HotCornerView(location: .lowerRight)
         self.view.addSubview(view)
         view.frame = CGRect(origin: .zero, size: Constants.hotCornerSize)
+        view.bounds = Constants.initialHotCornerBounds
         view.alpha = 0.0
         return view
     }()
@@ -91,6 +96,9 @@ class HotCornersTrackableViewController: UIViewController {
             self.showPresetsViewController()
         }
         component.upperLeftTitle = "Presets"
+        component.upperRightTitle = "Sample"
+        component.lowerLeftTitle = "Sample"
+        component.lowerRightTitle = "Sample"
         let controller = SixButtonKeyboardViewController.get(fromStoryboard: .sixButtonKeyboardViewController, component: component)
         controller.add(to: self)
         return controller
@@ -102,6 +110,9 @@ class HotCornersTrackableViewController: UIViewController {
             self.showSixButtonKeyboardViewController()
         }
         component.upperLeftTitle = "Back"
+        component.upperRightTitle = "BackSample"
+        component.lowerLeftTitle = "BackSample"
+        component.lowerRightTitle = "BackSample"
         let controller = PresetsViewController.get(fromStoryboard: .presets, component: component)
         controller.add(to: self)
         return controller

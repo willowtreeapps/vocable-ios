@@ -20,7 +20,7 @@ enum ExpandingAnimatableState {
 }
 
 struct ExpandingAnimatableComponent {
-    fileprivate var _beforeAnimationSize: CGSize = .zero
+    fileprivate var _beforeAnimationBounds: CGRect = .zero
     fileprivate var _animatableState: ExpandingAnimatableState = .idle
     fileprivate var _isTrackingEnabled: Bool = false
 }
@@ -35,11 +35,11 @@ protocol ExpandingAnimatable: class {
 }
 
 extension ExpandingAnimatable where Self: HotCornerView {
-    fileprivate var beforeAnimationSize: CGSize {
+    fileprivate var beforeAnimationBounds: CGRect {
         get {
-            return self.animatableComponent._beforeAnimationSize
+            return self.animatableComponent._beforeAnimationBounds
         } set {
-            self.animatableComponent._beforeAnimationSize = newValue
+            self.animatableComponent._beforeAnimationBounds = newValue
         }
     }
     fileprivate var animatableState: ExpandingAnimatableState {
@@ -54,14 +54,12 @@ extension ExpandingAnimatable where Self: HotCornerView {
         if self.isTrackingEnabled && self.animatableState == .idle {
             self.isTrackingEnabled = false
             self.animatableState = .expanding
-            self.beforeAnimationSize = self.frame.size
-            let center = self.center
-            let newWidth = self.beforeAnimationSize.width * self.expandingScale
-            let newHeight = self.beforeAnimationSize.height * self.expandingScale
+            self.beforeAnimationBounds = self.bounds
+            let newSize = self.beforeAnimationBounds.size.multiply(by: self.expandingScale)
+            let newOrigin = self.beforeAnimationBounds.origin.multiply(by: self.expandingScale)
             self.willExpand()
             UIView.animate(withDuration: self.animationSpeed, animations:  {
-                self.frame = CGRect(origin: .zero, size: CGSize(width: newWidth, height: newHeight))
-                self.center = center
+                self.bounds = CGRect(origin: newOrigin, size: newSize)
                 self.onExpand()
                 
             }, completion: { finished in
@@ -75,11 +73,9 @@ extension ExpandingAnimatable where Self: HotCornerView {
     func cancelAnimation() {
         if self.animatableState.isGazing {
             self.animatableState = .shrinking
-            let center = self.center
             self.willCollapse()
             UIView.animate(withDuration: 1.0, animations: {
-                self.frame = CGRect(origin: .zero, size: self.beforeAnimationSize)
-                self.center = center
+                self.bounds = self.beforeAnimationBounds
                 self.onCollapse()
             }, completion: { finished in
                 if self.animatableState == .shrinking && finished {

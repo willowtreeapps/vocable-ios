@@ -15,6 +15,22 @@ enum HotCornerViewLocation {
     case lowerRight
     case unknown
     
+    var isUpper: Bool {
+        return self == .upperLeft || self == .upperRight
+    }
+    
+    var isLower: Bool {
+        return self == .lowerLeft || self == .lowerRight
+    }
+    
+    var isLeft: Bool {
+        return self == .upperLeft || self == .lowerLeft
+    }
+    
+    var isRight: Bool {
+        return self == .upperRight || self == .lowerRight
+    }
+    
     var coordinateSystem: (x: CGFloat, y: CGFloat) {
         switch self {
         case .upperLeft: return (1.0, 1.0)
@@ -46,7 +62,7 @@ class HotCornerView: TrackingView, ExpandingAnimatable {
     struct Constants {
         static let expandingScale = CGFloat(10.0)
         static let animationSpeed = TimeInterval(1.0)
-        static let textLabelOriginOffset = (x: CGFloat(20), y: CGFloat(20))
+        static let textLabelOriginOffset = (x: CGFloat(30), y: CGFloat(30))
     }
     
     var isTrackingEnabled: Bool = true
@@ -65,16 +81,42 @@ class HotCornerView: TrackingView, ExpandingAnimatable {
         }
     }
     
+    override var bounds: CGRect {
+        didSet {
+            self.layer.cornerRadius = self.bounds.height / 2.0
+        }
+    }
+    
     func add(to engine: TrackingEngine) {
         engine.registerView(self)
     }
     
-    var text: String?
+    var text: String? {
+        didSet {
+            self.textLabel.text = self.text
+            self.textLabel.sizeToFit()
+            self.textLabel.setNeedsLayout()
+        }
+    }
     lazy var textLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
+        label.alpha = 0.0
+        self.addSubview(label)
         return label
     }()
+    
+    var textOffsetOrigin: CGPoint {
+        var newXOffset = Constants.textLabelOriginOffset.x * self.location.coordinateSystem.x
+        var newYOffset = Constants.textLabelOriginOffset.y * self.location.coordinateSystem.y
+        if self.location.isLower {
+            newYOffset = newYOffset - self.textLabel.frame.height
+        }
+        if self.location.isRight {
+            newXOffset = newXOffset - self.textLabel.frame.width
+        }
+        return CGPoint(x: newXOffset, y: newYOffset)
+    }
     
     init(location: HotCornerViewLocation) {
         self.location = location
@@ -94,52 +136,13 @@ class HotCornerView: TrackingView, ExpandingAnimatable {
         self.layoutIfNeeded()
     }
     
-    func expandedStateLabelOrigin() -> CGPoint {
-        let center = self.convert(self.center, from: self.superview)
-        let coordinateSystem = self.location.coordinateSystem
-        let offsetX = center.x + (coordinateSystem.x * Constants.textLabelOriginOffset.x)
-        let offsetY = center.y + (coordinateSystem.y * Constants.textLabelOriginOffset.y)
-        return CGPoint(x: offsetX, y: offsetY)
-        
-    }
-    
-    func convertLabelOriginPointToSuperview() -> CGPoint {
-        let idleCenter = self.center
-        let coordinateSystem = self.location.coordinateSystem
-        let offsetX = idleCenter.x + (coordinateSystem.x * Constants.textLabelOriginOffset.x)
-        let offsetY = idleCenter.y + (coordinateSystem.y * Constants.textLabelOriginOffset.y)
-        return CGPoint(x: offsetX, y: offsetY)
-    }
-    
-    func moveTextLabelToSuperview() {
-        self.textLabel.removeFromSuperview()
-        self.textLabel.frame.origin = self.convertLabelOriginPointToSuperview()
-        self.superview?.addSubview(self.textLabel)
-    }
-    
-    func moveTextLabelToSelf() {
-        self.textLabel.removeFromSuperview()
-        self.textLabel.frame.origin = self.expandedStateLabelOrigin()
-        self.addSubview(self.textLabel)
-    }
-    
     func willExpand() {
-        self.moveTextLabelToSuperview()
-        self.textLabel.alpha = 0.0
-        self.textLabel.text = self.text
-        self.textLabel.sizeToFit()
-    }
-    
-    func onExpand() {
-        self.moveTextLabelToSelf()
         self.textLabel.alpha = 1.0
+        self.textLabel.frame = CGRect(origin: self.textOffsetOrigin, size: self.frame.size)
+        self.textLabel.sizeToFit()
+        self.textLabel.setNeedsLayout()
     }
-    
-    func willCollapse() {
-        self.moveTextLabelToSuperview()
-    }
-    
-    func onCollapse() {
-        self.textLabel.alpha = 0.0
-    }
+    func onExpand() {}
+    func willCollapse() {}
+    func onCollapse() {}
 }

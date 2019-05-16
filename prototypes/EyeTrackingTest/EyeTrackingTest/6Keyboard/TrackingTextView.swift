@@ -13,8 +13,10 @@ class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
         static let animationSpeed = TimeInterval(1.0)
         static let cursorColor = UIColor.black
         static let startingCursorOrigin = CGPoint(x: 8, y: 0)
-        static let cursorSize = CGSize(width: 2, height: 20)
+        static let cursorWidth = CGFloat(2.0)
+        static let cursorDefaultHeight = CGFloat(16.0)
         static let cursorAnimationDuration = TimeInterval(0.5)
+        static let cursorOffset = CGFloat(2.0)
     }
     var hoverBorderColor: UIColor?
     var isTrackingEnabled: Bool = true
@@ -51,10 +53,16 @@ class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
     
     lazy var cursor: UIView = {
         let view = UIView()
-        view.frame = CGRect(origin: Constants.startingCursorOrigin, size: Constants.cursorSize)
+        view.frame = CGRect(origin: Constants.startingCursorOrigin, size: self.cursorSize)
         self.addSubview(view)
         return view
     }()
+    
+    var cursorSize: CGSize {
+        let width = Constants.cursorWidth
+        let height = self.font?.lineHeight ?? Constants.cursorDefaultHeight
+        return CGSize(width: width, height: height)
+    }
     
     func runCursor() {
         self.layer.removeAllAnimations()
@@ -70,7 +78,8 @@ class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
             let position = self.offset(from: self.beginningOfDocument, to: range)
             print("Position: \(position)")
             let rect = self.caretRect(for: range)
-            self.cursor.frame.origin = rect.origin
+            self.cursor.frame.size = self.cursorSize
+            self.cursor.frame.origin = CGPoint(x: rect.origin.x + Constants.cursorOffset, y: rect.origin.y)
             print(rect)
         }
     }
