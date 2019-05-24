@@ -13,4 +13,8 @@ struct HotCornerGazeableComponent {
     var onUpperRightGaze: ((Int?) -> Void)?
     var onLowerLeftGaze: ((Int?) -> Void)?
     var onLowerRightGaze: ((Int?) -> Void)?
+    var upperLeftTitle: String?
+    var upperRightTitle: String?
+    var lowerLeftTitle: String?
+    var lowerRightTitle: String?
 }

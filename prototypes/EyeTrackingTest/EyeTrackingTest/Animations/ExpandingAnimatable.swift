@@ -20,39 +20,50 @@ enum ExpandingAnimatableState {
 }
 
 struct ExpandingAnimatableComponent {
-    init(isTrackingEnabled: Bool) {
-        self._isTrackingEnabled = isTrackingEnabled
-    }
-    fileprivate var _isTrackingEnabled: Bool = true
+    fileprivate var _beforeAnimationBounds: CGRect = .zero
+    fileprivate var _animatableState: ExpandingAnimatableState = .idle
+    fileprivate var _isTrackingEnabled: Bool = false
 }
 
 protocol ExpandingAnimatable: class {
     var expandingScale: CGFloat { get set }
-    var animatableState: ExpandingAnimatableState { get set }
     var animatableComponent: ExpandingAnimatableComponent { get set }
+    func willExpand()
+    func onExpand()
+    func willCollapse()
+    func onCollapse()
 }
 
 extension ExpandingAnimatable where Self: TrackingView {
-    var isTrackingEnabled: Bool {
+    fileprivate var beforeAnimationBounds: CGRect {
         get {
-            return self.animatableComponent._isTrackingEnabled && self.animatableState == .idle
-        }
-        set {
-            self.animatableComponent._isTrackingEnabled = newValue
+            return self.animatableComponent._beforeAnimationBounds
+        } set {
+            self.animatableComponent._beforeAnimationBounds = newValue
         }
     }
+    fileprivate var animatableState: ExpandingAnimatableState {
+        get {
+            return self.animatableComponent._animatableState
+        } set {
+            self.animatableComponent._animatableState = newValue
+        }
+    }
+    
     func animateGaze() {
-        print("animateGaze")
-        if self.animatableState == .idle {
-            print("Expanding")
+        if self.isTrackingEnabled && self.animatableState == .idle {
             self.isTrackingEnabled = false
             self.animatableState = .expanding
+            self.beforeAnimationBounds = self.bounds
+            let newSize = self.beforeAnimationBounds.size.multiply(by: self.expandingScale)
+            let newOrigin = self.beforeAnimationBounds.origin.multiply(by: self.expandingScale)
+            self.willExpand()
             UIView.animate(withDuration: self.animationSpeed, animations:  {
-                print("Inside expanding animation")
-                self.transform = CGAffineTransform(scaleX: self.expandingScale, y: self.expandingScale)
+                self.bounds = CGRect(origin: newOrigin, size: newSize)
+                self.onExpand()
+                
             }, completion: { finished in
                 if self.animatableState == .expanding && finished {
-                    print("Expanded")
                     self.animatableState = .expanded
                 }
             })
@@ -60,16 +71,14 @@ extension ExpandingAnimatable where Self: TrackingView {
     }
     
     func cancelAnimation() {
-        print("cancelAnimation")
         if self.animatableState.isGazing {
-            print("Shrinking")
             self.animatableState = .shrinking
+            self.willCollapse()
             UIView.animate(withDuration: 1.0, animations: {
-                print("Inside cancel animation")
-                self.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                self.bounds = self.beforeAnimationBounds
+                self.onCollapse()
             }, completion: { finished in
                 if self.animatableState == .shrinking && finished {
-                    print("Idle")
                     self.animatableState = .idle
                     self.isTrackingEnabled = true
                 }

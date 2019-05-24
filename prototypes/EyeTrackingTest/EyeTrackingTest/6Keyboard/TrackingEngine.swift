@@ -11,7 +11,6 @@ import UIKit
 class TrackingEngine {
     
     var parent: TrackingEngine?
-    
     var isUnlocked: Bool = true {
         willSet {
             if self.isUnlocked != newValue {
@@ -60,6 +59,7 @@ class TrackingEngine {
 
     func registerView(_ view: TrackingView) {
         self.trackedViews.append(view)
+        view.isTrackingEnabled = self.isUnlocked
     }
     
     func applyToEach(_ completion: (TrackingView) -> Void) {

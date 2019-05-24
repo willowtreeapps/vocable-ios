@@ -9,6 +9,12 @@
 import UIKit
 
 class TrackingButton: UIButton, TrackableWidget, CircularAnimatable {
+    var statelessBorderColor: UIColor? {
+        didSet {
+            self.layer.borderColor = self.statelessBorderColor?.cgColor
+        }
+    }
+    
     var hoverBorderColor: UIColor?
     var isTrackingEnabled: Bool = true
     var animationSpeed: TimeInterval = 1.0
@@ -25,7 +31,6 @@ class TrackingButton: UIButton, TrackableWidget, CircularAnimatable {
     
     lazy var animationView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.animatingColor
         self.addSubview(view)
         self.sendSubviewToBack(view)
         return view

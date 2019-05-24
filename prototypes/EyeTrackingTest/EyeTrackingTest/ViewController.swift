@@ -12,13 +12,14 @@ import ARKit
 
 
 class ViewController: UIViewController, ScreenTrackingViewControllerDelegate {
-    func didAddFaceNode(for screenTrackingViewController: ScreenTrackingViewController) {
+    func didGestureForCalibration() {
+        // do stuff 
     }
     
-    func didRemoveFaceNode(for screenTrackingViewController: ScreenTrackingViewController) {
+    func didFinishCalibrationGesture() {
+        // do stuff
     }
     
-
     var showDebug: Bool = true {
         didSet {
             DispatchQueue.main.async {

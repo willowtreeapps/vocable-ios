@@ -9,7 +9,13 @@
 import UIKit
 
 class TrackingCollectionViewCell: UICollectionViewCell, TrackableWidget, CircularAnimatable {
-    var hoverBorderColor: UIColor? = .speakBoxHoverBorderColor
+    var statelessBorderColor: UIColor? {
+        didSet {
+            self.layer.borderColor = self.statelessBorderColor?.cgColor
+        }
+    }
+    
+    var hoverBorderColor: UIColor?
     var parent: TrackableWidget?
     var id: Int?
     var gazeableComponent = GazeableTrackingComponent()
@@ -23,11 +29,16 @@ class TrackingCollectionViewCell: UICollectionViewCell, TrackableWidget, Circula
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.statelessBorderColor = .mainWidgetBorderColor
+    }
+    
     lazy var animationView: UIView = {
         let view = UIView()
         self.addSubview(view)
         self.sendSubviewToBack(view)
-        view.backgroundColor = .speakBoxHoverColor
+        view.backgroundColor = .keyboardBloom
         return view
     }()
     

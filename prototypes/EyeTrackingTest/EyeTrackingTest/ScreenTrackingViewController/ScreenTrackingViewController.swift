@@ -23,6 +23,14 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
     var showDebug: Bool = true {
         didSet { self.updateSceneConfiguration() }
     }
+    
+    let faceGestureEngine = FaceGestureEngine()
+    
+    lazy var calibarationView: UIView = {
+        let view = UIView(frame: self.view.frame)
+        view.backgroundColor = .black
+        return view
+    }()
 
 
     // MARK: - Init
@@ -40,7 +48,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     private let sceneView = ARSCNView(frame: CGRect.zero)
     
-    let trackingResultQueue = FixedQueue<TrackingResult>(maxSize: 5)
+    let trackingResultQueue = FixedQueue<TrackingResult>(maxSize: 10)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +59,16 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
         self.sceneView.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
         self.sceneView.frame = self.view.bounds
         self.view.addSubview(self.sceneView)
-
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(calibrate))
-        self.view.addGestureRecognizer(tapGesture)
+        
+        let eyesGesture = EyesBlinkGesture(requiredGestures: 2)
+        eyesGesture.onGesture = {
+            print("Blink Gesture Activated")
+            DispatchQueue.main.async {
+                self.delegate?.didGestureForCalibration()
+                self.calibrate()
+            }
+        }
+        self.faceGestureEngine.gestures.append(eyesGesture)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -151,10 +166,11 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     var calibrationVectors: [SCNVector3] = []
 
-    @objc private func calibrate() {
+    private func calibrate() {
         self.sceneMode = .calibrating
         self.calibrationVectors.removeAll()
-
+        self.view.addSubview(self.calibarationView)
+        self.calibarationView.frame = self.view.frame
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             var averageVector = self.calibrationVectors.reduce(into: SCNVector3(), { (result, next) in
                 result += next
@@ -164,6 +180,8 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
             let convertedVector = self.sceneView.scene.rootNode.convertPosition(averageVector, to: self.containerNode)
             self.hitTestPlane.position = convertedVector
             self.sceneMode = .tracking
+            self.delegate?.didFinishCalibrationGesture()
+            self.calibarationView.removeFromSuperview()
         }
     }
 
@@ -193,6 +211,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
                 calibrationVectors.append(faceVector)
 
             case .tracking:
+                self.faceGestureEngine.update(withAnchor: faceAnchor)
                 let trackingResult = self.hitTestPlane.track(faceAnchor: faceAnchor)
                 self.trackingResultQueue.add(element: trackingResult)
                 let averageUnitPositionInPlane = self.averageUnitPositionInPlane()

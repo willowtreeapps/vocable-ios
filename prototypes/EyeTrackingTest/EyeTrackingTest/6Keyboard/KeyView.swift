@@ -66,9 +66,9 @@ enum KeyViewValue {
     var largeDisplayBackgroundColor: UIColor {
         switch self {
         case .back:
-            return .backButtonBackgroundColor
+            return .backKeyboardFill
         default:
-            return KeyView.Constants.normalBackgroundColor
+            return .keyboardFill
         }
     }
     
@@ -88,6 +88,12 @@ enum KeyModel {
 }
 
 class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
+    var statelessBorderColor: UIColor? {
+        didSet {
+            self.layer.borderColor = self.statelessBorderColor?.cgColor
+        }
+    }
+    
     var hoverBorderColor: UIColor?
     var isTrackingEnabled: Bool = true
     var animationSpeed: TimeInterval = 1.0
@@ -98,14 +104,11 @@ class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
     
     lazy var animationView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.animatingColor
-        self.addSubview(view)
+        view.backgroundColor = UIColor.keyboardBloom
+        self.contentView.addSubview(view)
+        self.contentView.sendSubviewToBack(view)
         return view
     }()
-    
-    struct Constants {
-        static let normalBackgroundColor = UIColor.appBackgroundColor
-    }
     
     @IBOutlet var singleValueLabel: UILabel!
 
@@ -125,9 +128,15 @@ class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
             label.adjustsFontSizeToFitWidth = true
         }
         self.singleValueLabel.adjustsFontSizeToFitWidth = true
-        self.contentView.backgroundColor = Constants.normalBackgroundColor
+        self.contentView.backgroundColor = .keyboardFill
         self.singleValueLabel.textColor = .mainTextColor
-        self.optionLabels.forEach { $0.textColor = .mainTextColor }
+        self.statelessBorderColor = UIColor.clear
+        self.singleValueLabel.backgroundColor = .clear
+        self.optionLabels.forEach {
+            $0.textColor = .mainTextColor
+            $0.backgroundColor = .clear
+        }
+        self.hoverBorderColor = UIColor.keyboardBorderHover
     }
 
     func configure(with keyModel: KeyModel) {
@@ -141,7 +150,7 @@ class KeyView: NibBackView, TrackableWidget, CircularAnimatable {
 
         case .options(let options):
             self.singleValueLabel.isHidden = true
-            self.contentView.backgroundColor = Constants.normalBackgroundColor
+            self.contentView.backgroundColor = .keyboardFill
             self.optionLabels.forEach { $0.isHidden = false }
             self.topLeftOption.textComponentText = options.topLeft?.smallDisplay
             self.topCenterOption.textComponentText = options.topCenter?.smallDisplay
