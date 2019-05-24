@@ -8,20 +8,9 @@
 
 import UIKit
 
-enum ExpandingAnimatableState {
-    case idle
-    case shrinking
-    case expanding
-    case expanded
-    
-    var isGazing: Bool {
-        return self == .expanding || self == .expanded
-    }
-}
-
 struct ExpandingAnimatableComponent {
     fileprivate var _beforeAnimationBounds: CGRect = .zero
-    fileprivate var _animatableState: ExpandingAnimatableState = .idle
+    fileprivate var _animatableState: AnimatingState = .idle
     fileprivate var _isTrackingEnabled: Bool = false
 }
 
@@ -42,7 +31,7 @@ extension ExpandingAnimatable where Self: TrackingView {
             self.animatableComponent._beforeAnimationBounds = newValue
         }
     }
-    fileprivate var animatableState: ExpandingAnimatableState {
+    fileprivate var animatableState: AnimatingState {
         get {
             return self.animatableComponent._animatableState
         } set {
