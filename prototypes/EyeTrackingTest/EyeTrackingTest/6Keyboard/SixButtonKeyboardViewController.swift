@@ -181,7 +181,6 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
             if let _ = trackingView as? HotCornerView {} else {
                 trackingView.layer.cornerRadius = Constants.cornerRadius
                 trackingView.clipsToBounds = true
-                trackingView.layer.borderColor = UIColor.mainWidgetBorderColor.cgColor
                 trackingView.layer.borderWidth = Constants.borderWidth
             }
         }
@@ -208,7 +207,15 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
     
     private func configureInitialState() {
         self.configureOnGazes()
-        self.configureHoverStateColors()
+        self.configureTextBoxStyle()
+        self.configureBackspaceStyle()
+        self.configureClearStyle()
+        self.configureTextPredictiveStyle()
+        
+        for widget in self.topHalfWidgets {
+            widget.textComponentTextColor = .mainTextColor
+        }
+        
         self.configureTextPredictiveState(for: self.textPrediction1Button, withValue: .empty)
         self.configureTextPredictiveState(for: self.textPrediction2Button, withValue: .empty)
         self.configureTextPredictiveState(for: self.textPrediction3Button, withValue: .empty)
@@ -255,16 +262,33 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
         }
     }
     
-    func configureHoverStateColors() {
-        self.backButton.animationViewColor = .backspaceButtonHoverColor
-        self.backButton.hoverBorderColor = .backspaceButtonHoverBorderColor
-        self.clearButton.animationViewColor = .clearButtonHoverColor
-        self.clearButton.hoverBorderColor = .clearButtonHoverBorderColor
-        self.textfield.animationViewColor = .speakBoxHoverColor
-        self.textfield.hoverBorderColor = .speakBoxHoverBorderColor
-        
-        self.topHalfWidgets.forEach { widget in
-            widget.textComponentTextColor = .mainTextColor
+    func configureTextBoxStyle() {
+        self.textfield.backgroundColor = .textBoxFill
+        self.textfield.statelessBorderColor = UIColor.textBoxBorder
+        self.textfield.animationViewColor = .textBoxBloom
+        self.textfield.hoverBorderColor = .textBoxBorderHover
+    }
+    
+    func configureBackspaceStyle() {
+        self.backButton.backgroundColor = .backspaceFill
+        self.backButton.statelessBorderColor = UIColor.clear
+        self.backButton.animationViewColor = .backspaceBloom
+        self.backButton.hoverBorderColor = .backspaceBorderHover
+    }
+    
+    func configureClearStyle() {
+        self.clearButton.backgroundColor = .clearButtonFill
+        self.clearButton.statelessBorderColor = UIColor.clear
+        self.clearButton.animationViewColor = .clearButtonBloom
+        self.clearButton.hoverBorderColor = .clearButtonBorderHover
+    }
+    
+    func configureTextPredictiveStyle() {
+        [self.textPrediction1Button, self.textPrediction2Button, self.textPrediction3Button, self.textPrediction4Button, self.textPrediction5Button, self.textPrediction6Button].forEach { button in
+            button?.backgroundColor = .predictionTextFill
+            button?.animationViewColor = .predictionTextBloom
+            button?.hoverBorderColor = .predictionTextBorderHover
+            button?.statelessBorderColor = UIColor.clear
         }
     }
 

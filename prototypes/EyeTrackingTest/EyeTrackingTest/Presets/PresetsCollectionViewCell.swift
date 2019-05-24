@@ -9,15 +9,21 @@
 import UIKit
 
 class PresetsCollectionViewCell: TrackingCollectionViewCell {
+    struct Constants {
+        static let borderWidth = CGFloat(3.0)
+        static let borderRadius = CGFloat(5.0)
+    }
     @IBOutlet weak var presetsLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = .white
         self.presetsLabel.textColor = .mainTextColor
-        self.layer.borderWidth = 3.0
-        self.layer.cornerRadius = 5.0
-        self.layer.borderColor = UIColor.mainWidgetBorderColor.cgColor
+        self.hoverBorderColor = .textBoxBorderHover
+        self.animationView.backgroundColor = .textBoxBloom
+        self.statelessBorderColor = .textBoxBorder
+        self.backgroundColor = .textBoxFill
+        self.layer.borderWidth = Constants.borderWidth
+        self.layer.cornerRadius = Constants.borderRadius
         self.clipsToBounds = true
     }
     

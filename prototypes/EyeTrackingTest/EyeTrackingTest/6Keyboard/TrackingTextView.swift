@@ -9,6 +9,12 @@
 import UIKit
 
 class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
+    var statelessBorderColor: UIColor? {
+        didSet {
+            self.layer.borderColor = self.statelessBorderColor?.cgColor
+        }
+    }
+    
     struct Constants {
         static let animationSpeed = TimeInterval(1.0)
         static let cursorColor = UIColor.black
@@ -47,7 +53,6 @@ class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
         let view = UIView()
         self.addSubview(view)
         self.sendSubviewToBack(view)
-        view.backgroundColor = .animatingColor
         return view
     }()
     
@@ -60,7 +65,7 @@ class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
     
     var cursorSize: CGSize {
         let width = Constants.cursorWidth
-        let height = self.font?.lineHeight ?? Constants.cursorDefaultHeight
+        let height = (self.font?.lineHeight ?? Constants.cursorDefaultHeight) - 4.0
         return CGSize(width: width, height: height)
     }
     
@@ -79,7 +84,7 @@ class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
             print("Position: \(position)")
             let rect = self.caretRect(for: range)
             self.cursor.frame.size = self.cursorSize
-            self.cursor.frame.origin = CGPoint(x: rect.origin.x + Constants.cursorOffset, y: rect.origin.y)
+            self.cursor.frame.origin = CGPoint(x: rect.origin.x + Constants.cursorOffset, y: rect.origin.y + Constants.cursorOffset)
             print(rect)
         }
     }

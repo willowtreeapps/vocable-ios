@@ -91,13 +91,7 @@ class HotCornerView: TrackingView, ExpandingAnimatable {
         engine.registerView(self)
     }
     
-    var text: String? {
-        didSet {
-            self.textLabel.text = self.text
-            self.textLabel.sizeToFit()
-            self.textLabel.setNeedsLayout()
-        }
-    }
+    var text: String?
     lazy var textLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -137,6 +131,7 @@ class HotCornerView: TrackingView, ExpandingAnimatable {
     }
     
     func willExpand() {
+        self.textLabel.text = self.text
         self.textLabel.alpha = 1.0
         self.textLabel.frame = CGRect(origin: self.textOffsetOrigin, size: self.frame.size)
         self.textLabel.sizeToFit()
