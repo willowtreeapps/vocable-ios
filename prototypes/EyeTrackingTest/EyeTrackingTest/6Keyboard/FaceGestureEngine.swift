@@ -60,7 +60,7 @@ extension FaceGesture {
         self.prepare(withAnchor: anchor)
         if isGestureDetected {
             if !self.isGestureTimerRunning {
-                self.gestureTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
+                self.gestureTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
                     self.currentGestureCount = 0
                     self.isGestureTimerRunning = false
                 })

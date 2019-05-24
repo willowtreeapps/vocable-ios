@@ -15,10 +15,17 @@ class HotCornersTrackableViewController: UIViewController {
         static let initialHotCornerBounds = CGRect(origin: CGPoint(x: -24, y: -24), size: Constants.hotCornerSize)
     }
     
+    var isUnlocked = true {
+        didSet {
+            self.currentTrackingEngine?.isUnlocked = self.isUnlocked
+        }
+    }
+    
     let parentTrackingEngine = TrackingEngine()
     var currentTrackingEngine: TrackingEngine? {
         didSet {
             self.currentTrackingEngine?.parent = self.parentTrackingEngine
+            self.currentTrackingEngine?.isUnlocked = self.isUnlocked
         }
     }
     
@@ -96,9 +103,10 @@ class HotCornersTrackableViewController: UIViewController {
             self.showPresetsViewController()
         }
         component.upperLeftTitle = "Presets"
-        component.upperRightTitle = "Sample"
-        component.lowerLeftTitle = "Sample"
-        component.lowerRightTitle = "Sample"
+        component.lowerLeftTitle = "Pause"
+        component.onLowerLeftGaze = { _ in
+            self.isUnlocked.toggle()
+        }
         let controller = SixButtonKeyboardViewController.get(fromStoryboard: .sixButtonKeyboardViewController, component: component)
         controller.add(to: self)
         return controller
@@ -110,9 +118,10 @@ class HotCornersTrackableViewController: UIViewController {
             self.showSixButtonKeyboardViewController()
         }
         component.upperLeftTitle = "Back"
-        component.upperRightTitle = "BackSample"
-        component.lowerLeftTitle = "BackSample"
-        component.lowerRightTitle = "BackSample"
+        component.lowerLeftTitle = "Pause"
+        component.onLowerLeftGaze = { _ in
+            self.isUnlocked.toggle()
+        }
         let controller = PresetsViewController.get(fromStoryboard: .presets, component: component)
         controller.add(to: self)
         return controller
@@ -141,6 +150,8 @@ class HotCornersTrackableViewController: UIViewController {
         
         self.sixButtonKeyboardViewController.show(in: self.containerView)
         self.configure(with: self.sixButtonKeyboardViewController)
+        
+        self.trackingView.center = self.view.center
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -181,7 +192,6 @@ class HotCornersTrackableViewController: UIViewController {
     
     func configure(with trackable: HotCornerTrackable) {
         self.currentTrackingEngine = trackable.trackingEngine
-        self.currentTrackingEngine?.isUnlocked = true
         self.upperLeftHotCorner.onGaze = trackable.component?.onUpperLeftGaze
         self.upperRightHotCorner.onGaze = trackable.component?.onUpperRightGaze
         self.lowerLeftHotCorner.onGaze = trackable.component?.onLowerLeftGaze
@@ -213,7 +223,7 @@ extension HotCornersTrackableViewController: ScreenTrackingViewControllerDelegat
     }
     
     func didFinishCalibrationGesture() {
-        self.currentTrackingEngine?.isUnlocked = true
+        self.currentTrackingEngine?.isUnlocked = self.isUnlocked
         self.parentTrackingEngine.isUnlocked = true
     }
     

@@ -34,7 +34,7 @@ protocol ExpandingAnimatable: class {
     func onCollapse()
 }
 
-extension ExpandingAnimatable where Self: HotCornerView {
+extension ExpandingAnimatable where Self: TrackingView {
     fileprivate var beforeAnimationBounds: CGRect {
         get {
             return self.animatableComponent._beforeAnimationBounds

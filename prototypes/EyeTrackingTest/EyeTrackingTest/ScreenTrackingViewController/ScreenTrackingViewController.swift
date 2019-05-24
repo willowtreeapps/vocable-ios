@@ -48,7 +48,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     private let sceneView = ARSCNView(frame: CGRect.zero)
     
-    let trackingResultQueue = FixedQueue<TrackingResult>(maxSize: 5)
+    let trackingResultQueue = FixedQueue<TrackingResult>(maxSize: 10)
 
     override func viewDidLoad() {
         super.viewDidLoad()

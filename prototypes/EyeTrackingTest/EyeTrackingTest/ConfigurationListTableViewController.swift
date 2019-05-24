@@ -64,5 +64,4 @@ class ConfigurationListTableViewController: UITableViewController {
             dest.trackingConfiguration = selectedConfiguration.configuration
         }
     }
-
 }
