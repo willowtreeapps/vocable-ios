@@ -14,7 +14,7 @@ class TrackingCollectionViewCell: UICollectionViewCell, TrackableWidget, Circula
             self.layer.borderColor = self.statelessBorderColor?.cgColor
         }
     }
-    
+    var animatableComponent = CircularAnimatableComponent()
     var hoverBorderColor: UIColor?
     var parent: TrackableWidget?
     var id: Int?

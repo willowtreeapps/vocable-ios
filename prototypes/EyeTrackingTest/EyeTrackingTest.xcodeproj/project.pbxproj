@@ -77,6 +77,7 @@
 		9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */; };
 		9DC7C03222676AA400A1D503 /* CircularAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7C03122676AA400A1D503 /* CircularAnimatable.swift */; };
 		9DC7C03522677F1700A1D503 /* TrackingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7C03422677F1700A1D503 /* TrackingTextView.swift */; };
+		9DDBFD7D229852FA00D19BCA /* AnimationHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBFD7C229852FA00D19BCA /* AnimationHelpers.swift */; };
 		9DDF1EF7226F61450072A248 /* TrackingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE391D215572EC00B6110F /* TrackingType.swift */; };
 		9DDF1EF9226F61690072A248 /* HotCornersTrackableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1EF8226F61690072A248 /* HotCornersTrackableViewController.swift */; };
 		9DDF1EFF226F654B0072A248 /* HotCornerGazeableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */; };
@@ -158,6 +159,7 @@
 		9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppExtensions.swift"; sourceTree = "<group>"; };
 		9DC7C03122676AA400A1D503 /* CircularAnimatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularAnimatable.swift; sourceTree = "<group>"; };
 		9DC7C03422677F1700A1D503 /* TrackingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingTextView.swift; sourceTree = "<group>"; };
+		9DDBFD7C229852FA00D19BCA /* AnimationHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHelpers.swift; sourceTree = "<group>"; };
 		9DDF1EF8226F61690072A248 /* HotCornersTrackableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornersTrackableViewController.swift; sourceTree = "<group>"; };
 		9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerGazeableComponent.swift; sourceTree = "<group>"; };
 		9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerTrackable.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 			children = (
 				9DC7C03122676AA400A1D503 /* CircularAnimatable.swift */,
 				9D3FC1F62268B923003C5841 /* ExpandingAnimatable.swift */,
+				9DDBFD7C229852FA00D19BCA /* AnimationHelpers.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				13204C572180E559005410FC /* SixButtonKeyboardViewController.swift in Sources */,
 				9DA02929228CF5ED002C8D21 /* CoreGraphics+Utilities.swift in Sources */,
 				9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */,
+				9DDBFD7D229852FA00D19BCA /* AnimationHelpers.swift in Sources */,
 				9DDF1EF9226F61690072A248 /* HotCornersTrackableViewController.swift in Sources */,
 				134B6417214C03FC00285AD5 /* LookAtDirectionIntersectionMethod.swift in Sources */,
 				13DA076C21929D760081754A /* Array+Split.swift in Sources */,

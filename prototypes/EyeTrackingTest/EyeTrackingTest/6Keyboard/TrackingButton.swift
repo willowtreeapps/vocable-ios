@@ -14,7 +14,7 @@ class TrackingButton: UIButton, TrackableWidget, CircularAnimatable {
             self.layer.borderColor = self.statelessBorderColor?.cgColor
         }
     }
-    
+    var animatableComponent = CircularAnimatableComponent()
     var hoverBorderColor: UIColor?
     var isTrackingEnabled: Bool = true
     var animationSpeed: TimeInterval = 1.0

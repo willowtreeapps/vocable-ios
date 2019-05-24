@@ -75,6 +75,10 @@ class HotCornerView: TrackingView, ExpandingAnimatable {
     var gazeableComponent = GazeableTrackingComponent()
     let location: HotCornerViewLocation
     
+    var animatingView: UIView {
+        return self
+    }
+    
     override var frame: CGRect {
         didSet {
             self.layer.cornerRadius = self.frame.height / 2.0

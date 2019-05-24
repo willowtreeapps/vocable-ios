@@ -14,7 +14,6 @@ class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
             self.layer.borderColor = self.statelessBorderColor?.cgColor
         }
     }
-    
     struct Constants {
         static let animationSpeed = TimeInterval(1.0)
         static let cursorColor = UIColor.black
@@ -24,6 +23,7 @@ class TrackingTextView: UITextView, TrackableWidget, CircularAnimatable {
         static let cursorAnimationDuration = TimeInterval(0.5)
         static let cursorOffset = CGFloat(2.0)
     }
+    var animatableComponent = CircularAnimatableComponent()
     var hoverBorderColor: UIColor?
     var isTrackingEnabled: Bool = true
     var animationSpeed = Constants.animationSpeed
