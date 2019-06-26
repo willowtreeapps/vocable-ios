@@ -34,6 +34,7 @@ extension CircularAnimatable where Self: TrackingView {
             self.animatableComponent._animatableState = newValue
         }
     }
+    
     func animateGaze() {
         if self.isTrackingEnabled && (self.animatableState == .idle || self.animatableState == .cancelled) {
             self.animationView.center = self.relativeCenterPoint

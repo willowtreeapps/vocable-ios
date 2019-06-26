@@ -47,6 +47,10 @@
 		13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */; };
 		9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E0542271F0DC0058DF57 /* CursorView.swift */; };
 		9D15E058227211AB0058DF57 /* FixedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E057227211AB0058DF57 /* FixedQueue.swift */; };
+		9D219D5E22C3D6A10087BF1B /* EyeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D219D5D22C3D6A10087BF1B /* EyeState.swift */; };
+		9D219D6022C3D6CF0087BF1B /* FaceGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D219D5F22C3D6CF0087BF1B /* FaceGesture.swift */; };
+		9D219D6222C3D6EF0087BF1B /* BlinkGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D219D6122C3D6EF0087BF1B /* BlinkGesture.swift */; };
+		9D219D6422C3D7060087BF1B /* EyesBlinkGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D219D6322C3D7060087BF1B /* EyesBlinkGesture.swift */; };
 		9D2BB540227A35DA002BB068 /* HotCornerTrackable+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2BB53F227A35DA002BB068 /* HotCornerTrackable+Component.swift */; };
 		9D2BB542227A3AFB002BB068 /* PrettyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2BB541227A3AFB002BB068 /* PrettyExtensions.swift */; };
 		9D2BB544227B3BFF002BB068 /* FaceGestureEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2BB543227B3BFF002BB068 /* FaceGestureEngine.swift */; };
@@ -77,7 +81,7 @@
 		9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */; };
 		9DC7C03222676AA400A1D503 /* CircularAnimatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7C03122676AA400A1D503 /* CircularAnimatable.swift */; };
 		9DC7C03522677F1700A1D503 /* TrackingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7C03422677F1700A1D503 /* TrackingTextView.swift */; };
-		9DDBFD7D229852FA00D19BCA /* AnimationHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBFD7C229852FA00D19BCA /* AnimationHelpers.swift */; };
+		9DDBFD7D229852FA00D19BCA /* AnimatingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBFD7C229852FA00D19BCA /* AnimatingState.swift */; };
 		9DDF1EF7226F61450072A248 /* TrackingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE391D215572EC00B6110F /* TrackingType.swift */; };
 		9DDF1EF9226F61690072A248 /* HotCornersTrackableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1EF8226F61690072A248 /* HotCornersTrackableViewController.swift */; };
 		9DDF1EFF226F654B0072A248 /* HotCornerGazeableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */; };
@@ -129,6 +133,10 @@
 		13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralInterpolator.swift; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9D15E057227211AB0058DF57 /* FixedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedQueue.swift; sourceTree = "<group>"; };
+		9D219D5D22C3D6A10087BF1B /* EyeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeState.swift; sourceTree = "<group>"; };
+		9D219D5F22C3D6CF0087BF1B /* FaceGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceGesture.swift; sourceTree = "<group>"; };
+		9D219D6122C3D6EF0087BF1B /* BlinkGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlinkGesture.swift; sourceTree = "<group>"; };
+		9D219D6322C3D7060087BF1B /* EyesBlinkGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyesBlinkGesture.swift; sourceTree = "<group>"; };
 		9D2BB53F227A35DA002BB068 /* HotCornerTrackable+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HotCornerTrackable+Component.swift"; sourceTree = "<group>"; };
 		9D2BB541227A3AFB002BB068 /* PrettyExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyExtensions.swift; sourceTree = "<group>"; };
 		9D2BB543227B3BFF002BB068 /* FaceGestureEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceGestureEngine.swift; sourceTree = "<group>"; };
@@ -159,7 +167,7 @@
 		9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppExtensions.swift"; sourceTree = "<group>"; };
 		9DC7C03122676AA400A1D503 /* CircularAnimatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularAnimatable.swift; sourceTree = "<group>"; };
 		9DC7C03422677F1700A1D503 /* TrackingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingTextView.swift; sourceTree = "<group>"; };
-		9DDBFD7C229852FA00D19BCA /* AnimationHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHelpers.swift; sourceTree = "<group>"; };
+		9DDBFD7C229852FA00D19BCA /* AnimatingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatingState.swift; sourceTree = "<group>"; };
 		9DDF1EF8226F61690072A248 /* HotCornersTrackableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornersTrackableViewController.swift; sourceTree = "<group>"; };
 		9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerGazeableComponent.swift; sourceTree = "<group>"; };
 		9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerTrackable.swift; sourceTree = "<group>"; };
@@ -196,6 +204,7 @@
 		130C00B620D2AD2A007C3163 /* EyeTrackingTest */ = {
 			isa = PBXGroup;
 			children = (
+				9D219D5C22C3D6940087BF1B /* Gestures */,
 				9D15E0562272119E0058DF57 /* Utilities */,
 				130C00B720D2AD2A007C3163 /* AppDelegate.swift */,
 				13FE3921215577E300B6110F /* ConfigurationListTableViewController.swift */,
@@ -234,7 +243,6 @@
 				9D3FC1F42268B64C003C5841 /* HotCornerView.swift */,
 				9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */,
 				9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */,
-				9D2BB543227B3BFF002BB068 /* FaceGestureEngine.swift */,
 			);
 			path = 6Keyboard;
 			sourceTree = "<group>";
@@ -348,6 +356,18 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		9D219D5C22C3D6940087BF1B /* Gestures */ = {
+			isa = PBXGroup;
+			children = (
+				9D219D5D22C3D6A10087BF1B /* EyeState.swift */,
+				9D2BB543227B3BFF002BB068 /* FaceGestureEngine.swift */,
+				9D219D5F22C3D6CF0087BF1B /* FaceGesture.swift */,
+				9D219D6122C3D6EF0087BF1B /* BlinkGesture.swift */,
+				9D219D6322C3D7060087BF1B /* EyesBlinkGesture.swift */,
+			);
+			path = Gestures;
+			sourceTree = "<group>";
+		};
 		9D739DEF2269FEDE00FEFFAC /* Presets */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,7 +396,7 @@
 			children = (
 				9DC7C03122676AA400A1D503 /* CircularAnimatable.swift */,
 				9D3FC1F62268B923003C5841 /* ExpandingAnimatable.swift */,
-				9DDBFD7C229852FA00D19BCA /* AnimationHelpers.swift */,
+				9DDBFD7C229852FA00D19BCA /* AnimatingState.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -462,6 +482,7 @@
 				9D739DF6226A012000FEFFAC /* CoreDataStack.swift in Sources */,
 				130C00BC20D2AD2A007C3163 /* ViewController.swift in Sources */,
 				9D3FC1F72268B923003C5841 /* ExpandingAnimatable.swift in Sources */,
+				9D219D6022C3D6CF0087BF1B /* FaceGesture.swift in Sources */,
 				13FE391A2154150900B6110F /* Bounded.swift in Sources */,
 				9DB58D47226664C500E99C3B /* UIView+Utilities.swift in Sources */,
 				13B715852148464000B3612A /* Constants.swift in Sources */,
@@ -480,7 +501,7 @@
 				13204C572180E559005410FC /* SixButtonKeyboardViewController.swift in Sources */,
 				9DA02929228CF5ED002C8D21 /* CoreGraphics+Utilities.swift in Sources */,
 				9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */,
-				9DDBFD7D229852FA00D19BCA /* AnimationHelpers.swift in Sources */,
+				9DDBFD7D229852FA00D19BCA /* AnimatingState.swift in Sources */,
 				9DDF1EF9226F61690072A248 /* HotCornersTrackableViewController.swift in Sources */,
 				134B6417214C03FC00285AD5 /* LookAtDirectionIntersectionMethod.swift in Sources */,
 				13DA076C21929D760081754A /* Array+Split.swift in Sources */,
@@ -515,14 +536,17 @@
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
 				13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */,
 				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
+				9D219D6422C3D7060087BF1B /* EyesBlinkGesture.swift in Sources */,
 				9D739E13226F5EB700FEFFAC /* String+Utilities.swift in Sources */,
 				9DB58D05226524F800E99C3B /* TrackingGroup.swift in Sources */,
+				9D219D6222C3D6EF0087BF1B /* BlinkGesture.swift in Sources */,
 				9D15E058227211AB0058DF57 /* FixedQueue.swift in Sources */,
 				9DDF1F03226F7A160072A248 /* TrackingCollectionViewCell.swift in Sources */,
 				13204C5B2180EBD1005410FC /* KeyView.swift in Sources */,
 				139EDEEC21419D700009A99F /* ScreenTrackingViewController.swift in Sources */,
 				13FE39142153F63000B6110F /* TrackingRegion.swift in Sources */,
 				9D739E11226F47C500FEFFAC /* UIStoryboard+ViewControllers.swift in Sources */,
+				9D219D5E22C3D6A10087BF1B /* EyeState.swift in Sources */,
 				13DA076A219297140081754A /* TrackingButton.swift in Sources */,
 				13B7158721484B6600B3612A /* TrackingConfiguration.swift in Sources */,
 			);
