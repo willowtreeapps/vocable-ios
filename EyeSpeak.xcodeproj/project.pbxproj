@@ -90,7 +90,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		130C00B420D2AD2A007C3163 /* EyeTrackingTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeTrackingTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		130C00B420D2AD2A007C3163 /* EyeSpeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeSpeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		130C00B720D2AD2A007C3163 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		130C00B920D2AD2A007C3163 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		130C00BB20D2AD2A007C3163 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 		130C00AB20D2AD2A007C3163 = {
 			isa = PBXGroup;
 			children = (
-				130C00B620D2AD2A007C3163 /* EyeTrackingTest */,
+				130C00B620D2AD2A007C3163 /* EyeSpeak */,
 				130C00B520D2AD2A007C3163 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -196,12 +196,12 @@
 		130C00B520D2AD2A007C3163 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				130C00B420D2AD2A007C3163 /* EyeTrackingTest.app */,
+				130C00B420D2AD2A007C3163 /* EyeSpeak.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		130C00B620D2AD2A007C3163 /* EyeTrackingTest */ = {
+		130C00B620D2AD2A007C3163 /* EyeSpeak */ = {
 			isa = PBXGroup;
 			children = (
 				9D219D5C22C3D6940087BF1B /* Gestures */,
@@ -222,7 +222,7 @@
 				9DC7C03322676DF100A1D503 /* Animations */,
 				139EDEE921419C400009A99F /* Supporting Files */,
 			);
-			path = EyeTrackingTest;
+			path = EyeSpeak;
 			sourceTree = "<group>";
 		};
 		13204C552180E52F005410FC /* 6Keyboard */ = {
@@ -404,9 +404,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		130C00B320D2AD2A007C3163 /* EyeTrackingTest */ = {
+		130C00B320D2AD2A007C3163 /* EyeSpeak */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 130C00C820D2AD2C007C3163 /* Build configuration list for PBXNativeTarget "EyeTrackingTest" */;
+			buildConfigurationList = 130C00C820D2AD2C007C3163 /* Build configuration list for PBXNativeTarget "EyeSpeak" */;
 			buildPhases = (
 				130C00B020D2AD2A007C3163 /* Sources */,
 				130C00B120D2AD2A007C3163 /* Frameworks */,
@@ -416,9 +416,9 @@
 			);
 			dependencies = (
 			);
-			name = EyeTrackingTest;
+			name = EyeSpeak;
 			productName = EyeTrackingTest;
-			productReference = 130C00B420D2AD2A007C3163 /* EyeTrackingTest.app */;
+			productReference = 130C00B420D2AD2A007C3163 /* EyeSpeak.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -437,7 +437,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 130C00AF20D2AD2A007C3163 /* Build configuration list for PBXProject "EyeTrackingTest" */;
+			buildConfigurationList = 130C00AF20D2AD2A007C3163 /* Build configuration list for PBXProject "EyeSpeak" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -450,7 +450,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				130C00B320D2AD2A007C3163 /* EyeTrackingTest */,
+				130C00B320D2AD2A007C3163 /* EyeSpeak */,
 			);
 		};
 /* End PBXProject section */
@@ -695,13 +695,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y32EQUAEWX;
-				INFOPLIST_FILE = "$(SRCROOT)/EyeTrackingTest/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/EyeSpeak/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.willowtree.EyeTrackingTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willowtree.EyeSpeak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -714,13 +714,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y32EQUAEWX;
-				INFOPLIST_FILE = "$(SRCROOT)/EyeTrackingTest/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/EyeSpeak/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.willowtree.EyeTrackingTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willowtree.EyeSpeak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -730,7 +730,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		130C00AF20D2AD2A007C3163 /* Build configuration list for PBXProject "EyeTrackingTest" */ = {
+		130C00AF20D2AD2A007C3163 /* Build configuration list for PBXProject "EyeSpeak" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				130C00C620D2AD2C007C3163 /* Debug */,
@@ -739,7 +739,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		130C00C820D2AD2C007C3163 /* Build configuration list for PBXNativeTarget "EyeTrackingTest" */ = {
+		130C00C820D2AD2C007C3163 /* Build configuration list for PBXNativeTarget "EyeSpeak" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				130C00C920D2AD2C007C3163 /* Debug */,
