@@ -1,4 +1,4 @@
-# eyespeak
+# eyespeak for iOS
 ![Platform iOS](https://img.shields.io/badge/platform-iOS-orange.svg)
 ![license MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)
 
@@ -15,6 +15,7 @@
 - [License](#license)
 
 ## What is eyespeak?
+eyespeak is a head-gaze enabled AAC app that gives users the ability to communicate without touch or voice input. 
 
 ## Features
 - 
