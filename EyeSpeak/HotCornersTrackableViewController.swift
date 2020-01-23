@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PulseController
 
 class HotCornersTrackableViewController: UIViewController {
     struct Constants {
@@ -152,6 +153,14 @@ class HotCornersTrackableViewController: UIViewController {
         self.configure(with: self.sixButtonKeyboardViewController)
         
         self.trackingView.center = self.view.center
+
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(onTap))
+        recognizer.numberOfTouchesRequired = 1
+        UIApplication.shared.keyWindow?.addGestureRecognizer(recognizer)
+    }
+
+    @objc func onTap() {
+        self.xPulse.showTunningView(minimumValue: 0, maximumValue: self.view.bounds.width)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -213,6 +222,44 @@ class HotCornersTrackableViewController: UIViewController {
         self.presetsViewController.show(in: self.containerView)
         self.configure(with: self.presetsViewController)
     }
+
+    lazy var pulseConfig = Pulse.Configuration(minimumValueStep: 0.05, Kp: 2.511, Ki: 0.1, Kd: 0.7)
+    var cursorPoint: CGPoint = .zero {
+        didSet {
+            if DispatchQueue.isMainQueue {
+                updateCursorPosition(self.cursorPoint)
+            } else {
+                DispatchQueue.main.async {
+                    self.updateCursorPosition(self.cursorPoint)
+                }
+            }
+        }
+    }
+
+    lazy var xPulse = Pulse(configuration: self.pulseConfig, measureClosure: { () -> CGFloat in
+        return self.cursorPoint.x
+    }, outputClosure: { output in
+        self.cursorPoint.x = output
+//        self.cursorPoint.y = self.view.bounds.height / 2
+    })
+
+    lazy var yPulse = Pulse(configuration: self.pulseConfig, measureClosure: { () -> CGFloat in
+        return self.cursorPoint.y
+    }, outputClosure: { output in
+        self.cursorPoint.y = output
+    })
+
+
+    func updateCursorPosition(_ point: CGPoint) {
+        self.trackingView.isHidden = false
+        let positionInView = self.view.convert(point, from: nil)
+        self.trackingView.center = positionInView
+        if let engine = self.currentTrackingEngine {
+            _ = engine.updateWithTrackedPoint(point)
+        } else {
+            _ = self.parentTrackingEngine.updateWithTrackedPoint(point)
+        }
+    }
 }
 
 extension HotCornersTrackableViewController: ScreenTrackingViewControllerDelegate {
@@ -228,19 +275,9 @@ extension HotCornersTrackableViewController: ScreenTrackingViewControllerDelegat
     }
     
     func didUpdateTrackedPosition(_ trackedPositionOnScreen: CGPoint?, for screenTrackingViewController: ScreenTrackingViewController) {
-        DispatchQueue.main.async {
-            if let position = trackedPositionOnScreen {
-                self.trackingView.isHidden = false
-                let positionInView = self.view.convert(position, from: nil)
-                self.trackingView.center = positionInView
-                if let engine = self.currentTrackingEngine {
-                    _ = engine.updateWithTrackedPoint(position)
-                } else {
-                    _ = self.parentTrackingEngine.updateWithTrackedPoint(position)
-                }
-            } else {
-                self.trackingView.isHidden = true
-            }
+        if let position = trackedPositionOnScreen {
+            xPulse.setPoint = position.x
+            yPulse.setPoint = position.y
         }
     }
 }

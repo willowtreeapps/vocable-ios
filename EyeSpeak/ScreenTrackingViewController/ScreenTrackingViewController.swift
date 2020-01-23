@@ -48,7 +48,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     private let sceneView = ARSCNView(frame: CGRect.zero)
     
-    let trackingResultQueue = FixedQueue<TrackingResult>(maxSize: 10)
+    let trackingResultQueue = FixedQueue<TrackingResult>(maxSize: 1)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +68,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
                 self.calibrate()
             }
         }
+
         self.faceGestureEngine.gestures.append(eyesGesture)
     }
 

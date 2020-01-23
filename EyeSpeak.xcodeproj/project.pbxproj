@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -45,6 +45,7 @@
 		13FE392421557DA900B6110F /* QuadrilateralTrackingRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */; };
 		13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392621557E5500B6110F /* Quadrilateral.swift */; };
 		13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */; };
+		195218F92EB38E0D96FD5FDC /* Pods_EyeSpeak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87641514102BB4BE361EBD06 /* Pods_EyeSpeak.framework */; };
 		9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E0542271F0DC0058DF57 /* CursorView.swift */; };
 		9D15E058227211AB0058DF57 /* FixedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E057227211AB0058DF57 /* FixedQueue.swift */; };
 		9D219D5E22C3D6A10087BF1B /* EyeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D219D5D22C3D6A10087BF1B /* EyeState.swift */; };
@@ -72,6 +73,7 @@
 		9D739E0F226F451A00FEFFAC /* UIViewController+Children.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739E0E226F451A00FEFFAC /* UIViewController+Children.swift */; };
 		9D739E11226F47C500FEFFAC /* UIStoryboard+ViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739E10226F47C500FEFFAC /* UIStoryboard+ViewControllers.swift */; };
 		9D739E13226F5EB700FEFFAC /* String+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D739E12226F5EB700FEFFAC /* String+Utilities.swift */; };
+		9D9909AA23D91F75000402FC /* DispatchQueue+IsMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9909A923D91F75000402FC /* DispatchQueue+IsMain.swift */; };
 		9DA02929228CF5ED002C8D21 /* CoreGraphics+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA02928228CF5ED002C8D21 /* CoreGraphics+Utilities.swift */; };
 		9DB58D032264DF1B00E99C3B /* TextPredictionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */; };
 		9DB58D05226524F800E99C3B /* TrackingGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D04226524F800E99C3B /* TrackingGroup.swift */; };
@@ -131,6 +133,8 @@
 		13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralTrackingRegion.swift; sourceTree = "<group>"; };
 		13FE392621557E5500B6110F /* Quadrilateral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quadrilateral.swift; sourceTree = "<group>"; };
 		13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralInterpolator.swift; sourceTree = "<group>"; };
+		87641514102BB4BE361EBD06 /* Pods_EyeSpeak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EyeSpeak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8928022C7424D70E293A1CB1 /* Pods-EyeSpeak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EyeSpeak.debug.xcconfig"; path = "Target Support Files/Pods-EyeSpeak/Pods-EyeSpeak.debug.xcconfig"; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9D15E057227211AB0058DF57 /* FixedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedQueue.swift; sourceTree = "<group>"; };
 		9D219D5D22C3D6A10087BF1B /* EyeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeState.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 		9D739E0E226F451A00FEFFAC /* UIViewController+Children.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Children.swift"; sourceTree = "<group>"; };
 		9D739E10226F47C500FEFFAC /* UIStoryboard+ViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+ViewControllers.swift"; sourceTree = "<group>"; };
 		9D739E12226F5EB700FEFFAC /* String+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utilities.swift"; sourceTree = "<group>"; };
+		9D9909A923D91F75000402FC /* DispatchQueue+IsMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+IsMain.swift"; sourceTree = "<group>"; };
 		9DA02928228CF5ED002C8D21 /* CoreGraphics+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Utilities.swift"; sourceTree = "<group>"; };
 		9DB58D022264DF1B00E99C3B /* TextPredictionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPredictionController.swift; sourceTree = "<group>"; };
 		9DB58D04226524F800E99C3B /* TrackingGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingGroup.swift; sourceTree = "<group>"; };
@@ -172,6 +177,7 @@
 		9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerGazeableComponent.swift; sourceTree = "<group>"; };
 		9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerTrackable.swift; sourceTree = "<group>"; };
 		9DDF1F02226F7A160072A248 /* TrackingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingCollectionViewCell.swift; sourceTree = "<group>"; };
+		CAFC5B377890CC31A2AD658D /* Pods-EyeSpeak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EyeSpeak.release.xcconfig"; path = "Target Support Files/Pods-EyeSpeak/Pods-EyeSpeak.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +185,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				195218F92EB38E0D96FD5FDC /* Pods_EyeSpeak.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +197,8 @@
 			children = (
 				130C00B620D2AD2A007C3163 /* EyeSpeak */,
 				130C00B520D2AD2A007C3163 /* Products */,
+				3A52CA86661379ABF41B36B7 /* Pods */,
+				930B799F3839FCCFF14D060F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,6 +223,7 @@
 				9DDF1EF8226F61690072A248 /* HotCornersTrackableViewController.swift */,
 				9D739E0C226F433F00FEFFAC /* HotCornersTracking.storyboard */,
 				9D15E0542271F0DC0058DF57 /* CursorView.swift */,
+				9D9909A923D91F75000402FC /* DispatchQueue+IsMain.swift */,
 				13204C552180E52F005410FC /* 6Keyboard */,
 				13B71581214840B100B3612A /* ScreenTrackingViewController */,
 				9D739DEF2269FEDE00FEFFAC /* Presets */,
@@ -348,6 +358,23 @@
 			path = QuadrilateralTrackingRegion;
 			sourceTree = "<group>";
 		};
+		3A52CA86661379ABF41B36B7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8928022C7424D70E293A1CB1 /* Pods-EyeSpeak.debug.xcconfig */,
+				CAFC5B377890CC31A2AD658D /* Pods-EyeSpeak.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		930B799F3839FCCFF14D060F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				87641514102BB4BE361EBD06 /* Pods_EyeSpeak.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9D15E0562272119E0058DF57 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,9 +435,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 130C00C820D2AD2C007C3163 /* Build configuration list for PBXNativeTarget "EyeSpeak" */;
 			buildPhases = (
+				857A9112B8752931533B6F30 /* [CP] Check Pods Manifest.lock */,
 				130C00B020D2AD2A007C3163 /* Sources */,
 				130C00B120D2AD2A007C3163 /* Frameworks */,
 				130C00B220D2AD2A007C3163 /* Resources */,
+				C21C13C537545EEBAB6D720D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -474,6 +503,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		857A9112B8752931533B6F30 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EyeSpeak-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C21C13C537545EEBAB6D720D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EyeSpeak/Pods-EyeSpeak-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EyeSpeak/Pods-EyeSpeak-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EyeSpeak/Pods-EyeSpeak-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		130C00B020D2AD2A007C3163 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -509,6 +580,7 @@
 				134B6419214C3A4B00285AD5 /* TrackingNode.swift in Sources */,
 				9DC7C03222676AA400A1D503 /* CircularAnimatable.swift in Sources */,
 				9D739DFB226A026E00FEFFAC /* PresetsCollectionViewFlowLayout.swift in Sources */,
+				9D9909AA23D91F75000402FC /* DispatchQueue+IsMain.swift in Sources */,
 				13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */,
 				9D739E05226A0BBE00FEFFAC /* Cell+NibLoading.swift in Sources */,
 				13A7B912214C027300714057 /* TrackingMethod.swift in Sources */,
@@ -691,6 +763,7 @@
 		};
 		130C00C920D2AD2C007C3163 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8928022C7424D70E293A1CB1 /* Pods-EyeSpeak.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -710,6 +783,7 @@
 		};
 		130C00CA20D2AD2C007C3163 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAFC5B377890CC31A2AD658D /* Pods-EyeSpeak.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
