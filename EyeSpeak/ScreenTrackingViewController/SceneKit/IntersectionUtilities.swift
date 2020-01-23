@@ -67,7 +67,7 @@ enum IntersectionUtils {
         case .portraitUpsideDown:
             orientedPosition.x = 1 - orientedPosition.x
             orientedPosition.y = 1 - orientedPosition.y
-        case .unknown:
+        default:
             break
         }
 

@@ -50,8 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		069AEF3007F4D80912167995090AE013 /* PulseController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PulseController.framework; path = PulseController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0FC46DB9DEEA87870046E951956F2ABA /* Pods_EyeSpeak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_EyeSpeak.framework; path = "Pods-EyeSpeak.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		069AEF3007F4D80912167995090AE013 /* PulseController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PulseController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FC46DB9DEEA87870046E951956F2ABA /* Pods_EyeSpeak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EyeSpeak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117B2561740F0C0377631E6B1897C2AA /* PulseController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PulseController-prefix.pch"; sourceTree = "<group>"; };
 		230FA5632F13CA8DA0515BBCAF596B74 /* PulseController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PulseController.modulemap; sourceTree = "<group>"; };
 		2E321FB069979A513CF9B49F737F17BC /* Pods-EyeSpeak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EyeSpeak.debug.xcconfig"; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 		843475A5EA7684C7901908683D3AB875 /* PulseExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PulseExtension.swift; path = Pulse/Classes/PulseExtension.swift; sourceTree = "<group>"; };
 		9269BA907B0685C80667C08DF2357D42 /* Pulse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Pulse.swift; path = Pulse/Classes/Pulse.swift; sourceTree = "<group>"; };
 		99A84B8F2766856AD3E54B51026555F9 /* SingleControlView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SingleControlView.swift; path = Pulse/Classes/Controls/SingleControlView.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DAE06A18C4B6BF8333F931559BCBAB1 /* ControlsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ControlsView.swift; path = Pulse/Classes/Controls/ControlsView.swift; sourceTree = "<group>"; };
 		9F318A01F9E9DDD6E244102FD15E9D73 /* PulseController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PulseController-umbrella.h"; sourceTree = "<group>"; };
 		A2286BB04C31C52FA0911044DACF53D9 /* TunningWindow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TunningWindow.swift; path = Pulse/Classes/Helpers/TunningWindow.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 		C3A3573DEF6DC620F1712AB45166267A /* Pods-EyeSpeak-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EyeSpeak-frameworks.sh"; sourceTree = "<group>"; };
 		C5B403C66075F13B16D87F36F8E189E6 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Pulse/Assets/Assets.xcassets; sourceTree = "<group>"; };
 		C9D56B6CB70AB696C95B74BE6686FD2C /* SingleControlDisplayable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SingleControlDisplayable.swift; path = Pulse/Classes/Controls/SingleControlDisplayable.swift; sourceTree = "<group>"; };
-		D73FA9F00B5C43FF30683131A713B7CB /* Pulse.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Pulse.bundle; path = "PulseController-Pulse.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D73FA9F00B5C43FF30683131A713B7CB /* Pulse.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Pulse.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD0EA515E1B67290B4B395441717E2BB /* TunningView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TunningView.swift; path = Pulse/Classes/Helpers/TunningView.swift; sourceTree = "<group>"; };
 		DE632BBA17FDE69BBE52C0E61F91B95A /* GradientView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GradientView.swift; path = Pulse/Classes/Graph/GradientView.swift; sourceTree = "<group>"; };
 		E8C7F61A1D2E815895213D1495AA37B8 /* CAGradientExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CAGradientExtensions.swift; path = Pulse/Classes/Extensions/CAGradientExtensions.swift; sourceTree = "<group>"; };
@@ -220,7 +220,6 @@
 				A3107F1101D11AB1305A56AA25DD788B /* Resources */,
 				40B73AF7F1D9CBA38D4FAAF3974DA2F3 /* Support Files */,
 			);
-			name = PulseController;
 			path = PulseController;
 			sourceTree = "<group>";
 		};
@@ -319,6 +318,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1020;
+				TargetAttributes = {
+					9A29C3EC67D0FFF4FCF3CA8E524456A5 = {
+						LastSwiftMigration = 1120;
+					};
+				};
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 9.3";
@@ -554,7 +558,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -590,7 +594,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";

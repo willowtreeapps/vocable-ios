@@ -17,7 +17,7 @@ extension Pulse {
     
     public func showTunningView(minimumValue: CGFloat, maximumValue: CGFloat) {
         tunningWindow = TunningWindow(frame: UIScreen.main.bounds)
-        tunningWindow?.windowLevel = UIWindowLevelAlert + 1
+        tunningWindow?.windowLevel = UIWindow.Level.alert + 1
         tunningWindow?.translatesAutoresizingMaskIntoConstraints = false
 
         guard let alertWindow = tunningWindow else {

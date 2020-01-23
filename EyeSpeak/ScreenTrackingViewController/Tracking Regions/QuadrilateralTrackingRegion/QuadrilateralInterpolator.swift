@@ -15,10 +15,10 @@ struct QuadrilateralInterpolator {
     let quad: Quadrilateral
 
     private static let A = simd_double4x4(rows: [
-        double4([1, 0, 0, 0]),
-        double4([1, 1, 0, 0]),
-        double4([1, 1, 1, 1]),
-        double4([1, 0, 1, 0])
+        SIMD4([1, 0, 0, 0]),
+        SIMD4([1, 1, 0, 0]),
+        SIMD4([1, 1, 1, 1]),
+        SIMD4([1, 0, 1, 0])
         ]
     )
     private static let AI = A.inverse

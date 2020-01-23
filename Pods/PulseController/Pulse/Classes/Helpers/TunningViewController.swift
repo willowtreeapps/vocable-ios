@@ -40,7 +40,7 @@ class TunningViewController: UIViewController {
         
         // Setup timer
         displayLinkProxy.target = self
-        displayLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
+        displayLink.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
         
         self.tunningView = TunningView(configuration: configuration, closeClosure: { [weak self] (sender) in
             guard let `self` = self else { return }

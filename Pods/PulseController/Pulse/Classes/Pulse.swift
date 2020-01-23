@@ -94,7 +94,7 @@ public class Pulse: NSObject {
         // Setup timer
         displayLinkProxy.target = self
         displayLink.isPaused = true
-        displayLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
+        displayLink.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
     }
     
     deinit {
