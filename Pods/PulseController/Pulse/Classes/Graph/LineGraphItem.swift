@@ -73,6 +73,20 @@ class LineGraphItem: CALayer {
      
         addSublayer(strokeLayer)
      }
+
+    override init(layer: Any) {
+        let other = layer as! LineGraphItem
+        values = other.values
+        headValueOffsetFactor = other.headValueOffsetFactor
+        minimumValue = other.minimumValue
+        maximumValue = other.maximumValue
+
+        super.init(layer: other)
+
+        backgroundColor = LayoutConstants.BackgroundColor
+        strokeLayer.strokeColor = other.strokeLayer.strokeColor
+        addSublayer(strokeLayer)
+    }
     
     override func layoutSublayers() {
         super.layoutSublayers()

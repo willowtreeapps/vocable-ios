@@ -13,7 +13,8 @@ class TunningViewController: UIViewController {
     
     /// Wraps all UI components for tuning
     private var tunningView: TunningView? = nil
-    
+    weak var pulse: Pulse?
+
     /// Tracks change of
     var setPointValue: CGFloat = 0
     var pulseOutputValue: CGFloat = 0
@@ -31,18 +32,19 @@ class TunningViewController: UIViewController {
         view = tunningView
     }
     
-    init(configuration: TunningView.Configuration, closeClosure: @escaping ((TunningViewController) -> Void), configurationChanged: @escaping ((TunningViewController, Pulse.Configuration) -> Void)) {
+    init(pulse: Pulse, configuration: TunningView.Configuration, closeClosure: @escaping ((TunningViewController) -> Void), configurationChanged: @escaping ((TunningViewController, Pulse.Configuration) -> Void)) {
         self.closeClosure = closeClosure
         self.configurationChanged = configurationChanged
         self.displayLink = CADisplayLink(target: displayLinkProxy, selector: #selector(tick))
-        
+        self.pulse = pulse
+
         super.init(nibName: nil, bundle: nil)
         
         // Setup timer
         displayLinkProxy.target = self
         displayLink.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
         
-        self.tunningView = TunningView(configuration: configuration, closeClosure: { [weak self] (sender) in
+        self.tunningView = TunningView(isHorizontal: pulse.isHorizontal, configuration: configuration, closeClosure: { [weak self] (sender) in
             guard let `self` = self else { return }
             self.closeClosure(self)
         }, configurationChanged: { [weak self] (sender, configuration) in
@@ -54,7 +56,7 @@ class TunningViewController: UIViewController {
     @objc func tick() {
         tunningView?.drawSetPoint(value: setPointValue)
         tunningView?.drawPulseOutput(value: pulseOutputValue)
-        tunningView?.updateGraph()
+//        tunningView?.updateGraph()
     }
     
     required init?(coder aDecoder: NSCoder) {

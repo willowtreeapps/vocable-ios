@@ -154,13 +154,33 @@ class HotCornersTrackableViewController: UIViewController {
         
         self.trackingView.center = self.view.center
 
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(onTap))
-        recognizer.numberOfTouchesRequired = 1
-        UIApplication.shared.keyWindow?.addGestureRecognizer(recognizer)
+        let horizontalRecognizerLeft = UISwipeGestureRecognizer(target: self, action: #selector(onSwipeHorizontal))
+        horizontalRecognizerLeft.numberOfTouchesRequired = 2
+        horizontalRecognizerLeft.direction = .left
+        UIApplication.shared.keyWindow?.addGestureRecognizer(horizontalRecognizerLeft)
+
+        let horizontalRecognizerRight = UISwipeGestureRecognizer(target: self, action: #selector(onSwipeHorizontal))
+        horizontalRecognizerRight.numberOfTouchesRequired = 2
+        horizontalRecognizerRight.direction = .right
+        UIApplication.shared.keyWindow?.addGestureRecognizer(horizontalRecognizerRight)
+
+        let verticalRecognizerUp = UISwipeGestureRecognizer(target: self, action: #selector(onSwipeVertical))
+        verticalRecognizerUp.numberOfTouchesRequired = 2
+        verticalRecognizerUp.direction = .up
+        UIApplication.shared.keyWindow?.addGestureRecognizer(verticalRecognizerUp)
+
+        let verticalRecognizerDown = UISwipeGestureRecognizer(target: self, action: #selector(onSwipeVertical))
+        verticalRecognizerDown.numberOfTouchesRequired = 2
+        verticalRecognizerDown.direction = .down
+        UIApplication.shared.keyWindow?.addGestureRecognizer(verticalRecognizerDown)
     }
 
-    @objc func onTap() {
+    @objc func onSwipeHorizontal() {
         self.xPulse.showTunningView(minimumValue: 0, maximumValue: self.view.bounds.width)
+    }
+
+    @objc func onSwipeVertical() {
+        self.yPulse.showTunningView(minimumValue: 0, maximumValue: self.view.bounds.height)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -236,18 +256,27 @@ class HotCornersTrackableViewController: UIViewController {
         }
     }
 
-    lazy var xPulse = Pulse(configuration: self.pulseConfig, measureClosure: { () -> CGFloat in
-        return self.cursorPoint.x
-    }, outputClosure: { output in
-        self.cursorPoint.x = output
-//        self.cursorPoint.y = self.view.bounds.height / 2
-    })
+    lazy var xPulse: Pulse = {
+        let p = Pulse(configuration: self.pulseConfig, measureClosure: { () -> CGFloat in
+            return self.cursorPoint.x
+        }, outputClosure: { output in
+            self.cursorPoint.x = output
+        })
+        p.isHorizontal = true
+        p.label = "Horizontal"
+        return p
+    }()
 
-    lazy var yPulse = Pulse(configuration: self.pulseConfig, measureClosure: { () -> CGFloat in
-        return self.cursorPoint.y
-    }, outputClosure: { output in
-        self.cursorPoint.y = output
-    })
+    lazy var yPulse: Pulse = {
+        let p = Pulse(configuration: self.pulseConfig, measureClosure: { () -> CGFloat in
+            return self.cursorPoint.y
+        }, outputClosure: { output in
+            self.cursorPoint.y = output
+        })
+        p.isHorizontal = false
+        p.label = "Vertical"
+        return p
+    }()
 
 
     func updateCursorPosition(_ point: CGPoint) {

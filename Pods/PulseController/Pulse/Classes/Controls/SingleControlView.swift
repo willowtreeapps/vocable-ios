@@ -28,14 +28,14 @@ class SingleControlView: UIView {
     // UI Components
     // Titles
     private  var nameLabel: UILabel = {
-        let font = UIFont(name: "AvenirNext-Bold", size: 12.5)
+        let font = UIFont.boldSystemFont(ofSize: 12)
         let label = UILabel(frame: .zero)
         label.font = font
         return label
     }()
     
     private let valueLabel: UILabel = {
-        let font = UIFont(name: "AvenirNext-Bold", size: 12.5)
+        let font = UIFont.boldSystemFont(ofSize: 12)
         let label = UILabel(frame: .zero)
         label.font = font
         return label
@@ -64,15 +64,16 @@ class SingleControlView: UIView {
     
     /// Initial configuration
     private let configuration: SingleControlDisplayable
-    
-    required init(configuration: SingleControlDisplayable) {
+    private let isHorizontal: Bool
+    required init(configuration: SingleControlDisplayable, isHorizontal: Bool) {
         self.configuration = configuration
+        self.isHorizontal = isHorizontal
         super.init(frame: .zero)
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         valueSlider.translatesAutoresizingMaskIntoConstraints = false
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+
         // Add views
         addSubview(nameLabel)
         addSubview(valueSlider)
@@ -126,7 +127,7 @@ class SingleControlView: UIView {
     ///
     /// - Parameter configuration: Object storing configuration details for UI components
     private func update(with configuration: SingleControlDisplayable) {
-        nameLabel.text = configuration.name
+        nameLabel.text = (isHorizontal ? "H: " : "V: ") + configuration.name
         valueSlider.minimumValue = configuration.minimumValue
         valueSlider.maximumValue = configuration.maximumValue
     }

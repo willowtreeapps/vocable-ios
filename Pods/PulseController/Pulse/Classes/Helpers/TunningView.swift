@@ -58,7 +58,7 @@ class TunningView: UIView {
     private var topConstraint: NSLayoutConstraint? = nil
     
     // Draws current value of Pulse's `output` value and `setPoint`
-    private let graphView: LineGraphView
+//    private let graphView: LineGraphView
     
     /// Draws current value of Pulse's output value
     let outputValueGraphItem: LineGraphItem
@@ -81,11 +81,11 @@ class TunningView: UIView {
     
     var configurationChanged: ((TunningView, Pulse.Configuration) -> Void)
 
-    required init(configuration: Configuration, closeClosure: @escaping ((TunningView) -> Void), configurationChanged: @escaping ((TunningView, Pulse.Configuration) -> Void)) {
+    required init(isHorizontal: Bool, configuration: Configuration, closeClosure: @escaping ((TunningView) -> Void), configurationChanged: @escaping ((TunningView, Pulse.Configuration) -> Void)) {
         self.closeClosure = closeClosure
         self.configurationChanged = configurationChanged
 
-        controlsView = ControlsView(initialConfiguration: configuration.initialConfiguration)
+        controlsView = ControlsView(initialConfiguration: configuration.initialConfiguration, isHorizontal: isHorizontal)
 
         outputValueGraphItem = LineGraphItem(initialValue: CGFloat(0),
                                              strokeColor: UIColor.white,
@@ -99,8 +99,8 @@ class TunningView: UIView {
                                                minimumValue: CGFloat(configuration.minimumValue),
                                                maximumValue: CGFloat(configuration.maximumValue))
         
-        graphView = LineGraphView(items: [outputValueGraphItem, setpointValueGraphItem],
-                                  backgroundColors: LayoutConstants.GraphColors)
+//        graphView = LineGraphView(items: [outputValueGraphItem, setpointValueGraphItem],
+//                                  backgroundColors: LayoutConstants.GraphColors)
    
         super.init(frame: .zero)
         
@@ -126,13 +126,13 @@ class TunningView: UIView {
         }
 
         // Add views to `UIStackView`
-        graphView.translatesAutoresizingMaskIntoConstraints = false
+//        graphView.translatesAutoresizingMaskIntoConstraints = false
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(containerStackView)
       
         containerStackView.addArrangedSubview(closeButton)
-        containerStackView.addArrangedSubview(graphView)
+//        containerStackView.addArrangedSubview(graphView)
         containerStackView.addArrangedSubview(controlsView)
     }
     
@@ -143,9 +143,9 @@ class TunningView: UIView {
     }
     
     /// Update values drawn on graph
-    func updateGraph() {
-        graphView.update()
-    }
+//    func updateGraph() {
+//        graphView.update()
+//    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -164,10 +164,10 @@ class TunningView: UIView {
         NSLayoutConstraint.activate([
             self.containerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             self.containerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            self.graphView.heightAnchor.constraint(equalToConstant: 100),
+//            self.graphView.heightAnchor.constraint(equalToConstant: 100),
             
             self.controlsView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor),
-            self.graphView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor),
+//            self.graphView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor),
             self.closeButton.widthAnchor.constraint(equalToConstant: 40),
             self.closeButton.heightAnchor.constraint(equalToConstant: 40),
            topConstraint!,
@@ -178,9 +178,10 @@ class TunningView: UIView {
     private func heightForVisibilityState() -> CGFloat {
         let margin: CGFloat = 10
         let newHeight: CGFloat
-        if(visibilityState == .graphOnly) {
-            newHeight = graphView.frame.maxY + margin
-        } else if(visibilityState == .notVisible) {
+//        if(visibilityState == .graphOnly) {
+////            newHeight = graphView.frame.maxY + margin
+//        } else
+        if(visibilityState == .notVisible) {
            newHeight = 0
         } else {
 
@@ -194,7 +195,7 @@ class TunningView: UIView {
     @objc func buttonPressed() {
         switch visibilityState {
         case .fullyVisible:
-            visibilityState = .graphOnly
+            visibilityState = .notVisible//.graphOnly
         case .graphOnly:
             visibilityState = .notVisible
         case .notVisible:

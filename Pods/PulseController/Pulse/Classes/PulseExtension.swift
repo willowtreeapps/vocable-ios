@@ -16,43 +16,6 @@ extension Pulse {
     }
     
     public func showTunningView(minimumValue: CGFloat, maximumValue: CGFloat) {
-        tunningWindow = TunningWindow(frame: UIScreen.main.bounds)
-        tunningWindow?.windowLevel = UIWindow.Level.alert + 1
-        tunningWindow?.translatesAutoresizingMaskIntoConstraints = false
-
-        guard let alertWindow = tunningWindow else {
-            return
-        }
-        
-        let proxyOutputClosure = self.outputClosure
-
-        // Create `TunningView`
-        let tunningViewConfiguration: TunningView.Configuration = TunningView.Configuration(minimumValue: minimumValue, maximumValue: maximumValue, initialConfiguration: configuration)
-        let tunningViewController: TunningViewController = TunningViewController(configuration: tunningViewConfiguration, closeClosure: {  (sender) in
-            alertWindow.rootViewController = nil
-            alertWindow.isHidden = true
-            self.outputClosure = proxyOutputClosure
-            self.setPointChangedClosure = nil
-        }, configurationChanged: { [weak self] (sender, newConfiguration) in
-            guard let `self` = self else { return }
-            self.configuration = newConfiguration
-        })
-    
-        // Listen to changes in `output` and new `setPoint`
-        self.outputClosure = { newValue in
-            tunningViewController.pulseOutputValue = newValue
-            proxyOutputClosure(newValue)
-        }
-   
-        self.setPointChangedClosure = { newValue in
-            tunningViewController.setPointValue = newValue
-        }
-        
-        alertWindow.rootViewController = tunningViewController
-        alertWindow.makeKeyAndVisible()
-        alertWindow.isHidden = false
-        
-        // Show `TunningView`
-        tunningViewController.show()
+        TunningWindow.shared.tuningContainerViewController.addTuningViewController(for: self, minValue: minimumValue, maxValue: maximumValue)
     }
 }

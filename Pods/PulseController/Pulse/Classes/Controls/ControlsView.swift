@@ -59,11 +59,11 @@ class ControlsView: UIView {
     ///
     /// - Parameters:
     ///   - initialConfiguration: Initial configuration to be displayed by scroll bars
-    required init(initialConfiguration: Pulse.Configuration) {
-        minimumStepView = SingleControlView(configuration: PulseConstants.minimumValueStep)
-        proportionalGainView = SingleControlView(configuration: PulseConstants.proportionalGain)
-        integralGainView = SingleControlView(configuration: PulseConstants.integralGain)
-        derivativeGainView = SingleControlView(configuration: PulseConstants.derivativeGain)
+    required init(initialConfiguration: Pulse.Configuration, isHorizontal: Bool) {
+        minimumStepView = SingleControlView(configuration: PulseConstants.minimumValueStep, isHorizontal: isHorizontal)
+        proportionalGainView = SingleControlView(configuration: PulseConstants.proportionalGain, isHorizontal: isHorizontal)
+        integralGainView = SingleControlView(configuration: PulseConstants.integralGain, isHorizontal: isHorizontal)
+        derivativeGainView = SingleControlView(configuration: PulseConstants.derivativeGain, isHorizontal: isHorizontal)
         
         allControlViews = [minimumStepView, proportionalGainView, integralGainView, derivativeGainView]
         

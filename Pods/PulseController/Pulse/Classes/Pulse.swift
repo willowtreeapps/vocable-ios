@@ -38,7 +38,9 @@ public class Pulse: NSObject {
     ///
     /// @discussion:  It's used when you want to use tunning feature. If you want to use this class stand alone - you can remove it
     var tunningWindow: UIWindow? = nil
-    
+    public var isHorizontal = false
+    public var label: String = ""
+
     //  MARK: - Properties
     
     /// Target value `PID Controller` aims for
