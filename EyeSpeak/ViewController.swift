@@ -114,7 +114,7 @@ class ViewController: UIViewController, ScreenTrackingViewControllerDelegate {
 
         trackingView.frame = CGRect(x: 0.0, y: 0.0, width: 40, height: 40)
         trackingView.layer.cornerRadius = 20.0
-        trackingView.backgroundColor = UIColor.purple.withAlphaComponent(0.8)
+        trackingView.backgroundColor = .clear
         self.view.addSubview(trackingView)
 
         self.configureUI()
