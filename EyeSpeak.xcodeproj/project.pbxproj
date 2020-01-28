@@ -90,7 +90,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		130C00B420D2AD2A007C3163 /* EyeSpeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeSpeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		130C00B420D2AD2A007C3163 /* Eyespeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eyespeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		130C00B720D2AD2A007C3163 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		130C00B920D2AD2A007C3163 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		130C00BB20D2AD2A007C3163 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 		130C00B520D2AD2A007C3163 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				130C00B420D2AD2A007C3163 /* EyeSpeak.app */,
+				130C00B420D2AD2A007C3163 /* Eyespeak.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -418,7 +418,7 @@
 			);
 			name = EyeSpeak;
 			productName = EyeTrackingTest;
-			productReference = 130C00B420D2AD2A007C3163 /* EyeSpeak.app */;
+			productReference = 130C00B420D2AD2A007C3163 /* Eyespeak.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -701,8 +701,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.willowtree.EyeSpeak;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeak;
+				PRODUCT_NAME = Eyespeak;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -720,8 +720,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.willowtree.EyeSpeak;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeak;
+				PRODUCT_NAME = Eyespeak;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
