@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "130C00B320D2AD2A007C3163"
-               BuildableName = "EyeTrackingTest.app"
-               BlueprintName = "EyeTrackingTest"
+               BuildableName = "Eyespeak.app"
+               BlueprintName = "EyeSpeak"
                ReferencedContainer = "container:EyeSpeak.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -27,19 +27,17 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-      </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "130C00B320D2AD2A007C3163"
-            BuildableName = "EyeTrackingTest.app"
-            BlueprintName = "EyeTrackingTest"
+            BuildableName = "Eyespeak.app"
+            BlueprintName = "EyeSpeak"
             ReferencedContainer = "container:EyeSpeak.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <Testables>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -56,13 +54,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "130C00B320D2AD2A007C3163"
-            BuildableName = "EyeTrackingTest.app"
-            BlueprintName = "EyeTrackingTest"
+            BuildableName = "Eyespeak.app"
+            BlueprintName = "EyeSpeak"
             ReferencedContainer = "container:EyeSpeak.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -75,8 +71,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "130C00B320D2AD2A007C3163"
-            BuildableName = "EyeTrackingTest.app"
-            BlueprintName = "EyeTrackingTest"
+            BuildableName = "Eyespeak.app"
+            BlueprintName = "EyeSpeak"
             ReferencedContainer = "container:EyeSpeak.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
