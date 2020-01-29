@@ -63,53 +63,79 @@ class TextSelectionViewController: UIViewController {
             
             switch sectionKind {
             case .textField:
-                let textFieldItem = NSCollectionLayoutItem(
-                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.438),
-                                                       heightDimension: .fractionalHeight(1.0)))
-                let speakButtonItem = NSCollectionLayoutItem(
-                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.179),
-                                                       heightDimension: .fractionalHeight(1.0)))
-                let undoButtonItem = NSCollectionLayoutItem(
-                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.179),
-                                                       heightDimension: .fractionalHeight(1.0)))
-                
-                let keyboardButtonItem = NSCollectionLayoutItem(
-                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.179),
-                                                       heightDimension: .fractionalHeight(1.0)))
-                
-                let subitems = [textFieldItem, speakButtonItem, undoButtonItem, keyboardButtonItem]
-                subitems.forEach {
-                    $0.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 0, trailing: 8)
-                }
-                
-                let containerGroup = NSCollectionLayoutGroup.horizontal(
-                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                       heightDimension: .fractionalHeight(0.10)),
-                    subitems: subitems)
-                
-                let section = NSCollectionLayoutSection(group: containerGroup)
-                section.contentInsets = NSDirectionalEdgeInsets(top: 36, leading: 0, bottom: 16, trailing: 0)
-                
-                return section
+                return self.textFieldSectionLayout()
             case .categories:
-                break
+                return self.categoriesSectionLayout()
             }
-                        
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
-                                                  heightDimension: .fractionalHeight(1.0))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
-            
-            let groupHeight = NSCollectionLayoutDimension.fractionalHeight(0.125)
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                   heightDimension: groupHeight)
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: sectionKind.columns)
-            
-            let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 24, leading: 24, bottom: 16, trailing: 24)
-            return section
         }
         return layout
+    }
+    
+    private func textFieldSectionLayout() -> NSCollectionLayoutSection {
+        // TODO: implemnet edge insets and spacing like the categories section layout
+        let textFieldItem = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.438),
+                                               heightDimension: .fractionalHeight(1.0)))
+        let speakButtonItem = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.179),
+                                               heightDimension: .fractionalHeight(1.0)))
+        let undoButtonItem = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.179),
+                                               heightDimension: .fractionalHeight(1.0)))
+        
+        let keyboardButtonItem = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.179),
+                                               heightDimension: .fractionalHeight(1.0)))
+        
+        let subitems = [textFieldItem, speakButtonItem, undoButtonItem, keyboardButtonItem]
+        subitems.forEach {
+            $0.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 0, trailing: 8)
+        }
+        
+        let containerGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(0.143)),
+            subitems: subitems)
+        
+        let section = NSCollectionLayoutSection(group: containerGroup)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 36, leading: 0, bottom: 16, trailing: 0)
+        
+        return section
+    }
+    
+    private func categoriesSectionLayout() -> NSCollectionLayoutSection {
+        let category1Item = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.152),
+                                               heightDimension: .fractionalHeight(1.0)))
+        let category2Item = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.152),
+                                               heightDimension: .fractionalHeight(1.0)))
+        let category3Item = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.152),
+                                               heightDimension: .fractionalHeight(1.0)))
+        let category4Item = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.152),
+                                               heightDimension: .fractionalHeight(1.0)))
+        
+        let moreCategories = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.273),
+                                               heightDimension: .fractionalHeight(1.0)))
+        
+        
+        let subitems = [category1Item, category2Item, category3Item, category4Item, moreCategories]
+        subitems.forEach {
+            $0.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(0), top: .flexible(0), trailing: .flexible(0), bottom: .flexible(0))
+        }
+        
+        let containerGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(0.143)),
+            subitems: subitems)
+        containerGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(24), top: .fixed(16), trailing: .flexible(24), bottom: .fixed(0))
+        
+        let section = NSCollectionLayoutSection(group: containerGroup)
+        
+        return section
     }
     
     private func configureDataSource() {
