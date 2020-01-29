@@ -12,26 +12,26 @@ class TextSelectionViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    enum Category {
+        case want
+        case need
+        case three
+        case confirmation
+    }
+    
+    private var categoryPresets: [Category : [ItemWrapper]] = [
+        .want: (1...9).map { .presetItem("Want \($0)") },
+        .need: (1...9).map { .presetItem("Need \($0)") },
+        .three: (1...9).map { .presetItem("Three \($0)") },
+        .confirmation: (1...9).map { .presetItem("Yes \($0)") },
+    ]
+    
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
     enum Section: Int, CaseIterable {
         case textField
         case categories
-        
-        var columns: Int {
-            switch self {
-            case .textField:
-                return 4
-            case .categories:
-                return 5
-            }
-        }
-        
-//        var groupHeight: Int {
-//
-//        }
-//        case categories
-//        case presets
+        case presets
     }
     
     enum ItemWrapper: Hashable {
@@ -44,6 +44,7 @@ class TextSelectionViewController: UIViewController {
         case category3(String)
         case category4(String)
         case moreCategories(String)
+        case presetItem(String)
     }
 
     override func viewDidLoad() {
@@ -66,6 +67,8 @@ class TextSelectionViewController: UIViewController {
                 return self.textFieldSectionLayout()
             case .categories:
                 return self.categoriesSectionLayout()
+            case .presets:
+                return self.presetsSectionLayout()
             }
         }
         return layout
@@ -131,6 +134,26 @@ class TextSelectionViewController: UIViewController {
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(0.143)),
             subitems: subitems)
+        containerGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(24), top: .fixed(16), trailing: .flexible(24), bottom: .fixed(16))
+        
+        let section = NSCollectionLayoutSection(group: containerGroup)
+        
+        return section
+    }
+    
+    private func presetsSectionLayout() -> NSCollectionLayoutSection {
+        let presetItems = (0..<3).map { _ in NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.304),
+                                               heightDimension: .fractionalHeight(1.0))) }
+        
+        presetItems.forEach {
+            $0.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(0), top: .flexible(0), trailing: .flexible(0), bottom: .flexible(0))
+        }
+        
+        let containerGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(144.0 / 834.0)),
+            subitems: presetItems)
         containerGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(24), top: .fixed(16), trailing: .flexible(24), bottom: .fixed(0))
         
         let section = NSCollectionLayoutSection(group: containerGroup)
@@ -149,6 +172,10 @@ class TextSelectionViewController: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
                 cell.setup(title: title, backgroundColor: .backspaceFill, animationViewColor: .backspaceBloom, hoverBorderColor: .backspaceBorderHover)
                 return cell
+            case .presetItem(let preset):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
+                cell.setup(title: preset, backgroundColor: .backspaceFill, animationViewColor: .backspaceBloom, hoverBorderColor: .backspaceBorderHover)
+                return cell
             }
         })
         
@@ -158,6 +185,9 @@ class TextSelectionViewController: UIViewController {
         snapshot.appendItems([.textField, .send("speak"), .undo("undo"), .toggleKeyboard("keyboard")])
         snapshot.appendSections([.categories])
         snapshot.appendItems([.category1("I want..."), .category2("I am..."), .category3("Will you..."), .category4("Confirmations"), .moreCategories("More Categories")])
+        
+        snapshot.appendSections([.presets])
+        snapshot.appendItems(categoryPresets[.want]!)
             
         dataSource.apply(snapshot, animatingDifferences: false)
         
