@@ -16,11 +16,14 @@ class TextSelectionViewController: UIViewController {
     
     enum Section: Int, CaseIterable {
         case textField
+        case categories
         
         var columns: Int {
             switch self {
             case .textField:
                 return 4
+            case .categories:
+                return 5
             }
         }
         
@@ -36,6 +39,11 @@ class TextSelectionViewController: UIViewController {
         case send
         case undo
         case toggleKeyboard
+        case category1
+        case category2
+        case category3
+        case category4
+        case moreCategories
     }
 
     override func viewDidLoad() {
@@ -55,7 +63,7 @@ class TextSelectionViewController: UIViewController {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
                                                   heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
             
             let groupHeight = NSCollectionLayoutDimension.fractionalHeight(0.125)
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -63,7 +71,7 @@ class TextSelectionViewController: UIViewController {
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: sectionKind.columns)
             
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
             return section
         }
         return layout
@@ -72,41 +80,53 @@ class TextSelectionViewController: UIViewController {
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { (collectionView: UICollectionView, indexPath: IndexPath, identifier: Item) -> UICollectionViewCell? in
             
-            switch Section.allCases[indexPath.section] {
+            switch Item.allCases[indexPath.row] {
             case .textField:
-                switch Item.allCases[indexPath.row] {
-                case .textField:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TextFieldCollectionViewCell", for: indexPath) as! TextFieldCollectionViewCell
-                    return cell
-                case .send:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
-                    cell.setup(title: "Send", backgroundColor: .backspaceFill, animationViewColor: .backspaceBloom, hoverBorderColor: .backspaceBorderHover)
-                    return cell
-                case .undo:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
-                    cell.setup(title: "Undo", backgroundColor: .backspaceFill, animationViewColor: .backspaceBloom, hoverBorderColor: .backspaceBorderHover)
-                    return cell
-                case .toggleKeyboard:
-                    fatalError("not implemented yet")
-                }
-                
-//            case .categories:
-//                break
-//            case .presets:
-//                break
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TextFieldCollectionViewCell", for: indexPath) as! TextFieldCollectionViewCell
+                return cell
+            case .send:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
+                cell.setup(title: "speak", backgroundColor: .backspaceFill, animationViewColor: .backspaceBloom, hoverBorderColor: .backspaceBorderHover)
+                return cell
+            case .undo:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
+                cell.setup(title: "undo", backgroundColor: .backspaceFill, animationViewColor: .backspaceBloom, hoverBorderColor: .backspaceBorderHover)
+                return cell
+            case .toggleKeyboard:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
+                cell.setup(title: "keyboard", backgroundColor: .backspaceFill, animationViewColor: .backspaceBloom, hoverBorderColor: .backspaceBorderHover)
+                return cell
+            case .category1:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
+                cell.setup(title: "I want...", backgroundColor: .backspaceFill, animationViewColor: .backspaceBloom, hoverBorderColor: .backspaceBorderHover)
+                return cell
+            case .category2:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
+                cell.setup(title: "I am...", backgroundColor: .backspaceFill, animationViewColor: .backspaceBloom, hoverBorderColor: .backspaceBorderHover)
+                return cell
+            case .category3:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
+                cell.setup(title: "Will you...", backgroundColor: .backspaceFill, animationViewColor: .backspaceBloom, hoverBorderColor: .backspaceBorderHover)
+                return cell
+            case .category4:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
+                cell.setup(title: "Confirmations", backgroundColor: .backspaceFill, animationViewColor: .backspaceBloom, hoverBorderColor: .backspaceBorderHover)
+                return cell
+            case .moreCategories:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
+                cell.setup(title: "More Categories", backgroundColor: .backspaceFill, animationViewColor: .backspaceBloom, hoverBorderColor: .backspaceBorderHover)
+                return cell
             }
         })
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-        Section.allCases.forEach { section in
-            snapshot.appendSections([section])
+
+        snapshot.appendSections([.textField])
+        snapshot.appendItems([.textField, .send, .undo])
+        snapshot.appendSections([.categories])
+        snapshot.appendItems([.category1, .category2, .category3, .category4, .moreCategories])
             
-            switch section {
-            case .textField:
-                snapshot.appendItems([.textField, .send, .undo])
-            }
-            
-            dataSource.apply(snapshot, animatingDifferences: false)
-        }
+        dataSource.apply(snapshot, animatingDifferences: false)
+        
     }
 }
