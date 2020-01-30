@@ -139,7 +139,7 @@ class TextSelectionViewController: UIViewController {
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(0.143)),
             subitems: subitems)
-        containerGroup.interItemSpacing = .fixed(8)
+        containerGroup.interItemSpacing = .flexible(0)
         
 //        containerGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(24), top: .fixed(20), trailing: .flexible(24), bottom: .fixed(16))
         
