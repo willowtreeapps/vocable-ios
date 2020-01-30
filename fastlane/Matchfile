@@ -1,4 +1,4 @@
-git_url("https://jrtb@github.com/willowtreeapps/eyespeak-match.git")
+git_url("git@github.com:willowtreeapps/eyespeak-match.git")
 
 storage_mode("git")
 
