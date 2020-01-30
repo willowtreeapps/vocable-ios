@@ -45,6 +45,7 @@
 		13FE392421557DA900B6110F /* QuadrilateralTrackingRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */; };
 		13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392621557E5500B6110F /* Quadrilateral.swift */; };
 		13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */; };
+		54D3C41723E37CD40061EF47 /* EyeSpeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* EyeSpeakTests.swift */; };
 		9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E0542271F0DC0058DF57 /* CursorView.swift */; };
 		9D15E058227211AB0058DF57 /* FixedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E057227211AB0058DF57 /* FixedQueue.swift */; };
 		9D219D5E22C3D6A10087BF1B /* EyeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D219D5D22C3D6A10087BF1B /* EyeState.swift */; };
@@ -89,6 +90,16 @@
 		9DDF1F03226F7A160072A248 /* TrackingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1F02226F7A160072A248 /* TrackingCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		54D3C41923E37CD40061EF47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 130C00AC20D2AD2A007C3163 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 130C00B320D2AD2A007C3163;
+			remoteInfo = EyeSpeak;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		130C00B420D2AD2A007C3163 /* EyeSpeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeSpeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		130C00B720D2AD2A007C3163 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +142,9 @@
 		13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralTrackingRegion.swift; sourceTree = "<group>"; };
 		13FE392621557E5500B6110F /* Quadrilateral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quadrilateral.swift; sourceTree = "<group>"; };
 		13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralInterpolator.swift; sourceTree = "<group>"; };
+		54D3C41423E37CD40061EF47 /* EyeSpeakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EyeSpeakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		54D3C41623E37CD40061EF47 /* EyeSpeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeSpeakTests.swift; sourceTree = "<group>"; };
+		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9D15E057227211AB0058DF57 /* FixedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedQueue.swift; sourceTree = "<group>"; };
 		9D219D5D22C3D6A10087BF1B /* EyeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeState.swift; sourceTree = "<group>"; };
@@ -182,6 +196,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		54D3C41123E37CD40061EF47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -189,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				130C00B620D2AD2A007C3163 /* EyeSpeak */,
+				54D3C41523E37CD40061EF47 /* EyeSpeakTests */,
 				130C00B520D2AD2A007C3163 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -197,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				130C00B420D2AD2A007C3163 /* EyeSpeak.app */,
+				54D3C41423E37CD40061EF47 /* EyeSpeakTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -348,6 +371,15 @@
 			path = QuadrilateralTrackingRegion;
 			sourceTree = "<group>";
 		};
+		54D3C41523E37CD40061EF47 /* EyeSpeakTests */ = {
+			isa = PBXGroup;
+			children = (
+				54D3C41623E37CD40061EF47 /* EyeSpeakTests.swift */,
+				54D3C41823E37CD40061EF47 /* Info.plist */,
+			);
+			path = EyeSpeakTests;
+			sourceTree = "<group>";
+		};
 		9D15E0562272119E0058DF57 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,19 +453,41 @@
 			productReference = 130C00B420D2AD2A007C3163 /* EyeSpeak.app */;
 			productType = "com.apple.product-type.application";
 		};
+		54D3C41323E37CD40061EF47 /* EyeSpeakTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54D3C41D23E37CD40061EF47 /* Build configuration list for PBXNativeTarget "EyeSpeakTests" */;
+			buildPhases = (
+				54D3C41023E37CD40061EF47 /* Sources */,
+				54D3C41123E37CD40061EF47 /* Frameworks */,
+				54D3C41223E37CD40061EF47 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				54D3C41A23E37CD40061EF47 /* PBXTargetDependency */,
+			);
+			name = EyeSpeakTests;
+			productName = EyeSpeakTests;
+			productReference = 54D3C41423E37CD40061EF47 /* EyeSpeakTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		130C00AC20D2AD2A007C3163 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1000;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = WillowTree;
 				TargetAttributes = {
 					130C00B320D2AD2A007C3163 = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1030;
+					};
+					54D3C41323E37CD40061EF47 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 130C00B320D2AD2A007C3163;
 					};
 				};
 			};
@@ -451,6 +505,7 @@
 			projectRoot = "";
 			targets = (
 				130C00B320D2AD2A007C3163 /* EyeSpeak */,
+				54D3C41323E37CD40061EF47 /* EyeSpeakTests */,
 			);
 		};
 /* End PBXProject section */
@@ -469,6 +524,13 @@
 				9D739E0D226F433F00FEFFAC /* HotCornersTracking.storyboard in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
 				130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54D3C41223E37CD40061EF47 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,7 +615,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		54D3C41023E37CD40061EF47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54D3C41723E37CD40061EF47 /* EyeSpeakTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		54D3C41A23E37CD40061EF47 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 130C00B320D2AD2A007C3163 /* EyeSpeak */;
+			targetProxy = 54D3C41923E37CD40061EF47 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		130C00BD20D2AD2A007C3163 /* Main.storyboard */ = {
@@ -731,6 +809,50 @@
 			};
 			name = Release;
 		};
+		54D3C41B23E37CD40061EF47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 753J68XC6W;
+				INFOPLIST_FILE = EyeSpeakTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaactests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EyeSpeak.app/EyeSpeak";
+			};
+			name = Debug;
+		};
+		54D3C41C23E37CD40061EF47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 753J68XC6W;
+				INFOPLIST_FILE = EyeSpeakTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaactests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EyeSpeak.app/EyeSpeak";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -748,6 +870,15 @@
 			buildConfigurations = (
 				130C00C920D2AD2C007C3163 /* Debug */,
 				130C00CA20D2AD2C007C3163 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		54D3C41D23E37CD40061EF47 /* Build configuration list for PBXNativeTarget "EyeSpeakTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54D3C41B23E37CD40061EF47 /* Debug */,
+				54D3C41C23E37CD40061EF47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
