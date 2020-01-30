@@ -37,7 +37,7 @@ jobs:
       xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
-      FASTLANE_LANE: appstore
+      FASTLANE_LANE: testflight
     steps:
       - checkout
       - run: bundle install
