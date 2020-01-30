@@ -32,12 +32,12 @@ jobs:
       - store_artifacts:
           path: output
 
-  testflight:
+  buildanddeploytotestflight:
     macos:
       xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
-      FASTLANE_LANE: testflight
+      FASTLANE_LANE: buildanddeploytotestflight
     steps:
       - checkout
       - run: bundle install
@@ -57,7 +57,7 @@ workflows:
 #              only: develop
           requires:
             - build-and-test
-      - testflight:
+      - buildanddeploytotestflight:
 #          filters:
 #            branches:
 #              only: develop

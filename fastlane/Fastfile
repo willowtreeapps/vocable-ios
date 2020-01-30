@@ -19,7 +19,7 @@ platform :ios do
   end
 
   desc "AppStore build and upload to TestFlight"
-  lane :testflight do
+  lane :buildanddeploytotestflight do
     match(type: "appstore")
     build_app(scheme: "AppStore")
     upload_to_testflight
