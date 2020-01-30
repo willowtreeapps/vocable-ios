@@ -11,6 +11,7 @@ import UIKit
 class TextSelectionViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     enum Category {
         case want
@@ -29,12 +30,16 @@ class TextSelectionViewController: UIViewController {
                 .presetItem("I would like some water."),
                 .presetItem("I would like some coffee."),
                 .presetItem("I want another pillow.")],
-        .need: (1...9).map { .presetItem("Need \($0)") },
-        .three: (1...9).map { .presetItem("Three \($0)") },
-        .confirmation: (1...9).map { .presetItem("Yes \($0)") },
+        .need: (1...28).map { .presetItem("Need Item \($0)") },
+        .three: (1...9).map { .presetItem("Category 3 item \($0)") },
+        .confirmation: (1...9).map { .presetItem("Confirmation item \($0)") },
     ]
     
+    private let maxItemsPerPage = 9
+    
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
+    
+    private var selectedCategory: Category = .need
     
     enum Section: Int, CaseIterable {
         case textField
@@ -57,12 +62,23 @@ class TextSelectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupCollectionView()
+        configureDataSource()
+        setupPageControl()
+    }
+    
+    private func setupCollectionView() {
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(UINib(nibName: "TrackingButtonCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TrackingButtonCollectionViewCell")
         collectionView.collectionViewLayout = createLayout()
         collectionView.backgroundColor = .black
-        configureDataSource()
+    }
+    
+    private func setupPageControl(){
+        let presetsInCategory = Double(categoryPresets[selectedCategory]?.count ?? 0)
+        let maxItemsPerPage = Double(self.maxItemsPerPage)
+        pageControl.numberOfPages = Int((presetsInCategory / maxItemsPerPage).rounded(.up))
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -202,7 +218,7 @@ class TextSelectionViewController: UIViewController {
         snapshot.appendItems([.category1("Basic Needs"), .category2("Personal Care"), .category3("Salutations"), .category4("Yes | No"), .moreCategories("More Categories")])
         
         snapshot.appendSections([.presets])
-        snapshot.appendItems(categoryPresets[.want]!)
+        snapshot.appendItems(categoryPresets[selectedCategory]!)
             
         dataSource.apply(snapshot, animatingDifferences: false)
         
