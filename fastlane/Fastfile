@@ -7,12 +7,14 @@ platform :ios do
 
   desc "Runs all the tests"
   lane :test do
-    scan
+    scan(scheme: "AdHoc")
   end
 
   desc "Ad-hoc build"
   lane :adhoc do
     match(type: "adhoc")
-    gym(export_method: "ad-hoc")
+    gym(export_method: "ad-hoc",
+        scheme: "AdHoc",
+    )
   end
 end
