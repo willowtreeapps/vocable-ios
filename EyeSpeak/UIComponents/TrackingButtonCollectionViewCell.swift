@@ -11,14 +11,26 @@ import UIKit
 class TrackingButtonCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var button: TrackingButton!
     
-    func setup(title: String, backgroundColor: UIColor, animationViewColor: UIColor, hoverBorderColor: UIColor) {
+    func setup(title: String, titleColor: UIColor, textStyle: UIFont.TextStyle, backgroundColor: UIColor, animationViewColor: UIColor, borderColor: UIColor) {
         
+        // adjust button text styling
         button.setTitle(title, for: .normal)
+        button.setTitleColor(titleColor, for: .normal)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.titleLabel?.font = .preferredFont(forTextStyle: textStyle)
+            
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.titleLabel?.textAlignment = .center
+        
         button.backgroundColor = backgroundColor
         button.animationViewColor = animationViewColor
-        button.hoverBorderColor = hoverBorderColor
+        // deprecated from old tracking engine
+        //button.hoverBorderColor = hoverBorderColor
         
-        button.statelessBorderColor = .clear
+        contentView.layer.cornerRadius = 6.0
+        contentView.layer.borderWidth = 4.0
+        contentView.layer.borderColor = borderColor.cgColor
+        contentView.layer.masksToBounds = true
         
     }
 
