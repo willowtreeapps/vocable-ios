@@ -17,4 +17,12 @@ platform :ios do
         scheme: "AdHoc",
     )
   end
+
+  desc "AppStore build and upload to TestFlight"
+  lane :testflight do
+    match(type: "appstore")
+    build_app(scheme: "AppStore")
+    upload_to_testflight
+    #slack(message: "Successfully distributed a new TestFlight build")
+  end
 end
