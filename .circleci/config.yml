@@ -52,14 +52,14 @@ workflows:
     jobs:
       - build-and-test
       - adhoc:
-          filters:
-            branches:
-              only: develop
+#          filters:
+#            branches:
+#              only: develop
           requires:
             - build-and-test
       - testflight:
-          filters:
-            branches:
-              only: develop
+#          filters:
+#            branches:
+#              only: develop
           requires:
             - build-and-test            
