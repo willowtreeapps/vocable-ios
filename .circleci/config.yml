@@ -48,7 +48,7 @@ jobs:
           path: output
           
 workflows:
-  build-test-adhoc:
+  build-test-adhoc-testflight:
     jobs:
       - build-and-test
       - adhoc:
