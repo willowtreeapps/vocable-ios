@@ -13,9 +13,4 @@ class PresetPageControlReusableView: UICollectionReusableView {
     
     @IBOutlet var pageControl: UIPageControl!
     
-    func updatePageControl() {
-        pageControl.numberOfPages = 3
-        pageControl.currentPage = 0
-    }
-    
 }
