@@ -48,7 +48,6 @@
 		6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */; };
 		6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */; };
 		6B9DFA5D23E889DB0037673E /* UIHeadGaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */; };
-		6B9DFA5E23E889DB0037673E /* UIHoverableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4F23E889DB0037673E /* UIHoverableButton.swift */; };
 		6B9DFA5F23E889DB0037673E /* UIHeadGazeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA5023E889DB0037673E /* UIHeadGazeEvent.swift */; };
 		6B9DFA6023E889DB0037673E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA5123E889DB0037673E /* Extensions.swift */; };
 		6B9DFA6223E889DB0037673E /* UIVirtualCursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA5423E889DB0037673E /* UIVirtualCursorView.swift */; };
@@ -146,7 +145,6 @@
 		6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGazeViewController.swift; sourceTree = "<group>"; };
 		6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadGazeWindow.swift; sourceTree = "<group>"; };
 		6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGaze.swift; sourceTree = "<group>"; };
-		6B9DFA4F23E889DB0037673E /* UIHoverableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHoverableButton.swift; sourceTree = "<group>"; };
 		6B9DFA5023E889DB0037673E /* UIHeadGazeEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGazeEvent.swift; sourceTree = "<group>"; };
 		6B9DFA5123E889DB0037673E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6B9DFA5423E889DB0037673E /* UIVirtualCursorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVirtualCursorView.swift; sourceTree = "<group>"; };
@@ -380,7 +378,6 @@
 				6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */,
 				6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */,
 				6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */,
-				6B9DFA4F23E889DB0037673E /* UIHoverableButton.swift */,
 				6B9DFA5023E889DB0037673E /* UIHeadGazeEvent.swift */,
 				6B9DFA5423E889DB0037673E /* UIVirtualCursorView.swift */,
 				6B9DFA5623E889DB0037673E /* UIHeadGazeRecognizer.swift */,
@@ -560,7 +557,6 @@
 				6B9DFA6423E889DB0037673E /* UIHeadGazeRecognizer.swift in Sources */,
 				9DDBFD7D229852FA00D19BCA /* AnimatingState.swift in Sources */,
 				9DDF1EF9226F61690072A248 /* HotCornersTrackableViewController.swift in Sources */,
-				6B9DFA5E23E889DB0037673E /* UIHoverableButton.swift in Sources */,
 				134B6417214C03FC00285AD5 /* LookAtDirectionIntersectionMethod.swift in Sources */,
 				13DA076C21929D760081754A /* Array+Split.swift in Sources */,
 				134B6419214C3A4B00285AD5 /* TrackingNode.swift in Sources */,

@@ -1,11 +1,3 @@
-//
-//  UIHeadGaze.swift
-//  demo
-//
-//  Created by Chris Stroud on 2/3/20.
-//  Copyright © 2020 Xie,Jinrong. All rights reserved.
-//
-
 import UIKit
 
 class UIHeadGaze: UITouch {

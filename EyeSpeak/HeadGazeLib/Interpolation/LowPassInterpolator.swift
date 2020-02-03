@@ -1,9 +1,9 @@
 //
 //  LowPassInterpolator.swift
-//  demo
+//  EyeSpeak
 //
 //  Created by Chris Stroud on 1/31/20.
-//  Copyright © 2020 Xie,Jinrong. All rights reserved.
+//  Copyright © 2020 WillowTree. All rights reserved.
 //
 
 import Foundation

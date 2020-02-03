@@ -1,9 +1,9 @@
 //
-//  HeadGazeWindow.swift
-//  demo
+//  Interpolation.swift
+//  EyeSpeak
 //
 //  Created by Chris Stroud on 1/30/20.
-//  Copyright © 2020 Xie,Jinrong. All rights reserved.
+//  Copyright © 2020 WillowTree. All rights reserved.
 //
 
 import UIKit
@@ -35,7 +35,7 @@ class HeadGazeWindow: UIWindow {
 
         guard let trackingView = trackingView, hitTestResult == trackingView else {
             // If we're not continuing to track the same view, end
-            // the current tracking session (if one is active() and
+            // the current tracking session (if one is active) and
             // start a new one with the newly hit-tested view (if non-nil)
             self.trackingView?.gazeEnded(gaze, with: event)
             self.trackingView = hitTestResult
