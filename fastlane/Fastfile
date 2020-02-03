@@ -33,6 +33,5 @@ platform :ios do
 
     build_app(scheme: "AppStore")
     upload_to_testflight
-    #slack(message: "Successfully distributed a new TestFlight build")
   end
 end
