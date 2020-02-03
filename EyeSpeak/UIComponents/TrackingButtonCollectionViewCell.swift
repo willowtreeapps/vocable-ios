@@ -27,6 +27,8 @@ class TrackingButtonCollectionViewCell: UICollectionViewCell {
         // deprecated from old tracking engine
         //button.hoverBorderColor = hoverBorderColor
         
+        button.isUserInteractionEnabled = false
+        
         contentView.layer.cornerRadius = 6.0
         contentView.layer.borderWidth = 4.0
         contentView.layer.borderColor = borderColor.cgColor

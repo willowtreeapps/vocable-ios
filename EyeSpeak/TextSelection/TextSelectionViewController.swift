@@ -8,9 +8,9 @@
 
 import UIKit
 
-class TextSelectionViewController: UIViewController {
+class TextSelectionViewController: UICollectionViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+//    @IBOutlet weak var collectionView: UICollectionView!
     
     enum Category {
         case want
@@ -28,13 +28,42 @@ class TextSelectionViewController: UIViewController {
                 .presetItem("I want my pillow fixed."),
                 .presetItem("I would like some water."),
                 .presetItem("I would like some coffee."),
-                .presetItem("I want another pillow.")],
+                .presetItem("I want another pillow."),
+        .presetItem("I want the door closed.2"),
+        .presetItem("I want the door open.2"),
+        .presetItem("I would like to go to the bathroom.2"),
+        .presetItem("I want the lights off.2"),
+        .presetItem("I want the lights on.2"),
+        .presetItem("I want my pillow fixed.2"),
+        .presetItem("I would like some water.2"),
+        .presetItem("I would like some coffee.2"),
+        .presetItem("I want the door closed.3"),
+        .presetItem("I want the door open.3"),
+        .presetItem("I would like to go to the bathroom.3"),
+        .presetItem("I want the lights off.3"),
+        .presetItem("I want the lights on.3"),
+        .presetItem("I want my pillow fixed.3"),
+        .presetItem("I want another pillow.3")],
         .need: (1...9).map { .presetItem("Need \($0)") },
         .three: (1...9).map { .presetItem("Three \($0)") },
         .confirmation: (1...9).map { .presetItem("Yes \($0)") },
     ]
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
+    private weak var orthogonalScrollView: UIScrollView? {
+        didSet {
+            scrollOffsetObserver = orthogonalScrollView?.observe(\.contentOffset, changeHandler: handleScrollViewOffsetChange(scrollView:offset:))
+        }
+    }
+    private var scrollOffsetObserver: NSKeyValueObservation?
+    private weak var pageControl: UIPageControl? {
+        didSet {
+            pageControl?.addTarget(self, action: #selector(handlePageControlChange), for: .valueChanged)
+        }
+    }
+    
+    private let totalHeight: CGFloat = 834.0
+    private let totalWidth: CGFloat = 1112.0
     
     enum Section: Int, CaseIterable {
         case textField
@@ -62,6 +91,9 @@ class TextSelectionViewController: UIViewController {
         collectionView.register(UINib(nibName: "TrackingButtonCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TrackingButtonCollectionViewCell")
         collectionView.collectionViewLayout = createLayout()
         collectionView.backgroundColor = .black
+        
+        collectionView.register(PresetPageControlReusableView.self, forSupplementaryViewOfKind: "footerPageIndicator", withReuseIdentifier: "PresetPageControlView")
+        
         configureDataSource()
     }
     
@@ -86,50 +118,50 @@ class TextSelectionViewController: UIViewController {
     private func textFieldSectionLayout() -> NSCollectionLayoutSection {
         // TODO: implemnet edge insets and spacing like the categories section layout
         let textFieldItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(488.0 / 1112.0),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(488.0 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         let speakButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(168.0 / 1112.0),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(168.0 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         let undoButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(168.0 / 1112.0),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(168.0 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         
         let keyboardButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(176.0 / 1112.0),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(176.0 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         
         let subitems = [textFieldItem, speakButtonItem, undoButtonItem, keyboardButtonItem]
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(0.143)),
+                                               heightDimension: .fractionalHeight(120.0 / totalHeight)),
             subitems: subitems)
-        containerGroup.interItemSpacing = .fixed(8)
+        containerGroup.interItemSpacing = .flexible(0)
         
         let section = NSCollectionLayoutSection(group: containerGroup)
 //        containerGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(24), top: .fixed(36), trailing: .flexible(24), bottom: .fixed(16))
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 0, trailing: 32)
         
         return section
     }
     
     private func categoriesSectionLayout() -> NSCollectionLayoutSection {
         let category1Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(170.0 / 1112.0),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(170.0 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         let category2Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(170.0 / 1112.0),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(170.0 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         let category3Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(170.0 / 1112.0),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(170.0 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         let category4Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(170.0 / 1112.0),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(170.0 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         
         let moreCategories = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(304.0 / 1112.0),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(304.0 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         
         
@@ -137,41 +169,45 @@ class TextSelectionViewController: UIViewController {
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(0.143)),
+                                               heightDimension: .fractionalHeight(120.0 / totalHeight)),
             subitems: subitems)
         containerGroup.interItemSpacing = .flexible(0)
         
-//        containerGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(24), top: .fixed(20), trailing: .flexible(24), bottom: .fixed(16))
-        
         let section = NSCollectionLayoutSection(group: containerGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
         
         return section
     }
     
     private func presetsSectionLayout() -> NSCollectionLayoutSection {
-        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(339.0 / 1112.0),
+        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(339.0 / totalWidth),
                                                                                    heightDimension: .fractionalHeight(1.0)))
         
         let rowGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(1.0)),
             subitem: presetItem, count: 3)
-//        rowGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
         rowGroup.interItemSpacing = .fixed(16)
         
         let containerGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(512.0 / 834.0)),
+                                               heightDimension: .fractionalHeight(464.0 / totalHeight)),
             subitem: rowGroup, count: 3)
-//        containerGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(0), top: .fixed(36), trailing: .flexible(0), bottom: .fixed(0))
         containerGroup.interItemSpacing = .fixed(16)
-        containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 32)
+        containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
+        
+        
         
         let section = NSCollectionLayoutSection(group: containerGroup)
-        section.interGroupSpacing = 16
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+        section.interGroupSpacing = 0
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 64)
         section.orthogonalScrollingBehavior = .groupPaging
+        
+        let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+        footer.extendsBoundary = true
+        footer.pinToVisibleBounds = true
+        section.boundarySupplementaryItems = [footer]
         
         return section
     }
@@ -203,8 +239,49 @@ class TextSelectionViewController: UIViewController {
         
         snapshot.appendSections([.presets])
         snapshot.appendItems(categoryPresets[.want]!)
+        
+        dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "PresetPageControlView", for: indexPath) as! PresetPageControlReusableView
+            self?.pageControl = view.pageControl
+            return view
+        }
             
         dataSource.apply(snapshot, animatingDifferences: false)
         
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        func locateNearestContainingScrollView(for view: UIView?) -> UIScrollView? {
+            if view == nil {
+                return nil
+            } else if let view = view as? UIScrollView {
+                return view
+            }
+            return locateNearestContainingScrollView(for: view?.superview)
+        }
+        
+        if  orthogonalScrollView == nil && dataSource.snapshot().indexOfSection(.presets) == indexPath.section {
+            orthogonalScrollView = locateNearestContainingScrollView(for: cell)
+        }
+        
+    }
+    
+    func handleScrollViewOffsetChange(scrollView: UIScrollView, offset: NSKeyValueObservedChange<CGPoint>) {
+        let numPages = ceil(scrollView.contentSize.width / scrollView.bounds.width)
+        let pageNum = floor(scrollView.bounds.midX / scrollView.bounds.width)
+        
+        if let pageControl = pageControl {
+            pageControl.numberOfPages = Int(numPages)
+            pageControl.currentPage = Int(pageNum)
+        }
+    }
+    
+    @objc func handlePageControlChange() {
+        guard let page = pageControl?.currentPage, let scrollView = orthogonalScrollView else { return }
+        let x = min(scrollView.bounds.width * CGFloat(page), scrollView.contentSize.width - scrollView.bounds.width)
+        let rect = CGRect(x: x, y: 0, width: scrollView.bounds.width, height: scrollView.bounds.height)
+        orthogonalScrollView?.scrollRectToVisible(rect, animated: true)
+    }
+    
+    
 }

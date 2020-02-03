@@ -87,6 +87,7 @@
 		9DDF1EFF226F654B0072A248 /* HotCornerGazeableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */; };
 		9DDF1F01226F66630072A248 /* HotCornerTrackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */; };
 		9DDF1F03226F7A160072A248 /* TrackingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1F02226F7A160072A248 /* TrackingCollectionViewCell.swift */; };
+		A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */; };
 		B879830E23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879830C23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift */; };
 		B879830F23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B879830D23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib */; };
 		B879831123E0CEC300DC1A81 /* TextSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879831023E0CEC300DC1A81 /* TextSelectionViewController.swift */; };
@@ -177,6 +178,7 @@
 		9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerGazeableComponent.swift; sourceTree = "<group>"; };
 		9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerTrackable.swift; sourceTree = "<group>"; };
 		9DDF1F02226F7A160072A248 /* TrackingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingCollectionViewCell.swift; sourceTree = "<group>"; };
+		A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControlReusableView.swift; sourceTree = "<group>"; };
 		B879830C23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		B879830D23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCollectionViewCell.xib; sourceTree = "<group>"; };
 		B879831023E0CEC300DC1A81 /* TextSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSelectionViewController.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 			children = (
 				B879831323E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift */,
 				B879831423E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.xib */,
+				A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				13B71583214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift in Sources */,
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
 				9DDF1EFF226F654B0072A248 /* HotCornerGazeableComponent.swift in Sources */,
+				A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */,
 				9D3FC1F52268B64C003C5841 /* HotCornerView.swift in Sources */,
 				13FE3922215577E300B6110F /* ConfigurationListTableViewController.swift in Sources */,
 				13FE392421557DA900B6110F /* QuadrilateralTrackingRegion.swift in Sources */,
