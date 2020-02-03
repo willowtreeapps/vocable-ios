@@ -9,6 +9,9 @@
 import Foundation
 import CoreGraphics
 
+// Extensions of types that we would like to interpolate
+// to make them conform to Interpolable
+
 extension CGPoint: Interpolable {
     var interpolableValues: [Double] {
         return [Double(x), Double(y)]

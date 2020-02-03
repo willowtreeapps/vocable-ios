@@ -8,6 +8,13 @@
 
 import Foundation
 
+/// A low-pass filter interpolator.
+///
+/// Values given to the interpolator are weighted and summed with
+/// the inversely-weighted current value of the interpolator. The weight is
+/// derived by the filterFactor. If the filterFactor is set to 0.5, the interpolator
+/// would effectively be averaging the previous value and the new value to
+/// compute its newly updated state.
 class LowPassInterpolator<E: Interpolable>: Interpolator {
     let filterFactor: Double
     let valueInterpolators: [InterpolatorKind]
@@ -22,9 +29,6 @@ class LowPassInterpolator<E: Interpolable>: Interpolator {
     }
 
     func update(with newValue: E, factor: Double?) -> E {
-        if let factor = factor, abs(factor - filterFactor) > 0.1 {
-            print("factor: \(factor)")
-        }
         let interpolated = zip(newValue.interpolableValues, valueInterpolators).map { (newValue, interpolator) in
             return interpolator.update(with: newValue, factor: factor)
         }
