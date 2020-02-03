@@ -47,6 +47,7 @@ class TextSelectionViewController: UICollectionViewController {
         }
     }
     
+    // TODO: Need to figure out how to update fractional width of cells without using collection view size
     private let totalHeight: CGFloat = 834.0
     private let totalWidth: CGFloat = 1112.0
     
