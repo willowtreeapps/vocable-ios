@@ -9,16 +9,8 @@ import Foundation
 import UIKit
 import SpriteKit
 
-/**
- This is a user custom view inherent from UIHeadGazeView.
- It renders a virtual cursor/crosshair on top of the screen
- using SpriteKit to indicate where the head is pointing at
- on the device screen.
- Override gazeMoved() to handle the UIHeadGazeEvent, or
- add UIHeadGazeRecognizer to monitor UIHeadGazeEvent
- see usage in ViewController.swift
- */
 class UIVirtualCursorView: SKView {
+
     var spritekitScene: SKScene?
     var cursorNode: SKSpriteNode!
     var circleNode: SKShapeNode!
@@ -57,11 +49,11 @@ class UIVirtualCursorView: SKView {
         createCursor()
     }
     
-    func createCursor(){
+    func createCursor() {
         if spriteNode != nil { spriteNode.removeFromParent() }
         
         let scale = 1.5
-        let ring   = SKShapeNode(ellipseOf: CGSize(width: 6*scale, height: 6*scale))
+        let ring = SKShapeNode(ellipseOf: CGSize(width: 6*scale, height: 6*scale))
         ring.position = CGPoint(x: 0, y: 0)
         ring.name = "dot"
         ring.strokeColor = SKColor.cyan
@@ -82,7 +74,7 @@ class UIVirtualCursorView: SKView {
         spritekitScene?.addChild(spriteNode)
     }
     
-    func createCursorIcon(imageNamed cursorName: String = "crosshair"){
+    func createCursorIcon(imageNamed cursorName: String = "crosshair") {
         if spriteNode != nil { spriteNode.removeFromParent() }
         
         let boundSize = self.bounds.size
@@ -95,9 +87,6 @@ class UIVirtualCursorView: SKView {
     }
     
     override func gazeMoved(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
-        //print("UIHeadGazeView: gaze NDC position=\(gaze?.location(in: nil))")
-        //print("UIHeadGazeView: gaze UIView position=\(gaze?.location(in: self))")
-        //print("UIHeadGazeView: gaze SKScene position=\(gaze?.location(in: spritekitScence))")
         if let scene = spritekitScene {
             let position = gaze.location(in: scene)
             spriteNode.position = position
