@@ -45,6 +45,17 @@
 		13FE392421557DA900B6110F /* QuadrilateralTrackingRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */; };
 		13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392621557E5500B6110F /* Quadrilateral.swift */; };
 		13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */; };
+		6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */; };
+		6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */; };
+		6B9DFA5D23E889DB0037673E /* UIHeadGaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */; };
+		6B9DFA5F23E889DB0037673E /* UIHeadGazeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA5023E889DB0037673E /* UIHeadGazeEvent.swift */; };
+		6B9DFA6023E889DB0037673E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA5123E889DB0037673E /* Extensions.swift */; };
+		6B9DFA6223E889DB0037673E /* UIVirtualCursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA5423E889DB0037673E /* UIVirtualCursorView.swift */; };
+		6B9DFA6423E889DB0037673E /* UIHeadGazeRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA5623E889DB0037673E /* UIHeadGazeRecognizer.swift */; };
+		6B9DFA6923E88A1B0037673E /* GazeLib.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B9DFA6823E88A1B0037673E /* GazeLib.scnassets */; };
+		6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA6D23E88A250037673E /* LowPassInterpolator.swift */; };
+		6B9DFA6F23E88A610037673E /* Interpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA6C23E88A250037673E /* Interpolation.swift */; };
+		6B9DFA7023E88A630037673E /* InterpolableValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA6B23E88A250037673E /* InterpolableValues.swift */; };
 		9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E0542271F0DC0058DF57 /* CursorView.swift */; };
 		9D15E058227211AB0058DF57 /* FixedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E057227211AB0058DF57 /* FixedQueue.swift */; };
 		9D219D5E22C3D6A10087BF1B /* EyeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D219D5D22C3D6A10087BF1B /* EyeState.swift */; };
@@ -137,6 +148,17 @@
 		13FE392321557DA900B6110F /* QuadrilateralTrackingRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralTrackingRegion.swift; sourceTree = "<group>"; };
 		13FE392621557E5500B6110F /* Quadrilateral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quadrilateral.swift; sourceTree = "<group>"; };
 		13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralInterpolator.swift; sourceTree = "<group>"; };
+		6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGazeViewController.swift; sourceTree = "<group>"; };
+		6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadGazeWindow.swift; sourceTree = "<group>"; };
+		6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGaze.swift; sourceTree = "<group>"; };
+		6B9DFA5023E889DB0037673E /* UIHeadGazeEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGazeEvent.swift; sourceTree = "<group>"; };
+		6B9DFA5123E889DB0037673E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		6B9DFA5423E889DB0037673E /* UIVirtualCursorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVirtualCursorView.swift; sourceTree = "<group>"; };
+		6B9DFA5623E889DB0037673E /* UIHeadGazeRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGazeRecognizer.swift; sourceTree = "<group>"; };
+		6B9DFA6823E88A1B0037673E /* GazeLib.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = GazeLib.scnassets; sourceTree = "<group>"; };
+		6B9DFA6B23E88A250037673E /* InterpolableValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpolableValues.swift; sourceTree = "<group>"; };
+		6B9DFA6C23E88A250037673E /* Interpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolation.swift; sourceTree = "<group>"; };
+		6B9DFA6D23E88A250037673E /* LowPassInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowPassInterpolator.swift; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9D15E057227211AB0058DF57 /* FixedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedQueue.swift; sourceTree = "<group>"; };
 		9D219D5D22C3D6A10087BF1B /* EyeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeState.swift; sourceTree = "<group>"; };
@@ -216,6 +238,7 @@
 		130C00B620D2AD2A007C3163 /* EyeSpeak */ = {
 			isa = PBXGroup;
 			children = (
+				6B9DFA4B23E889DB0037673E /* HeadGazeLib */,
 				9D219D5C22C3D6940087BF1B /* Gestures */,
 				9D15E0562272119E0058DF57 /* Utilities */,
 				130C00B720D2AD2A007C3163 /* AppDelegate.swift */,
@@ -362,6 +385,32 @@
 			path = QuadrilateralTrackingRegion;
 			sourceTree = "<group>";
 		};
+		6B9DFA4B23E889DB0037673E /* HeadGazeLib */ = {
+			isa = PBXGroup;
+			children = (
+				6B9DFA5123E889DB0037673E /* Extensions.swift */,
+				6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */,
+				6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */,
+				6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */,
+				6B9DFA5023E889DB0037673E /* UIHeadGazeEvent.swift */,
+				6B9DFA5423E889DB0037673E /* UIVirtualCursorView.swift */,
+				6B9DFA5623E889DB0037673E /* UIHeadGazeRecognizer.swift */,
+				6B9DFA6823E88A1B0037673E /* GazeLib.scnassets */,
+				6B9DFA6A23E88A250037673E /* Interpolation */,
+			);
+			path = HeadGazeLib;
+			sourceTree = "<group>";
+		};
+		6B9DFA6A23E88A250037673E /* Interpolation */ = {
+			isa = PBXGroup;
+			children = (
+				6B9DFA6B23E88A250037673E /* InterpolableValues.swift */,
+				6B9DFA6C23E88A250037673E /* Interpolation.swift */,
+				6B9DFA6D23E88A250037673E /* LowPassInterpolator.swift */,
+			);
+			path = Interpolation;
+			sourceTree = "<group>";
+		};
 		9D15E0562272119E0058DF57 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -503,6 +552,7 @@
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,
 				13204C592180E564005410FC /* SixButtonKeyboardViewController.storyboard in Resources */,
 				9D739E0D226F433F00FEFFAC /* HotCornersTracking.storyboard in Resources */,
+				6B9DFA6923E88A1B0037673E /* GazeLib.scnassets in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
 				130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */,
 			);
@@ -536,14 +586,18 @@
 				9D739DF12269FEFA00FEFFAC /* PresetsViewController.swift in Sources */,
 				13C32B88213991190090BB7D /* LineSegment.swift in Sources */,
 				9D739E03226A0B3A00FEFFAC /* UIStoryboardSegue+Identifier.swift in Sources */,
+				6B9DFA6023E889DB0037673E /* Extensions.swift in Sources */,
 				13204C572180E559005410FC /* SixButtonKeyboardViewController.swift in Sources */,
 				9DA02929228CF5ED002C8D21 /* CoreGraphics+Utilities.swift in Sources */,
 				9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */,
+				6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */,
+				6B9DFA6423E889DB0037673E /* UIHeadGazeRecognizer.swift in Sources */,
 				9DDBFD7D229852FA00D19BCA /* AnimatingState.swift in Sources */,
 				9DDF1EF9226F61690072A248 /* HotCornersTrackableViewController.swift in Sources */,
 				134B6417214C03FC00285AD5 /* LookAtDirectionIntersectionMethod.swift in Sources */,
 				13DA076C21929D760081754A /* Array+Split.swift in Sources */,
 				134B6419214C3A4B00285AD5 /* TrackingNode.swift in Sources */,
+				6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */,
 				9DC7C03222676AA400A1D503 /* CircularAnimatable.swift in Sources */,
 				9D739DFB226A026E00FEFFAC /* PresetsCollectionViewFlowLayout.swift in Sources */,
 				13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */,
@@ -555,11 +609,14 @@
 				13DA0768219121DE0081754A /* TrackingView.swift in Sources */,
 				9DB58D072265252300E99C3B /* TrackableWidget.swift in Sources */,
 				9D739DF32269FF6A00FEFFAC /* PresetsCollectionViewController.swift in Sources */,
+				6B9DFA7023E88A630037673E /* InterpolableValues.swift in Sources */,
 				9DB58D032264DF1B00E99C3B /* TextPredictionController.swift in Sources */,
 				13A7B914214C032A00714057 /* HeadDirectionIntersectionMethod.swift in Sources */,
+				6B9DFA5D23E889DB0037673E /* UIHeadGaze.swift in Sources */,
 				13B1865E2108E8030099D278 /* FaceNode.swift in Sources */,
 				13C32B8A2139A2440090BB7D /* IntersectionPointNode.swift in Sources */,
 				9D739DF9226A01B800FEFFAC /* Eyespeak.xcdatamodeld in Sources */,
+				6B9DFA6F23E88A610037673E /* Interpolation.swift in Sources */,
 				9D2BB542227A3AFB002BB068 /* PrettyExtensions.swift in Sources */,
 				13FE391C2154166600B6110F /* ClosedRange+UnitSpace.swift in Sources */,
 				9D2BB544227B3BFF002BB068 /* FaceGestureEngine.swift in Sources */,
@@ -576,16 +633,19 @@
 				B879831523E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift in Sources */,
 				13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */,
 				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
+				6B9DFA5F23E889DB0037673E /* UIHeadGazeEvent.swift in Sources */,
 				9D219D6422C3D7060087BF1B /* EyesBlinkGesture.swift in Sources */,
 				9D739E13226F5EB700FEFFAC /* String+Utilities.swift in Sources */,
 				9DB58D05226524F800E99C3B /* TrackingGroup.swift in Sources */,
 				9D219D6222C3D6EF0087BF1B /* BlinkGesture.swift in Sources */,
 				9D15E058227211AB0058DF57 /* FixedQueue.swift in Sources */,
+				6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */,
 				9DDF1F03226F7A160072A248 /* TrackingCollectionViewCell.swift in Sources */,
 				13204C5B2180EBD1005410FC /* KeyView.swift in Sources */,
 				139EDEEC21419D700009A99F /* ScreenTrackingViewController.swift in Sources */,
 				13FE39142153F63000B6110F /* TrackingRegion.swift in Sources */,
 				9D739E11226F47C500FEFFAC /* UIStoryboard+ViewControllers.swift in Sources */,
+				6B9DFA6223E889DB0037673E /* UIVirtualCursorView.swift in Sources */,
 				9D219D5E22C3D6A10087BF1B /* EyeState.swift in Sources */,
 				13DA076A219297140081754A /* TrackingButton.swift in Sources */,
 				B879830E23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift in Sources */,
