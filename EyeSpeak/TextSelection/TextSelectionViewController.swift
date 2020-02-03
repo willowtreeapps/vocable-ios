@@ -28,10 +28,7 @@ class TextSelectionViewController: UICollectionViewController {
                 .presetItem("I want my pillow fixed."),
                 .presetItem("I would like some water."),
                 .presetItem("I would like some coffee."),
-                .presetItem("I want another pillow."),
-                .presetItem("I want another pillow.1"),
-                .presetItem("I want another pillow.2"),
-                .presetItem("I want another pillow.3")],
+                .presetItem("I want another pillow.")],
         .need: (1...28).map { .presetItem("Need Item \($0)") },
         .three: (1...9).map { .presetItem("Category 3 item \($0)") },
         .confirmation: (1...9).map { .presetItem("Confirmation item \($0)") },
@@ -65,8 +62,7 @@ class TextSelectionViewController: UICollectionViewController {
     
     enum ItemWrapper: Hashable {
         case textField
-        case send(String)
-        case undo(String)
+        case redo(String)
         case toggleKeyboard(String)
         case category1(String)
         case category2(String)
@@ -115,20 +111,17 @@ class TextSelectionViewController: UICollectionViewController {
     private func textFieldSectionLayout() -> NSCollectionLayoutSection {
         // TODO: implemnet edge insets and spacing like the categories section layout
         let textFieldItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(488.0 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(846.0 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
-        let speakButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(168.0 / totalWidth),
-                                               heightDimension: .fractionalHeight(1.0)))
-        let undoButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(168.0 / totalWidth),
+        let redoButtonItem = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(75.0 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         
         let keyboardButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(176.0 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(108.0 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         
-        let subitems = [textFieldItem, speakButtonItem, undoButtonItem, keyboardButtonItem]
+        let subitems = [textFieldItem, redoButtonItem, keyboardButtonItem]
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -197,7 +190,7 @@ class TextSelectionViewController: UICollectionViewController {
         
         let section = NSCollectionLayoutSection(group: containerGroup)
         section.interGroupSpacing = 0
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 64)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         section.orthogonalScrollingBehavior = .groupPaging
         
         let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
@@ -214,9 +207,10 @@ class TextSelectionViewController: UICollectionViewController {
             
             switch identifier {
             case .textField:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TextFieldCollectionViewCell", for: indexPath) as! TextFieldCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
+                cell.setup(title: "Speech text goes here", titleColor: .white, textStyle: .footnote, backgroundColor: .clear, animationViewColor: .backspaceBloom, borderColor: .clear)
                 return cell
-            case .send(let title), .undo(let title), .toggleKeyboard(let title), .category1(let title), .category2(let title), .category3(let title), .category4(let title), .moreCategories(let title):
+            case .redo(let title), .toggleKeyboard(let title), .category1(let title), .category2(let title), .category3(let title), .category4(let title), .moreCategories(let title):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
                 cell.setup(title: title, titleColor: .white, textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
                 return cell
@@ -230,7 +224,7 @@ class TextSelectionViewController: UICollectionViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
 
         snapshot.appendSections([.textField])
-        snapshot.appendItems([.textField, .send("speak"), .undo("undo"), .toggleKeyboard("keyboard")])
+        snapshot.appendItems([.textField, .redo("redo"),.toggleKeyboard("keyboard")])
         snapshot.appendSections([.categories])
         snapshot.appendItems([.category1("Basic Needs"), .category2("Personal Care"), .category3("Salutations"), .category4("Yes | No"), .moreCategories("More Categories")])
         
