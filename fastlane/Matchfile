@@ -5,5 +5,4 @@ storage_mode("git")
 type("development") # The default type, can be: appstore, adhoc, enterprise or development
 
 app_identifier(["com.willowtreeapps.eyespeakaac"])
-username("eyespeakstore@willowtreeapps.com") # Apple Developer Portal username
 team_id("753J68XC6W") # WillowRoot Apps, LLC
