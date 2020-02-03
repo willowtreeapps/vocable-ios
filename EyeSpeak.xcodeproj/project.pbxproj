@@ -101,7 +101,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		130C00B420D2AD2A007C3163 /* EyeSpeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeSpeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		130C00B420D2AD2A007C3163 /* Eyespeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eyespeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		130C00B720D2AD2A007C3163 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		130C00B920D2AD2A007C3163 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		130C00BB20D2AD2A007C3163 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -450,7 +450,7 @@
 			);
 			name = EyeSpeak;
 			productName = EyeTrackingTest;
-			productReference = 130C00B420D2AD2A007C3163 /* EyeSpeak.app */;
+			productReference = 130C00B420D2AD2A007C3163 /* Eyespeak.app */;
 			productType = "com.apple.product-type.application";
 		};
 		54D3C41323E37CD40061EF47 /* EyeSpeakTests */ = {
