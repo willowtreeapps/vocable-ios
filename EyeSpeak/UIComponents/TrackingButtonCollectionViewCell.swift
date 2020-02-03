@@ -11,8 +11,16 @@ import UIKit
 class TrackingButtonCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var button: TrackingButton!
     
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        let selectedBG = UIView(frame: .zero)
+        selectedBG.backgroundColor = .green
+        self.selectedBackgroundView = selectedBG
+    }
+
     func setup(title: String, titleColor: UIColor, textStyle: UIFont.TextStyle, backgroundColor: UIColor, animationViewColor: UIColor, borderColor: UIColor) {
-        
+
         // adjust button text styling
         button.setTitle(title, for: .normal)
         button.setTitleColor(titleColor, for: .normal)
@@ -21,8 +29,8 @@ class TrackingButtonCollectionViewCell: UICollectionViewCell {
             
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.titleLabel?.textAlignment = .center
-        
-        button.backgroundColor = backgroundColor
+
+        button.backgroundColor = .clear
         button.animationViewColor = animationViewColor
         button.isUserInteractionEnabled = false
         
@@ -30,7 +38,10 @@ class TrackingButtonCollectionViewCell: UICollectionViewCell {
         contentView.layer.borderWidth = 4.0
         contentView.layer.borderColor = borderColor.cgColor
         contentView.layer.masksToBounds = true
-        
+
+        let bg = UIView(frame: .zero)
+        bg.backgroundColor = backgroundColor
+        self.backgroundView = bg
     }
 
 }

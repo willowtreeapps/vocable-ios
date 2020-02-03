@@ -57,6 +57,8 @@
 		6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA6D23E88A250037673E /* LowPassInterpolator.swift */; };
 		6B9DFA6F23E88A610037673E /* Interpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA6C23E88A250037673E /* Interpolation.swift */; };
 		6B9DFA7023E88A630037673E /* InterpolableValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA6B23E88A250037673E /* InterpolableValues.swift */; };
+		6B9DFA7423E8D1270037673E /* TrackingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA7323E8D1270037673E /* TrackingContainerViewController.swift */; };
+		6B9DFA7623E8D59A0037673E /* UICollectionView+Gaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA7523E8D5990037673E /* UICollectionView+Gaze.swift */; };
 		9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E0542271F0DC0058DF57 /* CursorView.swift */; };
 		9D15E058227211AB0058DF57 /* FixedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E057227211AB0058DF57 /* FixedQueue.swift */; };
 		9D219D5E22C3D6A10087BF1B /* EyeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D219D5D22C3D6A10087BF1B /* EyeState.swift */; };
@@ -118,7 +120,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		130C00B420D2AD2A007C3163 /* Eyespeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Eyespeak.app; path = EyeSpeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		130C00B420D2AD2A007C3163 /* EyeSpeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeSpeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		130C00B720D2AD2A007C3163 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		130C00B920D2AD2A007C3163 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		130C00BB20D2AD2A007C3163 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +175,8 @@
 		6B9DFA6B23E88A250037673E /* InterpolableValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpolableValues.swift; sourceTree = "<group>"; };
 		6B9DFA6C23E88A250037673E /* Interpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolation.swift; sourceTree = "<group>"; };
 		6B9DFA6D23E88A250037673E /* LowPassInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowPassInterpolator.swift; sourceTree = "<group>"; };
+		6B9DFA7323E8D1270037673E /* TrackingContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingContainerViewController.swift; sourceTree = "<group>"; };
+		6B9DFA7523E8D5990037673E /* UICollectionView+Gaze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Gaze.swift"; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9D15E057227211AB0058DF57 /* FixedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedQueue.swift; sourceTree = "<group>"; };
 		9D219D5D22C3D6A10087BF1B /* EyeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeState.swift; sourceTree = "<group>"; };
@@ -264,10 +268,12 @@
 				6B9DFA4B23E889DB0037673E /* HeadGazeLib */,
 				9D219D5C22C3D6940087BF1B /* Gestures */,
 				9D15E0562272119E0058DF57 /* Utilities */,
+				6B9DFA7523E8D5990037673E /* UICollectionView+Gaze.swift */,
 				130C00B720D2AD2A007C3163 /* AppDelegate.swift */,
 				13FE3921215577E300B6110F /* ConfigurationListTableViewController.swift */,
 				130C00BB20D2AD2A007C3163 /* ViewController.swift */,
 				130C00BD20D2AD2A007C3163 /* Main.storyboard */,
+				6B9DFA7323E8D1270037673E /* TrackingContainerViewController.swift */,
 				13204C5E2180EC61005410FC /* NibBackedView.swift */,
 				9DDF1EF8226F61690072A248 /* HotCornersTrackableViewController.swift */,
 				9D739E0C226F433F00FEFFAC /* HotCornersTracking.storyboard */,
@@ -533,7 +539,7 @@
 			);
 			name = EyeSpeak;
 			productName = EyeTrackingTest;
-			productReference = 130C00B420D2AD2A007C3163 /* Eyespeak.app */;
+			productReference = 130C00B420D2AD2A007C3163 /* EyeSpeak.app */;
 			productType = "com.apple.product-type.application";
 		};
 		54D3C41323E37CD40061EF47 /* EyeSpeakTests */ = {
@@ -660,6 +666,7 @@
 				13DA076C21929D760081754A /* Array+Split.swift in Sources */,
 				134B6419214C3A4B00285AD5 /* TrackingNode.swift in Sources */,
 				6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */,
+				6B9DFA7423E8D1270037673E /* TrackingContainerViewController.swift in Sources */,
 				9DC7C03222676AA400A1D503 /* CircularAnimatable.swift in Sources */,
 				9D739DFB226A026E00FEFFAC /* PresetsCollectionViewFlowLayout.swift in Sources */,
 				13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */,
@@ -667,6 +674,7 @@
 				13A7B912214C027300714057 /* TrackingMethod.swift in Sources */,
 				9D739E07226A0C1500FEFFAC /* PresetsCollectionViewCell.swift in Sources */,
 				9DB58D092266170000E99C3B /* TextExpression.swift in Sources */,
+				6B9DFA7623E8D59A0037673E /* UICollectionView+Gaze.swift in Sources */,
 				13204C5F2180EC61005410FC /* NibBackedView.swift in Sources */,
 				13DA0768219121DE0081754A /* TrackingView.swift in Sources */,
 				9DB58D072265252300E99C3B /* TrackableWidget.swift in Sources */,

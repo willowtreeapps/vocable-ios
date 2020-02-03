@@ -135,7 +135,7 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         self.faceAnchor = anchor as? ARFaceAnchor
         let vector = self.headNode?.convertPosition(SCNVector3Zero, to: sceneview?.pointOfView) ?? SCNVector3Zero
         let length = sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
-        print("Distance: \(length)")
+        // TODO: Implement distance scaling adjustment
     }
 
     /**
