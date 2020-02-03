@@ -87,6 +87,12 @@
 		9DDF1EFF226F654B0072A248 /* HotCornerGazeableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */; };
 		9DDF1F01226F66630072A248 /* HotCornerTrackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */; };
 		9DDF1F03226F7A160072A248 /* TrackingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1F02226F7A160072A248 /* TrackingCollectionViewCell.swift */; };
+		A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */; };
+		B879830E23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879830C23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift */; };
+		B879830F23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B879830D23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib */; };
+		B879831123E0CEC300DC1A81 /* TextSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879831023E0CEC300DC1A81 /* TextSelectionViewController.swift */; };
+		B879831523E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879831323E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift */; };
+		B879831623E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B879831423E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -172,6 +178,12 @@
 		9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerGazeableComponent.swift; sourceTree = "<group>"; };
 		9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerTrackable.swift; sourceTree = "<group>"; };
 		9DDF1F02226F7A160072A248 /* TrackingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingCollectionViewCell.swift; sourceTree = "<group>"; };
+		A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControlReusableView.swift; sourceTree = "<group>"; };
+		B879830C23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCollectionViewCell.swift; sourceTree = "<group>"; };
+		B879830D23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCollectionViewCell.xib; sourceTree = "<group>"; };
+		B879831023E0CEC300DC1A81 /* TextSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSelectionViewController.swift; sourceTree = "<group>"; };
+		B879831323E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		B879831423E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackingButtonCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +226,8 @@
 				9DDF1EF8226F61690072A248 /* HotCornersTrackableViewController.swift */,
 				9D739E0C226F433F00FEFFAC /* HotCornersTracking.storyboard */,
 				9D15E0542271F0DC0058DF57 /* CursorView.swift */,
+				B879831223E0DA5800DC1A81 /* UIComponents */,
+				B879830B23E0C85500DC1A81 /* TextSelection */,
 				13204C552180E52F005410FC /* 6Keyboard */,
 				13B71581214840B100B3612A /* ScreenTrackingViewController */,
 				9D739DEF2269FEDE00FEFFAC /* Presets */,
@@ -401,6 +415,26 @@
 			path = Animations;
 			sourceTree = "<group>";
 		};
+		B879830B23E0C85500DC1A81 /* TextSelection */ = {
+			isa = PBXGroup;
+			children = (
+				B879831023E0CEC300DC1A81 /* TextSelectionViewController.swift */,
+				B879830C23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift */,
+				B879830D23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib */,
+			);
+			path = TextSelection;
+			sourceTree = "<group>";
+		};
+		B879831223E0DA5800DC1A81 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				B879831323E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift */,
+				B879831423E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.xib */,
+				A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -462,7 +496,9 @@
 			files = (
 				13204C5D2180EC2D005410FC /* KeyView.xib in Resources */,
 				130C00BA20D2AD2A007C3163 /* art.scnassets in Resources */,
+				B879831623E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.xib in Resources */,
 				9D739DFD226A090C00FEFFAC /* Presets.storyboard in Resources */,
+				B879830F23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib in Resources */,
 				9D739E09226A0C2200FEFFAC /* PresetsCollectionViewCell.xib in Resources */,
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,
 				13204C592180E564005410FC /* SixButtonKeyboardViewController.storyboard in Resources */,
@@ -480,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DDF1EF7226F61450072A248 /* TrackingType.swift in Sources */,
+				B879831123E0CEC300DC1A81 /* TextSelectionViewController.swift in Sources */,
 				9D739DF6226A012000FEFFAC /* CoreDataStack.swift in Sources */,
 				130C00BC20D2AD2A007C3163 /* ViewController.swift in Sources */,
 				9D3FC1F72268B923003C5841 /* ExpandingAnimatable.swift in Sources */,
@@ -529,12 +566,14 @@
 				13B71583214840F600B3612A /* ScreenTrackingViewControllerDelegate.swift in Sources */,
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
 				9DDF1EFF226F654B0072A248 /* HotCornerGazeableComponent.swift in Sources */,
+				A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */,
 				9D3FC1F52268B64C003C5841 /* HotCornerView.swift in Sources */,
 				13FE3922215577E300B6110F /* ConfigurationListTableViewController.swift in Sources */,
 				13FE392421557DA900B6110F /* QuadrilateralTrackingRegion.swift in Sources */,
 				13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */,
 				9D739E01226A0A2F00FEFFAC /* UIViewController+Segues.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
+				B879831523E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift in Sources */,
 				13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */,
 				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
 				9D219D6422C3D7060087BF1B /* EyesBlinkGesture.swift in Sources */,
@@ -549,6 +588,7 @@
 				9D739E11226F47C500FEFFAC /* UIStoryboard+ViewControllers.swift in Sources */,
 				9D219D5E22C3D6A10087BF1B /* EyeState.swift in Sources */,
 				13DA076A219297140081754A /* TrackingButton.swift in Sources */,
+				B879830E23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift in Sources */,
 				13B7158721484B6600B3612A /* TrackingConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -694,9 +734,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y32EQUAEWX;
+				DEVELOPMENT_TEAM = RZF5Q9N5D5;
 				INFOPLIST_FILE = "$(SRCROOT)/EyeSpeak/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -713,9 +753,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y32EQUAEWX;
+				DEVELOPMENT_TEAM = RZF5Q9N5D5;
 				INFOPLIST_FILE = "$(SRCROOT)/EyeSpeak/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
