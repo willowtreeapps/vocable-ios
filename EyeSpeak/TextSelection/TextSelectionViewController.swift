@@ -10,8 +10,6 @@ import UIKit
 
 class TextSelectionViewController: UICollectionViewController {
     
-//    @IBOutlet weak var collectionView: UICollectionView!
-    
     enum Category {
         case want
         case need
@@ -109,16 +107,15 @@ class TextSelectionViewController: UICollectionViewController {
     }
     
     private func textFieldSectionLayout() -> NSCollectionLayoutSection {
-        // TODO: implemnet edge insets and spacing like the categories section layout
         let textFieldItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(846.0 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth((846.0 + 16.0) / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         let redoButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(75.0 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth((75.0 + 16.0) / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         
         let keyboardButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(108.0 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth((108.0 + 16.0) / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         
         let subitems = [textFieldItem, redoButtonItem, keyboardButtonItem]
@@ -127,10 +124,9 @@ class TextSelectionViewController: UICollectionViewController {
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(120.0 / totalHeight)),
             subitems: subitems)
-        containerGroup.interItemSpacing = .flexible(0)
+        containerGroup.interItemSpacing = .fixed(16)
         
         let section = NSCollectionLayoutSection(group: containerGroup)
-//        containerGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(24), top: .fixed(36), trailing: .flexible(24), bottom: .fixed(16))
         section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 0, trailing: 32)
         
         return section
@@ -138,20 +134,20 @@ class TextSelectionViewController: UICollectionViewController {
     
     private func categoriesSectionLayout() -> NSCollectionLayoutSection {
         let category1Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(170.0 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(182.8 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         let category2Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(170.0 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(182.8 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         let category3Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(170.0 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(182.8 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         let category4Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(170.0 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(182.8 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         
         let moreCategories = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(304.0 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(317.8 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         
         
@@ -161,7 +157,7 @@ class TextSelectionViewController: UICollectionViewController {
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(120.0 / totalHeight)),
             subitems: subitems)
-        containerGroup.interItemSpacing = .flexible(0)
+        containerGroup.interItemSpacing = .fixed(16)
         
         let section = NSCollectionLayoutSection(group: containerGroup)
         section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
@@ -186,8 +182,6 @@ class TextSelectionViewController: UICollectionViewController {
         containerGroup.interItemSpacing = .fixed(16)
         containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
         
-        
-        
         let section = NSCollectionLayoutSection(group: containerGroup)
         section.interGroupSpacing = 0
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
@@ -207,17 +201,11 @@ class TextSelectionViewController: UICollectionViewController {
             
             switch identifier {
             case .textField:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
-                cell.setup(title: "Speech text goes here", titleColor: .white, textStyle: .footnote, backgroundColor: .clear, animationViewColor: .backspaceBloom, borderColor: .clear)
-                return cell
+                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: "Speech text goes here", titleColor: .white, textStyle: .footnote, backgroundColor: .clear, animationViewColor: .backspaceBloom, borderColor: .clear)
             case .redo(let title), .toggleKeyboard(let title), .category1(let title), .category2(let title), .category3(let title), .category4(let title), .moreCategories(let title):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
-                cell.setup(title: title, titleColor: .white, textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
-                return cell
+                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: title, titleColor: .white, textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
             case .presetItem(let preset):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackingButtonCollectionViewCell", for: indexPath) as! TrackingButtonCollectionViewCell
-                cell.setup(title: preset, titleColor: UIColor(red:0.22, green:0.22, blue:0.22, alpha:1.0), textStyle: .headline, backgroundColor: .white, animationViewColor: .black, borderColor: .clear)
-                return cell
+                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: preset, titleColor: UIColor(red:0.22, green:0.22, blue:0.22, alpha:1.0), textStyle: .headline, backgroundColor: .white, animationViewColor: .black, borderColor: .clear)
             }
         })
         
@@ -238,7 +226,6 @@ class TextSelectionViewController: UICollectionViewController {
         }
             
         dataSource.apply(snapshot, animatingDifferences: false)
-        
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -254,7 +241,6 @@ class TextSelectionViewController: UICollectionViewController {
         if  orthogonalScrollView == nil && dataSource.snapshot().indexOfSection(.presets) == indexPath.section {
             orthogonalScrollView = locateNearestContainingScrollView(for: cell)
         }
-        
     }
     
     func handleScrollViewOffsetChange(scrollView: UIScrollView, offset: NSKeyValueObservedChange<CGPoint>) {
@@ -274,5 +260,10 @@ class TextSelectionViewController: UICollectionViewController {
         orthogonalScrollView?.scrollRectToVisible(rect, animated: true)
     }
     
+    private func setupCell(reuseIdentifier: String, indexPath: IndexPath, title: String, titleColor: UIColor, textStyle: UIFont.TextStyle, backgroundColor: UIColor, animationViewColor: UIColor, borderColor: UIColor) -> TrackingButtonCollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TrackingButtonCollectionViewCell
+        cell.setup(title: title, titleColor: titleColor, textStyle: textStyle, backgroundColor: backgroundColor, animationViewColor: animationViewColor, borderColor: borderColor)
+        return cell
+    }
     
 }
