@@ -29,25 +29,15 @@ class TextSelectionViewController: UICollectionViewController {
                 .presetItem("I would like some water."),
                 .presetItem("I would like some coffee."),
                 .presetItem("I want another pillow."),
-        .presetItem("I want the door closed.2"),
-        .presetItem("I want the door open.2"),
-        .presetItem("I would like to go to the bathroom.2"),
-        .presetItem("I want the lights off.2"),
-        .presetItem("I want the lights on.2"),
-        .presetItem("I want my pillow fixed.2"),
-        .presetItem("I would like some water.2"),
-        .presetItem("I would like some coffee.2"),
-        .presetItem("I want the door closed.3"),
-        .presetItem("I want the door open.3"),
-        .presetItem("I would like to go to the bathroom.3"),
-        .presetItem("I want the lights off.3"),
-        .presetItem("I want the lights on.3"),
-        .presetItem("I want my pillow fixed.3"),
-        .presetItem("I want another pillow.3")],
-        .need: (1...9).map { .presetItem("Need \($0)") },
-        .three: (1...9).map { .presetItem("Three \($0)") },
-        .confirmation: (1...9).map { .presetItem("Yes \($0)") },
+                .presetItem("I want another pillow.1"),
+                .presetItem("I want another pillow.2"),
+                .presetItem("I want another pillow.3")],
+        .need: (1...28).map { .presetItem("Need Item \($0)") },
+        .three: (1...9).map { .presetItem("Category 3 item \($0)") },
+        .confirmation: (1...9).map { .presetItem("Confirmation item \($0)") },
     ]
+    
+    private let maxItemsPerPage = 9
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     private weak var orthogonalScrollView: UIScrollView? {
@@ -64,6 +54,8 @@ class TextSelectionViewController: UICollectionViewController {
     
     private let totalHeight: CGFloat = 834.0
     private let totalWidth: CGFloat = 1112.0
+    
+    private var selectedCategory: Category = .need
     
     enum Section: Int, CaseIterable {
         case textField
@@ -86,7 +78,12 @@ class TextSelectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupCollectionView()
+        configureDataSource()
+    }
+    
+    private func setupCollectionView() {
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(UINib(nibName: "TrackingButtonCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TrackingButtonCollectionViewCell")
         collectionView.collectionViewLayout = createLayout()
