@@ -8,7 +8,6 @@
 
 import SceneKit
 
-
 struct QuadrilateralTrackingRegion: TrackingRegion {
 
     private let interpolator: QuadrilateralInterpolator

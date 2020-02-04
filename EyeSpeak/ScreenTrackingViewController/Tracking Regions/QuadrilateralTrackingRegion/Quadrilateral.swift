@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 struct Quadrilateral {
     let p1: CGPoint
     let p2: CGPoint

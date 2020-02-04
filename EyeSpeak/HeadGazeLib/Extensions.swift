@@ -5,7 +5,7 @@ import simd
  * m[i] is the ith column of the matrix, and m[i][j] is the elements in the ith column and jth row
  * In addition, (m[3][0], m[3][1], m[3][2], m[3][3]) holds the translation amount in x, y, and z direction respectively.
  */
-extension matrix_float4x4: CustomStringConvertible{
+extension matrix_float4x4: CustomStringConvertible {
     public var debugDescription: String {
         let m = self
         return """
@@ -18,16 +18,16 @@ extension matrix_float4x4: CustomStringConvertible{
     public var description: String {
         return self.debugDescription
     }
-    public static let identity: matrix_float4x4 = matrix_float4x4(columns: (simd_float4(1,0,0,0), simd_float4(0,1,0,0), simd_float4(0,0,1,0), simd_float4(0,0,0,1)))
+    public static let identity: matrix_float4x4 = matrix_float4x4(columns: (simd_float4(1, 0, 0, 0), simd_float4(0, 1, 0, 0), simd_float4(0, 0, 1, 0), simd_float4(0, 0, 0, 1)))
 }
 
-extension BinaryInteger{
+extension BinaryInteger {
     var degreesToRadians: Float {
         return Float(Int(self)) * .pi / 180.0
     }
 }
 
-extension FloatingPoint{
+extension FloatingPoint {
     var degreesToRadians: Self { return self * .pi / 180 }
     var radiansToDegrees: Self { return self * 180 / .pi }
 }

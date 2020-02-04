@@ -8,7 +8,6 @@
 
 import SceneKit
 
-
 /// A simple rectangular tracking region with a width and height.
 struct RectangleTrackingRegion: TrackingRegion {
 

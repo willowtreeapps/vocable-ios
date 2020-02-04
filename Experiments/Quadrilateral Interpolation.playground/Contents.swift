@@ -4,7 +4,7 @@ import UIKit
 import PlaygroundSupport
 import SceneKit
 
-class MyViewController : UIViewController {
+class MyViewController: UIViewController {
 
     var quadView: QuadView?
 
@@ -62,7 +62,6 @@ let p2 = CGPoint(x: 250.0, y: 70.0)
 let p3 = CGPoint(x: 350.0, y: 280.0)
 let p4 = CGPoint(x: 25.0, y: 290.0)
 
-
 // Present the view controller in the Live View window
 let vc = MyViewController()
 PlaygroundPage.current.liveView = vc
@@ -103,8 +102,8 @@ struct QuadrilateralInterpolator {
     init(quad: Quadrilateral) {
         self.quad = quad
 
-        let xPoints = simd_double4([quad.p1.x, quad.p2.x, quad.p3.x, quad.p4.x].map {Double($0)} )
-        let yPoints = simd_double4([quad.p1.y, quad.p2.y, quad.p3.y, quad.p4.y].map {Double($0)} )
+        let xPoints = simd_double4([quad.p1.x, quad.p2.x, quad.p3.x, quad.p4.x].map {Double($0)})
+        let yPoints = simd_double4([quad.p1.y, quad.p2.y, quad.p3.y, quad.p4.y].map {Double($0)})
 
         let AI = QuadrilateralInterpolator.AI
         self.alphaCoefficients = simd_mul(AI, xPoints)
@@ -125,7 +124,7 @@ struct QuadrilateralInterpolator {
         // m = (-b + sqrt(b^2-4ac)) / 2a
         let determinant = sqrt(pow(bb, 2) - (4*aa*cc))
         var m: Double = 0.0
-        if (aa == 0.0) {
+        if aa == 0.0 {
             m = (-bb + determinant)
         } else {
             m = (-bb + determinant) / (2*aa)

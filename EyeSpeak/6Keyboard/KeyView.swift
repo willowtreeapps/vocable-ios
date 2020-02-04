@@ -17,7 +17,7 @@ struct KeyViewOptions {
     let bottomRight: KeyViewValue?
 
     var allValues: [KeyViewValue] {
-        return [ topLeft, topCenter, topRight, bottomLeft, bottomCenter, bottomRight ].compactMap{$0}
+        return [ topLeft, topCenter, topRight, bottomLeft, bottomCenter, bottomRight ].compactMap {$0}
     }
 
     init(topLeft: KeyViewValue?,

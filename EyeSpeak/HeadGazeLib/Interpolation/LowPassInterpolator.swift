@@ -19,7 +19,7 @@ class LowPassInterpolator<E: Interpolable>: Interpolator {
     let filterFactor: Double
     let valueInterpolators: [InterpolatorKind]
     var value: E {
-        return E(interpolableValues: valueInterpolators.map{$0.value})
+        return E(interpolableValues: valueInterpolators.map {$0.value})
     }
     init(filterFactor: Double, initialValue: E) {
         self.filterFactor = filterFactor

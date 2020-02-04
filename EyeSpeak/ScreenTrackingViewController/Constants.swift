@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 struct Constants {
 
     // Physical iPhone X size in meters

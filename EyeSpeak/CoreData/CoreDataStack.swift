@@ -35,7 +35,6 @@ class CoreDataStack {
         self.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
     }
     
-    
     func newBackgroundContext() -> NSManagedObjectContext {
         let backgroundContext = self.persistentContainer.newBackgroundContext()
         backgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
