@@ -50,8 +50,6 @@ class TrackingButtonCollectionViewCell: UICollectionViewCell {
         button.animationViewColor = animationViewColor
         button.isUserInteractionEnabled = false
         
-        backgroundView?.backgroundColor = .clear
-        contentView.backgroundColor = .clear
         contentView.layer.cornerRadius = 6.0
         contentView.layer.borderWidth = 4.0
         contentView.layer.borderColor = borderColor.cgColor
