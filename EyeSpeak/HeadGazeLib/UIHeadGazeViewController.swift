@@ -55,11 +55,7 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     
     private func resetTracking() {
         guard ARFaceTrackingConfiguration.isSupported else {
-            let alertController = UIAlertController(title: "iPhone X is not detected", message:
-                "You need a iPhone X to run the example!", preferredStyle: UIAlertController.Style.alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
-            fatalError("ARFaceTracking is not supported on your device!")
+            return
         }
 
         let configuration = ARFaceTrackingConfiguration()
