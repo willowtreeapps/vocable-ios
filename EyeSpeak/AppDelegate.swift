@@ -11,12 +11,15 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    var window: HeadGazeWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         application.isIdleTimerDisabled = true
-        CoreDataStack.loadPersistentContainer("Eyespeak")
+        let window = HeadGazeWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+        window.makeKeyAndVisible()
+        self.window = window
         return true
     }
 

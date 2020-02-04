@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class TextSelectionViewController: UICollectionViewController {
     
@@ -63,10 +64,7 @@ class TextSelectionViewController: UICollectionViewController {
         case textField
         case redo(String)
         case toggleKeyboard(String)
-        case category1(String)
-        case category2(String)
-        case category3(String)
-        case category4(String)
+        case category(String)
         case moreCategories(String)
         case presetItem(String)
     }
@@ -200,22 +198,9 @@ class TextSelectionViewController: UICollectionViewController {
             
             switch identifier {
             case .textField:
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell",
-                                      indexPath: indexPath, title: "Speech text goes here",
-                                      titleColor: .white,
-                                      textStyle: .footnote,
-                                      backgroundColor: .clear,
-                                      animationViewColor: .backspaceBloom,
-                                      borderColor: .clear)
-            case .redo(let title), .toggleKeyboard(let title), .category1(let title), .category2(let title), .category3(let title), .category4(let title), .moreCategories(let title):
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell",
-                                      indexPath: indexPath,
-                                      title: title,
-                                      titleColor: .white,
-                                      textStyle: .footnote,
-                                      backgroundColor: .black,
-                                      animationViewColor: .backspaceBloom,
-                                      borderColor: .white)
+                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: "Speech text goes here", titleColor: .white, textStyle: .footnote, backgroundColor: .clear, animationViewColor: .backspaceBloom, borderColor: .clear)
+            case .redo(let title), .toggleKeyboard(let title), .category(let title), .moreCategories(let title):
+                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: title, titleColor: .white, textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell",
                                       indexPath: indexPath,
@@ -233,7 +218,7 @@ class TextSelectionViewController: UICollectionViewController {
         snapshot.appendSections([.textField])
         snapshot.appendItems([.textField, .redo("redo"), .toggleKeyboard("keyboard")])
         snapshot.appendSections([.categories])
-        snapshot.appendItems([.category1("Basic Needs"), .category2("Personal Care"), .category3("Salutations"), .category4("Yes | No"), .moreCategories("More Categories")])
+        snapshot.appendItems([.category("Basic Needs"), .category("Personal Care"), .category("Salutations"), .category("Yes | No"), .moreCategories("More Categories")])
         
         snapshot.appendSections([.presets])
         snapshot.appendItems(categoryPresets[.want]!)
@@ -259,6 +244,22 @@ class TextSelectionViewController: UICollectionViewController {
         
         if  orthogonalScrollView == nil && dataSource.snapshot().indexOfSection(.presets) == indexPath.section {
             orthogonalScrollView = locateNearestContainingScrollView(for: cell)
+        }
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
+        switch selectedItem {
+        case .presetItem(let text):
+            let utterance = AVSpeechUtterance(string: text)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            let synthesizer = AVSpeechSynthesizer.shared
+            if synthesizer.isSpeaking {
+                synthesizer.stopSpeaking(at: .immediate)
+            }
+            synthesizer.speak(utterance)
+        default:
+            break
         }
     }
     
