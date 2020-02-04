@@ -10,13 +10,29 @@ import UIKit
 
 class TrackingButtonCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var button: TrackingButton!
-    
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        let selectedBG = UIView(frame: .zero)
-        selectedBG.backgroundColor = .green
-        self.selectedBackgroundView = selectedBG
+    private var defaultBackgroundColor: UIColor?
+
+    override var isHighlighted: Bool {
+        didSet {
+            self.backgroundView?.backgroundColor = currentBackgroundColor
+        }
+    }
+
+    override var isSelected: Bool {
+        didSet {
+            self.backgroundView?.backgroundColor = currentBackgroundColor
+        }
+    }
+
+    private var currentBackgroundColor: UIColor? {
+        if isSelected {
+            return .blue
+        }
+        if isHighlighted {
+            return .green
+        }
+        return defaultBackgroundColor
     }
 
     func setup(title: String, titleColor: UIColor, textStyle: UIFont.TextStyle, backgroundColor: UIColor, animationViewColor: UIColor, borderColor: UIColor) {
@@ -42,6 +58,8 @@ class TrackingButtonCollectionViewCell: UICollectionViewCell {
         let bg = UIView(frame: .zero)
         bg.backgroundColor = backgroundColor
         self.backgroundView = bg
+
+        defaultBackgroundColor = backgroundColor
     }
 
 }
