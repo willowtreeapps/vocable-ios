@@ -17,8 +17,8 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
     
     override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attr = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
-        attr?.transform = CGAffineTransform(translationX: 0, y: -500.0)
+        let attr = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
+        attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
         return attr
     }
 }
