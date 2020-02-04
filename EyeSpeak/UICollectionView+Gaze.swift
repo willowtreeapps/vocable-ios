@@ -45,10 +45,17 @@ extension UICollectionView {
 
     private func setItemHighlighted(_ highlighted: Bool, at indexPath: IndexPath) {
         if let cell = cellForItem(at: indexPath) {
-            cell.isHighlighted = highlighted
+            if highlighted {
+                cell.isHighlighted = true
+                delegate?.collectionView?(self, didHighlightItemAt: indexPath)
+            } else {
+                cell.isHighlighted = false
+                delegate?.collectionView?(self, didUnhighlightItemAt: indexPath)
+            }
         }
         if !highlighted, indexPathIsSelected(indexPath)  {
             deselectItem(at: indexPath, animated: true)
+            delegate?.collectionView?(self, didDeselectItemAt: indexPath)
         }
     }
 
@@ -66,6 +73,7 @@ extension UICollectionView {
                 let timeElapsed = Date().timeIntervalSince(oldTarget.beginDate)
                 if timeElapsed >= gaze.selectionHoldDuration {
                     selectItem(at: oldTarget.indexPath, animated: true, scrollPosition: .init())
+                    delegate?.collectionView?(self, didSelectItemAt: oldTarget.indexPath)
                 }
             }
             return
