@@ -68,6 +68,8 @@ enum IntersectionUtils {
             orientedPosition.y = 1 - orientedPosition.y
         case .unknown:
             break
+        @unknown default:
+            break
         }
 
         let screenX = screenSize.width * orientedPosition.x

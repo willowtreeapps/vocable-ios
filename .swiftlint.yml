@@ -1,6 +1,8 @@
 disabled_rules:
 - trailing_whitespace
 - identifier_name
+- compiler_protocol_init
+- unused_optional_binding
 opt_in_rules:
 - empty_count
 - empty_string
@@ -10,7 +12,8 @@ excluded:
 - SwiftLint/Common/3rdPartyLib
 force_cast: warning
 line_length:
-    warning: 150
+    warning: 250
+    error: 300
     ignores_function_declarations: true
     ignores_comments: true
     ignores_urls: true

@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
 class UIHeadGazeRecognizer: UIGestureRecognizer {

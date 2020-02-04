@@ -90,8 +90,7 @@ class TextSelectionViewController: UICollectionViewController {
     }
     
     private func createLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout {
-            (sectionIndex: Int, _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
             let sectionKind = Section.allCases[sectionIndex]
             
@@ -201,11 +200,31 @@ class TextSelectionViewController: UICollectionViewController {
             
             switch identifier {
             case .textField:
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: "Speech text goes here", titleColor: .white, textStyle: .footnote, backgroundColor: .clear, animationViewColor: .backspaceBloom, borderColor: .clear)
+                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell",
+                                      indexPath: indexPath, title: "Speech text goes here",
+                                      titleColor: .white,
+                                      textStyle: .footnote,
+                                      backgroundColor: .clear,
+                                      animationViewColor: .backspaceBloom,
+                                      borderColor: .clear)
             case .redo(let title), .toggleKeyboard(let title), .category1(let title), .category2(let title), .category3(let title), .category4(let title), .moreCategories(let title):
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: title, titleColor: .white, textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
+                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell",
+                                      indexPath: indexPath,
+                                      title: title,
+                                      titleColor: .white,
+                                      textStyle: .footnote,
+                                      backgroundColor: .black,
+                                      animationViewColor: .backspaceBloom,
+                                      borderColor: .white)
             case .presetItem(let preset):
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: preset, titleColor: UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1.0), textStyle: .headline, backgroundColor: .white, animationViewColor: .black, borderColor: .clear)
+                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell",
+                                      indexPath: indexPath,
+                                      title: preset,
+                                      titleColor: UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1.0),
+                                      textStyle: .headline,
+                                      backgroundColor: .white,
+                                      animationViewColor: .black,
+                                      borderColor: .clear)
             }
         })
         

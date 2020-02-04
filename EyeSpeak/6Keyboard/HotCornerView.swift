@@ -108,10 +108,10 @@ class HotCornerView: TrackingView, ExpandingAnimatable {
         var newXOffset = Constants.textLabelOriginOffset.x * self.location.coordinateSystem.x
         var newYOffset = Constants.textLabelOriginOffset.y * self.location.coordinateSystem.y
         if self.location.isLower {
-            newYOffset = newYOffset - self.textLabel.frame.height
+            newYOffset -= self.textLabel.frame.height
         }
         if self.location.isRight {
-            newXOffset = newXOffset - self.textLabel.frame.width
+            newXOffset -= self.textLabel.frame.width
         }
         return CGPoint(x: newXOffset, y: newYOffset)
     }
