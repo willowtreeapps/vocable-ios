@@ -31,7 +31,7 @@ class TextSelectionViewController: UICollectionViewController {
         }
     }
     
-    private var categoryPresets: [Category : [ItemWrapper]] = [
+    private var categoryPresets: [Category: [ItemWrapper]] = [
         .basicNeeds: [.presetItem("I want the door closed."),
                 .presetItem("I want the door open."),
                 .presetItem("I would like to go to the bathroom."),
@@ -43,7 +43,7 @@ class TextSelectionViewController: UICollectionViewController {
                 .presetItem("I want another pillow.")],
         .personalCare: (1...28).map { .presetItem("Personal Care Item \($0)") },
         .salutations: (1...9).map { .presetItem("Salutation item \($0)") },
-        .yesNo: (1...9).map { .presetItem("Yes | No item \($0)") },
+        .yesNo: (1...9).map { .presetItem("Yes | No item \($0)") }
     ]
     
     private let maxItemsPerPage = 9
@@ -212,11 +212,14 @@ class TextSelectionViewController: UICollectionViewController {
             
             switch identifier {
             case .textField(let title):
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: title, titleColor: .white, textStyle: .footnote, backgroundColor: .clear, animationViewColor: .backspaceBloom, borderColor: .clear)
+                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: title, titleColor: .white,
+                                      textStyle: .footnote, backgroundColor: .clear, animationViewColor: .backspaceBloom, borderColor: .clear)
             case .redo(let title), .toggleKeyboard(let title), .moreCategories(let title):
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: title, titleColor: .white, textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
+                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: title, titleColor: .white,
+                                      textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
             case .category(let category):
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: category.description, titleColor: .white, textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
+                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: category.description, titleColor: .white,
+                                      textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell",
                                       indexPath: indexPath,
@@ -236,7 +239,7 @@ class TextSelectionViewController: UICollectionViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
 
         snapshot.appendSections([.textField])
-        snapshot.appendItems([.textField(currentSpeechText), .redo("redo"),.toggleKeyboard("keyboard")])
+        snapshot.appendItems([.textField(currentSpeechText), .redo("redo"), .toggleKeyboard("keyboard")])
         snapshot.appendSections([.categories])
         snapshot.appendItems([.category(.basicNeeds), .category(.personalCare), .category(.salutations), .category(.yesNo), .moreCategories("More Categories")])
         
