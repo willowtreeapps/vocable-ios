@@ -39,6 +39,7 @@ class HeadGazeWindow: UIWindow {
             trackingView.gazeEnded(gaze, with: nil)
         }
         self.trackingView = nil
+        self.lastGaze = nil
     }
 
     override func sendEvent(_ originalEvent: UIEvent) {

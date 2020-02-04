@@ -10,7 +10,7 @@ extension UIApplication {
 
     fileprivate class Storage {
 
-        static fileprivate(set) var isGazeTrackingActive: Bool = false {
+        static var isGazeTrackingActive: Bool = false {
             didSet {
                 guard oldValue != isGazeTrackingActive else { return }
                 if isGazeTrackingActive {
@@ -26,7 +26,6 @@ extension UIApplication {
         return Storage.isGazeTrackingActive
     }
 }
-
 
 class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate {
  
@@ -175,7 +174,7 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
-        if let anchor = anchor as? ARFaceAnchor {
+        if anchor is ARFaceAnchor {
             self.faceAnchor = nil
             self.headNode = nil
         }
