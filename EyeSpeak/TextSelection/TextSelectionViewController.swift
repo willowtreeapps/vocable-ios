@@ -65,8 +65,16 @@ class TextSelectionViewController: UICollectionViewController {
     private let totalHeight: CGFloat = 834.0
     private let totalWidth: CGFloat = 1112.0
     
-    private var selectedCategory: Category = .basicNeeds
-    private var currentSpeechText: String = ""
+    private var selectedCategory: Category = .basicNeeds {
+        didSet {
+            self.updateSnapshot()
+        }
+    }
+    private var currentSpeechText: String = "" {
+        didSet {
+            self.updateSnapshot()
+        }
+    }
     
     enum Section: Int, CaseIterable {
         case textField
@@ -212,23 +220,17 @@ class TextSelectionViewController: UICollectionViewController {
             
             switch identifier {
             case .textField(let title):
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: title, titleColor: .white,
+                return self.setupCell(reuseIdentifier: TrackingButtonCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: title, titleColor: .white,
                                       textStyle: .footnote, backgroundColor: .clear, animationViewColor: .backspaceBloom, borderColor: .clear)
             case .redo(let title), .toggleKeyboard(let title), .moreCategories(let title):
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: title, titleColor: .white,
+                return self.setupCell(reuseIdentifier: TrackingButtonCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: title, titleColor: .white,
                                       textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
             case .category(let category):
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: category.description, titleColor: .white,
+                return self.setupCell(reuseIdentifier: TrackingButtonCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description, titleColor: .white,
                                       textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
             case .presetItem(let preset):
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell",
-                                      indexPath: indexPath,
-                                      title: preset,
-                                      titleColor: UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1.0),
-                                      textStyle: .headline,
-                                      backgroundColor: .white,
-                                      animationViewColor: .black,
-                                      borderColor: .clear)
+                return self.setupCell(reuseIdentifier: TrackingButtonCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset, titleColor: UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1.0),
+                                      textStyle: .headline, backgroundColor: .white, animationViewColor: .black, borderColor: .clear)
             }
         })
         
@@ -282,10 +284,8 @@ class TextSelectionViewController: UICollectionViewController {
             }
             synthesizer.speak(utterance)
             currentSpeechText = text
-            updateSnapshot()
         case .category(let category):
             selectedCategory = category
-            updateSnapshot()
         default:
             break
         }
