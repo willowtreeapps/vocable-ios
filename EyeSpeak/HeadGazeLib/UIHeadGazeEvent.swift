@@ -15,7 +15,7 @@ class UIHeadGazeEvent: UIEvent {
     /**
      Returns the time when the event occurred
      */
-    public var timeStamp: TimeInterval{
+    public var timeStamp: TimeInterval {
         return _timestamp
     }
     

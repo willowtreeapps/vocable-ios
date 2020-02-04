@@ -23,8 +23,9 @@
 import Foundation
 import SceneKit
 
-extension SCNVector3
-{
+// swiftlint:disable shorthand_operator
+
+extension SCNVector3 {
     /**
      * Negates the vector described by SCNVector3 and returns
      * the result as a new SCNVector3.
@@ -182,8 +183,7 @@ func SCNVector3Negate(vector: SCNVector3) -> SCNVector3 {
 /**
  * Returns the length (magnitude) of the vector described by the SCNVector3
  */
-func SCNVector3Length(vector: SCNVector3) -> Float
-{
+func SCNVector3Length(vector: SCNVector3) -> Float {
     return sqrtf(vector.x*vector.x + vector.y*vector.y + vector.z*vector.z)
 }
 

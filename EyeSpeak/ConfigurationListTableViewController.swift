@@ -24,7 +24,7 @@ class ConfigurationListTableViewController: UITableViewController {
         self.configurationOptions = [
             ConfigurationOption(title: "Head Tracking", configuration: .headTracking, segueID: "showDemo"),
             ConfigurationOption(title: "Eye Tracking", configuration: .eyeTracking, segueID: "showDemo"),
-            ConfigurationOption(title: "Six Keyboard", configuration: .headTracking, segueID: "sixKeyboard"),
+            ConfigurationOption(title: "Six Keyboard", configuration: .headTracking, segueID: "sixKeyboard")
         ]
         self.tableView.reloadData()
     }

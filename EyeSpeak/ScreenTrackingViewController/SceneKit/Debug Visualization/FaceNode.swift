@@ -109,7 +109,6 @@ class FaceNode: SCNNode {
         eyeLaserRight.addChildNode(coneNode)
         self.addChildNode(eyeLaserRight)
 
-
         // eye spheres
         let leftSphere = SCNSphere(radius: 0.01)
         leftSphere.materials = [ eyeMaterial ]
@@ -119,7 +118,6 @@ class FaceNode: SCNNode {
         let rightSphere = SCNSphere(radius: 0.01)
         eyeSphereRight.geometry = rightSphere
         self.addChildNode(eyeSphereRight)
-
 
         // look at direction
         let lookAtCone = SCNCone(topRadius: 0.001, bottomRadius: 0.001, height: 0.5)

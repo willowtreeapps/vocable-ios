@@ -69,7 +69,6 @@ class SimpleHeadTrackingViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
 
-
     // MARK: - Setting Up the Scene
 
     var rootNode: SCNNode {
@@ -184,7 +183,6 @@ class SimpleHeadTrackingViewController: UIViewController, ARSCNViewDelegate {
         // orientations, the cone will change along with it.
         self.faceDirectionDebugNode.addChildNode(coneContainerNode)
     }
-
 
     // MARK: - ARSCNViewDelegate
     

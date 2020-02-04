@@ -12,7 +12,7 @@ class HeadGazeWindow: UIWindow {
 
     weak var cursorView: UIVirtualCursorView?
 
-    private var trackingView: UIView? = nil
+    private var trackingView: UIView?
 
     override func sendEvent(_ originalEvent: UIEvent) {
 
@@ -46,8 +46,8 @@ class HeadGazeWindow: UIWindow {
         // The same view is being tracked, so make sure the cursor
         // hasn't left its area. If it has, end the gaze session for
         // that particular view.
-        let pt = gaze.location(in: trackingView)
-        let isInside = trackingView.point(inside: pt, with: nil)
+        let point = gaze.location(in: trackingView)
+        let isInside = trackingView.point(inside: point, with: nil)
         if isInside {
             trackingView.gazeMoved(gaze, with: event)
         } else {

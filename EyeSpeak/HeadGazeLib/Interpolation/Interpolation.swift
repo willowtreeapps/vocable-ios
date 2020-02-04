@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /// Describes a type that can be interpolated with an Interpolator
 ///
 /// Interpolable types provide a means of expressing their values

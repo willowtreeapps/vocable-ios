@@ -17,7 +17,6 @@ class TrackingNode: SCNNode {
     private var trackingMethod: TrackingMethod { return self.trackingConfiguration.trackingMethod }
     private var trackingRegion: TrackingRegion { return self.trackingConfiguration.trackingRegion }
 
-
     // MARK: - Face Tracking
 
     func track(faceAnchor: ARFaceAnchor) -> TrackingResult? {
@@ -32,7 +31,6 @@ class TrackingNode: SCNNode {
         return TrackingResult(hitTest: hitTest, unitPositionInPlane: unitPosition)
     }
 
-
     // MARK: -
 
     init(trackingConfiguration config: TrackingConfiguration) {
@@ -46,7 +44,6 @@ class TrackingNode: SCNNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("Not implemented")
     }
-
 
     // MARK: -
 

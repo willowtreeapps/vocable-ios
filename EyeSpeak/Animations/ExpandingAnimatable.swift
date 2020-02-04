@@ -47,7 +47,7 @@ extension ExpandingAnimatable where Self: TrackingView {
             let newSize = self.beforeAnimationBounds.size.multiply(by: self.expandingScale)
             let newOrigin = self.beforeAnimationBounds.origin.multiply(by: self.expandingScale)
             self.willExpand()
-            UIView.animate(withDuration: self.animationSpeed, animations:  {
+            UIView.animate(withDuration: self.animationSpeed, animations: {
                 self.bounds = CGRect(origin: newOrigin, size: newSize)
                 self.onExpand()
                 

@@ -10,7 +10,6 @@ import UIKit
 import SceneKit
 import ARKit
 
-
 class ViewController: UIViewController, ScreenTrackingViewControllerDelegate {
     func didGestureForCalibration() {
         // do stuff 
@@ -40,7 +39,6 @@ class ViewController: UIViewController, ScreenTrackingViewControllerDelegate {
         }
     }
 
-
     // MARK: - Demo Interface
 
     @IBOutlet var buttonStackView: UIStackView!
@@ -54,8 +52,8 @@ class ViewController: UIViewController, ScreenTrackingViewControllerDelegate {
                 button.isHighlighted = true
 
                 let animator: UIViewPropertyAnimator
-                if let a = animatorsForButtons[button] {
-                    animator = a
+                if let anAnimator = animatorsForButtons[button] {
+                    animator = anAnimator
                 } else {
                     let springParams = UISpringTimingParameters(dampingRatio: 1.0)
                     animator = UIViewPropertyAnimator(duration: 0.0, timingParameters: springParams)
@@ -90,14 +88,13 @@ class ViewController: UIViewController, ScreenTrackingViewControllerDelegate {
         self.screenTrackingViewController.trackingConfiguration = self.trackingConfiguration
     }
 
-
     // MARK: - View Lifecycle
 
     let trackingView: UIView = UIView()
     lazy var screenTrackingViewController: ScreenTrackingViewController = {
-        let vc = ScreenTrackingViewController()
-        vc.delegate = self
-        return vc
+        let viewController = ScreenTrackingViewController()
+        viewController.delegate = self
+        return viewController
     }()
 
     override func viewDidLoad() {
@@ -119,7 +116,6 @@ class ViewController: UIViewController, ScreenTrackingViewControllerDelegate {
 
         self.configureUI()
     }
-
 
     // MARK: - ScreenTrackingViewControllerDelegate
 

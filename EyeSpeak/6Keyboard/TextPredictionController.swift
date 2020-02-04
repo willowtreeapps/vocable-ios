@@ -82,7 +82,7 @@ class TextPredictionController {
     private func phraseCompletions(neededCompletions: Int) -> [String] {
         var splitExpression = self.expression.splitExpression
         var completions: [String] = []
-        while splitExpression.count > 0 && completions.count < neededCompletions {
+        while !splitExpression.isEmpty && completions.count < neededCompletions {
             let phrase = splitExpression.joined(separator: " ")
             let augmentedString = phrase + " *"
             let range = NSRange(location: (phrase as NSString).length, length: -1)

@@ -18,7 +18,7 @@ class TextSelectionViewController: UICollectionViewController {
         case confirmation
     }
     
-    private var categoryPresets: [Category : [ItemWrapper]] = [
+    private var categoryPresets: [Category: [ItemWrapper]] = [
         .want: [.presetItem("I want the door closed."),
                 .presetItem("I want the door open."),
                 .presetItem("I would like to go to the bathroom."),
@@ -30,7 +30,7 @@ class TextSelectionViewController: UICollectionViewController {
                 .presetItem("I want another pillow.")],
         .need: (1...28).map { .presetItem("Need Item \($0)") },
         .three: (1...9).map { .presetItem("Category 3 item \($0)") },
-        .confirmation: (1...9).map { .presetItem("Confirmation item \($0)") },
+        .confirmation: (1...9).map { .presetItem("Confirmation item \($0)") }
     ]
     
     private let maxItemsPerPage = 9
@@ -88,8 +88,7 @@ class TextSelectionViewController: UICollectionViewController {
     }
     
     private func createLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout {
-            (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
             let sectionKind = Section.allCases[sectionIndex]
             
@@ -149,7 +148,6 @@ class TextSelectionViewController: UICollectionViewController {
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(317.8 / totalWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         
-        
         let subitems = [category1Item, category2Item, category3Item, category4Item, moreCategories]
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
@@ -196,7 +194,7 @@ class TextSelectionViewController: UICollectionViewController {
     }
     
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, ItemWrapper>(collectionView: collectionView, cellProvider: { (collectionView: UICollectionView, indexPath: IndexPath, identifier: ItemWrapper) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, ItemWrapper>(collectionView: collectionView, cellProvider: { (_: UICollectionView, indexPath: IndexPath, identifier: ItemWrapper) -> UICollectionViewCell? in
             
             switch identifier {
             case .textField:
@@ -204,14 +202,21 @@ class TextSelectionViewController: UICollectionViewController {
             case .redo(let title), .toggleKeyboard(let title), .category(let title), .moreCategories(let title):
                 return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: title, titleColor: .white, textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
             case .presetItem(let preset):
-                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell", indexPath: indexPath, title: preset, titleColor: UIColor(red:0.22, green:0.22, blue:0.22, alpha:1.0), textStyle: .headline, backgroundColor: .white, animationViewColor: .black, borderColor: .clear)
+                return self.setupCell(reuseIdentifier: "TrackingButtonCollectionViewCell",
+                                      indexPath: indexPath,
+                                      title: preset,
+                                      titleColor: UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1.0),
+                                      textStyle: .headline,
+                                      backgroundColor: .white,
+                                      animationViewColor: .black,
+                                      borderColor: .clear)
             }
         })
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
 
         snapshot.appendSections([.textField])
-        snapshot.appendItems([.textField, .redo("redo"),.toggleKeyboard("keyboard")])
+        snapshot.appendItems([.textField, .redo("redo"), .toggleKeyboard("keyboard")])
         snapshot.appendSections([.categories])
         snapshot.appendItems([.category("Basic Needs"), .category("Personal Care"), .category("Salutations"), .category("Yes | No"), .moreCategories("More Categories")])
         

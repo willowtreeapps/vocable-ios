@@ -31,7 +31,6 @@ enum IntersectionUtils {
 
         return targetNode.hitTestWithSegment(from: SCNVector3(lineStartInTarget), to: SCNVector3(lineEndInTarget), options: [ SCNHitTestOption.ignoreChildNodes.rawValue: NSNumber(booleanLiteral: true) ])
     }
-
     
     // MARK: - Unit-space and Screen-space conversion helpers
 
@@ -68,6 +67,8 @@ enum IntersectionUtils {
             orientedPosition.x = 1 - orientedPosition.x
             orientedPosition.y = 1 - orientedPosition.y
         case .unknown:
+            break
+        @unknown default:
             break
         }
 

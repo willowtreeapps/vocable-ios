@@ -9,7 +9,6 @@
 import UIKit
 import ARKit
 
-
 class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
 
     // MARK: - Public
@@ -32,7 +31,6 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
         return view
     }()
 
-
     // MARK: - Init
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -42,7 +40,6 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
 
     // MARK: - View Lifecycle
 
@@ -88,7 +85,6 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
         self.sceneView.session.pause()
     }
 
-
     // MARK: - Scene
 
     private lazy var rootNode = self.sceneView.scene.rootNode
@@ -125,7 +121,6 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
         self.intersectionParentNode.addChildNode(self.intersectionDebugNode)
     }
 
-
     // MARK: - Scene Configuration
 
     enum SceneMode {
@@ -161,7 +156,6 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
         }
     }
 
-
     // MARK: - Calibration
 
     var calibrationVectors: [SCNVector3] = []
@@ -184,7 +178,6 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
             self.calibarationView.removeFromSuperview()
         }
     }
-
 
     // MARK: - ARSCNViewDelegate
 
@@ -222,7 +215,6 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
-
 
     // MARK: - Intersection Helpers
 
@@ -264,7 +256,7 @@ class ScreenTrackingViewController: UIViewController, ARSCNViewDelegate {
             averageX += element.unitPositionInPlane.x
             averageY += element.unitPositionInPlane.y
         }
-        let count = elements.count > 0 ? elements.count : 1
+        let count = !elements.isEmpty ? elements.count : 1
         averageX /= CGFloat(count)
         averageY /= CGFloat(count)
         return CGPoint(x: averageX, y: averageY)

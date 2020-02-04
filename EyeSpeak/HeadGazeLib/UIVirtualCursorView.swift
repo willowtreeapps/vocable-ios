@@ -9,7 +9,7 @@ class UIVirtualCursorView: SKView {
     var circleNode: SKShapeNode!
     var spriteNode: SKNode!
 
-    private enum Config{
+    private enum Config {
         static let cursorSize: Int = 40
     }
     
@@ -18,7 +18,7 @@ class UIVirtualCursorView: SKView {
         initializeHeadGazeView()
     }
     
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         super.init(frame: frame)
         initializeHeadGazeView()
     }
@@ -89,7 +89,6 @@ class UIVirtualCursorView: SKView {
         }
     }
 }
-
 
 extension UIHeadGaze {
     /**

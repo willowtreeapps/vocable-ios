@@ -10,15 +10,14 @@ import Foundation
 import ARKit
 
 class FaceGesture {
-    var gestureTimer: Timer? = nil
+    var gestureTimer: Timer?
     var currentGestureCount = 0
     var isGestureTimerRunning = false
     var isGestureDetected = false
     var requiredGestures = 0
-    var onGesture: (() -> Void)? = nil
+    var onGesture: (() -> Void)?
     
     func prepare(withAnchor anchor: ARFaceAnchor) {}
-    
     
     func update(withAnchor anchor: ARFaceAnchor) {
         self.prepare(withAnchor: anchor)

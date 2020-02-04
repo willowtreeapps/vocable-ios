@@ -7,7 +7,23 @@ platform :ios do
 
   desc "Runs all the tests"
   lane :test do
-    scan(scheme: "Development")
+    lint
+    #scan(scheme: "Development") // add this back when we have tests
+    # in the meantime, build the app for PRs
+    match(type: "development")
+    gym(
+      scheme: "Development",
+      skip_archive: true,
+    )
+  end
+
+  desc "Run swiftlint"
+  lane :lint do
+    sh("brew install swiftlint")
+    swiftlint(
+      mode: :lint,      # SwiftLint mode: :lint (default) or :autocorrect
+      ignore_exit_status: true    # Allow fastlane to continue even if SwiftLint returns a non-zero exit status
+    )
   end
 
   desc "Ad-hoc build"

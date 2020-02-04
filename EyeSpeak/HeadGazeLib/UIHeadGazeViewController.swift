@@ -92,7 +92,6 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
 
         guard let window = self.view.window else { return }
 
-
         // Generate head gaze event and invoke event callback methods
         var allGazes = Set<UIHeadGaze>()
         let curGaze: UIHeadGaze
@@ -102,7 +101,6 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
             curGaze = UIHeadGaze(position: cursorPosNDC, view: self.view, win: window, isLeftEyeBlinking: leftBlink, isRightEyeBlinking: rightBlink)
         }
 
-
         allGazes.insert(curGaze)
         previousGaze = curGaze
 
@@ -110,13 +108,12 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         window.sendEvent(event)
     }
 
-
     private var headNode: SCNNode?
     private var headAnchor: ARFaceAnchor?
 
     private let axesNode = loadModelFromAsset(named: "axes")
 
-    private func setupSceneNode(){
+    private func setupSceneNode() {
         headNode?.addChildNode(axesNode)
     }
 
@@ -148,8 +145,8 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
 
         let worldTransMtx = getFaceTransformationMatrix()
 
-        let o_headCenter = simd_float4(0,0,0,1)
-        let o_headLookAtDir  = simd_float4(0,0,1,0)
+        let o_headCenter = simd_float4(0, 0, 0, 1)
+        let o_headLookAtDir  = simd_float4(0, 0, 1, 0)
 
         let tranfMtx = worldTransMtx
         let c_headCenter = tranfMtx * o_headCenter
@@ -188,7 +185,7 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     /**
      Extract the scale components of the ARFaceAnchor node
     */
-    private func getFaceScale() -> simd_float3{
+    private func getFaceScale() -> simd_float3 {
         let M = getFaceTransformationMatrix()
         let sx = simd_float3([M[0][0], M[0][1], M[0][2]])
         let sy = simd_float3([M[1][0], M[1][1], M[1][2]])
@@ -203,17 +200,17 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     private func getFaceRotationMatrix() -> simd_float4x4 {
         let scale = getFaceScale()
         let mtx = getFaceTransformationMatrix()
-        var (c0,c1,c2,c3) = mtx.columns
-        c3 = simd_float4(0,0,0,1) //zero out translation components
-        c0 = c0 / scale[0]
-        c1 = c1 / scale[1]
-        c2 = c2 / scale[2]
-        return simd_float4x4(c0,c1,c2,c3)
+        var (c0, c1, c2, c3) = mtx.columns
+        c3 = simd_float4(0, 0, 0, 1) //zero out translation components
+        c0 /= scale[0]
+        c1 /= scale[1]
+        c2 /= scale[2]
+        return simd_float4x4(c0, c1, c2, c3)
     }
 
 }
 
-private func loadModelFromAsset(named assetName: String) -> SCNNode{
+private func loadModelFromAsset(named assetName: String) -> SCNNode {
     let url = Bundle.main.url(forResource: assetName, withExtension: "scn", subdirectory: "GazeLib.scnassets")
     let node = SCNReferenceNode(url: url!)
     node?.load()

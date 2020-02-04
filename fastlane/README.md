@@ -21,6 +21,11 @@ or alternatively using `brew cask install fastlane`
 fastlane ios test
 ```
 Runs all the tests
+### ios lint
+```
+fastlane ios lint
+```
+Run swiftlint
 ### ios adhoc
 ```
 fastlane ios adhoc

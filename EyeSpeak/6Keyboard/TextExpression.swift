@@ -60,7 +60,7 @@ class TextExpression {
     }
     
     func backspace() {
-        if self.value.count > 0 {
+        if !self.value.isEmpty {
             _ = self.value.removeLast()
         }
         self.delegate?.textExpression(self, valueChanged: self.value)

@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct TrackingConfiguration {
 
     let trackingMethod: TrackingMethod

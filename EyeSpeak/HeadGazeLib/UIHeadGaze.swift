@@ -19,7 +19,7 @@ class UIHeadGaze: UITouch {
     /**
      Returns the time when the event occurred
      */
-    public var timeStamp: TimeInterval{
+    public var timeStamp: TimeInterval {
         return _timestamp
     }
 
@@ -29,11 +29,11 @@ class UIHeadGaze: UITouch {
         """
     }
 
-    convenience init(position: CGPoint, view uiview: UIView, win window: UIWindow? = nil, isLeftEyeBlinking: Bool, isRightEyeBlinking: Bool){
+    convenience init(position: CGPoint, view uiview: UIView, win window: UIWindow? = nil, isLeftEyeBlinking: Bool, isRightEyeBlinking: Bool) {
         self.init(curPosition: position, prevPosition: position, view: uiview, win: window, isLeftEyeBlinking: isLeftEyeBlinking, isRightEyeBlinking: isRightEyeBlinking)
     }
 
-    init(curPosition: CGPoint, prevPosition: CGPoint, view uiview: UIView, win window: UIWindow? = nil, isLeftEyeBlinking: Bool, isRightEyeBlinking: Bool){
+    init(curPosition: CGPoint, prevPosition: CGPoint, view uiview: UIView, win window: UIWindow? = nil, isLeftEyeBlinking: Bool, isRightEyeBlinking: Bool) {
         self._window = window
         self._receiver = uiview
         self._position = curPosition

@@ -53,7 +53,6 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
         expression.delegate = self
         return expression
     }()
-    
 
     @IBOutlet var topLeftKey: KeyView!
     @IBOutlet var topCenterKey: KeyView!
@@ -83,7 +82,6 @@ class SixButtonKeyboardViewController: UIViewController, HotCornerTrackable {
                  self.textfield
         ]
     }
-
 
     // MARK: - Key Options
 

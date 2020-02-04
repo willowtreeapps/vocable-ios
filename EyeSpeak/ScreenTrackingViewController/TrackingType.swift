@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /// A high-level type to communicate the basic tracking approach used. Useful for showing debug information.
 enum TrackingType {
     case head
