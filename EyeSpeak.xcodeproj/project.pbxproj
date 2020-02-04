@@ -911,7 +911,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 753J68XC6W;
+				DEVELOPMENT_TEAM = Y32EQUAEWX;
 				INFOPLIST_FILE = "EyeSpeak/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -920,7 +920,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.willowtreeapps.eyespeakaac";
+				PROVISIONING_PROFILE_SPECIFIER = "WillowTree Development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
