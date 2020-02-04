@@ -47,6 +47,8 @@
 		13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE392821557E7500B6110F /* QuadrilateralInterpolator.swift */; };
 		54D3C41723E37CD40061EF47 /* EyeSpeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* EyeSpeakTests.swift */; };
 		6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */; };
+		6B17CD7E23E9F85F0050BCB8 /* HotCornerOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7D23E9F85F0050BCB8 /* HotCornerOverlayViewController.swift */; };
+		6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */; };
 		6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */; };
 		6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */; };
 		6B9DFA5D23E889DB0037673E /* UIHeadGaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */; };
@@ -166,6 +168,8 @@
 		54D3C41623E37CD40061EF47 /* EyeSpeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeSpeakTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVSpeechSynthesizer+Shared.swift"; sourceTree = "<group>"; };
+		6B17CD7D23E9F85F0050BCB8 /* HotCornerOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerOverlayViewController.swift; sourceTree = "<group>"; };
+		6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapperView.swift; sourceTree = "<group>"; };
 		6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGazeViewController.swift; sourceTree = "<group>"; };
 		6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadGazeWindow.swift; sourceTree = "<group>"; };
 		6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGaze.swift; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 		130C00B620D2AD2A007C3163 /* EyeSpeak */ = {
 			isa = PBXGroup;
 			children = (
+				6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */,
 				6B9DFA4B23E889DB0037673E /* HeadGazeLib */,
 				9D219D5C22C3D6940087BF1B /* Gestures */,
 				9D15E0562272119E0058DF57 /* Utilities */,
@@ -280,6 +285,7 @@
 				9DDF1EF8226F61690072A248 /* HotCornersTrackableViewController.swift */,
 				9D739E0C226F433F00FEFFAC /* HotCornersTracking.storyboard */,
 				9D15E0542271F0DC0058DF57 /* CursorView.swift */,
+				6B17CD7D23E9F85F0050BCB8 /* HotCornerOverlayViewController.swift */,
 				B879831223E0DA5800DC1A81 /* UIComponents */,
 				B879830B23E0C85500DC1A81 /* TextSelection */,
 				13204C552180E52F005410FC /* 6Keyboard */,
@@ -688,11 +694,13 @@
 				9DDBFD7D229852FA00D19BCA /* AnimatingState.swift in Sources */,
 				9DDF1EF9226F61690072A248 /* HotCornersTrackableViewController.swift in Sources */,
 				134B6417214C03FC00285AD5 /* LookAtDirectionIntersectionMethod.swift in Sources */,
+				6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */,
 				13DA076C21929D760081754A /* Array+Split.swift in Sources */,
 				134B6419214C3A4B00285AD5 /* TrackingNode.swift in Sources */,
 				6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */,
 				6B9DFA7423E8D1270037673E /* TrackingContainerViewController.swift in Sources */,
 				9DC7C03222676AA400A1D503 /* CircularAnimatable.swift in Sources */,
+				6B17CD7E23E9F85F0050BCB8 /* HotCornerOverlayViewController.swift in Sources */,
 				9D739DFB226A026E00FEFFAC /* PresetsCollectionViewFlowLayout.swift in Sources */,
 				13FE392921557E7500B6110F /* QuadrilateralInterpolator.swift in Sources */,
 				9D739E05226A0BBE00FEFFAC /* Cell+NibLoading.swift in Sources */,

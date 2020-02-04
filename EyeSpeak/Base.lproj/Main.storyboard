@@ -71,6 +71,12 @@
                                     <segue destination="Jgy-U0-B1Z" kind="embed" id="VGF-IP-CWi"/>
                                 </connections>
                             </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A16-bV-8FB" customClass="ViewControllerWrapperView" customModule="EyeSpeak" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                                <connections>
+                                    <segue destination="gEA-fE-Ijf" kind="embed" id="ahg-Hg-anI"/>
+                                </connections>
+                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86h-9O-qAY" customClass="UIVirtualCursorView" customModule="EyeSpeak" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -81,10 +87,14 @@
                             <constraint firstItem="h77-DW-Ra2" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leading" id="2vi-F0-7jD"/>
                             <constraint firstItem="h77-DW-Ra2" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="top" id="35q-ga-C7k"/>
                             <constraint firstAttribute="trailing" secondItem="86h-9O-qAY" secondAttribute="trailing" id="9al-Da-z3Z"/>
+                            <constraint firstAttribute="bottom" secondItem="A16-bV-8FB" secondAttribute="bottom" id="DmU-vP-Uwr"/>
+                            <constraint firstItem="A16-bV-8FB" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leading" id="GUt-5Q-dz1"/>
                             <constraint firstAttribute="bottom" secondItem="86h-9O-qAY" secondAttribute="bottom" id="O6y-97-a4l"/>
+                            <constraint firstItem="A16-bV-8FB" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="top" id="PdI-JU-H9u"/>
                             <constraint firstItem="AQq-Gr-kNC" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="top" id="Pkw-eU-h0R"/>
                             <constraint firstItem="AQq-Gr-kNC" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leading" id="aS7-NB-aKe"/>
                             <constraint firstAttribute="bottom" secondItem="h77-DW-Ra2" secondAttribute="bottom" id="aiY-pn-mC3"/>
+                            <constraint firstAttribute="trailing" secondItem="A16-bV-8FB" secondAttribute="trailing" id="bQl-sF-nZX"/>
                             <constraint firstAttribute="bottom" secondItem="AQq-Gr-kNC" secondAttribute="bottom" id="gjT-Qg-rfd"/>
                             <constraint firstItem="86h-9O-qAY" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="top" id="ja5-K0-aCt"/>
                             <constraint firstItem="86h-9O-qAY" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leading" id="m3d-Dk-0Lq"/>
@@ -99,7 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OF-pV-I9m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-824" y="-972"/>
+            <point key="canvasLocation" x="-1668" y="-1443"/>
         </scene>
         <!--Head Gaze View Controller-->
         <scene sceneID="RBx-lz-Ojp">
@@ -114,7 +124,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPb-7J-yob" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8" y="-1352"/>
+            <point key="canvasLocation" x="-489" y="-2119"/>
         </scene>
         <!--Text Selection View Controller-->
         <scene sceneID="wcZ-O0-4Me">
@@ -168,7 +178,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yvH-BH-Lku" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8" y="-715"/>
+            <point key="canvasLocation" x="-489" y="-1444"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -277,6 +287,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jHJ-pO-z1P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="342" y="344"/>
+        </scene>
+        <!--Hot Corner Overlay View Controller-->
+        <scene sceneID="BXJ-IF-8S9">
+            <objects>
+                <viewController id="gEA-fE-Ijf" customClass="HotCornerOverlayViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="n5T-bn-khm">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TEc-iU-cqA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-489" y="-789"/>
         </scene>
     </scenes>
 </document>

@@ -107,6 +107,9 @@ extension UICollectionView {
     }
 
     override func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
-        updateGazeTarget(for: gaze, with: event)
+        if let oldTarget = gazeTarget {
+            setItemHighlighted(false, at: oldTarget.indexPath)
+            gazeTarget = nil
+        }
     }
 }
