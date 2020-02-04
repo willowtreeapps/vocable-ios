@@ -16,11 +16,21 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios build
+### ios test
 ```
-fastlane ios build
+fastlane ios test
 ```
-
+Runs all the tests
+### ios adhoc
+```
+fastlane ios adhoc
+```
+Ad-hoc build
+### ios buildanddeploytotestflight
+```
+fastlane ios buildanddeploytotestflight
+```
+AppStore build and upload to TestFlight
 
 ----
 
