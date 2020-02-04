@@ -102,6 +102,7 @@
 		9DDF1EFF226F654B0072A248 /* HotCornerGazeableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */; };
 		9DDF1F01226F66630072A248 /* HotCornerTrackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */; };
 		9DDF1F03226F7A160072A248 /* TrackingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1F02226F7A160072A248 /* TrackingCollectionViewCell.swift */; };
+		A920A4AF23EA1BD300CF5B08 /* PresetUICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewFlowLayout.swift */; };
 		A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */; };
 		B879830E23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879830C23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift */; };
 		B879830F23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B879830D23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib */; };
@@ -220,6 +221,7 @@
 		9DDF1EFE226F654B0072A248 /* HotCornerGazeableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerGazeableComponent.swift; sourceTree = "<group>"; };
 		9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerTrackable.swift; sourceTree = "<group>"; };
 		9DDF1F02226F7A160072A248 /* TrackingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingCollectionViewCell.swift; sourceTree = "<group>"; };
+		A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetUICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControlReusableView.swift; sourceTree = "<group>"; };
 		B879830C23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		B879830D23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -521,6 +523,7 @@
 				B879831323E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift */,
 				B879831423E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.xib */,
 				A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */,
+				A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewFlowLayout.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				130C00BC20D2AD2A007C3163 /* ViewController.swift in Sources */,
 				9D3FC1F72268B923003C5841 /* ExpandingAnimatable.swift in Sources */,
 				9D219D6022C3D6CF0087BF1B /* FaceGesture.swift in Sources */,
+				A920A4AF23EA1BD300CF5B08 /* PresetUICollectionViewFlowLayout.swift in Sources */,
 				13FE391A2154150900B6110F /* Bounded.swift in Sources */,
 				9DB58D47226664C500E99C3B /* UIView+Utilities.swift in Sources */,
 				13B715852148464000B3612A /* Constants.swift in Sources */,
