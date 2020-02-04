@@ -1,10 +1,36 @@
 import Foundation
 import ARKit
 
+extension Notification.Name {
+    static let applicationDidAcquireGaze = Notification.Name("applicationDidAcquireGaze")
+    static let applicationDidLoseGaze = Notification.Name("applicationDidLoseGaze")
+}
+
+extension UIApplication {
+
+    fileprivate class Storage {
+
+        static fileprivate(set) var isGazeTrackingActive: Bool = false {
+            didSet {
+                guard oldValue != isGazeTrackingActive else { return }
+                if isGazeTrackingActive {
+                    NotificationCenter.default.post(name: .applicationDidAcquireGaze, object: nil)
+                } else {
+                    NotificationCenter.default.post(name: .applicationDidLoseGaze, object: nil)
+                }
+            }
+        }
+    }
+
+    var isGazeTrackingActive: Bool {
+        return Storage.isGazeTrackingActive
+    }
+}
+
+
 class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate {
  
     private(set) var sceneview: ARSCNView?
-    private var faceAnchor: ARFaceAnchor?
 
     public var virtualCursorView: UIVirtualCursorView?
 
@@ -68,9 +94,10 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     */
     private var lastGazeNDCLocation = CGPoint(x: 0.5, y: 0.5)
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        guard let faceAnchor = faceAnchor else { return }
 
-        let lBlinkAmount = faceAnchor?.blendShapes[.eyeBlinkLeft]?.floatValue ?? 0.0
-        let rBlinkAmount = faceAnchor?.blendShapes[.eyeBlinkRight]?.floatValue ?? 0.0
+        let lBlinkAmount = faceAnchor.blendShapes[.eyeBlinkLeft]?.floatValue ?? 0.0
+        let rBlinkAmount = faceAnchor.blendShapes[.eyeBlinkRight]?.floatValue ?? 0.0
 
         let leftBlink = lBlinkAmount > 0.05
         let rightBlink = rBlinkAmount > 0.05
@@ -78,7 +105,7 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
 
         let cursorPosNDC: CGPoint
 
-        if !isBlinking {
+        if !isBlinking && faceAnchor.isTracked {
             let pos = updateGazeNDCLocationByARFaceAnchor(frame: frame, isBlinking: isBlinking)
             cursorPosNDC = cursorPositionInterpolator.update(with: pos, factor: nil)
             lastGazeNDCLocation = pos
@@ -100,12 +127,28 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         allGazes.insert(curGaze)
         previousGaze = curGaze
 
-        let event = UIHeadGazeEvent(allGazes: allGazes)
-        window.sendEvent(event)
+        if faceAnchor.isTracked {
+            let event = UIHeadGazeEvent(allGazes: allGazes)
+            window.sendEvent(event)
+        }
     }
 
     private var headNode: SCNNode?
-    private var headAnchor: ARFaceAnchor?
+    private var faceAnchor: ARFaceAnchor? {
+        didSet {
+            let oldTracked = oldValue?.isTracked ?? false
+            let newTracked = faceAnchor?.isTracked ?? false
+            if oldTracked && !newTracked {
+                DispatchQueue.main.async {
+                    UIApplication.Storage.isGazeTrackingActive = false
+                }
+            } else if !oldTracked && newTracked {
+                DispatchQueue.main.async {
+                    UIApplication.Storage.isGazeTrackingActive = true
+                }
+            }
+        }
+    }
 
     private let axesNode = loadModelFromAsset(named: "axes")
 
@@ -129,6 +172,13 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         let vector = self.headNode?.convertPosition(SCNVector3Zero, to: sceneview?.pointOfView) ?? SCNVector3Zero
         let length = sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
         // TODO: Implement distance scaling adjustment
+    }
+
+    func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
+        if let anchor = anchor as? ARFaceAnchor {
+            self.faceAnchor = nil
+            self.headNode = nil
+        }
     }
 
     /**
