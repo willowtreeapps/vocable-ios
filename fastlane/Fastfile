@@ -8,7 +8,12 @@ platform :ios do
   desc "Runs all the tests"
   lane :test do
     lint
-    scan(scheme: "Development")
+    #scan(scheme: "Development") // add this back when we have tests
+    # in the meantime, build the app for PRs
+    gym(
+      scheme: "Development",
+      skip_archive: true,
+    )
   end
 
   desc "Run swiftlint"
