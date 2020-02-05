@@ -85,6 +85,16 @@ extension SCNVector3 {
     func cross(vector: SCNVector3) -> SCNVector3 {
         return SCNVector3Make(y * vector.z - z * vector.y, z * vector.x - x * vector.z, x * vector.y - y * vector.x)
     }
+
+    var magnitude: SCNFloat {
+        return sqrt(dot(vector: self))
+    }
+
+    func angleToReach(_ vectorB: SCNVector3) -> SCNFloat {
+        //cos(angle) = (A.B)/(|A||B|)
+        let cosineAngle = (dot(vector: vectorB) / (magnitude * vectorB.magnitude))
+        return SCNFloat(acos(cosineAngle))
+    }
 }
 
 /**

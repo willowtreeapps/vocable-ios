@@ -31,12 +31,12 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
  
     private(set) var sceneview: ARSCNView?
 
-    public var virtualCursorView: UIVirtualCursorView?
-
     private var previousGaze: UIHeadGaze? //inherent from UIHeadGazeCallback
     private var cursorPositionInterpolator = LowPassInterpolator<CGPoint>(filterFactor: 0.2, initialValue: .zero)
     private var ndcSmoothingInterpolator = LowPassInterpolator<SIMD2<Float>>(filterFactor: 0.05, initialValue: .zero)
     private var computedScale: CGFloat = 6
+    private var xAngleCorrectionAmount = 0.0
+    private var yAngleCorrectionAmount = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,10 +49,6 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         sceneview?.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         sceneview?.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
 
-        virtualCursorView = UIVirtualCursorView(frame: self.view.bounds)
-        self.view.addSubview(virtualCursorView!)
-        virtualCursorView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
         sceneview?.delegate = self
         sceneview?.session.delegate = self
         sceneview?.isHidden = true
@@ -63,10 +59,6 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         resetTracking()
-
-        if let virtualCursorView = virtualCursorView {
-            view.sendSubviewToBack(virtualCursorView)
-        }
 
         if let sceneView = sceneview {
             sceneView.isHidden = false
@@ -96,11 +88,13 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         guard let faceAnchor = faceAnchor else { return }
 
-        let lBlinkAmount = faceAnchor.blendShapes[.eyeBlinkLeft]?.floatValue ?? 0.0
-        let rBlinkAmount = faceAnchor.blendShapes[.eyeBlinkRight]?.floatValue ?? 0.0
+        let blendShapes = faceAnchor.blendShapes
+        let lBlinkAmount = blendShapes[.eyeBlinkLeft]?.floatValue ?? 0.0
+        let rBlinkAmount = blendShapes[.eyeBlinkRight]?.floatValue ?? 0.0
 
-        let leftBlink = lBlinkAmount > 0.05
-        let rightBlink = rBlinkAmount > 0.05
+        let blinkThreshold: Float = 0.3 // 0.05
+        let leftBlink = lBlinkAmount > blinkThreshold
+        let rightBlink = rBlinkAmount > blinkThreshold
         let isBlinking = leftBlink || rightBlink
 
         let cursorPosNDC: CGPoint
@@ -119,9 +113,9 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         var allGazes = Set<UIHeadGaze>()
         let curGaze: UIHeadGaze
         if let lastGaze = previousGaze {
-            curGaze = UIHeadGaze(curPosition: cursorPosNDC, prevPosition: lastGaze.location(in: window), view: self.view, win: window, isLeftEyeBlinking: leftBlink, isRightEyeBlinking: rightBlink)
+            curGaze = UIHeadGaze(curPosition: cursorPosNDC, prevPosition: lastGaze.location(in: window), view: self.view, win: window)
         } else {
-            curGaze = UIHeadGaze(position: cursorPosNDC, view: self.view, win: window, isLeftEyeBlinking: leftBlink, isRightEyeBlinking: rightBlink)
+            curGaze = UIHeadGaze(position: cursorPosNDC, view: self.view, win: window)
         }
 
         allGazes.insert(curGaze)
@@ -169,7 +163,13 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     /// - Tag: ARFaceGeometryUpdate
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         self.faceAnchor = anchor as? ARFaceAnchor
-        let vector = self.headNode?.convertPosition(SCNVector3Zero, to: sceneview?.pointOfView) ?? SCNVector3Zero
+        guard let headNode = headNode, let sceneView = sceneview else { return }
+        let vector = headNode.convertPosition(SCNVector3Zero, to: sceneView.pointOfView)
+        let angleX = vector.angleToReach(SCNVector3Make(1, 0, 0))
+        let angleY = vector.angleToReach(SCNVector3Make(0, 1, 0))
+        xAngleCorrectionAmount = Double(90 - angleX.radiansToDegrees) / 90.0
+        yAngleCorrectionAmount = Double(90 - angleY.radiansToDegrees) / 90.0
+
         let length = Double(sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z))
         let distanceRange = (0.3 ... 0.6)
         let scalingRange = (3.0 ... 6.0)
@@ -205,7 +205,10 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         let t = (0.0 - c_headCenter[2]) / c_lookAtDir[2]
         let hitPos = c_headCenter + c_lookAtDir * t
 
-        let hitPosNDC = SIMD2<Float>([Float(hitPos[0]), Float(hitPos[1])])
+        let correctionScalar: Double = 1.0
+        let xNDC = Float(hitPos[0]) - Float(xAngleCorrectionAmount * correctionScalar)
+        let yNDC = Float(hitPos[1]) - Float(yAngleCorrectionAmount * correctionScalar)
+        let hitPosNDC = SIMD2<Float>([xNDC, yNDC])
         let filteredPos = ndcSmoothingInterpolator.update(with: hitPosNDC, factor: isBlinking ? 0.05 : nil)
 
         let worldToSKSceneScale = Float(computedScale)
