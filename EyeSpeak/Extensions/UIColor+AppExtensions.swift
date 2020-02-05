@@ -9,6 +9,22 @@
 import UIKit
 
 extension UIColor {
+    
+    // MARK: New Branded Colors
+    
+    static let primaryColor = UIColor(named: "Primary")!
+    
+    static let defaultFontColor = UIColor(named: "DefaultFontColor")!
+    
+    static let collectionViewBackgroundColor = UIColor(named: "Background")!
+    static let defaultCellBackgroundColor = UIColor(named: "DefaultCellBackground")!
+    static let categoryBackgroundColor = UIColor(named: "CategoryBackground")!
+    
+    static let cellSelectionColor = UIColor(named: "Selection")!
+    static let cellBorderHighlightColor = UIColor(named: "BorderHighlight")!
+    
+    // MARK: Deprecated Colors
+    
     convenience init(rgbRed red: Int, green: Int, blue: Int, alpha: CGFloat) {
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: alpha)
     }
@@ -44,4 +60,5 @@ extension UIColor {
     static let backKeyboardFill = UIColor(rgbRed: 232, green: 232, blue: 232, alpha: 1.0)
     static let backKeyboardBloom = UIColor(rgbRed: 202, green: 202, blue: 202, alpha: 1.0)
     static let backKeyboardBorderHover = UIColor(rgbRed: 56, green: 56, blue: 56, alpha: 1.0)
+    
 }
