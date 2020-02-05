@@ -36,7 +36,8 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     private var previousGaze: UIHeadGaze? //inherent from UIHeadGazeCallback
     private var cursorPositionInterpolator = LowPassInterpolator<CGPoint>(filterFactor: 0.2, initialValue: .zero)
     private var ndcSmoothingInterpolator = LowPassInterpolator<SIMD2<Float>>(filterFactor: 0.05, initialValue: .zero)
-    
+    private var computedScale: CGFloat = 6
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -169,8 +170,13 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         self.faceAnchor = anchor as? ARFaceAnchor
         let vector = self.headNode?.convertPosition(SCNVector3Zero, to: sceneview?.pointOfView) ?? SCNVector3Zero
-        let length = sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
-        // TODO: Implement distance scaling adjustment
+        let length = Double(sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z))
+        let distanceRange = (0.3 ... 0.6)
+        let scalingRange = (3.0 ... 6.0)
+        let normalizedLength = min(max((length - distanceRange.lowerBound) / (distanceRange.upperBound - distanceRange.lowerBound), 0.0), 1.0)
+        let normalizedScale = 1.0 - normalizedLength
+        let scaleValue = (normalizedScale * (scalingRange.upperBound - scalingRange.lowerBound)) + scalingRange.lowerBound
+        computedScale = CGFloat(scaleValue)
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
@@ -202,7 +208,7 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         let hitPosNDC = SIMD2<Float>([Float(hitPos[0]), Float(hitPos[1])])
         let filteredPos = ndcSmoothingInterpolator.update(with: hitPosNDC, factor: isBlinking ? 0.05 : nil)
 
-        let worldToSKSceneScale = Float(6.0)
+        let worldToSKSceneScale = Float(computedScale)
         let hitPosSKScene = filteredPos * worldToSKSceneScale
         switch orientation {
         case .portrait:
