@@ -40,6 +40,22 @@ class UIVirtualCursorView: SKView {
         self.spritekitScene?.backgroundColor = .clear
         self.presentScene(self.spritekitScene)
         createCursor()
+        updateForCurrentGazeActivityStatus()
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
+    }
+
+    private func updateForCurrentGazeActivityStatus() {
+        let isActive = UIApplication.shared.isGazeTrackingActive
+        self.isHidden = !isActive
+    }
+
+    @objc private func applicationDidAcquireGaze(_ sender: Any?) {
+        updateForCurrentGazeActivityStatus()
+    }
+
+    @objc private func applicationDidLoseGaze(_ sender: Any?) {
+        updateForCurrentGazeActivityStatus()
     }
     
     func createCursor() {

@@ -289,6 +289,9 @@ class TextSelectionViewController: UICollectionViewController {
         default:
             break
         }
+        if collectionView.indexPathForGazedItem != indexPath {
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
     }
     
     func handleScrollViewOffsetChange(scrollView: UIScrollView, offset: NSKeyValueObservedChange<CGPoint>) {

@@ -13,6 +13,34 @@ class HeadGazeWindow: UIWindow {
     weak var cursorView: UIVirtualCursorView?
 
     private var trackingView: UIView?
+    private var lastGaze: UIHeadGaze?
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+
+    override init(windowScene: UIWindowScene) {
+        super.init(windowScene: windowScene)
+        commonInit()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+
+    private func commonInit() {
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
+    }
+
+    @objc private func applicationDidLoseGaze(_ sender: Any?) {
+        if let trackingView = trackingView, let gaze = lastGaze {
+            trackingView.gazeEnded(gaze, with: nil)
+        }
+        self.trackingView = nil
+        self.lastGaze = nil
+    }
 
     override func sendEvent(_ originalEvent: UIEvent) {
 
@@ -22,6 +50,8 @@ class HeadGazeWindow: UIWindow {
             super.sendEvent(originalEvent)
             return
         }
+
+        lastGaze = event.allGazes?.first
 
         // If something has registered as the cursor view, let it know
         // there was a state change

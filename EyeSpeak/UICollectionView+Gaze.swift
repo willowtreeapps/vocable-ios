@@ -30,6 +30,10 @@ extension UICollectionView {
         static var gazeTarget: UInt8 = 0
     }
 
+    var indexPathForGazedItem: IndexPath? {
+        return gazeTarget?.indexPath
+    }
+
     private var gazeTarget: UICollectionViewGazeTarget? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.gazeTarget) as? UICollectionViewGazeTarget
