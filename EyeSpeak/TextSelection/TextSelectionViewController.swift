@@ -109,8 +109,7 @@ class TextSelectionViewController: UICollectionViewController {
     
     enum ItemWrapper: Hashable {
         case textField(String)
-        case redo(String)
-        case toggleKeyboard(String)
+        case topBarButton(String)
         case category(Category)
         case presetItem(String)
     }
@@ -124,8 +123,11 @@ class TextSelectionViewController: UICollectionViewController {
     
     private func setupCollectionView() {
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
-        collectionView.register(UINib(nibName: "TrackingButtonCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TrackingButtonCollectionViewCell")
-        collectionView.collectionViewLayout = createLayout()
+        collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
+        collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
+        let layout = createLayout()
+        collectionView.collectionViewLayout = layout
+        layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
         collectionView.backgroundColor = UIColor.collectionViewBackgroundColor
         collectionView.allowsMultipleSelection = true
         
@@ -216,10 +218,14 @@ class TextSelectionViewController: UICollectionViewController {
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(137.0 / totalHeight)),
             subitems: subitems)
-        
+        containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
         let section = NSCollectionLayoutSection(group: containerGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
         
+        let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
+        backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
+
+        section.decorationItems = [backgroundDecoration]
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
         return section
     }
     
@@ -259,21 +265,15 @@ class TextSelectionViewController: UICollectionViewController {
             
             switch identifier {
             case .textField(let title):
-                return self.setupCell(reuseIdentifier: TrackingButtonCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: title,
-                                      titleColor: .defaultFontColor, textStyle: .largeTitle, backgroundColor: .clear,
-                                      animationViewColor: .backspaceBloom, borderColor: .clear)
-            case .redo(let title), .toggleKeyboard(let title):
-                return self.setupCell(reuseIdentifier: TrackingButtonCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: title,
-                                      titleColor: .defaultFontColor, textStyle: .footnote, backgroundColor: .defaultCellBackgroundColor,
-                                      animationViewColor: .backspaceBloom, borderColor: .clear)
+                return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: title)
+            case .topBarButton(let buttonImageName):
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+                cell.setup(systemImageName: buttonImageName)
+                return cell
             case .category(let category):
-                return self.setupCell(reuseIdentifier: TrackingButtonCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description,
-                                      titleColor: .defaultFontColor, textStyle: .footnote, backgroundColor: .categoryBackgroundColor,
-                                      animationViewColor: .backspaceBloom, borderColor: .clear)
+                return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description)
             case .presetItem(let preset):
-                return self.setupCell(reuseIdentifier: TrackingButtonCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset,
-                                      titleColor: .defaultFontColor, textStyle: .headline, backgroundColor: .defaultCellBackgroundColor,
-                                      animationViewColor: .black, borderColor: .clear)
+                return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
             }
         })
         
@@ -284,7 +284,7 @@ class TextSelectionViewController: UICollectionViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
         
         snapshot.appendSections([.topBar])
-        snapshot.appendItems([.redo("redo"), .toggleKeyboard("keyboard")])
+        snapshot.appendItems([.topBarButton("repeat"), .topBarButton("keyboard")])
         
         snapshot.appendSections([.textField])
         snapshot.appendItems([.textField(currentSpeechText)])
@@ -296,6 +296,10 @@ class TextSelectionViewController: UICollectionViewController {
         snapshot.appendItems(categoryPresets[selectedCategory]!)
         
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
+            if kind == "CategorySectionBackground" {
+                let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CategorySectionBackground", for: indexPath) as! CategorySectionBackground
+                return view
+            }
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "PresetPageControlView", for: indexPath) as! PresetPageControlReusableView
             self?.pageControl = view.pageControl
             return view
@@ -371,9 +375,9 @@ class TextSelectionViewController: UICollectionViewController {
         orthogonalScrollView?.scrollRectToVisible(rect, animated: true)
     }
     
-    private func setupCell(reuseIdentifier: String, indexPath: IndexPath, title: String, titleColor: UIColor, textStyle: UIFont.TextStyle, backgroundColor: UIColor, animationViewColor: UIColor, borderColor: UIColor) -> TrackingButtonCollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TrackingButtonCollectionViewCell
-        cell.setup(title: title, titleColor: titleColor, textStyle: textStyle, backgroundColor: backgroundColor, animationViewColor: animationViewColor, borderColor: borderColor)
+    private func setupCell(reuseIdentifier: String, indexPath: IndexPath, title: String) -> PresetItemCollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+        cell.setup(title: title)
         return cell
     }
     

@@ -14,8 +14,11 @@ extension UIColor {
     
     static let primaryColor = UIColor(named: "Primary")!
     
-    static let defaultFontColor = UIColor(named: "DefaultFontColor")!
-    
+    static let defaultTextColor = UIColor(named: "DefaultFontColor")!
+    static var selectedTextColor: UIColor {
+        return collectionViewBackgroundColor
+    }
+
     static let collectionViewBackgroundColor = UIColor(named: "Background")!
     static let defaultCellBackgroundColor = UIColor(named: "DefaultCellBackground")!
     static let categoryBackgroundColor = UIColor(named: "CategoryBackground")!
