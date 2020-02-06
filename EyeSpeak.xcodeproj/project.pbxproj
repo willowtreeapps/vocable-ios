@@ -105,6 +105,8 @@
 		9DDF1F01226F66630072A248 /* HotCornerTrackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */; };
 		9DDF1F03226F7A160072A248 /* TrackingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1F02226F7A160072A248 /* TrackingCollectionViewCell.swift */; };
 		A920A4AF23EA1BD300CF5B08 /* PresetUICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewFlowLayout.swift */; };
+		A92FFB8D23ECCB5400AF2D0B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FFB8C23ECCB5400AF2D0B /* SettingsViewController.swift */; };
+		A92FFB8F23ECD6F200AF2D0B /* HotCorners.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A92FFB8E23ECD6F200AF2D0B /* HotCorners.storyboard */; };
 		A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */; };
 		B879830E23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879830C23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift */; };
 		B879830F23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B879830D23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib */; };
@@ -229,6 +231,8 @@
 		9DDF1F00226F66630072A248 /* HotCornerTrackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerTrackable.swift; sourceTree = "<group>"; };
 		9DDF1F02226F7A160072A248 /* TrackingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingCollectionViewCell.swift; sourceTree = "<group>"; };
 		A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetUICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		A92FFB8C23ECCB5400AF2D0B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A92FFB8E23ECD6F200AF2D0B /* HotCorners.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HotCorners.storyboard; sourceTree = "<group>"; };
 		A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControlReusableView.swift; sourceTree = "<group>"; };
 		B879830C23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		B879830D23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -283,6 +287,9 @@
 				6B9DFA4B23E889DB0037673E /* HeadGazeLib */,
 				9D219D5C22C3D6940087BF1B /* Gestures */,
 				9D15E0562272119E0058DF57 /* Utilities */,
+				A920A4B023ECB76400CF5B08 /* HotCorner */,
+				B879831223E0DA5800DC1A81 /* UIComponents */,
+				B879830B23E0C85500DC1A81 /* TextSelection */,
 				6B9DFA7523E8D5990037673E /* UICollectionView+Gaze.swift */,
 				130C00B720D2AD2A007C3163 /* AppDelegate.swift */,
 				13FE3921215577E300B6110F /* ConfigurationListTableViewController.swift */,
@@ -293,9 +300,6 @@
 				9DDF1EF8226F61690072A248 /* HotCornersTrackableViewController.swift */,
 				9D739E0C226F433F00FEFFAC /* HotCornersTracking.storyboard */,
 				9D15E0542271F0DC0058DF57 /* CursorView.swift */,
-				6B17CD7D23E9F85F0050BCB8 /* HotCornerOverlayViewController.swift */,
-				B879831223E0DA5800DC1A81 /* UIComponents */,
-				B879830B23E0C85500DC1A81 /* TextSelection */,
 				13204C552180E52F005410FC /* 6Keyboard */,
 				13B71581214840B100B3612A /* ScreenTrackingViewController */,
 				9D739DEF2269FEDE00FEFFAC /* Presets */,
@@ -519,6 +523,24 @@
 			path = Animations;
 			sourceTree = "<group>";
 		};
+		A920A4B023ECB76400CF5B08 /* HotCorner */ = {
+			isa = PBXGroup;
+			children = (
+				6B17CD7D23E9F85F0050BCB8 /* HotCornerOverlayViewController.swift */,
+				A92FFB8E23ECD6F200AF2D0B /* HotCorners.storyboard */,
+				A92FFB9023ECD73400AF2D0B /* Settings */,
+			);
+			path = HotCorner;
+			sourceTree = "<group>";
+		};
+		A92FFB9023ECD73400AF2D0B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A92FFB8C23ECCB5400AF2D0B /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		B879830B23E0C85500DC1A81 /* TextSelection */ = {
 			isa = PBXGroup;
 			children = (
@@ -632,6 +654,7 @@
 				9D739DFD226A090C00FEFFAC /* Presets.storyboard in Resources */,
 				B879830F23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib in Resources */,
 				9D739E09226A0C2200FEFFAC /* PresetsCollectionViewCell.xib in Resources */,
+				A92FFB8F23ECD6F200AF2D0B /* HotCorners.storyboard in Resources */,
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,
 				13204C592180E564005410FC /* SixButtonKeyboardViewController.storyboard in Resources */,
 				9D739E0D226F433F00FEFFAC /* HotCornersTracking.storyboard in Resources */,
@@ -749,6 +772,7 @@
 				13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */,
 				9D739E01226A0A2F00FEFFAC /* UIViewController+Segues.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
+				A92FFB8D23ECCB5400AF2D0B /* SettingsViewController.swift in Sources */,
 				B879831523E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift in Sources */,
 				13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */,
 				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
@@ -935,8 +959,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 753J68XC6W;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 753J68XC6W;
 				INFOPLIST_FILE = "EyeSpeak/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
