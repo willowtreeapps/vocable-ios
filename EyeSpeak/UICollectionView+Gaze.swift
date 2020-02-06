@@ -64,7 +64,6 @@ extension UICollectionView {
         if !highlighted,
             indexPathIsSelected(indexPath),
             delegate?.collectionView?(self, shouldDeselectItemAt: indexPath) ?? true {
-
             deselectItem(at: indexPath, animated: true)
             delegate?.collectionView?(self, didDeselectItemAt: indexPath)
         }
