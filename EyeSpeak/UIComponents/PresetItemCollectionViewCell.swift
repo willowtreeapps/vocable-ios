@@ -39,12 +39,18 @@ class PresetItemCollectionViewCell: UICollectionViewCell {
     
     fileprivate func updateContentViews() {
         borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
-        borderedView.fillColor = isSelected ? .cellSelectionColor : .defaultCellBackgroundColor
+        borderedView.fillColor = isSelected ? .cellSelectionColor : fillColor
         borderedView.isOpaque = true
 
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = borderedView.fillColor
         textLabel.isOpaque = true
+    }
+    
+    var fillColor: UIColor = .defaultCellBackgroundColor {
+        didSet {
+            updateContentViews()
+        }
     }
 
     func setup(title: String) {

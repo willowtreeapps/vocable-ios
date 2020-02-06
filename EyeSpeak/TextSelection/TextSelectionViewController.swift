@@ -119,6 +119,8 @@ class TextSelectionViewController: UICollectionViewController {
         
         setupCollectionView()
         configureDataSource()
+        
+        collectionView.selectItem(at: dataSource.indexPath(for: .category(.category1)), animated: false, scrollPosition: .init())
     }
     
     private func setupCollectionView() {
@@ -132,8 +134,6 @@ class TextSelectionViewController: UICollectionViewController {
         collectionView.allowsMultipleSelection = true
         
         collectionView.register(PresetPageControlReusableView.self, forSupplementaryViewOfKind: "footerPageIndicator", withReuseIdentifier: "PresetPageControlView")
-        
-        configureDataSource()
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -265,7 +265,7 @@ class TextSelectionViewController: UICollectionViewController {
             
             switch identifier {
             case .textField(let title):
-                return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: title)
+                return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: title, fillColor: .collectionViewBackgroundColor)
             case .topBarButton(let buttonImageName):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
                 cell.setup(systemImageName: buttonImageName)
@@ -306,6 +306,28 @@ class TextSelectionViewController: UICollectionViewController {
         }
         
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
+        
+        switch item {
+        case .textField:
+            return false
+        case .category, .presetItem, .topBarButton:
+            return true
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
+        
+        switch item {
+        case .textField:
+            return false
+        case .category, .presetItem, .topBarButton:
+            return true
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -355,7 +377,14 @@ class TextSelectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-        return false
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
+        
+        switch item {
+        case .presetItem:
+            return true
+        case .category, .textField, .topBarButton:
+            return false
+        }
     }
     
     func handleScrollViewOffsetChange(scrollView: UIScrollView, offset: NSKeyValueObservedChange<CGPoint>) {
@@ -375,9 +404,12 @@ class TextSelectionViewController: UICollectionViewController {
         orthogonalScrollView?.scrollRectToVisible(rect, animated: true)
     }
     
-    private func setupCell(reuseIdentifier: String, indexPath: IndexPath, title: String) -> PresetItemCollectionViewCell {
+    private func setupCell(reuseIdentifier: String, indexPath: IndexPath, title: String, fillColor: UIColor = .defaultCellBackgroundColor) -> PresetItemCollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+        
         cell.setup(title: title)
+        cell.fillColor = fillColor
+        
         return cell
     }
     
