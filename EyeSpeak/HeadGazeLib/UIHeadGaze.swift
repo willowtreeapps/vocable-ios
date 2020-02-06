@@ -8,8 +8,6 @@ class UIHeadGaze: UITouch {
     private let _receiver: UIView
     private let _position: CGPoint //NDC coordinates [0,1] x [0,1], origin is lower left corner of the screen
     private let _previousPosition: CGPoint //NDC coordinates [0,1] x [0,1], origin is lower left corner of the screen
-    let isLeftEyeBlinking: Bool
-    let isRightEyeBlinking: Bool
 
     /**
      The time when the event occurred
@@ -29,18 +27,16 @@ class UIHeadGaze: UITouch {
         """
     }
 
-    convenience init(position: CGPoint, view uiview: UIView, win window: UIWindow? = nil, isLeftEyeBlinking: Bool, isRightEyeBlinking: Bool) {
-        self.init(curPosition: position, prevPosition: position, view: uiview, win: window, isLeftEyeBlinking: isLeftEyeBlinking, isRightEyeBlinking: isRightEyeBlinking)
+    convenience init(position: CGPoint, view uiview: UIView, win window: UIWindow? = nil) {
+        self.init(curPosition: position, prevPosition: position, view: uiview, win: window)
     }
 
-    init(curPosition: CGPoint, prevPosition: CGPoint, view uiview: UIView, win window: UIWindow? = nil, isLeftEyeBlinking: Bool, isRightEyeBlinking: Bool) {
+    init(curPosition: CGPoint, prevPosition: CGPoint, view uiview: UIView, win window: UIWindow? = nil) {
         self._window = window
         self._receiver = uiview
         self._position = curPosition
         self._previousPosition = prevPosition
         self._timestamp = Date().timeIntervalSince1970
-        self.isLeftEyeBlinking = isLeftEyeBlinking
-        self.isRightEyeBlinking = isRightEyeBlinking
     }
 
     /**
@@ -48,12 +44,10 @@ class UIHeadGaze: UITouch {
               2. or position in NDC coordinates if view is nil
     */
     override func location(in view: UIView?) -> CGPoint {
-        guard let view = view, let window = view.window ?? view as? UIWindow else {
+        guard let point = transformNDCPoint(_position, in: view) else {
             return _position
         }
-        let winPos = CGPoint(x: (self._position.x+0.5) * window.frame.width, y: (1.0-(self._position.y+0.5)) * window.frame.height)
-        let viewPos = view.convert(winPos, from: window)
-        return viewPos
+        return point
     }
 
     /**
@@ -61,10 +55,20 @@ class UIHeadGaze: UITouch {
                2. or position in NDC coordinates if view is nil
      */
     override func previousLocation(in view: UIView?) -> CGPoint {
-        guard let view = view, let window = view.window else {
+        guard let point = transformNDCPoint(_previousPosition, in: view) else {
             return _previousPosition
         }
-        let winPos = CGPoint(x: (self._previousPosition.x+0.5) * window.frame.width, y: (1.0-(self._previousPosition.y+0.5)) * window.frame.height)
+        return point
+    }
+
+    private func transformNDCPoint(_ point: CGPoint, in view: UIView?) -> CGPoint? {
+        guard let view = view, let window = view.window ?? (view as? UIWindow) else {
+            return nil
+        }
+        func clamp(_ value: CGFloat) -> CGFloat {
+            return max(min(value, 1.0), 0.0)
+        }
+        let winPos = CGPoint(x: clamp(point.x+0.5) * window.frame.width, y: clamp(1.0-(point.y+0.5)) * window.frame.height)
         let viewPos = view.convert(winPos, from: window)
         return viewPos
     }
