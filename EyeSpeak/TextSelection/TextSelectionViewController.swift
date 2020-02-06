@@ -380,9 +380,9 @@ class TextSelectionViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .presetItem:
+        case .presetItem, .topBarButton:
             return true
-        case .category, .textField, .topBarButton:
+        case .category, .textField:
             return false
         }
     }
