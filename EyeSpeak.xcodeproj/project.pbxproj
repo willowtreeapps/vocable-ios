@@ -109,8 +109,11 @@
 		B879830E23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879830C23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift */; };
 		B879830F23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B879830D23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib */; };
 		B879831123E0CEC300DC1A81 /* TextSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879831023E0CEC300DC1A81 /* TextSelectionViewController.swift */; };
-		B879831523E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879831323E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift */; };
-		B879831623E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B879831423E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.xib */; };
+		B879831523E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */; };
+		B879831623E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B879831423E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib */; };
+		B8DA9DE823EB833200FEBE19 /* BorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DE723EB833200FEBE19 /* BorderedView.swift */; };
+		B8DA9DEA23EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DA9DE923EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib */; };
+		B8DA9DEC23EB8FB900FEBE19 /* CategorySectionBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DEB23EB8FB900FEBE19 /* CategorySectionBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -230,8 +233,11 @@
 		B879830C23E0C87600DC1A81 /* TextFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		B879830D23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCollectionViewCell.xib; sourceTree = "<group>"; };
 		B879831023E0CEC300DC1A81 /* TextSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSelectionViewController.swift; sourceTree = "<group>"; };
-		B879831323E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingButtonCollectionViewCell.swift; sourceTree = "<group>"; };
-		B879831423E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackingButtonCollectionViewCell.xib; sourceTree = "<group>"; };
+		B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		B879831423E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PresetItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		B8DA9DE723EB833200FEBE19 /* BorderedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedView.swift; sourceTree = "<group>"; };
+		B8DA9DE923EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		B8DA9DEB23EB8FB900FEBE19 /* CategorySectionBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -526,9 +532,12 @@
 		B879831223E0DA5800DC1A81 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				B879831323E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift */,
-				B879831423E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.xib */,
+				B8DA9DE723EB833200FEBE19 /* BorderedView.swift */,
+				B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */,
+				B879831423E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib */,
+				B8DA9DE923EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib */,
 				A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */,
+				B8DA9DEB23EB8FB900FEBE19 /* CategorySectionBackground.swift */,
 				A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewFlowLayout.swift */,
 			);
 			path = UIComponents;
@@ -619,7 +628,7 @@
 			files = (
 				13204C5D2180EC2D005410FC /* KeyView.xib in Resources */,
 				130C00BA20D2AD2A007C3163 /* art.scnassets in Resources */,
-				B879831623E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.xib in Resources */,
+				B879831623E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib in Resources */,
 				9D739DFD226A090C00FEFFAC /* Presets.storyboard in Resources */,
 				B879830F23E0C87600DC1A81 /* TextFieldCollectionViewCell.xib in Resources */,
 				9D739E09226A0C2200FEFFAC /* PresetsCollectionViewCell.xib in Resources */,
@@ -629,6 +638,7 @@
 				6B9DFA6923E88A1B0037673E /* GazeLib.scnassets in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
 				130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */,
+				B8DA9DEA23EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,6 +683,7 @@
 				9D3FC1F72268B923003C5841 /* ExpandingAnimatable.swift in Sources */,
 				9D219D6022C3D6CF0087BF1B /* FaceGesture.swift in Sources */,
 				A920A4AF23EA1BD300CF5B08 /* PresetUICollectionViewFlowLayout.swift in Sources */,
+				B8DA9DE823EB833200FEBE19 /* BorderedView.swift in Sources */,
 				13FE391A2154150900B6110F /* Bounded.swift in Sources */,
 				9DB58D47226664C500E99C3B /* UIView+Utilities.swift in Sources */,
 				13B715852148464000B3612A /* Constants.swift in Sources */,
@@ -710,6 +721,7 @@
 				9D739E05226A0BBE00FEFFAC /* Cell+NibLoading.swift in Sources */,
 				13A7B912214C027300714057 /* TrackingMethod.swift in Sources */,
 				9D739E07226A0C1500FEFFAC /* PresetsCollectionViewCell.swift in Sources */,
+				B8DA9DEC23EB8FB900FEBE19 /* CategorySectionBackground.swift in Sources */,
 				9DB58D092266170000E99C3B /* TextExpression.swift in Sources */,
 				6B9DFA7623E8D59A0037673E /* UICollectionView+Gaze.swift in Sources */,
 				13204C5F2180EC61005410FC /* NibBackedView.swift in Sources */,
@@ -737,7 +749,7 @@
 				13FE392721557E5500B6110F /* Quadrilateral.swift in Sources */,
 				9D739E01226A0A2F00FEFFAC /* UIViewController+Segues.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
-				B879831523E0DA8300DC1A81 /* TrackingButtonCollectionViewCell.swift in Sources */,
+				B879831523E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift in Sources */,
 				13B715892149509200B3612A /* IntersectionUtilities.swift in Sources */,
 				13C32B84213990D60090BB7D /* SCNVector3+Extensions.swift in Sources */,
 				6B9DFA5F23E889DB0037673E /* UIHeadGazeEvent.swift in Sources */,

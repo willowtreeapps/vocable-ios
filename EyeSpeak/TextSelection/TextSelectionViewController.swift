@@ -12,27 +12,27 @@ import AVFoundation
 class TextSelectionViewController: UICollectionViewController {
     
     enum Category: CustomStringConvertible {
-        case basicNeeds
-        case personalCare
-        case salutations
-        case yesNo
+        case category1
+        case category2
+        case category3
+        case category4
         
         var description: String {
             switch self {
-            case .basicNeeds:
+            case .category1:
                 return "Basic Needs"
-            case .personalCare:
-                return "Personal Care"
-            case .salutations:
+            case .category2:
                 return "Salutations"
-            case .yesNo:
-                return "Yes | No"
+            case .category3:
+                return "Temperature"
+            case .category4:
+                return "Body"
             }
         }
     }
     
     private var categoryPresets: [Category: [ItemWrapper]] = [
-        .basicNeeds: [.presetItem("I want the door closed."),
+        .category1: [.presetItem("I want the door closed."),
                 .presetItem("I want the door open."),
                 .presetItem("I would like to go to the bathroom."),
                 .presetItem("I want the lights off."),
@@ -41,9 +41,33 @@ class TextSelectionViewController: UICollectionViewController {
                 .presetItem("I would like some water."),
                 .presetItem("I would like some coffee."),
                 .presetItem("I want another pillow.")],
-        .personalCare: (1...28).map { .presetItem("Personal Care Item \($0)") },
-        .salutations: (1...9).map { .presetItem("Salutation item \($0)") },
-        .yesNo: (1...9).map { .presetItem("Yes | No item \($0)") }
+        .category2: [.presetItem("Hello"),
+                .presetItem("How are you?"),
+                .presetItem("Bye"),
+                .presetItem("Goodbye"),
+                .presetItem("Okay"),
+                .presetItem("How's it going?"),
+                .presetItem("Good"),
+                .presetItem("How is your day?"),
+                .presetItem("Bad")],
+        .category3: [.presetItem("I am cold"),
+                .presetItem("I am hot"),
+                .presetItem("I want more blankets"),
+                .presetItem("I want less blankets"),
+                .presetItem("I feel fine"),
+                .presetItem("I am sweating"),
+                .presetItem("I am freezing"),
+                .presetItem("I need a towel"),
+                .presetItem("I need a jacket")],
+        .category4: [.presetItem("Head"),
+                .presetItem("Feet"),
+                .presetItem("Hands"),
+                .presetItem("Neck"),
+                .presetItem("Arm"),
+                .presetItem("Knee"),
+                .presetItem("Side"),
+                .presetItem("Right"),
+                .presetItem("Left")]
     ]
     
     private let maxItemsPerPage = 9
@@ -65,18 +89,19 @@ class TextSelectionViewController: UICollectionViewController {
     private let totalHeight: CGFloat = 834.0
     private let totalWidth: CGFloat = 1112.0
     
-    private var selectedCategory: Category = .basicNeeds {
+    private var selectedCategory: Category = .category1 {
         didSet {
             self.updateSnapshot()
         }
     }
-    private var currentSpeechText: String = "" {
+    private var currentSpeechText: String = "Select something below to speak" {
         didSet {
             self.updateSnapshot()
         }
     }
     
     enum Section: Int, CaseIterable {
+        case topBar
         case textField
         case categories
         case presets
@@ -84,10 +109,8 @@ class TextSelectionViewController: UICollectionViewController {
     
     enum ItemWrapper: Hashable {
         case textField(String)
-        case redo(String)
-        case toggleKeyboard(String)
+        case topBarButton(String)
         case category(Category)
-        case moreCategories(String)
         case presetItem(String)
     }
 
@@ -96,17 +119,21 @@ class TextSelectionViewController: UICollectionViewController {
         
         setupCollectionView()
         configureDataSource()
+        
+        collectionView.selectItem(at: dataSource.indexPath(for: .category(.category1)), animated: false, scrollPosition: .init())
     }
     
     private func setupCollectionView() {
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
-        collectionView.register(UINib(nibName: "TrackingButtonCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TrackingButtonCollectionViewCell")
-        collectionView.collectionViewLayout = createLayout()
-        collectionView.backgroundColor = .black
+        collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
+        collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
+        let layout = createLayout()
+        collectionView.collectionViewLayout = layout
+        layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
+        collectionView.backgroundColor = UIColor.collectionViewBackgroundColor
+        collectionView.allowsMultipleSelection = true
         
         collectionView.register(PresetPageControlReusableView.self, forSupplementaryViewOfKind: "footerPageIndicator", withReuseIdentifier: "PresetPageControlView")
-        
-        configureDataSource()
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -115,6 +142,8 @@ class TextSelectionViewController: UICollectionViewController {
             let sectionKind = Section.allCases[sectionIndex]
             
             switch sectionKind {
+            case .topBar:
+                return self.topBarSectionLayout()
             case .textField:
                 return self.textFieldSectionLayout()
             case .categories:
@@ -126,25 +155,42 @@ class TextSelectionViewController: UICollectionViewController {
         return layout
     }
     
-    private func textFieldSectionLayout() -> NSCollectionLayoutSection {
-        let textFieldItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth((846.0 + 16.0) / totalWidth),
-                                               heightDimension: .fractionalHeight(1.0)))
+    private func topBarSectionLayout() -> NSCollectionLayoutSection {
         let redoButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth((75.0 + 16.0) / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(116.0 / 240.0),
                                                heightDimension: .fractionalHeight(1.0)))
         
         let keyboardButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth((108.0 + 16.0) / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(116.0 / 240.0),
                                                heightDimension: .fractionalHeight(1.0)))
         
-        let subitems = [textFieldItem, redoButtonItem, keyboardButtonItem]
+        let subitems = [redoButtonItem, keyboardButtonItem]
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(120.0 / totalHeight)),
+                                               heightDimension: .fractionalHeight(64.0 / totalHeight)),
+            subitems: subitems)
+        containerGroup.interItemSpacing = .fixed(8)
+        
+        let section = NSCollectionLayoutSection(group: containerGroup)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 256, bottom: 0, trailing: 256)
+        
+        return section
+    }
+    
+    private func textFieldSectionLayout() -> NSCollectionLayoutSection {
+        let textFieldItem = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .fractionalHeight(1.0)))
+        
+        let subitems = [textFieldItem]
+        
+        let containerGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(86.0 / totalHeight)),
             subitems: subitems)
         containerGroup.interItemSpacing = .flexible(0)
+        containerGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(400), top: .fixed(0), trailing: .flexible(400), bottom: .fixed(0))
         
         let section = NSCollectionLayoutSection(group: containerGroup)
         section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 0, trailing: 32)
@@ -154,33 +200,32 @@ class TextSelectionViewController: UICollectionViewController {
     
     private func categoriesSectionLayout() -> NSCollectionLayoutSection {
         let category1Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(182.8 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
                                                heightDimension: .fractionalHeight(1.0)))
         let category2Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(182.8 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
                                                heightDimension: .fractionalHeight(1.0)))
         let category3Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(182.8 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
                                                heightDimension: .fractionalHeight(1.0)))
         let category4Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(182.8 / totalWidth),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
                                                heightDimension: .fractionalHeight(1.0)))
         
-        let moreCategories = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(317.8 / totalWidth),
-                                               heightDimension: .fractionalHeight(1.0)))
-        
-        let subitems = [category1Item, category2Item, category3Item, category4Item, moreCategories]
+        let subitems = [category1Item, category2Item, category3Item, category4Item]
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(120.0 / totalHeight)),
+                                               heightDimension: .fractionalHeight(137.0 / totalHeight)),
             subitems: subitems)
-        containerGroup.interItemSpacing = .flexible(0)
-        
+        containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
         let section = NSCollectionLayoutSection(group: containerGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
         
+        let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
+        backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
+
+        section.decorationItems = [backgroundDecoration]
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
         return section
     }
     
@@ -220,17 +265,15 @@ class TextSelectionViewController: UICollectionViewController {
             
             switch identifier {
             case .textField(let title):
-                return self.setupCell(reuseIdentifier: TrackingButtonCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: title, titleColor: .white,
-                                      textStyle: .footnote, backgroundColor: .clear, animationViewColor: .backspaceBloom, borderColor: .clear)
-            case .redo(let title), .toggleKeyboard(let title), .moreCategories(let title):
-                return self.setupCell(reuseIdentifier: TrackingButtonCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: title, titleColor: .white,
-                                      textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
+                return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: title, fillColor: .collectionViewBackgroundColor)
+            case .topBarButton(let buttonImageName):
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+                cell.setup(systemImageName: buttonImageName)
+                return cell
             case .category(let category):
-                return self.setupCell(reuseIdentifier: TrackingButtonCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description, titleColor: .white,
-                                      textStyle: .footnote, backgroundColor: .black, animationViewColor: .backspaceBloom, borderColor: .white)
+                return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description)
             case .presetItem(let preset):
-                return self.setupCell(reuseIdentifier: TrackingButtonCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset, titleColor: UIColor(red: 0.22, green: 0.22, blue: 0.22, alpha: 1.0),
-                                      textStyle: .headline, backgroundColor: .white, animationViewColor: .black, borderColor: .clear)
+                return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
             }
         })
         
@@ -239,22 +282,52 @@ class TextSelectionViewController: UICollectionViewController {
     
     func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
-
-        snapshot.appendSections([.textField])
-        snapshot.appendItems([.textField(currentSpeechText), .redo("redo"), .toggleKeyboard("keyboard")])
-        snapshot.appendSections([.categories])
-        snapshot.appendItems([.category(.basicNeeds), .category(.personalCare), .category(.salutations), .category(.yesNo), .moreCategories("More Categories")])
         
+        snapshot.appendSections([.topBar])
+        snapshot.appendItems([.topBarButton("repeat"), .topBarButton("keyboard")])
+        
+        snapshot.appendSections([.textField])
+        snapshot.appendItems([.textField(currentSpeechText)])
+        
+        snapshot.appendSections([.categories])
+        snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
+    
         snapshot.appendSections([.presets])
         snapshot.appendItems(categoryPresets[selectedCategory]!)
         
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
+            if kind == "CategorySectionBackground" {
+                let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CategorySectionBackground", for: indexPath) as! CategorySectionBackground
+                return view
+            }
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "PresetPageControlView", for: indexPath) as! PresetPageControlReusableView
             self?.pageControl = view.pageControl
             return view
         }
         
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
+        
+        switch item {
+        case .textField:
+            return false
+        case .category, .presetItem, .topBarButton:
+            return true
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
+        
+        switch item {
+        case .textField:
+            return false
+        case .category, .presetItem, .topBarButton:
+            return true
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -274,6 +347,13 @@ class TextSelectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
+        
+        for selectedPath in collectionView.indexPathsForSelectedItems ?? [] {
+            if selectedPath.section == indexPath.section && selectedPath != indexPath {
+                collectionView.deselectItem(at: selectedPath, animated: true)
+            }
+        }
+        
         switch selectedItem {
         case .presetItem(let text):
             let utterance = AVSpeechUtterance(string: text)
@@ -286,11 +366,24 @@ class TextSelectionViewController: UICollectionViewController {
             currentSpeechText = text
         case .category(let category):
             selectedCategory = category
+            return
         default:
             break
         }
+        
         if collectionView.indexPathForGazedItem != indexPath {
             collectionView.deselectItem(at: indexPath, animated: true)
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
+        
+        switch item {
+        case .presetItem, .topBarButton:
+            return true
+        case .category, .textField:
+            return false
         }
     }
     
@@ -311,9 +404,12 @@ class TextSelectionViewController: UICollectionViewController {
         orthogonalScrollView?.scrollRectToVisible(rect, animated: true)
     }
     
-    private func setupCell(reuseIdentifier: String, indexPath: IndexPath, title: String, titleColor: UIColor, textStyle: UIFont.TextStyle, backgroundColor: UIColor, animationViewColor: UIColor, borderColor: UIColor) -> TrackingButtonCollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TrackingButtonCollectionViewCell
-        cell.setup(title: title, titleColor: titleColor, textStyle: textStyle, backgroundColor: backgroundColor, animationViewColor: animationViewColor, borderColor: borderColor)
+    private func setupCell(reuseIdentifier: String, indexPath: IndexPath, title: String, fillColor: UIColor = .defaultCellBackgroundColor) -> PresetItemCollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+        
+        cell.setup(title: title)
+        cell.fillColor = fillColor
+        
         return cell
     }
     

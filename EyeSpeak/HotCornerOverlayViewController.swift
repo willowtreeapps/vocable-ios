@@ -23,11 +23,13 @@ final private class HotCornerExpandingView: UIButton {
     }
 
     private func commonInit() {
-        backgroundColor = .gray
+        backgroundColor = .defaultCellBackgroundColor
+        titleLabel?.textColor = .defaultTextColor
     }
 
     override func gazeBegan(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
-        backgroundColor = .green
+        backgroundColor = .cellSelectionColor
+        titleLabel?.textColor = .selectedTextColor
         gazeBeginDate = Date()
     }
 
@@ -41,7 +43,8 @@ final private class HotCornerExpandingView: UIButton {
     }
 
     override func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
-        backgroundColor = .gray
+        backgroundColor = .defaultCellBackgroundColor
+        titleLabel?.textColor = .defaultTextColor
         gazeBeginDate = nil
     }
 
@@ -111,16 +114,22 @@ final class HotCornerOverlayViewController: UIViewController {
         pauseView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         pauseView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         pauseView.addTarget(self, action: #selector(pauseTracking(_:)), for: .primaryActionTriggered)
-        pauseView.setTitle("Pause", for: .normal)
+        
+        setPauseButtonImage(systemName: "pause.fill")
+    }
+    
+    private func setPauseButtonImage(systemName: String) {
+        let systemPauseImage = NSTextAttachment(image: UIImage(systemName: systemName)!)
+        pauseView.setAttributedTitle(NSAttributedString(attachment: systemPauseImage), for: .normal)
     }
 
     @objc private func pauseTracking(_ sender: Any?) {
         overlayView.isInterceptingAllGazeEvents.toggle()
         if overlayView.isInterceptingAllGazeEvents {
-            pauseView.setTitle("Resume", for: .normal)
-            overlayView.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
+            setPauseButtonImage(systemName: "play.fill")
+            overlayView.backgroundColor = UIColor.collectionViewBackgroundColor.withAlphaComponent(0.9)
         } else {
-            pauseView.setTitle("Pause", for: .normal)
+            setPauseButtonImage(systemName: "pause.fill")
             overlayView.backgroundColor = UIColor.clear
         }
     }
