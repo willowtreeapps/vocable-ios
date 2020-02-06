@@ -8,19 +8,18 @@
 
 import UIKit
 
-private class UICollectionViewGazeTarget: NSObject {
+private struct UICollectionViewGazeTarget: Equatable {
+
     let indexPath: IndexPath
     let beginDate: Date
+
     init(beginDate: Date, indexPath: IndexPath) {
         self.indexPath = indexPath
         self.beginDate = beginDate
     }
 
-    override func isEqual(_ object: Any?) -> Bool {
-        guard let other = object as? UICollectionViewGazeTarget else {
-            return false
-        }
-        return indexPath == other.indexPath
+    static func == (lhs: UICollectionViewGazeTarget, rhs: UICollectionViewGazeTarget) -> Bool {
+        return lhs.indexPath == rhs.indexPath
     }
 }
 
@@ -50,7 +49,7 @@ extension UICollectionView {
     private func setItemHighlighted(_ highlighted: Bool, at indexPath: IndexPath) {
         if let cell = cellForItem(at: indexPath) {
             if highlighted {
-                guard let canHighlight = delegate?.collectionView?(self, shouldHighlightItemAt: indexPath), canHighlight else {
+                guard delegate?.collectionView?(self, shouldHighlightItemAt: indexPath) ?? true else {
                     return
                 }
                 
@@ -61,10 +60,11 @@ extension UICollectionView {
                 delegate?.collectionView?(self, didUnhighlightItemAt: indexPath)
             }
         }
+
         if !highlighted,
             indexPathIsSelected(indexPath),
             delegate?.collectionView?(self, shouldDeselectItemAt: indexPath) ?? true {
-            
+
             deselectItem(at: indexPath, animated: true)
             delegate?.collectionView?(self, didDeselectItemAt: indexPath)
         }

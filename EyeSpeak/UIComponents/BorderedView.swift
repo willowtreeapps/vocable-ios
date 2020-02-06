@@ -3,7 +3,7 @@
 //  Vitality-One
 //
 //  Created by Chris Stroud on 10/15/19.
-//  Copyright © 2019 Vitality. All rights reserved.
+//  Copyright © 2019 WilowTree. All rights reserved.
 //
 
 import UIKit

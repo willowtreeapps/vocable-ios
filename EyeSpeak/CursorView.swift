@@ -9,47 +9,72 @@
 import UIKit
 
 class CursorView: UIView {
+
     struct Constants {
         static let innerCircleDiameter = CGFloat(10.0)
         static let borderWidth = CGFloat(2.0)
     }
-    
-    private var constraintsQueue: [NSLayoutConstraint] = []
-    
+
+    override class var layerClass: AnyClass {
+        return CAShapeLayer.self
+    }
+
+    private var shapeLayer: CAShapeLayer {
+        return self.layer as! CAShapeLayer
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        updateShapeLayer()
+        sizeToFit()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        updateShapeLayer()
+        sizeToFit()
+    }
+
     override var frame: CGRect {
         didSet {
-            self.layer.cornerRadius = self.frame.height / 2.0
+            if frame.size != oldValue.size {
+                updateShapeLayer()
+            }
         }
     }
-    
-    lazy var innerCircle: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.heightAnchor.constraint(equalToConstant: Constants.innerCircleDiameter).isActive = true
-        view.widthAnchor.constraint(equalToConstant: Constants.innerCircleDiameter).isActive = true
-        self.constraintsQueue.append(view.centerXAnchor.constraint(equalTo: self.centerXAnchor))
-        self.constraintsQueue.append(view.centerYAnchor.constraint(equalTo: self.centerYAnchor))
-        view.backgroundColor = UIColor.mainTextColor
-        view.layer.cornerRadius = Constants.innerCircleDiameter / 2.0
-        view.clipsToBounds = true
-        return view
-    }()
-    
-    init() {
-        super.init(frame: .zero)
-        self.commonInit()
+
+    override var bounds: CGRect {
+        didSet {
+            if bounds.size != oldValue.size {
+                updateShapeLayer()
+            }
+        }
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.commonInit()
+
+    override func tintColorDidChange() {
+        super.tintColorDidChange()
+        updateShapeLayer()
     }
-    
-    private func commonInit() {
-        self.backgroundColor = .clear
-        self.layer.borderColor = UIColor.mainTextColor.cgColor
-        self.layer.borderWidth = Constants.borderWidth
-        self.addSubview(self.innerCircle)
-        NSLayoutConstraint.activate(constraintsQueue)
+
+    private func updateShapeLayer() {
+        let dimension = min(bounds.width, bounds.height)
+        let center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
+        let path = UIBezierPath()
+        path.addArc(withCenter: center, radius: dimension, startAngle: 0, endAngle: .pi * 2, clockwise: true)
+        path.addArc(withCenter: center, radius: dimension * 0.8, startAngle: 0, endAngle: .pi * 2, clockwise: true)
+        path.addArc(withCenter: center, radius: dimension * 0.3, startAngle: 0, endAngle: .pi * 2, clockwise: true)
+        shapeLayer.path = path.cgPath
+        shapeLayer.fillRule = .evenOdd
+        shapeLayer.fillColor = tintColor.cgColor
+        shapeLayer.backgroundColor = UIColor.clear.cgColor
+    }
+
+    override var intrinsicContentSize: CGSize {
+        let dimension = 32
+        return CGSize(width: dimension, height: dimension)
+    }
+
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return intrinsicContentSize
     }
 }

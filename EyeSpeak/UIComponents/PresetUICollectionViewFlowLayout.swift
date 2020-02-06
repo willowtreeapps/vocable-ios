@@ -10,14 +10,26 @@ import UIKit
 
 class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLayout {
     
+    var dataSource: UICollectionViewDiffableDataSource<TextSelectionViewController.Section, TextSelectionViewController.ItemWrapper>? {
+        self.collectionView?.dataSource as? UICollectionViewDiffableDataSource<TextSelectionViewController.Section, TextSelectionViewController.ItemWrapper>
+    }
+    
     override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attr = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
+        // Make animation only happen for preset items
+        guard let item = dataSource?.itemIdentifier(for: itemIndexPath), case TextSelectionViewController.ItemWrapper.presetItem(_) = item else {
+            return attr
+        }
         attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
         return attr
     }
     
     override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attr = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
+        // Make animation only happen for preset items
+        guard let item = dataSource?.itemIdentifier(for: itemIndexPath), case TextSelectionViewController.ItemWrapper.presetItem(_) = item else {
+            return attr
+        }
         attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
         return attr
     }
