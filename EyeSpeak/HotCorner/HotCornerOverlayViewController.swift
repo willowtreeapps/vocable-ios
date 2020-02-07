@@ -150,6 +150,15 @@ final class HotCornerOverlayViewController: UIViewController {
     }
     
     @objc private func goToSettings(_ sender: Any?) {
-        settingsContainerView.isHidden = false
+        if settingsContainerView.isHidden {
+            settingsContainerView.isHidden = false
+            pauseButton.isHidden = true
+            setUIControlImage(uiControl: settingsButton, systemName: "xmark.circle")
+        } else {
+            settingsContainerView.isHidden = true
+            pauseButton.isHidden = false
+            setUIControlImage(uiControl: settingsButton, systemName: "gear")
+        }
+        
     }
 }

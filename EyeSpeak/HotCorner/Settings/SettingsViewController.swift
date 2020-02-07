@@ -13,6 +13,15 @@ class SettingsViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.backgroundColor = .collectionViewBackgroundColor
+
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.backgroundColor = .collectionViewBackgroundColor
+        let textAttr = [NSAttributedString.Key.foregroundColor: UIColor.defaultTextColor]
+        self.navigationController?.navigationBar.titleTextAttributes = textAttr
+    }
+    
+    
+
 }

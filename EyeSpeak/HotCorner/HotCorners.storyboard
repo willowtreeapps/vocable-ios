@@ -11,6 +11,7 @@
         <!--Hot Corner Overlay View Controller-->
         <scene sceneID="deE-Iv-jtO">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VrW-dC-wex" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="Pfh-KD-zMk" customClass="HotCornerOverlayViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="39h-nR-9WY" customClass="HotCornerOverlayView" customModule="EyeSpeak" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
@@ -19,7 +20,7 @@
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ETv-9k-hec">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1174"/>
                                 <connections>
-                                    <segue destination="if3-QM-p2o" kind="embed" id="YkW-6E-SJj"/>
+                                    <segue destination="fpt-VE-TTz" kind="embed" id="YkW-6E-SJj"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -36,13 +37,13 @@
                         <outlet property="settingsContainerView" destination="ETv-9k-hec" id="TqE-BA-e3H"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VrW-dC-wex" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="80.575539568345334" y="143.71859296482413"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--Settings-->
         <scene sceneID="dPi-vA-NKQ">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9rs-Gw-LBG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <collectionViewController id="if3-QM-p2o" customClass="SettingsViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yYQ-tW-Cgs">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1174"/>
@@ -69,10 +70,28 @@
                             <outlet property="delegate" destination="if3-QM-p2o" id="AHo-Oe-exm"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" title="Settings" id="mBW-xa-0wJ"/>
                 </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9rs-Gw-LBG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="954" y="144"/>
+            <point key="canvasLocation" x="1706.4748201438849" y="143.71859296482413"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Bnb-jY-2Yf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fpt-VE-TTz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QxL-hL-L5U">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="if3-QM-p2o" kind="relationship" relationship="rootViewController" id="axD-Bm-Q5X"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bBu-ac-JhO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="953.95683453237416" y="143.71859296482413"/>
         </scene>
     </scenes>
 </document>
