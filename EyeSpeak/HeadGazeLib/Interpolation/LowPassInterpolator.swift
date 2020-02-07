@@ -21,6 +21,15 @@ class LowPassInterpolator<E: Interpolable>: Interpolator {
     var value: E {
         return E(interpolableValues: valueInterpolators.map {$0.value})
     }
+
+    var needsResetOnNextUpdate = false {
+        didSet {
+            for interpolator in valueInterpolators {
+                interpolator.needsResetOnNextUpdate = true
+            }
+        }
+    }
+
     init(filterFactor: Double, initialValue: E) {
         self.filterFactor = filterFactor
         self.valueInterpolators = initialValue.interpolableValues.map {
@@ -37,6 +46,7 @@ class LowPassInterpolator<E: Interpolable>: Interpolator {
 
     class InterpolatorKind: ValueInterpolator {
         let filterFactor: Double
+        fileprivate var needsResetOnNextUpdate = false
         init(filterFactor: Double, initialValue: Double) {
             self.filterFactor = filterFactor
             self.value = initialValue
@@ -48,6 +58,11 @@ class LowPassInterpolator<E: Interpolable>: Interpolator {
         }
 
         func update(with newValue: Double, factor: Double?) -> Double {
+            if needsResetOnNextUpdate {
+                value = newValue
+                needsResetOnNextUpdate = false
+                return value
+            }
             let f = factor ?? filterFactor
             value = f * newValue + (1.0 - f) * value
             return value

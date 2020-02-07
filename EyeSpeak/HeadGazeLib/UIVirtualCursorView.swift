@@ -40,8 +40,8 @@ class UIVirtualCursorView: UIView {
     }
 
     private func updateForCurrentGazeActivityStatus() {
-        let isActive = UIApplication.shared.isGazeTrackingActive
-        cursorView.tintColor = isActive ? .cyan : UIColor.orange.withAlphaComponent(0.5)
+        let isNowActive = UIApplication.shared.isGazeTrackingActive
+        cursorView.tintColor = isNowActive ? .cyan : UIColor.orange.withAlphaComponent(0.5)
     }
 
     @objc private func applicationDidAcquireGaze(_ sender: Any?) {
@@ -54,7 +54,8 @@ class UIVirtualCursorView: UIView {
     
     override func gazeMoved(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
         let position = gaze.location(in: self)
-        cursorView.center = position
-        cursorView.isHidden = false
+        UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState, animations: {
+            self.cursorView.center = position
+        }, completion: nil)
     }
 }
