@@ -31,9 +31,19 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
  
     private(set) var sceneview: ARSCNView?
 
-    private var previousGaze: UIHeadGaze? //inherent from UIHeadGazeCallback
-    private var cursorPositionInterpolator = LowPassInterpolator<CGPoint>(filterFactor: 0.2, initialValue: .zero)
-    private var ndcSmoothingInterpolator = LowPassInterpolator<SIMD2<Float>>(filterFactor: 0.05, initialValue: .zero)
+    private var previousGaze: UIHeadGaze?
+    private var cursorPositionInterpolator: LowPassInterpolator<CGPoint> = {
+        let interpolator = LowPassInterpolator<CGPoint>(filterFactor: 0.2, initialValue: .zero)
+        interpolator.needsResetOnNextUpdate = true
+        return interpolator
+    }()
+
+    private var ndcSmoothingInterpolator: LowPassInterpolator<SIMD2<Float>> = {
+        let interpolator = LowPassInterpolator<SIMD2<Float>>(filterFactor: 0.05, initialValue: .zero)
+        interpolator.needsResetOnNextUpdate = true
+        return interpolator
+    }()
+
     private var computedScale: CGFloat = 6
     private var xAngleCorrectionAmount = 0.0
     private var yAngleCorrectionAmount = 0.0
@@ -109,21 +119,29 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
 
         guard let window = self.view.window else { return }
 
-        // Generate head gaze event and invoke event callback methods
-        var allGazes = Set<UIHeadGaze>()
-        let curGaze: UIHeadGaze
-        if let lastGaze = previousGaze {
-            curGaze = UIHeadGaze(curPosition: cursorPosNDC, prevPosition: lastGaze.location(in: window), view: self.view, win: window)
-        } else {
-            curGaze = UIHeadGaze(position: cursorPosNDC, view: self.view, win: window)
-        }
-
-        allGazes.insert(curGaze)
-        previousGaze = curGaze
-
         if faceAnchor.isTracked {
+
+            // Generate head gaze event and invoke event callback methods
+            var allGazes = Set<UIHeadGaze>()
+            let curGaze: UIHeadGaze
+            if let lastGaze = previousGaze {
+                curGaze = UIHeadGaze(curPosition: cursorPosNDC, prevPosition: lastGaze.location(in: window), view: self.view, win: window)
+            } else {
+                curGaze = UIHeadGaze(position: cursorPosNDC, view: self.view, win: window)
+            }
+
+            allGazes.insert(curGaze)
+            previousGaze = curGaze
+            
             let event = UIHeadGazeEvent(allGazes: allGazes)
             window.sendEvent(event)
+        } else {
+            // Ensure that the interpolators will reset on the next frame
+            // that a face is actually trackable. This is to prevent
+            // the cursor jumping wildly when first (re-)entering the view
+            cursorPositionInterpolator.needsResetOnNextUpdate = true
+            ndcSmoothingInterpolator.needsResetOnNextUpdate = true
+            previousGaze = nil
         }
     }
 
