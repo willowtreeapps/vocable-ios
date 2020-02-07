@@ -114,6 +114,7 @@
 		B8DA9DE823EB833200FEBE19 /* BorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DE723EB833200FEBE19 /* BorderedView.swift */; };
 		B8DA9DEA23EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DA9DE923EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib */; };
 		B8DA9DEC23EB8FB900FEBE19 /* CategorySectionBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DEB23EB8FB900FEBE19 /* CategorySectionBackground.swift */; };
+		B8DA9DF023EDECEE00FEBE19 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DEF23EDECEE00FEBE19 /* AppConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +239,7 @@
 		B8DA9DE723EB833200FEBE19 /* BorderedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedView.swift; sourceTree = "<group>"; };
 		B8DA9DE923EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B8DA9DEB23EB8FB900FEBE19 /* CategorySectionBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionBackground.swift; sourceTree = "<group>"; };
+		B8DA9DEF23EDECEE00FEBE19 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +287,7 @@
 				9D15E0562272119E0058DF57 /* Utilities */,
 				6B9DFA7523E8D5990037673E /* UICollectionView+Gaze.swift */,
 				130C00B720D2AD2A007C3163 /* AppDelegate.swift */,
+				B8DA9DEF23EDECEE00FEBE19 /* AppConfig.swift */,
 				13FE3921215577E300B6110F /* ConfigurationListTableViewController.swift */,
 				130C00BB20D2AD2A007C3163 /* ViewController.swift */,
 				130C00BD20D2AD2A007C3163 /* Main.storyboard */,
@@ -721,6 +724,7 @@
 				9D739E05226A0BBE00FEFFAC /* Cell+NibLoading.swift in Sources */,
 				13A7B912214C027300714057 /* TrackingMethod.swift in Sources */,
 				9D739E07226A0C1500FEFFAC /* PresetsCollectionViewCell.swift in Sources */,
+				B8DA9DF023EDECEE00FEBE19 /* AppConfig.swift in Sources */,
 				B8DA9DEC23EB8FB900FEBE19 /* CategorySectionBackground.swift in Sources */,
 				9DB58D092266170000E99C3B /* TextExpression.swift in Sources */,
 				6B9DFA7623E8D59A0037673E /* UICollectionView+Gaze.swift in Sources */,
@@ -935,8 +939,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 753J68XC6W;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 753J68XC6W;
 				INFOPLIST_FILE = "EyeSpeak/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -968,6 +972,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.willowtreeapps.eyespeakaac";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1090,6 +1095,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.willowtreeapps.eyespeakaac";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
