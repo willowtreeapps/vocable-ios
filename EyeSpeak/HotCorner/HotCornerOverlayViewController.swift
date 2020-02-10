@@ -106,10 +106,6 @@ final class HotCornerOverlayViewController: UIViewController {
         return self.view as! HotCornerOverlayView
     }
 
-//    override func loadView() {
-//        self.view = HotCornerOverlayView(frame: .zero)
-//    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         

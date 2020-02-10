@@ -68,7 +68,14 @@ class UIHeadGaze: UITouch {
         func clamp(_ value: CGFloat) -> CGFloat {
             return max(min(value, 1.0), 0.0)
         }
-        let winPos = CGPoint(x: clamp(point.x+0.5) * window.frame.width, y: clamp(1.0-(point.y+0.5)) * window.frame.height)
+        
+        // Inset the window by one pixel to ensure the point is inside the window's bounds
+        // See: https://developer.apple.com/documentation/coregraphics/cgrect/1456316-contains
+        let windowWidth: CGFloat = max(window.frame.width - 1, 0)
+        let windowHeight: CGFloat = max(window.frame.height - 1, 0)
+        
+        
+        let winPos = CGPoint(x: clamp(point.x+0.5) * windowWidth, y: clamp(1.0-(point.y+0.5)) * windowHeight)
         let viewPos = view.convert(winPos, from: window)
         return viewPos
     }

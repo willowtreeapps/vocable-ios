@@ -80,10 +80,17 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        for selectedPath in collectionView.indexPathsForSelectedItems ?? [] {
+            if selectedPath.section == indexPath.section && selectedPath != indexPath {
+                collectionView.deselectItem(at: selectedPath, animated: true)
+            }
+        }
+        
         switch SettingsItem.allCases[indexPath.item] {
         case .privacyPolicy:
             let url = URL(string: "https://vocable.app/privacy.html")!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            
         case .contactDevs:
             guard MFMailComposeViewController.canSendMail() else {
                 NSLog("Mail composer failed to send mail", [])
@@ -93,8 +100,6 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
         case .versionNum:
             break
         }
-        
-        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
