@@ -290,7 +290,10 @@ class TextSelectionViewController: UICollectionViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
         
         snapshot.appendSections([.topBar])
-        snapshot.appendItems([.topBarButton("repeat"), .topBarButton("keyboard")])
+        
+        if AppConfig.showIncompleteFeatures {
+            snapshot.appendItems([.topBarButton("repeat"), .topBarButton("keyboard")])
+        }
         
         snapshot.appendSections([.textField])
         snapshot.appendItems([.textField(currentSpeechText)])
