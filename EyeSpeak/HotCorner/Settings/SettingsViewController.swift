@@ -34,8 +34,6 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
     func setupMailComposer() {
         composeVC.mailComposeDelegate = self
         composeVC.setToRecipients(["vocable@willowtreeapps.com"])
-        composeVC.setSubject("Hello!")
-        composeVC.setMessageBody("Hello this is my message body!", isHTML: false)
     }
     
     func setupNavigationBar() {
@@ -91,7 +89,6 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
                 NSLog("Mail composer failed to send mail", [])
                 break
             }
-
             self.present(composeVC, animated: true, completion: nil)
         case .versionNum:
             break
