@@ -74,7 +74,6 @@ class UIHeadGaze: UITouch {
         let windowWidth: CGFloat = max(window.frame.width - 1, 0)
         let windowHeight: CGFloat = max(window.frame.height - 1, 0)
         
-        
         let winPos = CGPoint(x: clamp(point.x+0.5) * windowWidth, y: clamp(1.0-(point.y+0.5)) * windowHeight)
         let viewPos = view.convert(winPos, from: window)
         return viewPos
