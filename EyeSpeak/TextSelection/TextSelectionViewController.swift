@@ -113,6 +113,10 @@ class TextSelectionViewController: UICollectionViewController {
         case category(Category)
         case presetItem(String)
     }
+    
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,6 +128,8 @@ class TextSelectionViewController: UICollectionViewController {
     }
     
     private func setupCollectionView() {
+        collectionView.delaysContentTouches = false
+        collectionView.isScrollEnabled = false
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")

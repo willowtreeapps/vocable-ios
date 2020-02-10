@@ -4,14 +4,12 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Hot Corner Overlay View Controller-->
         <scene sceneID="deE-Iv-jtO">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VrW-dC-wex" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="Pfh-KD-zMk" customClass="HotCornerOverlayViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="39h-nR-9WY" customClass="HotCornerOverlayView" customModule="EyeSpeak" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
@@ -37,13 +35,13 @@
                         <outlet property="settingsContainerView" destination="ETv-9k-hec" id="TqE-BA-e3H"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VrW-dC-wex" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="80.575539568345334" y="143.71859296482413"/>
         </scene>
         <!--Settings-->
         <scene sceneID="dPi-vA-NKQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9rs-Gw-LBG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <collectionViewController id="if3-QM-p2o" customClass="SettingsViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yYQ-tW-Cgs">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1174"/>
@@ -55,23 +53,14 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="8vT-WV-zgv">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kXJ-M2-RhN">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </collectionViewCellContentView>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="if3-QM-p2o" id="Xsz-rJ-UF7"/>
-                            <outlet property="delegate" destination="if3-QM-p2o" id="AHo-Oe-exm"/>
-                        </connections>
+                        <cells/>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Settings" id="mBW-xa-0wJ"/>
+                    <navigationItem key="navigationItem" title="Settings" largeTitleDisplayMode="always" id="mBW-xa-0wJ"/>
+                    <connections>
+                        <outlet property="headerView" destination="mBW-xa-0wJ" id="4BE-Lp-Hmp"/>
+                    </connections>
                 </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9rs-Gw-LBG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1706.4748201438849" y="143.71859296482413"/>
         </scene>
@@ -80,8 +69,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fpt-VE-TTz" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QxL-hL-L5U">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="QxL-hL-L5U">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -33,7 +33,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="269" height="218"/>
             <connections>
-                <outlet property="textLabel" destination="qn0-yK-CCv" id="ekk-Z2-G1m"/>
+                <outlet property="textLabel" destination="qn0-yK-CCv" id="cYX-xz-a2v"/>
             </connections>
             <point key="canvasLocation" x="296.37681159420293" y="190.17857142857142"/>
         </collectionViewCell>
