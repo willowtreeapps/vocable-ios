@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class TextSelectionViewController: UICollectionViewController {
+class PresetsViewController: UICollectionViewController {
     
     enum Category: CustomStringConvertible {
         case category1
