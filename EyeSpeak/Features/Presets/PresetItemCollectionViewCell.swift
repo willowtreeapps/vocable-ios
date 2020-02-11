@@ -61,8 +61,12 @@ class PresetItemCollectionViewCell: UICollectionViewCell {
         textLabel.font = font
     }
     
-    func setup(systemImageName: String) {
-        let systemImageAttachment = NSTextAttachment(image: UIImage(systemName: systemImageName)!)
+    func setup(with image: UIImage?) {
+        guard let image = image else {
+            return
+        }
+        
+        let systemImageAttachment = NSTextAttachment(image: image)
         let attributedString = NSAttributedString(attachment: systemImageAttachment)
         
         textLabel.attributedText = attributedString

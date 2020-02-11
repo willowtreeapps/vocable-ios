@@ -255,13 +255,13 @@
 		B8DA9DF623F30CC400FEBE19 /* Presets */ = {
 			isa = PBXGroup;
 			children = (
+				B8DA9DFF23F3436800FEBE19 /* Models */,
 				B879831023E0CEC300DC1A81 /* PresetsViewController.swift */,
 				B8DA9DE923EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib */,
 				B8DA9DEB23EB8FB900FEBE19 /* CategorySectionBackground.swift */,
 				B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */,
 				B879831423E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib */,
 				A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift */,
-				B8DA9DFD23F3407000FEBE19 /* TextPresets.swift */,
 			);
 			path = Presets;
 			sourceTree = "<group>";
@@ -281,6 +281,14 @@
 			children = (
 			);
 			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		B8DA9DFF23F3436800FEBE19 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B8DA9DFD23F3407000FEBE19 /* TextPresets.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

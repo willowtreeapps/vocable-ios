@@ -49,11 +49,34 @@ class PresetsViewController: UICollectionViewController {
     
     enum ItemWrapper: Hashable {
         case textField(String)
-        case topBarButton(String)
+        case topBarButton(TopBarButton)
         case category(PresetCategory)
         case presetItem(String)
         case keyboard
     }
+    
+    enum TopBarButton: String {
+        case repeatSpokenText
+        case toggleKeyboard
+        
+        var image: UIImage? {
+            switch self {
+            case .repeatSpokenText:
+                return UIImage(systemName: "repeat")
+            case .toggleKeyboard:
+                return UIImage(systemName: "keyboard")
+            default:
+                return nil
+            }
+        }
+    }
+    
+    enum InputMode {
+        case presetPhrases
+        case keyboard
+    }
+    
+    private var inputMode: InputMode = .presetPhrases
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -111,9 +134,9 @@ class PresetsViewController: UICollectionViewController {
             switch identifier {
             case .textField(let title):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: title, fillColor: .collectionViewBackgroundColor)
-            case .topBarButton(let buttonImageName):
+            case .topBarButton(let buttonType):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-                cell.setup(systemImageName: buttonImageName)
+                cell.setup(with: buttonType.image)
                 return cell
             case .category(let category):
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description)
@@ -135,7 +158,7 @@ class PresetsViewController: UICollectionViewController {
         snapshot.appendSections([.topBar])
         
         if AppConfig.showIncompleteFeatures {
-            snapshot.appendItems([.topBarButton("repeat"), .topBarButton("keyboard")])
+            snapshot.appendItems([.topBarButton(.repeatSpokenText), .topBarButton(.toggleKeyboard)])
         }
         
         snapshot.appendSections([.textField])
@@ -159,6 +182,8 @@ class PresetsViewController: UICollectionViewController {
         
         dataSource.apply(snapshot, animatingDifferences: true)
     }
+    
+    // MARK: - Collection View Delegate
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
@@ -207,15 +232,17 @@ class PresetsViewController: UICollectionViewController {
         }
         
         switch selectedItem {
-        case .presetItem(let text):
-            let utterance = AVSpeechUtterance(string: text)
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-            let synthesizer = AVSpeechSynthesizer.shared
-            if synthesizer.isSpeaking {
-                synthesizer.stopSpeaking(at: .immediate)
+        case .topBarButton(let buttonType):
+            switch buttonType {
+            case .repeatSpokenText:
+                AVSpeechSynthesizer.shared.speak(currentSpeechText)
+            case .toggleKeyboard:
+                inputMode = .keyboard
             }
-            synthesizer.speak(utterance)
+        case .presetItem(let text):
             currentSpeechText = text
+            
+            AVSpeechSynthesizer.shared.speak(currentSpeechText)
         case .category(let category):
             selectedCategory = category
             return
@@ -227,7 +254,7 @@ class PresetsViewController: UICollectionViewController {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
     }
-    
+        
     override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
