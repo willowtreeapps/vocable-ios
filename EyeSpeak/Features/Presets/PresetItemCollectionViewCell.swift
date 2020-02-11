@@ -87,11 +87,21 @@ class CategoryItemCollectionViewCell: PresetItemCollectionViewCell {
     }
 }
 
-class KeyboardGroupCollectionViewCell: PresetItemCollectionViewCell {
+class KeyboardKeyGroupCollectionViewCell: PresetItemCollectionViewCell {
+    
+    var title: String = "" {
+        didSet {
+            updateTitleLabel()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        textLabel.font = .systemFont(ofSize: 45)
+        updateTitleLabel()
+    }
+    
+    override func setup(title: String) {
+        self.title = title
     }
     
     override fileprivate func updateContentViews() {
@@ -102,5 +112,16 @@ class KeyboardGroupCollectionViewCell: PresetItemCollectionViewCell {
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = borderedView.fillColor
         textLabel.isOpaque = true
+    }
+    
+    private func updateTitleLabel() {
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            .kern: 48
+        ]
+        
+        let attributedString = NSMutableAttributedString(string: title)
+        attributedString.addAttributes(textAttributes, range: NSRange(location: 0, length: attributedString.length))
+        
+        textLabel.attributedText = attributedString
     }
 }

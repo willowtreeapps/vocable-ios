@@ -145,15 +145,14 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
     
     static func keyboardSectionLayout() -> NSCollectionLayoutSection {
-        // TODO
-        let groupedKeyboardKeysItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(339.0 / totalWidth),
-                                                                                            heightDimension: .fractionalHeight(1.0)))
+        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(339.0 / totalWidth),
+                                                                                   heightDimension: .fractionalHeight(1.0)))
         
         let rowGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(1.0)),
-            subitem: groupedKeyboardKeysItem, count: 3)
-        rowGroup.interItemSpacing = .fixed(8)
+            subitem: presetItem, count: 3)
+        rowGroup.interItemSpacing = .fixed(16)
         
         let containerGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),

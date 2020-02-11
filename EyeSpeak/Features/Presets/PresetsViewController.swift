@@ -108,7 +108,6 @@ class PresetsViewController: UICollectionViewController {
     
     private func createLayout() -> UICollectionViewLayout {
         let layout = PresetUICollectionViewCompositionalLayout { (sectionIndex: Int, _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            
             let sectionKind = Section.allCases[sectionIndex]
             
             switch sectionKind {
@@ -119,6 +118,10 @@ class PresetsViewController: UICollectionViewController {
             case .categories:
                 return PresetUICollectionViewCompositionalLayout.categoriesSectionLayout()
             case .presets:
+                guard !self.showKeyboard else {
+                    return nil
+                }
+                
                 return PresetUICollectionViewCompositionalLayout.presetsSectionLayout()
             case .keyboard:
                 return PresetUICollectionViewCompositionalLayout.keyboardSectionLayout()
@@ -142,7 +145,7 @@ class PresetsViewController: UICollectionViewController {
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
             case .keyGroup(let keyGroup):
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "KeyboardKeyGroupCollectionViewCell", for: indexPath) as! KeyboardGroupCollectionViewCell
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "KeyboardKeyGroupCollectionViewCell", for: indexPath) as! KeyboardKeyGroupCollectionViewCell
                 cell.setup(title: keyGroup.containedCharacters)
                 return cell
             }
@@ -166,12 +169,16 @@ class PresetsViewController: UICollectionViewController {
         snapshot.appendSections([.categories])
         snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
     
-        if showKeyboard {
-            snapshot.appendSections([.keyboard])
-            snapshot.appendItems(KeyGroup.QWERTYKeyboardGroups.map { .keyGroup($0) })
-        } else {
-            snapshot.appendSections([.presets])
+        snapshot.appendSections([.presets])
+        
+        if !showKeyboard {
             snapshot.appendItems(categoryPresets[selectedCategory]!)
+        }
+        
+        snapshot.appendSections([.keyboard])
+        
+        if showKeyboard {
+            snapshot.appendItems(KeyGroup.QWERTYKeyboardGroups.map { .keyGroup($0) })
         }
         
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
@@ -245,7 +252,6 @@ class PresetsViewController: UICollectionViewController {
             }
         case .presetItem(let text):
             currentSpeechText = text
-            
             AVSpeechSynthesizer.shared.speak(currentSpeechText)
         case .category(let category):
             selectedCategory = category

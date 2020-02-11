@@ -262,7 +262,6 @@
 				B8DA9DFF23F3436800FEBE19 /* Models */,
 				B879831023E0CEC300DC1A81 /* PresetsViewController.swift */,
 				B8DA9DE923EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib */,
-				B8B779E623F349C600FEE660 /* KeyboardKeyGroupCollectionViewCell.xib */,
 				B8DA9DEB23EB8FB900FEBE19 /* CategorySectionBackground.swift */,
 				B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */,
 				B879831423E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib */,
@@ -284,6 +283,7 @@
 		B8DA9DF823F33B1B00FEBE19 /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				B8B779E623F349C600FEE660 /* KeyboardKeyGroupCollectionViewCell.xib */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
