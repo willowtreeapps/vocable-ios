@@ -45,6 +45,7 @@
 		B8DA9DF023EDECEE00FEBE19 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DEF23EDECEE00FEBE19 /* AppConfig.swift */; };
 		B8DA9DF223F30BAF00FEBE19 /* Cell+NibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DF123F30BAF00FEBE19 /* Cell+NibLoading.swift */; };
 		B8DA9DF423F30BD200FEBE19 /* VectorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DF323F30BD200FEBE19 /* VectorUtils.swift */; };
+		B8DA9DFE23F3407000FEBE19 /* TextPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DFD23F3407000FEBE19 /* TextPresets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		B8DA9DEF23EDECEE00FEBE19 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		B8DA9DF123F30BAF00FEBE19 /* Cell+NibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cell+NibLoading.swift"; sourceTree = "<group>"; };
 		B8DA9DF323F30BD200FEBE19 /* VectorUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorUtils.swift; sourceTree = "<group>"; };
+		B8DA9DFD23F3407000FEBE19 /* TextPresets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPresets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 		B8DA9DF523F30C5E00FEBE19 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				B8DA9DF823F33B1B00FEBE19 /* Keyboard */,
 				A920A4B023ECB76400CF5B08 /* HotCorners */,
 				B8DA9DF623F30CC400FEBE19 /* Presets */,
 				A92FFB9023ECD73400AF2D0B /* Settings */,
@@ -258,6 +261,7 @@
 				B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */,
 				B879831423E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib */,
 				A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift */,
+				B8DA9DFD23F3407000FEBE19 /* TextPresets.swift */,
 			);
 			path = Presets;
 			sourceTree = "<group>";
@@ -270,6 +274,13 @@
 				9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B8DA9DF823F33B1B00FEBE19 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Keyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,6 +416,7 @@
 				B8DA9DE823EB833200FEBE19 /* BorderedView.swift in Sources */,
 				6B9DFA6023E889DB0037673E /* Extensions.swift in Sources */,
 				6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */,
+				B8DA9DFE23F3407000FEBE19 /* TextPresets.swift in Sources */,
 				9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */,
 				6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */,
 				6B9DFA6423E889DB0037673E /* UIHeadGazeRecognizer.swift in Sources */,

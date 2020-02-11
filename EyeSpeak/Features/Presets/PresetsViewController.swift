@@ -11,66 +11,9 @@ import AVFoundation
 
 class PresetsViewController: UICollectionViewController {
     
-    enum Category: CustomStringConvertible {
-        case category1
-        case category2
-        case category3
-        case category4
-        
-        var description: String {
-            switch self {
-            case .category1:
-                return "Basic Needs"
-            case .category2:
-                return "Salutations"
-            case .category3:
-                return "Temperature"
-            case .category4:
-                return "Body"
-            }
-        }
-    }
-    
-    private var categoryPresets: [Category: [ItemWrapper]] = [
-        .category1: [.presetItem("I want the door closed."),
-                .presetItem("I want the door open."),
-                .presetItem("I would like to go to the bathroom."),
-                .presetItem("I want the lights off."),
-                .presetItem("I want the lights on."),
-                .presetItem("I want my pillow fixed."),
-                .presetItem("I would like some water."),
-                .presetItem("I would like some coffee."),
-                .presetItem("I want another pillow.")],
-        .category2: [.presetItem("Hello"),
-                .presetItem("How are you?"),
-                .presetItem("Bye"),
-                .presetItem("Goodbye"),
-                .presetItem("Okay"),
-                .presetItem("How's it going?"),
-                .presetItem("Good"),
-                .presetItem("How is your day?"),
-                .presetItem("Bad")],
-        .category3: [.presetItem("I am cold"),
-                .presetItem("I am hot"),
-                .presetItem("I want more blankets"),
-                .presetItem("I want less blankets"),
-                .presetItem("I feel fine"),
-                .presetItem("I am sweating"),
-                .presetItem("I am freezing"),
-                .presetItem("I need a towel"),
-                .presetItem("I need a jacket")],
-        .category4: [.presetItem("Head"),
-                .presetItem("Feet"),
-                .presetItem("Hands"),
-                .presetItem("Neck"),
-                .presetItem("Arm"),
-                .presetItem("Knee"),
-                .presetItem("Side"),
-                .presetItem("Right"),
-                .presetItem("Left")]
-    ]
-    
-    private let maxItemsPerPage = 9
+    private lazy var categoryPresets: [PresetCategory: [ItemWrapper]] = {
+        TextPresets.presetsByCategory.mapValues { $0.map { .presetItem($0) } }
+    }()
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     private weak var orthogonalScrollView: UIScrollView? {
@@ -85,11 +28,7 @@ class PresetsViewController: UICollectionViewController {
         }
     }
     
-    // TODO: Need to figure out how to update fractional width of cells without using collection view size
-    private let totalHeight: CGFloat = 834.0
-    private let totalWidth: CGFloat = 1112.0
-    
-    private var selectedCategory: Category = .category1 {
+    private var selectedCategory: PresetCategory = .category1 {
         didSet {
             self.updateSnapshot()
         }
@@ -105,13 +44,15 @@ class PresetsViewController: UICollectionViewController {
         case textField
         case categories
         case presets
+        case keyboard
     }
     
     enum ItemWrapper: Hashable {
         case textField(String)
         case topBarButton(String)
-        case category(Category)
+        case category(PresetCategory)
         case presetItem(String)
+        case keyboard
     }
     
     override var prefersHomeIndicatorAutoHidden: Bool {
@@ -133,6 +74,7 @@ class PresetsViewController: UICollectionViewController {
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
+        collectionView.register(UINib(nibName: "KeyboardGroupCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboradGroupCollectionViewCell")
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
@@ -149,123 +91,20 @@ class PresetsViewController: UICollectionViewController {
             
             switch sectionKind {
             case .topBar:
-                return self.topBarSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.topBarSectionLayout()
             case .textField:
-                return self.textFieldSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.textFieldSectionLayout()
             case .categories:
-                return self.categoriesSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.categoriesSectionLayout()
             case .presets:
-                return self.presetsSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.presetsSectionLayout()
+            case .keyboard:
+                return PresetUICollectionViewCompositionalLayout.keyboardSectionLayout()
             }
         }
         return layout
     }
-    
-    private func topBarSectionLayout() -> NSCollectionLayoutSection {
-        let redoButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(116.0 / 240.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        
-        let keyboardButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(116.0 / 240.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        
-        let subitems = [redoButtonItem, keyboardButtonItem]
-        
-        let containerGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(64.0 / totalHeight)),
-            subitems: subitems)
-        containerGroup.interItemSpacing = .fixed(8)
-        
-        let section = NSCollectionLayoutSection(group: containerGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 256, bottom: 0, trailing: 256)
-        
-        return section
-    }
-    
-    private func textFieldSectionLayout() -> NSCollectionLayoutSection {
-        let textFieldItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        
-        let subitems = [textFieldItem]
-        
-        let containerGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(86.0 / totalHeight)),
-            subitems: subitems)
-        containerGroup.interItemSpacing = .flexible(0)
-        containerGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(400), top: .fixed(0), trailing: .flexible(400), bottom: .fixed(0))
-        
-        let section = NSCollectionLayoutSection(group: containerGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 0, trailing: 32)
-        
-        return section
-    }
-    
-    private func categoriesSectionLayout() -> NSCollectionLayoutSection {
-        let category1Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        let category2Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        let category3Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        let category4Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        
-        let subitems = [category1Item, category2Item, category3Item, category4Item]
-        
-        let containerGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(137.0 / totalHeight)),
-            subitems: subitems)
-        containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
-        let section = NSCollectionLayoutSection(group: containerGroup)
-        
-        let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
-        backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
 
-        section.decorationItems = [backgroundDecoration]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
-        return section
-    }
-    
-    private func presetsSectionLayout() -> NSCollectionLayoutSection {
-        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(339.0 / totalWidth),
-                                                                                   heightDimension: .fractionalHeight(1.0)))
-        
-        let rowGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(1.0)),
-            subitem: presetItem, count: 3)
-        rowGroup.interItemSpacing = .fixed(16)
-        
-        let containerGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(464.0 / totalHeight)),
-            subitem: rowGroup, count: 3)
-        containerGroup.interItemSpacing = .fixed(16)
-        containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
-        
-        let section = NSCollectionLayoutSection(group: containerGroup)
-        section.interGroupSpacing = 0
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        section.orthogonalScrollingBehavior = .groupPaging
-        
-        let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
-        footer.extendsBoundary = true
-        footer.pinToVisibleBounds = true
-        section.boundarySupplementaryItems = [footer]
-        
-        return section
-    }
-    
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, ItemWrapper>(collectionView: collectionView, cellProvider: { (_: UICollectionView, indexPath: IndexPath, identifier: ItemWrapper) -> UICollectionViewCell? in
             
@@ -280,6 +119,10 @@ class PresetsViewController: UICollectionViewController {
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description)
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
+            case .keyboard:
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "KeyboradGroupCollectionViewCell", for: indexPath) as! KeyboardGroupCollectionViewCell
+                cell.setup(title: "QWE")
+                return cell
             }
         })
         
@@ -323,7 +166,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton:
+        case .category, .presetItem, .topBarButton, .keyboard:
             return true
         }
     }
@@ -334,7 +177,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton:
+        case .category, .presetItem, .topBarButton, .keyboard:
             return true
         }
     }
@@ -391,7 +234,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .presetItem, .topBarButton:
             return true
-        case .category, .textField:
+        case .category, .textField, .keyboard:
             return false
         }
     }

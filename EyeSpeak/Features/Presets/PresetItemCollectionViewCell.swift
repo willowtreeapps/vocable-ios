@@ -82,3 +82,21 @@ class CategoryItemCollectionViewCell: PresetItemCollectionViewCell {
         textLabel.isOpaque = true
     }
 }
+
+class KeyboardGroupCollectionViewCell: PresetItemCollectionViewCell {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        textLabel.font = .systemFont(ofSize: 45)
+    }
+    
+    override fileprivate func updateContentViews() {
+        borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
+        borderedView.fillColor = isSelected ? .cellSelectionColor : fillColor
+        borderedView.isOpaque = true
+        
+        textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
+        textLabel.backgroundColor = borderedView.fillColor
+        textLabel.isOpaque = true
+    }
+}
