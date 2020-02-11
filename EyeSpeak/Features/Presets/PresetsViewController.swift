@@ -52,7 +52,7 @@ class PresetsViewController: UICollectionViewController {
         case topBarButton(TopBarButton)
         case category(PresetCategory)
         case presetItem(String)
-        case keyboard
+        case keyGroup(KeyGroup)
     }
     
     enum TopBarButton: String {
@@ -71,12 +71,11 @@ class PresetsViewController: UICollectionViewController {
         }
     }
     
-    enum InputMode {
-        case presetPhrases
-        case keyboard
+    private var showKeyboard: Bool = false {
+        didSet {
+            self.updateSnapshot()
+        }
     }
-    
-    private var inputMode: InputMode = .presetPhrases
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -97,7 +96,7 @@ class PresetsViewController: UICollectionViewController {
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
-        collectionView.register(UINib(nibName: "KeyboardGroupCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboradGroupCollectionViewCell")
+        collectionView.register(UINib(nibName: "KeyboardKeyGroupCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyGroupCollectionViewCell")
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
@@ -142,9 +141,9 @@ class PresetsViewController: UICollectionViewController {
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description)
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
-            case .keyboard:
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "KeyboradGroupCollectionViewCell", for: indexPath) as! KeyboardGroupCollectionViewCell
-                cell.setup(title: "QWE")
+            case .keyGroup(let keyGroup):
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "KeyboardKeyGroupCollectionViewCell", for: indexPath) as! KeyboardGroupCollectionViewCell
+                cell.setup(title: keyGroup.containedCharacters)
                 return cell
             }
         })
@@ -167,8 +166,13 @@ class PresetsViewController: UICollectionViewController {
         snapshot.appendSections([.categories])
         snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
     
-        snapshot.appendSections([.presets])
-        snapshot.appendItems(categoryPresets[selectedCategory]!)
+        if showKeyboard {
+            snapshot.appendSections([.keyboard])
+            snapshot.appendItems(KeyGroup.QWERTYKeyboardGroups.map { .keyGroup($0) })
+        } else {
+            snapshot.appendSections([.presets])
+            snapshot.appendItems(categoryPresets[selectedCategory]!)
+        }
         
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
             if kind == "CategorySectionBackground" {
@@ -191,7 +195,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton, .keyboard:
+        case .category, .presetItem, .topBarButton, .keyGroup:
             return true
         }
     }
@@ -202,7 +206,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton, .keyboard:
+        case .category, .presetItem, .topBarButton, .keyGroup:
             return true
         }
     }
@@ -237,7 +241,7 @@ class PresetsViewController: UICollectionViewController {
             case .repeatSpokenText:
                 AVSpeechSynthesizer.shared.speak(currentSpeechText)
             case .toggleKeyboard:
-                inputMode = .keyboard
+                showKeyboard.toggle()
             }
         case .presetItem(let text):
             currentSpeechText = text
@@ -261,7 +265,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .presetItem, .topBarButton:
             return true
-        case .category, .textField, .keyboard:
+        case .category, .textField, .keyGroup:
             return false
         }
     }
