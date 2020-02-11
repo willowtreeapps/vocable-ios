@@ -11,4 +11,16 @@ import UIKit
 final class TrackingContainerViewController: UIViewController {
 
     @IBOutlet private var cursorView: UIVirtualCursorView!
+    
+    private var contentViewController: UIViewController!
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ContentViewControllerSegue" {
+            self.contentViewController = segue.destination
+        }
+    }
+    
+    override var childForHomeIndicatorAutoHidden: UIViewController? {
+        return contentViewController
+    }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final private class HotCornerExpandingView: UIButton {
+final private class HotCornerExpandingUIControl: UIButton {
 
     private var gazeBeginDate: Date?
 
@@ -21,7 +21,7 @@ final private class HotCornerExpandingView: UIButton {
         super.init(coder: coder)
         commonInit()
     }
-
+    
     private func commonInit() {
         backgroundColor = .defaultCellBackgroundColor
         titleLabel?.textColor = .defaultTextColor
@@ -47,13 +47,13 @@ final private class HotCornerExpandingView: UIButton {
         titleLabel?.textColor = .defaultTextColor
         gazeBeginDate = nil
     }
-
+    
     override var intrinsicContentSize: CGSize {
         return CGSize(width: 88, height: 88)
     }
 }
 
-final private class HotCornerOverlayView: UIView {
+class HotCornerOverlayView: UIView {
 
     var isInterceptingAllGazeEvents: Bool = false
 
@@ -97,40 +97,62 @@ final private class HotCornerOverlayView: UIView {
 
 final class HotCornerOverlayViewController: UIViewController {
 
-    private let pauseView = HotCornerExpandingView()
+    @IBOutlet private var settingsContainerView: UIView!
+    
+    private let pauseButton = HotCornerExpandingUIControl()
+    private let settingsButton = HotCornerExpandingUIControl()
 
     private var overlayView: HotCornerOverlayView {
         return self.view as! HotCornerOverlayView
     }
 
-    override func loadView() {
-        self.view = HotCornerOverlayView(frame: .zero)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(pauseView)
-        pauseView.translatesAutoresizingMaskIntoConstraints = false
-        pauseView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        pauseView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        pauseView.addTarget(self, action: #selector(pauseTracking(_:)), for: .primaryActionTriggered)
         
-        setPauseButtonImage(systemName: "pause.fill")
+        // set pause hot corner
+        self.view.addSubview(pauseButton)
+        pauseButton.translatesAutoresizingMaskIntoConstraints = false
+        pauseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        pauseButton.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        pauseButton.addTarget(self, action: #selector(pauseTracking(_:)), for: .primaryActionTriggered)
+        pauseButton.titleLabel?.font = UIFont.systemFont(ofSize: 34, weight: .bold)
+        setUIControlImage(uiControl: pauseButton, systemName: "pause.fill")
+        
+        // set settings hot corner
+        self.view.addSubview(settingsButton)
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        settingsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        settingsButton.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        settingsButton.addTarget(self, action: #selector(goToSettings(_:)), for: .primaryActionTriggered)
+        settingsButton.titleLabel?.font = UIFont.systemFont(ofSize: 34, weight: .bold)
+        setUIControlImage(uiControl: settingsButton, systemName: "gear")
+        
     }
     
-    private func setPauseButtonImage(systemName: String) {
+    private func setUIControlImage(uiControl: HotCornerExpandingUIControl, systemName: String) {
         let systemPauseImage = NSTextAttachment(image: UIImage(systemName: systemName)!)
-        pauseView.setAttributedTitle(NSAttributedString(attachment: systemPauseImage), for: .normal)
+        uiControl.setAttributedTitle(NSMutableAttributedString(attachment: systemPauseImage), for: .normal)
     }
 
     @objc private func pauseTracking(_ sender: Any?) {
         overlayView.isInterceptingAllGazeEvents.toggle()
         if overlayView.isInterceptingAllGazeEvents {
-            setPauseButtonImage(systemName: "play.fill")
+            setUIControlImage(uiControl: pauseButton, systemName: "play.fill")
             overlayView.backgroundColor = UIColor.collectionViewBackgroundColor.withAlphaComponent(0.9)
         } else {
-            setPauseButtonImage(systemName: "pause.fill")
+            setUIControlImage(uiControl: pauseButton, systemName: "pause.fill")
             overlayView.backgroundColor = UIColor.clear
+        }
+    }
+    
+    @objc private func goToSettings(_ sender: Any?) {
+        settingsContainerView.isHidden.toggle()
+        pauseButton.isHidden.toggle()
+        
+        if settingsContainerView.isHidden {
+            setUIControlImage(uiControl: settingsButton, systemName: "gear")
+        } else {
+            setUIControlImage(uiControl: settingsButton, systemName: "xmark.circle")
         }
     }
 }

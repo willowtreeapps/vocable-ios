@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CvH-fK-txz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CvH-fK-txz">
     <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,13 +25,13 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQq-Gr-kNC" userLabel="ContentViewController">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                                 <connections>
-                                    <segue destination="Jgy-U0-B1Z" kind="embed" id="VGF-IP-CWi"/>
+                                    <segue destination="Jgy-U0-B1Z" kind="embed" identifier="ContentViewControllerSegue" id="VGF-IP-CWi"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A16-bV-8FB" customClass="ViewControllerWrapperView" customModule="EyeSpeak" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                                 <connections>
-                                    <segue destination="gEA-fE-Ijf" kind="embed" id="ahg-Hg-anI"/>
+                                    <segue destination="qUl-CJ-Hw7" kind="embed" id="CCf-Bd-QlP"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86h-9O-qAY" customClass="UIVirtualCursorView" customModule="EyeSpeak" customModuleProvider="target">
@@ -151,6 +151,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TEc-iU-cqA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-489" y="-789"/>
+        </scene>
+        <!--HotCorners-->
+        <scene sceneID="4pM-9s-nVE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="HotCorners" id="qUl-CJ-Hw7" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jaI-mq-cgd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-549" y="-308"/>
         </scene>
     </scenes>
 </document>
