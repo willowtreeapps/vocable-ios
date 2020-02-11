@@ -1,6 +1,6 @@
 //
 //  BorderedView.swift
-//  Vitality-One
+//  Vocable
 //
 //  Created by Chris Stroud on 10/15/19.
 //  Copyright © 2019 WilowTree. All rights reserved.
