@@ -11,11 +11,9 @@ import MessageUI
 
 class SettingsViewController: UICollectionViewController, MFMailComposeViewControllerDelegate {
     
-    @IBOutlet var headerView: UINavigationItem!
+    @IBOutlet private var headerView: UINavigationItem!
     
-    let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    
-    let composeVC = MFMailComposeViewController()
+    private weak var composeVC: MFMailComposeViewController?
     
     enum SettingsItem: CaseIterable {
         case privacyPolicy
@@ -26,14 +24,8 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupMailComposer()
         setupNavigationBar()
         setupCollectionView()
-    }
-    
-    func setupMailComposer() {
-        composeVC.mailComposeDelegate = self
-        composeVC.setToRecipients(["vocable@willowtreeapps.com"])
     }
     
     func setupNavigationBar() {
@@ -54,56 +46,6 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
         collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsFooterCollectionViewCell")
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
-    }
-    
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch SettingsItem.allCases[indexPath.item] {
-        case .privacyPolicy:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: "Privacy Policy")
-            cell.changeTitleFont(font: .systemFont(ofSize: 28, weight: .bold))
-            return cell
-        case .contactDevs:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: "Contact Developers")
-            cell.changeTitleFont(font: .systemFont(ofSize: 28, weight: .bold))
-            return cell
-        case .versionNum:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
-            cell.setup(versionLabel: "V 0.0.0")
-            return cell
-        }
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        for selectedPath in collectionView.indexPathsForSelectedItems ?? [] {
-            if selectedPath.section == indexPath.section && selectedPath != indexPath {
-                collectionView.deselectItem(at: selectedPath, animated: true)
-            }
-        }
-        
-        switch SettingsItem.allCases[indexPath.item] {
-        case .privacyPolicy:
-            let url = URL(string: "https://vocable.app/privacy.html")!
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            
-        case .contactDevs:
-            guard MFMailComposeViewController.canSendMail() else {
-                NSLog("Mail composer failed to send mail", [])
-                break
-            }
-            self.present(composeVC, animated: true, completion: nil)
-        case .versionNum:
-            break
-        }
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        SettingsItem.allCases.count
     }
     
     func createLayout() -> UICollectionViewLayout {
@@ -127,5 +69,85 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
-
+    
+    // MARK: UICollectionViewController
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch SettingsItem.allCases[indexPath.item] {
+        case .privacyPolicy:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+            cell.setup(title: "Privacy Policy")
+            cell.changeTitleFont(font: .systemFont(ofSize: 28, weight: .bold))
+            return cell
+        case .contactDevs:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+            cell.setup(title: "Contact Developers")
+            cell.changeTitleFont(font: .systemFont(ofSize: 28, weight: .bold))
+            return cell
+        case .versionNum:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
+            cell.setup(versionLabel: "V 0.0.0")
+            return cell
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.indexPathForGazedItem != indexPath {
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
+        
+        switch SettingsItem.allCases[indexPath.item] {
+        case .privacyPolicy:
+            let url = URL(string: "https://vocable.app/privacy.html")!
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            
+        case .contactDevs:
+            guard MFMailComposeViewController.canSendMail() else {
+                NSLog("Mail composer failed to send mail", [])
+                break
+            }
+            
+            guard composeVC == nil else {
+                break
+            }
+            
+            let composeVC = MFMailComposeViewController()
+            composeVC.mailComposeDelegate = self
+            composeVC.setToRecipients(["vocable@willowtreeapps.com"])
+            self.composeVC = composeVC
+            
+            self.present(composeVC, animated: true, completion: nil)
+        case .versionNum:
+            break
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        SettingsItem.allCases.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        switch SettingsItem.allCases[indexPath.item] {
+        case .versionNum:
+            return false
+        default:
+            return true
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        switch SettingsItem.allCases[indexPath.item] {
+        case .versionNum:
+            return false
+        default:
+            return true
+        }
+    }
+    
+    // MARK: MFMailComposeViewControllerDelegate
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
 }

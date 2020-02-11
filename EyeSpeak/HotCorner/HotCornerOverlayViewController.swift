@@ -21,7 +21,7 @@ final private class HotCornerExpandingUIControl: UIButton {
         super.init(coder: coder)
         commonInit()
     }
-
+    
     private func commonInit() {
         backgroundColor = .defaultCellBackgroundColor
         titleLabel?.textColor = .defaultTextColor
@@ -47,7 +47,7 @@ final private class HotCornerExpandingUIControl: UIButton {
         titleLabel?.textColor = .defaultTextColor
         gazeBeginDate = nil
     }
-
+    
     override var intrinsicContentSize: CGSize {
         return CGSize(width: 88, height: 88)
     }
@@ -146,15 +146,13 @@ final class HotCornerOverlayViewController: UIViewController {
     }
     
     @objc private func goToSettings(_ sender: Any?) {
-        if settingsContainerView.isHidden {
-            settingsContainerView.isHidden = false
-            pauseButton.isHidden = true
-            setUIControlImage(uiControl: settingsButton, systemName: "xmark.circle")
-        } else {
-            settingsContainerView.isHidden = true
-            pauseButton.isHidden = false
-            setUIControlImage(uiControl: settingsButton, systemName: "gear")
-        }
+        settingsContainerView.isHidden.toggle()
+        pauseButton.isHidden.toggle()
         
+        if settingsContainerView.isHidden {
+            setUIControlImage(uiControl: settingsButton, systemName: "gear")
+        } else {
+            setUIControlImage(uiControl: settingsButton, systemName: "xmark.circle")
+        }
     }
 }
