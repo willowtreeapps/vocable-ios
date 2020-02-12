@@ -146,22 +146,6 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     
     // MARK: Keyboard Layout
     
-    //                                 +-------+
-    // Triple keyboard key group, i.e. | Q W E |
-    //                                 +-------+
-    static let tripleKeyItemFractionalWidth = 339.0 / totalWidth
-    static let tripleKeyItem = keyboardCollectionLayoutItem(
-        layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(tripleKeyItemFractionalWidth),
-                                           heightDimension: .fractionalHeight(1.0)))
-    
-    //                                    +---------+
-    // Quadruple keyboard key group, i.e. | U I O P |
-    //                                    +---------+
-    static let quadrupleKeyItemFractionalWidth: CGFloat = 4.0 / 10.0
-    static let quadrupleKeyItem = keyboardCollectionLayoutItem(
-        layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(quadrupleKeyItemFractionalWidth),
-                                           heightDimension: .fractionalHeight(1.0)))
-    
     static func keyboardSectionLayout() -> NSCollectionLayoutSection {
         let keyboardContainerGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -173,6 +157,22 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         
         return section
     }
+    
+    //                                 +-------+
+    // Triple keyboard key group, i.e. | Q W E |
+    //                                 +-------+
+    private static let tripleKeyItemFractionalWidth = 339.0 / totalWidth
+    private static let tripleKeyItem = keyboardCollectionLayoutItem(
+        layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(tripleKeyItemFractionalWidth),
+                                           heightDimension: .fractionalHeight(1.0)))
+    
+    //                                    +---------+
+    // Quadruple keyboard key group, i.e. | U I O P |
+    //                                    +---------+
+    private static let quadrupleKeyItemFractionalWidth: CGFloat = 4.0 / 10.0
+    private static let quadrupleKeyItem = keyboardCollectionLayoutItem(
+        layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(quadrupleKeyItemFractionalWidth),
+                                           heightDimension: .fractionalHeight(1.0)))
     
     private static func topRowGroup() -> NSCollectionLayoutGroup {
         let multiKeyFractionalWidth: CGFloat = 6.0 / 10.0
