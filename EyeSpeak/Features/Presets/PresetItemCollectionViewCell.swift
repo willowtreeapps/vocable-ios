@@ -89,43 +89,32 @@ class CategoryItemCollectionViewCell: PresetItemCollectionViewCell {
 
 class KeyboardKeyGroupCollectionViewCell: PresetItemCollectionViewCell {
     
-    var title: String = "" {
-        didSet {
-            updateTitleLabel()
+    @IBOutlet weak var stackView: UIStackView!
+    
+    override func setup(title: String) {
+        guard !title.isEmpty else {
+            return
+        }
+        
+        title.forEach { character in
+            let label = UILabel()
+            label.textColor = .defaultTextColor
+            label.font = .boldSystemFont(ofSize: 48)
+            label.text = "\(character)"
+            stackView.addArrangedSubview(label)
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        updateTitleLabel()
-    }
-    
-    override func setup(title: String) {
-        self.title = title
+    override func prepareForReuse() {
+        stackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
     }
     
     override fileprivate func updateContentViews() {
         borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
         borderedView.fillColor = isSelected ? .cellSelectionColor : fillColor
         borderedView.isOpaque = true
-        
-        textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
-        textLabel.backgroundColor = borderedView.fillColor
-        textLabel.isOpaque = true
     }
-    
-    private func updateTitleLabel() {
-        guard !title.isEmpty else {
-            return
-        }
-        
-        let textAttributes: [NSAttributedString.Key: Any] = [
-            .kern: 45 // FIXME: the text's kerning should fit the label's width
-        ]
-        
-        let attributedString = NSMutableAttributedString(string: title)
-        attributedString.addAttributes(textAttributes, range: NSRange(location: 0, length: attributedString.length - 1))
-        
-        textLabel.attributedText = attributedString
-    }
+
 }

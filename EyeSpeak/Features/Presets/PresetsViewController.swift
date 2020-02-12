@@ -181,8 +181,8 @@ class PresetsViewController: UICollectionViewController {
             snapshot.appendItems(KeyGroup.QWERTYKeyboardGroups.map { .keyGroup($0) })
             
             // FIXME: use a real item type here
-            snapshot.appendItems([.keyGroup(KeyGroup("space")),
-                                  .keyGroup(KeyGroup("Speak"))])
+            snapshot.appendItems([.presetItem("Space"),
+                                  .presetItem("Speak")])
         }
         
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
