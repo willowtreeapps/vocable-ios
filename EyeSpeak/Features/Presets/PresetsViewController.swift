@@ -39,6 +39,8 @@ class PresetsViewController: UICollectionViewController {
         }
     }
     
+    let textExpression = TextExpression()
+    
     enum Section: Int, CaseIterable {
         case topBar
         case textField
@@ -52,7 +54,7 @@ class PresetsViewController: UICollectionViewController {
         case textField(String)
         case topBarButton(TopBarButton)
         case category(PresetCategory)
-        case predictiveText(String)
+        case predictiveText(TextPrediction)
         case presetItem(String)
         case keyGroup(KeyGroup)
     }
@@ -78,6 +80,10 @@ class PresetsViewController: UICollectionViewController {
             self.updateSnapshot()
         }
     }
+    
+    // TODO: Hook this up with the TextExpression predict() function when the user updates
+    // the text in the text field
+    let predictions: [TextPrediction?] = []
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -146,8 +152,8 @@ class PresetsViewController: UICollectionViewController {
                 return cell
             case .category(let category):
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description)
-            case .predictiveText(let text):
-                return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: text)
+            case .predictiveText(let predictiveText):
+                return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: predictiveText.text)
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
             case .keyGroup(let keyGroup):
@@ -174,7 +180,17 @@ class PresetsViewController: UICollectionViewController {
         
         if showKeyboard {
             snapshot.appendSections([.predictiveText])
-            snapshot.appendItems([.predictiveText(""), .predictiveText(""), .predictiveText(""), .predictiveText(""), .predictiveText("")])
+            if predictions.isEmpty {
+                 snapshot.appendItems([.predictiveText(TextPrediction(text: "")),
+                                       .predictiveText(TextPrediction(text: "")),
+                                       .predictiveText(TextPrediction(text: "")),
+                                       .predictiveText(TextPrediction(text: ""))])
+            } else {
+                snapshot.appendItems([.predictiveText(TextPrediction(text: predictions[0]?.text ?? "")),
+                                      .predictiveText(TextPrediction(text: predictions[1]?.text ?? "")),
+                                      .predictiveText(TextPrediction(text: predictions[2]?.text ?? "")),
+                                      .predictiveText(TextPrediction(text: predictions[3]?.text ?? ""))])
+            }
             
             snapshot.appendSections([.keyboard])
             snapshot.appendItems(KeyGroup.QWERTYKeyboardGroups.map { .keyGroup($0) })

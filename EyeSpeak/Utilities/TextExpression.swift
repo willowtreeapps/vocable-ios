@@ -7,14 +7,10 @@
 //
 import Foundation
 
-protocol TextExpressionDelegate: class {
-    func textExpression(_ expression: TextExpression, valueChanged value: String)
-}
-
 class TextExpression {
     private(set) var value: String = ""
-
-    weak var delegate: TextExpressionDelegate?
+    
+    private let textPredictionController = TextPredictionController()
 
     var wordCount: Int {
         return value.split(separator: " ").count
@@ -30,7 +26,6 @@ class TextExpression {
         var newSplitExpression = trimmedExpression.split(separator: " ").map { String($0) }
         newSplitExpression.append(word)
         self.value = newSplitExpression.joined(separator: " ")
-        self.delegate?.textExpression(self, valueChanged: self.value)
     }
 
     func replaceWord(at index: Int, with newWord: String) {
@@ -39,7 +34,6 @@ class TextExpression {
             newSplitExpression[index] = newWord
         }
         self.value = newSplitExpression.joined(separator: " ")
-        self.delegate?.textExpression(self, valueChanged: self.value)
     }
 
     func replaceLastWord(with newWord: String) {
@@ -62,21 +56,21 @@ class TextExpression {
         if !self.value.isEmpty {
             _ = self.value.removeLast()
         }
-        self.delegate?.textExpression(self, valueChanged: self.value)
     }
 
     func append(text: String) {
         self.value.append(text)
-        self.delegate?.textExpression(self, valueChanged: self.value)
     }
 
     func clear() {
         self.value = ""
-        self.delegate?.textExpression(self, valueChanged: self.value)
     }
 
     func space() {
         self.value.append(" ")
-        self.delegate?.textExpression(self, valueChanged: self.value)
+    }
+    
+    func predictions() -> [String] {
+        return textPredictionController.predictions(for: self)
     }
 }

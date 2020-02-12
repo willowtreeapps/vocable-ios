@@ -105,7 +105,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
     
     static func predictiveTextSectionLayout() -> NSCollectionLayoutSection {
-        let numOfItems = CGFloat(5)
+        let numOfItems = CGFloat(4)
         
         let predictiveTextItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / numOfItems),
