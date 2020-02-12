@@ -53,6 +53,7 @@ class PresetsViewController: UICollectionViewController {
         case category(PresetCategory)
         case presetItem(String)
         case keyGroup(KeyGroup)
+        case keyboardFunctionButton(KeyboardFunctionButton)
     }
     
     enum TopBarButton: String {
@@ -65,8 +66,20 @@ class PresetsViewController: UICollectionViewController {
                 return UIImage(systemName: "repeat")
             case .toggleKeyboard:
                 return UIImage(systemName: "keyboard")
-            default:
-                return nil
+            }
+        }
+    }
+    
+    enum KeyboardFunctionButton {
+        case space
+        case speak
+        
+        var title: String {
+            switch self {
+            case .space:
+                return "Space"
+            case .speak:
+                return "Speak"
             }
         }
     }
@@ -76,7 +89,7 @@ class PresetsViewController: UICollectionViewController {
             self.updateSnapshot()
         }
     }
-    
+
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
@@ -148,6 +161,10 @@ class PresetsViewController: UICollectionViewController {
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "KeyboardKeyGroupCollectionViewCell", for: indexPath) as! KeyboardKeyGroupCollectionViewCell
                 cell.setup(title: keyGroup.containedCharacters)
                 return cell
+            case .keyboardFunctionButton(let functionType):
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+                cell.setup(title: functionType.title)
+                return cell
             }
         })
         
@@ -179,10 +196,7 @@ class PresetsViewController: UICollectionViewController {
         
         if showKeyboard {
             snapshot.appendItems(KeyGroup.QWERTYKeyboardGroups.map { .keyGroup($0) })
-            
-            // FIXME: use a real item type here
-            snapshot.appendItems([.presetItem("Space"),
-                                  .presetItem("Speak")])
+            snapshot.appendItems([.keyboardFunctionButton(.space), .keyboardFunctionButton(.speak)])
         }
         
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
@@ -206,7 +220,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton, .keyGroup:
+        case .category, .presetItem, .topBarButton, .keyGroup, .keyboardFunctionButton:
             return true
         }
     }
@@ -217,7 +231,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton, .keyGroup:
+        case .category, .presetItem, .topBarButton, .keyGroup, .keyboardFunctionButton:
             return true
         }
     }
@@ -260,6 +274,13 @@ class PresetsViewController: UICollectionViewController {
         case .category(let category):
             selectedCategory = category
             return
+        case .keyboardFunctionButton(let functionType):
+            switch functionType {
+            case .space:
+                currentSpeechText.append(" ")
+            case .speak:
+                AVSpeechSynthesizer.shared.speak(currentSpeechText)
+            }
         default:
             break
         }
@@ -273,7 +294,7 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .presetItem, .topBarButton:
+        case .presetItem, .topBarButton, .keyboardFunctionButton:
             return true
         case .category, .textField, .keyGroup:
             return false
