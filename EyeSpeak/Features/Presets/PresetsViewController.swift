@@ -43,6 +43,7 @@ class PresetsViewController: UICollectionViewController {
         case topBar
         case textField
         case categories
+        case predictiveText
         case presets
         case keyboard
     }
@@ -51,6 +52,7 @@ class PresetsViewController: UICollectionViewController {
         case textField(String)
         case topBarButton(TopBarButton)
         case category(PresetCategory)
+        case predictiveText(String)
         case presetItem(String)
         case keyGroup(KeyGroup)
     }
@@ -92,7 +94,7 @@ class PresetsViewController: UICollectionViewController {
     
     private func setupCollectionView() {
         collectionView.delaysContentTouches = false
-        collectionView.isScrollEnabled = false
+//        collectionView.isScrollEnabled = false
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
@@ -108,7 +110,7 @@ class PresetsViewController: UICollectionViewController {
     
     private func createLayout() -> UICollectionViewLayout {
         let layout = PresetUICollectionViewCompositionalLayout { (sectionIndex: Int, _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            let sectionKind = Section.allCases[sectionIndex]
+            let sectionKind = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
             
             switch sectionKind {
             case .topBar:
@@ -117,6 +119,8 @@ class PresetsViewController: UICollectionViewController {
                 return PresetUICollectionViewCompositionalLayout.textFieldSectionLayout()
             case .categories:
                 return PresetUICollectionViewCompositionalLayout.categoriesSectionLayout()
+            case .predictiveText:
+                return PresetUICollectionViewCompositionalLayout.predictiveTextSectionLayout()
             case .presets:
                 guard !self.showKeyboard else {
                     return nil
@@ -142,6 +146,8 @@ class PresetsViewController: UICollectionViewController {
                 return cell
             case .category(let category):
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description)
+            case .predictiveText(let text):
+                return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: text)
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
             case .keyGroup(let keyGroup):
@@ -166,19 +172,18 @@ class PresetsViewController: UICollectionViewController {
         snapshot.appendSections([.textField])
         snapshot.appendItems([.textField(currentSpeechText)])
         
-        snapshot.appendSections([.categories])
-        snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
-    
-        snapshot.appendSections([.presets])
-        
-        if !showKeyboard {
-            snapshot.appendItems(categoryPresets[selectedCategory]!)
-        }
-        
-        snapshot.appendSections([.keyboard])
-        
         if showKeyboard {
+            snapshot.appendSections([.predictiveText])
+            snapshot.appendItems([.predictiveText(""), .predictiveText(""), .predictiveText(""), .predictiveText(""), .predictiveText("")])
+            
+            snapshot.appendSections([.keyboard])
             snapshot.appendItems(KeyGroup.QWERTYKeyboardGroups.map { .keyGroup($0) })
+        } else {
+            snapshot.appendSections([.categories])
+            snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
+            
+            snapshot.appendSections([.presets])
+            snapshot.appendItems(categoryPresets[selectedCategory]!)
         }
         
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
@@ -202,7 +207,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton, .keyGroup:
+        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText:
             return true
         }
     }
@@ -213,7 +218,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton, .keyGroup:
+        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText:
             return true
         }
     }
@@ -271,7 +276,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .presetItem, .topBarButton:
             return true
-        case .category, .textField, .keyGroup:
+        case .category, .textField, .keyGroup, .predictiveText:
             return false
         }
     }
