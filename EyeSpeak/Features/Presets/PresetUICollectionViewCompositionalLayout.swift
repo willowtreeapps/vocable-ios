@@ -145,33 +145,80 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
     
     static func keyboardSectionLayout() -> NSCollectionLayoutSection {
-        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(339.0 / totalWidth),
+        // FIXME: all item content insets are the same currently. Abstract that out to clean up
+        // Items
+        let presetFractionalWidth = 339.0 / totalWidth
+        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(presetFractionalWidth),
                                                                                    heightDimension: .fractionalHeight(1.0)))
+        presetItem.contentInsets = .init(top: 4, leading: 4, bottom: 4, trailing: 4)
+        let largeItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                                                  heightDimension: .fractionalHeight(1.0)))
+        largeItem.contentInsets = .init(top: 4, leading: 4, bottom: 4, trailing: 4)
         
-        let rowGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+        // Shared Groups
+        let multiKeyGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(6.0 / 10.0),
                                                heightDimension: .fractionalHeight(1.0)),
-            subitem: presetItem, count: 3)
-        rowGroup.interItemSpacing = .fixed(16)
+            subitem: presetItem, count: 2)
+        
+        let singleKeyGroupFractionalWidth: CGFloat = 4.0 / 10.0
+        let singleKeyGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(singleKeyGroupFractionalWidth),
+                                               heightDimension: .fractionalHeight(1.0)),
+            subitem: largeItem, count: 1)
+        
+        // Top Group
+        
+        let topRowGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(1.0 / 3.0)),
+            subitems: [multiKeyGroup, singleKeyGroup])
+        
+        // Middle Group
+        
+        let middleLeadingItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(339.0 / totalWidth),
+                                                                                          heightDimension: .fractionalHeight(1.0)))
+        middleLeadingItem.edgeSpacing = .init(leading: .flexible(16), top: nil, trailing: nil, bottom: nil)
+        middleLeadingItem.contentInsets = .init(top: 4, leading: 4, bottom: 4, trailing: 4)
+        
+        let middleTrailingItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(339.0 / totalWidth),
+                                                                                           heightDimension: .fractionalHeight(1.0)))
+        middleTrailingItem.edgeSpacing = .init(leading: nil, top: nil, trailing: .flexible(16), bottom: nil)
+        middleTrailingItem.contentInsets = .init(top: 4, leading: 4, bottom: 4, trailing: 4)
+        
+        let middleRowGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(1.0 / 3.0)),
+            subitems: [middleLeadingItem, presetItem, middleTrailingItem])
+        
+        // Bottom group
+        
+        // FIXME: Maybe figure out a way to assert or validate that all the fractional widths add up to 100% in an environemnt that we want to center the content
+        
+        let smallKeyItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 2.0), heightDimension: .fractionalHeight(1.0)))
+        smallKeyItem.contentInsets = .init(top: 4, leading: 4, bottom: 4, trailing: 4)
+        
+        let smallKeyGroupFractionalWidth = 1.0 - presetFractionalWidth - singleKeyGroupFractionalWidth
+        let smallBottomKeyGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(smallKeyGroupFractionalWidth), heightDimension: .fractionalHeight(1.0)), subitems: [smallKeyItem, smallKeyItem])
+        
+        let bottomRowGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .fractionalHeight(1.0 / 3.0)),
+            subitems: [presetItem, singleKeyGroup, smallBottomKeyGroup])
+        
+        print(bottomRowGroup.visualDescription())
+        
+        // Section
         
         let containerGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(464.0 / totalHeight)),
-            subitem: rowGroup, count: 3)
-        containerGroup.interItemSpacing = .fixed(16)
-        containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
+                                               heightDimension: .fractionalHeight(400 / totalHeight)),
+            subitems: [topRowGroup, middleRowGroup, bottomRowGroup])
         
         let section = NSCollectionLayoutSection(group: containerGroup)
-        section.interGroupSpacing = 0
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        section.orthogonalScrollingBehavior = .groupPaging
-        
-        let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
-        footer.extendsBoundary = true
-        footer.pinToVisibleBounds = true
-        section.boundarySupplementaryItems = [footer]
+        section.contentInsets = .init(top: 0, leading: 32, bottom: 0, trailing: 32)
         
         return section
     }
+
 }

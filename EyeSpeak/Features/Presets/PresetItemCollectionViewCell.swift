@@ -115,12 +115,16 @@ class KeyboardKeyGroupCollectionViewCell: PresetItemCollectionViewCell {
     }
     
     private func updateTitleLabel() {
+        guard !title.isEmpty else {
+            return
+        }
+        
         let textAttributes: [NSAttributedString.Key: Any] = [
-            .kern: 48
+            .kern: 45 // FIXME: the text's kerning should fit the label's width
         ]
         
         let attributedString = NSMutableAttributedString(string: title)
-        attributedString.addAttributes(textAttributes, range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttributes(textAttributes, range: NSRange(location: 0, length: attributedString.length - 1))
         
         textLabel.attributedText = attributedString
     }
