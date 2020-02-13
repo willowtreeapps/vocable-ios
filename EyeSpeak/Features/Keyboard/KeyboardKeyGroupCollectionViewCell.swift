@@ -27,6 +27,7 @@ class KeyboardKeyGroupCollectionViewCell: VocableCollectionViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         stackView.subviews.forEach {
             $0.removeFromSuperview()
         }
