@@ -117,7 +117,7 @@ class PresetsViewController: UICollectionViewController {
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
-        collectionView.register(UINib(nibName: "KeyboardKeyGroupCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyGroupCollectionViewCell")
+        collectionView.register(UINib(nibName: "KeyboardGroupCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardGroupCollectionViewCell")
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
@@ -170,7 +170,7 @@ class PresetsViewController: UICollectionViewController {
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
             case .keyGroup(let keyGroup):
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "KeyboardKeyGroupCollectionViewCell", for: indexPath) as! KeyboardKeyGroupCollectionViewCell
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "KeyboardGroupCollectionViewCell", for: indexPath) as! KeyboardGroupCollectionViewCell
                 cell.setup(title: keyGroup.containedCharacters)
                 return cell
             case .keyboardFunctionButton(let functionType):
