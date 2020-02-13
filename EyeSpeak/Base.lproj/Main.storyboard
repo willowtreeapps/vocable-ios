@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CvH-fK-txz">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,29 +12,29 @@
             <objects>
                 <viewController id="CvH-fK-txz" customClass="TrackingContainerViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QoN-fl-FyW">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h77-DW-Ra2" userLabel="TrackingContainer">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <connections>
                                     <segue destination="Gya-9R-y3J" kind="embed" id="hQM-OQ-1Dc"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQq-Gr-kNC" userLabel="ContentViewController">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <connections>
                                     <segue destination="Jgy-U0-B1Z" kind="embed" identifier="ContentViewControllerSegue" id="VGF-IP-CWi"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A16-bV-8FB" customClass="ViewControllerWrapperView" customModule="EyeSpeak" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <connections>
                                     <segue destination="qUl-CJ-Hw7" kind="embed" id="CCf-Bd-QlP"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86h-9O-qAY" customClass="UIVirtualCursorView" customModule="EyeSpeak" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
@@ -72,7 +72,7 @@
             <objects>
                 <viewController id="Gya-9R-y3J" customClass="UIHeadGazeViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0FP-BP-SNo">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="GGj-AU-Ual"/>
@@ -87,7 +87,7 @@
             <objects>
                 <collectionViewController id="Jgy-U0-B1Z" customClass="PresetsViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WCJ-8g-p1t">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jtp-ya-uaj">
@@ -96,22 +96,13 @@
                             <size key="footerReferenceSize" width="50" height="50"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vns-g5-ZIP">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xGV-Ud-5km">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </collectionViewCellContentView>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PresetPageControlView" id="m0H-ea-bEJ" customClass="PresetPageControlReusableView" customModule="EyeSpeak" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="50" width="1024" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="3bW-mX-haI">
-                                    <rect key="frame" x="492.5" y="6.5" width="39" height="37"/>
+                                    <rect key="frame" x="187.5" y="6.5" width="39" height="37"/>
                                 </pageControl>
                             </subviews>
                             <constraints>
@@ -134,22 +125,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yvH-BH-Lku" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-489" y="-1444"/>
-        </scene>
-        <!--Hot Corner Overlay View Controller-->
-        <scene sceneID="BXJ-IF-8S9">
-            <objects>
-                <viewController id="gEA-fE-Ijf" customClass="HotCornerOverlayViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="n5T-bn-khm">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="zeJ-se-oJa"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TEc-iU-cqA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-489" y="-789"/>
+            <point key="canvasLocation" x="-490" y="-1458"/>
         </scene>
         <!--HotCorners-->
         <scene sceneID="4pM-9s-nVE">
@@ -157,7 +133,7 @@
                 <viewControllerPlaceholder storyboardName="HotCorners" id="qUl-CJ-Hw7" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jaI-mq-cgd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-549" y="-308"/>
+            <point key="canvasLocation" x="-1667" y="-1007"/>
         </scene>
     </scenes>
 </document>
