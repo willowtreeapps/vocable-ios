@@ -77,12 +77,10 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
         case .privacyPolicy:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
             cell.setup(title: "Privacy Policy")
-            cell.changeTitleFont(font: .systemFont(ofSize: 28, weight: .bold))
             return cell
         case .contactDevs:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
             cell.setup(title: "Contact Developers")
-            cell.changeTitleFont(font: .systemFont(ofSize: 28, weight: .bold))
             return cell
         case .versionNum:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell

@@ -16,4 +16,14 @@ extension AVSpeechSynthesizer {
     static var shared: AVSpeechSynthesizer {
         return Storage.shared
     }
+    
+    func speak(_ string: String) {
+        let utterance = AVSpeechUtterance(string: string)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        
+        if isSpeaking {
+            stopSpeaking(at: .immediate)
+        }
+        speak(utterance)
+    }
 }
