@@ -21,20 +21,34 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attr = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
         // Make animation only happen for preset items
-        guard let item = dataSource?.itemIdentifier(for: itemIndexPath), case PresetsViewController.ItemWrapper.presetItem(_) = item else {
+        guard let item = dataSource?.itemIdentifier(for: itemIndexPath) else {
             return attr
         }
-        attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
+        
+        switch item {
+        case .presetItem, .keyGroup, .keyboardFunctionButton:
+            attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
+        default:
+            break
+        }
+        
         return attr
     }
 
     override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attr = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
         // Make animation only happen for preset items
-        guard let item = dataSource?.itemIdentifier(for: itemIndexPath), case PresetsViewController.ItemWrapper.presetItem(_) = item else {
+        guard let item = dataSource?.itemIdentifier(for: itemIndexPath) else {
             return attr
         }
-        attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
+        
+        switch item {
+        case .presetItem, .keyGroup, .keyboardFunctionButton:
+            attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
+        default:
+            break
+        }
+        
         return attr
     }
     
