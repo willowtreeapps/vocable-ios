@@ -10,6 +10,8 @@ import UIKit
 
 class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLayout {
     
+    // Dimensions of the product designs.
+    // These are intended for use in computing the fractional-size dimensions of collection layout items rather than hard-coding width/height values
     private static let totalHeight: CGFloat = 834.0
     private static let totalWidth: CGFloat = 1112.0
     
