@@ -57,6 +57,7 @@ class PresetsViewController: UICollectionViewController {
         case predictiveText(TextPrediction)
         case presetItem(String)
         case keyGroup(KeyGroup)
+        case keyboardFunctionButton(KeyboardFunctionButton)
     }
     
     enum TopBarButton: String {
@@ -69,8 +70,20 @@ class PresetsViewController: UICollectionViewController {
                 return UIImage(systemName: "repeat")
             case .toggleKeyboard:
                 return UIImage(systemName: "keyboard")
-            default:
-                return nil
+            }
+        }
+    }
+    
+    enum KeyboardFunctionButton {
+        case space
+        case speak
+        
+        var title: String {
+            switch self {
+            case .space:
+                return "Space"
+            case .speak:
+                return "Speak"
             }
         }
     }
@@ -160,6 +173,10 @@ class PresetsViewController: UICollectionViewController {
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "KeyboardKeyGroupCollectionViewCell", for: indexPath) as! KeyboardKeyGroupCollectionViewCell
                 cell.setup(title: keyGroup.containedCharacters)
                 return cell
+            case .keyboardFunctionButton(let functionType):
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+                cell.setup(title: functionType.title)
+                return cell
             }
         })
         
@@ -194,6 +211,7 @@ class PresetsViewController: UICollectionViewController {
             
             snapshot.appendSections([.keyboard])
             snapshot.appendItems(KeyGroup.QWERTYKeyboardGroups.map { .keyGroup($0) })
+            snapshot.appendItems([.keyboardFunctionButton(.space), .keyboardFunctionButton(.speak)])
         } else {
             snapshot.appendSections([.categories])
             snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
@@ -223,7 +241,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText:
+        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText, .keyboardFunctionButton:
             return true
         }
     }
@@ -234,7 +252,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText:
+        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText, .keyboardFunctionButton:
             return true
         }
     }
@@ -277,6 +295,13 @@ class PresetsViewController: UICollectionViewController {
         case .category(let category):
             selectedCategory = category
             return
+        case .keyboardFunctionButton(let functionType):
+            switch functionType {
+            case .space:
+                currentSpeechText.append(" ")
+            case .speak:
+                AVSpeechSynthesizer.shared.speak(currentSpeechText)
+            }
         default:
             break
         }
@@ -290,7 +315,7 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .presetItem, .topBarButton:
+        case .presetItem, .topBarButton, .keyboardFunctionButton:
             return true
         case .category, .textField, .keyGroup, .predictiveText:
             return false

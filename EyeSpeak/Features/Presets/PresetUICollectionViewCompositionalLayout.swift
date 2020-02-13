@@ -10,8 +10,9 @@ import UIKit
 
 class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLayout {
     
+    // Height dimension of the product designs.
+    // Intended for use in computing the fractional-size dimensions of collection layout items rather than hard-coding width/height values
     private static let totalHeight: CGFloat = 834.0
-    private static let totalWidth: CGFloat = 1112.0
     
     var dataSource: UICollectionViewDiffableDataSource<PresetsViewController.Section, PresetsViewController.ItemWrapper>? {
         self.collectionView?.dataSource as? UICollectionViewDiffableDataSource<PresetsViewController.Section, PresetsViewController.ItemWrapper>
@@ -125,9 +126,9 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
         return section
     }
-    
+        
     static func presetsSectionLayout() -> NSCollectionLayoutSection {
-        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(339.0 / totalWidth),
+        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 3.0),
                                                                                    heightDimension: .fractionalHeight(1.0)))
         
         let rowGroup = NSCollectionLayoutGroup.horizontal(
@@ -157,34 +158,89 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         return section
     }
     
+    // MARK: Keyboard Layout
+    
     static func keyboardSectionLayout() -> NSCollectionLayoutSection {
-        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(339.0 / totalWidth),
-                                                                                   heightDimension: .fractionalHeight(1.0)))
-        
-        let rowGroup = NSCollectionLayoutGroup.horizontal(
+        let keyboardContainerGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(1.0)),
-            subitem: presetItem, count: 3)
-        rowGroup.interItemSpacing = .fixed(16)
+                                               heightDimension: .fractionalHeight(400 / totalHeight)),
+            subitems: [topRowGroup(), middleRowGroup(), bottomRowGroup()])
         
-        let containerGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(464.0 / totalHeight)),
-            subitem: rowGroup, count: 3)
-        containerGroup.interItemSpacing = .fixed(16)
-        containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
-        
-        let section = NSCollectionLayoutSection(group: containerGroup)
-        section.interGroupSpacing = 0
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        section.orthogonalScrollingBehavior = .groupPaging
-        
-        let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
-        footer.extendsBoundary = true
-        footer.pinToVisibleBounds = true
-        section.boundarySupplementaryItems = [footer]
+        let section = NSCollectionLayoutSection(group: keyboardContainerGroup)
+        section.contentInsets = .init(top: 0, leading: 32, bottom: 0, trailing: 32)
         
         return section
+    }
+    
+    //                                 +-------+
+    // Triple keyboard key group, i.e. | Q W E |
+    //                                 +-------+
+    private static let tripleKeyItemFractionalWidth: CGFloat = 3.0 / 10.0
+    private static let tripleKeyItem = keyboardCollectionLayoutItem(
+        layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(tripleKeyItemFractionalWidth),
+                                           heightDimension: .fractionalHeight(1.0)))
+    
+    //                                    +---------+
+    // Quadruple keyboard key group, i.e. | U I O P |
+    //                                    +---------+
+    private static let quadrupleKeyItemFractionalWidth: CGFloat = 4.0 / 10.0
+    private static let quadrupleKeyItem = keyboardCollectionLayoutItem(
+        layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(quadrupleKeyItemFractionalWidth),
+                                           heightDimension: .fractionalHeight(1.0)))
+    
+    private static func topRowGroup() -> NSCollectionLayoutGroup {
+        let multiKeyFractionalWidth: CGFloat = 6.0 / 10.0
+        
+        assert((0.998...1.0) ~= multiKeyFractionalWidth + quadrupleKeyItemFractionalWidth,
+               "The top keyboard layout does not fill 100% of its container group's width")
+        
+        let multiKeyGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(multiKeyFractionalWidth),
+                                               heightDimension: .fractionalHeight(1.0)),
+            subitem: tripleKeyItem, count: 2)
+        
+        return NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(1.0 / 3.0)),
+            subitems: [multiKeyGroup, quadrupleKeyItem])
+    }
+    
+    private static func middleRowGroup() -> NSCollectionLayoutGroup {
+        let middleLeadingItem = keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(tripleKeyItemFractionalWidth),
+                                                                                                heightDimension: .fractionalHeight(1.0)))
+        middleLeadingItem.edgeSpacing = .init(leading: .flexible(16), top: nil, trailing: nil, bottom: nil)
+        
+        let middleTrailingItem = keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(tripleKeyItemFractionalWidth),
+                                                                                                 heightDimension: .fractionalHeight(1.0)))
+        middleTrailingItem.edgeSpacing = .init(leading: nil, top: nil, trailing: .flexible(16), bottom: nil)
+        
+        return NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(1.0 / 3.0)),
+            subitems: [middleLeadingItem, tripleKeyItem, middleTrailingItem])
+    }
+    
+    private static func bottomRowGroup() -> NSCollectionLayoutGroup {
+        let smallKeyGroupFractionalWidth = 1.0 - tripleKeyItemFractionalWidth - quadrupleKeyItemFractionalWidth
+        
+        assert((0.998...1.0) ~= smallKeyGroupFractionalWidth + tripleKeyItemFractionalWidth + quadrupleKeyItemFractionalWidth,
+               "The bottom keyboard layout does not fill 100% of its container group's width")
+        
+        let smallKeyItem = keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 2.0), heightDimension: .fractionalHeight(1.0)))
+        
+        let smallBottomKeyGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(smallKeyGroupFractionalWidth), heightDimension: .fractionalHeight(1.0)),
+            subitems: [smallKeyItem, smallKeyItem])
+        
+        return NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .fractionalHeight(1.0 / 3.0)),
+            subitems: [tripleKeyItem, quadrupleKeyItem, smallBottomKeyGroup])
+    }
+    
+    private static func keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize) -> NSCollectionLayoutItem {
+        let item = NSCollectionLayoutItem(layoutSize: layoutSize)
+        item.contentInsets = .init(top: 4, leading: 4, bottom: 4, trailing: 4)
+        return item
     }
 }

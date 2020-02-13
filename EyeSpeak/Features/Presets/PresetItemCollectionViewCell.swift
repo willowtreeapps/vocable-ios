@@ -8,27 +8,18 @@
 
 import UIKit
 
-class PresetItemCollectionViewCell: UICollectionViewCell {
+class PresetItemCollectionViewCell: VocableCollectionViewCell {
     @IBOutlet fileprivate weak var textLabel: UILabel!
     
-    fileprivate let borderedView = BorderedView()
-
-    fileprivate var defaultBackgroundColor: UIColor?
-    
-    override var isHighlighted: Bool {
+    var font: UIFont = .systemFont(ofSize: 28, weight: .bold) {
         didSet {
-             updateContentViews()
-        }
-    }
-
-    override var isSelected: Bool {
-        didSet {
-            updateContentViews()
+            textLabel.font = font
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         borderedView.cornerRadius = 8
         borderedView.borderColor = .cellBorderHighlightColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
@@ -37,28 +28,16 @@ class PresetItemCollectionViewCell: UICollectionViewCell {
         backgroundView = borderedView
     }
     
-    fileprivate func updateContentViews() {
-        borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
-        borderedView.fillColor = isSelected ? .cellSelectionColor : fillColor
-        borderedView.isOpaque = true
+    override func updateContentViews() {
+        super.updateContentViews()
 
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = borderedView.fillColor
         textLabel.isOpaque = true
     }
-    
-    var fillColor: UIColor = .defaultCellBackgroundColor {
-        didSet {
-            updateContentViews()
-        }
-    }
 
     func setup(title: String) {
         textLabel.text = title
-    }
-    
-    func changeTitleFont(font: UIFont) {
-        textLabel.font = font
     }
     
     func setup(with image: UIImage?) {
@@ -75,7 +54,7 @@ class PresetItemCollectionViewCell: UICollectionViewCell {
 
 class CategoryItemCollectionViewCell: PresetItemCollectionViewCell {
     
-    override fileprivate func updateContentViews() {
+    override func updateContentViews() {
         borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
         borderedView.fillColor = isSelected ? .cellSelectionColor : .categoryBackgroundColor
         borderedView.backgroundColor = .categoryBackgroundColor
@@ -84,44 +63,5 @@ class CategoryItemCollectionViewCell: PresetItemCollectionViewCell {
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = borderedView.fillColor
         textLabel.isOpaque = true
-    }
-}
-
-class KeyboardKeyGroupCollectionViewCell: PresetItemCollectionViewCell {
-    
-    var title: String = "" {
-        didSet {
-            updateTitleLabel()
-        }
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        updateTitleLabel()
-    }
-    
-    override func setup(title: String) {
-        self.title = title
-    }
-    
-    override fileprivate func updateContentViews() {
-        borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
-        borderedView.fillColor = isSelected ? .cellSelectionColor : fillColor
-        borderedView.isOpaque = true
-        
-        textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
-        textLabel.backgroundColor = borderedView.fillColor
-        textLabel.isOpaque = true
-    }
-    
-    private func updateTitleLabel() {
-        let textAttributes: [NSAttributedString.Key: Any] = [
-            .kern: 48
-        ]
-        
-        let attributedString = NSMutableAttributedString(string: title)
-        attributedString.addAttributes(textAttributes, range: NSRange(location: 0, length: attributedString.length))
-        
-        textLabel.attributedText = attributedString
     }
 }

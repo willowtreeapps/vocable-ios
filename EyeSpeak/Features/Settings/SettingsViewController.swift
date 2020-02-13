@@ -77,12 +77,10 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
         case .privacyPolicy:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
             cell.setup(title: "Privacy Policy")
-            cell.changeTitleFont(font: .systemFont(ofSize: 28, weight: .bold))
             return cell
         case .contactDevs:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
             cell.setup(title: "Contact Developers")
-            cell.changeTitleFont(font: .systemFont(ofSize: 28, weight: .bold))
             return cell
         case .versionNum:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
@@ -104,6 +102,9 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
         case .contactDevs:
             guard MFMailComposeViewController.canSendMail() else {
                 NSLog("Mail composer failed to send mail", [])
+                let alert = UIAlertController(title: "Email Error", message: "There was an error creating an email. Is your device linked to an email account?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
                 break
             }
             
