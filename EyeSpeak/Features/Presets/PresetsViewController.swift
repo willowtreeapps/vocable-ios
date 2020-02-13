@@ -39,10 +39,13 @@ class PresetsViewController: UICollectionViewController {
         }
     }
     
+    let textExpression = TextExpression()
+    
     enum Section: Int, CaseIterable {
         case topBar
         case textField
         case categories
+        case predictiveText
         case presets
         case keyboard
     }
@@ -51,6 +54,7 @@ class PresetsViewController: UICollectionViewController {
         case textField(String)
         case topBarButton(TopBarButton)
         case category(PresetCategory)
+        case predictiveText(TextPrediction)
         case presetItem(String)
         case keyGroup(KeyGroup)
         case keyboardFunctionButton(KeyboardFunctionButton)
@@ -89,7 +93,11 @@ class PresetsViewController: UICollectionViewController {
             self.updateSnapshot()
         }
     }
-
+    
+    // TODO: Hook this up with the TextExpression predict() function when the user updates
+    // the text in the text field
+    let predictions: [TextPrediction] = []
+    
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
@@ -121,7 +129,7 @@ class PresetsViewController: UICollectionViewController {
     
     private func createLayout() -> UICollectionViewLayout {
         let layout = PresetUICollectionViewCompositionalLayout { (sectionIndex: Int, _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            let sectionKind = Section.allCases[sectionIndex]
+            let sectionKind = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
             
             switch sectionKind {
             case .topBar:
@@ -130,6 +138,8 @@ class PresetsViewController: UICollectionViewController {
                 return PresetUICollectionViewCompositionalLayout.textFieldSectionLayout()
             case .categories:
                 return PresetUICollectionViewCompositionalLayout.categoriesSectionLayout()
+            case .predictiveText:
+                return PresetUICollectionViewCompositionalLayout.predictiveTextSectionLayout()
             case .presets:
                 guard !self.showKeyboard else {
                     return nil
@@ -155,6 +165,8 @@ class PresetsViewController: UICollectionViewController {
                 return cell
             case .category(let category):
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description)
+            case .predictiveText(let predictiveText):
+                return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: predictiveText.text)
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
             case .keyGroup(let keyGroup):
@@ -183,20 +195,29 @@ class PresetsViewController: UICollectionViewController {
         snapshot.appendSections([.textField])
         snapshot.appendItems([.textField(currentSpeechText)])
         
-        snapshot.appendSections([.categories])
-        snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
-    
-        snapshot.appendSections([.presets])
-        
-        if !showKeyboard {
-            snapshot.appendItems(categoryPresets[selectedCategory]!)
-        }
-        
-        snapshot.appendSections([.keyboard])
-        
         if showKeyboard {
+            snapshot.appendSections([.predictiveText])
+            if predictions.isEmpty {
+                 snapshot.appendItems([.predictiveText(TextPrediction(text: "")),
+                                       .predictiveText(TextPrediction(text: "")),
+                                       .predictiveText(TextPrediction(text: "")),
+                                       .predictiveText(TextPrediction(text: ""))])
+            } else {
+                snapshot.appendItems([.predictiveText(TextPrediction(text: predictions[safe: 0]?.text ?? "")),
+                                      .predictiveText(TextPrediction(text: predictions[safe: 1]?.text ?? "")),
+                                      .predictiveText(TextPrediction(text: predictions[safe: 2]?.text ?? "")),
+                                      .predictiveText(TextPrediction(text: predictions[safe: 3]?.text ?? ""))])
+            }
+            
+            snapshot.appendSections([.keyboard])
             snapshot.appendItems(KeyGroup.QWERTYKeyboardGroups.map { .keyGroup($0) })
             snapshot.appendItems([.keyboardFunctionButton(.space), .keyboardFunctionButton(.speak)])
+        } else {
+            snapshot.appendSections([.categories])
+            snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
+            
+            snapshot.appendSections([.presets])
+            snapshot.appendItems(categoryPresets[selectedCategory]!)
         }
         
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
@@ -220,7 +241,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton, .keyGroup, .keyboardFunctionButton:
+        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText, .keyboardFunctionButton:
             return true
         }
     }
@@ -231,7 +252,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton, .keyGroup, .keyboardFunctionButton:
+        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText, .keyboardFunctionButton:
             return true
         }
     }
@@ -296,7 +317,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .presetItem, .topBarButton, .keyboardFunctionButton:
             return true
-        case .category, .textField, .keyGroup:
+        case .category, .textField, .keyGroup, .predictiveText:
             return false
         }
     }

@@ -27,7 +27,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
         return attr
     }
-    
+
     override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attr = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
         // Make animation only happen for preset items
@@ -84,25 +84,38 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
     
     static func categoriesSectionLayout() -> NSCollectionLayoutSection {
-        let category1Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        let category2Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        let category3Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        let category4Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
-                                               heightDimension: .fractionalHeight(1.0)))
+        let itemCount = CGFloat(4)
         
-        let subitems = [category1Item, category2Item, category3Item, category4Item]
+        let categoryItem = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / itemCount),
+                                               heightDimension: .fractionalHeight(1.0)))
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(137.0 / totalHeight)),
-            subitems: subitems)
+            subitem: categoryItem, count: Int(itemCount))
+        containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
+        let section = NSCollectionLayoutSection(group: containerGroup)
+        
+        let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
+        backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
+        
+        section.decorationItems = [backgroundDecoration]
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
+        return section
+    }
+    
+    static func predictiveTextSectionLayout() -> NSCollectionLayoutSection {
+        let itemCount = CGFloat(4)
+        
+        let predictiveTextItem = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / itemCount),
+                                               heightDimension: .fractionalHeight(1.0)))
+        
+        let containerGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(137.0 / totalHeight)),
+            subitem: predictiveTextItem, count: Int(itemCount))
         containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
         let section = NSCollectionLayoutSection(group: containerGroup)
         
