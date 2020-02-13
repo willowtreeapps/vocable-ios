@@ -10,10 +10,9 @@ import UIKit
 
 class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLayout {
     
-    // Dimensions of the product designs.
-    // These are intended for use in computing the fractional-size dimensions of collection layout items rather than hard-coding width/height values
+    // Height dimension of the product designs.
+    // Intended for use in computing the fractional-size dimensions of collection layout items rather than hard-coding width/height values
     private static let totalHeight: CGFloat = 834.0
-    private static let totalWidth: CGFloat = 1112.0
     
     var dataSource: UICollectionViewDiffableDataSource<PresetsViewController.Section, PresetsViewController.ItemWrapper>? {
         self.collectionView?.dataSource as? UICollectionViewDiffableDataSource<PresetsViewController.Section, PresetsViewController.ItemWrapper>
@@ -116,7 +115,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
         
     static func presetsSectionLayout() -> NSCollectionLayoutSection {
-        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(339.0 / totalWidth),
+        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 3.0),
                                                                                    heightDimension: .fractionalHeight(1.0)))
         
         let rowGroup = NSCollectionLayoutGroup.horizontal(
@@ -163,7 +162,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     //                                 +-------+
     // Triple keyboard key group, i.e. | Q W E |
     //                                 +-------+
-    private static let tripleKeyItemFractionalWidth = 339.0 / totalWidth
+    private static let tripleKeyItemFractionalWidth: CGFloat = 3.0 / 10.0
     private static let tripleKeyItem = keyboardCollectionLayoutItem(
         layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(tripleKeyItemFractionalWidth),
                                            heightDimension: .fractionalHeight(1.0)))
@@ -179,7 +178,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     private static func topRowGroup() -> NSCollectionLayoutGroup {
         let multiKeyFractionalWidth: CGFloat = 6.0 / 10.0
         
-        assert(multiKeyFractionalWidth + quadrupleKeyItemFractionalWidth == 1.0,
+        assert((0.998...1.0) ~= multiKeyFractionalWidth + quadrupleKeyItemFractionalWidth,
                "The top keyboard layout does not fill 100% of its container group's width")
         
         let multiKeyGroup = NSCollectionLayoutGroup.horizontal(
@@ -211,7 +210,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     private static func bottomRowGroup() -> NSCollectionLayoutGroup {
         let smallKeyGroupFractionalWidth = 1.0 - tripleKeyItemFractionalWidth - quadrupleKeyItemFractionalWidth
         
-        assert(smallKeyGroupFractionalWidth + tripleKeyItemFractionalWidth + quadrupleKeyItemFractionalWidth == 1.0,
+        assert((0.998...1.0) ~= smallKeyGroupFractionalWidth + tripleKeyItemFractionalWidth + quadrupleKeyItemFractionalWidth,
                "The bottom keyboard layout does not fill 100% of its container group's width")
         
         let smallKeyItem = keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 2.0), heightDimension: .fractionalHeight(1.0)))
