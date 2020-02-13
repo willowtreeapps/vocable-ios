@@ -83,7 +83,7 @@ class PresetsViewController: UICollectionViewController {
     
     // TODO: Hook this up with the TextExpression predict() function when the user updates
     // the text in the text field
-    let predictions: [TextPrediction?] = []
+    let predictions: [TextPrediction] = []
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -100,7 +100,7 @@ class PresetsViewController: UICollectionViewController {
     
     private func setupCollectionView() {
         collectionView.delaysContentTouches = false
-//        collectionView.isScrollEnabled = false
+        collectionView.isScrollEnabled = false
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
@@ -186,10 +186,10 @@ class PresetsViewController: UICollectionViewController {
                                        .predictiveText(TextPrediction(text: "")),
                                        .predictiveText(TextPrediction(text: ""))])
             } else {
-                snapshot.appendItems([.predictiveText(TextPrediction(text: predictions[0]?.text ?? "")),
-                                      .predictiveText(TextPrediction(text: predictions[1]?.text ?? "")),
-                                      .predictiveText(TextPrediction(text: predictions[2]?.text ?? "")),
-                                      .predictiveText(TextPrediction(text: predictions[3]?.text ?? ""))])
+                snapshot.appendItems([.predictiveText(TextPrediction(text: predictions[safe: 0]?.text ?? "")),
+                                      .predictiveText(TextPrediction(text: predictions[safe: 1]?.text ?? "")),
+                                      .predictiveText(TextPrediction(text: predictions[safe: 2]?.text ?? "")),
+                                      .predictiveText(TextPrediction(text: predictions[safe: 3]?.text ?? ""))])
             }
             
             snapshot.appendSections([.keyboard])

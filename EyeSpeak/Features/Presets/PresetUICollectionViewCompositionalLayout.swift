@@ -83,16 +83,16 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
     
     static func categoriesSectionLayout() -> NSCollectionLayoutSection {
-        let numOfItems = CGFloat(4)
+        let itemCount = CGFloat(4)
         
         let categoryItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / numOfItems),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / itemCount),
                                                heightDimension: .fractionalHeight(1.0)))
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(137.0 / totalHeight)),
-            subitem: categoryItem, count: Int(numOfItems))
+            subitem: categoryItem, count: Int(itemCount))
         containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
         let section = NSCollectionLayoutSection(group: containerGroup)
         
@@ -105,16 +105,16 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
     
     static func predictiveTextSectionLayout() -> NSCollectionLayoutSection {
-        let numOfItems = CGFloat(4)
+        let itemCount = CGFloat(4)
         
         let predictiveTextItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / numOfItems),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / itemCount),
                                                heightDimension: .fractionalHeight(1.0)))
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(137.0 / totalHeight)),
-            subitem: predictiveTextItem, count: Int(numOfItems))
+            subitem: predictiveTextItem, count: Int(itemCount))
         containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
         let section = NSCollectionLayoutSection(group: containerGroup)
         

@@ -41,11 +41,7 @@ class TextExpression {
     }
 
     func word(at index: Int) -> String? {
-        if self.splitExpression.count > index && index >= 0 {
-            return self.splitExpression[index]
-        } else {
-            return nil
-        }
+        return self.splitExpression[safe: index]
     }
 
     func lastWord() -> String? {
