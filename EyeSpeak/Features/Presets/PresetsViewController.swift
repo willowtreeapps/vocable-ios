@@ -11,66 +11,9 @@ import AVFoundation
 
 class PresetsViewController: UICollectionViewController {
     
-    enum Category: CustomStringConvertible {
-        case category1
-        case category2
-        case category3
-        case category4
-        
-        var description: String {
-            switch self {
-            case .category1:
-                return "Basic Needs"
-            case .category2:
-                return "Salutations"
-            case .category3:
-                return "Temperature"
-            case .category4:
-                return "Body"
-            }
-        }
-    }
-    
-    private var categoryPresets: [Category: [ItemWrapper]] = [
-        .category1: [.presetItem("I want the door closed."),
-                .presetItem("I want the door open."),
-                .presetItem("I would like to go to the bathroom."),
-                .presetItem("I want the lights off."),
-                .presetItem("I want the lights on."),
-                .presetItem("I want my pillow fixed."),
-                .presetItem("I would like some water."),
-                .presetItem("I would like some coffee."),
-                .presetItem("I want another pillow.")],
-        .category2: [.presetItem("Hello"),
-                .presetItem("How are you?"),
-                .presetItem("Bye"),
-                .presetItem("Goodbye"),
-                .presetItem("Okay"),
-                .presetItem("How's it going?"),
-                .presetItem("Good"),
-                .presetItem("How is your day?"),
-                .presetItem("Bad")],
-        .category3: [.presetItem("I am cold"),
-                .presetItem("I am hot"),
-                .presetItem("I want more blankets"),
-                .presetItem("I want less blankets"),
-                .presetItem("I feel fine"),
-                .presetItem("I am sweating"),
-                .presetItem("I am freezing"),
-                .presetItem("I need a towel"),
-                .presetItem("I need a jacket")],
-        .category4: [.presetItem("Head"),
-                .presetItem("Feet"),
-                .presetItem("Hands"),
-                .presetItem("Neck"),
-                .presetItem("Arm"),
-                .presetItem("Knee"),
-                .presetItem("Side"),
-                .presetItem("Right"),
-                .presetItem("Left")]
-    ]
-    
-    private let maxItemsPerPage = 9
+    private lazy var categoryPresets: [PresetCategory: [ItemWrapper]] = {
+        TextPresets.presetsByCategory.mapValues { $0.map { .presetItem($0) } }
+    }()
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     private weak var orthogonalScrollView: UIScrollView? {
@@ -85,11 +28,7 @@ class PresetsViewController: UICollectionViewController {
         }
     }
     
-    // TODO: Need to figure out how to update fractional width of cells without using collection view size
-    private let totalHeight: CGFloat = 834.0
-    private let totalWidth: CGFloat = 1112.0
-    
-    private var selectedCategory: Category = .category1 {
+    private var selectedCategory: PresetCategory = .category1 {
         didSet {
             self.updateSnapshot()
         }
@@ -100,19 +39,64 @@ class PresetsViewController: UICollectionViewController {
         }
     }
     
+    let textExpression = TextExpression()
+    
     enum Section: Int, CaseIterable {
         case topBar
         case textField
         case categories
+        case predictiveText
         case presets
+        case keyboard
     }
     
     enum ItemWrapper: Hashable {
         case textField(String)
-        case topBarButton(String)
-        case category(Category)
+        case topBarButton(TopBarButton)
+        case category(PresetCategory)
+        case predictiveText(TextPrediction)
         case presetItem(String)
+        case keyGroup(KeyGroup)
+        case keyboardFunctionButton(KeyboardFunctionButton)
     }
+    
+    enum TopBarButton: String {
+        case repeatSpokenText
+        case toggleKeyboard
+        
+        var image: UIImage? {
+            switch self {
+            case .repeatSpokenText:
+                return UIImage(systemName: "repeat")
+            case .toggleKeyboard:
+                return UIImage(systemName: "keyboard")
+            }
+        }
+    }
+    
+    enum KeyboardFunctionButton {
+        case space
+        case speak
+        
+        var title: String {
+            switch self {
+            case .space:
+                return "Space"
+            case .speak:
+                return "Speak"
+            }
+        }
+    }
+    
+    private var showKeyboard: Bool = false {
+        didSet {
+            self.updateSnapshot()
+        }
+    }
+    
+    // TODO: Hook this up with the TextExpression predict() function when the user updates
+    // the text in the text field
+    let predictions: [TextPrediction] = []
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -133,6 +117,7 @@ class PresetsViewController: UICollectionViewController {
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
+        collectionView.register(UINib(nibName: "KeyboardKeyGroupCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyGroupCollectionViewCell")
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
@@ -144,142 +129,54 @@ class PresetsViewController: UICollectionViewController {
     
     private func createLayout() -> UICollectionViewLayout {
         let layout = PresetUICollectionViewCompositionalLayout { (sectionIndex: Int, _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            
-            let sectionKind = Section.allCases[sectionIndex]
+            let sectionKind = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
             
             switch sectionKind {
             case .topBar:
-                return self.topBarSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.topBarSectionLayout()
             case .textField:
-                return self.textFieldSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.textFieldSectionLayout()
             case .categories:
-                return self.categoriesSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.categoriesSectionLayout()
+            case .predictiveText:
+                return PresetUICollectionViewCompositionalLayout.predictiveTextSectionLayout()
             case .presets:
-                return self.presetsSectionLayout()
+                guard !self.showKeyboard else {
+                    return nil
+                }
+                
+                return PresetUICollectionViewCompositionalLayout.presetsSectionLayout()
+            case .keyboard:
+                return PresetUICollectionViewCompositionalLayout.keyboardSectionLayout()
             }
         }
         return layout
     }
-    
-    private func topBarSectionLayout() -> NSCollectionLayoutSection {
-        let redoButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(116.0 / 240.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        
-        let keyboardButtonItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(116.0 / 240.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        
-        let subitems = [redoButtonItem, keyboardButtonItem]
-        
-        let containerGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(64.0 / totalHeight)),
-            subitems: subitems)
-        containerGroup.interItemSpacing = .fixed(8)
-        
-        let section = NSCollectionLayoutSection(group: containerGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 256, bottom: 0, trailing: 256)
-        
-        return section
-    }
-    
-    private func textFieldSectionLayout() -> NSCollectionLayoutSection {
-        let textFieldItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        
-        let subitems = [textFieldItem]
-        
-        let containerGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(86.0 / totalHeight)),
-            subitems: subitems)
-        containerGroup.interItemSpacing = .flexible(0)
-        containerGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .flexible(400), top: .fixed(0), trailing: .flexible(400), bottom: .fixed(0))
-        
-        let section = NSCollectionLayoutSection(group: containerGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 0, trailing: 32)
-        
-        return section
-    }
-    
-    private func categoriesSectionLayout() -> NSCollectionLayoutSection {
-        let category1Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        let category2Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        let category3Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        let category4Item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(262.0 / 1048.0),
-                                               heightDimension: .fractionalHeight(1.0)))
-        
-        let subitems = [category1Item, category2Item, category3Item, category4Item]
-        
-        let containerGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(137.0 / totalHeight)),
-            subitems: subitems)
-        containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
-        let section = NSCollectionLayoutSection(group: containerGroup)
-        
-        let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
-        backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
 
-        section.decorationItems = [backgroundDecoration]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 32, bottom: 16, trailing: 32)
-        return section
-    }
-    
-    private func presetsSectionLayout() -> NSCollectionLayoutSection {
-        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(339.0 / totalWidth),
-                                                                                   heightDimension: .fractionalHeight(1.0)))
-        
-        let rowGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(1.0)),
-            subitem: presetItem, count: 3)
-        rowGroup.interItemSpacing = .fixed(16)
-        
-        let containerGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(464.0 / totalHeight)),
-            subitem: rowGroup, count: 3)
-        containerGroup.interItemSpacing = .fixed(16)
-        containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
-        
-        let section = NSCollectionLayoutSection(group: containerGroup)
-        section.interGroupSpacing = 0
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        section.orthogonalScrollingBehavior = .groupPaging
-        
-        let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
-        footer.extendsBoundary = true
-        footer.pinToVisibleBounds = true
-        section.boundarySupplementaryItems = [footer]
-        
-        return section
-    }
-    
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, ItemWrapper>(collectionView: collectionView, cellProvider: { (_: UICollectionView, indexPath: IndexPath, identifier: ItemWrapper) -> UICollectionViewCell? in
             
             switch identifier {
             case .textField(let title):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: title, fillColor: .collectionViewBackgroundColor)
-            case .topBarButton(let buttonImageName):
+            case .topBarButton(let buttonType):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-                cell.setup(systemImageName: buttonImageName)
+                cell.setup(with: buttonType.image)
                 return cell
             case .category(let category):
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description)
+            case .predictiveText(let predictiveText):
+                return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: predictiveText.text)
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
+            case .keyGroup(let keyGroup):
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "KeyboardKeyGroupCollectionViewCell", for: indexPath) as! KeyboardKeyGroupCollectionViewCell
+                cell.setup(title: keyGroup.containedCharacters)
+                return cell
+            case .keyboardFunctionButton(let functionType):
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+                cell.setup(title: functionType.title)
+                return cell
             }
         })
         
@@ -292,17 +189,36 @@ class PresetsViewController: UICollectionViewController {
         snapshot.appendSections([.topBar])
         
         if AppConfig.showIncompleteFeatures {
-            snapshot.appendItems([.topBarButton("repeat"), .topBarButton("keyboard")])
+            snapshot.appendItems([.topBarButton(.repeatSpokenText), .topBarButton(.toggleKeyboard)])
         }
         
         snapshot.appendSections([.textField])
         snapshot.appendItems([.textField(currentSpeechText)])
         
-        snapshot.appendSections([.categories])
-        snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
-    
-        snapshot.appendSections([.presets])
-        snapshot.appendItems(categoryPresets[selectedCategory]!)
+        if showKeyboard {
+            snapshot.appendSections([.predictiveText])
+            if predictions.isEmpty {
+                 snapshot.appendItems([.predictiveText(TextPrediction(text: "")),
+                                       .predictiveText(TextPrediction(text: "")),
+                                       .predictiveText(TextPrediction(text: "")),
+                                       .predictiveText(TextPrediction(text: ""))])
+            } else {
+                snapshot.appendItems([.predictiveText(TextPrediction(text: predictions[safe: 0]?.text ?? "")),
+                                      .predictiveText(TextPrediction(text: predictions[safe: 1]?.text ?? "")),
+                                      .predictiveText(TextPrediction(text: predictions[safe: 2]?.text ?? "")),
+                                      .predictiveText(TextPrediction(text: predictions[safe: 3]?.text ?? ""))])
+            }
+            
+            snapshot.appendSections([.keyboard])
+            snapshot.appendItems(KeyGroup.QWERTYKeyboardGroups.map { .keyGroup($0) })
+            snapshot.appendItems([.keyboardFunctionButton(.space), .keyboardFunctionButton(.speak)])
+        } else {
+            snapshot.appendSections([.categories])
+            snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
+            
+            snapshot.appendSections([.presets])
+            snapshot.appendItems(categoryPresets[selectedCategory]!)
+        }
         
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
             if kind == "CategorySectionBackground" {
@@ -317,13 +233,15 @@ class PresetsViewController: UICollectionViewController {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
     
+    // MARK: - Collection View Delegate
+    
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton:
+        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText, .keyboardFunctionButton:
             return true
         }
     }
@@ -334,7 +252,7 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton:
+        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText, .keyboardFunctionButton:
             return true
         }
     }
@@ -364,21 +282,29 @@ class PresetsViewController: UICollectionViewController {
         }
         
         switch selectedItem {
+        case .topBarButton(let buttonType):
+            switch buttonType {
+            case .repeatSpokenText:
+                AVSpeechSynthesizer.shared.speak(currentSpeechText)
+            case .toggleKeyboard:
+                showKeyboard.toggle()
+            }
         case .presetItem(let text):
+            currentSpeechText = text
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {
-                let utterance = AVSpeechUtterance(string: text)
-                utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-                let synthesizer = AVSpeechSynthesizer.shared
-                if synthesizer.isSpeaking {
-                    synthesizer.stopSpeaking(at: .immediate)
-                }
-                synthesizer.speak(utterance)
+                AVSpeechSynthesizer.shared.speak(text)
             }
-            currentSpeechText = text
         case .category(let category):
             selectedCategory = category
             return
+        case .keyboardFunctionButton(let functionType):
+            switch functionType {
+            case .space:
+                currentSpeechText.append(" ")
+            case .speak:
+                AVSpeechSynthesizer.shared.speak(currentSpeechText)
+            }
         default:
             break
         }
@@ -387,14 +313,14 @@ class PresetsViewController: UICollectionViewController {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
     }
-    
+        
     override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .presetItem, .topBarButton:
+        case .presetItem, .topBarButton, .keyboardFunctionButton:
             return true
-        case .category, .textField:
+        case .category, .textField, .keyGroup, .predictiveText:
             return false
         }
     }
