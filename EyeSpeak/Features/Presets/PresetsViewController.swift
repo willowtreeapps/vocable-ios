@@ -239,9 +239,9 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .textField:
+        case .textField, .keyGroup:
             return false
-        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText, .keyboardFunctionButton:
+        case .category, .presetItem, .topBarButton, .predictiveText, .keyboardFunctionButton:
             return true
         }
     }
@@ -250,9 +250,9 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .textField:
+        case .textField, .keyGroup:
             return false
-        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText, .keyboardFunctionButton:
+        case .category, .presetItem, .topBarButton, .predictiveText, .keyboardFunctionButton:
             return true
         }
     }
