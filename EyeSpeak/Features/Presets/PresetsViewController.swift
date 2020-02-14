@@ -46,6 +46,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
     private var currentSpeechText: String = HintText.preset.rawValue {
         didSet {
             self.updateSnapshot()
+            self.updatePredictions()
         }
     }
     
@@ -104,9 +105,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         }
     }
     
-    // TODO: Hook this up with the TextExpression predict() function when the user updates
-    // the text in the text field
-    let predictions: [TextPrediction] = []
+    private var predictions: [TextPrediction] = []
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -323,6 +322,16 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                 }
                 AVSpeechSynthesizer.shared.speak(currentSpeechText)
             }
+        case .predictiveText(let prediction):
+            // If adding new word: just append
+            // Else replacing current word: remove last word & then append including an additional space
+            if currentSpeechText.last == " " {
+                currentSpeechText.append(prediction.text + " ")
+            } else {
+                var words = currentSpeechText.split(separator: " ")
+                words.remove(at: words.endIndex - 1)
+                currentSpeechText = words.joined(separator: " ") + " " + prediction.text + " "
+            }
         default:
             break
         }
@@ -375,6 +384,16 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
             currentSpeechText = ""
         }
         
-        currentSpeechText.append(character)
+        var characterCased = character
+        if !currentSpeechText.isEmpty && character != " "{
+            characterCased = character.lowercased()
+        }
+        
+        currentSpeechText.append(characterCased)
+    }
+    
+    private func updatePredictions() {
+        textExpression.updateString(text: currentSpeechText)
+        predictions = textExpression.predictions().map({ TextPrediction(text: $0) })
     }
 }

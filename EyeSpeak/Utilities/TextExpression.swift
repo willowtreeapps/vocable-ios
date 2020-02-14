@@ -57,6 +57,10 @@ class TextExpression {
     func append(text: String) {
         self.value.append(text)
     }
+    
+    func updateString(text: String) {
+        self.value = text
+    }
 
     func clear() {
         self.value = ""
