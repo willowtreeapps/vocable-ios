@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class PresetsViewController: UICollectionViewController {
+class PresetsViewController: UICollectionViewController, KeyboardSelectionDelegate {
     
     private lazy var categoryPresets: [PresetCategory: [ItemWrapper]] = {
         TextPresets.presetsByCategory.mapValues { $0.map { .presetItem($0) } }
@@ -33,7 +33,17 @@ class PresetsViewController: UICollectionViewController {
             self.updateSnapshot()
         }
     }
-    private var currentSpeechText: String = "Select something below to speak" {
+    
+    private enum HintText: String, CaseIterable {
+        case preset = "Select something below to speak"
+        case keyboard = "Select letters below to start typing."
+    }
+    
+    private var isShowingHintText: Bool {
+        HintText.allCases.map({$0.rawValue}).contains(currentSpeechText)
+    }
+    
+    private var currentSpeechText: String = HintText.preset.rawValue {
         didSet {
             self.updateSnapshot()
         }
@@ -117,7 +127,7 @@ class PresetsViewController: UICollectionViewController {
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
-        collectionView.register(UINib(nibName: "KeyboardKeyGroupCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyGroupCollectionViewCell")
+        collectionView.register(UINib(nibName: "KeyboardGroupCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardGroupCollectionViewCell")
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
@@ -170,8 +180,9 @@ class PresetsViewController: UICollectionViewController {
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
             case .keyGroup(let keyGroup):
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "KeyboardKeyGroupCollectionViewCell", for: indexPath) as! KeyboardKeyGroupCollectionViewCell
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "KeyboardGroupCollectionViewCell", for: indexPath) as! KeyboardGroupCollectionViewCell
                 cell.setup(title: keyGroup.containedCharacters)
+                cell.delegate = self
                 return cell
             case .keyboardFunctionButton(let functionType):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
@@ -239,9 +250,9 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .textField:
+        case .textField, .keyGroup:
             return false
-        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText, .keyboardFunctionButton:
+        case .category, .presetItem, .topBarButton, .predictiveText, .keyboardFunctionButton:
             return true
         }
     }
@@ -250,9 +261,9 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .textField:
+        case .textField, .keyGroup:
             return false
-        case .category, .presetItem, .topBarButton, .keyGroup, .predictiveText, .keyboardFunctionButton:
+        case .category, .presetItem, .topBarButton, .predictiveText, .keyboardFunctionButton:
             return true
         }
     }
@@ -285,9 +296,16 @@ class PresetsViewController: UICollectionViewController {
         case .topBarButton(let buttonType):
             switch buttonType {
             case .repeatSpokenText:
+                guard !isShowingHintText else {
+                    break
+                }
                 AVSpeechSynthesizer.shared.speak(currentSpeechText)
             case .toggleKeyboard:
                 showKeyboard.toggle()
+                
+                // TODO: discuss with design if we want to cache the user's currently-entered text instead
+                // of just clearing it
+                currentSpeechText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.rawValue
             }
         case .presetItem(let text):
             currentSpeechText = text
@@ -301,8 +319,11 @@ class PresetsViewController: UICollectionViewController {
         case .keyboardFunctionButton(let functionType):
             switch functionType {
             case .space:
-                currentSpeechText.append(" ")
+                self.didSelectCharacter(" ")
             case .speak:
+                guard !isShowingHintText else {
+                    break
+                }
                 AVSpeechSynthesizer.shared.speak(currentSpeechText)
             }
         default:
@@ -351,4 +372,12 @@ class PresetsViewController: UICollectionViewController {
         return cell
     }
     
+    // MARK: - KeyboardSelectionDelegate
+    func didSelectCharacter(_ character: String) {
+        if isShowingHintText {
+            currentSpeechText = ""
+        }
+        
+        currentSpeechText.append(character)
+    }
 }
