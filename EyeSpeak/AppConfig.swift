@@ -16,4 +16,12 @@ struct AppConfig {
         return false
         #endif
     }()
+
+    static let showPIDTunerDebugMenu: Bool = {
+        #if DEBUG
+        return true
+        #else
+        return false
+        #endif
+    }()
 }

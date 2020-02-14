@@ -365,13 +365,16 @@ class PresetsViewController: UICollectionViewController {
         
         switch selectedItem {
         case .presetItem(let text):
-            let utterance = AVSpeechUtterance(string: text)
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-            let synthesizer = AVSpeechSynthesizer.shared
-            if synthesizer.isSpeaking {
-                synthesizer.stopSpeaking(at: .immediate)
+            // Dispatch to get off the main queue for performance
+            DispatchQueue.global(qos: .userInitiated).async {
+                let utterance = AVSpeechUtterance(string: text)
+                utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+                let synthesizer = AVSpeechSynthesizer.shared
+                if synthesizer.isSpeaking {
+                    synthesizer.stopSpeaking(at: .immediate)
+                }
+                synthesizer.speak(utterance)
             }
-            synthesizer.speak(utterance)
             currentSpeechText = text
         case .category(let category):
             selectedCategory = category

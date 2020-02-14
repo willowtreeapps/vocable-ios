@@ -4,7 +4,21 @@ import SpriteKit
 
 class UIVirtualCursorView: UIView {
 
-    var cursorView = CursorView()
+    private var cursorView = CursorView()
+    private var debugCursorView = CursorView()
+
+    private var cursorPosition: CGPoint = .zero
+    private var debugCursorPosition: CGPoint = .zero
+    var isDebugCursorHidden: Bool {
+        get {
+            return debugCursorView.isHidden
+        }
+        set {
+            debugCursorView.isHidden = newValue
+        }
+    }
+
+    private var displayLink: CADisplayLink?
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -20,6 +34,12 @@ class UIVirtualCursorView: UIView {
         super.willMove(toWindow: newWindow)
         if let window = newWindow as? HeadGazeWindow {
             window.cursorView = self
+            displayLink = CADisplayLink(target: self, selector: #selector(displayLinkDidFire(_:)))
+            displayLink?.preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
+            displayLink?.add(to: .current, forMode: .common)
+        } else {
+            displayLink?.invalidate()
+            displayLink = nil
         }
     }
 
@@ -29,10 +49,15 @@ class UIVirtualCursorView: UIView {
     
     private func initializeHeadGazeView() {
 
+        addSubview(debugCursorView)
+        debugCursorView.center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
+        debugCursorView.sizeToFit()
+        debugCursorView.isHidden = true
+
         addSubview(cursorView)
         cursorView.center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
         cursorView.sizeToFit()
-
+        
         backgroundColor = .clear
         updateForCurrentGazeActivityStatus()
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
@@ -41,7 +66,8 @@ class UIVirtualCursorView: UIView {
 
     private func updateForCurrentGazeActivityStatus() {
         let isNowActive = UIApplication.shared.isGazeTrackingActive
-        cursorView.tintColor = isNowActive ? .cyan : UIColor.orange.withAlphaComponent(0.5)
+        cursorView.tintColor = isNowActive ? .cellBorderHighlightColor : UIColor.orange.withAlphaComponent(0.5)
+        debugCursorView.tintColor = isNowActive ? UIColor.red.withAlphaComponent(0.6) : UIColor.red.withAlphaComponent(0.1)
     }
 
     @objc private func applicationDidAcquireGaze(_ sender: Any?) {
@@ -54,8 +80,17 @@ class UIVirtualCursorView: UIView {
     
     override func gazeMoved(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
         let position = gaze.location(in: self)
-        UIView.animate(withDuration: 0.1, delay: 0, options: .beginFromCurrentState, animations: {
-            self.cursorView.center = position
-        }, completion: nil)
+        cursorPosition = position
+    }
+
+    func debugCursorMoved(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        let position = gaze.location(in: self)
+        debugCursorPosition = position
+    }
+
+    @objc
+    private func displayLinkDidFire(_ sender: CADisplayLink) {
+        self.cursorView.center = cursorPosition
+        self.debugCursorView.center = debugCursorPosition
     }
 }
