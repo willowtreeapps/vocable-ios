@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol KeyboardSelectionDelegate: AnyObject {
+    func didSelectCharacter(_ character: String)
+}
+
 class KeyboardGroupCollectionViewCell: VocableCollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet var collectionView: UICollectionView!
+    
+    weak var delegate: KeyboardSelectionDelegate?
     
     private var characters: [String] = []
     
@@ -39,7 +45,6 @@ class KeyboardGroupCollectionViewCell: VocableCollectionViewCell, UICollectionVi
     override func updateContentViews() {
         borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
         borderedView.fillColor = .defaultCellBackgroundColor
-//        borderedView.fillColor = isSelected ? .cellSelectionColor : fillColor
         borderedView.isOpaque = true
     }
     
@@ -76,6 +81,15 @@ class KeyboardGroupCollectionViewCell: VocableCollectionViewCell, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         characters.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let letter = characters[indexPath.row]
+        delegate?.didSelectCharacter(letter)
+        
+        if collectionView.indexPathForGazedItem != indexPath {
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
     }
     
 }
