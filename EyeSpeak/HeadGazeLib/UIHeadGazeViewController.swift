@@ -53,7 +53,7 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         sceneview?.delegate = self
         sceneview?.session.delegate = self
         sceneview?.isHidden = true
-        sceneview?.preferredFramesPerSecond =  UIScreen.main.maximumFramesPerSecond //8
+        sceneview?.preferredFramesPerSecond =  UIScreen.main.maximumFramesPerSecond
         setupSceneNode()
 
         for interpolator in trackingInterpolators {

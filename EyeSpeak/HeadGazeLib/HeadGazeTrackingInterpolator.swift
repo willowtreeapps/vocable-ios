@@ -35,7 +35,7 @@ class HeadGazeTrackingInterpolator {
         let lBlinkAmount = blendShapes[.eyeBlinkLeft]?.floatValue ?? 0.0
         let rBlinkAmount = blendShapes[.eyeBlinkRight]?.floatValue ?? 0.0
 
-        let blinkThreshold: Float = 0.3 // 0.05
+        let blinkThreshold: Float = 0.3
         let leftBlink = lBlinkAmount > blinkThreshold
         let rightBlink = rBlinkAmount > blinkThreshold
         let isBlinking = leftBlink || rightBlink
