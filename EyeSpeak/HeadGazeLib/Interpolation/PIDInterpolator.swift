@@ -9,6 +9,15 @@
 import Foundation
 import CoreGraphics
 
+/// A PID-based interpolator.
+///
+/// As stated in the README for [Pulse](https://github.com/cieslakdawid/Pulse):
+///
+/// A  PID Controller  is a simple and efficient feedback loop system, widely used in industrial applications.
+/// It constantly calculates the error as the difference between the measured value and desired one, then
+/// applies the counter force based on the combination of three factors: P(Proportional), I(Integral), D(Derivative).
+///
+/// For more information on how PID controllers work, see https://www.csimn.com/CSI_pages/PIDforDummies.html
 class PIDInterpolator<E: Interpolable>: Interpolator {
 
     let valueInterpolators: [InterpolatorKind]
