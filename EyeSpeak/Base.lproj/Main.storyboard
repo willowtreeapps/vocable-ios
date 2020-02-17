@@ -3,6 +3,7 @@
     <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,20 +16,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h77-DW-Ra2" userLabel="TrackingContainer">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h77-DW-Ra2" userLabel="TrackingContainer">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <connections>
                                     <segue destination="Gya-9R-y3J" kind="embed" id="hQM-OQ-1Dc"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQq-Gr-kNC" userLabel="ContentViewController">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                                <rect key="frame" x="32" y="76" width="350" height="754"/>
                                 <connections>
                                     <segue destination="Jgy-U0-B1Z" kind="embed" identifier="ContentViewControllerSegue" id="VGF-IP-CWi"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A16-bV-8FB" customClass="ViewControllerWrapperView" customModule="EyeSpeak" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                                <rect key="frame" x="32" y="76" width="350" height="754"/>
                                 <connections>
                                     <segue destination="qUl-CJ-Hw7" kind="embed" id="CCf-Bd-QlP"/>
                                 </connections>
@@ -38,25 +39,26 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="h77-DW-Ra2" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leading" id="2vi-F0-7jD"/>
                             <constraint firstItem="h77-DW-Ra2" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="top" id="35q-ga-C7k"/>
                             <constraint firstAttribute="trailing" secondItem="86h-9O-qAY" secondAttribute="trailing" id="9al-Da-z3Z"/>
-                            <constraint firstAttribute="bottom" secondItem="A16-bV-8FB" secondAttribute="bottom" id="DmU-vP-Uwr"/>
-                            <constraint firstItem="A16-bV-8FB" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leading" id="GUt-5Q-dz1"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="A16-bV-8FB" secondAttribute="bottom" id="DmU-vP-Uwr"/>
+                            <constraint firstItem="A16-bV-8FB" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leadingMargin" id="GUt-5Q-dz1"/>
                             <constraint firstAttribute="bottom" secondItem="86h-9O-qAY" secondAttribute="bottom" id="O6y-97-a4l"/>
-                            <constraint firstItem="A16-bV-8FB" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="top" id="PdI-JU-H9u"/>
-                            <constraint firstItem="AQq-Gr-kNC" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="top" id="Pkw-eU-h0R"/>
-                            <constraint firstItem="AQq-Gr-kNC" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leading" id="aS7-NB-aKe"/>
+                            <constraint firstItem="A16-bV-8FB" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="topMargin" id="PdI-JU-H9u"/>
+                            <constraint firstItem="AQq-Gr-kNC" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="topMargin" id="Pkw-eU-h0R"/>
+                            <constraint firstItem="AQq-Gr-kNC" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leadingMargin" id="aS7-NB-aKe"/>
                             <constraint firstAttribute="bottom" secondItem="h77-DW-Ra2" secondAttribute="bottom" id="aiY-pn-mC3"/>
-                            <constraint firstAttribute="trailing" secondItem="A16-bV-8FB" secondAttribute="trailing" id="bQl-sF-nZX"/>
-                            <constraint firstAttribute="bottom" secondItem="AQq-Gr-kNC" secondAttribute="bottom" id="gjT-Qg-rfd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="A16-bV-8FB" secondAttribute="trailing" id="bQl-sF-nZX"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="AQq-Gr-kNC" secondAttribute="bottom" id="gjT-Qg-rfd"/>
                             <constraint firstItem="86h-9O-qAY" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="top" id="ja5-K0-aCt"/>
                             <constraint firstItem="86h-9O-qAY" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leading" id="m3d-Dk-0Lq"/>
-                            <constraint firstAttribute="trailing" secondItem="AQq-Gr-kNC" secondAttribute="trailing" id="oal-gs-OpX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AQq-Gr-kNC" secondAttribute="trailing" id="oal-gs-OpX"/>
                             <constraint firstAttribute="trailing" secondItem="h77-DW-Ra2" secondAttribute="trailing" id="tKc-EE-VNA"/>
                         </constraints>
+                        <edgeInsets key="layoutMargins" top="32" left="32" bottom="32" right="32"/>
                         <viewLayoutGuide key="safeArea" id="N6F-RO-WaJ"/>
                     </view>
                     <connections>
@@ -74,7 +76,7 @@
                     <view key="view" contentMode="scaleToFill" id="0FP-BP-SNo">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <viewLayoutGuide key="safeArea" id="GGj-AU-Ual"/>
                     </view>
                 </viewController>
@@ -87,7 +89,7 @@
             <objects>
                 <collectionViewController id="Jgy-U0-B1Z" customClass="PresetsViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WCJ-8g-p1t">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="778"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jtp-ya-uaj">
@@ -98,11 +100,11 @@
                         </collectionViewFlowLayout>
                         <cells/>
                         <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PresetPageControlView" id="m0H-ea-bEJ" customClass="PresetPageControlReusableView" customModule="EyeSpeak" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="3bW-mX-haI">
-                                    <rect key="frame" x="397.5" y="6.5" width="39" height="37"/>
+                                    <rect key="frame" x="167.5" y="6.5" width="39" height="37"/>
                                 </pageControl>
                             </subviews>
                             <constraints>
@@ -136,4 +138,9 @@
             <point key="canvasLocation" x="-1667" y="-1007"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
