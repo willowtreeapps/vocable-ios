@@ -8,15 +8,9 @@
 
 import UIKit
 
-protocol KeyboardSelectionDelegate: AnyObject {
-    func didSelectCharacter(_ character: String)
-}
-
 class KeyboardGroupCollectionViewCell: VocableCollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet var collectionView: UICollectionView!
-    
-    weak var delegate: KeyboardSelectionDelegate?
     
     private var characters: [String] = []
     
@@ -85,7 +79,6 @@ class KeyboardGroupCollectionViewCell: VocableCollectionViewCell, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let letter = characters[indexPath.row]
-        delegate?.didSelectCharacter(letter)
         
         if collectionView.indexPathForGazedItem != indexPath {
             collectionView.deselectItem(at: indexPath, animated: true)

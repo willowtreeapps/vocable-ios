@@ -48,7 +48,6 @@
 		B879831523E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */; };
 		B879831623E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B879831423E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib */; };
 		B8B779E723F349C600FEE660 /* KeyboardGroupCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8B779E623F349C600FEE660 /* KeyboardGroupCollectionViewCell.xib */; };
-		B8B779E923F34A7B00FEE660 /* KeyboardKeyGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B779E823F34A7B00FEE660 /* KeyboardKeyGroup.swift */; };
 		B8DA9DE823EB833200FEBE19 /* BorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DE723EB833200FEBE19 /* BorderedView.swift */; };
 		B8DA9DEA23EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8DA9DE923EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib */; };
 		B8DA9DEC23EB8FB900FEBE19 /* CategorySectionBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DEB23EB8FB900FEBE19 /* CategorySectionBackground.swift */; };
@@ -114,7 +113,6 @@
 		B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		B879831423E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PresetItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B8B779E623F349C600FEE660 /* KeyboardGroupCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardGroupCollectionViewCell.xib; sourceTree = "<group>"; };
-		B8B779E823F34A7B00FEE660 /* KeyboardKeyGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKeyGroup.swift; sourceTree = "<group>"; };
 		B8DA9DE723EB833200FEBE19 /* BorderedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedView.swift; sourceTree = "<group>"; };
 		B8DA9DE923EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		B8DA9DEB23EB8FB900FEBE19 /* CategorySectionBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionBackground.swift; sourceTree = "<group>"; };
@@ -315,7 +313,6 @@
 			isa = PBXGroup;
 			children = (
 				B8DA9DFD23F3407000FEBE19 /* TextPresets.swift */,
-				B8B779E823F34A7B00FEE660 /* KeyboardKeyGroup.swift */,
 				A9DE170523F4C0AF0094DB64 /* TextPrediction.swift */,
 			);
 			path = Models;
@@ -468,7 +465,6 @@
 				6B17CD7E23E9F85F0050BCB8 /* HotCornerOverlayViewController.swift in Sources */,
 				A9DE170623F4C0AF0094DB64 /* TextPrediction.swift in Sources */,
 				B8DA9DF023EDECEE00FEBE19 /* AppConfig.swift in Sources */,
-				B8B779E923F34A7B00FEE660 /* KeyboardKeyGroup.swift in Sources */,
 				B8DA9DEC23EB8FB900FEBE19 /* CategorySectionBackground.swift in Sources */,
 				6B9DFA7623E8D59A0037673E /* UICollectionView+Gaze.swift in Sources */,
 				6B9DFA7023E88A630037673E /* InterpolableValues.swift in Sources */,
