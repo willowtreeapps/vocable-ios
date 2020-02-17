@@ -21,7 +21,7 @@ class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
         super.awakeFromNib()
         
         borderedView.borderColor = .cellBorderHighlightColor
-        borderedView.backgroundColor = .defaultCellBackgroundColor
+        borderedView.backgroundColor = .collectionViewBackgroundColor
         
         updateContentViews()
         backgroundView = borderedView
