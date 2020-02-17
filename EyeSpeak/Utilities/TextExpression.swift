@@ -55,15 +55,15 @@ class TextExpression {
     }
 
     func append(text: String) {
-        self.value.append(text)
+        value.append(text)
     }
     
     func updateString(text: String) {
-        self.value = text
+        value = text
     }
 
     func clear() {
-        self.value = ""
+        value = ""
     }
 
     func space() {

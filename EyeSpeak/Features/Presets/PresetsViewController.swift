@@ -45,8 +45,8 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
     
     private var currentSpeechText: String = HintText.preset.rawValue {
         didSet {
-            self.updateSnapshot()
-            self.updatePredictions()
+            updateSnapshot()
+            updatePredictions()
         }
     }
     
@@ -107,7 +107,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
     
     private var predictions: [TextPrediction] = [] {
         didSet {
-            self.updateSnapshot()
+            updateSnapshot()
         }
     }
     
