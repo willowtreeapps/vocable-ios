@@ -310,14 +310,17 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
             }
         case .presetItem(let text):
             currentSpeechText = text
-            AVSpeechSynthesizer.shared.speak(currentSpeechText)
+            // Dispatch to get off the main queue for performance
+            DispatchQueue.global(qos: .userInitiated).async {
+                AVSpeechSynthesizer.shared.speak(text)
+            }
         case .category(let category):
             selectedCategory = category
             return
         case .keyboardFunctionButton(let functionType):
             switch functionType {
             case .space:
-                self.didSelectCharacter(" ")
+                didSelectCharacter(" ")
                 suggestions = []
             case .speak:
                 guard !isShowingHintText else {

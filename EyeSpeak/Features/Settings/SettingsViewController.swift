@@ -15,10 +15,15 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
     
     private weak var composeVC: MFMailComposeViewController?
     
-    enum SettingsItem: CaseIterable {
+    private enum SettingsItem: CaseIterable {
         case privacyPolicy
         case contactDevs
+        case pidTuner
         case versionNum
+    }
+
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SettingsItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+        return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
     
     override func viewDidLoad() {
@@ -44,16 +49,31 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
         
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
         collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsFooterCollectionViewCell")
+
+        updateDataSource()
+
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
     }
+
+    private func updateDataSource() {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, SettingsItem>()
+        snapshot.appendSections([0])
+        snapshot.appendItems([.privacyPolicy, .contactDevs])
+        if AppConfig.showPIDTunerDebugMenu {
+            snapshot.appendItems([.pidTuner])
+        }
+        snapshot.appendItems([.versionNum])
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
     
     func createLayout() -> UICollectionViewLayout {
+        let itemCount = dataSource.snapshot().itemIdentifiers.count
         let settingsItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(144.0 / 834.0))
         let settingsItem = NSCollectionLayoutItem(layoutSize: settingsItemSize)
         
-        let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(320.0 / 834.0))
-        let settingsOptionsGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsOptionsGroupSize, subitem: settingsItem, count: 2)
+        let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight((144.0 * CGFloat(itemCount)) / 834.0))
+        let settingsOptionsGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsOptionsGroupSize, subitem: settingsItem, count: itemCount)
         settingsOptionsGroup.interItemSpacing = .fixed(32)
         settingsOptionsGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .fixed(0), top: .fixed(97), trailing: .fixed(0), bottom: .fixed(0))
         settingsOptionsGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
@@ -72,8 +92,8 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
     
     // MARK: UICollectionViewController
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch SettingsItem.allCases[indexPath.item] {
+    private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: SettingsItem) -> UICollectionViewCell {
+        switch item {
         case .privacyPolicy:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
             cell.setup(title: "Privacy Policy")
@@ -86,6 +106,10 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
             cell.setup(versionLabel: "V 0.0.0")
             return cell
+        case .pidTuner:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+            cell.setup(title: "Tune Cursor")
+            return cell
         }
     }
     
@@ -93,8 +117,9 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
         if collectionView.indexPathForGazedItem != indexPath {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
-        
-        switch SettingsItem.allCases[indexPath.item] {
+
+        let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
+        switch item {
         case .privacyPolicy:
             let url = URL(string: "https://vocable.app/privacy.html")!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -118,17 +143,22 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
             self.composeVC = composeVC
             
             self.present(composeVC, animated: true, completion: nil)
+        case .pidTuner:
+            guard let gazeWindow = view.window as? HeadGazeWindow else { return }
+            for child in gazeWindow.rootViewController?.children ?? [] {
+                if let child = child as? UIHeadGazeViewController {
+                    child.pidInterpolator.pidSmoothingInterpolator.pulse.showTunningView(minimumValue: -1.0, maximumValue: 1.0)
+                    gazeWindow.cursorView?.isDebugCursorHidden = false
+                }
+            }
         case .versionNum:
             break
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        SettingsItem.allCases.count
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        switch SettingsItem.allCases[indexPath.item] {
+        let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
+        switch item {
         case .versionNum:
             return false
         default:
@@ -137,7 +167,8 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
     }
     
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        switch SettingsItem.allCases[indexPath.item] {
+        let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
+        switch item {
         case .versionNum:
             return false
         default:
