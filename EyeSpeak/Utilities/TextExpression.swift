@@ -10,7 +10,7 @@ import Foundation
 class TextExpression {
     private(set) var value: String = ""
     
-    private let textPredictionController = TextPredictionController()
+    private let textSuggestionController = TextSuggestionController()
 
     var wordCount: Int {
         return value.split(separator: " ").count
@@ -58,7 +58,7 @@ class TextExpression {
         value.append(text)
     }
     
-    func updateString(text: String) {
+    func replace(text: String) {
         value = text
     }
 
@@ -70,7 +70,7 @@ class TextExpression {
         self.value.append(" ")
     }
     
-    func predictions() -> [String] {
-        return textPredictionController.predictions(for: self)
+    func suggestions() -> [String] {
+        return textSuggestionController.suggestions(for: self)
     }
 }

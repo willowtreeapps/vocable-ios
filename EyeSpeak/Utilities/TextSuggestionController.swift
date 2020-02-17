@@ -1,5 +1,5 @@
 //
-//  TextPredictionController.swift
+//  TextSuggestionController.swift
 //  EyeSpeak
 //
 //  Created by Kyle Ohanian on 4/15/19.
@@ -7,11 +7,11 @@
 //
 import UIKit
 
-class TextPredictionController {
+class TextSuggestionController {
     
     private let checker = UITextChecker()
-
-    func predictions(for expression: TextExpression) -> [String] {
+    
+    func suggestions(for expression: TextExpression) -> [String] {
         let fullExpression = expression.value
         let lastWord = expression.lastWord() ?? ""
         let range = NSRange(location: (fullExpression as NSString).length - (lastWord as NSString).length, length: (lastWord as NSString).length)
