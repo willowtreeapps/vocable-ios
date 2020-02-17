@@ -95,8 +95,9 @@ class HeadGazeTrackingInterpolator {
         let hitPos = c_headCenter + c_lookAtDir * t
 
         let correctionScalar: CGFloat = 1.0
-        let xNDC = Float(hitPos[0]) - Float(correctionAmount.width * correctionScalar)
-        let yNDC = Float(hitPos[1]) - Float(correctionAmount.height * correctionScalar)
+        let correctionSign = correctionAmountSignsForCurrentInterfaceOrientation()
+        let xNDC = Float(hitPos[0]) - Float(correctionAmount.width * correctionScalar * correctionSign.width)
+        let yNDC = Float(hitPos[1]) - Float(correctionAmount.height * correctionScalar * correctionSign.height)
         let hitPosNDC = SIMD2<Float>([xNDC, yNDC])
         let filteredPos: SIMD2<Float>
         filteredPos = interpolateNDCLocation(hitPosNDC)
@@ -118,6 +119,25 @@ class HeadGazeTrackingInterpolator {
             fallthrough
         @unknown default:
             return CGPoint(x: CGFloat(hitPosSKScene[0]), y: CGFloat(hitPosSKScene[1]) )
+        }
+    }
+
+    private func correctionAmountSignsForCurrentInterfaceOrientation() -> CGSize {
+        
+        let orientation = view?.window?.windowScene?.interfaceOrientation ?? .portrait
+        switch orientation {
+        case .portrait:
+            return CGSize(width: 1, height: 1)
+        case .portraitUpsideDown:
+            return CGSize(width: 1, height: 1)
+        case .landscapeRight:
+            return CGSize(width: 1, height: 1)
+        case .landscapeLeft:
+            return CGSize(width: -1, height: -1)
+        case .unknown:
+            fallthrough
+        @unknown default:
+            return CGSize(width: 1, height: 1)
         }
     }
 
