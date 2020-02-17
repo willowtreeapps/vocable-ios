@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TextPrediction: Hashable {
+struct TextSuggestion: Hashable {
     let text: String
     let id = UUID()
 }
