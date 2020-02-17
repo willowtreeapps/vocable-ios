@@ -198,10 +198,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
         
         snapshot.appendSections([.topBar])
-        
-        if AppConfig.showIncompleteFeatures {
-            snapshot.appendItems([.topBarButton(.repeatSpokenText), .topBarButton(.toggleKeyboard)])
-        }
+        snapshot.appendItems([.topBarButton(.repeatSpokenText), .topBarButton(.toggleKeyboard)])
         
         snapshot.appendSections([.textField])
         snapshot.appendItems([.textField(currentSpeechText)])
