@@ -105,7 +105,11 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         }
     }
     
-    private var predictions: [TextPrediction] = []
+    private var predictions: [TextPrediction] = [] {
+        didSet {
+            self.updateSnapshot()
+        }
+    }
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -305,6 +309,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                 // TODO: discuss with design if we want to cache the user's currently-entered text instead
                 // of just clearing it
                 currentSpeechText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.rawValue
+                predictions = []
             }
         case .presetItem(let text):
             currentSpeechText = text
@@ -316,6 +321,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
             switch functionType {
             case .space:
                 self.didSelectCharacter(" ")
+                predictions = []
             case .speak:
                 guard !isShowingHintText else {
                     break
@@ -393,7 +399,11 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
     }
     
     private func updatePredictions() {
-        textExpression.updateString(text: currentSpeechText)
-        predictions = textExpression.predictions().map({ TextPrediction(text: $0) })
+        if isShowingHintText || currentSpeechText.last == " " {
+            predictions = []
+        } else {
+            textExpression.updateString(text: currentSpeechText)
+            predictions = textExpression.predictions().map({ TextPrediction(text: $0) })
+        }
     }
 }
