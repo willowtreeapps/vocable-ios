@@ -45,7 +45,8 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
     
     private var currentSpeechText: String = HintText.preset.rawValue {
         didSet {
-            self.updateSnapshot()
+            updateSnapshot()
+            updateSuggestions()
         }
     }
     
@@ -64,7 +65,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         case textField(String)
         case topBarButton(TopBarButton)
         case category(PresetCategory)
-        case predictiveText(TextPrediction)
+        case suggestionText(TextSuggestion)
         case presetItem(String)
         case keyGroup(KeyGroup)
         case keyboardFunctionButton(KeyboardFunctionButton)
@@ -104,9 +105,11 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         }
     }
     
-    // TODO: Hook this up with the TextExpression predict() function when the user updates
-    // the text in the text field
-    let predictions: [TextPrediction] = []
+    private var suggestions: [TextSuggestion] = [] {
+        didSet {
+            updateSnapshot()
+        }
+    }
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -175,7 +178,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                 return cell
             case .category(let category):
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description)
-            case .predictiveText(let predictiveText):
+            case .suggestionText(let predictiveText):
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: predictiveText.text)
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
@@ -205,16 +208,16 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         
         if showKeyboard {
             snapshot.appendSections([.predictiveText])
-            if predictions.isEmpty {
-                 snapshot.appendItems([.predictiveText(TextPrediction(text: "")),
-                                       .predictiveText(TextPrediction(text: "")),
-                                       .predictiveText(TextPrediction(text: "")),
-                                       .predictiveText(TextPrediction(text: ""))])
+            if suggestions.isEmpty {
+                 snapshot.appendItems([.suggestionText(TextSuggestion(text: "")),
+                                       .suggestionText(TextSuggestion(text: "")),
+                                       .suggestionText(TextSuggestion(text: "")),
+                                       .suggestionText(TextSuggestion(text: ""))])
             } else {
-                snapshot.appendItems([.predictiveText(TextPrediction(text: predictions[safe: 0]?.text ?? "")),
-                                      .predictiveText(TextPrediction(text: predictions[safe: 1]?.text ?? "")),
-                                      .predictiveText(TextPrediction(text: predictions[safe: 2]?.text ?? "")),
-                                      .predictiveText(TextPrediction(text: predictions[safe: 3]?.text ?? ""))])
+                snapshot.appendItems([.suggestionText(TextSuggestion(text: suggestions[safe: 0]?.text ?? "")),
+                                      .suggestionText(TextSuggestion(text: suggestions[safe: 1]?.text ?? "")),
+                                      .suggestionText(TextSuggestion(text: suggestions[safe: 2]?.text ?? "")),
+                                      .suggestionText(TextSuggestion(text: suggestions[safe: 3]?.text ?? ""))])
             }
             
             snapshot.appendSections([.keyboard])
@@ -249,7 +252,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         switch item {
         case .textField, .keyGroup:
             return false
-        case .category, .presetItem, .topBarButton, .predictiveText, .keyboardFunctionButton:
+        case .category, .presetItem, .topBarButton, .suggestionText, .keyboardFunctionButton:
             return true
         }
     }
@@ -260,7 +263,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         switch item {
         case .textField, .keyGroup:
             return false
-        case .category, .presetItem, .topBarButton, .predictiveText, .keyboardFunctionButton:
+        case .category, .presetItem, .topBarButton, .suggestionText, .keyboardFunctionButton:
             return true
         }
     }
@@ -303,6 +306,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                 // TODO: discuss with design if we want to cache the user's currently-entered text instead
                 // of just clearing it
                 currentSpeechText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.rawValue
+                suggestions = []
             }
         case .presetItem(let text):
             currentSpeechText = text
@@ -317,11 +321,22 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
             switch functionType {
             case .space:
                 didSelectCharacter(" ")
+                suggestions = []
             case .speak:
                 guard !isShowingHintText else {
                     break
                 }
                 AVSpeechSynthesizer.shared.speak(currentSpeechText)
+            }
+        case .suggestionText(let suggestion):
+            // If adding new word: just append
+            // Else replacing current word: remove last word & then append including an additional space
+            if currentSpeechText.last == " " {
+                currentSpeechText.append(suggestion.text + " ")
+            } else {
+                var words = currentSpeechText.split(separator: " ")
+                words.remove(at: words.endIndex - 1)
+                currentSpeechText = words.joined(separator: " ") + " " + suggestion.text + " "
             }
         default:
             break
@@ -338,7 +353,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         switch item {
         case .presetItem, .topBarButton, .keyboardFunctionButton:
             return true
-        case .category, .textField, .keyGroup, .predictiveText:
+        case .category, .textField, .keyGroup, .suggestionText:
             return false
         }
     }
@@ -375,6 +390,20 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
             currentSpeechText = ""
         }
         
-        currentSpeechText.append(character)
+        var characterCased = character
+        if !currentSpeechText.isEmpty && character != " "{
+            characterCased = character.lowercased()
+        }
+        
+        currentSpeechText.append(characterCased)
+    }
+    
+    private func updateSuggestions() {
+        if isShowingHintText || currentSpeechText.last == " " {
+            suggestions = []
+        } else {
+            textExpression.replace(text: currentSpeechText)
+            suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
+        }
     }
 }
