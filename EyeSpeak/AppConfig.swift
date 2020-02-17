@@ -9,11 +9,4 @@
 import Foundation
 
 struct AppConfig {
-    static let showIncompleteFeatures: Bool = {
-        #if DEBUG
-        return true
-        #else
-        return false
-        #endif
-    }()
 }
