@@ -6,6 +6,9 @@ class UIVirtualCursorView: UIView {
 
     private var cursorView = CursorView()
     private var debugCursorView = CursorView()
+    var cursorViews: [CursorView] {
+        return [cursorView, debugCursorView]
+    }
 
     private var cursorPosition: CGPoint = .zero
     private var debugCursorPosition: CGPoint = .zero
