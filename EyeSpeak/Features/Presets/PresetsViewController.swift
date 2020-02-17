@@ -319,7 +319,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         case .keyboardFunctionButton(let functionType):
             switch functionType {
             case .space:
-                self.didSelectCharacter(" ")
+                didSelectCharacter(" ")
             case .speak:
                 guard !isShowingHintText else {
                     break
