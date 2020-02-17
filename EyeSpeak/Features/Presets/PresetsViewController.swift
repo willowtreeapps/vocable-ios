@@ -203,10 +203,7 @@ class PresetsViewController: UICollectionViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
         
         snapshot.appendSections([.topBar])
-        
-        if AppConfig.showIncompleteFeatures {
-            snapshot.appendItems([.topBarButton(.repeatSpokenText), .topBarButton(.toggleKeyboard)])
-        }
+        snapshot.appendItems([.topBarButton(.repeatSpokenText), .topBarButton(.toggleKeyboard)])
         
         snapshot.appendSections([.textField])
         snapshot.appendItems([.textField(currentSpeechText)])
@@ -316,14 +313,17 @@ class PresetsViewController: UICollectionViewController {
             }
         case .presetItem(let text):
             currentSpeechText = text
-            AVSpeechSynthesizer.shared.speak(currentSpeechText)
+            // Dispatch to get off the main queue for performance
+            DispatchQueue.global(qos: .userInitiated).async {
+                AVSpeechSynthesizer.shared.speak(text)
+            }
         case .category(let category):
             selectedCategory = category
             return
         case .keyboardFunctionButton(let functionType):
             switch functionType {
             case .space:
-                self.didSelectCharacter(" ")
+                didSelectCharacter(" ")
             case .speak:
                 guard !isShowingHintText else {
                     break

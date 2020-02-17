@@ -15,6 +15,19 @@
 		6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */; };
 		6B17CD7E23E9F85F0050BCB8 /* HotCornerOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7D23E9F85F0050BCB8 /* HotCornerOverlayViewController.swift */; };
 		6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */; };
+		6B1C7F3223F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */; };
+		6B823BC223F4ADE30099F65E /* PIDControlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BAD23F4ADE30099F65E /* PIDControlConstants.swift */; };
+		6B823BC623F4ADE30099F65E /* FormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BB323F4ADE30099F65E /* FormatterExtensions.swift */; };
+		6B823BC823F4ADE30099F65E /* SingleControlDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BB623F4ADE30099F65E /* SingleControlDisplayable.swift */; };
+		6B823BC923F4ADE30099F65E /* SingleControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BB723F4ADE30099F65E /* SingleControlView.swift */; };
+		6B823BCA23F4ADE30099F65E /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BB823F4ADE30099F65E /* ControlsView.swift */; };
+		6B823BCB23F4ADE30099F65E /* Pulse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BB923F4ADE30099F65E /* Pulse.swift */; };
+		6B823BCC23F4ADE30099F65E /* TunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BBB23F4ADE30099F65E /* TunningView.swift */; };
+		6B823BCD23F4ADE30099F65E /* TunningWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BBC23F4ADE30099F65E /* TunningWindow.swift */; };
+		6B823BCE23F4ADE30099F65E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BBD23F4ADE30099F65E /* Queue.swift */; };
+		6B823BCF23F4ADE30099F65E /* TunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BBE23F4ADE30099F65E /* TunningViewController.swift */; };
+		6B823BD023F4ADE30099F65E /* PulseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BBF23F4ADE30099F65E /* PulseExtension.swift */; };
+		6B823BD323F4AE250099F65E /* PIDInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BD223F4AE250099F65E /* PIDInterpolator.swift */; };
 		6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */; };
 		6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */; };
 		6B9DFA5D23E889DB0037673E /* UIHeadGaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */; };
@@ -78,6 +91,19 @@
 		6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVSpeechSynthesizer+Shared.swift"; sourceTree = "<group>"; };
 		6B17CD7D23E9F85F0050BCB8 /* HotCornerOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCornerOverlayViewController.swift; sourceTree = "<group>"; };
 		6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapperView.swift; sourceTree = "<group>"; };
+		6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadGazeTrackingInterpolator.swift; sourceTree = "<group>"; };
+		6B823BAD23F4ADE30099F65E /* PIDControlConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIDControlConstants.swift; sourceTree = "<group>"; };
+		6B823BB323F4ADE30099F65E /* FormatterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterExtensions.swift; sourceTree = "<group>"; };
+		6B823BB623F4ADE30099F65E /* SingleControlDisplayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleControlDisplayable.swift; sourceTree = "<group>"; };
+		6B823BB723F4ADE30099F65E /* SingleControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleControlView.swift; sourceTree = "<group>"; };
+		6B823BB823F4ADE30099F65E /* ControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
+		6B823BB923F4ADE30099F65E /* Pulse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pulse.swift; sourceTree = "<group>"; };
+		6B823BBB23F4ADE30099F65E /* TunningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunningView.swift; sourceTree = "<group>"; };
+		6B823BBC23F4ADE30099F65E /* TunningWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunningWindow.swift; sourceTree = "<group>"; };
+		6B823BBD23F4ADE30099F65E /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		6B823BBE23F4ADE30099F65E /* TunningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunningViewController.swift; sourceTree = "<group>"; };
+		6B823BBF23F4ADE30099F65E /* PulseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulseExtension.swift; sourceTree = "<group>"; };
+		6B823BD223F4AE250099F65E /* PIDInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIDInterpolator.swift; sourceTree = "<group>"; };
 		6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGazeViewController.swift; sourceTree = "<group>"; };
 		6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadGazeWindow.swift; sourceTree = "<group>"; };
 		6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGaze.swift; sourceTree = "<group>"; };
@@ -189,11 +215,30 @@
 			path = EyeSpeakTests;
 			sourceTree = "<group>";
 		};
+		6B823BA923F4ADE30099F65E /* PulseController */ = {
+			isa = PBXGroup;
+			children = (
+				6B823BB323F4ADE30099F65E /* FormatterExtensions.swift */,
+				6B823BAD23F4ADE30099F65E /* PIDControlConstants.swift */,
+				6B823BB623F4ADE30099F65E /* SingleControlDisplayable.swift */,
+				6B823BB723F4ADE30099F65E /* SingleControlView.swift */,
+				6B823BB823F4ADE30099F65E /* ControlsView.swift */,
+				6B823BB923F4ADE30099F65E /* Pulse.swift */,
+				6B823BBF23F4ADE30099F65E /* PulseExtension.swift */,
+				6B823BBB23F4ADE30099F65E /* TunningView.swift */,
+				6B823BBC23F4ADE30099F65E /* TunningWindow.swift */,
+				6B823BBD23F4ADE30099F65E /* Queue.swift */,
+				6B823BBE23F4ADE30099F65E /* TunningViewController.swift */,
+			);
+			path = PulseController;
+			sourceTree = "<group>";
+		};
 		6B9DFA4B23E889DB0037673E /* HeadGazeLib */ = {
 			isa = PBXGroup;
 			children = (
 				6B9DFA5123E889DB0037673E /* Extensions.swift */,
 				6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */,
+				6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */,
 				6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */,
 				6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */,
 				6B9DFA5023E889DB0037673E /* UIHeadGazeEvent.swift */,
@@ -211,6 +256,8 @@
 				6B9DFA6B23E88A250037673E /* InterpolableValues.swift */,
 				6B9DFA6C23E88A250037673E /* Interpolation.swift */,
 				6B9DFA6D23E88A250037673E /* LowPassInterpolator.swift */,
+				6B823BD223F4AE250099F65E /* PIDInterpolator.swift */,
+				6B823BA923F4ADE30099F65E /* PulseController */,
 			);
 			path = Interpolation;
 			sourceTree = "<group>";
@@ -441,42 +488,55 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B823BCA23F4ADE30099F65E /* ControlsView.swift in Sources */,
+				6B823BCE23F4ADE30099F65E /* Queue.swift in Sources */,
+				6B823BC623F4ADE30099F65E /* FormatterExtensions.swift in Sources */,
 				B879831123E0CEC300DC1A81 /* PresetsViewController.swift in Sources */,
 				A920A4AF23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift in Sources */,
+				6B823BC923F4ADE30099F65E /* SingleControlView.swift in Sources */,
+				6B823BD323F4AE250099F65E /* PIDInterpolator.swift in Sources */,
 				B8DA9DE823EB833200FEBE19 /* BorderedView.swift in Sources */,
 				6B9DFA6023E889DB0037673E /* Extensions.swift in Sources */,
 				6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */,
 				B8DA9DFE23F3407000FEBE19 /* TextPresets.swift in Sources */,
 				9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */,
 				6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */,
+				6B823BCF23F4ADE30099F65E /* TunningViewController.swift in Sources */,
 				6B9DFA6423E889DB0037673E /* UIHeadGazeRecognizer.swift in Sources */,
 				6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */,
 				B8DA9DF223F30BAF00FEBE19 /* Cell+NibLoading.swift in Sources */,
 				6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */,
 				6B9DFA7423E8D1270037673E /* TrackingContainerViewController.swift in Sources */,
 				6B17CD7E23E9F85F0050BCB8 /* HotCornerOverlayViewController.swift in Sources */,
+				6B823BC823F4ADE30099F65E /* SingleControlDisplayable.swift in Sources */,
 				A9DE170623F4C0AF0094DB64 /* TextPrediction.swift in Sources */,
 				B8DA9DF023EDECEE00FEBE19 /* AppConfig.swift in Sources */,
 				B8DA9DEC23EB8FB900FEBE19 /* CategorySectionBackground.swift in Sources */,
 				6B9DFA7623E8D59A0037673E /* UICollectionView+Gaze.swift in Sources */,
 				6B9DFA7023E88A630037673E /* InterpolableValues.swift in Sources */,
+				6B1C7F3223F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift in Sources */,
 				A9DE16FE23F48FD30094DB64 /* TextPredictionController.swift in Sources */,
 				A9DE170223F492B20094DB64 /* Array+Split.swift in Sources */,
 				6B9DFA5D23E889DB0037673E /* UIHeadGaze.swift in Sources */,
 				6B9DFA6F23E88A610037673E /* Interpolation.swift in Sources */,
+				6B823BD023F4ADE30099F65E /* PulseExtension.swift in Sources */,
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
 				A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
+				6B823BCB23F4ADE30099F65E /* Pulse.swift in Sources */,
 				B8DA9DF423F30BD200FEBE19 /* VectorUtils.swift in Sources */,
 				A92FFB8D23ECCB5400AF2D0B /* SettingsViewController.swift in Sources */,
 				B879831523E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift in Sources */,
+				6B823BCC23F4ADE30099F65E /* TunningView.swift in Sources */,
 				6B9DFA5F23E889DB0037673E /* UIHeadGazeEvent.swift in Sources */,
 				A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */,
 				A9299C7523F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift in Sources */,
 				6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */,
+				6B823BCD23F4ADE30099F65E /* TunningWindow.swift in Sources */,
 				B838200F23F4B011005A79CD /* VocableCollectionViewCell.swift in Sources */,
 				A98E8A2323F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift in Sources */,
 				6B9DFA6223E889DB0037673E /* UIVirtualCursorView.swift in Sources */,
+				6B823BC223F4ADE30099F65E /* PIDControlConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

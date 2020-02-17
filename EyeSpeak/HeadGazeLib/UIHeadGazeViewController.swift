@@ -31,18 +31,9 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
  
     private(set) var sceneview: ARSCNView?
 
-    private var previousGaze: UIHeadGaze?
-    private var cursorPositionInterpolator: LowPassInterpolator<CGPoint> = {
-        let interpolator = LowPassInterpolator<CGPoint>(filterFactor: 0.2, initialValue: .zero)
-        interpolator.needsResetOnNextUpdate = true
-        return interpolator
-    }()
-
-    private var ndcSmoothingInterpolator: LowPassInterpolator<SIMD2<Float>> = {
-        let interpolator = LowPassInterpolator<SIMD2<Float>>(filterFactor: 0.05, initialValue: .zero)
-        interpolator.needsResetOnNextUpdate = true
-        return interpolator
-    }()
+    let pidInterpolator = PIDControlledTrackingInterpolator()
+    let debugInterpolator = HeadGazeTrackingInterpolator()
+    lazy var trackingInterpolators: [HeadGazeTrackingInterpolator] = [pidInterpolator, debugInterpolator]
 
     private var computedScale: CGFloat = 6
     private var xAngleCorrectionAmount = 0.0
@@ -62,8 +53,12 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         sceneview?.delegate = self
         sceneview?.session.delegate = self
         sceneview?.isHidden = true
-
+        sceneview?.preferredFramesPerSecond =  UIScreen.main.maximumFramesPerSecond
         setupSceneNode()
+
+        for interpolator in trackingInterpolators {
+            interpolator.view = self.view
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,63 +86,29 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         sceneview?.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
 
-    /**
-     AR tracking loop, the virtual cursor position is update here
-    */
-    private var lastGazeNDCLocation = CGPoint(x: 0.5, y: 0.5)
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        guard let faceAnchor = faceAnchor else { return }
-
-        let blendShapes = faceAnchor.blendShapes
-        let lBlinkAmount = blendShapes[.eyeBlinkLeft]?.floatValue ?? 0.0
-        let rBlinkAmount = blendShapes[.eyeBlinkRight]?.floatValue ?? 0.0
-
-        let blinkThreshold: Float = 0.3 // 0.05
-        let leftBlink = lBlinkAmount > blinkThreshold
-        let rightBlink = rBlinkAmount > blinkThreshold
-        let isBlinking = leftBlink || rightBlink
-
-        let cursorPosNDC: CGPoint
-
-        if !isBlinking && faceAnchor.isTracked {
-            let pos = updateGazeNDCLocationByARFaceAnchor(frame: frame, isBlinking: isBlinking)
-            cursorPosNDC = cursorPositionInterpolator.update(with: pos, factor: nil)
-            lastGazeNDCLocation = pos
-        } else {
-            cursorPosNDC = cursorPositionInterpolator.update(with: lastGazeNDCLocation)
+        let correction = CGSize(width: xAngleCorrectionAmount, height: yAngleCorrectionAmount)
+        for interpolator in trackingInterpolators {
+            interpolator.update(withFrame: frame,
+                                correctionAmount: correction,
+                                scale: computedScale)
         }
-
-        guard let window = self.view.window else { return }
-
-        if faceAnchor.isTracked {
-
-            // Generate head gaze event and invoke event callback methods
-            var allGazes = Set<UIHeadGaze>()
-            let curGaze: UIHeadGaze
-            if let lastGaze = previousGaze {
-                curGaze = UIHeadGaze(curPosition: cursorPosNDC, prevPosition: lastGaze.location(in: window), view: self.view, win: window)
-            } else {
-                curGaze = UIHeadGaze(position: cursorPosNDC, view: self.view, win: window)
+        if let window = view.window as? HeadGazeWindow {
+            if let event = pidInterpolator.event {
+                window.sendEvent(event)
             }
-
-            allGazes.insert(curGaze)
-            previousGaze = curGaze
-            
-            let event = UIHeadGazeEvent(allGazes: allGazes)
-            window.sendEvent(event)
-        } else {
-            // Ensure that the interpolators will reset on the next frame
-            // that a face is actually trackable. This is to prevent
-            // the cursor jumping wildly when first (re-)entering the view
-            cursorPositionInterpolator.needsResetOnNextUpdate = true
-            ndcSmoothingInterpolator.needsResetOnNextUpdate = true
-            previousGaze = nil
+            if let debugEvent = debugInterpolator.event, let gaze = debugEvent.allGazes?.first {
+                window.cursorView?.debugCursorMoved(gaze, with: debugEvent)
+            }
         }
     }
 
     private var headNode: SCNNode?
     private var faceAnchor: ARFaceAnchor? {
         didSet {
+            for interpolator in trackingInterpolators {
+                interpolator.faceAnchor = faceAnchor
+            }
             let oldTracked = oldValue?.isTracked ?? false
             let newTracked = faceAnchor?.isTracked ?? false
             if oldTracked && !newTracked {
@@ -203,83 +164,6 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
             self.headNode = nil
         }
     }
-
-    /**
-     return head gaze projection in 2D NDC coordinate system
-     where the origin is at the center of the screen
-     */
-    private func updateGazeNDCLocationByARFaceAnchor(frame: ARFrame, isBlinking: Bool) -> CGPoint {
-
-        let orientation = view.window?.windowScene?.interfaceOrientation ?? .portrait
-
-        let worldTransMtx = getFaceTransformationMatrix()
-
-        let o_headCenter = simd_float4(0, 0, 0, 1)
-        let o_headLookAtDir  = simd_float4(0, 0, 1, 0)
-
-        let tranfMtx = worldTransMtx
-        let c_headCenter = tranfMtx * o_headCenter
-        let c_lookAtDir  = tranfMtx * o_headLookAtDir
-        let t = (0.0 - c_headCenter[2]) / c_lookAtDir[2]
-        let hitPos = c_headCenter + c_lookAtDir * t
-
-        let correctionScalar: Double = 1.0
-        let xNDC = Float(hitPos[0]) - Float(xAngleCorrectionAmount * correctionScalar)
-        let yNDC = Float(hitPos[1]) - Float(yAngleCorrectionAmount * correctionScalar)
-        let hitPosNDC = SIMD2<Float>([xNDC, yNDC])
-        let filteredPos = ndcSmoothingInterpolator.update(with: hitPosNDC, factor: isBlinking ? 0.05 : nil)
-
-        let worldToSKSceneScale = Float(computedScale)
-        let hitPosSKScene = filteredPos * worldToSKSceneScale
-        switch orientation {
-        case .portrait:
-            return CGPoint(x: CGFloat(hitPosSKScene[1]), y: -CGFloat(hitPosSKScene[0]))
-        case .portraitUpsideDown:
-            return CGPoint(x: -CGFloat(hitPosSKScene[1]), y: CGFloat(hitPosSKScene[0]))
-        case .landscapeRight:
-            return CGPoint(x: CGFloat(hitPosSKScene[0]), y: CGFloat(hitPosSKScene[1]))
-        case .landscapeLeft:
-            return CGPoint(x: -CGFloat(hitPosSKScene[0]), y: -CGFloat(hitPosSKScene[1]))
-        case .unknown:
-            fallthrough
-        @unknown default:
-            return CGPoint(x: CGFloat(hitPosSKScene[0]), y: CGFloat(hitPosSKScene[1]) )
-        }
-    }
-
-    /**
-     Returns the world transformation matrix of the ARFaceAnchor node
-     */
-    private func getFaceTransformationMatrix() -> simd_float4x4 {
-        return faceAnchor?.transform ?? .identity
-    }
-
-    /**
-     Extract the scale components of the ARFaceAnchor node
-    */
-    private func getFaceScale() -> simd_float3 {
-        let M = getFaceTransformationMatrix()
-        let sx = simd_float3([M[0][0], M[0][1], M[0][2]])
-        let sy = simd_float3([M[1][0], M[1][1], M[1][2]])
-        let sz = simd_float3([M[2][0], M[2][1], M[2][2]])
-        let s = simd_float3([simd_length(sx), simd_length(sy), simd_length(sz)])
-        return s
-    }
-
-    /**
-     Extract the rotation components of the ARFaceAnchor node
-     */
-    private func getFaceRotationMatrix() -> simd_float4x4 {
-        let scale = getFaceScale()
-        let mtx = getFaceTransformationMatrix()
-        var (c0, c1, c2, c3) = mtx.columns
-        c3 = simd_float4(0, 0, 0, 1) //zero out translation components
-        c0 /= scale[0]
-        c1 /= scale[1]
-        c2 /= scale[2]
-        return simd_float4x4(c0, c1, c2, c3)
-    }
-
 }
 
 private func loadModelFromAsset(named assetName: String) -> SCNNode {
