@@ -14,6 +14,8 @@ class HeadGazeWindow: UIWindow {
 
     private var trackingView: UIView?
     private var lastGaze: UIHeadGaze?
+    private let touchGazeDisableDuration: TimeInterval = 5
+    private var touchGazeDisableBeganDate: Date?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,6 +37,10 @@ class HeadGazeWindow: UIWindow {
     }
 
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
+        cancelCurrentGazeIfNeeded()
+    }
+
+    private func cancelCurrentGazeIfNeeded() {
         if let trackingView = trackingView, let gaze = lastGaze {
             trackingView.gazeEnded(gaze, with: nil)
         }
@@ -42,13 +48,61 @@ class HeadGazeWindow: UIWindow {
         self.lastGaze = nil
     }
 
+    private func extendGazeDisabledPeriodForTouchEvent() {
+        cancelCurrentGazeIfNeeded()
+        touchGazeDisableBeganDate = Date()
+    }
+
+    private func setCursorViewHidden(_ isCursorHidden: Bool, animated: Bool) {
+        guard let cursorView = cursorView else {
+            return
+        }
+
+        func actions() {
+            for cursor in cursorView.cursorViews {
+                cursor.alpha = isCursorHidden ? 0.0 : 1.0
+                cursor.transform = isCursorHidden ? CGAffineTransform(scaleX: 0.1, y: 0.1) : .identity
+            }
+        }
+
+        if animated {
+            UIView.animate(withDuration: 0.5,
+                           delay: 0,
+                           usingSpringWithDamping: 0.4,
+                           initialSpringVelocity: 0.4,
+                           options: .beginFromCurrentState,
+                           animations: actions,
+                           completion: nil)
+        } else {
+            actions()
+        }
+    }
+
+    private func animateCursorHidden() {
+        
+    }
+
     override func sendEvent(_ originalEvent: UIEvent) {
 
         // Ignore any non-gaze events and let super handle them
         guard let event = originalEvent as? UIHeadGazeEvent,
             let gaze = event.allGazes?.first else {
+                if originalEvent.type == .touches {
+                    extendGazeDisabledPeriodForTouchEvent()
+                    setCursorViewHidden(true, animated: true)
+                }
             super.sendEvent(originalEvent)
             return
+        }
+
+        if let gazeDisabledStart = touchGazeDisableBeganDate {
+            if Date().timeIntervalSince(gazeDisabledStart) >= touchGazeDisableDuration {
+                setCursorViewHidden(false, animated: true)
+                touchGazeDisableBeganDate = nil
+            } else {
+                // Waiting for touch timeout to allow events to propagate
+                return
+            }
         }
 
         lastGaze = event.allGazes?.first
