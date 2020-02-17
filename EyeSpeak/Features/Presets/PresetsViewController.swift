@@ -259,8 +259,10 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton, .suggestionText, .keyboardFunctionButton, .key:
+        case .category, .presetItem, .topBarButton, .keyboardFunctionButton, .key:
             return true
+        case .suggestionText(let suggestion):
+            return !suggestion.text.isEmpty
         }
     }
     
@@ -270,8 +272,10 @@ class PresetsViewController: UICollectionViewController {
         switch item {
         case .textField:
             return false
-        case .category, .presetItem, .topBarButton, .suggestionText, .keyboardFunctionButton, .key:
+        case .category, .presetItem, .topBarButton, .keyboardFunctionButton, .key:
             return true
+        case .suggestionText(let suggestion):
+            return !suggestion.text.isEmpty
         }
     }
     
