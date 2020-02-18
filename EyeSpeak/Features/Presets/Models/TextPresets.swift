@@ -8,11 +8,17 @@
 
 import Foundation
 
-enum PresetCategory: CaseIterable {
+enum PresetCategory: CaseIterable, Comparable {
+    static func < (lhs: PresetCategory, rhs: PresetCategory) -> Bool {
+        lhs.description < rhs.description
+    }
+    
     case category1
     case category2
     case category3
     case category4
+    case category5
+    case category6
     
     var description: String {
         switch self {
@@ -24,20 +30,17 @@ enum PresetCategory: CaseIterable {
             return "Temperature"
         case .category4:
             return "Body"
+        case .category5:
+            return "Test category 5"
+        case .category6:
+            return "Test category 6"
         }
     }
 }
 
 struct TextPresets {
     
-    static var testCategories: [PresetCategory: [String]] = [
-        .category1: ["test cat 1"],
-        .category2: ["test cat 2"],
-        .category3: ["test cat 3"],
-        .category4: ["test cat 4"]
-    ]
-    
-    static var presetsByCategory: [PresetCategory: [String]] = [
+    static private var presetsByCategory: [PresetCategory: [String]] = [
         .category1: ["I want the door closed.",
                      "I want the door open.",
                      "I would like to go to the bathroom.",
@@ -73,6 +76,16 @@ struct TextPresets {
                      "Knee",
                      "Side",
                      "Right",
-                     "Left"]
+                     "Left"],
+        .category5: ["Test cat 5"],
+        .category6: ["Test cat 6"]
     ]
+    
+    static func presetsForCategories(in range: Range<Int>) -> [PresetCategory: [String]] {
+        let allCategories = presetsByCategory.keys.sorted()
+        let safeRange = range.clamped(to: (0..<allCategories.count))
+        let categoriesInRange = allCategories[range.clamped(to: safeRange)]
+        
+        return presetsByCategory.filter { categoriesInRange.contains($0.key) }
+    }
 }

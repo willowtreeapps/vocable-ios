@@ -11,7 +11,25 @@ import AVFoundation
 
 class PresetsViewController: UICollectionViewController, KeyboardSelectionDelegate {
     
-    private var currentCategories: [PresetCategory: [String]] = TextPresets.presetsByCategory
+    // TODO move this somewhere
+    private let maxDisplayedCategories = 4
+    
+    private var currentCategoryRange = 0..<4 {
+        didSet {
+            selectedCategory = currentCategories.keys.sorted().first!
+        }
+    }
+    
+    private var currentCategories: [PresetCategory: [String]] {
+        TextPresets.presetsForCategories(in: currentCategoryRange)
+    }
+    
+    private var selectedCategory: PresetCategory = .category1 {
+        didSet {
+            self.updateSnapshot()
+        }
+    }
+    
     private var categoryPresets: [PresetCategory: [ItemWrapper]] {
         currentCategories.mapValues { $0.map { .presetItem($0) } }
     }
@@ -28,13 +46,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
             pageControl?.addTarget(self, action: #selector(handlePageControlChange), for: .valueChanged)
         }
     }
-    
-    private var selectedCategory: PresetCategory = .category1 {
-        didSet {
-            self.updateSnapshot()
-        }
-    }
-    
+
     private enum HintText: String, CaseIterable {
         case preset = "Select something below to speak"
         case keyboard = "Select letters below to start typing."
@@ -251,7 +263,13 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         } else {
             snapshot.appendSections([.categories])
             snapshot.appendItems([.pagination(.backward)])
-            snapshot.appendItems(PresetCategory.allCases.map { .category($0) })
+            
+            let currentCategoryItems: [ItemWrapper] = currentCategories.keys.sorted().map { .category($0) }
+            // TODO potentially add a custom placeholder item type
+            let placeholderItems: [ItemWrapper] = (currentCategoryItems.count..<maxDisplayedCategories).map { _ in .suggestionText(TextSuggestion(text: "")) }
+            
+            snapshot.appendItems(currentCategoryItems)
+            snapshot.appendItems(placeholderItems)
             snapshot.appendItems([.pagination(.forward)])
             
             snapshot.appendSections([.presets])
@@ -379,12 +397,20 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
     private func paginate(_ section: Section, _ direction: PaginationDirection) {
         switch section {
         case .categories:
-            currentCategories = TextPresets.testCategories
+            switch direction {
+            case .forward:
+                // TODO handle incrementing range differently and handle out-of-bounds cases
+                currentCategoryRange = (currentCategoryRange.lowerBound + currentCategoryRange.count..<currentCategoryRange.upperBound + currentCategoryRange.count)
+            case .backward:
+                currentCategoryRange = (currentCategoryRange.lowerBound - currentCategoryRange.count..<currentCategoryRange.upperBound - currentCategoryRange.count)
+            }
+            
+            collectionView.selectItem(at: dataSource.indexPath(for: .category(selectedCategory)), animated: false, scrollPosition: .init())
+        case .presets:
+            break
         default:
             break
         }
-        
-        updateSnapshot()
     }
         
     override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
