@@ -179,7 +179,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         
         let keyboardRowGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)), subitem: keyboardKeyItem, count: 10)
         
-        let keyboardContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(400.0 / totalHeight)), subitem: keyboardRowGroup, count: 3)
+        let keyboardContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 2.0)), subitem: keyboardRowGroup, count: 3)
         
         let section = NSCollectionLayoutSection(group: keyboardContainerGroup)
         section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)

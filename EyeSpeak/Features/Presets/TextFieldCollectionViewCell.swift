@@ -38,8 +38,8 @@ class TextFieldCollectionViewCell: VocableCollectionViewCell {
         textLabel.isOpaque = true
     }
 
-    func setup(title: String) {
-        textLabel.text = title
+    func setup(title: NSAttributedString) {
+        textLabel.attributedText = title
     }
     
     func setup(with image: UIImage?) {
@@ -52,4 +52,6 @@ class TextFieldCollectionViewCell: VocableCollectionViewCell {
         
         textLabel.attributedText = attributedString
     }
+    
+    
 }

@@ -45,8 +45,11 @@ class PresetsViewController: UICollectionViewController {
     
     private var currentSpeechText: String = HintText.preset.rawValue {
         didSet {
-            updateSnapshot()
+            if !self.isShowingHintText && !self.currentSpeechText.isEmpty {
+                self.range = NSRange(location: currentSpeechText.count - 1, length: 1)
+            }
             updateSuggestions()
+            updateSnapshot()
         }
     }
     
@@ -117,6 +120,8 @@ class PresetsViewController: UICollectionViewController {
         }
     }
     
+    private var range: NSRange?
+    
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
@@ -179,7 +184,14 @@ class PresetsViewController: UICollectionViewController {
             switch identifier {
             case .textField(let title):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: TextFieldCollectionViewCell.reuseIdentifier, for: indexPath) as! TextFieldCollectionViewCell
-                cell.setup(title: title)
+                let attrTitle = NSMutableAttributedString(string: title)
+                if let range = self.range {
+                    if !self.currentSpeechText.isEmpty {
+                        let attributes = [NSAttributedString.Key.foregroundColor: UIColor.green]
+                        attrTitle.setAttributes(attributes, range: range)
+                    }
+                }
+                cell.setup(title: attrTitle)
                 return cell
             case .topBarButton(let buttonType):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
@@ -222,10 +234,10 @@ class PresetsViewController: UICollectionViewController {
                                        .suggestionText(TextSuggestion(text: "")),
                                        .suggestionText(TextSuggestion(text: ""))])
             } else {
-                snapshot.appendItems([.suggestionText(TextSuggestion(text: suggestions[safe: 0]?.text ?? "")),
-                                      .suggestionText(TextSuggestion(text: suggestions[safe: 1]?.text ?? "")),
-                                      .suggestionText(TextSuggestion(text: suggestions[safe: 2]?.text ?? "")),
-                                      .suggestionText(TextSuggestion(text: suggestions[safe: 3]?.text ?? ""))])
+                snapshot.appendItems([.suggestionText(TextSuggestion(text: "\"" + (suggestions[safe: 0]?.text ?? "") + "\"")),
+                                      .suggestionText(TextSuggestion(text: "\"" + (suggestions[safe: 1]?.text ?? "") + "\"")),
+                                      .suggestionText(TextSuggestion(text: "\"" + (suggestions[safe: 2]?.text ?? "") + "\"")),
+                                      .suggestionText(TextSuggestion(text: "\"" + (suggestions[safe: 3]?.text ?? "") + "\""))])
             }
             
             snapshot.appendSections([.keyboard])
@@ -356,7 +368,7 @@ class PresetsViewController: UICollectionViewController {
             } else {
                 var words = currentSpeechText.split(separator: " ")
                 words.remove(at: words.endIndex - 1)
-                currentSpeechText = words.joined(separator: " ") + " " + suggestion.text + " "
+                currentSpeechText = words.joined(separator: " ") + " " + suggestion.text.dropLast().dropFirst() + " "
             }
         default:
             break
