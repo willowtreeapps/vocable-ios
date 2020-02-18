@@ -26,6 +26,12 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
     
+    private var versionAndBuildNumber: String {
+        let versionNumber = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+        return "Version \(versionNumber)-\(buildNumber)"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -100,11 +106,11 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
             return cell
         case .contactDevs:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: "Contact Developers")
+            cell.setup(title: "Send feedback to the developers")
             return cell
         case .versionNum:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
-            cell.setup(versionLabel: "V 0.0.0")
+            cell.setup(versionLabel: versionAndBuildNumber)
             return cell
         case .pidTuner:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
@@ -140,6 +146,7 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
             let composeVC = MFMailComposeViewController()
             composeVC.mailComposeDelegate = self
             composeVC.setToRecipients(["vocable@willowtreeapps.com"])
+            composeVC.setSubject("Feedback for Vocable v\(versionAndBuildNumber)")
             self.composeVC = composeVC
             
             self.present(composeVC, animated: true, completion: nil)
