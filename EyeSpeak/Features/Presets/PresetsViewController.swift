@@ -11,10 +11,9 @@ import AVFoundation
 
 class PresetsViewController: UICollectionViewController, KeyboardSelectionDelegate {
     
-    // TODO move this somewhere
     private let maxDisplayedCategories = 4
     
-    private var currentCategoryRange = 0..<4 {
+    @CircularRange(size: 4, upperBound: TextPresets.presetsByCategory.keys.count) var currentCategoryRange: Range<Int> {
         didSet {
             selectedCategory = currentCategories.keys.sorted().first!
         }
@@ -265,11 +264,14 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
             snapshot.appendItems([.pagination(.backward)])
             
             let currentCategoryItems: [ItemWrapper] = currentCategories.keys.sorted().map { .category($0) }
-            // TODO potentially add a custom placeholder item type
-            let placeholderItems: [ItemWrapper] = (currentCategoryItems.count..<maxDisplayedCategories).map { _ in .suggestionText(TextSuggestion(text: "")) }
-            
             snapshot.appendItems(currentCategoryItems)
-            snapshot.appendItems(placeholderItems)
+            
+            if currentCategoryItems.count < maxDisplayedCategories {
+            // TODO potentially add a custom placeholder item type
+                let placeholderItems: [ItemWrapper] = (currentCategoryItems.count..<maxDisplayedCategories).map { _ in .suggestionText(TextSuggestion(text: "")) }
+                
+                snapshot.appendItems(placeholderItems)
+            }
             snapshot.appendItems([.pagination(.forward)])
             
             snapshot.appendSections([.presets])

@@ -60,6 +60,7 @@
 		B838202123FC6B17005A79CD /* PaginationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B838202023FC6B17005A79CD /* PaginationCollectionViewCell.xib */; };
 		B838202323FC6B38005A79CD /* PaginationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838202223FC6B38005A79CD /* PaginationCollectionViewCell.swift */; };
 		B838202623FC6BBB005A79CD /* PaginationDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838202523FC6BBB005A79CD /* PaginationDirection.swift */; };
+		B838202A23FC99C9005A79CD /* CircularRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838202923FC99C9005A79CD /* CircularRange.swift */; };
 		B879831123E0CEC300DC1A81 /* PresetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879831023E0CEC300DC1A81 /* PresetsViewController.swift */; };
 		B879831523E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */; };
 		B879831623E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B879831423E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib */; };
@@ -141,6 +142,7 @@
 		B838202023FC6B17005A79CD /* PaginationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaginationCollectionViewCell.xib; sourceTree = "<group>"; };
 		B838202223FC6B38005A79CD /* PaginationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B838202523FC6BBB005A79CD /* PaginationDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationDirection.swift; sourceTree = "<group>"; };
+		B838202923FC99C9005A79CD /* CircularRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularRange.swift; sourceTree = "<group>"; };
 		B879831023E0CEC300DC1A81 /* PresetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetsViewController.swift; sourceTree = "<group>"; };
 		B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		B879831423E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PresetItemCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -311,16 +313,25 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		B879831223E0DA5800DC1A81 /* Common */ = {
+		B838202723FC99AE005A79CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B838202423FC6BB0005A79CD /* Models */,
 				B8DA9DE723EB833200FEBE19 /* BorderedView.swift */,
 				9D15E0542271F0DC0058DF57 /* CursorView.swift */,
 				A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */,
 				6B9DFA7323E8D1270037673E /* TrackingContainerViewController.swift */,
 				6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */,
 				B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B879831223E0DA5800DC1A81 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B838202423FC6BB0005A79CD /* Models */,
+				B838202723FC99AE005A79CD /* Views */,
+				B838202923FC99C9005A79CD /* CircularRange.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -525,6 +536,7 @@
 				6B9DFA6023E889DB0037673E /* Extensions.swift in Sources */,
 				6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */,
 				B838201123F4B1C2005A79CD /* KeyboardGroupCollectionViewCell.swift in Sources */,
+				B838202A23FC99C9005A79CD /* CircularRange.swift in Sources */,
 				B8DA9DFE23F3407000FEBE19 /* TextPresets.swift in Sources */,
 				9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */,
 				6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */,

@@ -40,7 +40,7 @@ enum PresetCategory: CaseIterable, Comparable {
 
 struct TextPresets {
     
-    static private var presetsByCategory: [PresetCategory: [String]] = [
+    static var presetsByCategory: [PresetCategory: [String]] = [
         .category1: ["I want the door closed.",
                      "I want the door open.",
                      "I would like to go to the bathroom.",
