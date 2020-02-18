@@ -54,11 +54,15 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
 
 class CategoryItemCollectionViewCell: PresetItemCollectionViewCell {
     
+    var roundedCorners: UIRectCorner = .allCorners {
+        didSet {
+            borderedView.roundedCorners = roundedCorners
+        }
+    }
+    
     override func updateContentViews() {
-        borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
+        super.updateContentViews()
         borderedView.fillColor = isSelected ? .cellSelectionColor : .categoryBackgroundColor
-        borderedView.backgroundColor = .categoryBackgroundColor
-        borderedView.isOpaque = true
         
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = borderedView.fillColor

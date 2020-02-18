@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PresetCategory {
+enum PresetCategory: CaseIterable {
     case category1
     case category2
     case category3
@@ -29,6 +29,13 @@ enum PresetCategory {
 }
 
 struct TextPresets {
+    
+    static var testCategories: [PresetCategory: [String]] = [
+        .category1: ["test cat 1"],
+        .category2: ["test cat 2"],
+        .category3: ["test cat 3"],
+        .category4: ["test cat 4"]
+    ]
     
     static var presetsByCategory: [PresetCategory: [String]] = [
         .category1: ["I want the door closed.",

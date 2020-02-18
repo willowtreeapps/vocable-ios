@@ -11,9 +11,10 @@ import AVFoundation
 
 class PresetsViewController: UICollectionViewController, KeyboardSelectionDelegate {
     
-    private lazy var categoryPresets: [PresetCategory: [ItemWrapper]] = {
-        TextPresets.presetsByCategory.mapValues { $0.map { .presetItem($0) } }
-    }()
+    private var currentCategories: [PresetCategory: [String]] = TextPresets.presetsByCategory
+    private var categoryPresets: [PresetCategory: [ItemWrapper]] {
+        currentCategories.mapValues { $0.map { .presetItem($0) } }
+    }
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     private weak var orthogonalScrollView: UIScrollView? {
@@ -178,7 +179,22 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                 cell.setup(with: buttonType.image)
                 return cell
             case .category(let category):
-                return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description)
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
+                cell.setup(title: category.description)
+                
+                let snapshot = self.dataSource.snapshot()
+                let sectionIdentifier = snapshot.sectionIdentifier(containingItem: identifier)!
+                                
+                // Round the corners of the first and last category cells using index path math to skip over the pagination cells
+                if indexPath.row == 1 {
+                    cell.roundedCorners = [.topLeft, .bottomLeft]
+                } else if indexPath.row == snapshot.numberOfItems(inSection: sectionIdentifier) - 2 {
+                    cell.roundedCorners = [.topRight, .bottomRight]
+                } else {
+                    cell.roundedCorners = []
+                }
+                
+                return cell
             case .suggestionText(let predictiveText):
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: predictiveText.text)
             case .presetItem(let preset):
@@ -235,7 +251,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         } else {
             snapshot.appendSections([.categories])
             snapshot.appendItems([.pagination(.backward)])
-            snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
+            snapshot.appendItems(PresetCategory.allCases.map { .category($0) })
             snapshot.appendItems([.pagination(.forward)])
             
             snapshot.appendSections([.presets])
@@ -345,6 +361,12 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                 words.remove(at: words.endIndex - 1)
                 currentSpeechText = words.joined(separator: " ") + " " + suggestion.text + " "
             }
+        case .pagination(let direction):
+            guard let section = dataSource.snapshot().sectionIdentifier(containingItem: selectedItem) else {
+                break
+            }
+            
+            paginate(section, direction)
         default:
             break
         }
@@ -352,6 +374,17 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         if collectionView.indexPathForGazedItem != indexPath {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
+    }
+    
+    private func paginate(_ section: Section, _ direction: PaginationDirection) {
+        switch section {
+        case .categories:
+            currentCategories = TextPresets.testCategories
+        default:
+            break
+        }
+        
+        updateSnapshot()
     }
         
     override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
