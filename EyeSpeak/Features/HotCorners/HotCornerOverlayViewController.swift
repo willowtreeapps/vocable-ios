@@ -37,6 +37,7 @@ final private class HotCornerExpandingUIControl: UIButton {
         guard let beginDate = gazeBeginDate else { return }
         let elapsedTime = Date().timeIntervalSince(beginDate)
         if elapsedTime >= gaze.selectionHoldDuration {
+            (window as? HeadGazeWindow)?.animateCursorSelection()
             sendActions(for: .primaryActionTriggered)
             gazeBeginDate = nil
         }

@@ -78,8 +78,31 @@ class HeadGazeWindow: UIWindow {
         }
     }
 
-    private func animateCursorHidden() {
-        
+    func animateCursorSelection() {
+
+        func performSelectionAnimation(_ cursor: CursorView) {
+            let duration: TimeInterval = 0.6
+            let relativeDownDuration = duration * 0.5
+            let relativeUpDuration = (1.0 - relativeDownDuration) * 0.5
+            let relativeSettleDuration = 1.0 - relativeUpDuration
+            UIView.animateKeyframes(withDuration: duration, delay: 0, options: [.beginFromCurrentState], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: relativeDownDuration) {
+                    cursor.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                    cursor.shadowAmount = 0.8
+                }
+                UIView.addKeyframe(withRelativeStartTime: 1.0 - relativeSettleDuration - relativeUpDuration, relativeDuration: relativeUpDuration) {
+                    cursor.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                    cursor.shadowAmount = 1.0
+                }
+                UIView.addKeyframe(withRelativeStartTime: 1.0 - relativeSettleDuration, relativeDuration: relativeSettleDuration) {
+                    cursor.transform = .identity
+                }
+            }, completion: nil)
+        }
+
+        for cursor in cursorView?.cursorViews ?? [] {
+            performSelectionAnimation(cursor)
+        }
     }
 
     override func sendEvent(_ originalEvent: UIEvent) {
