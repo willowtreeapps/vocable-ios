@@ -98,9 +98,9 @@ class PresetsViewController: UICollectionViewController {
             case .backspace:
                 return UIImage(systemName: "arrow.left.circle")!
             case .space:
-                return UIImage(systemName: "shift")!
+                return UIImage(named: "underscore")!
             case .speak:
-                return UIImage(systemName: "speaker.2.fill")!
+                return UIImage(named: "speak")!
             }
         }
     }
