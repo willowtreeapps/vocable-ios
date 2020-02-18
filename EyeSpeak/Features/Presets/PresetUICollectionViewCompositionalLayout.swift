@@ -98,23 +98,30 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
     
     static func categoriesSectionLayout() -> NSCollectionLayoutSection {
-        let itemCount = CGFloat(4)
+        let totalSectionWidth: CGFloat = 1130.0
+        let totalSectionFractionalHeight: NSCollectionLayoutDimension = .fractionalHeight(137.0 / totalHeight)
+        let numberOfCategories = CGFloat(4)
+        let categoryGroupFractionalWidth: NSCollectionLayoutDimension = .fractionalWidth(906.0 / totalSectionWidth)
         
         let categoryItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / itemCount),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / numberOfCategories),
+                                               heightDimension: .fractionalHeight(1.0)))
+        
+        let categoriesGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: categoryGroupFractionalWidth,
+                                               heightDimension: .fractionalHeight(1)),
+            subitem: categoryItem, count: Int(numberOfCategories))
+        categoriesGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
+        
+        let paginationItem = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(104.0 / totalSectionWidth),
                                                heightDimension: .fractionalHeight(1.0)))
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(137.0 / totalHeight)),
-            subitem: categoryItem, count: Int(itemCount))
-        containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: totalSectionFractionalHeight),
+            subitems: [paginationItem, categoriesGroup, paginationItem])
+        
         let section = NSCollectionLayoutSection(group: containerGroup)
-        
-        let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
-        backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
-        
-        section.decorationItems = [backgroundDecoration]
         section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
         return section
     }

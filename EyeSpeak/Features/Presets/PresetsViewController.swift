@@ -69,6 +69,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         case presetItem(String)
         case keyGroup(KeyGroup)
         case keyboardFunctionButton(KeyboardFunctionButton)
+        case pagination(PaginationDirection)
     }
     
     enum TopBarButton: String {
@@ -131,9 +132,9 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
         collectionView.register(UINib(nibName: "KeyboardGroupCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardGroupCollectionViewCell")
+        collectionView.register(UINib(nibName: "PaginationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PaginationCollectionViewCell")
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
-        layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
         collectionView.backgroundColor = UIColor.collectionViewBackgroundColor
         collectionView.allowsMultipleSelection = true
         
@@ -191,12 +192,17 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
                 cell.setup(title: functionType.title)
                 return cell
+            case .pagination(let direction):
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PaginationCollectionViewCell", for: indexPath) as! PaginationCollectionViewCell
+                cell.paginationDirection = direction
+                return cell
             }
         })
         
         updateSnapshot()
     }
     
+    // MARK: - NSDiffableDataSourceSnapshot construction
     func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
         
@@ -208,6 +214,8 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         
         if showKeyboard {
             snapshot.appendSections([.predictiveText])
+            snapshot.appendItems([.pagination(.backward)]) // TODO clean up the snapshot construction
+            
             if suggestions.isEmpty {
                  snapshot.appendItems([.suggestionText(TextSuggestion(text: "")),
                                        .suggestionText(TextSuggestion(text: "")),
@@ -219,23 +227,22 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                                       .suggestionText(TextSuggestion(text: suggestions[safe: 2]?.text ?? "")),
                                       .suggestionText(TextSuggestion(text: suggestions[safe: 3]?.text ?? ""))])
             }
+            snapshot.appendItems([.pagination(.forward)])
             
             snapshot.appendSections([.keyboard])
             snapshot.appendItems(KeyGroup.QWERTYKeyboardGroups.map { .keyGroup($0) })
             snapshot.appendItems([.keyboardFunctionButton(.space), .keyboardFunctionButton(.speak)])
         } else {
             snapshot.appendSections([.categories])
+            snapshot.appendItems([.pagination(.backward)])
             snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
+            snapshot.appendItems([.pagination(.forward)])
             
             snapshot.appendSections([.presets])
             snapshot.appendItems(categoryPresets[selectedCategory]!)
         }
         
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
-            if kind == "CategorySectionBackground" {
-                let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CategorySectionBackground", for: indexPath) as! CategorySectionBackground
-                return view
-            }
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "PresetPageControlView", for: indexPath) as! PresetPageControlReusableView
             self?.pageControl = view.pageControl
             return view
@@ -252,7 +259,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         switch item {
         case .textField, .keyGroup:
             return false
-        case .category, .presetItem, .topBarButton, .suggestionText, .keyboardFunctionButton:
+        case .category, .presetItem, .topBarButton, .suggestionText, .keyboardFunctionButton, .pagination:
             return true
         }
     }
@@ -263,7 +270,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         switch item {
         case .textField, .keyGroup:
             return false
-        case .category, .presetItem, .topBarButton, .suggestionText, .keyboardFunctionButton:
+        case .category, .presetItem, .topBarButton, .suggestionText, .keyboardFunctionButton, .pagination:
             return true
         }
     }
@@ -351,7 +358,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .presetItem, .topBarButton, .keyboardFunctionButton:
+        case .presetItem, .topBarButton, .keyboardFunctionButton, .pagination:
             return true
         case .category, .textField, .keyGroup, .suggestionText:
             return false
