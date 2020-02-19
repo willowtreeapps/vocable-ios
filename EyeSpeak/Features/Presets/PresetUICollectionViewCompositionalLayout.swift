@@ -98,7 +98,6 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
     
     static func categoriesSectionLayout() -> NSCollectionLayoutSection {
-        let numberOfCategories = CGFloat(4)
         let totalSectionWidth: CGFloat = 1130.0
         
         let categoryItem = NSCollectionLayoutItem(

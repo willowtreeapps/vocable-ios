@@ -28,14 +28,27 @@ class CategoryContainerCollectionViewCell: VocableCollectionViewCell, UICollecti
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
+    private lazy var pageViewController = CategoriesPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        setupCollectionView()
-        configureDataSource()
-        
+        setupPageViewController()
         borderedView.fillColor = .categoryBackgroundColor
-        collectionView.selectItem(at: dataSource.indexPath(for: .category(.category1)), animated: false, scrollPosition: .init())
+    }
+    
+    private func setupPageViewController() {
+        
+        pageViewController.view.frame = contentView.frame
+        let pageView = pageViewController.view!
+        
+        contentView.addSubview(pageView)
+        NSLayoutConstraint.activate([
+            pageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            pageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            pageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            pageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
     
     private func setupCollectionView() {
@@ -95,21 +108,39 @@ class CategoryContainerCollectionViewCell: VocableCollectionViewCell, UICollecti
     }
     
     func paginate(_ direction: PaginationDirection) {
+//        let visibleIndexPaths = collectionView.indexPathsForVisibleItems
         switch direction {
         case .forward:
-            guard let largestIndexPath = collectionView.indexPathsForVisibleItems.max() else {
-                return
-            }
-            
-            let nextRow = largestIndexPath.row + 1
-            var targetScrollRow = 0
-            if collectionView.numberOfItems(inSection: largestIndexPath.section) > nextRow {
-                targetScrollRow = nextRow
-            }
-            
-            collectionView.scrollToItem(at: IndexPath(row: targetScrollRow, section: largestIndexPath.section), at: .left, animated: true)
+            break
+//            guard let largestIndexPath = visibleIndexPaths.max() else {
+//                return
+//            }
+//
+//            let nextRow = largestIndexPath.row + 1
+//            var targetScrollRow = 0
+//            if collectionView.numberOfItems(inSection: largestIndexPath.section) > nextRow {
+//                targetScrollRow = nextRow
+//            }
+//
+//            collectionView.scrollToItem(at: IndexPath(row: targetScrollRow, section: largestIndexPath.section), at: .left, animated: true)
         case .backward:
             break
+//            collectionView.select
+//            guard let smallestIndexPath = visibleIndexPaths.min() else {
+//                return
+//            }
+//
+//            let previousRow = smallestIndexPath.row - visibleIndexPaths.count
+//
+//            var targetScrollRow: Int
+//            if previousRow > 0 {
+//                targetScrollRow = max(0, smallestIndexPath.row - )
+//            } else {
+//                targetScrollRow = max(collectionView.numberOfItems(inSection: smallestIndexPath.section) - visibleIndexPaths.count - 1, 0)
+//            }
+//
+//            print(targetScrollRow)
+//            collectionView.scrollToItem(at: IndexPath(row: targetScrollRow, section: smallestIndexPath.section), at: .left, animated: true)
         }
     }
 }
