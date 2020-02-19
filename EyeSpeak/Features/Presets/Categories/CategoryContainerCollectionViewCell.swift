@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CategorySelectionDelegate: AnyObject {
+    func didSelectCategory(_: PresetCategory)
+}
+
 class CategoryContainerCollectionViewCell: VocableCollectionViewCell, UICollectionViewDelegate {
     
     private enum Section {
@@ -20,6 +24,8 @@ class CategoryContainerCollectionViewCell: VocableCollectionViewCell, UICollecti
     
     @IBOutlet var collectionView: UICollectionView!
     
+    weak var categorySelectionDelegate: CategorySelectionDelegate?
+    
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
     override func awakeFromNib() {
@@ -28,27 +34,19 @@ class CategoryContainerCollectionViewCell: VocableCollectionViewCell, UICollecti
         setupCollectionView()
         configureDataSource()
         
+        borderedView.fillColor = .categoryBackgroundColor
         collectionView.selectItem(at: dataSource.indexPath(for: .category(.category1)), animated: false, scrollPosition: .init())
     }
     
-//    override func updateContentViews() {
-//        borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
-//        borderedView.fillColor = .defaultCellBackgroundColor
-//        borderedView.isOpaque = true
-//    }
-    
     private func setupCollectionView() {
-        self.collectionView.dataSource = dataSource
-        self.collectionView.delegate = self
+        collectionView.dataSource = dataSource
+        collectionView.delegate = self
+        collectionView.delaysContentTouches = false
         
-        self.collectionView.backgroundColor = .defaultCellBackgroundColor
-        self.collectionView.delaysContentTouches = false
+        collectionView.register(UINib(nibName: CategoryItemCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
 
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
-//        collectionView.reloadData()
-        
-        collectionView.register(UINib(nibName: CategoryItemCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
     }
     
     private func configureDataSource() {
@@ -89,21 +87,29 @@ class CategoryContainerCollectionViewCell: VocableCollectionViewCell, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Move this to the pagination buttons
-        paginate()
-    }
-    
-    func paginate() {
-        guard let largestIndexPath = collectionView.indexPathsForVisibleItems.max() else {
-            return
-        }
+        let itemIdentifier = dataSource.itemIdentifier(for: indexPath)
         
-        let nextRow = largestIndexPath.row + 1
-        if collectionView.numberOfItems(inSection: largestIndexPath.section) > nextRow {
-            collectionView.scrollToItem(at: IndexPath(row: nextRow, section: largestIndexPath.section), at: .left, animated: true)
-        } else {
-            collectionView.scrollToItem(at: IndexPath(row: 0, section: largestIndexPath.section), at: .left, animated: true)
+        if case let .category(category) = itemIdentifier {
+            categorySelectionDelegate?.didSelectCategory((category))
         }
     }
     
+    func paginate(_ direction: PaginationDirection) {
+        switch direction {
+        case .forward:
+            guard let largestIndexPath = collectionView.indexPathsForVisibleItems.max() else {
+                return
+            }
+            
+            let nextRow = largestIndexPath.row + 1
+            var targetScrollRow = 0
+            if collectionView.numberOfItems(inSection: largestIndexPath.section) > nextRow {
+                targetScrollRow = nextRow
+            }
+            
+            collectionView.scrollToItem(at: IndexPath(row: targetScrollRow, section: largestIndexPath.section), at: .left, animated: true)
+        case .backward:
+            break
+        }
+    }
 }

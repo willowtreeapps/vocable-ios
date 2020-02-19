@@ -60,7 +60,6 @@
 		B838202123FC6B17005A79CD /* PaginationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B838202023FC6B17005A79CD /* PaginationCollectionViewCell.xib */; };
 		B838202323FC6B38005A79CD /* PaginationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838202223FC6B38005A79CD /* PaginationCollectionViewCell.swift */; };
 		B838202623FC6BBB005A79CD /* PaginationDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838202523FC6BBB005A79CD /* PaginationDirection.swift */; };
-		B838202A23FC99C9005A79CD /* CircularRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838202923FC99C9005A79CD /* CircularRange.swift */; };
 		B838202D23FD8934005A79CD /* CategoryContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838202C23FD8934005A79CD /* CategoryContainerCollectionViewCell.swift */; };
 		B838202F23FD894C005A79CD /* CategoryContainerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B838202E23FD894C005A79CD /* CategoryContainerCollectionViewCell.xib */; };
 		B879831123E0CEC300DC1A81 /* PresetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879831023E0CEC300DC1A81 /* PresetsViewController.swift */; };
@@ -144,7 +143,6 @@
 		B838202023FC6B17005A79CD /* PaginationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaginationCollectionViewCell.xib; sourceTree = "<group>"; };
 		B838202223FC6B38005A79CD /* PaginationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B838202523FC6BBB005A79CD /* PaginationDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationDirection.swift; sourceTree = "<group>"; };
-		B838202923FC99C9005A79CD /* CircularRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularRange.swift; sourceTree = "<group>"; };
 		B838202C23FD8934005A79CD /* CategoryContainerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryContainerCollectionViewCell.swift; sourceTree = "<group>"; };
 		B838202E23FD894C005A79CD /* CategoryContainerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryContainerCollectionViewCell.xib; sourceTree = "<group>"; };
 		B879831023E0CEC300DC1A81 /* PresetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetsViewController.swift; sourceTree = "<group>"; };
@@ -345,7 +343,6 @@
 			children = (
 				B838202423FC6BB0005A79CD /* Models */,
 				B838202723FC99AE005A79CD /* Views */,
-				B838202923FC99C9005A79CD /* CircularRange.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -552,7 +549,6 @@
 				6B9DFA6023E889DB0037673E /* Extensions.swift in Sources */,
 				6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */,
 				B838201123F4B1C2005A79CD /* KeyboardGroupCollectionViewCell.swift in Sources */,
-				B838202A23FC99C9005A79CD /* CircularRange.swift in Sources */,
 				B8DA9DFE23F3407000FEBE19 /* TextPresets.swift in Sources */,
 				9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */,
 				6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */,

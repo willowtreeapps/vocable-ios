@@ -9,29 +9,16 @@
 import UIKit
 import AVFoundation
 
-class PresetsViewController: UICollectionViewController, KeyboardSelectionDelegate {
-    
-    private let maxDisplayedCategories = 4
-    
-    @CircularRange(size: 4, upperBound: TextPresets.presetsByCategory.keys.count) var currentCategoryRange: Range<Int> {
-        didSet {
-            selectedCategory = currentCategories.keys.sorted().first!
-        }
-    }
-    
-    private var currentCategories: [PresetCategory: [String]] {
-        TextPresets.presetsForCategories(in: currentCategoryRange)
-    }
-    
+class PresetsViewController: UICollectionViewController, KeyboardSelectionDelegate, CategorySelectionDelegate {
     private var selectedCategory: PresetCategory = .category1 {
         didSet {
             self.updateSnapshot()
         }
     }
     
-    private var categoryPresets: [PresetCategory: [ItemWrapper]] {
-        currentCategories.mapValues { $0.map { .presetItem($0) } }
-    }
+    private lazy var categoryPresets: [PresetCategory: [ItemWrapper]] = {
+        TextPresets.presetsByCategory.mapValues { $0.map { .presetItem($0) } }
+    }()
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     private weak var orthogonalScrollView: UIScrollView? {
@@ -189,27 +176,9 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                 cell.setup(with: buttonType.image)
                 return cell
             case .category:
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryContainerCollectionViewCell", for: indexPath) as! CategoryContainerCollectionViewCell
-
+                let cell =  self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryContainerCollectionViewCell", for: indexPath) as! CategoryContainerCollectionViewCell
+                cell.categorySelectionDelegate = self
                 return cell
-                
-                // TODO round its corners
-//                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
-//                cell.setup(title: category.description)
-//
-//                let snapshot = self.dataSource.snapshot()
-//                let sectionIdentifier = snapshot.sectionIdentifier(containingItem: identifier)!
-//
-//                // Round the corners of the first and last category cells using index path math to skip over the pagination cells
-//                if indexPath.row == 1 {
-//                    cell.roundedCorners = [.topLeft, .bottomLeft]
-//                } else if indexPath.row == snapshot.numberOfItems(inSection: sectionIdentifier) - 2 {
-//                    cell.roundedCorners = [.topRight, .bottomRight]
-//                } else {
-//                    cell.roundedCorners = []
-//                }
-//
-//                return cell
             case .suggestionText(let predictiveText):
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: predictiveText.text)
             case .presetItem(let preset):
@@ -263,19 +232,8 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
             snapshot.appendItems([.keyboardFunctionButton(.space), .keyboardFunctionButton(.speak)])
         } else {
             snapshot.appendSections([.categories])
-            snapshot.appendItems([.pagination(.backward)]) // TODO clean up the snapshot construction
-            
+            snapshot.appendItems([.pagination(.backward)])
             snapshot.appendItems([.category])
-            
-//            let currentCategoryItems: [ItemWrapper] = currentCategories.keys.sorted().map { .category($0) }
-//            snapshot.appendItems(currentCategoryItems)
-//
-//            if currentCategoryItems.count < maxDisplayedCategories {
-//            // TODO potentially add a custom placeholder item type
-//                let placeholderItems: [ItemWrapper] = (currentCategoryItems.count..<maxDisplayedCategories).map { _ in .suggestionText(TextSuggestion(text: "")) }
-//
-//                snapshot.appendItems(placeholderItems)
-//            }
             snapshot.appendItems([.pagination(.forward)])
             
             snapshot.appendSections([.presets])
@@ -362,7 +320,6 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                 AVSpeechSynthesizer.shared.speak(text)
             }
         case .category:
-//            selectedCategory = category
             return
         case .keyboardFunctionButton(let functionType):
             switch functionType {
@@ -386,11 +343,21 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                 currentSpeechText = words.joined(separator: " ") + " " + suggestion.text + " "
             }
         case .pagination(let direction):
-            guard let section = dataSource.snapshot().sectionIdentifier(containingItem: selectedItem) else {
+            let snapshot = dataSource.snapshot()
+            guard let section = snapshot.sectionIdentifier(containingItem: selectedItem) else {
                 break
             }
             
-            paginate(section, direction)
+            let sectionContentIdentifiers = snapshot.itemIdentifiers(inSection: section).filter { $0 != .pagination(.forward) && $0 != .pagination(.backward) }
+            
+            guard let contentItemIdentifier = sectionContentIdentifiers.first,
+                let contentItemIndexPath = dataSource.indexPath(for: contentItemIdentifier) else {
+                break
+            }
+            
+            if let categoryContainerCell = collectionView.cellForItem(at: contentItemIndexPath) as? CategoryContainerCollectionViewCell {
+                categoryContainerCell.paginate(direction)
+            }
         default:
             break
         }
@@ -398,28 +365,6 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         if collectionView.indexPathForGazedItem != indexPath {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
-    }
-    
-    private func paginate(_ section: Section, _ direction: PaginationDirection) {
-//        switch section {
-//        case .categories:
-//            // Move this to the cell if it pans out
-////            let visibleIndexPaths =
-//
-//            switch direction {
-//            case .forward:
-//                // TODO handle incrementing range differently and handle out-of-bounds cases
-//                currentCategoryRange = (currentCategoryRange.lowerBound + currentCategoryRange.count..<currentCategoryRange.upperBound + currentCategoryRange.count)
-//            case .backward:
-//                currentCategoryRange = (currentCategoryRange.lowerBound - currentCategoryRange.count..<currentCategoryRange.upperBound - currentCategoryRange.count)
-//            }
-//
-//            collectionView.selectItem(at: dataSource.indexPath(for: .category(selectedCategory)), animated: false, scrollPosition: .init())
-//        case .presets:
-//            break
-//        default:
-//            break
-//        }
     }
         
     override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
@@ -480,5 +425,10 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
             textExpression.replace(text: currentSpeechText)
             suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
         }
+    }
+    
+    // MARK: - CategorySelectionDelegate
+    func didSelectCategory(_ category: PresetCategory) {
+        selectedCategory = category
     }
 }

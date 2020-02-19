@@ -80,12 +80,4 @@ struct TextPresets {
         .category5: ["Test cat 5"],
         .category6: ["Test cat 6"]
     ]
-    
-    static func presetsForCategories(in range: Range<Int>) -> [PresetCategory: [String]] {
-        let allCategories = presetsByCategory.keys.sorted()
-        let safeRange = range.clamped(to: (0..<allCategories.count))
-        let categoriesInRange = allCategories[range.clamped(to: safeRange)]
-        
-        return presetsByCategory.filter { categoriesInRange.contains($0.key) }
-    }
 }

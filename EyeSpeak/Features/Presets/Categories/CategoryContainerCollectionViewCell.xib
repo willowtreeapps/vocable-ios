@@ -36,6 +36,7 @@
                 </constraints>
                 <edgeInsets key="layoutMargins" top="25" left="56" bottom="25" right="56"/>
             </collectionViewCellContentView>
+            <color key="backgroundColor" name="CategoryBackground"/>
             <size key="customSize" width="524" height="366"/>
             <connections>
                 <outlet property="collectionView" destination="4GU-Nq-tRW" id="b9U-LF-dCr"/>
