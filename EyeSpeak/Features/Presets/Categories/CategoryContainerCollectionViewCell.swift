@@ -10,21 +10,13 @@ import UIKit
 
 class CategoryContainerCollectionViewCell: VocableCollectionViewCell, UICollectionViewDelegate {
             
-    private lazy var pageViewController = CategoriesPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    lazy var pageViewController = CategoriesPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        setupPageViewController()
         borderedView.fillColor = .categoryBackgroundColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
-    }
-    
-    private func setupPageViewController() {
-        pageViewController.view.frame = contentView.frame.inset(by: contentView.layoutMargins)
-        
-        let pageView = pageViewController.view!
-        contentView.addSubview(pageView)
     }
     
     func paginate(_ direction: PaginationDirection) {

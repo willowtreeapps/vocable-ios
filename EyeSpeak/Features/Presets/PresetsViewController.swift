@@ -283,8 +283,18 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
             return locateNearestContainingScrollView(for: view?.superview)
         }
         
-        if  orthogonalScrollView == nil && dataSource.snapshot().indexOfSection(.presets) == indexPath.section {
+        if orthogonalScrollView == nil && dataSource.snapshot().indexOfSection(.presets) == indexPath.section {
             orthogonalScrollView = locateNearestContainingScrollView(for: cell)
+        }
+        
+        if let cell = cell as? CategoryContainerCollectionViewCell {
+            let childContainerView = cell.contentView
+            let childViewController = cell.pageViewController
+            
+            addChild(childViewController)
+            childViewController.view.frame = childContainerView.frame.inset(by: childContainerView.layoutMargins)
+            childContainerView.addSubview(childViewController.view)
+            childViewController.didMove(toParent: self)
         }
     }
 
@@ -319,8 +329,6 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
             DispatchQueue.global(qos: .userInitiated).async {
                 AVSpeechSynthesizer.shared.speak(text)
             }
-        case .category:
-            return
         case .keyboardFunctionButton(let functionType):
             switch functionType {
             case .space:
