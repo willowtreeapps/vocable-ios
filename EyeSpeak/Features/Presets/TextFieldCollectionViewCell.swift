@@ -1,17 +1,17 @@
 //
-//  KeyboardKeyCollectionView.swift
+//  TextFieldCollectionViewCell.swift
 //  EyeSpeak
 //
-//  Created by Jesse Morgan on 2/13/20.
+//  Created by Jesse Morgan on 2/18/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
 import UIKit
 
-class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
+class TextFieldCollectionViewCell: VocableCollectionViewCell {
     @IBOutlet fileprivate weak var textLabel: UILabel!
     
-    var font: UIFont = .systemFont(ofSize: 48, weight: .bold) {
+    var font: UIFont = .systemFont(ofSize: 28, weight: .bold) {
         didSet {
             textLabel.font = font
         }
@@ -20,8 +20,11 @@ class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        borderedView.cornerRadius = 8
         borderedView.borderColor = .cellBorderHighlightColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
+        super.fillColor = .collectionViewBackgroundColor
+        font = .systemFont(ofSize: 48, weight: .bold)
         
         updateContentViews()
         backgroundView = borderedView
@@ -31,13 +34,12 @@ class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
         super.updateContentViews()
         
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
-        textLabel.backgroundColor = borderedView.fillColor
+        textLabel.backgroundColor = .collectionViewBackgroundColor
         textLabel.isOpaque = true
-        textLabel.font = font
     }
 
-    func setup(title: String) {
-        textLabel.text = title
+    func setup(title: NSAttributedString) {
+        textLabel.attributedText = title
     }
     
     func setup(with image: UIImage?) {
@@ -50,4 +52,6 @@ class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
         
         textLabel.attributedText = attributedString
     }
+    
+    
 }
