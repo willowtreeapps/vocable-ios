@@ -8,11 +8,7 @@
 
 import Foundation
 
-enum PresetCategory: CaseIterable, Comparable {
-    static func < (lhs: PresetCategory, rhs: PresetCategory) -> Bool {
-        lhs.description < rhs.description
-    }
-    
+enum PresetCategory: CaseIterable {
     case category1
     case category2
     case category3

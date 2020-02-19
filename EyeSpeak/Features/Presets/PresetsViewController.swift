@@ -121,7 +121,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         setupCollectionView()
         configureDataSource()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: CategoryPageCollectionViewController.didSelectCategoryNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: .didSelectCategoryNotificationName, object: nil)
     }
     
     private func setupCollectionView() {

@@ -24,9 +24,12 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
         super.viewDidLoad()
         delegate = self
         dataSource = self
-        setViewControllers([pages.first!], direction: .forward, animated: true)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: CategoryPageCollectionViewController.didSelectCategoryNotificationName, object: nil)
+        if let firstViewController = pages.first {
+            setViewControllers([firstViewController], direction: .forward, animated: true)
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: .didSelectCategoryNotificationName, object: nil)
     }
     
     // MARK: - UIPageViewControllerDataSource

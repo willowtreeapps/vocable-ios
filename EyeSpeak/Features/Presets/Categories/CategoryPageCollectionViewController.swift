@@ -10,8 +10,6 @@ import UIKit
 
 class CategoryPageCollectionViewController: UICollectionViewController {
     
-    static let didSelectCategoryNotificationName = Notification.Name("didSelectCategory")
-    
     static func createLayout(with itemCount: Int) -> UICollectionViewLayout {
         let letterItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         let letterGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)), subitem: letterItem, count: itemCount)
@@ -89,7 +87,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
         let itemIdentifier = dataSource.itemIdentifier(for: indexPath)
         
         if case let .category(category) = itemIdentifier {
-            NotificationCenter.default.post(name: CategoryPageCollectionViewController.didSelectCategoryNotificationName, object: category)
+            NotificationCenter.default.post(name: .didSelectCategoryNotificationName, object: category)
         }
     }
     
