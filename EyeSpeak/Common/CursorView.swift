@@ -8,12 +8,7 @@
 
 import UIKit
 
-class CursorView: UIView {
-
-    struct Constants {
-        static let innerCircleDiameter = CGFloat(10.0)
-        static let borderWidth = CGFloat(2.0)
-    }
+final class CursorView: UIView {
 
     override class var layerClass: AnyClass {
         return CAShapeLayer.self
@@ -21,6 +16,19 @@ class CursorView: UIView {
 
     private var shapeLayer: CAShapeLayer {
         return self.layer as! CAShapeLayer
+    }
+
+    // Scales the magnitude of the shadow to make it animatable
+    // by a single property. For example, one may bind this property
+    // to a UIScrollView offset or UISlider to make a given shadow dynamically
+    // "lift" a view off of its background.
+    var shadowAmount: CGFloat = 1.0 {
+        didSet {
+
+            // Clamp it to the interval [0, 1]
+            shadowAmount = max(min(shadowAmount, 1.0), 0.0)
+            self.updateShadowProperties()
+        }
     }
 
     override init(frame: CGRect) {
@@ -61,16 +69,23 @@ class CursorView: UIView {
         let center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
         let path = UIBezierPath()
         path.addArc(withCenter: center, radius: dimension, startAngle: 0, endAngle: .pi * 2, clockwise: true)
-        path.addArc(withCenter: center, radius: dimension * 0.8, startAngle: 0, endAngle: .pi * 2, clockwise: true)
-        path.addArc(withCenter: center, radius: dimension * 0.3, startAngle: 0, endAngle: .pi * 2, clockwise: true)
         shapeLayer.path = path.cgPath
-        shapeLayer.fillRule = .evenOdd
+        shapeLayer.shadowPath = path.cgPath
         shapeLayer.fillColor = tintColor.cgColor
         shapeLayer.backgroundColor = UIColor.clear.cgColor
+        clipsToBounds = false
+        updateShadowProperties()
+    }
+
+    private func updateShadowProperties() {
+        layer.shadowRadius = 4 * shadowAmount
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: 0, height: 4).applying(.init(scaleX: shadowAmount, y: shadowAmount))
+        layer.shadowColor = UIColor.black.cgColor
     }
 
     override var intrinsicContentSize: CGSize {
-        let dimension = 32
+        let dimension = 16
         return CGSize(width: dimension, height: dimension)
     }
 

@@ -99,6 +99,7 @@ extension UICollectionView {
                     guard delegate?.collectionView?(self, shouldSelectItemAt: oldTarget.indexPath) ?? true else {
                         return
                     }
+                    (self.window as? HeadGazeWindow)?.animateCursorSelection()
                     selectItem(at: oldTarget.indexPath, animated: true, scrollPosition: .init())
                     delegate?.collectionView?(self, didSelectItemAt: oldTarget.indexPath)
                 }
