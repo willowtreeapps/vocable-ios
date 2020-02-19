@@ -210,7 +210,7 @@ class PresetsViewController: UICollectionViewController {
         snapshot.appendItems([.topBarButton(.repeatSpokenText), .topBarButton(.toggleKeyboard)])
         
         snapshot.appendSections([.textField])
-        snapshot.appendItems([.textField(textTransaction.attrText)])
+        snapshot.appendItems([.textField(textTransaction.attributedText)])
         
         if showKeyboard {
             snapshot.appendSections([.predictiveText])
@@ -346,7 +346,7 @@ class PresetsViewController: UICollectionViewController {
                     AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
                 }
             case .clear:
-                setTextTransaction(TextTransaction(text: "", changeType: .none))
+                setTextTransaction(TextTransaction(text: "", intent: .none))
             case .backspace:
                 setTextTransaction(textTransaction.deletingLastToken())
             }
@@ -410,7 +410,5 @@ class PresetsViewController: UICollectionViewController {
             textExpression.replace(text: textTransaction.text)
             suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
         }
-        
-        updateSnapshot(animated: true)
     }
 }
