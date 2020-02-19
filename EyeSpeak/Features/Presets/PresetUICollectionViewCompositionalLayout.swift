@@ -102,12 +102,12 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         let totalSectionWidth: CGFloat = 1130.0
         
         let categoryItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / numberOfCategories),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(1)))
         let categoriesGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(906.0 / totalSectionWidth),
                                                heightDimension: .fractionalHeight(1)),
-            subitem: categoryItem, count: Int(numberOfCategories))
+            subitems: [categoryItem])
         
         let paginationItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(104.0 / totalSectionWidth),
