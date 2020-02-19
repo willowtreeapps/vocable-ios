@@ -321,7 +321,7 @@ class PresetsViewController: UICollectionViewController {
                 // of just clearing it
 
                 let newText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.rawValue
-                setTextTransaction(TextTransaction(text: newText, isHint: true), updatingSnapshot: false)
+                setTextTransaction(TextTransaction(text: newText, isHint: true))
                 suggestions = []
             }
         case .presetItem(let text):
@@ -367,9 +367,9 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .presetItem, .topBarButton, .keyboardFunctionButton:
+        case .presetItem, .topBarButton, .keyboardFunctionButton, .key, .suggestionText:
             return true
-        case .category, .textField, .key, .suggestionText:
+        case .category, .textField:
             return false
         }
     }
@@ -400,7 +400,7 @@ class PresetsViewController: UICollectionViewController {
         return cell
     }
     
-    private func setTextTransaction(_ transaction: TextTransaction, updatingSnapshot: Bool = true) {
+    private func setTextTransaction(_ transaction: TextTransaction) {
         self._textTransaction = transaction
         
         // Update suggestions
@@ -411,8 +411,6 @@ class PresetsViewController: UICollectionViewController {
             suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
         }
         
-        if updatingSnapshot {
-            updateSnapshot(animated: false)
-        }
+        updateSnapshot(animated: true)
     }
 }
