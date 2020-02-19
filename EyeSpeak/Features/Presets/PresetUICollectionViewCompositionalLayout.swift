@@ -116,7 +116,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         let containerGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(137.0 / totalHeight)),
             subitems: [paginationItem, categoriesGroup, paginationItem])
-        containerGroup.interItemSpacing = .fixed(8)
+        containerGroup.interItemSpacing = .flexible(0)
         
         let section = NSCollectionLayoutSection(group: containerGroup)
         section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
@@ -135,12 +135,8 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
                                                heightDimension: .fractionalHeight(137.0 / totalHeight)),
             subitem: predictiveTextItem, count: Int(itemCount))
         containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
+        
         let section = NSCollectionLayoutSection(group: containerGroup)
-        
-        let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
-        backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
-        
-        section.decorationItems = [backgroundDecoration]
         section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
         return section
     }

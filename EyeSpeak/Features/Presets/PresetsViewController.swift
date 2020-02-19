@@ -241,7 +241,6 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         
         if showKeyboard {
             snapshot.appendSections([.predictiveText])
-            snapshot.appendItems([.pagination(.backward)]) // TODO clean up the snapshot construction
             
             if suggestions.isEmpty {
                  snapshot.appendItems([.suggestionText(TextSuggestion(text: "")),
@@ -254,14 +253,13 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                                       .suggestionText(TextSuggestion(text: suggestions[safe: 2]?.text ?? "")),
                                       .suggestionText(TextSuggestion(text: suggestions[safe: 3]?.text ?? ""))])
             }
-            snapshot.appendItems([.pagination(.forward)])
             
             snapshot.appendSections([.keyboard])
             snapshot.appendItems(KeyGroup.QWERTYKeyboardGroups.map { .keyGroup($0) })
             snapshot.appendItems([.keyboardFunctionButton(.space), .keyboardFunctionButton(.speak)])
         } else {
             snapshot.appendSections([.categories])
-            snapshot.appendItems([.pagination(.backward)])
+            snapshot.appendItems([.pagination(.backward)]) // TODO clean up the snapshot construction
             
             let currentCategoryItems: [ItemWrapper] = currentCategories.keys.sorted().map { .category($0) }
             snapshot.appendItems(currentCategoryItems)
