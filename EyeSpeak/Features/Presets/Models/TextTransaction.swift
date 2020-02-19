@@ -33,7 +33,7 @@ struct TextTransaction: CustomDebugStringConvertible {
         let lastCharacterExpr = ".$"
         lastChararacterRange = TextTransaction.computeRange(with: self.text, using: lastCharacterExpr)
         
-        let lastTokenExpr = "\\w+\\s*$"
+        let lastTokenExpr = "[^\\s]*\\s*$"
         lastTokenRange = TextTransaction.computeRange(with: self.text, using: lastTokenExpr)
         
         let attributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "TextHighlight")!]

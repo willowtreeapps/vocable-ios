@@ -39,20 +39,11 @@ class PresetsViewController: UICollectionViewController {
         case keyboard = "Select letters below to start typing."
     }
     
-    private var textTransaction = TextTransaction(text: HintText.preset.rawValue) {
-        didSet {
-            print(textTransaction)
-            updateSuggestions()
-            updateSnapshot()
-        }
-    }
+    private var _textTransaction = TextTransaction(text: HintText.preset.rawValue)
     
-//    private var currentSpeechText: String = HintText.preset.rawValue {
-//        didSet {
-//            updateSuggestions()
-//            updateSnapshot()
-//        }
-//    }
+    private var textTransaction: TextTransaction {
+        return _textTransaction
+    }
     
     let textExpression = TextExpression()
     
@@ -212,7 +203,7 @@ class PresetsViewController: UICollectionViewController {
         updateSnapshot()
     }
     
-    func updateSnapshot() {
+    func updateSnapshot(animated: Bool = true) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
         
         snapshot.appendSections([.topBar])
@@ -258,7 +249,7 @@ class PresetsViewController: UICollectionViewController {
             return view
         }
         
-        dataSource.apply(snapshot, animatingDifferences: true)
+        dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
     // MARK: - Collection View Delegate
@@ -330,11 +321,11 @@ class PresetsViewController: UICollectionViewController {
                 // of just clearing it
 
                 let newText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.rawValue
-                textTransaction = TextTransaction(text: newText, isHint: true)
+                setTextTransaction(TextTransaction(text: newText, isHint: true), updatingSnapshot: false)
                 suggestions = []
             }
         case .presetItem(let text):
-            textTransaction = TextTransaction(text: text)
+            setTextTransaction(TextTransaction(text: text))
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {
                 AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
@@ -345,7 +336,7 @@ class PresetsViewController: UICollectionViewController {
         case .keyboardFunctionButton(let functionType):
             switch functionType {
             case .space:
-                textTransaction = textTransaction.appendingCharacter(with: " ")
+                setTextTransaction(textTransaction.appendingCharacter(with: " "))
                 suggestions = []
             case .speak:
                 guard !textTransaction.isHint else {
@@ -355,14 +346,14 @@ class PresetsViewController: UICollectionViewController {
                     AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
                 }
             case .clear:
-                textTransaction = TextTransaction(text: "", changeType: .none)
+                setTextTransaction(TextTransaction(text: "", changeType: .none))
             case .backspace:
-                textTransaction = textTransaction.deletingLastToken()
+                setTextTransaction(textTransaction.deletingLastToken())
             }
         case .key(let char):
-            textTransaction = textTransaction.appendingCharacter(with: char)
+            setTextTransaction(textTransaction.appendingCharacter(with: char))
         case .suggestionText(let suggestion):
-            textTransaction = textTransaction.insertingSuggestion(with: suggestion.text)
+            setTextTransaction(textTransaction.insertingSuggestion(with: suggestion.text))
         default:
             break
         }
@@ -409,12 +400,19 @@ class PresetsViewController: UICollectionViewController {
         return cell
     }
     
-    private func updateSuggestions() {
+    private func setTextTransaction(_ transaction: TextTransaction, updatingSnapshot: Bool = true) {
+        self._textTransaction = transaction
+        
+        // Update suggestions
         if textTransaction.isHint || textTransaction.text.last == " " {
             suggestions = []
         } else {
             textExpression.replace(text: textTransaction.text)
             suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
+        }
+        
+        if updatingSnapshot {
+            updateSnapshot(animated: false)
         }
     }
 }
