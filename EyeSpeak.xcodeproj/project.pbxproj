@@ -339,8 +339,6 @@
 				A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift */,
 				A946553123FC2CB20033D71F /* TextFieldCollectionViewCell.xib */,
 				A946553323FC2CC20033D71F /* TextFieldCollectionViewCell.swift */,
-				A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */,
-				A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */,
 			);
 			path = Presets;
 			sourceTree = "<group>";
@@ -360,6 +358,8 @@
 			children = (
 				A9299C7423F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift */,
 				A9299C7623F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib */,
+				A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */,
+				A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
