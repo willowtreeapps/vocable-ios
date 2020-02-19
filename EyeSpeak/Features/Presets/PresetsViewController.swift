@@ -345,7 +345,6 @@ class PresetsViewController: UICollectionViewController {
         case .keyboardFunctionButton(let functionType):
             switch functionType {
             case .space:
-//                didSelectCharacter(" ")
                 textTransaction = textTransaction.appendingCharacter(with: " ")
                 suggestions = []
             case .speak:
@@ -361,18 +360,8 @@ class PresetsViewController: UICollectionViewController {
                 textTransaction = textTransaction.deletingLastToken()
             }
         case .key(let char):
-//            didSelectCharacter(char)
             textTransaction = textTransaction.appendingCharacter(with: char)
         case .suggestionText(let suggestion):
-            // If adding new word: just append
-            // Else replacing current word: remove last word & then append including an additional space
-//            if currentSpeechText.last == " " {
-//                currentSpeechText.append(suggestion.text + " ")
-//            } else {
-//                var words = currentSpeechText.split(separator: " ")
-//                words.remove(at: words.endIndex - 1)
-//                currentSpeechText = words.joined(separator: " ") + " " + suggestion.text.dropLast().dropFirst() + " "
-//            }
             textTransaction = textTransaction.insertingSuggestion(with: suggestion.text)
         default:
             break
@@ -419,16 +408,6 @@ class PresetsViewController: UICollectionViewController {
         
         return cell
     }
-    
-    // MARK: - KeyboardSelectionDelegate
-//    func didSelectCharacter(_ character: String) {
-//        var characterCased = character
-//        if !currentSpeechText.isEmpty && character != " "{
-//            characterCased = character.lowercased()
-//        }
-//
-//        currentSpeechText.append(characterCased)
-//    }
     
     private func updateSuggestions() {
         if textTransaction.isHint || textTransaction.text.last == " " {
