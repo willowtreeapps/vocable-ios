@@ -427,7 +427,6 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         }
     }
     
-    // MARK: - CategorySelectionDelegate
     @objc private func didSelectCategory(notification: NSNotification) {
         guard let category = notification.object as? PresetCategory else {
             return

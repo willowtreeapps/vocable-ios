@@ -12,6 +12,8 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
     
     private let itemsPerPage = 4
     
+    var selectedCategory: PresetCategory = .category1
+    
     private lazy var pages: [UIViewController] = PresetCategory.allCases.chunked(into: itemsPerPage).map { categories in
         let collectionViewController = CategoryPageCollectionViewController(collectionViewLayout: CategoryPageCollectionViewController.createLayout(with: categories.count))
         collectionViewController.items = categories
@@ -23,6 +25,8 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
         delegate = self
         dataSource = self
         setViewControllers([pages.first!], direction: .forward, animated: true)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: CategoryPageCollectionViewController.didSelectCategoryNotificationName, object: nil)
     }
     
     // MARK: - UIPageViewControllerDataSource
@@ -68,6 +72,14 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
         }
         
         setViewControllers([previousViewController], direction: .reverse, animated: true)
+    }
+    
+    @objc private func didSelectCategory(notification: NSNotification) {
+        guard let category = notification.object as? PresetCategory else {
+            return
+        }
+        
+        selectedCategory = category
     }
 }
 

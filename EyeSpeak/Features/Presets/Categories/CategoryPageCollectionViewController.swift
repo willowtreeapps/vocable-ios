@@ -37,6 +37,21 @@ class CategoryPageCollectionViewController: UICollectionViewController {
         
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        for indexPath in collectionView.indexPathsForVisibleItems {
+            guard let item = dataSource.itemIdentifier(for: indexPath),
+                case let .category(category) = item,
+                (self.parent as? CategoriesPageViewController)?.selectedCategory == category else {
+                continue
+            }
+            
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            return
+        }
+    }
+    
     private func setupCollectionView() {
         collectionView.dataSource = dataSource
         collectionView.delegate = self
@@ -69,11 +84,21 @@ class CategoryPageCollectionViewController: UICollectionViewController {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
       
+    // MARK: - Collection View Delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let itemIdentifier = dataSource.itemIdentifier(for: indexPath)
         
         if case let .category(category) = itemIdentifier {
             NotificationCenter.default.post(name: CategoryPageCollectionViewController.didSelectCategoryNotificationName, object: category)
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
+        
+        switch item {
+        case .category:
+            return false
         }
     }
 }

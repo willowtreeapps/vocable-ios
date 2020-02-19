@@ -31,7 +31,5 @@ class CategoryContainerCollectionViewCell: VocableCollectionViewCell, UICollecti
         pageViewController.page(direction)
     }
     
-    override func updateContentViews() {
-        // no-op
-    }
+    override func updateContentViews() { /* No-op */ }
 }
