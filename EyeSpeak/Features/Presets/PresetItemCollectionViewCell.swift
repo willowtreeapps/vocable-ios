@@ -17,17 +17,6 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        borderedView.cornerRadius = 8
-        borderedView.borderColor = .cellBorderHighlightColor
-        borderedView.backgroundColor = .collectionViewBackgroundColor
-        
-        updateContentViews()
-        backgroundView = borderedView
-    }
-    
     override func updateContentViews() {
         super.updateContentViews()
 
