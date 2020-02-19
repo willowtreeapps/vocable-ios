@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class PresetsViewController: UICollectionViewController, KeyboardSelectionDelegate, CategorySelectionDelegate {
+class PresetsViewController: UICollectionViewController, KeyboardSelectionDelegate {
     private var selectedCategory: PresetCategory = .category1 {
         didSet {
             self.updateSnapshot()
@@ -120,6 +120,8 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         
         setupCollectionView()
         configureDataSource()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: CategoryPageCollectionViewController.didSelectCategoryNotificationName, object: nil)
     }
     
     private func setupCollectionView() {
@@ -176,9 +178,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                 cell.setup(with: buttonType.image)
                 return cell
             case .category:
-                let cell =  self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryContainerCollectionViewCell", for: indexPath) as! CategoryContainerCollectionViewCell
-                cell.categorySelectionDelegate = self
-                return cell
+                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryContainerCollectionViewCell", for: indexPath) as! CategoryContainerCollectionViewCell
             case .suggestionText(let predictiveText):
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: predictiveText.text)
             case .presetItem(let preset):
@@ -428,7 +428,11 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
     }
     
     // MARK: - CategorySelectionDelegate
-    func didSelectCategory(_ category: PresetCategory) {
+    @objc private func didSelectCategory(notification: NSNotification) {
+        guard let category = notification.object as? PresetCategory else {
+            return
+        }
+        
         selectedCategory = category
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     private let itemsPerPage = 4
+    
     private lazy var pages: [UIViewController] = PresetCategory.allCases.chunked(into: itemsPerPage).map { categories in
         let collectionViewController = CategoryPageCollectionViewController(collectionViewLayout: CategoryPageCollectionViewController.createLayout(with: categories.count))
         collectionViewController.items = categories
@@ -19,15 +20,9 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         delegate = self
         dataSource = self
-        
         setViewControllers([pages.first!], direction: .forward, animated: true)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-//        didMove(toParent: <#T##UIViewController?#>)
     }
     
     // MARK: - UIPageViewControllerDataSource
@@ -37,7 +32,7 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
             return nil
         }
         
-        return pages[safe: index - 1] ?? pages.last!
+        return pages[safe: index - 1] ?? pages.last
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -45,10 +40,40 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
             return nil
         }
         
-        return pages[safe: index + 1] ?? pages.first!
+        return pages[safe: index + 1] ?? pages.first
     }
     
-    // MARK: - UIPageViewControllerDelegate
+    func page(_ direction: PaginationDirection) {
+        switch direction {
+        case .forward:
+            pageForward()
+        case .backward:
+            pageBackward()
+        }
+    }
+    
+    private func pageForward() {
+        guard let currentViewController = viewControllers?.first,
+            let nextViewController = pageViewController(self, viewControllerAfter: currentViewController) else {
+            return
+        }
+
+        setViewControllers([nextViewController], direction: .forward, animated: true)
+    }
+    
+    private func pageBackward() {
+        guard let currentViewController = viewControllers?.first,
+            let previousViewController = pageViewController(self, viewControllerBefore: currentViewController) else {
+                return
+        }
+        
+        setViewControllers([previousViewController], direction: .reverse, animated: true)
+    }
+    
+    // MARK: - CategorySelectionDelegate
+    func didSelectCategory(_: PresetCategory) {
+        
+    }
 }
 
 private extension Array {
