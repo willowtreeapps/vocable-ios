@@ -16,16 +16,15 @@
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ldk-6n-dPb">
                 <rect key="frame" x="0.0" y="0.0" width="524" height="366"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <edgeInsets key="layoutMargins" top="25" left="56" bottom="25" right="56"/>
             </collectionViewCellContentView>
-            <color key="backgroundColor" name="CategoryBackground"/>
+            <color key="backgroundColor" name="Background"/>
             <size key="customSize" width="524" height="366"/>
             <point key="canvasLocation" x="355.07246376811599" y="431.25"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="CategoryBackground">
-            <color red="0.31200000643730164" green="0.29399999976158142" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

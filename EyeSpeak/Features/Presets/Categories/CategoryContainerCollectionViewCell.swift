@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class CategoryContainerCollectionViewCell: VocableCollectionViewCell, UICollectionViewDelegate {
             
     private lazy var pageViewController = CategoriesPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
@@ -18,23 +17,21 @@ class CategoryContainerCollectionViewCell: VocableCollectionViewCell, UICollecti
         
         setupPageViewController()
         borderedView.fillColor = .categoryBackgroundColor
+        borderedView.backgroundColor = .collectionViewBackgroundColor
     }
     
     private func setupPageViewController() {
+        pageViewController.view.frame = contentView.frame.inset(by: contentView.layoutMargins)
         
-        pageViewController.view.frame = contentView.frame
         let pageView = pageViewController.view!
-        
         contentView.addSubview(pageView)
-        NSLayoutConstraint.activate([
-            pageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            pageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            pageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            pageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
     }
     
     func paginate(_ direction: PaginationDirection) {
         pageViewController.page(direction)
+    }
+    
+    override func updateContentViews() {
+        // no-op
     }
 }

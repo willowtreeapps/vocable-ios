@@ -8,17 +8,15 @@
 
 import UIKit
 
-
 class CategoryPageCollectionViewController: UICollectionViewController {
     
     static let didSelectCategoryNotificationName = Notification.Name("didSelectCategory")
     
     static func createLayout(with itemCount: Int) -> UICollectionViewLayout {
         let letterItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        
         let letterGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)), subitem: letterItem, count: itemCount)
-
-        let layout = UICollectionViewCompositionalLayout(section: NSCollectionLayoutSection(group: letterGroup))
+        let section = NSCollectionLayoutSection(group: letterGroup)
+        let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
     
