@@ -65,8 +65,10 @@ struct TextTransaction: CustomDebugStringConvertible {
         switch changeType {
         case .fullWord:
             newText = NSString(string: text).replacingCharacters(in: lastTokenRange, with: "")
-        case .lastCharacter, .none:
+        case .lastCharacter:
             newText = NSString(string: text).replacingCharacters(in: lastChararacterRange, with: "")
+        case .none:
+            return TextTransaction(text: text, changeType: .lastCharacter)
         }
         return TextTransaction(text: newText, changeType: .lastCharacter)
     }
