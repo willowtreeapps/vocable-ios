@@ -19,7 +19,7 @@ class CategoryContainerCollectionViewCell: VocableCollectionViewCell, UICollecti
         borderedView.backgroundColor = .collectionViewBackgroundColor
     }
     
-    func paginate(_ direction: PaginationDirection) {
+    func paginate(_ direction: UIPageViewController.NavigationDirection) {
         pageViewController.page(direction)
     }
     

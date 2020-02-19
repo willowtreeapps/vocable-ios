@@ -68,7 +68,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
         case presetItem(String)
         case keyGroup(KeyGroup)
         case keyboardFunctionButton(KeyboardFunctionButton)
-        case pagination(PaginationDirection)
+        case pagination(UIPageViewController.NavigationDirection)
     }
     
     enum TopBarButton: String {
@@ -232,7 +232,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
             snapshot.appendItems([.keyboardFunctionButton(.space), .keyboardFunctionButton(.speak)])
         } else {
             snapshot.appendSections([.categories])
-            snapshot.appendItems([.pagination(.backward)])
+            snapshot.appendItems([.pagination(.reverse)])
             snapshot.appendItems([.category])
             snapshot.appendItems([.pagination(.forward)])
             
@@ -356,7 +356,7 @@ class PresetsViewController: UICollectionViewController, KeyboardSelectionDelega
                 break
             }
             
-            let sectionContentIdentifiers = snapshot.itemIdentifiers(inSection: section).filter { $0 != .pagination(.forward) && $0 != .pagination(.backward) }
+            let sectionContentIdentifiers = snapshot.itemIdentifiers(inSection: section).filter { $0 != .pagination(.forward) && $0 != .pagination(.reverse) }
             
             guard let contentItemIdentifier = sectionContentIdentifiers.first,
                 let contentItemIndexPath = dataSource.indexPath(for: contentItemIdentifier) else {

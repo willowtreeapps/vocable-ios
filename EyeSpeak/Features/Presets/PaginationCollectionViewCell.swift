@@ -12,7 +12,7 @@ class PaginationCollectionViewCell: VocableCollectionViewCell {
     
     @IBOutlet weak var paginationLabel: UILabel!
     
-    var paginationDirection: PaginationDirection = .forward {
+    var paginationDirection: UIPageViewController.NavigationDirection = .forward {
         didSet {
             updatePaginationLabel()
         }
@@ -40,7 +40,7 @@ class PaginationCollectionViewCell: VocableCollectionViewCell {
         switch paginationDirection {
         case .forward:
             image = UIImage(systemName: "chevron.right")
-        case .backward:
+        case .reverse:
             image = UIImage(systemName: "chevron.left")
         }
         

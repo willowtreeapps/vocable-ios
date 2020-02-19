@@ -50,12 +50,14 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
         return pages[safe: index + 1] ?? pages.first
     }
     
-    func page(_ direction: PaginationDirection) {
+    func page(_ direction: UIPageViewController.NavigationDirection) {
         switch direction {
         case .forward:
             pageForward()
-        case .backward:
+        case .reverse:
             pageBackward()
+        @unknown default:
+            pageForward()
         }
     }
     
