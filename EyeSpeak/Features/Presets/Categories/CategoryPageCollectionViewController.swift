@@ -35,13 +35,19 @@ class CategoryPageCollectionViewController: UICollectionViewController {
         
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        clearsSelectionOnViewWillAppear = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         for indexPath in collectionView.indexPathsForVisibleItems {
             guard let item = dataSource.itemIdentifier(for: indexPath),
                 case let .category(category) = item,
                 (self.parent as? CategoriesPageViewController)?.selectedCategory == category else {
+                    collectionView.deselectItem(at: indexPath, animated: false)
                 continue
             }
             
@@ -84,6 +90,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
       
     // MARK: - Collection View Delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let itemIdentifier = dataSource.itemIdentifier(for: indexPath)
         
         if case let .category(category) = itemIdentifier {
