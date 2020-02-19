@@ -39,19 +39,20 @@ class PresetsViewController: UICollectionViewController {
         case keyboard = "Select letters below to start typing."
     }
     
-    private var isShowingHintText: Bool {
-        HintText.allCases.map({$0.rawValue}).contains(currentSpeechText)
-    }
-    
-    private var currentSpeechText: String = HintText.preset.rawValue {
+    private var textTransaction = TextTransaction(text: HintText.preset.rawValue) {
         didSet {
-            if !self.isShowingHintText && !self.currentSpeechText.isEmpty {
-                self.range = NSRange(location: currentSpeechText.count - 1, length: 1)
-            }
+            print(textTransaction)
             updateSuggestions()
             updateSnapshot()
         }
     }
+    
+//    private var currentSpeechText: String = HintText.preset.rawValue {
+//        didSet {
+//            updateSuggestions()
+//            updateSnapshot()
+//        }
+//    }
     
     let textExpression = TextExpression()
     
@@ -65,7 +66,7 @@ class PresetsViewController: UICollectionViewController {
     }
     
     enum ItemWrapper: Hashable {
-        case textField(String)
+        case textField(NSAttributedString)
         case topBarButton(TopBarButton)
         case category(PresetCategory)
         case suggestionText(TextSuggestion)
@@ -120,8 +121,6 @@ class PresetsViewController: UICollectionViewController {
         }
     }
     
-    private var range: NSRange?
-    
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
@@ -143,6 +142,7 @@ class PresetsViewController: UICollectionViewController {
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
         collectionView.register(UINib(nibName: "KeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyCollectionViewCell")
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
+        collectionView.register(UINib(nibName: "SuggestionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SuggestionCollectionViewCell")
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
@@ -184,14 +184,7 @@ class PresetsViewController: UICollectionViewController {
             switch identifier {
             case .textField(let title):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: TextFieldCollectionViewCell.reuseIdentifier, for: indexPath) as! TextFieldCollectionViewCell
-                let attrTitle = NSMutableAttributedString(string: title)
-                if let range = self.range {
-                    if !self.currentSpeechText.isEmpty {
-                        let attributes = [NSAttributedString.Key.foregroundColor: UIColor.green]
-                        attrTitle.setAttributes(attributes, range: range)
-                    }
-                }
-                cell.setup(title: attrTitle)
+                cell.setup(title: title)
                 return cell
             case .topBarButton(let buttonType):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
@@ -200,7 +193,9 @@ class PresetsViewController: UICollectionViewController {
             case .category(let category):
                 return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: category.description)
             case .suggestionText(let predictiveText):
-                return self.setupCell(reuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: predictiveText.text)
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: SuggestionCollectionViewCell.reuseIdentifier, for: indexPath) as! SuggestionCollectionViewCell
+                cell.setup(title: predictiveText.text)
+                return cell
             case .presetItem(let preset):
                 return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
             case .key(let char):
@@ -224,7 +219,7 @@ class PresetsViewController: UICollectionViewController {
         snapshot.appendItems([.topBarButton(.repeatSpokenText), .topBarButton(.toggleKeyboard)])
         
         snapshot.appendSections([.textField])
-        snapshot.appendItems([.textField(currentSpeechText)])
+        snapshot.appendItems([.textField(textTransaction.attrText)])
         
         if showKeyboard {
             snapshot.appendSections([.predictiveText])
@@ -234,10 +229,10 @@ class PresetsViewController: UICollectionViewController {
                                        .suggestionText(TextSuggestion(text: "")),
                                        .suggestionText(TextSuggestion(text: ""))])
             } else {
-                snapshot.appendItems([.suggestionText(TextSuggestion(text: "\"" + (suggestions[safe: 0]?.text ?? "") + "\"")),
-                                      .suggestionText(TextSuggestion(text: "\"" + (suggestions[safe: 1]?.text ?? "") + "\"")),
-                                      .suggestionText(TextSuggestion(text: "\"" + (suggestions[safe: 2]?.text ?? "") + "\"")),
-                                      .suggestionText(TextSuggestion(text: "\"" + (suggestions[safe: 3]?.text ?? "") + "\""))])
+                snapshot.appendItems([.suggestionText(TextSuggestion(text: (suggestions[safe: 0]?.text ?? ""))),
+                                      .suggestionText(TextSuggestion(text: (suggestions[safe: 1]?.text ?? ""))),
+                                      .suggestionText(TextSuggestion(text: (suggestions[safe: 2]?.text ?? ""))),
+                                      .suggestionText(TextSuggestion(text: (suggestions[safe: 3]?.text ?? "")))])
             }
             
             snapshot.appendSections([.keyboard])
@@ -322,23 +317,27 @@ class PresetsViewController: UICollectionViewController {
         case .topBarButton(let buttonType):
             switch buttonType {
             case .repeatSpokenText:
-                guard !isShowingHintText else {
+                guard !textTransaction.isHint else {
                     break
                 }
-                AVSpeechSynthesizer.shared.speak(currentSpeechText)
+                DispatchQueue.global(qos: .userInitiated).async {
+                    AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
+                }
             case .toggleKeyboard:
                 showKeyboard.toggle()
                 
                 // TODO: discuss with design if we want to cache the user's currently-entered text instead
                 // of just clearing it
-                currentSpeechText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.rawValue
+
+                let newText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.rawValue
+                textTransaction = TextTransaction(text: newText, isHint: true)
                 suggestions = []
             }
         case .presetItem(let text):
-            currentSpeechText = text
+            textTransaction = TextTransaction(text: text)
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {
-                AVSpeechSynthesizer.shared.speak(text)
+                AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
             }
         case .category(let category):
             selectedCategory = category
@@ -346,34 +345,39 @@ class PresetsViewController: UICollectionViewController {
         case .keyboardFunctionButton(let functionType):
             switch functionType {
             case .space:
-                didSelectCharacter(" ")
+//                didSelectCharacter(" ")
+                textTransaction = textTransaction.appendingCharacter(with: " ")
                 suggestions = []
             case .speak:
-                guard !isShowingHintText else {
+                guard !textTransaction.isHint else {
                     break
                 }
-                AVSpeechSynthesizer.shared.speak(currentSpeechText)
+                DispatchQueue.global(qos: .userInitiated).async {
+                    AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
+                }
             case .clear:
-                currentSpeechText = ""
+                textTransaction = TextTransaction(text: "", changeType: .none)
             case .backspace:
-                currentSpeechText = String(currentSpeechText.dropLast())
+                textTransaction = textTransaction.deletingLastToken()
             }
         case .key(let char):
-            didSelectCharacter(char)
+//            didSelectCharacter(char)
+            textTransaction = textTransaction.appendingCharacter(with: char)
         case .suggestionText(let suggestion):
             // If adding new word: just append
             // Else replacing current word: remove last word & then append including an additional space
-            if currentSpeechText.last == " " {
-                currentSpeechText.append(suggestion.text + " ")
-            } else {
-                var words = currentSpeechText.split(separator: " ")
-                words.remove(at: words.endIndex - 1)
-                currentSpeechText = words.joined(separator: " ") + " " + suggestion.text.dropLast().dropFirst() + " "
-            }
+//            if currentSpeechText.last == " " {
+//                currentSpeechText.append(suggestion.text + " ")
+//            } else {
+//                var words = currentSpeechText.split(separator: " ")
+//                words.remove(at: words.endIndex - 1)
+//                currentSpeechText = words.joined(separator: " ") + " " + suggestion.text.dropLast().dropFirst() + " "
+//            }
+            textTransaction = textTransaction.insertingSuggestion(with: suggestion.text)
         default:
             break
         }
-        
+
         if collectionView.indexPathForGazedItem != indexPath {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
@@ -417,24 +421,20 @@ class PresetsViewController: UICollectionViewController {
     }
     
     // MARK: - KeyboardSelectionDelegate
-    func didSelectCharacter(_ character: String) {
-        if isShowingHintText {
-            currentSpeechText = ""
-        }
-        
-        var characterCased = character
-        if !currentSpeechText.isEmpty && character != " "{
-            characterCased = character.lowercased()
-        }
-        
-        currentSpeechText.append(characterCased)
-    }
+//    func didSelectCharacter(_ character: String) {
+//        var characterCased = character
+//        if !currentSpeechText.isEmpty && character != " "{
+//            characterCased = character.lowercased()
+//        }
+//
+//        currentSpeechText.append(characterCased)
+//    }
     
     private func updateSuggestions() {
-        if isShowingHintText || currentSpeechText.last == " " {
+        if textTransaction.isHint || textTransaction.text.last == " " {
             suggestions = []
         } else {
-            textExpression.replace(text: currentSpeechText)
+            textExpression.replace(text: textTransaction.text)
             suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
         }
     }
