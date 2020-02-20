@@ -67,15 +67,21 @@ class PresetsViewController: UICollectionViewController {
     }
     
     enum TopBarButton: String {
-        case repeatSpokenText
+        case save
         case toggleKeyboard
+        case togglePreset
+        case settings
         
         var image: UIImage? {
             switch self {
-            case .repeatSpokenText:
-                return UIImage(systemName: "repeat")
+            case .save:
+                return UIImage(systemName: "suit.heart")
             case .toggleKeyboard:
                 return UIImage(systemName: "keyboard")
+            case .togglePreset:
+                return UIImage(systemName: "text.bubble.fill")
+            case .settings:
+                return UIImage(systemName: "gear")
             }
         }
     }
@@ -91,7 +97,7 @@ class PresetsViewController: UICollectionViewController {
             case .clear:
                 return UIImage(systemName: "trash")!
             case .backspace:
-                return UIImage(systemName: "arrow.left.circle")!
+                return UIImage(systemName: "delete.left")!
             case .space:
                 return UIImage(named: "underscore")!
             case .speak:
@@ -144,7 +150,7 @@ class PresetsViewController: UICollectionViewController {
     }
     
     private func createLayout() -> UICollectionViewLayout {
-        let layout = PresetUICollectionViewCompositionalLayout { (sectionIndex: Int, _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = PresetUICollectionViewCompositionalLayout { (sectionIndex: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             let sectionKind = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
             
             switch sectionKind {
@@ -163,7 +169,7 @@ class PresetsViewController: UICollectionViewController {
                 
                 return PresetUICollectionViewCompositionalLayout.presetsSectionLayout()
             case .keyboard:
-                return PresetUICollectionViewCompositionalLayout.keyboardSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.keyboardSectionLayout(with: environment)
             }
         }
         return layout
@@ -206,11 +212,8 @@ class PresetsViewController: UICollectionViewController {
     func updateSnapshot(animated: Bool = true) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
         
-        snapshot.appendSections([.topBar])
-        snapshot.appendItems([.topBarButton(.repeatSpokenText), .topBarButton(.toggleKeyboard)])
-        
         snapshot.appendSections([.textField])
-        snapshot.appendItems([.textField(textTransaction.attributedText)])
+        snapshot.appendItems([.textField(textTransaction.attributedText), .topBarButton(.save), .topBarButton(.togglePreset), .topBarButton(.settings)])
         
         if showKeyboard {
             snapshot.appendSections([.predictiveText])
@@ -227,10 +230,8 @@ class PresetsViewController: UICollectionViewController {
             }
             
             snapshot.appendSections([.keyboard])
-            snapshot.appendItems("QWERTYUIOPASDFGHJKL".map { ItemWrapper.key("\($0)") })
-            snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.backspace)])
-            snapshot.appendItems("ZXCVBNM".map { ItemWrapper.key("\($0)") })
-            snapshot.appendItems([.keyboardFunctionButton(.space), .keyboardFunctionButton(.speak)])
+            snapshot.appendItems("QWERTYUIOPASDFGHJKL'ZXCVBNM,.?".map { ItemWrapper.key("\($0)") })
+            snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])
         } else {
             snapshot.appendSections([.categories])
             snapshot.appendItems([.category(.category1), .category(.category2), .category(.category3), .category(.category4)])
@@ -307,14 +308,14 @@ class PresetsViewController: UICollectionViewController {
         switch selectedItem {
         case .topBarButton(let buttonType):
             switch buttonType {
-            case .repeatSpokenText:
+            case .save:
                 guard !textTransaction.isHint else {
                     break
                 }
                 DispatchQueue.global(qos: .userInitiated).async {
                     AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
                 }
-            case .toggleKeyboard:
+            case .toggleKeyboard, .togglePreset:
                 showKeyboard.toggle()
                 
                 // TODO: discuss with design if we want to cache the user's currently-entered text instead
@@ -323,6 +324,8 @@ class PresetsViewController: UICollectionViewController {
                 let newText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.rawValue
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
                 suggestions = []
+            case .settings:
+                break
             }
         case .presetItem(let text):
             setTextTransaction(TextTransaction(text: text))
