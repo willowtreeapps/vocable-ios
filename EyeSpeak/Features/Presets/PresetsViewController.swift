@@ -58,10 +58,9 @@ class PresetsViewController: UICollectionViewController {
         case paginatedCategories
         case suggestionText(TextSuggestion)
         case paginatedPresets
-//        case presetItem(String)
         case key(String)
         case keyboardFunctionButton(KeyboardFunctionButton)
-        case pagination(UIPageViewController.NavigationDirection)
+        indirect case pagination(ItemWrapper, UIPageViewController.NavigationDirection)
     }
     
     enum TopBarButton: String {
@@ -145,7 +144,7 @@ class PresetsViewController: UICollectionViewController {
     }
     
     private func createLayout() -> UICollectionViewLayout {
-        let layout = PresetUICollectionViewCompositionalLayout { (sectionIndex: Int, _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = PresetUICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             let sectionKind = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
             
             switch sectionKind {
@@ -162,7 +161,7 @@ class PresetsViewController: UICollectionViewController {
                     return nil
                 }
                 
-                return PresetUICollectionViewCompositionalLayout.presetsSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.presetsSectionLayout(for: layoutEnvironment)
             case .keyboard:
                 return PresetUICollectionViewCompositionalLayout.keyboardSectionLayout()
             }
@@ -200,7 +199,7 @@ class PresetsViewController: UICollectionViewController {
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
                 cell.setup(with: functionType.image)
                 return cell
-            case .pagination(let direction):
+            case .pagination(let itemIdentifier, let direction):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PaginationCollectionViewCell", for: indexPath) as! PaginationCollectionViewCell
                 cell.paginationDirection = direction
                 return cell
@@ -244,12 +243,15 @@ class PresetsViewController: UICollectionViewController {
             snapshot.appendItems([.keyboardFunctionButton(.space), .keyboardFunctionButton(.speak)])
         } else {
             snapshot.appendSections([.categories])
-            snapshot.appendItems([.pagination(.reverse)])
+            snapshot.appendItems([.pagination(.paginatedCategories, .reverse)])
             snapshot.appendItems([.paginatedCategories])
-            snapshot.appendItems([.pagination(.forward)])
+            snapshot.appendItems([.pagination(.paginatedCategories, .forward)])
             
             snapshot.appendSections([.presets])
+            
+            // TODO make pagiantion items unique
             snapshot.appendItems([.paginatedPresets])
+            snapshot.appendItems([.pagination(.paginatedPresets, .reverse), .key("test"), .pagination(.paginatedPresets, .forward)])
         }
         
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
@@ -308,13 +310,12 @@ class PresetsViewController: UICollectionViewController {
         if orthogonalScrollView == nil && dataSource.snapshot().indexOfSection(.presets) == indexPath.section {
             orthogonalScrollView = locateNearestContainingScrollView(for: cell)
         }
-        
-        
-        
+             
         if let cell = cell as? PaginationContainerCollectionViewCell,
             let childViewController = cell.pageViewController {
             let childContainerView = cell.contentView
             
+            // FIXME: the child is retained forever
             addChild(childViewController)
             childViewController.view.frame = childContainerView.frame.inset(by: childContainerView.layoutMargins)
             childContainerView.addSubview(childViewController.view)
@@ -378,16 +379,8 @@ class PresetsViewController: UICollectionViewController {
             setTextTransaction(textTransaction.appendingCharacter(with: char))
         case .suggestionText(let suggestion):
             setTextTransaction(textTransaction.insertingSuggestion(with: suggestion.text))
-        case .pagination(let direction):
-            let snapshot = dataSource.snapshot()
-            guard let section = snapshot.sectionIdentifier(containingItem: selectedItem) else {
-                break
-            }
-            
-            let sectionContentIdentifiers = snapshot.itemIdentifiers(inSection: section).filter { $0 != .pagination(.forward) && $0 != .pagination(.reverse) }
-            
-            guard let contentItemIdentifier = sectionContentIdentifiers.first,
-                let contentItemIndexPath = dataSource.indexPath(for: contentItemIdentifier) else {
+        case .pagination(let itemIdentifier, let direction):  
+            guard let contentItemIndexPath = dataSource.indexPath(for: itemIdentifier) else {
                 break
             }
             

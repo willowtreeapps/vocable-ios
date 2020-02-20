@@ -132,7 +132,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
             
             let containerGroup = NSCollectionLayoutGroup.vertical(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .fractionalHeight(464.0 / totalHeight)),
+                                                   heightDimension: .fractionalHeight(1)),
                 subitem: rowGroup, count: 3)
             containerGroup.interItemSpacing = .fixed(16)
             containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)

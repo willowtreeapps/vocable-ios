@@ -15,13 +15,13 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
     private let itemsPerPage = 9
     private var selectedCategory: PresetCategory
     
-    private var pages: [UIViewController] {
+    private lazy var pages: [UIViewController] = {
         TextPresets.presetsByCategory[selectedCategory]?.chunked(into: itemsPerPage).map { presets in
             let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.CompositionalLayout(with: presets.count))
             collectionViewController.items = presets
             return collectionViewController
             } ?? []
-    }
+    }()
     
     init(selectedCategory: PresetCategory) {
         self.selectedCategory = selectedCategory

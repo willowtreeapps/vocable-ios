@@ -140,26 +140,37 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         return section
     }
         
-    static func presetsSectionLayout() -> NSCollectionLayoutSection {
+    static func presetsSectionLayout(for environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let sectionHeight: CGFloat = 552.0
+        let collectionViewWidth = environment.container.contentSize.width
+        let collectionViewHeight = environment.container.contentSize.height
+        let flexibleSpacing = (environment.container.contentSize.width / 10.0) * 2.0
+        
         let presetPageItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(1)))
+                                               heightDimension: .fractionalHeight(404.0 / 503.0)))
         
-        let containerGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(552.0 / totalHeight)),
-            subitems: [presetPageItem])
+        let leadingPaginationItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(146.0 / collectionViewWidth), heightDimension: .fractionalHeight(1)))
+        leadingPaginationItem.edgeSpacing = .init(leading: .flexible(flexibleSpacing), top: nil, trailing: nil, bottom: nil)
+        
+        let pageIndicatorItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(228.0 / collectionViewWidth), heightDimension: .fractionalHeight(1)))
+        
+        let trailingPaginationItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(146.0 / collectionViewWidth), heightDimension: .fractionalHeight(1)))
+        trailingPaginationItem.edgeSpacing = .init(leading: nil, top: nil, trailing: .flexible(flexibleSpacing), bottom: nil)
+
+        let paginationGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(99.0 / sectionHeight)),
+            subitems: [leadingPaginationItem, pageIndicatorItem, trailingPaginationItem])
+        paginationGroup.interItemSpacing = .fixed(16)
+        paginationGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        let containerGroup = NSCollectionLayoutGroup.vertical(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(sectionHeight / collectionViewHeight)),
+            subitems: [presetPageItem, paginationGroup])
+        containerGroup.interItemSpacing = .fixed(8)
         
         let section = NSCollectionLayoutSection(group: containerGroup)
-        section.interGroupSpacing = 0
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        section.orthogonalScrollingBehavior = .groupPaging
-        
-        let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
-        footer.extendsBoundary = true
-        footer.pinToVisibleBounds = true
-        section.boundarySupplementaryItems = [footer]
-        
         return section
     }
     
