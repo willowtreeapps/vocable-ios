@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class PresetPageCollectionViewController: UICollectionViewController {
     
@@ -86,12 +87,19 @@ class PresetPageCollectionViewController: UICollectionViewController {
     
     // MARK: - Collection View Delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
         
-        let itemIdentifier = dataSource.itemIdentifier(for: indexPath)
-        
-//        if case let .category(category) = itemIdentifier {
-//            NotificationCenter.default.post(name: .didSelectCategoryNotificationName, object: category)
-//        }
+        switch selectedItem {
+        case .presetItem(let text):
+            // TODO: ask why this was needed 
+//            setTextTransaction(TextTransaction(text: text))
+            // Dispatch to get off the main queue for performance
+            DispatchQueue.global(qos: .userInitiated).async {
+                AVSpeechSynthesizer.shared.speak(text)
+            }
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {

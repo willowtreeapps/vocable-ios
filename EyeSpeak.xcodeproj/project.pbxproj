@@ -69,6 +69,8 @@
 		B81D235F23FEDC15005741E8 /* PresetsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D235E23FEDC15005741E8 /* PresetsPageViewController.swift */; };
 		B81D236123FEDCD1005741E8 /* PresetPageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D236023FEDCD1005741E8 /* PresetPageCollectionViewController.swift */; };
 		B81D236323FEE642005741E8 /* PaginationContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D236223FEE642005741E8 /* PaginationContainerCollectionViewCell.swift */; };
+		B81D236623FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D236423FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift */; };
+		B81D236723FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B81D236523FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib */; };
 		B838200F23F4B011005A79CD /* VocableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */; };
 		B838202123FC6B17005A79CD /* PaginationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B838202023FC6B17005A79CD /* PaginationCollectionViewCell.xib */; };
 		B838202323FC6B38005A79CD /* PaginationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838202223FC6B38005A79CD /* PaginationCollectionViewCell.swift */; };
@@ -162,6 +164,8 @@
 		B81D235E23FEDC15005741E8 /* PresetsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsPageViewController.swift; sourceTree = "<group>"; };
 		B81D236023FEDCD1005741E8 /* PresetPageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetPageCollectionViewController.swift; sourceTree = "<group>"; };
 		B81D236223FEE642005741E8 /* PaginationContainerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationContainerCollectionViewCell.swift; sourceTree = "<group>"; };
+		B81D236423FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageIndicatorCollectionViewCell.swift; sourceTree = "<group>"; };
+		B81D236523FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageIndicatorCollectionViewCell.xib; sourceTree = "<group>"; };
 		B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableCollectionViewCell.swift; sourceTree = "<group>"; };
 		B838202023FC6B17005A79CD /* PaginationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaginationCollectionViewCell.xib; sourceTree = "<group>"; };
 		B838202223FC6B38005A79CD /* PaginationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -338,6 +342,8 @@
 				B81D235523FED535005741E8 /* PresetPaginationCollectionViewCell.swift */,
 				B838202023FC6B17005A79CD /* PaginationCollectionViewCell.xib */,
 				B838202223FC6B38005A79CD /* PaginationCollectionViewCell.swift */,
+				B81D236423FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift */,
+				B81D236523FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib */,
 			);
 			path = Pagination;
 			sourceTree = "<group>";
@@ -520,6 +526,7 @@
 				A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */,
 				B879831623E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib in Resources */,
 				A9299C7723F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib in Resources */,
+				B81D236723FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib in Resources */,
 				A98E8A2523F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib in Resources */,
 				A92FFB8F23ECD6F200AF2D0B /* HotCorners.storyboard in Resources */,
 				B81D235B23FED8EF005741E8 /* PresetPaginationCollectionViewCell.xib in Resources */,
@@ -569,6 +576,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B838202D23FD8934005A79CD /* CategoryPaginationCollectionViewCell.swift in Sources */,
+				B81D236623FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift in Sources */,
 				6B823BCA23F4ADE30099F65E /* ControlsView.swift in Sources */,
 				6B823BCE23F4ADE30099F65E /* Queue.swift in Sources */,
 				6B823BC623F4ADE30099F65E /* FormatterExtensions.swift in Sources */,

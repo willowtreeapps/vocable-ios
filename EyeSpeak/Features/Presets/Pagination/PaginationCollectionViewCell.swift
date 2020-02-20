@@ -31,7 +31,7 @@ class PaginationCollectionViewCell: VocableCollectionViewCell {
     
     override func updateContentViews() {
         super.updateContentViews()
-        borderedView.fillColor = isSelected ? .cellSelectionColor : .categoryBackgroundColor
+        borderedView.fillColor = isSelected ? .cellSelectionColor : fillColor
     }
     
     private func updatePaginationLabel() {
@@ -42,6 +42,8 @@ class PaginationCollectionViewCell: VocableCollectionViewCell {
             image = UIImage(systemName: "chevron.right")
         case .reverse:
             image = UIImage(systemName: "chevron.left")
+        @unknown default:
+            return
         }
         
         let systemImageAttachment = NSTextAttachment(image: image)

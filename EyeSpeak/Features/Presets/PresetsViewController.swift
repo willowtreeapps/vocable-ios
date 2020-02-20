@@ -60,6 +60,7 @@ class PresetsViewController: UICollectionViewController {
         case paginatedPresets
         case key(String)
         case keyboardFunctionButton(KeyboardFunctionButton)
+        case pageIndicator((String))
         indirect case pagination(ItemWrapper, UIPageViewController.NavigationDirection)
     }
     
@@ -134,6 +135,7 @@ class PresetsViewController: UICollectionViewController {
         collectionView.register(UINib(nibName: "PresetPaginationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetPaginationCollectionViewCell")
         collectionView.register(UINib(nibName: "KeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyCollectionViewCell")
         collectionView.register(UINib(nibName: "SuggestionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SuggestionCollectionViewCell")
+        collectionView.register(UINib(nibName: "PageIndicatorCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PageIndicatorCollectionViewCell")
         
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
@@ -199,9 +201,22 @@ class PresetsViewController: UICollectionViewController {
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
                 cell.setup(with: functionType.image)
                 return cell
+            case .pageIndicator:
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PageIndicatorCollectionViewCell", for: indexPath) as! PaginationCollectionViewCell
+                return cell
             case .pagination(let itemIdentifier, let direction):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PaginationCollectionViewCell", for: indexPath) as! PaginationCollectionViewCell
                 cell.paginationDirection = direction
+                
+                switch itemIdentifier {
+                case .paginatedCategories:
+                    cell.fillColor = .categoryBackgroundColor
+                case .paginatedPresets:
+                    cell.fillColor = .defaultCellBackgroundColor
+                default:
+                    break
+                }
+                
                 return cell
             }
         })
@@ -248,8 +263,6 @@ class PresetsViewController: UICollectionViewController {
             snapshot.appendItems([.pagination(.paginatedCategories, .forward)])
             
             snapshot.appendSections([.presets])
-            
-            // TODO make pagiantion items unique
             snapshot.appendItems([.paginatedPresets])
             snapshot.appendItems([.pagination(.paginatedPresets, .reverse), .key("test"), .pagination(.paginatedPresets, .forward)])
         }
@@ -275,7 +288,7 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .textField, .paginatedCategories, .paginatedPresets:
+        case .textField, .paginatedCategories, .paginatedPresets, .pageIndicator:
             return false
         case .topBarButton, .keyboardFunctionButton, .key, .pagination:
             return true
@@ -288,7 +301,7 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .textField, .paginatedCategories, .paginatedPresets:
+        case .textField, .paginatedCategories, .paginatedPresets, .pageIndicator:
             return false
         case .topBarButton, .keyboardFunctionButton, .key, .pagination:
             return true
@@ -352,12 +365,6 @@ class PresetsViewController: UICollectionViewController {
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
                 suggestions = []
             }
-//        case .presetItem(let text):
-//            setTextTransaction(TextTransaction(text: text))
-//            // Dispatch to get off the main queue for performance
-//            DispatchQueue.global(qos: .userInitiated).async {
-//                AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
-//            }
         case .keyboardFunctionButton(let functionType):
             switch functionType {
             case .space:
@@ -384,8 +391,8 @@ class PresetsViewController: UICollectionViewController {
                 break
             }
             
-            if let categoryContainerCell = collectionView.cellForItem(at: contentItemIndexPath) as? CategoryPaginationCollectionViewCell {
-                categoryContainerCell.paginate(direction)
+            if let paginationCell = collectionView.cellForItem(at: contentItemIndexPath) as? PaginationContainerCollectionViewCell {
+                paginationCell.paginate(direction)
             }
         default:
             break
@@ -400,7 +407,7 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .topBarButton, .keyboardFunctionButton, .key, .suggestionText, .pagination, .paginatedPresets:
+        case .topBarButton, .keyboardFunctionButton, .key, .suggestionText, .pagination, .paginatedPresets, .pageIndicator:
             return true
         case .paginatedCategories, .textField:
             return false
