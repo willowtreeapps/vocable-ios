@@ -19,6 +19,12 @@ class BorderedView: UIView {
         return self.layer as! CAShapeLayer
     }
 
+    var roundedCorners: UIRectCorner = .allCorners {
+        didSet {
+            updateShapeLayer()
+        }
+    }
+    
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
             updateShapeLayer()
@@ -79,8 +85,12 @@ class BorderedView: UIView {
 
     private func updateShapeLayer() {
         guard bounds.size != .zero else { return }
-        
-        let path = UIBezierPath(roundedRect: CGRect(origin: .zero, size: bounds.size).insetBy(dx: borderWidth / 2, dy: borderWidth / 2), cornerRadius: cornerRadius).cgPath
+        let cornerRadii = CGSize(width: cornerRadius, height: cornerRadius)
+        let boundsRect = CGRect(origin: .zero, size: bounds.size)
+        let insetRect = boundsRect.insetBy(dx: borderWidth / 2, dy: borderWidth / 2)
+        let path = UIBezierPath(roundedRect: insetRect,
+                                byRoundingCorners: roundedCorners,
+                                cornerRadii: cornerRadii).cgPath
         shapeLayer.path = path
         shapeLayer.shadowPath = path
         shapeLayer.fillColor = fillColor.cgColor
