@@ -9,20 +9,9 @@
 import UIKit
 import AVFoundation
 
-class PresetsViewController: UICollectionViewController {
+class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
-    private weak var orthogonalScrollView: UIScrollView? {
-        didSet {
-            scrollOffsetObserver = orthogonalScrollView?.observe(\.contentOffset, changeHandler: handleScrollViewOffsetChange(scrollView:offset:))
-        }
-    }
-    private var scrollOffsetObserver: NSKeyValueObservation?
-    private weak var pageControl: UIPageControl? {
-        didSet {
-            pageControl?.addTarget(self, action: #selector(handlePageControlChange), for: .valueChanged)
-        }
-    }
     
     private var selectedCategory: PresetCategory = .category1 {
         didSet {
@@ -201,8 +190,9 @@ class PresetsViewController: UICollectionViewController {
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
                 cell.setup(with: functionType.image)
                 return cell
-            case .pageIndicator:
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PageIndicatorCollectionViewCell", for: indexPath) as! PaginationCollectionViewCell
+            case .pageIndicator(let title):
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PageIndicatorCollectionViewCell", for: indexPath) as! PageIndicatorCollectionViewCell
+                cell.pageInfo = title
                 return cell
             case .pagination(let itemIdentifier, let direction):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PaginationCollectionViewCell", for: indexPath) as! PaginationCollectionViewCell
@@ -264,15 +254,9 @@ class PresetsViewController: UICollectionViewController {
             
             snapshot.appendSections([.presets])
             snapshot.appendItems([.paginatedPresets])
-            snapshot.appendItems([.pagination(.paginatedPresets, .reverse), .key("test"), .pagination(.paginatedPresets, .forward)])
+            snapshot.appendItems([.pagination(.paginatedPresets, .reverse), .pageIndicator("Page 1 of 4"), .pagination(.paginatedPresets, .forward)])
         }
-        
-        dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "PresetPageControlView", for: indexPath) as! PresetPageControlReusableView
-            self?.pageControl = view.pageControl
-            return view
-        }
-        
+
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
@@ -311,19 +295,6 @@ class PresetsViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        func locateNearestContainingScrollView(for view: UIView?) -> UIScrollView? {
-            if view == nil {
-                return nil
-            } else if let view = view as? UIScrollView {
-                return view
-            }
-            return locateNearestContainingScrollView(for: view?.superview)
-        }
-        
-        if orthogonalScrollView == nil && dataSource.snapshot().indexOfSection(.presets) == indexPath.section {
-            orthogonalScrollView = locateNearestContainingScrollView(for: cell)
-        }
-             
         if let cell = cell as? PaginationContainerCollectionViewCell,
             let childViewController = cell.pageViewController {
             let childContainerView = cell.contentView
@@ -333,6 +304,10 @@ class PresetsViewController: UICollectionViewController {
             childViewController.view.frame = childContainerView.frame.inset(by: childContainerView.layoutMargins)
             childContainerView.addSubview(childViewController.view)
             childViewController.didMove(toParent: self)
+            
+            if let presetsPageViewController = childViewController as? PresetsPageViewController {
+                presetsPageViewController.pageIndicatorDelegate = self
+            }
         }
     }
 
@@ -414,23 +389,6 @@ class PresetsViewController: UICollectionViewController {
         }
     }
     
-    func handleScrollViewOffsetChange(scrollView: UIScrollView, offset: NSKeyValueObservedChange<CGPoint>) {
-        let numPages = ceil(scrollView.contentSize.width / scrollView.bounds.width)
-        let pageNum = floor(scrollView.bounds.midX / scrollView.bounds.width)
-        
-        if let pageControl = pageControl {
-            pageControl.numberOfPages = Int(numPages)
-            pageControl.currentPage = Int(pageNum)
-        }
-    }
-    
-    @objc func handlePageControlChange() {
-        guard let page = pageControl?.currentPage, let scrollView = orthogonalScrollView else { return }
-        let x = min(scrollView.bounds.width * CGFloat(page), scrollView.contentSize.width - scrollView.bounds.width)
-        let rect = CGRect(x: x, y: 0, width: scrollView.bounds.width, height: scrollView.bounds.height)
-        orthogonalScrollView?.scrollRectToVisible(rect, animated: true)
-    }
-    
     private func setupCell(reuseIdentifier: String, indexPath: IndexPath, title: String, fillColor: UIColor = .defaultCellBackgroundColor) -> PresetItemCollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
         
@@ -458,5 +416,25 @@ class PresetsViewController: UICollectionViewController {
         }
         
         selectedCategory = category
+    }
+    
+    // MARK: - PageIndicatorDelegate
+    func updatePageIndicator(with pageInfo: String) {
+        let presetPageIndicatorIdentifier = dataSource.snapshot().itemIdentifiers(inSection: .presets).first {
+            guard case .pageIndicator = $0 else {
+                return false
+            }
+            
+            return true
+        }
+        
+        guard let pageIndicatorIdentifier = presetPageIndicatorIdentifier,
+            let pageIndicatorIndexPath = dataSource.indexPath(for: pageIndicatorIdentifier) else {
+            return
+        }
+        
+         if let pageIndicatorCell = collectionView.cellForItem(at: pageIndicatorIndexPath) as? PageIndicatorCollectionViewCell {
+            pageIndicatorCell.pageLabel.text = pageInfo
+        }
     }
 }

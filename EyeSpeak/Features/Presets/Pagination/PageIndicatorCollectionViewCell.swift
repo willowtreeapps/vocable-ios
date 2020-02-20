@@ -22,8 +22,4 @@ class PageIndicatorCollectionViewCell: VocableCollectionViewCell {
         super.awakeFromNib()
         fillColor = .collectionViewBackgroundColor
     }
-    
-    override func updateContentViews() {
-        // No - op
-    }
 }

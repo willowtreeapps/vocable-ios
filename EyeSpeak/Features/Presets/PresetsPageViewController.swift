@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol PageIndicatorDelegate: AnyObject {
+    func updatePageIndicator(with: String)
+}
+
 class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
+    weak var pageIndicatorDelegate: PageIndicatorDelegate?
     var selectedItem: String?
     
     private let itemsPerPage = 9
@@ -42,6 +47,25 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        notifyPageIndicatorDelegate()
+    }
+    
+    override func setViewControllers(_ viewControllers: [UIViewController]?, direction: UIPageViewController.NavigationDirection, animated: Bool, completion: ((Bool) -> Void)? = nil) {
+        super.setViewControllers(viewControllers, direction: direction, animated: animated, completion: completion)
+        notifyPageIndicatorDelegate()
+    }
+    
+    private func notifyPageIndicatorDelegate() {
+        guard let visibleViewController = viewControllers?.first,
+            let currentPage = pages.firstIndex(of: visibleViewController) else {
+            return
+        }
+        
+        pageIndicatorDelegate?.updatePageIndicator(with: "Page \(currentPage + 1) of \(pages.count)")
+    }
+    
     // MARK: - UIPageViewControllerDataSource
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -60,5 +84,14 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
         }
         
         return pages[safe: index + 1] ?? pages.first
+    }
+    
+    // MARK: - UIPageViewControllerDelegate
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard completed else {
+            return
+        }
+        
+        notifyPageIndicatorDelegate()
     }
 }
