@@ -44,14 +44,25 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
         barAppearance.backgroundColor = .collectionViewBackgroundColor
         let textAttr: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.defaultTextColor, .font: UIFont.systemFont(ofSize: 34, weight: .bold)]
         barAppearance.largeTitleTextAttributes = textAttr
-        self.navigationItem.standardAppearance = barAppearance
-        self.navigationItem.largeTitleDisplayMode = .always
+        barAppearance.titleTextAttributes = textAttr
+        navigationItem.standardAppearance = barAppearance
+        navigationItem.largeTitleDisplayMode = .always
+        
+        let dismissBarButton = UIBarButtonItem(image: UIImage(systemName: "xmark.circle")!, style: .plain, target: self, action: #selector(dismissVC))
+        dismissBarButton.tintColor = .defaultTextColor
+        
+        navigationItem.rightBarButtonItem = dismissBarButton
+    }
+    
+    @objc func dismissVC() {
+        dismiss(animated: true, completion: nil)
     }
     
     func setupCollectionView() {
-        self.collectionView.backgroundColor = .collectionViewBackgroundColor
-        self.collectionView.delaysContentTouches = false
-        self.collectionView.isScrollEnabled = false
+        collectionView.backgroundColor = .collectionViewBackgroundColor
+        collectionView.delaysContentTouches = false
+//        collectionView.isScrollEnabled = false
+//        collectionView.contentInsetAdjustmentBehavior = .never
         
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
         collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsFooterCollectionViewCell")
@@ -80,8 +91,8 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
         
         let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight((144.0 * CGFloat(itemCount)) / 834.0))
         let settingsOptionsGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsOptionsGroupSize, subitem: settingsItem, count: itemCount)
-        settingsOptionsGroup.interItemSpacing = .fixed(32)
-        settingsOptionsGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .fixed(0), top: .fixed(97), trailing: .fixed(0), bottom: .fixed(0))
+        settingsOptionsGroup.interItemSpacing = .fixed(16)
+        settingsOptionsGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .fixed(0), top: .fixed(80), trailing: .fixed(0), bottom: .fixed(0))
         settingsOptionsGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
         
         let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(80.0 / 834.0))

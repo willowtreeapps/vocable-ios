@@ -17,22 +17,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h77-DW-Ra2" userLabel="TrackingContainer">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                                 <connections>
                                     <segue destination="Gya-9R-y3J" kind="embed" id="hQM-OQ-1Dc"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQq-Gr-kNC" userLabel="ContentViewController">
-                                <rect key="frame" x="32" y="76" width="350" height="754"/>
+                                <rect key="frame" x="32" y="32" width="770" height="1110"/>
                                 <connections>
                                     <segue destination="Jgy-U0-B1Z" kind="embed" identifier="ContentViewControllerSegue" id="VGF-IP-CWi"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A16-bV-8FB" customClass="ViewControllerWrapperView" customModule="EyeSpeak" customModuleProvider="target">
-                                <rect key="frame" x="32" y="76" width="350" height="754"/>
-                                <connections>
-                                    <segue destination="qUl-CJ-Hw7" kind="embed" id="CCf-Bd-QlP"/>
-                                </connections>
+                                <rect key="frame" x="32" y="32" width="770" height="1110"/>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86h-9O-qAY" customClass="UIVirtualCursorView" customModule="EyeSpeak" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
@@ -89,7 +86,7 @@
             <objects>
                 <collectionViewController id="Jgy-U0-B1Z" customClass="PresetsViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WCJ-8g-p1t">
-                        <rect key="frame" x="0.0" y="0.0" width="374" height="778"/>
+                        <rect key="frame" x="0.0" y="0.0" width="770" height="1110"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jtp-ya-uaj">
@@ -100,11 +97,11 @@
                         </collectionViewFlowLayout>
                         <cells/>
                         <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PresetPageControlView" id="m0H-ea-bEJ" customClass="PresetPageControlReusableView" customModule="EyeSpeak" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="770" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="3bW-mX-haI">
-                                    <rect key="frame" x="167.5" y="6.5" width="39" height="37"/>
+                                    <rect key="frame" x="155.5" y="6.5" width="39" height="37"/>
                                 </pageControl>
                             </subviews>
                             <constraints>
@@ -128,14 +125,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yvH-BH-Lku" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-490" y="-1458"/>
-        </scene>
-        <!--HotCorners-->
-        <scene sceneID="4pM-9s-nVE">
-            <objects>
-                <viewControllerPlaceholder storyboardName="HotCorners" id="qUl-CJ-Hw7" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jaI-mq-cgd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1667" y="-1007"/>
         </scene>
     </scenes>
     <resources>

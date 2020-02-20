@@ -48,7 +48,6 @@ class PresetsViewController: UICollectionViewController {
     let textExpression = TextExpression()
     
     enum Section: Int, CaseIterable {
-        case topBar
         case textField
         case categories
         case predictiveText
@@ -154,8 +153,6 @@ class PresetsViewController: UICollectionViewController {
             let sectionKind = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
             
             switch sectionKind {
-            case .topBar:
-                return PresetUICollectionViewCompositionalLayout.topBarSectionLayout()
             case .textField:
                 return PresetUICollectionViewCompositionalLayout.textFieldSectionLayout()
             case .categories:
@@ -325,7 +322,10 @@ class PresetsViewController: UICollectionViewController {
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
                 suggestions = []
             case .settings:
-                break
+                let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+                let vc = storyboard.instantiateInitialViewController()!
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
             }
         case .presetItem(let text):
             setTextTransaction(TextTransaction(text: text))
