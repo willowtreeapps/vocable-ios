@@ -17,12 +17,6 @@ class PresetPageCollectionViewController: UICollectionViewController {
         }
     }
     
-    private var selectedCategory: PresetCategory = .category1 {
-        didSet {
-            self.updateSnapshot()
-        }
-    }
-    
     private enum Section {
         case presets
     }
@@ -36,7 +30,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         clearsSelectionOnViewWillAppear = false
-        collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,8 +54,10 @@ class PresetPageCollectionViewController: UICollectionViewController {
         collectionView.delegate = self
         collectionView.delaysContentTouches = false
         collectionView.isScrollEnabled = false
+        collectionView.backgroundColor = .collectionViewBackgroundColor
         
         collectionView.register(UINib(nibName: CategoryItemCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: PresetItemCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
     }
     
     private func configureDataSource() {
@@ -71,7 +67,6 @@ class PresetPageCollectionViewController: UICollectionViewController {
             case .presetItem(let preset):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
                 cell.setup(title: preset)
-//                cell.fillColor = fillColor
                 
                 return cell
 
@@ -125,40 +120,6 @@ class PresetPageCollectionViewController: UICollectionViewController {
             fatalError("init(coder:) has not been implemented")
         }
         
-        override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-            let attr = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
-            // Make animation only happen for preset items
-            guard let item = dataSource?.itemIdentifier(for: itemIndexPath) else {
-                return attr
-            }
-            
-            switch item {
-            case .presetItem:
-                attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
-            default:
-                break
-            }
-            
-            return attr
-        }
-        
-        override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-            let attr = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
-            // Make animation only happen for preset items
-            guard let item = dataSource?.itemIdentifier(for: itemIndexPath) else {
-                return attr
-            }
-            
-            switch item {
-            case .presetItem:
-                attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
-            default:
-                break
-            }
-            
-            return attr
-        }
-        
         private static func presetsSectionLayout() -> NSCollectionLayoutSection {
             let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 3.0),
                                                                                        heightDimension: .fractionalHeight(1.0)))
@@ -179,7 +140,6 @@ class PresetPageCollectionViewController: UICollectionViewController {
             let section = NSCollectionLayoutSection(group: containerGroup)
             section.interGroupSpacing = 0
             section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-            section.orthogonalScrollingBehavior = .groupPaging
             
             return section
         }

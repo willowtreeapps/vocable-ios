@@ -23,6 +23,12 @@ class PresetsViewController: UICollectionViewController {
             pageControl?.addTarget(self, action: #selector(handlePageControlChange), for: .valueChanged)
         }
     }
+    
+    private var selectedCategory: PresetCategory = .category1 {
+        didSet {
+            reloadPresets()
+        }
+    }
 
     private enum HintText: String, CaseIterable {
         case preset = "Select something below to speak"
@@ -113,6 +119,8 @@ class PresetsViewController: UICollectionViewController {
         
         setupCollectionView()
         configureDataSource()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: .didSelectCategoryNotificationName, object: nil)
     }
     
     private func setupCollectionView() {
@@ -181,7 +189,9 @@ class PresetsViewController: UICollectionViewController {
                 cell.setup(title: predictiveText.text)
                 return cell
             case .paginatedPresets:
-                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "PresetPaginationCollectionViewCell", for: indexPath) as! PresetPaginationCollectionViewCell
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PresetPaginationCollectionViewCell", for: indexPath) as! PresetPaginationCollectionViewCell
+                cell.selectedCategory = self.selectedCategory
+                return cell
             case .key(let char):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
                 cell.setup(title: char)
@@ -249,6 +259,12 @@ class PresetsViewController: UICollectionViewController {
         }
         
         dataSource.apply(snapshot, animatingDifferences: animated)
+    }
+    
+    private func reloadPresets() {
+        var snapshot = dataSource.snapshot()
+        snapshot.reloadItems([.paginatedPresets])
+        dataSource.apply(snapshot)
     }
     
     // MARK: - Collection View Delegate
@@ -434,5 +450,13 @@ class PresetsViewController: UICollectionViewController {
             textExpression.replace(text: textTransaction.text)
             suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
         }
+    }
+    
+    @objc private func didSelectCategory(notification: NSNotification) {
+        guard let category = notification.object as? PresetCategory else {
+            return
+        }
+        
+        selectedCategory = category
     }
 }

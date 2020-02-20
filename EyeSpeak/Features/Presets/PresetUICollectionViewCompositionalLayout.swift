@@ -26,7 +26,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         }
         
         switch item {
-        case .key, .keyboardFunctionButton:
+        case .paginatedPresets, .key, .keyboardFunctionButton:
             attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
         default:
             break
@@ -43,7 +43,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         }
         
         switch item {
-        case .key, .keyboardFunctionButton:
+        case .paginatedPresets, .key, .keyboardFunctionButton:
             attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
         default:
             break
