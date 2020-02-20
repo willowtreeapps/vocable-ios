@@ -93,7 +93,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
         
         switch selectedItem {
         case .presetItem(let text):
-            // TODO: ask why this was needed 
+            // TODO: ask why this was needed
 //            setTextTransaction(TextTransaction(text: text))
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {
@@ -136,13 +136,13 @@ class PresetPageCollectionViewController: UICollectionViewController {
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .fractionalHeight(1.0)),
                 subitem: presetItem, count: 3)
-            rowGroup.interItemSpacing = .fixed(16)
+            rowGroup.interItemSpacing = .fixed(8)
             
             let containerGroup = NSCollectionLayoutGroup.vertical(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .fractionalHeight(1)),
                 subitem: rowGroup, count: 3)
-            containerGroup.interItemSpacing = .fixed(16)
+            containerGroup.interItemSpacing = .fixed(8)
             containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             
             let section = NSCollectionLayoutSection(group: containerGroup)
