@@ -26,7 +26,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         }
         
         switch item {
-        case .presetItem, .key, .keyboardFunctionButton:
+        case .key, .keyboardFunctionButton:
             attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
         default:
             break
@@ -43,7 +43,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         }
         
         switch item {
-        case .presetItem, .key, .keyboardFunctionButton:
+        case .key, .keyboardFunctionButton:
             attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
         default:
             break
@@ -141,21 +141,13 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
         
     static func presetsSectionLayout() -> NSCollectionLayoutSection {
-        let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 3.0),
-                                                                                   heightDimension: .fractionalHeight(1.0)))
-        
-        let rowGroup = NSCollectionLayoutGroup.horizontal(
+        let presetPageItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(1.0)),
-            subitem: presetItem, count: 3)
-        rowGroup.interItemSpacing = .fixed(16)
+                                               heightDimension: .fractionalHeight(1)))
         
-        let containerGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(464.0 / totalHeight)),
-            subitem: rowGroup, count: 3)
-        containerGroup.interItemSpacing = .fixed(16)
-        containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        let containerGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(552.0 / totalHeight)),
+            subitems: [presetPageItem])
         
         let section = NSCollectionLayoutSection(group: containerGroup)
         section.interGroupSpacing = 0

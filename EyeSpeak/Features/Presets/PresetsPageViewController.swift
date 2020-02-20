@@ -1,24 +1,25 @@
 //
-//  CategoriesPageViewController.swift
+//  PresetsPageViewController.swift
 //  EyeSpeak
 //
-//  Created by Patrick Gatewood on 2/19/20.
+//  Created by Patrick Gatewood on 2/20/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
 import UIKit
 
-class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    private let itemsPerPage = 4
+    var selectedItem: String?
     
-    var selectedCategory: PresetCategory = .category1
+    private let itemsPerPage = 9
+    private var selectedCategory: PresetCategory = .category1 // TODO move this default to TextPresets
     
-    private lazy var pages: [UIViewController] = PresetCategory.allCases.chunked(into: itemsPerPage).map { categories in
-        let collectionViewController = CategoryPageCollectionViewController(collectionViewLayout: CategoryPageCollectionViewController.createLayout(with: categories.count))
-        collectionViewController.items = categories
+    private lazy var pages: [UIViewController] = TextPresets.presetsByCategory[selectedCategory]?.chunked(into: itemsPerPage).map { presets in
+        let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.CompositionalLayout(with: presets.count))
+        collectionViewController.items = presets
         return collectionViewController
-    }
+        } ?? []
     
     override func viewDidLoad() {
         super.viewDidLoad()

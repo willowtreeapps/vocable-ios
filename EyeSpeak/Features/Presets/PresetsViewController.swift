@@ -10,15 +10,6 @@ import UIKit
 import AVFoundation
 
 class PresetsViewController: UICollectionViewController {
-    private var selectedCategory: PresetCategory = .category1 {
-        didSet {
-            self.updateSnapshot()
-        }
-    }
-    
-    private lazy var categoryPresets: [PresetCategory: [ItemWrapper]] = {
-        TextPresets.presetsByCategory.mapValues { $0.map { .presetItem($0) } }
-    }()
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     private weak var orthogonalScrollView: UIScrollView? {
@@ -58,9 +49,10 @@ class PresetsViewController: UICollectionViewController {
     enum ItemWrapper: Hashable {
         case textField(NSAttributedString)
         case topBarButton(TopBarButton)
-        case category
+        case paginatedCategories
         case suggestionText(TextSuggestion)
-        case presetItem(String)
+        case paginatedPresets
+//        case presetItem(String)
         case key(String)
         case keyboardFunctionButton(KeyboardFunctionButton)
         case pagination(UIPageViewController.NavigationDirection)
@@ -121,21 +113,21 @@ class PresetsViewController: UICollectionViewController {
         
         setupCollectionView()
         configureDataSource()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: .didSelectCategoryNotificationName, object: nil)
     }
     
     private func setupCollectionView() {
         collectionView.delaysContentTouches = false
         collectionView.isScrollEnabled = false
+        
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PaginationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PaginationCollectionViewCell")
-        collectionView.register(UINib(nibName: "CategoryContainerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryContainerCollectionViewCell")
+        collectionView.register(UINib(nibName: "CategoryPaginationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryPaginationCollectionViewCell")
+        collectionView.register(UINib(nibName: "PresetPaginationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetPaginationCollectionViewCell")
         collectionView.register(UINib(nibName: "KeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyCollectionViewCell")
         collectionView.register(UINib(nibName: "SuggestionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SuggestionCollectionViewCell")
-
+        
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
         collectionView.backgroundColor = UIColor.collectionViewBackgroundColor
@@ -182,14 +174,14 @@ class PresetsViewController: UICollectionViewController {
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
                 cell.setup(with: buttonType.image)
                 return cell
-            case .category:
-                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryContainerCollectionViewCell", for: indexPath) as! CategoryContainerCollectionViewCell
+            case .paginatedCategories:
+                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryPaginationCollectionViewCell", for: indexPath) as! CategoryPaginationCollectionViewCell
             case .suggestionText(let predictiveText):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: SuggestionCollectionViewCell.reuseIdentifier, for: indexPath) as! SuggestionCollectionViewCell
                 cell.setup(title: predictiveText.text)
                 return cell
-            case .presetItem(let preset):
-                return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
+            case .paginatedPresets:
+                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "PresetPaginationCollectionViewCell", for: indexPath) as! PresetPaginationCollectionViewCell
             case .key(let char):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
                 cell.setup(title: char)
@@ -243,11 +235,11 @@ class PresetsViewController: UICollectionViewController {
         } else {
             snapshot.appendSections([.categories])
             snapshot.appendItems([.pagination(.reverse)])
-            snapshot.appendItems([.category])
+            snapshot.appendItems([.paginatedCategories])
             snapshot.appendItems([.pagination(.forward)])
             
             snapshot.appendSections([.presets])
-            snapshot.appendItems(categoryPresets[selectedCategory]!)
+            snapshot.appendItems([.paginatedPresets])
         }
         
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
@@ -265,9 +257,9 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .textField:
+        case .textField, .paginatedCategories, .paginatedPresets:
             return false
-        case .category, .presetItem, .topBarButton, .keyboardFunctionButton, .key, .pagination:
+        case .topBarButton, .keyboardFunctionButton, .key, .pagination:
             return true
         case .suggestionText(let suggestion):
             return !suggestion.text.isEmpty
@@ -278,9 +270,9 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .textField:
+        case .textField, .paginatedCategories, .paginatedPresets:
             return false
-        case .category, .presetItem, .topBarButton, .keyboardFunctionButton, .key, .pagination:
+        case .topBarButton, .keyboardFunctionButton, .key, .pagination:
             return true
         case .suggestionText(let suggestion):
             return !suggestion.text.isEmpty
@@ -301,9 +293,11 @@ class PresetsViewController: UICollectionViewController {
             orthogonalScrollView = locateNearestContainingScrollView(for: cell)
         }
         
-        if let cell = cell as? CategoryContainerCollectionViewCell {
+        
+        
+        if let cell = cell as? PaginationContainerCollectionViewCell,
+            let childViewController = cell.pageViewController {
             let childContainerView = cell.contentView
-            let childViewController = cell.pageViewController
             
             addChild(childViewController)
             childViewController.view.frame = childContainerView.frame.inset(by: childContainerView.layoutMargins)
@@ -341,12 +335,12 @@ class PresetsViewController: UICollectionViewController {
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
                 suggestions = []
             }
-        case .presetItem(let text):
-            setTextTransaction(TextTransaction(text: text))
-            // Dispatch to get off the main queue for performance
-            DispatchQueue.global(qos: .userInitiated).async {
-                AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
-            }
+//        case .presetItem(let text):
+//            setTextTransaction(TextTransaction(text: text))
+//            // Dispatch to get off the main queue for performance
+//            DispatchQueue.global(qos: .userInitiated).async {
+//                AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
+//            }
         case .keyboardFunctionButton(let functionType):
             switch functionType {
             case .space:
@@ -381,7 +375,7 @@ class PresetsViewController: UICollectionViewController {
                 break
             }
             
-            if let categoryContainerCell = collectionView.cellForItem(at: contentItemIndexPath) as? CategoryContainerCollectionViewCell {
+            if let categoryContainerCell = collectionView.cellForItem(at: contentItemIndexPath) as? CategoryPaginationCollectionViewCell {
                 categoryContainerCell.paginate(direction)
             }
         default:
@@ -397,9 +391,9 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .presetItem, .topBarButton, .keyboardFunctionButton, .key, .suggestionText, .pagination:
+        case .topBarButton, .keyboardFunctionButton, .key, .suggestionText, .pagination, .paginatedPresets:
             return true
-        case .category, .textField:
+        case .paginatedCategories, .textField:
             return false
         }
     }
@@ -440,13 +434,5 @@ class PresetsViewController: UICollectionViewController {
             textExpression.replace(text: textTransaction.text)
             suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
         }
-    }
-    
-    @objc private func didSelectCategory(notification: NSNotification) {
-        guard let category = notification.object as? PresetCategory else {
-            return
-        }
-        
-        selectedCategory = category
     }
 }
