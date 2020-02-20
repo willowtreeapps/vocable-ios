@@ -74,23 +74,26 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
     
     static func categoriesSectionLayout() -> NSCollectionLayoutSection {
-        let itemCount = CGFloat(4)
+        let totalSectionWidth: CGFloat = 1130.0
         
         let categoryItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / itemCount),
-                                               heightDimension: .fractionalHeight(1.0)))
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(1)))
+        let categoriesGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(906.0 / totalSectionWidth),
+                                               heightDimension: .fractionalHeight(1)),
+            subitems: [categoryItem])
+        
+        let paginationItem = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(104.0 / totalSectionWidth),
+                                               heightDimension: .fractionalHeight(1)))
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(116.0 / totalHeight)),
-            subitem: categoryItem, count: Int(itemCount))
-        containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(137.0 / totalHeight)),
+            subitems: [paginationItem, categoriesGroup, paginationItem])
+        containerGroup.interItemSpacing = .flexible(0)
+        
         let section = NSCollectionLayoutSection(group: containerGroup)
-        
-        let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
-        backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
-        
-        section.decorationItems = [backgroundDecoration]
         section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
         return section
     }

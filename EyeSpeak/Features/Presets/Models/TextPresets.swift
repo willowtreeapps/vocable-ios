@@ -8,11 +8,13 @@
 
 import Foundation
 
-enum PresetCategory {
+enum PresetCategory: CaseIterable {
     case category1
     case category2
     case category3
     case category4
+    case category5
+    case category6
     
     var description: String {
         switch self {
@@ -24,6 +26,10 @@ enum PresetCategory {
             return "Temperature"
         case .category4:
             return "Body"
+        case .category5:
+            return "Test category 5"
+        case .category6:
+            return "Test category 6"
         }
     }
 }
@@ -66,6 +72,8 @@ struct TextPresets {
                      "Knee",
                      "Side",
                      "Right",
-                     "Left"]
+                     "Left"],
+        .category5: ["Test cat 5"],
+        .category6: ["Test cat 6"]
     ]
 }
