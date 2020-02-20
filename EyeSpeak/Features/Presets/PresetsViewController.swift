@@ -100,7 +100,7 @@ class PresetsViewController: UICollectionViewController {
             case .space:
                 return UIImage(named: "underscore")!
             case .speak:
-                return UIImage(named: "Speak")!
+                return UIImage(named: "speak")!
             }
         }
     }
@@ -145,6 +145,7 @@ class PresetsViewController: UICollectionViewController {
         collectionView.collectionViewLayout = layout
         collectionView.backgroundColor = UIColor.collectionViewBackgroundColor
         collectionView.allowsMultipleSelection = true
+        layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
         
         collectionView.register(PresetPageControlReusableView.self, forSupplementaryViewOfKind: "footerPageIndicator", withReuseIdentifier: "PresetPageControlView")
     }
