@@ -54,7 +54,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     
     // MARK: - Section Layouts
     
-    static func textFieldSectionLayout() -> NSCollectionLayoutSection {
+    static func textFieldSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7), heightDimension: .fractionalHeight(1.0)))
         textFieldItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
         
@@ -73,7 +73,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         return section
     }
     
-    static func categoriesSectionLayout() -> NSCollectionLayoutSection {
+    static func categoriesSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let totalSectionWidth: CGFloat = 1130.0
         
         let categoryItem = NSCollectionLayoutItem(
@@ -98,7 +98,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         return section
     }
     
-    static func predictiveTextSectionLayout() -> NSCollectionLayoutSection {
+    static func predictiveTextSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let itemCount = CGFloat(4)
         
         let predictiveTextItem = NSCollectionLayoutItem(
@@ -120,7 +120,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         return section
     }
         
-    static func presetsSectionLayout() -> NSCollectionLayoutSection {
+    static func presetsSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 3.0),
                                                                                    heightDimension: .fractionalHeight(1.0)))
         

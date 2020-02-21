@@ -10,7 +10,7 @@ import UIKit
 
 class HeadGazeWindow: UIWindow {
 
-    weak var cursorView: UIVirtualCursorView?
+    let cursorView = UIVirtualCursorView()
 
     private var trackingView: UIView?
     private var lastGaze: UIHeadGaze?
@@ -20,11 +20,23 @@ class HeadGazeWindow: UIWindow {
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
+        self.addSubview(cursorView)
+        NSLayoutConstraint.activate([
+            cursorView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            cursorView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+            cursorView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
+            cursorView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+        ])
     }
 
     override init(windowScene: UIWindowScene) {
         super.init(windowScene: windowScene)
         commonInit()
+    }
+    
+    override func addSubview(_ view: UIView) {
+        super.addSubview(view)
+        self.bringSubviewToFront(cursorView)
     }
 
     required init?(coder: NSCoder) {
@@ -54,10 +66,6 @@ class HeadGazeWindow: UIWindow {
     }
 
     private func setCursorViewHidden(_ isCursorHidden: Bool, animated: Bool) {
-        guard let cursorView = cursorView else {
-            return
-        }
-
         func actions() {
             for cursor in cursorView.cursorViews {
                 cursor.alpha = isCursorHidden ? 0.0 : 1.0
@@ -100,7 +108,7 @@ class HeadGazeWindow: UIWindow {
             }, completion: nil)
         }
 
-        for cursor in cursorView?.cursorViews ?? [] {
+        for cursor in cursorView.cursorViews {
             performSelectionAnimation(cursor)
         }
     }
@@ -132,9 +140,7 @@ class HeadGazeWindow: UIWindow {
 
         // If something has registered as the cursor view, let it know
         // there was a state change
-        if let cursorView = cursorView {
-            cursorView.gazeMoved(gaze, with: event)
-        }
+        cursorView.gazeMoved(gaze, with: event)
 
         // Locate the current hit-tested view in our hierarchy
         let pointInWindow = gaze.location(in: self)

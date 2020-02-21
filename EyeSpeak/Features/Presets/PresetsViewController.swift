@@ -145,7 +145,6 @@ class PresetsViewController: UICollectionViewController {
         collectionView.collectionViewLayout = layout
         collectionView.backgroundColor = UIColor.collectionViewBackgroundColor
         collectionView.allowsMultipleSelection = true
-        layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
         
         collectionView.register(PresetPageControlReusableView.self, forSupplementaryViewOfKind: "footerPageIndicator", withReuseIdentifier: "PresetPageControlView")
     }
@@ -156,21 +155,22 @@ class PresetsViewController: UICollectionViewController {
             
             switch sectionKind {
             case .textField:
-                return PresetUICollectionViewCompositionalLayout.textFieldSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.textFieldSectionLayout(with: environment)
             case .categories:
-                return PresetUICollectionViewCompositionalLayout.categoriesSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.categoriesSectionLayout(with: environment)
             case .predictiveText:
-                return PresetUICollectionViewCompositionalLayout.predictiveTextSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.predictiveTextSectionLayout(with: environment)
             case .presets:
                 guard !self.showKeyboard else {
                     return nil
                 }
                 
-                return PresetUICollectionViewCompositionalLayout.presetsSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.presetsSectionLayout(with: environment)
             case .keyboard:
                 return PresetUICollectionViewCompositionalLayout.keyboardSectionLayout(with: environment)
             }
         }
+        layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
         return layout
     }
 
@@ -340,10 +340,7 @@ class PresetsViewController: UICollectionViewController {
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
                 suggestions = []
             case .settings:
-                let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-                let vc = storyboard.instantiateInitialViewController()!
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true, completion: nil)
+                presentSettingsViewController()
             }
         case .presetItem(let text):
             setTextTransaction(TextTransaction(text: text))
@@ -452,5 +449,12 @@ class PresetsViewController: UICollectionViewController {
         }
         
         selectedCategory = category
+    }
+    
+    private func presentSettingsViewController() {
+        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController()!
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
 }

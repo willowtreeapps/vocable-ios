@@ -35,8 +35,7 @@ class UIVirtualCursorView: UIView {
 
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
-        if let window = newWindow as? HeadGazeWindow {
-            window.cursorView = self
+        if (newWindow as? HeadGazeWindow) != nil {
             displayLink = CADisplayLink(target: self, selector: #selector(displayLinkDidFire(_:)))
             displayLink?.preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
             displayLink?.add(to: .current, forMode: .common)

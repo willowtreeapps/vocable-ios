@@ -61,8 +61,7 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
     func setupCollectionView() {
         collectionView.backgroundColor = .collectionViewBackgroundColor
         collectionView.delaysContentTouches = false
-//        collectionView.isScrollEnabled = false
-//        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.isScrollEnabled = false
         
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
         collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsFooterCollectionViewCell")
@@ -166,7 +165,7 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
             for child in gazeWindow.rootViewController?.children ?? [] {
                 if let child = child as? UIHeadGazeViewController {
                     child.pidInterpolator.pidSmoothingInterpolator.pulse.showTunningView(minimumValue: -1.0, maximumValue: 1.0)
-                    gazeWindow.cursorView?.isDebugCursorHidden = false
+                    gazeWindow.cursorView.isDebugCursorHidden = false
                 }
             }
         case .versionNum:
