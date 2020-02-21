@@ -10,4 +10,5 @@ import Foundation
 
 extension Notification.Name {
     static let didSelectCategoryNotificationName = Notification.Name("ActivePresetCategoryDidChange")
+    static let didSelectPresetNotificationName = Notification.Name("ActivePresetDidChange")
 }

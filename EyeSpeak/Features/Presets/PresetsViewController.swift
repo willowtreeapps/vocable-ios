@@ -9,27 +9,13 @@
 import UIKit
 import AVFoundation
 
-class PresetsViewController: UICollectionViewController {
-    private var selectedCategory: PresetCategory = .category1 {
-        didSet {
-            self.updateSnapshot()
-        }
-    }
-    
-    private lazy var categoryPresets: [PresetCategory: [ItemWrapper]] = {
-        TextPresets.presetsByCategory.mapValues { $0.map { .presetItem($0) } }
-    }()
+class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
-    private weak var orthogonalScrollView: UIScrollView? {
+    
+    private var selectedCategory: PresetCategory = .category1 {
         didSet {
-            scrollOffsetObserver = orthogonalScrollView?.observe(\.contentOffset, changeHandler: handleScrollViewOffsetChange(scrollView:offset:))
-        }
-    }
-    private var scrollOffsetObserver: NSKeyValueObservation?
-    private weak var pageControl: UIPageControl? {
-        didSet {
-            pageControl?.addTarget(self, action: #selector(handlePageControlChange), for: .valueChanged)
+            reloadPresets()
         }
     }
 
@@ -58,12 +44,13 @@ class PresetsViewController: UICollectionViewController {
     enum ItemWrapper: Hashable {
         case textField(NSAttributedString)
         case topBarButton(TopBarButton)
-        case category
+        case paginatedCategories
         case suggestionText(TextSuggestion)
-        case presetItem(String)
+        case paginatedPresets
         case key(String)
         case keyboardFunctionButton(KeyboardFunctionButton)
-        case pagination(UIPageViewController.NavigationDirection)
+        case pageIndicator((String))
+        indirect case pagination(ItemWrapper, UIPageViewController.NavigationDirection)
     }
     
     enum TopBarButton: String {
@@ -123,19 +110,23 @@ class PresetsViewController: UICollectionViewController {
         configureDataSource()
         
         NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: .didSelectCategoryNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didSelectPreset(notification:)), name: .didSelectPresetNotificationName, object: nil)
     }
     
     private func setupCollectionView() {
         collectionView.delaysContentTouches = false
         collectionView.isScrollEnabled = false
+        
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PaginationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PaginationCollectionViewCell")
-        collectionView.register(UINib(nibName: "CategoryContainerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryContainerCollectionViewCell")
+        collectionView.register(UINib(nibName: "CategoryPaginationContainerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryPaginationContainerCollectionViewCell")
+        collectionView.register(UINib(nibName: "PresetPaginationContainerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetPaginationContainerCollectionViewCell")
         collectionView.register(UINib(nibName: "KeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyCollectionViewCell")
         collectionView.register(UINib(nibName: "SuggestionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SuggestionCollectionViewCell")
-
+        collectionView.register(UINib(nibName: "PageIndicatorCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PageIndicatorCollectionViewCell")
+        
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
         collectionView.backgroundColor = UIColor.collectionViewBackgroundColor
@@ -145,7 +136,7 @@ class PresetsViewController: UICollectionViewController {
     }
     
     private func createLayout() -> UICollectionViewLayout {
-        let layout = PresetUICollectionViewCompositionalLayout { (sectionIndex: Int, _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = PresetUICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             let sectionKind = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
             
             switch sectionKind {
@@ -162,7 +153,7 @@ class PresetsViewController: UICollectionViewController {
                     return nil
                 }
                 
-                return PresetUICollectionViewCompositionalLayout.presetsSectionLayout()
+                return PresetUICollectionViewCompositionalLayout.presetsSectionLayout(for: layoutEnvironment)
             case .keyboard:
                 return PresetUICollectionViewCompositionalLayout.keyboardSectionLayout()
             }
@@ -182,14 +173,16 @@ class PresetsViewController: UICollectionViewController {
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
                 cell.setup(with: buttonType.image)
                 return cell
-            case .category:
-                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryContainerCollectionViewCell", for: indexPath) as! CategoryContainerCollectionViewCell
+            case .paginatedCategories:
+                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryPaginationContainerCollectionViewCell", for: indexPath) as! CategoryPaginationContainerCollectionViewCell
             case .suggestionText(let predictiveText):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: SuggestionCollectionViewCell.reuseIdentifier, for: indexPath) as! SuggestionCollectionViewCell
                 cell.setup(title: predictiveText.text)
                 return cell
-            case .presetItem(let preset):
-                return self.setupCell(reuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, indexPath: indexPath, title: preset)
+            case .paginatedPresets:
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PresetPaginationContainerCollectionViewCell", for: indexPath) as! PresetPaginationContainerCollectionViewCell
+                cell.selectedCategory = self.selectedCategory
+                return cell
             case .key(let char):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
                 cell.setup(title: char)
@@ -198,9 +191,23 @@ class PresetsViewController: UICollectionViewController {
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
                 cell.setup(with: functionType.image)
                 return cell
-            case .pagination(let direction):
+            case .pageIndicator(let title):
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PageIndicatorCollectionViewCell", for: indexPath) as! PageIndicatorCollectionViewCell
+                cell.pageInfo = title
+                return cell
+            case .pagination(let itemIdentifier, let direction):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PaginationCollectionViewCell", for: indexPath) as! PaginationCollectionViewCell
                 cell.paginationDirection = direction
+                
+                switch itemIdentifier {
+                case .paginatedCategories:
+                    cell.fillColor = .categoryBackgroundColor
+                case .paginatedPresets:
+                    cell.fillColor = .defaultCellBackgroundColor
+                default:
+                    break
+                }
+                
                 return cell
             }
         })
@@ -242,21 +249,22 @@ class PresetsViewController: UICollectionViewController {
             snapshot.appendItems([.keyboardFunctionButton(.space), .keyboardFunctionButton(.speak)])
         } else {
             snapshot.appendSections([.categories])
-            snapshot.appendItems([.pagination(.reverse)])
-            snapshot.appendItems([.category])
-            snapshot.appendItems([.pagination(.forward)])
+            snapshot.appendItems([.pagination(.paginatedCategories, .reverse)])
+            snapshot.appendItems([.paginatedCategories])
+            snapshot.appendItems([.pagination(.paginatedCategories, .forward)])
             
             snapshot.appendSections([.presets])
-            snapshot.appendItems(categoryPresets[selectedCategory]!)
+            snapshot.appendItems([.paginatedPresets])
+            snapshot.appendItems([.pagination(.paginatedPresets, .reverse), .pageIndicator("Page 1 of 4"), .pagination(.paginatedPresets, .forward)])
         }
-        
-        dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "PresetPageControlView", for: indexPath) as! PresetPageControlReusableView
-            self?.pageControl = view.pageControl
-            return view
-        }
-        
+
         dataSource.apply(snapshot, animatingDifferences: animated)
+    }
+    
+    private func reloadPresets() {
+        var snapshot = dataSource.snapshot()
+        snapshot.reloadItems([.paginatedPresets])
+        dataSource.apply(snapshot)
     }
     
     // MARK: - Collection View Delegate
@@ -265,9 +273,9 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .textField:
+        case .textField, .paginatedCategories, .paginatedPresets, .pageIndicator:
             return false
-        case .category, .presetItem, .topBarButton, .keyboardFunctionButton, .key, .pagination:
+        case .topBarButton, .keyboardFunctionButton, .key, .pagination:
             return true
         case .suggestionText(let suggestion):
             return !suggestion.text.isEmpty
@@ -278,9 +286,9 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .textField:
+        case .textField, .paginatedCategories, .paginatedPresets, .pageIndicator:
             return false
-        case .category, .presetItem, .topBarButton, .keyboardFunctionButton, .key, .pagination:
+        case .topBarButton, .keyboardFunctionButton, .key, .pagination:
             return true
         case .suggestionText(let suggestion):
             return !suggestion.text.isEmpty
@@ -288,27 +296,18 @@ class PresetsViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        func locateNearestContainingScrollView(for view: UIView?) -> UIScrollView? {
-            if view == nil {
-                return nil
-            } else if let view = view as? UIScrollView {
-                return view
-            }
-            return locateNearestContainingScrollView(for: view?.superview)
-        }
-        
-        if orthogonalScrollView == nil && dataSource.snapshot().indexOfSection(.presets) == indexPath.section {
-            orthogonalScrollView = locateNearestContainingScrollView(for: cell)
-        }
-        
-        if let cell = cell as? CategoryContainerCollectionViewCell {
+        if let cell = cell as? PaginationContainerCollectionViewCell,
+            let childViewController = cell.pageViewController {
             let childContainerView = cell.contentView
-            let childViewController = cell.pageViewController
             
             addChild(childViewController)
             childViewController.view.frame = childContainerView.frame.inset(by: childContainerView.layoutMargins)
             childContainerView.addSubview(childViewController.view)
             childViewController.didMove(toParent: self)
+            
+            if let presetsPageViewController = childViewController as? PresetsPageViewController {
+                presetsPageViewController.pageIndicatorDelegate = self
+            }
         }
     }
 
@@ -341,12 +340,6 @@ class PresetsViewController: UICollectionViewController {
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
                 suggestions = []
             }
-        case .presetItem(let text):
-            setTextTransaction(TextTransaction(text: text))
-            // Dispatch to get off the main queue for performance
-            DispatchQueue.global(qos: .userInitiated).async {
-                AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
-            }
         case .keyboardFunctionButton(let functionType):
             switch functionType {
             case .space:
@@ -368,21 +361,13 @@ class PresetsViewController: UICollectionViewController {
             setTextTransaction(textTransaction.appendingCharacter(with: char))
         case .suggestionText(let suggestion):
             setTextTransaction(textTransaction.insertingSuggestion(with: suggestion.text))
-        case .pagination(let direction):
-            let snapshot = dataSource.snapshot()
-            guard let section = snapshot.sectionIdentifier(containingItem: selectedItem) else {
+        case .pagination(let itemIdentifier, let direction):  
+            guard let contentItemIndexPath = dataSource.indexPath(for: itemIdentifier) else {
                 break
             }
             
-            let sectionContentIdentifiers = snapshot.itemIdentifiers(inSection: section).filter { $0 != .pagination(.forward) && $0 != .pagination(.reverse) }
-            
-            guard let contentItemIdentifier = sectionContentIdentifiers.first,
-                let contentItemIndexPath = dataSource.indexPath(for: contentItemIdentifier) else {
-                break
-            }
-            
-            if let categoryContainerCell = collectionView.cellForItem(at: contentItemIndexPath) as? CategoryContainerCollectionViewCell {
-                categoryContainerCell.paginate(direction)
+            if let paginationCell = collectionView.cellForItem(at: contentItemIndexPath) as? PaginationContainerCollectionViewCell {
+                paginationCell.paginate(direction)
             }
         default:
             break
@@ -397,28 +382,11 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .presetItem, .topBarButton, .keyboardFunctionButton, .key, .suggestionText, .pagination:
+        case .topBarButton, .keyboardFunctionButton, .key, .suggestionText, .pagination, .paginatedPresets, .pageIndicator:
             return true
-        case .category, .textField:
+        case .paginatedCategories, .textField:
             return false
         }
-    }
-    
-    func handleScrollViewOffsetChange(scrollView: UIScrollView, offset: NSKeyValueObservedChange<CGPoint>) {
-        let numPages = ceil(scrollView.contentSize.width / scrollView.bounds.width)
-        let pageNum = floor(scrollView.bounds.midX / scrollView.bounds.width)
-        
-        if let pageControl = pageControl {
-            pageControl.numberOfPages = Int(numPages)
-            pageControl.currentPage = Int(pageNum)
-        }
-    }
-    
-    @objc func handlePageControlChange() {
-        guard let page = pageControl?.currentPage, let scrollView = orthogonalScrollView else { return }
-        let x = min(scrollView.bounds.width * CGFloat(page), scrollView.contentSize.width - scrollView.bounds.width)
-        let rect = CGRect(x: x, y: 0, width: scrollView.bounds.width, height: scrollView.bounds.height)
-        orthogonalScrollView?.scrollRectToVisible(rect, animated: true)
     }
     
     private func setupCell(reuseIdentifier: String, indexPath: IndexPath, title: String, fillColor: UIColor = .defaultCellBackgroundColor) -> PresetItemCollectionViewCell {
@@ -448,5 +416,33 @@ class PresetsViewController: UICollectionViewController {
         }
         
         selectedCategory = category
+    }
+    
+    @objc private func didSelectPreset(notification: NSNotification) {
+        guard let text = notification.object as? String else {
+            return
+        }
+        
+        setTextTransaction(TextTransaction(text: text))
+    }
+    
+    // MARK: - PageIndicatorDelegate
+    func updatePageIndicator(with pageInfo: String) {
+        let presetPageIndicatorIdentifier = dataSource.snapshot().itemIdentifiers(inSection: .presets).first {
+            guard case .pageIndicator = $0 else {
+                return false
+            }
+            
+            return true
+        }
+        
+        guard let pageIndicatorIdentifier = presetPageIndicatorIdentifier,
+            let pageIndicatorIndexPath = dataSource.indexPath(for: pageIndicatorIdentifier) else {
+            return
+        }
+        
+         if let pageIndicatorCell = collectionView.cellForItem(at: pageIndicatorIndexPath) as? PageIndicatorCollectionViewCell {
+            pageIndicatorCell.pageInfo = pageInfo
+        }
     }
 }
