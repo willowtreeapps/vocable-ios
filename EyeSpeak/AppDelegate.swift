@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: HeadGazeWindow?
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        // Ensure that the persistent store has the current
+        // default presets before presenting UI
+        preparePersistentStore()
+
         application.isIdleTimerDisabled = true
         let window = HeadGazeWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
@@ -23,26 +28,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    private func preparePersistentStore() {
+        let container = NSPersistentContainer.shared
+        if let url = container.persistentStoreCoordinator.persistentStores.first?.url?.absoluteString.removingPercentEncoding {
+            print("NSPersistentStore URL: \(url)")
+        }
+        let context = container.viewContext
+        deleteExistingPrescribedEntities(in: context)
+        createPrescribedEntities(in: context)
+
+        do {
+            try context.save()
+        } catch {
+            assertionFailure("Core Data save failure: \(error)")
+        }
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    private func deleteExistingPrescribedEntities(in context: NSManagedObjectContext) {
+
+        let phraseRequest: NSFetchRequest<Phrase> = Phrase.fetchRequest()
+        phraseRequest.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, false)
+        let phraseResults = (try? context.fetch(phraseRequest)) ?? []
+        for phrase in phraseResults {
+            context.delete(phrase)
+        }
+
+        let categoryRequest: NSFetchRequest<Category> = Category.fetchRequest()
+        categoryRequest.predicate = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, false)
+        let categoryResults = (try? context.fetch(categoryRequest)) ?? []
+        for category in categoryResults {
+            context.delete(category)
+        }
     }
 
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
+    private func createPrescribedEntities(in context: NSManagedObjectContext) {
+        for presetCategory in PresetCategory.allCases {
+            let category = Category.fetchOrCreate(in: context, matching: presetCategory.description)
+            category.creationDate = Date()
+            category.name = presetCategory.description
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+            for preset in TextPresets.presetsByCategory[presetCategory] ?? [] {
+                let phrase = Phrase.fetchOrCreate(in: context, matching: preset)
+                phrase.creationDate = Date()
+                phrase.utterance = preset
+                phrase.addToCategories(category)
+                
+            }
+        }
     }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
 }
