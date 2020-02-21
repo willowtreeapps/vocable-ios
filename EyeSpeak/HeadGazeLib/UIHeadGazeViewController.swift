@@ -98,7 +98,7 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
                 window.sendEvent(event)
             }
             if let debugEvent = debugInterpolator.event, let gaze = debugEvent.allGazes?.first {
-                window.cursorView?.debugCursorMoved(gaze, with: debugEvent)
+                window.cursorView.debugCursorMoved(gaze, with: debugEvent)
             }
         }
     }
