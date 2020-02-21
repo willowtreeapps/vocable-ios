@@ -107,7 +107,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(137.0 / totalSize.height)),
+                                               heightDimension: .fractionalHeight(116.0 / totalSize.height)),
             subitem: predictiveTextItem, count: Int(itemCount))
         containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
         let section = NSCollectionLayoutSection(group: containerGroup)
@@ -142,7 +142,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         paginationGroup.interItemSpacing = .fixed(0)
         
         let containerGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(775.0 / totalSize.height)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(800.0 / totalSize.height)),
             subitems: [presetPageItem, paginationGroup])
         containerGroup.interItemSpacing = .fixed(0)
         

@@ -21,6 +21,6 @@ class PageIndicatorCollectionViewCell: VocableCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         fillColor = .collectionViewBackgroundColor
-        pageLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        pageLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
     }
 }
