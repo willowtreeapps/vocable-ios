@@ -70,7 +70,6 @@ class PresetPageCollectionViewController: UICollectionViewController {
                 cell.setup(title: preset)
                 
                 return cell
-
             }
         })
         
@@ -93,8 +92,8 @@ class PresetPageCollectionViewController: UICollectionViewController {
         
         switch selectedItem {
         case .presetItem(let text):
-            // TODO: ask why this was needed
-//            setTextTransaction(TextTransaction(text: text))
+            NotificationCenter.default.post(name: .didSelectPresetNotificationName, object: text)
+
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {
                 AVSpeechSynthesizer.shared.speak(text)

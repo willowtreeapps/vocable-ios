@@ -110,6 +110,7 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         configureDataSource()
         
         NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: .didSelectCategoryNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didSelectPreset(notification:)), name: .didSelectPresetNotificationName, object: nil)
     }
     
     private func setupCollectionView() {
@@ -416,6 +417,14 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         }
         
         selectedCategory = category
+    }
+    
+    @objc private func didSelectPreset(notification: NSNotification) {
+        guard let text = notification.object as? String else {
+            return
+        }
+        
+        setTextTransaction(TextTransaction(text: text))
     }
     
     // MARK: - PageIndicatorDelegate
