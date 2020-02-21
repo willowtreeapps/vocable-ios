@@ -11,18 +11,13 @@ import UIKit
 class PresetItemCollectionViewCell: VocableCollectionViewCell {
     @IBOutlet fileprivate weak var textLabel: UILabel!
     
-    var font: UIFont = .systemFont(ofSize: 28, weight: .bold) {
-        didSet {
-            textLabel.font = font
-        }
-    }
-    
     override func updateContentViews() {
         super.updateContentViews()
 
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = borderedView.fillColor
         textLabel.isOpaque = true
+        textLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
     }
 
     func setup(title: String) {
@@ -57,5 +52,6 @@ class CategoryItemCollectionViewCell: PresetItemCollectionViewCell {
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = borderedView.fillColor
         textLabel.isOpaque = true
+        textLabel.font = .systemFont(ofSize: 22, weight: .bold)
     }
 }
