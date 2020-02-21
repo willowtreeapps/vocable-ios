@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PresetPaginationCollectionViewCell: PaginationContainerCollectionViewCell {
+class PresetPaginationContainerCollectionViewCell: PaginationContainerCollectionViewCell {
     
     var selectedCategory: PresetCategory! {
         didSet {

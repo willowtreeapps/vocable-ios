@@ -121,8 +121,8 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
         collectionView.register(UINib(nibName: "PaginationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PaginationCollectionViewCell")
-        collectionView.register(UINib(nibName: "CategoryPaginationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryPaginationCollectionViewCell")
-        collectionView.register(UINib(nibName: "PresetPaginationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetPaginationCollectionViewCell")
+        collectionView.register(UINib(nibName: "CategoryPaginationContainerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryPaginationContainerCollectionViewCell")
+        collectionView.register(UINib(nibName: "PresetPaginationContainerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetPaginationContainerCollectionViewCell")
         collectionView.register(UINib(nibName: "KeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyCollectionViewCell")
         collectionView.register(UINib(nibName: "SuggestionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SuggestionCollectionViewCell")
         collectionView.register(UINib(nibName: "PageIndicatorCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PageIndicatorCollectionViewCell")
@@ -174,13 +174,13 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
                 cell.setup(with: buttonType.image)
                 return cell
             case .paginatedCategories:
-                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryPaginationCollectionViewCell", for: indexPath) as! CategoryPaginationCollectionViewCell
+                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryPaginationContainerCollectionViewCell", for: indexPath) as! CategoryPaginationContainerCollectionViewCell
             case .suggestionText(let predictiveText):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: SuggestionCollectionViewCell.reuseIdentifier, for: indexPath) as! SuggestionCollectionViewCell
                 cell.setup(title: predictiveText.text)
                 return cell
             case .paginatedPresets:
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PresetPaginationCollectionViewCell", for: indexPath) as! PresetPaginationCollectionViewCell
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PresetPaginationContainerCollectionViewCell", for: indexPath) as! PresetPaginationContainerCollectionViewCell
                 cell.selectedCategory = self.selectedCategory
                 return cell
             case .key(let char):
