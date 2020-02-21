@@ -50,48 +50,11 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
         return pages[safe: index + 1] ?? pages.first
     }
     
-    func page(_ direction: UIPageViewController.NavigationDirection) {
-        switch direction {
-        case .forward:
-            pageForward()
-        case .reverse:
-            pageBackward()
-        @unknown default:
-            pageForward()
-        }
-    }
-    
-    private func pageForward() {
-        guard let currentViewController = viewControllers?.first,
-            let nextViewController = pageViewController(self, viewControllerAfter: currentViewController) else {
-            return
-        }
-
-        setViewControllers([nextViewController], direction: .forward, animated: true)
-    }
-    
-    private func pageBackward() {
-        guard let currentViewController = viewControllers?.first,
-            let previousViewController = pageViewController(self, viewControllerBefore: currentViewController) else {
-                return
-        }
-        
-        setViewControllers([previousViewController], direction: .reverse, animated: true)
-    }
-    
     @objc private func didSelectCategory(notification: NSNotification) {
         guard let category = notification.object as? PresetCategory else {
             return
         }
         
         selectedCategory = category
-    }
-}
-
-private extension Array {
-    func chunked(into size: Int) -> [[Element]] {
-        return stride(from: 0, to: count, by: size).map {
-            Array(self[$0..<Swift.min($0 + size, count)])
-        }
     }
 }
