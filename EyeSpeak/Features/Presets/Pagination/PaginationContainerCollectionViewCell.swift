@@ -11,6 +11,12 @@ import UIKit
 class PaginationContainerCollectionViewCell: VocableCollectionViewCell {
     var pageViewController: UIPageViewController?
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pageViewController?.view.removeFromSuperview()
+        pageViewController?.removeFromParent()
+    }
+    
     func paginate(_ direction: UIPageViewController.NavigationDirection) {
         pageViewController?.page(direction)
     }
