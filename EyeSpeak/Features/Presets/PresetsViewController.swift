@@ -300,7 +300,6 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
             let childViewController = cell.pageViewController {
             let childContainerView = cell.contentView
             
-            // FIXME: the child is retained forever
             addChild(childViewController)
             childViewController.view.frame = childContainerView.frame.inset(by: childContainerView.layoutMargins)
             childContainerView.addSubview(childViewController.view)
