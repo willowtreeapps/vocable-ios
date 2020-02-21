@@ -5,6 +5,7 @@ disabled_rules:
 - unused_optional_binding
 - force_cast
 - force_try
+- type_name
 opt_in_rules:
 - empty_count
 - empty_string

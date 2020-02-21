@@ -442,7 +442,7 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         }
         
          if let pageIndicatorCell = collectionView.cellForItem(at: pageIndicatorIndexPath) as? PageIndicatorCollectionViewCell {
-            pageIndicatorCell.pageLabel.text = pageInfo
+            pageIndicatorCell.pageInfo = pageInfo
         }
     }
 }

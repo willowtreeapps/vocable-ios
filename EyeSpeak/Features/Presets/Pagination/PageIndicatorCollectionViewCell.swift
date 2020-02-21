@@ -10,7 +10,7 @@ import UIKit
 
 class PageIndicatorCollectionViewCell: VocableCollectionViewCell {
     
-    @IBOutlet weak var pageLabel: UILabel!
+    @IBOutlet private weak var pageLabel: UILabel!
     
     var pageInfo: String = "" {
         didSet {

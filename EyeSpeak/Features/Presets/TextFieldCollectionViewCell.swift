@@ -53,5 +53,4 @@ class TextFieldCollectionViewCell: VocableCollectionViewCell {
         textLabel.attributedText = attributedString
     }
     
-    
 }
