@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 category.isUserGenerated = true
             }
 
-            for preset in TextPresets.presetsByCategory[presetCategory] ?? [] {
+            for preset in TextPresets.presetsByCategory[presetCategory]?.reversed() ?? [] {
                 let phrase = Phrase.fetchOrCreate(in: context, matching: preset)
                 phrase.creationDate = Date()
                 phrase.utterance = preset

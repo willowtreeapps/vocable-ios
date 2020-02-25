@@ -33,7 +33,7 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
         Category.fetchObject(in: NSPersistentContainer.shared.viewContext,
                              matching: selectedCategory.identifier)?.phrases?
             .compactMap { PhraseViewModel($0 as? Phrase) }
-            .sorted { $0.creationDate < $1.creationDate }
+            .sorted { $0.creationDate > $1.creationDate }
             ?? []
     
     init(selectedCategory: CategoryViewModel) {
