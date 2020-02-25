@@ -91,8 +91,7 @@ class SettingsViewController: UICollectionViewController, MFMailComposeViewContr
         let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight((144.0 * CGFloat(itemCount)) / 834.0))
         let settingsOptionsGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsOptionsGroupSize, subitem: settingsItem, count: itemCount)
         settingsOptionsGroup.interItemSpacing = .fixed(16)
-        settingsOptionsGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .fixed(0), top: .fixed(80), trailing: .fixed(0), bottom: .fixed(0))
-        settingsOptionsGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
+        settingsOptionsGroup.contentInsets = NSDirectionalEdgeInsets(top: 32, leading: 16, bottom: 0, trailing: 16)
         
         let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(80.0 / 834.0))
         let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
