@@ -46,7 +46,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
         for indexPath in collectionView.indexPathsForVisibleItems {
             guard let item = dataSource.itemIdentifier(for: indexPath),
                 case let .category(category) = item,
-                (self.parent as? CategoriesPageViewController)?.selectedCategory == category else {
+                ItemSelection.selectedCategory == category else {
                     collectionView.deselectItem(at: indexPath, animated: false)
                 continue
             }
@@ -94,7 +94,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
         let itemIdentifier = dataSource.itemIdentifier(for: indexPath)
         
         if case let .category(category) = itemIdentifier {
-            NotificationCenter.default.post(name: .didSelectCategoryNotificationName, object: category)
+            ItemSelection.selectedCategory = category
         }
     }
     

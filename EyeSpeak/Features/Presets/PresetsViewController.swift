@@ -9,20 +9,19 @@
 import UIKit
 import AVFoundation
 import CoreData
+import Combine
 
 class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
+    private var disposables = Set<AnyCancellable>()
     
-    private var selectedCategory: CategoryViewModel =
-        Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
-                          sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
-            .compactMap { CategoryViewModel($0) }.first! {
+    private var selectedCategory: CategoryViewModel = ItemSelection.selectedCategory {
         didSet {
             reloadPresets()
         }
     }
-
+    
     private enum HintText: String, CaseIterable {
         case preset = "Select something below to speak"
         case keyboard = "Select letters below to start typing."
@@ -120,9 +119,7 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         
         setupCollectionView()
         configureDataSource()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: .didSelectCategoryNotificationName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didSelectPreset(notification:)), name: .didSelectPresetNotificationName, object: nil)
+        observeCategorySelectionChanges()
     }
     
     private func setupCollectionView() {
@@ -226,6 +223,12 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         })
         
         updateSnapshot()
+    }
+    
+    private func observeCategorySelectionChanges() {
+        ItemSelection.categoryPublisher.sink(receiveValue: { selectedCategory in
+            self.selectedCategory = selectedCategory
+        }).store(in: &disposables)
     }
     
     // MARK: - NSDiffableDataSourceSnapshot construction

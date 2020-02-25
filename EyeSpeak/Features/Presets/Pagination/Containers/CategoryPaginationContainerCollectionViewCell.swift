@@ -12,7 +12,7 @@ class CategoryPaginationContainerCollectionViewCell: PaginationContainerCollecti
     
     var selectedCategory: CategoryViewModel! {
         didSet {
-            pageViewController = CategoriesPageViewController(selectedCategory: selectedCategory)
+            pageViewController = CategoriesPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         }
     }
             

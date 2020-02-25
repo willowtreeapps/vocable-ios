@@ -16,7 +16,6 @@ protocol PageIndicatorDelegate: AnyObject {
 class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     weak var pageIndicatorDelegate: PageIndicatorDelegate?
-    var selectedItem: PhraseViewModel?
     
     private let itemsPerPage = 9
     private var selectedCategory: CategoryViewModel
