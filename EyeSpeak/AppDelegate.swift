@@ -62,10 +62,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func createPrescribedEntities(in context: NSManagedObjectContext) {
+
+        // Create entities that are provided implicitly
         for presetCategory in PresetCategory.allCases {
+
             let category = Category.fetchOrCreate(in: context, matching: presetCategory.description)
             category.creationDate = Date()
             category.name = presetCategory.description
+
+            if presetCategory == .saved {
+                category.isUserGenerated = true
+            }
 
             for preset in TextPresets.presetsByCategory[presetCategory] ?? [] {
                 let phrase = Phrase.fetchOrCreate(in: context, matching: preset)
