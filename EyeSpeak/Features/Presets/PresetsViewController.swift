@@ -471,7 +471,7 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
     private func presentSettingsViewController() {
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
         let vc = storyboard.instantiateInitialViewController()!
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
 
