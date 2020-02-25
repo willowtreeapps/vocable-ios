@@ -10,7 +10,7 @@ import UIKit
 
 class PresetPaginationContainerCollectionViewCell: PaginationContainerCollectionViewCell {
     
-    var selectedCategory: PresetCategory! {
+    var selectedCategory: CategoryViewModel! {
         didSet {
             pageViewController = PresetsPageViewController(selectedCategory: selectedCategory)
         }

@@ -9,10 +9,15 @@
 import UIKit
 
 class CategoryPaginationContainerCollectionViewCell: PaginationContainerCollectionViewCell {
+    
+    var selectedCategory: CategoryViewModel! {
+        didSet {
+            pageViewController = CategoriesPageViewController(selectedCategory: selectedCategory)
+        }
+    }
             
     override func awakeFromNib() {
         super.awakeFromNib()
-        pageViewController = CategoriesPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         
         borderedView.fillColor = .categoryBackgroundColor
         borderedView.backgroundColor = .collectionViewBackgroundColor

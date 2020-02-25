@@ -27,6 +27,15 @@ extension NSManagedObjectIdentifiable where Self: NSManagedObject {
         let result = (try? context.fetch(fetchRequest))?.first
         return result
     }
+    
+    static func fetchAll(in context: NSManagedObjectContext, sortDescriptors: [NSSortDescriptor]? = nil) -> [Self] {
+        guard let entityName = self.entity().name else {
+            return []
+        }
+        let fetchRequest = NSFetchRequest<Self>(entityName: entityName)
+        fetchRequest.sortDescriptors = sortDescriptors
+        return (try? context.fetch(fetchRequest)) ?? []
+    }
 
     static func fetchOrCreate(in context: NSManagedObjectContext, matching identifier: IdentifierType) -> Self {
         if let existingObject = self.fetchObject(in: context, matching: identifier) {

@@ -18,7 +18,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
         return layout
     }
     
-    var items: [PresetCategory] = [] {
+    var items: [CategoryViewModel] = [] {
         didSet {
             setupCollectionView()
             configureDataSource()
@@ -30,7 +30,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
     }
     
     private enum ItemWrapper: Hashable {
-        case category(PresetCategory)
+        case category(CategoryViewModel)
     }
         
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
@@ -71,7 +71,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
             switch identifier {
             case .category(let category):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
-                cell.setup(title: category.description)
+                cell.setup(title: category.name)
                 
                 return cell
             }

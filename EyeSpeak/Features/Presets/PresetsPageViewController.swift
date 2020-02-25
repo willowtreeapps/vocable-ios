@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol PageIndicatorDelegate: AnyObject {
     func updatePageIndicator(with: String)
@@ -15,20 +16,27 @@ protocol PageIndicatorDelegate: AnyObject {
 class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     weak var pageIndicatorDelegate: PageIndicatorDelegate?
-    var selectedItem: String?
+    var selectedItem: PhraseViewModel?
     
     private let itemsPerPage = 9
-    private var selectedCategory: PresetCategory
+    private var selectedCategory: CategoryViewModel
     
     private lazy var pages: [UIViewController] = {
-        TextPresets.presetsByCategory[selectedCategory]?.chunked(into: itemsPerPage).map { presets in
-            let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.CompositionalLayout(with: presets.count))
-            collectionViewController.items = presets
+        presetViewModels.chunked(into: itemsPerPage).map { viewModels in
+            let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.CompositionalLayout(with: viewModels.count))
+            collectionViewController.items = viewModels
             return collectionViewController
-            } ?? []
+            }
     }()
     
-    init(selectedCategory: PresetCategory) {
+    private lazy var presetViewModels: [PhraseViewModel] =
+        Category.fetchObject(in: NSPersistentContainer.shared.viewContext,
+                             matching: selectedCategory.identifier)?.phrases?
+            .compactMap { PhraseViewModel($0 as? Phrase) }
+            .sorted { $0.creationDate < $1.creationDate }
+            ?? []
+    
+    init(selectedCategory: CategoryViewModel) {
         self.selectedCategory = selectedCategory
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
     }
