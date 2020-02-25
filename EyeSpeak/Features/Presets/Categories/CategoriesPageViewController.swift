@@ -7,17 +7,32 @@
 //
 
 import UIKit
+import CoreData
 
 class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     private let itemsPerPage = 4
     
-    var selectedCategory: PresetCategory = .category1
+    var selectedCategory: CategoryViewModel?
     
-    private lazy var pages: [UIViewController] = PresetCategory.allCases.chunked(into: itemsPerPage).map { categories in
-        let collectionViewController = CategoryPageCollectionViewController(collectionViewLayout: CategoryPageCollectionViewController.createLayout(with: categories.count))
-        collectionViewController.items = categories
-        return collectionViewController
+    private lazy var pages: [UIViewController] = categoryViewModels.chunked(into: itemsPerPage).map { viewModels in
+        let collectionViewController = CategoryPageCollectionViewController(collectionViewLayout: CategoryPageCollectionViewController.createLayout(with: viewModels.count))
+                collectionViewController.items = viewModels
+                return collectionViewController
+    }
+    
+    private lazy var categoryViewModels: [CategoryViewModel] =
+        Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
+                          sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
+            .compactMap { CategoryViewModel($0) }
+    
+    init(selectedCategory: CategoryViewModel) {
+        self.selectedCategory = selectedCategory
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -51,7 +66,7 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
     }
     
     @objc private func didSelectCategory(notification: NSNotification) {
-        guard let category = notification.object as? PresetCategory else {
+        guard let category = notification.object as? CategoryViewModel else {
             return
         }
         
