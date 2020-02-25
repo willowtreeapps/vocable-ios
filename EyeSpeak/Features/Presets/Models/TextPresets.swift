@@ -14,7 +14,7 @@ enum PresetCategory: CaseIterable {
     case category3
     case category4
     case category5
-    case category6
+    case saved
     
     var description: String {
         switch self {
@@ -28,8 +28,8 @@ enum PresetCategory: CaseIterable {
             return "Body"
         case .category5:
             return "Test category 5"
-        case .category6:
-            return "Test category 6"
+        case .saved:
+            return "My Sayings"
         }
     }
 }
@@ -85,7 +85,6 @@ struct TextPresets {
                      "Side",
                      "Right",
                      "Left"],
-        .category5: ["Test cat 5"],
-        .category6: ["Test cat 6"]
+        .category5: ["Test cat 5"]
     ]
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import CoreData
 
 class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
     
@@ -54,6 +55,7 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
     
     enum TopBarButton: String {
         case save
+        case unsave
         case toggleKeyboard
         case togglePreset
         case settings
@@ -62,6 +64,8 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
             switch self {
             case .save:
                 return UIImage(systemName: "suit.heart")
+            case .unsave:
+                return UIImage(systemName: "suit.heart.fill")
             case .toggleKeyboard:
                 return UIImage(systemName: "keyboard")
             case .togglePreset:
@@ -87,7 +91,7 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
             case .space:
                 return UIImage(named: "underscore")!
             case .speak:
-                return UIImage(named: "speak")!
+                return UIImage(named: "Speak")!
             }
         }
     }
@@ -221,12 +225,30 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
     
     // MARK: - NSDiffableDataSourceSnapshot construction
 
+    private func phraseIsSaved(_ text: String) -> Bool {
+        let context = NSPersistentContainer.shared.viewContext
+        let fetchRequest: NSFetchRequest<Phrase> = Phrase.fetchRequest()
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+            NSComparisonPredicate(\Phrase.utterance, .equalTo, text),
+            NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
+        ])
+        fetchRequest.fetchLimit = 1
+        let numberOfResults = (try? context.count(for: fetchRequest)) ?? 0
+        return numberOfResults > 0
+    }
+
     func updateSnapshot(animated: Bool = true) {
 
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
         
         snapshot.appendSections([.textField])
-        snapshot.appendItems([.textField(textTransaction.attributedText), .topBarButton(.save), .topBarButton(.togglePreset), .topBarButton(.settings)])
+        snapshot.appendItems([.textField(textTransaction.attributedText)])
+        if phraseIsSaved(textTransaction.text) {
+            snapshot.appendItems([.topBarButton(.unsave)])
+        } else {
+            snapshot.appendItems([.topBarButton(.save)])
+        }
+        snapshot.appendItems([.topBarButton(.togglePreset), .topBarButton(.settings)])
         
         if showKeyboard {
             snapshot.appendSections([.predictiveText])
@@ -322,13 +344,40 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         switch selectedItem {
         case .topBarButton(let buttonType):
             switch buttonType {
+            case .unsave:
+                let context = NSPersistentContainer.shared.viewContext
+                guard let existing = Phrase.fetchObject(in: context, matching: textTransaction.text) else {
+                    return
+                }
+                context.delete(existing)
+                updateSnapshot()
+
+                do {
+                    try context.save()
+                } catch {
+                    assertionFailure("Failed to unsave user generated phrase: \(error)")
+                }
+
             case .save:
                 guard !textTransaction.isHint else {
                     break
                 }
-                DispatchQueue.global(qos: .userInitiated).async {
-                    AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
+                let context = NSPersistentContainer.shared.viewContext
+                let savedCategory = Category.fetchOrCreate(in: context, matching: PresetCategory.saved.description)
+                let phrase = Phrase.fetchOrCreate(in: context, matching: textTransaction.text)
+                phrase.isUserGenerated = true
+                phrase.creationDate = Date()
+                phrase.lastSpokenDate = Date()
+                phrase.utterance = textTransaction.text
+                phrase.addToCategories(savedCategory)
+
+                do {
+                    try context.save()
+                } catch {
+                    assertionFailure("Failed to save user generated phrase: \(error)")
                 }
+                updateSnapshot()
+
             case .toggleKeyboard, .togglePreset:
                 showKeyboard.toggle()
                 
