@@ -28,21 +28,14 @@
                                     <segue destination="Jgy-U0-B1Z" kind="embed" identifier="ContentViewControllerSegue" id="VGF-IP-CWi"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A16-bV-8FB" customClass="ViewControllerWrapperView" customModule="EyeSpeak" customModuleProvider="target">
-                                <rect key="frame" x="32" y="32" width="770" height="1110"/>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="h77-DW-Ra2" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leading" id="2vi-F0-7jD"/>
                             <constraint firstItem="h77-DW-Ra2" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="top" id="35q-ga-C7k"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="A16-bV-8FB" secondAttribute="bottom" id="DmU-vP-Uwr"/>
-                            <constraint firstItem="A16-bV-8FB" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leadingMargin" id="GUt-5Q-dz1"/>
-                            <constraint firstItem="A16-bV-8FB" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="topMargin" id="PdI-JU-H9u"/>
                             <constraint firstItem="AQq-Gr-kNC" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="topMargin" id="Pkw-eU-h0R"/>
                             <constraint firstItem="AQq-Gr-kNC" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leadingMargin" id="aS7-NB-aKe"/>
                             <constraint firstAttribute="bottom" secondItem="h77-DW-Ra2" secondAttribute="bottom" id="aiY-pn-mC3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="A16-bV-8FB" secondAttribute="trailing" id="bQl-sF-nZX"/>
                             <constraint firstAttribute="bottomMargin" secondItem="AQq-Gr-kNC" secondAttribute="bottom" id="gjT-Qg-rfd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AQq-Gr-kNC" secondAttribute="trailing" id="oal-gs-OpX"/>
                             <constraint firstAttribute="trailing" secondItem="h77-DW-Ra2" secondAttribute="trailing" id="tKc-EE-VNA"/>
