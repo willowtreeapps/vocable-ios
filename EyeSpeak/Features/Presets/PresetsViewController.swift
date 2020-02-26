@@ -215,7 +215,7 @@ class PresetsViewController: UICollectionViewController {
     }
     
     private func observeCategorySelectionChanges() {
-        _ = ItemSelection.categoryValueSubject.sink(receiveValue: { selectedCategory in
+        _ = ItemSelection.categoryValueSubject.sink(receiveValue: { _ in
             self.reloadPresets()
         }).store(in: &disposables)
     }
