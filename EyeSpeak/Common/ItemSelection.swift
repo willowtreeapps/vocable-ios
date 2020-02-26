@@ -12,20 +12,23 @@ import CoreData
 
 struct ItemSelection {
     
-    static var categoryPublisher = PassthroughSubject<CategoryViewModel, Never>()
-    static var selectedCategory: CategoryViewModel =
+    static let categoryValueSubject = CurrentValueSubject<CategoryViewModel, Never>(initialSelectedCategory)
+    private static var initialSelectedCategory: CategoryViewModel =
         Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
                           sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
-        .compactMap { CategoryViewModel($0) }.first! {
-        didSet {
-            categoryPublisher.send(selectedCategory)
-        }
-    }
+        .compactMap { CategoryViewModel($0) }.first!
     
-    static var phrasePublisher = PassthroughSubject<PhraseViewModel?, Never>()
+    static let phrasePublisher = PassthroughSubject<PhraseViewModel?, Never>()
     static var selectedPhrase: PhraseViewModel? {
         didSet {
             phrasePublisher.send(selectedPhrase)
+        }
+    }
+    
+    static let presetsPageIndicatorPublisher = PassthroughSubject<String, Never>()
+    static var presetsPageIndicatorText: String = "" {
+        didSet {
+            presetsPageIndicatorPublisher.send(presetsPageIndicatorText)
         }
     }
 }

@@ -46,7 +46,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
         for indexPath in collectionView.indexPathsForVisibleItems {
             guard let item = dataSource.itemIdentifier(for: indexPath),
                 case let .category(category) = item,
-                ItemSelection.selectedCategory == category else {
+            ItemSelection.categoryValueSubject.value == category else {
                     collectionView.deselectItem(at: indexPath, animated: false)
                 continue
             }
@@ -90,11 +90,8 @@ class CategoryPageCollectionViewController: UICollectionViewController {
       
     // MARK: - Collection View Delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let itemIdentifier = dataSource.itemIdentifier(for: indexPath)
-        
-        if case let .category(category) = itemIdentifier {
-            ItemSelection.selectedCategory = category
+        if case let .category(category) = dataSource.itemIdentifier(for: indexPath) {
+            ItemSelection.categoryValueSubject.send(category)
         }
     }
     
