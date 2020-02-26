@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 class HeadGazeWindow: UIWindow {
 
@@ -16,6 +17,8 @@ class HeadGazeWindow: UIWindow {
     private var lastGaze: UIHeadGaze?
     private let touchGazeDisableDuration: TimeInterval = 5
     private var touchGazeDisableBeganDate: Date?
+    
+    private var disposables = Set<AnyCancellable>()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,6 +31,13 @@ class HeadGazeWindow: UIWindow {
             cursorView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
             cursorView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         ])
+        
+        _ = AppConfig.headTrackingValueSubject.sink { (isHeadTrackingEnabled) in
+            self.setCursorViewHidden(!isHeadTrackingEnabled, animated: true)
+            if isHeadTrackingEnabled {
+                self.touchGazeDisableBeganDate = .distantPast
+            }
+        }.store(in: &disposables)
     }
 
     override init(windowScene: UIWindowScene) {
