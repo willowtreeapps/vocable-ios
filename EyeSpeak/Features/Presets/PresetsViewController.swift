@@ -223,6 +223,8 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         updateSnapshot()
     }
     
+    
+    
     // MARK: - NSDiffableDataSourceSnapshot construction
 
     private func phraseIsSaved(_ text: String) -> Bool {

@@ -26,7 +26,7 @@
         <!--Settings-->
         <scene sceneID="dPi-vA-NKQ">
             <objects>
-                <collectionViewController id="if3-QM-p2o" customClass="SettingsViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="if3-QM-p2o" customClass="SettingsCollectionViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yYQ-tW-Cgs">
                         <rect key="frame" x="0.0" y="0.0" width="770" height="1014"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,10 +48,10 @@
             </objects>
             <point key="canvasLocation" x="2306" y="144"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="udF-jz-OFJ">
             <objects>
-                <viewController id="gMn-gX-rfc" sceneMemberID="viewController">
+                <viewController id="gMn-gX-rfc" customClass="SettingsViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mXz-yV-vIn">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,11 +68,22 @@
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c2X-hd-Zy7" customClass="VocableUIControl" customModule="EyeSpeak" customModuleProvider="target">
-                                <rect key="frame" x="722" y="20" width="92" height="95"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59L-eT-oZ6" customClass="GazeableButton" customModule="EyeSpeak" customModuleProvider="target">
+                                <rect key="frame" x="686" y="32" width="116" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="XFt-fF-4My"/>
+                                    <constraint firstAttribute="width" constant="116" id="eN5-ol-s16"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <state key="normal" image="xmark.circle" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="34" weight="bold"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissSettings:" destination="gMn-gX-rfc" eventType="primaryActionTriggered" id="0JV-PY-Yd9"/>
+                                    <action selector="dismissSettings:" destination="gMn-gX-rfc" eventType="touchUpInside" id="B1M-NP-Phw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
@@ -81,11 +92,16 @@
                             <constraint firstItem="CtZ-qP-xqU" firstAttribute="centerX" secondItem="mXz-yV-vIn" secondAttribute="centerX" id="OAf-Qz-V9Z"/>
                             <constraint firstItem="6E8-xr-Wux" firstAttribute="leading" secondItem="1Jr-Jy-UTd" secondAttribute="leading" constant="32" id="TT0-9y-Slu"/>
                             <constraint firstItem="1Jr-Jy-UTd" firstAttribute="trailing" secondItem="6E8-xr-Wux" secondAttribute="trailing" constant="32" id="lGt-vR-5mO"/>
+                            <constraint firstItem="1Jr-Jy-UTd" firstAttribute="trailing" secondItem="59L-eT-oZ6" secondAttribute="trailing" constant="32" id="nRG-PI-BCG"/>
                             <constraint firstItem="CtZ-qP-xqU" firstAttribute="top" secondItem="1Jr-Jy-UTd" secondAttribute="top" constant="32" id="udB-iK-X15"/>
+                            <constraint firstItem="59L-eT-oZ6" firstAttribute="top" secondItem="1Jr-Jy-UTd" secondAttribute="top" constant="32" id="zWY-4u-sBJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Jr-Jy-UTd"/>
                     </view>
                     <navigationItem key="navigationItem" id="x2W-9E-2W1"/>
+                    <connections>
+                        <outlet property="dismissButton" destination="59L-eT-oZ6" id="pKn-Jo-gYg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1E-o0-keE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -93,6 +109,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="xmark.circle" catalog="system" width="64" height="60"/>
         <namedColor name="Background">
             <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -21,6 +21,7 @@ class HeadGazeWindow: UIWindow {
         super.init(frame: frame)
         commonInit()
         self.addSubview(cursorView)
+        cursorView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cursorView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
             cursorView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
