@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import Combine
 
 class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
