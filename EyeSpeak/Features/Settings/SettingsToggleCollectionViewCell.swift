@@ -27,9 +27,7 @@ class SettingsToggleCollectionViewCell: VocableCollectionViewCell {
     override func updateContentViews() {
         super.updateContentViews()
 
-        textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
-        textLabel.backgroundColor = .collectionViewBackgroundColor
-        textLabel.isOpaque = true
+        textLabel.textColor = .defaultTextColor
         textLabel.font = UIFont.systemFont(ofSize: 22)
         
         borderedView.fillColor = .collectionViewBackgroundColor
