@@ -14,7 +14,10 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
-    private var selectedCategory: PresetCategory = .category1 {
+    private var selectedCategory: CategoryViewModel =
+        Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
+                          sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
+            .compactMap { CategoryViewModel($0) }.first! {
         didSet {
             reloadPresets()
         }
@@ -182,7 +185,9 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
                 cell.setup(with: buttonType.image)
                 return cell
             case .paginatedCategories:
-                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryPaginationContainerCollectionViewCell", for: indexPath) as! CategoryPaginationContainerCollectionViewCell
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryPaginationContainerCollectionViewCell", for: indexPath) as! CategoryPaginationContainerCollectionViewCell
+                cell.selectedCategory = self.selectedCategory
+                return cell
             case .suggestionText(let predictiveText):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: SuggestionCollectionViewCell.reuseIdentifier, for: indexPath) as! SuggestionCollectionViewCell
                 cell.setup(title: predictiveText.text)
@@ -463,7 +468,7 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
     }
     
     @objc private func didSelectCategory(notification: NSNotification) {
-        guard let category = notification.object as? PresetCategory else {
+        guard let category = notification.object as? CategoryViewModel else {
             return
         }
         

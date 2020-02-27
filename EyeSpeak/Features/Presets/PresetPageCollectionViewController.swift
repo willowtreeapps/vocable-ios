@@ -11,7 +11,7 @@ import AVFoundation
 
 class PresetPageCollectionViewController: UICollectionViewController {
     
-    var items: [String] = [] {
+    var items: [PhraseViewModel] = [] {
         didSet {
             setupCollectionView()
             configureDataSource()
@@ -23,7 +23,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
     }
     
     private enum ItemWrapper: Hashable {
-        case presetItem(String)
+        case presetItem(PhraseViewModel)
     }
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
@@ -65,9 +65,9 @@ class PresetPageCollectionViewController: UICollectionViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, ItemWrapper>(collectionView: collectionView, cellProvider: { (_: UICollectionView, indexPath: IndexPath, identifier: ItemWrapper) -> UICollectionViewCell? in
             
             switch identifier {
-            case .presetItem(let preset):
+            case .presetItem(let viewModel):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-                cell.setup(title: preset)
+                cell.setup(title: viewModel.utterance)
                 
                 return cell
             }
@@ -91,12 +91,12 @@ class PresetPageCollectionViewController: UICollectionViewController {
         }
         
         switch selectedItem {
-        case .presetItem(let text):
-            NotificationCenter.default.post(name: .didSelectPresetNotificationName, object: text)
+        case .presetItem(let viewModel):
+            NotificationCenter.default.post(name: .didSelectPresetNotificationName, object: viewModel.utterance)
 
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {
-                AVSpeechSynthesizer.shared.speak(text)
+                AVSpeechSynthesizer.shared.speak(viewModel.utterance)
             }
         }
     }
