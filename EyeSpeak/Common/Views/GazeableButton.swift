@@ -9,13 +9,20 @@
 import Foundation
 import UIKit
 
+@IBDesignable
 class GazeableButton: UIButton {
     
-    var beginDate = Date()
+    private var beginDate = Date()
     
-    let borderedView = BorderedView()
+    private let borderedView = BorderedView()
     
-    var fillColor: UIColor = .defaultCellBackgroundColor {
+    @IBInspectable var buttonImage: UIImage = UIImage() {
+        didSet {
+            sharedInit()
+        }
+    }
+    
+    private var fillColor: UIColor = .defaultCellBackgroundColor {
         didSet {
             updateContentViews()
         }
@@ -37,7 +44,16 @@ class GazeableButton: UIButton {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        sharedInit()
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        sharedInit()
+        setNeedsLayout()
+        layoutIfNeeded()
+    }
+    
+    func sharedInit() {
         borderedView.cornerRadius = 8
         borderedView.borderColor = .cellBorderHighlightColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
@@ -45,6 +61,15 @@ class GazeableButton: UIButton {
         borderedView.fillColor = .clear
 
         updateContentViews()
+        let image = buttonImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 34, weight: .bold))
+        let imageView = UIImageView(image: image)
+        borderedView.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: borderedView.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: borderedView.centerYAnchor)
+        ])
+        
         addSubview(borderedView)
         borderedView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

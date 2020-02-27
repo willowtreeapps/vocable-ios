@@ -76,9 +76,12 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="tintColor" name="DefaultFontColor"/>
-                                <state key="normal" image="xmark.circle" catalog="system">
+                                <state key="normal">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="34" weight="bold"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="xmark.circle" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="dismissSettings:" destination="gMn-gX-rfc" eventType="primaryActionTriggered" id="0JV-PY-Yd9"/>
                                     <action selector="dismissSettings:" destination="gMn-gX-rfc" eventType="touchUpInside" id="B1M-NP-Phw"/>
