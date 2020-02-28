@@ -352,7 +352,7 @@ class PresetsViewController: UICollectionViewController {
                 }
 
             case .save:
-                guard !textTransaction.isHint else {
+                guard !textTransaction.isHint, !textTransaction.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
                     break
                 }
                 let context = NSPersistentContainer.shared.viewContext
