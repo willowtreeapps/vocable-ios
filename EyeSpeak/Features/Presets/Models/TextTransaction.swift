@@ -98,7 +98,7 @@ struct TextTransaction: CustomDebugStringConvertible {
             newText = text.uppercased()
         }
         
-        if (!punctuation.contains(char) || character != " ") && (newText.last == "." || newText.last == "?") {
+        if !punctuation.contains(char) && character != " " && (newText.last == "." || newText.last == "?" || newText.last == ",") {
             newText += " "
         }
         
