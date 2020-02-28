@@ -22,17 +22,23 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czB-Cb-50h" userLabel="Content View" customClass="BorderedView" customModule="EyeSpeak" customModuleProvider="target">
                                 <rect key="frame" x="57" y="373" width="300" height="150"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zoc-0N-4z8">
-                                        <rect key="frame" x="16" y="41" width="268" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zoc-0N-4z8">
+                                        <rect key="frame" x="16" y="15.999999999999998" width="268" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=compact">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        </variation>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="SQ2-iU-HyV">
-                                        <rect key="frame" x="8" y="61.333333333333321" width="284" height="80.666666666666686"/>
+                                        <rect key="frame" x="8" y="36.333333333333321" width="284" height="105.66666666666669"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DVb-6M-5LW" customClass="GazeableButton" customModule="EyeSpeak" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="30.666666666666686" width="142" height="50"/>
+                                                <rect key="frame" x="0.0" y="55.666666666666686" width="142" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="h56-wC-lLl">
                                                         <variation key="heightClass=compact" constant="50"/>
@@ -54,7 +60,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifG-IP-dty" customClass="GazeableButton" customModule="EyeSpeak" customModuleProvider="target">
-                                                <rect key="frame" x="142" y="30.666666666666686" width="142" height="50"/>
+                                                <rect key="frame" x="142" y="55.666666666666686" width="142" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="x3r-hw-htW">
                                                         <variation key="heightClass=compact" constant="50"/>
@@ -96,13 +102,12 @@
                                         <variation key="heightClass=compact" constant="16"/>
                                         <variation key="widthClass=compact" constant="16"/>
                                     </constraint>
-                                    <constraint firstItem="Zoc-0N-4z8" firstAttribute="top" secondItem="czB-Cb-50h" secondAttribute="top" constant="41" id="h2Q-tT-pHB"/>
+                                    <constraint firstItem="Zoc-0N-4z8" firstAttribute="top" secondItem="czB-Cb-50h" secondAttribute="topMargin" constant="8" id="h2Q-tT-pHB"/>
                                     <constraint firstItem="SQ2-iU-HyV" firstAttribute="top" secondItem="Zoc-0N-4z8" secondAttribute="bottomMargin" constant="8" id="od4-pd-KSa"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="SQ2-iU-HyV" secondAttribute="bottom" id="r4W-so-JSO"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="SQ2-iU-HyV" secondAttribute="trailing" id="rlR-T0-W4I"/>
                                     <constraint firstItem="SQ2-iU-HyV" firstAttribute="leading" secondItem="czB-Cb-50h" secondAttribute="leadingMargin" id="u5r-1d-Zzq"/>
                                 </constraints>
-                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="6"/>
@@ -117,9 +122,6 @@
                                         <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <variation key="heightClass=compact-widthClass=regular">
-                                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -131,6 +133,7 @@
                     <connections>
                         <outlet property="cancelButton" destination="DVb-6M-5LW" id="mSH-oR-gAG"/>
                         <outlet property="confirmButton" destination="ifG-IP-dty" id="mW6-ZY-7vU"/>
+                        <outlet property="titleLabel" destination="Zoc-0N-4z8" id="Sra-F7-1yx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qjd-qf-hdq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
