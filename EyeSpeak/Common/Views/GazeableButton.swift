@@ -12,7 +12,7 @@ import UIKit
 @IBDesignable
 class GazeableButton: UIButton {
     
-    private var beginDate = Date()
+    private var gazeBeganDate: Date?
     
     private let borderedView = BorderedView()
     
@@ -56,9 +56,7 @@ class GazeableButton: UIButton {
     func sharedInit() {
         borderedView.cornerRadius = 8
         borderedView.borderColor = .cellBorderHighlightColor
-        borderedView.backgroundColor = .collectionViewBackgroundColor
         borderedView.isUserInteractionEnabled = false
-        borderedView.fillColor = .clear
 
         updateContentViews()
         let image = buttonImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 34, weight: .bold))
@@ -94,22 +92,29 @@ class GazeableButton: UIButton {
         super.gazeBegan(gaze, with: event)
         
         isHighlighted = true
-        beginDate = Date()
+        gazeBeganDate = Date()
     }
 
     override func gazeMoved(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
-        super.gazeBegan(gaze, with: event)
+        super.gazeMoved(gaze, with: event)
         
-        let timeElapsed = Date().timeIntervalSince(beginDate)
+        guard let beganDate = gazeBeganDate else {
+            return
+        }
+        
+        // TODO: Check for performance issues calling Date().timeIntervalSince here
+        let timeElapsed = Date().timeIntervalSince(beganDate)
         if timeElapsed >= gaze.selectionHoldDuration {
             isSelected = true
             sendActions(for: .primaryActionTriggered)
+            gazeBeganDate = nil
         }
     }
 
     override func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
-        super.gazeBegan(gaze, with: event)
+        super.gazeEnded(gaze, with: event)
         
+        gazeBeganDate = nil
         isSelected = false
         isHighlighted = false
     }
