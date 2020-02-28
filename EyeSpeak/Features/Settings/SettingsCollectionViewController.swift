@@ -2,18 +2,60 @@
 //  SettingsViewController.swift
 //  EyeSpeak
 //
-//  Created by Jesse Morgan on 2/25/20.
+//  Created by Jesse Morgan on 2/6/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import MessageUI
 
-class SettingsViewController: UIViewController {
+class SettingsCollectionViewController: UICollectionViewController, MFMailComposeViewControllerDelegate {
     
-    @IBOutlet var dismissButton: GazeableButton!
+    @IBOutlet private var headerView: UINavigationItem!
     
-    @IBAction func dismissSettings(_ sender: Any) {
+    private weak var composeVC: MFMailComposeViewController?
+    
+    private enum SettingsItem: CaseIterable {
+        case headTrackingToggle
+        case privacyPolicy
+        case contactDevs
+        case pidTuner
+        case versionNum
+    }
+
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SettingsItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+        return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
+    }
+    
+    private var versionAndBuildNumber: String {
+        let versionNumber = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+        return "Version \(versionNumber)-\(buildNumber)"
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupNavigationBar()
+        setupCollectionView()
+    }
+    
+    func setupNavigationBar() {
+        let barAppearance = UINavigationBarAppearance()
+        barAppearance.backgroundColor = .collectionViewBackgroundColor
+        let textAttr: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.defaultTextColor, .font: UIFont.systemFont(ofSize: 34, weight: .bold)]
+        barAppearance.largeTitleTextAttributes = textAttr
+        barAppearance.titleTextAttributes = textAttr
+        navigationItem.standardAppearance = barAppearance
+        navigationItem.largeTitleDisplayMode = .always
+        
+        let dismissBarButton = UIBarButtonItem(image: UIImage(systemName: "xmark.circle")!, style: .plain, target: self, action: #selector(dismissVC))
+        dismissBarButton.tintColor = .defaultTextColor
+        
+        navigationItem.rightBarButtonItem = dismissBarButton
+    }
+    
+    @objc func dismissVC() {
         dismiss(animated: true, completion: nil)
     }
     
@@ -24,6 +66,7 @@ class SettingsViewController: UIViewController {
         
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
         collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsFooterCollectionViewCell")
+        collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsToggleCollectionViewCell")
 
         updateDataSource()
 
@@ -34,7 +77,7 @@ class SettingsViewController: UIViewController {
     private func updateDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, SettingsItem>()
         snapshot.appendSections([0])
-        snapshot.appendItems([.privacyPolicy, .contactDevs])
+        snapshot.appendItems([.headTrackingToggle, .privacyPolicy, .contactDevs])
         if AppConfig.showPIDTunerDebugMenu {
             snapshot.appendItems([.pidTuner])
         }
@@ -43,21 +86,25 @@ class SettingsViewController: UIViewController {
     }
     
     func createLayout() -> UICollectionViewLayout {
-        let itemCount = dataSource.snapshot().itemIdentifiers.count
-        let settingsItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(144.0 / 834.0))
-        let settingsItem = NSCollectionLayoutItem(layoutSize: settingsItemSize)
+        let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
+        let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+        let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1 / 2)))
         
-        let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight((144.0 * CGFloat(itemCount)) / 834.0))
-        let settingsOptionsGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsOptionsGroupSize, subitem: settingsItem, count: itemCount)
+        let settingsToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 6))
+        let settingsToggleGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsToggleGroupSize, subitem: headTrackingToggleItem, count: 1)
+        settingsToggleGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
+        settingsToggleGroup.edgeSpacing = .init(leading: nil, top: .fixed(32), trailing: nil, bottom: .fixed(92))
+        
+        let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(3 / 6))
+        let settingsOptionsGroup = NSCollectionLayoutGroup.horizontal(layoutSize: settingsOptionsGroupSize, subitem: settingsButtonItem, count: itemCount)
+        settingsOptionsGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
         settingsOptionsGroup.interItemSpacing = .fixed(16)
-        settingsOptionsGroup.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .fixed(0), top: .fixed(80), trailing: .fixed(0), bottom: .fixed(0))
-        settingsOptionsGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
         
         let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(80.0 / 834.0))
         let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
         
         let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [settingsOptionsGroup, versionItem])
+        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [settingsToggleGroup, settingsOptionsGroup, versionItem])
         settingPageGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
         
         let section = NSCollectionLayoutSection(group: settingPageGroup)
@@ -69,13 +116,17 @@ class SettingsViewController: UIViewController {
     
     private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: SettingsItem) -> UICollectionViewCell {
         switch item {
+        case .headTrackingToggle:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsToggleCollectionViewCell
+            cell.setup(title: "Head Tracking")
+            return cell
         case .privacyPolicy:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
             cell.setup(title: "Privacy Policy")
             return cell
         case .contactDevs:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: "Send feedback to the developers")
+            cell.setup(title: "Contact developers")
             return cell
         case .versionNum:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
@@ -95,6 +146,8 @@ class SettingsViewController: UIViewController {
 
         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
         switch item {
+        case .headTrackingToggle:
+            AppConfig.isHeadTrackingEnabled.toggle()
         case .privacyPolicy:
             let url = URL(string: "https://vocable.app/privacy.html")!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -102,6 +155,9 @@ class SettingsViewController: UIViewController {
         case .contactDevs:
             guard MFMailComposeViewController.canSendMail() else {
                 NSLog("Mail composer failed to send mail", [])
+                let alert = UIAlertController(title: "Email Error", message: "There was an error creating an email. Is your device linked to an email account?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
                 break
             }
             

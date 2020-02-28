@@ -3,19 +3,20 @@
     <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--SettingsNavController-->
         <scene sceneID="Fl3-kc-eyg">
             <objects>
-                <navigationController title="SettingsNavController" id="z2O-mb-WoW" sceneMemberID="viewController">
+                <navigationController title="SettingsNavController" navigationBarHidden="YES" id="z2O-mb-WoW" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Ye0-e2-cfC">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="if3-QM-p2o" kind="relationship" relationship="rootViewController" id="9Oj-dh-IKD"/>
+                        <segue destination="gMn-gX-rfc" kind="relationship" relationship="rootViewController" id="wLX-sx-Yk3"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EVh-xO-TgO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -25,9 +26,9 @@
         <!--Settings-->
         <scene sceneID="dPi-vA-NKQ">
             <objects>
-                <collectionViewController id="if3-QM-p2o" customClass="SettingsViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="if3-QM-p2o" customClass="SettingsCollectionViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yYQ-tW-Cgs">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="770" height="1014"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="Xga-RH-NHm">
@@ -45,7 +46,78 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9rs-Gw-LBG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1706.4748201438849" y="143.71859296482413"/>
+            <point key="canvasLocation" x="2306" y="144"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="udF-jz-OFJ">
+            <objects>
+                <viewController id="gMn-gX-rfc" customClass="SettingsViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mXz-yV-vIn">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6E8-xr-Wux">
+                                <rect key="frame" x="32" y="128" width="770" height="1014"/>
+                                <connections>
+                                    <segue destination="if3-QM-p2o" kind="embed" id="npm-Wd-wUb"/>
+                                </connections>
+                            </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtZ-qP-xqU">
+                                <rect key="frame" x="350.5" y="32" width="133" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                <color key="textColor" name="DefaultFontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59L-eT-oZ6" customClass="GazeableButton" customModule="EyeSpeak" customModuleProvider="target">
+                                <rect key="frame" x="686" y="32" width="116" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="XFt-fF-4My"/>
+                                    <constraint firstAttribute="width" constant="116" id="eN5-ol-s16"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <state key="normal">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="34" weight="bold"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="xmark.circle" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="dismissSettings:" destination="gMn-gX-rfc" eventType="primaryActionTriggered" id="0JV-PY-Yd9"/>
+                                    <action selector="dismissSettings:" destination="gMn-gX-rfc" eventType="touchUpInside" id="B1M-NP-Phw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="6E8-xr-Wux" firstAttribute="top" secondItem="mXz-yV-vIn" secondAttribute="top" constant="128" id="AhE-Vm-PPA"/>
+                            <constraint firstItem="1Jr-Jy-UTd" firstAttribute="bottom" secondItem="6E8-xr-Wux" secondAttribute="bottom" constant="32" id="Nzx-CE-6Uz"/>
+                            <constraint firstItem="CtZ-qP-xqU" firstAttribute="centerX" secondItem="mXz-yV-vIn" secondAttribute="centerX" id="OAf-Qz-V9Z"/>
+                            <constraint firstItem="6E8-xr-Wux" firstAttribute="leading" secondItem="1Jr-Jy-UTd" secondAttribute="leading" constant="32" id="TT0-9y-Slu"/>
+                            <constraint firstItem="1Jr-Jy-UTd" firstAttribute="trailing" secondItem="6E8-xr-Wux" secondAttribute="trailing" constant="32" id="lGt-vR-5mO"/>
+                            <constraint firstItem="1Jr-Jy-UTd" firstAttribute="trailing" secondItem="59L-eT-oZ6" secondAttribute="trailing" constant="32" id="nRG-PI-BCG"/>
+                            <constraint firstItem="CtZ-qP-xqU" firstAttribute="top" secondItem="1Jr-Jy-UTd" secondAttribute="top" constant="32" id="udB-iK-X15"/>
+                            <constraint firstItem="59L-eT-oZ6" firstAttribute="top" secondItem="1Jr-Jy-UTd" secondAttribute="top" constant="32" id="zWY-4u-sBJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1Jr-Jy-UTd"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="x2W-9E-2W1"/>
+                    <connections>
+                        <outlet property="dismissButton" destination="59L-eT-oZ6" id="pKn-Jo-gYg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f1E-o0-keE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1515.8273381294964" y="143.71859296482413"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="xmark.circle" catalog="system" width="64" height="60"/>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DefaultFontColor">
+            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
