@@ -9,20 +9,25 @@
 import Foundation
 import UIKit
 
-@IBDesignable
 class GazeableButton: UIButton {
     
     private var gazeBeganDate: Date?
     
     private let borderedView = BorderedView()
     
-    @IBInspectable var buttonImage: UIImage = UIImage() {
+    var buttonImage: UIImage = UIImage() {
         didSet {
             sharedInit()
         }
     }
     
-    private var fillColor: UIColor = .defaultCellBackgroundColor {
+    var fillColor: UIColor = .defaultCellBackgroundColor {
+        didSet {
+            updateContentViews()
+        }
+    }
+    
+    var selectionFillColor: UIColor = .cellSelectionColor {
         didSet {
             updateContentViews()
         }
@@ -80,7 +85,7 @@ class GazeableButton: UIButton {
     
     func updateContentViews() {
         borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
-        borderedView.fillColor = isSelected ? .cellSelectionColor : fillColor
+        borderedView.fillColor = isSelected ? selectionFillColor : fillColor
         borderedView.isOpaque = true
     }
     

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TIF-Ei-9Xg">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Gazeable Alert View Controller-->
+        <scene sceneID="kdd-Fz-MlF">
+            <objects>
+                <viewController modalPresentationStyle="overFullScreen" id="TIF-Ei-9Xg" customClass="GazeableAlertViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qkf-Kz-QF4"/>
+                        <viewControllerLayoutGuide type="bottom" id="u14-cd-3Bs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sUf-gP-EH9" customClass="GazeEatingView" customModule="EyeSpeak" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czB-Cb-50h" userLabel="Content View" customClass="BorderedView" customModule="EyeSpeak" customModuleProvider="target">
+                                <rect key="frame" x="57" y="373" width="300" height="150"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zoc-0N-4z8">
+                                        <rect key="frame" x="16" y="41" width="268" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="SQ2-iU-HyV">
+                                        <rect key="frame" x="8" y="61.333333333333321" width="284" height="80.666666666666686"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DVb-6M-5LW" customClass="GazeableButton" customModule="EyeSpeak" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="30.666666666666686" width="142" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="h56-wC-lLl">
+                                                        <variation key="heightClass=compact" constant="50"/>
+                                                        <variation key="widthClass=compact" constant="50"/>
+                                                    </constraint>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" name="Background"/>
+                                                </state>
+                                                <variation key="heightClass=compact">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="didSelectCancelButton:" destination="TIF-Ei-9Xg" eventType="primaryActionTriggered" id="wT9-6a-V88"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifG-IP-dty" customClass="GazeableButton" customModule="EyeSpeak" customModuleProvider="target">
+                                                <rect key="frame" x="142" y="30.666666666666686" width="142" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="x3r-hw-htW">
+                                                        <variation key="heightClass=compact" constant="50"/>
+                                                        <variation key="widthClass=compact" constant="50"/>
+                                                    </constraint>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                                <state key="normal" title="Confirm">
+                                                    <color key="titleColor" name="Background"/>
+                                                </state>
+                                                <variation key="heightClass=compact">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="didSelectConfirmButton:" destination="TIF-Ei-9Xg" eventType="primaryActionTriggered" id="HaM-cQ-y11"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="264" id="AJ8-tn-fHL">
+                                        <variation key="heightClass=compact" constant="150"/>
+                                        <variation key="widthClass=compact" constant="150"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="695" id="IVM-dO-QZk">
+                                        <variation key="heightClass=compact" constant="300"/>
+                                        <variation key="widthClass=compact" constant="300"/>
+                                    </constraint>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Zoc-0N-4z8" secondAttribute="trailingMargin" constant="52" id="Mv1-hk-n0E">
+                                        <variation key="heightClass=compact" constant="16"/>
+                                        <variation key="widthClass=compact" constant="16"/>
+                                    </constraint>
+                                    <constraint firstItem="Zoc-0N-4z8" firstAttribute="leadingMargin" secondItem="czB-Cb-50h" secondAttribute="leadingMargin" constant="52" id="Tne-lQ-3ER">
+                                        <variation key="heightClass=compact" constant="16"/>
+                                        <variation key="widthClass=compact" constant="16"/>
+                                    </constraint>
+                                    <constraint firstItem="Zoc-0N-4z8" firstAttribute="top" secondItem="czB-Cb-50h" secondAttribute="top" constant="41" id="h2Q-tT-pHB"/>
+                                    <constraint firstItem="SQ2-iU-HyV" firstAttribute="top" secondItem="Zoc-0N-4z8" secondAttribute="bottomMargin" constant="8" id="od4-pd-KSa"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="SQ2-iU-HyV" secondAttribute="bottom" id="r4W-so-JSO"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="SQ2-iU-HyV" secondAttribute="trailing" id="rlR-T0-W4I"/>
+                                    <constraint firstItem="SQ2-iU-HyV" firstAttribute="leading" secondItem="czB-Cb-50h" secondAttribute="leadingMargin" id="u5r-1d-Zzq"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                        <color key="value" name="AlertBackground"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="heightClass=compact-widthClass=regular">
+                                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="czB-Cb-50h" firstAttribute="centerY" secondItem="sUf-gP-EH9" secondAttribute="centerY" id="7Kw-jw-00u"/>
+                            <constraint firstItem="czB-Cb-50h" firstAttribute="centerX" secondItem="sUf-gP-EH9" secondAttribute="centerX" id="czS-yJ-ToZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="DVb-6M-5LW" id="mSH-oR-gAG"/>
+                        <outlet property="confirmButton" destination="ifG-IP-dty" id="mW6-ZY-7vU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qjd-qf-hdq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="65"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="AlertBackground">
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
