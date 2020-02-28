@@ -7,20 +7,20 @@
 //
 
 import UIKit
+import Combine
 
 class PageIndicatorCollectionViewCell: VocableCollectionViewCell {
     
     @IBOutlet private weak var pageLabel: UILabel!
-    
-    var pageInfo: String = "" {
-        didSet {
-            pageLabel.text = pageInfo
-        }
-    }
+    private var disposables = Set<AnyCancellable>()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         fillColor = .collectionViewBackgroundColor
         pageLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        
+        ItemSelection.presetsPageIndicatorPublisher.sink(receiveValue: { pageInfo in
+            self.pageLabel.text = pageInfo
+        }).store(in: &disposables)
     }
 }

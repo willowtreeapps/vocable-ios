@@ -9,17 +9,16 @@
 import UIKit
 
 class PresetPaginationContainerCollectionViewCell: PaginationContainerCollectionViewCell {
-    
-    var selectedCategory: CategoryViewModel! {
-        didSet {
-            pageViewController = PresetsPageViewController(selectedCategory: selectedCategory)
-        }
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         borderedView.fillColor = .collectionViewBackgroundColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
+        pageViewController = PresetsPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pageViewController = PresetsPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     }
 }
