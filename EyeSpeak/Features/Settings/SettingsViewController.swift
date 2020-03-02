@@ -2,18 +2,59 @@
 //  SettingsViewController.swift
 //  EyeSpeak
 //
-//  Created by Jesse Morgan on 2/25/20.
+//  Created by Jesse Morgan on 2/6/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import MessageUI
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UICollectionViewController, MFMailComposeViewControllerDelegate {
     
-    @IBOutlet var dismissButton: GazeableButton!
+    @IBOutlet private var headerView: UINavigationItem!
     
-    @IBAction func dismissSettings(_ sender: Any) {
+    private weak var composeVC: MFMailComposeViewController?
+    
+    private enum SettingsItem: CaseIterable {
+        case privacyPolicy
+        case contactDevs
+        case pidTuner
+        case versionNum
+    }
+
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SettingsItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+        return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
+    }
+    
+    private var versionAndBuildNumber: String {
+        let versionNumber = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+        return "Version \(versionNumber)-\(buildNumber)"
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupNavigationBar()
+        setupCollectionView()
+    }
+    
+    func setupNavigationBar() {
+        let barAppearance = UINavigationBarAppearance()
+        barAppearance.backgroundColor = .collectionViewBackgroundColor
+        let textAttr: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.defaultTextColor, .font: UIFont.systemFont(ofSize: 34, weight: .bold)]
+        barAppearance.largeTitleTextAttributes = textAttr
+        barAppearance.titleTextAttributes = textAttr
+        navigationItem.standardAppearance = barAppearance
+        navigationItem.largeTitleDisplayMode = .always
+        
+        let dismissBarButton = UIBarButtonItem(image: UIImage(systemName: "xmark.circle")!, style: .plain, target: self, action: #selector(dismissVC))
+        dismissBarButton.tintColor = .defaultTextColor
+        
+        navigationItem.rightBarButtonItem = dismissBarButton
+    }
+    
+    @objc func dismissVC() {
         dismiss(animated: true, completion: nil)
     }
     

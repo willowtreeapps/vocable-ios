@@ -7,9 +7,16 @@
 //
 
 import Foundation
-import Combine
 
 struct AppConfig {
+    static let showIncompleteFeatures: Bool = {
+        #if DEBUG
+        return true
+        #else
+        return false
+        #endif
+    }()
+
     static let showPIDTunerDebugMenu: Bool = {
         #if DEBUG
         return true
@@ -17,13 +24,4 @@ struct AppConfig {
         return false
         #endif
     }()
-    
-    static var isHeadTrackingEnabled = UserDefaults.standard.value(forKey: "isHeadTrackingEnabled") as? Bool ?? true {
-        didSet {
-            UserDefaults.standard.set(isHeadTrackingEnabled, forKey: "isHeadTrackingEnabled")
-            headTrackingValueSubject.send(isHeadTrackingEnabled)
-        }
-    }
-    
-    static let headTrackingValueSubject = CurrentValueSubject<Bool, Never>(isHeadTrackingEnabled)
 }

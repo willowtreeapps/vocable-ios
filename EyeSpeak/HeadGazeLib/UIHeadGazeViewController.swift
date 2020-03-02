@@ -1,6 +1,5 @@
 import Foundation
 import ARKit
-import Combine
 
 extension Notification.Name {
     static let applicationDidAcquireGaze = Notification.Name("applicationDidAcquireGaze")
@@ -39,8 +38,6 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     private var computedScale: CGFloat = 6
     private var xAngleCorrectionAmount = 0.0
     private var yAngleCorrectionAmount = 0.0
-    
-    private var disposables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,14 +63,7 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        _ = AppConfig.headTrackingValueSubject.sink { (isHeadTrackingEnabled) in
-            if isHeadTrackingEnabled {
-                self.resetTracking()
-            } else {
-                self.sceneview?.session.pause()
-            }
-        }.store(in: &disposables)
+        resetTracking()
 
         if let sceneView = sceneview {
             sceneView.isHidden = false
