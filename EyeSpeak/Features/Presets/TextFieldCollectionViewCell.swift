@@ -24,7 +24,6 @@ class TextFieldCollectionViewCell: VocableCollectionViewCell {
         borderedView.borderColor = .cellBorderHighlightColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
         super.fillColor = .collectionViewBackgroundColor
-        font = .systemFont(ofSize: 48, weight: .bold)
         
         updateContentViews()
         backgroundView = borderedView
@@ -36,6 +35,12 @@ class TextFieldCollectionViewCell: VocableCollectionViewCell {
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = .collectionViewBackgroundColor
         textLabel.isOpaque = true
+        font = .systemFont(ofSize: 48, weight: .bold)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateContentViews()
     }
 
     func setup(title: NSAttributedString) {
