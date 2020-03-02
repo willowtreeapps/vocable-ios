@@ -38,7 +38,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
         for indexPath in collectionView.indexPathsForVisibleItems {
             guard let item = dataSource.itemIdentifier(for: indexPath),
                 case let .presetItem(preset) = item,
-            ItemSelection.selectedPhrase == preset else {
+            ItemSelection.phraseValueSubject.value == preset else {
                     collectionView.deselectItem(at: indexPath, animated: false)
                     continue
             }
@@ -90,7 +90,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
         
         switch selectedItem {
         case .presetItem(let viewModel):
-            ItemSelection.selectedPhrase = viewModel
+            ItemSelection.phraseValueSubject.send(viewModel)
 
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {
