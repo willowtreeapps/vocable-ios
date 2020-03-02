@@ -94,10 +94,6 @@ struct TextTransaction: CustomDebugStringConvertible {
         
         let punctuation = ["'", ",", ".", "?"]
         
-        if text.count == 1 {
-            newText = text.uppercased()
-        }
-        
         let trimmedText = newText.trimmingCharacters(in: .whitespaces)
         if let lastCharacter = trimmedText.last {
             // Adjusting spacing when adding a character after punctuation (should always be only one space after punctuation)
