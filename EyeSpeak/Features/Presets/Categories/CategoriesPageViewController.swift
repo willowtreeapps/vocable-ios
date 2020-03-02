@@ -11,7 +11,13 @@ import CoreData
 
 class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    private let itemsPerPage = 4
+    private var itemsPerPage: Int {
+        if case .regular = traitCollection.horizontalSizeClass {
+            return 4
+        }
+        
+        return 1
+    }
     private lazy var pages: [UIViewController] = categoryViewModels.chunked(into: itemsPerPage).map { viewModels in
         let collectionViewController = CategoryPageCollectionViewController(collectionViewLayout: CategoryPageCollectionViewController.createLayout(with: viewModels.count))
                 collectionViewController.items = viewModels
