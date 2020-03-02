@@ -19,15 +19,15 @@ enum PresetCategory: CaseIterable {
     var description: String {
         switch self {
         case .category1:
-            return "Basic Needs"
+            return "General"
         case .category2:
-            return "Salutations"
+            return "Basic Needs"
         case .category3:
-            return "Temperature"
+            return "Personal Care"
         case .category4:
-            return "Body"
+            return "Conversation"
         case .category5:
-            return "Test category 5"
+            return "Environment"
         case .saved:
             return "My Sayings"
         }
@@ -37,54 +37,68 @@ enum PresetCategory: CaseIterable {
 struct TextPresets {
     
     static var presetsByCategory: [PresetCategory: [String]] = [
-        .category1: ["I want the door closed.",
-                     "I want the door open.",
-                     "I would like to go to the bathroom.",
-                     "I want the lights off.",
-                     "I want the lights on.",
-                     "I want my pillow fixed.",
-                     "I would like some water.",
-                     "I would like some coffee.",
-                     "I want another pillow.1",
-                     "I want another pillow.2",
-                     "I want another pillow.3",
-                     "I want another pillow.4",
-                     "I want another pillow.5",
-                     "I want another pillow.6",
-                     "I want another pillow.7",
-                     "I want another pillow.8",
-                     "I want another pillow.9",
-                     "I want another pillow.0",
-                     "I want another pillow.a",
-                     "I want another pillow.b",
-                     "I want another pillow.c"],
-        .category2: ["Hello",
+        .category1: ["Please",
+                     "Thank you",
+                     "Yes",
+                     "No",
+                     "Maybe",
+                     "Please wait",
+                     "I don't know",
+                     "I didn't mean to say that",
+                     "Please be patient"],
+        .category2: ["I need to go to the restroom",
+                     "I am thirsty",
+                     "I am hungry",
+                     "I am cold",
+                     "I am hot",
+                     "I am tired",
+                     "I am fine",
+                     "I am good",
+                     "I am uncomfortable",
+                     "I am in pain",
+                     "I am finished",
+                     "I want to lie down",
+                     "I want to sit up"],
+        .category3: ["I need my medication",
+                     "I need a bath",
+                     "I need a shower",
+                     "I need to wash my face",
+                     "I need to brush my hair",
+                     "Please fix my pillow",
+                     "I need to spit",
+                     "I am having trouble breathing",
+                     "I need a jacket"],
+        .category4: ["Hello",
+                     "Good morning",
+                     "Good evening",
+                     "Please to meet you",
+                     "How is your day?",
                      "How are you?",
-                     "Bye",
+                     "How's it going?",
+                     "How was your weekend?",
                      "Goodbye",
                      "Okay",
-                     "How's it going?",
+                     "Bad",
                      "Good",
-                     "How is your day?",
-                     "Bad"],
-        .category3: ["I am cold",
-                     "I am hot",
-                     "I want more blankets",
-                     "I want less blankets",
-                     "I feel fine",
-                     "I am sweating",
-                     "I am freezing",
-                     "I need a towel",
-                     "I need a jacket"],
-        .category4: ["Head",
-                     "Feet",
-                     "Hands",
-                     "Neck",
-                     "Arm",
-                     "Knee",
-                     "Side",
-                     "Right",
-                     "Left"],
-        .category5: ["Test cat 5"]
+                     "That makes sense",
+                     "I like it",
+                     "Please stop",
+                     "I do not agree",
+                     "Please repeat what you said"],
+        .category5: ["Please turn the lights on",
+                     "Please turn the lights off",
+                     "No visitors please",
+                     "I would like visitors",
+                     "Please be quiet",
+                     "I would like to talk",
+                     "Please turn the TV on",
+                     "Please turn the TV off",
+                     "Please turn the volume up",
+                     "Please turn the volume down",
+                     "Please open the blinds",
+                     "Please close the blinds",
+                     "Please open the window",
+                     "Please close the window"]
+                     
     ]
 }
