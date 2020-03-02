@@ -113,7 +113,7 @@ class PresetsViewController: UICollectionViewController {
         
         setupCollectionView()
         configureDataSource()
-        observeCategorySelectionChanges()
+        observeItemSelectionChanges()
     }
     
     private func setupCollectionView() {
@@ -214,9 +214,14 @@ class PresetsViewController: UICollectionViewController {
         updateSnapshot()
     }
     
-    private func observeCategorySelectionChanges() {
+    private func observeItemSelectionChanges() {
         _ = ItemSelection.categoryValueSubject.sink(receiveValue: { _ in
             self.reloadPresets()
+        }).store(in: &disposables)
+        
+        _ = ItemSelection.phraseValueSubject.sink(receiveValue: { selectedPhrase in
+            guard let utterance = selectedPhrase?.utterance else { return }
+            self.setTextTransaction(TextTransaction(text: utterance))
         }).store(in: &disposables)
     }
     
@@ -460,13 +465,5 @@ class PresetsViewController: UICollectionViewController {
         let vc = storyboard.instantiateInitialViewController()!
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
-    }
-
-    @objc private func didSelectPreset(notification: NSNotification) {
-        guard let text = notification.object as? String else {
-            return
-        }
-        
-        setTextTransaction(TextTransaction(text: text))
     }
 }
