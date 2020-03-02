@@ -98,18 +98,22 @@ struct TextTransaction: CustomDebugStringConvertible {
             newText = text.uppercased()
         }
         
-        if !punctuation.contains(char) && character != " " && (newText.last == "." || newText.last == "?" || newText.last == ",") {
-            newText += " "
-        }
-        
         let trimmedText = newText.trimmingCharacters(in: .whitespaces)
-        if trimmedText.last == "." || trimmedText.last == "?" {
-            char = char.uppercased()
+        if let lastCharacter = trimmedText.last {
+            // Adjusting spacing when adding a character after punctuation (should always be only one space after punctuation)
+            if punctuation.contains(String(lastCharacter)) {
+                newText = trimmedText
+                newText += " "
+            }
+            
+            if lastCharacter == "." || lastCharacter == "?" {
+                char = char.uppercased()
+            }
         }
         
         if punctuation.contains(char) {
             if newText.last == " " {
-                newText.removeLast()
+                newText = newText.trimmingCharacters(in: .whitespaces)
             }
         }
         
