@@ -31,16 +31,14 @@ class PresetPageCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         clearsSelectionOnViewWillAppear = false
-        
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         for indexPath in collectionView.indexPathsForVisibleItems {
             guard let item = dataSource.itemIdentifier(for: indexPath),
                 case let .presetItem(preset) = item,
-                (self.parent as? PresetsPageViewController)?.selectedItem == preset else {
+            ItemSelection.selectedPhrase == preset else {
                     collectionView.deselectItem(at: indexPath, animated: false)
                     continue
             }
@@ -92,7 +90,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
         
         switch selectedItem {
         case .presetItem(let viewModel):
-            NotificationCenter.default.post(name: .didSelectPresetNotificationName, object: viewModel.utterance)
+            ItemSelection.selectedPhrase = viewModel
 
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {

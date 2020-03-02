@@ -9,20 +9,13 @@
 import UIKit
 import AVFoundation
 import CoreData
+import Combine
 
-class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
+class PresetsViewController: UICollectionViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
+    private var disposables = Set<AnyCancellable>()
     
-    private var selectedCategory: CategoryViewModel =
-        Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
-                          sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
-            .compactMap { CategoryViewModel($0) }.first! {
-        didSet {
-            reloadPresets()
-        }
-    }
-
     private enum HintText: String, CaseIterable {
         case preset = "Select something below to speak"
         case keyboard = "Select letters below to start typing."
@@ -52,7 +45,7 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         case paginatedPresets
         case key(String)
         case keyboardFunctionButton(KeyboardFunctionButton)
-        case pageIndicator((String))
+        case pageIndicator
         indirect case pagination(ItemWrapper, UIPageViewController.NavigationDirection)
     }
     
@@ -120,9 +113,7 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         
         setupCollectionView()
         configureDataSource()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: .didSelectCategoryNotificationName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didSelectPreset(notification:)), name: .didSelectPresetNotificationName, object: nil)
+        observeCategorySelectionChanges()
     }
     
     private func setupCollectionView() {
@@ -186,16 +177,13 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
                 return cell
             case .paginatedCategories:
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryPaginationContainerCollectionViewCell", for: indexPath) as! CategoryPaginationContainerCollectionViewCell
-                cell.selectedCategory = self.selectedCategory
                 return cell
             case .suggestionText(let predictiveText):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: SuggestionCollectionViewCell.reuseIdentifier, for: indexPath) as! SuggestionCollectionViewCell
                 cell.setup(title: predictiveText.text)
                 return cell
             case .paginatedPresets:
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PresetPaginationContainerCollectionViewCell", for: indexPath) as! PresetPaginationContainerCollectionViewCell
-                cell.selectedCategory = self.selectedCategory
-                return cell
+                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "PresetPaginationContainerCollectionViewCell", for: indexPath) as! PresetPaginationContainerCollectionViewCell
             case .key(let char):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
                 cell.setup(title: char)
@@ -204,10 +192,8 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
                 cell.setup(with: functionType.image)
                 return cell
-            case .pageIndicator(let title):
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PageIndicatorCollectionViewCell", for: indexPath) as! PageIndicatorCollectionViewCell
-                cell.pageInfo = title
-                return cell
+            case .pageIndicator:
+                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "PageIndicatorCollectionViewCell", for: indexPath) as! PageIndicatorCollectionViewCell
             case .pagination(let itemIdentifier, let direction):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PaginationCollectionViewCell", for: indexPath) as! PaginationCollectionViewCell
                 cell.paginationDirection = direction
@@ -226,6 +212,12 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         })
         
         updateSnapshot()
+    }
+    
+    private func observeCategorySelectionChanges() {
+        _ = ItemSelection.categoryValueSubject.sink(receiveValue: { _ in
+            self.reloadPresets()
+        }).store(in: &disposables)
     }
     
     // MARK: - NSDiffableDataSourceSnapshot construction
@@ -281,7 +273,7 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
             
             snapshot.appendSections([.presets])
             snapshot.appendItems([.paginatedPresets])
-            snapshot.appendItems([.pagination(.paginatedPresets, .reverse), .pageIndicator("Page 1 of 4"), .pagination(.paginatedPresets, .forward)])
+            snapshot.appendItems([.pagination(.paginatedPresets, .reverse), .pageIndicator, .pagination(.paginatedPresets, .forward)])
         }
 
         dataSource.apply(snapshot, animatingDifferences: animated)
@@ -330,10 +322,6 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
             childViewController.view.frame = childContainerView.frame.inset(by: childContainerView.layoutMargins)
             childContainerView.addSubview(childViewController.view)
             childViewController.didMove(toParent: self)
-            
-            if let presetsPageViewController = childViewController as? PresetsPageViewController {
-                presetsPageViewController.pageIndicatorDelegate = self
-            }
         }
     }
 
@@ -364,7 +352,9 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
                 }
 
             case .save:
-                guard !textTransaction.isHint else {
+                _textTransaction = TextTransaction(text: textTransaction.text.trimmingCharacters(in: .whitespacesAndNewlines))
+                
+                guard !textTransaction.isHint, !textTransaction.text.isEmpty else {
                     break
                 }
                 let context = NSPersistentContainer.shared.viewContext
@@ -465,14 +455,6 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         }
     }
     
-    @objc private func didSelectCategory(notification: NSNotification) {
-        guard let category = notification.object as? CategoryViewModel else {
-            return
-        }
-        
-        selectedCategory = category
-    }
-    
     private func presentSettingsViewController() {
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
         let vc = storyboard.instantiateInitialViewController()!
@@ -486,25 +468,5 @@ class PresetsViewController: UICollectionViewController, PageIndicatorDelegate {
         }
         
         setTextTransaction(TextTransaction(text: text))
-    }
-    
-    // MARK: - PageIndicatorDelegate
-    func updatePageIndicator(with pageInfo: String) {
-        let presetPageIndicatorIdentifier = dataSource.snapshot().itemIdentifiers(inSection: .presets).first {
-            guard case .pageIndicator = $0 else {
-                return false
-            }
-            
-            return true
-        }
-        
-        guard let pageIndicatorIdentifier = presetPageIndicatorIdentifier,
-            let pageIndicatorIndexPath = dataSource.indexPath(for: pageIndicatorIdentifier) else {
-            return
-        }
-        
-         if let pageIndicatorCell = collectionView.cellForItem(at: pageIndicatorIndexPath) as? PageIndicatorCollectionViewCell {
-            pageIndicatorCell.pageInfo = pageInfo
-        }
     }
 }

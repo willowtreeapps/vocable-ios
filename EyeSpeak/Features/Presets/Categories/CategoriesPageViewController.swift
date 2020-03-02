@@ -12,9 +12,6 @@ import CoreData
 class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     private let itemsPerPage = 4
-    
-    var selectedCategory: CategoryViewModel?
-    
     private lazy var pages: [UIViewController] = categoryViewModels.chunked(into: itemsPerPage).map { viewModels in
         let collectionViewController = CategoryPageCollectionViewController(collectionViewLayout: CategoryPageCollectionViewController.createLayout(with: viewModels.count))
                 collectionViewController.items = viewModels
@@ -26,15 +23,6 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
                           sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
             .compactMap { CategoryViewModel($0) }
     
-    init(selectedCategory: CategoryViewModel) {
-        self.selectedCategory = selectedCategory
-        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
@@ -43,8 +31,6 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
         if let firstViewController = pages.first {
             setViewControllers([firstViewController], direction: .forward, animated: true)
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(didSelectCategory(notification:)), name: .didSelectCategoryNotificationName, object: nil)
     }
     
     // MARK: - UIPageViewControllerDataSource
@@ -63,13 +49,5 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
         }
         
         return pages[safe: index + 1] ?? pages.first
-    }
-    
-    @objc private func didSelectCategory(notification: NSNotification) {
-        guard let category = notification.object as? CategoryViewModel else {
-            return
-        }
-        
-        selectedCategory = category
     }
 }
