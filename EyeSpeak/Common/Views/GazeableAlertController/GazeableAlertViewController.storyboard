@@ -19,8 +19,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czB-Cb-50h" userLabel="Content View" customClass="BorderedView" customModule="EyeSpeak" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="czB-Cb-50h" userLabel="Content View" customClass="BorderedView" customModule="EyeSpeak" customModuleProvider="target">
                                 <rect key="frame" x="57" y="373" width="300" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zoc-0N-4z8">
                                         <rect key="frame" x="16" y="15.999999999999998" width="268" height="20.333333333333329"/>

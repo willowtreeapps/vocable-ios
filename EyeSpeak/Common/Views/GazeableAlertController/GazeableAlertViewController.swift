@@ -23,6 +23,7 @@ class GazeableAlertViewController: UIViewController {
         return alertViewController
     }
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cancelButton: GazeableButton!
     @IBOutlet weak var confirmButton: GazeableButton!
     
@@ -38,6 +39,8 @@ class GazeableAlertViewController: UIViewController {
             button.selectionFillColor = .collectionViewBackgroundColor
             button.setTitleColor(.defaultTextColor, for: .selected)
         }
+        titleLabel.text = "let alertViewController = storyboard.instantiateInitialViewController() as! GazeableAlertViewController let alertViewController = storyboard.instantiateInitialViewController() as! GazeableAlertViewController"
+//        titleLabel.sizeToFit()
     }
  
     @IBAction func didSelectCancelButton(_ sender: GazeableButton) {
