@@ -240,16 +240,25 @@ class PresetsViewController: UICollectionViewController {
     }
 
     func updateSnapshot(animated: Bool = true) {
-
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
         
+        // Helper functions
+        func appendSaveButton() {
+            if phraseIsSaved(textTransaction.text) {
+                snapshot.appendItems([.topBarButton(.unsave)])
+            } else {
+                snapshot.appendItems([.topBarButton(.save)])
+            }
+        }
+        
+        // Snapshot construction
         snapshot.appendSections([.textField])
         snapshot.appendItems([.textField(textTransaction.attributedText)])
-        if phraseIsSaved(textTransaction.text) {
-            snapshot.appendItems([.topBarButton(.unsave)])
-        } else {
-            snapshot.appendItems([.topBarButton(.save)])
+        
+        if case .regular = traitCollection.horizontalSizeClass {
+           appendSaveButton()
         }
+        
         snapshot.appendItems([.topBarButton(.togglePreset), .topBarButton(.settings)])
         
         if showKeyboard {

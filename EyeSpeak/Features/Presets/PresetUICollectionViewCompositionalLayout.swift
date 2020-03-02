@@ -55,18 +55,39 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     // MARK: - Section Layouts
     
     static func textFieldSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7), heightDimension: .fractionalHeight(1.0)))
-        textFieldItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
+        var regularWidthContainerGroupLayout: NSCollectionLayoutGroup {
+            let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7), heightDimension: .fractionalHeight(1.0)))
+            textFieldItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
+            
+            let functionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.1), heightDimension: .fractionalHeight(1.0)))
+            functionItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
+            
+            let subitems = [textFieldItem, functionItem, functionItem, functionItem]
+            
+            return NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                   heightDimension: .fractionalHeight(100.0 / totalSize.height)),
+                subitems: subitems)
+        }
         
-        let functionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.1), heightDimension: .fractionalHeight(1.0)))
-        functionItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
+        var compactWidthContainerGroupLayout: NSCollectionLayoutGroup {
+            let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.5)))
+            textFieldItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
+            
+            let functionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0)))
+            functionItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
+            
+            let functionItemGroup = NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                   heightDimension: .fractionalHeight(0.5)),
+                subitems: [functionItem, functionItem])
+            
+            return NSCollectionLayoutGroup.vertical(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 4.0)),
+                subitems: [textFieldItem, functionItemGroup])
+        }
         
-        let subitems = [textFieldItem, functionItem, functionItem, functionItem]
-        
-        let containerGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(100.0 / totalSize.height)),
-            subitems: subitems)
+        let containerGroup = environment.traitCollection.horizontalSizeClass == .regular ? regularWidthContainerGroupLayout : compactWidthContainerGroupLayout
         
         let section = NSCollectionLayoutSection(group: containerGroup)
         
