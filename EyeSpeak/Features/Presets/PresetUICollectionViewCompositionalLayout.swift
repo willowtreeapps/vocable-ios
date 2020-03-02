@@ -164,32 +164,63 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     }
         
     static func presetsSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let flexibleSpacing = (environment.container.contentSize.width / 10.0) * 2.0
         
-        let presetPageItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(504.0 / totalSize.height)))
+        var regularWidthPresetGroup: NSCollectionLayoutGroup {
+            let flexibleSpacing = (environment.container.contentSize.width / 10.0) * 2.0
+            
+            let presetPageItem = NSCollectionLayoutItem(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                   heightDimension: .fractionalHeight(504.0 / totalSize.height)))
+            
+            let leadingPaginationItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(146.0 / totalSize.width), heightDimension: .fractionalHeight(1)))
+            leadingPaginationItem.edgeSpacing = .init(leading: .flexible(flexibleSpacing), top: nil, trailing: nil, bottom: nil)
+            
+            let pageIndicatorItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(228.0 / totalSize.width), heightDimension: .fractionalHeight(1)))
+            
+            let trailingPaginationItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(146.0 / totalSize.width), heightDimension: .fractionalHeight(1)))
+            trailingPaginationItem.edgeSpacing = .init(leading: nil, top: nil, trailing: .flexible(flexibleSpacing), bottom: nil)
+            
+            let paginationGroup = NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                   heightDimension: .fractionalHeight(99.0 / totalSize.height)),
+                subitems: [leadingPaginationItem, pageIndicatorItem, trailingPaginationItem])
+            paginationGroup.interItemSpacing = .fixed(0)
+            
+            let containerGroup = NSCollectionLayoutGroup.vertical(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(800.0 / totalSize.height)),
+                subitems: [presetPageItem, paginationGroup])
+            return containerGroup
+        }
         
-        let leadingPaginationItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(146.0 / totalSize.width), heightDimension: .fractionalHeight(1)))
-        leadingPaginationItem.edgeSpacing = .init(leading: .flexible(flexibleSpacing), top: nil, trailing: nil, bottom: nil)
+        var compactWidthPresetGroup: NSCollectionLayoutGroup {
+            let presetPageItem = NSCollectionLayoutItem(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                   heightDimension: .fractionalHeight(504.0 / totalSize.height)))
+            
+            let paginationItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 4.0), heightDimension: .fractionalHeight(1)))
+            
+            let pageIndicatorItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(2.0 / 4.0), heightDimension: .fractionalHeight(1)))
+            
+            let paginationGroup = NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                   heightDimension: .fractionalHeight(99.0 / totalSize.height)),
+                subitems: [paginationItem, pageIndicatorItem, paginationItem])
+            paginationGroup.interItemSpacing = .fixed(0)
+            
+            let containerGroup = NSCollectionLayoutGroup.vertical(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(4.0 / 5.0)),
+                subitems: [presetPageItem, paginationGroup])
+            
+            return containerGroup
+        }
         
-        let pageIndicatorItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(228.0 / totalSize.width), heightDimension: .fractionalHeight(1)))
+        let containerGroup = environment.traitCollection.horizontalSizeClass == .regular ? regularWidthPresetGroup : compactWidthPresetGroup
+        containerGroup.interItemSpacing = .fixed(8)
+    
+        let section = NSCollectionLayoutSection(group: containerGroup)
+        section.contentInsets = .init(top: 8, leading: 0, bottom: 8, trailing: 0)
         
-        let trailingPaginationItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(146.0 / totalSize.width), heightDimension: .fractionalHeight(1)))
-        trailingPaginationItem.edgeSpacing = .init(leading: nil, top: nil, trailing: .flexible(flexibleSpacing), bottom: nil)
-
-        let paginationGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(99.0 / totalSize.height)),
-            subitems: [leadingPaginationItem, pageIndicatorItem, trailingPaginationItem])
-        paginationGroup.interItemSpacing = .fixed(0)
-        
-        let containerGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(800.0 / totalSize.height)),
-            subitems: [presetPageItem, paginationGroup])
-        containerGroup.interItemSpacing = .fixed(0)
-        
-        return NSCollectionLayoutSection(group: containerGroup)
+        return section
     }
     
     // MARK: Keyboard Layout

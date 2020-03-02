@@ -14,14 +14,21 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
     
     var selectedItem: PhraseViewModel?
     
-    private let itemsPerPage = 9
+    private var itemsPerPage: Int {
+        switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
+        case (.regular, .regular), (.regular, .compact):
+            return 9
+        default:
+            return 6
+        }
+    }
 
     private lazy var pages: [UIViewController] = {
         presetViewModels.chunked(into: itemsPerPage).map { viewModels in
-            let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.CompositionalLayout(with: viewModels.count))
+            let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.CompositionalLayout(traitCollection: traitCollection))
             collectionViewController.items = viewModels
             return collectionViewController
-            }
+        }
     }()
     
     private var presetViewModels: [PhraseViewModel] =
