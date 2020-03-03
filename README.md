@@ -4,9 +4,9 @@
 
 Empowering people to communicate with care takers and loved ones.
 
-[![AppStore Link](marketing_assets/appstore_badge.gif)](https://itunes.apple.com/us/app/keynote/id1497040547?mt=8)
-
 [![Watch the video](marketing_assets/vocable_github_image.gif)](https://player.vimeo.com/video/394212430)
+
+[![AppStore Link](marketing_assets/appstore_badge.gif)](https://itunes.apple.com/us/app/keynote/id1497040547?mt=8)
 
 ## Contents
 - [What is Vocable?](#what-is-vocable)
@@ -22,29 +22,22 @@ Empowering people to communicate with care takers and loved ones.
 Vocable AAC allows those with conditions such as MS, stroke, ALS, or spinal cord injuries to communicate using an app that tracks head movements, without the need to spend tens of thousands of dollars on technology to do so.
 
 ## Features
-- 
 
 ## Roadmap
-- 
 
-### In-Progress:
-- 
+## In-Progress:
 
-### Up Next:
-- 
+## Up Next:
 
-### Future:
-- 
+## Future:
 
 ## Contributing
-- 
 
 ## Requirements
 - iOS 13.0
 - iOS devices with TrueDepth camera (currently iPad Pro only for v1.0)
 
 ## Build instructions
-- 
 
 ## Credits
 Matt Kubota, Kyle Ohanian, Duncan Lewis, Ameir Al-Zoubi, and many more from [WillowTree](https://willowtreeapps.com/) 💙.
