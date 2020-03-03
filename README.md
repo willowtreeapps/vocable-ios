@@ -1,4 +1,4 @@
-# eyespeak for iOS
+# Vocable for iOS
 ![Platform iOS](https://img.shields.io/badge/platform-iOS-orange.svg)
 ![license MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)
 
