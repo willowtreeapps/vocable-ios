@@ -54,15 +54,15 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     
     // MARK: - Section Layouts
     
-    static func textFieldSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+    static func topBarPresetSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         var regularWidthContainerGroupLayout: NSCollectionLayoutGroup {
             let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7), heightDimension: .fractionalHeight(1.0)))
             textFieldItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
             
-            let functionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.1), heightDimension: .fractionalHeight(1.0)))
+            let functionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.15), heightDimension: .fractionalHeight(1.0)))
             functionItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
             
-            let subitems = [textFieldItem, functionItem, functionItem, functionItem]
+            let subitems = [textFieldItem, functionItem, functionItem]
             
             return NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -85,6 +85,49 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             
             return NSCollectionLayoutGroup.vertical(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 4.0)),
+                subitems: [textFieldItem, functionItemGroup])
+        }
+        
+        let containerGroup = environment.traitCollection.horizontalSizeClass == .regular ? regularWidthContainerGroupLayout : compactWidthContainerGroupLayout
+        
+        let section = NSCollectionLayoutSection(group: containerGroup)
+        
+        return section
+    }
+    
+    static func topBarKeyboardSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        var regularWidthContainerGroupLayout: NSCollectionLayoutGroup {
+            let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7), heightDimension: .fractionalHeight(1.0)))
+            textFieldItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
+            
+            let functionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.1), heightDimension: .fractionalHeight(1.0)))
+            functionItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
+            
+            let subitems = [textFieldItem, functionItem, functionItem, functionItem]
+            
+            return NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                   heightDimension: .fractionalHeight(100.0 / totalSize.height)),
+                subitems: subitems)
+        }
+        
+        var compactWidthContainerGroupLayout: NSCollectionLayoutGroup {
+            let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(2 / 3)))
+            
+            let leadingFunctionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 3), heightDimension: .fractionalHeight(1.0)))
+            leadingFunctionItem.contentInsets = .init(top: 4, leading: 0, bottom: 0, trailing: 4)
+            let innerFunctionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 3), heightDimension: .fractionalHeight(1.0)))
+            innerFunctionItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
+            let trailingFunctionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 3), heightDimension: .fractionalHeight(1.0)))
+            trailingFunctionItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 0)
+
+            let functionItemGroup = NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                   heightDimension: .fractionalHeight(1 / 3)),
+                subitems: [leadingFunctionItem, innerFunctionItem, trailingFunctionItem])
+            
+            return NSCollectionLayoutGroup.vertical(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 5.0)),
                 subitems: [textFieldItem, functionItemGroup])
         }
         
@@ -141,26 +184,55 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         return section
     }
     
-    static func predictiveTextSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let itemCount = CGFloat(4)
+    static func suggestiveTextSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         
-        let predictiveTextItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / itemCount),
-                                               heightDimension: .fractionalHeight(1.0)))
+        var regularWidthSection: NSCollectionLayoutSection {
+            let itemCount = CGFloat(4)
+            
+            let suggestiveTextItem = NSCollectionLayoutItem(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / itemCount),
+                                                   heightDimension: .fractionalHeight(1.0)))
+            
+            let containerGroup = NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                   heightDimension: .fractionalHeight(116.0 / totalSize.height)),
+                subitem: suggestiveTextItem, count: Int(itemCount))
+            containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
+            let section = NSCollectionLayoutSection(group: containerGroup)
+            
+            let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
+            backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 8, trailing: 0)
+            
+            section.decorationItems = [backgroundDecoration]
+            section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
+            return section
+        }
         
-        let containerGroup = NSCollectionLayoutGroup.horizontal(
+        var compactWidthSection: NSCollectionLayoutSection {
+            let suggestiveTextItem = NSCollectionLayoutItem(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2),
+                                                   heightDimension: .fractionalHeight(1.0)))
+            
+            let suggestiveTextRow = NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                   heightDimension: .fractionalHeight(1)),
+                subitem: suggestiveTextItem, count: Int(2))
+            suggestiveTextRow.interItemSpacing = .fixed(8)
+            
+            let containerGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(116.0 / totalSize.height)),
-            subitem: predictiveTextItem, count: Int(itemCount))
-        containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
-        let section = NSCollectionLayoutSection(group: containerGroup)
+                                               heightDimension: .fractionalHeight(1 / 6)),
+            subitem: suggestiveTextRow, count: Int(2))
+            containerGroup.interItemSpacing = .fixed(8)
+            
+            let section = NSCollectionLayoutSection(group: containerGroup)
+            
+            section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
+            return section
+        }
         
-        let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
-        backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 8, trailing: 0)
-        
-        section.decorationItems = [backgroundDecoration]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
-        return section
+        return environment.traitCollection.horizontalSizeClass == .regular ? regularWidthSection : compactWidthSection
+
     }
         
     static func presetsSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
@@ -225,19 +297,15 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     
     // MARK: Keyboard Layout
     
-    static func keyboardSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+    static func landscapeKeyboardSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let keyItem = PresetUICollectionViewCompositionalLayout.keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 10.0), heightDimension: .fractionalHeight(1)))
         
         // Character key group (Top 3 rows)
-        let characterKeyGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)),
-                                                                   subitem: keyItem, count: 10)
+        let characterKeyGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)), subitem: keyItem, count: 10)
         
-        let characterKeyContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.75)),
-                                                                          subitem: characterKeyGroup, count: 3)
+        let characterKeyContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.75)), subitem: characterKeyGroup, count: 3)
         
         // Function key group (Bottom row)
-        
-        // Needs to take up space of 2
         let flexibleSpacing = (environment.container.contentSize.width / 10.0) * 2.0
         
         let leadingKeyItem = PresetUICollectionViewCompositionalLayout.keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 10.0), heightDimension: .fractionalHeight(1)))
@@ -251,8 +319,41 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         let functionKeyGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.25)),
                                                                   subitems: [leadingKeyItem, spaceKeyItem, keyItem, trailingKeyItem])
         
-        let overallContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.7)),
-                                                                     subitems: [characterKeyContainerGroup, functionKeyGroup])
+        let overallFractionHeight = environment.traitCollection.verticalSizeClass == .compact ? CGFloat(0.65) : CGFloat(0.7)
+        
+        let overallContainerGroup = NSCollectionLayoutGroup.vertical(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(overallFractionHeight)),
+            subitems: [characterKeyContainerGroup, functionKeyGroup])
+        
+        let section = NSCollectionLayoutSection(group: overallContainerGroup)
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        return section
+    }
+    
+    static func portraitKeyboardSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let keyItem = PresetUICollectionViewCompositionalLayout.keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 6.0), heightDimension: .fractionalHeight(1)))
+        
+        // Character key group (Top 3 rows)
+        let characterKeyGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)), subitem: keyItem, count: 6)
+        
+        let characterKeyContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(5 / 6)), subitem: characterKeyGroup, count: 5)
+        
+        // Function key group (Bottom row)
+        
+        let leadingKeyItem = PresetUICollectionViewCompositionalLayout.keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 6.0), heightDimension: .fractionalHeight(1)))
+        
+        let spaceKeyItem = PresetUICollectionViewCompositionalLayout.keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(3.0 / 6.0), heightDimension: .fractionalHeight(1)))
+        
+        let trailingKeyItem = PresetUICollectionViewCompositionalLayout.keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 6.0), heightDimension: .fractionalHeight(1)))
+        
+        let functionKeyGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1 / 6)),
+            subitems: [leadingKeyItem, spaceKeyItem, keyItem, trailingKeyItem])
+        
+        let overallContainerGroup = NSCollectionLayoutGroup.vertical(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.55)),
+            subitems: [characterKeyContainerGroup, functionKeyGroup])
         
         let section = NSCollectionLayoutSection(group: overallContainerGroup)
         section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)

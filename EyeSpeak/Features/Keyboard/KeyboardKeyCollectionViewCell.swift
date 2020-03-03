@@ -33,7 +33,6 @@ class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = borderedView.fillColor
         textLabel.isOpaque = true
-        textLabel.font = font
     }
 
     func setup(title: String) {

@@ -18,7 +18,7 @@ class PresetsViewController: UICollectionViewController {
     
     private enum HintText: String, CaseIterable {
         case preset = "Select something below to speak"
-        case keyboard = "Select letters below to start typing."
+        case keyboard = "Start typing..."
     }
     
     private var _textTransaction = TextTransaction(text: HintText.preset.rawValue)
@@ -107,7 +107,7 @@ class PresetsViewController: UICollectionViewController {
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -144,11 +144,14 @@ class PresetsViewController: UICollectionViewController {
             
             switch sectionKind {
             case .textField:
-                return PresetUICollectionViewCompositionalLayout.textFieldSectionLayout(with: layoutEnvironment)
+                if self.showKeyboard {
+                    return PresetUICollectionViewCompositionalLayout.topBarKeyboardSectionLayout(with: layoutEnvironment)
+                }
+                return PresetUICollectionViewCompositionalLayout.topBarPresetSectionLayout(with: layoutEnvironment)
             case .categories:
                 return PresetUICollectionViewCompositionalLayout.categoriesSectionLayout(with: layoutEnvironment)
             case .predictiveText:
-                return PresetUICollectionViewCompositionalLayout.predictiveTextSectionLayout(with: layoutEnvironment)
+                return PresetUICollectionViewCompositionalLayout.suggestiveTextSectionLayout(with: layoutEnvironment)
             case .presets:
                 guard !self.showKeyboard else {
                     return nil
@@ -156,7 +159,10 @@ class PresetsViewController: UICollectionViewController {
                 
                 return PresetUICollectionViewCompositionalLayout.presetsSectionLayout(with: layoutEnvironment)
             case .keyboard:
-                return PresetUICollectionViewCompositionalLayout.keyboardSectionLayout(with: layoutEnvironment)
+                if layoutEnvironment.traitCollection.horizontalSizeClass == .compact && layoutEnvironment.traitCollection.verticalSizeClass == .regular {
+                    return PresetUICollectionViewCompositionalLayout.portraitKeyboardSectionLayout(with: layoutEnvironment)
+                }
+                return PresetUICollectionViewCompositionalLayout.landscapeKeyboardSectionLayout(with: layoutEnvironment)
             }
         }
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
@@ -190,6 +196,7 @@ class PresetsViewController: UICollectionViewController {
                 return cell
             case .keyboardFunctionButton(let functionType):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
+                cell.font = .systemFont(ofSize: 28, weight: .bold)
                 cell.setup(with: functionType.image)
                 return cell
             case .pageIndicator:
@@ -250,13 +257,10 @@ class PresetsViewController: UICollectionViewController {
         snapshot.appendSections([.textField])
         snapshot.appendItems([.textField(textTransaction.attributedText)])
         
-        if case .regular = traitCollection.horizontalSizeClass {
-           appendSaveButton()
-        }
-        
-        snapshot.appendItems([.topBarButton(.togglePreset), .topBarButton(.settings)])
-        
         if showKeyboard {
+            appendSaveButton()
+            snapshot.appendItems([.topBarButton(.togglePreset), .topBarButton(.settings)])
+            
             snapshot.appendSections([.predictiveText])
             
             if suggestions.isEmpty {
@@ -272,9 +276,16 @@ class PresetsViewController: UICollectionViewController {
             }
             
             snapshot.appendSections([.keyboard])
-            snapshot.appendItems("QWERTYUIOPASDFGHJKL'ZXCVBNM,.?".map { ItemWrapper.key("\($0)") })
+            if traitCollection.horizontalSizeClass == .compact {
+                snapshot.appendItems(KeyboardKeys.alphabetical.map { ItemWrapper.key("\($0)") })
+            } else {
+                snapshot.appendItems(KeyboardKeys.qwerty.map { ItemWrapper.key("\($0)") })
+            }
+            
             snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])
         } else {
+            snapshot.appendItems([.topBarButton(.togglePreset), .topBarButton(.settings)])
+            
             snapshot.appendSections([.categories])
             snapshot.appendItems([.pagination(.paginatedCategories, .reverse)])
             snapshot.appendItems([.paginatedCategories])
@@ -292,6 +303,13 @@ class PresetsViewController: UICollectionViewController {
         var snapshot = dataSource.snapshot()
         snapshot.reloadItems([.paginatedPresets])
         dataSource.apply(snapshot)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        DispatchQueue.main.async {
+            self.updateSnapshot()
+        }
     }
     
     // MARK: - Collection View Delegate

@@ -64,6 +64,7 @@
 		A99AF23323FDA8B600BE1184 /* SuggestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */; };
 		A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */; };
 		A99AF23923FEE88000BE1184 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A99AF23823FEE88000BE1184 /* Settings.storyboard */; };
+		A9B32C8C240EB6250084E151 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B32C8B240EB6250084E151 /* Keyboard.swift */; };
 		A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */; };
 		A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FF23F4900C0094DB64 /* TextExpression.swift */; };
 		A9DE170223F492B20094DB64 /* Array+Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE170123F492B20094DB64 /* Array+Split.swift */; };
@@ -168,6 +169,7 @@
 		A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionCollectionViewCell.xib; sourceTree = "<group>"; };
 		A99AF23823FEE88000BE1184 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = EyeSpeak/Features/Settings/Settings.storyboard; sourceTree = SOURCE_ROOT; };
+		A9B32C8B240EB6250084E151 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSuggestionController.swift; sourceTree = "<group>"; };
 		A9DE16FF23F4900C0094DB64 /* TextExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExpression.swift; sourceTree = "<group>"; };
 		A9DE170123F492B20094DB64 /* Array+Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Split.swift"; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 				A99AF23023FC8BF700BE1184 /* TextTransaction.swift */,
 				B81AC0A02405AF1100972E85 /* CategoryViewModel.swift */,
 				B81AC0A42405B62900972E85 /* PhraseViewModel.swift */,
+				A9B32C8B240EB6250084E151 /* Keyboard.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				6B823BCC23F4ADE30099F65E /* TunningView.swift in Sources */,
 				6B9DFA5F23E889DB0037673E /* UIHeadGazeEvent.swift in Sources */,
 				A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */,
+				A9B32C8C240EB6250084E151 /* Keyboard.swift in Sources */,
 				A9299C7523F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift in Sources */,
 				6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */,
 				6B823BCD23F4ADE30099F65E /* TunningWindow.swift in Sources */,
