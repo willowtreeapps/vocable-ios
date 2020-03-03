@@ -107,7 +107,19 @@ class PresetsViewController: UICollectionViewController {
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
-
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteAllItems()
+        dataSource.apply(snapshot)
+                
+        DispatchQueue.main.async { [weak self] in
+            self?.updateSnapshot()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
