@@ -28,53 +28,12 @@
                                     <segue destination="Jgy-U0-B1Z" kind="embed" identifier="ContentViewControllerSegue" id="VGF-IP-CWi"/>
                                 </connections>
                             </containerView>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nrv-Aq-xbg" userLabel="warningView">
-                                <rect key="frame" x="12.5" y="40" width="350" height="57"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="aBV-Ne-M9W">
-                                        <rect key="frame" x="23" y="-7.5" width="304" height="72"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="CircleAlert" translatesAutoresizingMaskIntoConstraints="NO" id="liB-PH-vza">
-                                                <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Please move closer to the device." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ohJ-Pn-D1E">
-                                                <rect key="frame" x="85" y="0.0" width="219" height="72"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <color key="textColor" red="0.96079725029999996" green="0.96076112989999995" blue="0.960785687" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.67843137249999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="tintColor" red="0.67843137249999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.67843137249999996" green="0.0" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="aBV-Ne-M9W" firstAttribute="centerY" secondItem="Nrv-Aq-xbg" secondAttribute="centerY" id="9mA-zx-EsK"/>
-                                    <constraint firstAttribute="height" constant="57" id="GyK-Jk-TFZ"/>
-                                    <constraint firstAttribute="width" constant="411" id="NOt-WZ-oMg">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="350"/>
-                                    </constraint>
-                                    <constraint firstItem="aBV-Ne-M9W" firstAttribute="centerX" secondItem="Nrv-Aq-xbg" secondAttribute="centerX" id="V3H-IW-cND"/>
-                                    <constraint firstItem="aBV-Ne-M9W" firstAttribute="leading" secondItem="Nrv-Aq-xbg" secondAttribute="leading" constant="23" id="Yv4-oU-ZGR"/>
-                                    <constraint firstAttribute="trailing" secondItem="aBV-Ne-M9W" secondAttribute="trailing" constant="23" id="yS1-Xm-HoH"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="h77-DW-Ra2" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leading" id="2vi-F0-7jD"/>
                             <constraint firstItem="h77-DW-Ra2" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="top" id="35q-ga-C7k"/>
-                            <constraint firstItem="Nrv-Aq-xbg" firstAttribute="top" secondItem="h77-DW-Ra2" secondAttribute="top" id="F7a-vR-wif">
-                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
-                            </constraint>
                             <constraint firstItem="AQq-Gr-kNC" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="topMargin" id="Pkw-eU-h0R"/>
-                            <constraint firstItem="Nrv-Aq-xbg" firstAttribute="centerX" secondItem="AQq-Gr-kNC" secondAttribute="centerX" id="RjJ-nv-njB"/>
                             <constraint firstItem="AQq-Gr-kNC" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leadingMargin" id="aS7-NB-aKe"/>
                             <constraint firstAttribute="bottom" secondItem="h77-DW-Ra2" secondAttribute="bottom" id="aiY-pn-mC3"/>
                             <constraint firstAttribute="bottomMargin" secondItem="AQq-Gr-kNC" secondAttribute="bottom" id="gjT-Qg-rfd"/>
@@ -84,9 +43,6 @@
                         <edgeInsets key="layoutMargins" top="32" left="32" bottom="32" right="32"/>
                         <viewLayoutGuide key="safeArea" id="N6F-RO-WaJ"/>
                     </view>
-                    <connections>
-                        <outlet property="warningView" destination="Nrv-Aq-xbg" id="Fyq-I7-mdu"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OF-pV-I9m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -154,7 +110,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CircleAlert" width="36" height="36"/>
         <namedColor name="Background">
             <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
