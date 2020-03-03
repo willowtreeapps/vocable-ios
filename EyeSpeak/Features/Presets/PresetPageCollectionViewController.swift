@@ -130,25 +130,27 @@ class PresetPageCollectionViewController: UICollectionViewController {
             let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 3.0),
                                                                                        heightDimension: .fractionalHeight(1.0)))
             
-            var itemsPerRow: Int {
+            var rowInfo: (numberOfRows: Int, itemsPerRow: Int) {
                 switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
-                case (.regular, .regular), (.regular, .compact):
-                    return 3
+                case (.regular, .regular):
+                    return (3, 3)
+                case (.regular, .compact), (.compact, .compact):
+                    return (2, 3)
                 default:
-                    return 2
+                    return (2, 3)
                 }
             }
             
             let rowGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .fractionalHeight(1.0)),
-                subitem: presetItem, count: itemsPerRow)
+                subitem: presetItem, count: rowInfo.itemsPerRow)
             rowGroup.interItemSpacing = .fixed(8)
             
             let containerGroup = NSCollectionLayoutGroup.vertical(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .fractionalHeight(1)),
-                subitem: rowGroup, count: 3)
+                subitem: rowGroup, count: rowInfo.numberOfRows)
             containerGroup.interItemSpacing = .fixed(8)
             containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             

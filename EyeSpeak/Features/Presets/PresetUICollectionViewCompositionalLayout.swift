@@ -186,8 +186,16 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
                 subitems: [leadingPaginationItem, pageIndicatorItem, trailingPaginationItem])
             paginationGroup.interItemSpacing = .fixed(0)
             
+            var containerGroupFractionalWidth: NSCollectionLayoutDimension {
+                if case .compact = environment.traitCollection.verticalSizeClass {
+                    return .fractionalHeight(750.0 / totalSize.height)
+                }
+                
+                return .fractionalHeight(800.0 / totalSize.height)
+            }
+            
             let containerGroup = NSCollectionLayoutGroup.vertical(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(800.0 / totalSize.height)),
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: containerGroupFractionalWidth),
                 subitems: [presetPageItem, paginationGroup])
             return containerGroup
         }
@@ -208,7 +216,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             paginationGroup.interItemSpacing = .fixed(0)
             
             let containerGroup = NSCollectionLayoutGroup.vertical(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(4.0 / 5.0)),
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(3.75 / 5.0)),
                 subitems: [presetPageItem, paginationGroup])
             
             return containerGroup
