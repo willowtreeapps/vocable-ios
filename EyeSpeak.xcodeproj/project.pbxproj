@@ -12,6 +12,7 @@
 		130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C020D2AD2C007C3163 /* Assets.xcassets */; };
 		130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */; };
 		54D3C41723E37CD40061EF47 /* EyeSpeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* EyeSpeakTests.swift */; };
+		64884404240DAAAC007660B3 /* GazeableAlertViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64884403240DAAAC007660B3 /* GazeableAlertViewController.storyboard */; };
 		6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */; };
 		6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */; };
 		6B1C7F3223F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */; };
@@ -96,7 +97,6 @@
 		B8DA9DF423F30BD200FEBE19 /* VectorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DF323F30BD200FEBE19 /* VectorUtils.swift */; };
 		B8DA9DFE23F3407000FEBE19 /* TextPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DFD23F3407000FEBE19 /* TextPresets.swift */; };
 		B8EB51D12409860A00F425A6 /* GazeableAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EB51CF2409860A00F425A6 /* GazeableAlertViewController.swift */; };
-		B8EB51D42409866700F425A6 /* GazeableAlertViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8EB51D32409866700F425A6 /* GazeableAlertViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +119,7 @@
 		54D3C41423E37CD40061EF47 /* EyeSpeakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EyeSpeakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D3C41623E37CD40061EF47 /* EyeSpeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeSpeakTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64884403240DAAAC007660B3 /* GazeableAlertViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GazeableAlertViewController.storyboard; sourceTree = "<group>"; };
 		6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVSpeechSynthesizer+Shared.swift"; sourceTree = "<group>"; };
 		6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapperView.swift; sourceTree = "<group>"; };
 		6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadGazeTrackingInterpolator.swift; sourceTree = "<group>"; };
@@ -203,7 +204,6 @@
 		B8DA9DF323F30BD200FEBE19 /* VectorUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorUtils.swift; sourceTree = "<group>"; };
 		B8DA9DFD23F3407000FEBE19 /* TextPresets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPresets.swift; sourceTree = "<group>"; };
 		B8EB51CF2409860A00F425A6 /* GazeableAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableAlertViewController.swift; sourceTree = "<group>"; };
-		B8EB51D32409866700F425A6 /* GazeableAlertViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GazeableAlertViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -495,7 +495,7 @@
 			isa = PBXGroup;
 			children = (
 				B8EB51CF2409860A00F425A6 /* GazeableAlertViewController.swift */,
-				B8EB51D32409866700F425A6 /* GazeableAlertViewController.storyboard */,
+				64884403240DAAAC007660B3 /* GazeableAlertViewController.storyboard */,
 			);
 			path = GazeableAlertController;
 			sourceTree = "<group>";
@@ -598,8 +598,8 @@
 				B8DA9DEA23EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib in Resources */,
 				B838202123FC6B17005A79CD /* PaginationCollectionViewCell.xib in Resources */,
 				B838202F23FD894C005A79CD /* CategoryPaginationContainerCollectionViewCell.xib in Resources */,
+				64884404240DAAAC007660B3 /* GazeableAlertViewController.storyboard in Resources */,
 				A944D00B2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib in Resources */,
-				B8EB51D42409866700F425A6 /* GazeableAlertViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

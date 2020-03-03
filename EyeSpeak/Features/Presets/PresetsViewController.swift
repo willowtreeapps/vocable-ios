@@ -115,13 +115,7 @@ class PresetsViewController: UICollectionViewController {
         configureDataSource()
         observeCategorySelectionChanges()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        present(GazeableAlertViewController.make {
-            print("ok")
-        }, animated: true)
-    }
-    
+
     private func setupCollectionView() {
         collectionView.delaysContentTouches = false
         collectionView.isScrollEnabled = false
