@@ -2,10 +2,14 @@
 ![Platform iOS](https://img.shields.io/badge/platform-iOS-orange.svg)
 ![license MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)
 
-**Note:** eyespeak is not yet available on the Apple App Store.
+Empowering people to communicate with care takers and loved ones.
+
+[AppStore Link](https://itunes.apple.com/us/app/keynote/id1497040547?mt=8)
+
+[![Vocable Video]({vocable_github_image.png})]({https://player.vimeo.com/video/394212430} "Vocable Video")
 
 ## Contents
-- [What is eyespeak?](#what-is-eyespeak)
+- [What is Vocable?](#what-is-vocable)
 - [Features](#features)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
@@ -14,31 +18,24 @@
 - [Credits](#credits)
 - [License](#license)
 
-## What is eyespeak?
-eyespeak is a head-gaze enabled AAC app that gives users the ability to communicate without touch or voice input. 
+## What is Vocable?
+Vocable AAC allows those with conditions such as MS, stroke, ALS, or spinal cord injuries to communicate using an app that tracks head movements, without the need to spend tens of thousands of dollars on technology to do so.
 
 ## Features
-- 
-- 
-- 
-- 
-- 
 
 ## Roadmap
+
 ### In-Progress:
-- 
+
 ### Up Next:
-- 
+
 ### Future:
-- 
 
 ## Contributing
 
 ## Requirements
-- iOS ??+
-- Xcode ??+
-- Swift ??+
-- iOS devices with TrueDepth camera
+- iOS 13.0
+- iOS devices with TrueDepth camera (currently iPad Pro only for v1.0)
 
 ## Build instructions
 
@@ -46,4 +43,4 @@ eyespeak is a head-gaze enabled AAC app that gives users the ability to communic
 Matt Kubota, Kyle Ohanian, Duncan Lewis, Ameir Al-Zoubi, and many more from [WillowTree](https://willowtreeapps.com/) 💙.
 
 ## License
-eyespeak-ios is released under the MIT license. See [LICENSE](LICENSE) for details.
+vocable-ios is released under the MIT license. See [LICENSE](LICENSE) for details.
