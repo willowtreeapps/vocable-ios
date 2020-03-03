@@ -4,7 +4,7 @@
 
 Empowering people to communicate with care takers and loved ones.
 
-[![Watch the video](marketing_assets/vocable_github_image.gif)](https://player.vimeo.com/video/394212430)
+[![Watch the video](marketing_assets/vocable_vimeo_still.png)](https://player.vimeo.com/video/394212430)
 
 [![AppStore Link](marketing_assets/appstore_badge.gif)](https://itunes.apple.com/us/app/keynote/id1497040547?mt=8)
 
