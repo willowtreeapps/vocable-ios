@@ -4,9 +4,9 @@
 
 Empowering people to communicate with care takers and loved ones.
 
-[AppStore Link](https://itunes.apple.com/us/app/keynote/id1497040547?mt=8)
+[![AppStore Link](marketing_assets/appstore_badge.gif)](https://itunes.apple.com/us/app/keynote/id1497040547?mt=8)
 
-[![Watch the video](vocable_github_image.png)](https://player.vimeo.com/video/394212430)
+[![Watch the video](marketing_assets/vocable_github_image.gif)](https://player.vimeo.com/video/394212430)
 
 ## Contents
 - [What is Vocable?](#what-is-vocable)
