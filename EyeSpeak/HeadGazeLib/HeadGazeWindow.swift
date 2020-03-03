@@ -61,13 +61,10 @@ class HeadGazeWindow: UIWindow {
     
     private func initializeWarningView() {
            warningView = UINib(nibName: "WarningView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! UIView
-           
            self.addSubview(warningView)
-
-           let deviceModel = UIDevice().model.lowercased()
-           let width = deviceModel.contains("ipad") ? 425 : 350
-           
+           let width = UIScreen.main.traitCollection.horizontalSizeClass == .compact ? 350 : 425
            warningView.translatesAutoresizingMaskIntoConstraints = false
+        
            NSLayoutConstraint.activate([
                warningView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
                warningView.widthAnchor.constraint(equalToConstant: CGFloat(width)),
