@@ -39,6 +39,14 @@ Vocable AAC allows those with conditions such as MS, stroke, ALS, or spinal cord
 
 ## Build instructions
 
+## Device Provisioning
+1. Run `fastlane` from the project command line.
+2. From the menu select the option for `Add devices via....`
+3. When prompted enter a `device name` and press enter. This can be any name.
+4. When prompted enter the `device UDID` and press enter. Found in `Xcode -> Window -> Devices and Simulators`
+5. When prompted enter a `eyespeakstore@willowtreeapps.com` for `username` and press enter.
+6. Fastlane might ask you to enter a username again, use `eyespeakstore@willowtreeapps.com`.
+
 ## Credits
 Matt Kubota, Kyle Ohanian, Duncan Lewis, Ameir Al-Zoubi, and many more from [WillowTree](https://willowtreeapps.com/) 💙.
 
