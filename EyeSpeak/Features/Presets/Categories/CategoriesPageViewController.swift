@@ -11,11 +11,17 @@ import CoreData
 
 class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    private let itemsPerPage = 4
+    private var itemsPerPage: Int {
+        if case .regular = traitCollection.horizontalSizeClass {
+            return 4
+        }
+        
+        return 1
+    }
     private lazy var pages: [UIViewController] = categoryViewModels.chunked(into: itemsPerPage).map { viewModels in
         let collectionViewController = CategoryPageCollectionViewController(collectionViewLayout: CategoryPageCollectionViewController.createLayout(with: viewModels.count))
-                collectionViewController.items = viewModels
-                return collectionViewController
+        collectionViewController.items = viewModels
+        return collectionViewController
     }
     
     private lazy var categoryViewModels: [CategoryViewModel] =
@@ -27,9 +33,17 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
         super.viewDidLoad()
         delegate = self
         dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        if let firstViewController = pages.first {
-            setViewControllers([firstViewController], direction: .forward, animated: true)
+        let viewControllerToSelect = pages.first(where: {
+            (($0 as? CategoryPageCollectionViewController)?.items.contains(ItemSelection.categoryValueSubject.value) ?? false)
+        })
+        
+        if let viewController = viewControllerToSelect {
+            setViewControllers([viewController], direction: .forward, animated: true)
         }
     }
     
