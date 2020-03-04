@@ -47,6 +47,7 @@ class HeadGazeTrackingInterpolator {
             cursorPosNDC = interpolateCursorLocation(pos)
             lastGazeNDCLocation = pos
         } else {
+            TrackingDebugOverlayViewController.current?.setValue("\(isBlinking)", forKey: "Blinking?")
             cursorPosNDC = interpolateCursorLocation(lastGazeNDCLocation)
         }
 
@@ -96,6 +97,15 @@ class HeadGazeTrackingInterpolator {
 
         let correctionScalar: CGFloat = 1.0
         let correctionSign = correctionAmountSignsForCurrentInterfaceOrientation()
+        if let debugOutput = TrackingDebugOverlayViewController.current {
+            debugOutput.setValues([
+                "Blinking?": "\(isBlinking)",
+                "X Correction": NumberFormatter.debugFormatter.string(for: correctionAmount.width) ?? "~",
+                "Y Correction": NumberFormatter.debugFormatter.string(for: correctionAmount.height) ?? "~",
+                "Scale": NumberFormatter.debugFormatter.string(for: scale) ?? "~",
+                "Orientation Signs": "\(correctionSign)"
+            ])
+        }
         let xNDC = Float(hitPos[0]) - Float(correctionAmount.width * correctionScalar * correctionSign.width)
         let yNDC = Float(hitPos[1]) - Float(correctionAmount.height * correctionScalar * correctionSign.height)
         let hitPosNDC = SIMD2<Float>([xNDC, yNDC])
