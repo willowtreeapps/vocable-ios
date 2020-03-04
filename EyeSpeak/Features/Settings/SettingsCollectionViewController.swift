@@ -118,15 +118,15 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         switch item {
         case .headTrackingToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsToggleCollectionViewCell
-            cell.setup(title: "Head Tracking")
+            cell.setup(title: NSLocalizedString("Head Tracking", comment: "Head tracking cell title") )
             return cell
         case .privacyPolicy:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: "Privacy Policy")
+            cell.setup(title: NSLocalizedString("Privacy Policy", comment: "Privacy policy cell title") )
             return cell
         case .contactDevs:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: "Contact developers")
+            cell.setup(title: NSLocalizedString("Contact developers", comment: "Contact developers cell title") )
             return cell
         case .versionNum:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
@@ -134,7 +134,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return cell
         case .pidTuner:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: "Tune Cursor")
+            cell.setup(title: NSLocalizedString("Tune Cursor", comment: "Tune cursor cell title") )
             return cell
         }
     }
@@ -147,28 +147,24 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
         switch item {
         case .headTrackingToggle:
-            AppConfig.isHeadTrackingEnabled.toggle()
+            if AppConfig.isHeadTrackingEnabled {
+                let alertViewController = GazeableAlertViewController.make { AppConfig.isHeadTrackingEnabled.toggle() }
+                present(alertViewController, animated: true)
+                alertViewController.setAlertTitle("Turn off head tracking? Really?")
+            } else {
+                AppConfig.isHeadTrackingEnabled.toggle()
+            }
+
         case .privacyPolicy:
-            let url = URL(string: "https://vocable.app/privacy.html")!
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            
+            let alertViewController = GazeableAlertViewController.make { self.presentPrivacyAlert() }
+            present(alertViewController, animated: true)
+            alertViewController.setAlertTitle("You’re about to be taken outside of the app. You may lose head tracking control.")
+
         case .contactDevs:
-            guard MFMailComposeViewController.canSendMail() else {
-                NSLog("Mail composer failed to send mail", [])
-                break
-            }
-            
-            guard composeVC == nil else {
-                break
-            }
-            
-            let composeVC = MFMailComposeViewController()
-            composeVC.mailComposeDelegate = self
-            composeVC.setToRecipients(["vocable@willowtreeapps.com"])
-            composeVC.setSubject("Feedback for Vocable v\(versionAndBuildNumber)")
-            self.composeVC = composeVC
-            
-            self.present(composeVC, animated: true, completion: nil)
+            let alertViewController = GazeableAlertViewController.make { self.presentEmail() }
+            present(alertViewController, animated: true)
+            alertViewController.setAlertTitle("You’re about to be taken outside of the app. You may lose head tracking control.")
+
         case .pidTuner:
             guard let gazeWindow = view.window as? HeadGazeWindow else { return }
             for child in gazeWindow.rootViewController?.children ?? [] {
@@ -201,11 +197,38 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return true
         }
     }
+
+    // MARK: Presentations
+
+    private func presentPrivacyAlert() {
+        let url = URL(string: "https://vocable.app/privacy.html")!
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+
+    private func presentEmail() {
+
+        guard MFMailComposeViewController.canSendMail() else {
+            NSLog("Mail composer failed to send mail", [])
+            return
+        }
+
+        guard composeVC == nil else {
+            return
+        }
+
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = self
+        composeVC.setToRecipients(["vocable@willowtreeapps.com"])
+        composeVC.setSubject("Feedback for Vocable v\(versionAndBuildNumber)")
+        self.composeVC = composeVC
+
+        self.present(composeVC, animated: true)
+    }
     
     // MARK: MFMailComposeViewControllerDelegate
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
+        controller.dismiss(animated: true)
     }
     
 }
