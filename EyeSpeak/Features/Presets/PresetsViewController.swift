@@ -92,11 +92,7 @@ class PresetsViewController: UICollectionViewController {
         }
     }
     
-    private var showKeyboard: Bool = false {
-        didSet {
-            self.updateSnapshot()
-        }
-    }
+    private var showKeyboard: Bool = false
     
     private var suggestions: [TextSuggestion] = [] {
         didSet {
@@ -409,7 +405,6 @@ class PresetsViewController: UICollectionViewController {
 
                 let newText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.rawValue
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
-                suggestions = []
             case .settings:
                 presentSettingsViewController()
             }
@@ -417,7 +412,6 @@ class PresetsViewController: UICollectionViewController {
             switch functionType {
             case .space:
                 setTextTransaction(textTransaction.appendingCharacter(with: " "))
-                suggestions = []
             case .speak:
                 guard !textTransaction.isHint else {
                     break
