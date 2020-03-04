@@ -33,7 +33,7 @@ platform :ios do
     increment_build_number(
       build_number: ENV['CIRCLE_BUILD_NUM'],
     )
-    
+
     gym(export_method: "ad-hoc",
         scheme: "AdHoc",
     )
@@ -52,4 +52,15 @@ platform :ios do
       skip_waiting_for_build_processing: true
     )
   end
+
+  desc "Add devices via the command line to the device portal and regenerate the development provisioning profile with the device"
+  lane :register do
+    device_name = prompt(text: "Enter the device name: ")
+    device_udid = prompt(text: "Enter the device UDID: ")
+    device_hash = {}
+    device_hash[device_name] = device_udid
+    register_devices(devices: device_hash)
+    match(type:"development", force_for_new_devices: true)
+  end
+
 end
