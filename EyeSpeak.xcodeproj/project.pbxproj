@@ -15,6 +15,8 @@
 		6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */; };
 		6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */; };
 		6B1C7F3223F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */; };
+		6B3DCC1F24101F530039E45E /* TrackingDebugOverlayViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B3DCC1E24101F530039E45E /* TrackingDebugOverlayViewController.storyboard */; };
+		6B3DCC2124101FA80039E45E /* TrackingDebugOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3DCC2024101FA80039E45E /* TrackingDebugOverlayViewController.swift */; };
 		6B823BC223F4ADE30099F65E /* PIDControlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BAD23F4ADE30099F65E /* PIDControlConstants.swift */; };
 		6B823BC623F4ADE30099F65E /* FormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BB323F4ADE30099F65E /* FormatterExtensions.swift */; };
 		6B823BC823F4ADE30099F65E /* SingleControlDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BB623F4ADE30099F65E /* SingleControlDisplayable.swift */; };
@@ -121,6 +123,8 @@
 		6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVSpeechSynthesizer+Shared.swift"; sourceTree = "<group>"; };
 		6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapperView.swift; sourceTree = "<group>"; };
 		6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadGazeTrackingInterpolator.swift; sourceTree = "<group>"; };
+		6B3DCC1E24101F530039E45E /* TrackingDebugOverlayViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = TrackingDebugOverlayViewController.storyboard; path = HeadGazeLib/Interpolation/PulseController/TrackingDebugOverlayViewController.storyboard; sourceTree = "<group>"; };
+		6B3DCC2024101FA80039E45E /* TrackingDebugOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackingDebugOverlayViewController.swift; path = HeadGazeLib/Interpolation/PulseController/TrackingDebugOverlayViewController.swift; sourceTree = "<group>"; };
 		6B823BAD23F4ADE30099F65E /* PIDControlConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIDControlConstants.swift; sourceTree = "<group>"; };
 		6B823BB323F4ADE30099F65E /* FormatterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterExtensions.swift; sourceTree = "<group>"; };
 		6B823BB623F4ADE30099F65E /* SingleControlDisplayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleControlDisplayable.swift; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 				130C00B720D2AD2A007C3163 /* AppDelegate.swift */,
 				B8DA9DEF23EDECEE00FEBE19 /* AppConfig.swift */,
 				130C00BD20D2AD2A007C3163 /* Main.storyboard */,
+				6B3DCC2024101FA80039E45E /* TrackingDebugOverlayViewController.swift */,
+				6B3DCC1E24101F530039E45E /* TrackingDebugOverlayViewController.storyboard */,
 				139EDEE921419C400009A99F /* Supporting Files */,
 			);
 			path = EyeSpeak;
@@ -589,6 +595,7 @@
 				B838202123FC6B17005A79CD /* PaginationCollectionViewCell.xib in Resources */,
 				B838202F23FD894C005A79CD /* CategoryPaginationContainerCollectionViewCell.xib in Resources */,
 				A944D00B2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib in Resources */,
+				6B3DCC1F24101F530039E45E /* TrackingDebugOverlayViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +673,7 @@
 				6B9DFA7023E88A630037673E /* InterpolableValues.swift in Sources */,
 				A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */,
 				B81D234F23FDAB6D005741E8 /* CategoryPageCollectionViewController.swift in Sources */,
+				6B3DCC2124101FA80039E45E /* TrackingDebugOverlayViewController.swift in Sources */,
 				6B1C7F3223F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift in Sources */,
 				A9DE170223F492B20094DB64 /* Array+Split.swift in Sources */,
 				6B9DFA5D23E889DB0037673E /* UIHeadGaze.swift in Sources */,
