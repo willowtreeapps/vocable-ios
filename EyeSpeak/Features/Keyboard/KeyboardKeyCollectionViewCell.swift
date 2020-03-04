@@ -7,15 +7,10 @@
 //
 
 import UIKit
+import AVFoundation
 
 class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
     @IBOutlet fileprivate weak var textLabel: UILabel!
-    
-    var font: UIFont = .systemFont(ofSize: 48, weight: .bold) {
-        didSet {
-            textLabel.font = font
-        }
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,13 +35,20 @@ class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
     }
     
     func setup(with image: UIImage?) {
-        guard let image = image else {
+        guard let image = image, let font = textLabel.font else {
             return
         }
         
-        let systemImageAttachment = NSTextAttachment(image: image)
-        let attributedString = NSAttributedString(attachment: systemImageAttachment)
+        let size = CGSize(width: bounds.width, height: font.ascender)
         
-        textLabel.attributedText = attributedString
+        let scaledCellBounds = CGRect(origin: .zero, size: size)
+        let scaledRect = AVMakeRect(aspectRatio: image.size, insideRect: scaledCellBounds)
+        let finalRect = CGRect(origin: .zero, size: scaledRect.size)
+        
+        let systemImageAttachment = NSTextAttachment(image: image)
+        systemImageAttachment.bounds = finalRect
+        let finalAttributedString = NSAttributedString(attachment: systemImageAttachment)
+        
+        textLabel.attributedText = finalAttributedString
     }
 }

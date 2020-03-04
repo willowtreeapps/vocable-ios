@@ -43,7 +43,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         }
         
         switch item {
-        case .paginatedPresets, .key, .keyboardFunctionButton:
+        case .paginatedPresets, .key, .keyboardFunctionButton, .paginatedCategories:
             attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
         default:
             break
@@ -66,7 +66,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             
             return NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .fractionalHeight(100.0 / totalSize.height)),
+                                                   heightDimension: .fractionalHeight(116.0 / totalSize.height)),
                 subitems: subitems)
         }
         
@@ -107,7 +107,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             
             return NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .fractionalHeight(100.0 / totalSize.height)),
+                                                   heightDimension: .fractionalHeight(116.0 / totalSize.height)),
                 subitems: subitems)
         }
         
@@ -180,7 +180,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         containerGroup.interItemSpacing = .flexible(0)
         
         let section = NSCollectionLayoutSection(group: containerGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: traitCollection.horizontalSizeClass == .regular ? 16 : 8, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 0)
         return section
     }
     
@@ -201,10 +201,10 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             let section = NSCollectionLayoutSection(group: containerGroup)
             
             let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
-            backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 8, trailing: 0)
+            backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
             
             section.decorationItems = [backgroundDecoration]
-            section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 16, trailing: 0)
             return section
         }
         
@@ -227,7 +227,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             
             let section = NSCollectionLayoutSection(group: containerGroup)
             
-            section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 16, trailing: 0)
             return section
         }
         
@@ -319,7 +319,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         let functionKeyGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.25)),
                                                                   subitems: [leadingKeyItem, spaceKeyItem, keyItem, trailingKeyItem])
         
-        let overallFractionHeight = environment.traitCollection.verticalSizeClass == .compact ? CGFloat(0.65) : CGFloat(0.7)
+        let overallFractionHeight = environment.traitCollection.verticalSizeClass == .compact ? CGFloat(0.625) : CGFloat(0.675)
         
         let overallContainerGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(overallFractionHeight)),

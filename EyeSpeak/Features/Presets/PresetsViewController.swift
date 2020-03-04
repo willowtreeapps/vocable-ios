@@ -196,7 +196,6 @@ class PresetsViewController: UICollectionViewController {
                 return cell
             case .keyboardFunctionButton(let functionType):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
-                cell.font = .systemFont(ofSize: 28, weight: .bold)
                 cell.setup(with: functionType.image)
                 return cell
             case .pageIndicator:
@@ -363,6 +362,7 @@ class PresetsViewController: UICollectionViewController {
         
         switch selectedItem {
         case .topBarButton(let buttonType):
+            collectionView.deselectItem(at: indexPath, animated: true)
             switch buttonType {
             case .unsave:
                 let context = NSPersistentContainer.shared.viewContext
@@ -370,16 +370,17 @@ class PresetsViewController: UICollectionViewController {
                     return
                 }
                 context.delete(existing)
-                updateSnapshot()
 
                 do {
                     try context.save()
                 } catch {
                     assertionFailure("Failed to unsave user generated phrase: \(error)")
                 }
+                
+                updateSnapshot()
 
             case .save:
-                _textTransaction = TextTransaction(text: textTransaction.text.trimmingCharacters(in: .whitespacesAndNewlines))
+                _textTransaction = TextTransaction(text: textTransaction.text.trimmingCharacters(in: .whitespacesAndNewlines), isHint: textTransaction.isHint)
                 
                 guard !textTransaction.isHint, !textTransaction.text.isEmpty else {
                     break

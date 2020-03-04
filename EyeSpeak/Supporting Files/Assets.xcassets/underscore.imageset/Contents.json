@@ -11,6 +11,20 @@
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 55,
+          "height" : 37
+        },
+        "cap-insets" : {
+          "bottom" : 37,
+          "top" : 23,
+          "right" : 114,
+          "left" : 36
+        }
+      },
       "idiom" : "universal",
       "filename" : "underscore-2.png",
       "scale" : "3x"
