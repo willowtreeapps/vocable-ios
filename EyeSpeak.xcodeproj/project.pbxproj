@@ -45,6 +45,7 @@
 		6BFB18C424004406002C3515 /* NSManagedObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */; };
 		6BFB18C624004711002C3515 /* ModelObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C524004711002C3515 /* ModelObjectExtensions.swift */; };
 		6BFB18C724005E18002C3515 /* CategoryPaginationContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838202C23FD8934005A79CD /* CategoryPaginationContainerCollectionViewCell.swift */; };
+		71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71DBE5EA240DE4D000BA8D01 /* WarningView.xib */; };
 		9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E0542271F0DC0058DF57 /* CursorView.swift */; };
 		9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */; };
 		A920A4AF23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift */; };
@@ -149,6 +150,7 @@
 		6BFB18C124002C7B002C3515 /* Phrases.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Phrases.xcdatamodel; sourceTree = "<group>"; };
 		6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Helpers.swift"; sourceTree = "<group>"; };
 		6BFB18C524004711002C3515 /* ModelObjectExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectExtensions.swift; sourceTree = "<group>"; };
+		71DBE5EA240DE4D000BA8D01 /* WarningView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppExtensions.swift"; sourceTree = "<group>"; };
 		A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetUICollectionViewCompositionalLayout.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */,
 				B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */,
 				A944D0042405AE8C00F3863E /* GazeableButton.swift */,
+				71DBE5EA240DE4D000BA8D01 /* WarningView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */,
 				A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */,
 				B879831623E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib in Resources */,
 				A9299C7723F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib in Resources */,
@@ -880,7 +884,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753J68XC6W;
@@ -893,7 +897,7 @@
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.willowtreeapps.eyespeakaac";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.willowtreeapps.eyespeakaac";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -1004,7 +1008,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753J68XC6W;
@@ -1017,7 +1021,7 @@
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.willowtreeapps.eyespeakaac";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.willowtreeapps.eyespeakaac";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;

@@ -22,6 +22,9 @@ struct AppConfig {
         didSet {
             UserDefaults.standard.set(isHeadTrackingEnabled, forKey: "isHeadTrackingEnabled")
             headTrackingValueSubject.send(isHeadTrackingEnabled)
+            if !isHeadTrackingEnabled {
+                NotificationCenter.default.post(name: .headTrackingDisabled, object: nil)
+            }
         }
     }
     
