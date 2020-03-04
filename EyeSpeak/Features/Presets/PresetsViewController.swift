@@ -127,7 +127,7 @@ class PresetsViewController: UICollectionViewController {
         configureDataSource()
         observeItemSelectionChanges()
     }
-
+    
     private func setupCollectionView() {
         collectionView.delaysContentTouches = false
         collectionView.isScrollEnabled = false

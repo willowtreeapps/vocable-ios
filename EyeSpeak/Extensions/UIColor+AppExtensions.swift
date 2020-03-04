@@ -25,7 +25,4 @@ extension UIColor {
     
     static let cellSelectionColor = UIColor(named: "Selection")!
     static let cellBorderHighlightColor = UIColor(named: "BorderHighlight")!
-    static let alertBackgroundColor = UIColor(named: "AlertBackground")!
-
-    static let grayDivider = UIColor(named: "GrayDivider")!
 }

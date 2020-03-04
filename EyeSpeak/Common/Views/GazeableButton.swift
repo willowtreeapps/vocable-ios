@@ -9,25 +9,20 @@
 import Foundation
 import UIKit
 
+@IBDesignable
 class GazeableButton: UIButton {
     
     private var gazeBeganDate: Date?
     
-    let backgroundView = BorderedView()
+    private let borderedView = BorderedView()
     
-    var buttonImage: UIImage = UIImage() {
+    @IBInspectable var buttonImage: UIImage = UIImage() {
         didSet {
             sharedInit()
         }
     }
     
-    var fillColor: UIColor = .defaultCellBackgroundColor {
-        didSet {
-            updateContentViews()
-        }
-    }
-    
-    var selectionFillColor: UIColor = .cellSelectionColor {
+    private var fillColor: UIColor = .defaultCellBackgroundColor {
         didSet {
             updateContentViews()
         }
@@ -58,35 +53,35 @@ class GazeableButton: UIButton {
         layoutIfNeeded()
     }
     
-    private func sharedInit() {
-        backgroundView.cornerRadius = 8
-        backgroundView.borderColor = .cellBorderHighlightColor
-        backgroundView.isUserInteractionEnabled = false
+    func sharedInit() {
+        borderedView.cornerRadius = 8
+        borderedView.borderColor = .cellBorderHighlightColor
+        borderedView.isUserInteractionEnabled = false
 
         updateContentViews()
         let image = buttonImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 34, weight: .bold))
         let imageView = UIImageView(image: image)
-        backgroundView.addSubview(imageView)
+        borderedView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor)
+            imageView.centerXAnchor.constraint(equalTo: borderedView.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: borderedView.centerYAnchor)
         ])
         
-        addSubview(backgroundView)
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(borderedView)
+        borderedView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
-            backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+            borderedView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            borderedView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+            borderedView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
+            borderedView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         ])
     }
     
     func updateContentViews() {
-        backgroundView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
-        backgroundView.fillColor = isSelected ? selectionFillColor : fillColor
-        backgroundView.isOpaque = true
+        borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
+        borderedView.fillColor = isSelected ? .cellSelectionColor : fillColor
+        borderedView.isOpaque = true
     }
     
     override var canReceiveGaze: Bool {
