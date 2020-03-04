@@ -132,9 +132,9 @@ class PresetPageCollectionViewController: UICollectionViewController {
             
             var rowInfo: (numberOfRows: Int, itemsPerRow: Int) {
                 switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
-                case (.regular, .regular):
+                case (.regular, .regular), (.regular, .compact):
                     return (3, 3)
-                case (.regular, .compact), (.compact, .compact):
+                case (.compact, .compact):
                     return (2, 3)
                 case (.compact, .regular):
                     return (3, 2)
