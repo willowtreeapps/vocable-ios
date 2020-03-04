@@ -70,7 +70,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
         updateDataSource()
 
-        let layout = createLayout()
+        let layout = createLayout(traitCollection: UIScreen.main.traitCollection)
         collectionView.collectionViewLayout = layout
     }
 
@@ -85,20 +85,36 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
-    func createLayout() -> UICollectionViewLayout {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        //setupCollectionView()
+    }
+    
+    //take in trait collection environment, update layout when trait collection changes.
+    func createLayout(traitCollection: UITraitCollection) -> UICollectionViewLayout {
         let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
         let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1 / 2)))
+        let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+        //let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1 / 2)))
+        //Good fractional height for iphone in portrait, needs to be original in landscape
+        let settingsToggleHeight = traitCollection.verticalSizeClass == .compact ? CGFloat(6) : CGFloat(10)
+            let settingsToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / settingsToggleHeight))
+            let settingsToggleGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsToggleGroupSize, subitem: headTrackingToggleItem, count: 1)
+            settingsToggleGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
+            settingsToggleGroup.edgeSpacing = .init(leading: nil, top: .fixed(32), trailing: nil, bottom: .fixed(92))
         
-        let settingsToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 6))
-        let settingsToggleGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsToggleGroupSize, subitem: headTrackingToggleItem, count: 1)
-        settingsToggleGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
-        settingsToggleGroup.edgeSpacing = .init(leading: nil, top: .fixed(32), trailing: nil, bottom: .fixed(92))
+            let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(2 / 6))
+            let settingsOptionsGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsOptionsGroupSize, subitem: settingsButtonItem, count: itemCount)
+            settingsOptionsGroup.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 32, bottom: 5, trailing: 32)
+            settingsOptionsGroup.interItemSpacing = .fixed(16)
         
-        let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(3 / 6))
+       /* let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(3 / 6))
         let settingsOptionsGroup = NSCollectionLayoutGroup.horizontal(layoutSize: settingsOptionsGroupSize, subitem: settingsButtonItem, count: itemCount)
         settingsOptionsGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
-        settingsOptionsGroup.interItemSpacing = .fixed(16)
+        settingsOptionsGroup.interItemSpacing = .fixed(16)*/
         
         let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(80.0 / 834.0))
         let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
