@@ -58,7 +58,7 @@ class GazeableButton: UIButton {
         layoutIfNeeded()
     }
     
-    func sharedInit() {
+    private func sharedInit() {
         backgroundView.cornerRadius = 8
         backgroundView.borderColor = .cellBorderHighlightColor
         backgroundView.isUserInteractionEnabled = false
