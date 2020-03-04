@@ -136,6 +136,8 @@ class PresetPageCollectionViewController: UICollectionViewController {
                     return (3, 3)
                 case (.regular, .compact), (.compact, .compact):
                     return (2, 3)
+                case (.compact, .regular):
+                    return (3, 2)
                 default:
                     return (2, 3)
                 }
