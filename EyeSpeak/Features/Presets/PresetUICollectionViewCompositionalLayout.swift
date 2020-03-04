@@ -70,6 +70,8 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
                 subitems: subitems)
         }
         
+        var compactHeightContainerGroupLayout = regularWidthContainerGroupLayout
+        
         var compactWidthContainerGroupLayout: NSCollectionLayoutGroup {
             let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.5)))
             
@@ -87,8 +89,13 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 4.0)),
                 subitems: [textFieldItem, functionItemGroup])
         }
-        
-        let containerGroup = environment.traitCollection.horizontalSizeClass == .regular ? regularWidthContainerGroupLayout : compactWidthContainerGroupLayout
+    
+        let containerGroup: NSCollectionLayoutGroup
+        if case .compact = environment.traitCollection.verticalSizeClass {
+            containerGroup = compactHeightContainerGroupLayout
+        } else {
+            containerGroup = environment.traitCollection.horizontalSizeClass == .regular ? regularWidthContainerGroupLayout : compactWidthContainerGroupLayout
+        }
         
         let section = NSCollectionLayoutSection(group: containerGroup)
         
@@ -200,6 +207,8 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             return containerGroup
         }
         
+        var compactHeightPresetGroup = regularWidthPresetGroup
+        
         var compactWidthPresetGroup: NSCollectionLayoutGroup {
             let presetPageItem = NSCollectionLayoutItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -222,7 +231,13 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             return containerGroup
         }
         
-        let containerGroup = environment.traitCollection.horizontalSizeClass == .regular ? regularWidthPresetGroup : compactWidthPresetGroup
+        let containerGroup: NSCollectionLayoutGroup
+        if case .compact = environment.traitCollection.verticalSizeClass {
+            containerGroup = compactHeightPresetGroup
+        } else {
+            containerGroup = environment.traitCollection.horizontalSizeClass == .regular ? regularWidthPresetGroup : compactWidthPresetGroup
+        }
+        
         containerGroup.interItemSpacing = .fixed(8)
     
         let section = NSCollectionLayoutSection(group: containerGroup)
