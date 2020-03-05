@@ -124,5 +124,12 @@ class GazeableButton: UIButton {
         isSelected = false
         isHighlighted = false
     }
+
+    override func gazeCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        super.gazeCancelled(gaze, with: event)
+        isHighlighted = false
+        isSelected = false
+        gazeBeganDate = .distantFuture
+    }
     
 }

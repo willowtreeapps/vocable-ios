@@ -8,11 +8,11 @@
 
 import UIKit
 
-private struct UICollectionViewGazeTarget: Equatable {
+private class UICollectionViewGazeTarget: Equatable {
 
     let indexPath: IndexPath
     let beginDate: Date
-
+    var isCancelled = false
     init(beginDate: Date, indexPath: IndexPath) {
         self.indexPath = indexPath
         self.beginDate = beginDate
@@ -93,8 +93,7 @@ extension UICollectionView {
         if newTarget == oldTarget {
 
             // Update the existing target's selection state if needed
-            if let oldTarget = oldTarget, !indexPathIsSelected(oldTarget.indexPath) {
-                // TODO: Check for performance issues calling Date().timeIntervalSince here
+            if let oldTarget = gazeTarget, !oldTarget.isCancelled, !indexPathIsSelected(oldTarget.indexPath) {
                 let timeElapsed = Date().timeIntervalSince(oldTarget.beginDate)
                 if timeElapsed >= gaze.selectionHoldDuration {
                     guard delegate?.collectionView?(self, shouldSelectItemAt: oldTarget.indexPath) ?? true else {
@@ -136,9 +135,15 @@ extension UICollectionView {
     }
 
     override func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
-        if let oldTarget = gazeTarget {
+        if let oldTarget = gazeTarget, !oldTarget.isCancelled {
             setItemHighlighted(false, at: oldTarget.indexPath)
             gazeTarget = nil
         }
+    }
+
+    override func gazeCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        guard let target = gazeTarget else { return }
+        target.isCancelled = true
+        setItemHighlighted(false, at: target.indexPath)
     }
 }

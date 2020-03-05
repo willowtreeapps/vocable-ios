@@ -364,6 +364,7 @@ class PresetsViewController: UICollectionViewController {
         
         switch selectedItem {
         case .topBarButton(let buttonType):
+            (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
             switch buttonType {
             case .unsave:
                 let context = NSPersistentContainer.shared.viewContext

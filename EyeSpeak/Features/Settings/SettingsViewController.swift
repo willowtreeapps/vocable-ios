@@ -16,5 +16,9 @@ class SettingsViewController: UIViewController {
     @IBAction func dismissSettings(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
+    }
 }
