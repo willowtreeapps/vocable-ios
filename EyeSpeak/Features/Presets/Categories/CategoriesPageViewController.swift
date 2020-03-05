@@ -18,10 +18,18 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
         
         return 1
     }
-    private lazy var pages: [UIViewController] = categoryViewModels.chunked(into: itemsPerPage).map { viewModels in
-        let collectionViewController = CategoryPageCollectionViewController(collectionViewLayout: CategoryPageCollectionViewController.createLayout(with: viewModels.count))
-        collectionViewController.items = viewModels
-        return collectionViewController
+    
+    private var _pages: [UIViewController]?
+    private var pages: [UIViewController] {
+        if _pages == nil {
+            _pages = categoryViewModels.chunked(into: itemsPerPage).map { viewModels in
+                let collectionViewController = CategoryPageCollectionViewController(collectionViewLayout: CategoryPageCollectionViewController.createLayout(with: viewModels.count))
+                collectionViewController.items = viewModels
+                return collectionViewController
+            }
+        }
+        
+        return _pages ?? []
     }
     
     private lazy var categoryViewModels: [CategoryViewModel] =
@@ -45,6 +53,11 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
         if let viewController = viewControllerToSelect {
             setViewControllers([viewController], direction: .forward, animated: true)
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        _pages = nil 
     }
     
     // MARK: - UIPageViewControllerDataSource
