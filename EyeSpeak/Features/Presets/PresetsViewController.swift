@@ -317,13 +317,6 @@ class PresetsViewController: UICollectionViewController {
         dataSource.apply(snapshot)
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        DispatchQueue.main.async {
-            self.updateSnapshot()
-        }
-    }
-    
     // MARK: - Collection View Delegate
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
