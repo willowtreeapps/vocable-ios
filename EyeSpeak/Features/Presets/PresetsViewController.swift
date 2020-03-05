@@ -11,6 +11,7 @@ import AVFoundation
 import CoreData
 import Combine
 
+// swiftlint:disable type_body_length
 class PresetsViewController: UICollectionViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
@@ -351,6 +352,7 @@ class PresetsViewController: UICollectionViewController {
         }
     }
 
+    // swiftlint:disable cyclomatic_complexity
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
         
