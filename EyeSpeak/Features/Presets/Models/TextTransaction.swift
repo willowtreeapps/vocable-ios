@@ -107,10 +107,8 @@ struct TextTransaction: CustomDebugStringConvertible {
             }
         }
         
-        if punctuation.contains(char) {
-            if newText.last == " " {
-                newText = newText.trimmingCharacters(in: .whitespaces)
-            }
+        if punctuation.contains(char) && newText.last == " " {
+            newText = newText.trimmingCharacters(in: .whitespaces)
         }
         
         newText += char
