@@ -43,7 +43,7 @@ class TuningContainerViewController: UIViewController {
 
     private var deferredChildren: [(pulse: Pulse, min: CGFloat, max: CGFloat)] = []
     private var pulses: [Pulse] {
-        return children.map {($0 as! TunningViewController).pulse!}
+        return children.compactMap {($0 as? TunningViewController)?.pulse}
     }
 
     private let stackView: UIStackView = {
@@ -103,6 +103,18 @@ class TuningContainerViewController: UIViewController {
         tunningViewController.didMove(toParent: self)
         
         tunningViewController.show()
+
+        if TrackingDebugOverlayViewController.current == nil {
+            let debugVC = UIStoryboard(name: "TrackingDebugOverlayViewController", bundle: nil).instantiateInitialViewController()!
+            addChild(debugVC)
+            debugVC.view.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(debugVC.view)
+            debugVC.view.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor).isActive = true
+            debugVC.view.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 24).isActive = true
+            debugVC.view.widthAnchor.constraint(equalToConstant: 320).isActive = true
+            debugVC.view.heightAnchor.constraint(equalToConstant: 280).isActive = true
+            debugVC.didMove(toParent: self)
+        }
     }
 
     func removeTuningViewController(for pulse: Pulse) {
@@ -111,7 +123,16 @@ class TuningContainerViewController: UIViewController {
             if let child = child as? TunningViewController, child.pulse == pulse {
                 child.willMove(toParent: nil)
                 child.removeFromParent()
+                stackView.removeArrangedSubview(child.view)
                 child.view.removeFromSuperview()
+            }
+        }
+
+        if self.pulses.isEmpty {
+            if let theChild = children.first as? TrackingDebugOverlayViewController {
+                theChild.willMove(toParent: nil)
+                theChild.removeFromParent()
+                theChild.view.removeFromSuperview()
             }
         }
 

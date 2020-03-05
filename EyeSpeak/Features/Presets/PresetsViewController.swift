@@ -104,14 +104,26 @@ class PresetsViewController: UICollectionViewController {
         return true
     }
     
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteAllItems()
+        dataSource.apply(snapshot)
+                
+        DispatchQueue.main.async { [weak self] in
+            self?.updateSnapshot()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupCollectionView()
         configureDataSource()
-        observeCategorySelectionChanges()
+        observeItemSelectionChanges()
     }
-    
+
     private func setupCollectionView() {
         collectionView.delaysContentTouches = false
         collectionView.isScrollEnabled = false
@@ -216,9 +228,14 @@ class PresetsViewController: UICollectionViewController {
         updateSnapshot()
     }
     
-    private func observeCategorySelectionChanges() {
+    private func observeItemSelectionChanges() {
         _ = ItemSelection.categoryValueSubject.sink(receiveValue: { _ in
             self.reloadPresets()
+        }).store(in: &disposables)
+        
+        _ = ItemSelection.phraseValueSubject.sink(receiveValue: { selectedPhrase in
+            guard let utterance = selectedPhrase?.utterance else { return }
+            self.setTextTransaction(TextTransaction(text: utterance))
         }).store(in: &disposables)
     }
     
@@ -482,13 +499,5 @@ class PresetsViewController: UICollectionViewController {
         let vc = storyboard.instantiateInitialViewController()!
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
-    }
-
-    @objc private func didSelectPreset(notification: NSNotification) {
-        guard let text = notification.object as? String else {
-            return
-        }
-        
-        setTextTransaction(TextTransaction(text: text))
     }
 }

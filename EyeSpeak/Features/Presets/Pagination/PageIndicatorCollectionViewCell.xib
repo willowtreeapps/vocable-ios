@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,21 +16,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="264" height="193"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page 1 of X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmC-gl-HaJ">
-                        <rect key="frame" x="16" y="44" width="232" height="149"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page 1 of X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xmC-gl-HaJ">
+                        <rect key="frame" x="0.0" y="0.0" width="264" height="193"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                         <color key="textColor" name="DefaultFontColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="xmC-gl-HaJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="topMargin" id="ORn-TK-Aaw"/>
-                <constraint firstItem="xmC-gl-HaJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leadingMargin" id="f2V-97-vmy"/>
-                <constraint firstAttribute="trailingMargin" secondItem="xmC-gl-HaJ" secondAttribute="trailing" id="n1Y-X4-BLX"/>
-                <constraint firstAttribute="bottomMargin" secondItem="xmC-gl-HaJ" secondAttribute="bottom" id="o63-F1-0B0"/>
+                <constraint firstItem="xmC-gl-HaJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="51f-am-cTg"/>
+                <constraint firstItem="xmC-gl-HaJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Ggf-2o-7ze"/>
+                <constraint firstAttribute="bottom" secondItem="xmC-gl-HaJ" secondAttribute="bottom" id="Yop-WD-fFX"/>
+                <constraint firstAttribute="trailing" secondItem="xmC-gl-HaJ" secondAttribute="trailing" id="wEA-jI-O7b"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
             <size key="customSize" width="264" height="193"/>
             <connections>
                 <outlet property="pageLabel" destination="xmC-gl-HaJ" id="LMl-WO-3qD"/>

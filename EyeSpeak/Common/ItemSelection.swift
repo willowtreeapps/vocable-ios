@@ -18,12 +18,7 @@ struct ItemSelection {
                           sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
         .compactMap { CategoryViewModel($0) }.first!
     
-    static let phrasePublisher = PassthroughSubject<PhraseViewModel?, Never>()
-    static var selectedPhrase: PhraseViewModel? {
-        didSet {
-            phrasePublisher.send(selectedPhrase)
-        }
-    }
+    static let phraseValueSubject = CurrentValueSubject<PhraseViewModel?, Never>(nil)
     
     static let presetsPageIndicatorPublisher = PassthroughSubject<String, Never>()
     static var presetsPageIndicatorText: String = "" {

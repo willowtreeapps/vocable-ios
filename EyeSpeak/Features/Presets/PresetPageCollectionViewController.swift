@@ -39,7 +39,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
         for indexPath in collectionView.indexPathsForVisibleItems {
             guard let item = dataSource.itemIdentifier(for: indexPath),
                 case let .presetItem(preset) = item,
-            ItemSelection.selectedPhrase == preset else {
+            ItemSelection.phraseValueSubject.value == preset else {
                     collectionView.deselectItem(at: indexPath, animated: false)
                     continue
             }
@@ -91,7 +91,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
         
         switch selectedItem {
         case .presetItem(let viewModel):
-            ItemSelection.selectedPhrase = viewModel
+            ItemSelection.phraseValueSubject.send(viewModel)
 
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {
@@ -130,25 +130,29 @@ class PresetPageCollectionViewController: UICollectionViewController {
             let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 3.0),
                                                                                        heightDimension: .fractionalHeight(1.0)))
             
-            var itemsPerRow: Int {
+            var rowInfo: (numberOfRows: Int, itemsPerRow: Int) {
                 switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
                 case (.regular, .regular), (.regular, .compact):
-                    return 3
+                    return (3, 3)
+                case (.compact, .compact):
+                    return (2, 3)
+                case (.compact, .regular):
+                    return (3, 2)
                 default:
-                    return 2
+                    return (2, 3)
                 }
             }
             
             let rowGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .fractionalHeight(1.0)),
-                subitem: presetItem, count: itemsPerRow)
+                subitem: presetItem, count: rowInfo.itemsPerRow)
             rowGroup.interItemSpacing = .fixed(8)
             
             let containerGroup = NSCollectionLayoutGroup.vertical(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .fractionalHeight(1)),
-                subitem: rowGroup, count: 3)
+                subitem: rowGroup, count: rowInfo.numberOfRows)
             containerGroup.interItemSpacing = .fixed(8)
             containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             
