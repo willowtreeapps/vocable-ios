@@ -9,13 +9,14 @@
 import Foundation
 import UIKit
 
+@IBDesignable
 class GazeableButton: UIButton {
     
     private var gazeBeganDate: Date?
     
     let backgroundView = BorderedView()
     
-    var buttonImage: UIImage = UIImage() {
+    @IBInspectable var buttonImage: UIImage = UIImage() {
         didSet {
             sharedInit()
         }
@@ -107,12 +108,12 @@ class GazeableButton: UIButton {
             return
         }
         
-        // TODO: Check for performance issues calling Date().timeIntervalSince here
         let timeElapsed = Date().timeIntervalSince(beganDate)
         if timeElapsed >= gaze.selectionHoldDuration {
             isSelected = true
             sendActions(for: .primaryActionTriggered)
             gazeBeganDate = nil
+            (self.window as? HeadGazeWindow)?.animateCursorSelection()
         }
     }
 
