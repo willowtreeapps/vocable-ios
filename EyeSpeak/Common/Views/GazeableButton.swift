@@ -28,10 +28,7 @@ class GazeableButton: UIButton {
     }
     
     var selectionFillColor: UIColor = .cellSelectionColor {
-        didSet {
-            updateContentViews()
-        }
-    }
+    var buttonImageView = UIImageView()
     
     override var isHighlighted: Bool {
         didSet {
@@ -58,6 +55,7 @@ class GazeableButton: UIButton {
         layoutIfNeeded()
     }
     
+<<<<<<< HEAD
     private func sharedInit() {
         backgroundView.cornerRadius = 8
         backgroundView.borderColor = .cellBorderHighlightColor
@@ -75,6 +73,28 @@ class GazeableButton: UIButton {
         
         addSubview(backgroundView)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
+=======
+    func sharedInit() {
+        borderedView.cornerRadius = 8
+        borderedView.borderColor = .cellBorderHighlightColor
+        borderedView.isUserInteractionEnabled = false
+        borderedView.directionalLayoutMargins = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
+
+        updateContentViews()
+        let image = buttonImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 34, weight: .bold))
+        buttonImageView = UIImageView(image: image)
+        borderedView.addSubview(buttonImageView)
+        buttonImageView.translatesAutoresizingMaskIntoConstraints = false
+        let margins = borderedView.layoutMarginsGuide
+        NSLayoutConstraint.activate([
+            buttonImageView.topAnchor.constraint(equalTo: margins.topAnchor, constant: 0),
+            buttonImageView.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 0),
+            buttonImageView.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 0),
+            buttonImageView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 0)
+        ])
+        addSubview(borderedView)
+        borderedView.translatesAutoresizingMaskIntoConstraints = false
+>>>>>>> 3a2568d... Adjusted settings label and dismiss button.
         NSLayoutConstraint.activate([
             backgroundView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
             backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
