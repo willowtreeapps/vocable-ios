@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="z2O-mb-WoW">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -28,7 +28,7 @@
             <objects>
                 <collectionViewController id="if3-QM-p2o" customClass="SettingsCollectionViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yYQ-tW-Cgs">
-                        <rect key="frame" x="0.0" y="0.0" width="603" height="215"/>
+                        <rect key="frame" x="0.0" y="0.0" width="808" height="249"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="Xga-RH-NHm">
@@ -53,17 +53,17 @@
             <objects>
                 <viewController id="gMn-gX-rfc" customClass="SettingsViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mXz-yV-vIn">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtZ-qP-xqU">
-                                <rect key="frame" x="267" y="32" width="133" height="41"/>
+                                <rect key="frame" x="445.5" y="32" width="133" height="41"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59L-eT-oZ6" customClass="GazeableButton" customModule="EyeSpeak" customModuleProvider="target">
-                                <rect key="frame" x="519" y="32" width="116" height="100"/>
+                                <rect key="frame" x="929" y="32" width="63" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="XFt-fF-4My">
                                         <variation key="heightClass=compact-widthClass=regular" constant="48"/>
@@ -88,7 +88,7 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="6E8-xr-Wux">
-                                <rect key="frame" x="32" y="128" width="603" height="215"/>
+                                <rect key="frame" x="0.0" y="128" width="1024" height="640"/>
                                 <connections>
                                     <segue destination="if3-QM-p2o" kind="embed" id="npm-Wd-wUb"/>
                                 </connections>
@@ -97,16 +97,10 @@
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="6E8-xr-Wux" firstAttribute="top" secondItem="mXz-yV-vIn" secondAttribute="top" constant="128" id="AhE-Vm-PPA"/>
-                            <constraint firstItem="1Jr-Jy-UTd" firstAttribute="bottom" secondItem="6E8-xr-Wux" secondAttribute="bottom" constant="16" id="Nzx-CE-6Uz"/>
+                            <constraint firstItem="6E8-xr-Wux" firstAttribute="leading" secondItem="1Jr-Jy-UTd" secondAttribute="leading" id="CDw-7J-EQo"/>
+                            <constraint firstItem="1Jr-Jy-UTd" firstAttribute="trailing" secondItem="6E8-xr-Wux" secondAttribute="trailing" id="KC5-hh-n5d"/>
                             <constraint firstItem="CtZ-qP-xqU" firstAttribute="centerX" secondItem="mXz-yV-vIn" secondAttribute="centerX" id="OAf-Qz-V9Z"/>
-                            <constraint firstItem="6E8-xr-Wux" firstAttribute="leading" secondItem="1Jr-Jy-UTd" secondAttribute="leading" constant="32" id="TT0-9y-Slu">
-                                <variation key="heightClass=compact-widthClass=regular" constant="0.0"/>
-                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
-                            <constraint firstItem="1Jr-Jy-UTd" firstAttribute="trailing" secondItem="6E8-xr-Wux" secondAttribute="trailing" constant="32" id="lGt-vR-5mO">
-                                <variation key="heightClass=compact-widthClass=regular" constant="0.0"/>
-                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
+                            <constraint firstItem="1Jr-Jy-UTd" firstAttribute="bottom" secondItem="6E8-xr-Wux" secondAttribute="bottom" id="VBU-YZ-EKl"/>
                             <constraint firstItem="1Jr-Jy-UTd" firstAttribute="trailing" secondItem="59L-eT-oZ6" secondAttribute="trailing" constant="32" id="nRG-PI-BCG"/>
                             <constraint firstItem="CtZ-qP-xqU" firstAttribute="top" secondItem="1Jr-Jy-UTd" secondAttribute="top" constant="32" id="udB-iK-X15"/>
                             <constraint firstItem="59L-eT-oZ6" firstAttribute="top" secondItem="1Jr-Jy-UTd" secondAttribute="top" constant="32" id="zWY-4u-sBJ"/>

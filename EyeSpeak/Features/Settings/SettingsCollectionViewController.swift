@@ -70,7 +70,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
         updateDataSource()
 
-        let layout = createLayout(traitCollection: UIScreen.main.traitCollection)
+        let layout = createLayout()
         collectionView.collectionViewLayout = layout
     }
 
@@ -90,11 +90,27 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        //setupCollectionView()
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateDataSource()
+
+        let layout = createLayout()
+        collectionView.collectionViewLayout = layout
     }
     
     //take in trait collection environment, update layout when trait collection changes.
-    func createLayout(traitCollection: UITraitCollection) -> UICollectionViewLayout {
+    func createLayout() -> UICollectionViewLayout {
+        if case .compact = self.traitCollection.verticalSizeClass {
+            return compactHeight()
+        }
+        else if case .compact = self.traitCollection.horizontalSizeClass {
+            return compactWidthLayout()
+        }
+        else {
+            return regularHeightWidth()
+        }
+    }
+    
+    func compactWidthLayout() -> UICollectionViewLayout {
         let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
         let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         //Good fractional height for iphone in portrait, needs to be original in landscape
@@ -125,7 +141,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         return layout
     }
     
-    func phoneLandscape() -> UICollectionViewLayout {
+    func compactHeight() -> UICollectionViewLayout {
         let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
                let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
               
@@ -147,6 +163,33 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
                let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
                let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [settingsToggleGroup, settingsOptionsGroup, versionItem])
                //settingPageGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
+               
+               let section = NSCollectionLayoutSection(group: settingPageGroup)
+               let layout = UICollectionViewCompositionalLayout(section: section)
+               return layout
+    }
+    
+    func regularHeightWidth() -> UICollectionViewLayout {
+         let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
+               let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+               let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1 / 2)))
+               
+               let settingsToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 6))
+               let settingsToggleGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsToggleGroupSize, subitem: headTrackingToggleItem, count: 1)
+               settingsToggleGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
+               settingsToggleGroup.edgeSpacing = .init(leading: nil, top: .fixed(32), trailing: nil, bottom: .fixed(92))
+               
+               let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(3 / 6))
+               let settingsOptionsGroup = NSCollectionLayoutGroup.horizontal(layoutSize: settingsOptionsGroupSize, subitem: settingsButtonItem, count: itemCount)
+               settingsOptionsGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
+               settingsOptionsGroup.interItemSpacing = .fixed(16)
+               
+               let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(80.0 / 834.0))
+               let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
+               
+               let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+               let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [settingsToggleGroup, settingsOptionsGroup, versionItem])
+               settingPageGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
                
                let section = NSCollectionLayoutSection(group: settingPageGroup)
                let layout = UICollectionViewCompositionalLayout(section: section)
