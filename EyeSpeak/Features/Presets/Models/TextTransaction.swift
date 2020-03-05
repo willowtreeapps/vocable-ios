@@ -78,13 +78,42 @@ struct TextTransaction: CustomDebugStringConvertible {
             return TextTransaction(text: character, intent: .lastCharacter)
         }
         
-        return TextTransaction(text: text + character.lowercased(), intent: .lastCharacter)
+        let newText = handleGrammar(with: character)
+        return TextTransaction(text: newText, intent: .lastCharacter)
     }
     
     func insertingSuggestion(with suggestion: String) -> TextTransaction {
         let newText: String
         newText = NSString(string: text + " ").replacingCharacters(in: lastTokenRange, with: suggestion)
         return TextTransaction(text: newText, intent: .fullWord)
+    }
+    
+    func handleGrammar(with character: String) -> String {
+        var newText = text
+        var char = character.lowercased()
+        
+        let punctuation = ["'", ",", ".", "?"]
+        
+        let trimmedText = newText.trimmingCharacters(in: .whitespaces)
+        if let lastCharacter = trimmedText.last {
+            // Adjusting spacing when adding a character after punctuation (should always be only one space after punctuation)
+            if punctuation.contains(String(lastCharacter)) {
+                newText = trimmedText
+                newText += " "
+            }
+            
+            if lastCharacter == "." || lastCharacter == "?" {
+                char = char.uppercased()
+            }
+        }
+        
+        if punctuation.contains(char) && newText.last == " " {
+            newText = newText.trimmingCharacters(in: .whitespaces)
+        }
+        
+        newText += char
+        
+        return newText
     }
     
     // To keep track of when to delete the last word or the full word (after selecting a text suggestion) when pressing backspace
