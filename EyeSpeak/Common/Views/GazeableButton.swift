@@ -28,7 +28,18 @@ class GazeableButton: UIButton {
     }
     
     var selectionFillColor: UIColor = .cellSelectionColor {
+        didSet {
+            updateContentViews()
+       }
+    }
     var buttonImageView = UIImageView()
+    private var imageSize: CGSize {
+        if traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular {
+            return CGSize(width: 42, height: 42)
+        }
+        
+        return CGSize(width: 34, height: 34)
+    }
     
     override var isHighlighted: Bool {
         didSet {
@@ -55,46 +66,26 @@ class GazeableButton: UIButton {
         layoutIfNeeded()
     }
     
-<<<<<<< HEAD
-    private func sharedInit() {
+    func sharedInit() {
         backgroundView.cornerRadius = 8
         backgroundView.borderColor = .cellBorderHighlightColor
         backgroundView.isUserInteractionEnabled = false
-
-        updateContentViews()
-        let image = buttonImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 34, weight: .bold))
-        let imageView = UIImageView(image: image)
-        backgroundView.addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor)
-        ])
-        
-        addSubview(backgroundView)
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-=======
-    func sharedInit() {
-        borderedView.cornerRadius = 8
-        borderedView.borderColor = .cellBorderHighlightColor
-        borderedView.isUserInteractionEnabled = false
-        borderedView.directionalLayoutMargins = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
+        backgroundView.directionalLayoutMargins = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
 
         updateContentViews()
         let image = buttonImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 34, weight: .bold))
         buttonImageView = UIImageView(image: image)
-        borderedView.addSubview(buttonImageView)
+        backgroundView.addSubview(buttonImageView)
         buttonImageView.translatesAutoresizingMaskIntoConstraints = false
-        let margins = borderedView.layoutMarginsGuide
+        let margins = backgroundView.layoutMarginsGuide
         NSLayoutConstraint.activate([
-            buttonImageView.topAnchor.constraint(equalTo: margins.topAnchor, constant: 0),
-            buttonImageView.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 0),
-            buttonImageView.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 0),
-            buttonImageView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 0)
+            buttonImageView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            buttonImageView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
+            buttonImageView.widthAnchor.constraint(equalToConstant: imageSize.width),
+            buttonImageView.heightAnchor.constraint(equalToConstant: imageSize.height)
         ])
-        addSubview(borderedView)
-        borderedView.translatesAutoresizingMaskIntoConstraints = false
->>>>>>> 3a2568d... Adjusted settings label and dismiss button.
+        addSubview(backgroundView)
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             backgroundView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
             backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
@@ -145,3 +136,4 @@ class GazeableButton: UIButton {
     }
     
 }
+
