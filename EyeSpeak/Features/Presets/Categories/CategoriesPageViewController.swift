@@ -11,11 +11,25 @@ import CoreData
 
 class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    private let itemsPerPage = 4
-    private lazy var pages: [UIViewController] = categoryViewModels.chunked(into: itemsPerPage).map { viewModels in
-        let collectionViewController = CategoryPageCollectionViewController(collectionViewLayout: CategoryPageCollectionViewController.createLayout(with: viewModels.count))
+    private var itemsPerPage: Int {
+        if case .regular = traitCollection.horizontalSizeClass {
+            return 4
+        }
+        
+        return 1
+    }
+    
+    private var _pages: [UIViewController]?
+    private var pages: [UIViewController] {
+        if _pages == nil {
+            _pages = categoryViewModels.chunked(into: itemsPerPage).map { viewModels in
+                let collectionViewController = CategoryPageCollectionViewController(collectionViewLayout: CategoryPageCollectionViewController.createLayout(with: viewModels.count))
                 collectionViewController.items = viewModels
                 return collectionViewController
+            }
+        }
+        
+        return _pages ?? []
     }
     
     private lazy var categoryViewModels: [CategoryViewModel] =
@@ -27,10 +41,23 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
         super.viewDidLoad()
         delegate = self
         dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        if let firstViewController = pages.first {
-            setViewControllers([firstViewController], direction: .forward, animated: true)
+        let viewControllerToSelect = pages.first(where: {
+            (($0 as? CategoryPageCollectionViewController)?.items.contains(ItemSelection.categoryValueSubject.value) ?? false)
+        })
+        
+        if let viewController = viewControllerToSelect {
+            setViewControllers([viewController], direction: .forward, animated: true)
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        _pages = nil 
     }
     
     // MARK: - UIPageViewControllerDataSource

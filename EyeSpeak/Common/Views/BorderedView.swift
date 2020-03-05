@@ -24,7 +24,43 @@ class BorderedView: UIView {
             updateShapeLayer()
         }
     }
-    
+
+    // Scales the magnitude of the shadow to make it animatable
+    // by a single property. For example, one may bind this property
+    // to a UIScrollView offset or UISlider to make a given shadow dynamically
+    // "lift" a view off of its background.
+    var shadowAmount: CGFloat = 1.0 {
+        didSet {
+            // Clamp it to the interval [0, 1]
+            shadowAmount = max(min(shadowAmount, 1.0), 0.0)
+            self.updateShadowProperties()
+        }
+    }
+
+    @IBInspectable var shadowColor: UIColor = .black {
+        didSet {
+            updateShadowProperties()
+        }
+    }
+
+    @IBInspectable var shadowOffset: CGSize = .zero {
+        didSet {
+            updateShadowProperties()
+        }
+    }
+
+    @IBInspectable var shadowOpacity: CGFloat = 1.0 {
+        didSet {
+            updateShadowProperties()
+        }
+    }
+
+    @IBInspectable var shadowRadius: CGFloat = 0.0 {
+        didSet {
+            updateShadowProperties()
+        }
+    }
+
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
             updateShapeLayer()
@@ -75,6 +111,14 @@ class BorderedView: UIView {
         updateShapeLayer()
         setNeedsLayout()
         layoutIfNeeded()
+    }
+
+    private func updateShadowProperties() {
+        shapeLayer.shadowRadius = shadowRadius * shadowAmount
+        shapeLayer.shadowOpacity = Float(shadowOpacity)
+        shapeLayer.shadowOffset = shadowOffset.applying(.init(scaleX: shadowAmount, y: shadowAmount))
+        shapeLayer.shadowColor = shadowColor.cgColor
+        shapeLayer.masksToBounds = false
     }
 
     private func updateBorderProperties() {

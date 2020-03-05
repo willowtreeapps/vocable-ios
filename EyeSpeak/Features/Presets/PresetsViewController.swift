@@ -11,6 +11,7 @@ import AVFoundation
 import CoreData
 import Combine
 
+// swiftlint:disable type_body_length
 class PresetsViewController: UICollectionViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
@@ -107,15 +108,27 @@ class PresetsViewController: UICollectionViewController {
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
-
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteAllItems()
+        dataSource.apply(snapshot)
+                
+        DispatchQueue.main.async { [weak self] in
+            self?.updateSnapshot()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupCollectionView()
         configureDataSource()
-        observeCategorySelectionChanges()
+        observeItemSelectionChanges()
     }
-    
+
     private func setupCollectionView() {
         collectionView.delaysContentTouches = false
         collectionView.isScrollEnabled = false
@@ -214,9 +227,14 @@ class PresetsViewController: UICollectionViewController {
         updateSnapshot()
     }
     
-    private func observeCategorySelectionChanges() {
+    private func observeItemSelectionChanges() {
         _ = ItemSelection.categoryValueSubject.sink(receiveValue: { _ in
             self.reloadPresets()
+        }).store(in: &disposables)
+        
+        _ = ItemSelection.phraseValueSubject.sink(receiveValue: { selectedPhrase in
+            guard let utterance = selectedPhrase?.utterance else { return }
+            self.setTextTransaction(TextTransaction(text: utterance))
         }).store(in: &disposables)
     }
     
@@ -235,16 +253,25 @@ class PresetsViewController: UICollectionViewController {
     }
 
     func updateSnapshot(animated: Bool = true) {
-
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
         
+        // Helper functions
+        func appendSaveButton() {
+            if phraseIsSaved(textTransaction.text) {
+                snapshot.appendItems([.topBarButton(.unsave)])
+            } else {
+                snapshot.appendItems([.topBarButton(.save)])
+            }
+        }
+        
+        // Snapshot construction
         snapshot.appendSections([.textField])
         snapshot.appendItems([.textField(textTransaction.attributedText)])
-        if phraseIsSaved(textTransaction.text) {
-            snapshot.appendItems([.topBarButton(.unsave)])
-        } else {
-            snapshot.appendItems([.topBarButton(.save)])
+        
+        if case .regular = traitCollection.horizontalSizeClass {
+           appendSaveButton()
         }
+        
         snapshot.appendItems([.topBarButton(.togglePreset), .topBarButton(.settings)])
         
         if showKeyboard {
@@ -325,6 +352,7 @@ class PresetsViewController: UICollectionViewController {
         }
     }
 
+    // swiftlint:disable cyclomatic_complexity
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
         
@@ -460,13 +488,5 @@ class PresetsViewController: UICollectionViewController {
         let vc = storyboard.instantiateInitialViewController()!
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
-    }
-
-    @objc private func didSelectPreset(notification: NSNotification) {
-        guard let text = notification.object as? String else {
-            return
-        }
-        
-        setTextTransaction(TextTransaction(text: text))
     }
 }

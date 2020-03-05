@@ -12,6 +12,8 @@ import Combine
 class HeadGazeWindow: UIWindow {
 
     let cursorView = UIVirtualCursorView()
+    
+    var warningView = UIView()
 
     private var trackingView: UIView?
     private var lastGaze: UIHeadGaze?
@@ -23,8 +25,11 @@ class HeadGazeWindow: UIWindow {
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
-        self.addSubview(cursorView)
+
         cursorView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(cursorView)
+        initializeWarningView()
+        
         NSLayoutConstraint.activate([
             cursorView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
             cursorView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
@@ -48,19 +53,52 @@ class HeadGazeWindow: UIWindow {
     override func addSubview(_ view: UIView) {
         super.addSubview(view)
         self.bringSubviewToFront(cursorView)
+        self.bringSubviewToFront(warningView)
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
     }
+    
+    private func initializeWarningView() {
+           warningView = UINib(nibName: "WarningView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! UIView
+           self.addSubview(warningView)
+           let width = UIScreen.main.traitCollection.horizontalSizeClass == .compact ? 350 : 425
+           warningView.translatesAutoresizingMaskIntoConstraints = false
+        
+           NSLayoutConstraint.activate([
+               warningView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+               warningView.widthAnchor.constraint(equalToConstant: CGFloat(width)),
+               warningView.heightAnchor.constraint(equalToConstant: 57),
+               warningView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+           ])
+       }
 
     private func commonInit() {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .headTrackingDisabled, object: nil)
     }
-
+    
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
         cancelCurrentGazeIfNeeded()
+        handleWarning(shouldDisplay: true)
+    }
+    
+    @objc private func applicationDidAcquireGaze(_ sender: Any?) {
+        handleWarning(shouldDisplay: false)
+    }
+    
+    @objc private func headTrackingDisabled(_ sender: Any?) {
+        handleWarning(shouldDisplay: false)
+    }
+    
+    private func handleWarning(shouldDisplay: Bool) {
+        let alphaValue = shouldDisplay ? 1.0 : 0.0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.warningView.alpha = CGFloat(alphaValue)
+        })
     }
 
     private func cancelCurrentGazeIfNeeded() {

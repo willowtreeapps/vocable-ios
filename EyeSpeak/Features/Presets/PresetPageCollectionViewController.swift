@@ -32,13 +32,14 @@ class PresetPageCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         clearsSelectionOnViewWillAppear = false
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         for indexPath in collectionView.indexPathsForVisibleItems {
             guard let item = dataSource.itemIdentifier(for: indexPath),
                 case let .presetItem(preset) = item,
-            ItemSelection.selectedPhrase == preset else {
+            ItemSelection.phraseValueSubject.value == preset else {
                     collectionView.deselectItem(at: indexPath, animated: false)
                     continue
             }
@@ -90,7 +91,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
         
         switch selectedItem {
         case .presetItem(let viewModel):
-            ItemSelection.selectedPhrase = viewModel
+            ItemSelection.phraseValueSubject.send(viewModel)
 
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {
@@ -117,28 +118,41 @@ class PresetPageCollectionViewController: UICollectionViewController {
         // Intended for use in computing the fractional-size dimensions of collection layout items rather than hard-coding width/height values
         private static let totalHeight: CGFloat = 834.0
         
-        init(with itemCount: Int) {
-            super.init(section: CompositionalLayout.presetsSectionLayout())
+        init(traitCollection: UITraitCollection) {
+            super.init(section: CompositionalLayout.presetsSectionLayout(for: traitCollection))
         }
         
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
         
-        private static func presetsSectionLayout() -> NSCollectionLayoutSection {
+        private static func presetsSectionLayout(for traitCollection: UITraitCollection) -> NSCollectionLayoutSection {
             let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 3.0),
                                                                                        heightDimension: .fractionalHeight(1.0)))
+            
+            var rowInfo: (numberOfRows: Int, itemsPerRow: Int) {
+                switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
+                case (.regular, .regular), (.regular, .compact):
+                    return (3, 3)
+                case (.compact, .compact):
+                    return (2, 3)
+                case (.compact, .regular):
+                    return (3, 2)
+                default:
+                    return (2, 3)
+                }
+            }
             
             let rowGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .fractionalHeight(1.0)),
-                subitem: presetItem, count: 3)
+                subitem: presetItem, count: rowInfo.itemsPerRow)
             rowGroup.interItemSpacing = .fixed(8)
             
             let containerGroup = NSCollectionLayoutGroup.vertical(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .fractionalHeight(1)),
-                subitem: rowGroup, count: 3)
+                subitem: rowGroup, count: rowInfo.numberOfRows)
             containerGroup.interItemSpacing = .fixed(8)
             containerGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             

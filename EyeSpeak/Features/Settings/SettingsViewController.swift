@@ -12,7 +12,7 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     @IBOutlet var dismissButton: GazeableButton!
-    
+
     @IBAction func dismissSettings(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

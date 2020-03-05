@@ -5,6 +5,7 @@ import Combine
 extension Notification.Name {
     static let applicationDidAcquireGaze = Notification.Name("applicationDidAcquireGaze")
     static let applicationDidLoseGaze = Notification.Name("applicationDidLoseGaze")
+    static let headTrackingDisabled = Notification.Name("headTrackingDisabled")
 }
 
 extension UIApplication {
