@@ -97,8 +97,8 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     func createLayout(traitCollection: UITraitCollection) -> UICollectionViewLayout {
         let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
         let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+        //Good fractional height for iphone in portrait, needs to be original in landscape
         let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        //let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1 / 2)))
         //Good fractional height for iphone in portrait, needs to be original in landscape
         let settingsToggleHeight = traitCollection.verticalSizeClass == .compact ? CGFloat(6) : CGFloat(10)
             let settingsToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / settingsToggleHeight))
@@ -106,26 +106,51 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             settingsToggleGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
             settingsToggleGroup.edgeSpacing = .init(leading: nil, top: .fixed(32), trailing: nil, bottom: .fixed(92))
         
+        
+            //Good for everything except last case and iPad landscape (which needs to be original)
             let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(2 / 6))
             let settingsOptionsGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsOptionsGroupSize, subitem: settingsButtonItem, count: itemCount)
             settingsOptionsGroup.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 32, bottom: 5, trailing: 32)
             settingsOptionsGroup.interItemSpacing = .fixed(16)
         
-       /* let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(3 / 6))
-        let settingsOptionsGroup = NSCollectionLayoutGroup.horizontal(layoutSize: settingsOptionsGroupSize, subitem: settingsButtonItem, count: itemCount)
-        settingsOptionsGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
-        settingsOptionsGroup.interItemSpacing = .fixed(16)*/
-        
-        let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(80.0 / 834.0))
+        let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/7))
         let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
         
-        let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
         let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [settingsToggleGroup, settingsOptionsGroup, versionItem])
-        settingPageGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
+        //settingPageGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
         
         let section = NSCollectionLayoutSection(group: settingPageGroup)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
+    }
+    
+    func phoneLandscape() -> UICollectionViewLayout {
+        let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
+               let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+              
+               let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+               
+               let settingsToggleHeight = traitCollection.verticalSizeClass == .compact ? CGFloat(6) : CGFloat(10)
+               let settingsToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.3))
+               let settingsToggleGroup = NSCollectionLayoutGroup.horizontal(layoutSize: settingsToggleGroupSize, subitem: headTrackingToggleItem, count: 1)
+               settingsToggleGroup.edgeSpacing = .init(leading: nil, top: nil, trailing: nil, bottom: .fixed(32))
+               
+               let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 3))
+               let settingsOptionsGroup = NSCollectionLayoutGroup.horizontal(layoutSize: settingsOptionsGroupSize, subitem: settingsButtonItem, count: itemCount)
+               settingsOptionsGroup.interItemSpacing = .fixed(8)
+               settingsOptionsGroup.edgeSpacing = .init(leading: nil, top: nil, trailing: nil, bottom: .fixed(16))
+               
+               let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/7))
+               let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
+               
+               let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
+               let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [settingsToggleGroup, settingsOptionsGroup, versionItem])
+               //settingPageGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
+               
+               let section = NSCollectionLayoutSection(group: settingPageGroup)
+               let layout = UICollectionViewCompositionalLayout(section: section)
+               return layout
     }
     
     // MARK: UICollectionViewController

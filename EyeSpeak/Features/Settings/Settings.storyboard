@@ -97,7 +97,7 @@
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="6E8-xr-Wux" firstAttribute="top" secondItem="mXz-yV-vIn" secondAttribute="top" constant="128" id="AhE-Vm-PPA"/>
-                            <constraint firstItem="1Jr-Jy-UTd" firstAttribute="bottom" secondItem="6E8-xr-Wux" secondAttribute="bottom" constant="32" id="Nzx-CE-6Uz"/>
+                            <constraint firstItem="1Jr-Jy-UTd" firstAttribute="bottom" secondItem="6E8-xr-Wux" secondAttribute="bottom" constant="16" id="Nzx-CE-6Uz"/>
                             <constraint firstItem="CtZ-qP-xqU" firstAttribute="centerX" secondItem="mXz-yV-vIn" secondAttribute="centerX" id="OAf-Qz-V9Z"/>
                             <constraint firstItem="6E8-xr-Wux" firstAttribute="leading" secondItem="1Jr-Jy-UTd" secondAttribute="leading" constant="32" id="TT0-9y-Slu">
                                 <variation key="heightClass=compact-widthClass=regular" constant="0.0"/>
