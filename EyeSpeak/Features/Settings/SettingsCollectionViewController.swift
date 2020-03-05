@@ -85,16 +85,9 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        self.collectionView.collectionViewLayout.invalidateLayout()
-    }
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        updateDataSource()
-
-        let layout = createLayout()
-        collectionView.collectionViewLayout = layout
+        collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
     
     //take in trait collection environment, update layout when trait collection changes.
