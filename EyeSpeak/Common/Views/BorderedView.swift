@@ -61,7 +61,6 @@ class BorderedView: UIView {
         }
     }
 
-    
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
             updateShapeLayer()

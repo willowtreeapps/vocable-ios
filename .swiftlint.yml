@@ -6,6 +6,7 @@ disabled_rules:
 - force_cast
 - force_try
 - type_name
+- large_tuple
 opt_in_rules:
 - empty_count
 - empty_string

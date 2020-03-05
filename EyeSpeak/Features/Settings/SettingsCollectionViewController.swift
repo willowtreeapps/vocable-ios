@@ -150,7 +150,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             if AppConfig.isHeadTrackingEnabled {
                 let alertViewController = GazeableAlertViewController.make { AppConfig.isHeadTrackingEnabled.toggle() }
                 present(alertViewController, animated: true)
-                alertViewController.setAlertTitle("Turn off head tracking? Really?")
+                alertViewController.setAlertTitle("Turn off head tracking?")
             } else {
                 AppConfig.isHeadTrackingEnabled.toggle()
             }
