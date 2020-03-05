@@ -52,7 +52,7 @@
         <scene sceneID="udF-jz-OFJ">
             <objects>
                 <viewController id="gMn-gX-rfc" customClass="SettingsViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mXz-yV-vIn">
+                    <view key="view" contentMode="scaleToFill" id="mXz-yV-vIn" customClass="GazeEatingView" customModule="EyeSpeak" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
