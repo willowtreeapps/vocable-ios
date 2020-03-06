@@ -100,15 +100,6 @@ class PresetPageCollectionViewController: UICollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
-        
-        switch item {
-        case .presetItem:
-            return false
-        }
-    }
-    
     class CompositionalLayout: UICollectionViewCompositionalLayout {
         private var dataSource: UICollectionViewDiffableDataSource<PresetPageCollectionViewController.Section, PresetPageCollectionViewController.ItemWrapper>? {
             self.collectionView?.dataSource as? UICollectionViewDiffableDataSource<PresetPageCollectionViewController.Section, PresetPageCollectionViewController.ItemWrapper>
