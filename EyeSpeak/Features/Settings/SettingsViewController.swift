@@ -21,8 +21,4 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         dismissButton.buttonImage = UIImage(systemName: "xmark.circle")!
     }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-    }
-    
 }

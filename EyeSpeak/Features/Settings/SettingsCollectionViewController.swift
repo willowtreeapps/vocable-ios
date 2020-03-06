@@ -92,15 +92,15 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
     func createLayout() -> UICollectionViewLayout {
         if case .compact = self.traitCollection.verticalSizeClass {
-            return compactHeight()
+            return compactHeightLayout()
         } else if case .compact = self.traitCollection.horizontalSizeClass {
             return compactWidthLayout()
         } else {
-            return regularHeightWidth()
+            return regularHeightWidthLayout()
         }
     }
     
-    func compactWidthLayout() -> UICollectionViewLayout {
+    private func compactWidthLayout() -> UICollectionViewLayout {
         let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
         let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         
@@ -126,7 +126,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         return layout
     }
     
-    func compactHeight() -> UICollectionViewLayout {
+    private func compactHeightLayout() -> UICollectionViewLayout {
         let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
         let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         
@@ -152,7 +152,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         return layout
     }
     
-    func regularHeightWidth() -> UICollectionViewLayout {
+    private func regularHeightWidthLayout() -> UICollectionViewLayout {
         let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
         let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1 / 2)))

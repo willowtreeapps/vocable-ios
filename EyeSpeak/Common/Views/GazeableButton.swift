@@ -66,7 +66,7 @@ class GazeableButton: UIButton {
         layoutIfNeeded()
     }
     
-    func sharedInit() {
+    private func sharedInit() {
         backgroundView.cornerRadius = 8
         backgroundView.borderColor = .cellBorderHighlightColor
         backgroundView.isUserInteractionEnabled = false
@@ -77,7 +77,6 @@ class GazeableButton: UIButton {
         buttonImageView = UIImageView(image: image)
         backgroundView.addSubview(buttonImageView)
         buttonImageView.translatesAutoresizingMaskIntoConstraints = false
-        let margins = backgroundView.layoutMarginsGuide
         NSLayoutConstraint.activate([
             buttonImageView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
             buttonImageView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
