@@ -107,6 +107,7 @@ class HeadGazeTrackingInterpolator {
 
         let xNDC = Float(hitPos[0]) - Float(adjustedCorrection.width)
         let yNDC = Float(hitPos[1]) - Float(adjustedCorrection.height)
+
         let hitPosNDC = SIMD2<Float>([xNDC, yNDC])
         let filteredPos: SIMD2<Float>
         filteredPos = interpolateNDCLocation(hitPosNDC)
