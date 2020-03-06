@@ -37,7 +37,7 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     let debugInterpolator = HeadGazeTrackingInterpolator()
     lazy var trackingInterpolators: [HeadGazeTrackingInterpolator] = [pidInterpolator, debugInterpolator]
 
-    private var computedScale: CGFloat = 6
+    private var computedScale: CGFloat = 0
     private var xAngleCorrectionAmount = 0.0
     private var yAngleCorrectionAmount = 0.0
     
@@ -68,7 +68,7 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        _ = AppConfig.headTrackingValueSubject.sink { (isHeadTrackingEnabled) in
+        _ = AppConfig.headTrackingValueSubject.sink { isHeadTrackingEnabled in
             if isHeadTrackingEnabled {
                 self.resetTracking()
             } else {
@@ -161,8 +161,21 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         yAngleCorrectionAmount = Double(90 - angleY.radiansToDegrees) / 90.0
 
         let length = Double(sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z))
-        let distanceRange = (0.3 ... 0.6)
-        let scalingRange = (3.0 ... 6.0)
+
+        var distanceRange = (0.3 ... 0.6) // Distance from camera
+        var scalingRange = (3.0 ... 6.0) // Scaling
+
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            distanceRange = (0.3 ... 0.6)
+            scalingRange = (3.0 ... 6.0)
+        case .pad:
+            distanceRange = (0.3 ... 0.6)
+            scalingRange = (3.0 ... 6.0)
+        default:
+            break
+        }
+
         let normalizedLength = min(max((length - distanceRange.lowerBound) / (distanceRange.upperBound - distanceRange.lowerBound), 0.0), 1.0)
         let normalizedScale = 1.0 - normalizedLength
         let scaleValue = (normalizedScale * (scalingRange.upperBound - scalingRange.lowerBound)) + scalingRange.lowerBound

@@ -95,59 +95,75 @@ class HeadGazeTrackingInterpolator {
         let t = (0.0 - c_headCenter[2]) / c_lookAtDir[2]
         let hitPos = c_headCenter + c_lookAtDir * t
 
-        let correctionScalar: CGFloat = 1.0
-        let correctionSign = correctionAmountSignsForCurrentInterfaceOrientation()
+        let adjustedCorrection = correctionAmountSignsForCurrentInterfaceOrientation(correctionAmount)
         if let debugOutput = TrackingDebugOverlayViewController.current {
             debugOutput.setValues([
                 "Blinking?": "\(isBlinking)",
-                "X Correction": NumberFormatter.debugFormatter.string(for: correctionAmount.width) ?? "~",
-                "Y Correction": NumberFormatter.debugFormatter.string(for: correctionAmount.height) ?? "~",
+                "X Correction": NumberFormatter.debugFormatter.string(for: adjustedCorrection.width) ?? "~",
+                "Y Correction": NumberFormatter.debugFormatter.string(for: adjustedCorrection.height) ?? "~",
                 "Scale": NumberFormatter.debugFormatter.string(for: scale) ?? "~",
-                "Orientation Signs": "\(correctionSign)"
+                "Orientation Signs": "\(adjustedCorrection)"
             ])
         }
-        let xNDC = Float(hitPos[0]) - Float(correctionAmount.width * correctionScalar * correctionSign.width)
-        let yNDC = Float(hitPos[1]) - Float(correctionAmount.height * correctionScalar * correctionSign.height)
+
+        let xNDC = Float(hitPos[0]) - Float(adjustedCorrection.width) //Float(correctionAmount.width * correctionSign.width)
+        let yNDC = Float(hitPos[1]) - Float(adjustedCorrection.height) //Float(correctionAmount.height * correctionSign.height)
         let hitPosNDC = SIMD2<Float>([xNDC, yNDC])
         let filteredPos: SIMD2<Float>
         filteredPos = interpolateNDCLocation(hitPosNDC)
 
-        let worldToSKSceneScale = Float(scale)
-        let hitPosSKScene = filteredPos * worldToSKSceneScale
-
+        let hitPosSKScene = filteredPos
         let orientation = view?.window?.windowScene?.interfaceOrientation ?? .portrait
+
+        let screenSize = UIScreen.main.bounds.size
+        let majorAxis = max(screenSize.height, screenSize.width)
+        let minorAxis = min(screenSize.height, screenSize.width)
+
+        let majorAxisScale: CGFloat = scale
+        let minorAxisScale: CGFloat = (majorAxis / minorAxis) * majorAxisScale
+
         switch orientation {
         case .portrait:
-            return CGPoint(x: CGFloat(hitPosSKScene[1]), y: -CGFloat(hitPosSKScene[0]))
+            return CGPoint(x: CGFloat(hitPosSKScene[1]) * minorAxisScale, y: -1 * CGFloat(hitPosSKScene[0]) * majorAxisScale)
         case .portraitUpsideDown:
-            return CGPoint(x: -CGFloat(hitPosSKScene[1]), y: CGFloat(hitPosSKScene[0]))
+            return CGPoint(x: -1 * CGFloat(hitPosSKScene[1]) * minorAxisScale, y: CGFloat(hitPosSKScene[0]) * majorAxisScale)
         case .landscapeRight:
-            return CGPoint(x: CGFloat(hitPosSKScene[0]), y: CGFloat(hitPosSKScene[1]))
+            return CGPoint(x: CGFloat(hitPosSKScene[0]) * majorAxisScale, y: CGFloat(hitPosSKScene[1]) * minorAxisScale)
         case .landscapeLeft:
-            return CGPoint(x: -CGFloat(hitPosSKScene[0]), y: -CGFloat(hitPosSKScene[1]))
+            return CGPoint(x: -1 * CGFloat(hitPosSKScene[0]) * majorAxisScale, y: -1 * CGFloat(hitPosSKScene[1]) * minorAxisScale)
         case .unknown:
             fallthrough
         @unknown default:
-            return CGPoint(x: CGFloat(hitPosSKScene[0]), y: CGFloat(hitPosSKScene[1]) )
+            return CGPoint(x: CGFloat(hitPosSKScene[0]) * minorAxisScale, y: CGFloat(hitPosSKScene[1]) * majorAxisScale)
         }
     }
 
-    private func correctionAmountSignsForCurrentInterfaceOrientation() -> CGSize {
-        
+    private func correctionAmountSignsForCurrentInterfaceOrientation(_ size: CGSize) -> CGSize {
+        let sign: CGSize
         let orientation = view?.window?.windowScene?.interfaceOrientation ?? .portrait
         switch orientation {
         case .portrait:
-            return CGSize(width: 1, height: 1)
+            sign = CGSize(width: 1, height: 1)
         case .portraitUpsideDown:
-            return CGSize(width: 1, height: 1)
+            sign = CGSize(width: 1, height: 1)
         case .landscapeRight:
-            return CGSize(width: 1, height: 1)
+            sign = CGSize(width: 1, height: 1)
         case .landscapeLeft:
-            return CGSize(width: -1, height: -1)
+            sign = CGSize(width: -1, height: -1)
         case .unknown:
             fallthrough
         @unknown default:
-            return CGSize(width: 1, height: 1)
+            sign = CGSize(width: 1, height: 1)
+        }
+
+        let width = CGFloat(size.width * sign.width)
+        let height = CGFloat(size.height * sign.height)
+
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            return CGSize(width: height, height: width)
+        default:
+            return CGSize(width: width, height: height)
         }
     }
 

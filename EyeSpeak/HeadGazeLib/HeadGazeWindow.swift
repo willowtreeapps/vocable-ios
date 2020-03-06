@@ -17,7 +17,7 @@ class HeadGazeWindow: UIWindow {
 
     private var trackingView: UIView?
     private var lastGaze: UIHeadGaze?
-    private let touchGazeDisableDuration: TimeInterval = 5
+    private let touchGazeDisableDuration: TimeInterval = 3
     private var touchGazeDisableBeganDate: Date?
     
     private var disposables = Set<AnyCancellable>()
