@@ -20,10 +20,10 @@
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
-                        <variation key="widthClass=compact">
+                        <variation key="heightClass=compact">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                         </variation>
-                        <variation key="heightClass=compact-widthClass=regular">
+                        <variation key="heightClass=regular-widthClass=compact">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                         </variation>
                     </label>
