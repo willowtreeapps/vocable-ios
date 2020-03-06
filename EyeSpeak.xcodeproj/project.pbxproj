@@ -61,6 +61,7 @@
 		A944D00B2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A944D00A2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib */; };
 		A946553223FC2CB20033D71F /* TextFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A946553123FC2CB20033D71F /* TextFieldCollectionViewCell.xib */; };
 		A946553423FC2CC20033D71F /* TextFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A946553323FC2CC20033D71F /* TextFieldCollectionViewCell.swift */; };
+		A94A6CCD2412D38A00625275 /* NavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A6CCC2412D38A00625275 /* NavigationModel.swift */; };
 		A97814FA23FF3B1200ECC609 /* CategorySectionBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97814F923FF3B1200ECC609 /* CategorySectionBackground.swift */; };
 		A98E8A2323F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98E8A2223F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift */; };
 		A98E8A2523F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A98E8A2423F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib */; };
@@ -68,7 +69,7 @@
 		A99AF23323FDA8B600BE1184 /* SuggestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */; };
 		A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */; };
 		A99AF23923FEE88000BE1184 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A99AF23823FEE88000BE1184 /* Settings.storyboard */; };
-		A9B32C8C240EB6250084E151 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B32C8B240EB6250084E151 /* Keyboard.swift */; };
+		A9B32C8C240EB6250084E151 /* KeyboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B32C8B240EB6250084E151 /* KeyboardModel.swift */; };
 		A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */; };
 		A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FF23F4900C0094DB64 /* TextExpression.swift */; };
 		A9DE170223F492B20094DB64 /* Array+Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE170123F492B20094DB64 /* Array+Split.swift */; };
@@ -171,6 +172,7 @@
 		A944D00A2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsToggleCollectionViewCell.xib; sourceTree = "<group>"; };
 		A946553123FC2CB20033D71F /* TextFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCollectionViewCell.xib; sourceTree = "<group>"; };
 		A946553323FC2CC20033D71F /* TextFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCollectionViewCell.swift; sourceTree = "<group>"; };
+		A94A6CCC2412D38A00625275 /* NavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationModel.swift; sourceTree = "<group>"; };
 		A97814F923FF3B1200ECC609 /* CategorySectionBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionBackground.swift; sourceTree = "<group>"; };
 		A98E8A2223F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterCollectionViewCell.swift; sourceTree = "<group>"; };
 		A98E8A2423F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsFooterCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -178,7 +180,7 @@
 		A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionCollectionViewCell.xib; sourceTree = "<group>"; };
 		A99AF23823FEE88000BE1184 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = EyeSpeak/Features/Settings/Settings.storyboard; sourceTree = SOURCE_ROOT; };
-		A9B32C8B240EB6250084E151 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		A9B32C8B240EB6250084E151 /* KeyboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardModel.swift; sourceTree = "<group>"; };
 		A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSuggestionController.swift; sourceTree = "<group>"; };
 		A9DE16FF23F4900C0094DB64 /* TextExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExpression.swift; sourceTree = "<group>"; };
 		A9DE170123F492B20094DB64 /* Array+Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Split.swift"; sourceTree = "<group>"; };
@@ -380,6 +382,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		A94A6CCB2412D33F00625275 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A9B32C8B240EB6250084E151 /* KeyboardModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B81D235723FED551005741E8 /* Pagination */ = {
 			isa = PBXGroup;
 			children = (
@@ -482,6 +492,7 @@
 		B8DA9DF823F33B1B00FEBE19 /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				A94A6CCB2412D33F00625275 /* Model */,
 				A9299C7423F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift */,
 				A9299C7623F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib */,
 				A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */,
@@ -498,7 +509,7 @@
 				A99AF23023FC8BF700BE1184 /* TextTransaction.swift */,
 				B81AC0A02405AF1100972E85 /* CategoryViewModel.swift */,
 				B81AC0A42405B62900972E85 /* PhraseViewModel.swift */,
-				A9B32C8B240EB6250084E151 /* Keyboard.swift */,
+				A94A6CCC2412D38A00625275 /* NavigationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -653,6 +664,7 @@
 			files = (
 				A944D0092406D54400F3863E /* SettingsToggleCollectionViewCell.swift in Sources */,
 				6BFB18C424004406002C3515 /* NSManagedObject+Helpers.swift in Sources */,
+				A94A6CCD2412D38A00625275 /* NavigationModel.swift in Sources */,
 				B81D236623FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift in Sources */,
 				B81D236923FF3C82005741E8 /* PaginationContainerCollectionViewCell.swift in Sources */,
 				6B823BCA23F4ADE30099F65E /* ControlsView.swift in Sources */,
@@ -710,7 +722,7 @@
 				6B823BCC23F4ADE30099F65E /* TunningView.swift in Sources */,
 				6B9DFA5F23E889DB0037673E /* UIHeadGazeEvent.swift in Sources */,
 				A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */,
-				A9B32C8C240EB6250084E151 /* Keyboard.swift in Sources */,
+				A9B32C8C240EB6250084E151 /* KeyboardModel.swift in Sources */,
 				A9299C7523F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift in Sources */,
 				6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */,
 				6B823BCD23F4ADE30099F65E /* TunningWindow.swift in Sources */,

@@ -16,11 +16,6 @@ class PresetsViewController: UICollectionViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     private var disposables = Set<AnyCancellable>()
     
-    private enum HintText: String, CaseIterable {
-        case preset = "Select something below to speak"
-        case keyboard = "Start typing..."
-    }
-    
     private var _textTransaction = TextTransaction(text: HintText.preset.rawValue)
     
     private var textTransaction: TextTransaction {
@@ -47,49 +42,6 @@ class PresetsViewController: UICollectionViewController {
         case keyboardFunctionButton(KeyboardFunctionButton)
         case pageIndicator
         indirect case pagination(ItemWrapper, UIPageViewController.NavigationDirection)
-    }
-    
-    enum TopBarButton: String {
-        case save
-        case unsave
-        case toggleKeyboard
-        case togglePreset
-        case settings
-        
-        var image: UIImage? {
-            switch self {
-            case .save:
-                return UIImage(systemName: "suit.heart")
-            case .unsave:
-                return UIImage(systemName: "suit.heart.fill")
-            case .toggleKeyboard:
-                return UIImage(systemName: "keyboard")
-            case .togglePreset:
-                return UIImage(systemName: "text.bubble.fill")
-            case .settings:
-                return UIImage(systemName: "gear")
-            }
-        }
-    }
-    
-    enum KeyboardFunctionButton {
-        case clear
-        case backspace
-        case space
-        case speak
-        
-        var image: UIImage {
-            switch self {
-            case .clear:
-                return UIImage(systemName: "trash")!
-            case .backspace:
-                return UIImage(systemName: "delete.left")!
-            case .space:
-                return UIImage(named: "underscore")!
-            case .speak:
-                return UIImage(named: "Speak")!
-            }
-        }
     }
     
     private var showKeyboard: Bool = false
