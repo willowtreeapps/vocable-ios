@@ -158,12 +158,12 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         case .privacyPolicy:
             let alertViewController = GazeableAlertViewController.make { self.presentPrivacyAlert() }
             present(alertViewController, animated: true)
-            alertViewController.setAlertTitle("You’re about to be taken outside of the app. You may lose head tracking control.")
+            alertViewController.setAlertTitle("You're about to be taken outside of the Vocable app. You may lose head tracking control.")
 
         case .contactDevs:
             let alertViewController = GazeableAlertViewController.make { self.presentEmail() }
             present(alertViewController, animated: true)
-            alertViewController.setAlertTitle("You’re about to be taken outside of the app. You may lose head tracking control.")
+            alertViewController.setAlertTitle("You're about to be taken outside of the Vocable app. You may lose head tracking control.")
 
         case .pidTuner:
             guard let gazeWindow = view.window as? HeadGazeWindow else { return }
