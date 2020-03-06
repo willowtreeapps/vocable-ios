@@ -17,11 +17,6 @@ class PresetsViewController: UICollectionViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     private var disposables = Set<AnyCancellable>()
     
-    private enum HintText: String, CaseIterable {
-        case preset = "Select something below to speak"
-        case keyboard = "Select letters below to start typing."
-    }
-    
     private var _textTransaction = TextTransaction(text: HintText.preset.rawValue)
     
     private var textTransaction: TextTransaction {
@@ -50,54 +45,7 @@ class PresetsViewController: UICollectionViewController {
         indirect case pagination(ItemWrapper, UIPageViewController.NavigationDirection)
     }
     
-    enum TopBarButton: String {
-        case save
-        case unsave
-        case toggleKeyboard
-        case togglePreset
-        case settings
-        
-        var image: UIImage? {
-            switch self {
-            case .save:
-                return UIImage(systemName: "suit.heart")
-            case .unsave:
-                return UIImage(systemName: "suit.heart.fill")
-            case .toggleKeyboard:
-                return UIImage(systemName: "keyboard")
-            case .togglePreset:
-                return UIImage(systemName: "text.bubble.fill")
-            case .settings:
-                return UIImage(systemName: "gear")
-            }
-        }
-    }
-    
-    enum KeyboardFunctionButton {
-        case clear
-        case backspace
-        case space
-        case speak
-        
-        var image: UIImage {
-            switch self {
-            case .clear:
-                return UIImage(systemName: "trash")!
-            case .backspace:
-                return UIImage(systemName: "delete.left")!
-            case .space:
-                return UIImage(named: "underscore")!
-            case .speak:
-                return UIImage(named: "Speak")!
-            }
-        }
-    }
-    
-    private var showKeyboard: Bool = false {
-        didSet {
-            self.updateSnapshot()
-        }
-    }
+    private var showKeyboard: Bool = false
     
     private var suggestions: [TextSuggestion] = [] {
         didSet {
@@ -157,11 +105,14 @@ class PresetsViewController: UICollectionViewController {
             
             switch sectionKind {
             case .textField:
-                return PresetUICollectionViewCompositionalLayout.textFieldSectionLayout(with: layoutEnvironment)
+                if self.showKeyboard {
+                    return PresetUICollectionViewCompositionalLayout.topBarKeyboardSectionLayout(with: layoutEnvironment)
+                }
+                return PresetUICollectionViewCompositionalLayout.topBarPresetSectionLayout(with: layoutEnvironment)
             case .categories:
                 return PresetUICollectionViewCompositionalLayout.categoriesSectionLayout(with: layoutEnvironment)
             case .predictiveText:
-                return PresetUICollectionViewCompositionalLayout.predictiveTextSectionLayout(with: layoutEnvironment)
+                return PresetUICollectionViewCompositionalLayout.suggestiveTextSectionLayout(with: layoutEnvironment)
             case .presets:
                 guard !self.showKeyboard else {
                     return nil
@@ -169,7 +120,10 @@ class PresetsViewController: UICollectionViewController {
                 
                 return PresetUICollectionViewCompositionalLayout.presetsSectionLayout(with: layoutEnvironment)
             case .keyboard:
-                return PresetUICollectionViewCompositionalLayout.keyboardSectionLayout(with: layoutEnvironment)
+                if layoutEnvironment.traitCollection.horizontalSizeClass == .compact && layoutEnvironment.traitCollection.verticalSizeClass == .regular {
+                    return PresetUICollectionViewCompositionalLayout.portraitKeyboardSectionLayout(with: layoutEnvironment)
+                }
+                return PresetUICollectionViewCompositionalLayout.landscapeKeyboardSectionLayout(with: layoutEnvironment)
             }
         }
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
@@ -268,13 +222,10 @@ class PresetsViewController: UICollectionViewController {
         snapshot.appendSections([.textField])
         snapshot.appendItems([.textField(textTransaction.attributedText)])
         
-        if case .regular = traitCollection.horizontalSizeClass {
-           appendSaveButton()
-        }
-        
-        snapshot.appendItems([.topBarButton(.togglePreset), .topBarButton(.settings)])
-        
         if showKeyboard {
+            appendSaveButton()
+            snapshot.appendItems([.topBarButton(.togglePreset), .topBarButton(.settings)])
+            
             snapshot.appendSections([.predictiveText])
             
             if suggestions.isEmpty {
@@ -290,9 +241,16 @@ class PresetsViewController: UICollectionViewController {
             }
             
             snapshot.appendSections([.keyboard])
-            snapshot.appendItems("QWERTYUIOPASDFGHJKL'ZXCVBNM,.?".map { ItemWrapper.key("\($0)") })
+            if traitCollection.horizontalSizeClass == .compact {
+                snapshot.appendItems(KeyboardKeys.alphabetical.map { ItemWrapper.key("\($0)") })
+            } else {
+                snapshot.appendItems(KeyboardKeys.qwerty.map { ItemWrapper.key("\($0)") })
+            }
+            
             snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])
         } else {
+            snapshot.appendItems([.topBarButton(.togglePreset), .topBarButton(.settings)])
+            
             snapshot.appendSections([.categories])
             snapshot.appendItems([.pagination(.paginatedCategories, .reverse)])
             snapshot.appendItems([.paginatedCategories])
@@ -364,6 +322,7 @@ class PresetsViewController: UICollectionViewController {
         
         switch selectedItem {
         case .topBarButton(let buttonType):
+            collectionView.deselectItem(at: indexPath, animated: true)
             switch buttonType {
             case .unsave:
                 let context = NSPersistentContainer.shared.viewContext
@@ -371,16 +330,17 @@ class PresetsViewController: UICollectionViewController {
                     return
                 }
                 context.delete(existing)
-                updateSnapshot()
 
                 do {
                     try context.save()
                 } catch {
                     assertionFailure("Failed to unsave user generated phrase: \(error)")
                 }
+                
+                updateSnapshot()
 
             case .save:
-                _textTransaction = TextTransaction(text: textTransaction.text.trimmingCharacters(in: .whitespacesAndNewlines))
+                _textTransaction = TextTransaction(text: textTransaction.text.trimmingCharacters(in: .whitespacesAndNewlines), isHint: textTransaction.isHint)
                 
                 guard !textTransaction.isHint, !textTransaction.text.isEmpty else {
                     break
@@ -409,7 +369,6 @@ class PresetsViewController: UICollectionViewController {
 
                 let newText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.rawValue
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
-                suggestions = []
             case .settings:
                 presentSettingsViewController()
             }
@@ -417,7 +376,6 @@ class PresetsViewController: UICollectionViewController {
             switch functionType {
             case .space:
                 setTextTransaction(textTransaction.appendingCharacter(with: " "))
-                suggestions = []
             case .speak:
                 guard !textTransaction.isHint else {
                     break
