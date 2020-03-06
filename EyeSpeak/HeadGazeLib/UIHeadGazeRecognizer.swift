@@ -15,4 +15,8 @@ class UIHeadGazeRecognizer: UIGestureRecognizer {
         // No-op
     }
 
+    func gazeCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        // No-op
+    }
+
 }

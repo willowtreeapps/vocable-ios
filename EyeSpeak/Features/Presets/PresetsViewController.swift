@@ -322,6 +322,7 @@ class PresetsViewController: UICollectionViewController {
         
         switch selectedItem {
         case .topBarButton(let buttonType):
+            (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
             collectionView.deselectItem(at: indexPath, animated: true)
             switch buttonType {
             case .unsave:

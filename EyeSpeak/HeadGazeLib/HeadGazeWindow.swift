@@ -162,6 +162,53 @@ class HeadGazeWindow: UIWindow {
         }
     }
 
+    func cancelActiveGazeTarget() {
+        if let lastGaze = lastGaze, let trackingView = trackingView {
+            trackingView.gazeCancelled(lastGaze, with: nil)
+        }
+    }
+
+    override func gazeableHitTest(_ point: CGPoint, with event: UIHeadGazeEvent?) -> UIView? {
+        guard let result = super.gazeableHitTest(point, with: event) else {
+            return nil
+        }
+        guard let root = rootViewController?.presentedViewController ?? rootViewController else {
+            return result
+        }
+
+        func recurseChildren(of vc: UIViewController) -> UIViewController? {
+
+            guard result.isDescendant(of: vc.view) else {
+                return nil
+            }
+
+            let isBeingPresented = vc.isBeingPresented
+            let isBeingDismissed = vc.isBeingDismissed
+            let isMovingToParent = vc.isMovingToParent
+            let isMovingFromParent = vc.isMovingFromParent
+            let isBusy = isBeingPresented || isBeingDismissed || isMovingToParent || isMovingFromParent
+
+            if isBusy {
+                return vc
+            }
+
+            for child in vc.children {
+                if let match = recurseChildren(of: child) {
+                    return match
+                }
+            }
+
+            return nil
+        }
+
+        if let _ = recurseChildren(of: root) {
+            cancelActiveGazeTarget()
+            return result
+        }
+
+        return result
+    }
+
     override func sendEvent(_ originalEvent: UIEvent) {
 
         // Ignore any non-gaze events and let super handle them
@@ -244,6 +291,12 @@ class HeadGazeWindow: UIWindow {
     }
 
     func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        for gestureRecognizer in self.gazeGestureRecognizers {
+            gestureRecognizer.gazeEnded(gaze, with: event)
+        }
+    }
+
+    func gazeCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
         for gestureRecognizer in self.gazeGestureRecognizers {
             gestureRecognizer.gazeEnded(gaze, with: event)
         }

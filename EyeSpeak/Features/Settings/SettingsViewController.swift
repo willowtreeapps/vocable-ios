@@ -21,4 +21,9 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         dismissButton.buttonImage = UIImage(systemName: "xmark.circle")!
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
+    }
 }
