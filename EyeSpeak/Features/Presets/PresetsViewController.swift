@@ -249,7 +249,7 @@ class PresetsViewController: UICollectionViewController {
             
             snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])
         } else {
-            snapshot.appendItems([.topBarButton(.togglePreset), .topBarButton(.settings)])
+            snapshot.appendItems([.topBarButton(.toggleKeyboard), .topBarButton(.settings)])
             
             snapshot.appendSections([.categories])
             snapshot.appendItems([.pagination(.paginatedCategories, .reverse)])
