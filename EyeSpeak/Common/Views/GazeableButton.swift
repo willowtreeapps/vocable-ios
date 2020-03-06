@@ -31,7 +31,15 @@ class GazeableButton: UIButton {
     var selectionFillColor: UIColor = .cellSelectionColor {
         didSet {
             updateContentViews()
+       }
+    }
+    var buttonImageView = UIImageView()
+    private var imageSize: CGSize {
+        if traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular {
+            return CGSize(width: 42, height: 42)
         }
+        
+        return CGSize(width: 34, height: 34)
     }
     
     override var isHighlighted: Bool {
@@ -63,17 +71,19 @@ class GazeableButton: UIButton {
         backgroundView.cornerRadius = 8
         backgroundView.borderColor = .cellBorderHighlightColor
         backgroundView.isUserInteractionEnabled = false
+        backgroundView.directionalLayoutMargins = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
 
         updateContentViews()
         let image = buttonImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 34, weight: .bold))
-        let imageView = UIImageView(image: image)
-        backgroundView.addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        buttonImageView = UIImageView(image: image)
+        backgroundView.addSubview(buttonImageView)
+        buttonImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor)
+            buttonImageView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            buttonImageView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
+            buttonImageView.widthAnchor.constraint(equalToConstant: imageSize.width),
+            buttonImageView.heightAnchor.constraint(equalToConstant: imageSize.height)
         ])
-        
         addSubview(backgroundView)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -133,3 +143,4 @@ class GazeableButton: UIButton {
     }
     
 }
+

@@ -16,6 +16,11 @@ class SettingsViewController: UIViewController {
     @IBAction func dismissSettings(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        dismissButton.buttonImage = UIImage(systemName: "xmark.circle")!
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

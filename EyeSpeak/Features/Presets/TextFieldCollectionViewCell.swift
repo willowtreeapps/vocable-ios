@@ -11,12 +11,6 @@ import UIKit
 class TextFieldCollectionViewCell: VocableCollectionViewCell {
     @IBOutlet fileprivate weak var textLabel: UILabel!
     
-    var font: UIFont = .systemFont(ofSize: 28, weight: .bold) {
-        didSet {
-            textLabel.font = font
-        }
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -35,7 +29,6 @@ class TextFieldCollectionViewCell: VocableCollectionViewCell {
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = .collectionViewBackgroundColor
         textLabel.isOpaque = true
-        font = .systemFont(ofSize: 48, weight: .bold)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
