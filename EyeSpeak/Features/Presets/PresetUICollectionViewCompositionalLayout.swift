@@ -71,24 +71,22 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         }
         
         var compactWidthContainerGroupLayout: NSCollectionLayoutGroup {
-            let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.5)))
+            let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(2 / 3)))
             
-            let leadingFunctionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0)))
-            leadingFunctionItem.contentInsets = .init(top: 4, leading: 0, bottom: 0, trailing: 4)
-            let trailingFunctionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0)))
-            trailingFunctionItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 0)
+            let functionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1.0)))
+            functionItem.contentInsets = .init(top: 4, leading: 0, bottom: 0, trailing: 4)
 
             let functionItemGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .fractionalHeight(0.5)),
-                subitems: [leadingFunctionItem, trailingFunctionItem])
+                                                   heightDimension: .fractionalHeight(1 / 3)),
+                subitems: [functionItem, functionItem])
             
             return NSCollectionLayoutGroup.vertical(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 4.0)),
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 5.0)),
                 subitems: [textFieldItem, functionItemGroup])
         }
         
-        let containerGroup = environment.traitCollection.horizontalSizeClass == .regular ? regularWidthContainerGroupLayout : compactWidthContainerGroupLayout
+        let containerGroup = environment.traitCollection.horizontalSizeClass == .compact && environment.traitCollection.verticalSizeClass == .regular ? compactWidthContainerGroupLayout : regularWidthContainerGroupLayout
         
         let section = NSCollectionLayoutSection(group: containerGroup)
         
@@ -155,6 +153,11 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
                 return .fractionalWidth(906.0 / totalSectionWidth)
             }
             
+            if traitCollection.verticalSizeClass == .compact
+                && traitCollection.horizontalSizeClass == .compact {
+                return .fractionalWidth(4 / 5.0)
+            }
+            
             return .fractionalWidth(3.0 / 5.0)
         }
         
@@ -166,6 +169,11 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         var paginationItemFractionalWidth: NSCollectionLayoutDimension {
             if case .regular = traitCollection.horizontalSizeClass {
                 return .fractionalWidth(104.0 / totalSectionWidth)
+            }
+            
+            if traitCollection.verticalSizeClass == .compact
+                && traitCollection.horizontalSizeClass == .compact {
+                return .fractionalWidth(0.5 / 5.0)
             }
             
             return .fractionalWidth(1.0 / 5.0)
@@ -245,7 +253,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             
             let presetPageItem = NSCollectionLayoutItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .fractionalHeight(504.0 / totalSize.height)))
+                                                   heightDimension: .fractionalHeight(490.0 / totalSize.height)))
             
             let leadingPaginationItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(146.0 / totalSize.width), heightDimension: .fractionalHeight(1)))
             leadingPaginationItem.edgeSpacing = .init(leading: .flexible(flexibleSpacing), top: nil, trailing: nil, bottom: nil)

@@ -18,6 +18,8 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular), (.regular, .compact):
             return 9
+        case (.compact, .regular):
+            return 8
         default:
             return 6
         }
