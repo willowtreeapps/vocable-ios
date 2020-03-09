@@ -88,7 +88,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
                 subitems: [textFieldItem, functionItemGroup])
         }
         
-        let containerGroup = environment.traitCollection.horizontalSizeClass == .regular ? regularWidthContainerGroupLayout : compactWidthContainerGroupLayout
+        let containerGroup = environment.traitCollection.horizontalSizeClass == .compact && environment.traitCollection.verticalSizeClass == .regular ? compactWidthContainerGroupLayout : regularWidthContainerGroupLayout
         
         let section = NSCollectionLayoutSection(group: containerGroup)
         
@@ -155,6 +155,11 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
                 return .fractionalWidth(906.0 / totalSectionWidth)
             }
             
+            if traitCollection.verticalSizeClass == .compact
+                && traitCollection.horizontalSizeClass == .compact {
+                return .fractionalWidth(4 / 5.0)
+            }
+            
             return .fractionalWidth(3.0 / 5.0)
         }
         
@@ -166,6 +171,11 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         var paginationItemFractionalWidth: NSCollectionLayoutDimension {
             if case .regular = traitCollection.horizontalSizeClass {
                 return .fractionalWidth(104.0 / totalSectionWidth)
+            }
+            
+            if traitCollection.verticalSizeClass == .compact
+                && traitCollection.horizontalSizeClass == .compact {
+                return .fractionalWidth(0.5 / 5.0)
             }
             
             return .fractionalWidth(1.0 / 5.0)

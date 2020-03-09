@@ -12,8 +12,10 @@ import CoreData
 class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     private var itemsPerPage: Int {
-        if case .regular = traitCollection.horizontalSizeClass {
+        if traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular {
             return 4
+        } else if traitCollection.verticalSizeClass == .compact {
+            return 3
         }
         
         return 1

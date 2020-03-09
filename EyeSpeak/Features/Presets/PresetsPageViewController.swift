@@ -16,6 +16,8 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
     
     private var itemsPerPage: Int {
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
+        case (.compact, .regular):
+            return 12
         case (.regular, .regular), (.regular, .compact):
             return 9
         default:
