@@ -162,19 +162,8 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
 
         let length = Double(sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z))
 
-        var distanceRange = (0.3 ... 0.6) // Distance from camera
-        var scalingRange = (3.0 ... 6.0) // Scaling
-
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone:
-            distanceRange = (0.3 ... 0.6)
-            scalingRange = (3.0 ... 6.0)
-        case .pad:
-            distanceRange = (0.3 ... 0.6)
-            scalingRange = (3.0 ... 6.0)
-        default:
-            break
-        }
+        let distanceRange = (0.3 ... 0.6) // Distance from camera
+        let scalingRange = (3.0 ... 6.0) // Scaling
 
         let normalizedLength = min(max((length - distanceRange.lowerBound) / (distanceRange.upperBound - distanceRange.lowerBound), 0.0), 1.0)
         let normalizedScale = 1.0 - normalizedLength

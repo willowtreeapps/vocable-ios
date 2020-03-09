@@ -138,31 +138,20 @@ class HeadGazeTrackingInterpolator {
     }
 
     private func adjustedCorrectionAmountForCurrentInterfaceOrientation(_ size: CGSize) -> CGSize {
-        let sign: CGSize
         let orientation = view?.window?.windowScene?.interfaceOrientation ?? .portrait
         switch orientation {
         case .portrait:
-            sign = CGSize(width: 1, height: 1)
+            return CGSize(width: size.height, height: size.width)
         case .portraitUpsideDown:
-            sign = CGSize(width: 1, height: 1)
+            return CGSize(width: size.height, height: size.width * -1)
         case .landscapeRight:
-            sign = CGSize(width: 1, height: 1)
+            return CGSize(width: size.width, height: size.height)
         case .landscapeLeft:
-            sign = CGSize(width: -1, height: -1)
+            return CGSize(width: size.width * -1, height: size.height * -1)
         case .unknown:
             fallthrough
         @unknown default:
-            sign = CGSize(width: 1, height: 1)
-        }
-
-        let width = CGFloat(size.width * sign.width)
-        let height = CGFloat(size.height * sign.height)
-
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone:
-            return CGSize(width: height, height: width)
-        default:
-            return CGSize(width: width, height: height)
+            return CGSize(width: size.width, height: size.height)
         }
     }
 
