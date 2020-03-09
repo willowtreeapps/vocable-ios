@@ -131,7 +131,8 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
                 subitems: [textFieldItem, functionItemGroup])
         }
         
-        let containerGroup = environment.traitCollection.horizontalSizeClass == .regular ? regularWidthContainerGroupLayout : compactWidthContainerGroupLayout
+        let containerGroup = environment.traitCollection.horizontalSizeClass == .compact &&
+            environment.traitCollection.verticalSizeClass == .regular ? compactWidthContainerGroupLayout : regularWidthContainerGroupLayout
         
         let section = NSCollectionLayoutSection(group: containerGroup)
         
@@ -232,7 +233,8 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             return section
         }
         
-        return environment.traitCollection.horizontalSizeClass == .regular ? regularWidthSection : compactWidthSection
+        return environment.traitCollection.horizontalSizeClass == .compact &&
+            environment.traitCollection.verticalSizeClass == .regular ? compactWidthSection : regularWidthSection
 
     }
         
