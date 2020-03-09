@@ -241,7 +241,7 @@ class PresetsViewController: UICollectionViewController {
             }
             
             snapshot.appendSections([.keyboard])
-            if traitCollection.horizontalSizeClass == .compact {
+            if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
                 snapshot.appendItems(KeyboardKeys.alphabetical.map { ItemWrapper.key("\($0)") })
             } else {
                 snapshot.appendItems(KeyboardKeys.qwerty.map { ItemWrapper.key("\($0)") })
