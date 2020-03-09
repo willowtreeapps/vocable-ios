@@ -14,6 +14,7 @@ class HeadGazeWindow: UIWindow {
     let cursorView = UIVirtualCursorView()
     
     var warningView = UIView()
+    var phraseSavedView = UIView()
 
     private var trackingView: UIView?
     private var lastGaze: UIHeadGaze?
@@ -29,6 +30,7 @@ class HeadGazeWindow: UIWindow {
         cursorView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(cursorView)
         initializeWarningView()
+        initializePhraseSaveView()
         
         NSLayoutConstraint.activate([
             cursorView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
@@ -54,6 +56,7 @@ class HeadGazeWindow: UIWindow {
         super.addSubview(view)
         self.bringSubviewToFront(cursorView)
         self.bringSubviewToFront(warningView)
+        self.bringSubviewToFront(phraseSavedView)
     }
 
     required init?(coder: NSCoder) {
@@ -74,11 +77,26 @@ class HeadGazeWindow: UIWindow {
                warningView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
            ])
        }
+    
+    private func initializePhraseSaveView() {
+        phraseSavedView = UINib(nibName: "PhraseSavedView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! UIView
+        self.addSubview(phraseSavedView)
+        let width = UIScreen.main.traitCollection.horizontalSizeClass == .compact ? 300 : 475
+        phraseSavedView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            phraseSavedView.widthAnchor.constraint(equalToConstant: CGFloat(width)),
+            phraseSavedView.heightAnchor.constraint(equalToConstant: 96),
+            phraseSavedView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            phraseSavedView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
+    }
 
     private func commonInit() {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .headTrackingDisabled, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(phraseSaved), name: .phraseSaved, object: nil)
     }
     
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
@@ -92,6 +110,15 @@ class HeadGazeWindow: UIWindow {
     
     @objc private func headTrackingDisabled(_ sender: Any?) {
         handleWarning(shouldDisplay: false)
+    }
+    
+    @objc private func phraseSaved(_ sender: Any?) {
+        UIView.animate(withDuration: 1.5, animations: {
+            self.phraseSavedView.alpha = CGFloat(1.0)
+        })
+        UIView.animate(withDuration: 1.5, animations: {
+            self.phraseSavedView.alpha = CGFloat(0)
+        })
     }
     
     private func handleWarning(shouldDisplay: Bool) {
