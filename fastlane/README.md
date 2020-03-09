@@ -36,6 +36,11 @@ Ad-hoc build
 fastlane ios buildanddeploytotestflight
 ```
 AppStore build and upload to TestFlight
+### ios register
+```
+fastlane ios register
+```
+Add devices via the command line to the device portal and regenerate the development provisioning profile with the device
 
 ----
 
