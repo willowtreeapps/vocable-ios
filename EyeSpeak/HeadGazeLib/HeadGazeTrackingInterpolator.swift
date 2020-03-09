@@ -95,14 +95,13 @@ class HeadGazeTrackingInterpolator {
         let t = (0.0 - c_headCenter[2]) / c_lookAtDir[2]
         let hitPos = c_headCenter + c_lookAtDir * t
 
-        let adjustedCorrection = correctionAmountSignsForCurrentInterfaceOrientation(correctionAmount)
+        let adjustedCorrection = adjustedCorrectionAmountForCurrentInterfaceOrientation(correctionAmount)
         if let debugOutput = TrackingDebugOverlayViewController.current {
             debugOutput.setValues([
                 "Blinking?": "\(isBlinking)",
                 "X Correction": NumberFormatter.debugFormatter.string(for: adjustedCorrection.width) ?? "~",
                 "Y Correction": NumberFormatter.debugFormatter.string(for: adjustedCorrection.height) ?? "~",
-                "Scale": NumberFormatter.debugFormatter.string(for: scale) ?? "~",
-                "Orientation Signs": "\(adjustedCorrection)"
+                "Scale": NumberFormatter.debugFormatter.string(for: scale) ?? "~"
             ])
         }
 
@@ -138,7 +137,7 @@ class HeadGazeTrackingInterpolator {
         }
     }
 
-    private func correctionAmountSignsForCurrentInterfaceOrientation(_ size: CGSize) -> CGSize {
+    private func adjustedCorrectionAmountForCurrentInterfaceOrientation(_ size: CGSize) -> CGSize {
         let sign: CGSize
         let orientation = view?.window?.windowScene?.interfaceOrientation ?? .portrait
         switch orientation {
