@@ -245,7 +245,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             
             let presetPageItem = NSCollectionLayoutItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .fractionalHeight(504.0 / totalSize.height)))
+                                                   heightDimension: .fractionalHeight(490.0 / totalSize.height)))
             
             let leadingPaginationItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(146.0 / totalSize.width), heightDimension: .fractionalHeight(1)))
             leadingPaginationItem.edgeSpacing = .init(leading: .flexible(flexibleSpacing), top: nil, trailing: nil, bottom: nil)
