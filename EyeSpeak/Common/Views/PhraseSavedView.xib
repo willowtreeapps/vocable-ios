@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view alpha="0.0" contentMode="scaleToFill" restorationIdentifier="WarningView" id="yiJ-Tr-Jim" userLabel="savePhraseView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Saved to &quot;My Savings&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fEx-Zh-S4e">
+                    <rect key="frame" x="25" y="434" width="364" height="38.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
+                    <color key="textColor" red="0.96079725029999996" green="0.96076112989999995" blue="0.960785687" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.12549019607843137" green="0.10980392156862745" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <accessibility key="accessibilityConfiguration" identifier="WarningView"/>
+            <constraints>
+                <constraint firstItem="fEx-Zh-S4e" firstAttribute="leading" secondItem="PHA-Wo-3xQ" secondAttribute="leading" constant="25" id="F6a-Yj-fwh"/>
+                <constraint firstItem="fEx-Zh-S4e" firstAttribute="centerX" secondItem="PHA-Wo-3xQ" secondAttribute="centerX" id="I6i-n0-aZ6"/>
+                <constraint firstItem="fEx-Zh-S4e" firstAttribute="centerY" secondItem="PHA-Wo-3xQ" secondAttribute="centerY" id="XFX-L7-r4v"/>
+                <constraint firstItem="PHA-Wo-3xQ" firstAttribute="trailing" secondItem="fEx-Zh-S4e" secondAttribute="trailing" constant="25" id="Z72-3D-DUY"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="PHA-Wo-3xQ"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="20"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="45" y="33"/>
+        </view>
+    </objects>
+</document>

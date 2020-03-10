@@ -6,6 +6,7 @@ extension Notification.Name {
     static let applicationDidAcquireGaze = Notification.Name("applicationDidAcquireGaze")
     static let applicationDidLoseGaze = Notification.Name("applicationDidLoseGaze")
     static let headTrackingDisabled = Notification.Name("headTrackingDisabled")
+    static let phraseSaved = Notification.Name("phraseSaved")
 }
 
 extension UIApplication {

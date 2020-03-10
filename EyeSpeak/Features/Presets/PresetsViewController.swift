@@ -356,6 +356,7 @@ class PresetsViewController: UICollectionViewController {
 
                 do {
                     try context.save()
+                    NotificationCenter.default.post(name: .phraseSaved, object: nil)
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")
                 }
