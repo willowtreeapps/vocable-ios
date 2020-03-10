@@ -48,6 +48,8 @@ final class GazeableAlertViewController: UIViewController {
     }
 
     public func setAlertTitle(_ title: String) {
+        guard isViewLoaded else { return }
+
         alertTitleLabel.text = title
     }
 
