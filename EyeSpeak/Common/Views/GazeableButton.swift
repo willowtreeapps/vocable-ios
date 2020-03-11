@@ -1,6 +1,6 @@
 //
 //  VocableUIControl.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 2/25/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

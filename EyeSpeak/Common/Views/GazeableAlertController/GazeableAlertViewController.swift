@@ -1,6 +1,6 @@
 //
 //  GazeableAlertViewController.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Patrick Gatewood on 2/28/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

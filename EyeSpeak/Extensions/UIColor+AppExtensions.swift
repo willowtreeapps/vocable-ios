@@ -1,6 +1,6 @@
 //
 //  UIColor+AppExtensions.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Kyle Ohanian on 4/16/19.
 //  Copyright © 2019 WillowTree. All rights reserved.

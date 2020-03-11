@@ -1,6 +1,6 @@
 //
 //  TextFieldCollectionViewCell.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 2/18/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

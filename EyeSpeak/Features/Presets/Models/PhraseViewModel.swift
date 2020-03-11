@@ -1,6 +1,6 @@
 //
 //  PhraseViewModel.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Patrick Gatewood on 2/25/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  KeyboardModel.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/3/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

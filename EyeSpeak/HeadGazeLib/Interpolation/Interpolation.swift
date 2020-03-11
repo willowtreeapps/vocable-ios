@@ -1,6 +1,6 @@
 //
 //  Interpolation.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Chris Stroud on 1/31/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

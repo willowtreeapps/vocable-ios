@@ -1,6 +1,6 @@
 //
-//  EyeSpeakTests.swift
-//  EyeSpeakTests
+//  Vocable AACTests.swift
+//  Vocable AACTests
 //
 //  Created by James Bossert on 1/30/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

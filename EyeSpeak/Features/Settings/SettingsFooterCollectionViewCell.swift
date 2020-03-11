@@ -1,6 +1,6 @@
 //
 //  SettingsFooterCollectionViewCell.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 2/10/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

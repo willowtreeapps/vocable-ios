@@ -1,6 +1,6 @@
 //
 //  Array+Split.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Duncan Lewis on 11/6/18.
 //  Copyright © 2018 WillowTree. All rights reserved.

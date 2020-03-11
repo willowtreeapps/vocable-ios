@@ -1,6 +1,6 @@
 //
 //  TextSuggestionController.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Kyle Ohanian on 4/15/19.
 //  Copyright © 2019 WillowTree. All rights reserved.

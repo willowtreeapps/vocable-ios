@@ -1,6 +1,6 @@
 //
 //  AVSpeechSynthesizer+Shared.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Chris Stroud on 2/4/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  NavigationModel.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/6/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
