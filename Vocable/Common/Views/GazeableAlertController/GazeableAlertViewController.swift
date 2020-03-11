@@ -24,12 +24,17 @@ final class GazeableAlertViewController: UIViewController {
         return alertViewController
     }
 
+    private var confirmationAction: (() -> Void)?
+    private var alertTitle: String? {
+        didSet {
+            updateDisplay()
+        }
+    }
+
     @IBOutlet private var borderContainerView: BorderedView!
     @IBOutlet private var alertTitleLabel: UILabel!
     @IBOutlet private var cancelButton: GazeableButton!
     @IBOutlet private var confirmButton: GazeableButton!
-    
-    var confirmationAction: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,12 +50,18 @@ final class GazeableAlertViewController: UIViewController {
             button.setTitleColor(.defaultTextColor, for: .selected)
             button.backgroundView.cornerRadius = 14
         }
+
+        updateDisplay()
+    }
+
+    private func updateDisplay() {
+        guard isViewLoaded else { return }
+
+        alertTitleLabel.text = alertTitle
     }
 
     public func setAlertTitle(_ title: String) {
-        guard isViewLoaded else { return }
-
-        alertTitleLabel.text = title
+        self.alertTitle = title
     }
 
     @IBAction func didSelectCancelButton(_ sender: GazeableButton) {
