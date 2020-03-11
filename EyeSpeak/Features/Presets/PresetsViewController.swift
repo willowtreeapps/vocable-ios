@@ -372,6 +372,8 @@ class PresetsViewController: UICollectionViewController {
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
             case .settings:
                 presentSettingsViewController()
+            default:
+                break
             }
         case .keyboardFunctionButton(let functionType):
             switch functionType {
@@ -419,15 +421,6 @@ class PresetsViewController: UICollectionViewController {
         case .paginatedCategories, .textField:
             return false
         }
-    }
-    
-    private func setupCell(reuseIdentifier: String, indexPath: IndexPath, title: String, fillColor: UIColor = .defaultCellBackgroundColor) -> PresetItemCollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-        
-        cell.setup(title: title)
-        cell.fillColor = fillColor
-        
-        return cell
     }
     
     private func setTextTransaction(_ transaction: TextTransaction) {

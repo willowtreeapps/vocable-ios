@@ -52,6 +52,8 @@
 		71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71DBE5EA240DE4D000BA8D01 /* WarningView.xib */; };
 		9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E0542271F0DC0058DF57 /* CursorView.swift */; };
 		9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */; };
+		A91A9F4924192782008552E8 /* EditKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A9F4824192782008552E8 /* EditKeyboardViewController.swift */; };
+		A91A9F4B241927AF008552E8 /* EditKeyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A91A9F4A241927AF008552E8 /* EditKeyboard.storyboard */; };
 		A920A4AF23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift */; };
 		A9299C7523F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9299C7423F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift */; };
 		A9299C7723F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9299C7623F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib */; };
@@ -164,6 +166,8 @@
 		71DBE5EA240DE4D000BA8D01 /* WarningView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppExtensions.swift"; sourceTree = "<group>"; };
+		A91A9F4824192782008552E8 /* EditKeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditKeyboardViewController.swift; sourceTree = "<group>"; };
+		A91A9F4A241927AF008552E8 /* EditKeyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditKeyboard.storyboard; sourceTree = "<group>"; };
 		A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetUICollectionViewCompositionalLayout.swift; sourceTree = "<group>"; };
 		A9299C7423F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKeyCollectionViewCell.swift; sourceTree = "<group>"; };
 		A9299C7623F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyboardKeyCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -370,9 +374,19 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		A91A9F4724192747008552E8 /* EditSayings */ = {
+			isa = PBXGroup;
+			children = (
+				A91A9F4824192782008552E8 /* EditKeyboardViewController.swift */,
+				A91A9F4A241927AF008552E8 /* EditKeyboard.storyboard */,
+			);
+			path = EditSayings;
+			sourceTree = "<group>";
+		};
 		A92FFB9023ECD73400AF2D0B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				A91A9F4724192747008552E8 /* EditSayings */,
 				A944D00A2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib */,
 				A944D0082406D54400F3863E /* SettingsToggleCollectionViewCell.swift */,
 				A92FFB8C23ECCB5400AF2D0B /* SettingsCollectionViewController.swift */,
@@ -609,6 +623,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A91A9F4B241927AF008552E8 /* EditKeyboard.storyboard in Resources */,
 				71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */,
 				A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */,
 				B879831623E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib in Resources */,
@@ -716,6 +731,7 @@
 				B81D234C23FDA7A8005741E8 /* CategoriesPageViewController.swift in Sources */,
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
 				A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */,
+				A91A9F4924192782008552E8 /* EditKeyboardViewController.swift in Sources */,
 				A99AF23123FC8BF700BE1184 /* TextTransaction.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
 				6B823BCB23F4ADE30099F65E /* Pulse.swift in Sources */,

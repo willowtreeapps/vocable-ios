@@ -20,6 +20,8 @@ enum TopBarButton: String {
     case toggleKeyboard
     case togglePreset
     case settings
+    case back
+    case saveEdit
     
     var image: UIImage? {
         switch self {
@@ -33,6 +35,10 @@ enum TopBarButton: String {
             return UIImage(systemName: "text.bubble.fill")
         case .settings:
             return UIImage(systemName: "gear")
+        case .back:
+            return UIImage(systemName: "arrow.left")
+        case .saveEdit:
+            return UIImage(systemName: "suit.heart.fill")
         }
     }
 }
