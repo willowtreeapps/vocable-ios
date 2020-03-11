@@ -11,6 +11,7 @@ import AVFoundation
 import CoreData
 import Combine
 
+// swiftlint:disable type_body_length
 class PresetsViewController: UICollectionViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!

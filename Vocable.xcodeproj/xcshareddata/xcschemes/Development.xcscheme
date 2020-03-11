@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "130C00B320D2AD2A007C3163"
-               BuildableName = "EyeSpeak.app"
-               BlueprintName = "EyeSpeak"
-               ReferencedContainer = "container:EyeSpeak.xcodeproj">
+               BuildableName = "Vocable.app"
+               BlueprintName = "Vocable"
+               ReferencedContainer = "container:Vocable.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,9 +31,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "130C00B320D2AD2A007C3163"
-            BuildableName = "EyeSpeak.app"
-            BlueprintName = "EyeSpeak"
-            ReferencedContainer = "container:EyeSpeak.xcodeproj">
+            BuildableName = "Vocable.app"
+            BlueprintName = "Vocable"
+            ReferencedContainer = "container:Vocable.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -42,9 +42,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "54D3C41323E37CD40061EF47"
-               BuildableName = "EyeSpeakTests.xctest"
-               BlueprintName = "EyeSpeakTests"
-               ReferencedContainer = "container:EyeSpeak.xcodeproj">
+               BuildableName = "VocableTests.xctest"
+               BlueprintName = "VocableTests"
+               ReferencedContainer = "container:Vocable.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "130C00B320D2AD2A007C3163"
-            BuildableName = "EyeSpeak.app"
-            BlueprintName = "EyeSpeak"
-            ReferencedContainer = "container:EyeSpeak.xcodeproj">
+            BuildableName = "Vocable.app"
+            BlueprintName = "Vocable"
+            ReferencedContainer = "container:Vocable.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -81,9 +81,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "130C00B320D2AD2A007C3163"
-            BuildableName = "EyeSpeak.app"
-            BlueprintName = "EyeSpeak"
-            ReferencedContainer = "container:EyeSpeak.xcodeproj">
+            BuildableName = "Vocable.app"
+            BlueprintName = "Vocable"
+            ReferencedContainer = "container:Vocable.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
