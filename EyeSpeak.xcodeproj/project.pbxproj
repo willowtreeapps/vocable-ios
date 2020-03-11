@@ -12,6 +12,7 @@
 		130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C020D2AD2C007C3163 /* Assets.xcassets */; };
 		130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */; };
 		54D3C41723E37CD40061EF47 /* EyeSpeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* EyeSpeakTests.swift */; };
+		64253CED2419358D0044EAAA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64253CEC2419358D0044EAAA /* Settings.storyboard */; };
 		64884404240DAAAC007660B3 /* GazeableAlertViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64884403240DAAAC007660B3 /* GazeableAlertViewController.storyboard */; };
 		6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */; };
 		6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */; };
@@ -69,7 +70,6 @@
 		A99AF23123FC8BF700BE1184 /* TextTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99AF23023FC8BF700BE1184 /* TextTransaction.swift */; };
 		A99AF23323FDA8B600BE1184 /* SuggestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */; };
 		A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */; };
-		A99AF23923FEE88000BE1184 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A99AF23823FEE88000BE1184 /* Settings.storyboard */; };
 		A9B32C8C240EB6250084E151 /* KeyboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B32C8B240EB6250084E151 /* KeyboardModel.swift */; };
 		A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */; };
 		A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FF23F4900C0094DB64 /* TextExpression.swift */; };
@@ -125,6 +125,7 @@
 		54D3C41423E37CD40061EF47 /* EyeSpeakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EyeSpeakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D3C41623E37CD40061EF47 /* EyeSpeakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeSpeakTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64253CEC2419358D0044EAAA /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		64884403240DAAAC007660B3 /* GazeableAlertViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GazeableAlertViewController.storyboard; sourceTree = "<group>"; };
 		6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVSpeechSynthesizer+Shared.swift"; sourceTree = "<group>"; };
 		6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapperView.swift; sourceTree = "<group>"; };
@@ -181,7 +182,6 @@
 		A99AF23023FC8BF700BE1184 /* TextTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTransaction.swift; sourceTree = "<group>"; };
 		A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionCollectionViewCell.xib; sourceTree = "<group>"; };
-		A99AF23823FEE88000BE1184 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = EyeSpeak/Features/Settings/Settings.storyboard; sourceTree = SOURCE_ROOT; };
 		A9B32C8B240EB6250084E151 /* KeyboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardModel.swift; sourceTree = "<group>"; };
 		A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSuggestionController.swift; sourceTree = "<group>"; };
 		A9DE16FF23F4900C0094DB64 /* TextExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExpression.swift; sourceTree = "<group>"; };
@@ -239,7 +239,7 @@
 		130C00AB20D2AD2A007C3163 = {
 			isa = PBXGroup;
 			children = (
-				130C00B620D2AD2A007C3163 /* EyeSpeak */,
+				130C00B620D2AD2A007C3163 /* Vocable */,
 				54D3C41523E37CD40061EF47 /* EyeSpeakTests */,
 				130C00B520D2AD2A007C3163 /* Products */,
 			);
@@ -254,7 +254,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		130C00B620D2AD2A007C3163 /* EyeSpeak */ = {
+		130C00B620D2AD2A007C3163 /* Vocable */ = {
 			isa = PBXGroup;
 			children = (
 				B879831223E0DA5800DC1A81 /* Common */,
@@ -268,7 +268,7 @@
 				130C00BD20D2AD2A007C3163 /* Main.storyboard */,
 				139EDEE921419C400009A99F /* Supporting Files */,
 			);
-			path = EyeSpeak;
+			path = Vocable;
 			sourceTree = "<group>";
 		};
 		139EDEE921419C400009A99F /* Supporting Files */ = {
@@ -373,13 +373,13 @@
 		A92FFB9023ECD73400AF2D0B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				64253CEC2419358D0044EAAA /* Settings.storyboard */,
 				A944D00A2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib */,
 				A944D0082406D54400F3863E /* SettingsToggleCollectionViewCell.swift */,
 				A92FFB8C23ECCB5400AF2D0B /* SettingsCollectionViewController.swift */,
 				A944D0062405C61400F3863E /* SettingsViewController.swift */,
 				A98E8A2223F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift */,
 				A98E8A2423F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib */,
-				A99AF23823FEE88000BE1184 /* Settings.storyboard */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -613,7 +613,6 @@
 				A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */,
 				B879831623E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib in Resources */,
 				A9299C7723F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib in Resources */,
-				A99AF23923FEE88000BE1184 /* Settings.storyboard in Resources */,
 				71B856442416CEB600CB163B /* PhraseSavedView.xib in Resources */,
 				A98E8A2523F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib in Resources */,
 				B81D236723FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib in Resources */,
@@ -629,6 +628,7 @@
 				64884404240DAAAC007660B3 /* GazeableAlertViewController.storyboard in Resources */,
 				A944D00B2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib in Resources */,
 				6B3DCC1F24101F530039E45E /* TrackingDebugOverlayViewController.storyboard in Resources */,
+				64253CED2419358D0044EAAA /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -909,7 +909,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 753J68XC6W;
-				INFOPLIST_FILE = "EyeSpeak/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Vocable/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -932,7 +932,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753J68XC6W;
-				INFOPLIST_FILE = "EyeSpeak/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Vocable/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1056,7 +1056,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753J68XC6W;
-				INFOPLIST_FILE = "EyeSpeak/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Vocable/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
