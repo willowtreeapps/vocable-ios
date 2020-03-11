@@ -21,7 +21,7 @@ class GazeableButton: UIButton {
             sharedInit()
         }
     }
-    
+    @IBInspectable
     var fillColor: UIColor = .defaultCellBackgroundColor {
         didSet {
             updateContentViews()
