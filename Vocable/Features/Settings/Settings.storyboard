@@ -42,6 +42,7 @@
                     <navigationItem key="navigationItem" title="Settings" largeTitleDisplayMode="always" id="mBW-xa-0wJ"/>
                     <connections>
                         <outlet property="headerView" destination="mBW-xa-0wJ" id="4BE-Lp-Hmp"/>
+                        <segue destination="KLI-zL-Q9x" kind="show" identifier="MySayings" id="ccw-ld-OcH"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9rs-Gw-LBG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -53,7 +54,7 @@
             <objects>
                 <viewController id="gMn-gX-rfc" customClass="SettingsViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mXz-yV-vIn" customClass="GazeEatingView" customModule="EyeSpeak" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtZ-qP-xqU">
@@ -122,11 +123,77 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1E-o0-keE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664.8" y="617.54122938530736"/>
+            <point key="canvasLocation" x="1602" y="584"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="8J2-gW-BaT">
+            <objects>
+                <viewController storyboardIdentifier="MySayings" id="KLI-zL-Q9x" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XHU-T2-eKa" customClass="GazeEatingView" customModule="EyeSpeak" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Sayings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
+                                <rect key="frame" x="16" y="76" width="343" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                <color key="textColor" name="DefaultFontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvV-sn-lWq" customClass="GazeableButton" customModule="EyeSpeak" customModuleProvider="target">
+                                <rect key="frame" x="296" y="76" width="63" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="EHW-BN-Ezy">
+                                        <variation key="heightClass=compact" constant="48"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="48"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="116" id="Slj-Pd-ZAd">
+                                        <variation key="heightClass=compact" constant="63"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="63"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <state key="normal" image="xmark.circle" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="34" weight="bold"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="plus" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="NMW-nV-LoS">
+                                <rect key="frame" x="8" y="156" width="351" height="622"/>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="DvV-sn-lWq" firstAttribute="trailing" secondItem="XHU-T2-eKa" secondAttribute="trailingMargin" id="BOU-GM-FcN"/>
+                            <constraint firstItem="KsA-J6-p6N" firstAttribute="bottom" secondItem="NMW-nV-LoS" secondAttribute="bottom" id="Ggy-BE-daj"/>
+                            <constraint firstItem="NMW-nV-LoS" firstAttribute="top" secondItem="DvV-sn-lWq" secondAttribute="bottom" constant="32" id="Kao-xV-9Uc"/>
+                            <constraint firstItem="NMW-nV-LoS" firstAttribute="leadingMargin" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="QW7-qC-Wbe"/>
+                            <constraint firstItem="0CD-i2-i5g" firstAttribute="top" secondItem="KsA-J6-p6N" secondAttribute="top" constant="32" id="QYa-BH-CYw"/>
+                            <constraint firstItem="DvV-sn-lWq" firstAttribute="top" secondItem="KsA-J6-p6N" secondAttribute="top" constant="32" id="aV6-vY-LOh"/>
+                            <constraint firstItem="NMW-nV-LoS" firstAttribute="trailing" secondItem="XHU-T2-eKa" secondAttribute="trailingMargin" id="bDJ-4l-YEv"/>
+                            <constraint firstItem="0CD-i2-i5g" firstAttribute="centerX" secondItem="XHU-T2-eKa" secondAttribute="centerX" id="pHB-bl-yf2"/>
+                            <constraint firstItem="0CD-i2-i5g" firstAttribute="leading" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="sZj-YJ-CnH"/>
+                        </constraints>
+                        <edgeInsets key="layoutMargins" top="0.0" left="32" bottom="0.0" right="32"/>
+                        <viewLayoutGuide key="safeArea" id="KsA-J6-p6N"/>
+                        <variation key="heightClass=compact">
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="64t-Cy-SBd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxk-ad-LrW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3167" y="143"/>
         </scene>
     </scenes>
     <resources>
-        <image name="gear" catalog="system" width="64" height="58"/>
+        <image name="plus" catalog="system" width="64" height="56"/>
         <image name="xmark.circle" catalog="system" width="64" height="60"/>
         <namedColor name="Background">
             <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

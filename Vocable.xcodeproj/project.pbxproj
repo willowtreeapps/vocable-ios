@@ -49,6 +49,8 @@
 		6BFB18C424004406002C3515 /* NSManagedObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */; };
 		6BFB18C624004711002C3515 /* ModelObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C524004711002C3515 /* ModelObjectExtensions.swift */; };
 		6BFB18C724005E18002C3515 /* CategoryPaginationContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838202C23FD8934005A79CD /* CategoryPaginationContainerCollectionViewCell.swift */; };
+		718D7FAE2419546F00FDEF93 /* EditSayingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D7FAD2419546F00FDEF93 /* EditSayingsCollectionViewCell.swift */; };
+		718D7FB0241954C400FDEF93 /* EditSayingsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718D7FAF241954C400FDEF93 /* EditSayingsCollectionViewCell.xib */; };
 		71B856442416CEB600CB163B /* PhraseSavedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71B856432416CEB600CB163B /* PhraseSavedView.xib */; };
 		71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71DBE5EA240DE4D000BA8D01 /* WarningView.xib */; };
 		9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E0542271F0DC0058DF57 /* CursorView.swift */; };
@@ -161,6 +163,8 @@
 		6BFB18C124002C7B002C3515 /* Phrases.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Phrases.xcdatamodel; sourceTree = "<group>"; };
 		6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Helpers.swift"; sourceTree = "<group>"; };
 		6BFB18C524004711002C3515 /* ModelObjectExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectExtensions.swift; sourceTree = "<group>"; };
+		718D7FAD2419546F00FDEF93 /* EditSayingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSayingsCollectionViewCell.swift; sourceTree = "<group>"; };
+		718D7FAF241954C400FDEF93 /* EditSayingsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditSayingsCollectionViewCell.xib; sourceTree = "<group>"; };
 		71B856432416CEB600CB163B /* PhraseSavedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhraseSavedView.xib; sourceTree = "<group>"; };
 		71DBE5EA240DE4D000BA8D01 /* WarningView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
@@ -427,6 +431,8 @@
 				6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */,
 				B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */,
 				A944D0042405AE8C00F3863E /* GazeableButton.swift */,
+				718D7FAD2419546F00FDEF93 /* EditSayingsCollectionViewCell.swift */,
+				718D7FAF241954C400FDEF93 /* EditSayingsCollectionViewCell.xib */,
 				71DBE5EA240DE4D000BA8D01 /* WarningView.xib */,
 				71B856432416CEB600CB163B /* PhraseSavedView.xib */,
 			);
@@ -609,6 +615,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				718D7FB0241954C400FDEF93 /* EditSayingsCollectionViewCell.xib in Resources */,
 				71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */,
 				A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */,
 				B879831623E0DA8300DC1A81 /* PresetItemCollectionViewCell.xib in Resources */,
@@ -727,6 +734,7 @@
 				6B9DFA5F23E889DB0037673E /* UIHeadGazeEvent.swift in Sources */,
 				A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */,
 				A9B32C8C240EB6250084E151 /* KeyboardModel.swift in Sources */,
+				718D7FAE2419546F00FDEF93 /* EditSayingsCollectionViewCell.swift in Sources */,
 				A9299C7523F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift in Sources */,
 				6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */,
 				6B823BCD23F4ADE30099F65E /* TunningWindow.swift in Sources */,
