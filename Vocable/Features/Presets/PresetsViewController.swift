@@ -137,6 +137,7 @@ class PresetsViewController: UICollectionViewController {
             case .textField(let title):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: TextFieldCollectionViewCell.reuseIdentifier, for: indexPath) as! TextFieldCollectionViewCell
                 cell.setup(title: title)
+                cell.isCursorHidden = !self.showKeyboard
                 return cell
             case .topBarButton(let buttonType):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell

@@ -11,7 +11,7 @@ import UIKit
 
 enum HintText: String, CaseIterable {
     case preset = "Select something below to speak"
-    case keyboard = "Start typing..."
+    case keyboard = ""
 }
 
 enum TopBarButton: String {
