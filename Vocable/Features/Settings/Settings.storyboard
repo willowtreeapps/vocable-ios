@@ -135,7 +135,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvV-sn-lWq" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="638.5" y="32" width="41.5" height="40.5"/>
+                                <rect key="frame" x="576" y="32" width="104" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="96" id="8Vi-AL-Gfg"/>
                                     <constraint firstAttribute="width" constant="104" id="f16-uH-0DN"/>
@@ -150,13 +150,13 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Sayings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
-                                <rect key="frame" x="265" y="32" width="182.5" height="41"/>
+                                <rect key="frame" x="228.5" y="32" width="255.5" height="57.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00c-RK-HF1" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="32" y="32" width="107" height="39"/>
+                                <rect key="frame" x="32" y="32" width="156" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="156" id="Qle-Zw-lVD"/>
                                     <constraint firstAttribute="height" constant="96" id="w4Q-sd-jlt"/>
@@ -175,11 +175,19 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
-                                <rect key="frame" x="32" y="153" width="648" height="333"/>
+                                <rect key="frame" x="32" y="169.5" width="648" height="276.5"/>
                                 <connections>
-                                    <segue destination="W98-u1-6GB" kind="embed" id="YT0-TB-czc"/>
+                                    <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="156" y="486" width="400" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>
+                                    <constraint firstAttribute="width" constant="400" id="bYi-OY-TtN"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
@@ -191,7 +199,9 @@
                             <constraint firstItem="KsA-J6-p6N" firstAttribute="trailing" secondItem="DvV-sn-lWq" secondAttribute="trailing" constant="32" id="ZjF-iG-OA2"/>
                             <constraint firstItem="0CD-i2-i5g" firstAttribute="centerX" secondItem="XHU-T2-eKa" secondAttribute="centerX" id="eJa-1I-kaF"/>
                             <constraint firstItem="0CD-i2-i5g" firstAttribute="bottom" secondItem="ZPM-Ab-mlI" secondAttribute="top" constant="-80" id="gMz-ED-YjU"/>
+                            <constraint firstItem="xsL-XA-YD7" firstAttribute="centerX" secondItem="XHU-T2-eKa" secondAttribute="centerX" id="mJ1-dp-N83"/>
                             <constraint firstItem="KsA-J6-p6N" firstAttribute="trailing" secondItem="ZPM-Ab-mlI" secondAttribute="trailing" constant="32" id="nDS-NG-TAP"/>
+                            <constraint firstItem="KsA-J6-p6N" firstAttribute="bottom" secondItem="xsL-XA-YD7" secondAttribute="bottom" constant="32" id="pdv-ax-cnJ"/>
                             <constraint firstItem="00c-RK-HF1" firstAttribute="top" secondItem="KsA-J6-p6N" secondAttribute="top" constant="32" id="puP-lb-XWk"/>
                             <constraint firstItem="KsA-J6-p6N" firstAttribute="bottom" secondItem="ZPM-Ab-mlI" secondAttribute="bottom" constant="160" id="vxO-1d-yMr"/>
                         </constraints>
@@ -208,18 +218,19 @@
                     <connections>
                         <outlet property="addButton" destination="DvV-sn-lWq" id="JJf-RR-PfN"/>
                         <outlet property="backButton" destination="00c-RK-HF1" id="5Jz-2h-tl7"/>
+                        <outlet property="paginationView" destination="xsL-XA-YD7" id="wQN-yS-PtT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxk-ad-LrW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3387.7777777777778" y="142.2222222222222"/>
+            <point key="canvasLocation" x="3387.7777777777778" y="141.48148148148147"/>
         </scene>
         <!--Carousel Grid Collection View Controller-->
         <scene sceneID="JgZ-NN-QFW">
             <objects>
                 <collectionViewController id="W98-u1-6GB" customClass="CarouselGridCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
-                        <rect key="frame" x="0.0" y="0.0" width="648" height="333"/>
+                        <rect key="frame" x="0.0" y="0.0" width="648" height="276.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IVZ-Bw-liq">

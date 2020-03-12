@@ -1,20 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="uWA-s7-Sri" id="zrN-ef-Mpt"/>
+                <outlet property="labelText" destination="Nhe-Jt-i3X" id="b6K-4h-UCX"/>
+                <outlet property="nextPageButton" destination="wXW-Qu-lee" id="VaS-sd-Wt6"/>
+                <outlet property="previousPageButton" destination="Sz8-aa-DtW" id="EST-pN-94s"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="uWA-s7-Sri">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+        <view contentMode="scaleToFill" misplaced="YES" id="uWA-s7-Sri">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page 1 of 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nhe-Jt-i3X">
+                    <rect key="frame" x="145.33333333333331" y="52.333333333333343" width="137.33333333333331" height="33.666666666666657"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                    <color key="textColor" name="DefaultFontColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sz8-aa-DtW" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="44" width="103.33333333333333" height="60"/>
+                    <color key="tintColor" name="DefaultFontColor"/>
+                    <state key="normal">
+                        <color key="titleColor" name="DefaultFontColor"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.left" catalog="system"/>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXW-Qu-lee" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                    <rect key="frame" x="324.66666666666669" y="44" width="103.33333333333331" height="60"/>
+                    <color key="tintColor" name="DefaultFontColor"/>
+                    <state key="normal">
+                        <color key="titleColor" name="DefaultFontColor"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.right" catalog="system"/>
+                    </userDefinedRuntimeAttributes>
+                </button>
+            </subviews>
+            <color key="backgroundColor" name="Background"/>
+            <constraints>
+                <constraint firstItem="Nhe-Jt-i3X" firstAttribute="leading" secondItem="Sz8-aa-DtW" secondAttribute="trailing" constant="42" id="143-Z1-OCA"/>
+                <constraint firstItem="wXW-Qu-lee" firstAttribute="top" secondItem="jwY-MF-FMh" secondAttribute="top" id="QTk-aJ-89n"/>
+                <constraint firstItem="wXW-Qu-lee" firstAttribute="leading" secondItem="Nhe-Jt-i3X" secondAttribute="trailing" constant="42" id="SBv-Ft-Mcn"/>
+                <constraint firstItem="Nhe-Jt-i3X" firstAttribute="centerX" secondItem="uWA-s7-Sri" secondAttribute="centerX" id="bAg-n4-z0C"/>
+                <constraint firstItem="jwY-MF-FMh" firstAttribute="bottom" secondItem="Sz8-aa-DtW" secondAttribute="bottom" id="eII-WM-5kC"/>
+                <constraint firstItem="jwY-MF-FMh" firstAttribute="trailing" secondItem="wXW-Qu-lee" secondAttribute="trailing" id="fAS-3T-BX8"/>
+                <constraint firstItem="Nhe-Jt-i3X" firstAttribute="centerY" secondItem="uWA-s7-Sri" secondAttribute="centerY" id="k1H-15-Wpt"/>
+                <constraint firstItem="jwY-MF-FMh" firstAttribute="bottom" secondItem="wXW-Qu-lee" secondAttribute="bottom" id="lI9-f6-cRf"/>
+                <constraint firstItem="Sz8-aa-DtW" firstAttribute="top" secondItem="jwY-MF-FMh" secondAttribute="top" id="qNt-P3-udQ"/>
+                <constraint firstItem="Sz8-aa-DtW" firstAttribute="leading" secondItem="jwY-MF-FMh" secondAttribute="leading" id="zr9-rx-A8u"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="jwY-MF-FMh"/>
-            <point key="canvasLocation" x="128" y="15"/>
+            <point key="canvasLocation" x="136.23188405797103" y="-252.45535714285714"/>
         </view>
     </objects>
+    <resources>
+        <image name="chevron.left" catalog="system" width="48" height="64"/>
+        <image name="chevron.right" catalog="system" width="48" height="64"/>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DefaultFontColor">
+            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

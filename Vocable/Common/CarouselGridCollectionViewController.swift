@@ -44,12 +44,12 @@ class CarouselGridCollectionViewController: UICollectionViewController {
         return layout.$progress
     }
 
-    func scrollToNextPage() {
+    @objc func scrollToNextPage() {
         let nextRect = layout.nextPageRect
         collectionView.scrollRectToVisible(nextRect, animated: true)
     }
 
-    func scrollToPreviousPage() {
+    @objc func scrollToPreviousPage() {
         let nextRect = layout.previousPageRect
         collectionView.scrollRectToVisible(nextRect, animated: true)
     }
