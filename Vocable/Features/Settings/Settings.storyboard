@@ -131,20 +131,14 @@
             <objects>
                 <viewController storyboardIdentifier="MySayings" id="KLI-zL-Q9x" customClass="EditSayingsViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XHU-T2-eKa" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="351" height="602"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="606"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvV-sn-lWq" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="203" y="32" width="116" height="100"/>
+                                <rect key="frame" x="638.5" y="32" width="41.5" height="40.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="EHW-BN-Ezy">
-                                        <variation key="heightClass=compact" constant="48"/>
-                                        <variation key="heightClass=regular-widthClass=compact" constant="48"/>
-                                    </constraint>
-                                    <constraint firstAttribute="width" constant="116" id="Slj-Pd-ZAd">
-                                        <variation key="heightClass=compact" constant="63"/>
-                                        <variation key="heightClass=regular-widthClass=compact" constant="63"/>
-                                    </constraint>
+                                    <constraint firstAttribute="height" constant="96" id="8Vi-AL-Gfg"/>
+                                    <constraint firstAttribute="width" constant="104" id="f16-uH-0DN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="tintColor" name="DefaultFontColor"/>
@@ -155,42 +149,51 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="plus" catalog="system"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="My Sayings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
-                                <rect key="frame" x="70" y="32" width="265" height="41"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Sayings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
+                                <rect key="frame" x="265" y="32" width="182.5" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
-                                <rect key="frame" x="0.0" y="81" width="351" height="487"/>
-                                <connections>
-                                    <segue destination="W98-u1-6GB" kind="embed" id="YT0-TB-czc"/>
-                                </connections>
-                            </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00c-RK-HF1" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="32" y="32" width="152" height="96"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00c-RK-HF1" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="32" y="32" width="107" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="156" id="Qle-Zw-lVD"/>
+                                    <constraint firstAttribute="height" constant="96" id="w4Q-sd-jlt"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <state key="normal" title="&lt; Settings">
-                                    <color key="titleColor" red="0.96079725029999996" green="0.96076112989999995" blue="0.960785687" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
                                         <color key="value" name="Background"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="backToSettings:" destination="KLI-zL-Q9x" eventType="touchUpInside" id="fCp-bo-PGp"/>
+                                </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
+                                <rect key="frame" x="32" y="153" width="648" height="333"/>
+                                <connections>
+                                    <segue destination="W98-u1-6GB" kind="embed" id="YT0-TB-czc"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="DvV-sn-lWq" firstAttribute="trailing" secondItem="XHU-T2-eKa" secondAttribute="trailingMargin" id="BOU-GM-FcN"/>
-                            <constraint firstItem="00c-RK-HF1" firstAttribute="leading" secondItem="KsA-J6-p6N" secondAttribute="leading" constant="32" id="DYF-ei-U7N"/>
-                            <constraint firstItem="00c-RK-HF1" firstAttribute="top" secondItem="KsA-J6-p6N" secondAttribute="top" constant="55" id="HHL-nb-VtC"/>
-                            <constraint firstItem="ZPM-Ab-mlI" firstAttribute="trailing" secondItem="KsA-J6-p6N" secondAttribute="trailing" id="HHi-2E-aLn"/>
-                            <constraint firstItem="0CD-i2-i5g" firstAttribute="top" secondItem="KsA-J6-p6N" secondAttribute="top" constant="55" id="QYa-BH-CYw"/>
-                            <constraint firstItem="ZPM-Ab-mlI" firstAttribute="leading" secondItem="KsA-J6-p6N" secondAttribute="leading" id="TC8-41-Ubb"/>
-                            <constraint firstItem="DvV-sn-lWq" firstAttribute="top" secondItem="KsA-J6-p6N" secondAttribute="top" constant="32" id="aV6-vY-LOh"/>
-                            <constraint firstItem="ZPM-Ab-mlI" firstAttribute="bottom" secondItem="KsA-J6-p6N" secondAttribute="bottom" id="l9q-W6-EjG"/>
-                            <constraint firstItem="0CD-i2-i5g" firstAttribute="centerX" secondItem="XHU-T2-eKa" secondAttribute="centerX" id="pHB-bl-yf2"/>
+                            <constraint firstItem="KsA-J6-p6N" firstAttribute="bottom" secondItem="ZPM-Ab-mlI" secondAttribute="bottom" constant="160" id="4D3-cj-XsA"/>
+                            <constraint firstItem="0CD-i2-i5g" firstAttribute="top" secondItem="KsA-J6-p6N" secondAttribute="top" constant="32" id="5Oz-Th-iem"/>
+                            <constraint firstItem="DvV-sn-lWq" firstAttribute="top" secondItem="KsA-J6-p6N" secondAttribute="top" constant="32" id="AGD-Se-FBZ"/>
+                            <constraint firstItem="ZPM-Ab-mlI" firstAttribute="leading" secondItem="KsA-J6-p6N" secondAttribute="leading" constant="32" id="HU7-hF-4Vj"/>
+                            <constraint firstItem="00c-RK-HF1" firstAttribute="leading" secondItem="KsA-J6-p6N" secondAttribute="leading" constant="32" id="QK1-QV-aOn"/>
+                            <constraint firstItem="KsA-J6-p6N" firstAttribute="trailing" secondItem="DvV-sn-lWq" secondAttribute="trailing" constant="32" id="ZjF-iG-OA2"/>
+                            <constraint firstItem="0CD-i2-i5g" firstAttribute="centerX" secondItem="XHU-T2-eKa" secondAttribute="centerX" id="eJa-1I-kaF"/>
+                            <constraint firstItem="0CD-i2-i5g" firstAttribute="bottom" secondItem="ZPM-Ab-mlI" secondAttribute="top" constant="-80" id="gMz-ED-YjU"/>
+                            <constraint firstItem="KsA-J6-p6N" firstAttribute="trailing" secondItem="ZPM-Ab-mlI" secondAttribute="trailing" constant="32" id="nDS-NG-TAP"/>
+                            <constraint firstItem="00c-RK-HF1" firstAttribute="top" secondItem="KsA-J6-p6N" secondAttribute="top" constant="32" id="puP-lb-XWk"/>
+                            <constraint firstItem="KsA-J6-p6N" firstAttribute="bottom" secondItem="ZPM-Ab-mlI" secondAttribute="bottom" constant="160" id="vxO-1d-yMr"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="0.0" left="32" bottom="0.0" right="32"/>
                         <viewLayoutGuide key="safeArea" id="KsA-J6-p6N"/>
@@ -202,17 +205,21 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="64t-Cy-SBd"/>
+                    <connections>
+                        <outlet property="addButton" destination="DvV-sn-lWq" id="JJf-RR-PfN"/>
+                        <outlet property="backButton" destination="00c-RK-HF1" id="5Jz-2h-tl7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxk-ad-LrW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3388" y="142.61083743842366"/>
+            <point key="canvasLocation" x="3387.7777777777778" y="142.2222222222222"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Carousel Grid Collection View Controller-->
         <scene sceneID="JgZ-NN-QFW">
             <objects>
-                <collectionViewController id="W98-u1-6GB" sceneMemberID="viewController">
+                <collectionViewController id="W98-u1-6GB" customClass="CarouselGridCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
-                        <rect key="frame" x="0.0" y="0.0" width="351" height="487"/>
+                        <rect key="frame" x="0.0" y="0.0" width="648" height="333"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IVZ-Bw-liq">

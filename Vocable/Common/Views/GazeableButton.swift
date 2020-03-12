@@ -78,6 +78,7 @@ class GazeableButton: UIButton {
         buttonImageView = UIImageView(image: image)
         backgroundView.addSubview(buttonImageView)
         buttonImageView.translatesAutoresizingMaskIntoConstraints = false
+        buttonImageView.tintColor = .defaultTextColor
         NSLayoutConstraint.activate([
             buttonImageView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
             buttonImageView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),

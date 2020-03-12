@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="d0b-Hs-dtY" customClass="EditSayingsCollectionViewCell" customModule="Vocable" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="562" height="138"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jCC-WP-535">
+                <rect key="frame" x="0.0" y="0.0" width="562" height="138"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vav-Zc-tQ2">
+                        <rect key="frame" x="16" y="16" width="52.5" height="106"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r2i-5v-HG5" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                        <rect key="frame" x="458" y="25" width="88" height="88"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="88" id="dzU-DI-qKJ"/>
+                            <constraint firstAttribute="width" constant="88" id="fmo-Xb-jmg"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="trash" catalog="system"/>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jx7-73-ctO" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                        <rect key="frame" x="362" y="25" width="88" height="88"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="88" id="RAL-0T-aYT"/>
+                            <constraint firstAttribute="width" constant="88" id="cIV-Sq-ZQA"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="pencil" catalog="system"/>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Jx7-73-ctO" firstAttribute="centerY" secondItem="jCC-WP-535" secondAttribute="centerY" id="907-uF-PHc"/>
+                    <constraint firstAttribute="bottom" secondItem="vav-Zc-tQ2" secondAttribute="bottom" constant="16" id="JS6-SU-i2d"/>
+                    <constraint firstItem="r2i-5v-HG5" firstAttribute="leading" secondItem="Jx7-73-ctO" secondAttribute="trailing" constant="8" id="T3M-d3-do8"/>
+                    <constraint firstItem="r2i-5v-HG5" firstAttribute="centerY" secondItem="jCC-WP-535" secondAttribute="centerY" id="aZ7-vK-3PN"/>
+                    <constraint firstAttribute="trailing" secondItem="r2i-5v-HG5" secondAttribute="trailing" constant="16" id="e80-pT-Lky"/>
+                    <constraint firstItem="vav-Zc-tQ2" firstAttribute="top" secondItem="jCC-WP-535" secondAttribute="top" constant="16" id="frA-xN-ZJk"/>
+                    <constraint firstItem="vav-Zc-tQ2" firstAttribute="leading" secondItem="jCC-WP-535" secondAttribute="leading" constant="32" id="q3q-jp-yt0"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="562" height="138"/>
+            <connections>
+                <outlet property="textLabel" destination="vav-Zc-tQ2" id="68L-6v-kfY"/>
+            </connections>
+            <point key="canvasLocation" x="-115.94202898550725" y="124.55357142857142"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="pencil" catalog="system" width="64" height="56"/>
+        <image name="trash" catalog="system" width="60" height="64"/>
+    </resources>
+</document>
