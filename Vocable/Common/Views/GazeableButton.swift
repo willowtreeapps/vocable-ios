@@ -15,10 +15,16 @@ class GazeableButton: UIButton {
     private var gazeBeganDate: Date?
     
     let backgroundView = BorderedView()
-    
-    @IBInspectable var buttonImage: UIImage = UIImage() {
+    private var buttonImageView = UIImageView()
+    private var buttonImageWidthConstraint: NSLayoutConstraint?
+    private var buttonImageHeightConstraint: NSLayoutConstraint?
+
+    @IBInspectable
+    var buttonImage: UIImage? {
         didSet {
-            sharedInit()
+            buttonImage = buttonImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 34, weight: .bold))
+            buttonImageView.image = buttonImage
+            updateContentViews()
         }
     }
     @IBInspectable
@@ -33,15 +39,7 @@ class GazeableButton: UIButton {
             updateContentViews()
        }
     }
-    var buttonImageView = UIImageView()
-    private var imageSize: CGSize {
-        if traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular {
-            return CGSize(width: 42, height: 42)
-        }
-        
-        return CGSize(width: 34, height: 34)
-    }
-    
+
     override var isHighlighted: Bool {
         didSet {
             updateContentViews()
@@ -53,51 +51,77 @@ class GazeableButton: UIButton {
             updateContentViews()
         }
     }
-    
-    fileprivate var defaultBackgroundColor: UIColor?
-    
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        sharedInit()
+        updateContentViews()
     }
     
     override func prepareForInterfaceBuilder() {
-        sharedInit()
-        setNeedsLayout()
-        layoutIfNeeded()
+        super.prepareForInterfaceBuilder()
+        updateContentViews()
     }
     
-    private func sharedInit() {
-        backgroundView.cornerRadius = 8
-        backgroundView.borderColor = .cellBorderHighlightColor
-        backgroundView.isUserInteractionEnabled = false
-        backgroundView.directionalLayoutMargins = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
+    private func commonInit() {
 
-        updateContentViews()
-        let image = buttonImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 34, weight: .bold))
-        buttonImageView = UIImageView(image: image)
-        backgroundView.addSubview(buttonImageView)
-        buttonImageView.translatesAutoresizingMaskIntoConstraints = false
-        buttonImageView.tintColor = .defaultTextColor
-        NSLayoutConstraint.activate([
-            buttonImageView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            buttonImageView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
-            buttonImageView.widthAnchor.constraint(equalToConstant: imageSize.width),
-            buttonImageView.heightAnchor.constraint(equalToConstant: imageSize.height)
-        ])
+        backgroundView.isUserInteractionEnabled = false
+
         addSubview(backgroundView)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
-            backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+            backgroundView.topAnchor.constraint(equalTo: topAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+
+        buttonImageView = UIImageView(image: buttonImage)
+        addSubview(buttonImageView)
+        buttonImageView.translatesAutoresizingMaskIntoConstraints = false
+
+        let buttonSize = buttonImageViewSizeForCurrentTraitCollection()
+        let widthConstraint = buttonImageView.widthAnchor.constraint(equalToConstant: buttonSize.width)
+        let heightConstraint = buttonImageView.heightAnchor.constraint(equalToConstant: buttonSize.height)
+        NSLayoutConstraint.activate([
+            buttonImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            buttonImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            widthConstraint,
+            heightConstraint
+        ])
+        buttonImageWidthConstraint = widthConstraint
+        buttonImageHeightConstraint = heightConstraint
+    }
+
+    private func buttonImageViewSizeForCurrentTraitCollection() -> CGSize {
+        if traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular {
+            return CGSize(width: 42, height: 42)
+        }
+        return CGSize(width: 34, height: 34)
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        let buttonSize = buttonImageViewSizeForCurrentTraitCollection()
+        buttonImageWidthConstraint?.constant = buttonSize.width
+        buttonImageHeightConstraint?.constant = buttonSize.height
+        updateContentViews()
     }
     
-    func updateContentViews() {
+    private func updateContentViews() {
         backgroundView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
         backgroundView.fillColor = isSelected ? selectionFillColor : fillColor
+        backgroundView.borderColor = .cellBorderHighlightColor
+        backgroundView.cornerRadius = 8
         backgroundView.isOpaque = true
     }
     
