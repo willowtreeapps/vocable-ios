@@ -35,15 +35,16 @@ struct TextTransaction: CustomDebugStringConvertible {
         
         let lastTokenExpr = "[^\\s]*\\s*$"
         lastTokenRange = TextTransaction.computeRange(with: self.text, using: lastTokenExpr)
-        
-        let attributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "TextHighlight")!]
-        attributedText = NSMutableAttributedString(string: self.text)
+
+        let standardAttributes = [NSAttributedString.Key.foregroundColor: UIColor.defaultTextColor as Any]
+        let highlightedAttributes = [NSAttributedString.Key.foregroundColor: UIColor.highlightedTextColor as Any]
+        attributedText = NSMutableAttributedString(string: self.text, attributes: standardAttributes)
         
         switch intent {
         case .fullWord:
-            attributedText.addAttributes(attributes, range: lastTokenRange)
+            attributedText.addAttributes(highlightedAttributes, range: lastTokenRange)
         case .lastCharacter:
-            attributedText.addAttributes(attributes, range: lastChararacterRange)
+            attributedText.addAttributes(highlightedAttributes, range: lastChararacterRange)
         case .none:
             break
         }

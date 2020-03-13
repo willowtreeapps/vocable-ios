@@ -18,6 +18,7 @@ extension UIColor {
     static var selectedTextColor: UIColor {
         return collectionViewBackgroundColor
     }
+    static let highlightedTextColor = UIColor(named: "TextHighlight")
 
     static let collectionViewBackgroundColor = UIColor(named: "Background")!
     static let defaultCellBackgroundColor = UIColor(named: "DefaultCellBackground")!
