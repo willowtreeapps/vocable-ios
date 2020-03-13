@@ -135,7 +135,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvV-sn-lWq" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="638.5" y="32" width="41.5" height="40.5"/>
+                                <rect key="frame" x="576" y="32" width="104" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="96" id="8Vi-AL-Gfg"/>
                                     <constraint firstAttribute="width" constant="104" id="f16-uH-0DN"/>
@@ -150,13 +150,13 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Sayings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
-                                <rect key="frame" x="265" y="32" width="182.5" height="41"/>
+                                <rect key="frame" x="228.5" y="32" width="255.5" height="57.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00c-RK-HF1" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="32" y="32" width="107" height="39"/>
+                                <rect key="frame" x="32" y="32" width="156" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="156" id="Qle-Zw-lVD"/>
                                     <constraint firstAttribute="height" constant="96" id="w4Q-sd-jlt"/>
@@ -175,7 +175,7 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
-                                <rect key="frame" x="32" y="153" width="648" height="333"/>
+                                <rect key="frame" x="32" y="169.5" width="648" height="276.5"/>
                                 <connections>
                                     <segue destination="W98-u1-6GB" kind="embed" id="YT0-TB-czc"/>
                                 </connections>
@@ -214,10 +214,10 @@
             </objects>
             <point key="canvasLocation" x="3387.7777777777778" y="142.2222222222222"/>
         </scene>
-        <!--Carousel Grid Collection View Controller-->
+        <!--Edit Sayings Collection View Controller-->
         <scene sceneID="JgZ-NN-QFW">
             <objects>
-                <collectionViewController id="W98-u1-6GB" customClass="CarouselGridCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="W98-u1-6GB" customClass="EditSayingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
                         <rect key="frame" x="0.0" y="0.0" width="648" height="333"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
