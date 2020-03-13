@@ -11,21 +11,29 @@ import UIKit
 extension UIColor {
     
     // MARK: New Branded Colors
-    
-    static let primaryColor = UIColor(named: "Primary")!
-    
-    static let defaultTextColor = UIColor(named: "DefaultFontColor")!
+
+    // Workaround for https://openradar.appspot.com/47113341. Prevent crashing the IBDesignables agent when using a color from the asset catalog.
+    private convenience init?(safelyNamed name: String) {
+        self.init(named: name,
+                  in: Bundle(for: AppDelegate.self),
+                  compatibleWith: nil)
+    }
+
+    static let primaryColor = UIColor(safelyNamed: "Primary")!
+
+    static let defaultTextColor = UIColor(safelyNamed: "DefaultFontColor")!
     static var selectedTextColor: UIColor {
         return collectionViewBackgroundColor
     }
+    static let highlightedTextColor = UIColor(safelyNamed: "TextHighlight")
 
-    static let collectionViewBackgroundColor = UIColor(named: "Background")!
-    static let defaultCellBackgroundColor = UIColor(named: "DefaultCellBackground")!
-    static let categoryBackgroundColor = UIColor(named: "CategoryBackground")!
-    
-    static let cellSelectionColor = UIColor(named: "Selection")!
-    static let cellBorderHighlightColor = UIColor(named: "BorderHighlight")!
-    static let alertBackgroundColor = UIColor(named: "AlertBackground")!
+    static let collectionViewBackgroundColor = UIColor(safelyNamed: "Background")!
+    static let defaultCellBackgroundColor = UIColor(safelyNamed: "DefaultCellBackground")!
+    static let categoryBackgroundColor = UIColor(safelyNamed: "CategoryBackground")!
 
-    static let grayDivider = UIColor(named: "GrayDivider")!
+    static let cellSelectionColor = UIColor(safelyNamed: "Selection")!
+    static let cellBorderHighlightColor = UIColor(safelyNamed: "BorderHighlight")!
+    static let alertBackgroundColor = UIColor(safelyNamed: "AlertBackground")!
+
+    static let grayDivider = UIColor(safelyNamed: "GrayDivider")!
 }

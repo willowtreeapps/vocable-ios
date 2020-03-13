@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,32 +17,43 @@
                 <rect key="frame" x="0.0" y="0.0" width="269" height="218"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="headTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lJv-EU-CHR">
-                        <rect key="frame" x="16" y="44" width="237" height="174"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhH-Sl-1cZ" customClass="OutputTextView" customModule="EyeSpeak" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="106.5" width="269" height="49.5"/>
+                        <color key="backgroundColor" name="Background"/>
+                        <color key="tintColor" name="TextHighlight"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         <variation key="heightClass=compact">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                         </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
+                        <variation key="widthClass=compact">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                         </variation>
-                    </label>
+                    </textView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="trailingMargin" secondItem="lJv-EU-CHR" secondAttribute="trailing" id="2Od-3X-vhV"/>
-                <constraint firstItem="lJv-EU-CHR" firstAttribute="leading" secondItem="Hx1-bE-gyH" secondAttribute="leadingMargin" id="Arf-q9-3bk"/>
-                <constraint firstAttribute="bottomMargin" secondItem="lJv-EU-CHR" secondAttribute="bottom" id="V7M-sO-ZVn"/>
-                <constraint firstItem="lJv-EU-CHR" firstAttribute="top" secondItem="Hx1-bE-gyH" secondAttribute="topMargin" id="ubO-Um-0OQ"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MhH-Sl-1cZ" secondAttribute="bottom" id="1ys-Bw-JAD"/>
+                <constraint firstItem="MhH-Sl-1cZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Hx1-bE-gyH" secondAttribute="top" id="XxJ-ZU-wwR"/>
+                <constraint firstItem="MhH-Sl-1cZ" firstAttribute="leading" secondItem="Hx1-bE-gyH" secondAttribute="leading" id="fEf-ah-ePV"/>
+                <constraint firstAttribute="trailing" secondItem="MhH-Sl-1cZ" secondAttribute="trailing" id="iOp-5h-MlP"/>
+                <constraint firstItem="MhH-Sl-1cZ" firstAttribute="centerY" secondItem="uZY-cu-gmD" secondAttribute="centerY" id="kSR-wb-6WW"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="uZY-cu-gmD"/>
             <size key="customSize" width="269" height="218"/>
             <connections>
-                <outlet property="textLabel" destination="lJv-EU-CHR" id="pgU-hk-nhd"/>
+                <outlet property="textOutputView" destination="MhH-Sl-1cZ" id="oD4-nP-Nnv"/>
             </connections>
             <point key="canvasLocation" x="296.37681159420293" y="190.17857142857142"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextHighlight">
+            <color red="0.29800000786781311" green="0.85199999809265137" blue="0.97600001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

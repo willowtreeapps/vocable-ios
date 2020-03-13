@@ -9,8 +9,18 @@
 import UIKit
 
 class TextFieldCollectionViewCell: VocableCollectionViewCell {
-    @IBOutlet fileprivate weak var textLabel: UILabel!
-    
+
+    var isCursorHidden: Bool {
+        set {
+            textOutputView.isCursorHidden = newValue
+        }
+        get {
+            textOutputView.isCursorHidden
+        }
+    }
+
+    @IBOutlet fileprivate weak var textOutputView: OutputTextView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -26,18 +36,29 @@ class TextFieldCollectionViewCell: VocableCollectionViewCell {
     override func updateContentViews() {
         super.updateContentViews()
         
-        textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
-        textLabel.backgroundColor = .collectionViewBackgroundColor
-        textLabel.isOpaque = true
+        textOutputView?.textColor = isSelected ? .selectedTextColor : .defaultTextColor
+        textOutputView?.backgroundColor = .collectionViewBackgroundColor
+        textOutputView?.isOpaque = true
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateContentViews()
+        updateAttributedStringForCurrentFont()
+    }
+
+    // This allows the font attributes of the attributed string to adapt to potential
+    // changes to the trait collection's size class, as defined in the xib
+    private func updateAttributedStringForCurrentFont(with newString: NSAttributedString? = nil) {
+        guard let input = newString ?? textOutputView?.attributedText else { return }
+        let stringRange = NSRange(location: 0, length: input.length)
+        let mutableValue = NSMutableAttributedString(attributedString: input)
+        mutableValue.addAttribute(.font, value: textOutputView.font as Any, range: stringRange)
+        textOutputView.attributedText = mutableValue
     }
 
     func setup(title: NSAttributedString) {
-        textLabel.attributedText = title
+        updateAttributedStringForCurrentFont(with: title)
     }
     
     func setup(with image: UIImage?) {
@@ -48,7 +69,7 @@ class TextFieldCollectionViewCell: VocableCollectionViewCell {
         let systemImageAttachment = NSTextAttachment(image: image)
         let attributedString = NSAttributedString(attachment: systemImageAttachment)
         
-        textLabel.attributedText = attributedString
+        textOutputView.attributedText = attributedString
     }
     
 }
