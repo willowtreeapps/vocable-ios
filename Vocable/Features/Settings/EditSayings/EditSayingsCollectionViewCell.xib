@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vav-Zc-tQ2">
-                        <rect key="frame" x="16" y="16" width="52.5" height="106"/>
+                        <rect key="frame" x="32" y="16" width="52.5" height="106"/>
                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -28,6 +29,7 @@
                             <constraint firstAttribute="height" constant="88" id="dzU-DI-qKJ"/>
                             <constraint firstAttribute="width" constant="88" id="fmo-Xb-jmg"/>
                         </constraints>
+                        <color key="tintColor" name="DefaultFontColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="trash" catalog="system"/>
                         </userDefinedRuntimeAttributes>
@@ -38,6 +40,7 @@
                             <constraint firstAttribute="height" constant="88" id="RAL-0T-aYT"/>
                             <constraint firstAttribute="width" constant="88" id="cIV-Sq-ZQA"/>
                         </constraints>
+                        <color key="tintColor" name="DefaultFontColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="pencil" catalog="system"/>
                         </userDefinedRuntimeAttributes>
@@ -63,5 +66,8 @@
     <resources>
         <image name="pencil" catalog="system" width="64" height="56"/>
         <image name="trash" catalog="system" width="60" height="64"/>
+        <namedColor name="DefaultFontColor">
+            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
