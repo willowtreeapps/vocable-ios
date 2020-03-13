@@ -12,6 +12,7 @@ extension UIColor {
     
     // MARK: New Branded Colors
 
+    // Workaround for https://openradar.appspot.com/47113341. Prevent crashing the IBDesignables agent when using a color from the asset catalog.
     private convenience init?(safelyNamed name: String) {
         self.init(named: name,
                   in: Bundle(for: AppDelegate.self),
