@@ -11,8 +11,8 @@ import Combine
 
 class EditSayingsViewController: UIViewController {
 
-    @IBOutlet var addButton: GazeableButton!
-    @IBOutlet var backButton: GazeableButton!
+    @IBOutlet private var addButton: GazeableButton!
+    @IBOutlet private var backButton: GazeableButton!
     
     @IBOutlet var paginationView: PaginationView!
     
