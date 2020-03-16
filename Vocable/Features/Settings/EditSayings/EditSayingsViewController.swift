@@ -10,12 +10,9 @@ import UIKit
 
 class EditSayingsViewController: UIViewController {
 
-    @IBOutlet var addButton: GazeableButton!
-    @IBOutlet var backButton: GazeableButton!
+    @IBOutlet private var addButton: GazeableButton!
+    @IBOutlet private var backButton: GazeableButton!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     @IBAction func backToSettings(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
