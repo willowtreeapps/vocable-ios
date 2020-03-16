@@ -69,7 +69,6 @@
 		A946553223FC2CB20033D71F /* TextFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A946553123FC2CB20033D71F /* TextFieldCollectionViewCell.xib */; };
 		A946553423FC2CC20033D71F /* TextFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A946553323FC2CC20033D71F /* TextFieldCollectionViewCell.swift */; };
 		A94720CE241A8D9B00F7B4FF /* PaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94720CD241A8D9B00F7B4FF /* PaginationView.swift */; };
-		A94720D0241A8DBE00F7B4FF /* PaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A94720CF241A8DBE00F7B4FF /* PaginationView.xib */; };
 		A94A6CCD2412D38A00625275 /* NavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A6CCC2412D38A00625275 /* NavigationModel.swift */; };
 		A97814FA23FF3B1200ECC609 /* CategorySectionBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97814F923FF3B1200ECC609 /* CategorySectionBackground.swift */; };
 		A98E8A2323F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98E8A2223F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift */; };
@@ -189,7 +188,6 @@
 		A946553123FC2CB20033D71F /* TextFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCollectionViewCell.xib; sourceTree = "<group>"; };
 		A946553323FC2CC20033D71F /* TextFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		A94720CD241A8D9B00F7B4FF /* PaginationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationView.swift; sourceTree = "<group>"; };
-		A94720CF241A8DBE00F7B4FF /* PaginationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaginationView.xib; sourceTree = "<group>"; };
 		A94A6CCC2412D38A00625275 /* NavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationModel.swift; sourceTree = "<group>"; };
 		A97814F923FF3B1200ECC609 /* CategorySectionBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionBackground.swift; sourceTree = "<group>"; };
 		A98E8A2223F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -458,7 +456,6 @@
 				71DBE5EA240DE4D000BA8D01 /* WarningView.xib */,
 				71B856432416CEB600CB163B /* PhraseSavedView.xib */,
 				A94720CD241A8D9B00F7B4FF /* PaginationView.swift */,
-				A94720CF241A8DBE00F7B4FF /* PaginationView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -655,7 +652,6 @@
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
 				130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */,
 				A946553223FC2CB20033D71F /* TextFieldCollectionViewCell.xib in Resources */,
-				A94720D0241A8DBE00F7B4FF /* PaginationView.xib in Resources */,
 				B8DA9DEA23EB8E2900FEBE19 /* CategoryItemCollectionViewCell.xib in Resources */,
 				B838202123FC6B17005A79CD /* PaginationCollectionViewCell.xib in Resources */,
 				B838202F23FD894C005A79CD /* CategoryPaginationContainerCollectionViewCell.xib in Resources */,
