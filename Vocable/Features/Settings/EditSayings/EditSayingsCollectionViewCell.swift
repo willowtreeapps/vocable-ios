@@ -13,7 +13,8 @@ import Combine
 class EditSayingsCollectionViewCell: VocableCollectionViewCell {
     
     @IBOutlet var textLabel: UILabel!
-    
+    @IBOutlet var deleteButton: UIButton!
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
