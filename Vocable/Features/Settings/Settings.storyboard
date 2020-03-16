@@ -225,10 +225,10 @@
             </objects>
             <point key="canvasLocation" x="3387.7777777777778" y="141.48148148148147"/>
         </scene>
-        <!--Carousel Grid Collection View Controller-->
+        <!--Edit Sayings Collection View Controller-->
         <scene sceneID="JgZ-NN-QFW">
             <objects>
-                <collectionViewController id="W98-u1-6GB" customClass="CarouselGridCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="W98-u1-6GB" customClass="EditSayingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
                         <rect key="frame" x="0.0" y="0.0" width="648" height="276.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

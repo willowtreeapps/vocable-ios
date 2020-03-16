@@ -13,33 +13,6 @@ typealias CarouselGridPagingProgress = (pageIndex: Int, pageCount: Int)
 
 class CarouselGridCollectionViewController: UICollectionViewController {
 
-    // Prototype content -- delete after Core Data is integrated
-
-    private lazy var _prototypeDiffableDataSource = UICollectionViewDiffableDataSource<Int, Int>(collectionView: collectionView!) { (collectionView, indexPath, _) -> UICollectionViewCell? in
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditSayingsCollectionViewCell.reuseIdentifier, for: indexPath) as! EditSayingsCollectionViewCell
-        cell.setup(title: "\(indexPath.item)")
-        return cell
-    }
-
-    private func _prototypeSetupDataSource() {
-        var snap = _prototypeDiffableDataSource.snapshot()
-        snap.appendSections([0])
-        snap.appendItems(Array(0...12))
-        _prototypeDiffableDataSource.apply(snap, animatingDifferences: false)
-    }
-
-    private func _prototypeDeleteItem(at indexPath: IndexPath) {
-        guard let item = _prototypeDiffableDataSource.itemIdentifier(for: indexPath) else { return }
-        var snapshot = _prototypeDiffableDataSource.snapshot()
-        snapshot.deleteItems([item])
-        _prototypeDiffableDataSource.apply(snapshot, animatingDifferences: true, completion: { [weak self] in
-            self?.layout.invalidateLayout()
-            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false, animateIfNeeded: true)
-        })
-    }
-
-    // End prototype content
-
     var progressPublisher: Published<CarouselGridPagingProgress?>.Publisher {
         return layout.$progress
     }
@@ -69,10 +42,6 @@ class CarouselGridCollectionViewController: UICollectionViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(UINib(nibName: "EditSayingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EditSayingsCollectionViewCell")
-        collectionView.backgroundColor = .collectionViewBackgroundColor
-    
-        _prototypeSetupDataSource()
 
         layout.resetScrollViewOffset(inResponseToUserInteraction: false)
     }
@@ -80,10 +49,6 @@ class CarouselGridCollectionViewController: UICollectionViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         layout.resetScrollViewOffset(inResponseToUserInteraction: false)
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        _prototypeDeleteItem(at: indexPath)
     }
 
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -143,7 +108,7 @@ class CarouselGridLayout: UICollectionViewLayout {
     private var logicalPageIndex: Int = 0 {
         didSet {
             if logicalPageIndex == -1 {
-                logicalPageIndex = numberOfPages - 1
+                logicalPageIndex = max(numberOfPages - 1, 0)
             } else if logicalPageIndex == numberOfPages {
                 logicalPageIndex = 0
             }
