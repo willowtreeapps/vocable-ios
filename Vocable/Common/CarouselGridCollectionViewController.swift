@@ -48,7 +48,7 @@ class CarouselGridCollectionViewController: UICollectionViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
-
+        collectionView.delaysContentTouches = false
         layout.resetScrollViewOffset(inResponseToUserInteraction: false)
     }
 
