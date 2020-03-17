@@ -119,8 +119,11 @@ class CarouselGridLayout: UICollectionViewLayout {
     @Published
     var progress: CarouselGridPagingProgress?
 
+    private var lastInvalidatedSize: CGSize = .zero
+    private var lastInvalidatedVisiblePages = Set<Int>()
+    
     private var numberOfPages: Int {
-        guard let collectionView = collectionView else { return 1 }
+        guard let collectionView = collectionView, collectionView.window != nil else { return 1 }
         let pageCount = Int((Double(collectionView.numberOfItems(inSection: 0)) / Double(itemsPerPage)).rounded(.up))
         if pageCount != (progress?.pageCount ?? 0) {
             progress = (pageIndex: logicalPageIndex, pageCount: pageCount)
@@ -134,9 +137,6 @@ class CarouselGridLayout: UICollectionViewLayout {
 
     override var collectionViewContentSize: CGSize {
         guard let collectionView = collectionView else { return .zero }
-        if !needsMultiplePages {
-            return collectionView.frame.size
-        }
         var size = collectionView.frame.size.applying(.init(scaleX: 3, y: 1))
         size.width += interItemSpacing * 2
         return size
@@ -174,13 +174,17 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     func resetScrollViewOffset(inResponseToUserInteraction: Bool = true, animateIfNeeded: Bool = false) {
-        guard let collectionView = collectionView else { return }
+        guard let collectionView = collectionView, collectionView.window != nil else {
+            self.collectionView?.scrollRectToVisible(resetRect, animated: false)
+            return
+        }
 
         // Handles the case of the last item being deleted from the visible page
         if logicalPageIndex >= numberOfPages {
-            let rect = boundsRectForPageIndex(-1)
-            collectionView.scrollRectToVisible(rect, animated: animateIfNeeded)
-            logicalPageIndex -= 1
+            // Snap to the rightmost page before animating smoothly back to center.
+            collectionView.scrollRectToVisible(boundsRectForPageIndex(2), animated: false)
+            logicalPageIndex = max(numberOfPages - 1, 0)
+            collectionView.scrollRectToVisible(resetRect, animated: animateIfNeeded)
             return
         }
 
@@ -194,7 +198,34 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return true
+
+        // Invalidate in the event the collection view undergoes a size change
+        if newBounds.size != lastInvalidatedSize {
+            lastInvalidatedSize = newBounds.size
+            return true
+        }
+
+        // Invalidate when the visible pages change so we can be sure
+        // the logical content is correct
+        let proposedPages = visiblePages(forBounds: newBounds)
+        if proposedPages != lastInvalidatedVisiblePages {
+            lastInvalidatedVisiblePages = proposedPages
+            return true
+        }
+
+        return false
+    }
+
+    private func visiblePages(forBounds bounds: CGRect) -> Set<Int> {
+        var pages = Set<Int>([0])
+        let tx = bounds.origin.x.distance(to: resetRect.origin.x)
+        if tx != 0.0 {
+            // Get the page to the left/right of center
+            // if the scrollview has been scrolled
+            let txSign = Int(tx / abs(tx))
+            pages.insert(txSign)
+        }
+        return pages
     }
 
     private func boundsRectForPageIndex(_ index: Int) -> CGRect {
@@ -226,32 +257,31 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     private func pageIndex(before previousIndex: Int) -> Int? {
-        var proposedIndex = logicalPageIndex - 1
-        if proposedIndex == -1 {
-            proposedIndex = numberOfPages - 1
+        return pageIndex(withDelta: -1, from: previousIndex)
+    }
+
+    private func pageIndex(after previousIndex: Int) -> Int? {
+        return pageIndex(withDelta: 1, from: previousIndex)
+    }
+
+    private func pageIndex(withDelta delta: Int, from previousIndex: Int) -> Int? {
+        var proposedIndex = logicalPageIndex + delta
+        if proposedIndex >= numberOfPages {
+            proposedIndex = (proposedIndex - numberOfPages)
+        }
+        if proposedIndex < 0 {
+            proposedIndex = numberOfPages + proposedIndex
         }
         if proposedIndex == previousIndex {
             return nil
         }
-        return proposedIndex
-    }
-
-    private func pageIndex(after previousIndex: Int) -> Int? {
-        var proposedIndex = logicalPageIndex + 1
-        if proposedIndex == numberOfPages {
-            proposedIndex = 0
-        }
-        if proposedIndex == previousIndex {
+        if !(0..<numberOfPages).contains(proposedIndex) {
             return nil
         }
         return proposedIndex
     }
 
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-
-        if !needsMultiplePages {
-            return layoutAttributesForElementsInLogicalPage(logicalPageIndex, offsetByPageCount: -1)
-        }
 
         let currentPageAttributes = layoutAttributesForElementsInLogicalPage(logicalPageIndex)
 
@@ -293,6 +323,11 @@ class CarouselGridLayout: UICollectionViewLayout {
 
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let collectionView = collectionView else { return proposedContentOffset }
+
+        if !needsMultiplePages {
+            return resetRect.origin
+        }
+
         let width = collectionView.bounds.width
         let index = (proposedContentOffset.x / (width + interItemSpacing)).rounded()
         let boundary = boundsRectForPageIndex(Int(index))
