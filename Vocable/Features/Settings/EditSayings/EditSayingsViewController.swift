@@ -41,7 +41,6 @@ class EditSayingsViewController: UIViewController {
     
     @IBAction func backToSettings(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
-        
     }
 
 }
