@@ -9,18 +9,21 @@
 import Foundation
 import AVFoundation
 import UIKit
+import CoreData
 
 class EditKeyboardCollectionViewController: UICollectionViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
-    var _textTransaction = TextTransaction(text: "")
+    private var _textTransaction = TextTransaction(text: "")
+    
+    var phraseIdentifier: String?
     
     private var textTransaction: TextTransaction {
         return _textTransaction
     }
     
-    let textExpression = TextExpression()
+    private let textExpression = TextExpression()
     
     private var suggestions: [TextSuggestion] = [] {
         didSet {
@@ -28,7 +31,7 @@ class EditKeyboardCollectionViewController: UICollectionViewController {
         }
     }
     
-    enum ItemWrapper: Hashable {
+    private enum ItemWrapper: Hashable {
         case textField(NSAttributedString)
         case topBarButton(TopBarButton)
         case key(String)
@@ -36,7 +39,7 @@ class EditKeyboardCollectionViewController: UICollectionViewController {
         case suggestionText(TextSuggestion)
     }
     
-    enum Section: Int, CaseIterable {
+    private enum Section: Int, CaseIterable {
         case textField
         case suggestions
         case keyboard
@@ -210,6 +213,23 @@ class EditKeyboardCollectionViewController: UICollectionViewController {
             switch buttonType {
             case .back:
                 self.navigationController?.popViewController(animated: true)
+            case .confirmEdit:
+                let context = NSPersistentContainer.shared.viewContext
+                if let phraseIdentifier = phraseIdentifier {
+                    let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
+                    originalPhrase?.setValue(_textTransaction.text, forKey: "utterance")
+                } else {
+                    let phrase = Phrase.fetchOrCreate(in: context, matching: textTransaction.text)
+                    phrase.isUserGenerated = true
+                    phrase.creationDate = Date()
+                    phrase.lastSpokenDate = Date()
+                    phrase.utterance = textTransaction.text
+                }
+                do {
+                       try context.save()
+                   } catch {
+                       assertionFailure("Failed to save user generated phrase: \(error)")
+                   }
             default:
                 break
             }

@@ -99,7 +99,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         }
     }
     
-        @objc private func handleCellEditButton(_ sender: UIButton) {
+    @objc private func handleCellEditButton(_ sender: UIButton) {
         for cell in collectionView.visibleCells where sender.isDescendant(of: cell) {
             guard let indexPath = collectionView.indexPath(for: cell) else {
                 return
@@ -107,8 +107,8 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
             let phrase = fetchResultsController.object(at: indexPath)
             let utterance = phrase.utterance
             if let vc = self.storyboard?.instantiateViewController(identifier: "EditSaying") as? EditKeyboardCollectionViewController {
-                if let utterance = utterance {
-                    vc._textTransaction = TextTransaction(text: utterance)
+                if utterance != nil {
+                    vc.phraseIdentifier = phrase.identifier
                 }
                 show(vc, sender: nil)
             }
