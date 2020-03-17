@@ -106,8 +106,9 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
             }
             let phrase = fetchResultsController.object(at: indexPath)
             let utterance = phrase.utterance
-            if let vc = self.storyboard?.instantiateViewController(identifier: "EditSaying") as? EditKeyboardCollectionViewController {
-                if utterance != nil {
+            if let vc = self.storyboard?.instantiateViewController(identifier: "EditSaying") as? EditKeyboardViewController {
+                if let utterance = utterance {
+                    vc._textTransaction = TextTransaction(text: utterance)
                     vc.phraseIdentifier = phrase.identifier
                 }
                 show(vc, sender: nil)

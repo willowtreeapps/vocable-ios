@@ -324,30 +324,52 @@
             </objects>
             <point key="canvasLocation" x="3722" y="143"/>
         </scene>
-        <!--Edit Keyboard Collection View Controller-->
-        <scene sceneID="0fn-pK-qy5">
+        <!--Edit Keyboard View Controller-->
+        <scene sceneID="AKq-Ud-zOB">
             <objects>
-                <collectionViewController storyboardIdentifier="EditSaying" id="lls-oC-cfJ" customClass="EditKeyboardCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Met-AT-Of1">
+                <viewController storyboardIdentifier="EditSaying" id="2ck-if-Peh" customClass="EditKeyboardViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v72-Yi-YG1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Nk5-Z3-IaK">
-                            <size key="itemSize" width="50" height="50"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells/>
-                        <connections>
-                            <outlet property="dataSource" destination="lls-oC-cfJ" id="0qp-Fu-voJ"/>
-                            <outlet property="delegate" destination="lls-oC-cfJ" id="wUN-3Z-Djf"/>
-                        </connections>
-                    </collectionView>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pVE-cr-1JB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Z5U-v5-i5X">
+                                <rect key="frame" x="16" y="52" width="343" height="718"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gMc-BK-buD">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="delegate" destination="2ck-if-Peh" id="g3K-Ac-BiW"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="Z5U-v5-i5X" firstAttribute="bottom" secondItem="v72-Yi-YG1" secondAttribute="bottomMargin" id="55H-cc-WFs"/>
+                            <constraint firstItem="Z5U-v5-i5X" firstAttribute="leading" secondItem="v72-Yi-YG1" secondAttribute="leadingMargin" id="58e-UF-RDV"/>
+                            <constraint firstItem="Z5U-v5-i5X" firstAttribute="trailing" secondItem="v72-Yi-YG1" secondAttribute="trailingMargin" id="GRU-2y-XNS"/>
+                            <constraint firstItem="Z5U-v5-i5X" firstAttribute="top" secondItem="v72-Yi-YG1" secondAttribute="topMargin" id="UlE-Uy-bgm"/>
+                        </constraints>
+                        <edgeInsets key="layoutMargins" top="32" left="32" bottom="32" right="32"/>
+                        <viewLayoutGuide key="safeArea" id="8Jz-qZ-T6g"/>
+                        <variation key="heightClass=compact">
+                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Z5U-v5-i5X" id="gZz-Tk-Ucq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ykd-vg-8cc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4719" y="143"/>
+            <point key="canvasLocation" x="4778" y="138"/>
         </scene>
     </scenes>
     <resources>

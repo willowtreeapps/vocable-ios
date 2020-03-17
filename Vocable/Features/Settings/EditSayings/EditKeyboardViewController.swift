@@ -11,11 +11,13 @@ import AVFoundation
 import UIKit
 import CoreData
 
-class EditKeyboardCollectionViewController: UICollectionViewController {
+class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
-    private var _textTransaction = TextTransaction(text: "")
+    @IBOutlet var collectionView: UICollectionView!
+    
+    var _textTransaction = TextTransaction(text: "")
     
     var phraseIdentifier: String?
     
@@ -197,7 +199,7 @@ class EditKeyboardCollectionViewController: UICollectionViewController {
     // MARK: - Collection View Delegate
     
     // swiftlint:disable cyclomatic_complexity
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
         
         for selectedPath in collectionView.indexPathsForSelectedItems ?? [] {
@@ -225,6 +227,7 @@ class EditKeyboardCollectionViewController: UICollectionViewController {
                     phrase.lastSpokenDate = Date()
                     phrase.utterance = textTransaction.text
                 }
+                self.navigationController?.popViewController(animated: true)
                 do {
                        try context.save()
                    } catch {
@@ -262,7 +265,7 @@ class EditKeyboardCollectionViewController: UICollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
@@ -273,7 +276,7 @@ class EditKeyboardCollectionViewController: UICollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
@@ -286,7 +289,7 @@ class EditKeyboardCollectionViewController: UICollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
