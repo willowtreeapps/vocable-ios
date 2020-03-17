@@ -172,7 +172,6 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
                 subitems: subitems)
         }
         
-        // TODO: Update portrait for iphone when designs are added
         var compactWidthContainerGroupLayout: NSCollectionLayoutGroup {
             let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(2 / 3)))
             
