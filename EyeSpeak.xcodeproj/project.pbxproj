@@ -374,19 +374,9 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		A91A9F4724192747008552E8 /* EditSayings */ = {
-			isa = PBXGroup;
-			children = (
-				A91A9F4824192782008552E8 /* EditKeyboardViewController.swift */,
-				A91A9F4A241927AF008552E8 /* EditKeyboard.storyboard */,
-			);
-			path = EditSayings;
-			sourceTree = "<group>";
-		};
 		A92FFB9023ECD73400AF2D0B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				A91A9F4724192747008552E8 /* EditSayings */,
 				A944D00A2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib */,
 				A944D0082406D54400F3863E /* SettingsToggleCollectionViewCell.swift */,
 				A92FFB8C23ECCB5400AF2D0B /* SettingsCollectionViewController.swift */,
@@ -394,6 +384,8 @@
 				A98E8A2223F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift */,
 				A98E8A2423F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib */,
 				A99AF23823FEE88000BE1184 /* Settings.storyboard */,
+				A91A9F4824192782008552E8 /* EditKeyboardViewController.swift */,
+				A91A9F4A241927AF008552E8 /* EditKeyboard.storyboard */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
