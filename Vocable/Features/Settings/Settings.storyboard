@@ -249,8 +249,8 @@
                             </constraint>
                             <constraint firstItem="FaL-BL-aEw" firstAttribute="leading" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="Ef4-57-qpY"/>
                             <constraint firstItem="ZPM-Ab-mlI" firstAttribute="leading" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="HU7-hF-4Vj"/>
-                            <constraint firstItem="KsA-J6-p6N" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xsL-XA-YD7" secondAttribute="trailing" constant="24" id="Ktw-tB-gMd"/>
-                            <constraint firstItem="xsL-XA-YD7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KsA-J6-p6N" secondAttribute="leading" constant="24" id="Pvf-o7-jxY"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="xsL-XA-YD7" secondAttribute="trailing" id="Ktw-tB-gMd"/>
+                            <constraint firstItem="xsL-XA-YD7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="Pvf-o7-jxY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FaL-BL-aEw" secondAttribute="trailing" id="aVG-wy-B6E"/>
                             <constraint firstItem="xsL-XA-YD7" firstAttribute="centerX" secondItem="XHU-T2-eKa" secondAttribute="centerX" id="mJ1-dp-N83"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZPM-Ab-mlI" secondAttribute="trailing" id="nDS-NG-TAP"/>
