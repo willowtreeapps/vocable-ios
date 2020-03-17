@@ -230,8 +230,9 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             alertViewController.setAlertTitle("You're about to be taken outside of the Vocable app. You may lose head tracking control.")
         
         case .mySayings:
-             performSegue(withIdentifier: "MySayings", sender: nil)
-
+            if let vc = self.storyboard?.instantiateViewController(identifier: "MySayings") {
+                show(vc, sender: nil)
+            }
         case .contactDevs:
             let alertViewController = GazeableAlertViewController.make { self.presentEmail() }
             present(alertViewController, animated: true)

@@ -40,9 +40,34 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
                                 forCellWithReuseIdentifier: "EditSayingsCollectionViewCell")
         collectionView.backgroundColor = .collectionViewBackgroundColor
 
+        updateLayoutForCurrentTraitCollection()
+
         fetchResultsController.delegate = self
         try? fetchResultsController.performFetch()
         updateDataSource(animated: false)
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateLayoutForCurrentTraitCollection()
+    }
+
+    private func updateLayoutForCurrentTraitCollection() {
+        layout.interItemSpacing = 8
+
+        switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
+        case (.regular, .regular):
+            layout.numberOfColumns = 2
+            layout.numberOfRows = 3
+        case (.compact, .regular):
+            layout.numberOfColumns = 1
+            layout.numberOfRows = 3
+        case (.compact, .compact), (.regular, .compact):
+            layout.numberOfColumns = 1
+            layout.numberOfRows = 2
+        default:
+            break
+        }
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
