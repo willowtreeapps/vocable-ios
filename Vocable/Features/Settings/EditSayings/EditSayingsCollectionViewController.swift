@@ -70,6 +70,14 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         }
     }
 
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         updateDataSource(animated: true, completion: { [weak self] in
             self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
