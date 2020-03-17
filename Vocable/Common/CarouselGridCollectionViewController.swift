@@ -125,9 +125,6 @@ class CarouselGridLayout: UICollectionViewLayout {
     @Published
     var progress: CarouselGridPagingProgress?
 
-    private var lastInvalidatedSize: CGSize = .zero
-    private var lastInvalidatedVisiblePages = Set<Int>()
-    
     private var numberOfPages: Int {
         guard let collectionView = collectionView, collectionView.window != nil else { return 1 }
         let pageCount = Int((Double(collectionView.numberOfItems(inSection: 0)) / Double(itemsPerPage)).rounded(.up))
@@ -204,22 +201,7 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-
-        // Invalidate in the event the collection view undergoes a size change
-        if newBounds.size != lastInvalidatedSize {
-            lastInvalidatedSize = newBounds.size
-            return true
-        }
-
-        // Invalidate when the visible pages change so we can be sure
-        // the logical content is correct
-        let proposedPages = visiblePages(forBounds: newBounds)
-        if proposedPages != lastInvalidatedVisiblePages {
-            lastInvalidatedVisiblePages = proposedPages
-            return true
-        }
-
-        return false
+        return true
     }
 
     private func visiblePages(forBounds bounds: CGRect) -> Set<Int> {
