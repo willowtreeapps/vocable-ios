@@ -10,11 +10,11 @@ import Foundation
 import AVFoundation
 import UIKit
 
-class EditKeyboardViewController: UICollectionViewController {
+class EditKeyboardCollectionViewController: UICollectionViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
-    private var _textTransaction = TextTransaction(text: HintText.preset.rawValue)
+    var _textTransaction = TextTransaction(text: "")
     
     private var textTransaction: TextTransaction {
         return _textTransaction
@@ -121,7 +121,9 @@ class EditKeyboardViewController: UICollectionViewController {
         
         // Snapshot construction
         snapshot.appendSections([.textField])
-        snapshot.appendItems([.textField(textTransaction.attributedText), .topBarButton(.saveEdit), .topBarButton(.back)])
+        snapshot.appendItems([.topBarButton(.back),
+                              .textField(textTransaction.attributedText),
+                              .topBarButton(.confirmEdit)])
         
         snapshot.appendSections([.suggestions])
         
@@ -152,12 +154,12 @@ class EditKeyboardViewController: UICollectionViewController {
     private func topBarLayout() -> NSCollectionLayoutSection {
         var regularWidthContainerGroupLayout: NSCollectionLayoutGroup {
             let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .fractionalHeight(1.0)))
-            textFieldItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
+            textFieldItem.contentInsets = .init(top: 4, leading: 16, bottom: 0, trailing: 4)
             
             let functionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.1), heightDimension: .fractionalHeight(1.0)))
             functionItem.contentInsets = .init(top: 4, leading: 4, bottom: 0, trailing: 4)
             
-            let subitems = [textFieldItem, functionItem, functionItem]
+            let subitems = [functionItem, textFieldItem, functionItem]
             
             return NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -207,7 +209,7 @@ class EditKeyboardViewController: UICollectionViewController {
             collectionView.deselectItem(at: indexPath, animated: true)
             switch buttonType {
             case .back:
-                break
+                self.navigationController?.popViewController(animated: true)
             default:
                 break
             }

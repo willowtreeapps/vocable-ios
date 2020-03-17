@@ -21,7 +21,7 @@ enum TopBarButton: String {
     case togglePreset
     case settings
     case back
-    case saveEdit
+    case confirmEdit
     
     var image: UIImage? {
         switch self {
@@ -37,8 +37,8 @@ enum TopBarButton: String {
             return UIImage(systemName: "gear")
         case .back:
             return UIImage(systemName: "arrow.left")
-        case .saveEdit:
-            return UIImage(systemName: "suit.heart.fill")
+        case .confirmEdit:
+            return UIImage(systemName: "checkmark")
         }
     }
 }

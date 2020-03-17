@@ -18,6 +18,9 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         cell.deleteButton.addTarget(self,
                                     action: #selector(self.handleCellDeletionButton(_:)),
                                     for: .primaryActionTriggered)
+        cell.editButton.addTarget(self,
+                                  action: #selector(self.handleCellEditButton(_:)),
+                                  for: .primaryActionTriggered)
         return cell
     }
 
@@ -93,6 +96,22 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
             context.delete(phrase)
             try? context.save()
             return
+        }
+    }
+    
+        @objc private func handleCellEditButton(_ sender: UIButton) {
+        for cell in collectionView.visibleCells where sender.isDescendant(of: cell) {
+            guard let indexPath = collectionView.indexPath(for: cell) else {
+                return
+            }
+            let phrase = fetchResultsController.object(at: indexPath)
+            let utterance = phrase.utterance
+            if let vc = self.storyboard?.instantiateViewController(identifier: "EditSaying") as? EditKeyboardCollectionViewController {
+                if let utterance = utterance {
+                    vc._textTransaction = TextTransaction(text: utterance)
+                }
+                show(vc, sender: nil)
+            }
         }
     }
 }
