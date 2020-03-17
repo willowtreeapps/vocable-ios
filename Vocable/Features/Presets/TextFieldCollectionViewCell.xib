@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Hx1-bE-gyH" customClass="TextFieldCollectionViewCell" customModule="EyeSpeak" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="269" height="218"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="269" height="218"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhH-Sl-1cZ" customClass="OutputTextView" customModule="EyeSpeak" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="106.5" width="269" height="49.5"/>
+                        <color key="backgroundColor" name="Background"/>
+                        <color key="tintColor" name="TextHighlight"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <variation key="heightClass=compact">
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                        </variation>
+                    </textView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MhH-Sl-1cZ" secondAttribute="bottom" id="1ys-Bw-JAD"/>
+                <constraint firstItem="MhH-Sl-1cZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Hx1-bE-gyH" secondAttribute="top" id="XxJ-ZU-wwR"/>
+                <constraint firstItem="MhH-Sl-1cZ" firstAttribute="leading" secondItem="Hx1-bE-gyH" secondAttribute="leading" id="fEf-ah-ePV"/>
+                <constraint firstAttribute="trailing" secondItem="MhH-Sl-1cZ" secondAttribute="trailing" id="iOp-5h-MlP"/>
+                <constraint firstItem="MhH-Sl-1cZ" firstAttribute="centerY" secondItem="uZY-cu-gmD" secondAttribute="centerY" id="kSR-wb-6WW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="uZY-cu-gmD"/>
+            <size key="customSize" width="269" height="218"/>
+            <connections>
+                <outlet property="textOutputView" destination="MhH-Sl-1cZ" id="oD4-nP-Nnv"/>
+            </connections>
+            <point key="canvasLocation" x="296.37681159420293" y="190.17857142857142"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextHighlight">
+            <color red="0.29800000786781311" green="0.85199999809265137" blue="0.97600001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

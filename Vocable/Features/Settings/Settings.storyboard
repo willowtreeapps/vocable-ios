@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="z2O-mb-WoW">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--SettingsNavController-->
+        <scene sceneID="Fl3-kc-eyg">
+            <objects>
+                <navigationController title="SettingsNavController" navigationBarHidden="YES" id="z2O-mb-WoW" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="D9r-s9-bmU"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Ye0-e2-cfC">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gMn-gX-rfc" kind="relationship" relationship="rootViewController" id="wLX-sx-Yk3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EVh-xO-TgO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="738" y="144"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="dPi-vA-NKQ">
+            <objects>
+                <collectionViewController id="if3-QM-p2o" customClass="SettingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yYQ-tW-Cgs">
+                        <rect key="frame" x="0.0" y="0.0" width="351" height="622"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="Xga-RH-NHm">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Settings" largeTitleDisplayMode="always" id="mBW-xa-0wJ"/>
+                    <connections>
+                        <outlet property="headerView" destination="mBW-xa-0wJ" id="4BE-Lp-Hmp"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9rs-Gw-LBG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1601" y="895"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="udF-jz-OFJ">
+            <objects>
+                <viewController id="gMn-gX-rfc" customClass="SettingsViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mXz-yV-vIn" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtZ-qP-xqU">
+                                <rect key="frame" x="16" y="76" width="343" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                <color key="textColor" name="DefaultFontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59L-eT-oZ6" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="296" y="76" width="63" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="XFt-fF-4My">
+                                        <variation key="heightClass=compact" constant="48"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="48"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="116" id="eN5-ol-s16">
+                                        <variation key="heightClass=compact" constant="63"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="63"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <state key="normal" image="xmark.circle" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="34" weight="bold"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="xmark.circle" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="dismissSettings:" destination="gMn-gX-rfc" eventType="primaryActionTriggered" id="0JV-PY-Yd9"/>
+                                    <action selector="dismissSettings:" destination="gMn-gX-rfc" eventType="touchUpInside" id="B1M-NP-Phw"/>
+                                </connections>
+                            </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="6E8-xr-Wux">
+                                <rect key="frame" x="8" y="156" width="351" height="622"/>
+                                <connections>
+                                    <segue destination="if3-QM-p2o" kind="embed" id="npm-Wd-wUb"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="CtZ-qP-xqU" firstAttribute="leading" secondItem="mXz-yV-vIn" secondAttribute="leadingMargin" id="3HQ-kq-5Yu"/>
+                            <constraint firstItem="6E8-xr-Wux" firstAttribute="trailing" secondItem="mXz-yV-vIn" secondAttribute="trailingMargin" id="5Oi-jt-aXT"/>
+                            <constraint firstItem="59L-eT-oZ6" firstAttribute="trailing" secondItem="mXz-yV-vIn" secondAttribute="trailingMargin" id="BOW-Vj-2Lp"/>
+                            <constraint firstItem="6E8-xr-Wux" firstAttribute="leadingMargin" secondItem="mXz-yV-vIn" secondAttribute="leadingMargin" id="CDw-7J-EQo"/>
+                            <constraint firstItem="6E8-xr-Wux" firstAttribute="top" secondItem="59L-eT-oZ6" secondAttribute="bottom" constant="32" id="Gej-Yq-05A"/>
+                            <constraint firstItem="CtZ-qP-xqU" firstAttribute="centerX" secondItem="mXz-yV-vIn" secondAttribute="centerX" id="OAf-Qz-V9Z"/>
+                            <constraint firstItem="1Jr-Jy-UTd" firstAttribute="bottom" secondItem="6E8-xr-Wux" secondAttribute="bottom" id="VBU-YZ-EKl"/>
+                            <constraint firstItem="CtZ-qP-xqU" firstAttribute="top" secondItem="1Jr-Jy-UTd" secondAttribute="top" constant="32" id="udB-iK-X15"/>
+                            <constraint firstItem="59L-eT-oZ6" firstAttribute="top" secondItem="1Jr-Jy-UTd" secondAttribute="top" constant="32" id="zWY-4u-sBJ"/>
+                        </constraints>
+                        <edgeInsets key="layoutMargins" top="0.0" left="32" bottom="0.0" right="32"/>
+                        <viewLayoutGuide key="safeArea" id="1Jr-Jy-UTd"/>
+                        <variation key="heightClass=compact">
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="x2W-9E-2W1"/>
+                    <connections>
+                        <outlet property="dismissButton" destination="59L-eT-oZ6" id="pKn-Jo-gYg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f1E-o0-keE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1601" y="143"/>
+        </scene>
+        <!--Edit Sayings View Controller-->
+        <scene sceneID="8J2-gW-BaT">
+            <objects>
+                <viewController storyboardIdentifier="MySayings" id="KLI-zL-Q9x" customClass="EditSayingsViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XHU-T2-eKa" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaL-BL-aEw" userLabel="Toolbar">
+                                <rect key="frame" x="16" y="44" width="343" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvV-sn-lWq" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                        <rect key="frame" x="279" y="0.0" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="DvV-sn-lWq" secondAttribute="height" id="kAS-Wb-xZD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <color key="tintColor" name="DefaultFontColor"/>
+                                        <state key="normal" image="xmark.circle" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="34" weight="bold"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="plus" catalog="system"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Sayings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
+                                        <rect key="frame" x="96" y="15.999999999999996" width="151" height="33.666666666666657"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
+                                        <color key="textColor" name="DefaultFontColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=compact">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                        </variation>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00c-RK-HF1" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="00c-RK-HF1" secondAttribute="height" multiplier="1:1" id="Ybw-Mx-Z25"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <color key="tintColor" name="DefaultFontColor"/>
+                                        <state key="normal">
+                                            <color key="titleColor" name="DefaultFontColor"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="arrow.left" catalog="system"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="backToSettings:" destination="KLI-zL-Q9x" eventType="touchUpInside" id="fCp-bo-PGp"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="Background"/>
+                                <constraints>
+                                    <constraint firstItem="DvV-sn-lWq" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="topMargin" id="0fN-F4-AwJ"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="DvV-sn-lWq" secondAttribute="bottom" id="34H-OF-Dzj"/>
+                                    <constraint firstItem="0CD-i2-i5g" firstAttribute="centerX" secondItem="FaL-BL-aEw" secondAttribute="centerX" id="7hG-Zd-00j"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="DvV-sn-lWq" secondAttribute="trailing" id="HPu-Qg-daX"/>
+                                    <constraint firstItem="DvV-sn-lWq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0CD-i2-i5g" secondAttribute="trailing" constant="24" id="J8q-UF-qPs"/>
+                                    <constraint firstItem="0CD-i2-i5g" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="topMargin" constant="8" id="Nmv-ve-AaL">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                                    </constraint>
+                                    <constraint firstItem="0CD-i2-i5g" firstAttribute="centerX" secondItem="FaL-BL-aEw" secondAttribute="centerX" id="UfO-TZ-C2g"/>
+                                    <constraint firstItem="00c-RK-HF1" firstAttribute="leading" secondItem="FaL-BL-aEw" secondAttribute="leadingMargin" id="Yvt-vZ-hNf"/>
+                                    <constraint firstAttribute="height" constant="96" id="cfS-cm-2vy">
+                                        <variation key="heightClass=compact" constant="48"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="64"/>
+                                    </constraint>
+                                    <constraint firstAttribute="bottomMargin" secondItem="00c-RK-HF1" secondAttribute="bottom" id="dFT-Wk-Bu6"/>
+                                    <constraint firstItem="0CD-i2-i5g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="00c-RK-HF1" secondAttribute="trailing" constant="24" id="oK7-wd-nL0"/>
+                                    <constraint firstItem="00c-RK-HF1" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="topMargin" id="pyq-nd-AXg"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
+                                <rect key="frame" x="16" y="124" width="343" height="550"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ZPM-Ab-mlI" secondAttribute="height" multiplier="2" priority="250" id="PK4-eE-9mZ"/>
+                                    <constraint firstAttribute="height" constant="322.5" id="V2b-Pm-qsk"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="V2b-Pm-qsk"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="PK4-eE-9mZ"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="PK4-eE-9mZ"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="51.666666666666657" y="698" width="272" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>
+                                    <constraint firstAttribute="width" constant="400" id="bYi-OY-TtN"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aHj-3P-gGo"/>
+                                        <exclude reference="bYi-OY-TtN"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="ZPM-Ab-mlI" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="bottom" constant="64" id="E7v-Tz-7x3">
+                                <variation key="heightClass=compact" constant="12"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                            </constraint>
+                            <constraint firstItem="FaL-BL-aEw" firstAttribute="leading" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="Ef4-57-qpY"/>
+                            <constraint firstItem="ZPM-Ab-mlI" firstAttribute="leading" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="HU7-hF-4Vj"/>
+                            <constraint firstItem="KsA-J6-p6N" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xsL-XA-YD7" secondAttribute="trailing" constant="24" id="Ktw-tB-gMd"/>
+                            <constraint firstItem="xsL-XA-YD7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KsA-J6-p6N" secondAttribute="leading" constant="24" id="Pvf-o7-jxY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FaL-BL-aEw" secondAttribute="trailing" id="aVG-wy-B6E"/>
+                            <constraint firstItem="xsL-XA-YD7" firstAttribute="centerX" secondItem="XHU-T2-eKa" secondAttribute="centerX" id="mJ1-dp-N83"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZPM-Ab-mlI" secondAttribute="trailing" id="nDS-NG-TAP"/>
+                            <constraint firstItem="FaL-BL-aEw" firstAttribute="top" secondItem="XHU-T2-eKa" secondAttribute="topMargin" id="o1A-wb-z5y"/>
+                            <constraint firstItem="xsL-XA-YD7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZPM-Ab-mlI" secondAttribute="bottom" constant="16" id="odn-ZR-Jtm">
+                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                            </constraint>
+                            <constraint firstItem="KsA-J6-p6N" firstAttribute="bottom" secondItem="xsL-XA-YD7" secondAttribute="bottom" constant="32" id="pdv-ax-cnJ">
+                                <variation key="heightClass=compact" constant="8"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="32"/>
+                            </constraint>
+                            <constraint firstItem="xsL-XA-YD7" firstAttribute="top" secondItem="ZPM-Ab-mlI" secondAttribute="bottom" constant="24" id="sRZ-84-hWx">
+                                <variation key="heightClass=compact" constant="16"/>
+                            </constraint>
+                        </constraints>
+                        <edgeInsets key="layoutMargins" top="32" left="32" bottom="32" right="32"/>
+                        <viewLayoutGuide key="safeArea" id="KsA-J6-p6N"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="sRZ-84-hWx"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <edgeInsets key="layoutMargins" top="16" left="16" bottom="0.0" right="16"/>
+                            <mask key="constraints">
+                                <include reference="sRZ-84-hWx"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="sRZ-84-hWx"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="64t-Cy-SBd"/>
+                    <connections>
+                        <outlet property="addButton" destination="DvV-sn-lWq" id="JJf-RR-PfN"/>
+                        <outlet property="backButton" destination="00c-RK-HF1" id="5Jz-2h-tl7"/>
+                        <outlet property="paginationView" destination="xsL-XA-YD7" id="wQN-yS-PtT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxk-ad-LrW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2559" y="144"/>
+        </scene>
+        <!--Edit Sayings Collection View Controller-->
+        <scene sceneID="JgZ-NN-QFW">
+            <objects>
+                <collectionViewController id="W98-u1-6GB" customClass="EditSayingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="550"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IVZ-Bw-liq">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="W98-u1-6GB" id="Syx-wi-tdg"/>
+                            <outlet property="delegate" destination="W98-u1-6GB" id="2rF-nN-oM1"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LlE-tR-CS4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3804" y="111"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="arrow.left" catalog="system" width="64" height="48"/>
+        <image name="plus" catalog="system" width="64" height="56"/>
+        <image name="xmark.circle" catalog="system" width="64" height="60"/>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DefaultFontColor">
+            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
