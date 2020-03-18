@@ -30,7 +30,6 @@ class SettingsToggleCollectionViewCell: VocableCollectionViewCell {
         textLabel.textColor = .defaultTextColor
         textLabel.font = UIFont.systemFont(ofSize: 22)
         
-        borderedView.fillColor = .collectionViewBackgroundColor
     }
 
     func setup(title: String) {

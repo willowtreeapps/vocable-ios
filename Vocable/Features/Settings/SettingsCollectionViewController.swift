@@ -168,22 +168,36 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     
     private func regularHeightWidthLayout() -> UICollectionViewLayout {
         let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
-        let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1 / 2)))
+
+        let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1.0)))
         
-        let settingsToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 6))
-        let settingsToggleGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsToggleGroupSize, subitem: headTrackingToggleItem, count: 1)
-        settingsToggleGroup.edgeSpacing = .init(leading: nil, top: .fixed(32), trailing: nil, bottom: .fixed(92))
+        let internalLinkRowGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                              heightDimension: .fractionalHeight(1 / 3))
+        let internalLinkRowGroup = NSCollectionLayoutGroup.horizontal(layoutSize: internalLinkRowGroupSize,
+                                                                      subitem: settingsButtonItem,
+                                                                      count: 2)
+        internalLinkRowGroup.interItemSpacing = .fixed(8.0)
         
-        let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(3 / 6))
-        let settingsOptionsGroup = NSCollectionLayoutGroup.horizontal(layoutSize: settingsOptionsGroupSize, subitem: settingsButtonItem, count: itemCount)
-        settingsOptionsGroup.interItemSpacing = .fixed(16)
+        let internalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                                    heightDimension: .fractionalHeight(1 / 3))
+        let internalLinkContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: internalLinkContainerGroupSize,
+                                                                          subitem: internalLinkRowGroup,
+                                                                          count: 3)
+        
+        let externalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 9))
+        
+        internalLinkContainerGroup.edgeSpacing = .init(leading: nil, top: nil, trailing: nil, bottom: .fixed(24))
+        internalLinkContainerGroup.interItemSpacing = .fixed(8.0)
+        
+        
+        let externalLinkContainerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: externalLinkContainerGroupSize, subitem: settingsButtonItem, count: 2)
+        externalLinkContainerGroup.interItemSpacing = .fixed(8.0)
         
         let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(80.0 / 834.0))
         let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
         
         let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [settingsToggleGroup, settingsOptionsGroup, versionItem])
+        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [internalLinkContainerGroup, externalLinkContainerGroup, versionItem])
         
         let section = NSCollectionLayoutSection(group: settingPageGroup)
         let layout = UICollectionViewCompositionalLayout(section: section)
