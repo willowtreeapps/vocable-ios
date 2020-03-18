@@ -17,7 +17,7 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet var collectionView: UICollectionView!
     
-    var _textTransaction = TextTransaction(text: "")
+    private var _textTransaction = TextTransaction(text: "")
     
     var phraseIdentifier: String?
     
@@ -49,7 +49,11 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if let phraseIdentifier = phraseIdentifier {
+            let context = NSPersistentContainer.shared.viewContext
+            let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
+            _textTransaction = TextTransaction(text: originalPhrase?.utterance ?? "")
+        }
         setupCollectionView()
         configureDataSource()
     }
@@ -227,21 +231,15 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
                 let context = NSPersistentContainer.shared.viewContext
                 if let phraseIdentifier = phraseIdentifier {
                     let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                    originalPhrase?.setValue(_textTransaction.text, forKey: "utterance")
+                    originalPhrase?.utterance = _textTransaction.text
                 } else {
-                    let savedCategory = Category.fetchOrCreate(in: context, matching: PresetCategory.saved.description)
-                    let phrase = Phrase.fetchOrCreate(in: context, matching: _textTransaction.text)
-                    phrase.isUserGenerated = true
-                    phrase.creationDate = Date()
-                    phrase.lastSpokenDate = Date()
-                    phrase.utterance = _textTransaction.text
-                    phrase.addToCategories(savedCategory)
+                    _ = Phrase.create(withUserEntry: _textTransaction.text, in: context)
                 }
                 do {
-                       try context.save()
-                   } catch {
-                       assertionFailure("Failed to save user generated phrase: \(error)")
-                   }
+                    try context.save()
+                } catch {
+                    assertionFailure("Failed to save user generated phrase: \(error)")
+                }
                 self.navigationController?.popViewController(animated: true)
             default:
                 break

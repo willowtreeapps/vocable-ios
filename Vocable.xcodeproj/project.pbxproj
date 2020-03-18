@@ -78,6 +78,7 @@
 		A99AF23323FDA8B600BE1184 /* SuggestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */; };
 		A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */; };
 		A9B32C8C240EB6250084E151 /* KeyboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B32C8B240EB6250084E151 /* KeyboardModel.swift */; };
+		A9C32CFF242271F3000EC6F7 /* Phrase+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */; };
 		A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */; };
 		A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FF23F4900C0094DB64 /* TextExpression.swift */; };
 		A9DE170223F492B20094DB64 /* Array+Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE170123F492B20094DB64 /* Array+Split.swift */; };
@@ -198,6 +199,7 @@
 		A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9B32C8B240EB6250084E151 /* KeyboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardModel.swift; sourceTree = "<group>"; };
+		A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Phrase+Helpers.swift"; sourceTree = "<group>"; };
 		A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSuggestionController.swift; sourceTree = "<group>"; };
 		A9DE16FF23F4900C0094DB64 /* TextExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExpression.swift; sourceTree = "<group>"; };
 		A9DE170123F492B20094DB64 /* Array+Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Split.swift"; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				A9DE16FF23F4900C0094DB64 /* TextExpression.swift */,
 				A9DE170123F492B20094DB64 /* Array+Split.swift */,
 				B81D235C23FEDAF9005741E8 /* UIPageViewController+ManualPagination.swift */,
+				A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -730,6 +733,7 @@
 				B81AC0AD2405D8C400972E85 /* ItemSelection.swift in Sources */,
 				6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */,
 				B8DA9DF223F30BAF00FEBE19 /* Cell+NibLoading.swift in Sources */,
+				A9C32CFF242271F3000EC6F7 /* Phrase+Helpers.swift in Sources */,
 				6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */,
 				A9326C8D241C1A3300F7026C /* EditSayingsCollectionViewController.swift in Sources */,
 				B81D235623FED535005741E8 /* PresetPaginationContainerCollectionViewCell.swift in Sources */,

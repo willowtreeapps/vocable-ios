@@ -348,13 +348,7 @@ class PresetsViewController: UICollectionViewController {
                     break
                 }
                 let context = NSPersistentContainer.shared.viewContext
-                let savedCategory = Category.fetchOrCreate(in: context, matching: PresetCategory.saved.description)
-                let phrase = Phrase.fetchOrCreate(in: context, matching: textTransaction.text)
-                phrase.isUserGenerated = true
-                phrase.creationDate = Date()
-                phrase.lastSpokenDate = Date()
-                phrase.utterance = textTransaction.text
-                phrase.addToCategories(savedCategory)
+                _ = Phrase.create(withUserEntry: textTransaction.text, in: context)
 
                 do {
                     try context.save()
