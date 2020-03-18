@@ -10,19 +10,19 @@ import UIKit
 import MessageUI
 
 class SettingsCollectionViewController: UICollectionViewController, MFMailComposeViewControllerDelegate {
-    
+
     @IBOutlet private var headerView: UINavigationItem!
 
     private weak var composeVC: MFMailComposeViewController?
-    
+
     // Contact Developers + Privact Policy + Version Number
     private let externalLinksItemCount = 3
-    
+
     private enum SettingsItem: String, Hashable {
         var title: String {
             return self.rawValue
         }
-        
+
         var isFeatureEnabled: Bool {
             let debugFeatures: [SettingsItem] = [.categories, .timingSensitivity,
                                                  .resetAppSettings, .pidTuner]
@@ -31,7 +31,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             }
             return true
         }
-        
+
         case editMySayings = "Edit My Sayings"
         case categories = "Categories"
         case timingSensitivity = "Timing and Sensitivity"
@@ -46,20 +46,20 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SettingsItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
-    
+
     private var versionAndBuildNumber: String {
         let versionNumber = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
         return "Version \(versionNumber)-\(buildNumber)"
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupNavigationBar()
         setupCollectionView()
     }
-    
+
     func setupNavigationBar() {
         let barAppearance = UINavigationBarAppearance()
         barAppearance.backgroundColor = .collectionViewBackgroundColor
@@ -68,22 +68,22 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         barAppearance.titleTextAttributes = textAttr
         navigationItem.standardAppearance = barAppearance
         navigationItem.largeTitleDisplayMode = .always
-        
+
         let dismissBarButton = UIBarButtonItem(image: UIImage(systemName: "xmark.circle")!, style: .plain, target: self, action: #selector(dismissVC))
         dismissBarButton.tintColor = .defaultTextColor
-        
+
         navigationItem.rightBarButtonItem = dismissBarButton
     }
-    
+
     @objc func dismissVC() {
         dismiss(animated: true, completion: nil)
     }
-    
+
     func setupCollectionView() {
         collectionView.backgroundColor = .collectionViewBackgroundColor
         collectionView.delaysContentTouches = false
         collectionView.isScrollEnabled = false
-        
+
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
         collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsFooterCollectionViewCell")
         collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsToggleCollectionViewCell")
@@ -109,7 +109,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         snapshot.appendItems([.versionNum])
         dataSource.apply(snapshot, animatingDifferences: false)
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
@@ -122,33 +122,33 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return defaultLayout()
         }
     }
-    
+
     private func compactWidthLayout() -> UICollectionViewLayout {
         let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - externalLinksItemCount
 
         let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         settingsButtonItem.contentInsets = .init(top: 4, leading: 0, bottom: 4, trailing: 0)
-        
+
         let internalLinksGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                             heightDimension: .fractionalHeight(CGFloat(internalLinksItemCount) / 9))
         let internalLinksGroup = NSCollectionLayoutGroup.vertical(layoutSize: internalLinksGroupSize, subitem: settingsButtonItem, count: internalLinksItemCount)
-        
+
         let externalLinksGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                             heightDimension: .fractionalHeight(2 / 9))
         let externalLinksGroup = NSCollectionLayoutGroup.vertical(layoutSize: externalLinksGroupSize, subitem: settingsButtonItem, count: 2)
         externalLinksGroup.edgeSpacing = .init(leading: nil, top: .fixed(24), trailing: nil, bottom: nil)
-        
+
         let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/7))
         let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
-        
+
         let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
         let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [internalLinksGroup, externalLinksGroup, versionItem])
-        
+
         let section = NSCollectionLayoutSection(group: settingPageGroup)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
-    
+
     private func defaultLayout() -> UICollectionViewLayout {
         let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - externalLinksItemCount
         let numOfRows = CGFloat(ceil(Double(internalLinksItemCount) / 2.0))
@@ -157,43 +157,43 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
         let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1.0)))
         settingsButtonItem.contentInsets = .init(top: 4, leading: 8, bottom: 4, trailing: 8)
-        
+
         let internalLinkRowGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                               heightDimension: .fractionalHeight(1.0))
         let internalLinkRowGroup = NSCollectionLayoutGroup.horizontal(layoutSize: internalLinkRowGroupSize,
                                                                       subitem: settingsButtonItem,
                                                                       count: columnCount)
-        
+
         let internalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                                     heightDimension: .fractionalHeight((numOfRows == 1 ? numOfRows : numOfRows - 1) / 5))
         let internalLinkContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: internalLinkContainerGroupSize,
                                                                           subitem: internalLinkRowGroup,
                                                                           count: numOfRows == 1 ? Int(numOfRows) : Int(numOfRows - 1))
-        
+
         let internalLinkLastRowGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(isEvenNumOfItems ? 1.0 : 0.5),
                                                                   heightDimension: .fractionalHeight(1 / 5))
         let internalLinkLastRowGroup = NSCollectionLayoutGroup.horizontal(layoutSize: internalLinkLastRowGroupSize, subitem: settingsButtonItem, count: isEvenNumOfItems ? 2 : 1)
         internalLinkLastRowGroup.edgeSpacing = .init(leading: nil, top: nil, trailing: nil, bottom: .fixed(24))
-        
+
         let externalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 5))
         let externalLinkContainerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: externalLinkContainerGroupSize, subitem: settingsButtonItem, count: 2)
-        
+
         let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(80.0 / 834.0))
         let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
-        
+
         // If there is one row, only contain last row group in the subitems
         let settingsPageSubItems = (numOfRows == 1) ? [internalLinkLastRowGroup, externalLinkContainerGroup, versionItem]
             : [internalLinkContainerGroup, internalLinkLastRowGroup, externalLinkContainerGroup, versionItem]
         let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: settingsPageSubItems)
-        
+
         let section = NSCollectionLayoutSection(group: settingPageGroup)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
-    
+
     // MARK: UICollectionViewController
-    
+
     private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: SettingsItem) -> UICollectionViewCell {
         switch item {
         case .editMySayings, .categories, .timingSensitivity, .resetAppSettings, .selectionMode:
@@ -214,7 +214,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return cell
         }
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.indexPathForGazedItem != indexPath {
             collectionView.deselectItem(at: indexPath, animated: true)
@@ -223,18 +223,26 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
         switch item {
         case .privacyPolicy:
-            let alertViewController = GazeableAlertViewController.make { self.presentPrivacyAlert() }
+            let alertString = NSLocalizedString("You're about to be taken outside of the Vocable app. You may lose head tracking control.",
+                                                comment: "You're about to be taken outside of the Vocable app. You may lose head tracking control alert message")
+            let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+
+            alertViewController.addAction(GazableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
+            alertViewController.addAction(GazableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), handler: self.presentPrivacyAlert))
             present(alertViewController, animated: true)
-            alertViewController.setAlertTitle("You're about to be taken outside of the Vocable app. You may lose head tracking control.")
-        
+
         case .editMySayings:
             if let vc = self.storyboard?.instantiateViewController(identifier: "MySayings") {
                 show(vc, sender: nil)
             }
         case .contactDevs:
-            let alertViewController = GazeableAlertViewController.make { self.presentEmail() }
+            let alertString = NSLocalizedString("You're about to be taken outside of the Vocable app. You may lose head tracking control.",
+                                                comment: "You're about to be taken outside of the Vocable app. You may lose head tracking control alert message")
+            let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+
+            alertViewController.addAction(GazableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
+            alertViewController.addAction(GazableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), handler: self.presentEmail))
             present(alertViewController, animated: true)
-            alertViewController.setAlertTitle("You're about to be taken outside of the Vocable app. You may lose head tracking control.")
 
         case .pidTuner:
             guard let gazeWindow = view.window as? HeadGazeWindow else { return }
@@ -248,7 +256,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             break
         }
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
         switch item {
@@ -260,7 +268,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return true
         }
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
         switch item {
@@ -272,7 +280,11 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return true
         }
     }
-    
+
+    private func toggleHeadTracking() {
+        AppConfig.isHeadTrackingEnabled.toggle()
+    }
+
     // MARK: Presentations
 
     private func presentPrivacyAlert() {
@@ -299,11 +311,11 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
         self.present(composeVC, animated: true)
     }
-    
+
     // MARK: MFMailComposeViewControllerDelegate
-    
+
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
-    
+
 }
