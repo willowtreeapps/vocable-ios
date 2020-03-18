@@ -220,18 +220,20 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
                     let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
                     originalPhrase?.setValue(_textTransaction.text, forKey: "utterance")
                 } else {
-                    let phrase = Phrase.fetchOrCreate(in: context, matching: textTransaction.text)
+                    let savedCategory = Category.fetchOrCreate(in: context, matching: PresetCategory.saved.description)
+                    let phrase = Phrase.fetchOrCreate(in: context, matching: _textTransaction.text)
                     phrase.isUserGenerated = true
                     phrase.creationDate = Date()
                     phrase.lastSpokenDate = Date()
-                    phrase.utterance = textTransaction.text
+                    phrase.utterance = _textTransaction.text
+                    phrase.addToCategories(savedCategory)
                 }
-                self.navigationController?.popViewController(animated: true)
                 do {
                        try context.save()
                    } catch {
                        assertionFailure("Failed to save user generated phrase: \(error)")
                    }
+                self.navigationController?.popViewController(animated: true)
             default:
                 break
             }
