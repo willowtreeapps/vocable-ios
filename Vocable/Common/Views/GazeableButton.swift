@@ -27,7 +27,7 @@ class GazeableButton: UIButton {
             updateContentViews()
         }
     }
-    
+    @IBInspectable
     var fillColor: UIColor = .defaultCellBackgroundColor {
         didSet {
             updateContentViews()
@@ -86,6 +86,8 @@ class GazeableButton: UIButton {
         ])
 
         buttonImageView = UIImageView(image: buttonImage)
+        buttonImageView.contentMode = .scaleAspectFit
+
         addSubview(buttonImageView)
         buttonImageView.translatesAutoresizingMaskIntoConstraints = false
 

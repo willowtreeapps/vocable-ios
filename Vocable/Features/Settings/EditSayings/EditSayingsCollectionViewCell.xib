@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="d0b-Hs-dtY" customClass="EditSayingsCollectionViewCell" customModule="Vocable" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="562" height="266"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jCC-WP-535">
+                <rect key="frame" x="0.0" y="0.0" width="562" height="266"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="vav-Zc-tQ2">
+                        <rect key="frame" x="20" y="44" width="52.5" height="188"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZG4-Zl-Ck6">
+                        <rect key="frame" x="478" y="65" width="64" height="136"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jx7-73-ctO" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Jx7-73-ctO" secondAttribute="height" multiplier="1:1" id="CTi-ne-Wfe"/>
+                                    <constraint firstAttribute="height" priority="999" constant="88" id="RAL-0T-aYT">
+                                        <variation key="heightClass=compact" constant="64"/>
+                                        <variation key="widthClass=compact" constant="64"/>
+                                    </constraint>
+                                </constraints>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="pencil" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r2i-5v-HG5" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="64" height="64"/>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="trash" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <variation key="heightClass=regular-widthClass=compact" axis="vertical"/>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="ZG4-Zl-Ck6" secondAttribute="bottom" id="8VN-GN-bDX"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="vav-Zc-tQ2" secondAttribute="bottom" priority="999" id="JS6-SU-i2d"/>
+                    <constraint firstItem="ZG4-Zl-Ck6" firstAttribute="centerY" secondItem="jCC-WP-535" secondAttribute="centerY" id="O9Y-Wp-lPz"/>
+                    <constraint firstItem="vav-Zc-tQ2" firstAttribute="top" secondItem="jCC-WP-535" secondAttribute="topMargin" priority="999" id="frA-xN-ZJk"/>
+                    <constraint firstItem="ZG4-Zl-Ck6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jCC-WP-535" secondAttribute="topMargin" id="gJE-mF-Fyl"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ZG4-Zl-Ck6" secondAttribute="trailing" id="ir0-nA-oRu"/>
+                    <constraint firstItem="ZG4-Zl-Ck6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vav-Zc-tQ2" secondAttribute="trailing" constant="16" id="oUr-qe-iqF"/>
+                    <constraint firstItem="vav-Zc-tQ2" firstAttribute="leading" secondItem="jCC-WP-535" secondAttribute="leadingMargin" priority="999" id="q3q-jp-yt0"/>
+                </constraints>
+                <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
+            </collectionViewCellContentView>
+            <size key="customSize" width="562" height="266"/>
+            <connections>
+                <outlet property="deleteButton" destination="r2i-5v-HG5" id="onW-S6-HnY"/>
+                <outlet property="textLabel" destination="vav-Zc-tQ2" id="68L-6v-kfY"/>
+            </connections>
+            <point key="canvasLocation" x="-115.94202898550725" y="167.41071428571428"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="pencil" catalog="system" width="64" height="56"/>
+        <image name="trash" catalog="system" width="60" height="64"/>
+        <namedColor name="DefaultFontColor">
+            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

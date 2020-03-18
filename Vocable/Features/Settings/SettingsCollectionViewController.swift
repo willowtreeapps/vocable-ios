@@ -18,6 +18,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     private enum SettingsItem: CaseIterable {
         case headTrackingToggle
         case privacyPolicy
+        case mySayings
         case contactDevs
         case pidTuner
         case versionNum
@@ -77,7 +78,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     private func updateDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, SettingsItem>()
         snapshot.appendSections([0])
-        snapshot.appendItems([.headTrackingToggle, .privacyPolicy, .contactDevs])
+        snapshot.appendItems([.headTrackingToggle, .privacyPolicy, .contactDevs, .mySayings])
         if AppConfig.showPIDTunerDebugMenu {
             snapshot.appendItems([.pidTuner])
         }
@@ -188,6 +189,10 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
             cell.setup(title: NSLocalizedString("Privacy Policy", comment: "Privacy policy cell title") )
             return cell
+        case .mySayings:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+            cell.setup(title: NSLocalizedString("My Sayings", comment: "My sayings cell title"))
+            return cell
         case .contactDevs:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
             cell.setup(title: NSLocalizedString("Contact developers", comment: "Contact developers cell title") )
@@ -223,7 +228,11 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             let alertViewController = GazeableAlertViewController.make { self.presentPrivacyAlert() }
             present(alertViewController, animated: true)
             alertViewController.setAlertTitle("You're about to be taken outside of the Vocable app. You may lose head tracking control.")
-
+        
+        case .mySayings:
+            if let vc = self.storyboard?.instantiateViewController(identifier: "MySayings") {
+                show(vc, sender: nil)
+            }
         case .contactDevs:
             let alertViewController = GazeableAlertViewController.make { self.presentEmail() }
             present(alertViewController, animated: true)
