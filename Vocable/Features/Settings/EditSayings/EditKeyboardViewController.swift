@@ -126,9 +126,17 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
         
         // Snapshot construction
         snapshot.appendSections([.textField])
-        snapshot.appendItems([.topBarButton(.back),
-                              .textField(textTransaction.attributedText),
-                              .topBarButton(.confirmEdit)])
+        if traitCollection.horizontalSizeClass == .compact
+            && traitCollection.verticalSizeClass == .regular {
+            snapshot.appendItems([.topBarButton(.back),
+                                  .topBarButton(.confirmEdit),
+                                  .textField(textTransaction.attributedText)
+            ])
+        } else {
+            snapshot.appendItems([.topBarButton(.back),
+                                  .textField(textTransaction.attributedText),
+                                  .topBarButton(.confirmEdit)])
+        }
         
         snapshot.appendSections([.suggestions])
         
@@ -175,17 +183,18 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
         var compactWidthContainerGroupLayout: NSCollectionLayoutGroup {
             let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(2 / 3)))
             
-            let functionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1.0)))
+            let functionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 3), heightDimension: .fractionalHeight(1.0)))
             functionItem.contentInsets = .init(top: 4, leading: 0, bottom: 0, trailing: 4)
 
             let functionItemGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .fractionalHeight(1 / 3)),
                 subitems: [functionItem, functionItem])
+            functionItemGroup.interItemSpacing = .flexible(1)
             
-        return NSCollectionLayoutGroup.vertical(
+            return NSCollectionLayoutGroup.vertical(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 5.0)),
-                subitems: [textFieldItem, functionItemGroup])
+                subitems: [functionItemGroup, textFieldItem])
         }
         
         let containerGroup = traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular ? compactWidthContainerGroupLayout : regularWidthContainerGroupLayout
@@ -226,7 +235,6 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
                     phrase.lastSpokenDate = Date()
                     phrase.utterance = textTransaction.text
                 }
-                self.navigationController?.popViewController(animated: true)
                 do {
                        try context.save()
                    } catch {
@@ -310,6 +318,18 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
         } else {
             textExpression.replace(text: textTransaction.text)
             suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
+        }
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteAllItems()
+        dataSource.apply(snapshot)
+                
+        DispatchQueue.main.async { [weak self] in
+            self?.updateSnapshot()
         }
     }
 }
