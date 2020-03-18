@@ -70,17 +70,30 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         }
     }
 
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateDataSource(animated: true)
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return false
     }
 
-    private func updateDataSource(animated: Bool) {
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        updateDataSource(animated: true, completion: { [weak self] in
+            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
+                                               animateIfNeeded: true)
+        })
+    }
+
+    private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
         let content = fetchResultsController.fetchedObjects ?? []
         let viewModels = content.compactMap(PhraseViewModel.init)
         var snapshot = NSDiffableDataSourceSnapshot<Int, PhraseViewModel>()
         snapshot.appendSections([0])
         snapshot.appendItems(viewModels)
-        diffableDataSource.apply(snapshot, animatingDifferences: animated)
+        diffableDataSource.apply(snapshot,
+                                 animatingDifferences: animated,
+                                 completion: completion)
     }
 
     @objc private func handleCellDeletionButton(_ sender: UIButton) {
