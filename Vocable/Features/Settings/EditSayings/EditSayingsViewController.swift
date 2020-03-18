@@ -42,5 +42,11 @@ class EditSayingsViewController: UIViewController {
     @IBAction func backToSettings(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-
+    
+    @IBAction func addPhrasePressed(_ sender: Any) {
+        if let vc = self.storyboard?.instantiateViewController(identifier: "EditSaying") as? EditKeyboardViewController {
+            show(vc, sender: nil)
+        }
+        
+    }
 }
