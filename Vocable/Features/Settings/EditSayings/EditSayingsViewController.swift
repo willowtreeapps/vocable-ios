@@ -47,6 +47,5 @@ class EditSayingsViewController: UIViewController {
         if let vc = self.storyboard?.instantiateViewController(identifier: "EditSaying") as? EditKeyboardViewController {
             show(vc, sender: nil)
         }
-        
     }
 }
