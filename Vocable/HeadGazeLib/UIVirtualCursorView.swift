@@ -95,4 +95,53 @@ class UIVirtualCursorView: UIView {
         self.cursorView.center = cursorPosition
         self.debugCursorView.center = debugCursorPosition
     }
+
+    func setCursorViewsHidden(_ isCursorHidden: Bool, animated: Bool) {
+
+        func actions() {
+            for cursor in cursorViews {
+                cursor.alpha = isCursorHidden ? 0.0 : 1.0
+                cursor.transform = isCursorHidden ? CGAffineTransform(scaleX: 0.1, y: 0.1) : .identity
+            }
+        }
+
+        if animated {
+            UIView.animate(withDuration: 0.5,
+                           delay: 0,
+                           usingSpringWithDamping: 0.4,
+                           initialSpringVelocity: 0.4,
+                           options: .beginFromCurrentState,
+                           animations: actions,
+                           completion: nil)
+        } else {
+            actions()
+        }
+    }
+
+    func animateCursorSelection() {
+
+        func performSelectionAnimation(_ cursor: CursorView) {
+            let duration: TimeInterval = 0.6
+            let relativeDownDuration = duration * 0.5
+            let relativeUpDuration = (1.0 - relativeDownDuration) * 0.5
+            let relativeSettleDuration = 1.0 - relativeUpDuration
+            UIView.animateKeyframes(withDuration: duration, delay: 0, options: [.beginFromCurrentState], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: relativeDownDuration) {
+                    cursor.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                    cursor.shadowAmount = 0.8
+                }
+                UIView.addKeyframe(withRelativeStartTime: 1.0 - relativeSettleDuration - relativeUpDuration, relativeDuration: relativeUpDuration) {
+                    cursor.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                    cursor.shadowAmount = 1.0
+                }
+                UIView.addKeyframe(withRelativeStartTime: 1.0 - relativeSettleDuration, relativeDuration: relativeSettleDuration) {
+                    cursor.transform = .identity
+                }
+            }, completion: nil)
+        }
+
+        for cursor in cursorViews {
+            performSelectionAnimation(cursor)
+        }
+    }
 }

@@ -8,8 +8,10 @@
 
 import Foundation
 import Combine
+import ARKit
 
-struct AppConfig {
+final class AppConfig {
+
     static let showPIDTunerDebugMenu: Bool = {
         #if DEBUG
         return true
@@ -17,16 +19,10 @@ struct AppConfig {
         return false
         #endif
     }()
-    
-    static var isHeadTrackingEnabled = UserDefaults.standard.value(forKey: "isHeadTrackingEnabled") as? Bool ?? true {
-        didSet {
-            UserDefaults.standard.set(isHeadTrackingEnabled, forKey: "isHeadTrackingEnabled")
-            headTrackingValueSubject.send(isHeadTrackingEnabled)
-            if !isHeadTrackingEnabled {
-                NotificationCenter.default.post(name: .headTrackingDisabled, object: nil)
-            }
-        }
+
+    @PublishedDefault(key: "isHeadTrackingEnabled", defaultValue: AppConfig.isHeadTrackingSupported)
+    static var isHeadTrackingEnabled: Bool
+    static var isHeadTrackingSupported: Bool {
+        return ARFaceTrackingConfiguration.isSupported
     }
-    
-    static let headTrackingValueSubject = CurrentValueSubject<Bool, Never>(isHeadTrackingEnabled)
 }

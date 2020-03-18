@@ -45,6 +45,8 @@
 		6B9DFA7023E88A630037673E /* InterpolableValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA6B23E88A250037673E /* InterpolableValues.swift */; };
 		6B9DFA7423E8D1270037673E /* TrackingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA7323E8D1270037673E /* TrackingContainerViewController.swift */; };
 		6B9DFA7623E8D59A0037673E /* UICollectionView+Gaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA7523E8D5990037673E /* UICollectionView+Gaze.swift */; };
+		6BB56BA82422AC2500EA787E /* PhraseSavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB56BA72422AC2500EA787E /* PhraseSavedView.swift */; };
+		6BB56BAA2422B40300EA787E /* PublishedDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB56BA92422B40200EA787E /* PublishedDefault.swift */; };
 		6BFB18BE24002BFE002C3515 /* NSPersistentContainer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18BD24002BFE002C3515 /* NSPersistentContainer+Shared.swift */; };
 		6BFB18C224002C7B002C3515 /* Phrases.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C024002C7B002C3515 /* Phrases.xcdatamodeld */; };
 		6BFB18C424004406002C3515 /* NSManagedObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */; };
@@ -165,6 +167,8 @@
 		6B9DFA6D23E88A250037673E /* LowPassInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowPassInterpolator.swift; sourceTree = "<group>"; };
 		6B9DFA7323E8D1270037673E /* TrackingContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingContainerViewController.swift; sourceTree = "<group>"; };
 		6B9DFA7523E8D5990037673E /* UICollectionView+Gaze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Gaze.swift"; sourceTree = "<group>"; };
+		6BB56BA72422AC2500EA787E /* PhraseSavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraseSavedView.swift; sourceTree = "<group>"; };
+		6BB56BA92422B40200EA787E /* PublishedDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishedDefault.swift; sourceTree = "<group>"; };
 		6BFB18BD24002BFE002C3515 /* NSPersistentContainer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPersistentContainer+Shared.swift"; sourceTree = "<group>"; };
 		6BFB18C124002C7B002C3515 /* Phrases.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Phrases.xcdatamodel; sourceTree = "<group>"; };
 		6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Helpers.swift"; sourceTree = "<group>"; };
@@ -455,6 +459,7 @@
 				A944D0042405AE8C00F3863E /* GazeableButton.swift */,
 				71DBE5EA240DE4D000BA8D01 /* WarningView.xib */,
 				71B856432416CEB600CB163B /* PhraseSavedView.xib */,
+				6BB56BA72422AC2500EA787E /* PhraseSavedView.swift */,
 				A94720CD241A8D9B00F7B4FF /* PaginationView.swift */,
 			);
 			path = Views;
@@ -474,6 +479,7 @@
 			isa = PBXGroup;
 			children = (
 				B838202723FC99AE005A79CD /* Views */,
+				6BB56BA92422B40200EA787E /* PublishedDefault.swift */,
 				B81AC0AC2405D8C400972E85 /* ItemSelection.swift */,
 				A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */,
 			);
@@ -727,6 +733,7 @@
 				B81AC0AD2405D8C400972E85 /* ItemSelection.swift in Sources */,
 				6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */,
 				B8DA9DF223F30BAF00FEBE19 /* Cell+NibLoading.swift in Sources */,
+				6BB56BA82422AC2500EA787E /* PhraseSavedView.swift in Sources */,
 				6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */,
 				A9326C8D241C1A3300F7026C /* EditSayingsCollectionViewController.swift in Sources */,
 				B81D235623FED535005741E8 /* PresetPaginationContainerCollectionViewCell.swift in Sources */,
@@ -764,6 +771,7 @@
 				718D7FAE2419546F00FDEF93 /* EditSayingsCollectionViewCell.swift in Sources */,
 				A9299C7523F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift in Sources */,
 				6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */,
+				6BB56BAA2422B40300EA787E /* PublishedDefault.swift in Sources */,
 				6B823BCD23F4ADE30099F65E /* TunningWindow.swift in Sources */,
 				A94720CE241A8D9B00F7B4FF /* PaginationView.swift in Sources */,
 				B838200F23F4B011005A79CD /* VocableCollectionViewCell.swift in Sources */,

@@ -8,97 +8,52 @@
 
 import UIKit
 import Combine
+import ARKit
 
 class HeadGazeWindow: UIWindow {
 
-    let cursorView = UIVirtualCursorView()
+    weak var cursorView: UIVirtualCursorView?
     
-    var warningView = UIView()
-    var phraseSavedView = UIView()
+    private weak var warningView: UIView?
+    private weak var phraseSavedView: UIView?
 
     private var trackingView: UIView?
     private var lastGaze: UIHeadGaze?
     private let touchGazeDisableDuration: TimeInterval = 3
     private var touchGazeDisableBeganDate: Date?
     
-    private var disposables = Set<AnyCancellable>()
+    private var headTrackingEnabledPublisher: AnyCancellable?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
-
-        cursorView.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(cursorView)
-        initializeWarningView()
-        initializePhraseSaveView()
-        
-        NSLayoutConstraint.activate([
-            cursorView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            cursorView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            cursorView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
-            cursorView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
-        ])
-        
-        _ = AppConfig.headTrackingValueSubject.sink { (isHeadTrackingEnabled) in
-            self.setCursorViewHidden(!isHeadTrackingEnabled, animated: true)
-            if isHeadTrackingEnabled {
-                self.touchGazeDisableBeganDate = .distantPast
-            }
-        }.store(in: &disposables)
     }
 
     override init(windowScene: UIWindowScene) {
         super.init(windowScene: windowScene)
         commonInit()
     }
-    
-    override func addSubview(_ view: UIView) {
-        super.addSubview(view)
-        self.bringSubviewToFront(cursorView)
-        self.bringSubviewToFront(warningView)
-        self.bringSubviewToFront(phraseSavedView)
-    }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
     }
-    
-    private func initializeWarningView() {
-           warningView = UINib(nibName: "WarningView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! UIView
-           self.addSubview(warningView)
-           let width = UIScreen.main.traitCollection.horizontalSizeClass == .compact ? 350 : 425
-           warningView.translatesAutoresizingMaskIntoConstraints = false
-        
-           NSLayoutConstraint.activate([
-               warningView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-               warningView.widthAnchor.constraint(equalToConstant: CGFloat(width)),
-               warningView.heightAnchor.constraint(equalToConstant: 57),
-               warningView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
-           ])
-       }
-    
-    private func initializePhraseSaveView() {
-        phraseSavedView = UINib(nibName: "PhraseSavedView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! UIView
-        self.addSubview(phraseSavedView)
-        let width = UIScreen.main.traitCollection.horizontalSizeClass == .compact ? 300 : 475
-        phraseSavedView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            phraseSavedView.widthAnchor.constraint(equalToConstant: CGFloat(width)),
-            phraseSavedView.heightAnchor.constraint(equalToConstant: 96),
-            phraseSavedView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            phraseSavedView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
-        ])
-    }
 
     private func commonInit() {
+
+        headTrackingEnabledPublisher = AppConfig.$isHeadTrackingEnabled.sink { [weak self] isEnabled in
+            DispatchQueue.main.async {
+                self?.updateForCurrentHeadTrackingAvailability(isEnabled: isEnabled)
+            }
+        }
+        updateForCurrentHeadTrackingAvailability(isEnabled: AppConfig.isHeadTrackingEnabled)
+
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .headTrackingDisabled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(phraseSaved), name: .phraseSaved, object: nil)
     }
-    
+
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
         cancelCurrentGazeIfNeeded()
         handleWarning(shouldDisplay: true)
@@ -113,18 +68,78 @@ class HeadGazeWindow: UIWindow {
     }
     
     @objc private func phraseSaved(_ sender: Any?) {
-        UIView.animate(withDuration: 1.5, animations: {
-            self.phraseSavedView.alpha = CGFloat(1.0)
+
+        if phraseSavedView == nil {
+            let phraseSavedView = UINib(nibName: "PhraseSavedView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! UIView
+            phraseSavedView.alpha = 0
+            self.phraseSavedView = phraseSavedView
+            addSubview(phraseSavedView)
+            phraseSavedView.translatesAutoresizingMaskIntoConstraints = false
+
+            let horizontalPadding: CGFloat = [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) ? 16 : 24
+            NSLayoutConstraint.activate([
+                phraseSavedView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor),
+                phraseSavedView.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor,
+                                                      constant: horizontalPadding),
+                phraseSavedView.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor,
+                                                       constant: horizontalPadding),
+                phraseSavedView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
+                phraseSavedView.centerYAnchor.constraint(equalTo: centerYAnchor),
+                phraseSavedView.centerXAnchor.constraint(equalTo: centerXAnchor)
+            ])
+        }
+        UIView.animateKeyframes(withDuration: 2.0, delay: 0, options: [.beginFromCurrentState], animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1) {
+                self.phraseSavedView?.alpha = 1
+            }
+            UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.1) {
+                self.phraseSavedView?.alpha = 0
+            }
+        }, completion: { [weak self] didFinish in
+            if didFinish {
+                self?.phraseSavedView?.removeFromSuperview()
+            }
         })
-        UIView.animate(withDuration: 1.5, animations: {
-            self.phraseSavedView.alpha = CGFloat(0)
-        })
+    }
+
+    override func addSubview(_ view: UIView) {
+        super.addSubview(view)
+        if let cursorView = cursorView {
+            bringSubviewToFront(cursorView)
+        }
+        if let warningView = warningView {
+            bringSubviewToFront(warningView)
+        }
+        if let phraseSavedView = phraseSavedView {
+            bringSubviewToFront(phraseSavedView)
+        }
     }
     
     private func handleWarning(shouldDisplay: Bool) {
+
+        if warningView == nil {
+            let warningView = UINib(nibName: "WarningView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! UIView
+            warningView.alpha = 0
+            self.warningView = warningView
+            addSubview(warningView)
+            warningView.translatesAutoresizingMaskIntoConstraints = false
+            warningView.setContentHuggingPriority(.required, for: .horizontal)
+            let horizontalPadding: CGFloat = [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) ? 16 : 24
+            NSLayoutConstraint.activate([
+                warningView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+                warningView.leftAnchor.constraint(greaterThanOrEqualTo: safeAreaLayoutGuide.leftAnchor, constant: horizontalPadding),
+                warningView.rightAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.rightAnchor, constant: horizontalPadding),
+                warningView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
+            ])
+        }
+
         let alphaValue = shouldDisplay ? 1.0 : 0.0
-        UIView.animate(withDuration: 0.5, animations: {
-            self.warningView.alpha = CGFloat(alphaValue)
+        UIView.animate(withDuration: 0.5, delay: 0, options: .beginFromCurrentState, animations: {
+            self.warningView?.alpha = CGFloat(alphaValue)
+        }, completion: { [weak self] didFinish in
+            if didFinish && !shouldDisplay {
+                self?.warningView?.removeFromSuperview()
+            }
         })
     }
 
@@ -136,57 +151,38 @@ class HeadGazeWindow: UIWindow {
         self.lastGaze = nil
     }
 
+    private func updateForCurrentHeadTrackingAvailability(isEnabled: Bool) {
+        if isEnabled {
+            self.installCursorViewIfNeeded()
+            self.touchGazeDisableBeganDate = .distantPast
+        } else {
+            self.cursorView?.removeFromSuperview()
+        }
+    }
+
     private func extendGazeDisabledPeriodForTouchEvent() {
         cancelCurrentGazeIfNeeded()
         touchGazeDisableBeganDate = Date()
     }
 
-    private func setCursorViewHidden(_ isCursorHidden: Bool, animated: Bool) {
-        func actions() {
-            for cursor in cursorView.cursorViews {
-                cursor.alpha = isCursorHidden ? 0.0 : 1.0
-                cursor.transform = isCursorHidden ? CGAffineTransform(scaleX: 0.1, y: 0.1) : .identity
-            }
-        }
+    private func installCursorViewIfNeeded() {
+        guard cursorView?.superview == nil else { return }
 
-        if animated {
-            UIView.animate(withDuration: 0.5,
-                           delay: 0,
-                           usingSpringWithDamping: 0.4,
-                           initialSpringVelocity: 0.4,
-                           options: .beginFromCurrentState,
-                           animations: actions,
-                           completion: nil)
-        } else {
-            actions()
-        }
+        let cursorView = UIVirtualCursorView()
+        cursorView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(cursorView)
+
+        NSLayoutConstraint.activate([
+            cursorView.topAnchor.constraint(equalTo: topAnchor),
+            cursorView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            cursorView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            cursorView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        self.cursorView = cursorView
     }
 
     func animateCursorSelection() {
-
-        func performSelectionAnimation(_ cursor: CursorView) {
-            let duration: TimeInterval = 0.6
-            let relativeDownDuration = duration * 0.5
-            let relativeUpDuration = (1.0 - relativeDownDuration) * 0.5
-            let relativeSettleDuration = 1.0 - relativeUpDuration
-            UIView.animateKeyframes(withDuration: duration, delay: 0, options: [.beginFromCurrentState], animations: {
-                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: relativeDownDuration) {
-                    cursor.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-                    cursor.shadowAmount = 0.8
-                }
-                UIView.addKeyframe(withRelativeStartTime: 1.0 - relativeSettleDuration - relativeUpDuration, relativeDuration: relativeUpDuration) {
-                    cursor.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                    cursor.shadowAmount = 1.0
-                }
-                UIView.addKeyframe(withRelativeStartTime: 1.0 - relativeSettleDuration, relativeDuration: relativeSettleDuration) {
-                    cursor.transform = .identity
-                }
-            }, completion: nil)
-        }
-
-        for cursor in cursorView.cursorViews {
-            performSelectionAnimation(cursor)
-        }
+        cursorView?.animateCursorSelection()
     }
 
     func cancelActiveGazeTarget() {
@@ -243,7 +239,7 @@ class HeadGazeWindow: UIWindow {
             let gaze = event.allGazes?.first else {
                 if originalEvent.type == .touches {
                     extendGazeDisabledPeriodForTouchEvent()
-                    setCursorViewHidden(true, animated: true)
+                    cursorView?.setCursorViewsHidden(true, animated: true)
                 }
             super.sendEvent(originalEvent)
             return
@@ -251,7 +247,7 @@ class HeadGazeWindow: UIWindow {
 
         if let gazeDisabledStart = touchGazeDisableBeganDate {
             if Date().timeIntervalSince(gazeDisabledStart) >= touchGazeDisableDuration {
-                setCursorViewHidden(false, animated: true)
+                cursorView?.setCursorViewsHidden(false, animated: true)
                 touchGazeDisableBeganDate = nil
             } else {
                 // Waiting for touch timeout to allow events to propagate
@@ -263,7 +259,7 @@ class HeadGazeWindow: UIWindow {
 
         // If something has registered as the cursor view, let it know
         // there was a state change
-        cursorView.gazeMoved(gaze, with: event)
+        cursorView?.gazeMoved(gaze, with: event)
 
         // Locate the current hit-tested view in our hierarchy
         let pointInWindow = gaze.location(in: self)
