@@ -46,8 +46,6 @@ class EditSayingsViewController: UIViewController {
     @IBAction func addPhrasePressed(_ sender: Any) {
         if let vc = self.storyboard?.instantiateViewController(identifier: "EditSaying") as? EditKeyboardViewController {
             show(vc, sender: nil)
-            
-            vc._textTransaction = TextTransaction(text: "Start Typing...")
         }
         
     }
