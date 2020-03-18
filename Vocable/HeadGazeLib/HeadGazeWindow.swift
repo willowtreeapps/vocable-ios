@@ -157,6 +157,7 @@ class HeadGazeWindow: UIWindow {
             self.touchGazeDisableBeganDate = .distantPast
         } else {
             self.cursorView?.removeFromSuperview()
+            handleWarning(shouldDisplay: false)
         }
     }
 
