@@ -260,6 +260,8 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return false
         case .headTrackingToggle:
             return AppConfig.isHeadTrackingSupported
+        case .pidTuner:
+            return AppConfig.isHeadTrackingEnabled
         default:
             return true
         }
@@ -272,6 +274,8 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return false
         case .headTrackingToggle:
             return AppConfig.isHeadTrackingSupported
+        case .pidTuner:
+            return AppConfig.isHeadTrackingEnabled
         default:
             return true
         }
