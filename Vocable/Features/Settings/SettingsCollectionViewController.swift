@@ -15,11 +15,15 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
     private weak var composeVC: MFMailComposeViewController?
     
-    private enum SettingsItem: CaseIterable {
+    private enum SettingsItem: Hashable {
+        case editMySayings(String)
+        case categories(String)
+        case timingSensitivity(String)
+        case resetAppSettings(String)
+        case selectionMode(String)
         case headTrackingToggle
-        case privacyPolicy
-        case mySayings
-        case contactDevs
+        case privacyPolicy(String)
+        case contactDevs(String)
         case pidTuner
         case versionNum
     }
@@ -68,6 +72,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
         collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsFooterCollectionViewCell")
         collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsToggleCollectionViewCell")
+        collectionView.register(UINib(nibName: "SettingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsCollectionViewCell")
 
         updateDataSource()
 
@@ -78,7 +83,15 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     private func updateDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, SettingsItem>()
         snapshot.appendSections([0])
-        snapshot.appendItems([.headTrackingToggle, .privacyPolicy, .contactDevs, .mySayings])
+        let titles = SettingsCellTitles.self
+        snapshot.appendItems([.headTrackingToggle,
+                              .editMySayings(titles.editSayings.rawValue),
+                              .categories(titles.categories.rawValue),
+                              .timingSensitivity(titles.timingSensitivity.rawValue),
+                              .resetAppSettings(titles.resetAppSettings.rawValue),
+                              .selectionMode(titles.selectionMode.rawValue),
+                              .privacyPolicy(titles.privacyPolicy.rawValue),
+                              .contactDevs(titles.contactDevs.rawValue)])
         if AppConfig.showPIDTunerDebugMenu {
             snapshot.appendItems([.pidTuner])
         }
@@ -183,19 +196,15 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         switch item {
         case .headTrackingToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsToggleCollectionViewCell
-            cell.setup(title: NSLocalizedString("Head Tracking", comment: "Head tracking cell title") )
+            cell.setup(title: NSLocalizedString("Head Tracking", comment: "Head tracking cell title"))
             return cell
-        case .privacyPolicy:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: NSLocalizedString("Privacy Policy", comment: "Privacy policy cell title") )
+        case .editMySayings(let title), .categories(let title), .timingSensitivity(let title), .resetAppSettings(let title), .selectionMode(let title):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
+            cell.setup(title: title, image: UIImage(systemName: "chevron.right"))
             return cell
-        case .mySayings:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: NSLocalizedString("My Sayings", comment: "My sayings cell title"))
-            return cell
-        case .contactDevs:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: NSLocalizedString("Contact developers", comment: "Contact developers cell title") )
+        case .privacyPolicy(let title), .contactDevs(let title):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
+            cell.setup(title: title, image: UIImage(systemName: "arrow.up.right"))
             return cell
         case .versionNum:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
@@ -229,7 +238,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             present(alertViewController, animated: true)
             alertViewController.setAlertTitle("You're about to be taken outside of the Vocable app. You may lose head tracking control.")
         
-        case .mySayings:
+        case .editMySayings:
             if let vc = self.storyboard?.instantiateViewController(identifier: "MySayings") {
                 show(vc, sender: nil)
             }
@@ -246,7 +255,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
                     gazeWindow.cursorView.isDebugCursorHidden = false
                 }
             }
-        case .versionNum:
+        default:
             break
         }
     }
