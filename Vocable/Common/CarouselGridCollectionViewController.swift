@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CarouselGridCollectionViewController.swift
 //  YouScrollMeRightRound
 //
 //  Created by Chris Stroud on 2/25/20.

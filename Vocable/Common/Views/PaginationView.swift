@@ -25,7 +25,7 @@ private class PaginationViewGazeableButton: GazeableButton {
 }
 
 @IBDesignable
-class PaginationView: UIView {
+final class PaginationView: UIView {
 
     let textLabel = UILabel(frame: .zero)
     private let stackView = UIStackView(frame: .zero)

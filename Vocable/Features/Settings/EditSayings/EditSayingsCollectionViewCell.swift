@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 import Combine
 
-class EditSayingsCollectionViewCell: VocableCollectionViewCell {
+final class EditSayingsCollectionViewCell: VocableCollectionViewCell {
     
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet var deleteButton: UIButton!
-
+    @IBOutlet var editButton: UIButton!
     
     override func updateContentViews() {
         super.updateContentViews()
