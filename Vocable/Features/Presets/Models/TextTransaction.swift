@@ -98,7 +98,7 @@ struct TextTransaction: CustomDebugStringConvertible {
         let trimmedText = newText.trimmingCharacters(in: .whitespaces)
         if let lastCharacter = trimmedText.last {
             // Adjusting spacing when adding a character after punctuation (should always be only one space after punctuation)
-            if punctuation.contains(String(lastCharacter)) {
+            if punctuation.contains(String(lastCharacter)) && lastCharacter != "'" {
                 newText = trimmedText
                 newText += " "
             }

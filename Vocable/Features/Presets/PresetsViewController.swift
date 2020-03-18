@@ -348,13 +348,7 @@ class PresetsViewController: UICollectionViewController {
                     break
                 }
                 let context = NSPersistentContainer.shared.viewContext
-                let savedCategory = Category.fetchOrCreate(in: context, matching: PresetCategory.saved.description)
-                let phrase = Phrase.fetchOrCreate(in: context, matching: textTransaction.text)
-                phrase.isUserGenerated = true
-                phrase.creationDate = Date()
-                phrase.lastSpokenDate = Date()
-                phrase.utterance = textTransaction.text
-                phrase.addToCategories(savedCategory)
+                _ = Phrase.create(withUserEntry: textTransaction.text, in: context)
 
                 do {
                     try context.save()
@@ -374,6 +368,8 @@ class PresetsViewController: UICollectionViewController {
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
             case .settings:
                 presentSettingsViewController()
+            default:
+                break
             }
         case .keyboardFunctionButton(let functionType):
             switch functionType {
@@ -421,15 +417,6 @@ class PresetsViewController: UICollectionViewController {
         case .paginatedCategories, .textField:
             return false
         }
-    }
-    
-    private func setupCell(reuseIdentifier: String, indexPath: IndexPath, title: String, fillColor: UIColor = .defaultCellBackgroundColor) -> PresetItemCollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-        
-        cell.setup(title: title)
-        cell.fillColor = fillColor
-        
-        return cell
     }
     
     private func setTextTransaction(_ transaction: TextTransaction) {

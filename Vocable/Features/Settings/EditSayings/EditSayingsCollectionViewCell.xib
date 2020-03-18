@@ -66,6 +66,7 @@
             <size key="customSize" width="562" height="266"/>
             <connections>
                 <outlet property="deleteButton" destination="r2i-5v-HG5" id="onW-S6-HnY"/>
+                <outlet property="editButton" destination="Jx7-73-ctO" id="nmG-a9-6eD"/>
                 <outlet property="textLabel" destination="vav-Zc-tQ2" id="68L-6v-kfY"/>
             </connections>
             <point key="canvasLocation" x="-115.94202898550725" y="167.41071428571428"/>
