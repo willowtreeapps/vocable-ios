@@ -84,7 +84,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         var snapshot = NSDiffableDataSourceSnapshot<Int, SettingsItem>()
         snapshot.appendSections([0])
         let titles = SettingsCellTitles.self
-        if AppConfig.showPIDTunerDebugMenu {
+        if AppConfig.showDebugOptions {
             snapshot.appendItems([.editMySayings(titles.editSayings.rawValue),
                                   .categories(titles.categories.rawValue),
                                   .timingSensitivity(titles.timingSensitivity.rawValue),
@@ -96,9 +96,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             
         } else {
             snapshot.appendItems([.editMySayings(titles.editSayings.rawValue),
-                                  .categories(titles.categories.rawValue),
-                                  .timingSensitivity(titles.timingSensitivity.rawValue),
-                                  .resetAppSettings(titles.resetAppSettings.rawValue),
                                   .selectionMode(titles.selectionMode.rawValue),
                                   .privacyPolicy(titles.privacyPolicy.rawValue),
                                   .contactDevs(titles.contactDevs.rawValue)])
@@ -161,10 +158,10 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
                                                                       count: 2)
         
         let internalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                                    heightDimension: .fractionalHeight((numOfRows - 1) / 5))
+                                                                    heightDimension: .fractionalHeight((numOfRows == 1 ? numOfRows : numOfRows - 1) / 5))
         let internalLinkContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: internalLinkContainerGroupSize,
                                                                           subitem: internalLinkRowGroup,
-                                                                          count: Int(numOfRows) - 1)
+                                                                          count: numOfRows == 1 ? Int(numOfRows) : Int(numOfRows - 1))
         
         let internalLinkLastRowGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(isEvenNumOfItems ? 1.0 : 0.5),
                                                                   heightDimension: .fractionalHeight(1 / 5))
@@ -177,8 +174,11 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(80.0 / 834.0))
         let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
         
+        // If there is one row, only contain last row group in the subitems
+        let settingsPageSubItems = (numOfRows == 1) ? [internalLinkLastRowGroup, externalLinkContainerGroup, versionItem]
+            : [internalLinkContainerGroup, internalLinkLastRowGroup, externalLinkContainerGroup, versionItem]
         let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [internalLinkContainerGroup, internalLinkLastRowGroup, externalLinkContainerGroup, versionItem])
+        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: settingsPageSubItems)
         
         let section = NSCollectionLayoutSection(group: settingPageGroup)
         let layout = UICollectionViewCompositionalLayout(section: section)

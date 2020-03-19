@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 struct AppConfig {
-    static let showPIDTunerDebugMenu: Bool = {
+    static let showDebugOptions: Bool = {
         #if DEBUG
         return true
         #else
