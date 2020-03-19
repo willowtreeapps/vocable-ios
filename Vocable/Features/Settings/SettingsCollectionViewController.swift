@@ -84,16 +84,24 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         var snapshot = NSDiffableDataSourceSnapshot<Int, SettingsItem>()
         snapshot.appendSections([0])
         let titles = SettingsCellTitles.self
-        snapshot.appendItems([.headTrackingToggle,
-                              .editMySayings(titles.editSayings.rawValue),
-                              .categories(titles.categories.rawValue),
-                              .timingSensitivity(titles.timingSensitivity.rawValue),
-                              .resetAppSettings(titles.resetAppSettings.rawValue),
-                              .selectionMode(titles.selectionMode.rawValue),
-                              .privacyPolicy(titles.privacyPolicy.rawValue),
-                              .contactDevs(titles.contactDevs.rawValue)])
         if AppConfig.showPIDTunerDebugMenu {
-            snapshot.appendItems([.pidTuner])
+            snapshot.appendItems([.editMySayings(titles.editSayings.rawValue),
+                                  .categories(titles.categories.rawValue),
+                                  .timingSensitivity(titles.timingSensitivity.rawValue),
+                                  .resetAppSettings(titles.resetAppSettings.rawValue),
+                                  .selectionMode(titles.selectionMode.rawValue),
+                                  .pidTuner,
+                                  .privacyPolicy(titles.privacyPolicy.rawValue),
+                                  .contactDevs(titles.contactDevs.rawValue)])
+            
+        } else {
+            snapshot.appendItems([.editMySayings(titles.editSayings.rawValue),
+                                  .categories(titles.categories.rawValue),
+                                  .timingSensitivity(titles.timingSensitivity.rawValue),
+                                  .resetAppSettings(titles.resetAppSettings.rawValue),
+                                  .selectionMode(titles.selectionMode.rawValue),
+                                  .privacyPolicy(titles.privacyPolicy.rawValue),
+                                  .contactDevs(titles.contactDevs.rawValue)])
         }
         snapshot.appendItems([.versionNum])
         dataSource.apply(snapshot, animatingDifferences: false)
@@ -189,7 +197,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         internalLinkContainerGroup.edgeSpacing = .init(leading: nil, top: nil, trailing: nil, bottom: .fixed(24))
         internalLinkContainerGroup.interItemSpacing = .fixed(8.0)
         
-        
         let externalLinkContainerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: externalLinkContainerGroupSize, subitem: settingsButtonItem, count: 2)
         externalLinkContainerGroup.interItemSpacing = .fixed(8.0)
         
@@ -225,8 +232,8 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             cell.setup(versionLabel: versionAndBuildNumber)
             return cell
         case .pidTuner:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: NSLocalizedString("Tune Cursor", comment: "Tune cursor cell title") )
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
+            cell.setup(title: "Tune Cursor", image: UIImage())
             return cell
         }
     }
