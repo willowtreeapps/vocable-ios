@@ -92,17 +92,28 @@ class HeadGazeWindow: UIWindow {
                 phraseSavedView.centerXAnchor.constraint(equalTo: centerXAnchor)
             ])
         }
-        UIView.animateKeyframes(withDuration: 2.0, delay: 0, options: [.beginFromCurrentState], animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1) {
-                self.phraseSavedView?.alpha = 1
-            }
-            UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.1) {
-                self.phraseSavedView?.alpha = 0
-            }
-        }, completion: { [weak self] didFinish in
-            if didFinish {
-                self?.phraseSavedView?.removeFromSuperview()
-            }
+
+        let fadeInOutDuration: TimeInterval = 0.5
+        let presentationDuration: TimeInterval = 4
+
+        // Fade in
+        UIView.animate(withDuration: fadeInOutDuration,
+                       delay: 0,
+                       options: [.beginFromCurrentState, .curveEaseIn],
+                       animations: { self.phraseSavedView?.alpha = 1 },
+                       completion: { [weak self] entranceDidFinish in
+
+                        guard entranceDidFinish else { return }
+
+                        // Fade out
+                        UIView.animate(withDuration: fadeInOutDuration,
+                                       delay: presentationDuration,
+                                       options: [.beginFromCurrentState, .curveEaseOut],
+                                       animations: { self?.phraseSavedView?.alpha = 0 },
+                                       completion: { dismissalDidFinish in
+                                        guard dismissalDidFinish else { return }
+                                        self?.phraseSavedView?.removeFromSuperview()
+                        })
         })
     }
 
