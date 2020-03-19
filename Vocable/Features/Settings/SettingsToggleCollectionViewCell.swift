@@ -15,15 +15,16 @@ class SettingsToggleCollectionViewCell: VocableCollectionViewCell {
     @IBOutlet var textLabel: UILabel!
     @IBOutlet var enabledSwitch: UISwitch!
     
-    private var subscriber: AnyCancellable?
+    private var cancellables = Set<AnyCancellable>()
+
     override func awakeFromNib() {
         super.awakeFromNib()
         enabledSwitch.isUserInteractionEnabled = false
         enabledSwitch.isEnabled = AppConfig.isHeadTrackingSupported
         enabledSwitch.isOn = AppConfig.isHeadTrackingEnabled
-        subscriber = AppConfig.$isHeadTrackingEnabled.sink { [weak self] isEnabled in
+        AppConfig.$isHeadTrackingEnabled.sink { [weak self] isEnabled in
             self?.enabledSwitch.setOn(isEnabled, animated: true)
-        }
+        }.store(in: &cancellables)
     }
     
     override func updateContentViews() {

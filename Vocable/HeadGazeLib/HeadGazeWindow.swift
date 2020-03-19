@@ -22,7 +22,7 @@ class HeadGazeWindow: UIWindow {
     private let touchGazeDisableDuration: TimeInterval = 3
     private var touchGazeDisableBeganDate: Date?
     
-    private var headTrackingEnabledPublisher: AnyCancellable?
+    private var cancellables = Set<AnyCancellable>()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,12 +41,16 @@ class HeadGazeWindow: UIWindow {
 
     private func commonInit() {
 
-        headTrackingEnabledPublisher = AppConfig.$isHeadTrackingEnabled.sink { [weak self] isEnabled in
-            DispatchQueue.main.async {
-                self?.updateForCurrentHeadTrackingAvailability(isEnabled: isEnabled)
+        AppConfig.$isHeadTrackingEnabled.sink { [weak self] isEnabled in
+            guard let self = self else { return }
+            if isEnabled {
+                self.installCursorViewIfNeeded()
+                self.touchGazeDisableBeganDate = .distantPast
+            } else {
+                self.cursorView?.removeFromSuperview()
+                self.handleWarning(shouldDisplay: false)
             }
-        }
-        updateForCurrentHeadTrackingAvailability(isEnabled: AppConfig.isHeadTrackingEnabled)
+        }.store(in: &cancellables)
 
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
@@ -149,16 +153,6 @@ class HeadGazeWindow: UIWindow {
         }
         self.trackingView = nil
         self.lastGaze = nil
-    }
-
-    private func updateForCurrentHeadTrackingAvailability(isEnabled: Bool) {
-        if isEnabled {
-            self.installCursorViewIfNeeded()
-            self.touchGazeDisableBeganDate = .distantPast
-        } else {
-            self.cursorView?.removeFromSuperview()
-            handleWarning(shouldDisplay: false)
-        }
     }
 
     private func extendGazeDisabledPeriodForTouchEvent() {

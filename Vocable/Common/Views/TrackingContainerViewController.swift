@@ -13,27 +13,21 @@ final class TrackingContainerViewController: UIViewController {
 
     @IBOutlet private var cursorView: UIVirtualCursorView!
 
-    private var headTrackingEnabledPublisher: AnyCancellable?
-
     private var contentViewController: UIViewController!
     private var trackingViewController: UIHeadGazeViewController?
 
+    private var cancellables = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        headTrackingEnabledPublisher = AppConfig.$isHeadTrackingEnabled.sink { [weak self] isEnabled in
-            DispatchQueue.main.async {
-                self?.updateTrackingViewControllerForHeadTrackingState(isEnabled: isEnabled)
+        AppConfig.$isHeadTrackingEnabled.sink { [weak self] isEnabled in
+            guard let self = self else { return }
+            if isEnabled {
+                self.installTrackingViewController()
+            } else {
+                self.removeTrackingViewController()
             }
-        }
-        updateTrackingViewControllerForHeadTrackingState(isEnabled: AppConfig.isHeadTrackingEnabled)
-    }
-
-    private func updateTrackingViewControllerForHeadTrackingState(isEnabled: Bool) {
-        if isEnabled {
-            installTrackingViewController()
-        } else {
-            removeTrackingViewController()
-        }
+        }.store(in: &cancellables)
     }
 
     private func installTrackingViewController() {
