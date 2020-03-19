@@ -20,7 +20,6 @@ final class EditSayingsCollectionViewCell: VocableCollectionViewCell {
         super.updateContentViews()
 
         textLabel.textColor = .defaultTextColor
-        textLabel.font = UIFont.systemFont(ofSize: 22, weight: .regular)
         
         borderedView.fillColor = .defaultCellBackgroundColor
     }

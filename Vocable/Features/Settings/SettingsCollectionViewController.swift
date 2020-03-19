@@ -95,8 +95,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
                                   .contactDevs(titles.contactDevs.rawValue)])
             
         } else {
-            snapshot.appendItems([.headTrackingToggle,
-                                  .editMySayings(titles.editSayings.rawValue),
+            snapshot.appendItems([.editMySayings(titles.editSayings.rawValue),
                                   .categories(titles.categories.rawValue),
                                   .timingSensitivity(titles.timingSensitivity.rawValue),
                                   .resetAppSettings(titles.resetAppSettings.rawValue),
@@ -123,17 +122,17 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     
     private func compactWidthLayout() -> UICollectionViewLayout {
         let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - 3
-//        let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        
+
         let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+        settingsButtonItem.contentInsets = .init(top: 4, leading: 0, bottom: 4, trailing: 0)
         
-        let internalLinksGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(4 / 6))
+        let internalLinksGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                            heightDimension: .fractionalHeight(CGFloat(internalLinksItemCount) / 9))
         let internalLinksGroup = NSCollectionLayoutGroup.vertical(layoutSize: internalLinksGroupSize, subitem: settingsButtonItem, count: internalLinksItemCount)
-        internalLinksGroup.interItemSpacing = .fixed(8)
         
-        let externalLinksGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 4))
+        let externalLinksGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                            heightDimension: .fractionalHeight(2 / 9))
         let externalLinksGroup = NSCollectionLayoutGroup.vertical(layoutSize: externalLinksGroupSize, subitem: settingsButtonItem, count: 2)
-        externalLinksGroup.interItemSpacing = .fixed(8)
         externalLinksGroup.edgeSpacing = .init(leading: nil, top: .fixed(24), trailing: nil, bottom: nil)
         
         let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/7))
@@ -148,36 +147,38 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
     
     private func regularHeightWidthLayout() -> UICollectionViewLayout {
-        let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
+        let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - 3
+        let numOfRows = CGFloat(ceil(Double(internalLinksItemCount) / 2.0))
+        let isEvenNumOfItems = internalLinksItemCount % 2 == 0
 
         let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1.0)))
+        settingsButtonItem.contentInsets = .init(top: 4, leading: 8, bottom: 4, trailing: 8)
         
         let internalLinkRowGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                               heightDimension: .fractionalHeight(1.0))
         let internalLinkRowGroup = NSCollectionLayoutGroup.horizontal(layoutSize: internalLinkRowGroupSize,
                                                                       subitem: settingsButtonItem,
                                                                       count: 2)
-        internalLinkRowGroup.interItemSpacing = .fixed(8.0)
         
         let internalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                                    heightDimension: .fractionalHeight(0.6))
+                                                                    heightDimension: .fractionalHeight((numOfRows - 1) / 5))
         let internalLinkContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: internalLinkContainerGroupSize,
                                                                           subitem: internalLinkRowGroup,
-                                                                          count: 3)
+                                                                          count: Int(numOfRows) - 1)
         
-        let externalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.2))
+        let internalLinkLastRowGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(isEvenNumOfItems ? 1.0 : 0.5),
+                                                                  heightDimension: .fractionalHeight(1 / 5))
+        let internalLinkLastRowGroup = NSCollectionLayoutGroup.horizontal(layoutSize: internalLinkLastRowGroupSize, subitem: settingsButtonItem, count: isEvenNumOfItems ? 2 : 1)
+        internalLinkLastRowGroup.edgeSpacing = .init(leading: nil, top: nil, trailing: nil, bottom: .fixed(24))
         
-        internalLinkContainerGroup.edgeSpacing = .init(leading: nil, top: nil, trailing: nil, bottom: .fixed(24))
-        internalLinkContainerGroup.interItemSpacing = .fixed(8.0)
-        
+        let externalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 5))
         let externalLinkContainerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: externalLinkContainerGroupSize, subitem: settingsButtonItem, count: 2)
-        externalLinkContainerGroup.interItemSpacing = .fixed(8.0)
         
         let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(80.0 / 834.0))
         let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
         
         let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [internalLinkContainerGroup, externalLinkContainerGroup, versionItem])
+        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [internalLinkContainerGroup, internalLinkLastRowGroup, externalLinkContainerGroup, versionItem])
         
         let section = NSCollectionLayoutSection(group: settingPageGroup)
         let layout = UICollectionViewCompositionalLayout(section: section)
@@ -273,6 +274,18 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return true
         }
     }
+    
+//    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.willTransition(to: newCollection, with: coordinator)
+//
+//        var snapshot = dataSource.snapshot()
+//        snapshot.deleteAllItems()
+//        dataSource.apply(snapshot)
+//
+//        DispatchQueue.main.async { [weak self] in
+//            self?.updateDataSource()
+//        }
+//    }
 
     // MARK: Presentations
 

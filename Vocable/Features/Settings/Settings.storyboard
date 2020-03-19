@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="z2O-mb-WoW">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -29,7 +29,7 @@
             <objects>
                 <collectionViewController id="if3-QM-p2o" customClass="SettingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yYQ-tW-Cgs">
-                        <rect key="frame" x="0.0" y="0.0" width="351" height="662"/>
+                        <rect key="frame" x="0.0" y="0.0" width="786" height="1022"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="Xga-RH-NHm">
@@ -54,17 +54,23 @@
             <objects>
                 <viewController id="gMn-gX-rfc" customClass="SettingsViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mXz-yV-vIn" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtZ-qP-xqU">
-                                <rect key="frame" x="16" y="60" width="343" height="41"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtZ-qP-xqU">
+                                <rect key="frame" x="32" y="32" width="770" height="57.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=compact">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59L-eT-oZ6" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="296" y="60" width="63" height="48"/>
+                                <rect key="frame" x="32" y="32" width="116" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="XFt-fF-4My">
                                         <variation key="heightClass=compact" constant="48"/>
@@ -89,7 +95,7 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="6E8-xr-Wux">
-                                <rect key="frame" x="16" y="116" width="343" height="662"/>
+                                <rect key="frame" x="24" y="152" width="786" height="1022"/>
                                 <connections>
                                     <segue destination="if3-QM-p2o" kind="embed" id="npm-Wd-wUb"/>
                                 </connections>
@@ -98,12 +104,15 @@
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="CtZ-qP-xqU" firstAttribute="leading" secondItem="mXz-yV-vIn" secondAttribute="leadingMargin" id="3HQ-kq-5Yu"/>
-                            <constraint firstItem="6E8-xr-Wux" firstAttribute="trailing" secondItem="mXz-yV-vIn" secondAttribute="trailingMargin" id="5Oi-jt-aXT"/>
-                            <constraint firstItem="59L-eT-oZ6" firstAttribute="trailing" secondItem="mXz-yV-vIn" secondAttribute="trailingMargin" id="BOW-Vj-2Lp"/>
-                            <constraint firstItem="6E8-xr-Wux" firstAttribute="leading" secondItem="mXz-yV-vIn" secondAttribute="leadingMargin" id="CDw-7J-EQo"/>
-                            <constraint firstItem="6E8-xr-Wux" firstAttribute="top" secondItem="59L-eT-oZ6" secondAttribute="bottom" constant="24" id="Gej-Yq-05A">
-                                <variation key="heightClass=compact" constant="8"/>
-                                <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                            <constraint firstItem="6E8-xr-Wux" firstAttribute="trailing" secondItem="mXz-yV-vIn" secondAttribute="trailingMargin" constant="8" id="5Oi-jt-aXT">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="59L-eT-oZ6" firstAttribute="leading" secondItem="mXz-yV-vIn" secondAttribute="leadingMargin" id="BOW-Vj-2Lp"/>
+                            <constraint firstItem="6E8-xr-Wux" firstAttribute="leading" secondItem="mXz-yV-vIn" secondAttribute="leadingMargin" constant="-8" id="CDw-7J-EQo">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="6E8-xr-Wux" firstAttribute="top" secondItem="59L-eT-oZ6" secondAttribute="bottom" constant="20" id="Gej-Yq-05A">
+                                <variation key="heightClass=compact" constant="4"/>
                             </constraint>
                             <constraint firstItem="CtZ-qP-xqU" firstAttribute="centerX" secondItem="mXz-yV-vIn" secondAttribute="centerX" id="OAf-Qz-V9Z"/>
                             <constraint firstItem="1Jr-Jy-UTd" firstAttribute="bottom" secondItem="6E8-xr-Wux" secondAttribute="bottom" id="VBU-YZ-EKl"/>
@@ -119,7 +128,7 @@
                         <edgeInsets key="layoutMargins" top="0.0" left="32" bottom="0.0" right="32"/>
                         <viewLayoutGuide key="safeArea" id="1Jr-Jy-UTd"/>
                         <variation key="heightClass=compact">
-                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                            <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                         </variation>
                         <variation key="widthClass=compact">
                             <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
@@ -139,14 +148,14 @@
             <objects>
                 <viewController storyboardIdentifier="MySayings" id="KLI-zL-Q9x" customClass="EditSayingsViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XHU-T2-eKa" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaL-BL-aEw" userLabel="Toolbar">
-                                <rect key="frame" x="16" y="44" width="343" height="64"/>
+                                <rect key="frame" x="32" y="32" width="770" height="96"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvV-sn-lWq" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                        <rect key="frame" x="279" y="0.0" width="64" height="64"/>
+                                        <rect key="frame" x="674" y="0.0" width="96" height="96"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="DvV-sn-lWq" secondAttribute="height" id="kAS-Wb-xZD"/>
                                         </constraints>
@@ -159,11 +168,12 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="plus" catalog="system"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <action selector="addPhrasePressed:" destination="KLI-zL-Q9x" eventType="primaryActionTriggered" id="13s-0j-dDa"/>
                                             <action selector="addPhrasePressed:" destination="KLI-zL-Q9x" eventType="touchUpInside" id="gil-Ks-4dM"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Sayings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
-                                        <rect key="frame" x="96" y="15.999999999999996" width="151" height="33.666666666666657"/>
+                                        <rect key="frame" x="257.5" y="8" width="255.5" height="57.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                         <color key="textColor" name="DefaultFontColor"/>
                                         <nil key="highlightedColor"/>
@@ -175,7 +185,7 @@
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00c-RK-HF1" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="00c-RK-HF1" secondAttribute="height" multiplier="1:1" id="Ybw-Mx-Z25"/>
                                         </constraints>
@@ -188,6 +198,7 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="arrow.left" catalog="system"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <action selector="backToSettings:" destination="KLI-zL-Q9x" eventType="primaryActionTriggered" id="U67-4C-SVw"/>
                                             <action selector="backToSettings:" destination="KLI-zL-Q9x" eventType="touchUpInside" id="fCp-bo-PGp"/>
                                         </connections>
                                     </button>
@@ -214,8 +225,8 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
-                                <rect key="frame" x="16" y="116" width="343" height="558"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
+                                <rect key="frame" x="32" y="152" width="770" height="385"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZPM-Ab-mlI" secondAttribute="height" multiplier="2" priority="250" id="PK4-eE-9mZ"/>
                                     <constraint firstAttribute="height" constant="322.5" id="V2b-Pm-qsk"/>
@@ -239,8 +250,8 @@
                                     <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="51.666666666666657" y="698" width="272" height="48"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="200.5" y="1048" width="433.5" height="94"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>
                                     <constraint firstAttribute="width" constant="400" id="bYi-OY-TtN"/>
@@ -257,7 +268,6 @@
                         <constraints>
                             <constraint firstItem="ZPM-Ab-mlI" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="bottom" constant="24" id="E7v-Tz-7x3">
                                 <variation key="heightClass=compact" constant="8"/>
-                                <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                             </constraint>
                             <constraint firstItem="FaL-BL-aEw" firstAttribute="leading" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="Ef4-57-qpY"/>
                             <constraint firstItem="ZPM-Ab-mlI" firstAttribute="leading" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="HU7-hF-4Vj"/>
@@ -316,7 +326,7 @@
             <objects>
                 <collectionViewController id="W98-u1-6GB" customClass="EditSayingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="558"/>
+                        <rect key="frame" x="0.0" y="0.0" width="770" height="385"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IVZ-Bw-liq">
@@ -341,11 +351,11 @@
             <objects>
                 <viewController storyboardIdentifier="EditSaying" id="2ck-if-Peh" customClass="EditKeyboardViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="v72-Yi-YG1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Z5U-v5-i5X">
-                                <rect key="frame" x="16" y="52" width="343" height="718"/>
+                                <rect key="frame" x="32" y="32" width="770" height="1110"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gMc-BK-buD">
                                     <size key="itemSize" width="50" height="50"/>
