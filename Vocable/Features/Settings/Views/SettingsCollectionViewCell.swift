@@ -24,7 +24,6 @@ class SettingsCollectionViewCell: VocableCollectionViewCell {
         super.updateContentViews()
 
         textLabel.textColor = .defaultTextColor
-        textLabel.font = UIFont.systemFont(ofSize: 22)
     }
 
     func setup(title: String, image: UIImage?) {

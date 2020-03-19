@@ -18,16 +18,16 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Bhu-uK-cWQ">
-                        <rect key="frame" x="20" y="44" width="483" height="21"/>
+                        <rect key="frame" x="20" y="0.0" width="483" height="99"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yM-1f-UdS">
-                                <rect key="frame" x="0.0" y="0.0" width="436.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0yM-1f-UdS">
+                                <rect key="frame" x="0.0" y="36.5" width="436.5" height="26.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="r0N-lM-t9V">
-                                <rect key="frame" x="460.5" y="2" width="22.5" height="17"/>
+                                <rect key="frame" x="460.5" y="35" width="22.5" height="29.5"/>
                                 <color key="tintColor" name="DefaultFontColor"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="28" weight="bold"/>
                             </imageView>
@@ -35,10 +35,10 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Bhu-uK-cWQ" firstAttribute="top" secondItem="Uen-IX-0c2" secondAttribute="topMargin" id="9DT-II-c7B"/>
+                    <constraint firstItem="Bhu-uK-cWQ" firstAttribute="top" secondItem="Uen-IX-0c2" secondAttribute="top" id="9DT-II-c7B"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Bhu-uK-cWQ" secondAttribute="trailing" id="SYr-pJ-Oun"/>
                     <constraint firstItem="Bhu-uK-cWQ" firstAttribute="leading" secondItem="Uen-IX-0c2" secondAttribute="leadingMargin" id="fRG-at-Ius"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Bhu-uK-cWQ" secondAttribute="bottom" id="prr-Ny-G8f"/>
+                    <constraint firstAttribute="bottom" secondItem="Bhu-uK-cWQ" secondAttribute="bottom" id="prr-Ny-G8f"/>
                 </constraints>
                 <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
             </collectionViewCellContentView>

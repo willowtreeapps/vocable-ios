@@ -14,7 +14,6 @@ class SettingsFooterCollectionViewCell: UICollectionViewCell {
     @IBOutlet var versionLabel: UILabel!
     
     override func awakeFromNib() {
-        versionLabel.font = .systemFont(ofSize: 22, weight: .bold)
         versionLabel.textColor = .defaultTextColor
     }
     
