@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import ARKit
 
-final class AppConfig {
+struct AppConfig {
 
     static let showPIDTunerDebugMenu: Bool = {
         #if DEBUG
