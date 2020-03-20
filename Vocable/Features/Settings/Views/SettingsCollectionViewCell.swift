@@ -17,8 +17,6 @@ class SettingsCollectionViewCell: VocableCollectionViewCell {
     
     override func updateContentViews() {
         super.updateContentViews()
-
-        textLabel.textColor = .defaultTextColor
     }
 
     func setup(title: String, image: UIImage?) {

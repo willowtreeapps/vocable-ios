@@ -169,7 +169,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="addPhrasePressed:" destination="KLI-zL-Q9x" eventType="primaryActionTriggered" id="13s-0j-dDa"/>
-                                            <action selector="addPhrasePressed:" destination="KLI-zL-Q9x" eventType="touchUpInside" id="gil-Ks-4dM"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Sayings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
@@ -199,7 +198,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="backToSettings:" destination="KLI-zL-Q9x" eventType="primaryActionTriggered" id="U67-4C-SVw"/>
-                                            <action selector="backToSettings:" destination="KLI-zL-Q9x" eventType="touchUpInside" id="fCp-bo-PGp"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -13,10 +13,6 @@ class SettingsFooterCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var versionLabel: UILabel!
     
-    override func awakeFromNib() {
-        versionLabel.textColor = .defaultTextColor
-    }
-    
     func setup(versionLabel: String) {
         self.versionLabel.text = versionLabel
     }
