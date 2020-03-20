@@ -16,12 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h77-DW-Ra2" userLabel="TrackingContainer">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <connections>
-                                    <segue destination="Gya-9R-y3J" kind="embed" id="hQM-OQ-1Dc"/>
-                                </connections>
-                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQq-Gr-kNC" userLabel="ContentViewController">
                                 <rect key="frame" x="16" y="8" width="343" height="651"/>
                                 <connections>
@@ -31,14 +25,10 @@
                         </subviews>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="h77-DW-Ra2" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leading" id="2vi-F0-7jD"/>
-                            <constraint firstItem="h77-DW-Ra2" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="top" id="35q-ga-C7k"/>
                             <constraint firstItem="AQq-Gr-kNC" firstAttribute="top" secondItem="QoN-fl-FyW" secondAttribute="topMargin" id="Pkw-eU-h0R"/>
                             <constraint firstItem="AQq-Gr-kNC" firstAttribute="leading" secondItem="QoN-fl-FyW" secondAttribute="leadingMargin" id="aS7-NB-aKe"/>
-                            <constraint firstAttribute="bottom" secondItem="h77-DW-Ra2" secondAttribute="bottom" id="aiY-pn-mC3"/>
                             <constraint firstAttribute="bottomMargin" secondItem="AQq-Gr-kNC" secondAttribute="bottom" id="gjT-Qg-rfd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AQq-Gr-kNC" secondAttribute="trailing" id="oal-gs-OpX"/>
-                            <constraint firstAttribute="trailing" secondItem="h77-DW-Ra2" secondAttribute="trailing" id="tKc-EE-VNA"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="32" left="32" bottom="32" right="32"/>
                         <viewLayoutGuide key="safeArea" id="N6F-RO-WaJ"/>
@@ -53,21 +43,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OF-pV-I9m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1668.1640625" y="-1443.3382137628109"/>
-        </scene>
-        <!--Head Gaze View Controller-->
-        <scene sceneID="RBx-lz-Ojp">
-            <objects>
-                <viewController id="Gya-9R-y3J" customClass="UIHeadGazeViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0FP-BP-SNo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="Background"/>
-                        <viewLayoutGuide key="safeArea" id="GGj-AU-Ual"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BPb-7J-yob" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-489" y="-2119"/>
         </scene>
         <!--Presets View Controller-->
         <scene sceneID="wcZ-O0-4Me">

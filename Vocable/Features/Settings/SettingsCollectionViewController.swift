@@ -221,7 +221,9 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         switch item {
         case .headTrackingToggle:
             if AppConfig.isHeadTrackingEnabled {
-                let alertViewController = GazeableAlertViewController.make { AppConfig.isHeadTrackingEnabled.toggle() }
+                let alertViewController = GazeableAlertViewController.make {
+                    AppConfig.isHeadTrackingEnabled.toggle()
+                }
                 present(alertViewController, animated: true)
                 alertViewController.setAlertTitle("Turn off head tracking?")
             } else {
@@ -247,7 +249,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             for child in gazeWindow.rootViewController?.children ?? [] {
                 if let child = child as? UIHeadGazeViewController {
                     child.pidInterpolator.pidSmoothingInterpolator.pulse.showTunningView(minimumValue: -1.0, maximumValue: 1.0)
-                    gazeWindow.cursorView.isDebugCursorHidden = false
+                    gazeWindow.cursorView?.isDebugCursorHidden = false
                 }
             }
         default:
@@ -260,6 +262,10 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         switch item {
         case .versionNum:
             return false
+        case .headTrackingToggle:
+            return AppConfig.isHeadTrackingSupported
+        case .pidTuner:
+            return AppConfig.isHeadTrackingEnabled
         default:
             return true
         }
@@ -270,6 +276,10 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         switch item {
         case .versionNum:
             return false
+        case .headTrackingToggle:
+            return AppConfig.isHeadTrackingSupported
+        case .pidTuner:
+            return AppConfig.isHeadTrackingEnabled
         default:
             return true
         }

@@ -41,8 +41,6 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     private var computedScale: CGFloat = 0
     private var xAngleCorrectionAmount = 0.0
     private var yAngleCorrectionAmount = 0.0
-    
-    private var disposables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,15 +66,11 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        _ = AppConfig.headTrackingValueSubject.sink { isHeadTrackingEnabled in
-            if isHeadTrackingEnabled {
-                self.resetTracking()
-            } else {
-                self.sceneview?.session.pause()
-            }
-        }.store(in: &disposables)
 
+        let configuration = ARFaceTrackingConfiguration()
+        configuration.worldAlignment = .camera
+        sceneview?.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+        
         if let sceneView = sceneview {
             sceneView.isHidden = false
             view.sendSubviewToBack(sceneView)
@@ -86,16 +80,6 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         sceneview?.session.pause()
-    }
-    
-    private func resetTracking() {
-        guard ARFaceTrackingConfiguration.isSupported else {
-            return
-        }
-
-        let configuration = ARFaceTrackingConfiguration()
-        configuration.worldAlignment = .camera
-        sceneview?.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
 
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
@@ -110,7 +94,7 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
                 window.sendEvent(event)
             }
             if let debugEvent = debugInterpolator.event, let gaze = debugEvent.allGazes?.first {
-                window.cursorView.debugCursorMoved(gaze, with: debugEvent)
+                window.cursorView?.debugCursorMoved(gaze, with: debugEvent)
             }
         }
     }
