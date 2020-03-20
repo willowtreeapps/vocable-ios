@@ -14,11 +14,6 @@ class SettingsCollectionViewCell: VocableCollectionViewCell {
     @IBOutlet var textLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
     
-    private var disposables = Set<AnyCancellable>()
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
     override func updateContentViews() {
         super.updateContentViews()
