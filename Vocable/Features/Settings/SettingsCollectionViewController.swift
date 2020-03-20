@@ -15,16 +15,19 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
     private weak var composeVC: MFMailComposeViewController?
     
-    private enum SettingsItem: Hashable {
-        case editMySayings(String)
-        case categories(String)
-        case timingSensitivity(String)
-        case resetAppSettings(String)
-        case selectionMode(String)
-        case headTrackingToggle
-        case privacyPolicy(String)
-        case contactDevs(String)
-        case pidTuner
+    private enum SettingsItem: String, Hashable {
+        var title: String {
+            return self.rawValue
+        }
+        
+        case editMySayings = "Edit My Sayings"
+        case categories = "Categories"
+        case timingSensitivity = "Timing and Sensitivity"
+        case resetAppSettings = "Reset App Settings"
+        case selectionMode = "Selection Mode"
+        case privacyPolicy = "Privacy Policy"
+        case contactDevs = "Contact Developers"
+        case pidTuner = "Tune Cursor"
         case versionNum
     }
 
@@ -83,22 +86,21 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     private func updateDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, SettingsItem>()
         snapshot.appendSections([0])
-        let titles = SettingsCellTitles.self
         if AppConfig.showDebugOptions {
-            snapshot.appendItems([.editMySayings(titles.editSayings.rawValue),
-                                  .categories(titles.categories.rawValue),
-                                  .timingSensitivity(titles.timingSensitivity.rawValue),
-                                  .resetAppSettings(titles.resetAppSettings.rawValue),
-                                  .selectionMode(titles.selectionMode.rawValue),
+            snapshot.appendItems([.editMySayings,
+                                  .categories,
+                                  .timingSensitivity,
+                                  .resetAppSettings,
+                                  .selectionMode,
                                   .pidTuner,
-                                  .privacyPolicy(titles.privacyPolicy.rawValue),
-                                  .contactDevs(titles.contactDevs.rawValue)])
+                                  .privacyPolicy,
+                                  .contactDevs])
             
         } else {
-            snapshot.appendItems([.editMySayings(titles.editSayings.rawValue),
-                                  .selectionMode(titles.selectionMode.rawValue),
-                                  .privacyPolicy(titles.privacyPolicy.rawValue),
-                                  .contactDevs(titles.contactDevs.rawValue)])
+            snapshot.appendItems([.editMySayings,
+                                  .selectionMode,
+                                  .privacyPolicy,
+                                  .contactDevs])
         }
         snapshot.appendItems([.versionNum])
         dataSource.apply(snapshot, animatingDifferences: false)
@@ -113,7 +115,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         if case .compact = self.traitCollection.horizontalSizeClass, case .regular = self.traitCollection.verticalSizeClass {
             return compactWidthLayout()
         } else {
-            return regularHeightWidthLayout()
+            return defaultLayout()
         }
     }
     
@@ -143,10 +145,11 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         return layout
     }
     
-    private func regularHeightWidthLayout() -> UICollectionViewLayout {
+    private func defaultLayout() -> UICollectionViewLayout {
         let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - 3
         let numOfRows = CGFloat(ceil(Double(internalLinksItemCount) / 2.0))
         let isEvenNumOfItems = internalLinksItemCount % 2 == 0
+        let columnCount = 2
 
         let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1.0)))
         settingsButtonItem.contentInsets = .init(top: 4, leading: 8, bottom: 4, trailing: 8)
@@ -155,7 +158,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
                                                               heightDimension: .fractionalHeight(1.0))
         let internalLinkRowGroup = NSCollectionLayoutGroup.horizontal(layoutSize: internalLinkRowGroupSize,
                                                                       subitem: settingsButtonItem,
-                                                                      count: 2)
+                                                                      count: columnCount)
         
         let internalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                                     heightDimension: .fractionalHeight((numOfRows == 1 ? numOfRows : numOfRows - 1) / 5))
@@ -189,17 +192,13 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     
     private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: SettingsItem) -> UICollectionViewCell {
         switch item {
-        case .headTrackingToggle:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsToggleCollectionViewCell
-            cell.setup(title: NSLocalizedString("Head Tracking", comment: "Head tracking cell title"))
-            return cell
-        case .editMySayings(let title), .categories(let title), .timingSensitivity(let title), .resetAppSettings(let title), .selectionMode(let title):
+        case .editMySayings, .categories, .timingSensitivity, .resetAppSettings, .selectionMode:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
-            cell.setup(title: title, image: UIImage(systemName: "chevron.right"))
+            cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
             return cell
-        case .privacyPolicy(let title), .contactDevs(let title):
+        case .privacyPolicy, .contactDevs:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
-            cell.setup(title: title, image: UIImage(systemName: "arrow.up.right"))
+            cell.setup(title: item.title, image: UIImage(systemName: "arrow.up.right"))
             return cell
         case .versionNum:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
@@ -207,7 +206,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return cell
         case .pidTuner:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
-            cell.setup(title: "Tune Cursor", image: UIImage())
+            cell.setup(title: item.title, image: UIImage())
             return cell
         }
     }
@@ -219,17 +218,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
         switch item {
-        case .headTrackingToggle:
-            if AppConfig.isHeadTrackingEnabled {
-                let alertViewController = GazeableAlertViewController.make {
-                    AppConfig.isHeadTrackingEnabled.toggle()
-                }
-                present(alertViewController, animated: true)
-                alertViewController.setAlertTitle("Turn off head tracking?")
-            } else {
-                AppConfig.isHeadTrackingEnabled.toggle()
-            }
-
         case .privacyPolicy:
             let alertViewController = GazeableAlertViewController.make { self.presentPrivacyAlert() }
             present(alertViewController, animated: true)
@@ -262,8 +250,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         switch item {
         case .versionNum:
             return false
-        case .headTrackingToggle:
-            return AppConfig.isHeadTrackingSupported
         case .pidTuner:
             return AppConfig.isHeadTrackingEnabled
         default:
@@ -276,8 +262,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         switch item {
         case .versionNum:
             return false
-        case .headTrackingToggle:
-            return AppConfig.isHeadTrackingSupported
         case .pidTuner:
             return AppConfig.isHeadTrackingEnabled
         default:
