@@ -11,6 +11,8 @@ import UIKit
 @IBDesignable
 class PhraseSavedView: BorderedView {
 
+    @IBOutlet weak var label: UILabel?
+
     override var bounds: CGRect {
         didSet {
             cornerRadius = bounds.height / 2
@@ -27,5 +29,6 @@ class PhraseSavedView: BorderedView {
         super.awakeFromNib()
         setContentHuggingPriority(.required, for: .vertical)
         setContentHuggingPriority(.required, for: .horizontal)
+        label?.text = NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings")
     }
 }

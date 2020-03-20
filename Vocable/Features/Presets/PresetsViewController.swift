@@ -17,8 +17,8 @@ class PresetsViewController: UICollectionViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     private var disposables = Set<AnyCancellable>()
     
-    private var _textTransaction = TextTransaction(text: HintText.preset.rawValue)
-    
+    private var _textTransaction = TextTransaction(text: HintText.preset.localizedString)
+
     private var textTransaction: TextTransaction {
         return _textTransaction
     }
@@ -364,7 +364,7 @@ class PresetsViewController: UICollectionViewController {
                 // TODO: discuss with design if we want to cache the user's currently-entered text instead
                 // of just clearing it
 
-                let newText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.rawValue
+                let newText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.localizedString
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
             case .settings:
                 presentSettingsViewController()

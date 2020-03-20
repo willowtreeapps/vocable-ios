@@ -43,6 +43,9 @@
             <variation key="widthClass=compact">
                 <edgeInsets key="layoutMargins" top="16" left="32" bottom="16" right="32"/>
             </variation>
+            <connections>
+                <outlet property="label" destination="fEx-Zh-S4e" id="enh-y5-6ri"/>
+            </connections>
             <point key="canvasLocation" x="313.768115942029" y="110.49107142857143"/>
         </view>
     </objects>

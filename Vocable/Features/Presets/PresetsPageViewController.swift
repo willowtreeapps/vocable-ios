@@ -65,8 +65,8 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
             let currentPage = pages.firstIndex(of: visibleViewController) else {
             return
         }
-        
-        ItemSelection.presetsPageIndicatorText = ("Page \(currentPage + 1) of \(pages.count)")
+
+        ItemSelection.presetsPageIndicatorText = String(format: NSLocalizedString("Page %d of %d", comment: ""), currentPage + 1, pages.count)
     }
     
     // MARK: - UIPageViewControllerDataSource

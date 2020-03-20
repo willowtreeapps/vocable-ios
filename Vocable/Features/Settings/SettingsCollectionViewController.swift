@@ -191,7 +191,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return cell
         case .mySayings:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: NSLocalizedString("My Sayings", comment: "My sayings cell title"))
+            cell.setup(title: NSLocalizedString("My Sayings", comment: "Category: My Sayings"))
             return cell
         case .contactDevs:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
@@ -229,7 +229,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         case .privacyPolicy:
             let alertViewController = GazeableAlertViewController.make { self.presentPrivacyAlert() }
             present(alertViewController, animated: true)
-            alertViewController.setAlertTitle("You're about to be taken outside of the Vocable app. You may lose head tracking control.")
+            alertViewController.setAlertTitle(NSLocalizedString("You're about to be taken outside of the Vocable app. You may lose head tracking control.", comment: "Alert: You're about to be taken outside of the Vocable app."))
         
         case .mySayings:
             if let vc = self.storyboard?.instantiateViewController(identifier: "MySayings") {
@@ -238,7 +238,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         case .contactDevs:
             let alertViewController = GazeableAlertViewController.make { self.presentEmail() }
             present(alertViewController, animated: true)
-            alertViewController.setAlertTitle("You're about to be taken outside of the Vocable app. You may lose head tracking control.")
+            alertViewController.setAlertTitle(NSLocalizedString("You're about to be taken outside of the Vocable app. You may lose head tracking control.", comment: "Alert: You're about to be taken outside of the Vocable app."))
 
         case .pidTuner:
             guard let gazeWindow = view.window as? HeadGazeWindow else { return }

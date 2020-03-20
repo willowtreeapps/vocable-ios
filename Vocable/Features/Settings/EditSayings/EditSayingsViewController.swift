@@ -11,6 +11,8 @@ import Combine
 
 class EditSayingsViewController: UIViewController {
 
+    @IBOutlet private var titleLabel: UILabel!
+
     @IBOutlet private var addButton: GazeableButton!
     @IBOutlet private var backButton: GazeableButton!
     
@@ -32,11 +34,14 @@ class EditSayingsViewController: UIViewController {
             guard let pagingProgress = pagingProgress else {
                 return
             }
-            self.paginationView.textLabel.text = "\(pagingProgress.pageIndex + 1) of \(pagingProgress.pageCount)"
+
+            self.paginationView.textLabel.text = String(format: NSLocalizedString("Page %d of %d", comment: ""), pagingProgress.pageIndex + 1, pagingProgress.pageCount)
         }).store(in: &disposables)
         
         paginationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)
         paginationView.previousPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToPreviousPage), for: .primaryActionTriggered)
+
+        titleLabel.text = NSLocalizedString("My Sayings", comment: "Category: My Sayings")
     }
     
     @IBAction func backToSettings(_ sender: Any) {

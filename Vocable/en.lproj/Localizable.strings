@@ -1,0 +1,240 @@
+/* Preset: Bad */
+"Bad" = "Bad";
+
+/* Category: Basic Needs */
+"Basic Needs" = "Basic Needs";
+
+/* Cancel Button */
+"Cancel" = "Cancel";
+
+/* Confirm Button */
+"Confirm" = "Okay";
+
+/* Contact developers cell title */
+"Contact developers" = "Contact developers";
+
+/* Category: Conversation */
+"Conversation" = "Conversation";
+
+/* Category: Environment */
+"Environment" = "Environment";
+
+/* Category: General */
+"General" = "General";
+
+/* Preset: Good */
+"Good" = "Good";
+
+/* Preset: Good evening */
+"Good evening" = "Good evening";
+
+/* Preset: Good morning */
+"Good morning" = "Good morning";
+
+/* Preset: Goodbye */
+"Goodbye" = "Goodbye";
+
+/* Head tracking cell title */
+"Head Tracking" = "Head Tracking";
+
+/* Preset: Hello */
+"Hello" = "Hello";
+
+/* Preset: How are you? */
+"How are you?" = "How are you?";
+
+/* Preset: How is your day? */
+"How is your day?" = "How is your day?";
+
+/* Preset: How was your weekend? */
+"How was your weekend?" = "How was your weekend?";
+
+/* Preset: How's it going? */
+"How's it going?" = "How's it going?";
+
+/* Preset: I am cold */
+"I am cold" = "I am cold";
+
+/* Preset: I am fine */
+"I am fine" = "I am fine";
+
+/* Preset: I am finished */
+"I am finished" = "I am finished";
+
+/* Preset: I am good */
+"I am good" = "I am good";
+
+/* Preset: I am having trouble breathing */
+"I am having trouble breathing" = "I am having trouble breathing";
+
+/* Preset: I am hot */
+"I am hot" = "I am hot";
+
+/* Preset: I am hungry */
+"I am hungry" = "I am hungry";
+
+/* Preset: I am in pain */
+"I am in pain" = "I am in pain";
+
+/* Preset: I am thirsty */
+"I am thirsty" = "I am thirsty";
+
+/* Preset: I am tired */
+"I am tired" = "I am tired";
+
+/* Preset: I am uncomfortable */
+"I am uncomfortable" = "I am uncomfortable";
+
+/* Preset: I didn't mean to say that */
+"I didn't mean to say that" = "I didn't mean to say that";
+
+/* Preset: I do not agree */
+"I do not agree" = "I do not agree";
+
+/* Preset: I don't know */
+"I don't know" = "I don't know";
+
+/* Preset: I like it */
+"I like it" = "I like it";
+
+/* Preset: I need a bath */
+"I need a bath" = "I need a bath";
+
+/* Preset: I need a jacket */
+"I need a jacket" = "I need a jacket";
+
+/* Preset: I need a shower */
+"I need a shower" = "I need a shower";
+
+/* Preset: I need my medication */
+"I need my medication" = "I need my medication";
+
+/* Preset: I need to brush my hair */
+"I need to brush my hair" = "I need to brush my hair";
+
+/* Preset: I need to go to the restroom */
+"I need to go to the restroom" = "I need to go to the restroom";
+
+/* Preset: I need to spit */
+"I need to spit" = "I need to spit";
+
+/* Preset: I need to wash my face */
+"I need to wash my face" = "I need to wash my face";
+
+/* Preset: I want to lie down */
+"I want to lie down" = "I want to lie down";
+
+/* Preset: I want to sit up */
+"I want to sit up" = "I want to sit up";
+
+/* Preset: I would like to talk */
+"I would like to talk" = "I would like to talk";
+
+/* Preset: I would like visitors */
+"I would like visitors" = "I would like visitors";
+
+/* Preset: Maybe */
+"Maybe" = "Maybe";
+
+/* Category: My Sayings */
+"My Sayings" = "My Sayings";
+
+/* Preset: No */
+"No" = "No";
+
+/* Preset: No visitors please */
+"No visitors please" = "No visitors please";
+
+/* Preset: Okay */
+"Okay" = "Okay";
+
+/* No comment provided by engineer. */
+"Page %d of %d" = "Page %1$d of %2$d";
+
+/* Category: Personal Care */
+"Personal Care" = "Personal Care";
+
+/* Preset: Please */
+"Please" = "Please";
+
+/* Preset: Please be patient */
+"Please be patient" = "Please be patient";
+
+/* Preset: Please be quiet */
+"Please be quiet" = "Please be quiet";
+
+/* Preset: Please close the blinds */
+"Please close the blinds" = "Please close the blinds";
+
+/* Preset: Please close the window */
+"Please close the window" = "Please close the window";
+
+/* Preset: Please fix my pillow */
+"Please fix my pillow" = "Please fix my pillow";
+
+/* Warning: Please move closer to the device. */
+"Please move closer to the device." = "Please move closer to the device.";
+
+/* Preset: Please open the blinds */
+"Please open the blinds" = "Please open the blinds";
+
+/* Preset: Please open the window */
+"Please open the window" = "Please open the window";
+
+/* Preset: Please repeat what you said */
+"Please repeat what you said" = "Please repeat what you said";
+
+/* Preset: Please stop */
+"Please stop" = "Please stop";
+
+/* Preset: Please turn the lights off */
+"Please turn the lights off" = "Please turn the lights off";
+
+/* Preset: Please turn the lights on */
+"Please turn the lights on" = "Please turn the lights on";
+
+/* Preset: Please turn the TV off */
+"Please turn the TV off" = "Please turn the TV off";
+
+/* Preset: Please turn the TV on */
+"Please turn the TV on" = "Please turn the TV on";
+
+/* Preset: Please turn the volume down */
+"Please turn the volume down" = "Please turn the volume down";
+
+/* Preset: Please turn the volume up */
+"Please turn the volume up" = "Please turn the volume up";
+
+/* Preset: Please wait */
+"Please wait" = "Please wait";
+
+/* Preset: Pleased to meet you */
+"Pleased to meet you" = "Pleased to meet you";
+
+/* Privacy policy cell title */
+"Privacy Policy" = "Privacy Policy";
+
+/* Saved to My Sayings */
+"Saved to My Sayings" = "Saved to My Sayings";
+
+/* Select something below to speak Hint Text */
+"Select something below to speak" = "Select something below to speak";
+
+/* Title: Settings */
+"Settings" = "Settings";
+
+/* Preset: Thank you */
+"Thank you" = "Thank you";
+
+/* Preset: That makes sense */
+"That makes sense" = "That makes sense";
+
+/* Tune cursor cell title */
+"Tune Cursor" = "Tune Cursor";
+
+/* Preset: Yes */
+"Yes" = "Yes";
+
+/* Alert: You're about to be taken outside of the Vocable app. */
+"You're about to be taken outside of the Vocable app. You may lose head tracking control." = "You're about to be taken outside of the Vocable app. You may lose head tracking control.";
+

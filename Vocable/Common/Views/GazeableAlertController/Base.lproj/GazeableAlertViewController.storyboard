@@ -11,12 +11,12 @@
         <!--Gazeable Alert View Controller-->
         <scene sceneID="B34-5d-CpA">
             <objects>
-                <viewController modalPresentationStyle="overFullScreen" id="enC-yg-pBJ" customClass="GazeableAlertViewController" customModule="EyeSpeak" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="GNd-Cl-tSU" customClass="GazeEatingView" customModule="EyeSpeak" customModuleProvider="target">
+                <viewController modalPresentationStyle="overFullScreen" id="enC-yg-pBJ" customClass="GazeableAlertViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GNd-Cl-tSU" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5u-4R-VSq" customClass="BorderedView" customModule="EyeSpeak" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5u-4R-VSq" customClass="BorderedView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="267" y="445" width="300" height="222.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Lorem ipsum dolor" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qxz-Cn-o5q">
@@ -41,7 +41,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="fKf-IB-mcC">
                                         <rect key="frame" x="0.0" y="122.5" width="300" height="100"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rA5-3d-GQF" customClass="GazeableButton" customModule="EyeSpeak" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rA5-3d-GQF" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="149.5" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="5hb-26-GP6">
@@ -70,7 +70,7 @@
                                                     <constraint firstAttribute="width" constant="1" id="QD2-tF-1Ve"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="he4-Sq-X8i" customClass="GazeableButton" customModule="EyeSpeak" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="he4-Sq-X8i" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                                 <rect key="frame" x="150.5" y="0.0" width="149.5" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="0Mv-01-gSD">
