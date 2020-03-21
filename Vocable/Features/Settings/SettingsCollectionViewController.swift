@@ -235,6 +235,10 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             if let vc = self.storyboard?.instantiateViewController(identifier: "MySayings") {
                 show(vc, sender: nil)
             }
+        case .selectionMode:
+            if let vc = self.storyboard?.instantiateViewController(identifier: "SelectionMode") {
+                 show(vc, sender: nil)
+             }
         case .contactDevs:
             let alertString = NSLocalizedString("You're about to be taken outside of the Vocable app. You may lose head tracking control.",
                                                 comment: "You're about to be taken outside of the Vocable app. You may lose head tracking control alert message")
