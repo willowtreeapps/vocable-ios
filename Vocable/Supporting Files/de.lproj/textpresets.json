@@ -1,0 +1,88 @@
+[{
+    "title": "Allgemeines",
+    "presets":
+       ["Bitte",
+        "Danke",
+        "Ja",
+        "Nein",
+        "Vielleicht",
+        "Ein Moment",
+        "Ich weiß nicht",
+        "Das habe ich nicht gemeint",
+        "Hab bitte Geduld"
+    ]
+},
+{
+    "title": "Bedürfnisse",
+    "presets":
+       ["Ich muss aufs Klo",
+        "Ich habe Durst",
+        "Ich habe Hunger",
+        "Mir ist kalt",
+        "Mir ist heiß",
+        "Ich bin müde",
+        "Mir geht es gut",
+        "Das reicht, danke",
+        "Ich fühle mich unwohl",
+        "Ich habe Schmerzen",
+        "Ich bin fertig",
+        "Ich möchte mich hinlegen",
+        "Ich möchte mich aufsetzen"
+    ]
+},
+{
+    "title": "Hygenie",
+    "presets":
+       ["Ich brauche meine Medikamente",
+        "Ich möchte baden",
+        "Ich möchte duschen",
+        "Ich möchte mein Gesicht waschen",
+        "Ich möchte mein Haar kämmen",
+        "Bitte mein Kissen aufschütteln",
+        "Ich muss spucken",
+        "Ich habe Probleme zu atmen",
+        "Ich brauchen eine Jacke"
+    ]
+},
+{
+    "title": "Unterhaltung",
+    "presets":
+       ["Hallo",
+        "Guten Morgen",
+        "Guten Abend",
+        "Freut mich dich zu sehen",
+        "Wie war dein Tag?",
+        "Wie geht es dir?",
+        "Wie läufts?",
+        "Wie war dein Wochenende?",
+        "Auf Wiedersehen",
+        "OK",
+        "Schlecht",
+        "Gut",
+        "Das macht Sinn",
+        "Das mag ich",
+        "Bitte aufhören",
+        "Ich bin nicht einverstanden",
+        "Wie bitte?"
+    ]
+},
+{
+    "title": "Umgebung",
+    "presets":
+       ["Bitte das Licht anmachen",
+        "Bitte das Licht ausmachen",
+        "Kein Besuch bitte",
+        "Ich hätte gerne Besuch",
+        "Bitte leise sein",
+        "Ich möchte mich mit dir unterhalten",
+        "Bitte den Fernseher anmachen",
+        "Bitte den Fernseher ausmachen",
+        "Bitte lauter",
+        "Bitte leiser",
+        "Bitte die Vorhänge aufmachen",
+        "Bitte die Vorhänge zumachen",
+        "Bitte das Fenser aufmachen",
+        "Bitte das Fenser zumachen"
+    ]
+}
+]

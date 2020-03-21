@@ -66,7 +66,7 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
             return
         }
 
-        ItemSelection.presetsPageIndicatorText = String(format: NSLocalizedString("Page %d of %d", comment: ""), currentPage + 1, pages.count)
+        ItemSelection.presetsPageIndicatorText = String(format: NSLocalizedString("Page %d of %d", comment: "Pagination Control: page 1 of x"), currentPage + 1, pages.count)
     }
     
     // MARK: - UIPageViewControllerDataSource

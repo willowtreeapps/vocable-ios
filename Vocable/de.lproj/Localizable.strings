@@ -1,215 +1,17 @@
-/* Preset: Bad */
-"Bad" = "Schlecht";
-
-/* Cancel Button */
-"Cancel" = "Abbrechen";
-
-/* Confirm Button */
-"Confirm" = "Okay";
-
-/* Category: Basic Needs */
-"Basic Needs" = "Bedürfnisse";
-
 /* Contact developers cell title */
 "Contact developers" = "Entwickler kontaktieren";
-
-/* Category: Conversation */
-"Conversation" = "Unterhaltung";
-
-/* Category: Environment */
-"Environment" = "Umgebung";
-
-/* Category: General */
-"General" = "Allgemeines";
-
-/* Preset: Good */
-"Good" = "Gut";
-
-/* Preset: Good evening */
-"Good evening" = "Guten Abend";
-
-/* Preset: Good morning */
-"Good morning" = "Guten Morgen";
-
-/* Preset: Goodbye */
-"Goodbye" = "Auf Wiedersehen";
 
 /* Head tracking cell title */
 "Head Tracking" = "Kopfbewegungssteuerung";
 
-/* Preset: Hello */
-"Hello" = "Hallo";
-
-/* Preset: How are you? */
-"How are you?" = "Wie geht es dir?";
-
-/* Preset: How is your day? */
-"How is your day?" = "Wie war dein Tag?";
-
-/* Preset: How was your weekend? */
-"How was your weekend?" = "Wie war dein Wochenende?";
-
-/* Preset: How's it going? */
-"How's it going?" = "Wie läufts?";
-
-/* Preset: I am cold */
-"I am cold" = "Mir ist kalt";
-
-/* Preset: I am fine */
-"I am fine" = "Mir geht es gut";
-
-/* Preset: I am finished */
-"I am finished" = "Ich bin fertig";
-
-/* Preset: I am good */
-"I am good" = "Das reicht, danke";
-
-/* Preset: I am having trouble breathing */
-"I am having trouble breathing" = "Ich habe Probleme zu atmen";
-
-/* Preset: I am hot */
-"I am hot" = "Mir ist heiß";
-
-/* Preset: I am hungry */
-"I am hungry" = "Ich habe Hunger";
-
-/* Preset: I am in pain */
-"I am in pain" = "Ich habe Schmerzen";
-
-/* Preset: I am thirsty */
-"I am thirsty" = "Ich habe Durst";
-
-/* Preset: I am tired */
-"I am tired" = "Ich bin müde";
-
-/* Preset: I am uncomfortable */
-"I am uncomfortable" = "Ich fühle mich unwohl";
-
-/* Preset: I didn't mean to say that */
-"I didn't mean to say that" = "Das habe ich nicht gemeint";
-
-/* Preset: I do not agree */
-"I do not agree" = "Ich bin nicht einverstanden";
-
-/* Preset: I don't know */
-"I don't know" = "Ich weiß nicht";
-
-/* Preset: I like it */
-"I like it" = "Das mag ich";
-
-/* Preset: I need a bath */
-"I need a bath" = "Ich möchte baden";
-
-/* Preset: I need a jacket */
-"I need a jacket" = "Ich brauchen eine Jacke";
-
-/* Preset: I need a shower */
-"I need a shower" = "Ich möchte duschen";
-
-/* Preset: I need my medication */
-"I need my medication" = "Ich brauche meine Medikamente";
-
-/* Preset: I need to brush my hair */
-"I need to brush my hair" = "Ich möchte mein Haar kämmen";
-
-/* Preset: I need to go to the restroom */
-"I need to go to the restroom" = "Ich muss aufs Klo";
-
-/* Preset: I need to spit */
-"I need to spit" = "Ich muss spucken";
-
-/* Preset: I need to wash my face */
-"I need to wash my face" = "Ich möchte mein Gesicht waschen";
-
-/* Preset: I want to lie down */
-"I want to lie down" = "Ich möchte mich hinlegen";
-
-/* Preset: I want to sit up */
-"I want to sit up" = "Ich möchte mich aufsetzen";
-
-/* Preset: I would like to talk */
-"I would like to talk" = "Ich möchte mich mit dir unterhalten";
-
-/* Preset: I would like visitors */
-"I would like visitors" = "Ich hätte gerne Besuch";
-
-/* Preset: Maybe */
-"Maybe" = "Vielleicht";
-
 /* Category: My Sayings */
 "My Sayings" = "Meine Sätze";
 
-/* Preset: No */
-"No" = "Nein";
-
-/* Preset: No visitors please */
-"No visitors please" = "Kein Besuch bitte";
-
-/* Preset: Okay */
-"Okay" = "OK";
-
-/* No comment provided by engineer. */
+/* Pagination Control: page 1 of x */
 "Page %d of %d" = "Seite %1$d von %2$d";
-
-/* Category: Personal Care */
-"Personal Care" = "Hygenie";
-
-/* Preset: Please */
-"Please" = "Bitte";
-
-/* Preset: Please be patient */
-"Please be patient" = "Hab bitte Geduld";
-
-/* Preset: Please be quiet */
-"Please be quiet" = "Bitte leise sein";
-
-/* Preset: Please close the blinds */
-"Please close the blinds" = "Bitte die Vorhänge zumachen";
-
-/* Preset: Please close the window */
-"Please close the window" = "Bitte das Fenser zumachen";
-
-/* Preset: Please fix my pillow */
-"Please fix my pillow" = "Bitte mein Kissen aufschütteln";
 
 /* Warning: Please move closer to the device. */
 "Please move closer to the device." = "Bitte näher ans Gerät kommen.";
-
-/* Preset: Please open the blinds */
-"Please open the blinds" = "die Vorhänge aufmachen";
-
-/* Preset: Please open the window */
-"Please open the window" = "Bitte das Fenser aufmachen";
-
-/* Preset: Please repeat what you said */
-"Please repeat what you said" = "Wie bitte?";
-
-/* Preset: Please stop */
-"Please stop" = "Bitte aufhören";
-
-/* Preset: Please turn the lights off */
-"Please turn the lights off" = "Bitte das Licht ausmachen";
-
-/* Preset: Please turn the lights on */
-"Please turn the lights on" = "Bitte das Licht anmachen";
-
-/* Preset: Please turn the TV off */
-"Please turn the TV off" = "Bitte den Fernseher ausmachen";
-
-/* Preset: Please turn the TV on */
-"Please turn the TV on" = "Bitte den Fernseher anmachen";
-
-/* Preset: Please turn the volume down */
-"Please turn the volume down" = "Bitte lauter";
-
-/* Preset: Please turn the volume up */
-"Please turn the volume up" = "Bitte leiser";
-
-/* Preset: Please wait */
-"Please wait" = "Ein Moment";
-
-/* Preset: Pleased to meet you */
-"Pleased to meet you" = "Freut mich dich zu sehen";
 
 /* Privacy policy cell title */
 "Privacy Policy" = "Datenschutz";
@@ -223,17 +25,8 @@
 /* Title: Settings */
 "Settings" = "Einstellungen";
 
-/* Preset: Thank you */
-"Thank you" = "Danke";
-
-/* Preset: That makes sense */
-"That makes sense" = "Das macht Sinn";
-
 /* Tune cursor cell title */
 "Tune Cursor" = "Zeiger Feineinstellung";
-
-/* Preset: Yes */
-"Yes" = "Ja";
 
 /* Alert: You're about to be taken outside of the Vocable app. */
 "You're about to be taken outside of the Vocable app. You may lose head tracking control." = "Dieser Link wir ausserhalb der Vocable App geöffnet. Kopfbewegungssteuerung ist vielleicht nicht möglich.";
