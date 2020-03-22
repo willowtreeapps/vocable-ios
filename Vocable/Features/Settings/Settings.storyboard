@@ -439,6 +439,115 @@
             </objects>
             <point key="canvasLocation" x="4778" y="138"/>
         </scene>
+        <!--Selection Mode View Controller-->
+        <scene sceneID="E8o-4T-NBZ">
+            <objects>
+                <viewController storyboardIdentifier="SelectionMode" id="qZG-0r-rFp" customClass="SelectionModeViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zhu-BA-Not" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="PUK-lO-h1l">
+                                <rect key="frame" x="20" y="104" width="794" height="1070"/>
+                                <connections>
+                                    <segue destination="Vxa-qU-AeL" kind="embed" id="Sb3-vc-cl7"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPu-f6-SaZ" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="20" y="32" width="63" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="104" id="2lN-AG-P3Y">
+                                        <variation key="heightClass=compact" constant="63"/>
+                                        <variation key="widthClass=compact" constant="63"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="96" id="ao9-vQ-agS">
+                                        <variation key="heightClass=compact" constant="48"/>
+                                        <variation key="widthClass=compact" constant="48"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <state key="normal" image="xmark.circle" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="34" weight="bold"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="arrow.left" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="qZG-0r-rFp" eventType="touchUpInside" id="5kq-wn-PhI"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selection Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lxK-Kb-VzE">
+                                <rect key="frame" x="32" y="32" width="770" height="48"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
+                                <color key="textColor" name="DefaultFontColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=compact">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" hidden="YES"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="PUK-lO-h1l" firstAttribute="top" secondItem="BPu-f6-SaZ" secondAttribute="bottom" constant="24" id="6Z2-Ha-3y7"/>
+                            <constraint firstItem="PUK-lO-h1l" firstAttribute="leading" secondItem="Zhu-BA-Not" secondAttribute="leadingMargin" id="ANK-LJ-8Pc"/>
+                            <constraint firstItem="Y7t-8H-TNj" firstAttribute="bottom" secondItem="PUK-lO-h1l" secondAttribute="bottom" id="NKY-nJ-Ogw"/>
+                            <constraint firstItem="PUK-lO-h1l" firstAttribute="top" secondItem="lxK-Kb-VzE" secondAttribute="bottom" constant="24" id="PAn-HE-nPt"/>
+                            <constraint firstItem="lxK-Kb-VzE" firstAttribute="leading" secondItem="Y7t-8H-TNj" secondAttribute="leading" constant="32" id="bfa-Xf-WoD"/>
+                            <constraint firstItem="PUK-lO-h1l" firstAttribute="trailing" secondItem="Zhu-BA-Not" secondAttribute="trailingMargin" id="j60-1t-DH2"/>
+                            <constraint firstItem="Y7t-8H-TNj" firstAttribute="trailing" secondItem="lxK-Kb-VzE" secondAttribute="trailing" constant="32" id="jec-5I-g42"/>
+                            <constraint firstItem="BPu-f6-SaZ" firstAttribute="leading" secondItem="PUK-lO-h1l" secondAttribute="leading" id="u5g-GK-N9A"/>
+                            <constraint firstItem="BPu-f6-SaZ" firstAttribute="top" secondItem="Y7t-8H-TNj" secondAttribute="top" constant="32" id="wKj-Kq-CzA"/>
+                            <constraint firstItem="lxK-Kb-VzE" firstAttribute="top" secondItem="Y7t-8H-TNj" secondAttribute="top" constant="32" id="xTN-0f-vgW"/>
+                        </constraints>
+                        <edgeInsets key="layoutMargins" top="0.0" left="32" bottom="0.0" right="32"/>
+                        <viewLayoutGuide key="safeArea" id="Y7t-8H-TNj"/>
+                        <variation key="heightClass=compact">
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="fS3-1y-p6D"/>
+                    <connections>
+                        <outlet property="backButton" destination="BPu-f6-SaZ" id="bCr-yl-kRW"/>
+                        <outlet property="pageLabel" destination="lxK-Kb-VzE" id="hJR-Ae-iUJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dnS-eg-ghQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2577" y="867"/>
+        </scene>
+        <!--Selection Mode Collection View Controller-->
+        <scene sceneID="B2g-gz-VZl">
+            <objects>
+                <collectionViewController id="Vxa-qU-AeL" customClass="SelectionModeCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" id="Ynx-E9-Qnp">
+                        <rect key="frame" x="0.0" y="0.0" width="794" height="1070"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cpr-4e-7iv">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="Vxa-qU-AeL" id="dSa-pg-FdV"/>
+                            <outlet property="delegate" destination="Vxa-qU-AeL" id="cdM-MU-yQq"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="123-K5-uIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3423" y="867"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow.left" catalog="system" width="64" height="48"/>
