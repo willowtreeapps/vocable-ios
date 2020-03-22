@@ -9,14 +9,9 @@
 import UIKit
 
 class SelectionModeViewController: UIViewController {
-    
     @IBOutlet var backButton: GazeableButton!
-    @IBOutlet weak var pageLabel: UILabel!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     @IBAction func backButtonPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
      }
 }

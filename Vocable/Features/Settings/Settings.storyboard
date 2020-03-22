@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="z2O-mb-WoW">
-<<<<<<< HEAD
-    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
-=======
     <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
->>>>>>> 73b981d... Built out the selection mode screen.
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -33,11 +29,7 @@
             <objects>
                 <collectionViewController id="if3-QM-p2o" customClass="SettingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yYQ-tW-Cgs">
-<<<<<<< HEAD
-                        <rect key="frame" x="0.0" y="0.0" width="786" height="1022"/>
-=======
                         <rect key="frame" x="0.0" y="0.0" width="960" height="1210"/>
->>>>>>> 73b981d... Built out the selection mode screen.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="Xga-RH-NHm">
@@ -62,21 +54,12 @@
             <objects>
                 <viewController id="gMn-gX-rfc" customClass="SettingsViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mXz-yV-vIn" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
-<<<<<<< HEAD
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtZ-qP-xqU">
-                                <rect key="frame" x="32" y="32" width="770" height="57.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
-=======
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtZ-qP-xqU">
                                 <rect key="frame" x="32" y="32" width="960" height="41"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
->>>>>>> 73b981d... Built out the selection mode screen.
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=compact">
@@ -87,11 +70,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59L-eT-oZ6" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-<<<<<<< HEAD
-                                <rect key="frame" x="32" y="32" width="116" height="100"/>
-=======
                                 <rect key="frame" x="876" y="32" width="116" height="100"/>
->>>>>>> 73b981d... Built out the selection mode screen.
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="XFt-fF-4My">
                                         <variation key="heightClass=compact" constant="48"/>
@@ -116,11 +95,7 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="6E8-xr-Wux">
-<<<<<<< HEAD
-                                <rect key="frame" x="24" y="152" width="786" height="1022"/>
-=======
                                 <rect key="frame" x="32" y="156" width="960" height="1210"/>
->>>>>>> 73b981d... Built out the selection mode screen.
                                 <connections>
                                     <segue destination="if3-QM-p2o" kind="embed" id="npm-Wd-wUb"/>
                                 </connections>
@@ -173,16 +148,6 @@
             <objects>
                 <viewController storyboardIdentifier="MySayings" id="KLI-zL-Q9x" customClass="EditSayingsViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XHU-T2-eKa" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
-<<<<<<< HEAD
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaL-BL-aEw" userLabel="Toolbar">
-                                <rect key="frame" x="32" y="32" width="770" height="96"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvV-sn-lWq" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                        <rect key="frame" x="674" y="0.0" width="96" height="96"/>
-=======
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -191,7 +156,6 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvV-sn-lWq" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                         <rect key="frame" x="864" y="0.0" width="96" height="96"/>
->>>>>>> 73b981d... Built out the selection mode screen.
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="DvV-sn-lWq" secondAttribute="height" id="kAS-Wb-xZD"/>
                                         </constraints>
@@ -208,11 +172,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Sayings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
-<<<<<<< HEAD
-                                        <rect key="frame" x="257.5" y="8" width="255.5" height="57.5"/>
-=======
                                         <rect key="frame" x="352.5" y="8" width="255.5" height="57.5"/>
->>>>>>> 73b981d... Built out the selection mode screen.
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                         <color key="textColor" name="DefaultFontColor"/>
                                         <nil key="highlightedColor"/>
@@ -264,11 +224,7 @@
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
-<<<<<<< HEAD
-                                <rect key="frame" x="32" y="152" width="770" height="385"/>
-=======
                                 <rect key="frame" x="32" y="152" width="960" height="480"/>
->>>>>>> 73b981d... Built out the selection mode screen.
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZPM-Ab-mlI" secondAttribute="height" multiplier="2" priority="250" id="PK4-eE-9mZ"/>
                                     <constraint firstAttribute="height" constant="322.5" id="V2b-Pm-qsk"/>
@@ -292,8 +248,12 @@
                                     <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
                                 </connections>
                             </containerView>
+<<<<<<< HEAD
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
 <<<<<<< HEAD
+=======
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+>>>>>>> 303252f... Finished last tweaks to selection mode screen.
                                 <rect key="frame" x="200.5" y="1048" width="433.5" height="94"/>
 =======
                                 <rect key="frame" x="295.5" y="1240" width="433.5" height="94"/>
@@ -448,13 +408,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="PUK-lO-h1l">
-                                <rect key="frame" x="20" y="104" width="794" height="1070"/>
+                                <rect key="frame" x="32" y="152" width="770" height="1022"/>
                                 <connections>
                                     <segue destination="Vxa-qU-AeL" kind="embed" id="Sb3-vc-cl7"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPu-f6-SaZ" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="20" y="32" width="63" height="48"/>
+                                <rect key="frame" x="32" y="32" width="104" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="104" id="2lN-AG-P3Y">
                                         <variation key="heightClass=compact" constant="63"/>
@@ -478,7 +438,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selection Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lxK-Kb-VzE">
-                                <rect key="frame" x="32" y="32" width="770" height="48"/>
+                                <rect key="frame" x="32" y="32" width="770" height="96"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
@@ -516,7 +476,6 @@
                     <navigationItem key="navigationItem" id="fS3-1y-p6D"/>
                     <connections>
                         <outlet property="backButton" destination="BPu-f6-SaZ" id="bCr-yl-kRW"/>
-                        <outlet property="pageLabel" destination="lxK-Kb-VzE" id="hJR-Ae-iUJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dnS-eg-ghQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -528,7 +487,7 @@
             <objects>
                 <collectionViewController id="Vxa-qU-AeL" customClass="SelectionModeCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" id="Ynx-E9-Qnp">
-                        <rect key="frame" x="0.0" y="0.0" width="794" height="1070"/>
+                        <rect key="frame" x="0.0" y="0.0" width="770" height="1022"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cpr-4e-7iv">
