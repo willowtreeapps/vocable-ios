@@ -1,14 +1,14 @@
 [{
     "title": "Allgemeines",
     "presets":
-       ["Bitte",
+    ["Bitte",
         "Danke",
         "Ja",
         "Nein",
         "Vielleicht",
-        "Ein Moment",
-        "Ich weiß nicht",
-        "Das habe ich nicht gemeint",
+        "Einen Moment, bitte",
+        "Das weiß ich nicht",
+        "Das wollte ich nicht sagen",
         "Hab bitte Geduld"
     ]
 },
@@ -16,7 +16,7 @@
     "title": "Bedürfnisse",
     "presets":
        ["Ich muss aufs Klo",
-        "Ich habe Durst",
+        "Ich bin durstig",
         "Ich habe Hunger",
         "Mir ist kalt",
         "Mir ist heiß",
@@ -31,7 +31,7 @@
     ]
 },
 {
-    "title": "Hygenie",
+    "title": "Hygiene",
     "presets":
        ["Ich brauche meine Medikamente",
         "Ich möchte baden",
@@ -40,7 +40,7 @@
         "Ich möchte mein Haar kämmen",
         "Bitte mein Kissen aufschütteln",
         "Ich muss spucken",
-        "Ich habe Probleme zu atmen",
+        "Ich habe Atembeschwerden",
         "Ich brauchen eine Jacke"
     ]
 },
@@ -51,38 +51,38 @@
         "Guten Morgen",
         "Guten Abend",
         "Freut mich dich zu sehen",
-        "Wie war dein Tag?",
+        "Wie läuft dein Tag?",
         "Wie geht es dir?",
-        "Wie läufts?",
+        "Wie läuft's?",
         "Wie war dein Wochenende?",
-        "Auf Wiedersehen",
+        "Tschüss",
         "OK",
         "Schlecht",
         "Gut",
         "Das macht Sinn",
         "Das mag ich",
         "Bitte aufhören",
-        "Ich bin nicht einverstanden",
+        "Ich stimme nicht zu",
         "Wie bitte?"
     ]
 },
 {
     "title": "Umgebung",
     "presets":
-       ["Bitte das Licht anmachen",
-        "Bitte das Licht ausmachen",
+       ["Bitte das Licht anschalten",
+        "Bitte das Licht ausschalten",
         "Kein Besuch bitte",
         "Ich hätte gerne Besuch",
         "Bitte leise sein",
-        "Ich möchte mich mit dir unterhalten",
-        "Bitte den Fernseher anmachen",
-        "Bitte den Fernseher ausmachen",
+        "Ich möchte reden",
+        "Bitte den Fernseher anschalten",
+        "Bitte den Fernseher ausschalten",
         "Bitte lauter",
         "Bitte leiser",
-        "Bitte die Vorhänge aufmachen",
-        "Bitte die Vorhänge zumachen",
-        "Bitte das Fenser aufmachen",
-        "Bitte das Fenser zumachen"
+        "Bitte die Vorhänge öffnen",
+        "Bitte die Vorhänge schließen",
+        "Bitte das Fenster öffnen",
+        "Bitte das Fenster schließen"
     ]
 }
 ]

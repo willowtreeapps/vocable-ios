@@ -2,7 +2,7 @@
 "Contact developers" = "Entwickler kontaktieren";
 
 /* Head tracking cell title */
-"Head Tracking" = "Kopfbewegungssteuerung";
+"Head Tracking" = "Steuerung per Kopfbewegung";
 
 /* Category: My Sayings */
 "My Sayings" = "Meine Sätze";
@@ -20,14 +20,13 @@
 "Saved to My Sayings" = "In Meine Sätze gespeichert";
 
 /* Select something below to speak Hint Text */
-"Select something below to speak" = "Wähle unten etwas aus um zu sprechen";
+"Select something below to speak" = "Wähle unten etwas aus, um zu sprechen";
 
 /* Title: Settings */
 "Settings" = "Einstellungen";
 
 /* Tune cursor cell title */
-"Tune Cursor" = "Zeiger Feineinstellung";
+"Tune Cursor" = "Feineinstellung des Zeigers";
 
 /* Alert: You're about to be taken outside of the Vocable app. */
-"You're about to be taken outside of the Vocable app. You may lose head tracking control." = "Dieser Link wir ausserhalb der Vocable App geöffnet. Kopfbewegungssteuerung ist vielleicht nicht möglich.";
-
+"You're about to be taken outside of the Vocable app. You may lose head tracking control." = "Dieser Link wir ausserhalb der Vocable App geöffnet. Sie laufen möglicherweise Gefahr, nicht mehr per Kopfbewegung steuern zu können.";
