@@ -101,10 +101,6 @@ private final class GazeableAlertButton: GazeableButton {
         self.setTitleColor(.white, for: .selected)
         self.setTitleColor(.black, for: .normal)
         self.backgroundView.cornerRadius = 14
-    }
-
-    override func didMoveToWindow() {
-        super.didMoveToWindow()
 
         updateForCurrentTraitCollection()
     }
@@ -168,7 +164,7 @@ final class GazeableAlertViewController: UIViewController {
     init(alertTitle: String) {
         super.init(nibName: nil, bundle: nil)
 
-        self.modalPresentationStyle = .custom
+        self.modalPresentationStyle = .overFullScreen
         self.titleLabel.text = alertTitle
     }
 
