@@ -231,12 +231,10 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
                     let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
                     if originalPhrase?.utterance != _textTransaction.text {
                         handleExitAlert()
-                    } else {
-                        self.navigationController?.popViewController(animated: true)
+                        break
                     }
-                } else {
-                    self.navigationController?.popViewController(animated: true)
                 }
+                self.navigationController?.popViewController(animated: true)
             case .confirmEdit:
                 if let phraseIdentifier = phraseIdentifier {
                     let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
