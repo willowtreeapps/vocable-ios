@@ -54,6 +54,7 @@
 		6BFB18C624004711002C3515 /* ModelObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C524004711002C3515 /* ModelObjectExtensions.swift */; };
 		6BFB18C724005E18002C3515 /* CategoryPaginationContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838202C23FD8934005A79CD /* CategoryPaginationContainerCollectionViewCell.swift */; };
 		71004B0D242926A2006833B8 /* SelectionMode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71004B0C242926A2006833B8 /* SelectionMode.storyboard */; };
+		71004B0F24295F9C006833B8 /* EditedPhraseSavedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71004B0E24295F9C006833B8 /* EditedPhraseSavedView.xib */; };
 		714EFD45241964D800DC773C /* EditSayingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714EFD44241964D800DC773C /* EditSayingsViewController.swift */; };
 		718D7FAE2419546F00FDEF93 /* EditSayingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D7FAD2419546F00FDEF93 /* EditSayingsCollectionViewCell.swift */; };
 		718D7FB0241954C400FDEF93 /* EditSayingsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718D7FAF241954C400FDEF93 /* EditSayingsCollectionViewCell.xib */; };
@@ -183,6 +184,7 @@
 		6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Helpers.swift"; sourceTree = "<group>"; };
 		6BFB18C524004711002C3515 /* ModelObjectExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectExtensions.swift; sourceTree = "<group>"; };
 		71004B0C242926A2006833B8 /* SelectionMode.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectionMode.storyboard; sourceTree = "<group>"; };
+		71004B0E24295F9C006833B8 /* EditedPhraseSavedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditedPhraseSavedView.xib; sourceTree = "<group>"; };
 		714EFD44241964D800DC773C /* EditSayingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSayingsViewController.swift; sourceTree = "<group>"; };
 		718D7FAD2419546F00FDEF93 /* EditSayingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSayingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		718D7FAF241954C400FDEF93 /* EditSayingsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditSayingsCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 				A96D61D724229F7400577144 /* SettingsCollectionViewCell.xib in Resources */,
 				71B856442416CEB600CB163B /* PhraseSavedView.xib in Resources */,
 				A98E8A2523F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib in Resources */,
+				71004B0F24295F9C006833B8 /* EditedPhraseSavedView.xib in Resources */,
 				B81D236723FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib in Resources */,
 				B81D235B23FED8EF005741E8 /* PresetPaginationContainerCollectionViewCell.xib in Resources */,
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,

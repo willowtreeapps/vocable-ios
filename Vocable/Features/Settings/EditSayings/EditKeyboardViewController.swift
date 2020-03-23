@@ -244,10 +244,10 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
                 }
                 do {
                     try context.save()
+                    NotificationCenter.default.post(name: .editedPhraseSaved, object: nil)
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")
                 }
-                self.navigationController?.popViewController(animated: true)
             default:
                 break
             }
