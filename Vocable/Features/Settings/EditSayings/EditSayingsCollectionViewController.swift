@@ -100,16 +100,21 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
     }
 
     @objc private func handleCellDeletionButton(_ sender: UIButton) {
-        for cell in collectionView.visibleCells where sender.isDescendant(of: cell) {
-            guard let indexPath = collectionView.indexPath(for: cell) else {
+        let alert = GazeableAlertViewController(alertTitle: "Are you sure?\nDeleted phrases cannot be recovered.")
+        alert.addAction(GazeableAlertAction(title: "Delete", handler: {
+            for cell in self.collectionView.visibleCells where sender.isDescendant(of: cell) {
+                guard let indexPath = self.collectionView.indexPath(for: cell) else {
+                    return
+                }
+                let phrase = self.fetchResultsController.object(at: indexPath)
+                let context = NSPersistentContainer.shared.viewContext
+                context.delete(phrase)
+                try? context.save()
                 return
             }
-            let phrase = fetchResultsController.object(at: indexPath)
-            let context = NSPersistentContainer.shared.viewContext
-            context.delete(phrase)
-            try? context.save()
-            return
-        }
+        }))
+        alert.addAction(GazeableAlertAction(title: "Cancel"))
+        self.present(alert, animated: true)
     }
     
     @objc private func handleCellEditButton(_ sender: UIButton) {
