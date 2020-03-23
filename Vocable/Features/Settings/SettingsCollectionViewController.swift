@@ -15,12 +15,31 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
     private weak var composeVC: MFMailComposeViewController?
     
-    private enum SettingsItem: CaseIterable {
-        case headTrackingToggle
-        case privacyPolicy
-        case mySayings
-        case contactDevs
-        case pidTuner
+    // Contact Developers + Privact Policy + Version Number
+    private let externalLinksItemCount = 3
+    
+    private enum SettingsItem: String, Hashable {
+        var title: String {
+            return self.rawValue
+        }
+        
+        var isFeatureEnabled: Bool {
+            let debugFeatures: [SettingsItem] = [.categories, .timingSensitivity,
+                                                 .resetAppSettings, .pidTuner]
+            if debugFeatures.contains(self) {
+                return AppConfig.showDebugOptions
+            }
+            return true
+        }
+        
+        case editMySayings = "Edit My Sayings"
+        case categories = "Categories"
+        case timingSensitivity = "Timing and Sensitivity"
+        case resetAppSettings = "Reset App Settings"
+        case selectionMode = "Selection Mode"
+        case privacyPolicy = "Privacy Policy"
+        case contactDevs = "Contact Developers"
+        case pidTuner = "Tune Cursor"
         case versionNum
     }
 
@@ -68,6 +87,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
         collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsFooterCollectionViewCell")
         collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsToggleCollectionViewCell")
+        collectionView.register(UINib(nibName: "SettingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsCollectionViewCell")
 
         updateDataSource()
 
@@ -78,10 +98,14 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     private func updateDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, SettingsItem>()
         snapshot.appendSections([0])
-        snapshot.appendItems([.headTrackingToggle, .privacyPolicy, .contactDevs, .mySayings])
-        if AppConfig.showPIDTunerDebugMenu {
-            snapshot.appendItems([.pidTuner])
-        }
+        snapshot.appendItems([.editMySayings,
+                              .categories,
+                              .timingSensitivity,
+                              .resetAppSettings,
+                              .selectionMode,
+                              .pidTuner,
+                              .privacyPolicy,
+                              .contactDevs].filter({$0.isFeatureEnabled}))
         snapshot.appendItems([.versionNum])
         dataSource.apply(snapshot, animatingDifferences: false)
     }
@@ -92,85 +116,76 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
 
     func createLayout() -> UICollectionViewLayout {
-        if case .compact = self.traitCollection.verticalSizeClass {
-            return compactHeightLayout()
-        } else if case .compact = self.traitCollection.horizontalSizeClass {
+        if case .compact = self.traitCollection.horizontalSizeClass, case .regular = self.traitCollection.verticalSizeClass {
             return compactWidthLayout()
         } else {
-            return regularHeightWidthLayout()
+            return defaultLayout()
         }
     }
     
     private func compactWidthLayout() -> UICollectionViewLayout {
-        let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
-        let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        
+        let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - externalLinksItemCount
+
         let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+        settingsButtonItem.contentInsets = .init(top: 4, leading: 0, bottom: 4, trailing: 0)
         
-        let settingsToggleHeight = traitCollection.verticalSizeClass == .compact ? CGFloat(6) : CGFloat(10)
-        let settingsToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / settingsToggleHeight))
-        let settingsToggleGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsToggleGroupSize, subitem: headTrackingToggleItem, count: 1)
-        settingsToggleGroup.edgeSpacing = .init(leading: nil, top: .fixed(32), trailing: nil, bottom: .fixed(92))
+        let internalLinksGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                            heightDimension: .fractionalHeight(CGFloat(internalLinksItemCount) / 9))
+        let internalLinksGroup = NSCollectionLayoutGroup.vertical(layoutSize: internalLinksGroupSize, subitem: settingsButtonItem, count: internalLinksItemCount)
         
-        let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(2 / 6))
-        let settingsOptionsGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsOptionsGroupSize, subitem: settingsButtonItem, count: itemCount)
-        settingsOptionsGroup.interItemSpacing = .fixed(16)
+        let externalLinksGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                            heightDimension: .fractionalHeight(2 / 9))
+        let externalLinksGroup = NSCollectionLayoutGroup.vertical(layoutSize: externalLinksGroupSize, subitem: settingsButtonItem, count: 2)
+        externalLinksGroup.edgeSpacing = .init(leading: nil, top: .fixed(24), trailing: nil, bottom: nil)
         
         let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/7))
         let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
         
         let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
-        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [settingsToggleGroup, settingsOptionsGroup, versionItem])
+        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [internalLinksGroup, externalLinksGroup, versionItem])
         
         let section = NSCollectionLayoutSection(group: settingPageGroup)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
     
-    private func compactHeightLayout() -> UICollectionViewLayout {
-        let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
-        let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+    private func defaultLayout() -> UICollectionViewLayout {
+        let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - externalLinksItemCount
+        let numOfRows = CGFloat(ceil(Double(internalLinksItemCount) / 2.0))
+        let isEvenNumOfItems = internalLinksItemCount.isMultiple(of: 2)
+        let columnCount = 2
+
+        let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1.0)))
+        settingsButtonItem.contentInsets = .init(top: 4, leading: 8, bottom: 4, trailing: 8)
         
-        let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+        let internalLinkRowGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                              heightDimension: .fractionalHeight(1.0))
+        let internalLinkRowGroup = NSCollectionLayoutGroup.horizontal(layoutSize: internalLinkRowGroupSize,
+                                                                      subitem: settingsButtonItem,
+                                                                      count: columnCount)
         
-        let settingsToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.3))
-        let settingsToggleGroup = NSCollectionLayoutGroup.horizontal(layoutSize: settingsToggleGroupSize, subitem: headTrackingToggleItem, count: 1)
-        settingsToggleGroup.edgeSpacing = .init(leading: nil, top: nil, trailing: nil, bottom: .fixed(32))
+        let internalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                                    heightDimension: .fractionalHeight((numOfRows == 1 ? numOfRows : numOfRows - 1) / 5))
+        let internalLinkContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: internalLinkContainerGroupSize,
+                                                                          subitem: internalLinkRowGroup,
+                                                                          count: numOfRows == 1 ? Int(numOfRows) : Int(numOfRows - 1))
         
-        let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 3))
-        let settingsOptionsGroup = NSCollectionLayoutGroup.horizontal(layoutSize: settingsOptionsGroupSize, subitem: settingsButtonItem, count: itemCount)
-        settingsOptionsGroup.interItemSpacing = .fixed(8)
-        settingsOptionsGroup.edgeSpacing = .init(leading: nil, top: nil, trailing: nil, bottom: .fixed(16))
+        let internalLinkLastRowGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(isEvenNumOfItems ? 1.0 : 0.5),
+                                                                  heightDimension: .fractionalHeight(1 / 5))
+        let internalLinkLastRowGroup = NSCollectionLayoutGroup.horizontal(layoutSize: internalLinkLastRowGroupSize, subitem: settingsButtonItem, count: isEvenNumOfItems ? 2 : 1)
+        internalLinkLastRowGroup.edgeSpacing = .init(leading: nil, top: nil, trailing: nil, bottom: .fixed(24))
         
-        let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/7))
-        let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
-        
-        let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
-        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [settingsToggleGroup, settingsOptionsGroup, versionItem])
-        
-        let section = NSCollectionLayoutSection(group: settingPageGroup)
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
-    }
-    
-    private func regularHeightWidthLayout() -> UICollectionViewLayout {
-        let itemCount = dataSource.snapshot().itemIdentifiers.count - 2
-        let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1 / 2)))
-        
-        let settingsToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 6))
-        let settingsToggleGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingsToggleGroupSize, subitem: headTrackingToggleItem, count: 1)
-        settingsToggleGroup.edgeSpacing = .init(leading: nil, top: .fixed(32), trailing: nil, bottom: .fixed(92))
-        
-        let settingsOptionsGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(3 / 6))
-        let settingsOptionsGroup = NSCollectionLayoutGroup.horizontal(layoutSize: settingsOptionsGroupSize, subitem: settingsButtonItem, count: itemCount)
-        settingsOptionsGroup.interItemSpacing = .fixed(16)
+        let externalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 5))
+        let externalLinkContainerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: externalLinkContainerGroupSize, subitem: settingsButtonItem, count: 2)
         
         let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(80.0 / 834.0))
         let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
         
+        // If there is one row, only contain last row group in the subitems
+        let settingsPageSubItems = (numOfRows == 1) ? [internalLinkLastRowGroup, externalLinkContainerGroup, versionItem]
+            : [internalLinkContainerGroup, internalLinkLastRowGroup, externalLinkContainerGroup, versionItem]
         let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [settingsToggleGroup, settingsOptionsGroup, versionItem])
+        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: settingsPageSubItems)
         
         let section = NSCollectionLayoutSection(group: settingPageGroup)
         let layout = UICollectionViewCompositionalLayout(section: section)
@@ -181,29 +196,21 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     
     private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: SettingsItem) -> UICollectionViewCell {
         switch item {
-        case .headTrackingToggle:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsToggleCollectionViewCell
-            cell.setup(title: NSLocalizedString("Head Tracking", comment: "Head tracking cell title") )
+        case .editMySayings, .categories, .timingSensitivity, .resetAppSettings, .selectionMode:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
+            cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
             return cell
-        case .privacyPolicy:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: NSLocalizedString("Privacy Policy", comment: "Privacy policy cell title") )
-            return cell
-        case .mySayings:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: NSLocalizedString("My Sayings", comment: "My sayings cell title"))
-            return cell
-        case .contactDevs:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: NSLocalizedString("Contact developers", comment: "Contact developers cell title") )
+        case .privacyPolicy, .contactDevs:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
+            cell.setup(title: item.title, image: UIImage(systemName: "arrow.up.right"))
             return cell
         case .versionNum:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
             cell.setup(versionLabel: versionAndBuildNumber)
             return cell
         case .pidTuner:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-            cell.setup(title: NSLocalizedString("Tune Cursor", comment: "Tune cursor cell title") )
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
+            cell.setup(title: item.title, image: UIImage())
             return cell
         }
     }
@@ -215,23 +222,12 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
         switch item {
-        case .headTrackingToggle:
-            if AppConfig.isHeadTrackingEnabled {
-                let alertViewController = GazeableAlertViewController.make {
-                    AppConfig.isHeadTrackingEnabled.toggle()
-                }
-                present(alertViewController, animated: true)
-                alertViewController.setAlertTitle("Turn off head tracking?")
-            } else {
-                AppConfig.isHeadTrackingEnabled.toggle()
-            }
-
         case .privacyPolicy:
             let alertViewController = GazeableAlertViewController.make { self.presentPrivacyAlert() }
             present(alertViewController, animated: true)
             alertViewController.setAlertTitle("You're about to be taken outside of the Vocable app. You may lose head tracking control.")
         
-        case .mySayings:
+        case .editMySayings:
             if let vc = self.storyboard?.instantiateViewController(identifier: "MySayings") {
                 show(vc, sender: nil)
             }
@@ -248,7 +244,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
                     gazeWindow.cursorView?.isDebugCursorHidden = false
                 }
             }
-        case .versionNum:
+        default:
             break
         }
     }
@@ -258,8 +254,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         switch item {
         case .versionNum:
             return false
-        case .headTrackingToggle:
-            return AppConfig.isHeadTrackingSupported
         case .pidTuner:
             return AppConfig.isHeadTrackingEnabled
         default:
@@ -272,15 +266,13 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         switch item {
         case .versionNum:
             return false
-        case .headTrackingToggle:
-            return AppConfig.isHeadTrackingSupported
         case .pidTuner:
             return AppConfig.isHeadTrackingEnabled
         default:
             return true
         }
     }
-
+    
     // MARK: Presentations
 
     private func presentPrivacyAlert() {

@@ -11,8 +11,7 @@ import Combine
 import ARKit
 
 struct AppConfig {
-
-    static let showPIDTunerDebugMenu: Bool = {
+    static let showDebugOptions: Bool = {
         #if DEBUG
         return true
         #else
