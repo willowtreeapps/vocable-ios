@@ -12,6 +12,6 @@ class SelectionModeViewController: UIViewController {
     @IBOutlet var backButton: GazeableButton!
     
     @IBAction func backButtonPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
      }
 }
