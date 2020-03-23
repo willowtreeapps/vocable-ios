@@ -18,9 +18,6 @@ final class EditSayingsCollectionViewCell: VocableCollectionViewCell {
     
     override func updateContentViews() {
         super.updateContentViews()
-
-        textLabel.textColor = .defaultTextColor
-        
         borderedView.fillColor = .defaultCellBackgroundColor
     }
 
