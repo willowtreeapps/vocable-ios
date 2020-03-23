@@ -224,11 +224,20 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
         case .topBarButton(let buttonType):
             (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
             collectionView.deselectItem(at: indexPath, animated: true)
+            let context = NSPersistentContainer.shared.viewContext
             switch buttonType {
             case .back:
-                self.navigationController?.popViewController(animated: true)
+                if let phraseIdentifier = phraseIdentifier {
+                    let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
+                    if originalPhrase?.utterance != _textTransaction.text {
+                        handleExitAlert()
+                    } else {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
             case .confirmEdit:
-                let context = NSPersistentContainer.shared.viewContext
                 if let phraseIdentifier = phraseIdentifier {
                     let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
                     originalPhrase?.utterance = _textTransaction.text
@@ -320,6 +329,17 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
             textExpression.replace(text: textTransaction.text)
             suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
         }
+    }
+    
+    private func handleExitAlert() {
+        let alert = GazeableAlertViewController(alertTitle: "Going back before saving will clear any edits made.")
+        alert.addAction(GazeableAlertAction(title: "Discard", handler: {
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }))
+        alert.addAction(GazeableAlertAction(title: "Continue Editing"))
+        self.present(alert, animated: true)
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
