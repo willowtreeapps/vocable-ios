@@ -29,7 +29,7 @@
             <objects>
                 <collectionViewController id="if3-QM-p2o" customClass="SettingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yYQ-tW-Cgs">
-                        <rect key="frame" x="0.0" y="0.0" width="960" height="1210"/>
+                        <rect key="frame" x="0.0" y="0.0" width="976" height="1214"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="Xga-RH-NHm">
@@ -57,7 +57,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtZ-qP-xqU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtZ-qP-xqU">
                                 <rect key="frame" x="32" y="32" width="960" height="41"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                                 <color key="textColor" name="DefaultFontColor"/>
@@ -70,7 +70,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59L-eT-oZ6" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="876" y="32" width="116" height="100"/>
+                                <rect key="frame" x="32" y="32" width="116" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="XFt-fF-4My">
                                         <variation key="heightClass=compact" constant="48"/>
@@ -95,7 +95,7 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="6E8-xr-Wux">
-                                <rect key="frame" x="32" y="156" width="960" height="1210"/>
+                                <rect key="frame" x="24" y="152" width="976" height="1214"/>
                                 <connections>
                                     <segue destination="if3-QM-p2o" kind="embed" id="npm-Wd-wUb"/>
                                 </connections>
@@ -249,7 +249,7 @@
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="200.5" y="1048" width="433.5" height="94"/>
+                                <rect key="frame" x="295.5" y="1240" width="433.5" height="94"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>
                                     <constraint firstAttribute="width" constant="400" id="bYi-OY-TtN"/>

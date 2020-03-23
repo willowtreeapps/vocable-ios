@@ -85,9 +85,9 @@ class SelectionModeCollectionViewController: UICollectionViewController {
         }
         
         if AppConfig.isHeadTrackingEnabled {
-            let alertViewController = GazeableAlertViewController.make { AppConfig.isHeadTrackingEnabled.toggle() }
+            //let alertViewController = GazeableAlertViewController.make { AppConfig.isHeadTrackingEnabled.toggle() }
+            let alertViewController = GazeableAlertViewController.init(alertTitle: "Turn off head tracking?")
             present(alertViewController, animated: true)
-            alertViewController.setAlertTitle("Turn off head tracking?")
         } else {
             AppConfig.isHeadTrackingEnabled.toggle()
         }
