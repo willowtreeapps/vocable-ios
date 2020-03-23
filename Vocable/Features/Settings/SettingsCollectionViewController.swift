@@ -15,6 +15,9 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
     private weak var composeVC: MFMailComposeViewController?
     
+    // Contact Developers + Privact Policy + Version Number
+    private let externalLinksItemCount = 3
+    
     private enum SettingsItem: String, Hashable {
         var title: String {
             return self.rawValue
@@ -120,7 +123,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
     
     private func compactWidthLayout() -> UICollectionViewLayout {
-        let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - 3
+        let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - externalLinksItemCount
 
         let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         settingsButtonItem.contentInsets = .init(top: 4, leading: 0, bottom: 4, trailing: 0)
@@ -146,7 +149,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
     
     private func defaultLayout() -> UICollectionViewLayout {
-        let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - 3
+        let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - externalLinksItemCount
         let numOfRows = CGFloat(ceil(Double(internalLinksItemCount) / 2.0))
         let isEvenNumOfItems = internalLinksItemCount % 2 == 0
         let columnCount = 2
