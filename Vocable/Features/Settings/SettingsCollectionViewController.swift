@@ -235,6 +235,8 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             if let vc = self.storyboard?.instantiateViewController(identifier: "MySayings") {
                 show(vc, sender: nil)
             }
+        case .selectionMode:
+            presentSelectionModeViewController()
         case .contactDevs:
             let alertString = NSLocalizedString("You're about to be taken outside of the Vocable app. You may lose head tracking control.",
                                                 comment: "You're about to be taken outside of the Vocable app. You may lose head tracking control alert message")
@@ -317,5 +319,12 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
-
+    
+    private func presentSelectionModeViewController() {
+        let storyboard = UIStoryboard(name: "SelectionMode", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController()!
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+    
 }
