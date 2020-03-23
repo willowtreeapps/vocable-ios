@@ -23,6 +23,15 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return self.rawValue
         }
         
+        var isFeatureEnabled: Bool {
+            let debugFeatures: [SettingsItem] = [.categories, .timingSensitivity,
+                                                 .resetAppSettings, .pidTuner]
+            if debugFeatures.contains(self) {
+                return AppConfig.showDebugOptions
+            }
+            return true
+        }
+        
         case editMySayings = "Edit My Sayings"
         case categories = "Categories"
         case timingSensitivity = "Timing and Sensitivity"
@@ -89,22 +98,14 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     private func updateDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, SettingsItem>()
         snapshot.appendSections([0])
-        if AppConfig.showDebugOptions {
-            snapshot.appendItems([.editMySayings,
-                                  .categories,
-                                  .timingSensitivity,
-                                  .resetAppSettings,
-                                  .selectionMode,
-                                  .pidTuner,
-                                  .privacyPolicy,
-                                  .contactDevs])
-            
-        } else {
-            snapshot.appendItems([.editMySayings,
-                                  .selectionMode,
-                                  .privacyPolicy,
-                                  .contactDevs])
-        }
+        snapshot.appendItems([.editMySayings,
+                              .categories,
+                              .timingSensitivity,
+                              .resetAppSettings,
+                              .selectionMode,
+                              .pidTuner,
+                              .privacyPolicy,
+                              .contactDevs].filter({$0.isFeatureEnabled}))
         snapshot.appendItems([.versionNum])
         dataSource.apply(snapshot, animatingDifferences: false)
     }
@@ -272,7 +273,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         }
     }
     
-
     // MARK: Presentations
 
     private func presentPrivacyAlert() {
