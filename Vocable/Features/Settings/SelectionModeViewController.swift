@@ -14,4 +14,5 @@ class SelectionModeViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
      }
+    
 }

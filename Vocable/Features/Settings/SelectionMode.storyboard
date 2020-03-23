@@ -17,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="iam-PV-77H">
-                                <rect key="frame" x="32" y="196" width="350" height="666"/>
+                                <rect key="frame" x="20" y="148" width="374" height="714"/>
                                 <connections>
                                     <segue destination="Wpp-b3-AEE" kind="embed" id="7o6-O5-vUv"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRU-7y-7Mw" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="32" y="76" width="104" height="96"/>
+                                <rect key="frame" x="20" y="76" width="63" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="104" id="HTi-bI-cbO">
                                         <variation key="heightClass=compact" constant="63"/>
@@ -43,11 +43,11 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="arrow.left" catalog="system"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="backButtonPressed:" destination="sMt-ye-FpV" eventType="touchUpInside" id="WHJ-o4-15u"/>
+                                    <action selector="backButtonPressed:" destination="sMt-ye-FpV" eventType="primaryActionTriggered" id="0df-qb-rbF"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selection Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6K0-bd-56C">
-                                <rect key="frame" x="32" y="76" width="350" height="96"/>
+                                <rect key="frame" x="32" y="76" width="350" height="48"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
@@ -96,7 +96,7 @@
             <objects>
                 <collectionViewController id="Wpp-b3-AEE" customClass="SelectionModeCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" id="80Z-9e-FOK">
-                        <rect key="frame" x="0.0" y="0.0" width="350" height="666"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="714"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tdH-e2-Raq">
