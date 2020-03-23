@@ -17,7 +17,7 @@ class SelectionModeCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
     
-    func setupCollectionView() {
+    private func setupCollectionView() {
         collectionView.backgroundColor = .collectionViewBackgroundColor
         collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsToggleCollectionViewCell")
         
@@ -25,11 +25,11 @@ class SelectionModeCollectionViewController: UICollectionViewController {
         collectionView.collectionViewLayout = layout
     }
     
-    func createLayout() -> UICollectionViewLayout {
+    private func createLayout() -> UICollectionViewLayout {
         if case .compact = self.traitCollection.verticalSizeClass {
             return compactVerticalLayout()
         } else {
-            return regularHeightWidthLayout()
+            return defaultLayout()
         }
     }
     
@@ -43,7 +43,7 @@ class SelectionModeCollectionViewController: UICollectionViewController {
         return layout
     }
     
-    private func regularHeightWidthLayout() -> UICollectionViewLayout {
+    private func defaultLayout() -> UICollectionViewLayout {
         let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         let headTrackingToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/9))
         let headTrackingToggleGroup = NSCollectionLayoutGroup.vertical(layoutSize: headTrackingToggleGroupSize, subitems: [headTrackingToggleItem])
