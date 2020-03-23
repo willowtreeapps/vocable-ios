@@ -39,7 +39,7 @@ private final class DividerView: UIView {
     }
 
     func commonInit() {
-        self.backgroundColor = .grayDivider
+        backgroundColor = .grayDivider
     }
 
     override var intrinsicContentSize: CGSize {
@@ -61,10 +61,10 @@ private final class GazeableAlertView: BorderedView {
     }
 
     private func commonInit() {
-        self.roundedCorners = .allCorners
-        self.cornerRadius = 14
-        self.fillColor = .alertBackgroundColor
-        self.setContentHuggingPriority(.required, for: .horizontal)
+        roundedCorners = .allCorners
+        cornerRadius = 14
+        fillColor = .alertBackgroundColor
+        setContentHuggingPriority(.required, for: .horizontal)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -96,17 +96,17 @@ private final class GazeableAlertButton: GazeableButton {
     }
 
     private func commonInit() {
-        self.fillColor = .alertBackgroundColor
-        self.selectionFillColor = .primaryColor
-        self.setTitleColor(.white, for: .selected)
-        self.setTitleColor(.black, for: .normal)
-        self.backgroundView.cornerRadius = 14
+        fillColor = .alertBackgroundColor
+        selectionFillColor = .primaryColor
+        setTitleColor(.white, for: .selected)
+        setTitleColor(.black, for: .normal)
+        backgroundView.cornerRadius = 14
 
         updateForCurrentTraitCollection()
     }
 
     private func updateForCurrentTraitCollection() {
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         contentEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24)
     }
 
