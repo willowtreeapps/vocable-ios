@@ -151,7 +151,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     private func defaultLayout() -> UICollectionViewLayout {
         let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - externalLinksItemCount
         let numOfRows = CGFloat(ceil(Double(internalLinksItemCount) / 2.0))
-        let isEvenNumOfItems = internalLinksItemCount % 2 == 0
+        let isEvenNumOfItems = internalLinksItemCount.isMultiple(of: 2)
         let columnCount = 2
 
         let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1.0)))
