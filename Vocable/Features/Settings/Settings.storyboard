@@ -248,20 +248,8 @@
                                     <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
                                 </connections>
                             </containerView>
-<<<<<<< HEAD
-<<<<<<< HEAD
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
-<<<<<<< HEAD
-=======
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
->>>>>>> 303252f... Finished last tweaks to selection mode screen.
-=======
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
->>>>>>> 817400d... PR feedback
                                 <rect key="frame" x="200.5" y="1048" width="433.5" height="94"/>
-=======
-                                <rect key="frame" x="295.5" y="1240" width="433.5" height="94"/>
->>>>>>> 73b981d... Built out the selection mode screen.
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>
                                     <constraint firstAttribute="width" constant="400" id="bYi-OY-TtN"/>
