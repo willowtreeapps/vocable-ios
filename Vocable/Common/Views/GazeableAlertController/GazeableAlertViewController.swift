@@ -8,6 +8,13 @@
 
 import UIKit
 
+class GazeEatingView: UIView {
+    override func gazeableHitTest(_ point: CGPoint, with event: UIHeadGazeEvent?) -> UIView? {
+        // Hit test this view's subviews, otherwise swallow the gazeable hit test
+        super.gazeableHitTest(point, with: event) ?? self
+    }
+}
+
 final class GazableAlertAction: NSObject {
 
     let title: String
@@ -118,7 +125,7 @@ private final class GazeableAlertButton: GazeableButton {
 
 }
 
-final class GazeableAlertViewController: UIViewController {
+final class GazeableAlertViewController: UIViewController, UIViewControllerTransitioningDelegate {
 
     private lazy var alertView: GazeableAlertView = {
         let view = GazeableAlertView()
@@ -164,7 +171,9 @@ final class GazeableAlertViewController: UIViewController {
     init(alertTitle: String) {
         super.init(nibName: nil, bundle: nil)
 
-        self.modalPresentationStyle = .overFullScreen
+        self.transitioningDelegate = self
+        self.modalPresentationStyle = .custom
+
         self.titleLabel.text = alertTitle
     }
 
@@ -172,8 +181,6 @@ final class GazeableAlertViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .clear
 
         setupViews()
         updateContentForCurrentTraitCollection()
@@ -296,6 +303,12 @@ final class GazeableAlertViewController: UIViewController {
         } else {
             lastAlertButton?.backgroundView.roundedCorners.insert([.bottomLeft, .bottomRight])
         }
+    }
+
+    // MARK: UIViewControllerTransitioningDelegate
+
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return GazeableAlertPresentationController(presentedViewController: presented, presenting: presenting)
     }
 
 }
