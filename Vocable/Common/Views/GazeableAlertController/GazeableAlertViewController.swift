@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class GazableAlertAction: NSObject {
+final class GazeableAlertAction: NSObject {
 
     let title: String
     let handler: (() -> Void)?
@@ -20,8 +20,8 @@ final class GazableAlertAction: NSObject {
     }
 
     @objc fileprivate func performActions() {
-        handler?()
         defaultCompletion?()
+        handler?()
     }
 
 }
@@ -155,7 +155,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         return stackView
     }()
 
-    private var actions = [GazableAlertAction]() {
+    private var actions = [GazeableAlertAction]() {
         didSet {
             updateButtonLayout()
         }
@@ -195,7 +195,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         }
     }
 
-    func addAction(_ action: GazableAlertAction) {
+    func addAction(_ action: GazeableAlertAction) {
         action.defaultCompletion = { [weak self] in
             self?.presentingViewController?.dismiss(animated: true)
         }
@@ -255,7 +255,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
             let button = GazeableAlertButton(frame: .zero)
             button.setTitle(action.title, for: .normal)
             button.backgroundView.cornerRadius = alertView.cornerRadius
-            button.addTarget(action, action: #selector(GazableAlertAction.performActions), for: .primaryActionTriggered)
+            button.addTarget(action, action: #selector(GazeableAlertAction.performActions), for: .primaryActionTriggered)
 
             if actionButtonStackView.arrangedSubviews.isEmpty {
                 firstButton = button
