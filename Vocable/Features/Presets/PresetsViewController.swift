@@ -276,9 +276,11 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
+        case .pagination:
+            return ItemSelection.presetsPageIndicatorProgress.pageCount > 1
         case .textField, .paginatedCategories, .paginatedPresets, .pageIndicator:
             return false
-        case .topBarButton, .keyboardFunctionButton, .key, .pagination:
+        case .topBarButton, .keyboardFunctionButton, .key:
             return true
         case .suggestionText(let suggestion):
             return !suggestion.text.isEmpty
@@ -289,9 +291,11 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
+        case .pagination:
+            return ItemSelection.presetsPageIndicatorProgress.pageCount > 1
         case .textField, .paginatedCategories, .paginatedPresets, .pageIndicator:
             return false
-        case .topBarButton, .keyboardFunctionButton, .key, .pagination:
+        case .topBarButton, .keyboardFunctionButton, .key:
             return true
         case .suggestionText(let suggestion):
             return !suggestion.text.isEmpty

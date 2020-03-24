@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Combine
 
 class PaginationCollectionViewCell: VocableCollectionViewCell {
     
     @IBOutlet weak var paginationLabel: UILabel!
+    private var disposables = Set<AnyCancellable>()
     
     var paginationDirection: UIPageViewController.NavigationDirection = .forward {
         didSet {
@@ -20,6 +22,14 @@ class PaginationCollectionViewCell: VocableCollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        _ = ItemSelection.$presetsPageIndicatorProgress.sink(receiveValue: { newValue in
+            if newValue.pageCount <= 1 {
+                self.borderedView.alpha = 0.5
+            } else {
+                self.borderedView.alpha = 1.0
+            }
+        }).store(in: &self.disposables)
         
         updatePaginationLabel()
     }

@@ -19,8 +19,8 @@ class PageIndicatorCollectionViewCell: VocableCollectionViewCell {
         fillColor = .collectionViewBackgroundColor
         pageLabel.adjustsFontSizeToFitWidth = true
         
-        ItemSelection.presetsPageIndicatorPublisher.sink(receiveValue: { pageInfo in
-            self.pageLabel.text = pageInfo
+        ItemSelection.$presetsPageIndicatorProgress.sink(receiveValue: { pageInfo in
+            self.pageLabel.text = "Page \(pageInfo.pageIndex + 1) of \(pageInfo.pageCount)"
         }).store(in: &disposables)
     }
 }

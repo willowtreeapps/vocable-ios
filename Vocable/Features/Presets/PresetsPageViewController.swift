@@ -66,7 +66,7 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
             return
         }
         
-        ItemSelection.presetsPageIndicatorText = ("Page \(currentPage + 1) of \(pages.count)")
+        ItemSelection.presetsPageIndicatorProgress = (pageIndex: currentPage, pageCount: pages.count)
     }
     
     // MARK: - UIPageViewControllerDataSource
