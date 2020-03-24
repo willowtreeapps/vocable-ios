@@ -51,8 +51,6 @@ final class GazeableAlertViewController: UIViewController {
             button.backgroundView.cornerRadius = 14
         }
 
-        confirmButton.setTitleColor(.red, for: .normal)
-
         updateDisplay()
     }
 

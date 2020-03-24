@@ -30,3 +30,6 @@
 
 /* Alert: You're about to be taken outside of the Vocable app. */
 "You're about to be taken outside of the Vocable app. You may lose head tracking control." = "Dieser Link wir ausserhalb der Vocable App geöffnet. Sie laufen möglicherweise Gefahr, nicht mehr per Kopfbewegung steuern zu können.";
+
+/* Turn off head tracking? */
+"Turn off head tracking?" = "Steuerung per Kopfbewegung ausschalten?";

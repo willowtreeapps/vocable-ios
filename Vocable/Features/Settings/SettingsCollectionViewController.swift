@@ -221,7 +221,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
                     AppConfig.isHeadTrackingEnabled.toggle()
                 }
                 present(alertViewController, animated: true)
-                alertViewController.setAlertTitle("Turn off head tracking?")
+                alertViewController.setAlertTitle(NSLocalizedString("Turn off head tracking?", comment: "Turn off head tracking?"))
             } else {
                 AppConfig.isHeadTrackingEnabled.toggle()
             }
