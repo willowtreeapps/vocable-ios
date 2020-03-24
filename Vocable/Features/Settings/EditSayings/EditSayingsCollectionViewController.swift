@@ -100,9 +100,9 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
     }
 
     @objc private func handleCellDeletionButton(_ sender: UIButton) {
-        let alert = GazeableAlertViewController(alertTitle: "Are you sure?\nDeleted phrases cannot be recovered.")
-        alert.addAction(GazeableAlertAction(title: "Delete", handler: { self.deletePhrase(sender) }))
-        alert.addAction(GazeableAlertAction(title: "Cancel"))
+        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("Are you sure?\nDeleted phrases cannot be recovered.", comment: "Delete saying alert title"))
+        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Delete", comment: "Delete saying alert action title"), handler: { self.deletePhrase(sender) }))
+        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel deletion alert action title")))
         self.present(alert, animated: true)
     }
     
