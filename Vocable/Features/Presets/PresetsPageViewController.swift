@@ -26,11 +26,17 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
     }
 
     private lazy var pages: [UIViewController] = {
-        presetViewModels.chunked(into: itemsPerPage).map { viewModels in
-            let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.CompositionalLayout(traitCollection: traitCollection))
+        var value = presetViewModels.chunked(into: itemsPerPage).map { viewModels -> UIViewController in
+            let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.DefaultCompositionalLayout(traitCollection: traitCollection))
             collectionViewController.items = viewModels
             return collectionViewController
         }
+        if ItemSelection.categoryValueSubject.value.name == PresetCategory.numPad.description {
+            let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.NumPadCompositionalLayout(traitCollection: traitCollection))
+            collectionViewController.items = TextPresets.numPadCategory
+            value.insert(collectionViewController, at: 0)
+        }
+        return value
     }()
     
     private var presetViewModels: [PhraseViewModel] =

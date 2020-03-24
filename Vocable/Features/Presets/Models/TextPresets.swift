@@ -9,6 +9,7 @@
 import Foundation
 
 enum PresetCategory: CaseIterable {
+    case numPad
     case category1
     case category2
     case category3
@@ -18,6 +19,8 @@ enum PresetCategory: CaseIterable {
     
     var description: String {
         switch self {
+        case .numPad:
+            return "123 | Yes | No"
         case .category1:
             return "General"
         case .category2:
@@ -35,6 +38,13 @@ enum PresetCategory: CaseIterable {
 }
 
 struct TextPresets {
+    
+    static var numPadCategory: [PhraseViewModel] {
+        var numbers = (1...9).map { PhraseViewModel(unpersistedPhrase: "\($0)")}
+        numbers.append(PhraseViewModel(unpersistedPhrase: "0"))
+        let responses = [PhraseViewModel(unpersistedPhrase: "No"), PhraseViewModel(unpersistedPhrase: "Yes")]
+        return numbers + responses
+    }
     
     static var presetsByCategory: [PresetCategory: [String]] = [
         .category1: ["Please",
