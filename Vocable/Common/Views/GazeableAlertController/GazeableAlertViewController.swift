@@ -20,8 +20,8 @@ final class GazeableAlertAction: NSObject {
     }
 
     @objc fileprivate func performActions() {
-        handler?()
         defaultCompletion?()
+        handler?()
     }
 
 }

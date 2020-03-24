@@ -332,9 +332,7 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
     private func handleExitAlert() {
         let alert = GazeableAlertViewController(alertTitle: "Going back before saving will clear any edits made.")
         alert.addAction(GazeableAlertAction(title: "Discard", handler: {
-            DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
-            }
+            self.navigationController?.popViewController(animated: true)
         }))
         alert.addAction(GazeableAlertAction(title: "Continue Editing"))
         self.present(alert, animated: true)
