@@ -42,7 +42,8 @@ struct TextPresets {
     static var numPadCategory: [PhraseViewModel] {
         var numbers = (1...9).map { PhraseViewModel(unpersistedPhrase: "\($0)")}
         numbers.append(PhraseViewModel(unpersistedPhrase: "0"))
-        let responses = [PhraseViewModel(unpersistedPhrase: "No"), PhraseViewModel(unpersistedPhrase: "Yes")]
+        let responses = [PhraseViewModel(unpersistedPhrase: NSLocalizedString("No", comment: "'No' num pad response")),
+                         PhraseViewModel(unpersistedPhrase: NSLocalizedString("Yes", comment: "'Yes' num pad response"))]
         return numbers + responses
     }
     
