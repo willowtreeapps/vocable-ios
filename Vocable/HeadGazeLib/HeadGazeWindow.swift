@@ -60,8 +60,6 @@ class HeadGazeWindow: UIWindow {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .headTrackingDisabled, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(phraseSaved), name: .phraseSaved, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(editedPhraseSaved), name: .editedPhraseSaved, object: nil)
     }
 
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
@@ -77,18 +75,11 @@ class HeadGazeWindow: UIWindow {
         handleWarning(shouldDisplay: false)
     }
     
-    @objc private func phraseSaved(_ sender: Any?) {
-        handlePhraseSaved(nibName: .phraseSaved)
-    }
-    
-    @objc private func editedPhraseSaved(_ sender: Any?) {
-        handlePhraseSaved(nibName: .editedPhraseSaved)
-    }
-    
-    private func handlePhraseSaved(nibName: phraseSavedNibName) {
+    func handlePhraseSaved(toastLabelText: String) {
         if phraseSavedView == nil {
-            let phraseSavedView = UINib(nibName: nibName.rawValue, bundle: .main).instantiate(withOwner: nil, options: nil).first as! UIView
+            let phraseSavedView = UINib(nibName: "PhraseSavedView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! PhraseSavedView
              phraseSavedView.alpha = 0
+            phraseSavedView.setAlertText(text: toastLabelText)
              self.phraseSavedView = phraseSavedView
              addSubview(phraseSavedView)
              phraseSavedView.translatesAutoresizingMaskIntoConstraints = false
