@@ -121,7 +121,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
             fatalError("init(coder:) has not been implemented")
         }
         
-        class func gridDimensions(for traitCollection: UITraitCollection) -> (numberOfRows: Int, itemsPerRow: Int) {
+        fileprivate class func gridDimensions(for traitCollection: UITraitCollection) -> (numberOfRows: Int, itemsPerRow: Int) {
             switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
             case (.regular, .regular), (.regular, .compact):
                 return (3, 3)
