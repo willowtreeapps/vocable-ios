@@ -13,6 +13,7 @@
 		130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
 		64253CED2419358D0044EAAA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64253CEC2419358D0044EAAA /* Settings.storyboard */; };
+		64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A54544242A490700218BE8 /* GazeEatingView.swift */; };
 		64D04A58242951C00006962D /* GazeableAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */; };
 		6B14DC732419590E0050C287 /* OutputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B14DC722419590E0050C287 /* OutputTextView.swift */; };
 		6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */; };
@@ -139,6 +140,7 @@
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64253CEC2419358D0044EAAA /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		64A54544242A490700218BE8 /* GazeEatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeEatingView.swift; sourceTree = "<group>"; };
 		64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableAlertPresentationController.swift; sourceTree = "<group>"; };
 		6B14DC722419590E0050C287 /* OutputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTextView.swift; sourceTree = "<group>"; };
 		6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVSpeechSynthesizer+Shared.swift"; sourceTree = "<group>"; };
@@ -472,15 +474,16 @@
 				B8EB51CE240985E900F425A6 /* GazeableAlertController */,
 				B8DA9DE723EB833200FEBE19 /* BorderedView.swift */,
 				9D15E0542271F0DC0058DF57 /* CursorView.swift */,
+				A944D0042405AE8C00F3863E /* GazeableButton.swift */,
+				64A54544242A490700218BE8 /* GazeEatingView.swift */,
 				A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */,
+				A94720CD241A8D9B00F7B4FF /* PaginationView.swift */,
+				6BB56BA72422AC2500EA787E /* PhraseSavedView.swift */,
+				71B856432416CEB600CB163B /* PhraseSavedView.xib */,
 				6B9DFA7323E8D1270037673E /* TrackingContainerViewController.swift */,
 				6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */,
 				B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */,
-				A944D0042405AE8C00F3863E /* GazeableButton.swift */,
 				71DBE5EA240DE4D000BA8D01 /* WarningView.xib */,
-				71B856432416CEB600CB163B /* PhraseSavedView.xib */,
-				6BB56BA72422AC2500EA787E /* PhraseSavedView.swift */,
-				A94720CD241A8D9B00F7B4FF /* PaginationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -723,6 +726,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A944D0092406D54400F3863E /* SettingsToggleCollectionViewCell.swift in Sources */,
+				64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */,
 				6BFB18C424004406002C3515 /* NSManagedObject+Helpers.swift in Sources */,
 				A94A6CCD2412D38A00625275 /* NavigationModel.swift in Sources */,
 				B81D236623FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift in Sources */,

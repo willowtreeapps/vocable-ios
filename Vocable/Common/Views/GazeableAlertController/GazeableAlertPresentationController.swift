@@ -34,7 +34,6 @@ final class GazeableAlertPresentationController: UIPresentationController {
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
             self.dimmedBackgroundView.alpha = 0.6
         }, completion: nil)
-
     }
 
     override func containerViewWillLayoutSubviews() {

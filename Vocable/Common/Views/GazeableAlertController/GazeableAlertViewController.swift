@@ -8,13 +8,6 @@
 
 import UIKit
 
-class GazeEatingView: UIView {
-    override func gazeableHitTest(_ point: CGPoint, with event: UIHeadGazeEvent?) -> UIView? {
-        // Hit test this view's subviews, otherwise swallow the gazeable hit test
-        super.gazeableHitTest(point, with: event) ?? self
-    }
-}
-
 final class GazableAlertAction: NSObject {
 
     let title: String
