@@ -13,6 +13,12 @@ struct PhraseViewModel: Hashable {
     let utterance: String
     let creationDate: Date
     
+    init(unpersistedPhrase phrase: String) {
+        self.utterance = phrase
+        self.identifier = UUID().uuidString
+        self.creationDate = Date()
+    }
+    
     init?(_ phrase: Phrase?) {
         guard let identifier = phrase?.identifier,
             let utterance = phrase?.utterance,
