@@ -9,10 +9,9 @@
 import UIKit
 
 @IBDesignable
-class PhraseSavedView: BorderedView {
+class ToastView: BorderedView {
     
-    
-    @IBOutlet weak var alertLabel: UILabel!
+    @IBOutlet private var titleLabel: UILabel!
     
     override var bounds: CGRect {
         didSet {
@@ -25,14 +24,16 @@ class PhraseSavedView: BorderedView {
             cornerRadius = frame.height / 2
         }
     }
+    
+    var text: String = "" {
+        didSet {
+            titleLabel.text = text
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         setContentHuggingPriority(.required, for: .vertical)
         setContentHuggingPriority(.required, for: .horizontal)
-    }
-    
-    func setAlertText(text: String) {
-        alertLabel.text = text
     }
 }

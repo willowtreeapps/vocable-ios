@@ -12,11 +12,6 @@ import ARKit
 
 class HeadGazeWindow: UIWindow {
     
-    private enum phraseSavedNibName: String {
-        case phraseSaved = "PhraseSavedView"
-        case editedPhraseSaved = "EditedPhraseSavedView"
-    }
-
     weak var cursorView: UIVirtualCursorView?
     
     private weak var warningView: UIView?
@@ -77,25 +72,25 @@ class HeadGazeWindow: UIWindow {
     
     func handlePhraseSaved(toastLabelText: String) {
         if phraseSavedView == nil {
-            let phraseSavedView = UINib(nibName: "PhraseSavedView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! PhraseSavedView
-             phraseSavedView.alpha = 0
-            phraseSavedView.setAlertText(text: toastLabelText)
-             self.phraseSavedView = phraseSavedView
-             addSubview(phraseSavedView)
-             phraseSavedView.translatesAutoresizingMaskIntoConstraints = false
-
-             let horizontalPadding: CGFloat = [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) ? 16 : 24
-             NSLayoutConstraint.activate([
-                 phraseSavedView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor),
-                 phraseSavedView.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor,
+            let phraseSavedView = UINib(nibName: "ToastView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! ToastView
+            phraseSavedView.alpha = 0
+            phraseSavedView.text = toastLabelText
+            self.phraseSavedView = phraseSavedView
+            addSubview(phraseSavedView)
+            phraseSavedView.translatesAutoresizingMaskIntoConstraints = false
+            
+            let horizontalPadding: CGFloat = [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) ? 16 : 24
+            NSLayoutConstraint.activate([
+                phraseSavedView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor),
+                phraseSavedView.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor,
+                                                      constant: horizontalPadding),
+                phraseSavedView.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor,
                                                        constant: horizontalPadding),
-                 phraseSavedView.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor,
-                                                        constant: horizontalPadding),
-                 phraseSavedView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
-                 phraseSavedView.centerYAnchor.constraint(equalTo: centerYAnchor),
-                 phraseSavedView.centerXAnchor.constraint(equalTo: centerXAnchor)
-             ])
-         }
+                phraseSavedView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
+                phraseSavedView.centerYAnchor.constraint(equalTo: centerYAnchor),
+                phraseSavedView.centerXAnchor.constraint(equalTo: centerXAnchor)
+            ])
+        }
 
          let fadeInOutDuration: TimeInterval = 0.5
          let presentationDuration: TimeInterval = 4
