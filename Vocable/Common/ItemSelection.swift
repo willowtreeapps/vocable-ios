@@ -40,10 +40,6 @@ class ItemSelection {
         }
     }
 
-    /// Creates a new `PublishedDefault` for the given `UserDefaults` key and default value
-    /// - Parameters:
-    ///   - key: The key with which the value should be stored in `UserDefaults`
-    ///   - defaultValue: The value that should be provided when no value is stored in `UserDefaults`
     init(wrappedValue: T) {
         self.wrappedValue = wrappedValue
         self.subject = CurrentValueSubject<T, Never>(self.wrappedValue)
