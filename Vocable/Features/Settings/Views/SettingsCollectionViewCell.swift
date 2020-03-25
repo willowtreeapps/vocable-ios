@@ -14,7 +14,6 @@ class SettingsCollectionViewCell: VocableCollectionViewCell {
     @IBOutlet var textLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
     
-
     func setup(title: String, image: UIImage?) {
         guard let image = image else {
             return
