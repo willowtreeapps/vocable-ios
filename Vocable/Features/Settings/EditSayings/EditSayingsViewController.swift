@@ -37,7 +37,7 @@ class EditSayingsViewController: UIViewController {
             } else {
                 self.paginationView.enablePaginationButtons()
             }
-            let computedPageCount = pagingProgress.pageCount < 1 ? 1 : pagingProgress.pageCount
+            let computedPageCount = max(pagingProgress.pageCount, 1)
             self.paginationView.textLabel.text = "\(pagingProgress.pageIndex + 1) of \(computedPageCount)"
         }).store(in: &disposables)
         

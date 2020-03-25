@@ -11,7 +11,7 @@ import Combine
 
 class PaginationCollectionViewCell: VocableCollectionViewCell {
     
-    @IBOutlet weak var paginationLabel: UILabel!
+    let paginationLabel = UILabel(frame: .zero)
     
     var paginationDirection: UIPageViewController.NavigationDirection = .forward {
         didSet {
@@ -19,9 +19,24 @@ class PaginationCollectionViewCell: VocableCollectionViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        addSubview(paginationLabel)
+        paginationLabel.translatesAutoresizingMaskIntoConstraints = false
+        paginationLabel.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor).isActive = true
+        paginationLabel.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor).isActive = true
+        paginationLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor).isActive = true
+        paginationLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).isActive = true
+        paginationLabel.textAlignment = .center
         updatePaginationLabel()
     }
     
@@ -49,8 +64,8 @@ class PaginationCollectionViewCell: VocableCollectionViewCell {
         
         let systemImageAttachment = NSTextAttachment(image: image)
         let attributedString = NSMutableAttributedString(attachment: systemImageAttachment)
-        attributedString.addAttributes([
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 48)], range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttributes([.font: UIFont.boldSystemFont(ofSize: 48), .foregroundColor: UIColor.defaultTextColor],
+                                       range: NSRange(location: 0, length: attributedString.length))
         paginationLabel.attributedText = attributedString
     }
     

@@ -39,7 +39,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
         for indexPath in collectionView.indexPathsForVisibleItems {
             guard let item = dataSource.itemIdentifier(for: indexPath),
                 case let .presetItem(preset) = item,
-            ItemSelection.phraseValueSubject.value == preset else {
+            ItemSelection.selectedPhrase == preset else {
                     collectionView.deselectItem(at: indexPath, animated: false)
                     continue
             }
@@ -56,8 +56,8 @@ class PresetPageCollectionViewController: UICollectionViewController {
         collectionView.isScrollEnabled = false
         collectionView.backgroundColor = .collectionViewBackgroundColor
         
-        collectionView.register(UINib(nibName: CategoryItemCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
-        collectionView.register(UINib(nibName: PresetItemCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
+        collectionView.register(CategoryItemCollectionViewCell.self, forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
+        collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
     }
     
     private func configureDataSource() {
@@ -91,7 +91,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
         
         switch selectedItem {
         case .presetItem(let viewModel):
-            ItemSelection.phraseValueSubject.send(viewModel)
+            ItemSelection.selectedPhrase = viewModel
 
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {

@@ -46,7 +46,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
         for indexPath in collectionView.indexPathsForVisibleItems {
             guard let item = dataSource.itemIdentifier(for: indexPath),
                 case let .category(category) = item,
-            ItemSelection.categoryValueSubject.value == category else {
+            ItemSelection.selectedCategory == category else {
                     collectionView.deselectItem(at: indexPath, animated: false)
                 continue
             }
@@ -62,7 +62,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
         collectionView.delaysContentTouches = false
         collectionView.isScrollEnabled = false
         
-        collectionView.register(UINib(nibName: CategoryItemCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
+        collectionView.register(CategoryItemCollectionViewCell.self, forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
     }
     
     private func configureDataSource() {
@@ -91,7 +91,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
     // MARK: - Collection View Delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if case let .category(category) = dataSource.itemIdentifier(for: indexPath) {
-            ItemSelection.categoryValueSubject.send(category)
+            ItemSelection.selectedCategory = category
         }
     }
     

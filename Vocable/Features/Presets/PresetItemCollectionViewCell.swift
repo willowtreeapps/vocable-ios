@@ -9,7 +9,7 @@
 import UIKit
 
 class PresetItemCollectionViewCell: VocableCollectionViewCell {
-    @IBOutlet fileprivate weak var textLabel: UILabel!
+    let textLabel = UILabel(frame: .zero)
     
     override func updateContentViews() {
         super.updateContentViews()
@@ -19,9 +19,31 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
         textLabel.isOpaque = true
         textLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
     }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        addSubview(textLabel)
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor).isActive = true
+        textLabel.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor).isActive = true
+        textLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor).isActive = true
+        textLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).isActive = true
+        textLabel.textAlignment = .center
+        updateContentViews()
+    }
 
     func setup(title: String) {
         textLabel.text = title
+        updateContentViews()
     }
     
     func setup(with image: UIImage?) {
@@ -33,6 +55,7 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
         let attributedString = NSAttributedString(attachment: systemImageAttachment)
         
         textLabel.attributedText = attributedString
+        updateContentViews()
     }
 }
 

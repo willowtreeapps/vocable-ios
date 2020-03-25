@@ -36,6 +36,7 @@ class SuggestionCollectionViewCell: VocableCollectionViewCell {
         borderedView.fillColor = isSelected ? .cellSelectionColor : .categoryBackgroundColor
         adjustBackgroundColorForSizeClass()
         
+        guard let textLabel = textLabel else { return }
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = borderedView.fillColor
         textLabel.isOpaque = true

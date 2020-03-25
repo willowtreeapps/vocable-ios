@@ -49,7 +49,7 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
         super.viewWillAppear(animated)
         
         let viewControllerToSelect = pages.first(where: {
-            (($0 as? CategoryPageCollectionViewController)?.items.contains(ItemSelection.categoryValueSubject.value) ?? false)
+            (($0 as? CategoryPageCollectionViewController)?.items.contains(ItemSelection.selectedCategory) ?? false)
         })
         
         if let viewController = viewControllerToSelect {

@@ -81,14 +81,16 @@ class PresetsViewController: UICollectionViewController {
         collectionView.isScrollEnabled = false
         
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
-        collectionView.register(UINib(nibName: "CategoryItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCollectionViewCell")
-        collectionView.register(UINib(nibName: "PresetItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetItemCollectionViewCell")
-        collectionView.register(UINib(nibName: "PaginationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PaginationCollectionViewCell")
+        collectionView.register(CategoryItemCollectionViewCell.self, forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
+        collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
+        collectionView.register(PaginationCollectionViewCell.self, forCellWithReuseIdentifier: PaginationCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "CategoryPaginationContainerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryPaginationContainerCollectionViewCell")
         collectionView.register(UINib(nibName: "PresetPaginationContainerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PresetPaginationContainerCollectionViewCell")
         collectionView.register(UINib(nibName: "KeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyCollectionViewCell")
         collectionView.register(UINib(nibName: "SuggestionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SuggestionCollectionViewCell")
         collectionView.register(UINib(nibName: "PageIndicatorCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PageIndicatorCollectionViewCell")
+        collectionView.register(PresetPaginationCollectionViewCell.self, forCellWithReuseIdentifier: PresetPaginationCollectionViewCell.reuseIdentifier)
+        collectionView.register(CategoryPaginationCollectionViewCell.self, forCellWithReuseIdentifier: CategoryPaginationCollectionViewCell.reuseIdentifier)
         
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
@@ -162,23 +164,19 @@ class PresetsViewController: UICollectionViewController {
             case .pageIndicator:
                 return self.collectionView.dequeueReusableCell(withReuseIdentifier: "PageIndicatorCollectionViewCell", for: indexPath) as! PageIndicatorCollectionViewCell
             case .pagination(let itemIdentifier, let direction):
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PaginationCollectionViewCell", for: indexPath) as! PaginationCollectionViewCell
-                cell.paginationDirection = direction
-                
                 switch itemIdentifier {
                 case .paginatedCategories:
-                    cell.fillColor = .categoryBackgroundColor
+                    let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: CategoryPaginationCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryPaginationCollectionViewCell
+                    cell.paginationDirection = direction
+                    return cell
                 case .paginatedPresets:
-                    cell.fillColor = .defaultCellBackgroundColor
-                    _ = ItemSelection.$presetsPageIndicatorProgress.sink(receiveValue: { pageProgress in
-                        let alpha = CGFloat(pageProgress.pageCount > 1 ? 1.0 : 0.5)
-                        cell.borderedView.alpha = alpha
-                    }).store(in: &self.disposables)
+                    let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PaginationCollectionViewCell.reuseIdentifier, for: indexPath) as! PaginationCollectionViewCell
+                    cell.paginationDirection = direction
+                    return cell
                 default:
                     break
                 }
-                
-                return cell
+                return VocableCollectionViewCell()
             }
         })
         
@@ -186,11 +184,13 @@ class PresetsViewController: UICollectionViewController {
     }
     
     private func observeItemSelectionChanges() {
-        _ = ItemSelection.categoryValueSubject.sink(receiveValue: { _ in
-            self.reloadPresets()
+        _ = ItemSelection.$selectedCategory.sink(receiveValue: { _ in
+            DispatchQueue.main.async {
+                self.reloadPresets()
+            }
         }).store(in: &disposables)
         
-        _ = ItemSelection.phraseValueSubject.sink(receiveValue: { selectedPhrase in
+        _ = ItemSelection.$selectedPhrase.sink(receiveValue: { selectedPhrase in
             guard let utterance = selectedPhrase?.utterance else { return }
             self.setTextTransaction(TextTransaction(text: utterance))
         }).store(in: &disposables)

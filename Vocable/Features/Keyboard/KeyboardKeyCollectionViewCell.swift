@@ -25,6 +25,7 @@ class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
     override func updateContentViews() {
         super.updateContentViews()
         
+        guard let textLabel = textLabel else { return }
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = borderedView.fillColor
         textLabel.isOpaque = true

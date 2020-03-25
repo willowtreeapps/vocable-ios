@@ -26,7 +26,11 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
     }
 
     private lazy var pages: [UIViewController] = {
-        presetViewModels.chunked(into: itemsPerPage).map { viewModels in
+        var chunked = presetViewModels.chunked(into: itemsPerPage)
+        if chunked.isEmpty {
+            chunked.append([]) // Ensure that at least one empty page exists for empty state
+        }
+        return chunked.map { viewModels in
             let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.CompositionalLayout(traitCollection: traitCollection))
             collectionViewController.items = viewModels
             return collectionViewController
@@ -35,7 +39,7 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
     
     private var presetViewModels: [PhraseViewModel] =
         Category.fetchObject(in: NSPersistentContainer.shared.viewContext,
-                             matching: ItemSelection.categoryValueSubject.value.identifier)?.phrases?
+                             matching: ItemSelection.selectedCategory.identifier)?.phrases?
             .compactMap { PhraseViewModel($0 as? Phrase) }
             .sorted { $0.creationDate > $1.creationDate }
             ?? []
@@ -48,11 +52,6 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
         if let firstViewController = pages.first {
             setViewControllers([firstViewController], direction: .forward, animated: true)
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        notifyPageIndicatorSubscribers()
     }
     
     override func setViewControllers(_ viewControllers: [UIViewController]?, direction: UIPageViewController.NavigationDirection, animated: Bool, completion: ((Bool) -> Void)? = nil) {
