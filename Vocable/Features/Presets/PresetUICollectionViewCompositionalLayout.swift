@@ -283,7 +283,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             return containerGroup
         }
         
-        var compactHeightPresetGroup = regularWidthPresetGroup
+        let compactHeightPresetGroup = regularWidthPresetGroup
         
         var compactWidthPresetGroup: NSCollectionLayoutGroup {
             let presetPageItem = NSCollectionLayoutItem(
