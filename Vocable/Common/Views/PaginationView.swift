@@ -80,7 +80,7 @@ final class PaginationView: UIView {
         previousPageButton.isEnabled = false
         previousPageButton.backgroundView.alpha = 0.5
         nextPageButton.isEnabled = false
-       nextPageButton.backgroundView.alpha = 0.5
+        nextPageButton.backgroundView.alpha = 0.5
     }
     
     func enablePaginationButtons() {

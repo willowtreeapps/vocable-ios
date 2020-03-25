@@ -20,8 +20,6 @@ class ItemSelection {
     
     static let phraseValueSubject = CurrentValueSubject<PhraseViewModel?, Never>(nil)
     
-//    static let presetsPageIndicatorPublisher = PassthroughSubject<String, Never>()
-    
     @PublishedValue
     static var presetsPageIndicatorProgress: CarouselGridPagingProgress = (pageIndex: 0, pageCount: 0)
 }

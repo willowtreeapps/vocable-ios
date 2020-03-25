@@ -170,12 +170,9 @@ class PresetsViewController: UICollectionViewController {
                     cell.fillColor = .categoryBackgroundColor
                 case .paginatedPresets:
                     cell.fillColor = .defaultCellBackgroundColor
-                    _ = ItemSelection.$presetsPageIndicatorProgress.sink(receiveValue: { newValue in
-                        if newValue.pageCount <= 1 {
-                            cell.borderedView.alpha = 0.5
-                        } else {
-                            cell.borderedView.alpha = 1.0
-                        }
+                    _ = ItemSelection.$presetsPageIndicatorProgress.sink(receiveValue: { pageProgress in
+                        let alpha = CGFloat(pageProgress.pageCount > 1 ? 1.0 : 0.5)
+                        cell.borderedView.alpha = alpha
                     }).store(in: &self.disposables)
                 default:
                     break
