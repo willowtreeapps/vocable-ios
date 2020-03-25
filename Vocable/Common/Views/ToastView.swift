@@ -27,7 +27,7 @@ class ToastView: BorderedView {
     
     var text: String = "" {
         didSet {
-            titleLabel.text = text
+            titleLabel?.text = text
         }
     }
 
@@ -35,5 +35,6 @@ class ToastView: BorderedView {
         super.awakeFromNib()
         setContentHuggingPriority(.required, for: .vertical)
         setContentHuggingPriority(.required, for: .horizontal)
+        titleLabel.text = text
     }
 }
