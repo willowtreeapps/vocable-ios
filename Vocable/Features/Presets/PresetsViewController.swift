@@ -170,6 +170,13 @@ class PresetsViewController: UICollectionViewController {
                     cell.fillColor = .categoryBackgroundColor
                 case .paginatedPresets:
                     cell.fillColor = .defaultCellBackgroundColor
+                    _ = ItemSelection.$presetsPageIndicatorProgress.sink(receiveValue: { newValue in
+                        if newValue.pageCount <= 1 {
+                            cell.borderedView.alpha = 0.5
+                        } else {
+                            cell.borderedView.alpha = 1.0
+                        }
+                    }).store(in: &self.disposables)
                 default:
                     break
                 }
@@ -276,8 +283,13 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .pagination:
-            return ItemSelection.presetsPageIndicatorProgress.pageCount > 1
+        case .pagination(let itemIdentifier, _):
+            switch itemIdentifier {
+            case .paginatedPresets:
+                return ItemSelection.presetsPageIndicatorProgress.pageCount > 1
+            default:
+                return true
+            }
         case .textField, .paginatedCategories, .paginatedPresets, .pageIndicator:
             return false
         case .topBarButton, .keyboardFunctionButton, .key:
@@ -291,8 +303,13 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .pagination:
-            return ItemSelection.presetsPageIndicatorProgress.pageCount > 1
+        case .pagination(let itemIdentifier, _):
+            switch itemIdentifier {
+            case .paginatedPresets:
+                return ItemSelection.presetsPageIndicatorProgress.pageCount > 1
+            default:
+                return true
+            }
         case .textField, .paginatedCategories, .paginatedPresets, .pageIndicator:
             return false
         case .topBarButton, .keyboardFunctionButton, .key:
