@@ -63,6 +63,7 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
     private func notifyPageIndicatorSubscribers() {
         guard let visibleViewController = viewControllers?.first,
             let currentPage = pages.firstIndex(of: visibleViewController) else {
+            ItemSelection.presetsPageIndicatorProgress = (pageIndex: 0, pageCount: 1)
             return
         }
         
