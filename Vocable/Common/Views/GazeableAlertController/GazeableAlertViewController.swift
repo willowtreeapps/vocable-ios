@@ -145,6 +145,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         label.textColor = .black
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
 
@@ -187,12 +188,12 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
     }
 
     private func updateContentForCurrentTraitCollection() {
-        if traitCollection.horizontalSizeClass == .regular {
-            titleLabel.font = .systemFont(ofSize: 34)
-            titleContainerView.layoutMargins = UIEdgeInsets(top: 40, left: 50, bottom: 40, right: 50)
-        } else {
+        if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
             titleLabel.font = .systemFont(ofSize: 17)
             titleContainerView.layoutMargins = UIEdgeInsets(top: 36, left: 12, bottom: 36, right: 12)
+        } else {
+            titleLabel.font = .systemFont(ofSize: 34)
+            titleContainerView.layoutMargins = UIEdgeInsets(top: 40, left: 50, bottom: 40, right: 50)
         }
     }
 
@@ -263,6 +264,8 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
                 actionButtonStackView.addArrangedSubview(button)
             } else {
                 let separator = DividerView()
+                separator.translatesAutoresizingMaskIntoConstraints = false
+                separator.widthAnchor.constraint(equalToConstant: 1).isActive = true
                 actionButtonStackView.addArrangedSubview(separator)
                 actionButtonStackView.addArrangedSubview(button)
 

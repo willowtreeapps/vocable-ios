@@ -1,5 +1,5 @@
 //
-//  SettingsToggleCollectionViewCell.swift
+//  SettingsCollectionViewCell.swift
 //  Vocable AAC
 //
 //  Created by Jesse Morgan on 2/26/20.

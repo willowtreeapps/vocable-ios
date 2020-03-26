@@ -283,10 +283,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         }
     }
 
-    private func toggleHeadTracking() {
-        AppConfig.isHeadTrackingEnabled.toggle()
-    }
-
     // MARK: Presentations
 
     private func presentPrivacyAlert() {
