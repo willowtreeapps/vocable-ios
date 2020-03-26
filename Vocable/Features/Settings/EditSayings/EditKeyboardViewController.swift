@@ -213,7 +213,6 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
     // swiftlint:disable cyclomatic_complexity
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
-        
         for selectedPath in collectionView.indexPathsForSelectedItems ?? [] {
             if selectedPath.section == indexPath.section && selectedPath != indexPath {
                 collectionView.deselectItem(at: selectedPath, animated: true)
@@ -224,23 +223,36 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
         case .topBarButton(let buttonType):
             (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
             collectionView.deselectItem(at: indexPath, animated: true)
+            let context = NSPersistentContainer.shared.viewContext
             switch buttonType {
             case .back:
+                if let phraseIdentifier = phraseIdentifier {
+                    let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
+                    if originalPhrase?.utterance != _textTransaction.text {
+                        handleExitAlert()
+                        break
+                    }
+                }
                 self.navigationController?.popViewController(animated: true)
             case .confirmEdit:
+                var isNewPhrase = false
                 let context = NSPersistentContainer.shared.viewContext
                 if let phraseIdentifier = phraseIdentifier {
                     let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
                     originalPhrase?.utterance = _textTransaction.text
                 } else {
                     _ = Phrase.create(withUserEntry: _textTransaction.text, in: context)
+                    isNewPhrase = true
                 }
                 do {
                     try context.save()
+                    let alertMessage = isNewPhrase ? NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings") :
+                        NSLocalizedString("Changes saved", comment: "Changes saved")
+                    (self.view.window as? HeadGazeWindow)?.handlePhraseSaved(toastLabelText: alertMessage)
+
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")
                 }
-                self.navigationController?.popViewController(animated: true)
             default:
                 break
             }
@@ -320,6 +332,15 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
             textExpression.replace(text: textTransaction.text)
             suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
         }
+    }
+    
+    private func handleExitAlert() {
+        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("Going back before saving will clear any edits made.", comment: "Exit edit sayings alert title"))
+        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Discard", comment: "Discard changes alert action title"), handler: {
+            self.navigationController?.popViewController(animated: true)
+        }))
+        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Continue Editing", comment: "Continue editing alert action title")))
+        self.present(alert, animated: true)
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {

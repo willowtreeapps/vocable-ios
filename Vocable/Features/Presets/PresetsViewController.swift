@@ -11,7 +11,6 @@ import AVFoundation
 import CoreData
 import Combine
 
-// swiftlint:disable type_body_length
 class PresetsViewController: UICollectionViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
@@ -352,7 +351,7 @@ class PresetsViewController: UICollectionViewController {
 
                 do {
                     try context.save()
-                    NotificationCenter.default.post(name: .phraseSaved, object: nil)
+                    (self.view.window as? HeadGazeWindow)?.handlePhraseSaved(toastLabelText: NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings"))
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")
                 }
