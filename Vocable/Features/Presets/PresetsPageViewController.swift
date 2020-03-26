@@ -26,22 +26,32 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
     }
 
     private lazy var pages: [UIViewController] = {
-        var value = presetViewModels.chunked(into: itemsPerPage).map { viewModels -> UIViewController in
+        var chunked = presetViewModels.chunked(into: itemsPerPage)
+        var pageViewControllers: [UIViewController] = []
+        
+        if ItemSelection.selectedCategory.name == TextPresets.numPadDescription {
+            let numPadCollectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.NumPadCompositionalLayout(traitCollection: traitCollection))
+            numPadCollectionViewController.items = TextPresets.numPadCategory
+            pageViewControllers.insert(numPadCollectionViewController, at: 0)
+        }
+        
+        if pageViewControllers.isEmpty && chunked.isEmpty {
+            chunked.append([]) // Ensure that at least one empty page exists for empty state
+        }
+        
+        let mappedViewControllers = chunked.map { viewModels -> UIViewController in
             let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.DefaultCompositionalLayout(traitCollection: traitCollection))
             collectionViewController.items = viewModels
             return collectionViewController
         }
-        if ItemSelection.categoryValueSubject.value.name == TextPresets.numPadDescription {
-            let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.NumPadCompositionalLayout(traitCollection: traitCollection))
-            collectionViewController.items = TextPresets.numPadCategory
-            value.insert(collectionViewController, at: 0)
-        }
-        return value
+        
+        pageViewControllers += mappedViewControllers
+        return pageViewControllers
     }()
     
     private var presetViewModels: [PhraseViewModel] =
         Category.fetchObject(in: NSPersistentContainer.shared.viewContext,
-                             matching: ItemSelection.categoryValueSubject.value.identifier)?.phrases?
+                             matching: ItemSelection.selectedCategory.identifier)?.phrases?
             .compactMap { PhraseViewModel($0 as? Phrase) }
             .sorted { $0.creationDate > $1.creationDate }
             ?? []
@@ -56,11 +66,6 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        notifyPageIndicatorSubscribers()
-    }
-    
     override func setViewControllers(_ viewControllers: [UIViewController]?, direction: UIPageViewController.NavigationDirection, animated: Bool, completion: ((Bool) -> Void)? = nil) {
         super.setViewControllers(viewControllers, direction: direction, animated: animated, completion: completion)
         notifyPageIndicatorSubscribers()
@@ -69,10 +74,11 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
     private func notifyPageIndicatorSubscribers() {
         guard let visibleViewController = viewControllers?.first,
             let currentPage = pages.firstIndex(of: visibleViewController) else {
+            ItemSelection.presetsPageIndicatorProgress = (pageIndex: 0, pageCount: 1)
             return
         }
-
-        ItemSelection.presetsPageIndicatorText = String(format: NSLocalizedString("Page %d of %d", comment: "Pagination Control: page 1 of x"), currentPage + 1, pages.count)
+        
+        ItemSelection.presetsPageIndicatorProgress = (pageIndex: currentPage, pageCount: pages.count)
     }
     
     // MARK: - UIPageViewControllerDataSource

@@ -34,8 +34,14 @@ class EditSayingsViewController: UIViewController {
             guard let pagingProgress = pagingProgress else {
                 return
             }
+            if pagingProgress.pageCount > 1 {
+                self.paginationView.setPaginationButtonsEnabled(true)
+            } else {
+                self.paginationView.setPaginationButtonsEnabled(false)
+            }
+            let computedPageCount = max(pagingProgress.pageCount, 1)
 
-            self.paginationView.textLabel.text = String(format: NSLocalizedString("Page %d of %d", comment: ""), pagingProgress.pageIndex + 1, pagingProgress.pageCount)
+            self.paginationView.textLabel.text = String(format: NSLocalizedString("Page %d of %d", comment: ""), pagingProgress.pageIndex + 1, computedPageCount)
         }).store(in: &disposables)
         
         paginationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)

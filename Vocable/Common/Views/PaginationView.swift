@@ -75,6 +75,11 @@ final class PaginationView: UIView {
 
         updateForCurrentTraitCollection()
     }
+    
+    func setPaginationButtonsEnabled(_ isEnabled: Bool) {
+        previousPageButton.isEnabled = isEnabled
+        nextPageButton.isEnabled = isEnabled
+    }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

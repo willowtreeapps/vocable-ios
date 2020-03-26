@@ -33,9 +33,22 @@ class VocableCollectionViewCell: UICollectionViewCell {
     
     fileprivate var defaultBackgroundColor: UIColor?
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        commonInit()
+    }
+    
+    private func commonInit() {
         borderedView.cornerRadius = 8
         borderedView.borderColor = .cellBorderHighlightColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
