@@ -424,9 +424,9 @@
 				71004B0C242926A2006833B8 /* SelectionMode.storyboard */,
 				A92FFB8C23ECCB5400AF2D0B /* SettingsCollectionViewController.swift */,
 				A944D0062405C61400F3863E /* SettingsViewController.swift */,
-				71FA2854242406540051498A /* SelectionModeViewController.swift */,
-				71FA2856242413670051498A /* SelectionModeCollectionViewController.swift */,
 				714EFD412419636500DC773C /* EditSayings */,
+				A9DFCC21242D3A5000136136 /* TimingSensitivity */,
+				A9DFCC22242D3CF500136136 /* SelectionMode */,
 				A96D61D82422A00D00577144 /* Views */,
 			);
 			path = Settings;
@@ -451,6 +451,22 @@
 				A96D61D624229F7400577144 /* SettingsCollectionViewCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A9DFCC21242D3A5000136136 /* TimingSensitivity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TimingSensitivity;
+			sourceTree = "<group>";
+		};
+		A9DFCC22242D3CF500136136 /* SelectionMode */ = {
+			isa = PBXGroup;
+			children = (
+				71FA2854242406540051498A /* SelectionModeViewController.swift */,
+				71FA2856242413670051498A /* SelectionModeCollectionViewController.swift */,
+			);
+			path = SelectionMode;
 			sourceTree = "<group>";
 		};
 		B81D235723FED551005741E8 /* Pagination */ = {
