@@ -1,0 +1,9 @@
+
+/* Class = "UILabel"; text = "Lorem ipsum dolor"; ObjectID = "Qxz-Cn-o5q"; */
+"Qxz-Cn-o5q.text" = "Lorem ipsum dolor";
+
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "he4-Sq-X8i"; */
+"he4-Sq-X8i.normalTitle" = "Okay";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "rA5-3d-GQF"; */
+"rA5-3d-GQF.normalTitle" = "Cancel";

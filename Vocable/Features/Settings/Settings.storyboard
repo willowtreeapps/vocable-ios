@@ -137,6 +137,7 @@
                     <navigationItem key="navigationItem" id="x2W-9E-2W1"/>
                     <connections>
                         <outlet property="dismissButton" destination="59L-eT-oZ6" id="pKn-Jo-gYg"/>
+                        <outlet property="titleLabel" destination="CtZ-qP-xqU" id="Y6a-ww-l3F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1E-o0-keE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -313,6 +314,7 @@
                         <outlet property="addButton" destination="DvV-sn-lWq" id="JJf-RR-PfN"/>
                         <outlet property="backButton" destination="00c-RK-HF1" id="5Jz-2h-tl7"/>
                         <outlet property="paginationView" destination="xsL-XA-YD7" id="wQN-yS-PtT"/>
+                        <outlet property="titleLabel" destination="0CD-i2-i5g" id="sHc-PK-ckO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxk-ad-LrW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

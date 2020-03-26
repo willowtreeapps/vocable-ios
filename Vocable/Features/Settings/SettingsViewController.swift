@@ -13,6 +13,8 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet var dismissButton: GazeableButton!
 
+    @IBOutlet var titleLabel: UILabel!
+
     @IBAction func dismissSettings(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -20,6 +22,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dismissButton.buttonImage = UIImage(systemName: "xmark.circle")!
+        titleLabel.text = NSLocalizedString("Settings", comment: "Title: Settings")
     }
 
     override func viewDidAppear(_ animated: Bool) {

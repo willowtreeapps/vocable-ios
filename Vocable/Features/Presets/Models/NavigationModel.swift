@@ -12,6 +12,15 @@ import UIKit
 enum HintText: String, CaseIterable {
     case preset = "Select something below to speak"
     case keyboard = ""
+
+    var localizedString: String {
+        switch self {
+        case .preset:
+            return NSLocalizedString("Select something below to speak", comment: "Select something below to speak Hint Text")
+        default:
+            return ""
+        }
+    }
 }
 
 enum TopBarButton: String {

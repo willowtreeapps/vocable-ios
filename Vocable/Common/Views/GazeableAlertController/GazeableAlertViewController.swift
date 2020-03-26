@@ -101,7 +101,8 @@ private final class GazeableAlertButton: GazeableButton {
         setTitleColor(.white, for: .selected)
         setTitleColor(.black, for: .normal)
         backgroundView.cornerRadius = 14
-
+        titleLabel?.adjustsFontSizeToFitWidth = true
+        
         updateForCurrentTraitCollection()
     }
 

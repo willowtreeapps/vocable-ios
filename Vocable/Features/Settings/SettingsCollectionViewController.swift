@@ -20,7 +20,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
     private enum SettingsItem: String, Hashable {
         var title: String {
-            return self.rawValue
+            return NSLocalizedString(self.rawValue, comment: "")
         }
 
         var isFeatureEnabled: Bool {

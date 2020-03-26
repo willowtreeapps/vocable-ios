@@ -12,7 +12,7 @@ import CoreData
 extension Phrase {
     static func create(withUserEntry text: String, in context: NSManagedObjectContext) -> Phrase {
         let newIdentifier = "user_\(UUID().uuidString)"
-        let savedCategory = Category.fetchOrCreate(in: context, matching: PresetCategory.saved.description)
+        let savedCategory = Category.fetchOrCreate(in: context, matching: TextPresets.savedSayingsIdentifier)
         let phrase = Phrase.fetchOrCreate(in: context, matching: newIdentifier)
         phrase.isUserGenerated = true
         phrase.creationDate = Date()

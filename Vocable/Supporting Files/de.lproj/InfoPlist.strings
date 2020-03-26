@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Vocable
+
+  Created by Martin Pittenauer on 20.03.20.
+  Copyright © 2020 WillowTree. All rights reserved.
+*/
+
+NSCameraUsageDescription = "Vocable benutzt ARKit um Kopfbewegungen mit der TrueDepth Kamera zu erkennen. Das ermöglicht das Steuern der App bei eingeschränkter Bewegungsfähigkeit. Die Kameradaten werden ausdrücklich nur zum Steuern des Navigationszeigers verwendet und nicht gespeichert oder übermittelt. Deshalb braucht Vocable die Erlaubnis zur Nutzung der Kamera.";
+

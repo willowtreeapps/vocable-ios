@@ -11,6 +11,11 @@
 		130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00BD20D2AD2A007C3163 /* Main.storyboard */; };
 		130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C020D2AD2C007C3163 /* Assets.xcassets */; };
 		130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */; };
+		3010A599242602E5005A66D7 /* textpresets.json in Resources */ = {isa = PBXBuildFile; fileRef = 3010A59B242602E5005A66D7 /* textpresets.json */; };
+		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
+		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
+		30B979BE2425587B00309D7C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BC2425587B00309D7C /* Localizable.strings */; };
+		30B979C02425789700309D7C /* GazeableAlertViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30B979C22425789700309D7C /* GazeableAlertViewController.storyboard */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
 		64253CED2419358D0044EAAA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64253CEC2419358D0044EAAA /* Settings.storyboard */; };
 		64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A54544242A490700218BE8 /* GazeEatingView.swift */; };
@@ -139,6 +144,16 @@
 		130C00C020D2AD2C007C3163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		130C00C320D2AD2C007C3163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		130C00C520D2AD2C007C3163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3010A59A242602E5005A66D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/textpresets.json; sourceTree = "<group>"; };
+		3010A59C242602E9005A66D7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = de; path = de.lproj/textpresets.json; sourceTree = "<group>"; };
+		30B979A424254CBC00309D7C /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
+		30B979B92425583E00309D7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		30B979BB2425584300309D7C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		30B979BD2425587B00309D7C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Vocable/de.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		30B979BF242558FD00309D7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Vocable/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		30B979C12425789700309D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GazeableAlertViewController.storyboard; sourceTree = "<group>"; };
+		30B979C4242578AA00309D7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GazeableAlertViewController.strings; sourceTree = "<group>"; };
+		30B979C6242578AB00309D7C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/GazeableAlertViewController.strings; sourceTree = "<group>"; };
 		54D3C41423E37CD40061EF47 /* VocableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -311,6 +326,9 @@
 				130C00C020D2AD2C007C3163 /* Assets.xcassets */,
 				130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */,
 				130C00C520D2AD2C007C3163 /* Info.plist */,
+				3010A59B242602E5005A66D7 /* textpresets.json */,
+				30B979BC2425587B00309D7C /* Localizable.strings */,
+				30B979BA2425583E00309D7C /* InfoPlist.strings */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -491,6 +509,7 @@
 				6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */,
 				B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */,
 				71DBE5EA240DE4D000BA8D01 /* WarningView.xib */,
+				30B979A424254CBC00309D7C /* WarningView.swift */,
 				71B856432416CEB600CB163B /* ToastView.xib */,
 				6BB56BA72422AC2500EA787E /* ToastView.swift */,
 				A94720CD241A8D9B00F7B4FF /* PaginationView.swift */,
@@ -659,6 +678,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 130C00AB20D2AD2A007C3163;
 			productRefGroup = 130C00B520D2AD2A007C3163 /* Products */;
@@ -678,6 +698,7 @@
 			files = (
 				718D7FB0241954C400FDEF93 /* EditSayingsCollectionViewCell.xib in Resources */,
 				71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */,
+				30B979BE2425587B00309D7C /* Localizable.strings in Resources */,
 				A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */,
 				A9299C7723F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib in Resources */,
 				A96D61D724229F7400577144 /* SettingsCollectionViewCell.xib in Resources */,
@@ -685,6 +706,8 @@
 				A98E8A2523F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib in Resources */,
 				B81D236723FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib in Resources */,
 				B81D235B23FED8EF005741E8 /* PresetPaginationContainerCollectionViewCell.xib in Resources */,
+				30B979B82425583E00309D7C /* InfoPlist.strings in Resources */,
+				3010A599242602E5005A66D7 /* textpresets.json in Resources */,
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,
 				6B9DFA6923E88A1B0037673E /* GazeLib.scnassets in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
@@ -825,6 +848,7 @@
 				B81D236123FEDCD1005741E8 /* PresetPageCollectionViewController.swift in Sources */,
 				6B823BC223F4ADE30099F65E /* PIDControlConstants.swift in Sources */,
 				A9DFCC1A242BDD5300136136 /* PresetPaginationCollectionViewCell.swift in Sources */,
+				30B979A524254CBC00309D7C /* WarningView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,6 +887,43 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		3010A59B242602E5005A66D7 /* textpresets.json */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3010A59A242602E5005A66D7 /* en */,
+				3010A59C242602E9005A66D7 /* de */,
+			);
+			name = textpresets.json;
+			sourceTree = "<group>";
+		};
+		30B979BA2425583E00309D7C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30B979B92425583E00309D7C /* en */,
+				30B979BB2425584300309D7C /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		30B979BC2425587B00309D7C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30B979BD2425587B00309D7C /* de */,
+				30B979BF242558FD00309D7C /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		30B979C22425789700309D7C /* GazeableAlertViewController.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30B979C12425789700309D7C /* Base */,
+				30B979C4242578AA00309D7C /* en */,
+				30B979C6242578AB00309D7C /* de */,
+			);
+			name = GazeableAlertViewController.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -870,6 +931,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -932,6 +994,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -988,7 +1051,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1080,6 +1143,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
