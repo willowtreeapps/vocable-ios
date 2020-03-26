@@ -1,6 +1,6 @@
 //
 //  PublishedDefault.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Chris Stroud on 3/18/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
