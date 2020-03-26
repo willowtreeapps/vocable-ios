@@ -59,61 +59,15 @@ class HeadGazeWindow: UIWindow {
 
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
         cancelCurrentGazeIfNeeded()
-        handleWarning(shouldDisplay: true)
+       // handleWarning(shouldDisplay: true)
     }
     
     @objc private func applicationDidAcquireGaze(_ sender: Any?) {
-        handleWarning(shouldDisplay: false)
+      //  handleWarning(shouldDisplay: false)
     }
     
     @objc private func headTrackingDisabled(_ sender: Any?) {
-        handleWarning(shouldDisplay: false)
-    }
-    
-    func handlePhraseSaved(toastLabelText: String) {
-        if phraseSavedView == nil {
-            let phraseSavedView = UINib(nibName: "ToastView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! ToastView
-            phraseSavedView.alpha = 0
-            phraseSavedView.text = toastLabelText
-            self.phraseSavedView = phraseSavedView
-            addSubview(phraseSavedView)
-            phraseSavedView.translatesAutoresizingMaskIntoConstraints = false
-            
-            let horizontalPadding: CGFloat = [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) ? 16 : 24
-            NSLayoutConstraint.activate([
-                phraseSavedView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor),
-                phraseSavedView.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor,
-                                                      constant: horizontalPadding),
-                phraseSavedView.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor,
-                                                       constant: horizontalPadding),
-                phraseSavedView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
-                phraseSavedView.centerYAnchor.constraint(equalTo: centerYAnchor),
-                phraseSavedView.centerXAnchor.constraint(equalTo: centerXAnchor)
-            ])
-        }
-
-         let fadeInOutDuration: TimeInterval = 0.5
-         let presentationDuration: TimeInterval = 4
-
-         // Fade in
-         UIView.animate(withDuration: fadeInOutDuration,
-                        delay: 0,
-                        options: [.beginFromCurrentState, .curveEaseIn],
-                        animations: { self.phraseSavedView?.alpha = 1 },
-                        completion: { [weak self] entranceDidFinish in
-
-                         guard entranceDidFinish else { return }
-
-                         // Fade out
-                         UIView.animate(withDuration: fadeInOutDuration,
-                                        delay: presentationDuration,
-                                        options: [.beginFromCurrentState, .curveEaseOut],
-                                        animations: { self?.phraseSavedView?.alpha = 0 },
-                                        completion: { dismissalDidFinish in
-                                         guard dismissalDidFinish else { return }
-                                         self?.phraseSavedView?.removeFromSuperview()
-                         })
-         })
+      //  handleWarning(shouldDisplay: false)
     }
 
     override func addSubview(_ view: UIView) {

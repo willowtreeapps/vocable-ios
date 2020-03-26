@@ -13,13 +13,18 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var notificationWindow: NotificationWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Ensure that the persistent store has the current
         // default presets before presenting UI
         preparePersistentStore()
-
+        
+        addObservers()
+        notificationWindow = NotificationWindow(frame: UIScreen.main.bounds)
+        notificationWindow?.isHidden = true
+        
         application.isIdleTimerDisabled = true
         let window = HeadGazeWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
@@ -42,6 +47,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             assertionFailure("Core Data save failure: \(error)")
         }
+    }
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .headTrackingDisabled, object: nil)
+    }
+    
+    @objc private func applicationDidLoseGaze(_ sender: Any?) {
+        handleWarning(shouldDisplay: true)
+    }
+    
+    @objc private func applicationDidAcquireGaze(_ sender: Any?) {
+        handleWarning(shouldDisplay: false)
+    }
+    
+    @objc private func headTrackingDisabled(_ sender: Any?) {
+        handleWarning(shouldDisplay: false)
+    }
+    
+    private func handleWarning(shouldDisplay: Bool) {
+        notificationWindow?.handleWarning(shouldDisplay: shouldDisplay)
     }
 
     private func deleteExistingPrescribedEntities(in context: NSManagedObjectContext) {
