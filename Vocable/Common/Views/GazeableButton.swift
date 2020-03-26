@@ -18,6 +18,13 @@ class GazeableButton: UIButton {
     private var buttonImageView = UIImageView()
     private var buttonImageWidthConstraint: NSLayoutConstraint?
     private var buttonImageHeightConstraint: NSLayoutConstraint?
+    
+    override var isEnabled: Bool {
+        didSet {
+            let alpha = CGFloat(isEnabled ? 1.0 : 0.5)
+            backgroundView.alpha = alpha
+        }
+    }
 
     @IBInspectable
     var buttonImage: UIImage? {

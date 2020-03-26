@@ -23,25 +23,3 @@ class ItemSelection {
     @PublishedValue
     static var presetsPageIndicatorProgress: CarouselGridPagingProgress = (pageIndex: 0, pageCount: 0)
 }
-
-@propertyWrapper struct PublishedValue<T> {
-
-    private let subject: CurrentValueSubject<T, Never>
-
-    var wrappedValue: T {
-        didSet {
-            subject.send(wrappedValue)
-        }
-    }
-
-    var projectedValue: AnyPublisher<T, Never> {
-        mutating get {
-            return subject.eraseToAnyPublisher()
-        }
-    }
-
-    init(wrappedValue: T) {
-        self.wrappedValue = wrappedValue
-        self.subject = CurrentValueSubject<T, Never>(self.wrappedValue)
-    }
-}
