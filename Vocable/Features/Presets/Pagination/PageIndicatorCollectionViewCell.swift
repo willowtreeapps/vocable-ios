@@ -20,7 +20,7 @@ class PageIndicatorCollectionViewCell: VocableCollectionViewCell {
         pageLabel.adjustsFontSizeToFitWidth = true
         
         ItemSelection.$presetsPageIndicatorProgress.sink(receiveValue: { pageInfo in
-            self.pageLabel.text = "Page \(pageInfo.pageIndex + 1) of \(pageInfo.pageCount)"
+            self.pageLabel.text = NSLocalizedString("Page \(pageInfo.pageIndex + 1) of \(pageInfo.pageCount)", comment: "Presets page indicator info")
         }).store(in: &disposables)
     }
 }

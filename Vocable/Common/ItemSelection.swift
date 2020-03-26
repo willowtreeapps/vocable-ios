@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import CoreData
 
-class ItemSelection {
+struct ItemSelection {
     
     @PublishedValue
     static var selectedCategory = Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
