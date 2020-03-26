@@ -37,7 +37,6 @@ class CategoryPageCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = .categoryBackgroundColor
         clearsSelectionOnViewWillAppear = false
     }
     
@@ -62,6 +61,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
         collectionView.delegate = self
         collectionView.delaysContentTouches = false
         collectionView.isScrollEnabled = false
+        collectionView.backgroundColor = .categoryBackgroundColor
         
         collectionView.register(CategoryItemCollectionViewCell.self, forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
     }
