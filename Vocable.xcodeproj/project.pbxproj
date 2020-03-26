@@ -486,9 +486,6 @@
 				A944D0042405AE8C00F3863E /* GazeableButton.swift */,
 				64A54544242A490700218BE8 /* GazeEatingView.swift */,
 				A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */,
-				A94720CD241A8D9B00F7B4FF /* PaginationView.swift */,
-				6BB56BA72422AC2500EA787E /* PhraseSavedView.swift */,
-				71B856432416CEB600CB163B /* PhraseSavedView.xib */,
 				6B9DFA7323E8D1270037673E /* TrackingContainerViewController.swift */,
 				6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */,
 				B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */,
@@ -1002,7 +999,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.willowtreeapps.eyespeakaac";
@@ -1025,7 +1022,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.willowtreeapps.eyespeakaac";
@@ -1149,7 +1146,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.willowtreeapps.eyespeakaac";
