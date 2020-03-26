@@ -39,7 +39,7 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
             chunked.append([]) // Ensure that at least one empty page exists for empty state
         }
         
-        var mappedViewControllers = chunked.map { viewModels -> UIViewController in
+        let mappedViewControllers = chunked.map { viewModels -> UIViewController in
             let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.DefaultCompositionalLayout(traitCollection: traitCollection))
             collectionViewController.items = viewModels
             return collectionViewController
