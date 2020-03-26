@@ -37,6 +37,7 @@ class CategoryPageCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.backgroundColor = .categoryBackgroundColor
         clearsSelectionOnViewWillAppear = false
     }
     
