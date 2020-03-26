@@ -170,7 +170,7 @@ class PresetsViewController: UICollectionViewController {
                     cell.paginationDirection = direction
                     return cell
                 case .paginatedPresets:
-                    let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PaginationCollectionViewCell.reuseIdentifier, for: indexPath) as! PaginationCollectionViewCell
+                    let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetPaginationCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetPaginationCollectionViewCell
                     cell.paginationDirection = direction
                     return cell
                 default:

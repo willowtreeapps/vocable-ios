@@ -33,6 +33,10 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
     private func commonInit() {
         addSubview(textLabel)
         textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.textAlignment = .center
+        textLabel.numberOfLines = 0
+        textLabel.adjustsFontSizeToFitWidth = true
+        textLabel.minimumScaleFactor = 0.5
         textLabel.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor).isActive = true
         textLabel.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor).isActive = true
         textLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor).isActive = true

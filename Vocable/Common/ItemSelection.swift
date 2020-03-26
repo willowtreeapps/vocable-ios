@@ -18,7 +18,7 @@ class ItemSelection {
     .compactMap { CategoryViewModel($0) }.first!
 
     @PublishedValue
-    static var selectedPhrase: PhraseViewModel? = nil
+    static var selectedPhrase: PhraseViewModel?
     
     @PublishedValue
     static var presetsPageIndicatorProgress: CarouselGridPagingProgress = (pageIndex: 0, pageCount: 0)

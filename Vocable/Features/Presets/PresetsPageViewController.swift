@@ -27,20 +27,26 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
 
     private lazy var pages: [UIViewController] = {
         var chunked = presetViewModels.chunked(into: itemsPerPage)
-        if chunked.isEmpty {
+        var pageViewControllers: [UIViewController] = []
+        
+        if ItemSelection.selectedCategory.name == PresetCategory.numPad.description {
+            let numPadCollectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.NumPadCompositionalLayout(traitCollection: traitCollection))
+            numPadCollectionViewController.items = TextPresets.numPadCategory
+            pageViewControllers.insert(numPadCollectionViewController, at: 0)
+        }
+        
+        if pageViewControllers.isEmpty && chunked.isEmpty {
             chunked.append([]) // Ensure that at least one empty page exists for empty state
         }
-        var value = chunked.map { viewModels -> UIViewController in
+        
+        var mappedViewControllers = chunked.map { viewModels -> UIViewController in
             let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.DefaultCompositionalLayout(traitCollection: traitCollection))
             collectionViewController.items = viewModels
             return collectionViewController
         }
-        if ItemSelection.selectedCategory.name == PresetCategory.numPad.description {
-            let numPadCollectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.NumPadCompositionalLayout(traitCollection: traitCollection))
-            numPadCollectionViewController.items = TextPresets.numPadCategory
-            value.insert(numPadCollectionViewController, at: 0)
-        }
-        return value
+        
+        pageViewControllers += mappedViewControllers
+        return pageViewControllers
     }()
     
     private var presetViewModels: [PhraseViewModel] =

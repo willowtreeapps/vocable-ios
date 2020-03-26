@@ -43,6 +43,11 @@ class VocableCollectionViewCell: UICollectionViewCell {
         commonInit()
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        commonInit()
+    }
+    
     private func commonInit() {
         borderedView.cornerRadius = 8
         borderedView.borderColor = .cellBorderHighlightColor
