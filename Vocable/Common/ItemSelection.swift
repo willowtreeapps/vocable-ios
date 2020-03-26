@@ -12,18 +12,14 @@ import CoreData
 
 struct ItemSelection {
     
-    static let categoryValueSubject = CurrentValueSubject<CategoryViewModel, Never>(initialSelectedCategory)
-    private static var initialSelectedCategory: CategoryViewModel =
-        Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
-                          sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
-        .compactMap { CategoryViewModel($0) }.first!
+    @PublishedValue
+    static var selectedCategory = Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
+                      sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
+    .compactMap { CategoryViewModel($0) }.first!
+
+    @PublishedValue
+    static var selectedPhrase: PhraseViewModel?
     
-    static let phraseValueSubject = CurrentValueSubject<PhraseViewModel?, Never>(nil)
-    
-    static let presetsPageIndicatorPublisher = PassthroughSubject<String, Never>()
-    static var presetsPageIndicatorText: String = "" {
-        didSet {
-            presetsPageIndicatorPublisher.send(presetsPageIndicatorText)
-        }
-    }
+    @PublishedValue
+    static var presetsPageIndicatorProgress: CarouselGridPagingProgress = (pageIndex: 0, pageCount: 0)
 }
