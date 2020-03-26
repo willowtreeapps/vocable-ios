@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class GazableAlertAction: NSObject {
+final class GazeableAlertAction: NSObject {
 
     let title: String
     let handler: (() -> Void)?
@@ -20,8 +20,8 @@ final class GazableAlertAction: NSObject {
     }
 
     @objc fileprivate func performActions() {
-        handler?()
         defaultCompletion?()
+        handler?()
     }
 
 }
@@ -39,7 +39,7 @@ private final class DividerView: UIView {
     }
 
     func commonInit() {
-        self.backgroundColor = .grayDivider
+        backgroundColor = .grayDivider
     }
 
     override var intrinsicContentSize: CGSize {
@@ -61,10 +61,10 @@ private final class GazeableAlertView: BorderedView {
     }
 
     private func commonInit() {
-        self.roundedCorners = .allCorners
-        self.cornerRadius = 14
-        self.fillColor = .alertBackgroundColor
-        self.setContentHuggingPriority(.required, for: .horizontal)
+        roundedCorners = .allCorners
+        cornerRadius = 14
+        fillColor = .alertBackgroundColor
+        setContentHuggingPriority(.required, for: .horizontal)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -96,17 +96,17 @@ private final class GazeableAlertButton: GazeableButton {
     }
 
     private func commonInit() {
-        self.fillColor = .alertBackgroundColor
-        self.selectionFillColor = .primaryColor
-        self.setTitleColor(.white, for: .selected)
-        self.setTitleColor(.black, for: .normal)
-        self.backgroundView.cornerRadius = 14
+        fillColor = .alertBackgroundColor
+        selectionFillColor = .primaryColor
+        setTitleColor(.white, for: .selected)
+        setTitleColor(.black, for: .normal)
+        backgroundView.cornerRadius = 14
 
         updateForCurrentTraitCollection()
     }
 
     private func updateForCurrentTraitCollection() {
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         contentEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24)
     }
 
@@ -118,7 +118,7 @@ private final class GazeableAlertButton: GazeableButton {
 
 }
 
-final class GazeableAlertViewController: UIViewController {
+final class GazeableAlertViewController: UIViewController, UIViewControllerTransitioningDelegate {
 
     private lazy var alertView: GazeableAlertView = {
         let view = GazeableAlertView()
@@ -155,7 +155,7 @@ final class GazeableAlertViewController: UIViewController {
         return stackView
     }()
 
-    private var actions = [GazableAlertAction]() {
+    private var actions = [GazeableAlertAction]() {
         didSet {
             updateButtonLayout()
         }
@@ -164,7 +164,9 @@ final class GazeableAlertViewController: UIViewController {
     init(alertTitle: String) {
         super.init(nibName: nil, bundle: nil)
 
-        self.modalPresentationStyle = .overFullScreen
+        self.transitioningDelegate = self
+        self.modalPresentationStyle = .custom
+
         self.titleLabel.text = alertTitle
     }
 
@@ -172,8 +174,6 @@ final class GazeableAlertViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .clear
 
         setupViews()
         updateContentForCurrentTraitCollection()
@@ -195,7 +195,7 @@ final class GazeableAlertViewController: UIViewController {
         }
     }
 
-    func addAction(_ action: GazableAlertAction) {
+    func addAction(_ action: GazeableAlertAction) {
         action.defaultCompletion = { [weak self] in
             self?.presentingViewController?.dismiss(animated: true)
         }
@@ -255,7 +255,7 @@ final class GazeableAlertViewController: UIViewController {
             let button = GazeableAlertButton(frame: .zero)
             button.setTitle(action.title, for: .normal)
             button.backgroundView.cornerRadius = alertView.cornerRadius
-            button.addTarget(action, action: #selector(GazableAlertAction.performActions), for: .primaryActionTriggered)
+            button.addTarget(action, action: #selector(GazeableAlertAction.performActions), for: .primaryActionTriggered)
 
             if actionButtonStackView.arrangedSubviews.isEmpty {
                 firstButton = button
@@ -296,6 +296,12 @@ final class GazeableAlertViewController: UIViewController {
         } else {
             lastAlertButton?.backgroundView.roundedCorners.insert([.bottomLeft, .bottomRight])
         }
+    }
+
+    // MARK: UIViewControllerTransitioningDelegate
+
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return GazeableAlertPresentationController(presentedViewController: presented, presenting: presenting)
     }
 
 }

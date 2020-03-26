@@ -11,7 +11,7 @@ import Combine
 import ARKit
 
 class HeadGazeWindow: UIWindow {
-
+    
     weak var cursorView: UIVirtualCursorView?
     
     private weak var warningView: UIView?
@@ -55,7 +55,6 @@ class HeadGazeWindow: UIWindow {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .headTrackingDisabled, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(phraseSaved), name: .phraseSaved, object: nil)
     }
 
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
@@ -71,15 +70,15 @@ class HeadGazeWindow: UIWindow {
         handleWarning(shouldDisplay: false)
     }
     
-    @objc private func phraseSaved(_ sender: Any?) {
-
+    func handlePhraseSaved(toastLabelText: String) {
         if phraseSavedView == nil {
-            let phraseSavedView = UINib(nibName: "PhraseSavedView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! UIView
+            let phraseSavedView = UINib(nibName: "ToastView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! ToastView
             phraseSavedView.alpha = 0
+            phraseSavedView.text = toastLabelText
             self.phraseSavedView = phraseSavedView
             addSubview(phraseSavedView)
             phraseSavedView.translatesAutoresizingMaskIntoConstraints = false
-
+            
             let horizontalPadding: CGFloat = [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) ? 16 : 24
             NSLayoutConstraint.activate([
                 phraseSavedView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor),
@@ -93,28 +92,28 @@ class HeadGazeWindow: UIWindow {
             ])
         }
 
-        let fadeInOutDuration: TimeInterval = 0.5
-        let presentationDuration: TimeInterval = 4
+         let fadeInOutDuration: TimeInterval = 0.5
+         let presentationDuration: TimeInterval = 4
 
-        // Fade in
-        UIView.animate(withDuration: fadeInOutDuration,
-                       delay: 0,
-                       options: [.beginFromCurrentState, .curveEaseIn],
-                       animations: { self.phraseSavedView?.alpha = 1 },
-                       completion: { [weak self] entranceDidFinish in
+         // Fade in
+         UIView.animate(withDuration: fadeInOutDuration,
+                        delay: 0,
+                        options: [.beginFromCurrentState, .curveEaseIn],
+                        animations: { self.phraseSavedView?.alpha = 1 },
+                        completion: { [weak self] entranceDidFinish in
 
-                        guard entranceDidFinish else { return }
+                         guard entranceDidFinish else { return }
 
-                        // Fade out
-                        UIView.animate(withDuration: fadeInOutDuration,
-                                       delay: presentationDuration,
-                                       options: [.beginFromCurrentState, .curveEaseOut],
-                                       animations: { self?.phraseSavedView?.alpha = 0 },
-                                       completion: { dismissalDidFinish in
-                                        guard dismissalDidFinish else { return }
-                                        self?.phraseSavedView?.removeFromSuperview()
-                        })
-        })
+                         // Fade out
+                         UIView.animate(withDuration: fadeInOutDuration,
+                                        delay: presentationDuration,
+                                        options: [.beginFromCurrentState, .curveEaseOut],
+                                        animations: { self?.phraseSavedView?.alpha = 0 },
+                                        completion: { dismissalDidFinish in
+                                         guard dismissalDidFinish else { return }
+                                         self?.phraseSavedView?.removeFromSuperview()
+                         })
+         })
     }
 
     override func addSubview(_ view: UIView) {

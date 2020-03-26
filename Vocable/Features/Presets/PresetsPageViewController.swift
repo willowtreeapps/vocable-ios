@@ -30,11 +30,17 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
         if chunked.isEmpty {
             chunked.append([]) // Ensure that at least one empty page exists for empty state
         }
-        return chunked.map { viewModels in
-            let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.CompositionalLayout(traitCollection: traitCollection))
+        var value = chunked.map { viewModels -> UIViewController in
+            let collectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.DefaultCompositionalLayout(traitCollection: traitCollection))
             collectionViewController.items = viewModels
             return collectionViewController
         }
+        if ItemSelection.selectedCategory.name == PresetCategory.numPad.description {
+            let numPadCollectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.NumPadCompositionalLayout(traitCollection: traitCollection))
+            numPadCollectionViewController.items = TextPresets.numPadCategory
+            value.insert(numPadCollectionViewController, at: 0)
+        }
+        return value
     }()
     
     private var presetViewModels: [PhraseViewModel] =

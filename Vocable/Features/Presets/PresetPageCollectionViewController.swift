@@ -100,7 +100,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
         }
     }
     
-    class CompositionalLayout: UICollectionViewCompositionalLayout {
+    class DefaultCompositionalLayout: UICollectionViewCompositionalLayout {
         private var dataSource: UICollectionViewDiffableDataSource<PresetPageCollectionViewController.Section, PresetPageCollectionViewController.ItemWrapper>? {
             self.collectionView?.dataSource as? UICollectionViewDiffableDataSource<PresetPageCollectionViewController.Section, PresetPageCollectionViewController.ItemWrapper>
         }
@@ -109,30 +109,36 @@ class PresetPageCollectionViewController: UICollectionViewController {
         // Intended for use in computing the fractional-size dimensions of collection layout items rather than hard-coding width/height values
         private static let totalHeight: CGFloat = 834.0
         
-        init(traitCollection: UITraitCollection) {
-            super.init(section: CompositionalLayout.presetsSectionLayout(for: traitCollection))
+        convenience init(traitCollection: UITraitCollection) {
+            self.init(section: PresetPageCollectionViewController.DefaultCompositionalLayout.presetsSectionLayout(for: traitCollection))
+        }
+        
+        override init(section: NSCollectionLayoutSection) {
+            super.init(section: section)
         }
         
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
         
-        private static func presetsSectionLayout(for traitCollection: UITraitCollection) -> NSCollectionLayoutSection {
+        fileprivate class func gridDimensions(for traitCollection: UITraitCollection) -> (numberOfRows: Int, itemsPerRow: Int) {
+            switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
+            case (.regular, .regular), (.regular, .compact):
+                return (3, 3)
+            case (.compact, .compact):
+                return (2, 3)
+            case (.compact, .regular):
+                return (4, 2)
+            default:
+                return (2, 3)
+            }
+        }
+        
+        fileprivate class func presetsSectionLayout(for traitCollection: UITraitCollection) -> NSCollectionLayoutSection {
             let presetItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 3.0),
                                                                                        heightDimension: .fractionalHeight(1.0)))
             
-            var rowInfo: (numberOfRows: Int, itemsPerRow: Int) {
-                switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
-                case (.regular, .regular), (.regular, .compact):
-                    return (3, 3)
-                case (.compact, .compact):
-                    return (2, 3)
-                case (.compact, .regular):
-                    return (4, 2)
-                default:
-                    return (2, 3)
-                }
-            }
+            let rowInfo = gridDimensions(for: traitCollection)
             
             let rowGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -152,6 +158,25 @@ class PresetPageCollectionViewController: UICollectionViewController {
             section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             
             return section
+        }
+    }
+    
+    class NumPadCompositionalLayout: DefaultCompositionalLayout {
+        init(traitCollection: UITraitCollection) {
+            super.init(section: NumPadCompositionalLayout.presetsSectionLayout(for: traitCollection))
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        override class func gridDimensions(for traitCollection: UITraitCollection) -> (numberOfRows: Int, itemsPerRow: Int) {
+            switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
+            case (.regular, .compact), (.compact, .compact):
+                return (2, 6)
+            default:
+                return (4, 3)
+            }
         }
     }
 }
