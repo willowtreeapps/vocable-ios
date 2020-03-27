@@ -24,4 +24,6 @@ struct AppConfig {
     static var isHeadTrackingSupported: Bool {
         return ARFaceTrackingConfiguration.isSupported
     }
+    
+    static let preferredLanguageIdentifier = Locale.preferredLanguages.first ?? Locale.current.identifier
 }
