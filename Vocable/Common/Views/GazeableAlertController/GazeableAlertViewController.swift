@@ -40,6 +40,10 @@ private final class DividerView: UIView {
 
     func commonInit() {
         backgroundColor = .grayDivider
+        setContentCompressionResistancePriority(.init(999), for: .horizontal)
+        setContentCompressionResistancePriority(.init(999), for: .vertical)
+        setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
 
     override var intrinsicContentSize: CGSize {
@@ -64,7 +68,8 @@ private final class GazeableAlertView: BorderedView {
         roundedCorners = .allCorners
         cornerRadius = 14
         fillColor = .alertBackgroundColor
-        setContentHuggingPriority(.required, for: .horizontal)
+//        setContentHuggingPriority(.required, for: .horizontal)
+        setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -102,7 +107,9 @@ private final class GazeableAlertButton: GazeableButton {
         setTitleColor(.black, for: .normal)
         backgroundView.cornerRadius = 14
         titleLabel?.adjustsFontSizeToFitWidth = true
-        
+        setContentCompressionResistancePriority(.required, for: .horizontal)
+        setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+
         updateForCurrentTraitCollection()
     }
 
@@ -226,7 +233,9 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
             alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             alertView.leadingAnchor.constraint(greaterThanOrEqualTo: view.layoutMarginsGuide.leadingAnchor),
-            alertView.trailingAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.trailingAnchor)
+            alertView.trailingAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.trailingAnchor),
+            alertView.topAnchor.constraint(greaterThanOrEqualTo: view.layoutMarginsGuide.topAnchor),
+            alertView.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
         ])
 
         NSLayoutConstraint.activate([
@@ -264,8 +273,6 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
                 actionButtonStackView.addArrangedSubview(button)
             } else {
                 let separator = DividerView()
-                separator.translatesAutoresizingMaskIntoConstraints = false
-                separator.widthAnchor.constraint(equalToConstant: 1).isActive = true
                 actionButtonStackView.addArrangedSubview(separator)
                 actionButtonStackView.addArrangedSubview(button)
 
