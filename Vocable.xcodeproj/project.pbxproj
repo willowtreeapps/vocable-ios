@@ -63,7 +63,7 @@
 		71FA2857242413670051498A /* SelectionModeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA2856242413670051498A /* SelectionModeCollectionViewController.swift */; };
 		9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E0542271F0DC0058DF57 /* CursorView.swift */; };
 		9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */; };
-		A91A9F4924192782008552E8 /* EditKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A9F4824192782008552E8 /* EditKeyboardViewController.swift */; };
+		A91A9F4924192782008552E8 /* EditSayingsKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A9F4824192782008552E8 /* EditSayingsKeyboardViewController.swift */; };
 		A920A4AF23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift */; };
 		A9299C7523F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9299C7423F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift */; };
 		A9299C7723F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9299C7623F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib */; };
@@ -87,6 +87,14 @@
 		A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */; };
 		A9B32C8C240EB6250084E151 /* KeyboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B32C8B240EB6250084E151 /* KeyboardModel.swift */; };
 		A9C32CFF242271F3000EC6F7 /* Phrase+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */; };
+		A9CF2AE9242D41BE005633A7 /* EditSayings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9CF2AE8242D41BE005633A7 /* EditSayings.storyboard */; };
+		A9CF2AEB242D431E005633A7 /* TimingSensitivity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9CF2AEA242D431E005633A7 /* TimingSensitivity.storyboard */; };
+		A9CF2AED242D44CA005633A7 /* TimingSensitivityCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF2AEC242D44CA005633A7 /* TimingSensitivityCollectionViewController.swift */; };
+		A9CF2AEF242D44EE005633A7 /* TimingSensitivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF2AEE242D44EE005633A7 /* TimingSensitivityViewController.swift */; };
+		A9CF2AF3242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9CF2AF2242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib */; };
+		A9CF2AF5242D4EF1005633A7 /* SensitivityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9CF2AF4242D4EF1005633A7 /* SensitivityCollectionViewCell.xib */; };
+		A9CF2AF7242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF2AF6242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift */; };
+		A9CF2AF9242D4F0A005633A7 /* SensitivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF2AF8242D4F0A005633A7 /* SensitivityCollectionViewCell.swift */; };
 		A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */; };
 		A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FF23F4900C0094DB64 /* TextExpression.swift */; };
 		A9DE170223F492B20094DB64 /* Array+Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE170123F492B20094DB64 /* Array+Split.swift */; };
@@ -192,7 +200,7 @@
 		71FA2856242413670051498A /* SelectionModeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionModeCollectionViewController.swift; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppExtensions.swift"; sourceTree = "<group>"; };
-		A91A9F4824192782008552E8 /* EditKeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditKeyboardViewController.swift; sourceTree = "<group>"; };
+		A91A9F4824192782008552E8 /* EditSayingsKeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSayingsKeyboardViewController.swift; sourceTree = "<group>"; };
 		A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetUICollectionViewCompositionalLayout.swift; sourceTree = "<group>"; };
 		A9299C7423F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKeyCollectionViewCell.swift; sourceTree = "<group>"; };
 		A9299C7623F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyboardKeyCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -216,6 +224,14 @@
 		A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9B32C8B240EB6250084E151 /* KeyboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardModel.swift; sourceTree = "<group>"; };
 		A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Phrase+Helpers.swift"; sourceTree = "<group>"; };
+		A9CF2AE8242D41BE005633A7 /* EditSayings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditSayings.storyboard; sourceTree = "<group>"; };
+		A9CF2AEA242D431E005633A7 /* TimingSensitivity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimingSensitivity.storyboard; sourceTree = "<group>"; };
+		A9CF2AEC242D44CA005633A7 /* TimingSensitivityCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingSensitivityCollectionViewController.swift; sourceTree = "<group>"; };
+		A9CF2AEE242D44EE005633A7 /* TimingSensitivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingSensitivityViewController.swift; sourceTree = "<group>"; };
+		A9CF2AF2242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DwellTimeCollectionViewCell.xib; sourceTree = "<group>"; };
+		A9CF2AF4242D4EF1005633A7 /* SensitivityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SensitivityCollectionViewCell.xib; sourceTree = "<group>"; };
+		A9CF2AF6242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DwellTimeCollectionViewCell.swift; sourceTree = "<group>"; };
+		A9CF2AF8242D4F0A005633A7 /* SensitivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensitivityCollectionViewCell.swift; sourceTree = "<group>"; };
 		A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSuggestionController.swift; sourceTree = "<group>"; };
 		A9DE16FF23F4900C0094DB64 /* TextExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExpression.swift; sourceTree = "<group>"; };
 		A9DE170123F492B20094DB64 /* Array+Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Split.swift"; sourceTree = "<group>"; };
@@ -394,11 +410,12 @@
 		714EFD412419636500DC773C /* EditSayings */ = {
 			isa = PBXGroup;
 			children = (
+				A9CF2AE8242D41BE005633A7 /* EditSayings.storyboard */,
 				714EFD44241964D800DC773C /* EditSayingsViewController.swift */,
 				A9326C8C241C1A3300F7026C /* EditSayingsCollectionViewController.swift */,
+				A91A9F4824192782008552E8 /* EditSayingsKeyboardViewController.swift */,
 				718D7FAD2419546F00FDEF93 /* EditSayingsCollectionViewCell.swift */,
 				718D7FAF241954C400FDEF93 /* EditSayingsCollectionViewCell.xib */,
-				A91A9F4824192782008552E8 /* EditKeyboardViewController.swift */,
 			);
 			path = EditSayings;
 			sourceTree = "<group>";
@@ -421,7 +438,6 @@
 			isa = PBXGroup;
 			children = (
 				64253CEC2419358D0044EAAA /* Settings.storyboard */,
-				71004B0C242926A2006833B8 /* SelectionMode.storyboard */,
 				A92FFB8C23ECCB5400AF2D0B /* SettingsCollectionViewController.swift */,
 				A944D0062405C61400F3863E /* SettingsViewController.swift */,
 				714EFD412419636500DC773C /* EditSayings */,
@@ -453,9 +469,24 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		A9CF2AFA242D4F11005633A7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A9CF2AF2242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib */,
+				A9CF2AF6242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift */,
+				A9CF2AF4242D4EF1005633A7 /* SensitivityCollectionViewCell.xib */,
+				A9CF2AF8242D4F0A005633A7 /* SensitivityCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A9DFCC21242D3A5000136136 /* TimingSensitivity */ = {
 			isa = PBXGroup;
 			children = (
+				A9CF2AEA242D431E005633A7 /* TimingSensitivity.storyboard */,
+				A9CF2AEE242D44EE005633A7 /* TimingSensitivityViewController.swift */,
+				A9CF2AEC242D44CA005633A7 /* TimingSensitivityCollectionViewController.swift */,
+				A9CF2AFA242D4F11005633A7 /* Views */,
 			);
 			path = TimingSensitivity;
 			sourceTree = "<group>";
@@ -463,6 +494,7 @@
 		A9DFCC22242D3CF500136136 /* SelectionMode */ = {
 			isa = PBXGroup;
 			children = (
+				71004B0C242926A2006833B8 /* SelectionMode.storyboard */,
 				71FA2854242406540051498A /* SelectionModeViewController.swift */,
 				71FA2856242413670051498A /* SelectionModeCollectionViewController.swift */,
 			);
@@ -692,6 +724,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9CF2AF5242D4EF1005633A7 /* SensitivityCollectionViewCell.xib in Resources */,
 				718D7FB0241954C400FDEF93 /* EditSayingsCollectionViewCell.xib in Resources */,
 				71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */,
 				A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */,
@@ -701,13 +734,16 @@
 				A98E8A2523F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib in Resources */,
 				B81D236723FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib in Resources */,
 				B81D235B23FED8EF005741E8 /* PresetPaginationContainerCollectionViewCell.xib in Resources */,
+				A9CF2AE9242D41BE005633A7 /* EditSayings.storyboard in Resources */,
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,
+				A9CF2AEB242D431E005633A7 /* TimingSensitivity.storyboard in Resources */,
 				6B9DFA6923E88A1B0037673E /* GazeLib.scnassets in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
 				71004B0D242926A2006833B8 /* SelectionMode.storyboard in Resources */,
 				130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */,
 				A946553223FC2CB20033D71F /* TextFieldCollectionViewCell.xib in Resources */,
 				B838202F23FD894C005A79CD /* CategoryPaginationContainerCollectionViewCell.xib in Resources */,
+				A9CF2AF3242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib in Resources */,
 				A944D00B2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib in Resources */,
 				6B3DCC1F24101F530039E45E /* TrackingDebugOverlayViewController.storyboard in Resources */,
 				64253CED2419358D0044EAAA /* Settings.storyboard in Resources */,
@@ -810,11 +846,12 @@
 				B81D234C23FDA7A8005741E8 /* CategoriesPageViewController.swift in Sources */,
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
 				A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */,
-				A91A9F4924192782008552E8 /* EditKeyboardViewController.swift in Sources */,
+				A91A9F4924192782008552E8 /* EditSayingsKeyboardViewController.swift in Sources */,
 				A99AF23123FC8BF700BE1184 /* TextTransaction.swift in Sources */,
 				A9DFCC18242BDCD700136136 /* CategoryPaginationCollectionViewCell.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
 				6B823BCB23F4ADE30099F65E /* Pulse.swift in Sources */,
+				A9CF2AEF242D44EE005633A7 /* TimingSensitivityViewController.swift in Sources */,
 				B8DA9DF423F30BD200FEBE19 /* VectorUtils.swift in Sources */,
 				A92FFB8D23ECCB5400AF2D0B /* SettingsCollectionViewController.swift in Sources */,
 				A946553423FC2CC20033D71F /* TextFieldCollectionViewCell.swift in Sources */,
@@ -833,13 +870,16 @@
 				B8EB51D12409860A00F425A6 /* GazeableAlertViewController.swift in Sources */,
 				B81D235F23FEDC15005741E8 /* PresetsPageViewController.swift in Sources */,
 				A99AF23323FDA8B600BE1184 /* SuggestionCollectionViewCell.swift in Sources */,
+				A9CF2AED242D44CA005633A7 /* TimingSensitivityCollectionViewController.swift in Sources */,
 				6BFB18C224002C7B002C3515 /* Phrases.xcdatamodeld in Sources */,
 				A98E8A2323F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift in Sources */,
 				A944D0072405C61400F3863E /* SettingsViewController.swift in Sources */,
+				A9CF2AF9242D4F0A005633A7 /* SensitivityCollectionViewCell.swift in Sources */,
 				B81D235D23FEDAF9005741E8 /* UIPageViewController+ManualPagination.swift in Sources */,
 				6B9DFA6223E889DB0037673E /* UIVirtualCursorView.swift in Sources */,
 				B81D236123FEDCD1005741E8 /* PresetPageCollectionViewController.swift in Sources */,
 				6B823BC223F4ADE30099F65E /* PIDControlConstants.swift in Sources */,
+				A9CF2AF7242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift in Sources */,
 				A9DFCC1A242BDD5300136136 /* PresetPaginationCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

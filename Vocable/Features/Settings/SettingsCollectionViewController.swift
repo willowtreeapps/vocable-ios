@@ -232,11 +232,15 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             present(alertViewController, animated: true)
 
         case .editMySayings:
-            if let vc = self.storyboard?.instantiateViewController(identifier: "MySayings") {
+            if let vc = UIStoryboard(name: "EditSayings", bundle: nil).instantiateViewController(identifier: "MySayings") as? EditSayingsViewController {
+                show(vc, sender: nil)
+            }
+        case .timingSensitivity:
+            if let vc = UIStoryboard(name: "TimingSensitivity", bundle: nil).instantiateViewController(identifier: "TimingSensitivity") as? TimingSensitivityViewController {
                 show(vc, sender: nil)
             }
         case .selectionMode:
-            if let vc = self.storyboard?.instantiateViewController(identifier: "SelectionMode") {
+            if let vc = UIStoryboard(name: "SelectionMode", bundle: nil).instantiateViewController(identifier: "SelectionMode") as? SelectionModeViewController {
                 show(vc, sender: nil)
             }
         case .contactDevs:

@@ -11,7 +11,7 @@ import AVFoundation
 import UIKit
 import CoreData
 
-class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
+class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDelegate {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     

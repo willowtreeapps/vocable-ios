@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QDN-Xt-1QN">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Timing Sensitivity View Controller-->
+        <scene sceneID="6cp-oE-J2s">
+            <objects>
+                <viewController storyboardIdentifier="TimingSensitivity" id="QDN-Xt-1QN" customClass="TimingSensitivityViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3hP-Lk-nkI" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="9rO-Yy-rzB">
+                                <rect key="frame" x="20" y="148" width="374" height="714"/>
+                                <connections>
+                                    <segue destination="Pdg-nD-fXG" kind="embed" id="N2M-Wk-DEi"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6WR-sh-e0m" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="20" y="76" width="63" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="104" id="3Gj-QZ-E0z">
+                                        <variation key="heightClass=compact" constant="63"/>
+                                        <variation key="widthClass=compact" constant="63"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="96" id="ftW-Qf-bwP">
+                                        <variation key="heightClass=compact" constant="48"/>
+                                        <variation key="widthClass=compact" constant="48"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <state key="normal">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="34" weight="bold"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="arrow.left" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="QDN-Xt-1QN" eventType="touchUpInside" id="k5p-Ln-AkV"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timing and Sensitivity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5Db-Ld-8R7">
+                                <rect key="frame" x="32" y="76" width="350" height="48"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
+                                <color key="textColor" name="DefaultFontColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=compact">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" hidden="YES">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="9rO-Yy-rzB" firstAttribute="trailing" secondItem="3hP-Lk-nkI" secondAttribute="trailingMargin" id="2tf-uZ-Ldm"/>
+                            <constraint firstItem="kW2-PY-PRC" firstAttribute="bottom" secondItem="9rO-Yy-rzB" secondAttribute="bottom" id="7B5-ty-aCX"/>
+                            <constraint firstItem="5Db-Ld-8R7" firstAttribute="leading" secondItem="kW2-PY-PRC" secondAttribute="leading" constant="32" id="Ib7-gE-HbD"/>
+                            <constraint firstItem="6WR-sh-e0m" firstAttribute="leading" secondItem="9rO-Yy-rzB" secondAttribute="leading" id="MLT-Mm-9cY"/>
+                            <constraint firstItem="5Db-Ld-8R7" firstAttribute="top" secondItem="kW2-PY-PRC" secondAttribute="top" constant="32" id="PfH-rk-vKZ"/>
+                            <constraint firstItem="9rO-Yy-rzB" firstAttribute="leading" secondItem="3hP-Lk-nkI" secondAttribute="leadingMargin" id="Tmn-DO-1ri"/>
+                            <constraint firstItem="kW2-PY-PRC" firstAttribute="trailing" secondItem="5Db-Ld-8R7" secondAttribute="trailing" constant="32" id="qKG-Ir-Ax5"/>
+                            <constraint firstItem="6WR-sh-e0m" firstAttribute="top" secondItem="kW2-PY-PRC" secondAttribute="top" constant="32" id="vqd-Ht-FkZ"/>
+                            <constraint firstItem="9rO-Yy-rzB" firstAttribute="top" secondItem="5Db-Ld-8R7" secondAttribute="bottom" constant="24" id="x65-sL-CEi"/>
+                            <constraint firstItem="9rO-Yy-rzB" firstAttribute="top" secondItem="6WR-sh-e0m" secondAttribute="bottom" constant="24" id="xDR-n5-fv0"/>
+                        </constraints>
+                        <edgeInsets key="layoutMargins" top="0.0" left="32" bottom="0.0" right="32"/>
+                        <viewLayoutGuide key="safeArea" id="kW2-PY-PRC"/>
+                        <variation key="heightClass=compact">
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="51y-rO-nlr"/>
+                    <connections>
+                        <outlet property="backButton" destination="6WR-sh-e0m" id="pwL-2K-oak"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UgS-X6-dXV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2577" y="867"/>
+        </scene>
+        <!--Timing Sensitivity Collection View Controller-->
+        <scene sceneID="yKp-08-O5L">
+            <objects>
+                <collectionViewController id="Pdg-nD-fXG" customClass="TimingSensitivityCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5Ti-PA-Ht9">
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="714"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dvC-qh-wjb">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="Pdg-nD-fXG" id="s2O-He-AAj"/>
+                            <outlet property="delegate" destination="Pdg-nD-fXG" id="Vyw-Wh-kM4"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ofN-pD-WRB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3500" y="867"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="arrow.left" catalog="system" width="64" height="48"/>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DefaultFontColor">
+            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
