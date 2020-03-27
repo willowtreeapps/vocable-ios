@@ -7,7 +7,21 @@
 //
 
 import UIKit
+import Combine
 
 class DwellTimeCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet var decreaseTimeButton: GazeableButton!
+    @IBOutlet var timeLabel: UILabel!
+    @IBOutlet var increaseTimeButton: GazeableButton!
+    
+    private var disposables = Set<AnyCancellable>()
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        AppConfig.$selectionHoldDuration.sink(receiveValue: { duration in
+            self.timeLabel.text = NSLocalizedString("\(Int(duration))s", comment: "Hover time seconds label")
+        }).store(in: &disposables)
+    }
     
 }

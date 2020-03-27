@@ -153,7 +153,7 @@ class GazeableButton: UIButton {
         }
         
         let timeElapsed = Date().timeIntervalSince(beganDate)
-        if timeElapsed >= gaze.selectionHoldDuration {
+        if timeElapsed >= AppConfig.selectionHoldDuration {
             isSelected = true
             sendActions(for: .primaryActionTriggered)
             gazeBeganDate = nil

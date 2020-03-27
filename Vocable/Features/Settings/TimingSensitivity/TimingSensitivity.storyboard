@@ -43,6 +43,7 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="arrow.left" catalog="system"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="backButtonPressed:" destination="QDN-Xt-1QN" eventType="primaryActionTriggered" id="DCa-hB-dAP"/>
                                     <action selector="backButtonPressed:" destination="QDN-Xt-1QN" eventType="touchUpInside" id="k5p-Ln-AkV"/>
                                 </connections>
                             </button>

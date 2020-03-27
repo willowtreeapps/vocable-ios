@@ -34,6 +34,7 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     }
     
     private func setupCollectionView() {
+        collectionView.delaysContentTouches = false
         collectionView.backgroundColor = .collectionViewBackgroundColor
         collectionView.register(UINib(nibName: "DwellTimeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DwellTimeCollectionViewCell")
         collectionView.register(UINib(nibName: "SensitivityCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SensitivityCollectionViewCell")
@@ -45,29 +46,31 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     }
     
     private func createLayout() -> UICollectionViewLayout {
-        if case .compact = self.traitCollection.verticalSizeClass {
-            return compactVerticalLayout()
+        if case .compact = traitCollection.horizontalSizeClass,
+            case .regular = traitCollection.verticalSizeClass {
+            return compactWidthLayout()
         } else {
             return defaultLayout()
         }
     }
     
-    private func compactVerticalLayout() -> UICollectionViewLayout {
-        let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        let headTrackingToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/5))
-        let headTrackingToggleGroup = NSCollectionLayoutGroup.vertical(layoutSize: headTrackingToggleGroupSize, subitems: [headTrackingToggleItem])
+    private func compactWidthLayout() -> UICollectionViewLayout {
+        let settingsItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/5))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [settingsItem, settingsItem])
         
-        let section = NSCollectionLayoutSection(group: headTrackingToggleGroup)
+        let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
     
     private func defaultLayout() -> UICollectionViewLayout {
         let settingsItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0)))
-        let headTrackingToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/5))
-        let headTrackingToggleGroup = NSCollectionLayoutGroup.horizontal(layoutSize: headTrackingToggleGroupSize, subitems: [settingsItem, settingsItem])
+        let fractionalHeight = CGFloat(traitCollection.verticalSizeClass == .compact ? 0.5 : 0.225)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(fractionalHeight))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [settingsItem, settingsItem])
         
-        let section = NSCollectionLayoutSection(group: headTrackingToggleGroup)
+        let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
@@ -111,11 +114,24 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
         switch item {
         case .dwellTime:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DwellTimeCollectionViewCell.reuseIdentifier, for: indexPath) as! DwellTimeCollectionViewCell
+            cell.decreaseTimeButton.addTarget(self,
+                                        action: #selector(self.handleDecreasingDwellTime(_:)),
+                                        for: .primaryActionTriggered)
+            cell.increaseTimeButton.addTarget(self,
+                                      action: #selector(self.handleIncreasingDwellTime(_:)),
+                                      for: .primaryActionTriggered)
             return cell
         case .sensitivity:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SensitivityCollectionViewCell.reuseIdentifier, for: indexPath) as! SensitivityCollectionViewCell
             return cell
         }
-
+    }
+    
+    @objc private func handleDecreasingDwellTime(_ sender: UIButton) {
+        AppConfig.selectionHoldDuration -= 1
+    }
+    
+    @objc private func handleIncreasingDwellTime(_ sender: UIButton) {
+        AppConfig.selectionHoldDuration += 1
     }
 }
