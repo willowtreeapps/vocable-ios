@@ -128,10 +128,14 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     }
     
     @objc private func handleDecreasingDwellTime(_ sender: UIButton) {
-        AppConfig.selectionHoldDuration -= 1
+        if AppConfig.selectionHoldDuration > 1 {
+            AppConfig.selectionHoldDuration -= 0.5
+        }
     }
     
     @objc private func handleIncreasingDwellTime(_ sender: UIButton) {
-        AppConfig.selectionHoldDuration += 1
+        if AppConfig.selectionHoldDuration < 5 {
+            AppConfig.selectionHoldDuration += 0.5
+        }
     }
 }

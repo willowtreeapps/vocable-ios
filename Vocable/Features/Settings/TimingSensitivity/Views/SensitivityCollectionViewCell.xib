@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cursor Sensitivity" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="PJa-d1-ik7">
-                        <rect key="frame" x="20" y="56" width="233" height="33.5"/>
+                        <rect key="frame" x="20" y="56" width="233" height="28"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                         <color key="textColor" name="DefaultFontColor"/>
                         <nil key="highlightedColor"/>
@@ -37,23 +37,32 @@
                             <constraint firstAttribute="height" constant="2" id="BoX-I5-7O0"/>
                         </constraints>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="O5j-z4-VrA">
-                        <rect key="frame" x="20" y="97.5" width="535" height="49.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="O5j-z4-VrA">
+                        <rect key="frame" x="20" y="92" width="535" height="55"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ph1-lE-gZj" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="175" height="49.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="175" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="j1g-Cd-qVb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="tintColor" name="DefaultFontColor"/>
                                 <state key="normal" title="Low"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDi-eA-7a0" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="180" y="0.0" width="175" height="49.5"/>
+                                <rect key="frame" x="180" y="0.0" width="175" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="b7m-b2-4tl"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="tintColor" name="DefaultFontColor"/>
                                 <state key="normal" title="Medium"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4K-JS-vwn" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="360" y="0.0" width="175" height="49.5"/>
+                                <rect key="frame" x="360" y="0.0" width="175" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="kG5-sF-Ej8"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="tintColor" name="DefaultFontColor"/>
                                 <state key="normal" title="High"/>
