@@ -12,8 +12,9 @@ struct CategoryViewModel: Hashable {
     var identifier: String
     var name: String
     
-    init?(_ category: Category) {
-        guard let identifier = category.identifier,
+    init?(_ category: Category?) {
+        guard let category = category,
+            let identifier = category.identifier,
             let name = category.name else {
                 return nil
         }
