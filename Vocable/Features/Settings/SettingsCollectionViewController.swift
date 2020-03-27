@@ -304,7 +304,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
         composeVC.setToRecipients(["vocable@willowtreeapps.com"])
-        composeVC.setSubject("Feedback for Vocable v\(versionAndBuildNumber)")
+        composeVC.setSubject("Feedback for iOS Vocable \(versionAndBuildNumber)")
         self.composeVC = composeVC
 
         self.present(composeVC, animated: true)
