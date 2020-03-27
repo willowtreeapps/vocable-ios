@@ -15,7 +15,6 @@
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		30B979BE2425587B00309D7C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BC2425587B00309D7C /* Localizable.strings */; };
-		30B979C02425789700309D7C /* GazeableAlertViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30B979C22425789700309D7C /* GazeableAlertViewController.storyboard */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
 		64253CED2419358D0044EAAA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64253CEC2419358D0044EAAA /* Settings.storyboard */; };
 		64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A54544242A490700218BE8 /* GazeEatingView.swift */; };
@@ -151,9 +150,6 @@
 		30B979BB2425584300309D7C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30B979BD2425587B00309D7C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Vocable/de.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		30B979BF242558FD00309D7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Vocable/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
-		30B979C12425789700309D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GazeableAlertViewController.storyboard; sourceTree = "<group>"; };
-		30B979C4242578AA00309D7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GazeableAlertViewController.strings; sourceTree = "<group>"; };
-		30B979C6242578AB00309D7C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/GazeableAlertViewController.strings; sourceTree = "<group>"; };
 		54D3C41423E37CD40061EF47 /* VocableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -391,13 +387,6 @@
 			path = Interpolation;
 			sourceTree = "<group>";
 		};
-		6BFB18BC23FEE86D002C3515 /* Phrases */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Phrases;
-			sourceTree = "<group>";
-		};
 		6BFB18BF24002C55002C3515 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -541,7 +530,6 @@
 		B8DA9DF523F30C5E00FEBE19 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				6BFB18BC23FEE86D002C3515 /* Phrases */,
 				B8DA9DF823F33B1B00FEBE19 /* Keyboard */,
 				B8DA9DF623F30CC400FEBE19 /* Presets */,
 				A92FFB9023ECD73400AF2D0B /* Settings */,
@@ -658,7 +646,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = WillowTree;
 				TargetAttributes = {
 					130C00B320D2AD2A007C3163 = {
@@ -914,16 +902,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		30B979C22425789700309D7C /* GazeableAlertViewController.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				30B979C12425789700309D7C /* Base */,
-				30B979C4242578AA00309D7C /* en */,
-				30B979C6242578AB00309D7C /* de */,
-			);
-			name = GazeableAlertViewController.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -931,6 +909,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -993,6 +972,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1141,6 +1121,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

@@ -238,14 +238,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         case .selectionMode:
             presentSelectionModeViewController()
         case .contactDevs:
-            let alertString = NSLocalizedString("You're about to be taken outside of the Vocable app. You may lose head tracking control.",
-                                                comment: "You're about to be taken outside of the Vocable app. You may lose head tracking control alert message")
-            let alertViewController = GazeableAlertViewController(alertTitle: alertString)
-
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), handler: self.presentEmail))
-            present(alertViewController, animated: true)
-
+            presentEmail()
         case .pidTuner:
             guard let gazeWindow = view.window as? HeadGazeWindow else { return }
             for child in gazeWindow.rootViewController?.children ?? [] {
@@ -283,10 +276,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         }
     }
 
-    private func toggleHeadTracking() {
-        AppConfig.isHeadTrackingEnabled.toggle()
-    }
-
     // MARK: Presentations
 
     private func presentPrivacyAlert() {
@@ -295,9 +284,18 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
 
     private func presentEmail() {
-
-        guard MFMailComposeViewController.canSendMail() else {
-            NSLog("Mail composer failed to send mail", [])
+        if MFMailComposeViewController.canSendMail() {
+            let alertString = NSLocalizedString("You're about to be taken outside of the Vocable app. You may lose head tracking control.",
+                                                comment: "You're about to be taken outside of the Vocable app. You may lose head tracking control alert message")
+            let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
+            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), handler: self.presentEmail))
+            present(alertViewController, animated: true)
+        } else {
+            let alertString = NSLocalizedString("Email not configured.", comment: "No mail alert title")
+            let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Ok", comment: "Ok alert action title")))
+            present(alertViewController, animated: true)
             return
         }
 
@@ -308,7 +306,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
         composeVC.setToRecipients(["vocable@willowtreeapps.com"])
-        composeVC.setSubject("Feedback for Vocable v\(versionAndBuildNumber)")
+        composeVC.setSubject("Feedback for iOS Vocable \(versionAndBuildNumber)")
         self.composeVC = composeVC
 
         self.present(composeVC, animated: true)

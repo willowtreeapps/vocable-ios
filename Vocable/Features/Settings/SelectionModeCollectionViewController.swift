@@ -1,6 +1,6 @@
 //
 //  SelectionModeCollectionViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Thomas Shealy on 3/19/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
@@ -85,8 +85,9 @@ class SelectionModeCollectionViewController: UICollectionViewController {
         }
         
         if AppConfig.isHeadTrackingEnabled {
-            //let alertViewController = GazeableAlertViewController.make { AppConfig.isHeadTrackingEnabled.toggle() }
             let alertViewController = GazeableAlertViewController.init(alertTitle: "Turn off head tracking?")
+            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
+            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), handler: self.toggleHeadTracking))
             present(alertViewController, animated: true)
         } else {
             AppConfig.isHeadTrackingEnabled.toggle()
@@ -116,6 +117,11 @@ class SelectionModeCollectionViewController: UICollectionViewController {
             cell.setup(title: NSLocalizedString("Head Tracking", comment: "Head tracking cell title"))
             return cell
         }
+    }
 
+    // MARK: Helpers
+
+    private func toggleHeadTracking() {
+        AppConfig.isHeadTrackingEnabled.toggle()
     }
 }
