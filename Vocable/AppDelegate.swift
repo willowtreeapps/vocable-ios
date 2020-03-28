@@ -13,7 +13,6 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var notificationWindow: NotificationWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -22,14 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         preparePersistentStore()
         
         addObservers()
-        notificationWindow = NotificationWindow(frame: UIScreen.main.bounds)
-        notificationWindow?.isHidden = true
         
         application.isIdleTimerDisabled = true
         let window = HeadGazeWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         window.makeKeyAndVisible()
         self.window = window
+        
         return true
     }
 
@@ -68,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func handleWarning(shouldDisplay: Bool) {
-        notificationWindow?.handleWarning(shouldDisplay: shouldDisplay)
+        NotificationWindow.shared.handleWarning(shouldDisplay: shouldDisplay)
     }
 
     private func deleteExistingPrescribedEntities(in context: NSManagedObjectContext) {

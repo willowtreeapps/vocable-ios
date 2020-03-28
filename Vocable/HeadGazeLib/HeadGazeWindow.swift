@@ -13,9 +13,6 @@ import ARKit
 class HeadGazeWindow: UIWindow {
     
     weak var cursorView: UIVirtualCursorView?
-    
-    private weak var warningView: UIView?
-    private weak var phraseSavedView: UIView?
 
     private var trackingView: UIView?
     private var lastGaze: UIHeadGaze?
@@ -48,7 +45,6 @@ class HeadGazeWindow: UIWindow {
                 self.touchGazeDisableBeganDate = .distantPast
             } else {
                 self.cursorView?.removeFromSuperview()
-                self.handleWarning(shouldDisplay: false)
             }
         }.store(in: &cancellables)
 
@@ -75,40 +71,6 @@ class HeadGazeWindow: UIWindow {
         if let cursorView = cursorView {
             bringSubviewToFront(cursorView)
         }
-        if let warningView = warningView {
-            bringSubviewToFront(warningView)
-        }
-        if let phraseSavedView = phraseSavedView {
-            bringSubviewToFront(phraseSavedView)
-        }
-    }
-    
-    private func handleWarning(shouldDisplay: Bool) {
-
-        if warningView == nil {
-            let warningView = UINib(nibName: "WarningView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! UIView
-            warningView.alpha = 0
-            self.warningView = warningView
-            addSubview(warningView)
-            warningView.translatesAutoresizingMaskIntoConstraints = false
-            warningView.setContentHuggingPriority(.required, for: .horizontal)
-            let horizontalPadding: CGFloat = [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) ? 16 : 24
-            NSLayoutConstraint.activate([
-                warningView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-                warningView.leftAnchor.constraint(greaterThanOrEqualTo: safeAreaLayoutGuide.leftAnchor, constant: horizontalPadding),
-                warningView.rightAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.rightAnchor, constant: horizontalPadding),
-                warningView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
-            ])
-        }
-
-        let alphaValue = shouldDisplay ? 1.0 : 0.0
-        UIView.animate(withDuration: 0.5, delay: 0, options: .beginFromCurrentState, animations: {
-            self.warningView?.alpha = CGFloat(alphaValue)
-        }, completion: { [weak self] didFinish in
-            if didFinish && !shouldDisplay {
-                self?.warningView?.removeFromSuperview()
-            }
-        })
     }
 
     private func cancelCurrentGazeIfNeeded() {

@@ -371,8 +371,7 @@ class PresetsViewController: UICollectionViewController {
 
                 do {
                     try context.save()
-                    notificationWindow = NotificationWindow(frame: UIScreen.main.bounds)
-                    notificationWindow?.handlePhraseSaved(toastLabelText: NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings"))
+                    NotificationWindow.shared.handlePhraseSaved(toastLabelText: NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings"))
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")
                 }
