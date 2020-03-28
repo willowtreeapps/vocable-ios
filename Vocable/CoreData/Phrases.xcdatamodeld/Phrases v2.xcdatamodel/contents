@@ -4,6 +4,7 @@
         <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="identifier" attributeType="String"/>
         <attribute name="isUserGenerated" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="locale" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="phrases" toMany="YES" deletionRule="Nullify" destinationEntity="Phrase" inverseName="categories" inverseEntity="Phrase"/>
     </entity>
@@ -12,11 +13,12 @@
         <attribute name="identifier" attributeType="String"/>
         <attribute name="isUserGenerated" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="lastSpokenDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="locale" optional="YES" attributeType="String"/>
         <attribute name="utterance" optional="YES" attributeType="String"/>
         <relationship name="categories" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="phrases" inverseEntity="Category"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="Phrase" positionX="-54" positionY="-9" width="128" height="133"/>
+        <element name="Category" positionX="-63" positionY="-18" width="128" height="28"/>
+        <element name="Phrase" positionX="-54" positionY="-9" width="128" height="28"/>
     </elements>
 </model>

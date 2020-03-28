@@ -290,6 +290,7 @@
 		B838202E23FD894C005A79CD /* CategoryPaginationContainerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryPaginationContainerCollectionViewCell.xib; sourceTree = "<group>"; };
 		B879831023E0CEC300DC1A81 /* PresetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetsViewController.swift; sourceTree = "<group>"; };
 		B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8D55689242FE8B900B0F6FE /* Phrases v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Phrases v2.xcdatamodel"; sourceTree = "<group>"; };
 		B8DA9DE723EB833200FEBE19 /* BorderedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedView.swift; sourceTree = "<group>"; };
 		B8DA9DEF23EDECEE00FEBE19 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		B8DA9DF123F30BAF00FEBE19 /* Cell+NibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cell+NibLoading.swift"; sourceTree = "<group>"; };
@@ -1362,9 +1363,10 @@
 		6BFB18C024002C7B002C3515 /* Phrases.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B8D55689242FE8B900B0F6FE /* Phrases v2.xcdatamodel */,
 				6BFB18C124002C7B002C3515 /* Phrases.xcdatamodel */,
 			);
-			currentVersion = 6BFB18C124002C7B002C3515 /* Phrases.xcdatamodel */;
+			currentVersion = B8D55689242FE8B900B0F6FE /* Phrases v2.xcdatamodel */;
 			path = Phrases.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

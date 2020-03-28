@@ -24,16 +24,16 @@ extension NSManagedObjectIdentifiable where Self: NSManagedObject {
         } else {
             fetchRequest.predicate = NSPredicate(format: "identifier == \(identifier)")
         }
-        let result = (try? context.fetch(fetchRequest))?.first
-        return result
+        return (try? context.fetch(fetchRequest))?.first
     }
     
-    static func fetchAll(in context: NSManagedObjectContext, sortDescriptors: [NSSortDescriptor]? = nil) -> [Self] {
+    static func fetchAll(in context: NSManagedObjectContext, locale: String? = Locale.current.identifier, sortDescriptors: [NSSortDescriptor]? = nil) -> [Self] {
         guard let entityName = self.entity().name else {
             return []
         }
         let fetchRequest = NSFetchRequest<Self>(entityName: entityName)
         fetchRequest.sortDescriptors = sortDescriptors
+        fetchRequest.predicate = NSPredicate(format: "locale == %@", locale ?? NSNull())
         return (try? context.fetch(fetchRequest)) ?? []
     }
 
@@ -43,7 +43,16 @@ extension NSManagedObjectIdentifiable where Self: NSManagedObject {
         }
         let newObject = self.init(context: context)
         newObject.setValue(identifier, forKeyPath: "identifier")
+        newObject.setValue(Locale.current.identifier, forKeyPath: "locale")
         return newObject
+    }
+    
+    func migrateLocale() {
+        guard value(forKey: "locale") == nil else {
+            return
+        }
+        
+        setValue(Locale.current.identifier, forKeyPath: "locale")
     }
 }
 

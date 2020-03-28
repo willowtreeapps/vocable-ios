@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let context = container.viewContext
         deleteExistingPrescribedEntities(in: context)
         createPrescribedEntities(in: context)
+        migrateUserCreatedContent(in: context)
 
         do {
             try context.save()
@@ -101,6 +102,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 phrase.utterance = preset
                 phrase.addToCategories(category)
             }
+        }
+    }
+    
+    private func migrateUserCreatedContent(in context: NSManagedObjectContext) {
+        Category.fetchAll(in: context, locale: nil).forEach { category in
+            category.migrateLocale()
+        }
+        Phrase.fetchAll(in: context, locale: nil).forEach { phrase in
+            phrase.migrateLocale()
         }
     }
 }
