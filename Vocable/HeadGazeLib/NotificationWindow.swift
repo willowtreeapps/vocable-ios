@@ -13,7 +13,7 @@ import Combine
 class NotificationWindow: UIWindow {
     
     private var cancellables = Set<AnyCancellable>()
-    weak var cursorView: UIVirtualCursorView?
+    static var passThroughTag = 42
     
     private static var _shared: NotificationWindow?
     
@@ -49,31 +49,6 @@ class NotificationWindow: UIWindow {
     
     private func commonInit() {
         
-        AppConfig.$isHeadTrackingEnabled.sink { [weak self] isEnabled in
-            guard let self = self else { return }
-            if isEnabled {
-                self.installCursorViewIfNeeded()
-            } else {
-                self.cursorView?.removeFromSuperview()
-                self.handleWarning(shouldDisplay: false)
-            }
-        }.store(in: &cancellables)
-    }
-    
-    private func installCursorViewIfNeeded() {
-        guard cursorView?.superview == nil else { return }
-
-        let cursorView = UIVirtualCursorView()
-        cursorView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(cursorView)
-
-        NSLayoutConstraint.activate([
-            cursorView.topAnchor.constraint(equalTo: topAnchor),
-            cursorView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            cursorView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            cursorView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-        self.cursorView = cursorView
     }
     
     func handleWarning(shouldDisplay: Bool) {
@@ -83,4 +58,15 @@ class NotificationWindow: UIWindow {
     func handlePhraseSaved(toastLabelText: String) {
         toastContainer.handlePhraseSaved(toastLabelText: toastLabelText)
     }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+
+        let hitView = super.hitTest(point, with: event)
+        
+        if NotificationWindow.passThroughTag == hitView?.tag {
+                return nil
+            }
+        return hitView
+    }
+    
 }

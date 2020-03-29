@@ -12,19 +12,15 @@ class ToastContainerViewController: UIViewController {
     
     private weak var phraseSavedView: UIView?
     private weak var warningView: UIView?
+    
+    private var phraseSavedViewVisible = false
+    private var warningViewVisible = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationWindow.shared.isHidden = false
-    }
-    
-    func presentEphemeralToast() {
-        
-    }
-    
-    func presentPersistantToast() -> ToastView {
-        return ToastView()
+        view.tag = NotificationWindow.passThroughTag
     }
     
     func handlePhraseSaved(toastLabelText: String) {
@@ -52,6 +48,7 @@ class ToastContainerViewController: UIViewController {
 
          let fadeInOutDuration: TimeInterval = 0.5
          let presentationDuration: TimeInterval = 4
+         phraseSavedViewVisible = true
 
          // Fade in
          UIView.animate(withDuration: fadeInOutDuration,
@@ -70,7 +67,8 @@ class ToastContainerViewController: UIViewController {
                                         completion: { dismissalDidFinish in
                                          guard dismissalDidFinish else { return }
                                          self?.phraseSavedView?.removeFromSuperview()
-                                        NotificationWindow.shared.isHidden = true
+                                         self?.phraseSavedViewVisible = false
+                                         NotificationWindow.shared.isHidden = !(self?.warningViewVisible ?? false)
                          })
          })
     }
@@ -93,12 +91,14 @@ class ToastContainerViewController: UIViewController {
         }
         NotificationWindow.shared.isHidden = false
         let alphaValue = shouldDisplay ? 1.0 : 0.0
+        warningViewVisible = true
         UIView.animate(withDuration: 0.5, delay: 0, options: .beginFromCurrentState, animations: {
             self.warningView?.alpha = CGFloat(alphaValue)
         }, completion: { [weak self] didFinish in
             if didFinish && !shouldDisplay {
                 self?.warningView?.removeFromSuperview()
-                NotificationWindow.shared.isHidden = true
+                self?.warningViewVisible = false
+                NotificationWindow.shared.isHidden = !(self?.phraseSavedViewVisible ?? false)
             }
         })
     }
