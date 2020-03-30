@@ -227,8 +227,8 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
                                                 comment: "You're about to be taken outside of the Vocable app. You may lose head tracking control alert message")
             let alertViewController = GazeableAlertViewController(alertTitle: alertString)
 
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), handler: self.presentPrivacyAlert))
+            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title"), style: .default))
+            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), style: .destructive, handler: self.presentPrivacyAlert))
             present(alertViewController, animated: true)
 
         case .editMySayings:
