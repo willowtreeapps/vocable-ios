@@ -17,7 +17,6 @@ class SensitivityCollectionViewCell: UICollectionViewCell {
     
     private var disposables = Set<AnyCancellable>()
     
-    // have sink in awakeFromNib to update fill color based on currently selected sensitivity
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -38,7 +37,6 @@ class SensitivityCollectionViewCell: UICollectionViewCell {
         }.store(in: &disposables)
     }
     
-    // have IBAction functions here to update AppConfig user defaults
     @IBAction func handleLowSensitivity(_ sender: Any) {
         AppConfig.sensitivity = .low
     }

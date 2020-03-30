@@ -63,8 +63,6 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         sceneview?.preferredFramesPerSecond =  UIScreen.main.maximumFramesPerSecond
         setupSceneNode()
         
-        // put sink here: pidInterpolator.pidSmoothingInterpolator.pulse.configuration.apply(configurationForNewSetting)
-        // configurationForNewSetting -> comes from enum with three different sensitivity values (according to user defaults)
         AppConfig.$sensitivity.sink { (sensitivity) in
             self.scalingRange = sensitivity.range
         }.store(in: &disposables)

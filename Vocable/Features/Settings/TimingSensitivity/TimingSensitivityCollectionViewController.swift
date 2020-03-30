@@ -148,26 +148,4 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
             AppConfig.selectionHoldDuration += 0.5
         }
     }
-    
-    private func updateSensitivityButtons() {
-        // get sensitivity cell
-        
-        // iterate over buttons, check they match what's in user defaults (in app config)
-        
-        // update fill color to reflect which sensitivity is selected
-        
-        // call this function in bottom 3 handlers & viewWillAppear
-    }
-    
-    @objc private func handleSensitivityLow(_ sender: UIButton) {
-        
-    }
-    
-    @objc private func handleSensitivityMedium(_ sender: UIButton) {
-        
-    }
-    
-    @objc private func handleSensitivityHigh(_ sender: UIButton) {
-        
-    }
 }
