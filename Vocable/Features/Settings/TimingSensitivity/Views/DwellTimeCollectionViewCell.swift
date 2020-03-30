@@ -20,7 +20,9 @@ class DwellTimeCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         AppConfig.$selectionHoldDuration.sink(receiveValue: { duration in
-            self.timeLabel.text = NSLocalizedString("\(Int(duration))s", comment: "Hover time seconds label")
+            // Only show decimal if number is not whole number (e.g. "1s" & "0.5s")
+            let durationFormatted = duration.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", duration) : String(duration)
+            self.timeLabel.text = NSLocalizedString("\(durationFormatted)s", comment: "Hover time seconds label")
         }).store(in: &disposables)
     }
     

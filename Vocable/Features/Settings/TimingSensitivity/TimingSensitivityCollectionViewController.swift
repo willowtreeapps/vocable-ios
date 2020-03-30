@@ -18,12 +18,12 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SelectionModeItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
     }
-
+    
     // MARK: UICollectionViewDataSource
     
     private func updateDataSource() {
@@ -95,20 +95,20 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
-         switch item {
-         case .dwellTime, .sensitivity:
+        let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
+        switch item {
+        case .dwellTime, .sensitivity:
             return false
-         }
-     }
+        }
+    }
      
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
-         switch item {
-         case .dwellTime, .sensitivity:
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
+        switch item {
+        case .dwellTime, .sensitivity:
             return false
-         }
-     }
+        }
+    }
 
     private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: SelectionModeItem) -> UICollectionViewCell {
         switch item {
@@ -123,12 +123,22 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
             return cell
         case .sensitivity:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SensitivityCollectionViewCell.reuseIdentifier, for: indexPath) as! SensitivityCollectionViewCell
+            
+            cell.lowButton.addTarget(self,
+                                      action: #selector(self.handleSensitivityLow(_:)),
+                                      for: .primaryActionTriggered)
+            cell.mediumButton.addTarget(self,
+                                      action: #selector(self.handleSensitivityMedium(_:)),
+                                      for: .primaryActionTriggered)
+            cell.highButton.addTarget(self,
+                                      action: #selector(self.handleSensitivityHigh(_:)),
+                                      for: .primaryActionTriggered)
             return cell
         }
     }
     
     @objc private func handleDecreasingDwellTime(_ sender: UIButton) {
-        if AppConfig.selectionHoldDuration > 1 {
+        if AppConfig.selectionHoldDuration > 0.5 {
             AppConfig.selectionHoldDuration -= 0.5
         }
     }
@@ -137,5 +147,27 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
         if AppConfig.selectionHoldDuration < 5 {
             AppConfig.selectionHoldDuration += 0.5
         }
+    }
+    
+    private func updateSensitivityButtons() {
+        // get sensitivity cell
+        
+        // iterate over buttons, check they match what's in user defaults (in app config)
+        
+        // update fill color to reflect which sensitivity is selected
+        
+        // call this function in bottom 3 handlers & viewWillAppear
+    }
+    
+    @objc private func handleSensitivityLow(_ sender: UIButton) {
+        
+    }
+    
+    @objc private func handleSensitivityMedium(_ sender: UIButton) {
+        
+    }
+    
+    @objc private func handleSensitivityHigh(_ sender: UIButton) {
+        
     }
 }

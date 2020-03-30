@@ -24,6 +24,10 @@ struct AppConfig {
     static var isHeadTrackingSupported: Bool {
         return ARFaceTrackingConfiguration.isSupported
     }
+    
     @PublishedDefault(key: "dwellTimeDuration", defaultValue: 1)
     static var selectionHoldDuration: TimeInterval
+    
+    @PublishedDefault(key: "sensitivitySetting", defaultValue: Sensitivity.low)
+    static var sensitivity: Sensitivity
 }

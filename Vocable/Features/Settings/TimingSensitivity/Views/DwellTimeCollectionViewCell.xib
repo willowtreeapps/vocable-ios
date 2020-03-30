@@ -18,20 +18,20 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hover Time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="OLA-YL-VeV">
-                        <rect key="frame" x="20" y="20" width="149" height="33.5"/>
+                        <rect key="frame" x="20" y="12" width="149" height="33.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                         <color key="textColor" name="DefaultFontColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aGT-tV-MsX" userLabel="TopBar">
-                        <rect key="frame" x="20" y="8" width="598" height="2"/>
+                        <rect key="frame" x="20" y="0.0" width="598" height="2"/>
                         <color key="backgroundColor" name="DefaultCellBackground"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="4aU-Nv-iyF"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpa-XA-zUK" userLabel="BottomBar">
-                        <rect key="frame" x="20" y="127" width="598" height="2"/>
+                        <rect key="frame" x="20" y="135" width="598" height="2"/>
                         <color key="backgroundColor" name="DefaultCellBackground"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="mMs-08-NWm"/>
@@ -92,6 +92,7 @@
                     <constraint firstItem="Wpa-XA-zUK" firstAttribute="leading" secondItem="YVu-RA-dFE" secondAttribute="leadingMargin" id="ic9-vj-GYy"/>
                     <constraint firstItem="OLA-YL-VeV" firstAttribute="top" secondItem="YVu-RA-dFE" secondAttribute="topMargin" constant="12" id="s6L-ll-p3Q"/>
                 </constraints>
+                <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
             </collectionViewCellContentView>
             <size key="customSize" width="638" height="137"/>
             <connections>
