@@ -15,6 +15,5 @@ class WarningView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        label?.text = NSLocalizedString("Please move closer to the device.", comment: "Warning: Please move closer to the device.")
     }
 }

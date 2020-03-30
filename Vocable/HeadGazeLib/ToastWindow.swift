@@ -10,16 +10,13 @@ import UIKit
 import ARKit
 import Combine
 
-class NotificationWindow: UIWindow {
+class ToastWindow: UIWindow {
     
-    private var cancellables = Set<AnyCancellable>()
-    static var passThroughTag = 42
+    private static var _shared: ToastWindow?
     
-    private static var _shared: NotificationWindow?
-    
-    static var shared: NotificationWindow {
+    static var shared: ToastWindow {
         if _shared == nil {
-            let shared = NotificationWindow(frame: UIScreen.main.bounds)
+            let shared = ToastWindow(frame: UIScreen.main.bounds)
             shared.backgroundColor = .clear
             shared.translatesAutoresizingMaskIntoConstraints = false
             shared.rootViewController = ToastContainerViewController()
@@ -28,13 +25,14 @@ class NotificationWindow: UIWindow {
         return _shared!
     }
     
-    var toastContainer: ToastContainerViewController {
+    var toastContainerViewController: ToastContainerViewController {
         return self.rootViewController as! ToastContainerViewController
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
+        
     }
 
     override init(windowScene: UIWindowScene) {
@@ -48,25 +46,19 @@ class NotificationWindow: UIWindow {
     }
     
     private func commonInit() {
-        
+        self.isUserInteractionEnabled = false
     }
     
-    func handleWarning(shouldDisplay: Bool) {
-        toastContainer.handleWarning(shouldDisplay: shouldDisplay)
+    func presentPersistantWarning(with title: String) {
+        toastContainerViewController.handleWarning(with: title, shouldDisplay: true)
     }
     
-    func handlePhraseSaved(toastLabelText: String) {
-        toastContainer.handlePhraseSaved(toastLabelText: toastLabelText)
+    func dismissPersistantWarning() {
+        toastContainerViewController.handleWarning(with: nil, shouldDisplay: false)
     }
     
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-
-        let hitView = super.hitTest(point, with: event)
-        
-        if NotificationWindow.passThroughTag == hitView?.tag {
-                return nil
-            }
-        return hitView
+    func presentEphemeralToast(withTitle: String) {
+        toastContainerViewController.handlePhraseSaved(toastLabelText: withTitle)
     }
     
 }

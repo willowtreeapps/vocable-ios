@@ -50,23 +50,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .headTrackingDisabled, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(headTrackingDisabled(_:)), name: .headTrackingDisabled, object: nil)
     }
     
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
-        handleWarning(shouldDisplay: true)
+        ToastWindow.shared.presentPersistantWarning(with: NSLocalizedString("Please move closer to the device.", comment: "Warning title when head tracking is lost."))
     }
     
     @objc private func applicationDidAcquireGaze(_ sender: Any?) {
-        handleWarning(shouldDisplay: false)
+        ToastWindow.shared.dismissPersistantWarning()
     }
     
     @objc private func headTrackingDisabled(_ sender: Any?) {
-        handleWarning(shouldDisplay: false)
-    }
-    
-    private func handleWarning(shouldDisplay: Bool) {
-        NotificationWindow.shared.handleWarning(shouldDisplay: shouldDisplay)
+        ToastWindow.shared.dismissPersistantWarning()
     }
 
     private func deleteExistingPrescribedEntities(in context: NSManagedObjectContext) {

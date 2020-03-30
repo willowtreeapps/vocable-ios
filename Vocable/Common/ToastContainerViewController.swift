@@ -9,22 +9,31 @@
 import UIKit
 
 class ToastContainerViewController: UIViewController {
+    private weak var phraseSavedView: UIView? {
+        didSet {
+            updateWindowVisibility()
+        }
+    }
+    private weak var warningView: UIView? {
+        didSet {
+            updateWindowVisibility()
+        }
+    }
     
-    private weak var phraseSavedView: UIView?
-    private weak var warningView: UIView?
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateWindowVisibility()
+    }
     
-    private var phraseSavedViewVisible = false
-    private var warningViewVisible = false
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        NotificationWindow.shared.isHidden = false
-        view.tag = NotificationWindow.passThroughTag
+    func updateWindowVisibility() {
+        if phraseSavedView == nil && warningView == nil {
+            ToastWindow.shared.isHidden = true
+        } else {
+            ToastWindow.shared.isHidden = false
+        }
     }
     
     func handlePhraseSaved(toastLabelText: String) {
-        NotificationWindow.shared.isHidden = false
         if phraseSavedView == nil {
             let phraseSavedView = UINib(nibName: "ToastView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! ToastView
             phraseSavedView.alpha = 0
@@ -48,7 +57,6 @@ class ToastContainerViewController: UIViewController {
 
          let fadeInOutDuration: TimeInterval = 0.5
          let presentationDuration: TimeInterval = 4
-         phraseSavedViewVisible = true
 
          // Fade in
          UIView.animate(withDuration: fadeInOutDuration,
@@ -67,15 +75,14 @@ class ToastContainerViewController: UIViewController {
                                         completion: { dismissalDidFinish in
                                          guard dismissalDidFinish else { return }
                                          self?.phraseSavedView?.removeFromSuperview()
-                                         self?.phraseSavedViewVisible = false
-                                         NotificationWindow.shared.isHidden = !(self?.warningViewVisible ?? false)
                          })
          })
     }
     
-    func handleWarning(shouldDisplay: Bool) {
+    func handleWarning(with title: String?, shouldDisplay: Bool) {
         if warningView == nil {
-            let warningView = UINib(nibName: "WarningView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! UIView
+            let warningView = UINib(nibName: "WarningView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! WarningView
+            warningView.label?.text = title
             warningView.alpha = 0
             self.warningView = warningView
             view.addSubview(warningView)
@@ -89,16 +96,12 @@ class ToastContainerViewController: UIViewController {
                 warningView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
             ])
         }
-        NotificationWindow.shared.isHidden = false
         let alphaValue = shouldDisplay ? 1.0 : 0.0
-        warningViewVisible = true
         UIView.animate(withDuration: 0.5, delay: 0, options: .beginFromCurrentState, animations: {
             self.warningView?.alpha = CGFloat(alphaValue)
         }, completion: { [weak self] didFinish in
             if didFinish && !shouldDisplay {
                 self?.warningView?.removeFromSuperview()
-                self?.warningViewVisible = false
-                NotificationWindow.shared.isHidden = !(self?.phraseSavedViewVisible ?? false)
             }
         })
     }

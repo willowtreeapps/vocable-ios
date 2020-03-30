@@ -16,7 +16,6 @@ class PresetsViewController: UICollectionViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     private var disposables = Set<AnyCancellable>()
-    private var notificationWindow: NotificationWindow?
     
     private var _textTransaction = TextTransaction(text: HintText.preset.localizedString)
 
@@ -371,7 +370,7 @@ class PresetsViewController: UICollectionViewController {
 
                 do {
                     try context.save()
-                    NotificationWindow.shared.handlePhraseSaved(toastLabelText: NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings"))
+                    ToastWindow.shared.presentEphemeralToast(withTitle: NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings"))
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")
                 }

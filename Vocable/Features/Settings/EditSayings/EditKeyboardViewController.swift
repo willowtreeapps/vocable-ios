@@ -21,8 +21,6 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
     
     var phraseIdentifier: String?
     
-    private var notificationWindow: NotificationWindow?
-    
     private var textTransaction: TextTransaction {
         return _textTransaction
     }
@@ -251,7 +249,7 @@ class EditKeyboardViewController: UIViewController, UICollectionViewDelegate {
                     let alertMessage = isNewPhrase ? NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings") :
                         NSLocalizedString("Changes saved", comment: "Changes saved")
                     
-                    NotificationWindow.shared.handlePhraseSaved(toastLabelText: alertMessage)
+                    ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
 
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")

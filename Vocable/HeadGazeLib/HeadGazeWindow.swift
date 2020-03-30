@@ -49,21 +49,10 @@ class HeadGazeWindow: UIWindow {
         }.store(in: &cancellables)
 
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .headTrackingDisabled, object: nil)
     }
 
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
         cancelCurrentGazeIfNeeded()
-       // handleWarning(shouldDisplay: true)
-    }
-    
-    @objc private func applicationDidAcquireGaze(_ sender: Any?) {
-      //  handleWarning(shouldDisplay: false)
-    }
-    
-    @objc private func headTrackingDisabled(_ sender: Any?) {
-      //  handleWarning(shouldDisplay: false)
     }
 
     override func addSubview(_ view: UIView) {
