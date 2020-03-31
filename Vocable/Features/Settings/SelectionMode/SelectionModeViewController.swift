@@ -1,6 +1,6 @@
 //
 //  SelectionModeViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Thomas Shealy on 3/19/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

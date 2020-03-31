@@ -1,0 +1,86 @@
+/* Contact developers cell title */
+"Contact Developers" = "Entwickler kontaktieren";
+
+/* Head tracking cell title */
+"Head Tracking" = "Per Kopfbewegung";
+
+/* Category: My Sayings */
+"My Sayings" = "Meine Sätze";
+
+/* Pagination Control: page 1 of x */
+"Page %d of %d" = "Seite %1$d von %2$d";
+
+/* Warning: Please move closer to the device. */
+"Please move closer to the device." = "Bitte näher ans Gerät kommen.";
+
+/* Privacy policy cell title */
+"Privacy Policy" = "Datenschutz";
+
+/* Saved to My Sayings */
+"Saved to My Sayings" = "In Meine Sätze gespeichert";
+
+/* Select something below to speak Hint Text */
+"Select something below to speak" = "Wähle unten etwas aus, um zu sprechen";
+
+/* Title: Settings */
+"Settings" = "Einstellungen";
+
+/* Tune cursor cell title */
+"Tune Cursor" = "Feineinstellung des Zeigers";
+
+/* Alert: You're about to be taken outside of the Vocable app. */
+"You're about to be taken outside of the Vocable app. You may lose head tracking control." = "Dieser Link wir ausserhalb der Vocable App geöffnet. Sie laufen möglicherweise Gefahr, nicht mehr per Kopfbewegung steuern zu können.";
+
+/* Turn off head tracking? */
+"Turn off head tracking?" = "Steuerung per Kopfbewegung ausschalten?";
+
+/* Edit My Sayings */
+"Edit My Sayings" = "Meine Sätze editieren";
+
+/* Categories */
+"Categories" = "Kategorien";
+
+/* Category: 123 | Yes | No */
+"123 | Yes | No" = "123 | Ja | Nein";
+
+/* Timing and Sensitivity */
+"Timing and Sensitivity" = "Timing und Empfindlichkeit";
+
+/* Reset App Settings */
+"Reset App Settings" = "App Einstellungen zurücksetzen";
+
+/* Selection Mode */
+"Selection Mode" = "Steuerungsmodus";
+
+/* Privacy Policy */
+"Privacy Policy" = "Datenschutz";
+
+/* Cancel alert action title */
+"Cancel" = "Abbrechen";
+
+/* Confirm alert action title */
+"Confirm" = "Okay";
+
+/* 'Yes' num pad response */
+"Yes" = "Ja";
+
+/* 'No' num pad response */
+"No" = "Nein";
+
+/* Delete saying alert title */
+"Are you sure?\nDeleted phrases cannot be recovered." = "Sicher?\nGelöschte Sätze können nicht wiederhergestellt werden.";
+
+/* Changes saved */
+"Changes saved" = "Änderungen gespeichert";
+
+/* Continue editing alert action title */
+"Continue Editing" = "Weiter editieren";
+
+/* Delete saying alert action title */
+"Delete" = "Löschen";
+
+/* Discard changes alert action title */
+"Discard" = "Verwerfen";
+
+/* Exit edit sayings alert title */
+"Going back before saving will clear any edits made." = "Nicht gespeicherte Veränderungen werden beim Verlassen des Menüs verworfen.";

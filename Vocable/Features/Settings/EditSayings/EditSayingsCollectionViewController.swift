@@ -1,6 +1,6 @@
 //
 //  EditSayingsCollectionViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/13/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
@@ -100,9 +100,9 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
     }
 
     @objc private func handleCellDeletionButton(_ sender: UIButton) {
-        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("Are you sure?\nDeleted phrases cannot be recovered.", comment: "Delete saying alert title"))
+        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("Deleted phrases cannot be recovered.", comment: "Delete saying alert title"))
         alert.addAction(GazeableAlertAction(title: NSLocalizedString("Delete", comment: "Delete saying alert action title"), handler: { self.deletePhrase(sender) }))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel deletion alert action title")))
+        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
         self.present(alert, animated: true)
     }
     

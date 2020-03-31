@@ -1,6 +1,6 @@
 //
 //  OutputTextView.swift
-//  EyeSpeak
+//  Vocable AAC
 //
 //  Created by Chris Stroud on 3/11/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

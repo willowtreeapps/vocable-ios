@@ -29,7 +29,7 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
         var chunked = presetViewModels.chunked(into: itemsPerPage)
         var pageViewControllers: [UIViewController] = []
         
-        if ItemSelection.selectedCategory.name == PresetCategory.numPad.description {
+        if ItemSelection.selectedCategory.name == TextPresets.numPadDescription {
             let numPadCollectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.NumPadCompositionalLayout(traitCollection: traitCollection))
             numPadCollectionViewController.items = TextPresets.numPadCategory
             pageViewControllers.insert(numPadCollectionViewController, at: 0)

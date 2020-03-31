@@ -137,6 +137,7 @@
                     <navigationItem key="navigationItem" id="x2W-9E-2W1"/>
                     <connections>
                         <outlet property="dismissButton" destination="59L-eT-oZ6" id="pKn-Jo-gYg"/>
+                        <outlet property="titleLabel" destination="CtZ-qP-xqU" id="Y6a-ww-l3F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1E-o0-keE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

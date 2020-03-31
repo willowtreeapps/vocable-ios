@@ -19,7 +19,7 @@ extension AVSpeechSynthesizer {
     
     func speak(_ string: String) {
         let utterance = AVSpeechUtterance(string: string)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.voice = AVSpeechSynthesisVoice()
         
         if isSpeaking {
             stopSpeaking(at: .immediate)

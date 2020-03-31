@@ -40,6 +40,10 @@ private final class DividerView: UIView {
 
     func commonInit() {
         backgroundColor = .grayDivider
+        setContentCompressionResistancePriority(.init(999), for: .horizontal)
+        setContentCompressionResistancePriority(.init(999), for: .vertical)
+        setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
 
     override var intrinsicContentSize: CGSize {
@@ -64,7 +68,8 @@ private final class GazeableAlertView: BorderedView {
         roundedCorners = .allCorners
         cornerRadius = 14
         fillColor = .alertBackgroundColor
-        setContentHuggingPriority(.required, for: .horizontal)
+//        setContentHuggingPriority(.required, for: .horizontal)
+        setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -101,6 +106,9 @@ private final class GazeableAlertButton: GazeableButton {
         setTitleColor(.white, for: .selected)
         setTitleColor(.black, for: .normal)
         backgroundView.cornerRadius = 14
+        titleLabel?.adjustsFontSizeToFitWidth = true
+        setContentCompressionResistancePriority(.required, for: .horizontal)
+        setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
 
         updateForCurrentTraitCollection()
     }
@@ -144,6 +152,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         label.textColor = .black
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
 
@@ -186,12 +195,12 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
     }
 
     private func updateContentForCurrentTraitCollection() {
-        if traitCollection.horizontalSizeClass == .regular {
-            titleLabel.font = .systemFont(ofSize: 34)
-            titleContainerView.layoutMargins = UIEdgeInsets(top: 40, left: 50, bottom: 40, right: 50)
-        } else {
+        if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
             titleLabel.font = .systemFont(ofSize: 17)
             titleContainerView.layoutMargins = UIEdgeInsets(top: 36, left: 12, bottom: 36, right: 12)
+        } else {
+            titleLabel.font = .systemFont(ofSize: 34)
+            titleContainerView.layoutMargins = UIEdgeInsets(top: 40, left: 50, bottom: 40, right: 50)
         }
     }
 
@@ -224,7 +233,9 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
             alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             alertView.leadingAnchor.constraint(greaterThanOrEqualTo: view.layoutMarginsGuide.leadingAnchor),
-            alertView.trailingAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.trailingAnchor)
+            alertView.trailingAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.trailingAnchor),
+            alertView.topAnchor.constraint(greaterThanOrEqualTo: view.layoutMarginsGuide.topAnchor),
+            alertView.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
         ])
 
         NSLayoutConstraint.activate([

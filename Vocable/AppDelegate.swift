@@ -64,22 +64,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func createPrescribedEntities(in context: NSManagedObjectContext) {
 
         // Create entities that are provided implicitly
-        for presetCategory in PresetCategory.allCases {
+        for presetCategory in TextPresets.presetsByCategory {
 
-            let category = Category.fetchOrCreate(in: context, matching: presetCategory.description)
+            let category = Category.fetchOrCreate(in: context, matching: presetCategory.title)
             category.creationDate = Date()
-            category.name = presetCategory.description
+            category.name = presetCategory.title
 
-            if presetCategory == .saved {
+            if category.name == TextPresets.savedSayingsIdentifier {
                 category.isUserGenerated = true
             }
 
-            for preset in TextPresets.presetsByCategory[presetCategory]?.reversed() ?? [] {
+            for preset in presetCategory.presets.reversed() {
                 let phrase = Phrase.fetchOrCreate(in: context, matching: preset)
                 phrase.creationDate = Date()
                 phrase.utterance = preset
                 phrase.addToCategories(category)
-                
             }
         }
     }
