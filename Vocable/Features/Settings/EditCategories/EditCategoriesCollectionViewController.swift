@@ -11,14 +11,19 @@ import UIKit
 import CoreData
 
 class EditCategoriesCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
+    
+    private lazy var categoryViewModels: [CategoryViewModel] =
+    Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
+                      sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
+        .compactMap { CategoryViewModel($0) }
 
-    private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, PhraseViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
+    private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, CategoryViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         
         if self.traitCollection.horizontalSizeClass == .compact {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoriesCompactCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoriesCompactCollectionViewCell
             
-            cell.setup(title: "1. General")
+            cell.setup(title: "\(indexPath.row + 1). \(self.categoryViewModels[indexPath.row].name)")
             cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
             cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
             cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
@@ -27,7 +32,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoriesDefaultCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoriesDefaultCollectionViewCell
             
-            cell.setup(title: "1. General")
+             cell.setup(title: "\(indexPath.row + 1). \(self.categoryViewModels[indexPath.row].name)")
             cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
             cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
             cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
@@ -104,10 +109,9 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
 
     private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
         let content = fetchResultsController.fetchedObjects ?? []
-        let viewModels = content.compactMap(PhraseViewModel.init)
-        var snapshot = NSDiffableDataSourceSnapshot<Int, PhraseViewModel>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, CategoryViewModel>()
         snapshot.appendSections([0])
-        snapshot.appendItems(viewModels)
+        snapshot.appendItems(categoryViewModels)
         diffableDataSource.apply(snapshot,
                                  animatingDifferences: animated,
                                  completion: completion)
@@ -122,7 +126,16 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     }
     
     @objc private func handleShowEditCategoryDetail(_ sender: UIButton) {
-        // TODO
+        for cell in collectionView.visibleCells where sender.isDescendant(of: cell) {
+            
+            guard let indexPath = collectionView.indexPath(for: cell) else {
+                return
+            }
+            
+            if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as? EditCategoryDetailViewController {
+                vc.categoryName = categoryViewModels[indexPath.row].name
+                show(vc, sender: nil)
+            }
+        }
     }
 }
-
