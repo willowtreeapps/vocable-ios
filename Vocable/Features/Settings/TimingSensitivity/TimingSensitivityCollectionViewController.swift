@@ -80,20 +80,6 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView.indexPathForGazedItem != indexPath {
-            collectionView.deselectItem(at: indexPath, animated: true)
-        }
-        
-        if AppConfig.isHeadTrackingEnabled {
-            //let alertViewController = GazeableAlertViewController.make { AppConfig.isHeadTrackingEnabled.toggle() }
-            let alertViewController = GazeableAlertViewController.init(alertTitle: "Turn off head tracking?")
-            present(alertViewController, animated: true)
-        } else {
-            AppConfig.isHeadTrackingEnabled.toggle()
-        }
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
         switch item {

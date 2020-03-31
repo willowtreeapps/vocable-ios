@@ -25,9 +25,9 @@ struct AppConfig {
         return ARFaceTrackingConfiguration.isSupported
     }
     
-    @PublishedDefault(key: "dwellTimeDuration", defaultValue: 1)
+    @PublishedDefault(key: "dwellDuration", defaultValue: 1)
     static var selectionHoldDuration: TimeInterval
     
-    @PublishedDefault(key: "sensitivitySetting", defaultValue: Sensitivity.medium)
-    static var sensitivity: Sensitivity
+    @PublishedDefault(key: "sensitivitySetting", defaultValue: CursorSensitivity.medium)
+    static var cursorSensitivity: CursorSensitivity
 }

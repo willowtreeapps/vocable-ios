@@ -11,41 +11,40 @@ import Combine
 
 class SensitivityCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet var lowButton: GazeableSegmentedButton!
-    @IBOutlet var mediumButton: GazeableSegmentedButton!
-    @IBOutlet var highButton: GazeableSegmentedButton!
+    @IBOutlet private var lowSensitivityButton: GazeableSegmentedButton!
+    @IBOutlet private var mediumSensitivityButton: GazeableSegmentedButton!
+    @IBOutlet private var highSensitivityButton: GazeableSegmentedButton!
     
     private var disposables = Set<AnyCancellable>()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        AppConfig.$sensitivity.sink { (sensitivity) in
-            UIView.performWithoutAnimation {
-                self.lowButton.isSelected = false
-                self.mediumButton.isSelected = false
-                self.highButton.isSelected = false
-                
-                if case .low = sensitivity {
-                    self.lowButton.isSelected = true
-                } else if case .medium = sensitivity {
-                    self.mediumButton.isSelected = true
-                } else if case .high = sensitivity {
-                    self.highButton.isSelected = true
-                }
+        AppConfig.$cursorSensitivity.sink { (sensitivity) in
+            self.lowSensitivityButton.isSelected = false
+            self.mediumSensitivityButton.isSelected = false
+            self.highSensitivityButton.isSelected = false
+            
+            switch sensitivity {
+            case .low:
+                self.lowSensitivityButton.isSelected = true
+            case .medium:
+                self.mediumSensitivityButton.isSelected = true
+            case .high:
+                self.highSensitivityButton.isSelected = true
             }
         }.store(in: &disposables)
     }
     
-    @IBAction func handleLowSensitivity(_ sender: Any) {
-        AppConfig.sensitivity = .low
+    @IBAction private func handleLowSensitivity(_ sender: Any) {
+        AppConfig.cursorSensitivity = .low
     }
     
-    @IBAction func handleMediumSensitivity(_ sender: Any) {
-        AppConfig.sensitivity = .medium
+    @IBAction private func handleMediumSensitivity(_ sender: Any) {
+        AppConfig.cursorSensitivity = .medium
     }
     
-    @IBAction func handleHighSensitivity(_ sender: Any) {
-        AppConfig.sensitivity = .high
+    @IBAction private func handleHighSensitivity(_ sender: Any) {
+        AppConfig.cursorSensitivity = .high
     }
 }

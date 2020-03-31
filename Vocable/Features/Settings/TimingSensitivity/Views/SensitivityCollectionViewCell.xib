@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -18,30 +17,30 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cursor Sensitivity" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="PJa-d1-ik7">
-                        <rect key="frame" x="20" y="56" width="233" height="33.5"/>
+                        <rect key="frame" x="20" y="12" width="233" height="33.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                         <color key="textColor" name="DefaultFontColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0s-dp-HQO">
-                        <rect key="frame" x="20" y="44" width="586" height="2"/>
+                        <rect key="frame" x="20" y="0.0" width="586" height="2"/>
                         <color key="backgroundColor" name="DefaultCellBackground"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="SV7-Ip-ZrN"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYW-L9-31N">
-                        <rect key="frame" x="20" y="174" width="586" height="2"/>
+                        <rect key="frame" x="20" y="208" width="586" height="2"/>
                         <color key="backgroundColor" name="DefaultCellBackground"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="BoX-I5-7O0"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="O5j-z4-VrA">
-                        <rect key="frame" x="20" y="97.5" width="586" height="58.5"/>
+                        <rect key="frame" x="20" y="53.5" width="586" height="136.5"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ph1-lE-gZj" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="2" width="192" height="55"/>
+                                <rect key="frame" x="0.0" y="41" width="192" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="j1g-Cd-qVb"/>
                                 </constraints>
@@ -61,7 +60,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDi-eA-7a0" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="197" y="2" width="192" height="55"/>
+                                <rect key="frame" x="197" y="41" width="192" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="b7m-b2-4tl"/>
                                 </constraints>
@@ -81,7 +80,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4K-JS-vwn" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="394" y="2" width="192" height="55"/>
+                                <rect key="frame" x="394" y="41" width="192" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="kG5-sF-Ej8"/>
                                 </constraints>
@@ -121,9 +120,9 @@
             </collectionViewCellContentView>
             <size key="customSize" width="626" height="210"/>
             <connections>
-                <outlet property="highButton" destination="J4K-JS-vwn" id="Gf5-3Y-IEW"/>
-                <outlet property="lowButton" destination="Ph1-lE-gZj" id="ffD-He-jQH"/>
-                <outlet property="mediumButton" destination="PDi-eA-7a0" id="uCt-S2-XmX"/>
+                <outlet property="highSensitivityButton" destination="J4K-JS-vwn" id="Gf5-3Y-IEW"/>
+                <outlet property="lowSensitivityButton" destination="Ph1-lE-gZj" id="ffD-He-jQH"/>
+                <outlet property="mediumSensitivityButton" destination="PDi-eA-7a0" id="uCt-S2-XmX"/>
             </connections>
             <point key="canvasLocation" x="465.21739130434787" y="121.20535714285714"/>
         </collectionViewCell>
