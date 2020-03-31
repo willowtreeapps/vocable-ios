@@ -242,6 +242,10 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             if let vc = UIStoryboard(name: "SelectionMode", bundle: nil).instantiateViewController(identifier: "SelectionMode") as? SelectionModeViewController {
                 show(vc, sender: nil)
             }
+        case .categories:
+            if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategories") as? EditCategoriesViewController {
+                show(vc, sender: nil)
+            }
         case .contactDevs:
             presentEmail()
         case .pidTuner:

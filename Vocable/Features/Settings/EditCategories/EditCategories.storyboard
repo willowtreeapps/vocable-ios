@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="ipad11_0rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -8,36 +8,19 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Edit Sayings View Controller-->
+        <!--Edit Categories View Controller-->
         <scene sceneID="8J2-gW-BaT">
             <objects>
-                <viewController storyboardIdentifier="MySayings" id="KLI-zL-Q9x" customClass="EditSayingsViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditCategories" id="KLI-zL-Q9x" customClass="EditCategoriesViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XHU-T2-eKa" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaL-BL-aEw" userLabel="Toolbar">
-                                <rect key="frame" x="20" y="44" width="374" height="64"/>
+                                <rect key="frame" x="32" y="32" width="1130" height="96"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvV-sn-lWq" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                        <rect key="frame" x="310" y="0.0" width="64" height="64"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="DvV-sn-lWq" secondAttribute="height" id="kAS-Wb-xZD"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                        <color key="tintColor" name="DefaultFontColor"/>
-                                        <state key="normal" image="xmark.circle" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="34" weight="bold"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="plus" catalog="system"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="addPhrasePressed:" destination="KLI-zL-Q9x" eventType="primaryActionTriggered" id="13s-0j-dDa"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Sayings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
-                                        <rect key="frame" x="112" y="16" width="150.5" height="33.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
+                                        <rect key="frame" x="443" y="8" width="244" height="57.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                         <color key="textColor" name="DefaultFontColor"/>
                                         <nil key="highlightedColor"/>
@@ -48,8 +31,8 @@
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                         </variation>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00c-RK-HF1" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00c-RK-HF1" userLabel="Back Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="00c-RK-HF1" secondAttribute="height" multiplier="1:1" id="Ybw-Mx-Z25"/>
                                         </constraints>
@@ -61,18 +44,11 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="arrow.left" catalog="system"/>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="backToSettings:" destination="KLI-zL-Q9x" eventType="primaryActionTriggered" id="U67-4C-SVw"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
-                                    <constraint firstItem="DvV-sn-lWq" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="topMargin" id="0fN-F4-AwJ"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="DvV-sn-lWq" secondAttribute="bottom" id="34H-OF-Dzj"/>
                                     <constraint firstItem="0CD-i2-i5g" firstAttribute="centerX" secondItem="FaL-BL-aEw" secondAttribute="centerX" id="7hG-Zd-00j"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="DvV-sn-lWq" secondAttribute="trailing" id="HPu-Qg-daX"/>
-                                    <constraint firstItem="DvV-sn-lWq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0CD-i2-i5g" secondAttribute="trailing" constant="24" id="J8q-UF-qPs"/>
                                     <constraint firstItem="0CD-i2-i5g" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="topMargin" constant="8" id="Nmv-ve-AaL">
                                         <variation key="heightClass=regular-widthClass=compact" constant="16"/>
                                     </constraint>
@@ -88,8 +64,8 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
-                                <rect key="frame" x="20" y="132" width="374" height="626"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
+                                <rect key="frame" x="32" y="152" width="1130" height="512"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZPM-Ab-mlI" secondAttribute="height" multiplier="2" priority="250" id="PK4-eE-9mZ"/>
                                     <constraint firstAttribute="height" constant="322.5" id="V2b-Pm-qsk"/>
@@ -113,8 +89,8 @@
                                     <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="71" y="782" width="272" height="48"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="380.5" y="688" width="433.5" height="94"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>
                                     <constraint firstAttribute="width" constant="400" id="bYi-OY-TtN"/>
@@ -174,23 +150,17 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="64t-Cy-SBd"/>
-                    <connections>
-                        <outlet property="addButton" destination="00c-RK-HF1" id="vhL-69-4vj"/>
-                        <outlet property="backButton" destination="DvV-sn-lWq" id="3pj-cI-PHE"/>
-                        <outlet property="paginationView" destination="xsL-XA-YD7" id="23Z-Nk-svG"/>
-                        <outlet property="titleLabel" destination="0CD-i2-i5g" id="kda-XC-L2K"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxk-ad-LrW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2559" y="144"/>
         </scene>
-        <!--Edit Sayings Collection View Controller-->
+        <!--Edit Categories Collection View Controller-->
         <scene sceneID="JgZ-NN-QFW">
             <objects>
-                <collectionViewController id="W98-u1-6GB" customClass="EditSayingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="W98-u1-6GB" customClass="EditCategoriesCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
-                        <rect key="frame" x="0.0" y="0.0" width="374" height="626"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1130" height="565"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IVZ-Bw-liq">
@@ -215,11 +185,11 @@
             <objects>
                 <viewController storyboardIdentifier="EditSaying" id="qBB-qb-4us" customClass="EditSayingsKeyboardViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nxM-ki-o4S">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zBG-MP-Uvj">
-                                <rect key="frame" x="20" y="52" width="374" height="802"/>
+                                <rect key="frame" x="32" y="32" width="1130" height="750"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MPw-us-ZBK">
                                     <size key="itemSize" width="50" height="50"/>
@@ -260,8 +230,6 @@
     </scenes>
     <resources>
         <image name="arrow.left" catalog="system" width="64" height="48"/>
-        <image name="plus" catalog="system" width="64" height="56"/>
-        <image name="xmark.circle" catalog="system" width="64" height="60"/>
         <namedColor name="Background">
             <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
