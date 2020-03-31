@@ -214,7 +214,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
             
             section.decorationItems = [backgroundDecoration]
-            section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 16, trailing: 0)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
             return section
         }
         
@@ -237,7 +237,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             
             let section = NSCollectionLayoutSection(group: containerGroup)
             
-            section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 16, trailing: 0)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
             return section
         }
         
@@ -353,7 +353,6 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             subitems: [characterKeyContainerGroup, functionKeyGroup])
         
         let section = NSCollectionLayoutSection(group: overallContainerGroup)
-        section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         return section
     }
@@ -365,6 +364,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         let characterKeyGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)), subitem: keyItem, count: 6)
         
         let characterKeyContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(5 / 6)), subitem: characterKeyGroup, count: 5)
+        characterKeyContainerGroup.contentInsets = .init(top: 0, leading: 0, bottom: 16, trailing: 0)
         
         // Function key group (Bottom row)
         
@@ -383,7 +383,6 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             subitems: [characterKeyContainerGroup, functionKeyGroup])
         
         let section = NSCollectionLayoutSection(group: overallContainerGroup)
-        section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         return section
     }
