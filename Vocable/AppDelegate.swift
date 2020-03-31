@@ -19,12 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Ensure that the persistent store has the current
         // default presets before presenting UI
         preparePersistentStore()
-
+        
+        addObservers()
+        
         application.isIdleTimerDisabled = true
         let window = HeadGazeWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         window.makeKeyAndVisible()
         self.window = window
+        
         return true
     }
 
@@ -42,6 +45,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             assertionFailure("Core Data save failure: \(error)")
         }
+    }
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(headTrackingDisabled(_:)), name: .headTrackingDisabled, object: nil)
+    }
+    
+    @objc private func applicationDidLoseGaze(_ sender: Any?) {
+        ToastWindow.shared.presentPersistantWarning(with: NSLocalizedString("Please move closer to the device.", comment: "Warning title when head tracking is lost."))
+    }
+    
+    @objc private func applicationDidAcquireGaze(_ sender: Any?) {
+        ToastWindow.shared.dismissPersistantWarning()
+    }
+    
+    @objc private func headTrackingDisabled(_ sender: Any?) {
+        ToastWindow.shared.dismissPersistantWarning()
     }
 
     private func deleteExistingPrescribedEntities(in context: NSManagedObjectContext) {
