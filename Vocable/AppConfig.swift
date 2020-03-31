@@ -28,6 +28,6 @@ struct AppConfig {
     @PublishedDefault(key: "dwellTimeDuration", defaultValue: 1)
     static var selectionHoldDuration: TimeInterval
     
-    @PublishedDefault(key: "sensitivitySetting", defaultValue: Sensitivity.low)
+    @PublishedDefault(key: "sensitivitySetting", defaultValue: Sensitivity.medium)
     static var sensitivity: Sensitivity
 }
