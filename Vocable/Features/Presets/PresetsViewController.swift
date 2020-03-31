@@ -370,7 +370,7 @@ class PresetsViewController: UICollectionViewController {
 
                 do {
                     try context.save()
-                    (self.view.window as? HeadGazeWindow)?.handlePhraseSaved(toastLabelText: NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings"))
+                    ToastWindow.shared.presentEphemeralToast(withTitle: NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings"))
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")
                 }
