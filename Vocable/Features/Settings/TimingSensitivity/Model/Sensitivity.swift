@@ -13,7 +13,7 @@ enum Sensitivity: Int, Codable {
     var range: ClosedRange<Double> {
         switch self {
         case .low:
-            return (2.0 ... 3.0)
+            return (2.0 ... 4.0)
         case .medium:
             return (3.0 ... 5.0)
         case .high:
