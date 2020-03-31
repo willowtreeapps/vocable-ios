@@ -25,7 +25,8 @@ class ToastContainerViewController: UIViewController {
         updateWindowVisibility()
     }
     
-    func updateWindowVisibility() {
+    //In the future we should get away from manipulating the window here.
+    private func updateWindowVisibility() {
         if phraseSavedView == nil && warningView == nil {
             ToastWindow.shared.isHidden = true
         } else {
