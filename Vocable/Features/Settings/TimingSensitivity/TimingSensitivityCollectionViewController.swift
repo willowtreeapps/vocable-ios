@@ -123,16 +123,6 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
             return cell
         case .sensitivity:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SensitivityCollectionViewCell.reuseIdentifier, for: indexPath) as! SensitivityCollectionViewCell
-            
-            cell.lowButton.addTarget(self,
-                                      action: #selector(self.handleSensitivityLow(_:)),
-                                      for: .primaryActionTriggered)
-            cell.mediumButton.addTarget(self,
-                                      action: #selector(self.handleSensitivityMedium(_:)),
-                                      for: .primaryActionTriggered)
-            cell.highButton.addTarget(self,
-                                      action: #selector(self.handleSensitivityHigh(_:)),
-                                      for: .primaryActionTriggered)
             return cell
         }
     }
