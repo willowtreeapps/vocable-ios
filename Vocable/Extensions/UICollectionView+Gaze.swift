@@ -95,7 +95,7 @@ extension UICollectionView {
             // Update the existing target's selection state if needed
             if let oldTarget = gazeTarget, !oldTarget.isCancelled, !indexPathIsSelected(oldTarget.indexPath) {
                 let timeElapsed = Date().timeIntervalSince(oldTarget.beginDate)
-                if timeElapsed >= gaze.selectionHoldDuration {
+                if timeElapsed >= AppConfig.selectionHoldDuration {
                     guard delegate?.collectionView?(self, shouldSelectItemAt: oldTarget.indexPath) ?? true else {
                         return
                     }

@@ -123,7 +123,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
             guard let indexPath = collectionView.indexPath(for: cell) else {
                 return
             }
-            if let vc = self.storyboard?.instantiateViewController(identifier: "EditSaying") as? EditKeyboardViewController {
+            if let vc = UIStoryboard(name: "EditSayings", bundle: nil).instantiateViewController(identifier: "EditSaying") as? EditSayingsKeyboardViewController {
                 let phrase = fetchResultsController.object(at: indexPath)
                 vc.phraseIdentifier = phrase.identifier
                 show(vc, sender: nil)

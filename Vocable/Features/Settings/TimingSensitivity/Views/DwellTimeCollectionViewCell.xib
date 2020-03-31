@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="omo-gs-g3x" customClass="DwellTimeCollectionViewCell" customModule="Vocable" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="638" height="137"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="YVu-RA-dFE">
+                <rect key="frame" x="0.0" y="0.0" width="638" height="137"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hover Time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="OLA-YL-VeV">
+                        <rect key="frame" x="20" y="12" width="149" height="33.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                        <color key="textColor" name="DefaultFontColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aGT-tV-MsX" userLabel="TopBar">
+                        <rect key="frame" x="20" y="0.0" width="598" height="2"/>
+                        <color key="backgroundColor" name="DefaultCellBackground"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="4aU-Nv-iyF"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpa-XA-zUK" userLabel="BottomBar">
+                        <rect key="frame" x="20" y="135" width="598" height="2"/>
+                        <color key="backgroundColor" name="DefaultCellBackground"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="mMs-08-NWm"/>
+                        </constraints>
+                    </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="BeL-yu-x15">
+                        <rect key="frame" x="20" y="58.5" width="598" height="55"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYz-0h-pvW" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="85" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="OdC-6c-nVk"/>
+                                    <constraint firstAttribute="width" constant="85" id="Ra7-fV-vCz">
+                                        <variation key="heightClass=compact" constant="55"/>
+                                        <variation key="widthClass=compact" constant="55"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="minus" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2s" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="9Ym-ys-KLL">
+                                <rect key="frame" x="199.5" y="0.0" width="199" height="55"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <color key="textColor" name="DefaultFontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0m-iz-XHs" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="513" y="0.0" width="85" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="hwY-fa-zSH">
+                                        <variation key="heightClass=compact" constant="55"/>
+                                        <variation key="widthClass=compact" constant="55"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="55" id="zGP-DE-Jdz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="plus" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="Wpa-XA-zUK" secondAttribute="trailing" id="4Rs-8j-bhn"/>
+                    <constraint firstItem="BeL-yu-x15" firstAttribute="centerY" secondItem="YVu-RA-dFE" secondAttribute="centerY" constant="17.5" id="Afu-ru-eA2"/>
+                    <constraint firstItem="aGT-tV-MsX" firstAttribute="top" secondItem="YVu-RA-dFE" secondAttribute="topMargin" id="B0d-Es-ld4"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="aGT-tV-MsX" secondAttribute="trailing" id="H63-TK-UVi"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="BeL-yu-x15" secondAttribute="trailing" id="RXZ-qw-Qav"/>
+                    <constraint firstItem="OLA-YL-VeV" firstAttribute="leading" secondItem="YVu-RA-dFE" secondAttribute="leadingMargin" id="ZIM-to-PXH"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Wpa-XA-zUK" secondAttribute="bottom" id="d6K-nM-mjX"/>
+                    <constraint firstItem="BeL-yu-x15" firstAttribute="leading" secondItem="YVu-RA-dFE" secondAttribute="leadingMargin" id="ejU-Z6-GI4"/>
+                    <constraint firstItem="aGT-tV-MsX" firstAttribute="leading" secondItem="YVu-RA-dFE" secondAttribute="leadingMargin" id="exm-xA-nGB"/>
+                    <constraint firstItem="Wpa-XA-zUK" firstAttribute="leading" secondItem="YVu-RA-dFE" secondAttribute="leadingMargin" id="ic9-vj-GYy"/>
+                    <constraint firstItem="OLA-YL-VeV" firstAttribute="top" secondItem="YVu-RA-dFE" secondAttribute="topMargin" constant="12" id="s6L-ll-p3Q"/>
+                </constraints>
+                <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
+            </collectionViewCellContentView>
+            <size key="customSize" width="638" height="137"/>
+            <connections>
+                <outlet property="decreaseTimeButton" destination="NYz-0h-pvW" id="b1m-ks-jcb"/>
+                <outlet property="increaseTimeButton" destination="q0m-iz-XHs" id="5eG-Hh-eRr"/>
+                <outlet property="timeLabel" destination="9Ym-ys-KLL" id="2cU-ix-BQl"/>
+            </connections>
+            <point key="canvasLocation" x="446.48437499999994" y="116.17862371888725"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="minus" catalog="system" width="64" height="12"/>
+        <image name="plus" catalog="system" width="64" height="56"/>
+        <namedColor name="DefaultCellBackground">
+            <color red="0.21799999475479126" green="0.19499999284744263" blue="0.62699997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DefaultFontColor">
+            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

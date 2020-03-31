@@ -16,6 +16,8 @@ class HeadGazeWindow: UIWindow {
 
     private var trackingView: UIView?
     private var lastGaze: UIHeadGaze?
+    
+    
     private let touchGazeDisableDuration: TimeInterval = 3
     private var touchGazeDisableBeganDate: Date?
     

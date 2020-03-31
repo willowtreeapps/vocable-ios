@@ -40,6 +40,11 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
     private var computedScale: CGFloat = 0
     private var xAngleCorrectionAmount = 0.0
     private var yAngleCorrectionAmount = 0.0
+    
+    // The minimum/maximum values to scale how quickly the cursor moves around the screen
+    var scalingRange = (3.0 ... 6.0)
+    
+    private var disposables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +62,10 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         sceneview?.isHidden = true
         sceneview?.preferredFramesPerSecond =  UIScreen.main.maximumFramesPerSecond
         setupSceneNode()
+        
+        AppConfig.$cursorSensitivity.sink { (sensitivity) in
+            self.scalingRange = sensitivity.range
+        }.store(in: &disposables)
 
         for interpolator in trackingInterpolators {
             interpolator.view = self.view
@@ -145,9 +154,8 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         yAngleCorrectionAmount = Double(90 - angleY.radiansToDegrees) / 90.0
 
         let length = Double(sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z))
-
+        
         let distanceRange = (0.3 ... 0.6) // Distance from camera
-        let scalingRange = (3.0 ... 6.0) // Scaling
 
         let normalizedLength = min(max((length - distanceRange.lowerBound) / (distanceRange.upperBound - distanceRange.lowerBound), 0.0), 1.0)
         let normalizedScale = 1.0 - normalizedLength

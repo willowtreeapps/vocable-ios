@@ -24,8 +24,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         }
 
         var isFeatureEnabled: Bool {
-            let debugFeatures: [SettingsItem] = [.categories, .timingSensitivity,
-                                                 .resetAppSettings, .pidTuner]
+            let debugFeatures: [SettingsItem] = [.categories, .resetAppSettings, .pidTuner]
             if debugFeatures.contains(self) {
                 return AppConfig.showDebugOptions
             }
@@ -232,11 +231,17 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             present(alertViewController, animated: true)
 
         case .editMySayings:
-            if let vc = self.storyboard?.instantiateViewController(identifier: "MySayings") {
+            if let vc = UIStoryboard(name: "EditSayings", bundle: nil).instantiateViewController(identifier: "MySayings") as? EditSayingsViewController {
+                show(vc, sender: nil)
+            }
+        case .timingSensitivity:
+            if let vc = UIStoryboard(name: "TimingSensitivity", bundle: nil).instantiateViewController(identifier: "TimingSensitivity") as? TimingSensitivityViewController {
                 show(vc, sender: nil)
             }
         case .selectionMode:
-            presentSelectionModeViewController()
+            if let vc = UIStoryboard(name: "SelectionMode", bundle: nil).instantiateViewController(identifier: "SelectionMode") as? SelectionModeViewController {
+                show(vc, sender: nil)
+            }
         case .contactDevs:
             presentEmail()
         case .pidTuner:
@@ -316,13 +321,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
-    }
-    
-    private func presentSelectionModeViewController() {
-        let storyboard = UIStoryboard(name: "SelectionMode", bundle: nil)
-        let vc = storyboard.instantiateInitialViewController()!
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
     }
     
 }
