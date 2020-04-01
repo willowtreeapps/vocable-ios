@@ -25,7 +25,12 @@ class EditCategoryDetailViewController: UIViewController {
     }
     
     @IBAction func editButtonPressed(_ sender: Any) {
-        //TODO
+           if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryKeyboardViewController") as? EditCategoryKeyboardViewController {
+               vc.modalPresentationStyle = .fullScreen
+               vc.phraseIdentifier = categoryName
+            present(vc, animated: true)
+               return
+           }
     }
     
 }

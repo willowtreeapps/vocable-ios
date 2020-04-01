@@ -175,10 +175,10 @@
             </objects>
             <point key="canvasLocation" x="3722" y="143"/>
         </scene>
-        <!--Edit Sayings Keyboard View Controller-->
+        <!--Edit Category Keyboard View Controller-->
         <scene sceneID="WU4-lR-j23">
             <objects>
-                <viewController storyboardIdentifier="EditSaying" id="qBB-qb-4us" customClass="EditSayingsKeyboardViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditCategoryKeyboardViewController" id="qBB-qb-4us" customClass="EditCategoryKeyboardViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nxM-ki-o4S">
                         <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,7 +194,7 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                                 <connections>
-                                    <outlet property="delegate" destination="qBB-qb-4us" id="3hX-tf-aZQ"/>
+                                    <outlet property="delegate" destination="qBB-qb-4us" id="6TN-ix-IHO"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -215,12 +215,12 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="zBG-MP-Uvj" id="NE3-hU-w72"/>
+                        <outlet property="collectionView" destination="zBG-MP-Uvj" id="XE4-zH-JWf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bj1-rW-RH8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4778" y="138"/>
+            <point key="canvasLocation" x="4544" y="388"/>
         </scene>
         <!--Edit Category Detail View Controller-->
         <scene sceneID="FIn-Tv-o2a">
