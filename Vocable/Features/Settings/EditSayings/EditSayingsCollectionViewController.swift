@@ -61,13 +61,13 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
             layout.numberOfColumns = 2
-            layout.numberOfRows = 3
+            layout.numberOfRows = .fixedCount(3)
         case (.compact, .regular):
             layout.numberOfColumns = 1
-            layout.numberOfRows = 3
+            layout.numberOfRows = .fixedCount(3)
         case (.compact, .compact), (.regular, .compact):
             layout.numberOfColumns = 1
-            layout.numberOfRows = 2
+            layout.numberOfRows = .fixedCount(2)
         default:
             break
         }

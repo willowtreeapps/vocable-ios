@@ -49,28 +49,17 @@ class EditCategoryDetailCollectionViewController: UICollectionViewController {
     }
     
     private func createLayout() -> UICollectionViewLayout {
-        if case .compact = self.traitCollection.verticalSizeClass {
-            return compactVerticalLayout()
-        } else {
-            return defaultLayout()
-        }
-    }
-    
-    private func defaultLayout() -> UICollectionViewLayout {
         let showCategoryToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         showCategoryToggleItem.contentInsets = .init(top: 8, leading: 0, bottom: 8, trailing: 0)
-        let showRemoveCategoryGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/9))
-        let showRemoveCategoryGroup = NSCollectionLayoutGroup.vertical(layoutSize: showRemoveCategoryGroupSize, subitems: [showCategoryToggleItem])
         
-        let section = NSCollectionLayoutSection(group: showRemoveCategoryGroup)
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
-    }
-    
-    private func compactVerticalLayout() -> UICollectionViewLayout {
-        let showCategoryToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        showCategoryToggleItem.contentInsets = .init(top: 8, leading: 0, bottom: 8, trailing: 0)
-        let showRemoveCategoryGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/5))
+        var showRemoveCategoryGroupFractionalHeight: NSCollectionLayoutDimension {
+            if case .compact = traitCollection.verticalSizeClass {
+                return .fractionalHeight(1 / 3)
+            }
+            return .fractionalHeight(1 / 8)
+        }
+        
+        let showRemoveCategoryGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: showRemoveCategoryGroupFractionalHeight)
         let showRemoveCategoryGroup = NSCollectionLayoutGroup.vertical(layoutSize: showRemoveCategoryGroupSize, subitems: [showCategoryToggleItem])
         
         let section = NSCollectionLayoutSection(group: showRemoveCategoryGroup)
