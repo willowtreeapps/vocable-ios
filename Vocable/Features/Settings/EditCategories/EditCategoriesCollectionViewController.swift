@@ -24,17 +24,27 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoriesCompactCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoriesCompactCollectionViewCell
             
             cell.setup(title: "\(indexPath.row + 1). \(self.categoryViewModels[indexPath.row].name)")
-            cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
-            cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
-            cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
             
+            cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
+            cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
+            
+            cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
+            cell.moveDownButton.isEnabled = self.setDownButtonEnabled(indexPath: indexPath)
+            
+            cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
+
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoriesDefaultCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoriesDefaultCollectionViewCell
             
-             cell.setup(title: "\(indexPath.row + 1). \(self.categoryViewModels[indexPath.row].name)")
+            cell.setup(title: "\(indexPath.row + 1). \(self.categoryViewModels[indexPath.row].name)")
+            
             cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
+            cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
+            
             cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
+            cell.moveDownButton.isEnabled = self.setDownButtonEnabled(indexPath: indexPath)
+            
             cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
             
             return cell
@@ -72,6 +82,22 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateLayoutForCurrentTraitCollection()
+    }
+    
+    private func setUpButtonEnabled(indexPath: IndexPath) -> Bool {
+        if indexPath.row == 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    private func setDownButtonEnabled(indexPath: IndexPath) -> Bool {
+       if indexPath.row == collectionView.numberOfItems(inSection: 0) - 1 {
+            return false
+       } else {
+          return true
+       }
     }
 
     private func updateLayoutForCurrentTraitCollection() {
