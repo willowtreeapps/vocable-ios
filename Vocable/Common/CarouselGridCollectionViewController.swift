@@ -11,6 +11,14 @@ import Combine
 
 typealias CarouselGridPagingProgress = (pageIndex: Int, pageCount: Int)
 
+struct CellSeparatorMask: OptionSet {
+    let rawValue: Int
+    
+    static let top = CellSeparatorMask(rawValue: 1 << 0)
+    static let bottom = CellSeparatorMask(rawValue: 1 << 1)
+    static let both: CellSeparatorMask = [.top, .bottom]
+}
+
 class CarouselGridCollectionViewController: UICollectionViewController {
 
     var progressPublisher: Published<CarouselGridPagingProgress?>.Publisher {
@@ -84,6 +92,15 @@ class CarouselGridCollectionViewController: UICollectionViewController {
 class CarouselGridLayout: UICollectionViewLayout {
 
     enum RowCount {
+        var count: Int {
+            switch self {
+            case .fixedCount(let num):
+                return num
+            case .minimumHeight(let height):
+                return 0
+            }
+        }
+        
         case fixedCount(Int)
         case minimumHeight(CGFloat)
     }
@@ -281,6 +298,12 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        
+        if logicalPageIndex >= numberOfPages {
+            logicalPageIndex = numberOfPages - 1
+            invalidateLayout()
+            return nil
+        }
 
         let currentPageAttributes = layoutAttributesForElementsInLogicalPage(logicalPageIndex)
 
@@ -331,5 +354,20 @@ class CarouselGridLayout: UICollectionViewLayout {
         let index = (proposedContentOffset.x / (width + interItemSpacing)).rounded()
         let boundary = boundsRectForPageIndex(Int(index))
         return boundary.origin
+    }
+    
+    func separatorMask(for indexPath: IndexPath) -> CellSeparatorMask {
+        let index = indexPath.item
+        let numberOfRowsPerPage = Int((index % itemsPerPage) / numberOfColumns)
+        
+        if numberOfRowsPerPage == 0 {
+            return []
+        }
+        
+        if index % numberOfRowsPerPage == 0 {
+            return .both
+        } else {
+            return .top
+        }
     }
 }

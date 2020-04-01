@@ -20,7 +20,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, CategoryViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         
-        if self.traitCollection.horizontalSizeClass == .compact {
+        if self.traitCollection.horizontalSizeClass == .compact && self.traitCollection.verticalSizeClass == .regular {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoriesCompactCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoriesCompactCollectionViewCell
             
             cell.setup(title: "\(indexPath.row + 1). \(self.categoryViewModels[indexPath.row].name)")
@@ -38,6 +38,8 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoriesDefaultCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoriesDefaultCollectionViewCell
             
             cell.setup(title: "\(indexPath.row + 1). \(self.categoryViewModels[indexPath.row].name)")
+            
+            cell.bottomSeparator.isHidden = self.layout.separatorMask(for: indexPath).contains(.bottom)
             
             cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
             cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
@@ -82,6 +84,9 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateLayoutForCurrentTraitCollection()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     private func setUpButtonEnabled(indexPath: IndexPath) -> Bool {
@@ -93,11 +98,11 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     }
     
     private func setDownButtonEnabled(indexPath: IndexPath) -> Bool {
-       if indexPath.row == collectionView.numberOfItems(inSection: 0) - 1 {
+        if indexPath.row == collectionView.numberOfItems(inSection: 0) - 1 {
             return false
-       } else {
-          return true
-       }
+        } else {
+            return true
+        }
     }
 
     private func updateLayoutForCurrentTraitCollection() {

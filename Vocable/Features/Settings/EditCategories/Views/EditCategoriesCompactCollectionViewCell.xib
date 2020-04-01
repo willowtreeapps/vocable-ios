@@ -81,6 +81,7 @@
             </collectionViewCellContentView>
             <size key="customSize" width="704" height="196"/>
             <connections>
+                <outlet property="bottomSeparator" destination="hWY-nm-Hv6" id="wG2-NU-ubF"/>
                 <outlet property="categoryNameLabel" destination="3t9-YV-add" id="X4D-Iq-g1y"/>
                 <outlet property="moveDownButton" destination="yIe-C4-EHn" id="lcM-VC-wIH"/>
                 <outlet property="moveUpButton" destination="Ieb-WK-NlS" id="QXw-EG-pi6"/>

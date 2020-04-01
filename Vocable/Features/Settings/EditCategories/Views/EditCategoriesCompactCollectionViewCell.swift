@@ -18,6 +18,8 @@ class EditCategoriesCompactCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var showCategoryDetailButton: GazeableButton!
     
+    @IBOutlet var bottomSeparator: UIView!
+    
     func setup(title: String) {
         categoryNameLabel.text = title
     }
