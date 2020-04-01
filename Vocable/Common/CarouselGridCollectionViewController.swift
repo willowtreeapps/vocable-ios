@@ -36,7 +36,7 @@ class CarouselGridCollectionViewController: UICollectionViewController {
     let layout: CarouselGridLayout = {
         let layout = CarouselGridLayout()
         layout.numberOfColumns = 2
-        layout.numberOfRows = 3
+        layout.numberOfRows = .fixedCount(3)
         layout.interItemSpacing = 24
         return layout
     }()
@@ -83,6 +83,11 @@ class CarouselGridCollectionViewController: UICollectionViewController {
 
 class CarouselGridLayout: UICollectionViewLayout {
 
+    enum RowCount {
+        case fixedCount(Int)
+        case minimumHeight(CGFloat)
+    }
+
     var numberOfColumns = 1 {
         didSet {
             if numberOfColumns < 1 {
@@ -92,12 +97,18 @@ class CarouselGridLayout: UICollectionViewLayout {
         }
     }
 
-    var numberOfRows = 1 {
+    var numberOfRows: RowCount = .fixedCount(1) {
         didSet {
-            if numberOfRows < 1 {
-                numberOfRows = 1
-            }
             invalidateLayout()
+        }
+    }
+
+    private var rowCount: Int {
+        switch numberOfRows {
+        case .fixedCount(let count):
+            return count
+        case .minimumHeight(let minimumHeight):
+            return Int((collectionView?.bounds.height ?? 0) / minimumHeight)
         }
     }
 
@@ -108,7 +119,7 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     private var itemsPerPage: Int {
-        return numberOfRows * numberOfColumns
+        return rowCount * numberOfColumns
     }
 
     private var logicalPageIndex: Int = 0 {
@@ -230,12 +241,12 @@ class CarouselGridLayout: UICollectionViewLayout {
         let width = size.width
         let height = size.height
 
-        let itemsPerPage = numberOfRows * numberOfColumns
+        let itemsPerPage = rowCount * numberOfColumns
 
         let pageIndex = index / itemsPerPage
 
         let cellWidth = (width - CGFloat(numberOfColumns - 1) * interItemSpacing) / CGFloat(numberOfColumns)
-        let cellHeight = (height - CGFloat(numberOfRows - 1) * interItemSpacing) / CGFloat(numberOfRows)
+        let cellHeight = (height - CGFloat(rowCount - 1) * interItemSpacing) / CGFloat(rowCount)
 
         let cellX = CGFloat((index % numberOfColumns) + (numberOfColumns * pageIndex)) * (cellWidth + interItemSpacing)
         let cellY = CGFloat(Int((index % itemsPerPage) / numberOfColumns)) * (cellHeight + interItemSpacing)
