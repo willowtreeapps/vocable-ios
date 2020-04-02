@@ -10,12 +10,19 @@ import UIKit
 
 final class GazeableAlertAction: NSObject {
 
+    public enum Style {
+        case destructive
+        case `default`
+    }
+
     let title: String
+    let style: Style
     let handler: (() -> Void)?
     fileprivate var defaultCompletion: (() -> Void)?
 
-    init(title: String, handler: (() -> Void)? = nil) {
+    init(title: String, style: Style = .default, handler: (() -> Void)? = nil) {
         self.title = title
+        self.style = style
         self.handler = handler
     }
 
@@ -68,7 +75,6 @@ private final class GazeableAlertView: BorderedView {
         roundedCorners = .allCorners
         cornerRadius = 14
         fillColor = .alertBackgroundColor
-//        setContentHuggingPriority(.required, for: .horizontal)
         setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 
@@ -87,6 +93,26 @@ private final class GazeableAlertView: BorderedView {
 }
 
 private final class GazeableAlertButton: GazeableButton {
+
+    var style: GazeableAlertAction.Style = .default {
+        didSet {
+            switch style {
+            case .destructive:
+                if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
+                    titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+                } else {
+                    titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+                }
+
+            case .default:
+                if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
+                    titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+                } else {
+                    titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .regular)
+                }
+            }
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -114,7 +140,6 @@ private final class GazeableAlertButton: GazeableButton {
     }
 
     private func updateForCurrentTraitCollection() {
-        titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         contentEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24)
     }
 
@@ -147,7 +172,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         return view
     }()
 
-    private lazy var titleLabel: UILabel = {
+    private lazy var messageLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.lineBreakMode = .byWordWrapping
@@ -176,7 +201,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         self.transitioningDelegate = self
         self.modalPresentationStyle = .custom
 
-        self.titleLabel.text = alertTitle
+        self.messageLabel.text = alertTitle
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -196,10 +221,10 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
 
     private func updateContentForCurrentTraitCollection() {
         if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
-            titleLabel.font = .systemFont(ofSize: 17)
-            titleContainerView.layoutMargins = UIEdgeInsets(top: 36, left: 12, bottom: 36, right: 12)
+            messageLabel.font = .systemFont(ofSize: 15, weight: .regular)
+            titleContainerView.layoutMargins = UIEdgeInsets(top: 20, left: 35, bottom: 20, right: 35)
         } else {
-            titleLabel.font = .systemFont(ofSize: 34)
+            messageLabel.font = .systemFont(ofSize: 34, weight: .regular)
             titleContainerView.layoutMargins = UIEdgeInsets(top: 40, left: 50, bottom: 40, right: 50)
         }
     }
@@ -226,8 +251,8 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         containerStackView.addArrangedSubview(dividerView)
         containerStackView.addArrangedSubview(actionButtonStackView)
 
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleContainerView.addSubview(titleLabel)
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleContainerView.addSubview(messageLabel)
 
         NSLayoutConstraint.activate([
             alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -246,10 +271,10 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         ])
 
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: titleContainerView.layoutMarginsGuide.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: titleContainerView.layoutMarginsGuide.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: titleContainerView.layoutMarginsGuide.trailingAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: titleContainerView.layoutMarginsGuide.bottomAnchor)
+            messageLabel.topAnchor.constraint(equalTo: titleContainerView.layoutMarginsGuide.topAnchor),
+            messageLabel.leadingAnchor.constraint(equalTo: titleContainerView.layoutMarginsGuide.leadingAnchor),
+            messageLabel.trailingAnchor.constraint(equalTo: titleContainerView.layoutMarginsGuide.trailingAnchor),
+            messageLabel.bottomAnchor.constraint(equalTo: titleContainerView.layoutMarginsGuide.bottomAnchor)
         ])
     }
 
@@ -266,6 +291,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
             let button = GazeableAlertButton(frame: .zero)
             button.setTitle(action.title, for: .normal)
             button.backgroundView.cornerRadius = alertView.cornerRadius
+            button.style = action.style
             button.addTarget(action, action: #selector(GazeableAlertAction.performActions), for: .primaryActionTriggered)
 
             if actionButtonStackView.arrangedSubviews.isEmpty {
