@@ -111,6 +111,10 @@
 		A9DFCC1A242BDD5300136136 /* PresetPaginationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DFCC19242BDD5300136136 /* PresetPaginationCollectionViewCell.swift */; };
 		A9DFCC20242D020100136136 /* PublishedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DFCC1F242D020100136136 /* PublishedValue.swift */; };
 		A9E665A7241A785F00FE577A /* CarouselGridCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */; };
+		A9F56FC224365996008162B6 /* FunctionKeyboardKeyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F56FC124365996008162B6 /* FunctionKeyboardKeyCollectionViewCell.swift */; };
+		A9F56FC42436599E008162B6 /* FunctionKeyboardKeyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9F56FC32436599E008162B6 /* FunctionKeyboardKeyCollectionViewCell.xib */; };
+		A9F56FC624365BDB008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F56FC524365BDB008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.swift */; };
+		A9F56FC824365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9F56FC724365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib */; };
 		B81AC0A12405AF1100972E85 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81AC0A02405AF1100972E85 /* CategoryViewModel.swift */; };
 		B81AC0A52405B62900972E85 /* PhraseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81AC0A42405B62900972E85 /* PhraseViewModel.swift */; };
 		B81AC0AD2405D8C400972E85 /* ItemSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81AC0AC2405D8C400972E85 /* ItemSelection.swift */; };
@@ -258,6 +262,10 @@
 		A9DFCC19242BDD5300136136 /* PresetPaginationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetPaginationCollectionViewCell.swift; sourceTree = "<group>"; };
 		A9DFCC1F242D020100136136 /* PublishedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishedValue.swift; sourceTree = "<group>"; };
 		A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselGridCollectionViewController.swift; sourceTree = "<group>"; };
+		A9F56FC124365996008162B6 /* FunctionKeyboardKeyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionKeyboardKeyCollectionViewCell.swift; sourceTree = "<group>"; };
+		A9F56FC32436599E008162B6 /* FunctionKeyboardKeyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FunctionKeyboardKeyCollectionViewCell.xib; sourceTree = "<group>"; };
+		A9F56FC524365BDB008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakFunctionKeyboardKeyCollectionViewCell.swift; sourceTree = "<group>"; };
+		A9F56FC724365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeakFunctionKeyboardKeyCollectionViewCell.xib; sourceTree = "<group>"; };
 		B81AC0A02405AF1100972E85 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		B81AC0A42405B62900972E85 /* PhraseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraseViewModel.swift; sourceTree = "<group>"; };
 		B81AC0AC2405D8C400972E85 /* ItemSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSelection.swift; sourceTree = "<group>"; };
@@ -637,6 +645,10 @@
 				A94A6CCB2412D33F00625275 /* Model */,
 				A9299C7423F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift */,
 				A9299C7623F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib */,
+				A9F56FC124365996008162B6 /* FunctionKeyboardKeyCollectionViewCell.swift */,
+				A9F56FC32436599E008162B6 /* FunctionKeyboardKeyCollectionViewCell.xib */,
+				A9F56FC524365BDB008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.swift */,
+				A9F56FC724365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib */,
 				A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */,
 				A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */,
 			);
@@ -752,6 +764,7 @@
 				A9CF2AF5242D4EF1005633A7 /* SensitivityCollectionViewCell.xib in Resources */,
 				718D7FB0241954C400FDEF93 /* EditSayingsCollectionViewCell.xib in Resources */,
 				71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */,
+				A9F56FC42436599E008162B6 /* FunctionKeyboardKeyCollectionViewCell.xib in Resources */,
 				30B979BE2425587B00309D7C /* Localizable.strings in Resources */,
 				A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */,
 				A9299C7723F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib in Resources */,
@@ -762,6 +775,7 @@
 				B81D235B23FED8EF005741E8 /* PresetPaginationContainerCollectionViewCell.xib in Resources */,
 				A9CF2AE9242D41BE005633A7 /* EditSayings.storyboard in Resources */,
 				30B979B82425583E00309D7C /* InfoPlist.strings in Resources */,
+				A9F56FC824365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib in Resources */,
 				3010A599242602E5005A66D7 /* textpresets.json in Resources */,
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,
 				A9CF2AEB242D431E005633A7 /* TimingSensitivity.storyboard in Resources */,
@@ -814,6 +828,7 @@
 			files = (
 				A944D0092406D54400F3863E /* SettingsToggleCollectionViewCell.swift in Sources */,
 				64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */,
+				A9F56FC624365BDB008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.swift in Sources */,
 				6BFB18C424004406002C3515 /* NSManagedObject+Helpers.swift in Sources */,
 				A94A6CCD2412D38A00625275 /* NavigationModel.swift in Sources */,
 				B81D236623FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift in Sources */,
@@ -877,6 +892,7 @@
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
 				A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */,
 				A91A9F4924192782008552E8 /* EditSayingsKeyboardViewController.swift in Sources */,
+				A9F56FC224365996008162B6 /* FunctionKeyboardKeyCollectionViewCell.swift in Sources */,
 				A99AF23123FC8BF700BE1184 /* TextTransaction.swift in Sources */,
 				A9DFCC18242BDCD700136136 /* CategoryPaginationCollectionViewCell.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
