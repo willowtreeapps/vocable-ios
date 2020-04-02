@@ -12,7 +12,7 @@ import UIKit
 @IBDesignable
 class GazeableButton: UIButton {
     
-    private var gazeBeganDate: Date?
+    fileprivate var gazeBeganDate: Date?
     
     let backgroundView = BorderedView()
     private var buttonImageView = UIImageView()
@@ -126,7 +126,7 @@ class GazeableButton: UIButton {
         updateContentViews()
     }
     
-    private func updateContentViews() {
+    fileprivate func updateContentViews() {
         backgroundView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
         backgroundView.fillColor = isSelected ? selectionFillColor : fillColor
         backgroundView.borderColor = .cellBorderHighlightColor
@@ -153,7 +153,7 @@ class GazeableButton: UIButton {
         }
         
         let timeElapsed = Date().timeIntervalSince(beganDate)
-        if timeElapsed >= gaze.selectionHoldDuration {
+        if timeElapsed >= AppConfig.selectionHoldDuration {
             isSelected = true
             sendActions(for: .primaryActionTriggered)
             gazeBeganDate = nil
@@ -174,6 +174,31 @@ class GazeableButton: UIButton {
         isHighlighted = false
         isSelected = false
         gazeBeganDate = .distantFuture
+    }
+    
+}
+
+class GazeableSegmentedButton: GazeableButton {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !isSelected {
+            super.touchesBegan(touches, with: event)
+        }
+    }
+    
+    override func gazeBegan(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        if !isSelected {
+            isHighlighted = true
+        }
+        gazeBeganDate = Date()
+    }
+
+    override func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        if !isSelected {
+            gazeBeganDate = nil
+            isSelected = false
+        }
+        isHighlighted = false
     }
     
 }
