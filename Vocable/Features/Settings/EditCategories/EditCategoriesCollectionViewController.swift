@@ -20,38 +20,27 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, CategoryViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         
+        var cell = EditCategoriesDefaultCollectionViewCell()
         if self.traitCollection.horizontalSizeClass == .compact && self.traitCollection.verticalSizeClass == .regular {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoriesCompactCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoriesCompactCollectionViewCell
-            
-            cell.setup(title: "\(indexPath.row + 1). \(self.categoryViewModels[indexPath.row].name)")
-            
-            cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
-            cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
-            
-            cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
-            cell.moveDownButton.isEnabled = self.setDownButtonEnabled(indexPath: indexPath)
-            
-            cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
-
-            return cell
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditCategoriesCompactCollectionViewCell", for: indexPath) as! EditCategoriesDefaultCollectionViewCell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoriesDefaultCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoriesDefaultCollectionViewCell
-            
-            cell.setup(title: "\(indexPath.row + 1). \(self.categoryViewModels[indexPath.row].name)")
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoriesDefaultCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoriesDefaultCollectionViewCell
             
             cell.topSeparator.isHidden = !self.layout.separatorMask(for: indexPath).contains(.top)
             cell.bottomSeparator.isHidden = !self.layout.separatorMask(for: indexPath).contains(.bottom)
-            
-            cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
-            cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
-            
-            cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
-            cell.moveDownButton.isEnabled = self.setDownButtonEnabled(indexPath: indexPath)
-            
-            cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
-            
-            return cell
         }
+        
+        cell.setup(title: "\(indexPath.row + 1). \(self.categoryViewModels[indexPath.row].name)")
+        
+        cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
+        cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
+        
+        cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
+        cell.moveDownButton.isEnabled = self.setDownButtonEnabled(indexPath: indexPath)
+        
+        cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
+        
+        return cell
     }
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
