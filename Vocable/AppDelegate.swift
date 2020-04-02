@@ -33,10 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let url = container.persistentStoreCoordinator.persistentStores.first?.url?.absoluteString.removingPercentEncoding {
             print("NSPersistentStore URL: \(url)")
         }
-        let context = container.viewContext
+
+        let context = container.newBackgroundContext()
         deleteExistingPrescribedEntities(in: context)
         createPrescribedEntities(in: context)
-        migrateUserCreatedContent(in: context)
 
         do {
             try context.save()
@@ -57,39 +57,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let categoryRequest: NSFetchRequest<Category> = Category.fetchRequest()
         categoryRequest.predicate = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, false)
         let categoryResults = (try? context.fetch(categoryRequest)) ?? []
+
         for category in categoryResults {
             context.delete(category)
         }
     }
 
     private func createPrescribedEntities(in context: NSManagedObjectContext) {
+        guard let presetJSON = TextPresets.presets else {
+            assertionFailure("No presets found")
+            return
+        }
 
-        // Create entities that are provided implicitly
-        for presetCategory in TextPresets.presetsByCategory {
+        let preferredLocals = Bundle.main.preferredLocalizations
 
-            let category = Category.fetchOrCreate(in: context, matching: presetCategory.title)
+        for presetCategory in presetJSON.categories {
+            let category = Category.fetchOrCreate(in: context, matching: presetCategory.id)
             category.creationDate = Date()
-            category.name = presetCategory.title
+            category.isUserGenerated = false
 
-            if category.name == TextPresets.savedSayingsIdentifier {
-                category.isUserGenerated = true
+            for localizedName in presetCategory.localizedName {
+                let locale = preferredLocals.first { $0 == localizedName.key } ?? "en"
+                category.name = presetCategory.localizedName[locale]
+            }
+        }
+
+        for presetPhrase in presetJSON.phrases {
+            let phrase = Phrase.fetchOrCreate(in: context, matching: presetPhrase.id)
+            phrase.creationDate = Date()
+            phrase.isUserGenerated = false
+
+            for localizedUtterance in presetPhrase.localizedUtterance {
+                let locale = preferredLocals.first { $0 == localizedUtterance.key } ?? "en"
+                phrase.utterance = presetPhrase.localizedUtterance[locale]
+                phrase.locale = locale
+                break
             }
 
-            for preset in presetCategory.presets.reversed() {
-                let phrase = Phrase.fetchOrCreate(in: context, matching: preset)
-                phrase.creationDate = Date()
-                phrase.utterance = preset
-                phrase.addToCategories(category)
+            for identifier in presetPhrase.categoryIds {
+                if let category = Category.fetchObject(in: context, matching: identifier) {
+                    phrase.addToCategories(category)
+                    category.addToPhrases(phrase)
+                }
             }
         }
     }
-    
-    private func migrateUserCreatedContent(in context: NSManagedObjectContext) {
-        Category.fetchAll(in: context, locale: nil).forEach { category in
-            category.migrateLocale()
-        }
-        Phrase.fetchAll(in: context, locale: nil).forEach { phrase in
-            phrase.migrateLocale()
-        }
-    }
+
 }

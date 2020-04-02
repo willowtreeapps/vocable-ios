@@ -8,12 +8,33 @@
 
 import Foundation
 
+// Top level JSON object
+struct PresetData: Codable {
+
+    let schemaVersion: Int
+    let categories: [PresetCategory]
+    let phrases: [PresetPhrase]
+
+}
+
 struct PresetCategory: Codable {
-    var title: String
-    var presets: [String]
+
+    let id: String
+    let localizedName: [String: String]
+    let hidden: Bool
+
+}
+
+struct PresetPhrase: Codable {
+
+    let id: String
+    let categoryIds: [String]
+    let localizedUtterance: [String: String]
+
 }
 
 struct TextPresets {
+
     static let savedSayingsIdentifier = NSLocalizedString("My Sayings", comment: "Category: My Sayings")
 
     static let numPadDescription = NSLocalizedString("123 | Yes | No", comment: "Category: 123 | Yes | No")
@@ -26,24 +47,47 @@ struct TextPresets {
         return numbers + responses
     }
 
-    static var presetsByCategory: [PresetCategory] {
-        var result: [PresetCategory] = []
-
-        if let path = Bundle.main.path(forResource: "textpresets", ofType: "json") {
+    static var presets: PresetData? {
+        if let json = dataFromBundle() {
             do {
-                let json = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-
-                let categories = try! JSONDecoder().decode([PresetCategory].self, from: json)
-
-                result = categories
+                return try JSONDecoder().decode(PresetData.self, from: json)
             } catch {
-                print("🚨 Cannot parse \(path)")
+                assertionFailure("Error decoding PresetData: \(error)")
             }
         }
 
-        result.append(PresetCategory(title: TextPresets.savedSayingsIdentifier, presets: []))
-        result.append(PresetCategory(title: TextPresets.numPadDescription, presets: []))
-
-        return result
+        return nil
     }
+
+    // TODO: Add this to Legends after handling savedSayingsIdentifier and numPadDescription
+//    static var presetsByCategory: [PresetCategory] {
+//        var result: [PresetCategory] = []
+//
+//        if let json = jsonFromBundle() {
+//            do {
+//                result = try JSONDecoder().decode([PresetCategory].self, from: json)
+//            } catch {
+//                print(error)
+//            }
+//        }
+//
+//        //result.append(PresetCategory(localizedUtterance: TextPresets.savedSayingsIdentifier, presets: []))
+//        //result.append(PresetCategory(localizedUtterance: TextPresets.numPadDescription, presets: []))
+//
+//        return result
+//    }
+
+    private static func dataFromBundle() -> Data? {
+        if let path = Bundle.main.path(forResource: "textpresets", ofType: "json") {
+            do {
+                return try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+            } catch {
+                assertionFailure("🚨 Cannot parse \(path)")
+                return nil
+            }
+        }
+
+        return nil
+    }
+
 }
