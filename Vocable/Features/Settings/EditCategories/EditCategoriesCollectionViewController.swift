@@ -39,7 +39,8 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
             
             cell.setup(title: "\(indexPath.row + 1). \(self.categoryViewModels[indexPath.row].name)")
             
-            cell.bottomSeparator.isHidden = self.layout.separatorMask(for: indexPath).contains(.bottom)
+            cell.topSeparator.isHidden = !self.layout.separatorMask(for: indexPath).contains(.top)
+            cell.bottomSeparator.isHidden = !self.layout.separatorMask(for: indexPath).contains(.bottom)
             
             cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
             cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)

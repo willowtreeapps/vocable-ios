@@ -18,6 +18,7 @@ class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var showCategoryDetailButton: GazeableButton!
     
+    @IBOutlet var topSeparator: UIView!
     @IBOutlet var bottomSeparator: UIView!
     
     func setup(title: String) {

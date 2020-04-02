@@ -97,6 +97,7 @@
                 <outlet property="moveDownButton" destination="yIe-C4-EHn" id="abb-du-Sg5"/>
                 <outlet property="moveUpButton" destination="Ieb-WK-NlS" id="noh-No-fGm"/>
                 <outlet property="showCategoryDetailButton" destination="PfR-1l-Qp7" id="yjb-aR-8sS"/>
+                <outlet property="topSeparator" destination="Zy9-iu-ouW" id="tGL-eF-9ak"/>
             </connections>
             <point key="canvasLocation" x="1681.1594202898552" y="-14.732142857142856"/>
         </collectionViewCell>
