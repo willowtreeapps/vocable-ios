@@ -92,15 +92,6 @@ class CarouselGridCollectionViewController: UICollectionViewController {
 class CarouselGridLayout: UICollectionViewLayout {
 
     enum RowCount {
-        var count: Int {
-            switch self {
-            case .fixedCount(let num):
-                return num
-            case .minimumHeight(let height):
-                return 0
-            }
-        }
-        
         case fixedCount(Int)
         case minimumHeight(CGFloat)
     }
@@ -358,16 +349,12 @@ class CarouselGridLayout: UICollectionViewLayout {
     
     func separatorMask(for indexPath: IndexPath) -> CellSeparatorMask {
         let index = indexPath.item
-        let numberOfRowsPerPage = Int((index % itemsPerPage) / numberOfColumns)
+        let rowIndexWithinPage = Int((index % itemsPerPage) / numberOfColumns)
         
-        if numberOfRowsPerPage == 0 {
-            return []
-        }
-        
-        if index % numberOfRowsPerPage == 0 {
+        if rowIndexWithinPage == 0 {
             return .both
         } else {
-            return .top
+            return .bottom
         }
     }
 }
