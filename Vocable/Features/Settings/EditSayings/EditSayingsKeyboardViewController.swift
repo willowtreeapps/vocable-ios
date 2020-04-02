@@ -66,6 +66,8 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "KeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyCollectionViewCell")
         collectionView.register(UINib(nibName: "SuggestionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SuggestionCollectionViewCell")
+        collectionView.register(UINib(nibName: "FunctionKeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FunctionKeyboardKeyCollectionViewCell")
+        collectionView.register(UINib(nibName: "SpeakFunctionKeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SpeakFunctionKeyboardKeyCollectionViewCell")
         
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
@@ -96,7 +98,12 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
                 cell.setup(title: char)
                 return cell
             case .keyboardFunctionButton(let functionType):
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
+                if functionType == .speak {
+                    let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: SpeakFunctionKeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! SpeakFunctionKeyboardKeyCollectionViewCell
+                    cell.setup(with: functionType.image)
+                    return cell
+                }
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: FunctionKeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! FunctionKeyboardKeyCollectionViewCell
                 cell.setup(with: functionType.image)
                 return cell
             }

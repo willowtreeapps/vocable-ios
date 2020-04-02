@@ -539,6 +539,7 @@
 				A9B6960E2433CF23004E6960 /* EditCategoriesCollectionViewController.swift */,
 				7192E4112433E4BE008E4A0A /* EditCategoryDetailViewController.swift */,
 				7192E4132433E4F3008E4A0A /* EditCategoryDetailCollectionViewController.swift */,
+				714E48FC24350CB900FA9035 /* EditCategoryKeyboardViewController.swift */,
 				A9B696032433C3DF004E6960 /* Views */,
 			);
 			path = EditCategories;
@@ -547,7 +548,6 @@
 		A9B696032433C3DF004E6960 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				714E48FC24350CB900FA9035 /* EditCategoryKeyboardViewController.swift */,
 				A9B696042433C422004E6960 /* EditCategoriesDefaultCollectionViewCell.xib */,
 				7192E4192434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.swift */,
 				7192E41A2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.xib */,
