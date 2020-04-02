@@ -36,9 +36,9 @@ enum TopBarButton: String {
     var image: UIImage? {
         switch self {
         case .save:
-            return UIImage(systemName: "suit.heart")
+            return UIImage(systemName: "star")
         case .unsave:
-            return UIImage(systemName: "suit.heart.fill")
+            return UIImage(systemName: "star.fill")
         case .toggleKeyboard:
             return UIImage(systemName: "keyboard")
         case .togglePreset:

@@ -16,7 +16,7 @@ struct PresetCategory: Codable {
 struct TextPresets {
     static let savedSayingsIdentifier = NSLocalizedString("My Sayings", comment: "Category: My Sayings")
 
-    static let numPadDescription = NSLocalizedString("123 | Yes | No", comment: "Category: 123 | Yes | No")
+    static let numPadDescription = NSLocalizedString("123", comment: "Category: Num Pad")
 
     static var numPadCategory: [PhraseViewModel] {
         var numbers = (1...9).map { PhraseViewModel(unpersistedPhrase: "\($0)")}
