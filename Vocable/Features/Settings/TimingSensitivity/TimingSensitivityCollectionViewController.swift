@@ -109,6 +109,12 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
             return cell
         case .sensitivity:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SensitivityCollectionViewCell.reuseIdentifier, for: indexPath) as! SensitivityCollectionViewCell
+            if traitCollection.horizontalSizeClass == .compact
+                && traitCollection.verticalSizeClass == .regular {
+                cell.topSeparator.isHidden = true
+            } else {
+                cell.topSeparator.isHidden = false
+            }
             return cell
         }
     }
