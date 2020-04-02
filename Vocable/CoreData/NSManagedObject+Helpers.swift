@@ -47,13 +47,6 @@ extension NSManagedObjectIdentifiable where Self: NSManagedObject {
         return newObject
     }
     
-    func migrateLocale() {
-        guard value(forKey: "locale") == nil else {
-            return
-        }
-        
-        setValue(Locale.current.identifier, forKeyPath: "locale")
-    }
 }
 
 extension NSComparisonPredicate {
