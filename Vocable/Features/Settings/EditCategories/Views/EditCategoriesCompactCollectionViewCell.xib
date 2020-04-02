@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="yFj-S9-Vtf" customClass="EditCategoriesCompactCollectionViewCell" customModule="Vocable" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EditCategoriesCompactCollectionViewCell" id="yFj-S9-Vtf" customClass="EditCategoriesDefaultCollectionViewCell" customModule="Vocable" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="704" height="196"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="PX7-fo-08L">
@@ -81,11 +81,11 @@
             </collectionViewCellContentView>
             <size key="customSize" width="704" height="196"/>
             <connections>
-                <outlet property="bottomSeparator" destination="hWY-nm-Hv6" id="wG2-NU-ubF"/>
-                <outlet property="categoryNameLabel" destination="3t9-YV-add" id="X4D-Iq-g1y"/>
-                <outlet property="moveDownButton" destination="yIe-C4-EHn" id="lcM-VC-wIH"/>
-                <outlet property="moveUpButton" destination="Ieb-WK-NlS" id="QXw-EG-pi6"/>
-                <outlet property="showCategoryDetailButton" destination="PfR-1l-Qp7" id="L6b-4B-8ag"/>
+                <outlet property="bottomSeparator" destination="hWY-nm-Hv6" id="p5S-gZ-TPN"/>
+                <outlet property="categoryNameLabel" destination="3t9-YV-add" id="ENB-CO-MgT"/>
+                <outlet property="moveDownButton" destination="yIe-C4-EHn" id="Jow-FG-wti"/>
+                <outlet property="moveUpButton" destination="Ieb-WK-NlS" id="aLg-ju-4le"/>
+                <outlet property="showCategoryDetailButton" destination="PfR-1l-Qp7" id="csS-I7-Imd"/>
             </connections>
             <point key="canvasLocation" x="1678.2608695652175" y="-8.7053571428571423"/>
         </collectionViewCell>
