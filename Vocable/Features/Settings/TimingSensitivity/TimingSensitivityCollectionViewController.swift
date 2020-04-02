@@ -78,6 +78,9 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
