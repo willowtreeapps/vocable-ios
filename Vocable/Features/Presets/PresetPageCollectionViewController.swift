@@ -95,12 +95,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
 
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {
-                if viewModel.categories.map({ $0.name }).contains(NSLocalizedString("My Sayings", comment: "Category: My Sayings")) {
-                    AVSpeechSynthesizer.shared.speak(viewModel.utterance)
-                } else {
-                    // These phrases are potentially untranslated, so they should be spoken with the application's current locale voice
-                    AVSpeechSynthesizer.shared.speak(viewModel.utterance, language: Locale.current.identifier)
-                }
+                AVSpeechSynthesizer.shared.speak(viewModel.utterance, language: viewModel.languageCode)
             }
         }
     }

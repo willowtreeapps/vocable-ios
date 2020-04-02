@@ -405,7 +405,7 @@ class PresetsViewController: UICollectionViewController {
                     break
                 }
                 DispatchQueue.global(qos: .userInitiated).async {
-                    AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
+                    AVSpeechSynthesizer.shared.speak(self.textTransaction.text, language: Locale.preferredLanguages.first ?? "en")
                 }
             case .clear:
                 setTextTransaction(TextTransaction(text: "", intent: .none))
