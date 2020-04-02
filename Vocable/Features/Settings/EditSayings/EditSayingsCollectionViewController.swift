@@ -27,7 +27,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         let userGeneratedPredicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
-        let localePredicate = NSComparisonPredicate(\Phrase.locale, .equalTo, Locale.current.identifier)
+        let localePredicate = NSComparisonPredicate(\Phrase.languageCode, .equalTo, Locale.current.identifier)
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [userGeneratedPredicate, localePredicate])
         
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]

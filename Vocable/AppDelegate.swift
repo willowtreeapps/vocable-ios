@@ -69,29 +69,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
 
-        let preferredLocals = Bundle.main.preferredLocalizations
+        let orderedLanguages = Array(Locale.preferredLanguages.map {
+            return [$0, Locale.components(fromIdentifier: $0)[String(CFLocaleKey.languageCode.rawValue)]!]
+        }.joined()) + ["en"]
 
         for presetCategory in presetJSON.categories {
-            let category = Category.fetchOrCreate(in: context, matching: presetCategory.id)
-            category.creationDate = Date()
-            category.isUserGenerated = false
+            let supportLanguages = Set(presetCategory.localizedName.keys)
+            guard let languageCode = orderedLanguages.first(where: supportLanguages.contains) else {
+                continue
+            }
 
-            for localizedName in presetCategory.localizedName {
-                let locale = preferredLocals.first { $0 == localizedName.key } ?? "en"
-                category.name = presetCategory.localizedName[locale]
+            let category = Category.fetchOrCreate(in: context, matching: presetCategory.id)
+            category.isUserGenerated = false
+            category.name = presetCategory.localizedName[languageCode]
+            category.languageCode = languageCode
+
+            if category.isInserted {
+                category.creationDate = Date()
             }
         }
 
         for presetPhrase in presetJSON.phrases {
-            let phrase = Phrase.fetchOrCreate(in: context, matching: presetPhrase.id)
-            phrase.creationDate = Date()
-            phrase.isUserGenerated = false
+            let supportLanguages = Set(presetPhrase.localizedUtterance.keys)
+            guard let languageCode = orderedLanguages.first(where: supportLanguages.contains) else {
+                continue
+            }
 
-            for localizedUtterance in presetPhrase.localizedUtterance {
-                let locale = preferredLocals.first { $0 == localizedUtterance.key } ?? "en"
-                phrase.utterance = presetPhrase.localizedUtterance[locale]
-                phrase.locale = locale
-                break
+            let phrase = Phrase.fetchOrCreate(in: context, matching: presetPhrase.id)
+            phrase.isUserGenerated = false
+            phrase.utterance = presetPhrase.localizedUtterance[languageCode]
+            phrase.languageCode = languageCode
+
+            if phrase.isInserted {
+                phrase.creationDate = Date()
             }
 
             for identifier in presetPhrase.categoryIds {
@@ -99,6 +109,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     phrase.addToCategories(category)
                     category.addToPhrases(phrase)
                 }
+            }
+        }
+
+        if let mySayingsCategory = Category.fetchObject(in: context, matching: TextPresets.savedSayingsIdentifier) {
+            // TODO: Predicate
+            for phrase in Phrase.fetchAll(in: context) where phrase.isUserGenerated {
+                phrase.addToCategories(mySayingsCategory)
             }
         }
     }

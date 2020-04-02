@@ -35,11 +35,10 @@ struct PresetPhrase: Codable {
 
 struct TextPresets {
 
-    static let savedSayingsIdentifier = NSLocalizedString("My Sayings", comment: "Category: My Sayings")
+    static let savedSayingsIdentifier = "preset_user_favorites"
+    static let numPadIdentifier = "preset_user_keypad"
 
-    static let numPadDescription = NSLocalizedString("123 | Yes | No", comment: "Category: 123 | Yes | No")
-
-    static var numPadCategory: [PhraseViewModel] {
+    static var numPadPhrases: [PhraseViewModel] {
         var numbers = (1...9).map { PhraseViewModel(unpersistedPhrase: "\($0)")}
         numbers.append(PhraseViewModel(unpersistedPhrase: "0"))
         let responses = [PhraseViewModel(unpersistedPhrase: NSLocalizedString("No", comment: "'No' num pad response")),
@@ -58,24 +57,6 @@ struct TextPresets {
 
         return nil
     }
-
-    // TODO: Add this to Legends after handling savedSayingsIdentifier and numPadDescription
-//    static var presetsByCategory: [PresetCategory] {
-//        var result: [PresetCategory] = []
-//
-//        if let json = jsonFromBundle() {
-//            do {
-//                result = try JSONDecoder().decode([PresetCategory].self, from: json)
-//            } catch {
-//                print(error)
-//            }
-//        }
-//
-//        //result.append(PresetCategory(localizedUtterance: TextPresets.savedSayingsIdentifier, presets: []))
-//        //result.append(PresetCategory(localizedUtterance: TextPresets.numPadDescription, presets: []))
-//
-//        return result
-//    }
 
     private static func dataFromBundle() -> Data? {
         if let path = Bundle.main.path(forResource: "textpresets", ofType: "json") {
