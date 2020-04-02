@@ -15,6 +15,9 @@ class DwellTimeCollectionViewCell: UICollectionViewCell {
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var increaseTimeButton: GazeableButton!
     
+    @IBOutlet var topSeparator: UIView!
+    @IBOutlet var bottomSeparator: UIView!
+    
     private var disposables = Set<AnyCancellable>()
     
     override func awakeFromNib() {

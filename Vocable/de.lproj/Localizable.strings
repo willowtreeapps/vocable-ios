@@ -40,8 +40,8 @@
 /* Categories */
 "Categories" = "Kategorien";
 
-/* Category: 123 | Yes | No */
-"123 | Yes | No" = "123 | Ja | Nein";
+/* Category: 123 */
+"123" = "123";
 
 /* Timing and Sensitivity */
 "Timing and Sensitivity" = "Timing und Empfindlichkeit";
