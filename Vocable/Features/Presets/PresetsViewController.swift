@@ -325,7 +325,17 @@ class PresetsViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? PaginationContainerCollectionViewCell,
+        if let cell = cell as? PresetPaginationContainerCollectionViewCell,
+            let childViewController = cell.pageViewController {
+            let childContainerView = cell.contentView
+            
+            addChild(childViewController)
+            childViewController.view.frame = childContainerView.frame.inset(by: childContainerView.layoutMargins)
+            childContainerView.addSubview(childViewController.view)
+            childViewController.didMove(toParent: self)
+        }
+        
+        if let cell = cell as? CategoryPaginationContainerCollectionViewCell,
             let childViewController = cell.pageViewController {
             let childContainerView = cell.contentView
             

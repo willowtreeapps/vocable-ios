@@ -8,12 +8,20 @@
 
 import UIKit
 
-class CategoryPaginationContainerCollectionViewCell: PaginationContainerCollectionViewCell {
+class CategoryPaginationContainerCollectionViewCell: VocableCollectionViewCell {
+    var pageViewController: CategoryCollectionViewController?
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+//        pageViewController?.view.removeFromSuperview()
+//        pageViewController?.removeFromParent()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         borderedView.fillColor = .categoryBackgroundColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
-        pageViewController = CategoriesPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        pageViewController = CategoryCollectionViewController()
     }
 }
