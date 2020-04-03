@@ -54,4 +54,10 @@ extension NSComparisonPredicate {
         let rhs = NSExpression(forConstantValue: rhsValue)
         self.init(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operationType)
     }
+
+    convenience init<A, B, C: Collection>(_ lhsKeyPath: KeyPath<A, B>, _ operationType: Operator, _ rhsValue: C) where C.Element == B {
+        let lhs = NSExpression(forKeyPath: lhsKeyPath)
+        let rhs = NSExpression(forConstantValue: rhsValue)
+        self.init(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operationType)
+    }
 }
