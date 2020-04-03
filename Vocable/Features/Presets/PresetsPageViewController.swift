@@ -31,7 +31,7 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
         
         if ItemSelection.selectedCategory.identifier == TextPresets.numPadIdentifier {
             let numPadCollectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.NumPadCompositionalLayout(traitCollection: traitCollection))
-            numPadCollectionViewController.items = TextPresets.numPadPhrases
+            numPadCollectionViewController.items = TextPresets.numPadCategory
             pageViewControllers.insert(numPadCollectionViewController, at: 0)
         }
         

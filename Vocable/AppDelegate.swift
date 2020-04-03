@@ -18,11 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Ensure that the persistent store has the current
         // default presets before presenting UI
-        preparePersistentStore()
+        updatePersistentStoreForCurrentLanguagePreferences()
         
         addObservers()
-        
-        updatePersistentStoreForCurrentLanguagePreferences()
 
         application.isIdleTimerDisabled = true
         let window = HeadGazeWindow(frame: UIScreen.main.bounds)
