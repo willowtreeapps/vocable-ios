@@ -1,6 +1,6 @@
 //
 //  Phrase+Helpers.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/18/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

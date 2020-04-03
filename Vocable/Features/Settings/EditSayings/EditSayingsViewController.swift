@@ -1,6 +1,6 @@
 //
 //  EditSayingsViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Thomas Shealy on 3/11/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
@@ -55,7 +55,7 @@ class EditSayingsViewController: UIViewController {
     }
     
     @IBAction func addPhrasePressed(_ sender: Any) {
-        if let vc = self.storyboard?.instantiateViewController(identifier: "EditSaying") as? EditKeyboardViewController {
+        if let vc = UIStoryboard(name: "EditSayings", bundle: nil).instantiateViewController(identifier: "EditSaying") as? EditSayingsKeyboardViewController {
             show(vc, sender: nil)
         }
     }

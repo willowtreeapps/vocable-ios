@@ -2,8 +2,6 @@ import UIKit
 
 class UIHeadGaze: UITouch {
 
-    let selectionHoldDuration: TimeInterval = 1
-
     private weak var _window: UIWindow?
     private let _receiver: UIView
     private let _position: CGPoint //NDC coordinates [0,1] x [0,1], origin is lower left corner of the screen

@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Ensure that the persistent store has the current
         // default presets before presenting UI
         updatePersistentStoreForCurrentLanguagePreferences()
+        
+        addObservers()
 
         application.isIdleTimerDisabled = true
         let window = HeadGazeWindow(frame: UIScreen.main.bounds)
@@ -63,6 +65,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             assertionFailure(error.localizedDescription)
         }
+    }
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidLoseGaze(_:)), name: .applicationDidLoseGaze, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidAcquireGaze(_:)), name: .applicationDidAcquireGaze, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(headTrackingDisabled(_:)), name: .headTrackingDisabled, object: nil)
+    }
+    
+    @objc private func applicationDidLoseGaze(_ sender: Any?) {
+        ToastWindow.shared.presentPersistantWarning(with: NSLocalizedString("Please move closer to the device.", comment: "Warning title when head tracking is lost."))
+    }
+    
+    @objc private func applicationDidAcquireGaze(_ sender: Any?) {
+        ToastWindow.shared.dismissPersistantWarning()
+    }
+    
+    @objc private func headTrackingDisabled(_ sender: Any?) {
+        ToastWindow.shared.dismissPersistantWarning()
     }
 
     private func deleteOrphanedPhrases(in context: NSManagedObjectContext, with presets: PresetData) throws {

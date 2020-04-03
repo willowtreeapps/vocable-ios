@@ -24,8 +24,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         }
 
         var isFeatureEnabled: Bool {
-            let debugFeatures: [SettingsItem] = [.categories, .timingSensitivity,
-                                                 .resetAppSettings, .pidTuner]
+            let debugFeatures: [SettingsItem] = [.categories, .resetAppSettings, .pidTuner]
             if debugFeatures.contains(self) {
                 return AppConfig.showDebugOptions
             }
@@ -227,25 +226,24 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
                                                 comment: "You're about to be taken outside of the Vocable app. You may lose head tracking control alert message")
             let alertViewController = GazeableAlertViewController(alertTitle: alertString)
 
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), handler: self.presentPrivacyAlert))
+            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title"), style: .default))
+            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), style: .destructive, handler: self.presentPrivacyAlert))
             present(alertViewController, animated: true)
 
         case .editMySayings:
-            if let vc = self.storyboard?.instantiateViewController(identifier: "MySayings") {
+            if let vc = UIStoryboard(name: "EditSayings", bundle: nil).instantiateViewController(identifier: "MySayings") as? EditSayingsViewController {
+                show(vc, sender: nil)
+            }
+        case .timingSensitivity:
+            if let vc = UIStoryboard(name: "TimingSensitivity", bundle: nil).instantiateViewController(identifier: "TimingSensitivity") as? TimingSensitivityViewController {
                 show(vc, sender: nil)
             }
         case .selectionMode:
-            presentSelectionModeViewController()
+            if let vc = UIStoryboard(name: "SelectionMode", bundle: nil).instantiateViewController(identifier: "SelectionMode") as? SelectionModeViewController {
+                show(vc, sender: nil)
+            }
         case .contactDevs:
-            let alertString = NSLocalizedString("You're about to be taken outside of the Vocable app. You may lose head tracking control.",
-                                                comment: "You're about to be taken outside of the Vocable app. You may lose head tracking control alert message")
-            let alertViewController = GazeableAlertViewController(alertTitle: alertString)
-
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), handler: self.presentEmail))
-            present(alertViewController, animated: true)
-
+            presentEmail()
         case .pidTuner:
             guard let gazeWindow = view.window as? HeadGazeWindow else { return }
             for child in gazeWindow.rootViewController?.children ?? [] {
@@ -283,10 +281,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         }
     }
 
-    private func toggleHeadTracking() {
-        AppConfig.isHeadTrackingEnabled.toggle()
-    }
-
     // MARK: Presentations
 
     private func presentPrivacyAlert() {
@@ -295,9 +289,18 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
 
     private func presentEmail() {
-
-        guard MFMailComposeViewController.canSendMail() else {
-            NSLog("Mail composer failed to send mail", [])
+        if MFMailComposeViewController.canSendMail() {
+            let alertString = NSLocalizedString("You're about to be taken outside of the Vocable app. You may lose head tracking control.",
+                                                comment: "You're about to be taken outside of the Vocable app. You may lose head tracking control alert message")
+            let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
+            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), handler: self.presentEmail))
+            present(alertViewController, animated: true)
+        } else {
+            let alertString = NSLocalizedString("Email not configured.", comment: "No mail alert title")
+            let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Ok", comment: "Ok alert action title")))
+            present(alertViewController, animated: true)
             return
         }
 
@@ -308,7 +311,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
         composeVC.setToRecipients(["vocable@willowtreeapps.com"])
-        composeVC.setSubject("Feedback for Vocable v\(versionAndBuildNumber)")
+        composeVC.setSubject("Feedback for iOS Vocable \(versionAndBuildNumber)")
         self.composeVC = composeVC
 
         self.present(composeVC, animated: true)
@@ -318,13 +321,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
-    }
-    
-    private func presentSelectionModeViewController() {
-        let storyboard = UIStoryboard(name: "SelectionMode", bundle: nil)
-        let vc = storyboard.instantiateInitialViewController()!
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
     }
     
 }

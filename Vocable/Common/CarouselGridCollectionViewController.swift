@@ -1,6 +1,6 @@
 //
 //  CarouselGridCollectionViewController.swift
-//  YouScrollMeRightRound
+//  Vocable AAC
 //
 //  Created by Chris Stroud on 2/25/20.
 //  Copyright © 2020 WillowTree. All rights reserved.

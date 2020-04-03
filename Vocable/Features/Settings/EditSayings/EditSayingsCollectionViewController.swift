@@ -1,6 +1,6 @@
 //
 //  EditSayingsCollectionViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/13/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
@@ -61,7 +61,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
             layout.numberOfColumns = 2
-            layout.numberOfRows = 3
+            layout.numberOfRows = 4
         case (.compact, .regular):
             layout.numberOfColumns = 1
             layout.numberOfRows = 3
@@ -100,7 +100,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
     }
 
     @objc private func handleCellDeletionButton(_ sender: UIButton) {
-        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("Are you sure?\nDeleted phrases cannot be recovered.", comment: "Delete saying alert title"))
+        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("Deleted phrases cannot be recovered.", comment: "Delete saying alert title"))
         alert.addAction(GazeableAlertAction(title: NSLocalizedString("Delete", comment: "Delete saying alert action title"), handler: { self.deletePhrase(sender) }))
         alert.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
         self.present(alert, animated: true)
@@ -123,7 +123,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
             guard let indexPath = collectionView.indexPath(for: cell) else {
                 return
             }
-            if let vc = self.storyboard?.instantiateViewController(identifier: "EditSaying") as? EditKeyboardViewController {
+            if let vc = UIStoryboard(name: "EditSayings", bundle: nil).instantiateViewController(identifier: "EditSaying") as? EditSayingsKeyboardViewController {
                 let phrase = fetchResultsController.object(at: indexPath)
                 vc.phraseIdentifier = phrase.identifier
                 show(vc, sender: nil)
