@@ -13,7 +13,7 @@ struct PhraseViewModel: Hashable {
     let identifier: String
     let utterance: String
     var languageCode: String {
-        return _languageCode ?? Locale.preferredLanguages.first ?? "en"
+        return _languageCode ?? AppConfig.activePreferredLanguageCode
     }
     let creationDate: Date
     let categories: [CategoryViewModel]

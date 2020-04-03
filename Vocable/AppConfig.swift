@@ -30,4 +30,9 @@ struct AppConfig {
 
     @PublishedDefault(key: "sensitivitySetting", defaultValue: CursorSensitivity.medium)
     static var cursorSensitivity: CursorSensitivity
+
+    static let defaultLanguageCode = "en"
+    static var activePreferredLanguageCode: String {
+        return Locale.preferredLanguages.first ?? defaultLanguageCode
+    }
 }

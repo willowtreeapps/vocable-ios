@@ -19,7 +19,7 @@ extension Phrase {
         phrase.creationDate = Date()
         phrase.lastSpokenDate = Date()
         phrase.utterance = text
-        phrase.languageCode = Locale.preferredLanguages.first ?? "en"
+        phrase.languageCode = AppConfig.activePreferredLanguageCode
         phrase.addToCategories(savedCategory)
         return phrase
     }
