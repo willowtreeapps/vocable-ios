@@ -67,21 +67,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func deleteExistingPrescribedEntities(in context: NSManagedObjectContext) {
+//        guard let presetJSON = TextPresets.presets else {
+//            assertionFailure("No presets found")
+//            return
+//        }
 
-        let phraseRequest: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        phraseRequest.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, false)
-        let phraseResults = (try? context.fetch(phraseRequest)) ?? []
-        for phrase in phraseResults {
-            context.delete(phrase)
-        }
+//        let phraseRequest: NSFetchRequest<Phrase> = Phrase.fetchRequest()
+//        phraseRequest.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, false)
+//
+//        do {
+//            let phraseResults = try context.fetch(phraseRequest)
+//            for phrase in phraseResults where !phraseResults.contains(presetJSON.phrases) {
+//                context.delete(phrase)
+//            }
+//
+//        } catch {
+//            assertionFailure(error.localizedDescription)
+//        }
 
-        let categoryRequest: NSFetchRequest<Category> = Category.fetchRequest()
-        categoryRequest.predicate = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, false)
-        let categoryResults = (try? context.fetch(categoryRequest)) ?? []
+//        let categoryRequest: NSFetchRequest<Category> = Category.fetchRequest()
+//        categoryRequest.predicate = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, false)
+//
+//        do {
+//            let categoryResults = try context.fetch(categoryRequest)
+//            for category in categoryResults where !phraseResults.contains(presetJSON.phrases) {
+//                context.delete(category)
+//            }
+//
+//        } catch {
+//            assertionFailure(error.localizedDescription)
+//        }
 
-        for category in categoryResults {
-            context.delete(category)
-        }
+
     }
 
     private func createPrescribedEntities(in context: NSManagedObjectContext) {
@@ -134,11 +151,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         if let mySayingsCategory = Category.fetchObject(in: context, matching: TextPresets.savedSayingsIdentifier) {
-            // TODO: Predicate
-            for phrase in Phrase.fetchAll(in: context) where phrase.isUserGenerated {
-                phrase.addToCategories(mySayingsCategory)
+            let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
+            request.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
+
+            do {
+                let phraseResults = try context.fetch(request)
+
+                for phrase in phraseResults {
+                    phrase.addToCategories(mySayingsCategory)
+                }
+
+            } catch {
+                assertionFailure(error.localizedDescription)
             }
         }
+
     }
 
 }
