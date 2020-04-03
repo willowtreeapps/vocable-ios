@@ -14,7 +14,7 @@ struct ItemSelection {
     
     @PublishedValue
     static var selectedCategory = Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
-                      sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
+                      sortDescriptors: [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)])
     .compactMap { CategoryViewModel($0) }.first!
 
     @PublishedValue
