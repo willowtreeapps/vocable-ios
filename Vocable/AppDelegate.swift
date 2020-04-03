@@ -143,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let rootLanguage = Locale(identifier: regionalLanguage).languageCode
             let languages = [regionalLanguage, rootLanguage].compactMap { $0 }
             return languages // If no match exists for the regional language code, fall-back to the main language code
-        }.joined()) + ["en"] // Ensure English is always in the list so the UI will be populated with *something*
+        }.joined()) + [AppConfig.defaultLanguageCode] // Ensure the default language code is always in the list so the UI will be populated with *something*
 
         try updateDefaultCategories(in: context, withPresets: presets, orderedLanguages: orderedLanguages)
         try updateDefaultPhrases(in: context, withPresets: presets, orderedLanguages: orderedLanguages)
