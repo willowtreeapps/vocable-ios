@@ -36,7 +36,7 @@ class CategoriesPageViewController: UIPageViewController, UIPageViewControllerDa
     
     private lazy var categoryViewModels: [CategoryViewModel] =
         Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
-                          sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
+                          sortDescriptors: [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)])
             .compactMap { CategoryViewModel($0) }
     
     override func viewDidLoad() {
