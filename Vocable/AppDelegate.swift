@@ -142,6 +142,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let category = Category.fetchOrCreate(in: context, matching: presetCategory.id)
             category.name = presetCategory.localizedName[languageCode]
             category.languageCode = languageCode
+            if category.isInserted {
+                category.isHidden = presetCategory.hidden
+            }
         }
     }
 
