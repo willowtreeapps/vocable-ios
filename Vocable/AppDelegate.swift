@@ -61,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try deleteOrphanedPhrases(in: context, with: presets)
             try deleteOrphanedCategories(in: context, with: presets)
             try deleteLegacyUserFavoritesCategoryIfNeeded(in: context)
+            try updateOrdinalValuesForCategories(in: context)
 
             try context.save()
         } catch {
@@ -200,6 +201,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for phrase in phraseResults {
             phrase.addToCategories(mySayingsCategory)
             mySayingsCategory.addToPhrases(phrase)
+        }
+    }
+
+    private func updateOrdinalValuesForCategories(in context: NSManagedObjectContext) throws {
+
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        request.predicate = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, false)
+        request.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Category.ordinal, ascending: true),
+            NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)
+        ]
+        let results = try context.fetch(request)
+        for (index, category) in results.enumerated() {
+            category.ordinal = Int32(index)
         }
     }
 }
