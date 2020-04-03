@@ -16,8 +16,8 @@ class TextSuggestionController {
         let lastWord = expression.lastWord() ?? ""
         let range = NSRange(location: (fullExpression as NSString).length - (lastWord as NSString).length, length: (lastWord as NSString).length)
         var joinedArray: [String] = []
-        let guesses = checker.guesses(forWordRange: range, in: fullExpression, language: "en_US") ?? []
-        let completions = checker.completions(forPartialWordRange: range, in: fullExpression, language: "en_US") ?? []
+        let guesses = checker.guesses(forWordRange: range, in: fullExpression, language: Locale.current.identifier) ?? []
+        let completions = checker.completions(forPartialWordRange: range, in: fullExpression, language: Locale.current.identifier) ?? []
         joinedArray.append(contentsOf: completions)
         joinedArray.append(contentsOf: guesses)
         return joinedArray

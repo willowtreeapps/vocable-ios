@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 extension Phrase {
+
     static func create(withUserEntry text: String, in context: NSManagedObjectContext) -> Phrase {
         let newIdentifier = "user_\(UUID().uuidString)"
         let savedCategory = Category.fetchOrCreate(in: context, matching: TextPresets.savedSayingsIdentifier)
@@ -18,7 +19,9 @@ extension Phrase {
         phrase.creationDate = Date()
         phrase.lastSpokenDate = Date()
         phrase.utterance = text
+        phrase.languageCode = AppConfig.activePreferredLanguageCode
         phrase.addToCategories(savedCategory)
         return phrase
     }
+
 }

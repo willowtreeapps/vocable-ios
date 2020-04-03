@@ -24,16 +24,17 @@ extension NSManagedObjectIdentifiable where Self: NSManagedObject {
         } else {
             fetchRequest.predicate = NSPredicate(format: "identifier == \(identifier)")
         }
-        let result = (try? context.fetch(fetchRequest))?.first
-        return result
+        return (try? context.fetch(fetchRequest))?.first
     }
     
-    static func fetchAll(in context: NSManagedObjectContext, sortDescriptors: [NSSortDescriptor]? = nil) -> [Self] {
+    static func fetchAll(in context: NSManagedObjectContext, matching predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [Self] {
         guard let entityName = self.entity().name else {
             return []
         }
+
         let fetchRequest = NSFetchRequest<Self>(entityName: entityName)
         fetchRequest.sortDescriptors = sortDescriptors
+        fetchRequest.predicate = predicate
         return (try? context.fetch(fetchRequest)) ?? []
     }
 
@@ -45,10 +46,17 @@ extension NSManagedObjectIdentifiable where Self: NSManagedObject {
         newObject.setValue(identifier, forKeyPath: "identifier")
         return newObject
     }
+    
 }
 
 extension NSComparisonPredicate {
     convenience init<A, B>(_ lhsKeyPath: KeyPath<A, B>, _ operationType: Operator, _ rhsValue: B) {
+        let lhs = NSExpression(forKeyPath: lhsKeyPath)
+        let rhs = NSExpression(forConstantValue: rhsValue)
+        self.init(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operationType)
+    }
+
+    convenience init<A, B, C: Collection>(_ lhsKeyPath: KeyPath<A, B>, _ operationType: Operator, _ rhsValue: C) where C.Element == B {
         let lhs = NSExpression(forKeyPath: lhsKeyPath)
         let rhs = NSExpression(forConstantValue: rhsValue)
         self.init(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operationType)

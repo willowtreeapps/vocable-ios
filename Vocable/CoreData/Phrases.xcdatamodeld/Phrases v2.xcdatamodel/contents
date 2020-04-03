@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E266" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="identifier" attributeType="String"/>
+        <attribute name="isHidden" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="isUserGenerated" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="languageCode" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="ordinal" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="phrases" toMany="YES" deletionRule="Nullify" destinationEntity="Phrase" inverseName="categories" inverseEntity="Phrase"/>
     </entity>
     <entity name="Phrase" representedClassName="Phrase" syncable="YES" codeGenerationType="class">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="identifier" attributeType="String"/>
         <attribute name="isUserGenerated" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="languageCode" optional="YES" attributeType="String"/>
         <attribute name="lastSpokenDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="utterance" optional="YES" attributeType="String"/>
         <relationship name="categories" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="phrases" inverseEntity="Category"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="Phrase" positionX="-54" positionY="-9" width="128" height="133"/>
+        <element name="Category" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="Phrase" positionX="-54" positionY="-9" width="128" height="148"/>
     </elements>
 </model>
