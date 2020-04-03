@@ -6,6 +6,7 @@
         <attribute name="isUserGenerated" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="languageCode" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="ordinal" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="phrases" toMany="YES" deletionRule="Nullify" destinationEntity="Phrase" inverseName="categories" inverseEntity="Phrase"/>
     </entity>
     <entity name="Phrase" representedClassName="Phrase" syncable="YES" codeGenerationType="class">
@@ -18,7 +19,7 @@
         <relationship name="categories" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="phrases" inverseEntity="Category"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Category" positionX="-63" positionY="-18" width="128" height="148"/>
         <element name="Phrase" positionX="-54" positionY="-9" width="128" height="148"/>
     </elements>
 </model>
