@@ -12,7 +12,7 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    var window: HeadGazeWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -54,7 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
-        ToastWindow.shared.presentPersistantWarning(with: NSLocalizedString("Please move closer to the device.", comment: "Warning title when head tracking is lost."))
+        
+        if window?.shouldEnableCursor() ?? true {
+            ToastWindow.shared.presentPersistantWarning(with: NSLocalizedString("Please move closer to the device.", comment: "Warning title when head tracking is lost."))
+        }
     }
     
     @objc private func applicationDidAcquireGaze(_ sender: Any?) {

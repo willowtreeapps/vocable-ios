@@ -17,7 +17,6 @@ class HeadGazeWindow: UIWindow {
     private var trackingView: UIView?
     private var lastGaze: UIHeadGaze?
     
-    
     private let touchGazeDisableDuration: TimeInterval = 3
     private var touchGazeDisableBeganDate: Date?
     
@@ -102,6 +101,13 @@ class HeadGazeWindow: UIWindow {
             trackingView.gazeCancelled(lastGaze, with: nil)
         }
     }
+    
+    func shouldEnableCursor() -> Bool {
+        guard let gazeDisabledStart = touchGazeDisableBeganDate else {
+            return true
+        }
+        return Date().timeIntervalSince(gazeDisabledStart) >= touchGazeDisableDuration
+    }
 
     override func gazeableHitTest(_ point: CGPoint, with event: UIHeadGazeEvent?) -> UIView? {
         guard let result = super.gazeableHitTest(point, with: event) else {
@@ -152,13 +158,14 @@ class HeadGazeWindow: UIWindow {
                 if originalEvent.type == .touches {
                     extendGazeDisabledPeriodForTouchEvent()
                     cursorView?.setCursorViewsHidden(true, animated: true)
+                    ToastWindow.shared.dismissPersistantWarning()
                 }
             super.sendEvent(originalEvent)
             return
         }
 
-        if let gazeDisabledStart = touchGazeDisableBeganDate {
-            if Date().timeIntervalSince(gazeDisabledStart) >= touchGazeDisableDuration {
+        if let _ = touchGazeDisableBeganDate {
+            if shouldEnableCursor() {
                 cursorView?.setCursorViewsHidden(false, animated: true)
                 touchGazeDisableBeganDate = nil
             } else {
