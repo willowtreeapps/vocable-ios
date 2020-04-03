@@ -22,29 +22,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         addObservers()
         
+        updatePersistentStoreForCurrentLanguagePreferences()
+
         application.isIdleTimerDisabled = true
         let window = HeadGazeWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         window.makeKeyAndVisible()
         self.window = window
-        
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(localeDidChange(_:)),
+                                               name: NSLocale.currentLocaleDidChangeNotification,
+                                               object: nil)
         return true
     }
 
-    private func preparePersistentStore() {
+    @objc
+    private func localeDidChange(_ note: Notification?) {
+        updatePersistentStoreForCurrentLanguagePreferences()
+    }
+
+    private func updatePersistentStoreForCurrentLanguagePreferences() {
         let container = NSPersistentContainer.shared
         if let url = container.persistentStoreCoordinator.persistentStores.first?.url?.absoluteString.removingPercentEncoding {
             print("NSPersistentStore URL: \(url)")
         }
 
-        let context = container.newBackgroundContext()
-        deleteExistingPrescribedEntities(in: context)
-        createPrescribedEntities(in: context)
+        let context = container.viewContext
+
+        guard let presets = TextPresets.presets else {
+            assertionFailure("No presets found")
+            return
+        }
 
         do {
+
+            try createPrescribedEntities(in: context, with: presets)
+            try deleteOrphanedPhrases(in: context, with: presets)
+            try deleteOrphanedCategories(in: context, with: presets)
+
             try context.save()
         } catch {
-            assertionFailure("Core Data save failure: \(error)")
+            assertionFailure(error.localizedDescription)
         }
     }
     
@@ -66,81 +85,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ToastWindow.shared.dismissPersistantWarning()
     }
 
-    private func deleteExistingPrescribedEntities(in context: NSManagedObjectContext) {
-//        guard let presetJSON = TextPresets.presets else {
-//            assertionFailure("No presets found")
-//            return
-//        }
+    private func deleteOrphanedPhrases(in context: NSManagedObjectContext, with presets: PresetData) throws {
 
-//        let phraseRequest: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-//        phraseRequest.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, false)
-//
-//        do {
-//            let phraseResults = try context.fetch(phraseRequest)
-//            for phrase in phraseResults where !phraseResults.contains(presetJSON.phrases) {
-//                context.delete(phrase)
-//            }
-//
-//        } catch {
-//            assertionFailure(error.localizedDescription)
-//        }
+        let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
+        request.predicate = {
+            let identifiers = Set(presets.phrases.map { $0.id })
+            let isUserGenerated = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, false)
+            let identifierInSet = NSComparisonPredicate(\Phrase.identifier, .in, identifiers)
+            let identifierNotInSet = NSCompoundPredicate(notPredicateWithSubpredicate: identifierInSet)
+            return NSCompoundPredicate(andPredicateWithSubpredicates: [isUserGenerated, identifierNotInSet])
+        }()
 
-//        let categoryRequest: NSFetchRequest<Category> = Category.fetchRequest()
-//        categoryRequest.predicate = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, false)
-//
-//        do {
-//            let categoryResults = try context.fetch(categoryRequest)
-//            for category in categoryResults where !phraseResults.contains(presetJSON.phrases) {
-//                context.delete(category)
-//            }
-//
-//        } catch {
-//            assertionFailure(error.localizedDescription)
-//        }
+        let results = try context.fetch(request)
+        for phrase in results {
+            context.delete(phrase)
+        }
+    }
 
+    private func deleteOrphanedCategories(in context: NSManagedObjectContext, with presets: PresetData) throws {
+
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        request.predicate = {
+            let identifiers = Set(presets.categories.map { $0.id })
+            let isUserGenerated = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, false)
+            let identifierInSet = NSComparisonPredicate(\Category.identifier, .in, identifiers)
+            let identifierNotInSet = NSCompoundPredicate(notPredicateWithSubpredicate: identifierInSet)
+            return NSCompoundPredicate(andPredicateWithSubpredicates: [isUserGenerated, identifierNotInSet])
+        }()
+
+        let results = try context.fetch(request)
+        for phrase in results {
+            context.delete(phrase)
+        }
+    }
+
+    private func createPrescribedEntities(in context: NSManagedObjectContext, with presets: PresetData) throws {
+
+        let orderedLanguages = Array(Locale.preferredLanguages.map { regionalLanguage -> [String] in
+            let rootLanguage = Locale(identifier: regionalLanguage).languageCode
+            let languages = [regionalLanguage, rootLanguage].compactMap { $0 }
+            return languages // If no match exists for the regional language code, fall-back to the main language code
+        }.joined()) + ["en"] // Ensure English is always in the list so the UI will be populated with *something*
+
+        try updateDefaultCategories(in: context, withPresets: presets, orderedLanguages: orderedLanguages)
+        try updateDefaultPhrases(in: context, withPresets: presets, orderedLanguages: orderedLanguages)
+        try updateCategoryForUserGeneratedPhrases(in: context)
 
     }
 
-    private func createPrescribedEntities(in context: NSManagedObjectContext) {
-        guard let presetJSON = TextPresets.presets else {
-            assertionFailure("No presets found")
-            return
-        }
-
-        let orderedLanguages = Array(Locale.preferredLanguages.map {
-            return [$0, Locale.components(fromIdentifier: $0)[String(CFLocaleKey.languageCode.rawValue)]!]
-        }.joined()) + ["en"]
-
-        for presetCategory in presetJSON.categories {
+    private func updateDefaultCategories(in context: NSManagedObjectContext, withPresets presets: PresetData, orderedLanguages: [String]) throws {
+        for presetCategory in presets.categories {
             let supportLanguages = Set(presetCategory.localizedName.keys)
             guard let languageCode = orderedLanguages.first(where: supportLanguages.contains) else {
+                assertionFailure("Matching language not found for category \(presetCategory)")
                 continue
             }
 
             let category = Category.fetchOrCreate(in: context, matching: presetCategory.id)
-            category.isUserGenerated = false
             category.name = presetCategory.localizedName[languageCode]
             category.languageCode = languageCode
-
-            if category.isInserted {
-                category.creationDate = Date()
-            }
         }
+    }
 
-        for presetPhrase in presetJSON.phrases {
+    private func updateDefaultPhrases(in context: NSManagedObjectContext, withPresets presets: PresetData, orderedLanguages: [String]) throws {
+        for presetPhrase in presets.phrases {
             let supportLanguages = Set(presetPhrase.localizedUtterance.keys)
             guard let languageCode = orderedLanguages.first(where: supportLanguages.contains) else {
+                assertionFailure("Matching language not found for phrase \(presetPhrase)")
                 continue
             }
 
             let phrase = Phrase.fetchOrCreate(in: context, matching: presetPhrase.id)
-            phrase.isUserGenerated = false
             phrase.utterance = presetPhrase.localizedUtterance[languageCode]
             phrase.languageCode = languageCode
-
-            if phrase.isInserted {
-                phrase.creationDate = Date()
-            }
 
             for identifier in presetPhrase.categoryIds {
                 if let category = Category.fetchObject(in: context, matching: identifier) {
@@ -149,23 +166,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-
-        if let mySayingsCategory = Category.fetchObject(in: context, matching: TextPresets.savedSayingsIdentifier) {
-            let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-            request.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
-
-            do {
-                let phraseResults = try context.fetch(request)
-
-                for phrase in phraseResults {
-                    phrase.addToCategories(mySayingsCategory)
-                }
-
-            } catch {
-                assertionFailure(error.localizedDescription)
-            }
-        }
-
     }
 
+    private func updateCategoryForUserGeneratedPhrases(in context: NSManagedObjectContext) throws {
+        guard let mySayingsCategory = Category.fetchObject(in: context, matching: TextPresets.savedSayingsIdentifier) else {
+            assertionFailure("User generated category not found")
+            return
+        }
+        let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
+        request.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
+
+        let phraseResults = try context.fetch(request)
+
+        for phrase in phraseResults {
+            phrase.addToCategories(mySayingsCategory)
+            mySayingsCategory.addToPhrases(phrase)
+        }
+    }
 }
