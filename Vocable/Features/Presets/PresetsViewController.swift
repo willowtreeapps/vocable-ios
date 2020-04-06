@@ -336,7 +336,7 @@ class PresetsViewController: UICollectionViewController {
         }
         
         if let cell = cell as? CategoryPaginationContainerCollectionViewCell,
-            let childViewController = cell.pageViewController {
+            let childViewController = cell.categoryCollectionViewController {
             let childContainerView = cell.contentView
             
             addChild(childViewController)

@@ -9,7 +9,7 @@
 import UIKit
 
 class CategoryPaginationContainerCollectionViewCell: VocableCollectionViewCell {
-    var pageViewController: CategoryCollectionViewController?
+    var categoryCollectionViewController: CategoryCollectionViewController?
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -22,6 +22,6 @@ class CategoryPaginationContainerCollectionViewCell: VocableCollectionViewCell {
         
         borderedView.fillColor = .categoryBackgroundColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
-        pageViewController = CategoryCollectionViewController()
+        categoryCollectionViewController = CategoryCollectionViewController(collectionViewLayout: CarouselGridLayout())
     }
 }

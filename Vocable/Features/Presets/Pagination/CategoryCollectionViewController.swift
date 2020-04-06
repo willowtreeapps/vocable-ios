@@ -11,9 +11,10 @@ import UIKit
 
 class CategoryCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
 
-    private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, PhraseViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
+    private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, PhraseViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
         guard let self = self else { return nil }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
+        cell.setup(title: "test")
         return cell
     }
 
@@ -32,8 +33,8 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
-        collectionView.backgroundColor = .collectionViewBackgroundColor
+        collectionView.register(CategoryItemCollectionViewCell.self, forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
+        collectionView.backgroundColor = .categoryBackgroundColor
 
         updateLayoutForCurrentTraitCollection()
 
@@ -47,7 +48,7 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
         updateLayoutForCurrentTraitCollection()
     }
 
-    private func updateLayoutForCurrentTraitCollection() {
+    func updateLayoutForCurrentTraitCollection() {
         layout.interItemSpacing = 8
 
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
