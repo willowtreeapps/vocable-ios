@@ -95,7 +95,7 @@ class PresetPageCollectionViewController: UICollectionViewController {
 
             // Dispatch to get off the main queue for performance
             DispatchQueue.global(qos: .userInitiated).async {
-                AVSpeechSynthesizer.shared.speak(viewModel.utterance)
+                AVSpeechSynthesizer.shared.speak(viewModel.utterance, language: viewModel.languageCode)
             }
         }
     }

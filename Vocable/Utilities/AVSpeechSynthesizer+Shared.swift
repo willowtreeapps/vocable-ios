@@ -17,9 +17,9 @@ extension AVSpeechSynthesizer {
         return Storage.shared
     }
     
-    func speak(_ string: String) {
+    func speak(_ string: String, language: String) {
         let utterance = AVSpeechUtterance(string: string)
-        utterance.voice = AVSpeechSynthesisVoice()
+        utterance.voice = AVSpeechSynthesisVoice(language: language)
         
         if isSpeaking {
             stopSpeaking(at: .immediate)
