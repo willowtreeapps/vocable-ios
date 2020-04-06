@@ -86,7 +86,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             layout.numberOfColumns = 2
             layout.numberOfRows = 4
         case (.compact, .compact), (.regular, .compact):
-            layout.numberOfColumns = 4
+            layout.numberOfColumns = 3
             layout.numberOfRows = 2
         default:
             break

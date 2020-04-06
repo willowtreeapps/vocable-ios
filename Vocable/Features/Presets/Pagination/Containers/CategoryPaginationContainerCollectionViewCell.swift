@@ -14,7 +14,7 @@ class CategoryPaginationContainerCollectionViewCell: VocableCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        borderedView.fillColor = .categoryBackgroundColor
+        fillColor = .categoryBackgroundColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
         categoryCollectionViewController = CategoryCollectionViewController(collectionViewLayout: CarouselGridLayout())
     }

@@ -49,7 +49,7 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
     }
 
     func updateLayoutForCurrentTraitCollection() {
-        layout.interItemSpacing = 8
+        layout.interItemSpacing = 0
 
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
