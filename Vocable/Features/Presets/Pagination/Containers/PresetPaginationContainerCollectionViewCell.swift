@@ -8,7 +8,9 @@
 
 import UIKit
 
-class PresetPaginationContainerCollectionViewCell: PaginationContainerCollectionViewCell {
+class PresetPaginationContainerCollectionViewCell: VocableCollectionViewCell {
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

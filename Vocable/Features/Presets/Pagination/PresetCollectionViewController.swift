@@ -2,24 +2,24 @@
 //  CategoryCollectionViewController.swift
 //  Vocable
 //
-//  Created by Jesse Morgan on 4/3/20.
+//  Created by Jesse Morgan on 4/6/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
 import CoreData
 import UIKit
 
-class CategoryCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
+class PresetCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
     
-    private lazy var categoryViewModels: [CategoryViewModel] =
-    Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
-                      sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
-        .compactMap { CategoryViewModel($0) }
+    private lazy var phraseViewModels: [PhraseViewModel] =
+    Phrase.fetchAll(in: NSPersistentContainer.shared.viewContext,
+                      sortDescriptors: [NSSortDescriptor(keyPath: \Phrase.identifier, ascending: true)])
+        .compactMap { PhraseViewModel($0) }
     
-    private lazy var dataSource = UICollectionViewDiffableDataSource<Int, CategoryViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
+    private lazy var dataSource = UICollectionViewDiffableDataSource<Int, PhraseViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
         guard let self = self else { return nil }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
-        cell.setup(title: self.categoryViewModels[indexPath.row].name)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+        cell.setup(title: self.phraseViewModels[indexPath.row].utterance)
         return cell
     }
 
@@ -38,7 +38,7 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.register(CategoryItemCollectionViewCell.self, forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
+        collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
         collectionView.backgroundColor = .categoryBackgroundColor
 
         updateLayoutForCurrentTraitCollection()
@@ -71,6 +71,14 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
         }
     }
 
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         updateDataSource(animated: true, completion: { [weak self] in
             self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
@@ -81,16 +89,12 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
     private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
         let content = fetchResultsController.fetchedObjects ?? []
         let viewModels = content.compactMap(PhraseViewModel.init)
-        var snapshot = NSDiffableDataSourceSnapshot<Int, CategoryViewModel>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, PhraseViewModel>()
         snapshot.appendSections([0])
-        snapshot.appendItems(categoryViewModels)
+        snapshot.appendItems(phraseViewModels)
         dataSource.apply(snapshot,
                                  animatingDifferences: animated,
                                  completion: completion)
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        ItemSelection.selectedCategory = categoryViewModels[indexPath.row]
     }
 
 }

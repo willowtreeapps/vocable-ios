@@ -81,6 +81,7 @@
 		A944D00B2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A944D00A2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib */; };
 		A946553223FC2CB20033D71F /* TextFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A946553123FC2CB20033D71F /* TextFieldCollectionViewCell.xib */; };
 		A946553423FC2CC20033D71F /* TextFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A946553323FC2CC20033D71F /* TextFieldCollectionViewCell.swift */; };
+		A946D825243B8EFF00E76104 /* PresetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A946D824243B8EFF00E76104 /* PresetCollectionViewController.swift */; };
 		A94720CE241A8D9B00F7B4FF /* PaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94720CD241A8D9B00F7B4FF /* PaginationView.swift */; };
 		A94A6CCD2412D38A00625275 /* NavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A6CCC2412D38A00625275 /* NavigationModel.swift */; };
 		A95D07BE24326475004ECE64 /* CursorSensitivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95D07BD24326475004ECE64 /* CursorSensitivity.swift */; };
@@ -238,6 +239,7 @@
 		A944D00A2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsToggleCollectionViewCell.xib; sourceTree = "<group>"; };
 		A946553123FC2CB20033D71F /* TextFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCollectionViewCell.xib; sourceTree = "<group>"; };
 		A946553323FC2CC20033D71F /* TextFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCollectionViewCell.swift; sourceTree = "<group>"; };
+		A946D824243B8EFF00E76104 /* PresetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetCollectionViewController.swift; sourceTree = "<group>"; };
 		A94720CD241A8D9B00F7B4FF /* PaginationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationView.swift; sourceTree = "<group>"; };
 		A94A6CCC2412D38A00625275 /* NavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationModel.swift; sourceTree = "<group>"; };
 		A95D07BD24326475004ECE64 /* CursorSensitivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorSensitivity.swift; sourceTree = "<group>"; };
@@ -549,6 +551,7 @@
 				B81D236423FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift */,
 				B81D236523FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib */,
 				A9F56FC924378ED6008162B6 /* CategoryCollectionViewController.swift */,
+				A946D824243B8EFF00E76104 /* PresetCollectionViewController.swift */,
 			);
 			path = Pagination;
 			sourceTree = "<group>";
@@ -902,6 +905,7 @@
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
 				A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */,
 				A91A9F4924192782008552E8 /* EditSayingsKeyboardViewController.swift in Sources */,
+				A946D825243B8EFF00E76104 /* PresetCollectionViewController.swift in Sources */,
 				A9F56FC224365996008162B6 /* FunctionKeyboardKeyCollectionViewCell.swift in Sources */,
 				A99AF23123FC8BF700BE1184 /* TextTransaction.swift in Sources */,
 				A9DFCC18242BDCD700136136 /* CategoryPaginationCollectionViewCell.swift in Sources */,

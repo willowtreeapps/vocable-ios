@@ -11,17 +11,19 @@ import UIKit
 class CategoryPaginationContainerCollectionViewCell: VocableCollectionViewCell {
     var categoryCollectionViewController: CategoryCollectionViewController?
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-//        pageViewController?.view.removeFromSuperview()
-//        pageViewController?.removeFromParent()
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         borderedView.fillColor = .categoryBackgroundColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
         categoryCollectionViewController = CategoryCollectionViewController(collectionViewLayout: CarouselGridLayout())
+    }
+    
+    func paginate(_ direction: UIPageViewController.NavigationDirection) {
+        if direction == .forward {
+            categoryCollectionViewController?.scrollToNextPage()
+        } else if direction == .reverse {
+            categoryCollectionViewController?.scrollToPreviousPage()
+        }
     }
 }
