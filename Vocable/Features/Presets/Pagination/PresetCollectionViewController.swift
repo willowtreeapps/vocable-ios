@@ -28,10 +28,8 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     }
     
     func updateFetchedResultsController(with selectedCategoryID: NSManagedObjectID? = nil) {
-        print("updated fetch controller")
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         if let selectedCategoryID = selectedCategoryID {
-            print(selectedCategoryID)
             request.predicate = NSComparisonPredicate(\Phrase.categories, .contains, selectedCategoryID)
         }
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
