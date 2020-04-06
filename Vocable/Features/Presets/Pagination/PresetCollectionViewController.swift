@@ -109,5 +109,9 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
                                  animatingDifferences: animated,
                                  completion: completion)
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        ItemSelection.selectedPhrase = PhraseViewModel(fetchedResultsController?.object(at: indexPath))
+    }
 
 }
