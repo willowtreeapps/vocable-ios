@@ -23,9 +23,8 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
         return cell
     }
 
-    private lazy var fetchRequest: NSFetchRequest<Phrase> = {
-        let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
+    private lazy var fetchRequest: NSFetchRequest<Category> = {
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
         return request
     }()
@@ -70,6 +69,7 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
             break
         }
     }
+
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         updateDataSource(animated: true, completion: { [weak self] in

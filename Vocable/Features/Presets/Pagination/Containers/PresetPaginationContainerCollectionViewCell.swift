@@ -9,18 +9,21 @@
 import UIKit
 
 class PresetPaginationContainerCollectionViewCell: VocableCollectionViewCell {
-    
+    var presetCollectionViewController: PresetCollectionViewController?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        borderedView.fillColor = .collectionViewBackgroundColor
+        borderedView.fillColor = .categoryBackgroundColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
-        pageViewController = PresetsPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        presetCollectionViewController = PresetCollectionViewController(collectionViewLayout: CarouselGridLayout())
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        pageViewController = PresetsPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    func paginate(_ direction: UIPageViewController.NavigationDirection) {
+        if direction == .forward {
+            presetCollectionViewController?.scrollToNextPage()
+        } else if direction == .reverse {
+            presetCollectionViewController?.scrollToPreviousPage()
+        }
     }
 }

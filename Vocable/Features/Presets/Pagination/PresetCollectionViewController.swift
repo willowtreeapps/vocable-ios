@@ -39,7 +39,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         super.viewDidLoad()
 
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
-        collectionView.backgroundColor = .categoryBackgroundColor
+        collectionView.backgroundColor = .collectionViewBackgroundColor
 
         updateLayoutForCurrentTraitCollection()
 
@@ -58,14 +58,14 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
 
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
-            layout.numberOfColumns = 4
-            layout.numberOfRows = 1
-        case (.compact, .regular):
-            layout.numberOfColumns = 1
-            layout.numberOfRows = 1
-        case (.compact, .compact), (.regular, .compact):
             layout.numberOfColumns = 3
-            layout.numberOfRows = 1
+            layout.numberOfRows = 3
+        case (.compact, .regular):
+            layout.numberOfColumns = 2
+            layout.numberOfRows = 4
+        case (.compact, .compact), (.regular, .compact):
+            layout.numberOfColumns = 4
+            layout.numberOfRows = 2
         default:
             break
         }
