@@ -1,6 +1,6 @@
 //
 //  DwellTimeCollectionViewCell.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/26/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 import Combine
 
-class DwellTimeCollectionViewCell: UICollectionViewCell {
+final class DwellTimeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var decreaseTimeButton: GazeableButton!
     @IBOutlet var timeLabel: UILabel!
@@ -25,7 +25,7 @@ class DwellTimeCollectionViewCell: UICollectionViewCell {
         AppConfig.$selectionHoldDuration.sink(receiveValue: { duration in
             // Only show decimal if number is not whole number (e.g. "1s" & "0.5s")
             let durationFormatted = duration.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", duration) : String(duration)
-            self.timeLabel.text = NSLocalizedString("\(durationFormatted)s", comment: "Hover time seconds label")
+            self.timeLabel.text = String(format: NSLocalizedString("%ds", comment: "Dwell duration"), durationFormatted)
         }).store(in: &disposables)
     }
     

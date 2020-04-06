@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectionModeCollectionViewController: UICollectionViewController {
+final class SelectionModeCollectionViewController: UICollectionViewController {
     
     private enum SelectionModeItem: String, Hashable {
         var title: String {
@@ -85,7 +85,7 @@ class SelectionModeCollectionViewController: UICollectionViewController {
         }
         
         if AppConfig.isHeadTrackingEnabled {
-            let alertViewController = GazeableAlertViewController.init(alertTitle: "Turn off head tracking?")
+            let alertViewController = GazeableAlertViewController.init(alertTitle: NSLocalizedString("Turn off head tracking?", comment: "Turn off head tracking alert title"))
             alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
             alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), handler: self.toggleHeadTracking))
             present(alertViewController, animated: true)
