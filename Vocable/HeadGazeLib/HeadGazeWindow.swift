@@ -187,8 +187,10 @@ class HeadGazeWindow: UIWindow {
         }
 
         if let gazeDisabledStart = touchGazeDisableBeganDate {
-            if Date().timeIntervalSince(gazeDisabledStart) >= touchGazeDisableDuration {
+            if Date().timeIntervalSince(gazeDisabledStart) >= touchGazeDisableDuration && trackingDisabledByTouch {
                 newTouchHappened()
+            } else if Date().timeIntervalSince(gazeDisabledStart) >= touchGazeDisableDuration && !trackingDisabledByTouch {
+                cursorView?.setCursorViewsHidden(false, animated: true)
             } else {
                 // Waiting for touch timeout to allow events to propagate
                 return
