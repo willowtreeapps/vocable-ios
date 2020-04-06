@@ -84,7 +84,7 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        ItemSelection.selectedCategory = CategoryViewModel(fetchResultsController.object(at: indexPath))!
+        ItemSelection.selectedCategoryID = fetchResultsController.object(at: indexPath).objectID
     }
 
 }

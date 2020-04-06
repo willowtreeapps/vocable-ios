@@ -16,7 +16,7 @@ class PresetPaginationContainerCollectionViewCell: VocableCollectionViewCell {
         
         borderedView.fillColor = .categoryBackgroundColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
-        presetCollectionViewController = PresetCollectionViewController(collectionViewLayout: CarouselGridLayout())
+        presetCollectionViewController = PresetCollectionViewController(collectionViewLayout: PresetCarouselGridLayout())
     }
     
     func paginate(_ direction: UIPageViewController.NavigationDirection) {

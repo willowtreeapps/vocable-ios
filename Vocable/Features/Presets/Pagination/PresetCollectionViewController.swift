@@ -8,32 +8,44 @@
 
 import CoreData
 import UIKit
+import Combine
 
 class PresetCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
     
-    private lazy var phraseViewModels: [PhraseViewModel] =
-    Phrase.fetchAll(in: NSPersistentContainer.shared.viewContext,
-                      sortDescriptors: [NSSortDescriptor(keyPath: \Phrase.identifier, ascending: true)])
-        .compactMap { PhraseViewModel($0) }
+    private var disposables = Set<AnyCancellable>()
     
-    private lazy var dataSource = UICollectionViewDiffableDataSource<Int, PhraseViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
+    private lazy var dataSource = UICollectionViewDiffableDataSource<Int, Phrase>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-        cell.setup(title: self.phraseViewModels[indexPath.row].utterance)
+        cell.setup(title: phrase.utterance ?? "")
         return cell
     }
 
-    private lazy var fetchRequest: NSFetchRequest<Phrase> = {
+    private var fetchedResultsController: NSFetchedResultsController<Phrase>? {
+        didSet {
+            oldValue?.delegate = nil
+        }
+    }
+    
+    func updateFetchedResultsController(with selectedCategoryID: NSManagedObjectID? = nil) {
+        print("updated fetch controller")
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
+        if let selectedCategoryID = selectedCategoryID {
+            print(selectedCategoryID)
+            request.predicate = NSComparisonPredicate(\Phrase.categories, .contains, selectedCategoryID)
+        }
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
-        return request
-    }()
-
-    private lazy var fetchResultsController = NSFetchedResultsController<Phrase>(fetchRequest: self.fetchRequest,
-                                                                                 managedObjectContext: NSPersistentContainer.shared.viewContext,
-                                                                                 sectionNameKeyPath: nil,
-                                                                                 cacheName: nil)
+        
+        let fetchedResultsController = NSFetchedResultsController<Phrase>(fetchRequest: request,
+                                                                          managedObjectContext: NSPersistentContainer.shared.viewContext,
+                                                                          sectionNameKeyPath: nil,
+                                                                          cacheName: nil)
+        fetchedResultsController.delegate = self
+        try? fetchedResultsController.performFetch()
+        
+        self.fetchedResultsController = fetchedResultsController
+        updateDataSource(animated: true)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +54,22 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         collectionView.backgroundColor = .collectionViewBackgroundColor
 
         updateLayoutForCurrentTraitCollection()
-
-        fetchResultsController.delegate = self
-        try? fetchResultsController.performFetch()
-        updateDataSource(animated: false)
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Phrase>()
+        snapshot.appendSections([0])
+        dataSource.apply(snapshot,
+                                 animatingDifferences: false,
+                                 completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        ItemSelection.$selectedCategoryID.sink { (selectedCategoryID) in
+            DispatchQueue.main.async {
+                self.updateFetchedResultsController(with: selectedCategoryID)
+            }
+        }.store(in: &disposables)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -71,14 +95,6 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         }
     }
 
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         updateDataSource(animated: true, completion: { [weak self] in
             self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
@@ -87,11 +103,10 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     }
 
     private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
-        let content = fetchResultsController.fetchedObjects ?? []
-        let viewModels = content.compactMap(PhraseViewModel.init)
-        var snapshot = NSDiffableDataSourceSnapshot<Int, PhraseViewModel>()
+        let content = fetchedResultsController?.fetchedObjects ?? []
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Phrase>()
         snapshot.appendSections([0])
-        snapshot.appendItems(phraseViewModels)
+        snapshot.appendItems(content)
         dataSource.apply(snapshot,
                                  animatingDifferences: animated,
                                  completion: completion)

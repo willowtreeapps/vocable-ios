@@ -192,12 +192,6 @@ class PresetsViewController: UICollectionViewController {
     }
     
     private func observeItemSelectionChanges() {
-        _ = ItemSelection.$selectedCategory.sink(receiveValue: { _ in
-            DispatchQueue.main.async {
-                self.reloadPresets()
-            }
-        }).store(in: &disposables)
-        
         _ = ItemSelection.$selectedPhrase.sink(receiveValue: { selectedPhrase in
             guard let utterance = selectedPhrase?.utterance else { return }
             self.setTextTransaction(TextTransaction(text: utterance))
@@ -274,12 +268,6 @@ class PresetsViewController: UICollectionViewController {
         }
 
         dataSource.apply(snapshot, animatingDifferences: animated)
-    }
-    
-    private func reloadPresets() {
-        var snapshot = dataSource.snapshot()
-        snapshot.reloadItems([.paginatedPresets])
-        dataSource.apply(snapshot)
     }
     
     // MARK: - Collection View Delegate

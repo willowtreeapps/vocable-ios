@@ -33,17 +33,15 @@ class CarouselGridCollectionViewController: UICollectionViewController {
         collectionView.scrollRectToVisible(nextRect, animated: true)
     }
 
-    let layout: CarouselGridLayout = {
-        let layout = CarouselGridLayout()
-        layout.numberOfColumns = 2
-        layout.numberOfRows = 3
-        layout.interItemSpacing = 24
-        return layout
-    }()
+    var layout: CarouselGridLayout! {
+        return collectionView.collectionViewLayout as? CarouselGridLayout
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView.setCollectionViewLayout(self.layout, animated: false)
+        if layout == nil {
+            self.collectionView.setCollectionViewLayout(CarouselGridLayout(), animated: false)
+        }
         collectionView.decelerationRate = .fast
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.showsVerticalScrollIndicator = false
@@ -175,6 +173,12 @@ class CarouselGridLayout: UICollectionViewLayout {
     func prepareForDeceleration() {
         collectionView?.isUserInteractionEnabled = false
     }
+    
+//    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+//        let attributes = super.layoutAttributesForItem(at: indexPath) ?? UICollectionViewLayoutAttributes(forCellWith: indexPath)
+//        attributes.frame = frameForCellAtIndex(indexPath.item)
+//        return attributes
+//    }
 
     func resetScrollViewOffset(inResponseToUserInteraction: Bool = true, animateIfNeeded: Bool = false) {
         guard let collectionView = collectionView, collectionView.window != nil else {
@@ -321,4 +325,20 @@ class CarouselGridLayout: UICollectionViewLayout {
         let boundary = boundsRectForPageIndex(Int(index))
         return boundary.origin
     }
+}
+
+class PresetCarouselGridLayout: CarouselGridLayout {
+    
+//    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+//        let attr = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath) ?? self.layoutAttributesForItem(at: itemIndexPath)
+//        attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
+//        return attr
+//    }
+//
+//    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+//        let attr = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath) ?? self.layoutAttributesForItem(at: itemIndexPath)
+//        attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
+//        return attr
+//    }
+    
 }
