@@ -19,7 +19,7 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
     
     private var _textTransaction = TextTransaction(text: "")
     
-    var phraseIdentifier: String?
+    var categoryIdentifier: String?
     
     private var textTransaction: TextTransaction {
         return _textTransaction
@@ -49,10 +49,8 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let phraseIdentifier = phraseIdentifier {
-            let context = NSPersistentContainer.shared.viewContext
-            let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-            _textTransaction = TextTransaction(text: originalPhrase?.utterance ?? "")
+        if let phraseIdentifier = categoryIdentifier {
+            _textTransaction = TextTransaction(text: phraseIdentifier)
         }
 
         setupCollectionView()
@@ -229,8 +227,21 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
             case .close:
                 dismiss(animated: true, completion: nil)
             case .confirmEdit:
-                let alertMessage = NSLocalizedString("Changes Saved", comment: "Changes Saved Toast Message")
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                //Do we let them create new categories here?
+                if let categoryIdentifier = categoryIdentifier {
+                    //If not we don't need to fetch the original category name.
+                    let originalCategoryName = Category.fetchObject(in: context, matching: categoryIdentifier)
+                } else {
+                    _ = Category.fetchOrCreate(in: context, matching: _textTransaction.text)
+                }
+                do {
+                    try context.save()
+                    let alertMessage = NSLocalizedString("Changes Saved", comment: "Changes Saved Toast Message")
+                     ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                } catch {
+                    assertionFailure("Failed to save user generated cateory: \(error)")
+                }
+               
             default:
                 break
             }
@@ -243,7 +254,7 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
                     break
                 }
                 DispatchQueue.global(qos: .userInitiated).async {
-                    AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
+                    AVSpeechSynthesizer.shared.speak(self.textTransaction.text, language: AppConfig.activePreferredLanguageCode)
                 }
             case .clear:
                 setTextTransaction(TextTransaction(text: "", intent: .none))

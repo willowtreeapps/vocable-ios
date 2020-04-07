@@ -158,7 +158,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 assertionFailure("Matching language not found for category \(presetCategory)")
                 continue
             }
-
             let category = Category.fetchOrCreate(in: context, matching: presetCategory.id)
             category.name = presetCategory.localizedName[languageCode]
             category.languageCode = languageCode
@@ -179,7 +178,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let phrase = Phrase.fetchOrCreate(in: context, matching: presetPhrase.id)
             phrase.utterance = presetPhrase.localizedUtterance[languageCode]
             phrase.languageCode = languageCode
-
+            
             for identifier in presetPhrase.categoryIds {
                 if let category = Category.fetchObject(in: context, matching: identifier) {
                     phrase.addToCategories(category)
