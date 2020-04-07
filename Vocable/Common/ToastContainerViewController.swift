@@ -9,6 +9,8 @@
 import UIKit
 
 class ToastContainerViewController: UIViewController {
+    var isToastWarningVisible = false
+    
     private weak var phraseSavedView: UIView? {
         didSet {
             updateWindowVisibility()
@@ -99,9 +101,11 @@ class ToastContainerViewController: UIViewController {
         }
         let alphaValue = shouldDisplay ? 1.0 : 0.0
         UIView.animate(withDuration: 0.5, delay: 0, options: .beginFromCurrentState, animations: {
+            self.isToastWarningVisible = true
             self.warningView?.alpha = CGFloat(alphaValue)
         }, completion: { [weak self] didFinish in
             if didFinish && !shouldDisplay {
+                self?.isToastWarningVisible = false
                 self?.warningView?.removeFromSuperview()
             }
         })

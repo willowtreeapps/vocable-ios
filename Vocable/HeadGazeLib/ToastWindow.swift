@@ -49,6 +49,12 @@ class ToastWindow: UIWindow {
         self.isUserInteractionEnabled = false
     }
     
+    func updateHeadTrackingWarningToast() {
+        if !UIApplication.shared.isGazeTrackingActive && !toastContainerViewController.isToastWarningVisible {
+            presentPersistantWarning(with: NSLocalizedString("Please move closer to the device.", comment: "Warning title when head tracking is lost."))
+        }
+    }
+    
     func presentPersistantWarning(with title: String) {
         toastContainerViewController.handleWarning(with: title, shouldDisplay: true)
     }
