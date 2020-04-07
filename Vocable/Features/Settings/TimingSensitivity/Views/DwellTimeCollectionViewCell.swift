@@ -22,10 +22,11 @@ final class DwellTimeCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        AppConfig.$selectionHoldDuration.sink(receiveValue: { duration in
+
+        AppConfig.$selectionHoldDuration.sink(receiveValue: { [weak self] duration in
             // Only show decimal if number is not whole number (e.g. "1s" & "0.5s")
             let durationFormatted = duration.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", duration) : String(duration)
-            self.timeLabel.text = String(format: NSLocalizedString("%ds", comment: "Dwell duration"), durationFormatted)
+            self?.timeLabel.text = String.localizedStringWithFormat(NSLocalizedString("%@s", comment: "Dwell duration"), durationFormatted)
         }).store(in: &disposables)
     }
     

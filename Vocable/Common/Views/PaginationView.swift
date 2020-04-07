@@ -98,7 +98,9 @@ final class PaginationView: UIView {
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        textLabel.text = nil
+
+        // This is placeholder text for IBDesignable  so localization is not necessary.
+        textLabel.text = "Page 1 of 3"
     }
     
 }
