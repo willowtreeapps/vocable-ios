@@ -11,6 +11,7 @@ import Combine
 typealias CarouselGridPagingProgress = (pageIndex: Int, pageCount: Int)
 
 class CarouselGridCollectionViewController: UICollectionViewController {
+    
     var progressPublisher: PublishedValue<CarouselGridPagingProgress>.Publisher {
         return layout.$progress
     }
@@ -30,9 +31,11 @@ class CarouselGridCollectionViewController: UICollectionViewController {
         let nextRect = layout.previousPageRect
         collectionView.scrollRectToVisible(nextRect, animated: true)
     }
+    
     var layout: CarouselGridLayout! {
         return collectionView.collectionViewLayout as? CarouselGridLayout
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if layout == nil {
@@ -46,16 +49,20 @@ class CarouselGridCollectionViewController: UICollectionViewController {
         collectionView.delaysContentTouches = false
         //        layout.resetScrollViewOffset(inResponseToUserInteraction: false)
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //        layout.resetScrollViewOffset(inResponseToUserInteraction: false)
     }
+    
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         //        layout.resetScrollViewOffset(inResponseToUserInteraction: true)
     }
+    
     override func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         //        layout.resetScrollViewOffset(inResponseToUserInteraction: true)
     }
+    
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         //        if decelerate {
         //            layout.prepareForDeceleration()
@@ -63,29 +70,36 @@ class CarouselGridCollectionViewController: UICollectionViewController {
         //            layout.resetScrollViewOffset(inResponseToUserInteraction: true)
         //        }
     }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         //        coordinator.animateAlongsideTransition(in: collectionView, animation: { [weak self] (_) in
         //            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false)
         //        }, completion: nil)
     }
+    
 }
 class CarouselGridLayout: UICollectionViewLayout {
+    
     private struct Page {
         let index: Int
         let numberOfColumns: Int
         let numberOfRows: Int
+        
         private var itemsPerPage: Int {
             return numberOfRows * numberOfColumns
         }
+        
         let interItemSpacing: CGFloat
         var bounds: CGRect
         var indices: NSIndexSet
+        
         var allAttributes: [UICollectionViewLayoutAttributes] {
             return indices.compactMap {
                 attributes(forItemAt: IndexPath(item: $0, section: 0))
             }
         }
+        
         func attributes(forItemAt indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
             let size = bounds.size
             let width = size.width
@@ -101,8 +115,11 @@ class CarouselGridLayout: UICollectionViewLayout {
             attributes.frame = cellRect
             return attributes
         }
+        
     }
+    
     private var pages: [Page] = []
+    
     var numberOfColumns = 1 {
         didSet {
             if numberOfColumns < 1 {
@@ -111,6 +128,7 @@ class CarouselGridLayout: UICollectionViewLayout {
             invalidateLayout()
         }
     }
+    
     var numberOfRows = 1 {
         didSet {
             if numberOfRows < 1 {
@@ -119,11 +137,13 @@ class CarouselGridLayout: UICollectionViewLayout {
             invalidateLayout()
         }
     }
+    
     var interItemSpacing: CGFloat = 0 {
         didSet {
             invalidateLayout()
         }
     }
+    
     var nextPageRect: CGRect {
         guard let collectionView = collectionView else { return .zero }
         let visibleIndices = collectionView.indexPathsForVisibleItems.map { $0.item }
@@ -137,6 +157,7 @@ class CarouselGridLayout: UICollectionViewLayout {
         let bounds = pages[nextPage].bounds
         return bounds
     }
+    
     var previousPageRect: CGRect {
         guard let collectionView = collectionView else { return .zero }
         let visibleIndices = collectionView.indexPathsForVisibleItems.map { $0.item }
@@ -144,29 +165,37 @@ class CarouselGridLayout: UICollectionViewLayout {
         var nextPage = visiblePageIndices.reduce(-1) { (result, nextValue) in
             return max(result, nextValue)
             } - 1
+        
         if nextPage < 0 {
             nextPage = max(pages.count - 1, 0)
         }
+        
         let bounds = pages[nextPage].bounds
         return bounds
     }
+    
     private var itemsPerPage: Int {
         return numberOfRows * numberOfColumns
     }
+    
     @PublishedValue
     var progress: CarouselGridPagingProgress = (pageIndex: 0, pageCount: 1)
+    
     private var numberOfPages: Int {
         return pages.count
     }
+    
     private var needsMultiplePages: Bool {
         return numberOfPages > 1
     }
+    
     override var collectionViewContentSize: CGSize {
         guard let collectionView = collectionView else { return .zero }
         var size = collectionView.frame.size.applying(.init(scaleX: CGFloat(numberOfPages), y: 1))
         size.width += interItemSpacing * CGFloat(max(numberOfPages - 1, 0))
         return size
     }
+    
     override func prepare() {
         super.prepare()
         guard let collectionView = collectionView else { return }
@@ -183,6 +212,7 @@ class CarouselGridLayout: UICollectionViewLayout {
         }
         updatePageProgress()
     }
+    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         Array(pages.filter { page -> Bool in
             page.bounds.intersects(rect)
@@ -190,31 +220,39 @@ class CarouselGridLayout: UICollectionViewLayout {
             $0.allAttributes
         }.joined())
     }
+    
     private var lastInvalidatedSize: CGSize = .zero
+    
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         updatePageProgress()
         defer { lastInvalidatedSize = newBounds.size }
         return lastInvalidatedSize != newBounds.size
     }
+    
     private func updatePageProgress() {
         guard let collectionView = collectionView else { return }
         let visibleIndices = collectionView.indexPathsForVisibleItems.map { $0.item }
-        let visiblePageIndices = pages.filter { Set($0.indices).isDisjoint(with: visibleIndices) }.map { $0.index }
+        let visiblePageIndices = pages.filter { !Set($0.indices).isDisjoint(with: visibleIndices) }.map { $0.index }
         let currentPageIndex = visiblePageIndices.reduce(0) { (result, nextValue) in
-            return min(result, nextValue)
+            return max(result, nextValue)
         }
         progress = (pageIndex: currentPageIndex, pageCount: numberOfPages)
     }
+    
     override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attr = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath) ?? self.layoutAttributesForItem(at: itemIndexPath)
         attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
         return attr
     }
+    
     override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attr = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath) ?? self.layoutAttributesForItem(at: itemIndexPath)
         attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
         return attr
     }
+    
 }
+
 class PresetCarouselGridLayout: CarouselGridLayout {
+    
 }

@@ -51,8 +51,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
         collectionView.backgroundColor = .collectionViewBackgroundColor
         
-        _ = ItemSelection.$presetsPageIndicatorProgress.append(layout.$progress)
-        ItemSelection.$presetsPageIndicatorProgress = Publishers.Merge(ItemSelection.$presetsPageIndicatorProgress, layout.$progress)
+        _ = ItemSelection.$presetsPageIndicatorProgress.combineLatest(layout.$progress)
         
         updateLayoutForCurrentTraitCollection()
         
@@ -70,6 +69,10 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             DispatchQueue.main.async {
                 self.updateFetchedResultsController(with: selectedCategoryID)
             }
+        }.store(in: &disposables)
+        
+        layout.$progress.sink { (pagingProgress) in
+            ItemSelection.presetsPageIndicatorProgress = pagingProgress
         }.store(in: &disposables)
     }
 
