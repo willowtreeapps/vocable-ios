@@ -21,8 +21,9 @@ class HeadGazeWindow: UIWindow {
     private var touchGazeDisableBeganDate: Date?
     
     private var cancellables = Set<AnyCancellable>()
-    
-    var trackingDisabledByTouch = false
+    var trackingDisabledByTouch: Bool {
+        return touchGazeDisableBeganDate != nil
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,7 +46,11 @@ class HeadGazeWindow: UIWindow {
             guard let self = self else { return }
             if isEnabled {
                 self.installCursorViewIfNeeded()
-                self.touchGazeDisableBeganDate = .distantPast
+                self.cursorView?.setCursorViewsHidden(false, animated: true)
+                self.touchGazeDisableBeganDate = nil
+                /*if self.touchGazeDisableBeganDate != nil {
+                    self.touchGazeDisableBeganDate = .distantPast
+                }*/
             } else {
                 self.cursorView?.removeFromSuperview()
             }
@@ -75,19 +80,17 @@ class HeadGazeWindow: UIWindow {
 
     private func extendGazeDisabledPeriodForTouchEvent() {
         cancelCurrentGazeIfNeeded()
-        touchGazeDisableBeganDate = Date()
         
         guard trackingDisabledByTouch == false else { return }
-        trackingDisabledByTouch = true
+        touchGazeDisableBeganDate = Date()
         ToastWindow.shared.dismissPersistantWarning()
         func schedule(duration: TimeInterval = self.touchGazeDisableDuration) {
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-                guard let lastTouchDate = self.touchGazeDisableBeganDate else { return }
+                let lastTouchDate = self.touchGazeDisableBeganDate ?? .distantPast
                 let passed = Date().timeIntervalSince(lastTouchDate)
                 if passed >= self.touchGazeDisableDuration {
                     self.cursorView?.setCursorViewsHidden(false, animated: true)
                     self.touchGazeDisableBeganDate = nil
-                    self.trackingDisabledByTouch = false
                     ToastWindow.shared.updateHeadTrackingWarningToast()
                 } else {
                     schedule(duration: self.touchGazeDisableDuration - passed)
