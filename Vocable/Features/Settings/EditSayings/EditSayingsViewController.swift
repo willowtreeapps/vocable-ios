@@ -31,9 +31,9 @@ class EditSayingsViewController: UIViewController {
         super.viewDidLoad()
         
         carouselCollectionViewController?.progressPublisher.sink(receiveValue: { (pagingProgress) in
-            guard let pagingProgress = pagingProgress else {
-                return
-            }
+//            guard let pagingProgress = pagingProgress else {
+//                return
+//            }
             if pagingProgress.pageCount > 1 {
                 self.paginationView.setPaginationButtonsEnabled(true)
             } else {

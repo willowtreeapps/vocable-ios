@@ -50,7 +50,10 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
 
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
         collectionView.backgroundColor = .collectionViewBackgroundColor
-
+        
+        _ = ItemSelection.$presetsPageIndicatorProgress.append(layout.$progress)
+        ItemSelection.$presetsPageIndicatorProgress = Publishers.Merge(ItemSelection.$presetsPageIndicatorProgress, layout.$progress)
+        
         updateLayoutForCurrentTraitCollection()
         
         var snapshot = NSDiffableDataSourceSnapshot<Int, Phrase>()
@@ -91,13 +94,6 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         default:
             break
         }
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateDataSource(animated: true, completion: { [weak self] in
-            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
-                                               animateIfNeeded: true)
-        })
     }
 
     private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {

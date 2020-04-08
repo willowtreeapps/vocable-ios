@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Combine
 
 class PresetPaginationContainerCollectionViewCell: VocableCollectionViewCell {
     var presetCollectionViewController: PresetCollectionViewController?
+    
+    private var disposables = Set<AnyCancellable>()
     
     override func awakeFromNib() {
         super.awakeFromNib()

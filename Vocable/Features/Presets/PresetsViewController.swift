@@ -419,7 +419,7 @@ class PresetsViewController: UICollectionViewController {
                 break
             }
             
-            if let paginationCell = collectionView.cellForItem(at: contentItemIndexPath) as? PaginationContainerCollectionViewCell {
+            if let paginationCell = collectionView.cellForItem(at: contentItemIndexPath) as? PresetPaginationContainerCollectionViewCell {
                 paginationCell.paginate(direction)
             }
             

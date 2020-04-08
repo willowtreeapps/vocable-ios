@@ -5,82 +5,104 @@
 //  Created by Chris Stroud on 2/25/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
-
 import UIKit
 import Combine
 
 typealias CarouselGridPagingProgress = (pageIndex: Int, pageCount: Int)
 
 class CarouselGridCollectionViewController: UICollectionViewController {
-
-    var progressPublisher: Published<CarouselGridPagingProgress?>.Publisher {
+    var progressPublisher: PublishedValue<CarouselGridPagingProgress>.Publisher {
         return layout.$progress
     }
-
+    
     @objc func scrollToNextPage() {
-        guard let pageCount = layout.progress?.pageCount, pageCount > 1 else {
+        guard layout.progress.pageCount > 1 else {
             return
         }
         let nextRect = layout.nextPageRect
         collectionView.scrollRectToVisible(nextRect, animated: true)
     }
-
+    
     @objc func scrollToPreviousPage() {
-        guard let pageCount = layout.progress?.pageCount, pageCount > 1 else {
+        guard layout.progress.pageCount > 1 else {
             return
         }
         let nextRect = layout.previousPageRect
         collectionView.scrollRectToVisible(nextRect, animated: true)
     }
-
     var layout: CarouselGridLayout! {
         return collectionView.collectionViewLayout as? CarouselGridLayout
     }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         if layout == nil {
             self.collectionView.setCollectionViewLayout(CarouselGridLayout(), animated: false)
         }
-        collectionView.decelerationRate = .fast
+        //        collectionView.decelerationRate = .fast
+        collectionView.isPagingEnabled = true
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delaysContentTouches = false
-        layout.resetScrollViewOffset(inResponseToUserInteraction: false)
+        //        layout.resetScrollViewOffset(inResponseToUserInteraction: false)
     }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        layout.resetScrollViewOffset(inResponseToUserInteraction: false)
+        //        layout.resetScrollViewOffset(inResponseToUserInteraction: false)
     }
-
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        layout.resetScrollViewOffset(inResponseToUserInteraction: true)
+        //        layout.resetScrollViewOffset(inResponseToUserInteraction: true)
     }
-
     override func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        layout.resetScrollViewOffset(inResponseToUserInteraction: true)
+        //        layout.resetScrollViewOffset(inResponseToUserInteraction: true)
     }
-
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if decelerate {
-            layout.prepareForDeceleration()
-        } else {
-            layout.resetScrollViewOffset(inResponseToUserInteraction: true)
-        }
+        //        if decelerate {
+        //            layout.prepareForDeceleration()
+        //        } else {
+        //            layout.resetScrollViewOffset(inResponseToUserInteraction: true)
+        //        }
     }
-
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animateAlongsideTransition(in: collectionView, animation: { [weak self] (_) in
-            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false)
-        }, completion: nil)
+        //        coordinator.animateAlongsideTransition(in: collectionView, animation: { [weak self] (_) in
+        //            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false)
+        //        }, completion: nil)
     }
 }
-
 class CarouselGridLayout: UICollectionViewLayout {
-
+    private struct Page {
+        let index: Int
+        let numberOfColumns: Int
+        let numberOfRows: Int
+        private var itemsPerPage: Int {
+            return numberOfRows * numberOfColumns
+        }
+        let interItemSpacing: CGFloat
+        var bounds: CGRect
+        var indices: NSIndexSet
+        var allAttributes: [UICollectionViewLayoutAttributes] {
+            return indices.compactMap {
+                attributes(forItemAt: IndexPath(item: $0, section: 0))
+            }
+        }
+        func attributes(forItemAt indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+            let size = bounds.size
+            let width = size.width
+            let height = size.height
+            let index = indexPath.item
+            let pageIndex = self.index
+            let cellWidth = (width - CGFloat(numberOfColumns - 1) * interItemSpacing) / CGFloat(numberOfColumns)
+            let cellHeight = (height - CGFloat(numberOfRows - 1) * interItemSpacing) / CGFloat(numberOfRows)
+            let cellX = CGFloat((index % numberOfColumns) + (numberOfColumns * pageIndex)) * (cellWidth + interItemSpacing)
+            let cellY = CGFloat(Int((index % itemsPerPage) / numberOfColumns)) * (cellHeight + interItemSpacing)
+            let cellRect = CGRect(x: cellX, y: cellY, width: cellWidth, height: cellHeight)
+            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+            attributes.frame = cellRect
+            return attributes
+        }
+    }
+    private var pages: [Page] = []
     var numberOfColumns = 1 {
         didSet {
             if numberOfColumns < 1 {
@@ -89,7 +111,6 @@ class CarouselGridLayout: UICollectionViewLayout {
             invalidateLayout()
         }
     }
-
     var numberOfRows = 1 {
         didSet {
             if numberOfRows < 1 {
@@ -98,247 +119,102 @@ class CarouselGridLayout: UICollectionViewLayout {
             invalidateLayout()
         }
     }
-
     var interItemSpacing: CGFloat = 0 {
         didSet {
             invalidateLayout()
         }
     }
-
+    var nextPageRect: CGRect {
+        guard let collectionView = collectionView else { return .zero }
+        let visibleIndices = collectionView.indexPathsForVisibleItems.map { $0.item }
+        let visiblePageIndices = pages.filter { !Set($0.indices).isDisjoint(with: visibleIndices) }.map { $0.index }
+        var nextPage = visiblePageIndices.reduce(-1) { (result, nextValue) in
+            return max(result, nextValue)
+            } + 1
+        if nextPage >= numberOfPages {
+            nextPage = 0
+        }
+        let bounds = pages[nextPage].bounds
+        return bounds
+    }
+    var previousPageRect: CGRect {
+        guard let collectionView = collectionView else { return .zero }
+        let visibleIndices = collectionView.indexPathsForVisibleItems.map { $0.item }
+        let visiblePageIndices = pages.filter { !Set($0.indices).isDisjoint(with: visibleIndices) }.map { $0.index }
+        var nextPage = visiblePageIndices.reduce(-1) { (result, nextValue) in
+            return max(result, nextValue)
+            } - 1
+        if nextPage < 0 {
+            nextPage = max(pages.count - 1, 0)
+        }
+        let bounds = pages[nextPage].bounds
+        return bounds
+    }
     private var itemsPerPage: Int {
         return numberOfRows * numberOfColumns
     }
-
-    private var logicalPageIndex: Int = 0 {
-        didSet {
-            if logicalPageIndex == -1 {
-                logicalPageIndex = max(numberOfPages - 1, 0)
-            } else if logicalPageIndex == numberOfPages {
-                logicalPageIndex = 0
-            }
-            self.progress = (pageIndex: logicalPageIndex, pageCount: numberOfPages)
-        }
-    }
-
-    @Published
-    var progress: CarouselGridPagingProgress?
-
+    @PublishedValue
+    var progress: CarouselGridPagingProgress = (pageIndex: 0, pageCount: 1)
     private var numberOfPages: Int {
-        guard let collectionView = collectionView, collectionView.window != nil else { return 1 }
-        let pageCount = Int((Double(collectionView.numberOfItems(inSection: 0)) / Double(itemsPerPage)).rounded(.up))
-        if pageCount != (progress?.pageCount ?? 0) {
-            progress = (pageIndex: logicalPageIndex, pageCount: pageCount)
-        }
-        return pageCount
+        return pages.count
     }
-
     private var needsMultiplePages: Bool {
         return numberOfPages > 1
     }
-
     override var collectionViewContentSize: CGSize {
         guard let collectionView = collectionView else { return .zero }
-        var size = collectionView.frame.size.applying(.init(scaleX: 3, y: 1))
-        size.width += interItemSpacing * 2
+        var size = collectionView.frame.size.applying(.init(scaleX: CGFloat(numberOfPages), y: 1))
+        size.width += interItemSpacing * CGFloat(max(numberOfPages - 1, 0))
         return size
     }
-
-    var currentPageScrollOffset: CGSize {
-        guard let collectionView = collectionView else { return .zero }
-        let restingBounds = boundsRectForPageIndex(1)
-        let offset = CGSize(width: collectionView.bounds.origin.x - restingBounds.origin.x,
-                            height: collectionView.bounds.origin.y - restingBounds.origin.y)
-        return offset
-    }
-
-    private var resetRect: CGRect {
-        guard let collectionView = collectionView else { return .zero }
-        let bounds = collectionView.bounds
-        let resetRect = CGRect(origin: .init(x: bounds.width + interItemSpacing, y: 0), size: bounds.size)
-        return resetRect
-    }
-
-    fileprivate var nextPageRect: CGRect {
-        let resetRect = self.resetRect
-        let rect = resetRect.applying(.init(translationX: resetRect.width + interItemSpacing, y: 0))
-        return rect
-    }
-
-    fileprivate var previousPageRect: CGRect {
-        let resetRect = self.resetRect
-        let rect = resetRect.applying(.init(translationX: -(resetRect.width + interItemSpacing), y: 0))
-        return rect
-    }
-
-    func prepareForDeceleration() {
-        collectionView?.isUserInteractionEnabled = false
-    }
-    
-//    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-//        let attributes = super.layoutAttributesForItem(at: indexPath) ?? UICollectionViewLayoutAttributes(forCellWith: indexPath)
-//        attributes.frame = frameForCellAtIndex(indexPath.item)
-//        return attributes
-//    }
-
-    func resetScrollViewOffset(inResponseToUserInteraction: Bool = true, animateIfNeeded: Bool = false) {
-        guard let collectionView = collectionView, collectionView.window != nil else {
-            self.collectionView?.scrollRectToVisible(resetRect, animated: false)
-            return
+    override func prepare() {
+        super.prepare()
+        guard let collectionView = collectionView else { return }
+        let indicesPerPage = Array(0..<collectionView.numberOfItems(inSection: 0)).chunked(into: itemsPerPage)
+        self.pages = indicesPerPage.enumerated().map { (pageIndex, indices) -> Page in
+            let frame = collectionView.frame
+            let pageBounds = frame.applying(.init(translationX: CGFloat(pageIndex) * frame.width + interItemSpacing * CGFloat(max(pageIndex - 1, 0)), y: 0))
+            return Page(index: pageIndex,
+                        numberOfColumns: self.numberOfColumns,
+                        numberOfRows: self.numberOfRows,
+                        interItemSpacing: self.interItemSpacing,
+                        bounds: pageBounds,
+                        indices: NSIndexSet(indexSet: IndexSet(indices)))
         }
-
-        // Handles the case of the last item being deleted from the visible page
-        if logicalPageIndex >= numberOfPages {
-            // Snap to the rightmost page before animating smoothly back to center.
-            collectionView.scrollRectToVisible(boundsRectForPageIndex(2), animated: false)
-            logicalPageIndex = max(numberOfPages - 1, 0)
-            collectionView.scrollRectToVisible(resetRect, animated: animateIfNeeded)
-            return
-        }
-
-        let currentOffset = currentPageScrollOffset.width
-        if inResponseToUserInteraction && abs(currentOffset) > collectionView.frame.width / 2.0 {
-            let offsetSign = Int(currentOffset / abs(currentOffset))
-            logicalPageIndex += offsetSign
-        }
-        collectionView.scrollRectToVisible(resetRect, animated: animateIfNeeded)
-        collectionView.isUserInteractionEnabled = true
+        updatePageProgress()
     }
-
-    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return true
-    }
-
-    private func visiblePages(forBounds bounds: CGRect) -> Set<Int> {
-        var pages = Set<Int>([0])
-        let tx = bounds.origin.x.distance(to: resetRect.origin.x)
-        if tx != 0.0 {
-            // Get the page to the left/right of center
-            // if the scrollview has been scrolled
-            let txSign = Int(tx / abs(tx))
-            pages.insert(txSign)
-        }
-        return pages
-    }
-
-    private func boundsRectForPageIndex(_ index: Int) -> CGRect {
-        guard let collectionView = collectionView else { return .zero }
-        let size = collectionView.bounds.size
-        let origin = CGPoint(x: CGFloat(index) * (size.width + interItemSpacing), y: 0)
-        let rect = CGRect(origin: origin, size: size)
-        return rect
-    }
-
-    private func frameForCellAtIndex(_ index: Int) -> CGRect {
-        guard let collectionView = collectionView else { return .zero }
-        let size = collectionView.bounds.size
-        let width = size.width
-        let height = size.height
-
-        let itemsPerPage = numberOfRows * numberOfColumns
-
-        let pageIndex = index / itemsPerPage
-
-        let cellWidth = (width - CGFloat(numberOfColumns - 1) * interItemSpacing) / CGFloat(numberOfColumns)
-        let cellHeight = (height - CGFloat(numberOfRows - 1) * interItemSpacing) / CGFloat(numberOfRows)
-
-        let cellX = CGFloat((index % numberOfColumns) + (numberOfColumns * pageIndex)) * (cellWidth + interItemSpacing)
-        let cellY = CGFloat(Int((index % itemsPerPage) / numberOfColumns)) * (cellHeight + interItemSpacing)
-
-        let cellRect = CGRect(x: cellX, y: cellY, width: cellWidth, height: cellHeight)
-        return cellRect
-    }
-
-    private func pageIndex(before previousIndex: Int) -> Int? {
-        return pageIndex(withDelta: -1, from: previousIndex)
-    }
-
-    private func pageIndex(after previousIndex: Int) -> Int? {
-        return pageIndex(withDelta: 1, from: previousIndex)
-    }
-
-    private func pageIndex(withDelta delta: Int, from previousIndex: Int) -> Int? {
-        var proposedIndex = logicalPageIndex + delta
-        if proposedIndex >= numberOfPages {
-            proposedIndex = (proposedIndex - numberOfPages)
-        }
-        if proposedIndex < 0 {
-            proposedIndex = numberOfPages + proposedIndex
-        }
-        if proposedIndex == previousIndex {
-            return nil
-        }
-        if !(0..<numberOfPages).contains(proposedIndex) {
-            return nil
-        }
-        return proposedIndex
-    }
-
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-
-        let currentPageAttributes = layoutAttributesForElementsInLogicalPage(logicalPageIndex)
-
-        let leftwardPageAttributes: [UICollectionViewLayoutAttributes]
-        if currentPageScrollOffset.width < 0, let leftwardIndex = pageIndex(before: logicalPageIndex) {
-            leftwardPageAttributes = layoutAttributesForElementsInLogicalPage(leftwardIndex, offsetByPageCount: -1)
-        } else {
-            leftwardPageAttributes = []
-        }
-
-        let rightwardPageAttributes: [UICollectionViewLayoutAttributes]
-        if currentPageScrollOffset.width > 0, let rightwardIndex = pageIndex(after: logicalPageIndex) {
-            rightwardPageAttributes = layoutAttributesForElementsInLogicalPage(rightwardIndex, offsetByPageCount: 1)
-        } else {
-            rightwardPageAttributes = []
-        }
-
-        let attributes = Array([leftwardPageAttributes, currentPageAttributes, rightwardPageAttributes].joined())
-        return attributes
+        Array(pages.filter { page -> Bool in
+            page.bounds.intersects(rect)
+        }.map {
+            $0.allAttributes
+        }.joined())
     }
-
-    private func layoutAttributesForElementsInLogicalPage(_ index: Int, offsetByPageCount offsetPageCount: Int = 0) -> [UICollectionViewLayoutAttributes] {
-
-        guard let collectionView = collectionView else { return [] }
-
-        let portalRect = boundsRectForPageIndex(index)
-        let tx = collectionView.bounds.origin.x.distance(to: portalRect.origin.x) - CGFloat(offsetPageCount) * (collectionView.bounds.width + interItemSpacing) + currentPageScrollOffset.width
-
-        let startIndex = itemsPerPage * index
-        let endIndex = max(min(startIndex + itemsPerPage, collectionView.numberOfItems(inSection: 0)), 0)
-
-        let attributes = (startIndex ..< endIndex).map { index -> UICollectionViewLayoutAttributes in
-            let attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: index, section: 0))
-            attributes.frame = frameForCellAtIndex(index).applying(.init(translationX: -tx, y: 0))
-            return attributes
-        }
-        return attributes
+    private var lastInvalidatedSize: CGSize = .zero
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        updatePageProgress()
+        defer { lastInvalidatedSize = newBounds.size }
+        return lastInvalidatedSize != newBounds.size
     }
-
-    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        guard let collectionView = collectionView else { return proposedContentOffset }
-
-        if !needsMultiplePages {
-            return resetRect.origin
+    private func updatePageProgress() {
+        guard let collectionView = collectionView else { return }
+        let visibleIndices = collectionView.indexPathsForVisibleItems.map { $0.item }
+        let visiblePageIndices = pages.filter { Set($0.indices).isDisjoint(with: visibleIndices) }.map { $0.index }
+        let currentPageIndex = visiblePageIndices.reduce(0) { (result, nextValue) in
+            return min(result, nextValue)
         }
-
-        let width = collectionView.bounds.width
-        let index = (proposedContentOffset.x / (width + interItemSpacing)).rounded()
-        let boundary = boundsRectForPageIndex(Int(index))
-        return boundary.origin
+        progress = (pageIndex: currentPageIndex, pageCount: numberOfPages)
+    }
+    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attr = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath) ?? self.layoutAttributesForItem(at: itemIndexPath)
+        attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
+        return attr
+    }
+    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attr = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath) ?? self.layoutAttributesForItem(at: itemIndexPath)
+        attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
+        return attr
     }
 }
-
 class PresetCarouselGridLayout: CarouselGridLayout {
-    
-//    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-//        let attr = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath) ?? self.layoutAttributesForItem(at: itemIndexPath)
-//        attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
-//        return attr
-//    }
-//
-//    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-//        let attr = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath) ?? self.layoutAttributesForItem(at: itemIndexPath)
-//        attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
-//        return attr
-//    }
-    
 }
