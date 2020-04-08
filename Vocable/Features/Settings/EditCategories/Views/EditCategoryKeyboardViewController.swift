@@ -230,9 +230,9 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
                 //Do we let them create new categories here?
                 if let categoryIdentifier = categoryIdentifier {
                     //If not we don't need to fetch the original category name.
-                    let originalCategoryName = Category.fetchObject(in: context, matching: categoryIdentifier)
+                    //let originalCategoryName = Category.fetchObject(in: context, matching: categoryIdentifier)
+                    _ = Category.create(withUserEntry: _textTransaction.text, in: context)
                 } else {
-                    _ = Category.fetchOrCreate(in: context, matching: _textTransaction.text)
                 }
                 do {
                     try context.save()

@@ -14,7 +14,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     
     private lazy var categoryViewModels: [CategoryViewModel] =
     Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
-                      sortDescriptors: [NSSortDescriptor(keyPath: \Category.identifier, ascending: true)])
+                      sortDescriptors: [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)])
         .compactMap { CategoryViewModel($0) }
 
     private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, CategoryViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
@@ -120,12 +120,34 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return false
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         updateDataSource(animated: true, completion: { [weak self] in
             self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
                                                animateIfNeeded: true)
         })
+    }
+    
+    func handleMoveUpOrDown(identifier: String, identifier1: String) {
+        let context = NSPersistentContainer.shared.viewContext
+        if let result = Category.fetchObject(in: context, matching: identifier),
+           let result1 = Category.fetchObject(in: context, matching: identifier1){
+            print("result ordinal og: ", result.ordinal)
+            print("result1 ordinal og: ", result.ordinal)
+             result.setValue(result.ordinal - Int32(1), forKey: "ordinal")
+             result1.setValue(result1.ordinal + Int32(1), forKey: "ordinal")
+            print("result ordinal after: ", result.ordinal)
+            print("result1 ordinal after: ", result.ordinal)
+        }
+        do {
+            try context.save()
+            updateDataSource(animated: true)
+        } catch {
+            assertionFailure("Failed to move category: \(error)")
+        }
     }
 
     private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
@@ -139,7 +161,17 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     }
 
     @objc private func handleMoveCategoryUp(_ sender: UIButton) {
-        // TODO
+        
+        for cell in collectionView.visibleCells where sender.isDescendant(of: cell) {
+            
+            guard let indexPath = collectionView.indexPath(for: cell) else {
+                return
+            }
+            
+            handleMoveUpOrDown(identifier: categoryViewModels[indexPath.row].identifier, identifier1: categoryViewModels[indexPath.row - 1].identifier)
+            
+
+        }
     }
     
     @objc private func handleMoveCategoryDown(_ sender: UIButton) {
