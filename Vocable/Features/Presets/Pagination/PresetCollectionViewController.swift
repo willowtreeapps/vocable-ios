@@ -51,8 +51,6 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
         collectionView.backgroundColor = .collectionViewBackgroundColor
         
-        _ = ItemSelection.$presetsPageIndicatorProgress.combineLatest(layout.$progress)
-        
         updateLayoutForCurrentTraitCollection()
         
         var snapshot = NSDiffableDataSourceSnapshot<Int, Phrase>()

@@ -29,6 +29,11 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
                                                                                  managedObjectContext: NSPersistentContainer.shared.viewContext,
                                                                                  sectionNameKeyPath: nil,
                                                                                  cacheName: nil)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .init())
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
