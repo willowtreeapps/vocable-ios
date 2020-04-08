@@ -38,13 +38,13 @@ struct TextPresets {
     static let savedSayingsIdentifier = "preset_user_favorites"
     static let numPadIdentifier = "preset_user_keypad"
 
-    static var numPadPhrases: [PhraseViewModel] {
+    static let numPadPhrases: [PhraseViewModel] = {
         var numbers = (1...9).map { PhraseViewModel(unpersistedPhrase: "\($0)")}
         numbers.append(PhraseViewModel(unpersistedPhrase: "0"))
         let responses = [PhraseViewModel(unpersistedPhrase: NSLocalizedString("No", comment: "'No' num pad response")),
                          PhraseViewModel(unpersistedPhrase: NSLocalizedString("Yes", comment: "'Yes' num pad response"))]
         return numbers + responses
-    }
+    }()
 
     static var presets: PresetData? {
         if let json = dataFromBundle() {
