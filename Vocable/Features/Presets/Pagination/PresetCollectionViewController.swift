@@ -9,6 +9,7 @@
 import CoreData
 import UIKit
 import Combine
+import AVFoundation
 
 class PresetCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
     
@@ -181,7 +182,13 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        ItemSelection.selectedPhrase = PhraseViewModel(fetchedResultsController?.object(at: indexPath))
+        let selectedPhrase = PhraseViewModel(fetchedResultsController?.object(at: indexPath))
+        ItemSelection.selectedPhrase = selectedPhrase
+
+        // Dispatch to get off the main queue for performance
+        DispatchQueue.global(qos: .userInitiated).async {
+            AVSpeechSynthesizer.shared.speak(selectedPhrase?.utterance ?? "", language: AppConfig.activePreferredLanguageCode)
+        }
     }
 
 }
