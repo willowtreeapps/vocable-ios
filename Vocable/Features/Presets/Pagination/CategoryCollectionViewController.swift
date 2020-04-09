@@ -32,7 +32,13 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .init())
+        if let selectedCategoryID = ItemSelection.selectedCategoryID {
+            let category = fetchResultsController.managedObjectContext.object(with: selectedCategoryID)
+            let selectedIndexPath = dataSource.indexPath(for: category as! Category)
+            if let selectedIndexPath = selectedIndexPath {
+                collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .init())
+            }
+        }
     }
 
     override func viewDidLoad() {
@@ -47,11 +53,16 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
         fetchResultsController.delegate = self
         try? fetchResultsController.performFetch()
         updateDataSource(animated: false)
+        
+        self.clearsSelectionOnViewWillAppear = false
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateLayoutForCurrentTraitCollection()
+        if let indexPath = self.collectionView.indexPathsForSelectedItems?.first {
+            self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
+        }
     }
 
     func updateLayoutForCurrentTraitCollection() {

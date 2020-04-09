@@ -183,7 +183,17 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedPhrase = PhraseViewModel(fetchedResultsController?.object(at: indexPath))
+        guard let identifier = dataSource.itemIdentifier(for: indexPath) else { return }
+        
+        let selectedPhrase: PhraseViewModel?
+        
+        switch identifier {
+        case .presetsDefault(let phrase):
+            selectedPhrase = PhraseViewModel(phrase)
+        case .presetsNumPad(let phraseViewModel):
+            selectedPhrase = phraseViewModel
+        }
+        
         ItemSelection.selectedPhrase = selectedPhrase
 
         // Dispatch to get off the main queue for performance

@@ -345,6 +345,24 @@ class PresetsViewController: UICollectionViewController {
             childViewController.didMove(toParent: self)
         }
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? PresetPaginationContainerCollectionViewCell,
+            let childViewController = cell.presetCollectionViewController {
+            
+            childViewController.willMove(toParent: nil)
+            childViewController.removeFromParent()
+            childViewController.view.removeFromSuperview()
+        }
+        
+        if let cell = cell as? CategoryPaginationContainerCollectionViewCell,
+            let childViewController = cell.categoryCollectionViewController {
+            
+            childViewController.willMove(toParent: nil)
+            childViewController.removeFromParent()
+            childViewController.view.removeFromSuperview()
+        }
+    }
 
     // swiftlint:disable cyclomatic_complexity
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

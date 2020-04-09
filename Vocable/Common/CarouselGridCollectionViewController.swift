@@ -221,6 +221,14 @@ class CarouselGridLayout: UICollectionViewLayout {
         }.joined())
     }
     
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        for page in pages where page.indices.contains(indexPath.item) {
+            let attributes = page.attributes(forItemAt: indexPath)
+            return attributes
+        }
+        return nil
+    }
+    
     private var lastInvalidatedSize: CGSize = .zero
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
