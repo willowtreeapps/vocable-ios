@@ -18,11 +18,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cp-mz-ymB">
-<<<<<<< HEAD
                         <rect key="frame" x="20" y="44" width="483" height="21"/>
-=======
-                        <rect key="frame" x="0.0" y="5" width="523" height="99"/>
->>>>>>> bad08b7c2a0c84d07355e837a7d2416f4d755e06
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                         <color key="textColor" name="DefaultFontColor"/>
                         <nil key="highlightedColor"/>
@@ -30,17 +26,10 @@
                 </subviews>
             </view>
             <constraints>
-<<<<<<< HEAD
                 <constraint firstAttribute="bottomMargin" secondItem="2cp-mz-ymB" secondAttribute="bottom" id="5hh-qs-PAG"/>
                 <constraint firstAttribute="trailingMargin" secondItem="2cp-mz-ymB" secondAttribute="trailing" id="7AP-Dl-KXK"/>
                 <constraint firstItem="2cp-mz-ymB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leadingMargin" id="R47-yO-ByN"/>
                 <constraint firstItem="2cp-mz-ymB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="topMargin" id="mto-8r-er4"/>
-=======
-                <constraint firstItem="2cp-mz-ymB" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" id="LAz-mG-GYf"/>
-                <constraint firstItem="2cp-mz-ymB" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="Nlt-9P-fkd"/>
-                <constraint firstItem="2cp-mz-ymB" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="cYY-nM-jej"/>
-                <constraint firstItem="2cp-mz-ymB" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="czM-pn-NnA"/>
->>>>>>> bad08b7c2a0c84d07355e837a7d2416f4d755e06
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="550" height="122"/>
