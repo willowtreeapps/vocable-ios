@@ -276,10 +276,15 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .pagination(let itemIdentifier, _):
+        case .pagination(let itemIdentifier, let direction):
             switch itemIdentifier {
             case .paginatedPresets:
-                return ItemSelection.presetsPageIndicatorProgress.pageCount > 1
+                let pageProgress = ItemSelection.presetsPageIndicatorProgress
+                if pageProgress.pageCount <= 1 ||
+                    (pageProgress.pageIndex == pageProgress.pageCount - 1 && direction == .forward) {
+                    return false
+                }
+                return true
             default:
                 return true
             }
@@ -296,10 +301,17 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .pagination(let itemIdentifier, _):
+        case .pagination(let itemIdentifier, let direction):
             switch itemIdentifier {
             case .paginatedPresets:
-                return ItemSelection.presetsPageIndicatorProgress.pageCount > 1
+                let pageProgress = ItemSelection.presetsPageIndicatorProgress
+                // If there is only one page disable both pagination buttons or the user is on the last page
+                // disable the forward pagination button
+                if pageProgress.pageCount <= 1 ||
+                    (pageProgress.pageIndex == pageProgress.pageCount - 1 && direction == .forward) {
+                    return false
+                }
+                return true
             default:
                 return true
             }

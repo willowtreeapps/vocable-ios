@@ -25,7 +25,14 @@ class PresetPaginationCollectionViewCell: PaginationCollectionViewCell {
     
     private func commonInit() {
         _ = ItemSelection.$presetsPageIndicatorProgress.sink(receiveValue: { [weak self] pageProgress in
-            let alpha = CGFloat(pageProgress.pageCount > 1 ? 1.0 : 0.5)
+            var isDisabled = false
+            // If there is only one page disable both pagination buttons or the user is on the last page
+            // disable the forward pagination button
+            if pageProgress.pageCount <= 1 ||
+                (pageProgress.pageIndex == pageProgress.pageCount - 1 && self?.paginationDirection == .forward) {
+                isDisabled = true
+            }
+            let alpha = CGFloat(isDisabled ? 0.5 : 1.0)
             self?.borderedView.alpha = alpha
         }).store(in: &self.disposables)
         fillColor = .defaultCellBackgroundColor
