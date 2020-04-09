@@ -40,6 +40,7 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
 
         collectionView.register(CategoryItemCollectionViewCell.self, forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
         collectionView.backgroundColor = .categoryBackgroundColor
+        collectionView.delaysContentTouches = true
 
         updateLayoutForCurrentTraitCollection()
 

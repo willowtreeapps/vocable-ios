@@ -76,6 +76,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
 
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
         collectionView.backgroundColor = .collectionViewBackgroundColor
+        collectionView.delaysContentTouches = true
         
         updateLayoutForCurrentTraitCollection()
         

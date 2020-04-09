@@ -32,8 +32,11 @@ class PresetPaginationCollectionViewCell: PaginationCollectionViewCell {
                 (pageProgress.pageIndex == pageProgress.pageCount - 1 && self?.paginationDirection == .forward) {
                 isDisabled = true
             }
-            let alpha = CGFloat(isDisabled ? 0.5 : 1.0)
-            self?.borderedView.alpha = alpha
+            self?.borderedView.alpha = CGFloat(isDisabled ? 0.5 : 1.0)
+            // Makes selection color not green when button is disabled
+            if let isSelected = self?.isSelected, isSelected, let fillColor = self?.fillColor {
+                self?.borderedView.fillColor = isDisabled ? fillColor : .cellSelectionColor
+            }
         }).store(in: &self.disposables)
         fillColor = .defaultCellBackgroundColor
     }
