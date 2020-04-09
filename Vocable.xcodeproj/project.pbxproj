@@ -103,6 +103,7 @@
 		A9CF2AF5242D4EF1005633A7 /* SensitivityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9CF2AF4242D4EF1005633A7 /* SensitivityCollectionViewCell.xib */; };
 		A9CF2AF7242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF2AF6242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift */; };
 		A9CF2AF9242D4F0A005633A7 /* SensitivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF2AF8242D4F0A005633A7 /* SensitivityCollectionViewCell.swift */; };
+		A9DAB550243F9FD9002E5BC9 /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAB54F243F9FD9002E5BC9 /* Pagination.swift */; };
 		A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */; };
 		A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FF23F4900C0094DB64 /* TextExpression.swift */; };
 		A9DE170223F492B20094DB64 /* Array+Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE170123F492B20094DB64 /* Array+Split.swift */; };
@@ -125,7 +126,6 @@
 		B81D235D23FEDAF9005741E8 /* UIPageViewController+ManualPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D235C23FEDAF9005741E8 /* UIPageViewController+ManualPagination.swift */; };
 		B81D236623FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D236423FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift */; };
 		B81D236723FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B81D236523FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib */; };
-		B81D236923FF3C82005741E8 /* PaginationContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D236823FF3C82005741E8 /* PaginationContainerCollectionViewCell.swift */; };
 		B838200F23F4B011005A79CD /* VocableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */; };
 		B838202323FC6B38005A79CD /* PaginationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838202223FC6B38005A79CD /* PaginationCollectionViewCell.swift */; };
 		B838202F23FD894C005A79CD /* CategoryPaginationContainerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B838202E23FD894C005A79CD /* CategoryPaginationContainerCollectionViewCell.xib */; };
@@ -255,6 +255,7 @@
 		A9CF2AF4242D4EF1005633A7 /* SensitivityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SensitivityCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9CF2AF6242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DwellTimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		A9CF2AF8242D4F0A005633A7 /* SensitivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensitivityCollectionViewCell.swift; sourceTree = "<group>"; };
+		A9DAB54F243F9FD9002E5BC9 /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
 		A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSuggestionController.swift; sourceTree = "<group>"; };
 		A9DE16FF23F4900C0094DB64 /* TextExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExpression.swift; sourceTree = "<group>"; };
 		A9DE170123F492B20094DB64 /* Array+Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Split.swift"; sourceTree = "<group>"; };
@@ -277,7 +278,6 @@
 		B81D235C23FEDAF9005741E8 /* UIPageViewController+ManualPagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+ManualPagination.swift"; sourceTree = "<group>"; };
 		B81D236423FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageIndicatorCollectionViewCell.swift; sourceTree = "<group>"; };
 		B81D236523FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageIndicatorCollectionViewCell.xib; sourceTree = "<group>"; };
-		B81D236823FF3C82005741E8 /* PaginationContainerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationContainerCollectionViewCell.swift; sourceTree = "<group>"; };
 		B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableCollectionViewCell.swift; sourceTree = "<group>"; };
 		B838202223FC6B38005A79CD /* PaginationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B838202C23FD8934005A79CD /* CategoryPaginationContainerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryPaginationContainerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -510,6 +510,19 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		A9DAB54E243F9F52002E5BC9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B838202223FC6B38005A79CD /* PaginationCollectionViewCell.swift */,
+				A9DFCC19242BDD5300136136 /* PresetPaginationCollectionViewCell.swift */,
+				A9DFCC17242BDCD700136136 /* CategoryPaginationCollectionViewCell.swift */,
+				B81D236423FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift */,
+				B81D236523FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib */,
+				B81D236A240030D8005741E8 /* Containers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A9DFCC21242D3A5000136136 /* TimingSensitivity */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,14 +548,9 @@
 		B81D235723FED551005741E8 /* Pagination */ = {
 			isa = PBXGroup;
 			children = (
-				B81D236A240030D8005741E8 /* Containers */,
-				B838202223FC6B38005A79CD /* PaginationCollectionViewCell.swift */,
-				A9DFCC19242BDD5300136136 /* PresetPaginationCollectionViewCell.swift */,
-				A9DFCC17242BDCD700136136 /* CategoryPaginationCollectionViewCell.swift */,
-				B81D236423FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift */,
-				B81D236523FF31F6005741E8 /* PageIndicatorCollectionViewCell.xib */,
 				A9F56FC924378ED6008162B6 /* CategoryCollectionViewController.swift */,
 				A946D824243B8EFF00E76104 /* PresetCollectionViewController.swift */,
+				A9DAB54E243F9F52002E5BC9 /* Views */,
 			);
 			path = Pagination;
 			sourceTree = "<group>";
@@ -550,7 +558,6 @@
 		B81D236A240030D8005741E8 /* Containers */ = {
 			isa = PBXGroup;
 			children = (
-				B81D236823FF3C82005741E8 /* PaginationContainerCollectionViewCell.swift */,
 				B838202E23FD894C005A79CD /* CategoryPaginationContainerCollectionViewCell.xib */,
 				B838202C23FD8934005A79CD /* CategoryPaginationContainerCollectionViewCell.swift */,
 				B81D235A23FED8EF005741E8 /* PresetPaginationContainerCollectionViewCell.xib */,
@@ -654,6 +661,7 @@
 				B81AC0A02405AF1100972E85 /* CategoryViewModel.swift */,
 				B81AC0A42405B62900972E85 /* PhraseViewModel.swift */,
 				A94A6CCC2412D38A00625275 /* NavigationModel.swift */,
+				A9DAB54F243F9FD9002E5BC9 /* Pagination.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -823,7 +831,6 @@
 				6BFB18C424004406002C3515 /* NSManagedObject+Helpers.swift in Sources */,
 				A94A6CCD2412D38A00625275 /* NavigationModel.swift in Sources */,
 				B81D236623FF31F6005741E8 /* PageIndicatorCollectionViewCell.swift in Sources */,
-				B81D236923FF3C82005741E8 /* PaginationContainerCollectionViewCell.swift in Sources */,
 				6B823BCA23F4ADE30099F65E /* ControlsView.swift in Sources */,
 				6B823BCE23F4ADE30099F65E /* Queue.swift in Sources */,
 				B81AC0A12405AF1100972E85 /* CategoryViewModel.swift in Sources */,
@@ -841,6 +848,7 @@
 				6B9DFA6023E889DB0037673E /* Extensions.swift in Sources */,
 				6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */,
 				B8DA9DFE23F3407000FEBE19 /* TextPresets.swift in Sources */,
+				A9DAB550243F9FD9002E5BC9 /* Pagination.swift in Sources */,
 				9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */,
 				6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */,
 				6B823BCF23F4ADE30099F65E /* TunningViewController.swift in Sources */,
