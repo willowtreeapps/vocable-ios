@@ -12,45 +12,35 @@ import CoreData
 
 class EditCategoriesCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
     
-    private lazy var categoryViewModels: [CategoryViewModel] =
-    Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
-                      sortDescriptors: [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)])
-        .compactMap { CategoryViewModel($0) }
-
-    private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, CategoryViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
+    private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, Category>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, category) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         
-        var cell = EditCategoriesDefaultCollectionViewCell()
+        let cell: EditCategoriesDefaultCollectionViewCell
         if self.traitCollection.horizontalSizeClass == .compact && self.traitCollection.verticalSizeClass == .regular {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditCategoriesCompactCollectionViewCell", for: indexPath) as! EditCategoriesDefaultCollectionViewCell
         } else {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoriesDefaultCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoriesDefaultCollectionViewCell
-            
-            cell.topSeparator.isHidden = !self.layout.separatorMask(for: indexPath).contains(.top)
-            cell.bottomSeparator.isHidden = !self.layout.separatorMask(for: indexPath).contains(.bottom)
         }
         
-        cell.setup(title: "\(indexPath.row + 1). \(self.categoryViewModels[indexPath.row].name)")
+        self.setupCell(indexPath: indexPath, cell: cell, category: category)
         
         cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
-        cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
         
         cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
-        cell.moveDownButton.isEnabled = self.setDownButtonEnabled(indexPath: indexPath)
         
         cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
         
         return cell
     }
 
-    private lazy var fetchRequest: NSFetchRequest<Phrase> = {
-        let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
+    private lazy var fetchRequest: NSFetchRequest<Category> = {
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)]
         return request
     }()
+    
 
-    private lazy var fetchResultsController = NSFetchedResultsController<Phrase>(fetchRequest: self.fetchRequest,
+    private lazy var fetchResultsController = NSFetchedResultsController<Category>(fetchRequest: self.fetchRequest,
                                                                                  managedObjectContext: NSPersistentContainer.shared.viewContext,
                                                                                  sectionNameKeyPath: nil,
                                                                                  cacheName: nil)
@@ -131,51 +121,74 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         })
     }
     
-    func handleMoveUpOrDown(identifier: String, identifier1: String) {
-        let context = NSPersistentContainer.shared.viewContext
-        if let result = Category.fetchObject(in: context, matching: identifier),
-           let result1 = Category.fetchObject(in: context, matching: identifier1){
-            print("result ordinal og: ", result.ordinal)
-            print("result1 ordinal og: ", result.ordinal)
-             result.setValue(result.ordinal - Int32(1), forKey: "ordinal")
-             result1.setValue(result1.ordinal + Int32(1), forKey: "ordinal")
-            print("result ordinal after: ", result.ordinal)
-            print("result1 ordinal after: ", result.ordinal)
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        guard [.move, .update].contains(type) else { return }
+        
+        updateDataSource(animated: true)
+        
+        if let newIndexPath = newIndexPath {
+            setupCell(indexPath: newIndexPath)
         }
-        do {
-            try context.save()
-            updateDataSource(animated: true)
-        } catch {
-            assertionFailure("Failed to move category: \(error)")
+        if let oldIndexPath = indexPath {
+            setupCell(indexPath: oldIndexPath)
         }
     }
-
+    
+    func setupCell(indexPath: IndexPath, cell inputCell: EditCategoriesDefaultCollectionViewCell? = nil, category: Category? = nil) {
+        let cell: EditCategoriesDefaultCollectionViewCell
+        cell = inputCell ?? collectionView.cellForItem(at: indexPath) as! EditCategoriesDefaultCollectionViewCell
+        let category = category ?? fetchResultsController.object(at: indexPath)
+        cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
+        cell.moveDownButton.isEnabled = self.setDownButtonEnabled(indexPath: indexPath)
+        cell.setup(title: "\(indexPath.row + 1). \(category.name ?? "")")
+        
+        cell.separatorMask = self.layout.separatorMask(for: indexPath)
+    }
+    
     private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
         let content = fetchResultsController.fetchedObjects ?? []
-        var snapshot = NSDiffableDataSourceSnapshot<Int, CategoryViewModel>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Category>()
         snapshot.appendSections([0])
-        snapshot.appendItems(categoryViewModels)
+        snapshot.appendItems(content)
         diffableDataSource.apply(snapshot,
                                  animatingDifferences: animated,
                                  completion: completion)
     }
 
     @objc private func handleMoveCategoryUp(_ sender: UIButton) {
-        
-        for cell in collectionView.visibleCells where sender.isDescendant(of: cell) {
-            
-            guard let indexPath = collectionView.indexPath(for: cell) else {
-                return
-            }
-            
-            handleMoveUpOrDown(identifier: categoryViewModels[indexPath.row].identifier, identifier1: categoryViewModels[indexPath.row - 1].identifier)
-            
-
+        guard let fromIndexPath = indexPath(containing: sender) else {
+            assertionFailure("Failed to obtain index path")
+            return
         }
+        guard let toIndexPath = indexPath(before: fromIndexPath) else {
+            assertionFailure("Failed to obtain index before indexPath")
+            return
+        }
+        let fromCategory = fetchResultsController.object(at: fromIndexPath)
+        let toCategory = fetchResultsController.object(at: toIndexPath)
+        
+        swapOrdinal(fromCategory: fromCategory, toCategory: toCategory)
+        
+        saveContext()
+        
     }
     
     @objc private func handleMoveCategoryDown(_ sender: UIButton) {
-        // TODO
+        guard let fromIndexPath = indexPath(containing: sender) else {
+                   assertionFailure("Failed to obtain index path")
+                   return
+               }
+               guard let toIndexPath = indexPath(after: fromIndexPath) else {
+                   assertionFailure("Failed to obtain index before indexPath")
+                   return
+               }
+               let fromCategory = fetchResultsController.object(at: fromIndexPath)
+               let toCategory = fetchResultsController.object(at: toIndexPath)
+               
+               swapOrdinal(fromCategory: fromCategory, toCategory: toCategory)
+               
+               saveContext()
+        
     }
     
     @objc private func handleShowEditCategoryDetail(_ sender: UIButton) {
@@ -186,9 +199,55 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
             }
             
             if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as? EditCategoryDetailViewController {
-                vc.categoryName = categoryViewModels[indexPath.row].name
+                
+                EditCategoryDetailViewController.category = fetchResultsController.object(at: indexPath)
                 show(vc, sender: nil)
             }
+        }
+    }
+    
+    private func indexPath(after indexPath: IndexPath) -> IndexPath? {
+        let itemsInSection = collectionView.numberOfItems(inSection: 0)
+        let candidateIndex = indexPath.item + 1
+        if candidateIndex >= itemsInSection {
+            return nil
+        } else {
+            return IndexPath(row: candidateIndex, section: 0)
+        }
+    }
+    
+    private func indexPath(before indexPath: IndexPath) -> IndexPath? {
+        let candidateIndex = indexPath.item - 1
+        if candidateIndex < 0 {
+            return nil
+        } else {
+            return IndexPath(row: candidateIndex, section: 0)
+        }
+    }
+    
+    private func indexPath(containing view: UIView) -> IndexPath? {
+        
+        for cell in collectionView.visibleCells where view.isDescendant(of: cell) {
+            if let indexPath = collectionView.indexPath(for: cell) {
+                return indexPath
+            }
+        }
+        return nil
+    }
+    
+    private func swapOrdinal(fromCategory: Category, toCategory: Category) {
+        let fromOrdinal = fromCategory.ordinal
+        let toOrdinal = toCategory.ordinal
+        
+        fromCategory.ordinal = toOrdinal
+        toCategory.ordinal = fromOrdinal
+    }
+    
+    private func saveContext() {
+        do {
+            try fetchResultsController.managedObjectContext.save()
+        } catch {
+            assertionFailure("Failed to move category: \(error)")
         }
     }
 }

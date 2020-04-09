@@ -7,18 +7,20 @@
 //
 
 import UIKit
+import CoreData
 
 class EditCategoryDetailViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var editButton: GazeableButton!
     
-    var categoryName = ""
-
+    static var category: Category?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = categoryName
-        // Do any additional setup after loading the view.
+        titleLabel.text = EditCategoryDetailViewController.category?.name
+        editButton.isHidden = !EditCategoryDetailViewController.category!.isUserGenerated
     }
     @IBAction func backButtonPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -27,7 +29,7 @@ class EditCategoryDetailViewController: UIViewController {
     @IBAction func editButtonPressed(_ sender: Any) {
            if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryKeyboardViewController") as? EditCategoryKeyboardViewController {
                vc.modalPresentationStyle = .fullScreen
-               vc.categoryIdentifier = categoryName
+            
             present(vc, animated: true)
                return
            }

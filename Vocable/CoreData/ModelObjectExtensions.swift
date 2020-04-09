@@ -15,6 +15,7 @@ extension Category: NSManagedObjectIdentifiable {
         super.awakeFromInsert()
         setPrimitiveValue(Date(), forKey: #keyPath(creationDate))
         setPrimitiveValue(false, forKey: #keyPath(isUserGenerated))
+        setPrimitiveValue(Int32.max, forKey: #keyPath(ordinal))
     }
 }
 

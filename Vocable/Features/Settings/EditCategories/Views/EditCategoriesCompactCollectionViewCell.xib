@@ -87,7 +87,7 @@
                 <outlet property="moveUpButton" destination="Ieb-WK-NlS" id="aLg-ju-4le"/>
                 <outlet property="showCategoryDetailButton" destination="PfR-1l-Qp7" id="csS-I7-Imd"/>
             </connections>
-            <point key="canvasLocation" x="1678.2608695652175" y="-8.7053571428571423"/>
+            <point key="canvasLocation" x="1672" y="-7"/>
         </collectionViewCell>
     </objects>
     <resources>

@@ -18,10 +18,26 @@ class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var showCategoryDetailButton: GazeableButton!
     
-    @IBOutlet var topSeparator: UIView!
-    @IBOutlet var bottomSeparator: UIView!
+    @IBOutlet private var topSeparator: UIView!
+    @IBOutlet private var bottomSeparator: UIView!
+    
+    var separatorMask: CellSeparatorMask = .both {
+        didSet{
+            updateSeparatorMask()
+        }
+    }
     
     func setup(title: String) {
         categoryNameLabel.text = title
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        updateSeparatorMask()
+    }
+    
+    private func updateSeparatorMask() {
+        topSeparator?.isHidden = !separatorMask.contains(.top)
+        bottomSeparator?.isHidden = !separatorMask.contains(.bottom)
     }
 }

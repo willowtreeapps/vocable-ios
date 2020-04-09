@@ -19,7 +19,7 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
     
     private var _textTransaction = TextTransaction(text: "")
     
-    var categoryIdentifier: String?
+    private let context = NSPersistentContainer.shared.viewContext
     
     private var textTransaction: TextTransaction {
         return _textTransaction
@@ -49,8 +49,8 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let phraseIdentifier = categoryIdentifier {
-            _textTransaction = TextTransaction(text: phraseIdentifier)
+        if let categoryName = EditCategoryDetailViewController.category?.name {
+            _textTransaction = TextTransaction(text: categoryName)
         }
 
         setupCollectionView()
@@ -222,18 +222,12 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
         case .topBarButton(let buttonType):
             (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
             collectionView.deselectItem(at: indexPath, animated: true)
-            let context = NSPersistentContainer.shared.viewContext
+            
             switch buttonType {
             case .close:
                 dismiss(animated: true, completion: nil)
             case .confirmEdit:
-                //Do we let them create new categories here?
-                if let categoryIdentifier = categoryIdentifier {
-                    //If not we don't need to fetch the original category name.
-                    //let originalCategoryName = Category.fetchObject(in: context, matching: categoryIdentifier)
-                    _ = Category.create(withUserEntry: _textTransaction.text, in: context)
-                } else {
-                }
+                EditCategoryDetailViewController.category?.name = _textTransaction.text
                 do {
                     try context.save()
                     let alertMessage = NSLocalizedString("Changes Saved", comment: "Changes Saved Toast Message")
@@ -344,4 +338,3 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
         }
     }
 }
-

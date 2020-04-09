@@ -207,7 +207,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func updateOrdinalValuesForCategories(in context: NSManagedObjectContext) throws {
 
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, false)
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \Category.ordinal, ascending: true),
             NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)
