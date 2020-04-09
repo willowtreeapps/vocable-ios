@@ -90,6 +90,8 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         
         ItemSelection.$selectedCategoryID.sink { (selectedCategoryID) in
             DispatchQueue.main.async {
+                // Reset paging progress when selecting a new category
+                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .init(), animated: false)
                 self.updateFetchedResultsController(with: selectedCategoryID)
                 self.handleSelectedCategory()
             }
