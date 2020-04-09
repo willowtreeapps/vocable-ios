@@ -61,7 +61,11 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
             layout.numberOfColumns = 2
+<<<<<<< HEAD
             layout.numberOfRows = .fixedCount(3)
+=======
+            layout.numberOfRows = .fixedCount(4)
+>>>>>>> bad08b7c2a0c84d07355e837a7d2416f4d755e06
         case (.compact, .regular):
             layout.numberOfColumns = 1
             layout.numberOfRows = .fixedCount(3)

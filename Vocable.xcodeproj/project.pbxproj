@@ -541,6 +541,7 @@
 				A9B6960E2433CF23004E6960 /* EditCategoriesCollectionViewController.swift */,
 				7192E4112433E4BE008E4A0A /* EditCategoryDetailViewController.swift */,
 				7192E4132433E4F3008E4A0A /* EditCategoryDetailCollectionViewController.swift */,
+				714E48FC24350CB900FA9035 /* EditCategoryKeyboardViewController.swift */,
 				A9B696032433C3DF004E6960 /* Views */,
 			);
 			path = EditCategories;

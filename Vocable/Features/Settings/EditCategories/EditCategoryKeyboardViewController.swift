@@ -1,8 +1,8 @@
 //
-//  EditKeyboardViewController.swift
-//  Vocable AAC
+//  EditCategoryKeyboardViewController.swift
+//  Vocable
 //
-//  Created by Jesse Morgan on 3/11/20.
+//  Created by Thomas Shealy on 4/1/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import AVFoundation
 import UIKit
 import CoreData
 
-class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDelegate {
+class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDelegate {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
@@ -54,6 +54,7 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
             let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
             _textTransaction = TextTransaction(text: originalPhrase?.utterance ?? "")
         }
+
         setupCollectionView()
         configureDataSource()
     }
@@ -139,12 +140,12 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         snapshot.appendSections([.textField])
         if traitCollection.horizontalSizeClass == .compact
             && traitCollection.verticalSizeClass == .regular {
-            snapshot.appendItems([.topBarButton(.back),
+            snapshot.appendItems([.topBarButton(.close),
                                   .topBarButton(.confirmEdit),
                                   .textField(textTransaction.attributedText)
             ])
         } else {
-            snapshot.appendItems([.topBarButton(.back),
+            snapshot.appendItems([.topBarButton(.close),
                                   .textField(textTransaction.attributedText),
                                   .topBarButton(.confirmEdit)])
         }
@@ -220,7 +221,7 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
     // swiftlint:disable cyclomatic_complexity
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
-        for selectedPath in collectionView.indexPathsForSelectedItems ?? [] { 
+        for selectedPath in collectionView.indexPathsForSelectedItems ?? [] {
             if selectedPath.section == indexPath.section && selectedPath != indexPath {
                 collectionView.deselectItem(at: selectedPath, animated: true)
             }
@@ -232,35 +233,11 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
             collectionView.deselectItem(at: indexPath, animated: true)
             let context = NSPersistentContainer.shared.viewContext
             switch buttonType {
-            case .back:
-                if let phraseIdentifier = phraseIdentifier {
-                    let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                    if originalPhrase?.utterance != _textTransaction.text {
-                        handleExitAlert()
-                        break
-                    }
-                }
-                self.navigationController?.popViewController(animated: true)
+            case .close:
+                dismiss(animated: true, completion: nil)
             case .confirmEdit:
-                var isNewPhrase = false
-                let context = NSPersistentContainer.shared.viewContext
-                if let phraseIdentifier = phraseIdentifier {
-                    let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                    originalPhrase?.utterance = _textTransaction.text
-                } else {
-                    _ = Phrase.create(withUserEntry: _textTransaction.text, in: context)
-                    isNewPhrase = true
-                }
-                do {
-                    try context.save()
-                    let alertMessage = isNewPhrase ? NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings") :
-                        NSLocalizedString("Changes saved", comment: "Changes saved")
-                    
-                    ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-
-                } catch {
-                    assertionFailure("Failed to save user generated phrase: \(error)")
-                }
+                let alertMessage = NSLocalizedString("Changes Saved", comment: "Changes Saved Toast Message")
+                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
             default:
                 break
             }
@@ -273,7 +250,7 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
                     break
                 }
                 DispatchQueue.global(qos: .userInitiated).async {
-                    AVSpeechSynthesizer.shared.speak(self.textTransaction.text, language: AppConfig.activePreferredLanguageCode)
+                    AVSpeechSynthesizer.shared.speak(self.textTransaction.text)
                 }
             case .clear:
                 setTextTransaction(TextTransaction(text: "", intent: .none))
@@ -331,7 +308,7 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
     }
     
     private func setTextTransaction(_ transaction: TextTransaction) {
-        self._textTransaction = transaction
+        self._textTransaction = TextTransaction(text: transaction.text.capitalized)
         
         // Update suggestions
         if textTransaction.isHint || textTransaction.text.last == " " {
@@ -363,3 +340,4 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         }
     }
 }
+
