@@ -48,6 +48,20 @@
                                             <action selector="backToEditCategories:" destination="KLI-zL-Q9x" eventType="touchUpInside" id="NzM-GP-3Pc"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y3d-hd-xdZ" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                        <rect key="frame" x="1034" y="0.0" width="96" height="96"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <color key="tintColor" name="DefaultFontColor"/>
+                                        <state key="normal" image="xmark.circle" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="34" weight="bold"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="plus" catalog="system"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="addButtonPressed:" destination="KLI-zL-Q9x" eventType="primaryActionTriggered" id="mkJ-MP-RWS"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
@@ -56,6 +70,7 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="16"/>
                                     </constraint>
                                     <constraint firstItem="0CD-i2-i5g" firstAttribute="centerX" secondItem="FaL-BL-aEw" secondAttribute="centerX" id="UfO-TZ-C2g"/>
+                                    <constraint firstItem="y3d-hd-xdZ" firstAttribute="width" secondItem="00c-RK-HF1" secondAttribute="width" id="Y2b-FS-QNd"/>
                                     <constraint firstItem="00c-RK-HF1" firstAttribute="leading" secondItem="FaL-BL-aEw" secondAttribute="leadingMargin" id="Yvt-vZ-hNf"/>
                                     <constraint firstAttribute="height" constant="96" id="cfS-cm-2vy">
                                         <variation key="heightClass=compact" constant="48"/>
@@ -63,11 +78,13 @@
                                     </constraint>
                                     <constraint firstAttribute="bottomMargin" secondItem="00c-RK-HF1" secondAttribute="bottom" id="dFT-Wk-Bu6"/>
                                     <constraint firstItem="0CD-i2-i5g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="00c-RK-HF1" secondAttribute="trailing" constant="24" id="oK7-wd-nL0"/>
+                                    <constraint firstItem="y3d-hd-xdZ" firstAttribute="height" secondItem="00c-RK-HF1" secondAttribute="height" id="pS4-za-txR"/>
                                     <constraint firstItem="00c-RK-HF1" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="topMargin" id="pyq-nd-AXg"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="y3d-hd-xdZ" secondAttribute="trailing" id="u4m-Lt-OzX"/>
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
                                 <rect key="frame" x="32" y="152" width="1130" height="512"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="322.5" id="V2b-Pm-qsk"/>
@@ -81,7 +98,7 @@
                                     <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="380.5" y="688" width="433.5" height="94"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>
@@ -97,6 +114,7 @@
                         </subviews>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
+                            <constraint firstItem="y3d-hd-xdZ" firstAttribute="top" secondItem="KsA-J6-p6N" secondAttribute="top" constant="32" id="0Yo-gb-lhZ"/>
                             <constraint firstItem="ZPM-Ab-mlI" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="bottom" constant="24" id="E7v-Tz-7x3">
                                 <variation key="heightClass=compact" constant="8"/>
                             </constraint>
@@ -360,6 +378,7 @@
     <resources>
         <image name="arrow.left" catalog="system" width="64" height="48"/>
         <image name="pencil" catalog="system" width="64" height="56"/>
+        <image name="plus" catalog="system" width="64" height="56"/>
         <image name="xmark.circle" catalog="system" width="64" height="60"/>
         <namedColor name="Background">
             <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

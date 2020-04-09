@@ -20,6 +20,7 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
     private var _textTransaction = TextTransaction(text: "")
     
     var phraseIdentifier: String?
+    var isAddingCategory = false
     
     private var textTransaction: TextTransaction {
         return _textTransaction
@@ -49,11 +50,6 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let phraseIdentifier = phraseIdentifier {
-            let context = NSPersistentContainer.shared.viewContext
-            let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-            _textTransaction = TextTransaction(text: originalPhrase?.utterance ?? "")
-        }
 
         setupCollectionView()
         configureDataSource()
@@ -236,8 +232,23 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
             case .close:
                 dismiss(animated: true, completion: nil)
             case .confirmEdit:
-                let alertMessage = NSLocalizedString("Changes Saved", comment: "Changes Saved Toast Message")
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                let context = NSPersistentContainer.shared.viewContext
+                if isAddingCategory {
+                    _ = Category.create(withUserEntry: _textTransaction.text, in: context)
+                } else {
+                    guard let category = EditCategoryDetailViewController.category else { return }
+                    category.name = _textTransaction.text
+                }
+                do {
+                    try context.save()
+                    let alertMessage = isAddingCategory ? NSLocalizedString("Saved to Custom Categories", comment: "Saved to Custom Categories") :
+                        NSLocalizedString("Changes saved", comment: "Changes saved")
+                    
+                    ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+
+                } catch {
+                    assertionFailure("Failed to save changes or new user generated category: \(error)")
+                }
             default:
                 break
             }
