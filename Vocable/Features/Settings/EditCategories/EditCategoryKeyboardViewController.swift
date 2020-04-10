@@ -17,7 +17,7 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
     
     @IBOutlet var collectionView: UICollectionView!
     
-    private var _textTransaction = TextTransaction(text: "")
+    var _textTransaction = TextTransaction(text: "")
     
     var phraseIdentifier: String?
     var isAddingCategory = false
@@ -266,7 +266,7 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
             case .clear:
                 setTextTransaction(TextTransaction(text: "", intent: .none))
             case .backspace:
-                setTextTransaction(textTransaction.deletingLastToken())
+                setTextTransaction(TextTransaction(text: _textTransaction.text, intent: .lastCharacter).deletingLastToken())
             }
         case .key(let char):
             setTextTransaction(textTransaction.appendingCharacter(with: char))

@@ -22,17 +22,24 @@ class EditCategoryDetailViewController: UIViewController {
         titleLabel.text = EditCategoryDetailViewController.category?.name
         editButton.isHidden = !EditCategoryDetailViewController.category!.isUserGenerated
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let category = EditCategoryDetailViewController.category else { return }
+        titleLabel.text = category.name
+    }
     @IBAction func backButtonPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func editButtonPressed(_ sender: Any) {
-           if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryKeyboardViewController") as? EditCategoryKeyboardViewController {
-               vc.modalPresentationStyle = .fullScreen
+        if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryKeyboardViewController") as? EditCategoryKeyboardViewController {
+            vc.modalPresentationStyle = .fullScreen
+            
+            vc._textTransaction = TextTransaction(text: EditCategoryDetailViewController.category?.name ?? "")
             
             present(vc, animated: true)
-               return
-           }
+            return
+        }
     }
     
 }

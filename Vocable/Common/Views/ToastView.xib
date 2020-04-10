@@ -13,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="387" height="108"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="750" text="Saved to My Sayings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEx-Zh-S4e">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="750" text="Saved to My Sayings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fEx-Zh-S4e">
                     <rect key="frame" x="32" y="16" width="323" height="76"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                     <color key="textColor" name="DefaultFontColor"/>

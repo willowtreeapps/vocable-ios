@@ -35,7 +35,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
 
     private lazy var fetchRequest: NSFetchRequest<Category> = {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true), NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)]
         return request
     }()
     
@@ -139,8 +139,8 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     }
     
     func setupCell(indexPath: IndexPath, cell inputCell: EditCategoriesDefaultCollectionViewCell? = nil, category: Category? = nil) {
-        let cell: EditCategoriesDefaultCollectionViewCell
-        cell = inputCell ?? collectionView.cellForItem(at: indexPath) as! EditCategoriesDefaultCollectionViewCell
+        //let cell: EditCategoriesDefaultCollectionViewCell
+        guard let cell = inputCell ?? collectionView.cellForItem(at: indexPath) as? EditCategoriesDefaultCollectionViewCell else { return }
         let category = category ?? fetchResultsController.object(at: indexPath)
         cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
         cell.moveDownButton.isEnabled = self.setDownButtonEnabled(indexPath: indexPath)

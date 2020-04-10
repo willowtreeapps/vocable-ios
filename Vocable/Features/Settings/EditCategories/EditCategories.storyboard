@@ -77,6 +77,7 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="64"/>
                                     </constraint>
                                     <constraint firstAttribute="bottomMargin" secondItem="00c-RK-HF1" secondAttribute="bottom" id="dFT-Wk-Bu6"/>
+                                    <constraint firstItem="y3d-hd-xdZ" firstAttribute="top" secondItem="00c-RK-HF1" secondAttribute="top" id="mBd-2K-v0G"/>
                                     <constraint firstItem="0CD-i2-i5g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="00c-RK-HF1" secondAttribute="trailing" constant="24" id="oK7-wd-nL0"/>
                                     <constraint firstItem="y3d-hd-xdZ" firstAttribute="height" secondItem="00c-RK-HF1" secondAttribute="height" id="pS4-za-txR"/>
                                     <constraint firstItem="00c-RK-HF1" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="topMargin" id="pyq-nd-AXg"/>
@@ -84,7 +85,7 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
                                 <rect key="frame" x="32" y="152" width="1130" height="512"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="322.5" id="V2b-Pm-qsk"/>
@@ -98,7 +99,7 @@
                                     <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="380.5" y="688" width="433.5" height="94"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>
@@ -114,7 +115,6 @@
                         </subviews>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="y3d-hd-xdZ" firstAttribute="top" secondItem="KsA-J6-p6N" secondAttribute="top" constant="32" id="0Yo-gb-lhZ"/>
                             <constraint firstItem="ZPM-Ab-mlI" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="bottom" constant="24" id="E7v-Tz-7x3">
                                 <variation key="heightClass=compact" constant="8"/>
                             </constraint>
