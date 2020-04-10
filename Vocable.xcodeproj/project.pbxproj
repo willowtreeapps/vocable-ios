@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,9 +16,10 @@
 		30B979BE2425587B00309D7C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BC2425587B00309D7C /* Localizable.strings */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
 		64253CED2419358D0044EAAA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64253CEC2419358D0044EAAA /* Settings.storyboard */; };
+		64586FAF243FAB9500A586D4 /* VocableLocalizationTest in Frameworks */ = {isa = PBXBuildFile; productRef = 64586FAE243FAB9500A586D4 /* VocableLocalizationTest */; };
 		64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A54544242A490700218BE8 /* GazeEatingView.swift */; };
 		64D04A58242951C00006962D /* GazeableAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */; };
-		64E5D76A243506100015A378 /* textpresets.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E5D769243506100015A378 /* textpresets.json */; };
+		64E5D76A243506100015A378 /* textpresets-old.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E5D769243506100015A378 /* textpresets-old.json */; };
 		6B14DC732419590E0050C287 /* OutputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B14DC722419590E0050C287 /* OutputTextView.swift */; };
 		6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */; };
 		6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */; };
@@ -151,6 +152,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		64D0C16A243FA08C003FC7D7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		130C00B420D2AD2A007C3163 /* Vocable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vocable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		130C00B720D2AD2A007C3163 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -169,7 +182,7 @@
 		64253CEC2419358D0044EAAA /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		64A54544242A490700218BE8 /* GazeEatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeEatingView.swift; sourceTree = "<group>"; };
 		64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableAlertPresentationController.swift; sourceTree = "<group>"; };
-		64E5D769243506100015A378 /* textpresets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = textpresets.json; sourceTree = "<group>"; };
+		64E5D769243506100015A378 /* textpresets-old.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "textpresets-old.json"; sourceTree = "<group>"; };
 		6B14DC722419590E0050C287 /* OutputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTextView.swift; sourceTree = "<group>"; };
 		6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVSpeechSynthesizer+Shared.swift"; sourceTree = "<group>"; };
 		6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapperView.swift; sourceTree = "<group>"; };
@@ -302,6 +315,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64586FAF243FAB9500A586D4 /* VocableLocalizationTest in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +335,7 @@
 				130C00B620D2AD2A007C3163 /* Vocable */,
 				54D3C41523E37CD40061EF47 /* VocableTests */,
 				130C00B520D2AD2A007C3163 /* Products */,
+				64D0C16B243FA14D003FC7D7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -353,7 +368,7 @@
 		139EDEE921419C400009A99F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				64E5D769243506100015A378 /* textpresets.json */,
+				64E5D769243506100015A378 /* textpresets-old.json */,
 				130C00C020D2AD2C007C3163 /* Assets.xcassets */,
 				130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */,
 				130C00C520D2AD2C007C3163 /* Info.plist */,
@@ -370,6 +385,13 @@
 				54D3C41823E37CD40061EF47 /* Info.plist */,
 			);
 			path = VocableTests;
+			sourceTree = "<group>";
+		};
+		64D0C16B243FA14D003FC7D7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		6B823BA923F4ADE30099F65E /* PulseController */ = {
@@ -692,12 +714,16 @@
 				130C00B120D2AD2A007C3163 /* Frameworks */,
 				130C00B220D2AD2A007C3163 /* Resources */,
 				54481D4823E9CBF000ECF249 /* ShellScript */,
+				64D0C16A243FA08C003FC7D7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Vocable;
+			packageProductDependencies = (
+				64586FAE243FAB9500A586D4 /* VocableLocalizationTest */,
+			);
 			productName = EyeTrackingTest;
 			productReference = 130C00B420D2AD2A007C3163 /* Vocable.app */;
 			productType = "com.apple.product-type.application";
@@ -751,6 +777,9 @@
 				ar,
 			);
 			mainGroup = 130C00AB20D2AD2A007C3163;
+			packageReferences = (
+				64586FAD243FAB9500A586D4 /* XCRemoteSwiftPackageReference "VocableLocalizationTest" */,
+			);
 			productRefGroup = 130C00B520D2AD2A007C3163 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -784,7 +813,7 @@
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,
 				A9CF2AEB242D431E005633A7 /* TimingSensitivity.storyboard in Resources */,
 				6B9DFA6923E88A1B0037673E /* GazeLib.scnassets in Resources */,
-				64E5D76A243506100015A378 /* textpresets.json in Resources */,
+				64E5D76A243506100015A378 /* textpresets-old.json in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
 				71004B0D242926A2006833B8 /* SelectionMode.storyboard in Resources */,
 				130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */,
@@ -1346,6 +1375,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		64586FAD243FAB9500A586D4 /* XCRemoteSwiftPackageReference "VocableLocalizationTest" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stevefosterwta/VocableLocalizationTest";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		64586FAE243FAB9500A586D4 /* VocableLocalizationTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64586FAD243FAB9500A586D4 /* XCRemoteSwiftPackageReference "VocableLocalizationTest" */;
+			productName = VocableLocalizationTest;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		6BFB18C024002C7B002C3515 /* Phrases.xcdatamodeld */ = {

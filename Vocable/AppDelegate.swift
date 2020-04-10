@@ -8,8 +8,10 @@
 
 import UIKit
 import CoreData
+import VocableLocalizationTest
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: HeadGazeWindow?

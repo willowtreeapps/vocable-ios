@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "VocableLocalizationTest",
+        "repositoryURL": "https://github.com/stevefosterwta/VocableLocalizationTest",
+        "state": {
+          "branch": "develop",
+          "revision": "2010fca719acc0ea23d5fbfe3bf6576bb971d574",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
