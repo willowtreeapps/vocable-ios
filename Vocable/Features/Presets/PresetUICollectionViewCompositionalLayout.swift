@@ -357,6 +357,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         let characterKeyGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)), subitem: keyItem, count: columns)
         
         let characterKeyFractionalHeight = CGFloat((traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular)
+            && traitCollection.verticalSizeClass == .regular)
             ? 5.0 / 6.0 : 3.0 / 4.0)
         let characterKeyContainerGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(characterKeyFractionalHeight)),
@@ -378,7 +379,8 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
             leadingKeyItem.edgeSpacing = .init(leading: .flexible(flexibleSpacing), top: nil, trailing: nil, bottom: nil)
             trailingKeyItem.edgeSpacing = .init(leading: nil, top: nil, trailing: .flexible(flexibleSpacing), bottom: nil)
             
-            return NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.25)), subitems: [leadingKeyItem, spaceKeyItem, keyItem, trailingKeyItem])
+            return NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.25)),
+                                                      subitems: [leadingKeyItem, spaceKeyItem, keyItem, trailingKeyItem])
         }
         
         var compactPortraitFunctionKeyGroup: NSCollectionLayoutGroup {
@@ -392,16 +394,14 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
             let overallContainerGroup = NSCollectionLayoutGroup.vertical(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.55)),
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.6)),
                 subitems: [characterKeyContainerGroup, compactPortraitFunctionKeyGroup])
             
             return overallContainerGroup
         }
         
-        let overallFractionHeight = environment.traitCollection.verticalSizeClass == .compact ? CGFloat(0.625) : CGFloat(0.675)
-        
         let overallContainerGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(overallFractionHeight)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.675)),
             subitems: [characterKeyContainerGroup, defaultFunctionKeyGroup])
         
         return overallContainerGroup
