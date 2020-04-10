@@ -87,6 +87,7 @@ class EditCategoryDetailCollectionViewController: UICollectionViewController {
             guard let category = EditCategoryDetailViewController.category else { return }
             context.delete(category)
             saveContext()
+            self.navigationController?.popViewController(animated: true)
         }
     }
     }
@@ -96,6 +97,10 @@ class EditCategoryDetailCollectionViewController: UICollectionViewController {
        case .showCategoryToggle:
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryToggleCollectionViewCell
            cell.showCategorySwitch.addTarget(self, action: #selector(self.handleToggle(_:)), for: .valueChanged)
+           if let category = EditCategoryDetailViewController.category {
+              cell.showCategorySwitch.isOn = !category.isHidden
+           }
+           
            return cell
        case .removeCategoryToggle:
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryRemoveCollectionViewCell
@@ -105,7 +110,7 @@ class EditCategoryDetailCollectionViewController: UICollectionViewController {
    }
     
     @objc func handleToggle(_ sender: UISwitch) {
-        let shouldShowCategory = sender.isOn
+        let shouldShowCategory = !sender.isOn
         guard let category = EditCategoryDetailViewController.category else { return }
         category.setValue(shouldShowCategory, forKey: "isHidden")
         saveContext()

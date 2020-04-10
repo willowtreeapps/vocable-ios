@@ -60,6 +60,10 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         try? fetchResultsController.performFetch()
         updateDataSource(animated: false)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateDataSource(animated: false)
+    }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -140,7 +144,14 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         let category = category ?? fetchResultsController.object(at: indexPath)
         cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
         cell.moveDownButton.isEnabled = self.setDownButtonEnabled(indexPath: indexPath)
-        cell.setup(title: "\(indexPath.row + 1). \(category.name ?? "")")
+        
+        var titleString = NSMutableAttributedString(string: "\(indexPath.row + 1). \(category.name ?? "")")
+        
+        if fetchResultsController.object(at: indexPath).isHidden {
+            titleString = setupTitleString(toEdit: titleString)
+        }
+        
+        cell.setup(title: titleString)
         
         cell.separatorMask = self.layout.separatorMask(for: indexPath)
     }
@@ -249,5 +260,15 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         } catch {
             assertionFailure("Failed to move category: \(error)")
         }
+    }
+    
+    private func setupTitleString(toEdit: NSMutableAttributedString) -> NSMutableAttributedString {
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(systemName: "eye.slash.fill")?.withTintColor(UIColor.white)
+        let imageOffsetY: CGFloat = 0
+        imageAttachment.bounds = CGRect(x: -2, y: imageOffsetY, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
+        toEdit.insert(NSAttributedString(string: " "), at: 0)
+        toEdit.insert(NSAttributedString(attachment: imageAttachment), at: 0)
+        return toEdit
     }
 }

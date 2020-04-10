@@ -27,8 +27,8 @@ class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setup(title: String) {
-        categoryNameLabel.text = title
+    func setup(title: NSMutableAttributedString) {
+        categoryNameLabel.attributedText = title
     }
     
     override func awakeFromNib() {
