@@ -42,7 +42,7 @@
                                 </constraints>
                                 <color key="tintColor" name="DefaultFontColor"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.down" catalog="system"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.up" catalog="system"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveUpButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
@@ -53,7 +53,7 @@
                                 </constraints>
                                 <color key="tintColor" name="DefaultFontColor"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.up" catalog="system"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.down" catalog="system"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. General" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3t9-YV-add" userLabel="CategoryName">
@@ -94,8 +94,8 @@
             <connections>
                 <outlet property="bottomSeparator" destination="hWY-nm-Hv6" id="Sue-pL-2Uw"/>
                 <outlet property="categoryNameLabel" destination="3t9-YV-add" id="Ehe-LR-iFr"/>
-                <outlet property="moveDownButton" destination="yIe-C4-EHn" id="abb-du-Sg5"/>
-                <outlet property="moveUpButton" destination="Ieb-WK-NlS" id="noh-No-fGm"/>
+                <outlet property="moveDownButton" destination="Ieb-WK-NlS" id="uok-e2-jWH"/>
+                <outlet property="moveUpButton" destination="yIe-C4-EHn" id="e1c-iy-MGb"/>
                 <outlet property="showCategoryDetailButton" destination="PfR-1l-Qp7" id="yjb-aR-8sS"/>
                 <outlet property="topSeparator" destination="Zy9-iu-ouW" id="tGL-eF-9ak"/>
             </connections>

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class EditCategoryDetailCollectionViewController: UICollectionViewController {
+class EditCategoriesDetailCollectionViewController: UICollectionViewController {
     
     private enum EditCategoryItem: String, Hashable {
         var title: String {
@@ -84,12 +84,31 @@ class EditCategoryDetailCollectionViewController: UICollectionViewController {
         case .showCategoryToggle:
             break
         case .removeCategoryToggle:
-            guard let category = EditCategoryDetailViewController.category else { return }
-            context.delete(category)
-            saveContext()
-            self.navigationController?.popViewController(animated: true)
+            handleRemoveCategory()
         }
     }
+    }
+    
+    private func handleRemoveCategory() {
+        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("Deleted categories cannot be recovered.", comment: "Remove category alert title"))
+        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Remove", comment: "Remove category alert action title"), handler: { self.removeCategory() }))
+        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title"), handler: {
+            self.deselectCell()
+        }))
+        self.present(alert, animated: true)
+    }
+    
+    private func removeCategory() {
+       guard let category = EditCategoriesDetailViewController.category else { return }
+        context.delete(category)
+        saveContext()
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func deselectCell() {
+        for path in collectionView.indexPathsForSelectedItems ?? [] {
+            collectionView.deselectItem(at: path, animated: true)
+        }
     }
 
    private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: EditCategoryItem) -> UICollectionViewCell {
@@ -97,21 +116,21 @@ class EditCategoryDetailCollectionViewController: UICollectionViewController {
        case .showCategoryToggle:
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryToggleCollectionViewCell
            cell.showCategorySwitch.addTarget(self, action: #selector(self.handleToggle(_:)), for: .valueChanged)
-           if let category = EditCategoryDetailViewController.category {
+           if let category = EditCategoriesDetailViewController.category {
               cell.showCategorySwitch.isOn = !category.isHidden
            }
-           
+           cell.isHidden = EditCategoriesDetailViewController.category?.identifier == "preset_user_favorites"
            return cell
        case .removeCategoryToggle:
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryRemoveCollectionViewCell
-        cell.isHidden = (!(EditCategoryDetailViewController.category?.isUserGenerated ?? true))
+        cell.isHidden = (!(EditCategoriesDetailViewController.category?.isUserGenerated ?? true))
         return cell
     }
    }
     
     @objc func handleToggle(_ sender: UISwitch) {
         let shouldShowCategory = !sender.isOn
-        guard let category = EditCategoryDetailViewController.category else { return }
+        guard let category = EditCategoriesDetailViewController.category else { return }
         category.setValue(shouldShowCategory, forKey: "isHidden")
         saveContext()
     }

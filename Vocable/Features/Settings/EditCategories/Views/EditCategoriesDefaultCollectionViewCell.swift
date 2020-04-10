@@ -9,6 +9,13 @@
 import Foundation
 import UIKit
 
+public enum buttonScheme {
+    case disableMoveUp
+    case disableMoveDown
+    case disableAll
+    case enableAll
+}
+
 class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var moveDownButton: GazeableButton!

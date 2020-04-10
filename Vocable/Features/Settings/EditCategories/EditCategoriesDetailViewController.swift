@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class EditCategoryDetailViewController: UIViewController {
+class EditCategoriesDetailViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var editButton: GazeableButton!
@@ -19,12 +19,12 @@ class EditCategoryDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = EditCategoryDetailViewController.category?.name
-        editButton.isHidden = !EditCategoryDetailViewController.category!.isUserGenerated
+        titleLabel.text = EditCategoriesDetailViewController.category?.name
+        editButton.isHidden = !EditCategoriesDetailViewController.category!.isUserGenerated
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        guard let category = EditCategoryDetailViewController.category else { return }
+        guard let category = EditCategoriesDetailViewController.category else { return }
         titleLabel.text = category.name
     }
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -32,10 +32,10 @@ class EditCategoryDetailViewController: UIViewController {
     }
     
     @IBAction func editButtonPressed(_ sender: Any) {
-        if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryKeyboardViewController") as? EditCategoryKeyboardViewController {
+        if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryKeyboardViewController") as? EditCategoriesKeyboardViewController {
             vc.modalPresentationStyle = .fullScreen
             
-            vc._textTransaction = TextTransaction(text: EditCategoryDetailViewController.category?.name ?? "")
+            vc._textTransaction = TextTransaction(text: EditCategoriesDetailViewController.category?.name ?? "")
             
             present(vc, animated: true)
             return

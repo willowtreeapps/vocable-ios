@@ -24,22 +24,22 @@
                             <constraint firstAttribute="height" constant="2" id="tSY-ue-dhy"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIe-C4-EHn" userLabel="MoveDownButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                        <rect key="frame" x="20" y="98" width="84" height="54"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveDownButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                        <rect key="frame" x="112" y="98" width="84" height="54"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="54" id="eF3-ax-GmT"/>
-                            <constraint firstAttribute="width" constant="84" id="m2b-i3-ggR"/>
+                            <constraint firstAttribute="width" constant="84" id="DnU-vb-Ln9"/>
+                            <constraint firstAttribute="height" constant="54" id="FOm-kP-JDa"/>
                         </constraints>
                         <color key="tintColor" name="DefaultFontColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.down" catalog="system"/>
                         </userDefinedRuntimeAttributes>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveUpButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                        <rect key="frame" x="112" y="98" width="84" height="54"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIe-C4-EHn" userLabel="MoveUpButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                        <rect key="frame" x="20" y="98" width="84" height="54"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="84" id="DnU-vb-Ln9"/>
-                            <constraint firstAttribute="height" constant="54" id="FOm-kP-JDa"/>
+                            <constraint firstAttribute="height" constant="54" id="eF3-ax-GmT"/>
+                            <constraint firstAttribute="width" constant="84" id="m2b-i3-ggR"/>
                         </constraints>
                         <color key="tintColor" name="DefaultFontColor"/>
                         <userDefinedRuntimeAttributes>
@@ -83,8 +83,8 @@
             <connections>
                 <outlet property="bottomSeparator" destination="hWY-nm-Hv6" id="p5S-gZ-TPN"/>
                 <outlet property="categoryNameLabel" destination="3t9-YV-add" id="ENB-CO-MgT"/>
-                <outlet property="moveDownButton" destination="yIe-C4-EHn" id="Jow-FG-wti"/>
-                <outlet property="moveUpButton" destination="Ieb-WK-NlS" id="aLg-ju-4le"/>
+                <outlet property="moveDownButton" destination="Ieb-WK-NlS" id="L81-qa-uYF"/>
+                <outlet property="moveUpButton" destination="yIe-C4-EHn" id="zhH-op-CcN"/>
                 <outlet property="showCategoryDetailButton" destination="PfR-1l-Qp7" id="csS-I7-Imd"/>
             </connections>
             <point key="canvasLocation" x="1672" y="-7"/>

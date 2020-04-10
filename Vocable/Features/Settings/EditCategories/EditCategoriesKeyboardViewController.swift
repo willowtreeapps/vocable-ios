@@ -11,7 +11,7 @@ import AVFoundation
 import UIKit
 import CoreData
 
-class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDelegate {
+class EditCategoriesKeyboardViewController: UIViewController, UICollectionViewDelegate {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
@@ -227,7 +227,6 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
         case .topBarButton(let buttonType):
             (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
             collectionView.deselectItem(at: indexPath, animated: true)
-            let context = NSPersistentContainer.shared.viewContext
             switch buttonType {
             case .close:
                 dismiss(animated: true, completion: nil)
@@ -236,7 +235,7 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
                 if isAddingCategory {
                     _ = Category.create(withUserEntry: _textTransaction.text, in: context)
                 } else {
-                    guard let category = EditCategoryDetailViewController.category else { return }
+                    guard let category = EditCategoriesDetailViewController.category else { return }
                     category.name = _textTransaction.text
                 }
                 do {
@@ -351,4 +350,3 @@ class EditCategoryKeyboardViewController: UIViewController, UICollectionViewDele
         }
     }
 }
-

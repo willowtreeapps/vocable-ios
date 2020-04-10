@@ -35,11 +35,10 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
 
     private lazy var fetchRequest: NSFetchRequest<Category> = {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true), NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.isHidden, ascending: true), NSSortDescriptor(keyPath: \Category.ordinal, ascending: true), NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)]
         return request
     }()
     
-
     private lazy var fetchResultsController = NSFetchedResultsController<Category>(fetchRequest: self.fetchRequest,
                                                                                  managedObjectContext: NSPersistentContainer.shared.viewContext,
                                                                                  sectionNameKeyPath: nil,
@@ -139,20 +138,25 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     }
     
     func setupCell(indexPath: IndexPath, cell inputCell: EditCategoriesDefaultCollectionViewCell? = nil, category: Category? = nil) {
-        //let cell: EditCategoriesDefaultCollectionViewCell
         guard let cell = inputCell ?? collectionView.cellForItem(at: indexPath) as? EditCategoriesDefaultCollectionViewCell else { return }
         let category = category ?? fetchResultsController.object(at: indexPath)
-        cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
-        cell.moveDownButton.isEnabled = self.setDownButtonEnabled(indexPath: indexPath)
         
-        var titleString = NSMutableAttributedString(string: "\(indexPath.row + 1). \(category.name ?? "")")
-        
-        if fetchResultsController.object(at: indexPath).isHidden {
-            titleString = setupTitleString(toEdit: titleString)
+        if category.isHidden {
+            cell.moveUpButton.isEnabled = false
+            cell.moveDownButton.isEnabled = false
+        } else {
+            cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
+            cell.moveDownButton.isEnabled = self.setDownButtonEnabled(indexPath: indexPath)
         }
         
-        cell.setup(title: titleString)
-        
+        let visibleTitleString = NSMutableAttributedString(string: "\(indexPath.row + 1). \(category.name ?? "")")
+        let hiddenTitleString = NSMutableAttributedString(string: "\(category.name ?? "")")
+       
+        if fetchResultsController.object(at: indexPath).isHidden {
+            cell.setup(title: configureTitleString(with: hiddenTitleString))
+        } else {
+            cell.setup(title: visibleTitleString)
+        }
         cell.separatorMask = self.layout.separatorMask(for: indexPath)
     }
     
@@ -186,32 +190,30 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     
     @objc private func handleMoveCategoryDown(_ sender: UIButton) {
         guard let fromIndexPath = indexPath(containing: sender) else {
-                   assertionFailure("Failed to obtain index path")
-                   return
-               }
-               guard let toIndexPath = indexPath(after: fromIndexPath) else {
-                   assertionFailure("Failed to obtain index before indexPath")
-                   return
-               }
-               let fromCategory = fetchResultsController.object(at: fromIndexPath)
-               let toCategory = fetchResultsController.object(at: toIndexPath)
-               
-               swapOrdinal(fromCategory: fromCategory, toCategory: toCategory)
-               
-               saveContext()
+            assertionFailure("Failed to obtain index path")
+            return
+        }
+        guard let toIndexPath = indexPath(after: fromIndexPath) else {
+            assertionFailure("Failed to obtain index before indexPath")
+            return
+        }
+        let fromCategory = fetchResultsController.object(at: fromIndexPath)
+        let toCategory = fetchResultsController.object(at: toIndexPath)
+        
+        swapOrdinal(fromCategory: fromCategory, toCategory: toCategory)
+        
+        saveContext()
         
     }
     
     @objc private func handleShowEditCategoryDetail(_ sender: UIButton) {
         for cell in collectionView.visibleCells where sender.isDescendant(of: cell) {
             
-            guard let indexPath = collectionView.indexPath(for: cell) else {
-                return
-            }
+            guard let indexPath = collectionView.indexPath(for: cell) else { return }
             
-            if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as? EditCategoryDetailViewController {
+            if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as? EditCategoriesDetailViewController {
                 
-                EditCategoryDetailViewController.category = fetchResultsController.object(at: indexPath)
+                EditCategoriesDetailViewController.category = fetchResultsController.object(at: indexPath)
                 show(vc, sender: nil)
             }
         }
@@ -237,7 +239,6 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     }
     
     private func indexPath(containing view: UIView) -> IndexPath? {
-        
         for cell in collectionView.visibleCells where view.isDescendant(of: cell) {
             if let indexPath = collectionView.indexPath(for: cell) {
                 return indexPath
@@ -262,13 +263,12 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         }
     }
     
-    private func setupTitleString(toEdit: NSMutableAttributedString) -> NSMutableAttributedString {
+    private func configureTitleString(with stringToConfigure: NSMutableAttributedString) -> NSMutableAttributedString {
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "eye.slash.fill")?.withTintColor(UIColor.white)
-        let imageOffsetY: CGFloat = 0
-        imageAttachment.bounds = CGRect(x: -2, y: imageOffsetY, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
-        toEdit.insert(NSAttributedString(string: " "), at: 0)
-        toEdit.insert(NSAttributedString(attachment: imageAttachment), at: 0)
-        return toEdit
+        imageAttachment.bounds = CGRect(x: -2, y: 0, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
+        stringToConfigure.insert(NSAttributedString(string: " "), at: 0)
+        stringToConfigure.insert(NSAttributedString(attachment: imageAttachment), at: 0)
+        return stringToConfigure
     }
 }
