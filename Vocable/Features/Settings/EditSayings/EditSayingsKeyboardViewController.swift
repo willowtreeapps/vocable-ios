@@ -113,10 +113,7 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
             case .textField:
                 return self.topBarLayout()
             case .keyboard:
-                if layoutEnvironment.traitCollection.horizontalSizeClass == .compact && layoutEnvironment.traitCollection.verticalSizeClass == .regular {
-                    return PresetUICollectionViewCompositionalLayout.portraitKeyboardSectionLayout(with: layoutEnvironment)
-                }
-                return PresetUICollectionViewCompositionalLayout.landscapeKeyboardSectionLayout(with: layoutEnvironment)
+                return PresetUICollectionViewCompositionalLayout.keyboardLayout(with: layoutEnvironment)
             case .suggestions:
                 return PresetUICollectionViewCompositionalLayout.suggestiveTextSectionLayout(with: layoutEnvironment)
             }

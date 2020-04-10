@@ -124,10 +124,7 @@ class PresetsViewController: UICollectionViewController {
                 
                 return PresetUICollectionViewCompositionalLayout.presetsSectionLayout(with: layoutEnvironment)
             case .keyboard:
-                if layoutEnvironment.traitCollection.horizontalSizeClass == .compact && layoutEnvironment.traitCollection.verticalSizeClass == .regular {
-                    return PresetUICollectionViewCompositionalLayout.portraitKeyboardSectionLayout(with: layoutEnvironment)
-                }
-                return PresetUICollectionViewCompositionalLayout.landscapeKeyboardSectionLayout(with: layoutEnvironment)
+                return PresetUICollectionViewCompositionalLayout.keyboardLayout(with: layoutEnvironment)
             }
         }
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
