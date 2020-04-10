@@ -56,6 +56,13 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
         
         self.clearsSelectionOnViewWillAppear = false
     }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        updateDataSource(animated: true, completion: { [weak self] in
+            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
+                                               animateIfNeeded: true)
+        })
+    }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

@@ -93,6 +93,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         ItemSelection.$selectedCategoryID.sink { (selectedCategoryID) in
             DispatchQueue.main.async {
                 // Reset paging progress when selecting a new category
+                
                 self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .init(), animated: false)
                 self.updateFetchedResultsController(with: selectedCategoryID)
                 self.handleSelectedCategory()
@@ -100,8 +101,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         }.store(in: &disposables)
         
         layout.$progress.sink { (pagingProgress) in
-            ItemSelection.presetsPageIndicatorProgress.pageCount = pagingProgress.pageCount == 0 ? 1 : pagingProgress.pageCount
-            ItemSelection.presetsPageIndicatorProgress.pageIndex = pagingProgress.pageIndex
+            ItemSelection.presetsPageIndicatorProgress = pagingProgress
         }.store(in: &disposables)
     }
     
@@ -117,6 +117,13 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         } else {
             presentationMode = .defaultMode
         }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        updateDataSource(animated: true, completion: { [weak self] in
+            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
+                                               animateIfNeeded: true)
+        })
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
