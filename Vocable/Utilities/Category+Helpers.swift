@@ -20,9 +20,4 @@ extension Category {
         category.identifier = newIdentifier
         return category
     }
-    
-    static func isUserGeneratedCategory(identifier: String, in context: NSManagedObjectContext) -> Bool {
-        guard let category = Category.fetchObject(in: context, matching: identifier) else { return false }
-        return category.isUserGenerated
-    }
 }
