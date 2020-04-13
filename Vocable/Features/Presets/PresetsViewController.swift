@@ -377,7 +377,8 @@ class PresetsViewController: UICollectionViewController {
 
                 do {
                     try context.save()
-                    ToastWindow.shared.presentEphemeralToast(withTitle: NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings"))
+                    ToastWindow.shared.presentEphemeralToast(withTitle: NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title",
+                                                                                          comment: "Saved to My Sayings toast title"))
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")
                 }
@@ -389,7 +390,7 @@ class PresetsViewController: UICollectionViewController {
                 // TODO: discuss with design if we want to cache the user's currently-entered text instead
                 // of just clearing it
 
-                let newText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.localizedString
+                let newText = showKeyboard ? HintText.keyboard.localizedString : HintText.preset.localizedString
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
             case .settings:
                 presentSettingsViewController()

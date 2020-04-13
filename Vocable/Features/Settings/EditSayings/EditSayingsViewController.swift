@@ -8,6 +8,7 @@
 
 import UIKit
 import Combine
+import CoreData
 
 class EditSayingsViewController: UIViewController {
 
@@ -34,20 +35,18 @@ class EditSayingsViewController: UIViewController {
             guard let pagingProgress = pagingProgress else {
                 return
             }
-            if pagingProgress.pageCount > 1 {
-                self.paginationView.setPaginationButtonsEnabled(true)
-            } else {
-                self.paginationView.setPaginationButtonsEnabled(false)
-            }
-            let computedPageCount = max(pagingProgress.pageCount, 1)
-
-            self.paginationView.textLabel.text = String(format: NSLocalizedString("Page %d of %d", comment: ""), pagingProgress.pageIndex + 1, computedPageCount)
+            self.paginationView.setPaginationButtonsEnabled(pagingProgress.pageCount > 1)
+            self.paginationView.textLabel.text = pagingProgress.localizedString
         }).store(in: &disposables)
         
         paginationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)
         paginationView.previousPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToPreviousPage), for: .primaryActionTriggered)
 
-        titleLabel.text = NSLocalizedString("My Sayings", comment: "Category: My Sayings")
+        guard let userFavoritesCategory = Category.fetchObject(in: NSPersistentContainer.shared.viewContext, matching: TextPresets.savedSayingsIdentifier) else {
+            assertionFailure("debug.assertion.user_favorites_category_not_found")
+            return
+        }
+        titleLabel.text = userFavoritesCategory.name
     }
     
     @IBAction func backToSettings(_ sender: Any) {

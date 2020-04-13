@@ -22,5 +22,5 @@ struct ItemSelection {
     static var selectedPhrase: PhraseViewModel?
     
     @PublishedValue
-    static var presetsPageIndicatorProgress: CarouselGridPagingProgress = (pageIndex: 0, pageCount: 0)
+    static var presetsPageIndicatorProgress: CarouselGridPagingProgress = .zero
 }

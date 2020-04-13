@@ -39,10 +39,12 @@ struct TextPresets {
     static let numPadIdentifier = "preset_user_keypad"
 
     static var numPadPhrases: [PhraseViewModel] {
+        let phraseNoTitle = NSLocalizedString("preset.category.numberpad.phrase.no.title", comment: "'No' num pad response")
+        let phraseYesTitle = NSLocalizedString("preset.category.numberpad.phrase.yes.title", comment: "'Yes' num pad response")
         var numbers = (1...9).map { PhraseViewModel(unpersistedPhrase: "\($0)")}
         numbers.append(PhraseViewModel(unpersistedPhrase: "0"))
-        let responses = [PhraseViewModel(unpersistedPhrase: NSLocalizedString("No", comment: "'No' num pad response")),
-                         PhraseViewModel(unpersistedPhrase: NSLocalizedString("Yes", comment: "'Yes' num pad response"))]
+        let responses = [PhraseViewModel(unpersistedPhrase: phraseNoTitle),
+                         PhraseViewModel(unpersistedPhrase: phraseYesTitle)]
         return numbers + responses
     }
 

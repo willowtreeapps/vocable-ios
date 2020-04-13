@@ -246,8 +246,11 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
                 }
                 do {
                     try context.save()
-                    let alertMessage = isNewPhrase ? NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings") :
-                        NSLocalizedString("Changes saved", comment: "Changes saved")
+                    let newEntrySavedString = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title",
+                                                                comment: "new entry saved to user favorites category")
+                    let changesSavedString = NSLocalizedString("category_editor.toast.changes_saved.title",
+                                                               comment: "changes to an existing phrase were saved successfully")
+                    let alertMessage = isNewPhrase ? newEntrySavedString : changesSavedString
                     
                     ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
 
@@ -336,11 +339,20 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
     }
     
     private func handleExitAlert() {
-        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("Going back before saving will clear any edits made.", comment: "Exit edit sayings alert title"))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Discard", comment: "Discard changes alert action title"), handler: {
+
+        func discardChangesAction() {
             self.navigationController?.popViewController(animated: true)
-        }))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Continue Editing", comment: "Continue editing alert action title")))
+        }
+
+        let title = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.title",
+                                      comment: "Exit edit sayings alert title")
+        let discardButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.discard.title",
+                                                   comment: "Discard changes alert action title")
+        let continueButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
+                                                    comment: "Continue editing alert action title")
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
+        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
         self.present(alert, animated: true)
     }
     

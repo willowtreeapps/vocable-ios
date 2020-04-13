@@ -74,7 +74,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
-        ToastWindow.shared.presentPersistantWarning(with: NSLocalizedString("Please move closer to the device.", comment: "Warning title when head tracking is lost."))
+        let title = NSLocalizedString("gaze_tracking.error.excessive_head_distance.title", comment: "Warning message presented to the user when the head tracking system")
+        ToastWindow.shared.presentPersistantWarning(with: title)
     }
     
     @objc private func applicationDidAcquireGaze(_ sender: Any?) {
