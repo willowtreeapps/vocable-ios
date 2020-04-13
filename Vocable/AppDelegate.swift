@@ -49,7 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let context = container.viewContext
 
         guard let presets = TextPresets.presets else {
-            assertionFailure("No presets found")
+            let message = NSLocalizedString("debug.assertion.presets_file_not_found",
+                                            comment: "Debugging error message for when preloaded content is not found")
+            assertionFailure(message)
             return
         }
 
