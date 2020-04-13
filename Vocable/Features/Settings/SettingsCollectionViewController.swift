@@ -313,13 +313,16 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     private func presentLeavingHeadTrackableDomainAlert(withConfirmation confirmationAction: @escaping () -> Void) {
         let alertString = NSLocalizedString("settings.alert.surrender_gaze_confirmation.body",
                                             comment: "body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app")
+        let cancelTitle = NSLocalizedString("settings.alert.surrender_gaze_confirmation.button.cancel.title",
+        comment: "Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app")
+        let confirmationTitle = NSLocalizedString("settings.alert.surrender_gaze_confirmation.button.confirm.title",
+        comment: "Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app")
+        
         let alertViewController = GazeableAlertViewController(alertTitle: alertString)
 
-        alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("settings.alert.surrender_gaze_confirmation.button.cancel.title",
-                                                                                   comment: "Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app"),
+        alertViewController.addAction(GazeableAlertAction(title: cancelTitle,
                                                           style: .default))
-        alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("settings.alert.surrender_gaze_confirmation.button.confirm.title",
-                                                                                   comment: "Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app"),
+        alertViewController.addAction(GazeableAlertAction(title: confirmationTitle,
                                                           style: .destructive,
                                                           handler: confirmationAction))
         present(alertViewController, animated: true)
