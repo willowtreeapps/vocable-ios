@@ -35,9 +35,9 @@ struct PresetPhrase: Codable {
 
 struct TextPresets {
 
-    static let savedSayingsIdentifier = "preset_user_favorites"
+    static let userFavoritesCategoryIdentifier = "preset_user_favorites"
     static let numPadIdentifier = "preset_user_keypad"
-
+    
     private static let numpadKeyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         return formatter

@@ -22,8 +22,10 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         var title: String {
             switch self {
             case .editMySayings:
-                return NSLocalizedString("settings.cell.edit_user_favorites.title",
-                                         comment: "edit user's favorite phrases category settings menu item")
+                let format = NSLocalizedString("settings.cell.edit_user_favorites.title_format",
+                                               comment: "edit user's favorite phrases category settings menu item")
+                let categoryName = Category.userFavoritesCategoryName()
+                return String.localizedStringWithFormat(format, categoryName)
             case .categories:
                 return NSLocalizedString("settings.cell.categories.title",
                                          comment: "edit categories settings menu item")

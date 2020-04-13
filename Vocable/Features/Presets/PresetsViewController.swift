@@ -377,8 +377,14 @@ class PresetsViewController: UICollectionViewController {
 
                 do {
                     try context.save()
-                    ToastWindow.shared.presentEphemeralToast(withTitle: NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title",
-                                                                                          comment: "Saved to My Sayings toast title"))
+
+                    let toastString: String = {
+                        let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
+                        let categoryName = Category.userFavoritesCategoryName()
+                        return String.localizedStringWithFormat(format, categoryName)
+                    }()
+
+                    ToastWindow.shared.presentEphemeralToast(withTitle: toastString)
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")
                 }

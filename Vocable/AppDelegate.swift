@@ -192,7 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func updateCategoryForUserGeneratedPhrases(in context: NSManagedObjectContext) throws {
-        guard let mySayingsCategory = Category.fetchObject(in: context, matching: TextPresets.savedSayingsIdentifier) else {
+        guard let mySayingsCategory = Category.fetchObject(in: context, matching: TextPresets.userFavoritesCategoryIdentifier) else {
             assertionFailure("User generated category not found")
             return
         }
