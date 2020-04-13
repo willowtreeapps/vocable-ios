@@ -74,20 +74,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
-        
-        if window?.trackingDisabledByTouch == false {
-            let title = NSLocalizedString("gaze_tracking.error.excessive_head_distance.title",
-                                          comment: "Warning message presented to the user when the head tracking system")
-            ToastWindow.shared.presentPersistantWarning(with: title)
-        }
+         window?.presentHeadTrackingErrorToastIfNeeded()
     }
 
     @objc private func applicationDidAcquireGaze(_ sender: Any?) {
-        ToastWindow.shared.dismissPersistantWarning()
+        ToastWindow.shared.dismissPersistentWarning()
     }
     
     @objc private func headTrackingDisabled(_ sender: Any?) {
-        ToastWindow.shared.dismissPersistantWarning()
+        ToastWindow.shared.dismissPersistentWarning()
     }
 
     private func deleteOrphanedPhrases(in context: NSManagedObjectContext, with presets: PresetData) throws {
