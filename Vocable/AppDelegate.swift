@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Vocable-Presets
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -48,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let context = container.viewContext
 
-        guard let presets = TextPresets.presets else {
+        guard let presets = KeyboardPresets.presets else {
             let message = NSLocalizedString("debug.assertion.presets_file_not_found",
                                             comment: "Debugging error message for when preloaded content is not found")
             assertionFailure(message)
@@ -192,7 +193,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func updateCategoryForUserGeneratedPhrases(in context: NSManagedObjectContext) throws {
-        guard let mySayingsCategory = Category.fetchObject(in: context, matching: TextPresets.userFavoritesCategoryIdentifier) else {
+        guard let mySayingsCategory = Category.fetchObject(in: context, matching: KeyboardPresets.userFavoritesCategoryIdentifier) else {
             assertionFailure("User generated category not found")
             return
         }

@@ -14,10 +14,10 @@
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
-		641F6ADE2445046200739C1C /* Vocable_Presets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 641F6ADD2445046200739C1C /* Vocable_Presets.framework */; };
-		641F6ADF2445046200739C1C /* Vocable_Presets.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 641F6ADD2445046200739C1C /* Vocable_Presets.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		64253CED2419358D0044EAAA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64253CEC2419358D0044EAAA /* Settings.storyboard */; };
 		64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A54544242A490700218BE8 /* GazeEatingView.swift */; };
+		64B0BB3E24450ACE0031EAC0 /* Vocable-Presets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B0BB3D24450ACE0031EAC0 /* Vocable-Presets.framework */; };
+		64B0BB3F24450ACE0031EAC0 /* Vocable-Presets.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 64B0BB3D24450ACE0031EAC0 /* Vocable-Presets.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		64D04A58242951C00006962D /* GazeableAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */; };
 		64E5D76A243506100015A378 /* textpresets.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E5D769243506100015A378 /* textpresets.json */; };
 		6B14DC732419590E0050C287 /* OutputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B14DC722419590E0050C287 /* OutputTextView.swift */; };
@@ -154,13 +154,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		641F6AE02445046200739C1C /* Embed Frameworks */ = {
+		64B0BB4024450ACE0031EAC0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				641F6ADF2445046200739C1C /* Vocable_Presets.framework in Embed Frameworks */,
+				64B0BB3F24450ACE0031EAC0 /* Vocable-Presets.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,9 +180,9 @@
 		54D3C41423E37CD40061EF47 /* VocableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		641F6ADD2445046200739C1C /* Vocable_Presets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vocable_Presets.framework; path = Carthage/Build/iOS/Vocable_Presets.framework; sourceTree = "<group>"; };
 		64253CEC2419358D0044EAAA /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		64A54544242A490700218BE8 /* GazeEatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeEatingView.swift; sourceTree = "<group>"; };
+		64B0BB3D24450ACE0031EAC0 /* Vocable-Presets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Vocable-Presets.framework"; path = "Carthage/Build/iOS/Vocable-Presets.framework"; sourceTree = "<group>"; };
 		64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableAlertPresentationController.swift; sourceTree = "<group>"; };
 		64E5D769243506100015A378 /* textpresets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = textpresets.json; sourceTree = "<group>"; };
 		6B14DC722419590E0050C287 /* OutputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTextView.swift; sourceTree = "<group>"; };
@@ -317,7 +317,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				641F6ADE2445046200739C1C /* Vocable_Presets.framework in Frameworks */,
+				64B0BB3E24450ACE0031EAC0 /* Vocable-Presets.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +392,7 @@
 		641F6ADC2445046200739C1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				641F6ADD2445046200739C1C /* Vocable_Presets.framework */,
+				64B0BB3D24450ACE0031EAC0 /* Vocable-Presets.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -717,7 +717,7 @@
 				130C00B120D2AD2A007C3163 /* Frameworks */,
 				130C00B220D2AD2A007C3163 /* Resources */,
 				54481D4823E9CBF000ECF249 /* ShellScript */,
-				641F6AE02445046200739C1C /* Embed Frameworks */,
+				64B0BB4024450ACE0031EAC0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

@@ -33,7 +33,7 @@ struct PresetPhrase: Codable {
 
 }
 
-struct TextPresets {
+struct KeyboardPresets {
 
     static let userFavoritesCategoryIdentifier = "preset_user_favorites"
     static let numPadIdentifier = "preset_user_keypad"
@@ -49,7 +49,7 @@ struct TextPresets {
         // For this keypad layout, the 0 comes after the rest of the numbers
         let numbers = (Array(1...9) + [0]).map { intValue -> PhraseViewModel in
             let value = NSNumber(integerLiteral: intValue)
-            let formatted = TextPresets.numpadKeyFormatter.string(from: value)
+            let formatted = KeyboardPresets.numpadKeyFormatter.string(from: value)
             return PhraseViewModel(unpersistedPhrase: formatted!)
         }
         let responses = [PhraseViewModel(unpersistedPhrase: phraseNoTitle),
@@ -57,29 +57,29 @@ struct TextPresets {
         return numbers + responses
     }
 
-    static var presets: PresetData? {
-        if let json = dataFromBundle() {
-            do {
-                return try JSONDecoder().decode(PresetData.self, from: json)
-            } catch {
-                assertionFailure("Error decoding PresetData: \(error)")
-            }
-        }
-
-        return nil
-    }
-
-    private static func dataFromBundle() -> Data? {
-        if let path = Bundle.main.path(forResource: "textpresets", ofType: "json") {
-            do {
-                return try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-            } catch {
-                assertionFailure("🚨 Cannot parse \(path)")
-                return nil
-            }
-        }
-
-        return nil
-    }
+//    static var presets: PresetData? {
+//        if let json = dataFromBundle() {
+//            do {
+//                return try JSONDecoder().decode(PresetData.self, from: json)
+//            } catch {
+//                assertionFailure("Error decoding PresetData: \(error)")
+//            }
+//        }
+//
+//        return nil
+//    }
+//
+//    private static func dataFromBundle() -> Data? {
+//        if let path = Bundle.main.path(forResource: "textpresets", ofType: "json") {
+//            do {
+//                return try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//            } catch {
+//                assertionFailure("🚨 Cannot parse \(path)")
+//                return nil
+//            }
+//        }
+//
+//        return nil
+//    }
 
 }
