@@ -38,10 +38,7 @@ struct TextPresets {
     static let userFavoritesCategoryIdentifier = "preset_user_favorites"
     static let numPadIdentifier = "preset_user_keypad"
     
-    private static let numpadKeyFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        return formatter
-    }()
+    private static let numpadKeyFormatter = NumberFormatter()
 
     static var numPadPhrases: [PhraseViewModel] {
         let phraseNoTitle = NSLocalizedString("preset.category.numberpad.phrase.no.title",
