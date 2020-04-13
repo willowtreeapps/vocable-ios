@@ -22,7 +22,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dismissButton.buttonImage = UIImage(systemName: "xmark.circle")!
-        titleLabel.text = NSLocalizedString("Settings", comment: "Title: Settings")
+        titleLabel.text = NSLocalizedString("settings.header.title",
+                                            comment: "Settings screen header title")
     }
 
     override func viewDidAppear(_ animated: Bool) {

@@ -1,6 +1,6 @@
 //
 //  PaginationView.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/12/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
@@ -98,6 +98,8 @@ final class PaginationView: UIView {
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
+
+        // This is placeholder text for IBDesignable  so localization is not necessary.
         textLabel.text = "Page 1 of 3"
     }
     
