@@ -42,11 +42,7 @@ class EditSayingsViewController: UIViewController {
         paginationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)
         paginationView.previousPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToPreviousPage), for: .primaryActionTriggered)
 
-        guard let userFavoritesCategory = Category.fetchObject(in: NSPersistentContainer.shared.viewContext, matching: TextPresets.userFavoritesCategoryIdentifier) else {
-            assertionFailure("debug.assertion.user_favorites_category_not_found")
-            return
-        }
-        titleLabel.text = userFavoritesCategory.name
+        titleLabel.text = Category.userFavoritesCategoryName()
     }
     
     @IBAction func backToSettings(_ sender: Any) {

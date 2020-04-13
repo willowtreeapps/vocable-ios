@@ -20,6 +20,7 @@ extension Category: NSManagedObjectIdentifiable {
     static func userFavoritesCategoryName() -> String {
         let context = NSPersistentContainer.shared.viewContext
         guard let favoritesCategory = Category.fetchObject(in: context, matching: TextPresets.userFavoritesCategoryIdentifier) else {
+            assertionFailure("debug.assertion.user_favorites_category_not_found")
             return ""
         }
         return favoritesCategory.name ?? ""
