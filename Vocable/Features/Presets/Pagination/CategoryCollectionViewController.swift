@@ -45,7 +45,8 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
         super.viewDidLoad()
 
         collectionView.register(CategoryItemCollectionViewCell.self, forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
-        collectionView.backgroundColor = .categoryBackgroundColor
+        collectionView.backgroundColor = [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact)
+            ? .collectionViewBackgroundColor : .categoryBackgroundColor
         collectionView.delaysContentTouches = true
 
         updateLayoutForCurrentTraitCollection()
@@ -73,16 +74,17 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
     }
 
     func updateLayoutForCurrentTraitCollection() {
-        layout.interItemSpacing = 0
-
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
+            layout.interItemSpacing = 0
             layout.numberOfColumns = 4
             layout.numberOfRows = 1
         case (.compact, .regular):
+            layout.interItemSpacing = 8
             layout.numberOfColumns = 1
             layout.numberOfRows = 1
         case (.compact, .compact), (.regular, .compact):
+            layout.interItemSpacing = 8
             layout.numberOfColumns = 3
             layout.numberOfRows = 1
         default:

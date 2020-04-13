@@ -190,7 +190,6 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
     
     func updateProgress() {
-        print("pageIndex: \(logicalPageIndex) number of pages: \(numberOfPages)")
         self.progress = (pageIndex: logicalPageIndex, pageCount: numberOfPages)
     }
 

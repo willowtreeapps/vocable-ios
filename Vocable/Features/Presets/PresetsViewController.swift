@@ -340,7 +340,9 @@ class PresetsViewController: UICollectionViewController {
             let childContainerView = cell.contentView
             
             addChild(childViewController)
-            childViewController.view.frame = childContainerView.frame.inset(by: childContainerView.layoutMargins)
+            childViewController.view.frame = childContainerView.frame.inset(by:
+                [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) ?
+                    UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) : childContainerView.layoutMargins)
             childContainerView.addSubview(childViewController.view)
             childViewController.didMove(toParent: self)
         }
