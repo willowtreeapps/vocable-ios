@@ -10,12 +10,21 @@ import Foundation
 import AVFoundation
 
 extension AVSpeechSynthesizer {
+
     private struct Storage {
         static let shared = AVSpeechSynthesizer()
     }
-    static var shared: AVSpeechSynthesizer {
-        return Storage.shared
-    }
+
+    static let shared: AVSpeechSynthesizer = {
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
+
+        return AVSpeechSynthesizer()
+    }()
     
     func speak(_ string: String, language: String) {
         let utterance = AVSpeechUtterance(string: string)
@@ -26,4 +35,5 @@ extension AVSpeechSynthesizer {
         }
         speak(utterance)
     }
+
 }

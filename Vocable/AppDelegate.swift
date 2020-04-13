@@ -12,7 +12,7 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    var window: HeadGazeWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -74,10 +74,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
-        let title = NSLocalizedString("gaze_tracking.error.excessive_head_distance.title", comment: "Warning message presented to the user when the head tracking system")
-        ToastWindow.shared.presentPersistantWarning(with: title)
+        
+        if window?.trackingDisabledByTouch == false {
+            let title = NSLocalizedString("gaze_tracking.error.excessive_head_distance.title",
+                                          comment: "Warning message presented to the user when the head tracking system")
+            ToastWindow.shared.presentPersistantWarning(with: title)
+        }
     }
-    
+
     @objc private func applicationDidAcquireGaze(_ sender: Any?) {
         ToastWindow.shared.dismissPersistantWarning()
     }
