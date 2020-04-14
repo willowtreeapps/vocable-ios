@@ -399,9 +399,8 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         
         var compactPortraitFunctionKeyGroup: NSCollectionLayoutGroup {
             let compactFunctionKeyGroup = NSCollectionLayoutGroup.horizontal(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1 / 6)),
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.15)),
                 subitems: [leadingKeyItem, spaceKeyItem, keyItem, trailingKeyItem])
-            compactFunctionKeyGroup.contentInsets = .init(top: 16, leading: 0, bottom: 0, trailing: 0)
             
             return compactFunctionKeyGroup
         }
@@ -415,7 +414,7 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         }
         
         let overallContainerGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.675)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.6)),
             subitems: [characterKeyContainerGroup, defaultFunctionKeyGroup])
         
         return overallContainerGroup
