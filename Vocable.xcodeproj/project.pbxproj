@@ -202,6 +202,7 @@
 		6BB56BA72422AC2500EA787E /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		6BB56BA92422B40200EA787E /* PublishedDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishedDefault.swift; sourceTree = "<group>"; };
 		6BE23D552444DCBE0032CAE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6BE23D5724450FDA0032CAE4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BFB18BD24002BFE002C3515 /* NSPersistentContainer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPersistentContainer+Shared.swift"; sourceTree = "<group>"; };
 		6BFB18C124002C7B002C3515 /* Phrases.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Phrases.xcdatamodel; sourceTree = "<group>"; };
 		6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Helpers.swift"; sourceTree = "<group>"; };
@@ -986,6 +987,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6BE23D552444DCBE0032CAE4 /* en */,
+				6BE23D5724450FDA0032CAE4 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

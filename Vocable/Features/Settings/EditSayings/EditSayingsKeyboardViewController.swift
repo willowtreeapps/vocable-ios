@@ -246,8 +246,13 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
                 }
                 do {
                     try context.save()
-                    let newEntrySavedString = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title",
-                                                                comment: "new entry saved to user favorites category")
+
+                    let newEntrySavedString: String = {
+                        let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
+                        let categoryName = Category.userFavoritesCategoryName()
+                        return String.localizedStringWithFormat(format, categoryName)
+                    }()
+
                     let changesSavedString = NSLocalizedString("category_editor.toast.changes_saved.title",
                                                                comment: "changes to an existing phrase were saved successfully")
                     let alertMessage = isNewPhrase ? newEntrySavedString : changesSavedString
