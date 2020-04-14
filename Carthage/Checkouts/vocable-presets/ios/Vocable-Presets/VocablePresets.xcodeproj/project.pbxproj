@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6405B73E244615B500F3EFA2 /* textpresets.json in Resources */ = {isa = PBXBuildFile; fileRef = 6405B73D244615B500F3EFA2 /* textpresets.json */; };
 		64C441C924410474001732C7 /* VocablePresets.h in Headers */ = {isa = PBXBuildFile; fileRef = 64C441C724410474001732C7 /* VocablePresets.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		64F3A4D72445065C00588A84 /* TextPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3A4D62445065C00588A84 /* TextPresets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6405B73D244615B500F3EFA2 /* textpresets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = textpresets.json; path = ../../textpresets.json; sourceTree = "<group>"; };
 		64C441C424410474001732C7 /* VocablePresets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VocablePresets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64C441C724410474001732C7 /* VocablePresets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VocablePresets.h; sourceTree = "<group>"; };
 		64C441C824410474001732C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -32,6 +34,7 @@
 		64C441BA24410474001732C7 = {
 			isa = PBXGroup;
 			children = (
+				6405B73D244615B500F3EFA2 /* textpresets.json */,
 				64F3A4D62445065C00588A84 /* TextPresets.swift */,
 				64C441C624410474001732C7 /* VocablePresets */,
 				64C441C524410474001732C7 /* Products */,
@@ -125,6 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6405B73E244615B500F3EFA2 /* textpresets.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,9 +286,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.VocablePresets;
 				PRODUCT_NAME = VocablePresets;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -308,8 +313,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.VocablePresets;
 				PRODUCT_NAME = VocablePresets;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

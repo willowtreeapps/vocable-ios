@@ -9,33 +9,33 @@
 import Foundation
 
 // Top level JSON object
-struct PresetData: Codable {
+public struct PresetData: Codable {
 
-    let schemaVersion: Int
-    let categories: [PresetCategory]
-    let phrases: [PresetPhrase]
-
-}
-
-struct PresetCategory: Codable {
-
-    let id: String
-    let localizedName: [String: String]
-    let hidden: Bool
+    public let schemaVersion: Int
+    public let categories: [PresetCategory]
+    public let phrases: [PresetPhrase]
 
 }
 
-struct PresetPhrase: Codable {
+public struct PresetCategory: Codable {
 
-    let id: String
-    let categoryIds: [String]
-    let localizedUtterance: [String: String]
+    public let id: String
+    public let localizedName: [String: String]
+    public let hidden: Bool
 
 }
 
-struct TextPresets {
+public struct PresetPhrase: Codable {
 
-    static var presets: PresetData? {
+    public let id: String
+    public let categoryIds: [String]
+    public let localizedUtterance: [String: String]
+
+}
+
+public struct TextPresets {
+
+    public static var presets: PresetData? {
         if let json = dataFromBundle() {
             do {
                 return try JSONDecoder().decode(PresetData.self, from: json)
@@ -48,7 +48,12 @@ struct TextPresets {
     }
 
     private static func dataFromBundle() -> Data? {
-        if let path = Bundle.main.path(forResource: "textpresets", ofType: "json") {
+
+        guard let bundle = Bundle(identifier: "com.willowtreeapps.VocablePresets") else {
+            return nil
+        }
+
+        if let path = bundle.path(forResource: "textpresets", ofType: "json") {
             do {
                 return try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
             } catch {
