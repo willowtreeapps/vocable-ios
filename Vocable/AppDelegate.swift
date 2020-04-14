@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-import Vocable-Presets
+import VocablePresets
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let context = container.viewContext
 
-        guard let presets = KeyboardPresets.presets else {
+        guard let presets = TextPresets.presets else {
             let message = NSLocalizedString("debug.assertion.presets_file_not_found",
                                             comment: "Debugging error message for when preloaded content is not found")
             assertionFailure(message)
@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ToastWindow.shared.dismissPersistentWarning()
     }
 
-    private func deleteOrphanedPhrases(in context: NSManagedObjectContext, with presets: PresetData) throws {
+    private func deleteOrphanedPhrases(in context: NSManagedObjectContext, with presets: VocablePresets.PresetData) throws {
 
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         request.predicate = {
@@ -105,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    private func deleteOrphanedCategories(in context: NSManagedObjectContext, with presets: PresetData) throws {
+    private func deleteOrphanedCategories(in context: NSManagedObjectContext, with presets: VocablePresets.PresetData) throws {
 
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         request.predicate = {
@@ -140,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    private func createPrescribedEntities(in context: NSManagedObjectContext, with presets: PresetData) throws {
+    private func createPrescribedEntities(in context: NSManagedObjectContext, with presets: VocablePresets.PresetData) throws {
 
         let orderedLanguages = Array(Locale.preferredLanguages.map { regionalLanguage -> [String] in
             let rootLanguage = Locale(identifier: regionalLanguage).languageCode
@@ -154,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
 
-    private func updateDefaultCategories(in context: NSManagedObjectContext, withPresets presets: PresetData, orderedLanguages: [String]) throws {
+    private func updateDefaultCategories(in context: NSManagedObjectContext, withPresets presets: VocablePresets.PresetData, orderedLanguages: [String]) throws {
         for presetCategory in presets.categories {
             let supportLanguages = Set(presetCategory.localizedName.keys)
             guard let languageCode = orderedLanguages.first(where: supportLanguages.contains) else {
@@ -171,7 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    private func updateDefaultPhrases(in context: NSManagedObjectContext, withPresets presets: PresetData, orderedLanguages: [String]) throws {
+    private func updateDefaultPhrases(in context: NSManagedObjectContext, withPresets presets: VocablePresets.PresetData, orderedLanguages: [String]) throws {
         for presetPhrase in presets.phrases {
             let supportLanguages = Set(presetPhrase.localizedUtterance.keys)
             guard let languageCode = orderedLanguages.first(where: supportLanguages.contains) else {
