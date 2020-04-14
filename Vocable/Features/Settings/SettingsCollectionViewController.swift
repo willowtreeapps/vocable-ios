@@ -18,9 +18,38 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     // Contact Developers + Privact Policy + Version Number
     private let externalLinksItemCount = 3
 
-    private enum SettingsItem: String, Hashable {
+    private enum SettingsItem: Hashable {
         var title: String {
-            return NSLocalizedString(self.rawValue, comment: "")
+            switch self {
+            case .editMySayings:
+                let format = NSLocalizedString("settings.cell.edit_user_favorites.title_format",
+                                               comment: "edit user's favorite phrases category settings menu item")
+                let categoryName = Category.userFavoritesCategoryName()
+                return String.localizedStringWithFormat(format, categoryName)
+            case .categories:
+                return NSLocalizedString("settings.cell.categories.title",
+                                         comment: "edit categories settings menu item")
+            case .timingSensitivity:
+                return NSLocalizedString("settings.cell.timing_sensitivity.title",
+                                         comment: "edit cursor timing and sensititivy settings menu item")
+            case .resetAppSettings:
+                return NSLocalizedString("settings.cell.reset_all.title",
+                                         comment: "reset all settings menu item")
+            case .selectionMode:
+                return NSLocalizedString("settings.cell.selection_mode.title",
+                                         comment: "edit cursor selection mode settings menu item")
+            case .privacyPolicy:
+                return NSLocalizedString("settings.cell.privacy_policy.title",
+                                         comment: "view privacy policy settings menu item")
+            case .contactDevs:
+                return NSLocalizedString("settings.cell.contact_developers.title",
+                                         comment: "contact developers settings menu item")
+            case .pidTuner:
+                return NSLocalizedString("settings.cell.tune_cursor.title",
+                                         comment: "tune cursor debug settings menu item")
+            case .versionNum:
+                return ""
+            }
         }
 
         var isFeatureEnabled: Bool {
@@ -31,14 +60,14 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             return true
         }
 
-        case editMySayings = "Edit My Sayings"
-        case categories = "Categories"
-        case timingSensitivity = "Timing and Sensitivity"
-        case resetAppSettings = "Reset App Settings"
-        case selectionMode = "Selection Mode"
-        case privacyPolicy = "Privacy Policy"
-        case contactDevs = "Contact Developers"
-        case pidTuner = "Tune Cursor"
+        case editMySayings
+        case categories
+        case timingSensitivity
+        case resetAppSettings
+        case selectionMode
+        case privacyPolicy
+        case contactDevs
+        case pidTuner
         case versionNum
     }
 
@@ -222,14 +251,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
         switch item {
         case .privacyPolicy:
-            let alertString = NSLocalizedString("You're about to be taken outside of the Vocable app. You may lose head tracking control.",
-                                                comment: "You're about to be taken outside of the Vocable app. You may lose head tracking control alert message")
-            let alertViewController = GazeableAlertViewController(alertTitle: alertString)
-
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title"), style: .default))
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), style: .destructive, handler: self.presentPrivacyAlert))
-            present(alertViewController, animated: true)
-
+            presentLeavingHeadTrackableDomainAlert(withConfirmation: presentPrivacyAlert)
         case .editMySayings:
             if let vc = UIStoryboard(name: "EditSayings", bundle: nil).instantiateViewController(identifier: "MySayings") as? EditSayingsViewController {
                 show(vc, sender: nil)
@@ -288,18 +310,34 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 
+    private func presentLeavingHeadTrackableDomainAlert(withConfirmation confirmationAction: @escaping () -> Void) {
+        let alertString = NSLocalizedString("settings.alert.surrender_gaze_confirmation.body",
+                                            comment: "body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app")
+        let cancelTitle = NSLocalizedString("settings.alert.surrender_gaze_confirmation.button.cancel.title",
+        comment: "Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app")
+        let confirmationTitle = NSLocalizedString("settings.alert.surrender_gaze_confirmation.button.confirm.title",
+        comment: "Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app")
+        
+        let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+
+        alertViewController.addAction(GazeableAlertAction(title: cancelTitle,
+                                                          style: .default))
+        alertViewController.addAction(GazeableAlertAction(title: confirmationTitle,
+                                                          style: .destructive,
+                                                          handler: confirmationAction))
+        present(alertViewController, animated: true)
+    }
+
     private func presentEmail() {
         if MFMailComposeViewController.canSendMail() {
-            let alertString = NSLocalizedString("You're about to be taken outside of the Vocable app. You may lose head tracking control.",
-                                                comment: "You're about to be taken outside of the Vocable app. You may lose head tracking control alert message")
-            let alertViewController = GazeableAlertViewController(alertTitle: alertString)
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), handler: self.presentEmail))
-            present(alertViewController, animated: true)
+            presentLeavingHeadTrackableDomainAlert(withConfirmation: presentEmail)
         } else {
-            let alertString = NSLocalizedString("Email not configured.", comment: "No mail alert title")
+            let alertString = NSLocalizedString("settings.alert.no_email_configured.title",
+                                                comment: "No email account configured error alert title")
+            let dismissalTitle = NSLocalizedString("settings.alert.no_email_configured.button.dismiss.title",
+                                                   comment: "No email account configured error alert dismiss button title")
             let alertViewController = GazeableAlertViewController(alertTitle: alertString)
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Ok", comment: "Ok alert action title")))
+            alertViewController.addAction(GazeableAlertAction(title: dismissalTitle))
             present(alertViewController, animated: true)
             return
         }

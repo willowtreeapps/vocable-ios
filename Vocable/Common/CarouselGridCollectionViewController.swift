@@ -9,7 +9,20 @@
 import UIKit
 import Combine
 
-typealias CarouselGridPagingProgress = (pageIndex: Int, pageCount: Int)
+struct CarouselGridPagingProgress {
+    var pageIndex: Int
+    var pageCount: Int
+    var localizedString: String {
+        let pageIndex = self.pageIndex + 1
+        let pageCount = self.pageCount
+        let format = NSLocalizedString("paging_progress_indicator_format",
+                                       comment: "Page indicator progress format. \"Page x of n\"")
+        let formattedProgress = String.localizedStringWithFormat(format, pageIndex, pageCount)
+        return formattedProgress
+    }
+
+    static let zero = CarouselGridPagingProgress(pageIndex: 0, pageCount: 0)
+}
 
 class CarouselGridCollectionViewController: UICollectionViewController {
 
@@ -118,7 +131,7 @@ class CarouselGridLayout: UICollectionViewLayout {
             } else if logicalPageIndex == numberOfPages {
                 logicalPageIndex = 0
             }
-            self.progress = (pageIndex: logicalPageIndex, pageCount: numberOfPages)
+            self.progress?.pageIndex = logicalPageIndex
         }
     }
 
@@ -129,7 +142,7 @@ class CarouselGridLayout: UICollectionViewLayout {
         guard let collectionView = collectionView, collectionView.window != nil else { return 1 }
         let pageCount = Int((Double(collectionView.numberOfItems(inSection: 0)) / Double(itemsPerPage)).rounded(.up))
         if pageCount != (progress?.pageCount ?? 0) {
-            progress = (pageIndex: logicalPageIndex, pageCount: pageCount)
+            progress?.pageCount = pageCount
         }
         return pageCount
     }

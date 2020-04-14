@@ -1,0 +1,98 @@
+/* Delete phrase alert cancel button title */
+"category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Abbrechen";
+
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Löschen";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "Gelöschte Sätze können nicht wiederhergestellt werden.";
+
+/* changes to an existing phrase were saved successfully */
+"category_editor.toast.changes_saved.title" = "Änderungen gespeichert";
+
+/* Debugging error message for when preloaded content is not found */
+"debug.assertion.presets_file_not_found" = "No presets found";
+
+/* Cancel alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Abbrechen";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Okay";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "Steuerung per Kopfbewegung ausschalten?";
+
+/* Warning message presented to the user when the head tracking system */
+"gaze_tracking.error.excessive_head_distance.title" = "Bitte näher ans Gerät kommen.";
+
+/* Select something below to speak Hint Text */
+"main_screen.textfield_placeholder.default" = "Wähle unten etwas aus, um zu sprechen";
+
+/* Page indicator progress format. \"Page x of n\" */
+"paging_progress_indicator_format" = "Seite %1$d von %2$d";
+
+/* Continue editing alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Weiter editieren";
+
+/* Discard changes alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Verwerfen";
+
+/* Exit edit sayings alert title */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Nicht gespeicherte Veränderungen werden beim Verlassen des Menüs verworfen.";
+
+/* new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title */
+"phrase_editor.toast.successfully_saved_to_favorites.title_format" = "In %@ gespeichert";
+
+/* 'No' num pad response */
+"preset.category.numberpad.phrase.no.title" = "Nein";
+
+/* 'Yes' num pad response */
+"preset.category.numberpad.phrase.yes.title" = "Ja";
+
+/* No email account configured error alert dismiss button title */
+"settings.alert.no_email_configured.button.dismiss.title" = "OK";
+
+/* No email account configured error alert title */
+"settings.alert.no_email_configured.title" = "E-Mail ist nicht konfiguriert.";
+
+/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.body" = "Dieser link wir außerhalb der Vocable App geöffnet. Sie laufen möglicherweise Gefahr, nicht mehr per Kopfbewegung steuern zu können.";
+
+/* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.cancel.title" = "Abbrechen";
+
+/* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Okay";
+
+/* edit categories settings menu item */
+"settings.cell.categories.title" = "Kategorien";
+
+/* contact developers settings menu item */
+"settings.cell.contact_developers.title" = "Entwickler kontaktieren";
+
+/* edit user's favorite phrases category settings menu item */
+"settings.cell.edit_user_favorites.title_format" = "%@ editieren";
+
+/* Settings head tracking cell title */
+"settings.cell.head_tracking.title" = "Per Kopfbewegung";
+
+/* view privacy policy settings menu item */
+"settings.cell.privacy_policy.title" = "Datenschutz";
+
+/* reset all settings menu item */
+"settings.cell.reset_all.title" = "App Einstellungen zurücksetzen";
+
+/* edit cursor selection mode settings menu item */
+"settings.cell.selection_mode.title" = "Steuerungsmodus";
+
+/* edit cursor timing and sensititivy settings menu item */
+"settings.cell.timing_sensitivity.title" = "Timing und Empfindlichkeit";
+
+/* tune cursor debug settings menu item */
+"settings.cell.tune_cursor.title" = "Feineinstellung des Zeigers";
+
+/* Settings screen header title */
+"settings.header.title" = "Einstellungen";
+

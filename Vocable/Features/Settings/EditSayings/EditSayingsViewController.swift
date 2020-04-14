@@ -8,6 +8,7 @@
 
 import UIKit
 import Combine
+import CoreData
 
 class EditSayingsViewController: UIViewController {
 
@@ -34,20 +35,14 @@ class EditSayingsViewController: UIViewController {
             guard let pagingProgress = pagingProgress else {
                 return
             }
-            if pagingProgress.pageCount > 1 {
-                self.paginationView.setPaginationButtonsEnabled(true)
-            } else {
-                self.paginationView.setPaginationButtonsEnabled(false)
-            }
-            let computedPageCount = max(pagingProgress.pageCount, 1)
-
-            self.paginationView.textLabel.text = String(format: NSLocalizedString("Page %d of %d", comment: ""), pagingProgress.pageIndex + 1, computedPageCount)
+            self.paginationView.setPaginationButtonsEnabled(pagingProgress.pageCount > 1)
+            self.paginationView.textLabel.text = pagingProgress.localizedString
         }).store(in: &disposables)
         
         paginationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)
         paginationView.previousPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToPreviousPage), for: .primaryActionTriggered)
 
-        titleLabel.text = NSLocalizedString("My Sayings", comment: "Category: My Sayings")
+        titleLabel.text = Category.userFavoritesCategoryName()
     }
     
     @IBAction func backToSettings(_ sender: Any) {
