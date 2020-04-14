@@ -10,8 +10,25 @@ import Foundation
 import UIKit
 
 struct KeyboardKeys {
-    static var qwerty = "QWERTYUIOPASDFGHJKL'ZXCVBNM,.?"
-    static var alphabetical = "ABCDEFGHIJKLMNOPQRSTUVWXYZ',.?"
+    static var qwerty: String {
+        if AppConfig.activePreferredLanguageCode.contains("de-") {
+          return deUSQwerty
+        }
+        return enUSQwerty
+    }
+    
+    static var alphabetical: String {
+        if AppConfig.activePreferredLanguageCode.contains("de-") {
+          return deUSAlphabetical
+        }
+        return enUSAlphabetical
+    }
+    
+    static var enUSQwerty = "QWERTYUIOPASDFGHJKL'ZXCVBNM,.?"
+    static var enUSAlphabetical = "ABCDEFGHIJKLMNOPQRSTUVWXYZ',.?"
+    
+    static var deUSQwerty = "QWERTZUIOPÜASDFGHJKLÖÄYXCVBNMẞ'.?"
+    static var deUSAlphabetical = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜẞ/-',.?"
 }
 
 enum KeyboardFunctionButton {

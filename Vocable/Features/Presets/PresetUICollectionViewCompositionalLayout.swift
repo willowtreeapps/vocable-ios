@@ -340,13 +340,28 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     
     static func keyboardLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let traitCollection = environment.traitCollection
+        var rows: Int?
+        var columns: Int?
+        
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
-            let section = NSCollectionLayoutSection(group: keyboardGroupLayout(environment: environment, rows: 5, columns: 6))
-            return section
+            if AppConfig.activePreferredLanguageCode.contains("de-") {
+                rows = 6
+                columns = 6
+            } else {
+                rows = 5
+                columns = 6
+            }
         } else {
-            let section = NSCollectionLayoutSection(group: keyboardGroupLayout(environment: environment, rows: 3, columns: 10))
-            return section
+            if AppConfig.activePreferredLanguageCode.contains("de-") {
+                rows = 3
+                columns = 11
+            } else {
+                rows = 3
+                columns = 10
+            }
         }
+        
+        return NSCollectionLayoutSection(group: keyboardGroupLayout(environment: environment, rows: rows!, columns: columns!))
     }
     
     static private func keyboardGroupLayout(environment: NSCollectionLayoutEnvironment, rows: Int, columns: Int) -> NSCollectionLayoutGroup {
@@ -357,7 +372,6 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
         let characterKeyGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)), subitem: keyItem, count: columns)
         
         let characterKeyFractionalHeight = CGFloat((traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular)
-            && traitCollection.verticalSizeClass == .regular)
             ? 5.0 / 6.0 : 3.0 / 4.0)
         let characterKeyContainerGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(characterKeyFractionalHeight)),
