@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 11.4.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -19,7 +19,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 11.3.0
+      xcode: 11.4.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -34,7 +34,7 @@ jobs:
 
   buildanddeploytotestflight:
     macos:
-      xcode: 11.3.0
+      xcode: 11.4.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: buildanddeploytotestflight
