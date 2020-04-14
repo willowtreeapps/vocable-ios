@@ -46,6 +46,7 @@ class EditCategoriesDetailCollectionViewController: UICollectionViewController {
         collectionView.register(UINib(nibName: "EditCategoryRemoveCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EditCategoryRemoveCollectionViewCell")
         collectionView.allowsMultipleSelection = true
         collectionView.allowsSelection = true
+        collectionView.delaysContentTouches = false
         
         updateDataSource()
         
@@ -78,15 +79,17 @@ class EditCategoriesDetailCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
-    for _ in collectionView.indexPathsForSelectedItems ?? [] {
+        guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
+        if collectionView.indexPathForGazedItem != indexPath {
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
         switch selectedItem {
         case .showCategoryToggle:
-            break
+            handleToggle(at: indexPath)
         case .removeCategoryToggle:
             handleRemoveCategory()
         }
-    }
+        
     }
     
     private func handleRemoveCategory() {
@@ -111,27 +114,27 @@ class EditCategoriesDetailCollectionViewController: UICollectionViewController {
         }
     }
 
-   private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: EditCategoryItem) -> UICollectionViewCell {
-       switch item {
-       case .showCategoryToggle:
-           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryToggleCollectionViewCell
-           cell.showCategorySwitch.addTarget(self, action: #selector(self.handleToggle(_:)), for: .valueChanged)
-           if let category = EditCategoriesDetailViewController.category {
-              cell.showCategorySwitch.isOn = !category.isHidden
-           }
-           cell.isHidden = EditCategoriesDetailViewController.category?.identifier == "preset_user_favorites"
-           return cell
-       case .removeCategoryToggle:
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryRemoveCollectionViewCell
-        cell.isHidden = (!(EditCategoriesDetailViewController.category?.isUserGenerated ?? true))
-        return cell
+    private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: EditCategoryItem) -> UICollectionViewCell {
+        switch item {
+        case .showCategoryToggle:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryToggleCollectionViewCell
+            if let category = EditCategoriesDetailViewController.category {
+                cell.showCategorySwitch.isOn = !category.isHidden
+            }
+            cell.isHidden = EditCategoriesDetailViewController.category?.identifier == "preset_user_favorites"
+            return cell
+        case .removeCategoryToggle:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryRemoveCollectionViewCell
+            cell.isHidden = (!(EditCategoriesDetailViewController.category?.isUserGenerated ?? true))
+            return cell
+        }
     }
-   }
     
-    @objc func handleToggle(_ sender: UISwitch) {
-        let shouldShowCategory = !sender.isOn
-        guard let category = EditCategoriesDetailViewController.category else { return }
-        category.setValue(shouldShowCategory, forKey: "isHidden")
+    func handleToggle(at indexPath: IndexPath) {
+        guard let category = EditCategoriesDetailViewController.category, let cell = collectionView.cellForItem(at: indexPath) as? EditCategoryToggleCollectionViewCell else { return }
+        let shouldShowCategory = !cell.showCategorySwitch.isOn
+        category.setValue(!category.isHidden, forKey: "isHidden")
+        cell.showCategorySwitch.isOn = shouldShowCategory
         saveContext()
     }
     

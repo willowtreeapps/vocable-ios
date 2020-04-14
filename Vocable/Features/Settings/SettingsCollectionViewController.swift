@@ -24,7 +24,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         }
 
         var isFeatureEnabled: Bool {
-            let debugFeatures: [SettingsItem] = [.categories, .resetAppSettings, .pidTuner]
+            let debugFeatures: [SettingsItem] = [.resetAppSettings, .pidTuner]
             if debugFeatures.contains(self) {
                 return AppConfig.showDebugOptions
             }

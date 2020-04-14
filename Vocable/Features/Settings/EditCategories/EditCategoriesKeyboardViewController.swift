@@ -19,7 +19,6 @@ class EditCategoriesKeyboardViewController: UIViewController, UICollectionViewDe
     
     var _textTransaction = TextTransaction(text: "")
     
-    var phraseIdentifier: String?
     var isAddingCategory = false
     
     private var textTransaction: TextTransaction {

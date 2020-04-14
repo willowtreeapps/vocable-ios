@@ -9,13 +9,6 @@
 import Foundation
 import UIKit
 
-public enum buttonScheme {
-    case disableMoveUp
-    case disableMoveDown
-    case disableAll
-    case enableAll
-}
-
 class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var moveDownButton: GazeableButton!
@@ -29,7 +22,7 @@ class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
     @IBOutlet private var bottomSeparator: UIView!
     
     var separatorMask: CellSeparatorMask = .both {
-        didSet{
+        didSet {
             updateSeparatorMask()
         }
     }

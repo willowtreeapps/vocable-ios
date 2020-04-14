@@ -17,6 +17,7 @@ class EditCategoryToggleCollectionViewCell: VocableCollectionViewCell {
         super.awakeFromNib()
         
         showCategorySwitch.isEnabled = true
+        showCategorySwitch.isUserInteractionEnabled = false
         showCategoryLabel.text = NSLocalizedString("Show", comment: "Show category toggle label.")
         
     }

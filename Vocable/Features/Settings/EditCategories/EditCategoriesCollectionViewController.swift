@@ -35,7 +35,9 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
 
     private lazy var fetchRequest: NSFetchRequest<Category> = {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.isHidden, ascending: true), NSSortDescriptor(keyPath: \Category.ordinal, ascending: true), NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.isHidden, ascending: true),
+        NSSortDescriptor(keyPath: \Category.ordinal, ascending: true),
+        NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)]
         return request
     }()
     
@@ -61,6 +63,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         updateDataSource(animated: false)
     }
 
@@ -161,7 +164,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         let hiddenTitleString = NSMutableAttributedString(string: "\(category.name ?? "")")
        
         if fetchResultsController.object(at: indexPath).isHidden {
-            cell.setup(title: configureTitleString(with: hiddenTitleString))
+            cell.setup(title: addHiddenIconIfNeeded(to: hiddenTitleString))
         } else {
             cell.setup(title: visibleTitleString)
         }
@@ -191,9 +194,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         let toCategory = fetchResultsController.object(at: toIndexPath)
         
         swapOrdinal(fromCategory: fromCategory, toCategory: toCategory)
-        
         saveContext()
-        
     }
     
     @objc private func handleMoveCategoryDown(_ sender: UIButton) {
@@ -271,12 +272,12 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         }
     }
     
-    private func configureTitleString(with stringToConfigure: NSMutableAttributedString) -> NSMutableAttributedString {
+    private func addHiddenIconIfNeeded(to titleString: NSMutableAttributedString) -> NSMutableAttributedString {
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "eye.slash.fill")?.withTintColor(UIColor.white)
         imageAttachment.bounds = CGRect(x: -2, y: 0, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
-        stringToConfigure.insert(NSAttributedString(string: " "), at: 0)
-        stringToConfigure.insert(NSAttributedString(attachment: imageAttachment), at: 0)
-        return stringToConfigure
+        titleString.insert(NSAttributedString(string: " "), at: 0)
+        titleString.insert(NSAttributedString(attachment: imageAttachment), at: 0)
+        return titleString
     }
 }

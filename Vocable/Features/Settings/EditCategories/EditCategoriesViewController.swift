@@ -12,7 +12,7 @@ import Combine
 
 class EditCategoriesViewController: UIViewController {
     
-    @IBOutlet weak var paginationView: PaginationView!
+    @IBOutlet private weak var pageNavigationView: PaginationView!
     
     private var carouselCollectionViewController: CarouselGridCollectionViewController?
     private var disposables = Set<AnyCancellable>()
@@ -30,17 +30,17 @@ class EditCategoriesViewController: UIViewController {
                 return
             }
             if pagingProgress.pageCount > 1 {
-                self.paginationView.setPaginationButtonsEnabled(true)
+                self.pageNavigationView.setPaginationButtonsEnabled(true)
             } else {
-                self.paginationView.setPaginationButtonsEnabled(false)
+                self.pageNavigationView.setPaginationButtonsEnabled(false)
             }
             let computedPageCount = max(pagingProgress.pageCount, 1)
 
-            self.paginationView.textLabel.text = String(format: NSLocalizedString("Page %d of %d", comment: ""), pagingProgress.pageIndex + 1, computedPageCount)
+            self.pageNavigationView.textLabel.text = String(format: NSLocalizedString("Page %d of %d", comment: ""), pagingProgress.pageIndex + 1, computedPageCount)
         }).store(in: &disposables)
         
-        paginationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)
-        paginationView.previousPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToPreviousPage), for: .primaryActionTriggered)
+        pageNavigationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)
+        pageNavigationView.previousPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToPreviousPage), for: .primaryActionTriggered)
         
     }
     

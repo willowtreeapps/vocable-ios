@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad11_0rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -12,14 +13,14 @@
             <objects>
                 <viewController storyboardIdentifier="EditCategories" id="KLI-zL-Q9x" customClass="EditCategoriesViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XHU-T2-eKa" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaL-BL-aEw" userLabel="Toolbar">
-                                <rect key="frame" x="32" y="32" width="536" height="96"/>
+                                <rect key="frame" x="32" y="32" width="1130" height="96"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
-                                        <rect key="frame" x="146" y="8" width="244" height="57.5"/>
+                                        <rect key="frame" x="443" y="8" width="244" height="57.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                         <color key="textColor" name="DefaultFontColor"/>
                                         <nil key="highlightedColor"/>
@@ -44,11 +45,11 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="arrow.left" catalog="system"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="backToEditCategories:" destination="KLI-zL-Q9x" eventType="touchUpInside" id="NzM-GP-3Pc"/>
+                                            <action selector="backToEditCategories:" destination="KLI-zL-Q9x" eventType="primaryActionTriggered" id="cL2-ip-6UG"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y3d-hd-xdZ" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                        <rect key="frame" x="440" y="0.0" width="96" height="96"/>
+                                        <rect key="frame" x="1034" y="0.0" width="96" height="96"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <color key="tintColor" name="DefaultFontColor"/>
                                         <state key="normal" image="xmark.circle" catalog="system">
@@ -84,8 +85,8 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
-                                <rect key="frame" x="32" y="152" width="536" height="512"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
+                                <rect key="frame" x="32" y="152" width="1130" height="512"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="322.5" id="V2b-Pm-qsk"/>
                                 </constraints>
@@ -98,7 +99,7 @@
                                     <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="380.5" y="688" width="433.5" height="94"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>
@@ -160,7 +161,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="64t-Cy-SBd"/>
                     <connections>
-                        <outlet property="paginationView" destination="xsL-XA-YD7" id="Se5-DF-Fqu"/>
+                        <outlet property="pageNavigationView" destination="xsL-XA-YD7" id="Se5-DF-Fqu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxk-ad-LrW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -197,11 +198,11 @@
             <objects>
                 <viewController storyboardIdentifier="EditCategoryKeyboardViewController" id="qBB-qb-4us" customClass="EditCategoriesKeyboardViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nxM-ki-o4S">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zBG-MP-Uvj">
-                                <rect key="frame" x="32" y="32" width="536" height="536"/>
+                                <rect key="frame" x="32" y="32" width="1130" height="750"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MPw-us-ZBK">
                                     <size key="itemSize" width="50" height="50"/>
@@ -244,7 +245,7 @@
             <objects>
                 <viewController storyboardIdentifier="EditCategoryDetail" id="6hz-tb-yd2" customClass="EditCategoriesDetailViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6iL-6J-UCo" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bhv-Ll-Ibf" userLabel="Back Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
@@ -272,16 +273,16 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NGL-9m-pbg" userLabel="Top Bar View">
-                                <rect key="frame" x="32" y="152" width="536" height="41"/>
+                                <rect key="frame" x="32" y="152" width="1130" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Sb3-QR-EDr">
-                                        <rect key="frame" x="0.0" y="0.0" width="490" height="41"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1084" height="41"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                                         <color key="textColor" name="DefaultFontColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZe-iv-ZgI" userLabel="Edit Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                        <rect key="frame" x="498" y="0.0" width="38" height="41"/>
+                                        <rect key="frame" x="1092" y="0.0" width="38" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="38" id="W2F-kz-XX5"/>
                                             <constraint firstAttribute="height" constant="41" id="hvB-0q-JJ8"/>
@@ -308,7 +309,7 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Ql4-Sb-Tqo">
-                                <rect key="frame" x="32" y="201" width="536" height="399"/>
+                                <rect key="frame" x="32" y="201" width="1130" height="613"/>
                                 <connections>
                                     <segue destination="1Ka-UQ-NO5" kind="embed" id="I8E-i9-qv4"/>
                                 </connections>
