@@ -9,26 +9,47 @@
 import Foundation
 import UIKit
 
-struct KeyboardKeys {
-    static var qwerty: String {
-        if AppConfig.activePreferredLanguageCode.contains("de-") {
-          return deUSQwerty
-        }
-        return enUSQwerty
+struct KeyboardLocale {
+    enum LanguageCode: String {
+        case en
+        case de
     }
     
-    static var alphabetical: String {
-        if AppConfig.activePreferredLanguageCode.contains("de-") {
-          return deUSAlphabetical
-        }
-        return enUSAlphabetical
+    private struct OrientationKeyMapping {
+        let landscape: String
+        let compactPortrait: String
     }
     
-    static var enUSQwerty = "QWERTYUIOPASDFGHJKL'ZXCVBNM,.?"
-    static var enUSAlphabetical = "ABCDEFGHIJKLMNOPQRSTUVWXYZ',.?"
+    let languageCode: LanguageCode
+    private let orientationKeyMapping: OrientationKeyMapping
+    private init(preferredLanguageCode: String) {
+        let code = Locale(identifier: preferredLanguageCode).languageCode ?? AppConfig.defaultLanguageCode
+        languageCode = LanguageCode(rawValue: code) ?? .en
+        orientationKeyMapping = KeyboardLocale.orientationKeyMapping(for: languageCode)
+    }
     
-    static var deUSQwerty = "QWERTZUIOPÜASDFGHJKLÖÄYXCVBNMẞ'.?"
-    static var deUSAlphabetical = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜẞ/-',.?"
+    static var current: KeyboardLocale {
+        return KeyboardLocale(preferredLanguageCode: AppConfig.activePreferredLanguageCode)
+    }
+    
+    var landscape: String {
+        return orientationKeyMapping.landscape
+    }
+    
+    var compactPortrait: String {
+        return orientationKeyMapping.compactPortrait
+    }
+    
+    private static func orientationKeyMapping(for code: LanguageCode) -> OrientationKeyMapping {
+        switch code {
+        case .en:
+            return .init(landscape: "QWERTYUIOPASDFGHJKL'ZXCVBNM,.?",
+                         compactPortrait: "ABCDEFGHIJKLMNOPQRSTUVWXYZ',.?")
+        case .de:
+            return .init(landscape: "QWERTZUIOPÜASDFGHJKLÖÄYXCVBNMẞ'.?",
+                         compactPortrait: "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜẞ/-',.?")
+        }
+    }
 }
 
 enum KeyboardFunctionButton {

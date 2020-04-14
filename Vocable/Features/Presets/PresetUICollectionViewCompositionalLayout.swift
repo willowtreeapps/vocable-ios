@@ -340,55 +340,52 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     
     static func keyboardLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let traitCollection = environment.traitCollection
-        var rows: Int?
-        var columns: Int?
+        let dimensions: (rows: Int, columns: Int)
         
-        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
-            if AppConfig.activePreferredLanguageCode.contains("de-") {
-                rows = 6
-                columns = 6
+        let code = KeyboardLocale.current.languageCode
+        switch code {
+        case .en:
+            if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+                dimensions = (rows: 5, columns: 6)
             } else {
-                rows = 5
-                columns = 6
+                dimensions = (rows: 3, columns: 10)
             }
-        } else {
-            if AppConfig.activePreferredLanguageCode.contains("de-") {
-                rows = 3
-                columns = 11
+        case .de:
+            if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+                dimensions = (rows: 6, columns: 6)
             } else {
-                rows = 3
-                columns = 10
+                dimensions = (rows: 3, columns: 11)
             }
         }
         
-        return NSCollectionLayoutSection(group: keyboardGroupLayout(environment: environment, rows: rows!, columns: columns!))
+        return NSCollectionLayoutSection(group: keyboardGroupLayout(environment: environment, dimensions: dimensions))
     }
     
-    static private func keyboardGroupLayout(environment: NSCollectionLayoutEnvironment, rows: Int, columns: Int) -> NSCollectionLayoutGroup {
+    static private func keyboardGroupLayout(environment: NSCollectionLayoutEnvironment, dimensions: (rows: Int, columns: Int)) -> NSCollectionLayoutGroup {
         let traitCollection = environment.traitCollection
-        let keyItem = PresetUICollectionViewCompositionalLayout.keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(columns)), heightDimension: .fractionalHeight(1)))
+        let keyItem = PresetUICollectionViewCompositionalLayout.keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)))
         
         // Character key group (Top 3 rows)
-        let characterKeyGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)), subitem: keyItem, count: columns)
+        let characterKeyGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)), subitem: keyItem, count: dimensions.columns)
         
         let characterKeyFractionalHeight = CGFloat((traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular)
             ? 5.0 / 6.0 : 3.0 / 4.0)
         let characterKeyContainerGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(characterKeyFractionalHeight)),
-            subitem: characterKeyGroup, count: rows)
+            subitem: characterKeyGroup, count: dimensions.rows)
         
         // Function Key Group (bottom row)
         let leadingKeyItem = PresetUICollectionViewCompositionalLayout.keyboardCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(columns)), heightDimension: .fractionalHeight(1)))
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)))
         
         let spaceKeyItem = PresetUICollectionViewCompositionalLayout.keyboardCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(3.0 / CGFloat(columns)), heightDimension: .fractionalHeight(1)))
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(3.0 / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)))
         
         let trailingKeyItem = PresetUICollectionViewCompositionalLayout.keyboardCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(columns)), heightDimension: .fractionalHeight(1)))
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)))
         
         var defaultFunctionKeyGroup: NSCollectionLayoutGroup {
-            let flexibleSpacing = (environment.container.contentSize.width / CGFloat(columns)) * 2.0
+            let flexibleSpacing = (environment.container.contentSize.width / CGFloat(dimensions.columns)) * 2.0
             
             leadingKeyItem.edgeSpacing = .init(leading: .flexible(flexibleSpacing), top: nil, trailing: nil, bottom: nil)
             trailingKeyItem.edgeSpacing = .init(leading: nil, top: nil, trailing: .flexible(flexibleSpacing), bottom: nil)

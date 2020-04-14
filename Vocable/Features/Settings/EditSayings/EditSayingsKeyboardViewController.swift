@@ -155,9 +155,9 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         
         snapshot.appendSections([.keyboard])
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
-            snapshot.appendItems(KeyboardKeys.alphabetical.map { ItemWrapper.key("\($0)") })
+            snapshot.appendItems(KeyboardLocale.current.compactPortrait.map { ItemWrapper.key("\($0)") })
         } else {
-            snapshot.appendItems(KeyboardKeys.qwerty.map { ItemWrapper.key("\($0)") })
+            snapshot.appendItems(KeyboardLocale.current.landscape.map { ItemWrapper.key("\($0)") })
         }
         
         snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])
