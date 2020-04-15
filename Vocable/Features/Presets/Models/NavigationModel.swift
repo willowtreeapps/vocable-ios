@@ -9,14 +9,15 @@
 import Foundation
 import UIKit
 
-enum HintText: String, CaseIterable {
-    case preset = "Select something below to speak"
-    case keyboard = ""
+enum HintText: CaseIterable {
+    case preset
+    case keyboard
 
     var localizedString: String {
         switch self {
         case .preset:
-            return NSLocalizedString("Select something below to speak", comment: "Select something below to speak Hint Text")
+            return NSLocalizedString("main_screen.textfield_placeholder.default",
+                                     comment: "Select something below to speak Hint Text")
         default:
             return ""
         }

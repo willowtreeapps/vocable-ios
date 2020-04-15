@@ -8,11 +8,12 @@
 
 import UIKit
 import CoreData
+import VocablePresets
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    var window: HeadGazeWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -49,7 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let context = container.viewContext
 
         guard let presets = TextPresets.presets else {
-            assertionFailure("No presets found")
+            let message = NSLocalizedString("debug.assertion.presets_file_not_found",
+                                            comment: "Debugging error message for when preloaded content is not found")
+            assertionFailure(message)
             return
         }
 
@@ -74,15 +77,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
-        ToastWindow.shared.presentPersistantWarning(with: NSLocalizedString("Please move closer to the device.", comment: "Warning title when head tracking is lost."))
+         window?.presentHeadTrackingErrorToastIfNeeded()
     }
-    
+
     @objc private func applicationDidAcquireGaze(_ sender: Any?) {
-        ToastWindow.shared.dismissPersistantWarning()
+        ToastWindow.shared.dismissPersistentWarning()
     }
     
     @objc private func headTrackingDisabled(_ sender: Any?) {
-        ToastWindow.shared.dismissPersistantWarning()
+        ToastWindow.shared.dismissPersistentWarning()
     }
 
     private func deleteOrphanedPhrases(in context: NSManagedObjectContext, with presets: PresetData) throws {
@@ -189,7 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func updateCategoryForUserGeneratedPhrases(in context: NSManagedObjectContext) throws {
-        guard let mySayingsCategory = Category.fetchObject(in: context, matching: TextPresets.savedSayingsIdentifier) else {
+        guard let mySayingsCategory = Category.fetchObject(in: context, matching: KeyboardPresets.userFavoritesCategoryIdentifier) else {
             assertionFailure("User generated category not found")
             return
         }

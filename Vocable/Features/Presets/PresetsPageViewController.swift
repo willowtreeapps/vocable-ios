@@ -29,9 +29,9 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
         var chunked = presetViewModels.chunked(into: itemsPerPage)
         var pageViewControllers: [UIViewController] = []
         
-        if ItemSelection.selectedCategory.identifier == TextPresets.numPadIdentifier {
+        if ItemSelection.selectedCategory.identifier == KeyboardPresets.numPadIdentifier {
             let numPadCollectionViewController = PresetPageCollectionViewController(collectionViewLayout: PresetPageCollectionViewController.NumPadCompositionalLayout(traitCollection: traitCollection))
-            numPadCollectionViewController.items = TextPresets.numPadPhrases
+            numPadCollectionViewController.items = KeyboardPresets.numPadPhrases
             pageViewControllers.insert(numPadCollectionViewController, at: 0)
         }
         
@@ -74,11 +74,11 @@ class PresetsPageViewController: UIPageViewController, UIPageViewControllerDataS
     private func notifyPageIndicatorSubscribers() {
         guard let visibleViewController = viewControllers?.first,
             let currentPage = pages.firstIndex(of: visibleViewController) else {
-            ItemSelection.presetsPageIndicatorProgress = (pageIndex: 0, pageCount: 1)
+                ItemSelection.presetsPageIndicatorProgress = .init(pageIndex: 0, pageCount: 1)
             return
         }
         
-        ItemSelection.presetsPageIndicatorProgress = (pageIndex: currentPage, pageCount: pages.count)
+        ItemSelection.presetsPageIndicatorProgress = .init(pageIndex: currentPage, pageCount: pages.count)
     }
     
     // MARK: - UIPageViewControllerDataSource

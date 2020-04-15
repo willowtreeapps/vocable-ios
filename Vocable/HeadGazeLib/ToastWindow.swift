@@ -49,11 +49,11 @@ class ToastWindow: UIWindow {
         self.isUserInteractionEnabled = false
     }
     
-    func presentPersistantWarning(with title: String) {
+    func presentPersistentWarning(with title: String) {
         toastContainerViewController.handleWarning(with: title, shouldDisplay: true)
     }
     
-    func dismissPersistantWarning() {
+    func dismissPersistentWarning() {
         toastContainerViewController.handleWarning(with: nil, shouldDisplay: false)
     }
     

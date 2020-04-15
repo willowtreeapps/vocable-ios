@@ -21,6 +21,12 @@ class HeadGazeWindow: UIWindow {
     private var touchGazeDisableBeganDate: Date?
     
     private var cancellables = Set<AnyCancellable>()
+    var trackingDisabledByTouch: Bool {
+        if let date = touchGazeDisableBeganDate {
+            return Date().timeIntervalSince(date) < touchGazeDisableDuration
+        }
+        return false
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,6 +49,7 @@ class HeadGazeWindow: UIWindow {
             guard let self = self else { return }
             if isEnabled {
                 self.installCursorViewIfNeeded()
+                self.cursorView?.setCursorViewsHidden(false, animated: true)
                 self.touchGazeDisableBeganDate = .distantPast
             } else {
                 self.cursorView?.removeFromSuperview()
@@ -56,13 +63,22 @@ class HeadGazeWindow: UIWindow {
         cancelCurrentGazeIfNeeded()
     }
 
+    func presentHeadTrackingErrorToastIfNeeded() {
+        guard !UIApplication.shared.isGazeTrackingActive, AppConfig.isHeadTrackingEnabled, !trackingDisabledByTouch else {
+            return
+        }
+        let title = NSLocalizedString("gaze_tracking.error.excessive_head_distance.title",
+                                      comment: "Warning message presented to the user when the head tracking system")
+        ToastWindow.shared.presentPersistentWarning(with: title)
+    }
+
     override func addSubview(_ view: UIView) {
         super.addSubview(view)
         if let cursorView = cursorView {
             bringSubviewToFront(cursorView)
         }
     }
-
+    
     private func cancelCurrentGazeIfNeeded() {
         if let trackingView = trackingView, let gaze = lastGaze {
             trackingView.gazeEnded(gaze, with: nil)
@@ -73,7 +89,24 @@ class HeadGazeWindow: UIWindow {
 
     private func extendGazeDisabledPeriodForTouchEvent() {
         cancelCurrentGazeIfNeeded()
+        
+        guard trackingDisabledByTouch == false else { return }
         touchGazeDisableBeganDate = Date()
+        ToastWindow.shared.dismissPersistentWarning()
+        func schedule(duration: TimeInterval = self.touchGazeDisableDuration) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                let lastTouchDate = self.touchGazeDisableBeganDate ?? .distantPast
+                let passed = Date().timeIntervalSince(lastTouchDate)
+                if passed >= self.touchGazeDisableDuration {
+                    self.cursorView?.setCursorViewsHidden(false, animated: true)
+                    self.touchGazeDisableBeganDate = nil
+                    self.presentHeadTrackingErrorToastIfNeeded()
+                } else {
+                    schedule(duration: self.touchGazeDisableDuration - passed)
+                }
+            }
+        }
+        schedule(duration: self.touchGazeDisableDuration)
     }
 
     private func installCursorViewIfNeeded() {
@@ -149,7 +182,9 @@ class HeadGazeWindow: UIWindow {
         guard let event = originalEvent as? UIHeadGazeEvent,
             let gaze = event.allGazes?.first else {
                 if originalEvent.type == .touches {
-                    extendGazeDisabledPeriodForTouchEvent()
+                    if AppConfig.isHeadTrackingEnabled {
+                        extendGazeDisabledPeriodForTouchEvent()
+                    }
                     cursorView?.setCursorViewsHidden(true, animated: true)
                 }
             super.sendEvent(originalEvent)
@@ -158,8 +193,9 @@ class HeadGazeWindow: UIWindow {
 
         if let gazeDisabledStart = touchGazeDisableBeganDate {
             if Date().timeIntervalSince(gazeDisabledStart) >= touchGazeDisableDuration {
-                cursorView?.setCursorViewsHidden(false, animated: true)
-                touchGazeDisableBeganDate = nil
+                if !trackingDisabledByTouch {
+                    cursorView?.setCursorViewsHidden(false, animated: true)
+                }
             } else {
                 // Waiting for touch timeout to allow events to propagate
                 return

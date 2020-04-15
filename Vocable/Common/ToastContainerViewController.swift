@@ -9,6 +9,9 @@
 import UIKit
 
 class ToastContainerViewController: UIViewController {
+    private var isToastWarningVisible = false
+    private var headTrackingLostText: String?
+    
     private weak var phraseSavedView: UIView? {
         didSet {
             updateWindowVisibility()
@@ -25,7 +28,6 @@ class ToastContainerViewController: UIViewController {
         updateWindowVisibility()
     }
     
-    //In the future we should get away from manipulating the window here.
     private func updateWindowVisibility() {
         if phraseSavedView == nil && warningView == nil {
             ToastWindow.shared.isHidden = true
@@ -34,6 +36,7 @@ class ToastContainerViewController: UIViewController {
         }
     }
     
+    //In the future we should get away from manipulating the window here.
     func handlePhraseSaved(toastLabelText: String) {
         if phraseSavedView == nil {
             let phraseSavedView = UINib(nibName: "ToastView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! ToastView
@@ -97,12 +100,17 @@ class ToastContainerViewController: UIViewController {
                 warningView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
             ])
         }
+        if headTrackingLostText != nil && headTrackingLostText == title {
+            return
+        }
+        self.headTrackingLostText = title
         let alphaValue = shouldDisplay ? 1.0 : 0.0
         UIView.animate(withDuration: 0.5, delay: 0, options: .beginFromCurrentState, animations: {
             self.warningView?.alpha = CGFloat(alphaValue)
         }, completion: { [weak self] didFinish in
             if didFinish && !shouldDisplay {
                 self?.warningView?.removeFromSuperview()
+                self?.headTrackingLostText = nil
             }
         })
     }
