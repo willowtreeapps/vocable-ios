@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController storyboardIdentifier="EditSaying" id="VfB-6S-0gL" customClass="EditTextViewController" customModule="Vocable" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="eOD-AL-wa9">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1qe-6h-Lhb">
+                        <rect key="frame" x="20" y="52" width="374" height="802"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IMo-qR-MpI">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="delegate" destination="VfB-6S-0gL" id="S46-Dd-MaE"/>
+                        </connections>
+                    </collectionView>
+                </subviews>
+                <color key="backgroundColor" name="Background"/>
+                <constraints>
+                    <constraint firstItem="1qe-6h-Lhb" firstAttribute="bottom" secondItem="eOD-AL-wa9" secondAttribute="bottomMargin" id="6S3-h3-BYf"/>
+                    <constraint firstItem="1qe-6h-Lhb" firstAttribute="trailing" secondItem="eOD-AL-wa9" secondAttribute="trailingMargin" id="h1k-1A-oCx"/>
+                    <constraint firstItem="1qe-6h-Lhb" firstAttribute="top" secondItem="eOD-AL-wa9" secondAttribute="topMargin" id="v7l-cZ-iNy"/>
+                    <constraint firstItem="1qe-6h-Lhb" firstAttribute="leading" secondItem="eOD-AL-wa9" secondAttribute="leadingMargin" id="wVe-fh-3vo"/>
+                </constraints>
+                <edgeInsets key="layoutMargins" top="32" left="32" bottom="32" right="32"/>
+                <viewLayoutGuide key="safeArea" id="01d-4W-t4q"/>
+                <variation key="heightClass=compact">
+                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                </variation>
+                <variation key="widthClass=compact">
+                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                </variation>
+            </view>
+            <connections>
+                <outlet property="collectionView" destination="1qe-6h-Lhb" id="WES-3r-mwZ"/>
+            </connections>
+            <point key="canvasLocation" x="4778" y="138"/>
+        </viewController>
+    </objects>
+    <resources>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

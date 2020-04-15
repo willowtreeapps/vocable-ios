@@ -77,6 +77,8 @@
 		71FA2857242413670051498A /* SelectionModeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA2856242413670051498A /* SelectionModeCollectionViewController.swift */; };
 		9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15E0542271F0DC0058DF57 /* CursorView.swift */; };
 		9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */; };
+		A91525422447541200B9B815 /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91525412447541200B9B815 /* EditTextViewController.swift */; };
+		A91525442447546100B9B815 /* EditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A91525432447546100B9B815 /* EditTextViewController.xib */; };
 		A91A9F4924192782008552E8 /* EditSayingsKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A9F4824192782008552E8 /* EditSayingsKeyboardViewController.swift */; };
 		A920A4AF23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift */; };
 		A927A5252433D0240026EF40 /* EditCategories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A927A5242433D0240026EF40 /* EditCategories.storyboard */; };
@@ -245,6 +247,8 @@
 		7F55BDB1242E3BD600166C31 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppExtensions.swift"; sourceTree = "<group>"; };
+		A91525412447541200B9B815 /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
+		A91525432447546100B9B815 /* EditTextViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTextViewController.xib; sourceTree = "<group>"; };
 		A91A9F4824192782008552E8 /* EditSayingsKeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSayingsKeyboardViewController.swift; sourceTree = "<group>"; };
 		A920A4AE23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetUICollectionViewCompositionalLayout.swift; sourceTree = "<group>"; };
 		A927A5242433D0240026EF40 /* EditCategories.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = EditCategories.storyboard; path = Vocable/Features/Settings/EditCategories/EditCategories.storyboard; sourceTree = SOURCE_ROOT; };
@@ -658,6 +662,8 @@
 				7192E40A242E6562008E4A0A /* ToastContainerViewController.swift */,
 				B81AC0AC2405D8C400972E85 /* ItemSelection.swift */,
 				A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */,
+				A91525412447541200B9B815 /* EditTextViewController.swift */,
+				A91525432447546100B9B815 /* EditTextViewController.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -855,6 +861,7 @@
 				B838202F23FD894C005A79CD /* CategoryPaginationContainerCollectionViewCell.xib in Resources */,
 				A9CF2AF3242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib in Resources */,
 				A944D00B2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib in Resources */,
+				A91525442447546100B9B815 /* EditTextViewController.xib in Resources */,
 				6B3DCC1F24101F530039E45E /* TrackingDebugOverlayViewController.storyboard in Resources */,
 				64253CED2419358D0044EAAA /* Settings.storyboard in Resources */,
 			);
@@ -909,6 +916,7 @@
 				B81AC0A52405B62900972E85 /* PhraseViewModel.swift in Sources */,
 				B879831123E0CEC300DC1A81 /* PresetsViewController.swift in Sources */,
 				A97814FA23FF3B1200ECC609 /* CategorySectionBackground.swift in Sources */,
+				A91525422447541200B9B815 /* EditTextViewController.swift in Sources */,
 				A920A4AF23EA1BD300CF5B08 /* PresetUICollectionViewCompositionalLayout.swift in Sources */,
 				6B823BC923F4ADE30099F65E /* SingleControlView.swift in Sources */,
 				6BFB18C724005E18002C3515 /* CategoryPaginationContainerCollectionViewCell.swift in Sources */,
