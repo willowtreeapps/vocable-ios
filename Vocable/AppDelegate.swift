@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import VocablePresets
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -192,7 +193,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func updateCategoryForUserGeneratedPhrases(in context: NSManagedObjectContext) throws {
-        guard let mySayingsCategory = Category.fetchObject(in: context, matching: TextPresets.userFavoritesCategoryIdentifier) else {
+        guard let mySayingsCategory = Category.fetchObject(in: context, matching: KeyboardPresets.userFavoritesCategoryIdentifier) else {
             assertionFailure("User generated category not found")
             return
         }
