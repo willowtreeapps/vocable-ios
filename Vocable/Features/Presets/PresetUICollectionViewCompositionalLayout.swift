@@ -341,17 +341,19 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     static func keyboardLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let traitCollection = environment.traitCollection
         let dimensions: (rows: Int, columns: Int)
+        let isCompactPortrait = traitCollection.horizontalSizeClass
+            == .compact && traitCollection.verticalSizeClass == .regular
         
         let code = KeyboardLocale.current.languageCode
         switch code {
         case .en:
-            if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            if isCompactPortrait {
                 dimensions = (rows: 5, columns: 6)
             } else {
                 dimensions = (rows: 3, columns: 10)
             }
         case .de:
-            if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            if isCompactPortrait {
                 dimensions = (rows: 6, columns: 6)
             } else {
                 dimensions = (rows: 3, columns: 11)

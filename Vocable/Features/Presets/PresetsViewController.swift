@@ -251,9 +251,9 @@ class PresetsViewController: UICollectionViewController {
             
             snapshot.appendSections([.keyboard])
             if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
-                snapshot.appendItems(KeyboardLocale.current.compactPortrait.map { ItemWrapper.key("\($0)") })
+                snapshot.appendItems(KeyboardLocale.current.compactPortraitKeyMapping.map { ItemWrapper.key("\($0)") })
             } else {
-                snapshot.appendItems(KeyboardLocale.current.landscape.map { ItemWrapper.key("\($0)") })
+                snapshot.appendItems(KeyboardLocale.current.landscapeKeyMapping.map { ItemWrapper.key("\($0)") })
             }
             
             snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])

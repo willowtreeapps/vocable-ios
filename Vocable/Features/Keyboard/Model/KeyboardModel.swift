@@ -32,11 +32,11 @@ struct KeyboardLocale {
         return KeyboardLocale(preferredLanguageCode: AppConfig.activePreferredLanguageCode)
     }
     
-    var landscape: String {
+    var landscapeKeyMapping: String {
         return orientationKeyMapping.landscape
     }
     
-    var compactPortrait: String {
+    var compactPortraitKeyMapping: String {
         return orientationKeyMapping.compactPortrait
     }
     
