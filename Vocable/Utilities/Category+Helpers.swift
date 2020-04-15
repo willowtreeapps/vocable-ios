@@ -20,4 +20,17 @@ extension Category {
         category.identifier = newIdentifier
         return category
     }
+    
+    static func updateAllOrdinalValues(in context: NSManagedObjectContext) throws {
+
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        request.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Category.ordinal, ascending: true),
+            NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)
+        ]
+        let results = try context.fetch(request)
+        for (index, category) in results.enumerated() {
+            category.ordinal = Int32(index)
+        }
+    }
 }

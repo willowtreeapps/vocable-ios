@@ -233,11 +233,13 @@ class EditCategoriesKeyboardViewController: UIViewController, UICollectionViewDe
                 let context = NSPersistentContainer.shared.viewContext
                 if isAddingCategory {
                     _ = Category.create(withUserEntry: _textTransaction.text, in: context)
+                    
                 } else {
                     guard let category = EditCategoriesDetailViewController.category else { return }
                     category.name = _textTransaction.text
                 }
                 do {
+                    try Category.updateAllOrdinalValues(in: context)
                     try context.save()
                     let alertMessage = isAddingCategory ? NSLocalizedString("Saved to Custom Categories", comment: "Saved to Custom Categories") :
                         NSLocalizedString("Changes saved", comment: "Changes saved")
