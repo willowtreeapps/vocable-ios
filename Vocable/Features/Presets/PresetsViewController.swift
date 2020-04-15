@@ -124,10 +124,7 @@ class PresetsViewController: UICollectionViewController {
                 
                 return PresetUICollectionViewCompositionalLayout.presetsSectionLayout(with: layoutEnvironment)
             case .keyboard:
-                if layoutEnvironment.traitCollection.horizontalSizeClass == .compact && layoutEnvironment.traitCollection.verticalSizeClass == .regular {
-                    return PresetUICollectionViewCompositionalLayout.portraitKeyboardSectionLayout(with: layoutEnvironment)
-                }
-                return PresetUICollectionViewCompositionalLayout.landscapeKeyboardSectionLayout(with: layoutEnvironment)
+                return PresetUICollectionViewCompositionalLayout.keyboardLayout(with: layoutEnvironment)
             }
         }
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
@@ -254,9 +251,9 @@ class PresetsViewController: UICollectionViewController {
             
             snapshot.appendSections([.keyboard])
             if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
-                snapshot.appendItems(KeyboardKeys.alphabetical.map { ItemWrapper.key("\($0)") })
+                snapshot.appendItems(KeyboardLocale.current.compactPortraitKeyMapping.map { ItemWrapper.key("\($0)") })
             } else {
-                snapshot.appendItems(KeyboardKeys.qwerty.map { ItemWrapper.key("\($0)") })
+                snapshot.appendItems(KeyboardLocale.current.landscapeKeyMapping.map { ItemWrapper.key("\($0)") })
             }
             
             snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])
