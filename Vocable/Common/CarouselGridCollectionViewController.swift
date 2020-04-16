@@ -217,8 +217,8 @@ class CarouselGridLayout: UICollectionViewLayout {
         }
         var items = [UICollectionViewLayoutAttributes]()
 
-        let section = Int(rect.minX / sectionContentSize.width)
-        let sections = Set([section, section + 1, section - 1]).filter { (0..<collectionView.numberOfSections).contains($0)
+        let section = Int(rect.midX / sectionContentSize.width)
+        let sections = [section, section + 1, section - 1].filter { (0..<numberOfSections).contains($0)
         }
 
         for section in sections {
