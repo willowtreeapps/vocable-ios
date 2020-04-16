@@ -49,8 +49,8 @@ class EditCategoriesViewController: UIViewController {
     }
     
     @IBAction func addButtonPressed(_ sender: Any) {
-        if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryKeyboardViewController") as? EditCategoriesKeyboardViewController {
-            vc.isAddingCategory = true
+        if let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as? EditTextViewController {
+//            vc.isAddingCategory = true
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
             return

@@ -1,3 +1,15 @@
+/* Exit edit categories alert title */
+"category_editor.alert.cancel_editing_confirmation.title" = "If you close this without saving your custom category will be deleted.";
+
+/* Confirm exit category alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Confirm";
+
+/* Cancel exit editing alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Cancel";
+
+/* Discard changes alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
+
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Cancel";
 

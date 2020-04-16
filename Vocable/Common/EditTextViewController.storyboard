@@ -11,7 +11,7 @@
         <!--EditTextViewController-->
         <scene sceneID="Ohx-vX-Dvn">
             <objects>
-                <viewController storyboardIdentifier="EditText" title="EditTextViewController" id="ZB6-EJ-tYc" customClass="EditTextViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditTextViewController" title="EditTextViewController" id="ZB6-EJ-tYc" customClass="EditTextViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9aE-1M-ruh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

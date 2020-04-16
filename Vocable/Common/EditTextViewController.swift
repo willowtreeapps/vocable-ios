@@ -11,15 +11,13 @@ import AVFoundation
 import UIKit
 import CoreData
 
-class EditTextViewController: UIViewController, UICollectionViewDelegate {
+final class EditTextViewController: UIViewController, UICollectionViewDelegate {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
     @IBOutlet var collectionView: UICollectionView!
     
     private var _textTransaction = TextTransaction(text: "")
-    
-    var phraseIdentifier: String?
     
     private var textTransaction: TextTransaction {
         return _textTransaction
@@ -31,6 +29,25 @@ class EditTextViewController: UIViewController, UICollectionViewDelegate {
         didSet {
             updateSnapshot()
         }
+    }
+    
+    var text: String = "" {
+        didSet {
+            _textTransaction = TextTransaction(text: text)
+        }
+    }
+    
+    private var hasChanged: Bool {
+        return text != textTransaction.text
+    }
+    
+    var dismissalCompletionHandler: (String) -> Bool = { (_) in
+        assertionFailure("Completion not handled")
+        return false
+    }
+    
+    var editTextCompletionHandler: (Bool, String) -> Void = { (_, _) in
+        assertionFailure("Completion not handled")
     }
     
     private enum ItemWrapper: Hashable {
@@ -49,11 +66,7 @@ class EditTextViewController: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let phraseIdentifier = phraseIdentifier {
-            let context = NSPersistentContainer.shared.viewContext
-            let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-            _textTransaction = TextTransaction(text: originalPhrase?.utterance ?? "")
-        }
+
         setupCollectionView()
         configureDataSource()
     }
@@ -136,12 +149,12 @@ class EditTextViewController: UIViewController, UICollectionViewDelegate {
         snapshot.appendSections([.textField])
         if traitCollection.horizontalSizeClass == .compact
             && traitCollection.verticalSizeClass == .regular {
-            snapshot.appendItems([.topBarButton(.back),
+            snapshot.appendItems([.topBarButton(.close),
                                   .topBarButton(.confirmEdit),
                                   .textField(textTransaction.attributedText)
             ])
         } else {
-            snapshot.appendItems([.topBarButton(.back),
+            snapshot.appendItems([.topBarButton(.close),
                                   .textField(textTransaction.attributedText),
                                   .topBarButton(.confirmEdit)])
         }
@@ -229,37 +242,12 @@ class EditTextViewController: UIViewController, UICollectionViewDelegate {
             collectionView.deselectItem(at: indexPath, animated: true)
             let context = NSPersistentContainer.shared.viewContext
             switch buttonType {
-            case .back:
-                if let phraseIdentifier = phraseIdentifier {
-                    let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                    if originalPhrase?.utterance != _textTransaction.text {
-                        handleExitAlert()
-                        break
-                    }
-                }
-                self.navigationController?.popViewController(animated: true)
             case .confirmEdit:
-                var isNewPhrase = false
-                let context = NSPersistentContainer.shared.viewContext
-                if let phraseIdentifier = phraseIdentifier {
-                    let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                    originalPhrase?.utterance = _textTransaction.text
-                } else {
-                    _ = Phrase.create(withUserEntry: _textTransaction.text, in: context)
-                    isNewPhrase = true
-                }
-                do {
-                    try context.save()
-                    let alertMessage = isNewPhrase ? NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings") :
-                        NSLocalizedString("Changes saved", comment: "Changes saved")
-                    
-                    ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-
-                } catch {
-                    assertionFailure("Failed to save user generated phrase: \(error)")
-                }
+                editTextCompletionHandler(hasChanged, textTransaction.text)
             case .close:
-                dismiss(animated: true, completion: nil)
+                if dismissalCompletionHandler(textTransaction.text) {
+                    dismiss(animated: true, completion: nil)
+                }
             default:
                 break
             }
@@ -327,18 +315,6 @@ class EditTextViewController: UIViewController, UICollectionViewDelegate {
         case .suggestionText(let suggestion):
             return !suggestion.text.isEmpty
         }
-    }
-    
-    func handleBackTopBarButton() {
-        
-    }
-    
-    func handleCloseTopBarButton() {
-        
-    }
-    
-    func handleConfirmEditTopBarButton() {
-        
     }
     
     private func setTextTransaction(_ transaction: TextTransaction) {

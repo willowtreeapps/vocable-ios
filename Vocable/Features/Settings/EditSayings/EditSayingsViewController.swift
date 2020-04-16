@@ -22,7 +22,6 @@ class EditSayingsViewController: UIViewController {
     private var carouselCollectionViewController: CarouselGridCollectionViewController?
     private var disposables = Set<AnyCancellable>()
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CarouselCollectionViewController" {
            carouselCollectionViewController = segue.destination as? CarouselGridCollectionViewController

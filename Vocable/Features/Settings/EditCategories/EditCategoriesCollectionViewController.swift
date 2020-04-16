@@ -222,7 +222,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
             
             if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as? EditCategoriesDetailViewController {
                 
-                EditCategoriesDetailViewController.category = fetchResultsController.object(at: indexPath)
+                vc.category = fetchResultsController.object(at: indexPath)
                 show(vc, sender: nil)
             }
         }

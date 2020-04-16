@@ -230,6 +230,7 @@ class EditCategoriesKeyboardViewController: UIViewController, UICollectionViewDe
             case .close:
                 dismiss(animated: true, completion: nil)
             case .confirmEdit:
+                
                 let context = NSPersistentContainer.shared.viewContext
                 if isAddingCategory {
                     _ = Category.create(withUserEntry: _textTransaction.text, in: context)

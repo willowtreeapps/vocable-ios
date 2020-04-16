@@ -102,7 +102,7 @@ class EditCategoriesDetailCollectionViewController: UICollectionViewController {
     }
     
     private func removeCategory() {
-       guard let category = EditCategoriesDetailViewController.category else { return }
+       guard let category = category else { return }
         context.delete(category)
         saveContext()
         self.navigationController?.popViewController(animated: true)
@@ -118,10 +118,10 @@ class EditCategoriesDetailCollectionViewController: UICollectionViewController {
         switch item {
         case .showCategoryToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryToggleCollectionViewCell
-            if let category = EditCategoriesDetailViewController.category {
+            if let category = category {
                 cell.showCategorySwitch.isOn = !category.isHidden
             }
-            cell.isHidden = EditCategoriesDetailViewController.category?.identifier == "preset_user_favorites"
+            cell.isHidden = category?.identifier == "preset_user_favorites"
             return cell
         case .removeCategoryToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryRemoveCollectionViewCell

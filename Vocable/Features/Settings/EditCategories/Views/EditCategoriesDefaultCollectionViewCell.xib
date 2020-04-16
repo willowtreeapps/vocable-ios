@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -34,7 +34,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="e6f-uI-tYv">
                         <rect key="frame" x="20" y="52" width="668" height="84"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIe-C4-EHn" userLabel="MoveDownButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIe-C4-EHn" userLabel="MoveUpButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="15" width="84" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="eF3-ax-GmT"/>
@@ -45,7 +45,7 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.up" catalog="system"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveUpButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveDownButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="92" y="15" width="84" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="84" id="DnU-vb-Ln9"/>
@@ -103,9 +103,9 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="chevron.down" catalog="system" width="64" height="36"/>
-        <image name="chevron.right" catalog="system" width="48" height="64"/>
-        <image name="chevron.up" catalog="system" width="64" height="36"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <image name="chevron.up" catalog="system" width="128" height="72"/>
         <namedColor name="DefaultCellBackground">
             <color red="0.21799999475479126" green="0.19499999284744263" blue="0.62699997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
