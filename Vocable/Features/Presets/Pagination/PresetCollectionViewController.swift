@@ -28,8 +28,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     var presentationMode: PresentationMode = .defaultMode {
         didSet {
             guard oldValue != presentationMode else { return }
-            updateLayoutForCurrentTraitCollection()
-            updateDataSource(animated: true)
+            self.updateLayoutForCurrentTraitCollection()
         }
     }
     
@@ -68,7 +67,6 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         try? fetchedResultsController.performFetch()
         
         self.fetchedResultsController = fetchedResultsController
-        updateDataSource(animated: true)
     }
 
     override func viewDidLoad() {
@@ -119,6 +117,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         } else {
             presentationMode = .defaultMode
         }
+        updateDataSource(animated: true)
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

@@ -96,6 +96,9 @@ class CarouselGridLayout: UICollectionViewLayout {
 
     var numberOfColumns = 1 {
         didSet {
+            guard oldValue != numberOfColumns else {
+                return
+            }
             if numberOfColumns < 1 {
                 numberOfColumns = 1
             }
@@ -105,6 +108,18 @@ class CarouselGridLayout: UICollectionViewLayout {
 
     var numberOfRows: RowCount = .fixedCount(1) {
         didSet {
+            switch (oldValue, numberOfRows) {
+            case (.fixedCount(let countA), .fixedCount(let countB)):
+                if countA == countB {
+                    return
+                }
+            case (.minimumHeight(let heightA), .minimumHeight(let heightB)):
+                if heightA == heightB {
+                    return
+                }
+            case (_, _):
+                break
+            }
             invalidateLayout()
         }
     }
@@ -120,6 +135,7 @@ class CarouselGridLayout: UICollectionViewLayout {
 
     var interItemSpacing: CGFloat = 0 {
         didSet {
+            guard oldValue != interItemSpacing else { return }
             invalidateLayout()
         }
     }
