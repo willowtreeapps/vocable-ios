@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Combine
+import CoreData
 
 class EditCategoriesViewController: UIViewController {
     
@@ -50,10 +51,28 @@ class EditCategoriesViewController: UIViewController {
     
     @IBAction func addButtonPressed(_ sender: Any) {
         if let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as? EditTextViewController {
-//            vc.isAddingCategory = true
+            vc.editTextCompletionHandler = { (didChange, newText) -> Void in
+                guard didChange else { return }
+                let context = NSPersistentContainer.shared.viewContext
+
+                _ = Category.create(withUserEntry: newText, in: context)
+                do {
+                    try Category.updateAllOrdinalValues(in: context)
+                    try context.save()
+
+                    let alertMessage = NSLocalizedString("Saved to Custom Categories", comment: "Saved to Custom Categories")
+
+                    ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                } catch {
+                    assertionFailure("Failed to save category: \(error)")
+                }
+            }
+            
+            vc.dismissalCompletionHandler = { (newText) -> Bool in
+                return true
+            }
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
-            return
         }
     }
     

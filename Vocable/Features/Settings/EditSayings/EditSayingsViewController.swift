@@ -50,8 +50,32 @@ class EditSayingsViewController: UIViewController {
     }
     
     @IBAction func addPhrasePressed(_ sender: Any) {
-        if let vc = UIStoryboard(name: "EditSayings", bundle: nil).instantiateViewController(identifier: "EditSaying") as? EditSayingsKeyboardViewController {
-            show(vc, sender: nil)
+        if let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as? EditTextViewController {
+            vc.editTextCompletionHandler = { (didChange, newText) -> Void in
+                guard didChange else { return }
+                let context = NSPersistentContainer.shared.viewContext
+
+                _ = Phrase.create(withUserEntry: newText, in: context)
+                do {
+                    try context.save()
+
+                    let alertMessage: String = {
+                        let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
+                        let categoryName = Category.userFavoritesCategoryName()
+                        return String.localizedStringWithFormat(format, categoryName)
+                    }()
+                    
+                    ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                } catch {
+                    assertionFailure("Failed to save user generated phrase: \(error)")
+                }
+            }
+            
+            vc.dismissalCompletionHandler = { (newText) -> Bool in
+                return true
+            }
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
         }
     }
 }

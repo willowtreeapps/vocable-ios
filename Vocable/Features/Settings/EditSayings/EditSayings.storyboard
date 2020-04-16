@@ -88,7 +88,7 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
                                 <rect key="frame" x="20" y="132" width="374" height="626"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZPM-Ab-mlI" secondAttribute="height" multiplier="2" priority="250" id="PK4-eE-9mZ"/>
@@ -113,7 +113,7 @@
                                     <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="71" y="782" width="272" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>
@@ -188,6 +188,7 @@
         <!--Edit Sayings Collection View Controller-->
         <scene sceneID="JgZ-NN-QFW">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LlE-tR-CS4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <collectionViewController id="W98-u1-6GB" customClass="EditSayingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="626"/>
@@ -206,7 +207,6 @@
                         </connections>
                     </collectionView>
                 </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LlE-tR-CS4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3722" y="143"/>
         </scene>
