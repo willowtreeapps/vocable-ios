@@ -112,7 +112,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         
         let selectedCategory = NSPersistentContainer.shared.viewContext.object(with: selectedCategoryID) as? Category
         
-        if selectedCategory?.identifier == TextPresets.numPadIdentifier {
+        if selectedCategory?.identifier == KeyboardPresets.numPadIdentifier {
             presentationMode = .numPadMode
         } else {
             presentationMode = .defaultMode
@@ -173,7 +173,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         
         switch presentationMode {
         case .numPadMode:
-            let numPadPresets = TextPresets.numPadPhrases.map { (phraseViewModel) in
+            let numPadPresets = KeyboardPresets.numPadPhrases.map { (phraseViewModel) in
                 return ItemWrapper.presetsNumPad(phraseViewModel)
             }
             snapshot.appendItems(numPadPresets)

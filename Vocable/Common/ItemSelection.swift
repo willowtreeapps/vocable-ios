@@ -14,13 +14,13 @@ struct ItemSelection {
     
     @PublishedValue
     static var selectedCategoryID: NSManagedObjectID? = Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
-                                                                        matching: NSComparisonPredicate(\Category.isHidden, .equalTo, false),
-                                                                        sortDescriptors: [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)])
+                                                    matching: NSComparisonPredicate(\Category.isHidden, .equalTo, false),
+                                                    sortDescriptors: [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)])
         .first?.objectID
 
     @PublishedValue
     static var selectedPhrase: PhraseViewModel?
     
     @PublishedValue
-    static var presetsPageIndicatorProgress: CarouselGridPagingProgress = (pageIndex: 0, pageCount: 1)
+    static var presetsPageIndicatorProgress: CarouselGridPagingProgress = .zero
 }

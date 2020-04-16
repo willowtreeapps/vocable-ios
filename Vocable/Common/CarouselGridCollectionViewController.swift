@@ -9,7 +9,20 @@
 import UIKit
 import Combine
 
-typealias CarouselGridPagingProgress = (pageIndex: Int, pageCount: Int)
+struct CarouselGridPagingProgress {
+    var pageIndex: Int
+    var pageCount: Int
+    var localizedString: String {
+        let pageIndex = self.pageIndex + 1
+        let pageCount = self.pageCount
+        let format = NSLocalizedString("paging_progress_indicator_format",
+                                       comment: "Page indicator progress format. \"Page x of n\"")
+        let formattedProgress = String.localizedStringWithFormat(format, pageIndex, pageCount)
+        return formattedProgress
+    }
+
+    static let zero = CarouselGridPagingProgress(pageIndex: 0, pageCount: 0)
+}
 
 class CarouselGridCollectionViewController: UICollectionViewController {
 
@@ -52,7 +65,7 @@ class CarouselGridCollectionViewController: UICollectionViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -135,7 +148,7 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     @PublishedValue
-    var progress: CarouselGridPagingProgress = (pageIndex: 0, pageCount: 0)
+    var progress: CarouselGridPagingProgress = .zero
 
     private var numberOfPages: Int {
         guard let collectionView = collectionView, collectionView.window != nil else { return 1 }
@@ -149,7 +162,7 @@ class CarouselGridLayout: UICollectionViewLayout {
     private var needsMultiplePages: Bool {
         return numberOfPages > 1
     }
-    
+
     override func prepare() {
         super.prepare()
         updateProgress()
@@ -188,10 +201,10 @@ class CarouselGridLayout: UICollectionViewLayout {
         let rect = resetRect.applying(.init(translationX: -(resetRect.width + interItemSpacing), y: 0))
         return rect
     }
-    
+
     func updateProgress() {
         print("pageIndex: \(logicalPageIndex) number of pages: \(numberOfPages)")
-        self.progress = (pageIndex: logicalPageIndex, pageCount: numberOfPages)
+        self.progress = .init(pageIndex: logicalPageIndex, pageCount: numberOfPages)
     }
 
     func prepareForDeceleration() {

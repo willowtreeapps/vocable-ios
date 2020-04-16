@@ -9,7 +9,7 @@
 import UIKit
 import Combine
 
-class PageIndicatorCollectionViewCell: VocableCollectionViewCell {
+final class PageIndicatorCollectionViewCell: VocableCollectionViewCell {
     
     @IBOutlet private weak var pageLabel: UILabel!
     private var disposables = Set<AnyCancellable>()
@@ -20,7 +20,7 @@ class PageIndicatorCollectionViewCell: VocableCollectionViewCell {
         pageLabel.adjustsFontSizeToFitWidth = true
         
         ItemSelection.$presetsPageIndicatorProgress.sink(receiveValue: { pageInfo in
-            self.pageLabel.text = NSLocalizedString("Page \(pageInfo.pageIndex + 1) of \(pageInfo.pageCount)", comment: "Presets page indicator info")
+            self.pageLabel.text = pageInfo.localizedString
         }).store(in: &disposables)
     }
 }

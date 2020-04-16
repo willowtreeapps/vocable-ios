@@ -124,10 +124,7 @@ class PresetsViewController: UICollectionViewController {
                 
                 return PresetUICollectionViewCompositionalLayout.presetsSectionLayout(with: layoutEnvironment)
             case .keyboard:
-                if layoutEnvironment.traitCollection.horizontalSizeClass == .compact && layoutEnvironment.traitCollection.verticalSizeClass == .regular {
-                    return PresetUICollectionViewCompositionalLayout.portraitKeyboardSectionLayout(with: layoutEnvironment)
-                }
-                return PresetUICollectionViewCompositionalLayout.landscapeKeyboardSectionLayout(with: layoutEnvironment)
+                return PresetUICollectionViewCompositionalLayout.keyboardLayout(with: layoutEnvironment)
             }
         }
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
@@ -248,9 +245,9 @@ class PresetsViewController: UICollectionViewController {
             
             snapshot.appendSections([.keyboard])
             if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
-                snapshot.appendItems(KeyboardKeys.alphabetical.map { ItemWrapper.key("\($0)") })
+                snapshot.appendItems(KeyboardLocale.current.compactPortraitKeyMapping.map { ItemWrapper.key("\($0)") })
             } else {
-                snapshot.appendItems(KeyboardKeys.qwerty.map { ItemWrapper.key("\($0)") })
+                snapshot.appendItems(KeyboardLocale.current.landscapeKeyMapping.map { ItemWrapper.key("\($0)") })
             }
             
             snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])
@@ -405,7 +402,14 @@ class PresetsViewController: UICollectionViewController {
 
                 do {
                     try context.save()
-                    ToastWindow.shared.presentEphemeralToast(withTitle: NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings"))
+
+                    let toastString: String = {
+                        let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
+                        let categoryName = Category.userFavoritesCategoryName()
+                        return String.localizedStringWithFormat(format, categoryName)
+                    }()
+
+                    ToastWindow.shared.presentEphemeralToast(withTitle: toastString)
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")
                 }
@@ -417,7 +421,7 @@ class PresetsViewController: UICollectionViewController {
                 // TODO: discuss with design if we want to cache the user's currently-entered text instead
                 // of just clearing it
 
-                let newText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.localizedString
+                let newText = showKeyboard ? HintText.keyboard.localizedString : HintText.preset.localizedString
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
             case .settings:
                 presentSettingsViewController()
