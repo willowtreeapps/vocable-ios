@@ -13,7 +13,7 @@ import CoreData
 
 class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDelegate {
     
-    private var dataSource: CarouselCollectionViewDataSourceProxy<Section, ItemWrapper>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
     @IBOutlet var collectionView: UICollectionView!
     
@@ -76,7 +76,7 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
     }
     
     private func configureDataSource() {
-        dataSource = CarouselCollectionViewDataSourceProxy<Section, ItemWrapper>(collectionView: collectionView, cellProvider: { (_: UICollectionView, indexPath: IndexPath, identifier: ItemWrapper) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, ItemWrapper>(collectionView: collectionView, cellProvider: { (_: UICollectionView, indexPath: IndexPath, identifier: ItemWrapper) -> UICollectionViewCell? in
             
             switch identifier {
             case .textField(let title):
@@ -212,18 +212,14 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
         for selectedPath in collectionView.indexPathsForSelectedItems ?? [] { 
             if selectedPath.section == indexPath.section && selectedPath != indexPath {
-                dataSource.performActions(on: selectedPath) { (aPath) in
-                    collectionView.deselectItem(at: aPath, animated: true)
-                }
+                collectionView.deselectItem(at: selectedPath, animated: true)
             }
         }
         
         switch selectedItem {
         case .topBarButton(let buttonType):
             (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
-            dataSource.performActions(on: indexPath) { (indexPath) in
-                collectionView.deselectItem(at: indexPath, animated: true)
-            }
+            collectionView.deselectItem(at: indexPath, animated: true)
             let context = NSPersistentContainer.shared.viewContext
             switch buttonType {
             case .back:
@@ -291,9 +287,7 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         }
 
         if collectionView.indexPathForGazedItem != indexPath {
-            dataSource.performActions(on: indexPath) { (indexPath) in
-                collectionView.deselectItem(at: indexPath, animated: true)
-            }
+            collectionView.deselectItem(at: indexPath, animated: true)
         }
     }
     
