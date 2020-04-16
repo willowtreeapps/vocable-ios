@@ -256,7 +256,15 @@ class CarouselGridLayout: UICollectionViewLayout {
 
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let collectionView = collectionView else { return proposedContentOffset }
-        let proposedCenterX = proposedContentOffset.x + collectionView.bounds.width * 0.5
+
+        let proposedCenterX: CGFloat
+        if velocity.x > 1.0 {
+            proposedCenterX = collectionView.bounds.maxX
+        } else if velocity.x < -1.0 {
+            proposedCenterX = collectionView.bounds.minX
+        } else {
+            proposedCenterX = collectionView.bounds.midX
+        }
 
         let pageIndex = Int((proposedCenterX / (pageContentSize.width + interItemSpacing)))
         let sectionIndex = pageIndex / pagesPerSection
