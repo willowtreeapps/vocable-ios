@@ -36,6 +36,9 @@
 		6B823BCF23F4ADE30099F65E /* TunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BBE23F4ADE30099F65E /* TunningViewController.swift */; };
 		6B823BD023F4ADE30099F65E /* PulseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BBF23F4ADE30099F65E /* PulseExtension.swift */; };
 		6B823BD323F4AE250099F65E /* PIDInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BD223F4AE250099F65E /* PIDInterpolator.swift */; };
+		6B8440D92448B3FC007A4DC6 /* CarouselCollectionViewDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8440D82448B3FC007A4DC6 /* CarouselCollectionViewDataSourceProxy.swift */; };
+		6B8440DD2448BAA2007A4DC6 /* PresetCarouselGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8440DC2448BAA2007A4DC6 /* PresetCarouselGridLayout.swift */; };
+		6B8440DF2448C391007A4DC6 /* CGSize+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8440DE2448C391007A4DC6 /* CGSize+Helpers.swift */; };
 		6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */; };
 		6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */; };
 		6B9DFA5D23E889DB0037673E /* UIHeadGaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */; };
@@ -103,7 +106,6 @@
 		A9CF2AF5242D4EF1005633A7 /* SensitivityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9CF2AF4242D4EF1005633A7 /* SensitivityCollectionViewCell.xib */; };
 		A9CF2AF7242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF2AF6242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift */; };
 		A9CF2AF9242D4F0A005633A7 /* SensitivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF2AF8242D4F0A005633A7 /* SensitivityCollectionViewCell.swift */; };
-		A9DAB550243F9FD9002E5BC9 /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAB54F243F9FD9002E5BC9 /* Pagination.swift */; };
 		A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */; };
 		A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE16FF23F4900C0094DB64 /* TextExpression.swift */; };
 		A9DE170223F492B20094DB64 /* Array+Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE170123F492B20094DB64 /* Array+Split.swift */; };
@@ -197,6 +199,9 @@
 		6B823BBE23F4ADE30099F65E /* TunningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunningViewController.swift; sourceTree = "<group>"; };
 		6B823BBF23F4ADE30099F65E /* PulseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulseExtension.swift; sourceTree = "<group>"; };
 		6B823BD223F4AE250099F65E /* PIDInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIDInterpolator.swift; sourceTree = "<group>"; };
+		6B8440D82448B3FC007A4DC6 /* CarouselCollectionViewDataSourceProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewDataSourceProxy.swift; sourceTree = "<group>"; };
+		6B8440DC2448BAA2007A4DC6 /* PresetCarouselGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetCarouselGridLayout.swift; sourceTree = "<group>"; };
+		6B8440DE2448C391007A4DC6 /* CGSize+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Helpers.swift"; sourceTree = "<group>"; };
 		6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGazeViewController.swift; sourceTree = "<group>"; };
 		6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadGazeWindow.swift; sourceTree = "<group>"; };
 		6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGaze.swift; sourceTree = "<group>"; };
@@ -617,6 +622,8 @@
 				7192E40A242E6562008E4A0A /* ToastContainerViewController.swift */,
 				B81AC0AC2405D8C400972E85 /* ItemSelection.swift */,
 				A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */,
+				6B8440D82448B3FC007A4DC6 /* CarouselCollectionViewDataSourceProxy.swift */,
+				6B8440DC2448BAA2007A4DC6 /* PresetCarouselGridLayout.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -653,6 +660,7 @@
 				6B9DFA7523E8D5990037673E /* UICollectionView+Gaze.swift */,
 				B8DA9DF123F30BAF00FEBE19 /* Cell+NibLoading.swift */,
 				9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */,
+				6B8440DE2448C391007A4DC6 /* CGSize+Helpers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -877,6 +885,8 @@
 				6B823BCA23F4ADE30099F65E /* ControlsView.swift in Sources */,
 				6B823BCE23F4ADE30099F65E /* Queue.swift in Sources */,
 				B81AC0A12405AF1100972E85 /* CategoryViewModel.swift in Sources */,
+				6B8440D92448B3FC007A4DC6 /* CarouselCollectionViewDataSourceProxy.swift in Sources */,
+				6B8440DF2448C391007A4DC6 /* CGSize+Helpers.swift in Sources */,
 				6B823BC623F4ADE30099F65E /* FormatterExtensions.swift in Sources */,
 				B81AC0A52405B62900972E85 /* PhraseViewModel.swift in Sources */,
 				B879831123E0CEC300DC1A81 /* PresetsViewController.swift in Sources */,
@@ -899,6 +909,7 @@
 				6B14DC732419590E0050C287 /* OutputTextView.swift in Sources */,
 				A944D0052405AE8C00F3863E /* GazeableButton.swift in Sources */,
 				6B9DFA6423E889DB0037673E /* UIHeadGazeRecognizer.swift in Sources */,
+				6B8440DD2448BAA2007A4DC6 /* PresetCarouselGridLayout.swift in Sources */,
 				B81AC0AD2405D8C400972E85 /* ItemSelection.swift in Sources */,
 				6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */,
 				B8DA9DF223F30BAF00FEBE19 /* Cell+NibLoading.swift in Sources */,

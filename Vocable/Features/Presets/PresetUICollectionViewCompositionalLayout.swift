@@ -14,8 +14,10 @@ class PresetUICollectionViewCompositionalLayout: UICollectionViewCompositionalLa
     // Intended for use in computing the fractional-size dimensions of collection layout items rather than hard-coding width/height values
     private static let totalSize = CGSize(width: 1130, height: 834)
     
-    var dataSource: UICollectionViewDiffableDataSource<PresetsViewController.Section, PresetsViewController.ItemWrapper>? {
-        self.collectionView?.dataSource as? UICollectionViewDiffableDataSource<PresetsViewController.Section, PresetsViewController.ItemWrapper>
+    var dataSource: CarouselCollectionViewDataSourceProxy<PresetsViewController.Section, PresetsViewController.ItemWrapper>? {
+        return nil
+        #warning("This needs to be handled somehow")
+//        self.collectionView?.delegate as? CarouselCollectionViewDataSourceProxy<PresetsViewController.Section, PresetsViewController.ItemWrapper> // Casting the delegate and returning it since the actual data source is proxied
     }
     
     override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {

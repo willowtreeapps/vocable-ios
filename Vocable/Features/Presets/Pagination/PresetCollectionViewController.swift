@@ -33,7 +33,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         }
     }
     
-    private lazy var dataSource = UICollectionViewDiffableDataSource<Int, ItemWrapper>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
+    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<Int, ItemWrapper>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
         
@@ -79,22 +79,24 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         collectionView.delaysContentTouches = true
         
         updateLayoutForCurrentTraitCollection()
-        
+
         var snapshot = NSDiffableDataSourceSnapshot<Int, ItemWrapper>()
         snapshot.appendSections([0])
-        dataSource.apply(snapshot,
-                                 animatingDifferences: false,
-                                 completion: nil)
+        dataSourceProxy.apply(snapshot,
+                              animatingDifferences: false,
+                              completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         
-        ItemSelection.$selectedCategoryID.sink { (selectedCategoryID) in
+        ItemSelection.$selectedCategoryID.sink { [weak self] (selectedCategoryID) in
             DispatchQueue.main.async {
+                guard let self = self else { return }
                 // Reset paging progress when selecting a new category
                 
-                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .init(), animated: false)
+                self.scrollToMiddleSection()
                 self.updateFetchedResultsController(with: selectedCategoryID)
                 self.handleSelectedCategory()
             }
@@ -120,10 +122,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateDataSource(animated: true, completion: { [weak self] in
-            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
-                                               animateIfNeeded: true)
-        })
+        updateDataSource(animated: true)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -139,13 +138,13 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
             case (.regular, .regular):
                 layout.numberOfColumns = 3
-                layout.numberOfRows = 3
+                layout.numberOfRows = .fixedCount(3)
             case (.compact, .regular):
                 layout.numberOfColumns = 2
-                layout.numberOfRows = 4
+                layout.numberOfRows = .fixedCount(4)
             case (.compact, .compact), (.regular, .compact):
                 layout.numberOfColumns = 3
-                layout.numberOfRows = 2
+                layout.numberOfRows = .fixedCount(2)
             default:
                 break
             }
@@ -153,13 +152,13 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
             case (.regular, .regular):
                 layout.numberOfColumns = 3
-                layout.numberOfRows = 4
+                layout.numberOfRows = .fixedCount(4)
             case (.compact, .regular):
                 layout.numberOfColumns = 3
-                layout.numberOfRows = 4
+                layout.numberOfRows = .fixedCount(4)
             case (.compact, .compact), (.regular, .compact):
                 layout.numberOfColumns = 6
-                layout.numberOfRows = 2
+                layout.numberOfRows = .fixedCount(2)
             default:
                 break
             }
@@ -184,13 +183,23 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             snapshot.appendItems(presets)
         }
         
-        dataSource.apply(snapshot,
-                                 animatingDifferences: animated,
-                                 completion: completion)
+        dataSourceProxy.apply(snapshot,
+                              animatingDifferences: animated,
+                              completion: completion)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let identifier = dataSource.itemIdentifier(for: indexPath) else { return }
+        let indexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
+        
+        for selectedPath in collectionView.indexPathsForSelectedItems ?? [] {
+            dataSourceProxy.performActions(on: selectedPath) { aPath in
+                if aPath != collectionView.indexPathForGazedItem {
+                    collectionView.deselectItem(at: aPath, animated: true)
+                }
+            }
+        }
+
+        guard let identifier = dataSourceProxy.itemIdentifier(for: indexPath) else { return }
         
         let selectedPhrase: PhraseViewModel?
         
