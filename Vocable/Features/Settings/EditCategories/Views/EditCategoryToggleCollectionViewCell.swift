@@ -18,7 +18,7 @@ class EditCategoryToggleCollectionViewCell: VocableCollectionViewCell {
         
         showCategorySwitch.isEnabled = true
         showCategorySwitch.isUserInteractionEnabled = false
-        showCategoryLabel.text = NSLocalizedString("Show", comment: "Show category toggle label.")
+        showCategoryLabel.text = NSLocalizedString("category_editor.detail.button.show_category.title", comment: "Show category button label within the category detail screen.")
         
     }
 }

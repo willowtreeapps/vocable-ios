@@ -15,7 +15,7 @@ class EditCategoryRemoveCollectionViewCell: VocableCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        textLabel.text = NSLocalizedString("Remove Category", comment: "Remove category label.")
+        textLabel.text = NSLocalizedString("category_editor.detail.button.remove_category.title", comment: "Remove category button label within the category detail screen.")
 
     }
 

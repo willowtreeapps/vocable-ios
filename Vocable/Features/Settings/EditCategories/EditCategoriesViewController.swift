@@ -26,18 +26,12 @@ class EditCategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       carouselCollectionViewController?.progressPublisher.sink(receiveValue: { (pagingProgress) in
+        carouselCollectionViewController?.progressPublisher.sink(receiveValue: { (pagingProgress) in
             guard let pagingProgress = pagingProgress else {
                 return
             }
-            if pagingProgress.pageCount > 1 {
-                self.pageNavigationView.setPaginationButtonsEnabled(true)
-            } else {
-                self.pageNavigationView.setPaginationButtonsEnabled(false)
-            }
-            let computedPageCount = max(pagingProgress.pageCount, 1)
-
-            self.pageNavigationView.textLabel.text = String(format: NSLocalizedString("Page %d of %d", comment: ""), pagingProgress.pageIndex + 1, computedPageCount)
+            self.pageNavigationView.setPaginationButtonsEnabled(pagingProgress.pageCount > 1)
+            self.pageNavigationView.textLabel.text = pagingProgress.localizedString
         }).store(in: &disposables)
         
         pageNavigationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)
@@ -59,7 +53,7 @@ class EditCategoriesViewController: UIViewController {
                     try Category.updateAllOrdinalValues(in: context)
                     try context.save()
 
-                    let alertMessage = NSLocalizedString("Saved to Custom Categories", comment: "Saved to Custom Categories")
+                    let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
 
                     ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
                 } catch {
