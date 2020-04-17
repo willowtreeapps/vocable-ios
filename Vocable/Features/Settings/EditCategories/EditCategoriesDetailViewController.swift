@@ -107,22 +107,17 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
             vc.text = category.name ?? ""
             vc.editTextCompletionHandler = { (didChange, newText) -> Void in
                 guard didChange else { return }
-                var isNewCategory = false
                 let context = NSPersistentContainer.shared.viewContext
 
                 if let categoryIdentifier = self.category.identifier {
                     let originalCategory = Category.fetchObject(in: context, matching: categoryIdentifier)
                     originalCategory?.name = newText
-                } else {
-                    _ = Category.create(withUserEntry: newText, in: context)
-                    isNewCategory = true
                 }
                 do {
                     try Category.updateAllOrdinalValues(in: context)
                     try context.save()
 
-                    let alertMessage = isNewCategory ? NSLocalizedString("Saved to Custom Categories", comment: "Saved to Custom Categories") :
-                        NSLocalizedString("Changes saved", comment: "Changes saved")
+                    let alertMessage = NSLocalizedString("Changes saved", comment: "Changes saved")
 
                     ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
                 } catch {
@@ -194,7 +189,8 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(GazeableAlertAction(title: confirmButtonTitle, handler: confirmChangesAction))
         alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
-        self.present(alert, animated: true)
+        alert.show()
+
     }
     
     private func handleRemoveCategory() {

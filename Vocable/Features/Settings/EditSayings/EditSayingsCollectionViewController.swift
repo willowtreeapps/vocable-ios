@@ -142,28 +142,17 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
                 vc.text = phrase.utterance ?? ""
                 vc.editTextCompletionHandler = { (didChange, newText) -> Void in
                     guard didChange else { return }
-                    var isNewPhrase = false
                     let context = NSPersistentContainer.shared.viewContext
 
                     if let phraseIdentifier = phrase.identifier {
                         let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
                         originalPhrase?.utterance = newText
-                    } else {
-                        _ = Phrase.create(withUserEntry: newText, in: context)
-                        isNewPhrase = true
                     }
                     do {
                         try context.save()
-
-                        let newEntrySavedString: String = {
-                            let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
-                            let categoryName = Category.userFavoritesCategoryName()
-                            return String.localizedStringWithFormat(format, categoryName)
-                        }()
-
-                        let changesSavedString = NSLocalizedString("category_editor.toast.changes_saved.title",
-                                                                   comment: "changes to an existing phrase were saved successfully")
-                        let alertMessage = isNewPhrase ? newEntrySavedString : changesSavedString
+                        
+                        let alertMessage = NSLocalizedString("category_editor.toast.changes_saved.title",
+                        comment: "changes to an existing phrase were saved successfully")
                         
                         ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
                     } catch {
