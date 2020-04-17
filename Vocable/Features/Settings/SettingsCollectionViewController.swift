@@ -71,7 +71,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         case versionNum
     }
 
-    private lazy var dataSourceProxy: CarouselCollectionViewDataSourceProxy<Int, SettingsItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SettingsItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
 
@@ -135,7 +135,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
                               .privacyPolicy,
                               .contactDevs].filter({$0.isFeatureEnabled}))
         snapshot.appendItems([.versionNum])
-        dataSourceProxy.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -152,7 +152,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
 
     private func compactWidthLayout() -> UICollectionViewLayout {
-        let internalLinksItemCount = dataSourceProxy.snapshot().itemIdentifiers.count - externalLinksItemCount
+        let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - externalLinksItemCount
 
         let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         settingsButtonItem.contentInsets = .init(top: 4, leading: 0, bottom: 4, trailing: 0)
@@ -178,7 +178,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
 
     private func defaultLayout() -> UICollectionViewLayout {
-        let internalLinksItemCount = dataSourceProxy.snapshot().itemIdentifiers.count - externalLinksItemCount
+        let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - externalLinksItemCount
         let numOfRows = CGFloat(ceil(Double(internalLinksItemCount) / 2.0))
         let isEvenNumOfItems = internalLinksItemCount.isMultiple(of: 2)
         let columnCount = 2
@@ -244,13 +244,11 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        dataSourceProxy.performActions(on: indexPath) { (aPath) in
-            if collectionView.indexPathForGazedItem != aPath {
-                collectionView.deselectItem(at: aPath, animated: true)
-            }
+        if collectionView.indexPathForGazedItem != indexPath {
+            collectionView.deselectItem(at: indexPath, animated: true)
         }
 
-        let item = dataSourceProxy.snapshot().itemIdentifiers[indexPath.item]
+        let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
         switch item {
         case .privacyPolicy:
             presentLeavingHeadTrackableDomainAlert(withConfirmation: presentPrivacyAlert)
@@ -282,7 +280,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
 
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        let item = dataSourceProxy.itemIdentifier(for: indexPath)
+        let item = dataSource.itemIdentifier(for: indexPath)
         switch item {
         case .versionNum:
             return false
@@ -294,7 +292,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
 
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let item = dataSourceProxy.itemIdentifier(for: indexPath)
+        let item = dataSource.itemIdentifier(for: indexPath)
         switch item {
         case .versionNum:
             return false

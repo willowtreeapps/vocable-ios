@@ -18,7 +18,7 @@ final class SelectionModeCollectionViewController: UICollectionViewController {
         case headTrackingToggle = "Head Tracking"
     }
     
-    private lazy var dataSourceProxy: CarouselCollectionViewDataSourceProxy<Int, SelectionModeItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SelectionModeItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
 
@@ -33,7 +33,7 @@ final class SelectionModeCollectionViewController: UICollectionViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Int, SelectionModeItem>()
         snapshot.appendSections([0])
         snapshot.appendItems([.headTrackingToggle])
-        dataSourceProxy.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     private func setupCollectionView() {
@@ -80,11 +80,8 @@ final class SelectionModeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        dataSourceProxy.performActions(on: indexPath) { (aPath) in
-            if collectionView.indexPathForGazedItem != aPath {
-                collectionView.deselectItem(at: aPath, animated: true)
-            }
+        if collectionView.indexPathForGazedItem != indexPath {
+            collectionView.deselectItem(at: indexPath, animated: true)
         }
         
         if AppConfig.isHeadTrackingEnabled {
@@ -104,7 +101,7 @@ final class SelectionModeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        guard let item = dataSourceProxy.itemIdentifier(for: indexPath) else { return false }
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         switch item {
         case .headTrackingToggle:
             return AppConfig.isHeadTrackingSupported
@@ -112,7 +109,7 @@ final class SelectionModeCollectionViewController: UICollectionViewController {
     }
      
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        guard let item = dataSourceProxy.itemIdentifier(for: indexPath) else { return false }
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         switch item {
         case .headTrackingToggle:
             return AppConfig.isHeadTrackingSupported
