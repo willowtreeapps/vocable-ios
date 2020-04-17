@@ -81,6 +81,10 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         return false
     }
 
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        updateDataSource(animated: true)
+    }
+
     private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
         let content = fetchResultsController.fetchedObjects ?? []
         let viewModels = content.compactMap(PhraseViewModel.init)
