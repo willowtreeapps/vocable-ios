@@ -101,20 +101,20 @@ final class SelectionModeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
-         switch item {
-         case .headTrackingToggle:
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
+        switch item {
+        case .headTrackingToggle:
             return AppConfig.isHeadTrackingSupported
-         }
-     }
+        }
+    }
      
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
-         switch item {
-         case .headTrackingToggle:
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
+        switch item {
+        case .headTrackingToggle:
             return AppConfig.isHeadTrackingSupported
-         }
-     }
+        }
+    }
 
     private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: SelectionModeItem) -> UICollectionViewCell {
         switch item {

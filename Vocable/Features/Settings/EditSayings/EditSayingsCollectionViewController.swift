@@ -11,7 +11,7 @@ import CoreData
 
 class EditSayingsCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
 
-    private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, PhraseViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
+    private lazy var diffableDataSource = CarouselCollectionViewDataSourceProxy<Int, PhraseViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditSayingsCollectionViewCell.reuseIdentifier, for: indexPath) as! EditSayingsCollectionViewCell
         cell.setup(title: phrase.utterance)
@@ -61,7 +61,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
             layout.numberOfColumns = 2
-            layout.numberOfRows = .fixedCount(3)
+            layout.numberOfRows = .fixedCount(4)
         case (.compact, .regular):
             layout.numberOfColumns = 1
             layout.numberOfRows = .fixedCount(3)
@@ -82,10 +82,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateDataSource(animated: true, completion: { [weak self] in
-            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
-                                               animateIfNeeded: true)
-        })
+        updateDataSource(animated: true)
     }
 
     private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {

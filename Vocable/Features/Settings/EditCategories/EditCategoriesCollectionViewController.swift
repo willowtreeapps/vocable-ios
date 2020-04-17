@@ -10,15 +10,6 @@ import Foundation
 import UIKit
 import CoreData
 
-struct CellOrdinalButtonMask: OptionSet {
-    let rawValue: Int
-    
-    static let topUpArrow = CellOrdinalButtonMask(rawValue: 1 << 0)
-    static let bottomDownArrow = CellOrdinalButtonMask(rawValue: 1 << 1)
-    static let both: CellOrdinalButtonMask = [.topUpArrow, .bottomDownArrow]
-    static let none: CellOrdinalButtonMask = []
-}
-
 class EditCategoriesCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
     
     private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, Category>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, category) -> UICollectionViewCell? in
@@ -34,9 +25,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         self.setupCell(indexPath: indexPath, cell: cell, category: category)
         
         cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
-        
         cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
-        
         cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
         
         return cell
@@ -114,10 +103,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateDataSource(animated: true, completion: { [weak self] in
-            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
-                                               animateIfNeeded: true)
-        })
+        updateDataSource(animated: true)
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {

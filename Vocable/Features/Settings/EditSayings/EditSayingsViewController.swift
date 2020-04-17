@@ -32,9 +32,6 @@ class EditSayingsViewController: UIViewController {
         super.viewDidLoad()
         
         carouselCollectionViewController?.progressPublisher.sink(receiveValue: { (pagingProgress) in
-            guard let pagingProgress = pagingProgress else {
-                return
-            }
             self.paginationView.setPaginationButtonsEnabled(pagingProgress.pageCount > 1)
             self.paginationView.textLabel.text = pagingProgress.localizedString
         }).store(in: &disposables)

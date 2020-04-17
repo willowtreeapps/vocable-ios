@@ -27,9 +27,6 @@ class EditCategoriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         carouselCollectionViewController?.progressPublisher.sink(receiveValue: { (pagingProgress) in
-            guard let pagingProgress = pagingProgress else {
-                return
-            }
             self.pageNavigationView.setPaginationButtonsEnabled(pagingProgress.pageCount > 1)
             self.pageNavigationView.textLabel.text = pagingProgress.localizedString
         }).store(in: &disposables)
