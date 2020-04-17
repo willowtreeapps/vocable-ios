@@ -19,6 +19,15 @@
 /* Delete phrase confirmation alert title */
 "category_editor.alert.delete_phrase_confirmation.title" = "Deleted phrases cannot be recovered.";
 
+/* Delete category alert cancel button title */
+"category_editor.alert.delete_category_confirmation.button.cancel.title" = "Cancel";
+
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "Remove";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "Deleted categories cannot be recovered.";
+
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "Changes saved";
 

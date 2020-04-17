@@ -189,14 +189,13 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(GazeableAlertAction(title: confirmButtonTitle, handler: confirmChangesAction))
         alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
-        alert.show()
-
+        self.present(alert, animated: true, completion: nil)
     }
     
     private func handleRemoveCategory() {
-        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("Deleted categories cannot be recovered.", comment: "Remove category alert title"))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Remove", comment: "Remove category alert action title"), handler: { self.removeCategory() }))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title"), handler: {
+        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("category_editor.alert.delete_category_confirmation.title", comment: "Remove category alert title"))
+        alert.addAction(GazeableAlertAction(title: NSLocalizedString("category_editor.alert.delete_category_confirmation.button.remove.title", comment: "Remove category alert action title"), handler: { self.removeCategory() }))
+        alert.addAction(GazeableAlertAction(title: NSLocalizedString("category_editor.alert.delete_category_confirmation.button.cancel.title", comment: "Cancel alert action title"), handler: {
             self.deselectCell()
         }))
         self.present(alert, animated: true)
