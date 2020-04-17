@@ -116,7 +116,7 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
                     try Category.updateAllOrdinalValues(in: context)
                     try context.save()
 
-                    let alertMessage = NSLocalizedString("category_editor.toast.successfully_edited.title", comment: "User edited name of the category and saved it successfully")
+                    let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "User edited name of the category and saved it successfully")
 
                     ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
                 } catch {

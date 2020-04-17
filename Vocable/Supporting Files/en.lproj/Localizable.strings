@@ -96,3 +96,25 @@
 /* Settings screen header title */
 "settings.header.title" = "Settings";
 
+"category_editor.detail.button.show_category.title" = "Show";
+
+"category_editor.detail.button.remove_category.title" = "Remove Category";
+
+"category_editor.toast.successfully_saved.title" = "Changes Saved";
+
+"text_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
+"text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
+
+"text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
+
+"category_editor.alert.cancel_editing_confirmation.title" = "If you close this without saving your custom category will be deleted.";
+
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Confirm";
+
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Cancel";
+
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
+
+"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
+
+"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
