@@ -15,7 +15,7 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
         case sensitivity
     }
     
-    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<Int, SelectionModeItem>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+    private lazy var dataSource = UICollectionViewDiffableDataSource<Int, SelectionModeItem>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
     
@@ -30,7 +30,7 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Int, SelectionModeItem>()
         snapshot.appendSections([0])
         snapshot.appendItems([.dwellTime, .sensitivity])
-        dataSourceProxy.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     private func setupCollectionView() {
@@ -84,7 +84,7 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        guard let item = dataSourceProxy.itemIdentifier(for: indexPath) else { return false }
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         switch item {
         case .dwellTime, .sensitivity:
             return false
@@ -92,7 +92,7 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     }
      
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        guard let item = dataSourceProxy.itemIdentifier(for: indexPath) else { return false }
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         switch item {
         case .dwellTime, .sensitivity:
             return false
