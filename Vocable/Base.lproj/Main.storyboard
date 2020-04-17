@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CvH-fK-txz">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -13,11 +13,11 @@
             <objects>
                 <viewController id="CvH-fK-txz" customClass="TrackingContainerViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QoN-fl-FyW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQq-Gr-kNC" userLabel="ContentViewController">
-                                <rect key="frame" x="16" y="8" width="343" height="651"/>
+                                <rect key="frame" x="32" y="32" width="770" height="1110"/>
                                 <connections>
                                     <segue destination="Jgy-U0-B1Z" kind="embed" identifier="ContentViewControllerSegue" id="VGF-IP-CWi"/>
                                 </connections>
@@ -42,14 +42,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OF-pV-I9m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1668.1640625" y="-1443.3382137628109"/>
+            <point key="canvasLocation" x="-1668.3453237410074" y="-1443.7185929648242"/>
         </scene>
         <!--Presets View Controller-->
         <scene sceneID="wcZ-O0-4Me">
             <objects>
                 <collectionViewController id="Jgy-U0-B1Z" customClass="PresetsViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WCJ-8g-p1t">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="651"/>
+                        <rect key="frame" x="0.0" y="0.0" width="770" height="860"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jtp-ya-uaj">
@@ -60,11 +60,11 @@
                         </collectionViewFlowLayout>
                         <cells/>
                         <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PresetPageControlView" id="m0H-ea-bEJ" customClass="PresetPageControlReusableView" customModule="Vocable" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="770" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="3bW-mX-haI">
-                                    <rect key="frame" x="152" y="6.5" width="39" height="37"/>
+                                    <rect key="frame" x="365.5" y="6.5" width="39" height="37"/>
                                 </pageControl>
                             </subviews>
                             <constraints>

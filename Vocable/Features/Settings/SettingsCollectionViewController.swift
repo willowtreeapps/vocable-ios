@@ -280,7 +280,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
 
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
+        let item = dataSource.itemIdentifier(for: indexPath)
         switch item {
         case .versionNum:
             return false
@@ -292,7 +292,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     }
 
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
+        let item = dataSource.itemIdentifier(for: indexPath)
         switch item {
         case .versionNum:
             return false

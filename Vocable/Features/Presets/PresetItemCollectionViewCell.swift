@@ -74,7 +74,9 @@ class CategoryItemCollectionViewCell: PresetItemCollectionViewCell {
     override func updateContentViews() {
         super.updateContentViews()
         borderedView.fillColor = isSelected ? .cellSelectionColor : .categoryBackgroundColor
-        borderedView.backgroundColor = .categoryBackgroundColor
+        borderedView.backgroundColor = (traitCollection.verticalSizeClass == .compact
+            || traitCollection.horizontalSizeClass == .compact)
+            ? .collectionViewBackgroundColor : .categoryBackgroundColor
         
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = borderedView.fillColor
