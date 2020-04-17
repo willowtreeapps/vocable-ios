@@ -37,16 +37,11 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     
-    private var hasChanged: Bool {
+    private var textHasChanged: Bool {
         return text != textTransaction.text
     }
-    
-    var dismissalCompletionHandler: (String) -> Bool = { (_) in
-        assertionFailure("Completion not handled")
-        return false
-    }
-    
-    var editTextCompletionHandler: (Bool, String) -> Void = { (_, _) in
+  
+    var editTextCompletionHandler: (String) -> Void = { (_) in
         assertionFailure("Completion not handled")
     }
     
@@ -240,12 +235,13 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
         case .topBarButton(let buttonType):
             (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
             collectionView.deselectItem(at: indexPath, animated: true)
-            let context = NSPersistentContainer.shared.viewContext
             switch buttonType {
             case .confirmEdit:
-                editTextCompletionHandler(hasChanged, textTransaction.text)
+                editTextCompletionHandler(textTransaction.text)
             case .close:
-                if dismissalCompletionHandler(textTransaction.text) {
+                if textHasChanged {
+                    handleDismissAlert()
+                } else {
                     dismiss(animated: true, completion: nil)
                 }
             default:
@@ -329,15 +325,6 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     
-    private func handleExitAlert() {
-        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("Going back before saving will clear any edits made.", comment: "Exit edit sayings alert title"))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Discard", comment: "Discard changes alert action title"), handler: {
-            self.navigationController?.popViewController(animated: true)
-        }))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Continue Editing", comment: "Continue editing alert action title")))
-        self.present(alert, animated: true)
-    }
-    
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
         
@@ -349,5 +336,21 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
             self?.updateSnapshot()
         }
     }
-}
+    
+    private func handleDismissAlert() {
+        func discardChangesAction() {
+            dismiss(animated: true, completion: nil)
+        }
 
+        let title = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.title",
+                                      comment: "Exit edit sayings alert title")
+        let discardButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.discard.title",
+                                                   comment: "Discard changes alert action title")
+        let continueButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
+                                                    comment: "Continue editing alert action title")
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
+        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
+        self.present(alert, animated: true)
+    }
+}

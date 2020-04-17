@@ -51,8 +51,7 @@ class EditCategoriesViewController: UIViewController {
     
     @IBAction func addButtonPressed(_ sender: Any) {
         if let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as? EditTextViewController {
-            vc.editTextCompletionHandler = { (didChange, newText) -> Void in
-                guard didChange else { return }
+            vc.editTextCompletionHandler = { (newText) -> Void in
                 let context = NSPersistentContainer.shared.viewContext
 
                 _ = Category.create(withUserEntry: newText, in: context)
@@ -66,10 +65,6 @@ class EditCategoriesViewController: UIViewController {
                 } catch {
                     assertionFailure("Failed to save category: \(error)")
                 }
-            }
-            
-            vc.dismissalCompletionHandler = { (newText) -> Bool in
-                return true
             }
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)

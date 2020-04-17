@@ -105,8 +105,7 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
             vc.modalPresentationStyle = .fullScreen
             
             vc.text = category.name ?? ""
-            vc.editTextCompletionHandler = { (didChange, newText) -> Void in
-                guard didChange else { return }
+            vc.editTextCompletionHandler = { (newText) -> Void in
                 let context = NSPersistentContainer.shared.viewContext
 
                 if let categoryIdentifier = self.category.identifier {
@@ -123,17 +122,6 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
                 } catch {
                     assertionFailure("Failed to save category: \(error)")
                 }
-            }
-            
-            vc.dismissalCompletionHandler = { (newText) -> Bool in
-                if let categoryIdentifier = self.category.identifier {
-                    let originalCategory = Category.fetchObject(in: self.context, matching: categoryIdentifier)
-                    if originalCategory?.name != newText {
-                        self.handleDismissAlert()
-                        return false
-                    }
-                }
-                return true
             }
             present(vc, animated: true)
         }

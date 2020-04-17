@@ -51,8 +51,7 @@ class EditSayingsViewController: UIViewController {
     
     @IBAction func addPhrasePressed(_ sender: Any) {
         if let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as? EditTextViewController {
-            vc.editTextCompletionHandler = { (didChange, newText) -> Void in
-                guard didChange else { return }
+            vc.editTextCompletionHandler = { (newText) -> Void in
                 let context = NSPersistentContainer.shared.viewContext
 
                 _ = Phrase.create(withUserEntry: newText, in: context)
@@ -69,10 +68,6 @@ class EditSayingsViewController: UIViewController {
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")
                 }
-            }
-            
-            vc.dismissalCompletionHandler = { (newText) -> Bool in
-                return true
             }
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)

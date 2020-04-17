@@ -140,8 +140,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
                 
                 let phrase = fetchResultsController.object(at: indexPath)
                 vc.text = phrase.utterance ?? ""
-                vc.editTextCompletionHandler = { (didChange, newText) -> Void in
-                    guard didChange else { return }
+                vc.editTextCompletionHandler = { (newText) -> Void in
                     let context = NSPersistentContainer.shared.viewContext
 
                     if let phraseIdentifier = phrase.identifier {
@@ -158,18 +157,6 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
                     } catch {
                         assertionFailure("Failed to save user generated phrase: \(error)")
                     }
-                }
-                
-                vc.dismissalCompletionHandler = { (newText) -> Bool in
-                    let context = NSPersistentContainer.shared.viewContext
-                    if let phraseIdentifier = phrase.identifier {
-                        let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                        if originalPhrase?.utterance != newText {
-                            self.handleDismissAlert()
-                            return false
-                        }
-                    }
-                    return true
                 }
                 present(vc, animated: true)
             }

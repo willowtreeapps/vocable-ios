@@ -1,15 +1,3 @@
-/* Exit edit categories alert title */
-"category_editor.alert.cancel_editing_confirmation.title" = "If you close this without saving your custom category will be deleted.";
-
-/* Confirm exit category alert action title */
-"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Confirm";
-
-/* Cancel exit editing alert action title */
-"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Cancel";
-
-/* Discard changes alert action title */
-"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
-
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Cancel";
 
@@ -51,15 +39,6 @@
 
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "Page %1$d of %2$d";
-
-/* Continue editing alert action title */
-"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
-
-/* Discard changes alert action title */
-"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
-
-/* Exit edit sayings alert title */
-"phrase_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
 
 /* new entry saved to user favorites category
    Saved to user favorites category
