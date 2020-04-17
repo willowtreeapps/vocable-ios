@@ -10,6 +10,15 @@ import Foundation
 import UIKit
 import CoreData
 
+struct CellOrdinalButtonMask: OptionSet {
+    let rawValue: Int
+    
+    static let topUpArrow = CellOrdinalButtonMask(rawValue: 1 << 0)
+    static let bottomDownArrow = CellOrdinalButtonMask(rawValue: 1 << 1)
+    static let both: CellOrdinalButtonMask = [.topUpArrow, .bottomDownArrow]
+    static let none: CellOrdinalButtonMask = []
+}
+
 class EditCategoriesCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
     
     private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, Category>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, category) -> UICollectionViewCell? in
@@ -74,22 +83,6 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
             self.collectionView.reloadData()
         }
     }
-    
-    private func setUpButtonEnabled(indexPath: IndexPath) -> Bool {
-        if indexPath.row == 0 {
-            return false
-        } else {
-            return true
-        }
-    }
-    
-    private func setDownButtonEnabled(indexPath: IndexPath) -> Bool {
-        if indexPath.row == collectionView.numberOfItems(inSection: 0) - 1 {
-            return false
-        } else {
-            return true
-        }
-    }
 
     private func updateLayoutForCurrentTraitCollection() {
         layout.interItemSpacing = 0
@@ -144,22 +137,6 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         guard let cell = inputCell ?? collectionView.cellForItem(at: indexPath) as? EditCategoriesDefaultCollectionViewCell else { return }
         let category = category ?? fetchResultsController.object(at: indexPath)
         
-        if category.isHidden {
-            cell.moveUpButton.isEnabled = false
-            cell.moveDownButton.isEnabled = false
-        } else {
-            cell.moveUpButton.isEnabled = self.setUpButtonEnabled(indexPath: indexPath)
-            cell.moveDownButton.isEnabled = self.setDownButtonEnabled(indexPath: indexPath)
-        }
-        
-        //Check if the cell below the current one is hidden, disable down button if needed.
-        if indexPath.row + 1 < fetchResultsController.fetchedObjects?.count ?? 0 {
-            let nextIndex = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-            if fetchResultsController.object(at: nextIndex).isHidden {
-                cell.moveDownButton.isEnabled = false
-            }
-        }
-        
         let visibleTitleString = NSMutableAttributedString(string: "\(indexPath.row + 1). \(category.name ?? "")")
         let hiddenTitleString = NSMutableAttributedString(string: "\(category.name ?? "")")
        
@@ -169,6 +146,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
             cell.setup(title: visibleTitleString)
         }
         cell.separatorMask = self.layout.separatorMask(for: indexPath)
+        cell.ordinalButtonMask = cellOrdinalButtonMask(with: category, for: indexPath)
     }
     
     private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
@@ -279,5 +257,26 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         titleString.insert(NSAttributedString(string: " "), at: 0)
         titleString.insert(NSAttributedString(attachment: imageAttachment), at: 0)
         return titleString
+    }
+    
+    private func cellOrdinalButtonMask(with category: Category, for indexPath: IndexPath) -> CellOrdinalButtonMask {
+        if category.isHidden {
+            return .none
+        }
+        
+        //Check if the cell below the current one is hidden, disable down button if needed.
+        if indexPath.row + 1 < fetchResultsController.fetchedObjects?.count ?? 0 {
+            let nextIndex = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+            if fetchResultsController.object(at: nextIndex).isHidden {
+                return .topUpArrow
+            }
+        }
+        
+        if indexPath.row == 0 {
+            return .bottomDownArrow
+        } else if indexPath.row == collectionView.numberOfItems(inSection: 0) - 1 {
+            return .topUpArrow
+        }
+        return .both
     }
 }

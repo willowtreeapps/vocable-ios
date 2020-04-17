@@ -27,6 +27,12 @@ class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    var ordinalButtonMask: CellOrdinalButtonMask = .both {
+        didSet {
+            updateOrdinalButtonMask()
+        }
+    }
+    
     func setup(title: NSMutableAttributedString) {
         categoryNameLabel.attributedText = title
     }
@@ -39,5 +45,10 @@ class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
     private func updateSeparatorMask() {
         topSeparator?.isHidden = !separatorMask.contains(.top)
         bottomSeparator?.isHidden = !separatorMask.contains(.bottom)
+    }
+    
+    private func updateOrdinalButtonMask() {
+        moveUpButton.isEnabled = ordinalButtonMask.contains(.topUpArrow)
+        moveDownButton.isEnabled = ordinalButtonMask.contains(.bottomDownArrow)
     }
 }
