@@ -302,7 +302,6 @@
 		A9CF2AF4242D4EF1005633A7 /* SensitivityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SensitivityCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9CF2AF6242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DwellTimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		A9CF2AF8242D4F0A005633A7 /* SensitivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensitivityCollectionViewCell.swift; sourceTree = "<group>"; };
-		A9DAB54F243F9FD9002E5BC9 /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
 		A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSuggestionController.swift; sourceTree = "<group>"; };
 		A9DE16FF23F4900C0094DB64 /* TextExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExpression.swift; sourceTree = "<group>"; };
 		A9DE170123F492B20094DB64 /* Array+Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Split.swift"; sourceTree = "<group>"; };
@@ -751,7 +750,6 @@
 				B81AC0A02405AF1100972E85 /* CategoryViewModel.swift */,
 				B81AC0A42405B62900972E85 /* PhraseViewModel.swift */,
 				A94A6CCC2412D38A00625275 /* NavigationModel.swift */,
-				A9DAB54F243F9FD9002E5BC9 /* Pagination.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
