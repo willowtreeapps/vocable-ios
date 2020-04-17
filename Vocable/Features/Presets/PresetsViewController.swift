@@ -45,16 +45,10 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
         indirect case pagination(ItemWrapper, UIPageViewController.NavigationDirection)
     }
     
-    private var showKeyboard: Bool = false {
-        didSet {
-            guard oldValue != showKeyboard else { return }
-            updateSnapshot()
-        }
-    }
+    private var showKeyboard: Bool = false
     
     private var suggestions: [TextSuggestion]? {
         didSet {
-            guard oldValue != suggestions else { return }
             updateSnapshot()
         }
     }
