@@ -8,49 +8,46 @@
 
 import UIKit
 
-protocl
-
 class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayout {
     
     // Dimensions of the product designs.
     // Intended for use in computing the fractional-size dimensions of collection layout items rather than hard-coding width/height values
     private static let totalSize = CGSize(width: 1130, height: 834)
     
-    var dataSource: CarouselCollectionViewDataSourceProxy<PresetsViewController.Section, PresetsViewController.ItemWrapper>? {
-        return nil
-        #warning("This needs to be handled somehow")
-//        self.collectionView?.delegate as? CarouselCollectionViewDataSourceProxy<PresetsViewController.Section, PresetsViewController.ItemWrapper> // Casting the delegate and returning it since the actual data source is proxied
+    var transitioningDelegate: VocableCollectionViewLayoutTransitioningDelegate? {
+        return collectionView?.delegate as? VocableCollectionViewLayoutTransitioningDelegate
     }
     
     override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attr = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
-        // Make animation only happen for preset items
-        guard let item = dataSource?.itemIdentifier(for: itemIndexPath) else {
+        guard let collectionView = collectionView else {
             return attr
         }
-        
-        switch item {
-        case .paginatedPresets, .key, .keyboardFunctionButton:
+
+        let shouldTranslate = transitioningDelegate?.collectionView?(collectionView,
+                                                        shouldTranslateEntranceAnimationForItemAt: itemIndexPath) ?? false
+        if shouldTranslate {
             attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
-        default:
-            break
+        } else {
+            attr?.transform = .identity
         }
-        
+
         return attr
     }
 
     override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attr = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
-        // Make animation only happen for preset items
-        guard let item = dataSource?.itemIdentifier(for: itemIndexPath) else {
+
+        guard let collectionView = collectionView else {
             return attr
         }
-        
-        switch item {
-        case .paginatedPresets, .key, .keyboardFunctionButton, .paginatedCategories:
+
+        let shouldTranslate = transitioningDelegate?.collectionView?(collectionView,
+                                                        shouldTranslateExitAnimationForItemAt: itemIndexPath) ?? false
+        if shouldTranslate {
             attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
-        default:
-            break
+        } else {
+            attr?.transform = .identity
         }
         
         return attr
