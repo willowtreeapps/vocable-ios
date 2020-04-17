@@ -201,6 +201,7 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
         let containerGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: containerGroupFractionalWidth),
             subitems: [paginationItem, categoriesGroup, paginationItem])
+        containerGroup.interItemSpacing = .flexible(0)
         
         var sectionContentInsets: NSDirectionalEdgeInsets {
             if environment.traitCollection.verticalSizeClass == .regular &&
