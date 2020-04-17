@@ -12,28 +12,29 @@ import Combine
 import AVFoundation
 
 class PresetCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
-    
+
+    var categoryID: NSManagedObjectID!
+
     private var disposables = Set<AnyCancellable>()
     
-    enum PresentationMode {
+    private enum PresentationMode {
         case defaultMode
         case numPadMode
     }
     
-    enum ItemWrapper: Hashable {
+    private enum ItemWrapper: Hashable {
         case presetsDefault(Phrase)
         case presetsNumPad(PhraseViewModel)
     }
     
-    var presentationMode: PresentationMode = .defaultMode {
+    private var presentationMode: PresentationMode = .defaultMode {
         didSet {
             guard oldValue != presentationMode else { return }
-            updateLayoutForCurrentTraitCollection()
-            updateDataSource(animated: true)
+            self.updateLayoutForCurrentTraitCollection()
         }
     }
     
-    private lazy var dataSource = UICollectionViewDiffableDataSource<Int, ItemWrapper>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
+    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<Int, ItemWrapper>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
         
@@ -53,7 +54,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         }
     }
     
-    func updateFetchedResultsController(with selectedCategoryID: NSManagedObjectID? = nil) {
+    private func updateFetchedResultsController(with selectedCategoryID: NSManagedObjectID? = nil) {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         if let selectedCategoryID = selectedCategoryID {
             request.predicate = NSComparisonPredicate(\Phrase.categories, .contains, selectedCategoryID)
@@ -68,62 +69,43 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         try? fetchedResultsController.performFetch()
         
         self.fetchedResultsController = fetchedResultsController
-        updateDataSource(animated: true)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        assert(categoryID != nil, "Expected categoryID provided")
 
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
         collectionView.backgroundColor = .collectionViewBackgroundColor
         collectionView.delaysContentTouches = true
         
         updateLayoutForCurrentTraitCollection()
-        
-        var snapshot = NSDiffableDataSourceSnapshot<Int, ItemWrapper>()
-        snapshot.appendSections([0])
-        dataSource.apply(snapshot,
-                                 animatingDifferences: false,
-                                 completion: nil)
+
+        self.updateFetchedResultsController(with: categoryID)
+
+        let selectedCategory = NSPersistentContainer.shared.viewContext.object(with: categoryID) as! Category
+        if selectedCategory.identifier == KeyboardPresets.numPadIdentifier {
+            presentationMode = .numPadMode
+        } else {
+            presentationMode = .defaultMode
+        }
+        updateDataSource(animated: true)
+
+        self.scrollToMiddleSection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
-        
-        ItemSelection.$selectedCategoryID.sink { (selectedCategoryID) in
-            DispatchQueue.main.async {
-                // Reset paging progress when selecting a new category
-                
-                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .init(), animated: false)
-                self.updateFetchedResultsController(with: selectedCategoryID)
-                self.handleSelectedCategory()
-            }
-        }.store(in: &disposables)
-        
+
         layout.$progress.sink { (pagingProgress) in
             ItemSelection.presetsPageIndicatorProgress = pagingProgress
         }.store(in: &disposables)
     }
     
-    private func handleSelectedCategory() {
-        guard let selectedCategoryID = ItemSelection.selectedCategoryID else {
-            return
-        }
-        
-        let selectedCategory = NSPersistentContainer.shared.viewContext.object(with: selectedCategoryID) as? Category
-        
-        if selectedCategory?.identifier == TextPresets.numPadIdentifier {
-            presentationMode = .numPadMode
-        } else {
-            presentationMode = .defaultMode
-        }
-    }
-    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateDataSource(animated: true, completion: { [weak self] in
-            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
-                                               animateIfNeeded: true)
-        })
+        updateDataSource(animated: true)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -131,7 +113,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         updateLayoutForCurrentTraitCollection()
     }
 
-    func updateLayoutForCurrentTraitCollection() {
+    private func updateLayoutForCurrentTraitCollection() {
         layout.interItemSpacing = 8
         
         switch presentationMode {
@@ -139,13 +121,13 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
             case (.regular, .regular):
                 layout.numberOfColumns = 3
-                layout.numberOfRows = 3
+                layout.numberOfRows = .fixedCount(3)
             case (.compact, .regular):
                 layout.numberOfColumns = 2
-                layout.numberOfRows = 4
+                layout.numberOfRows = .fixedCount(4)
             case (.compact, .compact), (.regular, .compact):
                 layout.numberOfColumns = 3
-                layout.numberOfRows = 2
+                layout.numberOfRows = .fixedCount(2)
             default:
                 break
             }
@@ -153,13 +135,13 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
             case (.regular, .regular):
                 layout.numberOfColumns = 3
-                layout.numberOfRows = 4
+                layout.numberOfRows = .fixedCount(4)
             case (.compact, .regular):
                 layout.numberOfColumns = 3
-                layout.numberOfRows = 4
+                layout.numberOfRows = .fixedCount(4)
             case (.compact, .compact), (.regular, .compact):
                 layout.numberOfColumns = 6
-                layout.numberOfRows = 2
+                layout.numberOfRows = .fixedCount(2)
             default:
                 break
             }
@@ -173,7 +155,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         
         switch presentationMode {
         case .numPadMode:
-            let numPadPresets = TextPresets.numPadPhrases.map { (phraseViewModel) in
+            let numPadPresets = KeyboardPresets.numPadPhrases.map { (phraseViewModel) in
                 return ItemWrapper.presetsNumPad(phraseViewModel)
             }
             snapshot.appendItems(numPadPresets)
@@ -184,13 +166,23 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             snapshot.appendItems(presets)
         }
         
-        dataSource.apply(snapshot,
-                                 animatingDifferences: animated,
-                                 completion: completion)
+        dataSourceProxy.apply(snapshot,
+                              animatingDifferences: animated,
+                              completion: completion)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let identifier = dataSource.itemIdentifier(for: indexPath) else { return }
+        let indexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
+        
+        for selectedPath in collectionView.indexPathsForSelectedItems ?? [] {
+            dataSourceProxy.performActions(on: selectedPath) { aPath in
+                if aPath != collectionView.indexPathForGazedItem {
+                    collectionView.deselectItem(at: aPath, animated: true)
+                }
+            }
+        }
+
+        guard let identifier = dataSourceProxy.itemIdentifier(for: indexPath) else { return }
         
         let selectedPhrase: PhraseViewModel?
         

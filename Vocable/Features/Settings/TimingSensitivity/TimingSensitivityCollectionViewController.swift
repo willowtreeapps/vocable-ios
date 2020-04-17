@@ -15,7 +15,7 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
         case sensitivity
     }
     
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SelectionModeItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+    private lazy var dataSource = UICollectionViewDiffableDataSource<Int, SelectionModeItem>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
     
@@ -84,7 +84,7 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         switch item {
         case .dwellTime, .sensitivity:
             return false
@@ -92,7 +92,7 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     }
      
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         switch item {
         case .dwellTime, .sensitivity:
             return false

@@ -26,10 +26,8 @@ class PresetPaginationCollectionViewCell: PaginationCollectionViewCell {
     private func commonInit() {
         _ = ItemSelection.$presetsPageIndicatorProgress.sink(receiveValue: { [weak self] pageProgress in
             var isDisabled = false
-            // If there is only one page disable both pagination buttons or the user is on the last page
-            // disable the forward pagination button
-            if pageProgress.pageCount <= 1 ||
-                (pageProgress.pageIndex == pageProgress.pageCount - 1 && self?.paginationDirection == .forward) {
+            // If there is only one page disable both pagination buttons
+            if pageProgress.pageCount <= 1 {
                 isDisabled = true
             }
             self?.borderedView.alpha = CGFloat(isDisabled ? 0.5 : 1.0)

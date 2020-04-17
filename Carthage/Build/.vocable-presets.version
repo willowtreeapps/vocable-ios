@@ -1,0 +1,19 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "75546f6c69c34c3dfc7b05f2b862e35ae0c363de",
+  "iOS" : [
+    {
+      "name" : "VocablePresets",
+      "hash" : "21719d6f6e3dd69ce75f6080ceecacf3ed0fc26c21e383533c4969ed8f1de8cd",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
+    }
+  ]
+}

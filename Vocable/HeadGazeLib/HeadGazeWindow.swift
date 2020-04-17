@@ -22,7 +22,10 @@ class HeadGazeWindow: UIWindow {
     
     private var cancellables = Set<AnyCancellable>()
     var trackingDisabledByTouch: Bool {
-        return touchGazeDisableBeganDate != nil
+        if let date = touchGazeDisableBeganDate {
+            return Date().timeIntervalSince(date) < touchGazeDisableDuration
+        }
+        return false
     }
 
     override init(frame: CGRect) {
@@ -47,10 +50,7 @@ class HeadGazeWindow: UIWindow {
             if isEnabled {
                 self.installCursorViewIfNeeded()
                 self.cursorView?.setCursorViewsHidden(false, animated: true)
-                self.touchGazeDisableBeganDate = nil
-                /*if self.touchGazeDisableBeganDate != nil {
-                    self.touchGazeDisableBeganDate = .distantPast
-                }*/
+                self.touchGazeDisableBeganDate = .distantPast
             } else {
                 self.cursorView?.removeFromSuperview()
             }
@@ -61,6 +61,15 @@ class HeadGazeWindow: UIWindow {
 
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
         cancelCurrentGazeIfNeeded()
+    }
+
+    func presentHeadTrackingErrorToastIfNeeded() {
+        guard !UIApplication.shared.isGazeTrackingActive, AppConfig.isHeadTrackingEnabled, !trackingDisabledByTouch else {
+            return
+        }
+        let title = NSLocalizedString("gaze_tracking.error.excessive_head_distance.title",
+                                      comment: "Warning message presented to the user when the head tracking system")
+        ToastWindow.shared.presentPersistentWarning(with: title)
     }
 
     override func addSubview(_ view: UIView) {
@@ -83,7 +92,7 @@ class HeadGazeWindow: UIWindow {
         
         guard trackingDisabledByTouch == false else { return }
         touchGazeDisableBeganDate = Date()
-        ToastWindow.shared.dismissPersistantWarning()
+        ToastWindow.shared.dismissPersistentWarning()
         func schedule(duration: TimeInterval = self.touchGazeDisableDuration) {
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
                 let lastTouchDate = self.touchGazeDisableBeganDate ?? .distantPast
@@ -91,7 +100,7 @@ class HeadGazeWindow: UIWindow {
                 if passed >= self.touchGazeDisableDuration {
                     self.cursorView?.setCursorViewsHidden(false, animated: true)
                     self.touchGazeDisableBeganDate = nil
-                    ToastWindow.shared.updateHeadTrackingWarningToast()
+                    self.presentHeadTrackingErrorToastIfNeeded()
                 } else {
                     schedule(duration: self.touchGazeDisableDuration - passed)
                 }
@@ -173,7 +182,9 @@ class HeadGazeWindow: UIWindow {
         guard let event = originalEvent as? UIHeadGazeEvent,
             let gaze = event.allGazes?.first else {
                 if originalEvent.type == .touches {
-                    extendGazeDisabledPeriodForTouchEvent()
+                    if AppConfig.isHeadTrackingEnabled {
+                        extendGazeDisabledPeriodForTouchEvent()
+                    }
                     cursorView?.setCursorViewsHidden(true, animated: true)
                 }
             super.sendEvent(originalEvent)

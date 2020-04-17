@@ -10,7 +10,14 @@ import UIKit
 import Combine
 
 class PresetPaginationContainerCollectionViewCell: VocableCollectionViewCell {
-    var presetCollectionViewController: PresetCollectionViewController?
+
+    private var _collectionViewController: PresetCollectionViewController?
+    var presetCollectionViewController: PresetCollectionViewController {
+        if _collectionViewController == nil {
+            _collectionViewController = PresetCollectionViewController()
+        }
+        return _collectionViewController!
+    }
     
     private var disposables = Set<AnyCancellable>()
     
@@ -19,14 +26,18 @@ class PresetPaginationContainerCollectionViewCell: VocableCollectionViewCell {
         
         borderedView.fillColor = .categoryBackgroundColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
-        presetCollectionViewController = PresetCollectionViewController(collectionViewLayout: PresetCarouselGridLayout())
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        _collectionViewController = nil
     }
     
     func paginate(_ direction: UIPageViewController.NavigationDirection) {
         if direction == .forward {
-            presetCollectionViewController?.scrollToNextPage()
+            presetCollectionViewController.scrollToNextPage()
         } else if direction == .reverse {
-            presetCollectionViewController?.scrollToPreviousPage()
+            presetCollectionViewController.scrollToPreviousPage()
         }
     }
 }

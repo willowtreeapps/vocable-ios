@@ -12,7 +12,7 @@ import CoreData
 import Combine
 
 // swiftlint:disable type_body_length
-class PresetsViewController: UICollectionViewController {
+class PresetsViewController: UICollectionViewController, VocableCollectionViewLayoutTransitioningDelegate {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     private var disposables = Set<AnyCancellable>()
@@ -38,20 +38,22 @@ class PresetsViewController: UICollectionViewController {
         case topBarButton(TopBarButton)
         case paginatedCategories
         case suggestionText(TextSuggestion)
-        case paginatedPresets
+        case paginatedPresets(NSManagedObjectID?)
         case key(String)
         case keyboardFunctionButton(KeyboardFunctionButton)
-        case pageIndicator
+        indirect case pageIndicator(ItemWrapper)
         indirect case pagination(ItemWrapper, UIPageViewController.NavigationDirection)
     }
     
     private var showKeyboard: Bool = false
     
-    private var suggestions: [TextSuggestion] = [] {
+    private var suggestions: [TextSuggestion]? {
         didSet {
             updateSnapshot()
         }
     }
+
+    private var previousSnapshot: NSDiffableDataSourceSnapshot<Section, ItemWrapper>?
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -104,30 +106,27 @@ class PresetsViewController: UICollectionViewController {
     }
     
     private func createLayout() -> UICollectionViewLayout {
-        let layout = PresetUICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = PresetCollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             let sectionKind = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
             
             switch sectionKind {
             case .textField:
                 if self.showKeyboard {
-                    return PresetUICollectionViewCompositionalLayout.topBarKeyboardSectionLayout(with: layoutEnvironment)
+                    return PresetCollectionViewCompositionalLayout.topBarKeyboardSectionLayout(with: layoutEnvironment)
                 }
-                return PresetUICollectionViewCompositionalLayout.topBarPresetSectionLayout(with: layoutEnvironment)
+                return PresetCollectionViewCompositionalLayout.topBarPresetSectionLayout(with: layoutEnvironment)
             case .categories:
-                return PresetUICollectionViewCompositionalLayout.categoriesSectionLayout(with: layoutEnvironment)
+                return PresetCollectionViewCompositionalLayout.categoriesSectionLayout(with: layoutEnvironment)
             case .predictiveText:
-                return PresetUICollectionViewCompositionalLayout.suggestiveTextSectionLayout(with: layoutEnvironment)
+                return PresetCollectionViewCompositionalLayout.suggestiveTextSectionLayout(with: layoutEnvironment)
             case .presets:
                 guard !self.showKeyboard else {
                     return nil
                 }
                 
-                return PresetUICollectionViewCompositionalLayout.presetsSectionLayout(with: layoutEnvironment)
+                return PresetCollectionViewCompositionalLayout.presetsSectionLayout(with: layoutEnvironment)
             case .keyboard:
-                if layoutEnvironment.traitCollection.horizontalSizeClass == .compact && layoutEnvironment.traitCollection.verticalSizeClass == .regular {
-                    return PresetUICollectionViewCompositionalLayout.portraitKeyboardSectionLayout(with: layoutEnvironment)
-                }
-                return PresetUICollectionViewCompositionalLayout.landscapeKeyboardSectionLayout(with: layoutEnvironment)
+                return PresetCollectionViewCompositionalLayout.keyboardLayout(with: layoutEnvironment)
             }
         }
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
@@ -154,8 +153,10 @@ class PresetsViewController: UICollectionViewController {
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: SuggestionCollectionViewCell.reuseIdentifier, for: indexPath) as! SuggestionCollectionViewCell
                 cell.setup(title: predictiveText.text)
                 return cell
-            case .paginatedPresets:
-                return self.collectionView.dequeueReusableCell(withReuseIdentifier: "PresetPaginationContainerCollectionViewCell", for: indexPath) as! PresetPaginationContainerCollectionViewCell
+            case .paginatedPresets(let categoryID):
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "PresetPaginationContainerCollectionViewCell", for: indexPath) as! PresetPaginationContainerCollectionViewCell
+                cell.presetCollectionViewController.categoryID = categoryID
+                return cell
             case .key(let char):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
                 cell.setup(title: char)
@@ -179,6 +180,7 @@ class PresetsViewController: UICollectionViewController {
                     return cell
                 case .paginatedPresets:
                     let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetPaginationCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetPaginationCollectionViewCell
+                    
                     cell.paginationDirection = direction
                     return cell
                 default:
@@ -196,6 +198,12 @@ class PresetsViewController: UICollectionViewController {
             guard let utterance = selectedPhrase?.utterance else { return }
             self.setTextTransaction(TextTransaction(text: utterance))
         }).store(in: &disposables)
+
+        _ = ItemSelection.$selectedCategoryID.sink { [weak self] (selectedCategoryID) in
+            DispatchQueue.main.async {
+                self?.updateSnapshot(animated: true)
+            }
+        }.store(in: &disposables)
     }
     
     // MARK: - NSDiffableDataSourceSnapshot construction
@@ -213,6 +221,10 @@ class PresetsViewController: UICollectionViewController {
     }
 
     func updateSnapshot(animated: Bool = true) {
+
+        let suggestions = self.suggestions ?? []
+        let previousSnapshot = dataSource.snapshot()
+        self.previousSnapshot = previousSnapshot
         var snapshot = NSDiffableDataSourceSnapshot<Section, ItemWrapper>()
         
         // Helper functions
@@ -248,9 +260,9 @@ class PresetsViewController: UICollectionViewController {
             
             snapshot.appendSections([.keyboard])
             if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
-                snapshot.appendItems(KeyboardKeys.alphabetical.map { ItemWrapper.key("\($0)") })
+                snapshot.appendItems(KeyboardLocale.current.compactPortraitKeyMapping.map { ItemWrapper.key("\($0)") })
             } else {
-                snapshot.appendItems(KeyboardKeys.qwerty.map { ItemWrapper.key("\($0)") })
+                snapshot.appendItems(KeyboardLocale.current.landscapeKeyMapping.map { ItemWrapper.key("\($0)") })
             }
             
             snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])
@@ -261,30 +273,31 @@ class PresetsViewController: UICollectionViewController {
             snapshot.appendItems([.pagination(.paginatedCategories, .reverse)])
             snapshot.appendItems([.paginatedCategories])
             snapshot.appendItems([.pagination(.paginatedCategories, .forward)])
-            
+
+            let presetsItem = ItemWrapper.paginatedPresets(ItemSelection.selectedCategoryID)
             snapshot.appendSections([.presets])
-            snapshot.appendItems([.paginatedPresets])
-            snapshot.appendItems([.pagination(.paginatedPresets, .reverse), .pageIndicator, .pagination(.paginatedPresets, .forward)])
+            snapshot.appendItems([presetsItem])
+            snapshot.appendItems([.pagination(presetsItem, .reverse), .pageIndicator(presetsItem), .pagination(presetsItem, .forward)])
         }
 
-        dataSource.apply(snapshot, animatingDifferences: animated)
+        dataSource.apply(snapshot, animatingDifferences: animated, completion: {
+            if let previous = self.previousSnapshot, previousSnapshot.sectionIdentifiers == previous.sectionIdentifiers, previousSnapshot.itemIdentifiers == previous.itemIdentifiers {
+                self.previousSnapshot = nil
+            }
+        })
     }
     
-    // MARK: - Collection View Delegate
-    
+    // MARK: - PresetCollectionViewCompositionalLayoutDelegate
+
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .pagination(let itemIdentifier, let direction):
+        case .pagination(let itemIdentifier, _):
             switch itemIdentifier {
             case .paginatedPresets:
                 let pageProgress = ItemSelection.presetsPageIndicatorProgress
-                if pageProgress.pageCount <= 1 ||
-                    (pageProgress.pageIndex == pageProgress.pageCount - 1 && direction == .forward) {
-                    return false
-                }
-                return true
+                return pageProgress.pageCount > 1
             default:
                 return true
             }
@@ -301,17 +314,11 @@ class PresetsViewController: UICollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .pagination(let itemIdentifier, let direction):
+        case .pagination(let itemIdentifier, _):
             switch itemIdentifier {
             case .paginatedPresets:
                 let pageProgress = ItemSelection.presetsPageIndicatorProgress
-                // If there is only one page disable both pagination buttons or the user is on the last page
-                // disable the forward pagination button
-                if pageProgress.pageCount <= 1 ||
-                    (pageProgress.pageIndex == pageProgress.pageCount - 1 && direction == .forward) {
-                    return false
-                }
-                return true
+                return pageProgress.pageCount > 1
             default:
                 return true
             }
@@ -325,8 +332,8 @@ class PresetsViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? PresetPaginationContainerCollectionViewCell,
-            let childViewController = cell.presetCollectionViewController {
+        if let cell = cell as? PresetPaginationContainerCollectionViewCell {
+            let childViewController = cell.presetCollectionViewController
             let childContainerView = cell.contentView
             
             addChild(childViewController)
@@ -349,9 +356,8 @@ class PresetsViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? PresetPaginationContainerCollectionViewCell,
-            let childViewController = cell.presetCollectionViewController {
-            
+        if let cell = cell as? PresetPaginationContainerCollectionViewCell {
+            let childViewController = cell.presetCollectionViewController
             childViewController.willMove(toParent: nil)
             childViewController.removeFromParent()
             childViewController.view.removeFromSuperview()
@@ -359,7 +365,6 @@ class PresetsViewController: UICollectionViewController {
         
         if let cell = cell as? CategoryPaginationContainerCollectionViewCell,
             let childViewController = cell.categoryCollectionViewController {
-            
             childViewController.willMove(toParent: nil)
             childViewController.removeFromParent()
             childViewController.view.removeFromSuperview()
@@ -407,7 +412,14 @@ class PresetsViewController: UICollectionViewController {
 
                 do {
                     try context.save()
-                    ToastWindow.shared.presentEphemeralToast(withTitle: NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings"))
+
+                    let toastString: String = {
+                        let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
+                        let categoryName = Category.userFavoritesCategoryName()
+                        return String.localizedStringWithFormat(format, categoryName)
+                    }()
+
+                    ToastWindow.shared.presentEphemeralToast(withTitle: toastString)
                 } catch {
                     assertionFailure("Failed to save user generated phrase: \(error)")
                 }
@@ -419,7 +431,7 @@ class PresetsViewController: UICollectionViewController {
                 // TODO: discuss with design if we want to cache the user's currently-entered text instead
                 // of just clearing it
 
-                let newText = showKeyboard ? HintText.keyboard.rawValue : HintText.preset.localizedString
+                let newText = showKeyboard ? HintText.keyboard.localizedString : HintText.preset.localizedString
                 setTextTransaction(TextTransaction(text: newText, isHint: true))
             case .settings:
                 presentSettingsViewController()
@@ -466,7 +478,7 @@ class PresetsViewController: UICollectionViewController {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
     }
-        
+
     override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
@@ -474,6 +486,45 @@ class PresetsViewController: UICollectionViewController {
         case .topBarButton, .keyboardFunctionButton, .key, .suggestionText, .pagination, .paginatedPresets, .pageIndicator:
             return true
         case .paginatedCategories, .textField:
+            return false
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldTranslateEntranceAnimationForItemAt indexPath: IndexPath) -> Bool {
+        let item = dataSource.itemIdentifier(for: indexPath)
+        switch item {
+        case .pagination(let item, _):
+            switch item {
+            case .paginatedPresets:
+                return true
+            default:
+                return false
+            }
+        case .paginatedPresets, .key, .keyboardFunctionButton, .pageIndicator:
+            return true
+        default:
+            return false
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldTranslateExitAnimationForItemAt indexPath: IndexPath) -> Bool {
+        let previousItem: ItemWrapper? = {
+            guard let previous = previousSnapshot else { return nil }
+            let section = previous.sectionIdentifiers[indexPath.section]
+            return previous.itemIdentifiers(inSection: section)[indexPath.item]
+        }()
+        let item = previousItem ?? dataSource.itemIdentifier(for: indexPath)
+        switch item {
+        case .pagination(let item, _):
+            switch item {
+            case .paginatedPresets:
+                return true
+            default:
+                return false
+            }
+        case .paginatedPresets, .key, .keyboardFunctionButton, .pageIndicator:
+            return true
+        default:
             return false
         }
     }

@@ -35,6 +35,5 @@ class ToastView: BorderedView {
         super.awakeFromNib()
         setContentHuggingPriority(.required, for: .vertical)
         setContentHuggingPriority(.required, for: .horizontal)
-        titleLabel.text = NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings")
     }
 }

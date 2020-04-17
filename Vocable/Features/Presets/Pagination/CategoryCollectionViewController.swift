@@ -11,7 +11,7 @@ import UIKit
 
 class CategoryCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
     
-    private lazy var dataSource = UICollectionViewDiffableDataSource<Int, Category>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, category) -> UICollectionViewCell? in
+    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<Int, Category>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, category) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
         cell.setup(title: category.name!)
@@ -31,12 +31,17 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
                                                                                  cacheName: nil)
     
     override func viewWillAppear(_ animated: Bool) {
+        updateDataSource(animated: false)
+
         super.viewWillAppear(animated)
+
         if let selectedCategoryID = ItemSelection.selectedCategoryID {
             let category = fetchResultsController.managedObjectContext.object(with: selectedCategoryID)
-            let selectedIndexPath = dataSource.indexPath(for: category as! Category)
+            let selectedIndexPath = dataSourceProxy.indexPath(for: category as! Category)
             if let selectedIndexPath = selectedIndexPath {
-                collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .init())
+                dataSourceProxy.performActions(on: selectedIndexPath) { (indexPath) in
+                    collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+                }
             }
         }
     }
@@ -53,16 +58,12 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
 
         fetchResultsController.delegate = self
         try? fetchResultsController.performFetch()
-        updateDataSource(animated: false)
-        
+
         self.clearsSelectionOnViewWillAppear = false
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateDataSource(animated: true, completion: { [weak self] in
-            self?.layout.resetScrollViewOffset(inResponseToUserInteraction: false,
-                                               animateIfNeeded: true)
-        })
+        updateDataSource(animated: true)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -78,15 +79,15 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
         case (.regular, .regular):
             layout.interItemSpacing = 0
             layout.numberOfColumns = 4
-            layout.numberOfRows = 1
+            layout.numberOfRows = .fixedCount(1)
         case (.compact, .regular):
             layout.interItemSpacing = 8
             layout.numberOfColumns = 1
-            layout.numberOfRows = 1
+            layout.numberOfRows = .fixedCount(1)
         case (.compact, .compact), (.regular, .compact):
             layout.interItemSpacing = 8
             layout.numberOfColumns = 3
-            layout.numberOfRows = 1
+            layout.numberOfRows = .fixedCount(1)
         default:
             break
         }
@@ -97,12 +98,31 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
         var snapshot = NSDiffableDataSourceSnapshot<Int, Category>()
         snapshot.appendSections([0])
         snapshot.appendItems(content)
-        dataSource.apply(snapshot,
+        dataSourceProxy.apply(snapshot,
                                  animatingDifferences: animated,
                                  completion: completion)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let indexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
+
+        let selectedIndexPaths = Set(collectionView.indexPathsForSelectedItems?.map {
+            dataSourceProxy.indexPath(fromMappedIndexPath: $0)
+        } ?? [])
+        for path in selectedIndexPaths {
+            dataSourceProxy.performActions(on: path) { (aPath) in
+                if aPath != indexPath {
+                    collectionView.deselectItem(at: aPath, animated: true)
+                }
+            }
+        }
+
+        dataSourceProxy.performActions(on: indexPath) { (aPath) in
+            if aPath != indexPath {
+                collectionView.selectItem(at: aPath, animated: true, scrollPosition: [])
+            }
+        }
+
         ItemSelection.selectedCategoryID = fetchResultsController.object(at: indexPath).objectID
     }
 

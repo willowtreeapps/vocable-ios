@@ -11,7 +11,7 @@ import AVFoundation
 import UIKit
 import CoreData
 
-class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDelegate {
+class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDelegate, VocableCollectionViewLayoutTransitioningDelegate {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
@@ -106,19 +106,16 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
     }
     
     private func createLayout() -> UICollectionViewLayout {
-        let layout = PresetUICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = PresetCollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             let sectionKind = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
             
             switch sectionKind {
             case .textField:
                 return self.topBarLayout()
             case .keyboard:
-                if layoutEnvironment.traitCollection.horizontalSizeClass == .compact && layoutEnvironment.traitCollection.verticalSizeClass == .regular {
-                    return PresetUICollectionViewCompositionalLayout.portraitKeyboardSectionLayout(with: layoutEnvironment)
-                }
-                return PresetUICollectionViewCompositionalLayout.landscapeKeyboardSectionLayout(with: layoutEnvironment)
+                return PresetCollectionViewCompositionalLayout.keyboardLayout(with: layoutEnvironment)
             case .suggestions:
-                return PresetUICollectionViewCompositionalLayout.suggestiveTextSectionLayout(with: layoutEnvironment)
+                return PresetCollectionViewCompositionalLayout.suggestiveTextSectionLayout(with: layoutEnvironment)
             }
         }
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
@@ -158,9 +155,9 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         
         snapshot.appendSections([.keyboard])
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
-            snapshot.appendItems(KeyboardKeys.alphabetical.map { ItemWrapper.key("\($0)") })
+            snapshot.appendItems(KeyboardLocale.current.compactPortraitKeyMapping.map { ItemWrapper.key("\($0)") })
         } else {
-            snapshot.appendItems(KeyboardKeys.qwerty.map { ItemWrapper.key("\($0)") })
+            snapshot.appendItems(KeyboardLocale.current.landscapeKeyMapping.map { ItemWrapper.key("\($0)") })
         }
         
         snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])
@@ -246,8 +243,16 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
                 }
                 do {
                     try context.save()
-                    let alertMessage = isNewPhrase ? NSLocalizedString("Saved to My Sayings", comment: "Saved to My Sayings") :
-                        NSLocalizedString("Changes saved", comment: "Changes saved")
+
+                    let newEntrySavedString: String = {
+                        let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
+                        let categoryName = Category.userFavoritesCategoryName()
+                        return String.localizedStringWithFormat(format, categoryName)
+                    }()
+
+                    let changesSavedString = NSLocalizedString("category_editor.toast.changes_saved.title",
+                                                               comment: "changes to an existing phrase were saved successfully")
+                    let alertMessage = isNewPhrase ? newEntrySavedString : changesSavedString
                     
                     ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
 
@@ -336,11 +341,20 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
     }
     
     private func handleExitAlert() {
-        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("Going back before saving will clear any edits made.", comment: "Exit edit sayings alert title"))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Discard", comment: "Discard changes alert action title"), handler: {
+
+        func discardChangesAction() {
             self.navigationController?.popViewController(animated: true)
-        }))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Continue Editing", comment: "Continue editing alert action title")))
+        }
+
+        let title = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.title",
+                                      comment: "Exit edit sayings alert title")
+        let discardButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.discard.title",
+                                                   comment: "Discard changes alert action title")
+        let continueButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
+                                                    comment: "Continue editing alert action title")
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
+        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
         self.present(alert, animated: true)
     }
     

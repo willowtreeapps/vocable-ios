@@ -9,9 +9,47 @@
 import Foundation
 import UIKit
 
-struct KeyboardKeys {
-    static var qwerty = "QWERTYUIOPASDFGHJKL'ZXCVBNM,.?"
-    static var alphabetical = "ABCDEFGHIJKLMNOPQRSTUVWXYZ',.?"
+struct KeyboardLocale {
+    enum LanguageCode: String {
+        case en
+        case de
+    }
+    
+    private struct OrientationKeyMapping {
+        let landscape: String
+        let compactPortrait: String
+    }
+    
+    let languageCode: LanguageCode
+    private let orientationKeyMapping: OrientationKeyMapping
+    private init(preferredLanguageCode: String) {
+        let code = Locale(identifier: preferredLanguageCode).languageCode ?? AppConfig.defaultLanguageCode
+        languageCode = LanguageCode(rawValue: code) ?? .en
+        orientationKeyMapping = KeyboardLocale.orientationKeyMapping(for: languageCode)
+    }
+    
+    static var current: KeyboardLocale {
+        return KeyboardLocale(preferredLanguageCode: AppConfig.activePreferredLanguageCode)
+    }
+    
+    var landscapeKeyMapping: String {
+        return orientationKeyMapping.landscape
+    }
+    
+    var compactPortraitKeyMapping: String {
+        return orientationKeyMapping.compactPortrait
+    }
+    
+    private static func orientationKeyMapping(for code: LanguageCode) -> OrientationKeyMapping {
+        switch code {
+        case .en:
+            return .init(landscape: "QWERTYUIOPASDFGHJKL'ZXCVBNM,.?",
+                         compactPortrait: "ABCDEFGHIJKLMNOPQRSTUVWXYZ',.?")
+        case .de:
+            return .init(landscape: "QWERTZUIOPÜASDFGHJKLÖÄYXCVBNMẞ'.?",
+                         compactPortrait: "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜẞ/-',.?")
+        }
+    }
 }
 
 enum KeyboardFunctionButton {

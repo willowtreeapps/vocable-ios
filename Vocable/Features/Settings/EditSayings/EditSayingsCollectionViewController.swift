@@ -11,7 +11,7 @@ import CoreData
 
 class EditSayingsCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
 
-    private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, PhraseViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
+    private lazy var diffableDataSource = CarouselCollectionViewDataSourceProxy<Int, PhraseViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditSayingsCollectionViewCell.reuseIdentifier, for: indexPath) as! EditSayingsCollectionViewCell
         cell.setup(title: phrase.utterance)
@@ -61,13 +61,13 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
             layout.numberOfColumns = 2
-            layout.numberOfRows = 4
+            layout.numberOfRows = .fixedCount(4)
         case (.compact, .regular):
             layout.numberOfColumns = 1
-            layout.numberOfRows = 3
+            layout.numberOfRows = .fixedCount(3)
         case (.compact, .compact), (.regular, .compact):
             layout.numberOfColumns = 1
-            layout.numberOfRows = 2
+            layout.numberOfRows = .fixedCount(2)
         default:
             break
         }
@@ -79,6 +79,10 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
 
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return false
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        updateDataSource(animated: true)
     }
 
     private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
@@ -93,9 +97,21 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
     }
 
     @objc private func handleCellDeletionButton(_ sender: UIButton) {
-        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("Deleted phrases cannot be recovered.", comment: "Delete saying alert title"))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Delete", comment: "Delete saying alert action title"), handler: { self.deletePhrase(sender) }))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
+
+        func deleteAction() {
+            self.deletePhrase(sender)
+        }
+
+        let title = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.title",
+                                      comment: "Delete phrase confirmation alert title")
+        let deleteButtonTitle = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.button.delete.title",
+                                                  comment: "Delete phrase alert action button title")
+        let cancelButtonTitle = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.button.cancel.title",
+                                                  comment: "Delete phrase alert cancel button title")
+
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, handler: deleteAction))
+        alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
         self.present(alert, animated: true)
     }
     

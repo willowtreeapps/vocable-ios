@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectionModeCollectionViewController: UICollectionViewController {
+final class SelectionModeCollectionViewController: UICollectionViewController {
     
     private enum SelectionModeItem: String, Hashable {
         var title: String {
@@ -85,9 +85,15 @@ class SelectionModeCollectionViewController: UICollectionViewController {
         }
         
         if AppConfig.isHeadTrackingEnabled {
-            let alertViewController = GazeableAlertViewController.init(alertTitle: "Turn off head tracking?")
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel alert action title")))
-            alertViewController.addAction(GazeableAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm alert action title"), handler: self.toggleHeadTracking))
+            let title = NSLocalizedString("gaze_settings.alert.disable_head_tracking_confirmation.title",
+                                          comment: "Disable head tracking confirmation alert title")
+            let cancelButtonTitle = NSLocalizedString("gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title",
+                                                      comment: "Cancel alert action title")
+            let confirmButtonTitle = NSLocalizedString("gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title",
+                                                       comment: "Confirm alert action title")
+            let alertViewController = GazeableAlertViewController.init(alertTitle: title)
+            alertViewController.addAction(GazeableAlertAction(title: cancelButtonTitle))
+            alertViewController.addAction(GazeableAlertAction(title: confirmButtonTitle, handler: self.toggleHeadTracking))
             present(alertViewController, animated: true)
         } else {
             AppConfig.isHeadTrackingEnabled.toggle()
@@ -95,26 +101,28 @@ class SelectionModeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
-         switch item {
-         case .headTrackingToggle:
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
+        switch item {
+        case .headTrackingToggle:
             return AppConfig.isHeadTrackingSupported
-         }
-     }
+        }
+    }
      
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-         let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
-         switch item {
-         case .headTrackingToggle:
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
+        switch item {
+        case .headTrackingToggle:
             return AppConfig.isHeadTrackingSupported
-         }
-     }
+        }
+    }
 
     private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: SelectionModeItem) -> UICollectionViewCell {
         switch item {
         case .headTrackingToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsToggleCollectionViewCell
-            cell.setup(title: NSLocalizedString("Head Tracking", comment: "Head tracking cell title"))
+            let title = NSLocalizedString("settings.cell.head_tracking.title",
+                                          comment: "Settings head tracking cell title")
+            cell.setup(title: title)
             return cell
         }
     }
