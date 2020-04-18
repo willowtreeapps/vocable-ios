@@ -8,11 +8,11 @@
   "tvOS" : [
 
   ],
-  "commitish" : "8a716651f278da3fa03ad098e9647df4a7bb058e",
+  "commitish" : "75546f6c69c34c3dfc7b05f2b862e35ae0c363de",
   "iOS" : [
     {
       "name" : "VocablePresets",
-      "hash" : "46dbc7b867a8ca0128467520d1bd003f65dc697baefb5bfeaf57fbd953ca2c44",
+      "hash" : "79bb953d39ac3062d2f37f806c0e545eea8f923ed4affd51627a5eec1c1db926",
       "swiftToolchainVersion" : "5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)"
     }
   ]
