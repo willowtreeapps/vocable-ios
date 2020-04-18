@@ -132,12 +132,48 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
             guard let indexPath = collectionView.indexPath(for: cell) else {
                 return
             }
-            if let vc = UIStoryboard(name: "EditSayings", bundle: nil).instantiateViewController(identifier: "EditSaying") as? EditSayingsKeyboardViewController {
+            if let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as? EditTextViewController {
+                vc.modalPresentationStyle = .fullScreen
+                
                 let phrase = fetchResultsController.object(at: indexPath)
-                vc.phraseIdentifier = phrase.identifier
-                show(vc, sender: nil)
-                return
+                vc.text = phrase.utterance ?? ""
+                vc.editTextCompletionHandler = { (newText) -> Void in
+                    let context = NSPersistentContainer.shared.viewContext
+
+                    if let phraseIdentifier = phrase.identifier {
+                        let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
+                        originalPhrase?.utterance = newText
+                    }
+                    do {
+                        try context.save()
+                        
+                        let alertMessage = NSLocalizedString("category_editor.toast.changes_saved.title",
+                        comment: "changes to an existing phrase were saved successfully")
+                        
+                        ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                    } catch {
+                        assertionFailure("Failed to save user generated phrase: \(error)")
+                    }
+                }
+                present(vc, animated: true)
             }
         }
+    }
+    
+    private func handleDismissAlert() {
+        func discardChangesAction() {
+            self.navigationController?.popViewController(animated: true)
+        }
+
+        let title = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.title",
+                                      comment: "Exit edit sayings alert title")
+        let discardButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.discard.title",
+                                                   comment: "Discard changes alert action title")
+        let continueButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
+                                                    comment: "Continue editing alert action title")
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
+        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
+        self.present(alert, animated: true)
     }
 }

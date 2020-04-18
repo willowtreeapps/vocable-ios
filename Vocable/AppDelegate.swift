@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try deleteOrphanedPhrases(in: context, with: presets)
             try deleteOrphanedCategories(in: context, with: presets)
             try deleteLegacyUserFavoritesCategoryIfNeeded(in: context)
-            try updateOrdinalValuesForCategories(in: context)
+            try Category.updateAllOrdinalValues(in: context)
 
             try context.save()
         } catch {
@@ -161,7 +161,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 assertionFailure("Matching language not found for category \(presetCategory)")
                 continue
             }
-
             let category = Category.fetchOrCreate(in: context, matching: presetCategory.id)
             category.name = presetCategory.localizedName[languageCode]
             category.languageCode = languageCode
@@ -182,7 +181,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let phrase = Phrase.fetchOrCreate(in: context, matching: presetPhrase.id)
             phrase.utterance = presetPhrase.localizedUtterance[languageCode]
             phrase.languageCode = languageCode
-
+            
             for identifier in presetPhrase.categoryIds {
                 if let category = Category.fetchObject(in: context, matching: identifier) {
                     phrase.addToCategories(category)
@@ -193,10 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func updateCategoryForUserGeneratedPhrases(in context: NSManagedObjectContext) throws {
-        guard let mySayingsCategory = Category.fetchObject(in: context, matching: KeyboardPresets.userFavoritesCategoryIdentifier) else {
-            assertionFailure("User generated category not found")
-            return
-        }
+        let mySayingsCategory = Category.fetch(.userFavorites, in: context)
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         request.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
 
@@ -205,20 +201,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for phrase in phraseResults {
             phrase.addToCategories(mySayingsCategory)
             mySayingsCategory.addToPhrases(phrase)
-        }
-    }
-
-    private func updateOrdinalValuesForCategories(in context: NSManagedObjectContext) throws {
-
-        let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, false)
-        request.sortDescriptors = [
-            NSSortDescriptor(keyPath: \Category.ordinal, ascending: true),
-            NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)
-        ]
-        let results = try context.fetch(request)
-        for (index, category) in results.enumerated() {
-            category.ordinal = Int32(index)
         }
     }
 }

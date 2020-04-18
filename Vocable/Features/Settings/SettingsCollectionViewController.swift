@@ -53,7 +53,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         }
 
         var isFeatureEnabled: Bool {
-            let debugFeatures: [SettingsItem] = [.categories, .resetAppSettings, .pidTuner]
+            let debugFeatures: [SettingsItem] = [.resetAppSettings, .pidTuner]
             if debugFeatures.contains(self) {
                 return AppConfig.showDebugOptions
             }
@@ -262,6 +262,10 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             }
         case .selectionMode:
             if let vc = UIStoryboard(name: "SelectionMode", bundle: nil).instantiateViewController(identifier: "SelectionMode") as? SelectionModeViewController {
+                show(vc, sender: nil)
+            }
+        case .categories:
+            if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategories") as? EditCategoriesViewController {
                 show(vc, sender: nil)
             }
         case .contactDevs:

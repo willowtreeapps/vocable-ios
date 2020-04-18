@@ -102,28 +102,28 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
                                  animatingDifferences: animated,
                                  completion: completion)
     }
+
+    override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let indexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
+        let mappedIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
+
+        dataSourceProxy.performActions(on: mappedIndexPath) { (aPath) in
+            collectionView.selectItem(at: aPath, animated: true, scrollPosition: [])
+        }
 
         let selectedIndexPaths = Set(collectionView.indexPathsForSelectedItems?.map {
             dataSourceProxy.indexPath(fromMappedIndexPath: $0)
-        } ?? [])
-        for path in selectedIndexPaths {
+            } ?? [])
+        for path in selectedIndexPaths where path != mappedIndexPath {
             dataSourceProxy.performActions(on: path) { (aPath) in
-                if aPath != indexPath {
-                    collectionView.deselectItem(at: aPath, animated: true)
-                }
+                collectionView.deselectItem(at: aPath, animated: true)
             }
         }
 
-        dataSourceProxy.performActions(on: indexPath) { (aPath) in
-            if aPath != indexPath {
-                collectionView.selectItem(at: aPath, animated: true, scrollPosition: [])
-            }
-        }
-
-        ItemSelection.selectedCategoryID = fetchResultsController.object(at: indexPath).objectID
+        ItemSelection.selectedCategoryID = fetchResultsController.object(at: mappedIndexPath).objectID
     }
 
 }

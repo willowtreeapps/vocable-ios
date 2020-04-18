@@ -9,9 +9,6 @@
 import Foundation
 
 struct KeyboardPresets {
-
-    static let userFavoritesCategoryIdentifier = "preset_user_favorites"
-    static let numPadIdentifier = "preset_user_keypad"
     
     private static let numpadKeyFormatter = NumberFormatter()
 

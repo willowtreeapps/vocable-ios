@@ -74,16 +74,19 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
         var compactWidthContainerGroupLayout: NSCollectionLayoutGroup {
             let textFieldItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(2 / 3)))
             
-            let functionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1.0)))
-            functionItem.contentInsets = .init(top: 4, leading: 0, bottom: 0, trailing: 4)
+            let leadingFunctionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1.0)))
+            let trailingFunctionItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1.0)))
+            leadingFunctionItem.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 4)
+            trailingFunctionItem.contentInsets = .init(top: 0, leading: 4, bottom: 0, trailing: 0)
 
             let functionItemGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .fractionalHeight(1 / 3)),
-                subitems: [functionItem, functionItem])
+                subitems: [leadingFunctionItem, trailingFunctionItem])
+            functionItemGroup.contentInsets = .init(top: 0, leading: 0, bottom: 6, trailing: 0)
             
             return NSCollectionLayoutGroup.vertical(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 5.0)),
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.225)),
                 subitems: [textFieldItem, functionItemGroup])
         }
         
@@ -187,8 +190,12 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
         var containerGroupFractionalWidth: NSCollectionLayoutDimension {
             if case .compact = environment.traitCollection.verticalSizeClass {
                 return .fractionalHeight(130.0 / totalSize.height)
+            } else if environment.traitCollection.horizontalSizeClass == .compact
+                && environment.traitCollection.verticalSizeClass == .regular {
+                return .fractionalHeight(55.5 / totalSize.height)
+            } else {
+                return .fractionalHeight(116.0 / totalSize.height)
             }
-            return .fractionalHeight(116.0 / totalSize.height)
         }
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
@@ -196,8 +203,16 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
             subitems: [paginationItem, categoriesGroup, paginationItem])
         containerGroup.interItemSpacing = .flexible(0)
         
+        var sectionContentInsets: NSDirectionalEdgeInsets {
+            if environment.traitCollection.verticalSizeClass == .regular &&
+                environment.traitCollection.horizontalSizeClass == .compact {
+                return NSDirectionalEdgeInsets(top: 6, leading: 0, bottom: 4, trailing: 0)
+            }
+            return NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 0)
+        }
+        
         let section = NSCollectionLayoutSection(group: containerGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = sectionContentInsets
         
         return section
     }
@@ -313,7 +328,7 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .fractionalHeight(99.0 / totalSize.height)),
                 subitems: [paginationItem, pageIndicatorItem, paginationItem])
-            paginationGroup.interItemSpacing = .fixed(0)
+            paginationGroup.edgeSpacing = .init(leading: nil, top: .fixed(12), trailing: nil, bottom: nil)
             
             let containerGroup = NSCollectionLayoutGroup.vertical(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(3.75 / 5.0)),

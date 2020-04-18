@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="yFj-S9-Vtf" customClass="EditCategoriesDefaultCollectionViewCell" customModule="Vocable" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="708" height="178"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="PX7-fo-08L">
+                <rect key="frame" x="0.0" y="0.0" width="708" height="178"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zy9-iu-ouW" userLabel="TopSeparator">
+                        <rect key="frame" x="20" y="44" width="668" height="2"/>
+                        <color key="backgroundColor" name="DefaultCellBackground"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="UpI-RP-gtG"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWY-nm-Hv6" userLabel="BottomSeparator">
+                        <rect key="frame" x="20" y="142" width="668" height="2"/>
+                        <color key="backgroundColor" name="DefaultCellBackground"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="tSY-ue-dhy"/>
+                        </constraints>
+                    </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="e6f-uI-tYv">
+                        <rect key="frame" x="20" y="52" width="668" height="84"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIe-C4-EHn" userLabel="MoveUpButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="15" width="84" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="eF3-ax-GmT"/>
+                                    <constraint firstAttribute="width" constant="84" id="m2b-i3-ggR"/>
+                                </constraints>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.up" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveDownButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="92" y="15" width="84" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="84" id="DnU-vb-Ln9"/>
+                                    <constraint firstAttribute="height" constant="54" id="FOm-kP-JDa"/>
+                                </constraints>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.down" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. General" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3t9-YV-add" userLabel="CategoryName">
+                                <rect key="frame" x="184" y="25.5" width="428" height="33.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <color key="textColor" name="DefaultFontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfR-1l-Qp7" userLabel="ShowCategoryDetailButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="620" y="15" width="48" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="Gqm-Up-tsr"/>
+                                    <constraint firstAttribute="width" constant="48" id="iZI-pH-Vfy"/>
+                                </constraints>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.right" catalog="system"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Zy9-iu-ouW" firstAttribute="top" secondItem="PX7-fo-08L" secondAttribute="topMargin" id="1dl-N9-JYs"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Zy9-iu-ouW" secondAttribute="trailing" id="B0F-8x-f63"/>
+                    <constraint firstItem="e6f-uI-tYv" firstAttribute="top" secondItem="Zy9-iu-ouW" secondAttribute="top" constant="8" id="DIV-sK-yYN"/>
+                    <constraint firstItem="hWY-nm-Hv6" firstAttribute="leading" secondItem="PX7-fo-08L" secondAttribute="leadingMargin" id="GQP-jt-jfY"/>
+                    <constraint firstItem="Zy9-iu-ouW" firstAttribute="leading" secondItem="PX7-fo-08L" secondAttribute="leadingMargin" id="VYS-Ms-WvH"/>
+                    <constraint firstItem="hWY-nm-Hv6" firstAttribute="bottom" secondItem="e6f-uI-tYv" secondAttribute="bottom" constant="8" id="bAm-7H-4uJ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="e6f-uI-tYv" secondAttribute="trailing" id="q0E-9C-SNh"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="hWY-nm-Hv6" secondAttribute="trailing" id="t13-Fa-Tul"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="hWY-nm-Hv6" secondAttribute="bottom" id="v6b-vv-Ztm"/>
+                    <constraint firstItem="e6f-uI-tYv" firstAttribute="leading" secondItem="PX7-fo-08L" secondAttribute="leadingMargin" id="znN-zJ-DrT"/>
+                </constraints>
+                <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
+            </collectionViewCellContentView>
+            <size key="customSize" width="708" height="178"/>
+            <connections>
+                <outlet property="bottomSeparator" destination="hWY-nm-Hv6" id="Sue-pL-2Uw"/>
+                <outlet property="categoryNameLabel" destination="3t9-YV-add" id="Ehe-LR-iFr"/>
+                <outlet property="moveDownButton" destination="Ieb-WK-NlS" id="uok-e2-jWH"/>
+                <outlet property="moveUpButton" destination="yIe-C4-EHn" id="e1c-iy-MGb"/>
+                <outlet property="showCategoryDetailButton" destination="PfR-1l-Qp7" id="yjb-aR-8sS"/>
+                <outlet property="topSeparator" destination="Zy9-iu-ouW" id="tGL-eF-9ak"/>
+            </connections>
+            <point key="canvasLocation" x="1681.1594202898552" y="-14.732142857142856"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <image name="chevron.up" catalog="system" width="128" height="72"/>
+        <namedColor name="DefaultCellBackground">
+            <color red="0.21799999475479126" green="0.19499999284744263" blue="0.62699997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DefaultFontColor">
+            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

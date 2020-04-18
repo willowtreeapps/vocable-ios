@@ -18,6 +18,12 @@ class PaginationCollectionViewCell: VocableCollectionViewCell {
             updatePaginationLabel()
         }
     }
+
+    override var isEnabled: Bool {
+        didSet {
+            updatePaginationLabel()
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,12 +50,7 @@ class PaginationCollectionViewCell: VocableCollectionViewCell {
         super.prepareForReuse()
         paginationLabel.text = nil
     }
-    
-    override func updateContentViews() {
-        super.updateContentViews()
-        borderedView.fillColor = isSelected ? .cellSelectionColor : fillColor
-    }
-    
+
     private func updatePaginationLabel() {
         let image: UIImage!
         
@@ -65,7 +66,7 @@ class PaginationCollectionViewCell: VocableCollectionViewCell {
         let systemImageAttachment = NSTextAttachment(image: image)
         let attributedString = NSMutableAttributedString(attachment: systemImageAttachment)
         let fontSize = CGFloat([traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) ? 22 : 48)
-        attributedString.addAttributes([.font: UIFont.boldSystemFont(ofSize: fontSize), .foregroundColor: UIColor.defaultTextColor],
+        attributedString.addAttributes([.font: UIFont.boldSystemFont(ofSize: fontSize), .foregroundColor: isEnabled ? UIColor.defaultTextColor : UIColor.disabledTextColor],
                                        range: NSRange(location: 0, length: attributedString.length))
         paginationLabel.attributedText = attributedString
     }

@@ -30,6 +30,12 @@ class VocableCollectionViewCell: UICollectionViewCell {
             updateContentViews()
         }
     }
+
+    var isEnabled: Bool = true {
+        didSet {
+            updateContentViews()
+        }
+    }
     
     fileprivate var defaultBackgroundColor: UIColor?
     
@@ -49,17 +55,27 @@ class VocableCollectionViewCell: UICollectionViewCell {
     }
     
     private func commonInit() {
-        borderedView.cornerRadius = 8
-        borderedView.borderColor = .cellBorderHighlightColor
-        borderedView.backgroundColor = .collectionViewBackgroundColor
-        
         updateContentViews()
         backgroundView = borderedView
     }
     
     func updateContentViews() {
+
+        let fillColor: UIColor = {
+            if isSelected {
+                return .cellSelectionColor
+            }
+            if !isEnabled {
+                return self.fillColor.withAlphaComponent(0.5)
+            }
+            return self.fillColor
+        }()
+
+        borderedView.cornerRadius = 8
+        borderedView.borderColor = .cellBorderHighlightColor
+        borderedView.backgroundColor = .collectionViewBackgroundColor
         borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
-        borderedView.fillColor = isSelected ? .cellSelectionColor : fillColor
+        borderedView.fillColor = fillColor
         borderedView.isOpaque = true
     }
 

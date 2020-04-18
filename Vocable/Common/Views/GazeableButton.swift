@@ -21,8 +21,7 @@ class GazeableButton: UIButton {
     
     override var isEnabled: Bool {
         didSet {
-            let alpha = CGFloat(isEnabled ? 1.0 : 0.5)
-            backgroundView.alpha = alpha
+            updateContentViews()
         }
     }
 
@@ -127,6 +126,12 @@ class GazeableButton: UIButton {
     }
     
     fileprivate func updateContentViews() {
+
+        let alpha = CGFloat(isEnabled ? 1.0 : 0.5)
+        backgroundView.alpha = alpha
+        titleLabel?.alpha = alpha
+        buttonImageView.alpha = alpha
+
         backgroundView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
         backgroundView.fillColor = isSelected ? selectionFillColor : fillColor
         backgroundView.borderColor = .cellBorderHighlightColor

@@ -1,8 +1,8 @@
 //
-//  EditKeyboardViewController.swift
-//  Vocable AAC
+//  EditTextViewController.swift
+//  Vocable
 //
-//  Created by Jesse Morgan on 3/11/20.
+//  Created by Jesse Morgan on 4/15/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
@@ -11,15 +11,13 @@ import AVFoundation
 import UIKit
 import CoreData
 
-class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDelegate, VocableCollectionViewLayoutTransitioningDelegate {
+final class EditTextViewController: UIViewController, UICollectionViewDelegate {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
     @IBOutlet var collectionView: UICollectionView!
     
     private var _textTransaction = TextTransaction(text: "")
-    
-    var phraseIdentifier: String?
     
     private var textTransaction: TextTransaction {
         return _textTransaction
@@ -31,6 +29,20 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         didSet {
             updateSnapshot()
         }
+    }
+    
+    var text: String = "" {
+        didSet {
+            _textTransaction = TextTransaction(text: text)
+        }
+    }
+    
+    private var textHasChanged: Bool {
+        return text != textTransaction.text
+    }
+  
+    var editTextCompletionHandler: (String) -> Void = { (_) in
+        assertionFailure("Completion not handled")
     }
     
     private enum ItemWrapper: Hashable {
@@ -49,11 +61,7 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let phraseIdentifier = phraseIdentifier {
-            let context = NSPersistentContainer.shared.viewContext
-            let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-            _textTransaction = TextTransaction(text: originalPhrase?.utterance ?? "")
-        }
+
         setupCollectionView()
         configureDataSource()
     }
@@ -66,6 +74,8 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "KeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyCollectionViewCell")
         collectionView.register(UINib(nibName: "SuggestionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SuggestionCollectionViewCell")
+        collectionView.register(UINib(nibName: "FunctionKeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FunctionKeyboardKeyCollectionViewCell")
+        collectionView.register(UINib(nibName: "SpeakFunctionKeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SpeakFunctionKeyboardKeyCollectionViewCell")
         
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
@@ -96,7 +106,12 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
                 cell.setup(title: char)
                 return cell
             case .keyboardFunctionButton(let functionType):
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
+                if functionType == .speak {
+                    let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: SpeakFunctionKeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! SpeakFunctionKeyboardKeyCollectionViewCell
+                    cell.setup(with: functionType.image)
+                    return cell
+                }
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: FunctionKeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! FunctionKeyboardKeyCollectionViewCell
                 cell.setup(with: functionType.image)
                 return cell
             }
@@ -129,12 +144,12 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         snapshot.appendSections([.textField])
         if traitCollection.horizontalSizeClass == .compact
             && traitCollection.verticalSizeClass == .regular {
-            snapshot.appendItems([.topBarButton(.back),
+            snapshot.appendItems([.topBarButton(.close),
                                   .topBarButton(.confirmEdit),
                                   .textField(textTransaction.attributedText)
             ])
         } else {
-            snapshot.appendItems([.topBarButton(.back),
+            snapshot.appendItems([.topBarButton(.close),
                                   .textField(textTransaction.attributedText),
                                   .topBarButton(.confirmEdit)])
         }
@@ -210,7 +225,7 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
     // swiftlint:disable cyclomatic_complexity
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
-        for selectedPath in collectionView.indexPathsForSelectedItems ?? [] { 
+        for selectedPath in collectionView.indexPathsForSelectedItems ?? [] {
             if selectedPath.section == indexPath.section && selectedPath != indexPath {
                 collectionView.deselectItem(at: selectedPath, animated: true)
             }
@@ -220,44 +235,15 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         case .topBarButton(let buttonType):
             (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
             collectionView.deselectItem(at: indexPath, animated: true)
-            let context = NSPersistentContainer.shared.viewContext
             switch buttonType {
-            case .back:
-                if let phraseIdentifier = phraseIdentifier {
-                    let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                    if originalPhrase?.utterance != _textTransaction.text {
-                        handleExitAlert()
-                        break
-                    }
-                }
-                self.navigationController?.popViewController(animated: true)
             case .confirmEdit:
-                var isNewPhrase = false
-                let context = NSPersistentContainer.shared.viewContext
-                if let phraseIdentifier = phraseIdentifier {
-                    let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                    originalPhrase?.utterance = _textTransaction.text
+                editTextCompletionHandler(textTransaction.text)
+                dismiss(animated: true, completion: nil)
+            case .close:
+                if textHasChanged {
+                    handleDismissAlert()
                 } else {
-                    _ = Phrase.create(withUserEntry: _textTransaction.text, in: context)
-                    isNewPhrase = true
-                }
-                do {
-                    try context.save()
-
-                    let newEntrySavedString: String = {
-                        let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
-                        let categoryName = Category.userFavoritesCategoryName()
-                        return String.localizedStringWithFormat(format, categoryName)
-                    }()
-
-                    let changesSavedString = NSLocalizedString("category_editor.toast.changes_saved.title",
-                                                               comment: "changes to an existing phrase were saved successfully")
-                    let alertMessage = isNewPhrase ? newEntrySavedString : changesSavedString
-                    
-                    ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-
-                } catch {
-                    assertionFailure("Failed to save user generated phrase: \(error)")
+                    dismiss(animated: true, completion: nil)
                 }
             default:
                 break
@@ -340,24 +326,6 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         }
     }
     
-    private func handleExitAlert() {
-
-        func discardChangesAction() {
-            self.navigationController?.popViewController(animated: true)
-        }
-
-        let title = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.title",
-                                      comment: "Exit edit sayings alert title")
-        let discardButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.discard.title",
-                                                   comment: "Discard changes alert action title")
-        let continueButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
-                                                    comment: "Continue editing alert action title")
-        let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
-        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
-        self.present(alert, animated: true)
-    }
-    
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
         
@@ -368,5 +336,22 @@ class EditSayingsKeyboardViewController: UIViewController, UICollectionViewDeleg
         DispatchQueue.main.async { [weak self] in
             self?.updateSnapshot()
         }
+    }
+    
+    private func handleDismissAlert() {
+        func discardChangesAction() {
+            dismiss(animated: true, completion: nil)
+        }
+
+        let title = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.title",
+                                      comment: "Exit edit sayings alert title")
+        let discardButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.discard.title",
+                                                   comment: "Discard changes alert action title")
+        let continueButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
+                                                    comment: "Continue editing alert action title")
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
+        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
+        self.present(alert, animated: true)
     }
 }

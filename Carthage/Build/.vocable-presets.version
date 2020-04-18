@@ -12,8 +12,8 @@
   "iOS" : [
     {
       "name" : "VocablePresets",
-      "hash" : "21719d6f6e3dd69ce75f6080ceecacf3ed0fc26c21e383533c4969ed8f1de8cd",
-      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
+      "hash" : "79bb953d39ac3062d2f37f806c0e545eea8f923ed4affd51627a5eec1c1db926",
+      "swiftToolchainVersion" : "5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)"
     }
   ]
 }

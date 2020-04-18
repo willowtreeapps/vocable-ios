@@ -199,7 +199,7 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
             self.setTextTransaction(TextTransaction(text: utterance))
         }).store(in: &disposables)
 
-        _ = ItemSelection.$selectedCategoryID.sink { [weak self] (selectedCategoryID) in
+        _ = ItemSelection.$selectedCategoryID.sink { [weak self] _ in
             DispatchQueue.main.async {
                 self?.updateSnapshot(animated: true)
             }

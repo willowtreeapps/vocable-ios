@@ -85,7 +85,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         self.updateFetchedResultsController(with: categoryID)
 
         let selectedCategory = NSPersistentContainer.shared.viewContext.object(with: categoryID) as! Category
-        if selectedCategory.identifier == KeyboardPresets.numPadIdentifier {
+        if selectedCategory.identifier == .numPad {
             presentationMode = .numPadMode
         } else {
             presentationMode = .defaultMode

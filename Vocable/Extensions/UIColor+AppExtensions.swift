@@ -25,6 +25,8 @@ extension UIColor {
     static var selectedTextColor: UIColor {
         return collectionViewBackgroundColor
     }
+    static let disabledTextColor: UIColor = UIColor.defaultTextColor.withAlphaComponent(0.6)
+
     static let highlightedTextColor = UIColor(safelyNamed: "TextHighlight")
 
     static let collectionViewBackgroundColor = UIColor(safelyNamed: "Background")!
