@@ -38,7 +38,7 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
         assert(category != nil, "Category not provided")
         
         titleLabel.text = category.name
-        editButton.isHidden = category.isUserGenerated
+        editButton.isHidden = !category.isUserGenerated
         setupCollectionView()
     }
 
@@ -101,36 +101,38 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
     }
     
     @IBAction func editButtonPressed(_ sender: Any) {
-        if let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as? EditTextViewController {
-            vc.modalPresentationStyle = .fullScreen
-            
-            vc.text = category.name ?? ""
-            vc.editTextCompletionHandler = { (newText) -> Void in
-                let context = NSPersistentContainer.shared.viewContext
+        let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
 
-                if let categoryIdentifier = self.category.identifier {
-                    let originalCategory = Category.fetchObject(in: context, matching: categoryIdentifier)
-                    originalCategory?.name = newText
-                }
-                do {
-                    try Category.updateAllOrdinalValues(in: context)
-                    try context.save()
+        vc.modalPresentationStyle = .fullScreen
 
-                    let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "User edited name of the category and saved it successfully")
+        vc.text = category.name ?? ""
+        vc.editTextCompletionHandler = { (newText) -> Void in
+            let context = NSPersistentContainer.shared.viewContext
 
-                    ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-                } catch {
-                    assertionFailure("Failed to save category: \(error)")
-                }
+            if let categoryIdentifier = self.category.identifier {
+                let originalCategory = Category.fetchObject(in: context, matching: categoryIdentifier)
+                originalCategory?.name = newText
             }
-            present(vc, animated: true)
+            do {
+                try Category.updateAllOrdinalValues(in: context)
+                try context.save()
+
+                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "User edited name of the category and saved it successfully")
+
+                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+            } catch {
+                assertionFailure("Failed to save category: \(error)")
+            }
         }
+        present(vc, animated: true)
     }
     
     private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: EditCategoryItem) -> UICollectionViewCell {
         switch item {
         case .showCategoryToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryToggleCollectionViewCell
+            cell.isEnabled = shouldInteractWithItem(at: indexPath)
+
             if let category = category {
                 cell.showCategorySwitch.isOn = !category.isHidden
                 cell.showCategorySwitch.isEnabled = (category.identifier != .userFavorites)
@@ -138,7 +140,7 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
             return cell
         case .removeCategoryToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryRemoveCollectionViewCell
-            cell.isHidden = (!(category.isUserGenerated))
+            cell.isEnabled = shouldInteractWithItem(at: indexPath)
             return cell
         }
     }
@@ -153,6 +155,28 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
             handleToggle(at: indexPath)
         case .removeCategoryToggle:
             handleRemoveCategory()
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return shouldInteractWithItem(at: indexPath)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldhi indexPath: IndexPath) -> Bool {
+        return shouldInteractWithItem(at: indexPath)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return shouldInteractWithItem(at: indexPath)
+    }
+
+    private func shouldInteractWithItem(at indexPath: IndexPath) -> Bool {
+        guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return false }
+        switch selectedItem {
+        case .showCategoryToggle:
+            return (category.identifier != .userFavorites)
+        case .removeCategoryToggle:
+            return category.isUserGenerated
         }
     }
     

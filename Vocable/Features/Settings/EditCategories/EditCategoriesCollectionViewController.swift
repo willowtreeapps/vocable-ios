@@ -126,13 +126,14 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         let visibleTitleString = NSMutableAttributedString(string: "\(indexPath.row + 1). \(category.name ?? "")")
         let hiddenTitleString = NSMutableAttributedString(string: "\(category.name ?? "")")
        
-        if fetchResultsController.object(at: indexPath).isHidden {
+        if category.isHidden {
             cell.setup(title: addHiddenIconIfNeeded(to: hiddenTitleString))
         } else {
             cell.setup(title: visibleTitleString)
         }
         cell.separatorMask = self.layout.separatorMask(for: indexPath)
         cell.ordinalButtonMask = cellOrdinalButtonMask(with: category, for: indexPath)
+        cell.showCategoryDetailButton.isEnabled = (category.identifier != .userFavorites)
     }
     
     private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {

@@ -16,7 +16,11 @@ class EditCategoryRemoveCollectionViewCell: VocableCollectionViewCell {
         super.awakeFromNib()
         
         textLabel.text = NSLocalizedString("category_editor.detail.button.remove_category.title", comment: "Remove category button label within the category detail screen.")
+    }
 
+    override func updateContentViews() {
+        super.updateContentViews()
+        textLabel?.textColor = isEnabled ? .defaultTextColor : .disabledTextColor
     }
 
 }
