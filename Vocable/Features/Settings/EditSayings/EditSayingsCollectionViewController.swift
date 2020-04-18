@@ -94,6 +94,38 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         diffableDataSource.apply(snapshot,
                                  animatingDifferences: animated,
                                  completion: completion)
+
+        if viewModels.isEmpty {
+            installEmptyStateIfNeeded()
+        } else {
+            removeEmptyStateIfNeeded()
+        }
+    }
+
+    private func installEmptyStateIfNeeded() {
+        guard collectionView.backgroundView == nil else { return }
+
+        let text = NSLocalizedString("user_favorites_editor.empty_state.title",
+                                     comment: "Empty state for edit user favorites screen")
+
+        let starImageAttributedString: NSAttributedString? = {
+            guard let image = UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate) else {
+                return nil
+            }
+            let systemImageAttachment = NSTextAttachment(image: image)
+            return NSAttributedString(attachment: systemImageAttachment)
+        }()
+        let attributedString = NSMutableAttributedString(string: text)
+        if let attachmentString = starImageAttributedString {
+            attributedString.insert(.init(string: "\n"), at: 0)
+            attributedString.insert(attachmentString, at: 0)
+        }
+        let emptyView = EmptyStateView(attributedText: attributedString)
+        collectionView.backgroundView = emptyView
+    }
+
+    private func removeEmptyStateIfNeeded() {
+        collectionView.backgroundView = nil
     }
 
     @objc private func handleCellDeletionButton(_ sender: UIButton) {

@@ -118,3 +118,5 @@
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
 
 "phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
+
+"user_favorites_editor.empty_state.title" = "You don't have any sayings saved yet.\nPress the '+' in the top right to add something.";
