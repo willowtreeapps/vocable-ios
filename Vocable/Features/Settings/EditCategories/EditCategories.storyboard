@@ -141,6 +141,7 @@
                         <viewLayoutGuide key="safeArea" id="KsA-J6-p6N"/>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="odn-ZR-Jtm"/>
                                 <exclude reference="sRZ-84-hWx"/>
                             </mask>
                         </variation>
