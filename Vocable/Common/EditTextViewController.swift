@@ -238,6 +238,7 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
             switch buttonType {
             case .confirmEdit:
                 editTextCompletionHandler(textTransaction.text)
+                dismiss(animated: true, completion: nil)
             case .close:
                 if textHasChanged {
                     handleDismissAlert()
