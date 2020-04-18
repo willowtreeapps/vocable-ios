@@ -192,10 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func updateCategoryForUserGeneratedPhrases(in context: NSManagedObjectContext) throws {
-        guard let mySayingsCategory = Category.fetchObject(in: context, matching: KeyboardPresets.userFavoritesCategoryIdentifier) else {
-            assertionFailure("User generated category not found")
-            return
-        }
+        let mySayingsCategory = Category.fetch(.userFavorites, in: context)
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         request.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
 

@@ -133,9 +133,8 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryToggleCollectionViewCell
             if let category = category {
                 cell.showCategorySwitch.isOn = !category.isHidden
+                cell.showCategorySwitch.isEnabled = (category.identifier != .userFavorites)
             }
-            cell.isHidden = category.identifier ==
-                KeyboardPresets.userFavoritesCategoryIdentifier
             return cell
         case .removeCategoryToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryRemoveCollectionViewCell
