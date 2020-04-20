@@ -57,7 +57,8 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     private func updateFetchedResultsController(with selectedCategoryID: NSManagedObjectID? = nil) {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         if let selectedCategoryID = selectedCategoryID {
-            request.predicate = NSComparisonPredicate(\Phrase.categories, .contains, selectedCategoryID)
+            let category = NSPersistentContainer.shared.viewContext.object(with: selectedCategoryID)
+            request.predicate = NSComparisonPredicate(\Phrase.categories, .contains, category)
         }
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
         
@@ -96,12 +97,22 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+
+        updateFetchedResultsController(with: categoryID)
+
         super.viewWillAppear(animated)
+
+        updateDataSource(animated: true)
 
         layout.$progress.sink { (pagingProgress) in
             ItemSelection.presetsPageIndicatorProgress = pagingProgress
         }.store(in: &disposables)
+
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        fetchedResultsController = nil
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
