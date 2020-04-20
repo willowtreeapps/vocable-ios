@@ -148,48 +148,51 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
     }
     
     private func deletePhrase(_ sender: UIButton) {
-        for cell in self.collectionView.visibleCells where sender.isDescendant(of: cell) {
-            guard let indexPath = self.collectionView.indexPath(for: cell) else {
-                return
-            }
-            let phrase = self.fetchResultsController.object(at: indexPath)
-            let context = NSPersistentContainer.shared.viewContext
-            context.delete(phrase)
-            try? context.save()
+        guard let indexPath = collectionView.indexPath(containing: sender) else {
+            assertionFailure("Failed to obtain index path")
+            return
         }
+        
+        let safeIndexPath = diffableDataSource.indexPath(fromMappedIndexPath: indexPath)
+        let phrase = self.fetchResultsController.object(at: safeIndexPath)
+        let context = NSPersistentContainer.shared.viewContext
+        context.delete(phrase)
+        try? context.save()
     }
     
     @objc private func handleCellEditButton(_ sender: UIButton) {
-        for cell in collectionView.visibleCells where sender.isDescendant(of: cell) {
-            guard let indexPath = collectionView.indexPath(for: cell) else {
-                return
+        guard let indexPath = collectionView.indexPath(containing: sender) else {
+            assertionFailure("Failed to obtain index path")
+            return
+        }
+        
+        let safeIndexPath = diffableDataSource.indexPath(fromMappedIndexPath: indexPath)
+        let vc = UIStoryboard(name: "EditTextViewController", bundle: nil)
+            .instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
+        vc.modalPresentationStyle = .fullScreen
+        
+        let phrase = fetchResultsController.object(at: safeIndexPath)
+        vc.text = phrase.utterance ?? ""
+        vc.editTextCompletionHandler = { (newText) -> Void in
+            let context = NSPersistentContainer.shared.viewContext
+            
+            if let phraseIdentifier = phrase.identifier {
+                let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
+                originalPhrase?.utterance = newText
             }
-            if let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as? EditTextViewController {
-                vc.modalPresentationStyle = .fullScreen
+            do {
+                try context.save()
                 
-                let phrase = fetchResultsController.object(at: indexPath)
-                vc.text = phrase.utterance ?? ""
-                vc.editTextCompletionHandler = { (newText) -> Void in
-                    let context = NSPersistentContainer.shared.viewContext
-
-                    if let phraseIdentifier = phrase.identifier {
-                        let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                        originalPhrase?.utterance = newText
-                    }
-                    do {
-                        try context.save()
-                        
-                        let alertMessage = NSLocalizedString("category_editor.toast.changes_saved.title",
-                        comment: "changes to an existing phrase were saved successfully")
-                        
-                        ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-                    } catch {
-                        assertionFailure("Failed to save user generated phrase: \(error)")
-                    }
-                }
-                present(vc, animated: true)
+                let alertMessage = NSLocalizedString("category_editor.toast.changes_saved.title",
+                                                     comment: "changes to an existing phrase were saved successfully")
+                
+                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+            } catch {
+                assertionFailure("Failed to save user generated phrase: \(error)")
             }
         }
+        present(vc, animated: true)
+        
     }
     
     private func handleDismissAlert() {

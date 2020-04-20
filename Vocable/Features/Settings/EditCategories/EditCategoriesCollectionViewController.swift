@@ -98,9 +98,6 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return false
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         updateDataSource(animated: true)
@@ -147,7 +144,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     }
 
     @objc private func handleMoveCategoryUp(_ sender: UIButton) {
-        guard let fromIndexPath = indexPath(containing: sender) else {
+        guard let fromIndexPath = collectionView.indexPath(containing: sender) else {
             assertionFailure("Failed to obtain index path")
             return
         }
@@ -163,7 +160,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     }
     
     @objc private func handleMoveCategoryDown(_ sender: UIButton) {
-        guard let fromIndexPath = indexPath(containing: sender) else {
+        guard let fromIndexPath = collectionView.indexPath(containing: sender) else {
             assertionFailure("Failed to obtain index path")
             return
         }
@@ -181,16 +178,16 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     }
     
     @objc private func handleShowEditCategoryDetail(_ sender: UIButton) {
-        for cell in collectionView.visibleCells where sender.isDescendant(of: cell) {
-            
-            guard let indexPath = collectionView.indexPath(for: cell) else { return }
-            
-            if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as? EditCategoriesDetailViewController {
-                
-                vc.category = fetchResultsController.object(at: indexPath)
-                show(vc, sender: nil)
-            }
+        guard let indexPath = collectionView.indexPath(containing: sender) else {
+            assertionFailure("Failed to obtain index path")
+            return
         }
+        
+        let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as! EditCategoriesDetailViewController
+        
+        vc.category = fetchResultsController.object(at: indexPath)
+        show(vc, sender: nil)
+        
     }
     
     private func indexPath(after indexPath: IndexPath) -> IndexPath? {
@@ -210,15 +207,6 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
         } else {
             return IndexPath(row: candidateIndex, section: 0)
         }
-    }
-    
-    private func indexPath(containing view: UIView) -> IndexPath? {
-        for cell in collectionView.visibleCells where view.isDescendant(of: cell) {
-            if let indexPath = collectionView.indexPath(for: cell) {
-                return indexPath
-            }
-        }
-        return nil
     }
     
     private func swapOrdinal(fromCategory: Category, toCategory: Category) {

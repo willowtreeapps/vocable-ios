@@ -103,6 +103,7 @@
 "category_editor.toast.successfully_saved.title" = "Changes Saved";
 
 "text_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
+
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
 
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";

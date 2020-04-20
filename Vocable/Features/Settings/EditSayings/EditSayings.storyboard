@@ -188,7 +188,6 @@
         <!--Edit Sayings Collection View Controller-->
         <scene sceneID="JgZ-NN-QFW">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LlE-tR-CS4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <collectionViewController id="W98-u1-6GB" customClass="EditSayingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="626"/>
@@ -202,6 +201,7 @@
                         </connections>
                     </collectionView>
                 </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LlE-tR-CS4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3722" y="143"/>
         </scene>
