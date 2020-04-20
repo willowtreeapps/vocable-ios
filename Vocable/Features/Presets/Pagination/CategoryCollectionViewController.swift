@@ -75,19 +75,16 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
     }
 
     private func scrollToNearestSelectedIndexPath(animated: Bool = false) {
-        let _indexPath: IndexPath? = {
-            guard let selectedMappedIndexPath = collectionView.indexPathsForSelectedItems?.first else {
-                return nil
-            }
-            return dataSourceProxy.indexPath(fromMappedIndexPath: selectedMappedIndexPath)
-        }()
-
-        if let indexPath = _indexPath {
-            if let destination = layout.indexPathForLeftmostCellOfPage(containing: indexPath) {
-                collectionView.scrollToItem(at: destination,
-                                            at: .left,
-                                            animated: animated)
-            }
+        let selectedIndexPaths = collectionView.indexPathsForSelectedItems ?? []
+        
+        guard let middleIndexPath = selectedIndexPaths[safe: selectedIndexPaths.count / 2] else {
+            return
+        }
+        
+        if let destination = layout.indexPathForLeftmostCellOfPage(containing: middleIndexPath) {
+            collectionView.scrollToItem(at: destination,
+                                        at: .left,
+                                        animated: animated)
         }
     }
     
