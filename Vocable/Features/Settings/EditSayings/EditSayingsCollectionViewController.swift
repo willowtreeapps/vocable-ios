@@ -117,7 +117,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         }()
         let attributedString = NSMutableAttributedString(string: text)
         if let attachmentString = starImageAttributedString {
-            attributedString.insert(.init(string: "\n"), at: 0)
+            attributedString.insert(.init(string: "\n\n"), at: 0)
             attributedString.insert(attachmentString, at: 0)
         }
         let emptyView = EmptyStateView(attributedText: attributedString)
