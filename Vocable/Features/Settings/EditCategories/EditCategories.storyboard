@@ -85,8 +85,8 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
-                                <rect key="frame" x="20" y="132" width="374" height="626"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
+                                <rect key="frame" x="20" y="132" width="374" height="634"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="322.5" id="V2b-Pm-qsk"/>
                                 </constraints>
@@ -99,7 +99,7 @@
                                     <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="71" y="782" width="272" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>
@@ -141,19 +141,18 @@
                         <viewLayoutGuide key="safeArea" id="KsA-J6-p6N"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="odn-ZR-Jtm"/>
                                 <exclude reference="sRZ-84-hWx"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <edgeInsets key="layoutMargins" top="16" left="16" bottom="0.0" right="16"/>
                             <mask key="constraints">
-                                <include reference="sRZ-84-hWx"/>
+                                <exclude reference="sRZ-84-hWx"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="constraints">
-                                <include reference="sRZ-84-hWx"/>
+                                <exclude reference="sRZ-84-hWx"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -175,7 +174,7 @@
             <objects>
                 <collectionViewController id="W98-u1-6GB" customClass="EditCategoriesCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
-                        <rect key="frame" x="0.0" y="0.0" width="374" height="626"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="634"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewLayout key="collectionViewLayout" id="4c5-Wx-dzH" customClass="CarouselGridLayout" customModule="Vocable" customModuleProvider="target"/>
@@ -189,53 +188,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LlE-tR-CS4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3722" y="143"/>
-        </scene>
-        <!--Edit Categories Keyboard View Controller-->
-        <scene sceneID="WU4-lR-j23">
-            <objects>
-                <viewController storyboardIdentifier="EditCategoryKeyboardViewController" id="qBB-qb-4us" customClass="EditCategoriesKeyboardViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nxM-ki-o4S">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zBG-MP-Uvj">
-                                <rect key="frame" x="20" y="52" width="374" height="802"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MPw-us-ZBK">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                                <connections>
-                                    <outlet property="delegate" destination="qBB-qb-4us" id="6TN-ix-IHO"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" name="Background"/>
-                        <constraints>
-                            <constraint firstItem="zBG-MP-Uvj" firstAttribute="top" secondItem="nxM-ki-o4S" secondAttribute="topMargin" id="Syx-Rh-0JA"/>
-                            <constraint firstItem="zBG-MP-Uvj" firstAttribute="leading" secondItem="nxM-ki-o4S" secondAttribute="leadingMargin" id="bKs-Wb-6AT"/>
-                            <constraint firstItem="zBG-MP-Uvj" firstAttribute="trailing" secondItem="nxM-ki-o4S" secondAttribute="trailingMargin" id="g0f-Fr-opn"/>
-                            <constraint firstItem="zBG-MP-Uvj" firstAttribute="bottom" secondItem="nxM-ki-o4S" secondAttribute="bottomMargin" id="mM3-Au-Wcd"/>
-                        </constraints>
-                        <edgeInsets key="layoutMargins" top="32" left="32" bottom="32" right="32"/>
-                        <viewLayoutGuide key="safeArea" id="8d6-BI-B1P"/>
-                        <variation key="heightClass=compact">
-                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="collectionView" destination="zBG-MP-Uvj" id="XE4-zH-JWf"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bj1-rW-RH8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4544" y="388"/>
         </scene>
         <!--Edit Categories Detail View Controller-->
         <scene sceneID="FIn-Tv-o2a">

@@ -108,7 +108,8 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     private var currentPageIndex: Int {
-        guard let collectionView = collectionView else { return 0 }
+        guard let collectionView = collectionView,
+            pageContentSize.width > 0 || interItemSpacing > 0 else { return 0 }
         let index = Int((collectionView.bounds.midX / (pageContentSize.width + interItemSpacing)))
         return index
     }
@@ -139,6 +140,7 @@ class CarouselGridLayout: UICollectionViewLayout {
         let xOffset = CGFloat(indexPath.section) * sectionContentSize.width
 
         let itemsPerPage = rowCount * numberOfColumns
+        guard itemsPerPage > 0 else { return .zero }
 
         let pageIndex = indexPath.item / itemsPerPage
 
@@ -180,7 +182,8 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        guard let collectionView = collectionView else { return proposedContentOffset }
+        guard let collectionView = collectionView, pagesPerSection > 0,
+            pageContentSize.width > 0 || interItemSpacing > 0 else { return proposedContentOffset }
         let proposedCenterX: CGFloat
         if velocity.x > 1.0 {
             proposedCenterX = collectionView.bounds.maxX
@@ -201,7 +204,7 @@ class CarouselGridLayout: UICollectionViewLayout {
     func firstIndexPathForPageWithOffsetFromCurrentPage(offset: Int) -> IndexPath? {
 
         let pageIndex = currentPageIndex + offset
-        guard (0..<numberOfPages).contains(pageIndex) else {
+        guard (0..<numberOfPages).contains(pageIndex), pagesPerSection > 0 else {
             return nil
         }
         let sectionIndex = pageIndex / pagesPerSection
