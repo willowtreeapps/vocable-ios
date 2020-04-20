@@ -103,6 +103,26 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             ItemSelection.presetsPageIndicatorProgress = pagingProgress
         }.store(in: &disposables)
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        scrollToBoundaryOfCurrentPage(animated: false)
+    }
+
+    private func scrollToBoundaryOfCurrentPage(animated: Bool = false) {
+        if let destination = layout.indexPathForLeftmostCellOfCurrentPage() {
+            collectionView.scrollToItem(at: destination,
+                                        at: .left,
+                                        animated: animated)
+        }
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { (_) in
+            self.scrollToBoundaryOfCurrentPage(animated: false)
+        }, completion: nil)
+    }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         updateDataSource(animated: true)

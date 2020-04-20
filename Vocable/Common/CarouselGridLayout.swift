@@ -262,4 +262,26 @@ class CarouselGridLayout: UICollectionViewLayout {
 
         return attr
     }
+
+    func indexPathForLeftmostCellOfPage(containing indexPath: IndexPath) -> IndexPath? {
+        guard pagesPerSection > 0, itemsPerPage > 0 else {
+            return nil
+        }
+        let currentSection = currentPageIndex / pagesPerSection
+        let pageOfIndexPathWithinSection = indexPath.item / itemsPerPage
+        let firstItemInPage = pageOfIndexPathWithinSection * itemsPerPage
+        let result = IndexPath(item: firstItemInPage, section: currentSection)
+        return result
+    }
+
+    func indexPathForLeftmostCellOfCurrentPage() -> IndexPath? {
+        guard pagesPerSection > 0, itemsPerPage > 0 else {
+            return nil
+        }
+        let currentSection = currentPageIndex / pagesPerSection
+        let pageOfIndexPathWithinSection = currentPageIndex % pagesPerSection
+        let firstItemInPage = pageOfIndexPathWithinSection * itemsPerPage
+        let result = IndexPath(item: firstItemInPage, section: currentSection)
+        return result
+    }
 }
