@@ -46,6 +46,18 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        scrollToNearestSelectedIndexPath(animated: false)
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { _ in
+            self.scrollToNearestSelectedIndexPath(animated: false)
+        }, completion: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -61,6 +73,20 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
 
         self.clearsSelectionOnViewWillAppear = false
     }
+
+    private func scrollToNearestSelectedIndexPath(animated: Bool = false) {
+        let selectedIndexPaths = collectionView.indexPathsForSelectedItems ?? []
+        
+        guard let middleIndexPath = selectedIndexPaths[safe: selectedIndexPaths.count / 2] else {
+            return
+        }
+        
+        if let destination = layout.indexPathForLeftmostCellOfPage(containing: middleIndexPath) {
+            collectionView.scrollToItem(at: destination,
+                                        at: .left,
+                                        animated: animated)
+        }
+    }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         updateDataSource(animated: true)
@@ -69,9 +95,6 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateLayoutForCurrentTraitCollection()
-        if let indexPath = self.collectionView.indexPathsForSelectedItems?.first {
-            self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
-        }
     }
 
     func updateLayoutForCurrentTraitCollection() {

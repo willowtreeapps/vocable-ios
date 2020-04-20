@@ -77,6 +77,22 @@ class CarouselGridCollectionViewController: UICollectionViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scrollToMiddleSection()
+        scrollToBoundaryOfCurrentPage(animated: false)
+    }
+
+    private func scrollToBoundaryOfCurrentPage(animated: Bool = false) {
+        if let destination = layout.indexPathForLeftmostCellOfCurrentPage() {
+            collectionView.scrollToItem(at: destination,
+                                        at: .left,
+                                        animated: animated)
+        }
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { (_) in
+            self.scrollToBoundaryOfCurrentPage(animated: false)
+        }, completion: nil)
     }
 
     func scrollToMiddleSection() {
@@ -84,5 +100,6 @@ class CarouselGridCollectionViewController: UICollectionViewController {
         collectionView.scrollToItem(at: IndexPath(item: 0, section: sectionCount / 2),
                                     at: .left,
                                     animated: false)
+        collectionView.layoutIfNeeded()
     }
 }
