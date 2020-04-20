@@ -21,12 +21,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         case defaultMode
         case numPadMode
     }
-    
-    private enum ItemWrapper: Hashable {
-        case presetsDefault(Phrase)
-        case presetsNumPad(PhraseViewModel)
-    }
-    
+
     private var presentationMode: PresentationMode = .defaultMode {
         didSet {
             guard oldValue != presentationMode else { return }
@@ -34,16 +29,11 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         }
     }
     
-    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<Int, ItemWrapper>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
+    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<Int, PhraseViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-        
-        switch phrase {
-        case .presetsDefault(let phrase):
-            cell.setup(title: phrase.utterance ?? "")
-        case .presetsNumPad(let phraseViewModel):
-            cell.setup(title: phraseViewModel.utterance)
-        }
+
+        cell.setup(title: phrase.utterance)
         
         return cell
     }
@@ -57,7 +47,8 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     private func updateFetchedResultsController(with selectedCategoryID: NSManagedObjectID? = nil) {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         if let selectedCategoryID = selectedCategoryID {
-            request.predicate = NSComparisonPredicate(\Phrase.categories, .contains, selectedCategoryID)
+            let category = NSPersistentContainer.shared.viewContext.object(with: selectedCategoryID)
+            request.predicate = NSComparisonPredicate(\Phrase.categories, .contains, category)
         }
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
         
@@ -96,12 +87,22 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+
+        updateFetchedResultsController(with: categoryID)
+
         super.viewWillAppear(animated)
+
+        updateDataSource(animated: true)
 
         layout.$progress.sink { (pagingProgress) in
             ItemSelection.presetsPageIndicatorProgress = pagingProgress
         }.store(in: &disposables)
+
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        fetchedResultsController = nil
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -150,18 +151,16 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
 
     private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
         let content = fetchedResultsController?.fetchedObjects ?? []
-        var snapshot = NSDiffableDataSourceSnapshot<Int, ItemWrapper>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, PhraseViewModel>()
         snapshot.appendSections([0])
         
         switch presentationMode {
         case .numPadMode:
-            let numPadPresets = KeyboardPresets.numPadPhrases.map { (phraseViewModel) in
-                return ItemWrapper.presetsNumPad(phraseViewModel)
-            }
+            let numPadPresets = KeyboardPresets.numPadPhrases
             snapshot.appendItems(numPadPresets)
         case .defaultMode:
-            let presets = content.map { (phrase) in
-                return ItemWrapper.presetsDefault(phrase)
+            let presets = content.compactMap { (phrase) in
+                return PhraseViewModel(phrase)
             }
             snapshot.appendItems(presets)
         }
@@ -182,22 +181,13 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             }
         }
 
-        guard let identifier = dataSourceProxy.itemIdentifier(for: indexPath) else { return }
-        
-        let selectedPhrase: PhraseViewModel?
-        
-        switch identifier {
-        case .presetsDefault(let phrase):
-            selectedPhrase = PhraseViewModel(phrase)
-        case .presetsNumPad(let phraseViewModel):
-            selectedPhrase = phraseViewModel
-        }
+        guard let selectedPhrase = dataSourceProxy.itemIdentifier(for: indexPath) else { return }
         
         ItemSelection.selectedPhrase = selectedPhrase
 
         // Dispatch to get off the main queue for performance
         DispatchQueue.global(qos: .userInitiated).async {
-            AVSpeechSynthesizer.shared.speak(selectedPhrase?.utterance ?? "", language: AppConfig.activePreferredLanguageCode)
+            AVSpeechSynthesizer.shared.speak(selectedPhrase.utterance, language: AppConfig.activePreferredLanguageCode)
         }
     }
 

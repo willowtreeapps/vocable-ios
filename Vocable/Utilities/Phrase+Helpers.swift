@@ -21,6 +21,7 @@ extension Phrase {
         phrase.utterance = text
         phrase.languageCode = AppConfig.activePreferredLanguageCode
         phrase.addToCategories(savedCategory)
+        savedCategory.addToPhrases(phrase)
         return phrase
     }
 
