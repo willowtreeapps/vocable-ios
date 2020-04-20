@@ -13,6 +13,8 @@ import CoreData
 
 class EditCategoriesViewController: UIViewController {
     
+    @IBOutlet var addCategoryButton: GazeableButton!
+    
     @IBOutlet private weak var pageNavigationView: PaginationView!
     
     private var carouselCollectionViewController: CarouselGridCollectionViewController?
@@ -30,6 +32,8 @@ class EditCategoriesViewController: UIViewController {
             self.pageNavigationView.setPaginationButtonsEnabled(pagingProgress.pageCount > 1)
             self.pageNavigationView.textLabel.text = pagingProgress.localizedString
         }).store(in: &disposables)
+        
+        addCategoryButton.isHidden = !AppConfig.showDebugOptions
         
         pageNavigationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)
         pageNavigationView.previousPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToPreviousPage), for: .primaryActionTriggered)
