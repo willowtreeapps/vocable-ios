@@ -82,8 +82,6 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             presentationMode = .defaultMode
         }
         updateDataSource(animated: true)
-
-//        self.scrollToMiddleSection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,8 +95,8 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         layout.$progress.sink { (pagingProgress) in
             ItemSelection.presetsPageIndicatorProgress = pagingProgress
         }.store(in: &disposables)
-
     }
+
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)

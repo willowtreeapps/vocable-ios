@@ -282,4 +282,15 @@ class CarouselGridLayout: UICollectionViewLayout {
         }
         return nil
     }
+
+    func indexPathForLeftmostCellOfCurrentPageInMiddleSection() -> IndexPath? {
+        let indexPaths = collectionView?.indexPathsForVisibleItems ?? []
+        if let centerIndexPath = indexPaths[safe: indexPaths.count / 2] {
+            if let result = indexPathForLeftmostCellOfPage(containing: centerIndexPath) {
+                let middleIndexPath = IndexPath(item: result.item, section: numberOfSections / 2)
+                return middleIndexPath
+            }
+        }
+        return nil
+    }
 }

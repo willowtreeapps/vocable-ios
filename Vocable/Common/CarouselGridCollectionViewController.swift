@@ -44,6 +44,14 @@ private extension CarouselGridLayout {
         return self.collectionViewLayout as! CarouselGridLayout
     }
 
+    private var lastInvalidatedSize: CGSize = .zero
+    override var frame: CGRect {
+        didSet {
+            guard frame.size != lastInvalidatedSize else { return }
+            snapToBoundaryIfNeeded()
+        }
+    }
+
     private var needsInitialScrollToMiddle = true
 
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -58,6 +66,7 @@ private extension CarouselGridLayout {
 
     init() {
         super.init(frame: .zero, collectionViewLayout: CarouselGridLayout.default())
+        commonInit()
     }
 
     private func commonInit() {
@@ -98,6 +107,32 @@ private extension CarouselGridLayout {
                      animated: false)
         layoutIfNeeded()
     }
+
+    private func snapToBoundaryIfNeeded() {
+        guard !isDecelerating, !isDragging, !isTracking else { return }
+        scrollToNearestSelectedIndexPathOrCurrentPageBoundary()
+    }
+
+    private func scrollToNearestSelectedIndexPathOrCurrentPageBoundary(animated: Bool = false) {
+        let selectedIndexPaths = indexPathsForSelectedItems ?? []
+
+        let destination: IndexPath
+        if let middleIndexPath = selectedIndexPaths[safe: selectedIndexPaths.count / 2], let target = layout.indexPathForLeftmostCellOfPage(containing: middleIndexPath) {
+            destination = target
+        } else
+            if let target = animated ? layout.indexPathForLeftmostCellOfCurrentPage() : layout.indexPathForLeftmostCellOfCurrentPageInMiddleSection() {
+            destination = target
+        } else {
+            return
+        }
+
+        scrollToItem(at: destination,
+                     at: .left,
+                     animated: animated)
+        if !animated {
+            layoutIfNeeded()
+        }
+    }
 }
 
 class CarouselGridCollectionViewController: UICollectionViewController {
@@ -111,7 +146,7 @@ class CarouselGridCollectionViewController: UICollectionViewController {
     }
 
     override func loadView() {
-        let collectionView =  CarouselGridCollectionView()
+        let collectionView = CarouselGridCollectionView()
         self.collectionView = collectionView
     }
 
