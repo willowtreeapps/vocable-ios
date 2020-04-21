@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,7 +34,7 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="plus" catalog="system"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="addPhrasePressed:" destination="KLI-zL-Q9x" eventType="primaryActionTriggered" id="13s-0j-dDa"/>
+                                            <action selector="addPhrasePressed" destination="KLI-zL-Q9x" eventType="primaryActionTriggered" id="815-FM-bC4"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Sayings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-i2-i5g">
@@ -88,31 +89,24 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPM-Ab-mlI">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XxC-Wq-DWE" customClass="CarouselGridCollectionView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="20" y="132" width="374" height="626"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="ZPM-Ab-mlI" secondAttribute="height" multiplier="2" priority="250" id="PK4-eE-9mZ"/>
-                                    <constraint firstAttribute="height" constant="322.5" id="V2b-Pm-qsk"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="V2b-Pm-qsk"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=compact">
-                                    <mask key="constraints">
-                                        <exclude reference="PK4-eE-9mZ"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <exclude reference="PK4-eE-9mZ"/>
-                                    </mask>
-                                </variation>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewLayout key="collectionViewLayout" id="RJg-hs-fDZ" customClass="CarouselGridLayout" customModule="Vocable" customModuleProvider="target"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Qjr-Rq-IoO">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="u8n-P7-naF">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
+                                    <outlet property="delegate" destination="KLI-zL-Q9x" id="WKe-JG-Hl5"/>
                                 </connections>
-                            </containerView>
+                            </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="71" y="782" width="272" height="48"/>
                                 <constraints>
@@ -129,44 +123,44 @@
                         </subviews>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="ZPM-Ab-mlI" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="bottom" constant="24" id="E7v-Tz-7x3">
-                                <variation key="heightClass=compact" constant="8"/>
+                            <constraint firstItem="xsL-XA-YD7" firstAttribute="top" secondItem="XxC-Wq-DWE" secondAttribute="bottom" constant="24" id="4CI-pf-E0g">
+                                <variation key="heightClass=compact" constant="16"/>
                             </constraint>
+                            <constraint firstItem="XxC-Wq-DWE" firstAttribute="leading" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="Chu-9e-tUO"/>
                             <constraint firstItem="FaL-BL-aEw" firstAttribute="leading" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="Ef4-57-qpY"/>
-                            <constraint firstItem="ZPM-Ab-mlI" firstAttribute="leading" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="HU7-hF-4Vj"/>
+                            <constraint firstItem="xsL-XA-YD7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XxC-Wq-DWE" secondAttribute="bottom" constant="16" id="Ery-8z-I7U">
+                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                            </constraint>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="xsL-XA-YD7" secondAttribute="trailing" id="Ktw-tB-gMd"/>
                             <constraint firstItem="xsL-XA-YD7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XHU-T2-eKa" secondAttribute="leadingMargin" id="Pvf-o7-jxY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FaL-BL-aEw" secondAttribute="trailing" id="aVG-wy-B6E"/>
-                            <constraint firstItem="xsL-XA-YD7" firstAttribute="centerX" secondItem="XHU-T2-eKa" secondAttribute="centerX" id="mJ1-dp-N83"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZPM-Ab-mlI" secondAttribute="trailing" id="nDS-NG-TAP"/>
-                            <constraint firstItem="FaL-BL-aEw" firstAttribute="top" secondItem="XHU-T2-eKa" secondAttribute="topMargin" id="o1A-wb-z5y"/>
-                            <constraint firstItem="xsL-XA-YD7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZPM-Ab-mlI" secondAttribute="bottom" constant="16" id="odn-ZR-Jtm">
-                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XxC-Wq-DWE" secondAttribute="trailing" id="elT-oU-PHy"/>
+                            <constraint firstItem="XxC-Wq-DWE" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="bottom" constant="24" id="hAp-Ox-Vfb">
+                                <variation key="heightClass=compact" constant="8"/>
                             </constraint>
+                            <constraint firstItem="xsL-XA-YD7" firstAttribute="centerX" secondItem="XHU-T2-eKa" secondAttribute="centerX" id="mJ1-dp-N83"/>
+                            <constraint firstItem="FaL-BL-aEw" firstAttribute="top" secondItem="XHU-T2-eKa" secondAttribute="topMargin" id="o1A-wb-z5y"/>
                             <constraint firstItem="KsA-J6-p6N" firstAttribute="bottom" secondItem="xsL-XA-YD7" secondAttribute="bottom" constant="32" id="pdv-ax-cnJ">
                                 <variation key="heightClass=compact" constant="8"/>
                                 <variation key="heightClass=regular-widthClass=compact" constant="32"/>
-                            </constraint>
-                            <constraint firstItem="xsL-XA-YD7" firstAttribute="top" secondItem="ZPM-Ab-mlI" secondAttribute="bottom" constant="24" id="sRZ-84-hWx">
-                                <variation key="heightClass=compact" constant="16"/>
                             </constraint>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="32" left="32" bottom="32" right="32"/>
                         <viewLayoutGuide key="safeArea" id="KsA-J6-p6N"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="sRZ-84-hWx"/>
+                                <exclude reference="4CI-pf-E0g"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <edgeInsets key="layoutMargins" top="16" left="16" bottom="0.0" right="16"/>
                             <mask key="constraints">
-                                <include reference="sRZ-84-hWx"/>
+                                <include reference="4CI-pf-E0g"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="constraints">
-                                <include reference="sRZ-84-hWx"/>
+                                <include reference="4CI-pf-E0g"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -177,6 +171,7 @@
                     <connections>
                         <outlet property="addButton" destination="00c-RK-HF1" id="vhL-69-4vj"/>
                         <outlet property="backButton" destination="DvV-sn-lWq" id="3pj-cI-PHE"/>
+                        <outlet property="collectionView" destination="XxC-Wq-DWE" id="emp-5q-BhT"/>
                         <outlet property="paginationView" destination="xsL-XA-YD7" id="23Z-Nk-svG"/>
                         <outlet property="titleLabel" destination="0CD-i2-i5g" id="kda-XC-L2K"/>
                     </connections>
@@ -184,26 +179,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxk-ad-LrW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2559" y="144"/>
-        </scene>
-        <!--Edit Sayings Collection View Controller-->
-        <scene sceneID="JgZ-NN-QFW">
-            <objects>
-                <collectionViewController id="W98-u1-6GB" customClass="EditSayingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
-                        <rect key="frame" x="0.0" y="0.0" width="374" height="626"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <collectionViewLayout key="collectionViewLayout" id="q6l-HL-JPy" customClass="CarouselGridLayout" customModule="Vocable" customModuleProvider="target"/>
-                        <cells/>
-                        <connections>
-                            <outlet property="dataSource" destination="W98-u1-6GB" id="Syx-wi-tdg"/>
-                            <outlet property="delegate" destination="W98-u1-6GB" id="2rF-nN-oM1"/>
-                        </connections>
-                    </collectionView>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LlE-tR-CS4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3722" y="143"/>
         </scene>
         <!--Edit Sayings Keyboard View Controller-->
         <scene sceneID="WU4-lR-j23">
