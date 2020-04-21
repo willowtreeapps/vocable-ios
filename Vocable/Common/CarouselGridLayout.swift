@@ -97,7 +97,7 @@ class CarouselGridLayout: UICollectionViewLayout {
         return count
     }
 
-    private var pagesPerSection: Int {
+    var pagesPerSection: Int {
         guard itemsPerPage > 0 else { return 0 }
         let count = Int((Double(itemsPerSection) / Double(itemsPerPage)).rounded(.awayFromZero))
         return count
