@@ -225,18 +225,27 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
             let suggestiveTextItem = NSCollectionLayoutItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / itemCount),
                                                    heightDimension: .fractionalHeight(1.0)))
+            if environment.traitCollection.verticalSizeClass == .compact {
+                suggestiveTextItem.contentInsets = .init(top: 0, leading: 4, bottom: 0, trailing: 4)
+            }
             
             let containerGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                    heightDimension: .fractionalHeight(116.0 / totalSize.height)),
                 subitem: suggestiveTextItem, count: Int(itemCount))
-            containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
+            if environment.traitCollection.verticalSizeClass != .compact {
+                containerGroup.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
+            }
+            
             let section = NSCollectionLayoutSection(group: containerGroup)
             
-            let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
-            backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
-            
-            section.decorationItems = [backgroundDecoration]
+            if environment.traitCollection.verticalSizeClass != .compact {
+                let backgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: "CategorySectionBackground")
+                backgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
+                
+                section.decorationItems = [backgroundDecoration]
+            }
+
             section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
             return section
         }

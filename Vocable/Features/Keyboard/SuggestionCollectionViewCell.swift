@@ -12,12 +12,6 @@ class SuggestionCollectionViewCell: VocableCollectionViewCell {
     
     @IBOutlet var textLabel: UILabel!
     
-    var roundedCorners: UIRectCorner = .allCorners {
-        didSet {
-            borderedView.roundedCorners = roundedCorners
-        }
-    }
-    
     func setup(title: String) {
         if title.isEmpty {
             textLabel.text = title
@@ -44,7 +38,8 @@ class SuggestionCollectionViewCell: VocableCollectionViewCell {
     }
     
     private func adjustBackgroundColorForSizeClass() {
-        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+        if (traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular)
+            || traitCollection.verticalSizeClass == .compact {
             borderedView.backgroundColor = .clear
         } else {
             borderedView.backgroundColor = .categoryBackgroundColor
