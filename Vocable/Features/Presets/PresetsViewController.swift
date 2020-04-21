@@ -58,17 +58,34 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
+
+    private func updateKeyboardKeys(in snapshot: inout NSDiffableDataSourceSnapshot<Section, ItemWrapper>) {
+
+        guard snapshot.sectionIdentifiers.contains(.keyboard) else {
+            return
+        }
+
+        snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .keyboard))
+
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            snapshot.appendItems(KeyboardLocale.current.compactPortraitKeyMapping.map { ItemWrapper.key("\($0)") }, toSection: .keyboard)
+        } else {
+            snapshot.appendItems(KeyboardLocale.current.landscapeKeyMapping.map { ItemWrapper.key("\($0)") }, toSection: .keyboard)
+        }
+
+        snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)], toSection: .keyboard)
+    }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
-        
-        var snapshot = dataSource.snapshot()
-        snapshot.deleteAllItems()
-        dataSource.apply(snapshot)
-                
-        DispatchQueue.main.async { [weak self] in
-            self?.updateSnapshot()
-        }
+
+        coordinator.animate(alongsideTransition: { _ in
+            var snapshot = self.dataSource.snapshot()
+            if snapshot.sectionIdentifiers.contains(.keyboard) {
+                self.updateKeyboardKeys(in: &snapshot)
+                self.dataSource.apply(snapshot, animatingDifferences: false)
+            }
+        }, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -259,13 +276,8 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
             }
             
             snapshot.appendSections([.keyboard])
-            if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
-                snapshot.appendItems(KeyboardLocale.current.compactPortraitKeyMapping.map { ItemWrapper.key("\($0)") })
-            } else {
-                snapshot.appendItems(KeyboardLocale.current.landscapeKeyMapping.map { ItemWrapper.key("\($0)") })
-            }
-            
-            snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])
+            updateKeyboardKeys(in: &snapshot)
+
         } else {
             snapshot.appendItems([.topBarButton(.toggleKeyboard), .topBarButton(.settings)])
             

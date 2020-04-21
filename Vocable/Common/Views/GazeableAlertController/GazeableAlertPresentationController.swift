@@ -10,8 +10,8 @@ import UIKit
 
 final class GazeableAlertPresentationController: UIPresentationController {
 
-    private lazy var dimmedBackgroundView: UIView = {
-        let view = UIView()
+    private lazy var dimmedBackgroundView: GazeEatingView = {
+        let view = GazeEatingView()
         view.backgroundColor = .black
         view.alpha = 0
         return view
