@@ -36,7 +36,13 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
             _textTransaction = TextTransaction(text: text)
         }
     }
-    
+
+    private var shouldAllowSaving = false {
+        didSet {
+            updateSaveButtonCell()
+        }
+    }
+
     private var textHasChanged: Bool {
         return text != textTransaction.text
     }
@@ -95,6 +101,11 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
                 return cell
             case .topBarButton(let buttonType):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
+                if buttonType == .confirmEdit {
+                    cell.isEnabled = self.shouldAllowSaving
+                } else {
+                    cell.isEnabled = true
+                }
                 cell.setup(with: buttonType.image)
                 return cell
             case .suggestionText(let predictiveText):
@@ -178,6 +189,12 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
         snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])
 
         dataSource.apply(snapshot, animatingDifferences: animated)
+    }
+
+    private func updateSaveButtonCell() {
+        guard let indexPath = dataSource.indexPath(for: .topBarButton(.confirmEdit)) else { return }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PresetItemCollectionViewCell else { return }
+        cell.isEnabled = shouldAllowSaving
     }
     
     private func topBarLayout() -> NSCollectionLayoutSection {
@@ -294,7 +311,12 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
         switch item {
         case .textField:
             return false
-        case .topBarButton, .keyboardFunctionButton, .key:
+        case .topBarButton(let buttonType):
+            if case .confirmEdit = buttonType {
+                return shouldAllowSaving
+            }
+            return true
+        case .keyboardFunctionButton, .key:
             return true
         case .suggestionText(let suggestion):
             return !suggestion.text.isEmpty
@@ -307,7 +329,12 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
         switch item {
         case .textField:
             return false
-        case .topBarButton, .keyboardFunctionButton, .key:
+        case .topBarButton(let buttonType):
+            if case .confirmEdit = buttonType {
+                return shouldAllowSaving
+            }
+            return true
+        case .keyboardFunctionButton, .key:
             return true
         case .suggestionText(let suggestion):
             return !suggestion.text.isEmpty
@@ -316,7 +343,10 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
     
     private func setTextTransaction(_ transaction: TextTransaction) {
         self._textTransaction = transaction
-        
+
+        let isEmpty = transaction.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        shouldAllowSaving = textHasChanged && !isEmpty
+
         // Update suggestions
         if textTransaction.isHint || textTransaction.text.last == " " {
             suggestions = []
@@ -324,6 +354,7 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
             textExpression.replace(text: textTransaction.text)
             suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
         }
+
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
