@@ -47,7 +47,7 @@ private extension CarouselGridLayout {
     private var lastInvalidatedSize: CGSize = .zero
     override var frame: CGRect {
         didSet {
-            guard frame.size != lastInvalidatedSize else { return }
+            guard window != nil, frame.size != lastInvalidatedSize else { return }
             snapToBoundaryIfNeeded()
         }
     }
