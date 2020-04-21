@@ -105,8 +105,15 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         guard [.move, .update].contains(type) else { return }
-        
-        updateDataSource(animated: true)
+
+        updateDataSource(animated: true, completion: { [weak self] in
+            guard let window = self?.view.window as? HeadGazeWindow, let target = window.activeGazeTarget else {
+                    return
+            }
+            if let _ = self?.collectionView.indexPath(containing: target) {
+                window.cancelActiveGazeTarget()
+            }
+        })
         
         if let newIndexPath = newIndexPath {
             setupCell(indexPath: newIndexPath)

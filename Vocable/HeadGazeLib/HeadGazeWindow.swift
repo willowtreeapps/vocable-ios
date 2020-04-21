@@ -14,6 +14,10 @@ class HeadGazeWindow: UIWindow {
     
     weak var cursorView: UIVirtualCursorView?
 
+    var activeGazeTarget: UIView? {
+        return trackingView
+    }
+
     private var trackingView: UIView?
     private var lastGaze: UIHeadGaze?
     
