@@ -108,6 +108,8 @@ class GazeableButton: UIButton {
         ])
         buttonImageWidthConstraint = widthConstraint
         buttonImageHeightConstraint = heightConstraint
+
+        updateContentViews()
     }
 
     private func buttonImageViewSizeForCurrentTraitCollection() -> CGSize {
