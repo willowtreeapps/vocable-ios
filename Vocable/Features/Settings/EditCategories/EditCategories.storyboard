@@ -32,9 +32,14 @@
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00c-RK-HF1" userLabel="Back Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                        <rect key="frame" x="0.0" y="8" width="63" height="48"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="00c-RK-HF1" secondAttribute="height" multiplier="1:1" id="Ybw-Mx-Z25"/>
+                                            <constraint firstAttribute="height" constant="48" id="7za-qB-t9U">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="96"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="63" id="yU5-er-tY8">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="104"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <color key="tintColor" name="DefaultFontColor"/>
@@ -49,7 +54,15 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y3d-hd-xdZ" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                        <rect key="frame" x="310" y="0.0" width="64" height="64"/>
+                                        <rect key="frame" x="311" y="8" width="63" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="T4G-bF-2SP">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="96"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="63" id="buV-4d-4Y0">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="104"/>
+                                            </constraint>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <color key="tintColor" name="DefaultFontColor"/>
                                         <state key="normal" image="xmark.circle" catalog="system">
@@ -66,21 +79,19 @@
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstItem="0CD-i2-i5g" firstAttribute="centerX" secondItem="FaL-BL-aEw" secondAttribute="centerX" id="7hG-Zd-00j"/>
+                                    <constraint firstItem="00c-RK-HF1" firstAttribute="centerY" secondItem="FaL-BL-aEw" secondAttribute="centerY" id="FyE-V0-dl1"/>
                                     <constraint firstItem="0CD-i2-i5g" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="topMargin" constant="8" id="Nmv-ve-AaL">
                                         <variation key="heightClass=regular-widthClass=compact" constant="16"/>
                                     </constraint>
                                     <constraint firstItem="0CD-i2-i5g" firstAttribute="centerX" secondItem="FaL-BL-aEw" secondAttribute="centerX" id="UfO-TZ-C2g"/>
-                                    <constraint firstItem="y3d-hd-xdZ" firstAttribute="width" secondItem="00c-RK-HF1" secondAttribute="width" id="Y2b-FS-QNd"/>
                                     <constraint firstItem="00c-RK-HF1" firstAttribute="leading" secondItem="FaL-BL-aEw" secondAttribute="leadingMargin" id="Yvt-vZ-hNf"/>
                                     <constraint firstAttribute="height" constant="96" id="cfS-cm-2vy">
                                         <variation key="heightClass=compact" constant="48"/>
                                         <variation key="heightClass=regular-widthClass=compact" constant="64"/>
                                     </constraint>
-                                    <constraint firstAttribute="bottomMargin" secondItem="00c-RK-HF1" secondAttribute="bottom" id="dFT-Wk-Bu6"/>
+                                    <constraint firstItem="y3d-hd-xdZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0CD-i2-i5g" secondAttribute="trailing" constant="24" id="kxU-0c-zIa"/>
                                     <constraint firstItem="y3d-hd-xdZ" firstAttribute="top" secondItem="00c-RK-HF1" secondAttribute="top" id="mBd-2K-v0G"/>
                                     <constraint firstItem="0CD-i2-i5g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="00c-RK-HF1" secondAttribute="trailing" constant="24" id="oK7-wd-nL0"/>
-                                    <constraint firstItem="y3d-hd-xdZ" firstAttribute="height" secondItem="00c-RK-HF1" secondAttribute="height" id="pS4-za-txR"/>
-                                    <constraint firstItem="00c-RK-HF1" firstAttribute="top" secondItem="FaL-BL-aEw" secondAttribute="topMargin" id="pyq-nd-AXg"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="y3d-hd-xdZ" secondAttribute="trailing" id="u4m-Lt-OzX"/>
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>

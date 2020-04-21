@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="z2O-mb-WoW">
-    <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -29,7 +29,7 @@
             <objects>
                 <collectionViewController id="if3-QM-p2o" customClass="SettingsCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yYQ-tW-Cgs">
-                        <rect key="frame" x="0.0" y="0.0" width="976" height="1214"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="734"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="Xga-RH-NHm">
@@ -54,11 +54,11 @@
             <objects>
                 <viewController id="gMn-gX-rfc" customClass="SettingsViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mXz-yV-vIn" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtZ-qP-xqU">
-                                <rect key="frame" x="32" y="32" width="960" height="57.5"/>
+                                <rect key="frame" x="20" y="60" width="374" height="41"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
@@ -70,7 +70,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59L-eT-oZ6" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="32" y="32" width="116" height="100"/>
+                                <rect key="frame" x="20" y="60" width="63" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="XFt-fF-4My">
                                         <variation key="heightClass=compact" constant="48"/>
@@ -95,7 +95,7 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="6E8-xr-Wux">
-                                <rect key="frame" x="24" y="152" width="976" height="1214"/>
+                                <rect key="frame" x="20" y="128" width="374" height="734"/>
                                 <connections>
                                     <segue destination="if3-QM-p2o" kind="embed" id="npm-Wd-wUb"/>
                                 </connections>
