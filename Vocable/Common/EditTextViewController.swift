@@ -66,6 +66,11 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
         configureDataSource()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
+    }
+
     private func setupCollectionView() {
         collectionView.delaysContentTouches = false
         collectionView.isScrollEnabled = false
