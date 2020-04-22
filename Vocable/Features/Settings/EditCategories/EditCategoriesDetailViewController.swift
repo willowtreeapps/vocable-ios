@@ -193,20 +193,19 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
             self.dismiss(animated: true, completion: nil)
         }
 
-        let title = NSLocalizedString("category_editor.alert.cancel_editing_confirmation.title",
-                                      comment: "Exit edit categories alert title")
+        let title = NSLocalizedString("category_editor.alert.cancel_editing_confirmation.title", comment: "Exit edit categories alert title")
         let confirmButtonTitle = NSLocalizedString("category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title", comment: "Confirm exit category alert action title")
         let cancelButtonTitle = NSLocalizedString("category_editor.alert.cancel_editing_confirmation.button.cancel.title", comment: "Cancel exit editing alert action title")
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: confirmButtonTitle, handler: confirmChangesAction))
         alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
+        alert.addAction(GazeableAlertAction(title: confirmButtonTitle, style: .bold, handler: confirmChangesAction))
         self.present(alert, animated: true, completion: nil)
     }
     
     private func handleRemoveCategory() {
         let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("category_editor.alert.delete_category_confirmation.title", comment: "Remove category alert title"))
         alert.addAction(GazeableAlertAction(title: NSLocalizedString("category_editor.alert.delete_category_confirmation.button.remove.title", comment: "Remove category alert action title"), handler: { self.removeCategory() }))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("category_editor.alert.delete_category_confirmation.button.cancel.title", comment: "Cancel alert action title"), handler: {
+        alert.addAction(GazeableAlertAction(title: NSLocalizedString("category_editor.alert.delete_category_confirmation.button.cancel.title", comment: "Cancel alert action title"), style: .bold, handler: {
             self.deselectCell()
         }))
         self.present(alert, animated: true)

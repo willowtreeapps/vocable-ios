@@ -243,6 +243,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         }
     }
 
+    // swiftlint:disable cyclomatic_complexity
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.indexPathForGazedItem != indexPath {
             collectionView.deselectItem(at: indexPath, animated: true)
@@ -324,11 +325,8 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         
         let alertViewController = GazeableAlertViewController(alertTitle: alertString)
 
-        alertViewController.addAction(GazeableAlertAction(title: cancelTitle,
-                                                          style: .default))
-        alertViewController.addAction(GazeableAlertAction(title: confirmationTitle,
-                                                          style: .destructive,
-                                                          handler: confirmationAction))
+        alertViewController.addAction(GazeableAlertAction(title: cancelTitle))
+        alertViewController.addAction(GazeableAlertAction(title: confirmationTitle, style: .bold, handler: confirmationAction))
         present(alertViewController, animated: true)
     }
 

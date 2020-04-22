@@ -93,7 +93,7 @@ final class SelectionModeCollectionViewController: UICollectionViewController {
                                                        comment: "Confirm alert action title")
             let alertViewController = GazeableAlertViewController.init(alertTitle: title)
             alertViewController.addAction(GazeableAlertAction(title: cancelButtonTitle))
-            alertViewController.addAction(GazeableAlertAction(title: confirmButtonTitle, handler: self.toggleHeadTracking))
+            alertViewController.addAction(GazeableAlertAction(title: confirmButtonTitle, style: .bold, handler: self.toggleHeadTracking))
             present(alertViewController, animated: true)
         } else {
             AppConfig.isHeadTrackingEnabled.toggle()

@@ -194,8 +194,8 @@ class EditSayingsViewController: UIViewController, UICollectionViewDelegate, NSF
                                                   comment: "Delete phrase alert cancel button title")
 
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, handler: deleteAction))
         alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
+        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, handler: deleteAction))
         self.present(alert, animated: true)
     }
 
@@ -260,7 +260,7 @@ class EditSayingsViewController: UIViewController, UICollectionViewDelegate, NSF
                                                     comment: "Continue editing alert action title")
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
-        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
+        alert.addAction(GazeableAlertAction(title: continueButtonTitle, style: .bold))
         self.present(alert, animated: true)
     }
 }

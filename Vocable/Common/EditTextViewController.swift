@@ -387,7 +387,7 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
                                                     comment: "Continue editing alert action title")
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
-        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
+        alert.addAction(GazeableAlertAction(title: continueButtonTitle, style: .bold))
         self.present(alert, animated: true)
     }
 }
