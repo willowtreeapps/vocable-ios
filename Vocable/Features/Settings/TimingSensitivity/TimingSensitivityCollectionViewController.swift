@@ -15,6 +15,9 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
         case sensitivity
     }
     
+    private let maxDwellTimeDuration = 5.0
+    private let minDwellTimeDuration = 0.5
+    
     private lazy var dataSource = UICollectionViewDiffableDataSource<Int, SelectionModeItem>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
@@ -22,6 +25,7 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        handleDwellTimeButtonRange()
     }
     
     // MARK: UICollectionViewDataSource
@@ -123,14 +127,36 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     }
     
     @objc private func handleDecreasingDwellTime(_ sender: UIButton) {
-        if AppConfig.selectionHoldDuration > 0.5 {
+        if AppConfig.selectionHoldDuration > minDwellTimeDuration {
             AppConfig.selectionHoldDuration -= 0.5
         }
+        
+        handleDwellTimeButtonRange()
     }
     
     @objc private func handleIncreasingDwellTime(_ sender: UIButton) {
-        if AppConfig.selectionHoldDuration < 5 {
+        if AppConfig.selectionHoldDuration < maxDwellTimeDuration {
             AppConfig.selectionHoldDuration += 0.5
         }
+        
+        handleDwellTimeButtonRange()
+    }
+    
+    private func handleDwellTimeButtonRange() {
+        guard let dwellTimeCell = dwellTimeCollectionViewCell() else { return }
+        if AppConfig.selectionHoldDuration == minDwellTimeDuration {
+            dwellTimeCell.decreaseTimeButton.isEnabled = false
+        } else if AppConfig.selectionHoldDuration == maxDwellTimeDuration {
+            dwellTimeCell.increaseTimeButton.isEnabled = false
+        } else {
+            dwellTimeCell.decreaseTimeButton.isEnabled = true
+            dwellTimeCell.increaseTimeButton.isEnabled = true
+        }
+    }
+    
+    private func dwellTimeCollectionViewCell() -> DwellTimeCollectionViewCell? {
+        guard let indexPath = dataSource.indexPath(for: .dwellTime) else { return nil }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? DwellTimeCollectionViewCell else { return nil }
+        return cell
     }
 }
