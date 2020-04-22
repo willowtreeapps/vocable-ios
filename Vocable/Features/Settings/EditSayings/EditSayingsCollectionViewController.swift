@@ -110,8 +110,8 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
                                                   comment: "Delete phrase alert cancel button title")
 
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, handler: deleteAction))
         alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
+        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, style: .destructive, handler: deleteAction))
         self.present(alert, animated: true)
     }
     

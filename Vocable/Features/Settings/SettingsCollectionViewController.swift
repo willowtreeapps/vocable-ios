@@ -243,6 +243,7 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         }
     }
 
+    // swiftlint:disable cyclomatic_complexity
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.indexPathForGazedItem != indexPath {
             collectionView.deselectItem(at: indexPath, animated: true)
