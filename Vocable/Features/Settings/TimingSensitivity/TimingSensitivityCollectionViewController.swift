@@ -146,8 +146,10 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
         guard let indexPath = dataSource.indexPath(for: .dwellTime) else { return }
         guard let dwellTimeCell = collectionView.cellForItem(at: indexPath) as? DwellTimeCollectionViewCell else { return }
         if AppConfig.selectionHoldDuration == minDwellTimeDuration {
+            (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
             dwellTimeCell.decreaseTimeButton.isEnabled = false
         } else if AppConfig.selectionHoldDuration == maxDwellTimeDuration {
+            (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
             dwellTimeCell.increaseTimeButton.isEnabled = false
         } else {
             dwellTimeCell.decreaseTimeButton.isEnabled = true
