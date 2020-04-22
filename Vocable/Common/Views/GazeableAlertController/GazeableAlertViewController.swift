@@ -11,7 +11,7 @@ import UIKit
 final class GazeableAlertAction: NSObject {
 
     public enum Style {
-        case destructive
+        case bold
         case `default`
     }
 
@@ -97,7 +97,7 @@ private final class GazeableAlertButton: GazeableButton {
     var style: GazeableAlertAction.Style = .default {
         didSet {
             switch style {
-            case .destructive:
+            case .bold:
                 if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
                     titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
                 } else {
