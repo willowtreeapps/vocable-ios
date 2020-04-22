@@ -102,8 +102,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
             self.deletePhrase(sender)
         }
 
-        let title = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.title",
-                                      comment: "Delete phrase confirmation alert title")
+        let title = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.title", comment: "Delete phrase confirmation alert title")
         let deleteButtonTitle = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.button.delete.title",
                                                   comment: "Delete phrase alert action button title")
         let cancelButtonTitle = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.button.cancel.title",
@@ -111,7 +110,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
 
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
-        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, style: .destructive, handler: deleteAction))
+        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, handler: deleteAction))
         self.present(alert, animated: true)
     }
     
@@ -175,8 +174,8 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         let continueButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
                                                     comment: "Continue editing alert action title")
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
-        alert.addAction(GazeableAlertAction(title: discardButtonTitle, style: .destructive, handler: discardChangesAction))
+        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
+        alert.addAction(GazeableAlertAction(title: continueButtonTitle, style: .bold))
         self.present(alert, animated: true)
     }
 }
