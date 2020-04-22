@@ -260,9 +260,6 @@
 		71DBE5EA240DE4D000BA8D01 /* WarningView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		71FA2854242406540051498A /* SelectionModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionModeViewController.swift; sourceTree = "<group>"; };
 		71FA2856242413670051498A /* SelectionModeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionModeCollectionViewController.swift; sourceTree = "<group>"; };
-		7F55BDAD242E3BD300166C31 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
-		7F55BDAE242E3BD400166C31 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		7F55BDB1242E3BD600166C31 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppExtensions.swift"; sourceTree = "<group>"; };
 		A91525412447541200B9B815 /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
@@ -838,7 +835,6 @@
 				en,
 				Base,
 				de,
-				ar,
 			);
 			mainGroup = 130C00AB20D2AD2A007C3163;
 			productRefGroup = 130C00B520D2AD2A007C3163 /* Products */;
@@ -1087,7 +1083,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				130C00BE20D2AD2A007C3163 /* Base */,
-				7F55BDAD242E3BD300166C31 /* ar */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1096,7 +1091,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				130C00C320D2AD2C007C3163 /* Base */,
-				7F55BDAE242E3BD400166C31 /* ar */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1106,7 +1100,6 @@
 			children = (
 				30B979B92425583E00309D7C /* en */,
 				30B979BB2425584300309D7C /* de */,
-				7F55BDB1242E3BD600166C31 /* ar */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

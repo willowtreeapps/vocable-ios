@@ -14,8 +14,18 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
     override func updateContentViews() {
         super.updateContentViews()
 
-        textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
-        textLabel.backgroundColor = borderedView.fillColor
+        let textColor: UIColor = {
+            if isSelected {
+                return .selectedTextColor
+            }
+            if !isEnabled {
+                return .disabledTextColor
+            }
+            return .defaultTextColor
+        }()
+
+        textLabel.textColor = textColor
+        textLabel.backgroundColor = .clear
         textLabel.isOpaque = true
         textLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
     }
