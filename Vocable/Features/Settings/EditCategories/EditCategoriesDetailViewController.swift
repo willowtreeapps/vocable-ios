@@ -198,8 +198,8 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
         let confirmButtonTitle = NSLocalizedString("category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title", comment: "Confirm exit category alert action title")
         let cancelButtonTitle = NSLocalizedString("category_editor.alert.cancel_editing_confirmation.button.cancel.title", comment: "Cancel exit editing alert action title")
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: confirmButtonTitle, handler: confirmChangesAction))
         alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
+        alert.addAction(GazeableAlertAction(title: confirmButtonTitle, handler: confirmChangesAction))
         self.present(alert, animated: true, completion: nil)
     }
     
