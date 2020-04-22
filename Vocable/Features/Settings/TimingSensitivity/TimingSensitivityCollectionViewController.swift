@@ -15,6 +15,9 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
         case sensitivity
     }
     
+    private let maxDwellTimeDuration = 5.0
+    private let minDwellTimeDuration = 0.5
+    
     private lazy var dataSource = UICollectionViewDiffableDataSource<Int, SelectionModeItem>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
@@ -22,6 +25,7 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        handleDwellTimeButtonRange()
     }
     
     // MARK: UICollectionViewDataSource
@@ -123,14 +127,29 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     }
     
     @objc private func handleDecreasingDwellTime(_ sender: UIButton) {
-        if AppConfig.selectionHoldDuration > 0.5 {
+        if AppConfig.selectionHoldDuration > minDwellTimeDuration {
             AppConfig.selectionHoldDuration -= 0.5
         }
+        
+        handleDwellTimeButtonRange()
     }
     
     @objc private func handleIncreasingDwellTime(_ sender: UIButton) {
-        if AppConfig.selectionHoldDuration < 5 {
+        if AppConfig.selectionHoldDuration < maxDwellTimeDuration {
             AppConfig.selectionHoldDuration += 0.5
+        }
+        
+        handleDwellTimeButtonRange()
+    }
+    
+    private func handleDwellTimeButtonRange() {
+        guard let indexPath = dataSource.indexPath(for: .dwellTime) else { return }
+        guard let dwellTimeCell = collectionView.cellForItem(at: indexPath) as? DwellTimeCollectionViewCell else { return }
+        let currentDuration = AppConfig.selectionHoldDuration
+        dwellTimeCell.decreaseTimeButton.isEnabled =  currentDuration > minDwellTimeDuration
+        dwellTimeCell.increaseTimeButton.isEnabled = currentDuration < maxDwellTimeDuration
+        if !dwellTimeCell.decreaseTimeButton.isEnabled || !dwellTimeCell.increaseTimeButton.isEnabled {
+            (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
         }
     }
 }
