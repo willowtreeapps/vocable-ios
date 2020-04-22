@@ -34,7 +34,7 @@ private extension CarouselGridLayout {
     }
 }
 
-@IBDesignable class CarouselGridCollectionView: UICollectionView {
+class CarouselGridCollectionView: UICollectionView {
 
     var progressPublisher: PublishedValue<CarouselGridPagingProgress>.Publisher {
         return layout.$progress
