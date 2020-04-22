@@ -119,3 +119,5 @@
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
 
 "phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
+
+"categories_list_editor.header.title" = "Categories";
