@@ -13,8 +13,8 @@ import CoreData
 
 class EditCategoriesViewController: UIViewController {
     
-    @IBOutlet var addCategoryButton: GazeableButton!
-    
+    @IBOutlet private var addCategoryButton: GazeableButton!
+    @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private weak var pageNavigationView: PaginationView!
     
     private var carouselCollectionViewController: CarouselGridCollectionViewController?
@@ -34,7 +34,8 @@ class EditCategoriesViewController: UIViewController {
         }).store(in: &disposables)
         
         addCategoryButton.isHidden = !AppConfig.showDebugOptions
-        
+        titleLabel.text = NSLocalizedString("categories_list_editor.header.title",
+                                            comment: "Categories list editor screen header title")
         pageNavigationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)
         pageNavigationView.previousPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToPreviousPage), for: .primaryActionTriggered)
         

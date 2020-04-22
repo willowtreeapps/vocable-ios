@@ -1,3 +1,24 @@
+/* Categories list editor screen header title */
+"categories_list_editor.header.title" = "Kategorien";
+
+/* Cancel exit editing alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Abbrechen";
+
+/* Confirm exit category alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Bestätigen";
+
+/* Exit edit categories alert title */
+"category_editor.alert.cancel_editing_confirmation.title" = "Wenn Sie dies schließen, ohne Ihre benutzerdefinierte Kategorie zu speichern, wird gelöscht.";
+
+/* Delete category alert cancel button title */
+"category_editor.alert.delete_category_confirmation.button.cancel.title" = "Abbrechen";
+
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "Entfernen";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "Gelöschte Kategorien können nicht wiederhergestellt werden.";
+
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Abbrechen";
 
@@ -7,8 +28,18 @@
 /* Delete phrase confirmation alert title */
 "category_editor.alert.delete_phrase_confirmation.title" = "Gelöschte Sätze können nicht wiederhergestellt werden.";
 
+/* Remove category button label within the category detail screen. */
+"category_editor.detail.button.remove_category.title" = "Kategorie entfernen";
+
+/* Show category button label within the category detail screen. */
+"category_editor.detail.button.show_category.title" = "Anzeigen";
+
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "Änderungen gespeichert";
+
+/* Saved to Categories
+   User edited name of the category and saved it successfully */
+"category_editor.toast.successfully_saved.title" = "Änderungen gespeichert";
 
 /* Debugging error message for when preloaded content is not found */
 "debug.assertion.presets_file_not_found" = "No presets found";
@@ -17,7 +48,7 @@
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Abbrechen";
 
 /* Confirm alert action title */
-"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Okay";
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Bestätigen";
 
 /* Disable head tracking confirmation alert title */
 "gaze_settings.alert.disable_head_tracking_confirmation.title" = "Steuerung per Kopfbewegung ausschalten?";
@@ -64,7 +95,7 @@
 "settings.alert.surrender_gaze_confirmation.button.cancel.title" = "Abbrechen";
 
 /* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
-"settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Okay";
+"settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Bestätigen";
 
 /* edit categories settings menu item */
 "settings.cell.categories.title" = "Kategorien";
@@ -95,4 +126,13 @@
 
 /* Settings screen header title */
 "settings.header.title" = "Einstellungen";
+
+/* Continue editing alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Weiter editieren";
+
+/* Discard changes alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Verwerfen";
+
+/* Exit edit sayings alert title */
+"text_editor.alert.cancel_editing_confirmation.title" = "Nicht gespeicherte Veränderungen werden beim Verlassen des Menüs verworfen.";
 
