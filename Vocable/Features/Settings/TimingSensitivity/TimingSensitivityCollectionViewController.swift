@@ -143,7 +143,8 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
     }
     
     private func handleDwellTimeButtonRange() {
-        guard let dwellTimeCell = dwellTimeCollectionViewCell() else { return }
+        guard let indexPath = dataSource.indexPath(for: .dwellTime) else { return }
+        guard let dwellTimeCell = collectionView.cellForItem(at: indexPath) as? DwellTimeCollectionViewCell else { return }
         if AppConfig.selectionHoldDuration == minDwellTimeDuration {
             dwellTimeCell.decreaseTimeButton.isEnabled = false
         } else if AppConfig.selectionHoldDuration == maxDwellTimeDuration {
@@ -152,11 +153,5 @@ class TimingSensitivityCollectionViewController: UICollectionViewController {
             dwellTimeCell.decreaseTimeButton.isEnabled = true
             dwellTimeCell.increaseTimeButton.isEnabled = true
         }
-    }
-    
-    private func dwellTimeCollectionViewCell() -> DwellTimeCollectionViewCell? {
-        guard let indexPath = dataSource.indexPath(for: .dwellTime) else { return nil }
-        guard let cell = collectionView.cellForItem(at: indexPath) as? DwellTimeCollectionViewCell else { return nil }
-        return cell
     }
 }
