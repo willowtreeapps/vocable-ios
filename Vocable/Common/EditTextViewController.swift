@@ -10,30 +10,21 @@ import Foundation
 import AVFoundation
 import UIKit
 import CoreData
+import Combine
 
 final class EditTextViewController: UIViewController, UICollectionViewDelegate {
     
+    private var disposables = Set<AnyCancellable>()
+
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
-    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet private var collectionView: UICollectionView!
     
-    private var _textTransaction = TextTransaction(text: "")
+    private var keyboardViewController: KeyboardViewController?
     
-    private var textTransaction: TextTransaction {
-        return _textTransaction
-    }
-    
-    private let textExpression = TextExpression()
-    
-    private var suggestions: [TextSuggestion] = [] {
+    var displayText: NSMutableAttributedString? {
         didSet {
             updateSnapshot()
-        }
-    }
-    
-    var text: String = "" {
-        didSet {
-            _textTransaction = TextTransaction(text: text)
         }
     }
 
@@ -42,9 +33,17 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
             updateSaveButtonCell()
         }
     }
-
-    private var textHasChanged: Bool {
-        return text != textTransaction.text
+    
+    // TODO: Need to figure this out
+    private var textHasChanged = false
+//    private var textHasChanged: Bool {
+//        return text != textTransaction.text
+//    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "KeyboardViewController" {
+           keyboardViewController = segue.destination as? KeyboardViewController
+        }
     }
   
     var editTextCompletionHandler: (String) -> Void = { (_) in
@@ -54,20 +53,18 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
     private enum ItemWrapper: Hashable {
         case textField(NSAttributedString)
         case topBarButton(TopBarButton)
-        case key(String)
-        case keyboardFunctionButton(KeyboardFunctionButton)
-        case suggestionText(TextSuggestion)
     }
     
     private enum Section: Int, CaseIterable {
         case textField
-        case suggestions
-        case keyboard
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        keyboardViewController?.$attrText.receive(on: DispatchQueue.main)
+            .assign(to: \EditTextViewController.displayText, on: self)
+            .store(in: &disposables)
         setupCollectionView()
         configureDataSource()
     }
@@ -83,10 +80,7 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
         
         collectionView.register(UINib(nibName: "TextFieldCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TextFieldCollectionViewCell")
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
-        collectionView.register(UINib(nibName: "KeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardKeyCollectionViewCell")
         collectionView.register(UINib(nibName: "SuggestionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SuggestionCollectionViewCell")
-        collectionView.register(UINib(nibName: "FunctionKeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FunctionKeyboardKeyCollectionViewCell")
-        collectionView.register(UINib(nibName: "SpeakFunctionKeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SpeakFunctionKeyboardKeyCollectionViewCell")
         
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
@@ -103,6 +97,7 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
             case .textField(let title):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: TextFieldCollectionViewCell.reuseIdentifier, for: indexPath) as! TextFieldCollectionViewCell
                 cell.setup(title: title)
+                
                 return cell
             case .topBarButton(let buttonType):
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
@@ -113,23 +108,6 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
                 }
                 cell.setup(with: buttonType.image)
                 return cell
-            case .suggestionText(let predictiveText):
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: SuggestionCollectionViewCell.reuseIdentifier, for: indexPath) as! SuggestionCollectionViewCell
-                cell.setup(title: predictiveText.text)
-                return cell
-            case .key(let char):
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
-                cell.setup(title: char)
-                return cell
-            case .keyboardFunctionButton(let functionType):
-                if functionType == .speak {
-                    let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: SpeakFunctionKeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! SpeakFunctionKeyboardKeyCollectionViewCell
-                    cell.setup(with: functionType.image)
-                    return cell
-                }
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: FunctionKeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! FunctionKeyboardKeyCollectionViewCell
-                cell.setup(with: functionType.image)
-                return cell
             }
         })
         
@@ -137,17 +115,8 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
     }
     
     private func createLayout() -> UICollectionViewLayout {
-        let layout = PresetCollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            let sectionKind = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
-            
-            switch sectionKind {
-            case .textField:
-                return self.topBarLayout()
-            case .keyboard:
-                return PresetCollectionViewCompositionalLayout.keyboardLayout(with: layoutEnvironment)
-            case .suggestions:
-                return PresetCollectionViewCompositionalLayout.suggestiveTextSectionLayout(with: layoutEnvironment)
-            }
+        let layout = PresetCollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
+            return self.topBarLayout()
         }
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
         return layout
@@ -162,37 +131,14 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
             && traitCollection.verticalSizeClass == .regular {
             snapshot.appendItems([.topBarButton(.close),
                                   .topBarButton(.confirmEdit),
-                                  .textField(textTransaction.attributedText)
+                                  .textField(displayText ?? NSMutableAttributedString(string: ""))
             ])
         } else {
             snapshot.appendItems([.topBarButton(.close),
-                                  .textField(textTransaction.attributedText),
+                                  .textField(displayText ?? NSMutableAttributedString(string: "")),
                                   .topBarButton(.confirmEdit)])
         }
         
-        snapshot.appendSections([.suggestions])
-        
-        if suggestions.isEmpty {
-             snapshot.appendItems([.suggestionText(TextSuggestion(text: "")),
-                                   .suggestionText(TextSuggestion(text: "")),
-                                   .suggestionText(TextSuggestion(text: "")),
-                                   .suggestionText(TextSuggestion(text: ""))])
-        } else {
-            snapshot.appendItems([.suggestionText(TextSuggestion(text: (suggestions[safe: 0]?.text ?? ""))),
-                                  .suggestionText(TextSuggestion(text: (suggestions[safe: 1]?.text ?? ""))),
-                                  .suggestionText(TextSuggestion(text: (suggestions[safe: 2]?.text ?? ""))),
-                                  .suggestionText(TextSuggestion(text: (suggestions[safe: 3]?.text ?? "")))])
-        }
-        
-        snapshot.appendSections([.keyboard])
-        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
-            snapshot.appendItems(KeyboardLocale.current.compactPortraitKeyMapping.map { ItemWrapper.key("\($0)") })
-        } else {
-            snapshot.appendItems(KeyboardLocale.current.landscapeKeyMapping.map { ItemWrapper.key("\($0)") })
-        }
-        
-        snapshot.appendItems([.keyboardFunctionButton(.clear), .keyboardFunctionButton(.space), .keyboardFunctionButton(.backspace), .keyboardFunctionButton(.speak)])
-
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
 
@@ -214,7 +160,7 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
             
             return NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .fractionalHeight(1.0 / 7.0)),
+                                                   heightDimension: .fractionalHeight(1)),
                 subitems: subitems)
         }
         
@@ -231,7 +177,7 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
             functionItemGroup.interItemSpacing = .flexible(1)
             
             return NSCollectionLayoutGroup.vertical(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 5.0)),
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1)),
                 subitems: [functionItemGroup, textFieldItem])
         }
         
@@ -244,7 +190,6 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
     
     // MARK: - Collection View Delegate
     
-    // swiftlint:disable cyclomatic_complexity
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
         for selectedPath in collectionView.indexPathsForSelectedItems ?? [] {
@@ -259,7 +204,7 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
             collectionView.deselectItem(at: indexPath, animated: true)
             switch buttonType {
             case .confirmEdit:
-                editTextCompletionHandler(textTransaction.text)
+                editTextCompletionHandler(displayText?.string ?? "")
                 dismiss(animated: true, completion: nil)
             case .close:
                 if textHasChanged {
@@ -270,26 +215,6 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
             default:
                 break
             }
-        case .keyboardFunctionButton(let functionType):
-            switch functionType {
-            case .space:
-                setTextTransaction(textTransaction.appendingCharacter(with: " "))
-            case .speak:
-                guard !textTransaction.isHint else {
-                    break
-                }
-                DispatchQueue.global(qos: .userInitiated).async {
-                    AVSpeechSynthesizer.shared.speak(self.textTransaction.text, language: AppConfig.activePreferredLanguageCode)
-                }
-            case .clear:
-                setTextTransaction(TextTransaction(text: "", intent: .none))
-            case .backspace:
-                setTextTransaction(textTransaction.deletingLastToken())
-            }
-        case .key(let char):
-            setTextTransaction(textTransaction.appendingCharacter(with: char))
-        case .suggestionText(let suggestion):
-            setTextTransaction(textTransaction.insertingSuggestion(with: suggestion.text))
         default:
             break
         }
@@ -303,7 +228,7 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         
         switch item {
-        case .topBarButton, .keyboardFunctionButton, .key, .suggestionText:
+        case .topBarButton:
             return true
         case .textField:
             return false
@@ -321,10 +246,6 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
                 return shouldAllowSaving
             }
             return true
-        case .keyboardFunctionButton, .key:
-            return true
-        case .suggestionText(let suggestion):
-            return !suggestion.text.isEmpty
         }
     }
     
@@ -339,27 +260,7 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
                 return shouldAllowSaving
             }
             return true
-        case .keyboardFunctionButton, .key:
-            return true
-        case .suggestionText(let suggestion):
-            return !suggestion.text.isEmpty
         }
-    }
-    
-    private func setTextTransaction(_ transaction: TextTransaction) {
-        self._textTransaction = transaction
-
-        let isEmpty = transaction.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        shouldAllowSaving = textHasChanged && !isEmpty
-
-        // Update suggestions
-        if textTransaction.isHint || textTransaction.text.last == " " {
-            suggestions = []
-        } else {
-            textExpression.replace(text: textTransaction.text)
-            suggestions = textExpression.suggestions().map({ TextSuggestion(text: $0) })
-        }
-
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
