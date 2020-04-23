@@ -1,6 +1,6 @@
 //
 //  CategoryCollectionViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 4/6/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
@@ -96,7 +96,6 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             ItemSelection.presetsPageIndicatorProgress = pagingProgress
         }.store(in: &disposables)
     }
-
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
