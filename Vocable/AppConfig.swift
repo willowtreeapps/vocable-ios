@@ -35,4 +35,8 @@ struct AppConfig {
     static var activePreferredLanguageCode: String {
         return Locale.preferredLanguages.first ?? defaultLanguageCode
     }
+
+    static var emptyStatesEnabled: Bool {
+        return ProcessInfo.processInfo.environment.keys.contains("EmptyStatesEnabled")
+    }
 }

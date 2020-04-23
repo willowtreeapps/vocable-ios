@@ -97,7 +97,7 @@ class CarouselGridLayout: UICollectionViewLayout {
         return count
     }
 
-    private var pagesPerSection: Int {
+    var pagesPerSection: Int {
         guard itemsPerPage > 0 else { return 0 }
         let count = Int((Double(itemsPerSection) / Double(itemsPerPage)).rounded(.awayFromZero))
         return count
@@ -279,6 +279,17 @@ class CarouselGridLayout: UICollectionViewLayout {
         if let centerIndexPath = indexPaths[safe: indexPaths.count / 2] {
             let result = indexPathForLeftmostCellOfPage(containing: centerIndexPath)
             return result
+        }
+        return nil
+    }
+
+    func indexPathForLeftmostCellOfCurrentPageInMiddleSection() -> IndexPath? {
+        let indexPaths = collectionView?.indexPathsForVisibleItems ?? []
+        if let centerIndexPath = indexPaths[safe: indexPaths.count / 2] {
+            if let result = indexPathForLeftmostCellOfPage(containing: centerIndexPath) {
+                let middleIndexPath = IndexPath(item: result.item, section: numberOfSections / 2)
+                return middleIndexPath
+            }
         }
         return nil
     }

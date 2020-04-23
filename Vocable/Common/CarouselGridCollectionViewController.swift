@@ -24,34 +24,146 @@ struct CarouselGridPagingProgress {
     static let zero = CarouselGridPagingProgress(pageIndex: 0, pageCount: 0)
 }
 
-class CarouselGridCollectionViewController: UICollectionViewController {
+private extension CarouselGridLayout {
+    static func `default`() -> CarouselGridLayout {
+        let layout = CarouselGridLayout()
+        layout.numberOfColumns = 2
+        layout.numberOfRows = .fixedCount(3)
+        layout.interItemSpacing = 24
+        return layout
+    }
+}
+
+class CarouselGridCollectionView: UICollectionView {
 
     var progressPublisher: PublishedValue<CarouselGridPagingProgress>.Publisher {
         return layout.$progress
-    }
-
-    @objc func scrollToNextPage() {
-        if let indexPath = layout.firstIndexPathForPageWithOffsetFromCurrentPage(offset: 1) {
-            collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
-    }
-
-    @objc func scrollToPreviousPage() {
-        if let indexPath = layout.firstIndexPathForPageWithOffsetFromCurrentPage(offset: -1) {
-            collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
     }
 
     var layout: CarouselGridLayout {
         return self.collectionViewLayout as! CarouselGridLayout
     }
 
+    private var lastInvalidatedSize: CGSize = .zero
+    override var frame: CGRect {
+        didSet {
+            guard window != nil, frame.size != lastInvalidatedSize else { return }
+            snapToBoundaryIfNeeded()
+        }
+    }
+
+    private var needsInitialScrollToMiddle = true
+
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+        super.init(frame: frame, collectionViewLayout: layout)
+        commonInit()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+
     init() {
-        let layout = CarouselGridLayout()
-        layout.numberOfColumns = 2
-        layout.numberOfRows = .fixedCount(3)
-        layout.interItemSpacing = 24
-        super.init(collectionViewLayout: layout)
+        super.init(frame: .zero, collectionViewLayout: CarouselGridLayout.default())
+        commonInit()
+    }
+
+    private func commonInit() {
+        decelerationRate = .fast
+        isPagingEnabled = false
+        contentInsetAdjustmentBehavior = .never
+        showsVerticalScrollIndicator = false
+        showsHorizontalScrollIndicator = false
+        delaysContentTouches = false
+        allowsMultipleSelection = true
+        backgroundColor = .collectionViewBackgroundColor
+    }
+
+    @objc func scrollToNextPage() {
+        if let indexPath = layout.firstIndexPathForPageWithOffsetFromCurrentPage(offset: 1) {
+            scrollToItem(at: indexPath, at: .left, animated: true)
+        }
+    }
+
+    @objc func scrollToPreviousPage() {
+        if let indexPath = layout.firstIndexPathForPageWithOffsetFromCurrentPage(offset: -1) {
+            scrollToItem(at: indexPath, at: .left, animated: true)
+        }
+    }
+
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        if needsInitialScrollToMiddle {
+            scrollToMiddleSection()
+            needsInitialScrollToMiddle = false
+        }
+    }
+
+    func scrollToMiddleSection() {
+        let sectionCount = numberOfSections
+        scrollToItem(at: IndexPath(item: 0, section: sectionCount / 2),
+                     at: .left,
+                     animated: false)
+        layoutIfNeeded()
+    }
+
+    private func snapToBoundaryIfNeeded() {
+        guard !isDecelerating, !isDragging, !isTracking else { return }
+        scrollToNearestSelectedIndexPathOrCurrentPageBoundary()
+    }
+
+    private func scrollToNearestSelectedIndexPathOrCurrentPageBoundary(animated: Bool = false) {
+        let selectedIndexPaths = indexPathsForSelectedItems ?? []
+
+        let destination: IndexPath
+        if let middleIndexPath = selectedIndexPaths[safe: selectedIndexPaths.count / 2], let target = layout.indexPathForLeftmostCellOfPage(containing: middleIndexPath) {
+            destination = target
+        } else
+            if let target = animated ? layout.indexPathForLeftmostCellOfCurrentPage() : layout.indexPathForLeftmostCellOfCurrentPageInMiddleSection() {
+            destination = target
+        } else {
+            return
+        }
+
+        scrollToItem(at: destination,
+                     at: .left,
+                     animated: animated)
+        if !animated {
+            layoutIfNeeded()
+        }
+    }
+}
+
+class CarouselGridCollectionViewController: UICollectionViewController {
+
+    var progressPublisher: PublishedValue<CarouselGridPagingProgress>.Publisher {
+        return carouselCollectionView.progressPublisher
+    }
+
+    var carouselCollectionView: CarouselGridCollectionView {
+        return self.collectionView as! CarouselGridCollectionView
+    }
+
+    override func loadView() {
+        let collectionView = CarouselGridCollectionView()
+        self.collectionView = collectionView
+    }
+
+    @objc func scrollToNextPage() {
+        carouselCollectionView.scrollToNextPage()
+    }
+
+    @objc func scrollToPreviousPage() {
+        carouselCollectionView.scrollToPreviousPage()
+    }
+
+    var layout: CarouselGridLayout {
+        return carouselCollectionView.layout
+    }
+
+    init() {
+        super.init(collectionViewLayout: CarouselGridLayout.default())
     }
 
     override init(collectionViewLayout layout: UICollectionViewLayout) {
@@ -62,44 +174,4 @@ class CarouselGridCollectionViewController: UICollectionViewController {
         super.init(coder: coder)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.collectionView.setCollectionViewLayout(self.layout, animated: false)
-        collectionView.decelerationRate = .fast
-        collectionView.isPagingEnabled = false
-        collectionView.contentInsetAdjustmentBehavior = .never
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.delaysContentTouches = false
-        collectionView.allowsMultipleSelection = true
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        scrollToMiddleSection()
-        scrollToBoundaryOfCurrentPage(animated: false)
-    }
-
-    private func scrollToBoundaryOfCurrentPage(animated: Bool = false) {
-        if let destination = layout.indexPathForLeftmostCellOfCurrentPage() {
-            collectionView.scrollToItem(at: destination,
-                                        at: .left,
-                                        animated: animated)
-        }
-    }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: { (_) in
-            self.scrollToBoundaryOfCurrentPage(animated: false)
-        }, completion: nil)
-    }
-
-    func scrollToMiddleSection() {
-        let sectionCount = collectionView.numberOfSections
-        collectionView.scrollToItem(at: IndexPath(item: 0, section: sectionCount / 2),
-                                    at: .left,
-                                    animated: false)
-        collectionView.layoutIfNeeded()
-    }
 }
