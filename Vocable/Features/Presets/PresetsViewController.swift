@@ -556,7 +556,7 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
     private func presentSettingsViewController() {
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
         let vc = storyboard.instantiateInitialViewController()!
-        vc.modalPresentationStyle = .overFullScreen
+        vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
 }
