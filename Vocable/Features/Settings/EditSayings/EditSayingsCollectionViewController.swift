@@ -139,7 +139,7 @@ class EditSayingsCollectionViewController: CarouselGridCollectionViewController,
         vc.modalPresentationStyle = .fullScreen
         
         let phrase = fetchResultsController.object(at: safeIndexPath)
-        vc.displayText = NSMutableAttributedString(string: phrase.utterance ?? "")
+        vc.initialText = phrase.utterance ?? ""
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
             

@@ -9,18 +9,27 @@
 import UIKit
 import AVKit
 
-protocol KeyboardViewControllerDelegate: class {
-    func didSendKey(_ sender: String)
-}
-
 class KeyboardViewController: UICollectionViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
-    private var _textTransaction = TextTransaction(text: "")
+    private var _textTransaction = TextTransaction(text: "") {
+        didSet {
+            attrText = _textTransaction.attributedText
+        }
+    }
     
     private var textTransaction: TextTransaction {
         return _textTransaction
+    }
+    
+    var displayText: String {
+        get {
+            return _textTransaction.text
+        }
+        set {
+            _textTransaction = TextTransaction(text: newValue, intent: .lastCharacter)
+        }
     }
     
     private let textExpression = TextExpression()
@@ -31,18 +40,8 @@ class KeyboardViewController: UICollectionViewController {
         }
     }
     
-    var text: String = "" {
-        didSet {
-            _textTransaction = TextTransaction(text: text)
-        }
-    }
-    
     @PublishedValue
-    var attrText: NSMutableAttributedString?
-    
-    private var textHasChanged: Bool {
-        return text != textTransaction.text
-    }
+    var attrText: NSAttributedString?
     
     var editTextCompletionHandler: (String) -> Void = { (_) in
         assertionFailure("Completion not handled")
@@ -221,7 +220,6 @@ class KeyboardViewController: UICollectionViewController {
     
     private func setTextTransaction(_ transaction: TextTransaction) {
         _textTransaction = transaction
-        attrText = _textTransaction.attributedText
         
         // Update suggestions
         if textTransaction.isHint || textTransaction.text.last == " " {

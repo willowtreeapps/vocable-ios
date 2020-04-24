@@ -121,7 +121,7 @@
                                     <segue destination="W98-u1-6GB" kind="embed" identifier="CarouselCollectionViewController" id="YT0-TB-czc"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="167.5" y="898" width="433.5" height="94"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>

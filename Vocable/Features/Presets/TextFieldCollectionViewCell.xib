@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhH-Sl-1cZ" customClass="OutputTextView" customModule="Vocable" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="106.5" width="269" height="49.5"/>
+                        <rect key="frame" x="0.0" y="114.5" width="269" height="33.5"/>
                         <color key="backgroundColor" name="Background"/>
                         <color key="tintColor" name="TextHighlight"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

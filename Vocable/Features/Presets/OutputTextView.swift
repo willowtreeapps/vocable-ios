@@ -52,7 +52,12 @@ class OutputTextView: UITextView {
 
     override var attributedText: NSAttributedString? {
         didSet {
-            updateCursorPosition()
+            defer {
+                updateCursorPosition()
+                updateFontForTraitCollection()
+            }
+            guard let attributedText = attributedText, oldValue != attributedText else { return }
+            self.attributedText = NSTextStorage(attributedString: attributedText)
         }
     }
 
@@ -114,6 +119,7 @@ class OutputTextView: UITextView {
 
         addSubview(beamView)
         updateCursorPosition()
+        updateFontForTraitCollection()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -136,5 +142,14 @@ class OutputTextView: UITextView {
     private func updateCursorPosition() {
         let rect = caretRect(for: endOfDocument)
         beamView.frame = rect
+    }
+    
+    private func updateFontForTraitCollection() {
+        let sizeClass = (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass)
+        let fontSize: CGFloat = sizeClass == (.regular, .regular) ? 40 : 28
+        let font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
+        if self.font != font {
+            self.font = font
+        }
     }
 }

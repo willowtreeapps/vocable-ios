@@ -105,7 +105,7 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
 
         vc.modalPresentationStyle = .fullScreen
 
-        vc.displayText = NSMutableAttributedString(string: category.name ?? "")
+        vc.initialText = category.name ?? ""
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
