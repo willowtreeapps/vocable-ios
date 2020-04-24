@@ -1,13 +1,12 @@
 //
 //  EmptyStateView.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Chris Stroud on 4/17/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
 import UIKit
-
 
 private class EmptyStateButton: GazeableButton {
 
