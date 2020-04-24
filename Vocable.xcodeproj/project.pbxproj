@@ -11,6 +11,7 @@
 		130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00BD20D2AD2A007C3163 /* Main.storyboard */; };
 		130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C020D2AD2C007C3163 /* Assets.xcassets */; };
 		130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */; };
+		17191A32245089270079F9BE /* VocableUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17191A31245089270079F9BE /* VocableUITests.swift */; };
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
@@ -159,6 +160,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		17191A34245089270079F9BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 130C00AC20D2AD2A007C3163 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 130C00B320D2AD2A007C3163;
+			remoteInfo = Vocable;
+		};
 		54D3C41923E37CD40061EF47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 130C00AC20D2AD2A007C3163 /* Project object */;
@@ -188,6 +196,9 @@
 		130C00C020D2AD2C007C3163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		130C00C320D2AD2C007C3163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		130C00C520D2AD2C007C3163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17191A2F245089270079F9BE /* VocableUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17191A31245089270079F9BE /* VocableUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableUITests.swift; sourceTree = "<group>"; };
+		17191A33245089270079F9BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30B979A424254CBC00309D7C /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		30B979B92425583E00309D7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30B979BB2425584300309D7C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -349,6 +360,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		17191A2C245089270079F9BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		54D3C41123E37CD40061EF47 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -364,6 +382,7 @@
 			children = (
 				130C00B620D2AD2A007C3163 /* Vocable */,
 				54D3C41523E37CD40061EF47 /* VocableTests */,
+				17191A30245089270079F9BE /* VocableUITests */,
 				130C00B520D2AD2A007C3163 /* Products */,
 				641F6ADC2445046200739C1C /* Frameworks */,
 			);
@@ -374,6 +393,7 @@
 			children = (
 				130C00B420D2AD2A007C3163 /* Vocable.app */,
 				54D3C41423E37CD40061EF47 /* VocableTests.xctest */,
+				17191A2F245089270079F9BE /* VocableUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -405,6 +425,15 @@
 				30B979BA2425583E00309D7C /* InfoPlist.strings */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		17191A30245089270079F9BE /* VocableUITests */ = {
+			isa = PBXGroup;
+			children = (
+				17191A31245089270079F9BE /* VocableUITests.swift */,
+				17191A33245089270079F9BE /* Info.plist */,
+			);
+			path = VocableUITests;
 			sourceTree = "<group>";
 		};
 		54D3C41523E37CD40061EF47 /* VocableTests */ = {
@@ -789,6 +818,24 @@
 			productReference = 130C00B420D2AD2A007C3163 /* Vocable.app */;
 			productType = "com.apple.product-type.application";
 		};
+		17191A2E245089270079F9BE /* VocableUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17191A39245089270079F9BE /* Build configuration list for PBXNativeTarget "VocableUITests" */;
+			buildPhases = (
+				17191A2B245089270079F9BE /* Sources */,
+				17191A2C245089270079F9BE /* Frameworks */,
+				17191A2D245089270079F9BE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17191A35245089270079F9BE /* PBXTargetDependency */,
+			);
+			name = VocableUITests;
+			productName = VocableUITests;
+			productReference = 17191A2F245089270079F9BE /* VocableUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		54D3C41323E37CD40061EF47 /* VocableTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54D3C41D23E37CD40061EF47 /* Build configuration list for PBXNativeTarget "VocableTests" */;
@@ -821,6 +868,10 @@
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1030;
 					};
+					17191A2E245089270079F9BE = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 130C00B320D2AD2A007C3163;
+					};
 					54D3C41323E37CD40061EF47 = {
 						CreatedOnToolsVersion = 11.3.1;
 						TestTargetID = 130C00B320D2AD2A007C3163;
@@ -843,6 +894,7 @@
 			targets = (
 				130C00B320D2AD2A007C3163 /* Vocable */,
 				54D3C41323E37CD40061EF47 /* VocableTests */,
+				17191A2E245089270079F9BE /* VocableUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -885,6 +937,13 @@
 				A944D00B2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib in Resources */,
 				6B3DCC1F24101F530039E45E /* TrackingDebugOverlayViewController.storyboard in Resources */,
 				64253CED2419358D0044EAAA /* Settings.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17191A2D245089270079F9BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,6 +1119,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		17191A2B245089270079F9BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17191A32245089270079F9BE /* VocableUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		54D3C41023E37CD40061EF47 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1071,6 +1138,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		17191A35245089270079F9BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 130C00B320D2AD2A007C3163 /* Vocable */;
+			targetProxy = 17191A34245089270079F9BE /* PBXContainerItemProxy */;
+		};
 		54D3C41A23E37CD40061EF47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 130C00B320D2AD2A007C3163 /* Vocable */;
@@ -1294,6 +1366,69 @@
 			};
 			name = Release;
 		};
+		17191A36245089270079F9BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y32EQUAEWX;
+				INFOPLIST_FILE = VocableUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.VocableUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Vocable;
+			};
+			name = Debug;
+		};
+		17191A37245089270079F9BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y32EQUAEWX;
+				INFOPLIST_FILE = VocableUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.VocableUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Vocable;
+			};
+			name = Release;
+		};
+		17191A38245089270079F9BE /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y32EQUAEWX;
+				INFOPLIST_FILE = VocableUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.VocableUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Vocable;
+			};
+			name = AppStore;
+		};
 		54D3C41B23E37CD40061EF47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1465,6 +1600,16 @@
 				130C00C920D2AD2C007C3163 /* Debug */,
 				130C00CA20D2AD2C007C3163 /* Release */,
 				54D3C41F23E380440061EF47 /* AppStore */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17191A39245089270079F9BE /* Build configuration list for PBXNativeTarget "VocableUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17191A36245089270079F9BE /* Debug */,
+				17191A37245089270079F9BE /* Release */,
+				17191A38245089270079F9BE /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

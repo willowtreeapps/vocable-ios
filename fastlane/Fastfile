@@ -8,7 +8,11 @@ platform :ios do
   desc "Runs all the tests"
   lane :test do
     lint
-    #scan(scheme: "Development") // add this back when we have tests
+    scan(
+      scheme: "Development",
+      devices: ["iPhone 11"],
+      output_directory: "./artifacts"
+    )
     # in the meantime, build the app for PRs
     match(type: "development")
     gym(

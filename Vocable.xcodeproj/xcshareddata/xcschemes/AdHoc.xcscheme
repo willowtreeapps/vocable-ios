@@ -38,6 +38,16 @@
                ReferencedContainer = "container:Vocable.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "17191A2E245089270079F9BE"
+               BuildableName = "VocableUITests.xctest"
+               BlueprintName = "VocableUITests"
+               ReferencedContainer = "container:Vocable.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
