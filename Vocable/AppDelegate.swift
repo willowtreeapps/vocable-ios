@@ -9,11 +9,20 @@
 import UIKit
 import CoreData
 import VocablePresets
+import Combine
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: HeadGazeWindow?
+    var gazeTrackingWindow: UIHeadGazeTrackingWindow?
+    var cursorWindow: UIHeadGazeCursorWindow? {
+        didSet {
+            window?.cursorView = cursorWindow?.cursorViewController.virtualCursorView
+        }
+    }
+
+    private var disposables: [AnyCancellable] = []
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -33,7 +42,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                selector: #selector(localeDidChange(_:)),
                                                name: NSLocale.currentLocaleDidChangeNotification,
                                                object: nil)
+
+        AppConfig.$isHeadTrackingEnabled.receive(on: DispatchQueue.main).sink { isEnabled in
+            if isEnabled {
+                self.installTrackingWindowsIfNeeded()
+            } else {
+                self.removeTrackingWindowsIfNeeded()
+            }
+        }.store(in: &disposables)
+
         return true
+    }
+
+    private func installTrackingWindowsIfNeeded() {
+        if gazeTrackingWindow == nil {
+            gazeTrackingWindow = UIHeadGazeTrackingWindow(frame: UIScreen.main.bounds)
+            gazeTrackingWindow?.windowLevel = UIWindow.Level(rawValue: -1)
+            gazeTrackingWindow?.isHidden = false
+        }
+        if cursorWindow == nil {
+            cursorWindow = UIHeadGazeCursorWindow(frame: UIScreen.main.bounds)
+            cursorWindow?.windowLevel = UIWindow.Level(rawValue: 1)
+            cursorWindow?.isHidden = false
+        }
+    }
+
+    private func removeTrackingWindowsIfNeeded() {
+        gazeTrackingWindow?.isHidden = true
+        gazeTrackingWindow = nil
+
+        cursorWindow?.isHidden = true
+        cursorWindow = nil
     }
 
     @objc
