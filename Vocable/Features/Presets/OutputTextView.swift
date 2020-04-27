@@ -52,12 +52,8 @@ class OutputTextView: UITextView {
 
     override var attributedText: NSAttributedString? {
         didSet {
-            defer {
-                updateCursorPosition()
-                updateFontForTraitCollection()
-            }
-            guard let attributedText = attributedText, oldValue != attributedText else { return }
-            self.attributedText = NSTextStorage(attributedString: attributedText)
+            updateFontForTraitCollection()
+            updateCursorPosition()
         }
     }
 
@@ -147,9 +143,14 @@ class OutputTextView: UITextView {
     private func updateFontForTraitCollection() {
         let sizeClass = (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass)
         let fontSize: CGFloat = sizeClass == (.regular, .regular) ? 40 : 28
-        let font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
-        if self.font != font {
-            self.font = font
+        let desiredFont = UIFont.systemFont(ofSize: fontSize, weight: .bold)
+        let attributedFont: UIFont? = {
+            guard let len = attributedText?.length, len > 0 else { return nil }
+            return attributedText?.attribute(.font, at: 0, effectiveRange: nil) as? UIFont
+        }()
+        let currentFont = attributedFont ?? self.font
+        if currentFont != desiredFont {
+            self.font = desiredFont
         }
     }
 }

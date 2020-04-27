@@ -8,28 +8,22 @@
 
 import UIKit
 import AVKit
+import Combine
 
 class KeyboardViewController: UICollectionViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ItemWrapper>!
     
+    private var disposables = Set<AnyCancellable>()
+    
     private var _textTransaction = TextTransaction(text: "") {
         didSet {
-            attrText = _textTransaction.attributedText
+            attributedText = _textTransaction.attributedText
         }
     }
     
     private var textTransaction: TextTransaction {
         return _textTransaction
-    }
-    
-    var displayText: String {
-        get {
-            return _textTransaction.text
-        }
-        set {
-            _textTransaction = TextTransaction(text: newValue, intent: .lastCharacter)
-        }
     }
     
     private let textExpression = TextExpression()
@@ -41,7 +35,7 @@ class KeyboardViewController: UICollectionViewController {
     }
     
     @PublishedValue
-    var attrText: NSAttributedString?
+    var attributedText: NSAttributedString?
     
     var editTextCompletionHandler: (String) -> Void = { (_) in
         assertionFailure("Completion not handled")
@@ -60,6 +54,12 @@ class KeyboardViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        $attributedText.receive(on: DispatchQueue.main).sink { (newAttributedText) in
+            guard let newAttributedText = newAttributedText,
+                newAttributedText.string != self._textTransaction.text else { return }
+            self._textTransaction = TextTransaction(text: newAttributedText.string, intent: .lastCharacter)
+        }.store(in: &disposables)
         
         setupCollectionView()
         configureDataSource()
