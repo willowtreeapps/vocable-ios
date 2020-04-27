@@ -11,7 +11,8 @@
 		130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00BD20D2AD2A007C3163 /* Main.storyboard */; };
 		130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C020D2AD2C007C3163 /* Assets.xcassets */; };
 		130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */; };
-		17191A32245089270079F9BE /* VocableUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17191A31245089270079F9BE /* VocableUITests.swift */; };
+		17191A32245089270079F9BE /* KeyboardTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17191A31245089270079F9BE /* KeyboardTest.swift */; };
+		17E64A3324532AF100177537 /* KeyboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E64A3224532AF100177537 /* KeyboardScreen.swift */; };
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
@@ -197,8 +198,9 @@
 		130C00C320D2AD2C007C3163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		130C00C520D2AD2C007C3163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17191A2F245089270079F9BE /* VocableUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		17191A31245089270079F9BE /* VocableUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableUITests.swift; sourceTree = "<group>"; };
+		17191A31245089270079F9BE /* KeyboardTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTest.swift; sourceTree = "<group>"; };
 		17191A33245089270079F9BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17E64A3224532AF100177537 /* KeyboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardScreen.swift; sourceTree = "<group>"; };
 		30B979A424254CBC00309D7C /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		30B979B92425583E00309D7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30B979BB2425584300309D7C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -430,10 +432,35 @@
 		17191A30245089270079F9BE /* VocableUITests */ = {
 			isa = PBXGroup;
 			children = (
-				17191A31245089270079F9BE /* VocableUITests.swift */,
+				17E64A3124521CD900177537 /* Helpers */,
+				17E64A3024521A7800177537 /* Tests */,
+				17E64A2F24521A6E00177537 /* Screens */,
 				17191A33245089270079F9BE /* Info.plist */,
 			);
 			path = VocableUITests;
+			sourceTree = "<group>";
+		};
+		17E64A2F24521A6E00177537 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				17E64A3224532AF100177537 /* KeyboardScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		17E64A3024521A7800177537 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				17191A31245089270079F9BE /* KeyboardTest.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		17E64A3124521CD900177537 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		54D3C41523E37CD40061EF47 /* VocableTests */ = {
@@ -1123,7 +1150,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17191A32245089270079F9BE /* VocableUITests.swift in Sources */,
+				17E64A3324532AF100177537 /* KeyboardScreen.swift in Sources */,
+				17191A32245089270079F9BE /* KeyboardTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
