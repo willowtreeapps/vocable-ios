@@ -120,7 +120,7 @@ class KeyboardViewController: UICollectionViewController {
             
             switch sectionKind {
             case .keyboard:
-                return PresetCollectionViewCompositionalLayout.keyboardLayout(with: layoutEnvironment)
+                return PresetCollectionViewCompositionalLayout.editTextKeyboardLayout(with: layoutEnvironment)
             case .suggestions:
                 return PresetCollectionViewCompositionalLayout.suggestiveTextSectionLayout(with: layoutEnvironment)
             }

@@ -363,8 +363,17 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
     
     // MARK: Keyboard Layout
     
-    static func keyboardLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let traitCollection = environment.traitCollection
+    static func mainKeyboardLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let dimensions = computeDimensions(for: environment.traitCollection)
+        return NSCollectionLayoutSection(group: keyboardGroupLayout(environment: environment, dimensions: dimensions, fractionalHeights: (compactHeight: 0.6, defaultHeight: 0.675)))
+    }
+    
+    static func editTextKeyboardLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let dimensions = computeDimensions(for: environment.traitCollection)
+        return NSCollectionLayoutSection(group: keyboardGroupLayout(environment: environment, dimensions: dimensions, fractionalHeights: (compactHeight: 0.8, defaultHeight: 0.825)))
+    }
+    
+    static private func computeDimensions(for traitCollection: UITraitCollection) -> (rows: Int, columns: Int) {
         let dimensions: (rows: Int, columns: Int)
         let isCompactPortrait = traitCollection.horizontalSizeClass
             == .compact && traitCollection.verticalSizeClass == .regular
@@ -385,10 +394,10 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
             }
         }
         
-        return NSCollectionLayoutSection(group: keyboardGroupLayout(environment: environment, dimensions: dimensions))
+        return dimensions
     }
     
-    static private func keyboardGroupLayout(environment: NSCollectionLayoutEnvironment, dimensions: (rows: Int, columns: Int)) -> NSCollectionLayoutGroup {
+    static private func keyboardGroupLayout(environment: NSCollectionLayoutEnvironment, dimensions: (rows: Int, columns: Int), fractionalHeights: (compactHeight: CGFloat, defaultHeight: CGFloat)) -> NSCollectionLayoutGroup {
         let traitCollection = environment.traitCollection
         let keyItem = PresetCollectionViewCompositionalLayout.keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)))
         
@@ -431,14 +440,14 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
         
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
             let overallContainerGroup = NSCollectionLayoutGroup.vertical(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.6)),
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(fractionalHeights.compactHeight)),
                 subitems: [characterKeyContainerGroup, compactPortraitFunctionKeyGroup])
             
             return overallContainerGroup
         }
         
         let overallContainerGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.675)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(fractionalHeights.defaultHeight)),
             subitems: [characterKeyContainerGroup, defaultFunctionKeyGroup])
         
         return overallContainerGroup
