@@ -10,8 +10,7 @@ platform :ios do
     lint
     scan(
       scheme: "Development",
-      devices: ["iPhone 11"],
-      output_directory: "./artifacts"
+      devices: ["iPhone 11"]
     )
     # in the meantime, build the app for PRs
     match(type: "development")
