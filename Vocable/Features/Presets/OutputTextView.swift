@@ -10,34 +10,90 @@ import UIKit
 
 final private class TextCursorBeamView: UIView {
 
+    private var blinkTimer: Timer?
+    private var timerCounter = 1
+    private var tickCount = 1
+
     override func tintColorDidChange() {
         super.tintColorDidChange()
         backgroundColor = tintColor
     }
 
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        if newWindow == nil {
+            blinkTimer?.invalidate()
+        }
+    }
+
     override func didMoveToWindow() {
         super.didMoveToWindow()
-        scheduleBlinkAnimation(afterDelay: 1)
+        scheduleBlinkTimerIfNeeded()
         backgroundColor = tintColor
     }
 
-    private func scheduleBlinkAnimation(afterDelay delay: TimeInterval = 0) {
+    override var isHidden: Bool {
+        didSet {
+            scheduleBlinkTimerIfNeeded()
+        }
+    }
 
-        func scheduleBlink(withDelay delay: TimeInterval) {
-            UIView.animateKeyframes(withDuration: 1, delay: delay, options: [.beginFromCurrentState], animations: {
-                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33) {
-                    self.alpha = 0
-                }
-                UIView.addKeyframe(withRelativeStartTime: 0.66, relativeDuration: 0.33) {
-                    self.alpha = 1
-                }
-            }, completion: { _ in
-                scheduleBlink(withDelay: 0)
-            })
+    private var shouldAllowTimer: Bool {
+        guard self.window != nil else {
+            return false
+        }
+        guard !isHidden else {
+            return false
+        }
+        return true
+    }
+
+    private func scheduleBlinkTimerIfNeeded() {
+        guard shouldAllowTimer else {
+            blinkTimer?.invalidate()
+            return
+        }
+        if let current = blinkTimer, current.isValid {
+            return
+        }
+        let timer = Timer(fireAt: Date(),
+                          interval: 1.2,
+                          target: self,
+                          selector: #selector(blinkTimerDidFire(_:)),
+                          userInfo: timerCounter,
+                          repeats: true)
+        RunLoop.main.add(timer, forMode: .common)
+        blinkTimer = timer
+
+        timerCounter += 1
+    }
+
+    @objc
+    private func blinkTimerDidFire(_ sender: Timer) {
+
+        guard shouldAllowTimer else {
+            blinkTimer?.invalidate()
+            return
+        }
+
+        guard UIView.areAnimationsEnabled else {
+            return
         }
 
         layer.removeAllAnimations()
-        scheduleBlink(withDelay: delay)
+        let printableSelf = "0x" + Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque().debugDescription.suffix(5)
+        print("\(tickCount)\tCursor Instance: \(printableSelf)\n\t+ Timer Instance: \(sender.userInfo as! Int)")
+
+        UIView.animateKeyframes(withDuration: 1, delay: 0, options: [.beginFromCurrentState], animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33) {
+                self.alpha = 0
+            }
+            UIView.addKeyframe(withRelativeStartTime: 0.66, relativeDuration: 0.33) {
+                self.alpha = 1
+            }
+        }, completion: nil)
+
+        tickCount += 1
     }
 }
 

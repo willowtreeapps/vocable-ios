@@ -353,6 +353,11 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+        if let cell = cell as? TextFieldCollectionViewCell {
+            cell.isCursorHidden = !showKeyboard
+        }
+
         if let cell = cell as? PresetPaginationContainerCollectionViewCell {
             let childViewController = cell.presetCollectionViewController
             let childContainerView = cell.contentView
@@ -377,6 +382,11 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+        if let cell = cell as? TextFieldCollectionViewCell {
+            cell.isCursorHidden = true
+        }
+
         if let cell = cell as? PresetPaginationContainerCollectionViewCell {
             let childViewController = cell.presetCollectionViewController
             childViewController.willMove(toParent: nil)

@@ -345,6 +345,12 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
             return !suggestion.text.isEmpty
         }
     }
+
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? TextFieldCollectionViewCell {
+            cell.isCursorHidden = true
+        }
+    }
     
     private func setTextTransaction(_ transaction: TextTransaction) {
         self._textTransaction = transaction
