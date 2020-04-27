@@ -11,8 +11,6 @@ import UIKit
 final private class TextCursorBeamView: UIView {
 
     private var blinkTimer: Timer?
-    private var timerCounter = 1
-    private var tickCount = 1
 
     override func tintColorDidChange() {
         super.tintColorDidChange()
@@ -39,10 +37,7 @@ final private class TextCursorBeamView: UIView {
     }
 
     private var shouldAllowTimer: Bool {
-        guard self.window != nil else {
-            return false
-        }
-        guard !isHidden else {
+        guard self.window != nil, !isHidden else {
             return false
         }
         return true
@@ -60,12 +55,10 @@ final private class TextCursorBeamView: UIView {
                           interval: 1.2,
                           target: self,
                           selector: #selector(blinkTimerDidFire(_:)),
-                          userInfo: timerCounter,
+                          userInfo: nil,
                           repeats: true)
         RunLoop.main.add(timer, forMode: .common)
         blinkTimer = timer
-
-        timerCounter += 1
     }
 
     @objc
@@ -81,8 +74,6 @@ final private class TextCursorBeamView: UIView {
         }
 
         layer.removeAllAnimations()
-        let printableSelf = "0x" + Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque().debugDescription.suffix(5)
-        print("\(tickCount)\tCursor Instance: \(printableSelf)\n\t+ Timer Instance: \(sender.userInfo as! Int)")
 
         UIView.animateKeyframes(withDuration: 1, delay: 0, options: [.beginFromCurrentState], animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33) {
@@ -92,8 +83,6 @@ final private class TextCursorBeamView: UIView {
                 self.alpha = 1
             }
         }, completion: nil)
-
-        tickCount += 1
     }
 }
 
