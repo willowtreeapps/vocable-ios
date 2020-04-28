@@ -11,7 +11,7 @@ import UIKit
 
 struct TextTransaction: CustomDebugStringConvertible {
     
-    let text: String
+    var text: String
     let attributedText: NSMutableAttributedString
     private let lastChararacterRange: NSRange
     private let lastTokenRange: NSRange
