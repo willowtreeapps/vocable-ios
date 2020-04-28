@@ -224,7 +224,7 @@ class EditSayingsViewController: UIViewController, UICollectionViewDelegate, NSF
         vc.modalPresentationStyle = .fullScreen
 
         let phrase = fetchResultsController.object(at: safeIndexPath)
-        vc.text = phrase.utterance ?? ""
+        vc.initialText = phrase.utterance ?? ""
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
