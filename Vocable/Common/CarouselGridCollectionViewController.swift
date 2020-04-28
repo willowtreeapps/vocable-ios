@@ -44,15 +44,32 @@ class CarouselGridCollectionView: UICollectionView {
         return self.collectionViewLayout as! CarouselGridLayout
     }
 
-    private var lastInvalidatedSize: CGSize = .zero
+    private var needsInitialScrollToMiddle = true
+
+    private var lastInvalidatedFrameSize: CGSize = .zero
     override var frame: CGRect {
         didSet {
-            guard window != nil, frame.size != lastInvalidatedSize else { return }
+            guard frame.size != lastInvalidatedFrameSize, !needsInitialScrollToMiddle else {
+                return
+            }
             snapToBoundaryIfNeeded()
+            lastInvalidatedFrameSize = frame.size
         }
     }
 
-    private var needsInitialScrollToMiddle = true
+    private var lastInvalidatedContentSize: CGSize = .zero
+    override var contentSize: CGSize {
+        didSet {
+            guard contentSize != lastInvalidatedContentSize else { return }
+            if !contentSize.area.isZero && needsInitialScrollToMiddle {
+                scrollToMiddleSection(animated: false)
+                needsInitialScrollToMiddle = false
+            } else {
+                snapToBoundaryIfNeeded()
+            }
+            lastInvalidatedContentSize = contentSize
+        }
+    }
 
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -81,31 +98,24 @@ class CarouselGridCollectionView: UICollectionView {
     }
 
     @objc func scrollToNextPage() {
-        if let indexPath = layout.firstIndexPathForPageWithOffsetFromCurrentPage(offset: 1) {
-            scrollToItem(at: indexPath, at: .left, animated: true)
+        if let offset = layout.scrollOffsetForPageWithOffsetFromCurrentPage(offset: 1) {
+            scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: true)
         }
     }
 
     @objc func scrollToPreviousPage() {
-        if let indexPath = layout.firstIndexPathForPageWithOffsetFromCurrentPage(offset: -1) {
-            scrollToItem(at: indexPath, at: .left, animated: true)
+        if let offset = layout.scrollOffsetForPageWithOffsetFromCurrentPage(offset: -1) {
+            scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: true)
         }
     }
 
-    override func didMoveToWindow() {
-        super.didMoveToWindow()
-        if needsInitialScrollToMiddle {
-            scrollToMiddleSection()
-            needsInitialScrollToMiddle = false
+    func scrollToMiddleSection(animated: Bool) {
+        if let offset = layout.scrollOffsetForLeftmostCellOfCurrentPageInMiddleSection() {
+            scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: animated)
         }
-    }
-
-    func scrollToMiddleSection() {
-        let sectionCount = numberOfSections
-        scrollToItem(at: IndexPath(item: 0, section: sectionCount / 2),
-                     at: .left,
-                     animated: false)
-        layoutIfNeeded()
+        if !animated {
+            layoutIfNeeded()
+        }
     }
 
     private func snapToBoundaryIfNeeded() {
@@ -115,20 +125,18 @@ class CarouselGridCollectionView: UICollectionView {
 
     private func scrollToNearestSelectedIndexPathOrCurrentPageBoundary(animated: Bool = false) {
         let selectedIndexPaths = indexPathsForSelectedItems ?? []
-
-        let destination: IndexPath
-        if let middleIndexPath = selectedIndexPaths[safe: selectedIndexPaths.count / 2], let target = layout.indexPathForLeftmostCellOfPage(containing: middleIndexPath) {
+        let destination: CGPoint
+        if let middleIndexPath = selectedIndexPaths[safe: selectedIndexPaths.count / 2], let target = layout.scrollOffsetForLeftmostCellOfPage(containing: middleIndexPath) {
             destination = target
         } else
-            if let target = animated ? layout.indexPathForLeftmostCellOfCurrentPage() : layout.indexPathForLeftmostCellOfCurrentPageInMiddleSection() {
+            if let target = animated ? layout.scrollOffsetForLeftmostCellOfCurrentPage() : layout.scrollOffsetForLeftmostCellOfCurrentPageInMiddleSection() {
             destination = target
         } else {
             return
         }
 
-        scrollToItem(at: destination,
-                     at: .left,
-                     animated: animated)
+        scrollRectToVisible(CGRect(origin: destination, size: bounds.size),
+                            animated: animated)
         if !animated {
             layoutIfNeeded()
         }
