@@ -32,6 +32,14 @@ extension UIApplication {
 class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate {
  
     private(set) var sceneview: ARSCNView?
+    private lazy var receivingWindow: HeadGazeWindow? = {
+        for window in UIApplication.shared.windows {
+            if let result = window as? HeadGazeWindow {
+                return result
+            }
+        }
+        return nil
+    }()
 
     let pidInterpolator = PIDControlledTrackingInterpolator()
     let debugInterpolator = HeadGazeTrackingInterpolator()
@@ -97,13 +105,12 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
                                 correctionAmount: correction,
                                 scale: computedScale)
         }
-        if let window = view.window as? HeadGazeWindow {
-            if let event = pidInterpolator.event {
-                window.sendEvent(event)
-            }
-            if let debugEvent = debugInterpolator.event, let gaze = debugEvent.allGazes?.first {
-                window.cursorView?.debugCursorMoved(gaze, with: debugEvent)
-            }
+
+        if let event = pidInterpolator.event {
+            receivingWindow?.sendEvent(event)
+        }
+        if let debugEvent = debugInterpolator.event, let gaze = debugEvent.allGazes?.first {
+            receivingWindow?.cursorView?.debugCursorMoved(gaze, with: debugEvent)
         }
     }
 
