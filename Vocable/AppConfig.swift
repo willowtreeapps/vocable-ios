@@ -11,6 +11,7 @@ import Combine
 import ARKit
 
 struct AppConfig {
+
     static let showDebugOptions: Bool = {
         #if DEBUG
         return true
@@ -34,5 +35,13 @@ struct AppConfig {
     static let defaultLanguageCode = "en"
     static var activePreferredLanguageCode: String {
         return Locale.preferredLanguages.first ?? defaultLanguageCode
+    }
+
+    static var emptyStatesEnabled: Bool {
+        return ProcessInfo.processInfo.environment.keys.contains("EmptyStatesEnabled")
+    }
+
+    static var refactoredInterfaceEnabled: Bool {
+        return ProcessInfo.processInfo.environment.keys.contains("RefactoredInterfaceEnabled")
     }
 }

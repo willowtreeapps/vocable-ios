@@ -92,8 +92,15 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
         super.viewDidLoad()
         
         setupCollectionView()
-        configureDataSource()
+        configureDataSource(animated: false)
         observeItemSelectionChanges()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if dataSource.snapshot().indexOfSection(.presets) == nil {
+            updateSnapshot()
+        }
     }
 
     private func setupCollectionView() {
@@ -150,7 +157,7 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
         return layout
     }
 
-    private func configureDataSource() {
+    private func configureDataSource(animated: Bool = false) {
         dataSource = UICollectionViewDiffableDataSource<Section, ItemWrapper>(collectionView: collectionView, cellProvider: { (_: UICollectionView, indexPath: IndexPath, identifier: ItemWrapper) -> UICollectionViewCell? in
             
             switch identifier {
@@ -207,7 +214,7 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
             }
         })
         
-        updateSnapshot()
+        updateSnapshot(animated: animated, suppressingPhrases: true)
     }
     
     private func observeItemSelectionChanges() {
@@ -237,7 +244,7 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
         return numberOfResults > 0
     }
 
-    func updateSnapshot(animated: Bool = true) {
+    func updateSnapshot(animated: Bool = true, suppressingPhrases: Bool = false) {
 
         let suggestions = self.suggestions ?? []
         let previousSnapshot = dataSource.snapshot()
@@ -286,10 +293,12 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
             snapshot.appendItems([.paginatedCategories])
             snapshot.appendItems([.pagination(.paginatedCategories, .forward)])
 
-            let presetsItem = ItemWrapper.paginatedPresets(ItemSelection.selectedCategoryID)
-            snapshot.appendSections([.presets])
-            snapshot.appendItems([presetsItem])
-            snapshot.appendItems([.pagination(presetsItem, .reverse), .pageIndicator(presetsItem), .pagination(presetsItem, .forward)])
+            if !suppressingPhrases {
+                let presetsItem = ItemWrapper.paginatedPresets(ItemSelection.selectedCategoryID)
+                snapshot.appendSections([.presets])
+                snapshot.appendItems([presetsItem])
+                snapshot.appendItems([.pagination(presetsItem, .reverse), .pageIndicator(presetsItem), .pagination(presetsItem, .forward)])
+            }
         }
 
         dataSource.apply(snapshot, animatingDifferences: animated, completion: {
@@ -344,6 +353,11 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+        if let cell = cell as? TextFieldCollectionViewCell {
+            cell.isCursorHidden = !showKeyboard
+        }
+
         if let cell = cell as? PresetPaginationContainerCollectionViewCell {
             let childViewController = cell.presetCollectionViewController
             let childContainerView = cell.contentView
@@ -368,6 +382,11 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+        if let cell = cell as? TextFieldCollectionViewCell {
+            cell.isCursorHidden = true
+        }
+
         if let cell = cell as? PresetPaginationContainerCollectionViewCell {
             let childViewController = cell.presetCollectionViewController
             childViewController.willMove(toParent: nil)

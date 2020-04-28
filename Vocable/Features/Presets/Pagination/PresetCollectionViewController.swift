@@ -1,6 +1,6 @@
 //
 //  CategoryCollectionViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 4/6/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
@@ -82,8 +82,6 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
             presentationMode = .defaultMode
         }
         updateDataSource(animated: true)
-
-        self.scrollToMiddleSection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +95,6 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         layout.$progress.sink { (pagingProgress) in
             ItemSelection.presetsPageIndicatorProgress = pagingProgress
         }.store(in: &disposables)
-
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -168,6 +165,48 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         dataSourceProxy.apply(snapshot,
                               animatingDifferences: animated,
                               completion: completion)
+
+        let category = Category.fetch(.userFavorites, in: fetchedResultsController!.managedObjectContext)
+        if content.isEmpty, category.objectID == categoryID {
+            installEmptyStateIfNeeded()
+        } else {
+            removeEmptyStateIfNeeded()
+        }
+    }
+
+    private func addPhrasePressed() {
+        let storyboard = UIStoryboard(name: "EditTextViewController", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
+        vc.editTextCompletionHandler = { (newText) -> Void in
+            let context = NSPersistentContainer.shared.viewContext
+
+            _ = Phrase.create(withUserEntry: newText, in: context)
+            do {
+                try context.save()
+
+                let alertMessage: String = {
+                    let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
+                    let categoryName = Category.userFavoritesCategoryName()
+                    return String.localizedStringWithFormat(format, categoryName)
+                }()
+
+                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+            } catch {
+                assertionFailure("Failed to save user generated phrase: \(error)")
+            }
+        }
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+
+    private func installEmptyStateIfNeeded() {
+        guard AppConfig.emptyStatesEnabled else { return }
+        guard collectionView.backgroundView == nil else { return }
+        collectionView.backgroundView = PhraseCollectionEmptyStateView(action: addPhrasePressed)
+    }
+
+    private func removeEmptyStateIfNeeded() {
+        collectionView.backgroundView = nil
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

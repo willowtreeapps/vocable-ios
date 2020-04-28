@@ -11,10 +11,13 @@
 		130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00BD20D2AD2A007C3163 /* Main.storyboard */; };
 		130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C020D2AD2C007C3163 /* Assets.xcassets */; };
 		130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */; };
+		17191A32245089270079F9BE /* VocableUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17191A31245089270079F9BE /* VocableUITests.swift */; };
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
 		64253CED2419358D0044EAAA /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64253CEC2419358D0044EAAA /* Settings.storyboard */; };
+		64A220BB2452171C0014EA80 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A220BA2452171C0014EA80 /* RootViewController.swift */; };
+		64A220BE2452173C0014EA80 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64A220BD2452173C0014EA80 /* Root.storyboard */; };
 		64A4AF0B2446270E00262F6F /* VocablePresets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A4AF0A2446270E00262F6F /* VocablePresets.framework */; };
 		64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A54544242A490700218BE8 /* GazeEatingView.swift */; };
 		64D04A58242951C00006962D /* GazeableAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */; };
@@ -22,6 +25,7 @@
 		6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */; };
 		6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */; };
 		6B1C7F3223F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */; };
+		6B32EA96244F717E007DC6BB /* PhraseCollectionEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B32EA95244F717E007DC6BB /* PhraseCollectionEmptyStateView.swift */; };
 		6B3DCC1F24101F530039E45E /* TrackingDebugOverlayViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B3DCC1E24101F530039E45E /* TrackingDebugOverlayViewController.storyboard */; };
 		6B3DCC2124101FA80039E45E /* TrackingDebugOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3DCC2024101FA80039E45E /* TrackingDebugOverlayViewController.swift */; };
 		6B823BC223F4ADE30099F65E /* PIDControlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BAD23F4ADE30099F65E /* PIDControlConstants.swift */; };
@@ -42,6 +46,7 @@
 		6B8440E3244A1007007A4DC6 /* CarouselGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8440E2244A1007007A4DC6 /* CarouselGridLayout.swift */; };
 		6B8440E4244A50C1007A4DC6 /* EditCategoriesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B6960E2433CF23004E6960 /* EditCategoriesCollectionViewController.swift */; };
 		6B8440E6244A535A007A4DC6 /* CarouselGridLayout+Masks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8440E5244A535A007A4DC6 /* CarouselGridLayout+Masks.swift */; };
+		6B8440E8244A9557007A4DC6 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8440E7244A9557007A4DC6 /* EmptyStateView.swift */; };
 		6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */; };
 		6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */; };
 		6B9DFA5D23E889DB0037673E /* UIHeadGaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */; };
@@ -87,7 +92,6 @@
 		A9299C7523F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9299C7423F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift */; };
 		A9299C7723F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9299C7623F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib */; };
 		A92FFB8D23ECCB5400AF2D0B /* SettingsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FFB8C23ECCB5400AF2D0B /* SettingsCollectionViewController.swift */; };
-		A9326C8D241C1A3300F7026C /* EditSayingsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9326C8C241C1A3300F7026C /* EditSayingsCollectionViewController.swift */; };
 		A93E9403244E00A6008B61D2 /* UICollectionView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93E9402244E00A5008B61D2 /* UICollectionView+Helpers.swift */; };
 		A93E94052450EEC8008B61D2 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93E94042450EEC8008B61D2 /* KeyboardViewController.swift */; };
 		A944D0052405AE8C00F3863E /* GazeableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944D0042405AE8C00F3863E /* GazeableButton.swift */; };
@@ -159,6 +163,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		17191A34245089270079F9BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 130C00AC20D2AD2A007C3163 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 130C00B320D2AD2A007C3163;
+			remoteInfo = Vocable;
+		};
 		54D3C41923E37CD40061EF47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 130C00AC20D2AD2A007C3163 /* Project object */;
@@ -188,6 +199,9 @@
 		130C00C020D2AD2C007C3163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		130C00C320D2AD2C007C3163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		130C00C520D2AD2C007C3163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17191A2F245089270079F9BE /* VocableUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17191A31245089270079F9BE /* VocableUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableUITests.swift; sourceTree = "<group>"; };
+		17191A33245089270079F9BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30B979A424254CBC00309D7C /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		30B979B92425583E00309D7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30B979BB2425584300309D7C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -195,6 +209,8 @@
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64253CEC2419358D0044EAAA /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		64A220BA2452171C0014EA80 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		64A220BD2452173C0014EA80 /* Root.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
 		64A4AF0A2446270E00262F6F /* VocablePresets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VocablePresets.framework; path = Carthage/Build/iOS/VocablePresets.framework; sourceTree = "<group>"; };
 		64A54544242A490700218BE8 /* GazeEatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeEatingView.swift; sourceTree = "<group>"; };
 		64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableAlertPresentationController.swift; sourceTree = "<group>"; };
@@ -202,6 +218,7 @@
 		6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVSpeechSynthesizer+Shared.swift"; sourceTree = "<group>"; };
 		6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapperView.swift; sourceTree = "<group>"; };
 		6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadGazeTrackingInterpolator.swift; sourceTree = "<group>"; };
+		6B32EA95244F717E007DC6BB /* PhraseCollectionEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraseCollectionEmptyStateView.swift; sourceTree = "<group>"; };
 		6B3DCC1E24101F530039E45E /* TrackingDebugOverlayViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TrackingDebugOverlayViewController.storyboard; sourceTree = "<group>"; };
 		6B3DCC2024101FA80039E45E /* TrackingDebugOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingDebugOverlayViewController.swift; sourceTree = "<group>"; };
 		6B823BAD23F4ADE30099F65E /* PIDControlConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIDControlConstants.swift; sourceTree = "<group>"; };
@@ -221,6 +238,7 @@
 		6B8440E0244A0F97007A4DC6 /* VocableCollectionViewLayoutTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VocableCollectionViewLayoutTransitioningDelegate.swift; path = Vocable/Common/VocableCollectionViewLayoutTransitioningDelegate.swift; sourceTree = SOURCE_ROOT; };
 		6B8440E2244A1007007A4DC6 /* CarouselGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselGridLayout.swift; sourceTree = "<group>"; };
 		6B8440E5244A535A007A4DC6 /* CarouselGridLayout+Masks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarouselGridLayout+Masks.swift"; sourceTree = "<group>"; };
+		6B8440E7244A9557007A4DC6 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGazeViewController.swift; sourceTree = "<group>"; };
 		6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadGazeWindow.swift; sourceTree = "<group>"; };
 		6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGaze.swift; sourceTree = "<group>"; };
@@ -266,7 +284,6 @@
 		A9299C7423F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKeyCollectionViewCell.swift; sourceTree = "<group>"; };
 		A9299C7623F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyboardKeyCollectionViewCell.xib; sourceTree = "<group>"; };
 		A92FFB8C23ECCB5400AF2D0B /* SettingsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewController.swift; sourceTree = "<group>"; };
-		A9326C8C241C1A3300F7026C /* EditSayingsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSayingsCollectionViewController.swift; sourceTree = "<group>"; };
 		A93E9402244E00A5008B61D2 /* UICollectionView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Helpers.swift"; sourceTree = "<group>"; };
 		A93E94042450EEC8008B61D2 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		A944D0042405AE8C00F3863E /* GazeableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableButton.swift; sourceTree = "<group>"; };
@@ -349,6 +366,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		17191A2C245089270079F9BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		54D3C41123E37CD40061EF47 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -364,6 +388,7 @@
 			children = (
 				130C00B620D2AD2A007C3163 /* Vocable */,
 				54D3C41523E37CD40061EF47 /* VocableTests */,
+				17191A30245089270079F9BE /* VocableUITests */,
 				130C00B520D2AD2A007C3163 /* Products */,
 				641F6ADC2445046200739C1C /* Frameworks */,
 			);
@@ -374,6 +399,7 @@
 			children = (
 				130C00B420D2AD2A007C3163 /* Vocable.app */,
 				54D3C41423E37CD40061EF47 /* VocableTests.xctest */,
+				17191A2F245089270079F9BE /* VocableUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -407,6 +433,15 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		17191A30245089270079F9BE /* VocableUITests */ = {
+			isa = PBXGroup;
+			children = (
+				17191A31245089270079F9BE /* VocableUITests.swift */,
+				17191A33245089270079F9BE /* Info.plist */,
+			);
+			path = VocableUITests;
+			sourceTree = "<group>";
+		};
 		54D3C41523E37CD40061EF47 /* VocableTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +457,15 @@
 				64A4AF0A2446270E00262F6F /* VocablePresets.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		64A220BC245217220014EA80 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				64A220BA2452171C0014EA80 /* RootViewController.swift */,
+				64A220BD2452173C0014EA80 /* Root.storyboard */,
+			);
+			path = Root;
 			sourceTree = "<group>";
 		};
 		6B823BA923F4ADE30099F65E /* PulseController */ = {
@@ -490,7 +534,6 @@
 			children = (
 				A9CF2AE8242D41BE005633A7 /* EditSayings.storyboard */,
 				714EFD44241964D800DC773C /* EditSayingsViewController.swift */,
-				A9326C8C241C1A3300F7026C /* EditSayingsCollectionViewController.swift */,
 				718D7FAD2419546F00FDEF93 /* EditSayingsCollectionViewCell.swift */,
 				718D7FAF241954C400FDEF93 /* EditSayingsCollectionViewCell.xib */,
 			);
@@ -666,6 +709,8 @@
 				71B856432416CEB600CB163B /* ToastView.xib */,
 				6BB56BA72422AC2500EA787E /* ToastView.swift */,
 				A94720CD241A8D9B00F7B4FF /* PaginationView.swift */,
+				6B8440E7244A9557007A4DC6 /* EmptyStateView.swift */,
+				6B32EA95244F717E007DC6BB /* PhraseCollectionEmptyStateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -695,6 +740,7 @@
 				B8DA9DF823F33B1B00FEBE19 /* Keyboard */,
 				B8DA9DF623F30CC400FEBE19 /* Presets */,
 				A92FFB9023ECD73400AF2D0B /* Settings */,
+				64A220BC245217220014EA80 /* Root */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -789,6 +835,24 @@
 			productReference = 130C00B420D2AD2A007C3163 /* Vocable.app */;
 			productType = "com.apple.product-type.application";
 		};
+		17191A2E245089270079F9BE /* VocableUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17191A39245089270079F9BE /* Build configuration list for PBXNativeTarget "VocableUITests" */;
+			buildPhases = (
+				17191A2B245089270079F9BE /* Sources */,
+				17191A2C245089270079F9BE /* Frameworks */,
+				17191A2D245089270079F9BE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17191A35245089270079F9BE /* PBXTargetDependency */,
+			);
+			name = VocableUITests;
+			productName = VocableUITests;
+			productReference = 17191A2F245089270079F9BE /* VocableUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		54D3C41323E37CD40061EF47 /* VocableTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54D3C41D23E37CD40061EF47 /* Build configuration list for PBXNativeTarget "VocableTests" */;
@@ -821,6 +885,10 @@
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1030;
 					};
+					17191A2E245089270079F9BE = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 130C00B320D2AD2A007C3163;
+					};
 					54D3C41323E37CD40061EF47 = {
 						CreatedOnToolsVersion = 11.3.1;
 						TestTargetID = 130C00B320D2AD2A007C3163;
@@ -843,6 +911,7 @@
 			targets = (
 				130C00B320D2AD2A007C3163 /* Vocable */,
 				54D3C41323E37CD40061EF47 /* VocableTests */,
+				17191A2E245089270079F9BE /* VocableUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -878,6 +947,7 @@
 				71004B0D242926A2006833B8 /* SelectionMode.storyboard in Resources */,
 				A927A5252433D0240026EF40 /* EditCategories.storyboard in Resources */,
 				7192E41C2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.xib in Resources */,
+				64A220BE2452173C0014EA80 /* Root.storyboard in Resources */,
 				130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */,
 				A946553223FC2CB20033D71F /* TextFieldCollectionViewCell.xib in Resources */,
 				B838202F23FD894C005A79CD /* CategoryPaginationContainerCollectionViewCell.xib in Resources */,
@@ -885,6 +955,13 @@
 				A944D00B2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib in Resources */,
 				6B3DCC1F24101F530039E45E /* TrackingDebugOverlayViewController.storyboard in Resources */,
 				64253CED2419358D0044EAAA /* Settings.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17191A2D245089270079F9BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -978,6 +1055,7 @@
 				6B14DC732419590E0050C287 /* OutputTextView.swift in Sources */,
 				A944D0052405AE8C00F3863E /* GazeableButton.swift in Sources */,
 				6B9DFA6423E889DB0037673E /* UIHeadGazeRecognizer.swift in Sources */,
+				64A220BB2452171C0014EA80 /* RootViewController.swift in Sources */,
 				B81AC0AD2405D8C400972E85 /* ItemSelection.swift in Sources */,
 				6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */,
 				B8DA9DF223F30BAF00FEBE19 /* Cell+NibLoading.swift in Sources */,
@@ -986,13 +1064,13 @@
 				A9C32CFF242271F3000EC6F7 /* Phrase+Helpers.swift in Sources */,
 				6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */,
 				A96D61D524229F6400577144 /* SettingsCollectionViewCell.swift in Sources */,
-				A9326C8D241C1A3300F7026C /* EditSayingsCollectionViewController.swift in Sources */,
 				A95D07BE24326475004ECE64 /* CursorSensitivity.swift in Sources */,
 				B81D235623FED535005741E8 /* PresetPaginationContainerCollectionViewCell.swift in Sources */,
 				71FA2857242413670051498A /* SelectionModeCollectionViewController.swift in Sources */,
 				714EFD45241964D800DC773C /* EditSayingsViewController.swift in Sources */,
 				6B9DFA7423E8D1270037673E /* TrackingContainerViewController.swift in Sources */,
 				A93E94052450EEC8008B61D2 /* KeyboardViewController.swift in Sources */,
+				6B32EA96244F717E007DC6BB /* PhraseCollectionEmptyStateView.swift in Sources */,
 				6BFB18BE24002BFE002C3515 /* NSPersistentContainer+Shared.swift in Sources */,
 				A9DE170623F4C0AF0094DB64 /* TextSuggestion.swift in Sources */,
 				6BFB18C624004711002C3515 /* ModelObjectExtensions.swift in Sources */,
@@ -1005,6 +1083,7 @@
 				A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */,
 				A9B6960B2433CCFD004E6960 /* EditCategoriesDefaultCollectionViewCell.swift in Sources */,
 				6B3DCC2124101FA80039E45E /* TrackingDebugOverlayViewController.swift in Sources */,
+				6B8440E8244A9557007A4DC6 /* EmptyStateView.swift in Sources */,
 				6B1C7F3223F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift in Sources */,
 				64D04A58242951C00006962D /* GazeableAlertPresentationController.swift in Sources */,
 				A9F56FCA24378ED6008162B6 /* CategoryCollectionViewController.swift in Sources */,
@@ -1060,6 +1139,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		17191A2B245089270079F9BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17191A32245089270079F9BE /* VocableUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		54D3C41023E37CD40061EF47 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1071,6 +1158,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		17191A35245089270079F9BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 130C00B320D2AD2A007C3163 /* Vocable */;
+			targetProxy = 17191A34245089270079F9BE /* PBXContainerItemProxy */;
+		};
 		54D3C41A23E37CD40061EF47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 130C00B320D2AD2A007C3163 /* Vocable */;
@@ -1257,7 +1349,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.willowtreeapps.eyespeakaac";
@@ -1284,7 +1376,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.willowtreeapps.eyespeakaac";
@@ -1293,6 +1385,69 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
+		};
+		17191A36245089270079F9BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y32EQUAEWX;
+				INFOPLIST_FILE = VocableUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.VocableUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Vocable;
+			};
+			name = Debug;
+		};
+		17191A37245089270079F9BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y32EQUAEWX;
+				INFOPLIST_FILE = VocableUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.VocableUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Vocable;
+			};
+			name = Release;
+		};
+		17191A38245089270079F9BE /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y32EQUAEWX;
+				INFOPLIST_FILE = VocableUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.VocableUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Vocable;
+			};
+			name = AppStore;
 		};
 		54D3C41B23E37CD40061EF47 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1414,7 +1569,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.willowtreeapps.eyespeakaac";
@@ -1465,6 +1620,16 @@
 				130C00C920D2AD2C007C3163 /* Debug */,
 				130C00CA20D2AD2C007C3163 /* Release */,
 				54D3C41F23E380440061EF47 /* AppStore */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17191A39245089270079F9BE /* Build configuration list for PBXNativeTarget "VocableUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17191A36245089270079F9BE /* Debug */,
+				17191A37245089270079F9BE /* Release */,
+				17191A38245089270079F9BE /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
