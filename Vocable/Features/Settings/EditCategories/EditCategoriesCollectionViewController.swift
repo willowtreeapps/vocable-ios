@@ -1,12 +1,11 @@
 //
 //  EditCategoriesCollectionViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/31/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import CoreData
 
@@ -47,10 +46,8 @@ final class EditCategoriesCollectionViewController: CarouselGridCollectionViewCo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.register(UINib(nibName: "EditCategoriesDefaultCollectionViewCell", bundle: nil),
-                                forCellWithReuseIdentifier: "EditCategoriesDefaultCollectionViewCell")
-        collectionView.register(UINib(nibName: "EditCategoriesCompactCollectionViewCell", bundle: nil),
-                                forCellWithReuseIdentifier: "EditCategoriesCompactCollectionViewCell")
+        collectionView.register(UINib(nibName: "EditCategoriesDefaultCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoriesDefaultCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "EditCategoriesCompactCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EditCategoriesCompactCollectionViewCell")
         collectionView.backgroundColor = .collectionViewBackgroundColor
 
         updateLayoutForCurrentTraitCollection()
@@ -190,11 +187,9 @@ final class EditCategoriesCollectionViewController: CarouselGridCollectionViewCo
             return
         }
         
-        let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as! EditCategoryDetailViewController
-        
-        vc.category = fetchResultsController.object(at: indexPath)
-        show(vc, sender: nil)
-        
+        let viewController = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as! EditCategoryDetailViewController
+        viewController.category = fetchResultsController.object(at: indexPath)
+        show(viewController, sender: nil)
     }
     
     private func indexPath(after indexPath: IndexPath) -> IndexPath? {

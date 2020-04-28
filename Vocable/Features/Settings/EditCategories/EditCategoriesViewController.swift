@@ -1,31 +1,30 @@
 //
 //  EditCategoriesViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/31/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Combine
 import CoreData
 
 final class EditCategoriesViewController: UIViewController {
-    
+
+    private var carouselCollectionViewController: CarouselGridCollectionViewController?
+    private var disposables = Set<AnyCancellable>()
+
     @IBOutlet private var addCategoryButton: GazeableButton!
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private weak var pageNavigationView: PaginationView!
-    
-    private var carouselCollectionViewController: CarouselGridCollectionViewController?
-    private var disposables = Set<AnyCancellable>()
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CarouselCollectionViewController" {
            carouselCollectionViewController = segue.destination as? CarouselGridCollectionViewController
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         carouselCollectionViewController?.progressPublisher.sink(receiveValue: { (pagingProgress) in

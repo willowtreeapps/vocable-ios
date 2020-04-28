@@ -1,15 +1,14 @@
 //
 //  TimingSensitivityViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/26/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class TimingSensitivityViewController: UIViewController {
+final class TimingSensitivityViewController: UIViewController {
     
     @IBOutlet var backButton: GazeableButton!
     

@@ -23,6 +23,13 @@ extension Category: NSManagedObjectIdentifiable {
         let category = Category.fetch(.userFavorites, in: context)
         return category.name ?? ""
     }
+
+    static func userFavoritesCategory() -> Category {
+        let context = NSPersistentContainer.shared.viewContext
+        let category = Category.fetch(.userFavorites, in: context)
+        return category
+    }
+
 }
 
 extension Phrase: NSManagedObjectIdentifiable {
