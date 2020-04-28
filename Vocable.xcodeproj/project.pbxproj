@@ -93,6 +93,7 @@
 		A9299C7723F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9299C7623F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib */; };
 		A92FFB8D23ECCB5400AF2D0B /* SettingsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FFB8C23ECCB5400AF2D0B /* SettingsCollectionViewController.swift */; };
 		A93E9403244E00A6008B61D2 /* UICollectionView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93E9402244E00A5008B61D2 /* UICollectionView+Helpers.swift */; };
+		A93E94052450EEC8008B61D2 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93E94042450EEC8008B61D2 /* KeyboardViewController.swift */; };
 		A944D0052405AE8C00F3863E /* GazeableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944D0042405AE8C00F3863E /* GazeableButton.swift */; };
 		A944D0072405C61400F3863E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944D0062405C61400F3863E /* SettingsViewController.swift */; };
 		A944D0092406D54400F3863E /* SettingsToggleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944D0082406D54400F3863E /* SettingsToggleCollectionViewCell.swift */; };
@@ -284,6 +285,7 @@
 		A9299C7623F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyboardKeyCollectionViewCell.xib; sourceTree = "<group>"; };
 		A92FFB8C23ECCB5400AF2D0B /* SettingsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewController.swift; sourceTree = "<group>"; };
 		A93E9402244E00A5008B61D2 /* UICollectionView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Helpers.swift"; sourceTree = "<group>"; };
+		A93E94042450EEC8008B61D2 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		A944D0042405AE8C00F3863E /* GazeableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableButton.swift; sourceTree = "<group>"; };
 		A944D0062405C61400F3863E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A944D0082406D54400F3863E /* SettingsToggleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsToggleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -783,6 +785,7 @@
 				A9F56FC724365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib */,
 				A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */,
 				A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */,
+				A93E94042450EEC8008B61D2 /* KeyboardViewController.swift */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -1066,6 +1069,7 @@
 				71FA2857242413670051498A /* SelectionModeCollectionViewController.swift in Sources */,
 				714EFD45241964D800DC773C /* EditSayingsViewController.swift in Sources */,
 				6B9DFA7423E8D1270037673E /* TrackingContainerViewController.swift in Sources */,
+				A93E94052450EEC8008B61D2 /* KeyboardViewController.swift in Sources */,
 				6B32EA96244F717E007DC6BB /* PhraseCollectionEmptyStateView.swift in Sources */,
 				6BFB18BE24002BFE002C3515 /* NSPersistentContainer+Shared.swift in Sources */,
 				A9DE170623F4C0AF0094DB64 /* TextSuggestion.swift in Sources */,

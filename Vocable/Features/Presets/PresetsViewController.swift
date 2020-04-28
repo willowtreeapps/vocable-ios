@@ -150,7 +150,7 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
                 
                 return PresetCollectionViewCompositionalLayout.presetsSectionLayout(with: layoutEnvironment)
             case .keyboard:
-                return PresetCollectionViewCompositionalLayout.keyboardLayout(with: layoutEnvironment)
+                return PresetCollectionViewCompositionalLayout.mainKeyboardLayout(with: layoutEnvironment)
             }
         }
         layout.register(CategorySectionBackground.self, forDecorationViewOfKind: "CategorySectionBackground")
