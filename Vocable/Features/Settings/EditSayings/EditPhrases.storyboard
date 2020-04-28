@@ -5,14 +5,13 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Edit Sayings View Controller-->
+        <!--Edit Phrases View Controller-->
         <scene sceneID="8J2-gW-BaT">
             <objects>
-                <viewController storyboardIdentifier="MySayings" id="KLI-zL-Q9x" customClass="EditSayingsViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyPhrases" id="KLI-zL-Q9x" customClass="EditPhrasesViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XHU-T2-eKa" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -89,25 +88,16 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XxC-Wq-DWE" customClass="CarouselGridCollectionView" customModule="Vocable" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XxC-Wq-DWE" customClass="CarouselGridCollectionView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="16" y="132" width="343" height="542"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewLayout key="collectionViewLayout" id="RJg-hs-fDZ" customClass="CarouselGridLayout" customModule="Vocable" customModuleProvider="target"/>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EditSayingsCell" id="Qjr-Rq-IoO">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="u8n-P7-naF">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <connections>
                                     <outlet property="delegate" destination="KLI-zL-Q9x" id="WKe-JG-Hl5"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="51.666666666666657" y="698" width="272" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>
@@ -174,53 +164,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxk-ad-LrW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2559" y="144"/>
-        </scene>
-        <!--Edit Sayings Keyboard View Controller-->
-        <scene sceneID="WU4-lR-j23">
-            <objects>
-                <viewController storyboardIdentifier="EditSaying" id="qBB-qb-4us" customClass="EditSayingsKeyboardViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nxM-ki-o4S">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zBG-MP-Uvj">
-                                <rect key="frame" x="16" y="52" width="343" height="718"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MPw-us-ZBK">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                                <connections>
-                                    <outlet property="delegate" destination="qBB-qb-4us" id="3hX-tf-aZQ"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" name="Background"/>
-                        <constraints>
-                            <constraint firstItem="zBG-MP-Uvj" firstAttribute="top" secondItem="nxM-ki-o4S" secondAttribute="topMargin" id="Syx-Rh-0JA"/>
-                            <constraint firstItem="zBG-MP-Uvj" firstAttribute="leading" secondItem="nxM-ki-o4S" secondAttribute="leadingMargin" id="bKs-Wb-6AT"/>
-                            <constraint firstItem="zBG-MP-Uvj" firstAttribute="trailing" secondItem="nxM-ki-o4S" secondAttribute="trailingMargin" id="g0f-Fr-opn"/>
-                            <constraint firstItem="zBG-MP-Uvj" firstAttribute="bottom" secondItem="nxM-ki-o4S" secondAttribute="bottomMargin" id="mM3-Au-Wcd"/>
-                        </constraints>
-                        <edgeInsets key="layoutMargins" top="32" left="32" bottom="32" right="32"/>
-                        <viewLayoutGuide key="safeArea" id="8d6-BI-B1P"/>
-                        <variation key="heightClass=compact">
-                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="collectionView" destination="zBG-MP-Uvj" id="NE3-hU-w72"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bj1-rW-RH8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4778" y="138"/>
         </scene>
     </scenes>
     <resources>

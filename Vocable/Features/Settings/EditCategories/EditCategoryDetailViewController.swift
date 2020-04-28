@@ -1,6 +1,6 @@
 //
 //  EditCategoryDetailViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Thomas Shealy on 3/31/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
@@ -44,7 +44,7 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
         var snapshot = NSDiffableDataSourceSnapshot<Int, EditCategoryItem>()
         snapshot.appendSections([0])
 
-        if AppConfig.addPhraseEnabled {
+        if AppConfig.editPhrasesEnabled {
             snapshot.appendItems([.showCategoryToggle, .addPhrase, .removeCategory])
         } else {
             snapshot.appendItems([.showCategoryToggle, .removeCategory])
@@ -56,13 +56,14 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
     private func setupCollectionView() {
         collectionView.dataSource = dataSource
         collectionView.delegate = self
-        
         collectionView.backgroundColor = .collectionViewBackgroundColor
-        collectionView.register(UINib(nibName: "EditCategoryToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier)
-        collectionView.register(UINib(nibName: "EditCategoryRemoveCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier)
         collectionView.allowsMultipleSelection = true
         collectionView.allowsSelection = true
         collectionView.delaysContentTouches = false
+
+        collectionView.register(UINib(nibName: "EditCategoryToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "EditCategoryRemoveCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "SettingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier)
         
         updateDataSource()
         
@@ -104,6 +105,7 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
         case .showCategoryToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryToggleCollectionViewCell
             cell.isEnabled = shouldEnableItem(at: indexPath)
+            cell.textLabel.text = NSLocalizedString("category_editor.detail.button.show_category.title", comment: "Show category button label within the category detail screen.")
 
             if let category = category {
                 cell.showCategorySwitch.isOn = !category.isHidden
@@ -112,9 +114,10 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
             return cell
 
         case .addPhrase:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryRemoveCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
+            let title = NSLocalizedString("MISSING_LOCALIZATION_Add Phrases", comment: "Add Phrases")
+            cell.setup(title: title, image: UIImage(systemName: "chevron.right"))
             cell.isEnabled = shouldEnableItem(at: indexPath)
-            cell.textLabel.text = "Add a phrase"
             return cell
 
         case .removeCategory:
@@ -134,36 +137,44 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
         case .showCategoryToggle:
             handleToggle(at: indexPath)
         case .addPhrase:
-            displayAddEditPhraseViewController()
+            displayEditPhrasesViewController()
         case .removeCategory:
             handleRemoveCategory()
         }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return shouldEnableItem(at: indexPath)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, shouldhi indexPath: IndexPath) -> Bool {
-        return shouldEnableItem(at: indexPath)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return shouldEnableItem(at: indexPath)
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
 
-    @IBAction func editButtonPressed(_ sender: Any) {
+    @IBAction func editCategoryButtonPressed(_ sender: Any) {
+        let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
+        vc.modalPresentationStyle = .fullScreen
+        vc.initialText = category.name ?? ""
+        vc.editTextCompletionHandler = { (newText) -> Void in
+            let context = NSPersistentContainer.shared.viewContext
 
-        
+            if let categoryIdentifier = self.category.identifier {
+                let originalCategory = Category.fetchObject(in: context, matching: categoryIdentifier)
+                originalCategory?.name = newText
+            }
+            do {
+                try Category.updateAllOrdinalValues(in: context)
+                try context.save()
 
+                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "User edited name of the category and saved it successfully")
+
+                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+            } catch {
+                assertionFailure("Failed to save category: \(error)")
+            }
+        }
+        present(vc, animated: true)
     }
 
     private func shouldEnableItem(at indexPath: IndexPath) -> Bool {
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return false }
+
         switch selectedItem {
         case .showCategoryToggle:
             return (category.identifier != .userFavorites)
@@ -174,35 +185,18 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
     
     private func handleToggle(at indexPath: IndexPath) {
         guard let category = category, let cell = collectionView.cellForItem(at: indexPath) as? EditCategoryToggleCollectionViewCell else { return }
+
         let shouldShowCategory = !cell.showCategorySwitch.isOn
         category.setValue(!category.isHidden, forKey: "isHidden")
         cell.showCategorySwitch.isOn = shouldShowCategory
         saveContext()
     }
 
-    private func displayAddEditPhraseViewController() {
-        let storyboard = UIStoryboard(name: "EditTextViewController", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
-        vc.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
-
-            _ = Phrase.create(withUserEntry: newText, in: context)
-            do {
-                try context.save()
-
-                let alertMessage: String = {
-                    let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
-                    let categoryName = Category.userFavoritesCategoryName()
-                    return String.localizedStringWithFormat(format, categoryName)
-                }()
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-            } catch {
-                assertionFailure("Failed to save user generated phrase: \(error)")
-            }
+    private func displayEditPhrasesViewController() {
+        if let viewController = UIStoryboard(name: "EditPhrases", bundle: nil).instantiateViewController(identifier: "MyPhrases") as? EditPhrasesViewController {
+            viewController.category = category
+            show(viewController, sender: nil)
         }
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
     }
 
     private func handleDismissAlert() {

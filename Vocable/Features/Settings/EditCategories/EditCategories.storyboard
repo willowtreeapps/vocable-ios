@@ -186,7 +186,7 @@
             <objects>
                 <collectionViewController id="W98-u1-6GB" customClass="EditCategoriesCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
-                        <rect key="frame" x="0.0" y="0.0" width="536" height="634"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="634"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewLayout key="collectionViewLayout" id="4c5-Wx-dzH" customClass="CarouselGridLayout" customModule="Vocable" customModuleProvider="target"/>
@@ -256,7 +256,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="editButtonPressed:" destination="6hz-tb-yd2" eventType="primaryActionTriggered" id="ggX-Qt-Mkk"/>
+                                            <action selector="editCategoryButtonPressed:" destination="6hz-tb-yd2" eventType="primaryActionTriggered" id="ggX-Qt-Mkk"/>
                                         </connections>
                                     </button>
                                 </subviews>

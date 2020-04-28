@@ -86,7 +86,7 @@
             isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "AddPhraseEnabled"
+            key = "EditPhrasesEnabled"
             value = ""
             isEnabled = "YES">
          </EnvironmentVariable>

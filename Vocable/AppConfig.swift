@@ -45,8 +45,8 @@ struct AppConfig {
         return ProcessInfo.processInfo.environment.keys.contains("RefactoredInterfaceEnabled")
     }
 
-    static var addPhraseEnabled: Bool {
-        return ProcessInfo.processInfo.environment.keys.contains("AddPhraseEnabled")
+    static var editPhrasesEnabled: Bool {
+        return ProcessInfo.processInfo.environment.keys.contains("EditPhrasesEnabled")
     }
 
 }

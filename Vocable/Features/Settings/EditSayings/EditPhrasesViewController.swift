@@ -12,13 +12,15 @@ import CoreData
 
 final class EditPhrasesViewController: UIViewController, UICollectionViewDelegate, NSFetchedResultsControllerDelegate {
 
+    var category: Category!
+
     private var carouselCollectionViewController: CarouselGridCollectionViewController?
     private var disposables = Set<AnyCancellable>()
 
     private lazy var diffableDataSource = CarouselCollectionViewDataSourceProxy<Int, PhraseViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditSayingsCollectionViewCell.reuseIdentifier, for: indexPath) as! EditSayingsCollectionViewCell
-        cell.setup(title: phrase.utterance)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier, for: indexPath) as! EditPhrasesCollectionViewCell
+        cell.textLabel.text = phrase.utterance
         cell.deleteButton.addTarget(self,
                                     action: #selector(self.handleCellDeletionButton(_:)),
                                     for: .primaryActionTriggered)
@@ -55,8 +57,9 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.register(UINib(nibName: "EditSayingsCollectionViewCell", bundle: nil),
-                                forCellWithReuseIdentifier: "EditSayingsCollectionViewCell")
+        assert(category != nil, "Category not provided")
+
+        collectionView.register(UINib(nibName: "EditPhrasesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier)
         collectionView.backgroundColor = .collectionViewBackgroundColor
 
         updateLayoutForCurrentTraitCollection()
@@ -73,8 +76,8 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
         paginationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)
         paginationView.previousPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToPreviousPage), for: .primaryActionTriggered)
 
-        titleLabel.text = Category.userFavoritesCategoryName()
-    }   
+        titleLabel.text = category.name
+    }
     
     @IBAction private func backToSettings(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -92,7 +95,7 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
 
                 let alertMessage: String = {
                     let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
-                    let categoryName = Category.userFavoritesCategoryName()
+                    let categoryName = self.category.name ?? ""
                     return String.localizedStringWithFormat(format, categoryName)
                 }()
 
