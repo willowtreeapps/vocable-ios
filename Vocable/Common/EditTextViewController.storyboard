@@ -44,7 +44,7 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="checkmark" catalog="system"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="confirmEdit:" destination="ZB6-EJ-tYc" eventType="touchUpInside" id="ywM-Ke-bE9"/>
+                                            <action selector="confirmEdit:" destination="ZB6-EJ-tYc" eventType="primaryActionTriggered" id="iTh-i8-GDl"/>
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndB-G0-Hnk" customClass="OutputTextView" customModule="Vocable" customModuleProvider="target">
@@ -87,7 +87,7 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="xmark.circle" catalog="system"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="dismiss:" destination="ZB6-EJ-tYc" eventType="touchUpInside" id="E25-oI-pRU"/>
+                                            <action selector="dismiss:" destination="ZB6-EJ-tYc" eventType="primaryActionTriggered" id="7C4-X8-Ras"/>
                                         </connections>
                                     </button>
                                 </subviews>
