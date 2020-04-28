@@ -11,7 +11,7 @@ import UIKit
 import Combine
 import CoreData
 
-class EditCategoriesViewController: UIViewController {
+final class EditCategoriesViewController: UIViewController {
     
     @IBOutlet private var addCategoryButton: GazeableButton!
     @IBOutlet private var titleLabel: UILabel!

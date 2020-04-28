@@ -89,7 +89,7 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XxC-Wq-DWE" customClass="CarouselGridCollectionView" customModule="Vocable" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XxC-Wq-DWE" customClass="CarouselGridCollectionView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="16" y="132" width="343" height="542"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewLayout key="collectionViewLayout" id="RJg-hs-fDZ" customClass="CarouselGridLayout" customModule="Vocable" customModuleProvider="target"/>
@@ -107,7 +107,7 @@
                                     <outlet property="delegate" destination="KLI-zL-Q9x" id="WKe-JG-Hl5"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsL-XA-YD7" customClass="PaginationView" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="51.666666666666657" y="698" width="272" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aHj-3P-gGo"/>

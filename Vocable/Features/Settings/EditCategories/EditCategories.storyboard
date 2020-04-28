@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -186,7 +186,7 @@
             <objects>
                 <collectionViewController id="W98-u1-6GB" customClass="EditCategoriesCollectionViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="f36-Ss-9hs">
-                        <rect key="frame" x="0.0" y="0.0" width="374" height="634"/>
+                        <rect key="frame" x="0.0" y="0.0" width="536" height="634"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewLayout key="collectionViewLayout" id="4c5-Wx-dzH" customClass="CarouselGridLayout" customModule="Vocable" customModuleProvider="target"/>
@@ -201,10 +201,10 @@
             </objects>
             <point key="canvasLocation" x="3722" y="143"/>
         </scene>
-        <!--Edit Categories Detail View Controller-->
+        <!--Edit Category Detail View Controller-->
         <scene sceneID="FIn-Tv-o2a">
             <objects>
-                <viewController storyboardIdentifier="EditCategoryDetail" id="6hz-tb-yd2" customClass="EditCategoriesDetailViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditCategoryDetail" id="6hz-tb-yd2" customClass="EditCategoryDetailViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6iL-6J-UCo" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

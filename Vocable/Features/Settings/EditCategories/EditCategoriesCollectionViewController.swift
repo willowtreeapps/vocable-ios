@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class EditCategoriesCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
+final class EditCategoriesCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
     
     private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, Category>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, category) -> UICollectionViewCell? in
         guard let self = self else { return nil }
@@ -190,7 +190,7 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
             return
         }
         
-        let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as! EditCategoriesDetailViewController
+        let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as! EditCategoryDetailViewController
         
         vc.category = fetchResultsController.object(at: indexPath)
         show(vc, sender: nil)

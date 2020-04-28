@@ -76,7 +76,7 @@ class EditSayingsViewController: UIViewController, UICollectionViewDelegate, NSF
         paginationView.previousPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToPreviousPage), for: .primaryActionTriggered)
 
         titleLabel.text = Category.userFavoritesCategoryName()
-    }
+    }   
     
     @IBAction private func backToSettings(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)

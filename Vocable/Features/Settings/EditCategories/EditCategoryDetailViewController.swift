@@ -9,32 +9,28 @@
 import UIKit
 import CoreData
 
-class EditCategoriesDetailViewController: UIViewController, UICollectionViewDelegate {
-    
-    private enum EditCategoryItem: String, Hashable {
-        var title: String {
-            return self.rawValue
-        }
-        
-        case showCategoryToggle = "Show"
-        case removeCategoryToggle = "Remove Category"
-    }
-    
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var editButton: GazeableButton!
-    
-    @IBOutlet var collectionView: UICollectionView!
-    
-    private let context = NSPersistentContainer.shared.viewContext
-    
+final class EditCategoryDetailViewController: UIViewController, UICollectionViewDelegate {
+
     var category: Category!
-    
+
+    private enum EditCategoryItem: Int, CaseIterable {
+        case showCategoryToggle
+        case addPhrase
+        case removeCategory
+    }
+
+    private let context = NSPersistentContainer.shared.viewContext
     private lazy var dataSource: UICollectionViewDiffableDataSource<Int, EditCategoryItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
-    
+
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var editButton: GazeableButton!
+    @IBOutlet private weak var collectionView: UICollectionView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
         assert(category != nil, "Category not provided")
         
         titleLabel.text = category.name
@@ -47,7 +43,13 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
     private func updateDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, EditCategoryItem>()
         snapshot.appendSections([0])
-        snapshot.appendItems([.showCategoryToggle, .removeCategoryToggle])
+
+        if AppConfig.addPhraseEnabled {
+            snapshot.appendItems([.showCategoryToggle, .addPhrase, .removeCategory])
+        } else {
+            snapshot.appendItems([.showCategoryToggle, .removeCategory])
+        }
+
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
@@ -56,8 +58,8 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
         collectionView.delegate = self
         
         collectionView.backgroundColor = .collectionViewBackgroundColor
-        collectionView.register(UINib(nibName: "EditCategoryToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EditCategoryToggleCollectionViewCell")
-        collectionView.register(UINib(nibName: "EditCategoryRemoveCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EditCategoryRemoveCollectionViewCell")
+        collectionView.register(UINib(nibName: "EditCategoryToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "EditCategoryRemoveCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier)
         collectionView.allowsMultipleSelection = true
         collectionView.allowsSelection = true
         collectionView.delaysContentTouches = false
@@ -96,51 +98,29 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
         super.viewWillAppear(animated)
         titleLabel.text = category.name
     }
-    @IBAction func backButtonPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func editButtonPressed(_ sender: Any) {
-        let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
 
-        vc.modalPresentationStyle = .fullScreen
-
-        vc.initialText = category.name ?? ""
-        vc.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
-
-            if let categoryIdentifier = self.category.identifier {
-                let originalCategory = Category.fetchObject(in: context, matching: categoryIdentifier)
-                originalCategory?.name = newText
-            }
-            do {
-                try Category.updateAllOrdinalValues(in: context)
-                try context.save()
-
-                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "User edited name of the category and saved it successfully")
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-            } catch {
-                assertionFailure("Failed to save category: \(error)")
-            }
-        }
-        present(vc, animated: true)
-    }
-    
     private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: EditCategoryItem) -> UICollectionViewCell {
         switch item {
         case .showCategoryToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryToggleCollectionViewCell
-            cell.isEnabled = shouldInteractWithItem(at: indexPath)
+            cell.isEnabled = shouldEnableItem(at: indexPath)
 
             if let category = category {
                 cell.showCategorySwitch.isOn = !category.isHidden
                 cell.showCategorySwitch.isEnabled = (category.identifier != .userFavorites)
             }
             return cell
-        case .removeCategoryToggle:
+
+        case .addPhrase:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryRemoveCollectionViewCell
-            cell.isEnabled = shouldInteractWithItem(at: indexPath)
+            cell.isEnabled = shouldEnableItem(at: indexPath)
+            cell.textLabel.text = "Add a phrase"
+            return cell
+
+        case .removeCategory:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryRemoveCollectionViewCell
+            cell.isEnabled = shouldEnableItem(at: indexPath)
+            cell.textLabel.text = NSLocalizedString("category_editor.detail.button.remove_category.title", comment: "Remove category button label within the category detail screen.")
             return cell
         }
     }
@@ -153,41 +133,78 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
         switch selectedItem {
         case .showCategoryToggle:
             handleToggle(at: indexPath)
-        case .removeCategoryToggle:
+        case .addPhrase:
+            displayAddEditPhraseViewController()
+        case .removeCategory:
             handleRemoveCategory()
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return shouldInteractWithItem(at: indexPath)
+        return shouldEnableItem(at: indexPath)
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldhi indexPath: IndexPath) -> Bool {
-        return shouldInteractWithItem(at: indexPath)
+        return shouldEnableItem(at: indexPath)
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return shouldInteractWithItem(at: indexPath)
+        return shouldEnableItem(at: indexPath)
     }
 
-    private func shouldInteractWithItem(at indexPath: IndexPath) -> Bool {
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func editButtonPressed(_ sender: Any) {
+
+        
+
+    }
+
+    private func shouldEnableItem(at indexPath: IndexPath) -> Bool {
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return false }
         switch selectedItem {
         case .showCategoryToggle:
             return (category.identifier != .userFavorites)
-        case .removeCategoryToggle:
+        case .addPhrase, .removeCategory:
             return category.isUserGenerated
         }
     }
     
-    func handleToggle(at indexPath: IndexPath) {
+    private func handleToggle(at indexPath: IndexPath) {
         guard let category = category, let cell = collectionView.cellForItem(at: indexPath) as? EditCategoryToggleCollectionViewCell else { return }
         let shouldShowCategory = !cell.showCategorySwitch.isOn
         category.setValue(!category.isHidden, forKey: "isHidden")
         cell.showCategorySwitch.isOn = shouldShowCategory
         saveContext()
     }
-    
+
+    private func displayAddEditPhraseViewController() {
+        let storyboard = UIStoryboard(name: "EditTextViewController", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
+        vc.editTextCompletionHandler = { (newText) -> Void in
+            let context = NSPersistentContainer.shared.viewContext
+
+            _ = Phrase.create(withUserEntry: newText, in: context)
+            do {
+                try context.save()
+
+                let alertMessage: String = {
+                    let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
+                    let categoryName = Category.userFavoritesCategoryName()
+                    return String.localizedStringWithFormat(format, categoryName)
+                }()
+
+                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+            } catch {
+                assertionFailure("Failed to save user generated phrase: \(error)")
+            }
+        }
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+
     private func handleDismissAlert() {
         func confirmChangesAction() {
             self.dismiss(animated: true, completion: nil)
@@ -203,11 +220,12 @@ class EditCategoriesDetailViewController: UIViewController, UICollectionViewDele
     }
     
     private func handleRemoveCategory() {
-        let alert = GazeableAlertViewController(alertTitle: NSLocalizedString("category_editor.alert.delete_category_confirmation.title", comment: "Remove category alert title"))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("category_editor.alert.delete_category_confirmation.button.remove.title", comment: "Remove category alert action title"), handler: { self.removeCategory() }))
-        alert.addAction(GazeableAlertAction(title: NSLocalizedString("category_editor.alert.delete_category_confirmation.button.cancel.title", comment: "Cancel alert action title"), style: .bold, handler: {
-            self.deselectCell()
-        }))
+        let title = NSLocalizedString("category_editor.alert.delete_category_confirmation.title", comment: "Remove category alert title")
+        let confirmButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.remove.title", comment: "Remove category alert action title")
+        let cancelButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.cancel.title", comment: "Cancel alert action title")
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: confirmButtonTitle, handler: { self.removeCategory() }))
+        alert.addAction(GazeableAlertAction(title: cancelButtonTitle, style: .bold, handler: { self.deselectCell() }))
         self.present(alert, animated: true)
     }
     
