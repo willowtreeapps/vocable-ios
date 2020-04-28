@@ -44,8 +44,10 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
         keyboardViewController?.$attributedText.sink(receiveValue: { (attributedText) in
             self.textView.attributedText = attributedText
             let didTextChange = self.initialText != attributedText?.string
+
+            let isTextEmpty = attributedText?.string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
             self.textHasChanged = didTextChange
-            self.confirmEditButton.isEnabled = didTextChange
+            self.confirmEditButton.isEnabled = didTextChange && !isTextEmpty
         }).store(in: &disposables)
     }
     
