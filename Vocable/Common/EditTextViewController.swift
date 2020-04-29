@@ -18,22 +18,22 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
     
     private var keyboardViewController: KeyboardViewController?
     
-    @IBOutlet var textView: OutputTextView!
     var initialText: String = ""
-    
-    @IBOutlet private var confirmEditButton: GazeableButton!
-    
+
     private var textHasChanged = false
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "KeyboardViewController" {
             keyboardViewController = segue.destination as? KeyboardViewController
         }
     }
-    
+
     var editTextCompletionHandler: (String) -> Void = { (_) in
         assertionFailure("Completion not handled")
     }
+
+    @IBOutlet var textView: OutputTextView!
+    @IBOutlet private var confirmEditButton: GazeableButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

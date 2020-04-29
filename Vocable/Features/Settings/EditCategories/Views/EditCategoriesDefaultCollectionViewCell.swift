@@ -1,15 +1,14 @@
 //
 //  EditCategoriesRegularCollectionViewCell.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/31/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
+final class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var moveDownButton: GazeableButton!
     @IBOutlet var moveUpButton: GazeableButton!

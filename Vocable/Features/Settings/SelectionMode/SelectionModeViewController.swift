@@ -8,7 +8,8 @@
 
 import UIKit
 
-class SelectionModeViewController: UIViewController {
+final class SelectionModeViewController: UIViewController {
+
     @IBOutlet var backButton: GazeableButton!
     
     @IBAction func backButtonPressed(_ sender: Any) {

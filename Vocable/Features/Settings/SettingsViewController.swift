@@ -6,19 +6,13 @@
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: UIViewController {
     
-    @IBOutlet var dismissButton: GazeableButton!
+    @IBOutlet private weak var dismissButton: GazeableButton!
+    @IBOutlet private weak var titleLabel: UILabel!
 
-    @IBOutlet var titleLabel: UILabel!
-
-    @IBAction func dismissSettings(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         dismissButton.buttonImage = UIImage(systemName: "xmark.circle")!
@@ -29,5 +23,9 @@ class SettingsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
+    }
+
+    @IBAction func dismissSettings(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }

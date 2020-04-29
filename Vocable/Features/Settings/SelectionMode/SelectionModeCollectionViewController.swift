@@ -10,12 +10,8 @@ import UIKit
 
 final class SelectionModeCollectionViewController: UICollectionViewController {
     
-    private enum SelectionModeItem: String, Hashable {
-        var title: String {
-            return self.rawValue
-        }
-        
-        case headTrackingToggle = "Head Tracking"
+    private enum SelectionModeItem: Int, Hashable {
+        case headTrackingToggle
     }
     
     private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SelectionModeItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
@@ -38,7 +34,7 @@ final class SelectionModeCollectionViewController: UICollectionViewController {
     
     private func setupCollectionView() {
         collectionView.backgroundColor = .collectionViewBackgroundColor
-        collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsToggleCollectionViewCell")
+        collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier)
         
         updateDataSource()
         

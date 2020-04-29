@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.swift
+//  SettingsCollectionViewController.swift
 //  Vocable AAC
 //
 //  Created by Jesse Morgan on 2/6/20.
@@ -9,9 +9,7 @@
 import UIKit
 import MessageUI
 
-class SettingsCollectionViewController: UICollectionViewController, MFMailComposeViewControllerDelegate {
-
-    @IBOutlet private var headerView: UINavigationItem!
+final class SettingsCollectionViewController: UICollectionViewController, MFMailComposeViewControllerDelegate {
 
     private weak var composeVC: MFMailComposeViewController?
 
@@ -19,6 +17,17 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
     private let externalLinksItemCount = 3
 
     private enum SettingsItem: Hashable {
+
+        case editMySayings
+        case categories
+        case timingSensitivity
+        case resetAppSettings
+        case selectionMode
+        case privacyPolicy
+        case contactDevs
+        case pidTuner
+        case versionNum
+
         var title: String {
             switch self {
             case .editMySayings:
@@ -59,16 +68,6 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
             }
             return true
         }
-
-        case editMySayings
-        case categories
-        case timingSensitivity
-        case resetAppSettings
-        case selectionMode
-        case privacyPolicy
-        case contactDevs
-        case pidTuner
-        case versionNum
     }
 
     private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SettingsItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
@@ -80,6 +79,8 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
         return "Version \(versionNumber)-\(buildNumber)"
     }
+
+    @IBOutlet private var headerView: UINavigationItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,9 +114,9 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         collectionView.isScrollEnabled = false
 
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
-        collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsFooterCollectionViewCell")
-        collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsToggleCollectionViewCell")
-        collectionView.register(UINib(nibName: "SettingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SettingsCollectionViewCell")
+        collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "SettingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier)
 
         updateDataSource()
 
@@ -254,7 +255,8 @@ class SettingsCollectionViewController: UICollectionViewController, MFMailCompos
         case .privacyPolicy:
             presentLeavingHeadTrackableDomainAlert(withConfirmation: presentPrivacyAlert)
         case .editMySayings:
-            if let vc = UIStoryboard(name: "EditSayings", bundle: nil).instantiateViewController(identifier: "MySayings") as? EditSayingsViewController {
+            if let vc = UIStoryboard(name: "EditPhrases", bundle: nil).instantiateViewController(identifier: "MyPhrases") as? EditPhrasesViewController {
+                vc.category = Category.userFavoritesCategory()
                 show(vc, sender: nil)
             }
         case .timingSensitivity:
