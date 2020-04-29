@@ -8,6 +8,9 @@
 
 import UIKit
 
+// This is an experimental way to (hopefully?) make
+// UITraitCollection more manageable to query against
+
 struct SizeClass: OptionSet {
 
     typealias RawValue = Int
