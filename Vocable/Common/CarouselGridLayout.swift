@@ -52,6 +52,13 @@ class CarouselGridLayout: UICollectionViewLayout {
         }
     }
 
+    var pageInsets: UIEdgeInsets = .zero {
+        didSet {
+            guard oldValue != pageInsets else { return }
+            invalidateLayout()
+        }
+    }
+
     var itemsPerPage: Int {
         return rowCount * numberOfColumns
     }
@@ -80,16 +87,13 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     private var sectionContentSize: CGSize {
-        guard let collectionView = collectionView else { return .zero }
-        var size = collectionView.bounds.size
-        size.width += interItemSpacing
+        var size = pageContentSize
         size = size.applying(.init(scaleX: CGFloat(pagesPerSection), y: 1))
         return size
     }
 
     private var pageContentSize: CGSize {
-        let size = collectionView?.bounds.size ?? .zero
-        return size
+        return collectionView?.bounds.size ?? .zero
     }
 
     private var numberOfSections: Int {
@@ -110,14 +114,13 @@ class CarouselGridLayout: UICollectionViewLayout {
 
     private var currentPageIndex: Int {
         guard let collectionView = collectionView,
-            pageContentSize.width > 0 || interItemSpacing > 0 else { return 0 }
-        let index = Int((collectionView.bounds.midX / (pageContentSize.width + interItemSpacing)))
+            pageContentSize.width > 0 else { return 0 }
+        let index = Int(collectionView.bounds.midX / pageContentSize.width)
         return index
     }
 
     override var collectionViewContentSize: CGSize {
-        var size = sectionContentSize.applying(.init(scaleX: CGFloat(numberOfSections), y: 1))
-        size.width -= interItemSpacing // The last page does not have trailing padding
+        let size = sectionContentSize.applying(.init(scaleX: CGFloat(numberOfSections), y: 1))
         return size
     }
 
@@ -134,24 +137,27 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     private func frameForCell(at indexPath: IndexPath) -> CGRect {
-        guard let collectionView = collectionView else { return .zero }
-        let size = collectionView.bounds.size
-        let width = size.width
-        let height = size.height
-        let xOffset = CGFloat(indexPath.section) * sectionContentSize.width
 
-        let itemsPerPage = rowCount * numberOfColumns
         guard itemsPerPage > 0 else { return .zero }
 
-        let pageIndex = indexPath.item / itemsPerPage
+        let pageRect: CGRect = rectForPage(containing: indexPath)
 
-        let cellWidth = (width - CGFloat(numberOfColumns - 1) * interItemSpacing) / CGFloat(numberOfColumns)
-        let cellHeight = (height - CGFloat(rowCount - 1) * interItemSpacing) / CGFloat(rowCount)
+        let contentRect = pageRect.inset(by: pageInsets)
+        let cellColumnIndex = indexPath.item % numberOfColumns
+        let cellRowIndex = (indexPath.item % itemsPerPage) / numberOfColumns
 
-        let cellX = CGFloat((indexPath.item % numberOfColumns) + (numberOfColumns * pageIndex)) * (cellWidth + interItemSpacing)
-        let cellY = CGFloat(Int((indexPath.item % itemsPerPage) / numberOfColumns)) * (cellHeight + interItemSpacing)
+        let totalInterItemSpace = CGSize(width: CGFloat(numberOfColumns - 1) * interItemSpacing,
+                                         height: CGFloat(rowCount - 1) * interItemSpacing)
+        let cellWidth = (contentRect.width - totalInterItemSpace.width) / CGFloat(numberOfColumns)
+        let cellHeight = (contentRect.height - totalInterItemSpace.height) / CGFloat(rowCount)
 
-        let cellRect = CGRect(x: xOffset + cellX, y: cellY, width: cellWidth, height: cellHeight)
+        let cellX = CGFloat(cellColumnIndex) * (cellWidth + interItemSpacing)
+        let cellY = CGFloat(cellRowIndex) * (cellHeight + interItemSpacing)
+
+        let cellRect = CGRect(x: contentRect.minX + cellX,
+                              y: contentRect.minY + cellY,
+                              width: cellWidth,
+                              height: cellHeight)
         return cellRect
     }
 
@@ -194,15 +200,26 @@ class CarouselGridLayout: UICollectionViewLayout {
             proposedCenterX = collectionView.bounds.midX
         }
 
-        let pageIndex = Int((proposedCenterX / (pageContentSize.width + interItemSpacing)))
+        let pageIndex = Int((proposedCenterX / pageContentSize.width))
         let sectionIndex = pageIndex / pagesPerSection
         let pageIndexInSection = pageIndex % pagesPerSection
         let firstItemInPage = pageIndexInSection * itemsPerPage
-        let rect = frameForCell(at: IndexPath(item: firstItemInPage, section: sectionIndex))
-        return rect.origin
+        let indexPath = IndexPath(item: firstItemInPage, section: sectionIndex)
+        return targetScrollOffsetForItem(at: indexPath)
     }
 
-    func firstIndexPathForPageWithOffsetFromCurrentPage(offset: Int) -> IndexPath? {
+    private func rectForPage(containing indexPath: IndexPath) -> CGRect {
+        let pageIndexWithinSection = Int(indexPath.item / itemsPerPage)
+        let globalPageIndex = indexPath.section * pagesPerSection + pageIndexWithinSection
+        let origin = CGPoint(x: CGFloat(globalPageIndex) * pageContentSize.width, y: 0)
+        return CGRect(origin: origin, size: pageContentSize)
+    }
+
+    private func targetScrollOffsetForItem(at indexPath: IndexPath) -> CGPoint {
+        return rectForPage(containing: indexPath).origin
+    }
+
+    func scrollOffsetForPageWithOffsetFromCurrentPage(offset: Int) -> CGPoint? {
 
         let pageIndex = currentPageIndex + offset
         guard (0..<numberOfPages).contains(pageIndex), pagesPerSection > 0 else {
@@ -212,7 +229,7 @@ class CarouselGridLayout: UICollectionViewLayout {
         let pageIndexInSection = pageIndex % pagesPerSection
         let firstItemInPage = pageIndexInSection * itemsPerPage
         let indexPath = IndexPath(item: firstItemInPage, section: sectionIndex)
-        return indexPath
+        return targetScrollOffsetForItem(at: indexPath)
     }
 
     private func updatePagingProgress() {
@@ -263,32 +280,33 @@ class CarouselGridLayout: UICollectionViewLayout {
         return attr
     }
 
-    func indexPathForLeftmostCellOfPage(containing indexPath: IndexPath) -> IndexPath? {
+    func scrollOffsetForLeftmostCellOfPage(containing indexPath: IndexPath, inMiddleSection: Bool = false) -> CGPoint? {
         guard pagesPerSection > 0, itemsPerPage > 0 else {
             return nil
         }
         
         let pageOfIndexPathWithinSection = indexPath.item / itemsPerPage
         let firstItemInPage = pageOfIndexPathWithinSection * itemsPerPage
-        let result = IndexPath(item: firstItemInPage, section: indexPath.section)
-        return result
+        let section = inMiddleSection ? (numberOfSections / 2) : indexPath.section
+        let indexPath = IndexPath(item: firstItemInPage, section: section)
+        return targetScrollOffsetForItem(at: indexPath)
     }
     
-    func indexPathForLeftmostCellOfCurrentPage() -> IndexPath? {
+    func scrollOffsetForLeftmostCellOfCurrentPage() -> CGPoint? {
         let indexPaths = collectionView?.indexPathsForVisibleItems ?? []
         if let centerIndexPath = indexPaths[safe: indexPaths.count / 2] {
-            let result = indexPathForLeftmostCellOfPage(containing: centerIndexPath)
-            return result
+            let offset = scrollOffsetForLeftmostCellOfPage(containing: centerIndexPath)
+            return offset
         }
         return nil
     }
 
-    func indexPathForLeftmostCellOfCurrentPageInMiddleSection() -> IndexPath? {
-        let indexPaths = collectionView?.indexPathsForVisibleItems ?? []
-        if let centerIndexPath = indexPaths[safe: indexPaths.count / 2] {
-            if let result = indexPathForLeftmostCellOfPage(containing: centerIndexPath) {
-                let middleIndexPath = IndexPath(item: result.item, section: numberOfSections / 2)
-                return middleIndexPath
+    func scrollOffsetForLeftmostCellOfCurrentPageInMiddleSection() -> CGPoint? {
+        if let visibleIndexPaths = collectionView?.indexPathsForVisibleItems {
+            if let centerIndexPath = visibleIndexPaths[safe: visibleIndexPaths.count / 2] {
+                if let result = scrollOffsetForLeftmostCellOfPage(containing: centerIndexPath, inMiddleSection: true) {
+                    return result
+                }
             }
         }
         return nil

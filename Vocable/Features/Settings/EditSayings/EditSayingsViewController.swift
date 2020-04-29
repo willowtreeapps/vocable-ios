@@ -164,7 +164,7 @@ class EditSayingsViewController: UIViewController, UICollectionViewDelegate, NSF
         }
 
         if pageCountBefore < 2, pageCountAfter > 1 {
-            collectionView.scrollToMiddleSection()
+            carouselCollectionViewController?.carouselCollectionView.scrollToMiddleSection(animated: true)
         }
     }
 
