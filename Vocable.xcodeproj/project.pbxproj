@@ -535,7 +535,7 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		714EFD412419636500DC773C /* EditSayings */ = {
+		714EFD412419636500DC773C /* EditPhrases */ = {
 			isa = PBXGroup;
 			children = (
 				A9CF2AE8242D41BE005633A7 /* EditPhrases.storyboard */,
@@ -543,7 +543,7 @@
 				718D7FAD2419546F00FDEF93 /* EditPhrasesCollectionViewCell.swift */,
 				718D7FAF241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib */,
 			);
-			path = EditSayings;
+			path = EditPhrases;
 			sourceTree = "<group>";
 		};
 		9D15E0562272119E0058DF57 /* Utilities */ = {
@@ -567,7 +567,7 @@
 				64253CEC2419358D0044EAAA /* Settings.storyboard */,
 				A944D0062405C61400F3863E /* SettingsViewController.swift */,
 				A92FFB8C23ECCB5400AF2D0B /* SettingsCollectionViewController.swift */,
-				714EFD412419636500DC773C /* EditSayings */,
+				714EFD412419636500DC773C /* EditPhrases */,
 				A9B696002433C33F004E6960 /* EditCategories */,
 				A9DFCC21242D3A5000136136 /* TimingSensitivity */,
 				A9DFCC22242D3CF500136136 /* SelectionMode */,

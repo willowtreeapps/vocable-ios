@@ -27,17 +27,18 @@ final class EditCategoriesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         carouselCollectionViewController?.progressPublisher.sink(receiveValue: { (pagingProgress) in
             self.pageNavigationView.setPaginationButtonsEnabled(pagingProgress.pageCount > 1)
             self.pageNavigationView.textLabel.text = pagingProgress.localizedString
         }).store(in: &disposables)
         
-        addCategoryButton.isHidden = !AppConfig.showDebugOptions
+        addCategoryButton.isHidden = !AppConfig.editPhrasesEnabled
+
         titleLabel.text = NSLocalizedString("categories_list_editor.header.title",
                                             comment: "Categories list editor screen header title")
         pageNavigationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)
         pageNavigationView.previousPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToPreviousPage), for: .primaryActionTriggered)
-        
     }
     
     @IBAction func backToEditCategories(_ sender: Any) {
