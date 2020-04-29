@@ -1,6 +1,6 @@
 //
 //  SensitivityCollectionViewCell.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/26/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
@@ -9,17 +9,17 @@
 import UIKit
 import Combine
 
-class SensitivityCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet private var lowSensitivityButton: GazeableSegmentedButton!
-    @IBOutlet private var mediumSensitivityButton: GazeableSegmentedButton!
-    @IBOutlet private var highSensitivityButton: GazeableSegmentedButton!
-    
-    @IBOutlet var topSeparator: UIView!
-    @IBOutlet var bottomSeparator: UIView!
+final class SensitivityCollectionViewCell: UICollectionViewCell {
     
     private var disposables = Set<AnyCancellable>()
-    
+
+    @IBOutlet private weak var lowSensitivityButton: GazeableSegmentedButton!
+    @IBOutlet private weak var mediumSensitivityButton: GazeableSegmentedButton!
+    @IBOutlet private weak var highSensitivityButton: GazeableSegmentedButton!
+
+    @IBOutlet weak var topSeparator: UIView!
+    @IBOutlet weak var bottomSeparator: UIView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         

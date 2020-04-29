@@ -6,23 +6,19 @@
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Combine
 
-final class EditSayingsCollectionViewCell: VocableCollectionViewCell {
+final class EditPhrasesCollectionViewCell: VocableCollectionViewCell {
     
-    @IBOutlet private var textLabel: UILabel!
+    @IBOutlet var textLabel: UILabel!
     @IBOutlet var deleteButton: UIButton!
     @IBOutlet var editButton: UIButton!
     
     override func updateContentViews() {
         super.updateContentViews()
+
         borderedView.fillColor = .defaultCellBackgroundColor
     }
 
-    func setup(title: String) {
-        textLabel.text = title
-    }
-    
 }

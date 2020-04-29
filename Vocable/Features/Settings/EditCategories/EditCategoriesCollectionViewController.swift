@@ -1,16 +1,15 @@
 //
 //  EditCategoriesCollectionViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/31/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import CoreData
 
-class EditCategoriesCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
+final class EditCategoriesCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
     
     private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, Category>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, category) -> UICollectionViewCell? in
         guard let self = self else { return nil }
@@ -47,10 +46,8 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.register(UINib(nibName: "EditCategoriesDefaultCollectionViewCell", bundle: nil),
-                                forCellWithReuseIdentifier: "EditCategoriesDefaultCollectionViewCell")
-        collectionView.register(UINib(nibName: "EditCategoriesCompactCollectionViewCell", bundle: nil),
-                                forCellWithReuseIdentifier: "EditCategoriesCompactCollectionViewCell")
+        collectionView.register(UINib(nibName: "EditCategoriesDefaultCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoriesDefaultCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "EditCategoriesCompactCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EditCategoriesCompactCollectionViewCell")
         collectionView.backgroundColor = .collectionViewBackgroundColor
 
         updateLayoutForCurrentTraitCollection()
@@ -190,11 +187,9 @@ class EditCategoriesCollectionViewController: CarouselGridCollectionViewControll
             return
         }
         
-        let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as! EditCategoriesDetailViewController
-        
-        vc.category = fetchResultsController.object(at: indexPath)
-        show(vc, sender: nil)
-        
+        let viewController = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as! EditCategoryDetailViewController
+        viewController.category = fetchResultsController.object(at: indexPath)
+        show(viewController, sender: nil)
     }
     
     private func indexPath(after indexPath: IndexPath) -> IndexPath? {

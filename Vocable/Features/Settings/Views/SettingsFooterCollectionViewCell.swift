@@ -6,12 +6,11 @@
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class SettingsFooterCollectionViewCell: UICollectionViewCell {
+final class SettingsFooterCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet var versionLabel: UILabel!
+    @IBOutlet private weak var versionLabel: UILabel!
     
     func setup(versionLabel: String) {
         self.versionLabel.text = versionLabel

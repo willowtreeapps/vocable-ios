@@ -1,6 +1,6 @@
 //
 //  TimingSensitivityCollectionViewController.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/26/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimingSensitivityCollectionViewController: UICollectionViewController {
+final class TimingSensitivityCollectionViewController: UICollectionViewController {
     
     private enum SelectionModeItem: Hashable {
         case dwellTime

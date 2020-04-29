@@ -16,8 +16,8 @@ class MySayingsJKVC: PagingCarouselViewController, NSFetchedResultsControllerDel
 
     private lazy var diffableDataSource = CarouselCollectionViewDataSourceProxy<Int, PhraseViewModel>(collectionView: collectionView) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditSayingsCollectionViewCell.reuseIdentifier, for: indexPath) as! EditSayingsCollectionViewCell
-        cell.setup(title: phrase.utterance)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier, for: indexPath) as! EditPhrasesCollectionViewCell
+        cell.textLabel.text = phrase.utterance
         cell.deleteButton.addTarget(self,
                                     action: #selector(self.handleCellDeletionButton(_:)),
                                     for: .primaryActionTriggered)
