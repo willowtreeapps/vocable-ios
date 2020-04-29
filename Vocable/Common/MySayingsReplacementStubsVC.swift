@@ -1,5 +1,5 @@
 //
-//  MySayingsJKVC.swift
+//  MySayingsReplacementStubsVC.swift
 //  Vocable
 //
 //  Created by Chris Stroud on 4/29/20.
@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import CoreData
 
-class MySayingsJKVC: PagingCarouselViewController, NSFetchedResultsControllerDelegate {
+class MySayingsReplacementStubsVC: PagingCarouselViewController, NSFetchedResultsControllerDelegate {
 
     private var disposables = Set<AnyCancellable>()
 
