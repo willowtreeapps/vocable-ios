@@ -121,7 +121,6 @@ class CarouselGridLayout: UICollectionViewLayout {
 
     override var collectionViewContentSize: CGSize {
         let size = sectionContentSize.applying(.init(scaleX: CGFloat(numberOfSections), y: 1))
-//        size.width -= _interPageSpacing // The last page does not have trailing padding
         return size
     }
 
