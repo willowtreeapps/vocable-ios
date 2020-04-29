@@ -10,13 +10,8 @@ import UIKit
 
 final class SelectionModeCollectionViewController: UICollectionViewController {
     
-    private enum SelectionModeItem: String, Hashable {
-
-        case headTrackingToggle = "Head Tracking"
-
-        var title: String {
-            return self.rawValue
-        }
+    private enum SelectionModeItem: Int, Hashable {
+        case headTrackingToggle
     }
     
     private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SelectionModeItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in

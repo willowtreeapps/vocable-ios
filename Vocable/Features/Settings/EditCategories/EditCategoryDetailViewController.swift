@@ -143,6 +143,18 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
         }
     }
 
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return shouldEnableItem(at: indexPath)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldhi indexPath: IndexPath) -> Bool {
+        return shouldEnableItem(at: indexPath)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return shouldEnableItem(at: indexPath)
+    }
+
     @IBAction func backButtonPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -193,10 +205,9 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
     }
 
     private func displayEditPhrasesViewController() {
-        if let viewController = UIStoryboard(name: "EditPhrases", bundle: nil).instantiateViewController(identifier: "MyPhrases") as? EditPhrasesViewController {
-            viewController.category = category
-            show(viewController, sender: nil)
-        }
+        let viewController = UIStoryboard(name: "EditPhrases", bundle: nil).instantiateViewController(identifier: "MyPhrases") as! EditPhrasesViewController
+        viewController.category = category
+        show(viewController, sender: nil)
     }
 
     private func handleDismissAlert() {
