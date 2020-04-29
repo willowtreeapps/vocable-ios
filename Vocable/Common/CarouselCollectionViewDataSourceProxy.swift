@@ -26,6 +26,16 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
         self.cellProvider = cellProvider
         self.collectionView = collectionView
         super.init()
+
+        if let collectionView = collectionView as? CarouselGridCollectionView {
+            collectionView.dataSourceProxyInvalidationCallback = { [weak self] in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    let snapshot = self.snapshot()
+                    self.apply(snapshot, animatingDifferences: false)
+                }
+            }
+        }
     }
 
     func snapshot() -> NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier> {

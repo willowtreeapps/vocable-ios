@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 private class ContentView: UIView {
 
     var titleLabel: UILabel? {
@@ -17,13 +16,13 @@ private class ContentView: UIView {
         }
     }
 
-    var leftButton: GazeableButton? {
+    var leftButton: VocableNavigationBarButton? {
         didSet {
             updateVolatileView(new: leftButton, old: oldValue)
         }
     }
 
-    var rightButton: GazeableButton? {
+    var rightButton: VocableNavigationBarButton? {
         didSet {
             updateVolatileView(new: rightButton, old: oldValue)
         }
@@ -47,23 +46,10 @@ private class ContentView: UIView {
         updateContentViews()
     }
 
-    struct SizeClass {
-        let horizontal: UIUserInterfaceSizeClass
-        let vertical: UIUserInterfaceSizeClass
-        func contains(_ value: UIUserInterfaceSizeClass) -> Bool {
-            return [horizontal, vertical].contains(value)
-        }
-    }
-
-    private var sizeClass: SizeClass {
-        return .init(horizontal: traitCollection.horizontalSizeClass,
-                     vertical: traitCollection.verticalSizeClass)
-    }
-
     private func updateContentViews() {
-        let fontSize: CGFloat = sizeClass.contains(.compact) ? 36 : 18
+        let fontSize: CGFloat = sizeClass.contains(any: .compact) ? 28 : 48
         titleLabel?.textAlignment = .center
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSize)
+        titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         titleLabel?.textColor = .defaultTextColor
 
         leftButton?.layoutMargins = .init(top: 8, left: 8, bottom: 8, right: 8)
@@ -73,7 +59,10 @@ private class ContentView: UIView {
     }
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIView.noIntrinsicMetric, height: 54)
+        if sizeClass.contains(any: .compact) {
+            return CGSize(width: UIView.noIntrinsicMetric, height: 54)
+        }
+        return CGSize(width: UIView.noIntrinsicMetric, height: 100)
     }
 
     private func updateContentLayout() {
@@ -81,7 +70,7 @@ private class ContentView: UIView {
         layoutMargins = .zero
 
         let buttonSpacing: CGFloat
-        if sizeClass.contains(.compact) {
+        if sizeClass.contains(any: .compact) {
             buttonSpacing = 8
         } else {
             buttonSpacing = 16
@@ -143,7 +132,6 @@ private class ContentView: UIView {
     }
 }
 
-
 class VocableNavigationBar: UIView {
 
     var title: String? {
@@ -171,7 +159,7 @@ class VocableNavigationBar: UIView {
         }
     }
 
-    var leftButton: GazeableButton? {
+    var leftButton: VocableNavigationBarButton? {
         get {
             contentView.leftButton
         }
@@ -180,7 +168,7 @@ class VocableNavigationBar: UIView {
         }
     }
 
-    var rightButton: GazeableButton? {
+    var rightButton: VocableNavigationBarButton? {
         get {
             contentView.rightButton
         }
