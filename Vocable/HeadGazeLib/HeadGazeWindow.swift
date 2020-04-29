@@ -52,11 +52,7 @@ class HeadGazeWindow: UIWindow {
         AppConfig.$isHeadTrackingEnabled.sink { [weak self] isEnabled in
             guard let self = self else { return }
             if isEnabled {
-                self.installCursorViewIfNeeded()
-                self.cursorView?.setCursorViewsHidden(false, animated: true)
                 self.touchGazeDisableBeganDate = .distantPast
-            } else {
-                self.cursorView?.removeFromSuperview()
             }
         }.store(in: &cancellables)
 
@@ -74,13 +70,6 @@ class HeadGazeWindow: UIWindow {
         let title = NSLocalizedString("gaze_tracking.error.excessive_head_distance.title",
                                       comment: "Warning message presented to the user when the head tracking system")
         ToastWindow.shared.presentPersistentWarning(with: title)
-    }
-
-    override func addSubview(_ view: UIView) {
-        super.addSubview(view)
-        if let cursorView = cursorView {
-            bringSubviewToFront(cursorView)
-        }
     }
     
     private func cancelCurrentGazeIfNeeded() {
@@ -111,22 +100,6 @@ class HeadGazeWindow: UIWindow {
             }
         }
         schedule(duration: self.touchGazeDisableDuration)
-    }
-
-    private func installCursorViewIfNeeded() {
-        guard cursorView?.superview == nil else { return }
-
-        let cursorView = UIVirtualCursorView()
-        cursorView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(cursorView)
-
-        NSLayoutConstraint.activate([
-            cursorView.topAnchor.constraint(equalTo: topAnchor),
-            cursorView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            cursorView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            cursorView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-        self.cursorView = cursorView
     }
 
     func animateCursorSelection() {

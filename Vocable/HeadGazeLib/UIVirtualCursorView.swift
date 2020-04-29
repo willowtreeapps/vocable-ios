@@ -2,6 +2,15 @@ import Foundation
 import UIKit
 import SpriteKit
 
+class UIVirtualCursorViewController: UIViewController {
+
+    private(set) var virtualCursorView = UIVirtualCursorView(frame: .zero)
+
+    override func loadView() {
+        self.view = self.virtualCursorView
+    }
+}
+
 class UIVirtualCursorView: UIView {
 
     private var cursorView = CursorView()
@@ -35,7 +44,7 @@ class UIVirtualCursorView: UIView {
 
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
-        if (newWindow as? HeadGazeWindow) != nil {
+        if newWindow != nil {
             displayLink = CADisplayLink(target: self, selector: #selector(displayLinkDidFire(_:)))
             displayLink?.preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
             displayLink?.add(to: .current, forMode: .common)
