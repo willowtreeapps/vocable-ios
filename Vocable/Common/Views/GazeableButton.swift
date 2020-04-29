@@ -81,6 +81,7 @@ class GazeableButton: UIButton {
     private func commonInit() {
 
         backgroundView.isUserInteractionEnabled = false
+        layoutMargins = .zero
 
         addSubview(backgroundView)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,6 +104,9 @@ class GazeableButton: UIButton {
         NSLayoutConstraint.activate([
             buttonImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             buttonImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            buttonImageView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leadingAnchor),
+            buttonImageView.trailingAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.trailingAnchor),
+
             widthConstraint,
             heightConstraint
         ])
