@@ -32,7 +32,11 @@ final class PaginationView: UIView {
 
     let previousPageButton: GazeableButton = PaginationViewGazeableButton(frame: .zero)
     let nextPageButton: GazeableButton = PaginationViewGazeableButton(frame: .zero)
-    
+
+    convenience init() {
+        self.init(frame: .zero)
+    }
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()

@@ -44,6 +44,8 @@ class CarouselGridCollectionView: UICollectionView {
         return self.collectionViewLayout as! CarouselGridLayout
     }
 
+    var dataSourceProxyInvalidationCallback: (() -> Void)?
+
     private var needsInitialScrollToMiddle = true
 
     private var lastInvalidatedFrameSize: CGSize = .zero
