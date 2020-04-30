@@ -1,5 +1,5 @@
 //
-//  TestHelper.swift
+//  BaseScreen.swift
 //  VocableUITests
 //
 //  Created by Kevin Stechler on 4/27/20.
@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 
-class TestHelper: XCTestCase {
+class BaseScreen: XCTestCase {
     override func setUp() {
         let app = XCUIApplication()
         continueAfterFailure = false

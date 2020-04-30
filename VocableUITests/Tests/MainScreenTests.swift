@@ -8,26 +8,31 @@
 
 import XCTest
 
-class MainScreenTests: TestHelper {
+class MainScreenTests: BaseScreen {
+    let mainScreen = MainScreen()
     
     func testDefaultCategoriesExist() {
         for categoryName in MainScreen().defaultCategories {
-            XCTAssert(MainScreen().isTextDisplayed(categoryName), "Expected the current category name to be \(categoryName)")
+            XCTAssert(mainScreen.isTextDisplayed(categoryName), "Expected the current category name to be \(categoryName)")
             MainScreen.categoryRightButton.tap()
         }
     }
     
     func testDefaultSayingsInGeneralCategoryExist() {
-        for phrase in MainScreen().defaultPhraseGeneral {
-            XCTAssert(MainScreen().isTextDisplayed(phrase), "Expected the phrase \(phrase) to be displayed")
+        for phrase in mainScreen.defaultPhraseGeneral {
+            XCTAssert(mainScreen.isTextDisplayed(phrase), "Expected the phrase \(phrase) to be displayed")
         }
     }
     
     func testSelectingCategoryChangesPhrases() {
-        MainScreen.categoryRightButton.tap()
-        XCUIApplication().collectionViews.collectionViews.staticTexts[MainScreen().defaultCategories[1]].tap()
-        for phrase in MainScreen().defaultPhraseBasicNeeds {
-            XCTAssert(MainScreen().isTextDisplayed(phrase), "Expected the phrase \(phrase) to be displayed")
+        mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 1)
+        for phrase in mainScreen.defaultPhraseBasicNeeds {
+            XCTAssert(mainScreen.isTextDisplayed(phrase), "Expected the phrase \(phrase) to be displayed")
         }
+    }
+    
+    func testWhenTappingPhrase_ThenTextFieldPopulates() {
+        XCUIApplication().collectionViews.collectionViews.staticTexts[mainScreen.defaultPhraseGeneral[0]].tap()
+        XCTAssert(mainScreen.isTextDisplayedInTextView("Please be patient"))
     }
 }
