@@ -32,7 +32,7 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
+        request.predicate = NSComparisonPredicate(\Phrase.categories, .contains, category)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
         return request
     }()
@@ -89,7 +89,7 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
-            _ = Phrase.create(withUserEntry: newText, in: context)
+            _ = Phrase.create(withUserEntry: newText, category: self.category, in: context)
             do {
                 try context.save()
 
@@ -165,7 +165,7 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
         }
 
         if pageCountBefore < 2, pageCountAfter > 1 {
-            collectionView.scrollToMiddleSection(animated: true)
+            collectionView.scrollToMiddleSection(animated: animated)
         }
     }
 
