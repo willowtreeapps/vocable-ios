@@ -9,10 +9,8 @@
 import UIKit
 import Combine
 
-@IBDesignable class PagingCarouselViewController: UIViewController, UICollectionViewDelegate {
+@IBDesignable class PagingCarouselViewController: VocableViewController, UICollectionViewDelegate {
 
-    private var _navigationBar: VocableNavigationBar?
-    private(set) lazy var navigationBar: VocableNavigationBar = self.installNavigationBar()
     private(set) var paginationView = PaginationView()
     private(set) var collectionView = CarouselGridCollectionView()
 
@@ -23,13 +21,13 @@ import Combine
         self.init(nibName: nil, bundle: nil)
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        commonInit()
-    }
-
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        commonInit()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         commonInit()
     }
 
@@ -40,8 +38,7 @@ import Combine
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .collectionViewBackgroundColor
-
+        collectionView.delegate = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
 
@@ -58,37 +55,7 @@ import Combine
         paginationView.previousPageButton.addTarget(collectionView, action: #selector(CarouselGridCollectionView.scrollToPreviousPage), for: .primaryActionTriggered)
 
         updateMarginsForSubviews()
-        updateViewForCurrentTraitCollection()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        installBackButtonIfNeeded()
-    }
-
-    private func installBackButtonIfNeeded() {
-
-        guard navigationBar.leftButton == nil else { return }
-        guard let navigationController = navigationController else {
-            return
-        }
-        let viewControllers = navigationController.viewControllers
-        guard viewControllers.contains(self) else {
-            return
-        }
-        guard viewControllers.first != self else {
-            return
-        }
-
-        navigationBar.leftButton = {
-            let button = VocableNavigationBarButton(frame: .zero)
-            button.buttonImage = UIImage(systemName: "arrow.left")
-            button.addTarget(navigationController,
-                             action: #selector(UINavigationController.popViewController(animated:)),
-                             for: .primaryActionTriggered)
-            return button
-        }()
+        view.setNeedsUpdateConstraints()
     }
 
     override func viewLayoutMarginsDidChange() {
@@ -103,45 +70,18 @@ import Combine
         } else {
             collectionView.layout.pageInsets = .init(top: 16, left: margins.left, bottom: 32, right: margins.right)
         }
-        _navigationBar?.preservesSuperviewLayoutMargins = true
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        updateViewForCurrentTraitCollection()
-    }
-
-    private func installNavigationBar() -> VocableNavigationBar {
-        let bar = VocableNavigationBar(frame: .zero)
-        bar.setContentHuggingPriority(.required, for: .vertical)
-        bar.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(bar)
-        _navigationBar = bar
-        updateViewForCurrentTraitCollection()
-        return bar
-    }
-
-    private func updateViewForCurrentTraitCollection() {
-
-        if sizeClass.contains(any: .compact) {
-            view.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        } else {
-            view.layoutMargins = UIEdgeInsets(top: 32, left: 32, bottom: 32, right: 32)
-        }
-
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        
         NSLayoutConstraint.deactivate(volatileConstraints)
 
         var constraints = [NSLayoutConstraint]()
 
         let layoutMargins = view.layoutMarginsGuide
 
-        if let navigationBar = _navigationBar {
-
-            // Navigation bar
-            constraints += [
-                navigationBar.topAnchor.constraint(equalTo: view.topAnchor),
-                navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ]
+        if let navigationBar = navigationBarIfLoaded() {
 
             // CollectionView top + Navigation bar boundary
             constraints += [

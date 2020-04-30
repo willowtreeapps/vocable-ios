@@ -50,8 +50,8 @@ class MySayingsReplacementStubsVC: PagingCarouselViewController, NSFetchedResult
             return button
         }()
 
-        collectionView.register(UINib(nibName: "EditSayingsCollectionViewCell", bundle: nil),
-                                forCellWithReuseIdentifier: "EditSayingsCollectionViewCell")
+        collectionView.register(UINib(nibName: "EditPhrasesCollectionViewCell", bundle: nil),
+                                forCellWithReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier)
         collectionView.backgroundColor = .collectionViewBackgroundColor
 
         updateLayoutForCurrentTraitCollection()
