@@ -10,7 +10,7 @@ assignees: ''
 **Acceptance Criteria**:
 
 any scenarios or conditions that need to be satisfied
-list out criteria maybe in gherkin format if it seems fit
+If familiar with Gherkin format, follow that templte.
 
 **Design**:
 
