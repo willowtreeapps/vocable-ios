@@ -8,7 +8,7 @@
 
 import XCTest
 
-class VocableUITests: BaseScreen {
+class VocableUITests: BaseTest {
     let app = XCUIApplication()
     let keyboardScreen = KeyboardScreen()
     let mainScreen = MainScreen()

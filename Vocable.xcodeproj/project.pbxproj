@@ -13,7 +13,7 @@
 		130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */; };
 		17793C2B24574B2800758BC0 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17793C2A24574B2800758BC0 /* MainScreen.swift */; };
 		17793C2E24574CB500758BC0 /* MainScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17793C2D24574CB500758BC0 /* MainScreenTests.swift */; };
-		17D4162A2457659700FD81CD /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D416292457659700FD81CD /* BaseScreen.swift */; };
+		17D4162A2457659700FD81CD /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D416292457659700FD81CD /* BaseTest.swift */; };
 		17D4162C245C6FE800FD81CD /* KeyboardScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4162B245C6FE800FD81CD /* KeyboardScreenTests.swift */; };
 		17D4162E245C6FF600FD81CD /* KeyboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4162D245C6FF600FD81CD /* KeyboardScreen.swift */; };
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
@@ -216,7 +216,7 @@
 		17191A33245089270079F9BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17793C2A24574B2800758BC0 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		17793C2D24574CB500758BC0 /* MainScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenTests.swift; sourceTree = "<group>"; };
-		17D416292457659700FD81CD /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScreen.swift; sourceTree = "<group>"; };
+		17D416292457659700FD81CD /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
 		17D4162B245C6FE800FD81CD /* KeyboardScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardScreenTests.swift; sourceTree = "<group>"; };
 		17D4162D245C6FF600FD81CD /* KeyboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardScreen.swift; sourceTree = "<group>"; };
 		30B979A424254CBC00309D7C /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
