@@ -152,7 +152,7 @@ final class EditCategoriesCollectionViewController: CarouselGridCollectionViewCo
             assertionFailure("Failed to obtain index path")
             return
         }
-        guard let toIndexPath = indexPath(before: fromIndexPath) else {
+        guard let toIndexPath = collectionView.indexPath(before: fromIndexPath) else {
             assertionFailure("Failed to obtain index before indexPath")
             return
         }
@@ -168,7 +168,7 @@ final class EditCategoriesCollectionViewController: CarouselGridCollectionViewCo
             assertionFailure("Failed to obtain index path")
             return
         }
-        guard let toIndexPath = indexPath(after: fromIndexPath) else {
+        guard let toIndexPath = collectionView.indexPath(after: fromIndexPath) else {
             assertionFailure("Failed to obtain index before indexPath")
             return
         }
@@ -190,25 +190,6 @@ final class EditCategoriesCollectionViewController: CarouselGridCollectionViewCo
         let viewController = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as! EditCategoryDetailViewController
         viewController.category = fetchResultsController.object(at: indexPath)
         show(viewController, sender: nil)
-    }
-    
-    private func indexPath(after indexPath: IndexPath) -> IndexPath? {
-        let itemsInSection = collectionView.numberOfItems(inSection: 0)
-        let candidateIndex = indexPath.item + 1
-        if candidateIndex >= itemsInSection {
-            return nil
-        } else {
-            return IndexPath(row: candidateIndex, section: 0)
-        }
-    }
-    
-    private func indexPath(before indexPath: IndexPath) -> IndexPath? {
-        let candidateIndex = indexPath.item - 1
-        if candidateIndex < 0 {
-            return nil
-        } else {
-            return IndexPath(row: candidateIndex, section: 0)
-        }
     }
     
     private func swapOrdinal(fromCategory: Category, toCategory: Category) {

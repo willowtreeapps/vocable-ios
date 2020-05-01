@@ -125,7 +125,7 @@ class CarouselGridCollectionView: UICollectionView {
         scrollToNearestSelectedIndexPathOrCurrentPageBoundary()
     }
 
-    private func scrollToNearestSelectedIndexPathOrCurrentPageBoundary(animated: Bool = false) {
+    func scrollToNearestSelectedIndexPathOrCurrentPageBoundary(animated: Bool = false) {
         let selectedIndexPaths = indexPathsForSelectedItems ?? []
         let destination: CGPoint
         if let middleIndexPath = selectedIndexPaths[safe: selectedIndexPaths.count / 2], let target = layout.scrollOffsetForLeftmostCellOfPage(containing: middleIndexPath) {

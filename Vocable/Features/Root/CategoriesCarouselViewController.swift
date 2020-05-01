@@ -11,10 +11,17 @@ import CoreData
 
 @IBDesignable class CategoriesCarouselViewController: UIViewController, NSFetchedResultsControllerDelegate, UICollectionViewDelegate {
 
-    @PublishedValue var categoryObjectID: NSManagedObjectID = Category.fetchAll(in: NSPersistentContainer.shared.viewContext,
-                                                                                matching: NSComparisonPredicate(\Category.isHidden, .equalTo, false),
-                                                                                sortDescriptors: [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)])
-        .first!.objectID
+    static func fetchInitialCategoryID() -> NSManagedObjectID {
+        let ctx = NSPersistentContainer.shared.viewContext
+        let predicate = NSComparisonPredicate(\Category.isHidden, .equalTo, false)
+        let sort = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)]
+        let categories = Category.fetchAll(in: ctx,
+                          matching: predicate,
+                          sortDescriptors: sort)
+        return categories[0].objectID
+    }
+
+    @PublishedValue private(set) var categoryObjectID = fetchInitialCategoryID()
     @IBOutlet private weak var backChevron: GazeableButton!
     @IBOutlet private weak var forwardChevron: GazeableButton!
     @IBOutlet private weak var collectionViewContainer: UIView!
@@ -35,12 +42,13 @@ import CoreData
                                                                 sectionNameKeyPath: nil,
                                                                 cacheName: nil)
 
-    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<Int, Category>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, category) -> UICollectionViewCell? in
-           guard let self = self else { return nil }
-           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
-           cell.setup(title: category.name!)
-           return cell
-       }
+    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
+        guard let self = self else { return nil }
+        let category = self.frc.object(at: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
+        cell.setup(title: category.name!)
+        return cell
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,37 +68,88 @@ import CoreData
 
         frc.delegate = self
         try? frc.performFetch()
-
-        updateDataSource(animated: false)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateSelectedIndexPaths()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateSelectedIndexPaths()
+        updateCollectionViewMaskFrame()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        collectionViewMask.frame = CGRect(origin: .zero, size: collectionViewContainer.bounds.size)
+        updateCollectionViewMaskFrame()
     }
 
-    private func updateSelectedIndexPaths() {
-        let category = frc.managedObjectContext.object(with: categoryObjectID)
-        let selectedIndexPath = dataSourceProxy.indexPath(for: category as! Category)
-        if let selectedIndexPath = selectedIndexPath {
-            dataSourceProxy.performActions(on: selectedIndexPath) { (indexPath) in
-                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+    private func updateCollectionViewMaskFrame() {
+        self.collectionViewMask.frame = CGRect(origin: .zero, size: self.collectionViewContainer.bounds.size)
+    }
+
+    private func updateSelectedIndexPathsInProxyDataSource() {
+
+        let objectID: NSManagedObjectID
+        if let _ = try? frc.managedObjectContext.existingObject(with: categoryObjectID) as? Category {
+            objectID = categoryObjectID
+        } else {
+            objectID = CategoriesCarouselViewController.fetchInitialCategoryID()
+        }
+
+        guard let indexPath = dataSourceProxy.indexPath(for: objectID) else {
+            return
+        }
+
+        let selectedIndexPaths = Set(collectionView.indexPathsForSelectedItems?.map {
+            dataSourceProxy.indexPath(fromMappedIndexPath: $0)
+            } ?? [])
+        for path in selectedIndexPaths where path != indexPath {
+            dataSourceProxy.performActions(on: path) { (aPath) in
+                collectionView.deselectItem(at: aPath, animated: true)
             }
+        }
+
+        dataSourceProxy.performActions(on: indexPath) { (aPath) in
+            collectionView.selectItem(at: aPath, animated: true, scrollPosition: [])
         }
     }
 
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateDataSource(animated: true)
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
+
+        let previousItem: (objectID: NSManagedObjectID, indexPath: IndexPath)? = {
+            guard let mapped = collectionView.indexPathsForSelectedItems?.first else {
+                return nil
+            }
+            let indexPath = dataSourceProxy.indexPath(fromMappedIndexPath: mapped)
+            guard let objectID = dataSourceProxy.itemIdentifier(for: indexPath) else {
+                return nil
+            }
+            return (objectID: objectID, indexPath: indexPath)
+        }()
+
+        let snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
+        dataSourceProxy.apply(snapshot, animatingDifferences: false, completion: {
+
+            guard let previous = previousItem else {
+                // No item was previous selected
+                self.updateSelectedIndexPathsInProxyDataSource()
+                self.collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary(animated: false)
+                return
+            }
+
+            let newItemIndexPath: IndexPath? = {
+                if let indexPath = self.dataSourceProxy.indexPath(for: previous.objectID) {
+                    return indexPath
+                }
+                return self.collectionView.indexPath(nearestTo: previous.indexPath)
+            }()
+
+            guard let newPath = newItemIndexPath else {
+                // No new path to select
+                assertionFailure("New selection index path not found")
+                return
+            }
+
+            self.collectionView(self.collectionView, didSelectItemAt: newPath)
+            self.collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary(animated: true)
+        })
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -131,16 +190,6 @@ import CoreData
 
     }
 
-    private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
-        let content = frc.fetchedObjects ?? []
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Category>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(content)
-        dataSourceProxy.apply(snapshot,
-                                 animatingDifferences: animated,
-                                 completion: completion)
-    }
-
     @IBAction private func previousButtonAction(_ sender: Any) {
         collectionView.scrollToPreviousPage()
     }
@@ -160,10 +209,7 @@ import CoreData
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: { _ in
-            self.collectionViewMask.frame = CGRect(origin: .zero, size: self.collectionViewContainer.bounds.size)
-        }, completion: { _ in
-            self.updateSelectedItemForHorizontallyCompactLayout()
-            self.updateSelectedIndexPaths()
+            self.updateCollectionViewMaskFrame()
         })
     }
 
@@ -179,20 +225,7 @@ import CoreData
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let mappedIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-
-        dataSourceProxy.performActions(on: mappedIndexPath) { (aPath) in
-            collectionView.selectItem(at: aPath, animated: true, scrollPosition: [])
-        }
-
-        let selectedIndexPaths = Set(collectionView.indexPathsForSelectedItems?.map {
-            dataSourceProxy.indexPath(fromMappedIndexPath: $0)
-            } ?? [])
-        for path in selectedIndexPaths where path != mappedIndexPath {
-            dataSourceProxy.performActions(on: path) { (aPath) in
-                collectionView.deselectItem(at: aPath, animated: true)
-            }
-        }
-
         categoryObjectID = frc.object(at: mappedIndexPath).objectID
+        updateSelectedIndexPathsInProxyDataSource()
     }
 }
