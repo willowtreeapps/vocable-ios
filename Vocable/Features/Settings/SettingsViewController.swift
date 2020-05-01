@@ -16,8 +16,13 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     // Contact Developers + Privact Policy + Version Number
     private let externalLinksItemCount = 3
 
-    private enum SettingsItem: Hashable {
+    private enum Section: Int, CaseIterable {
+        case internalSettings
+        case externalURL
+        case version
+    }
 
+    private enum SettingsItem: Int, CaseIterable {
         case editMySayings
         case categories
         case timingSensitivity
@@ -70,8 +75,27 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         }
     }
 
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SettingsItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
-        return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SettingsItem> = .init(collectionView: collectionView) {
+        (collectionView, indexPath, item) -> UICollectionViewCell in
+
+        switch item {
+        case .editMySayings, .categories, .timingSensitivity, .resetAppSettings, .selectionMode:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
+            cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
+            return cell
+        case .privacyPolicy, .contactDevs:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
+            cell.setup(title: item.title, image: UIImage(systemName: "arrow.up.right"))
+            return cell
+        case .versionNum:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
+            cell.setup(versionLabel: self.versionAndBuildNumber)
+            return cell
+        case .pidTuner:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
+            cell.setup(title: item.title, image: UIImage())
+            return cell
+        }
     }
 
     private var versionAndBuildNumber: String {
@@ -85,37 +109,31 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupNavigationBar()
+        setupCollectionView()
+    }
+
+    private func setupNavigationBar() {
+        navigationBar.title = NSLocalizedString("settings.header.title",
+                                                comment: "Settings screen header title")
+
         navigationBar.leftButton = {
             let button = VocableNavigationBarButton()
             button.buttonImage = UIImage(systemName: "xmark.circle")
             button.addTarget(self, action: #selector(dismissVC), for: .primaryActionTriggered)
             return button
         }()
-
-        navigationBar.title = NSLocalizedString("settings.header.title",
-                                                comment: "Settings screen header title")
-
-        setupCollectionView()
     }
 
-    @objc private func dismissVC() {
-        presentingViewController?.dismiss(animated: true, completion: nil)
-    }
-
-    func setupCollectionView() {
+    private func setupCollectionView() {
         collectionView.backgroundColor = .collectionViewBackgroundColor
         collectionView.delaysContentTouches = false
         collectionView.isScrollEnabled = false
 
-        collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier)
-        collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "SettingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier)
 
         updateDataSource()
-
-        let layout = createLayout()
-        collectionView.collectionViewLayout = layout
     }
 
     private func updateDataSource() {
@@ -135,11 +153,13 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
 
     override func viewLayoutMarginsDidChange() {
         super.viewLayoutMarginsDidChange()
+
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
 
@@ -218,36 +238,14 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: settingsPageSubItems)
 
         let section = NSCollectionLayoutSection(group: settingPageGroup)
-        section.contentInsets.leading = view.layoutMargins.left
-        section.contentInsets.trailing = view.layoutMargins.right
+        section.contentInsets.leading = 23
+        section.contentInsets.trailing = 23
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
 
     // MARK: UICollectionViewController
 
-    private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: SettingsItem) -> UICollectionViewCell {
-        switch item {
-        case .editMySayings, .categories, .timingSensitivity, .resetAppSettings, .selectionMode:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
-            cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
-            return cell
-        case .privacyPolicy, .contactDevs:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
-            cell.setup(title: item.title, image: UIImage(systemName: "arrow.up.right"))
-            return cell
-        case .versionNum:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
-            cell.setup(versionLabel: versionAndBuildNumber)
-            return cell
-        case .pidTuner:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
-            cell.setup(title: item.title, image: UIImage())
-            return cell
-        }
-    }
-
-    // swiftlint:disable cyclomatic_complexity
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.indexPathForGazedItem != indexPath {
             collectionView.deselectItem(at: indexPath, animated: true)
@@ -258,32 +256,28 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         case .privacyPolicy:
             presentLeavingHeadTrackableDomainAlert(withConfirmation: presentPrivacyAlert)
         case .editMySayings:
-            if let vc = UIStoryboard(name: "EditPhrases", bundle: nil).instantiateViewController(identifier: "MyPhrases") as? EditPhrasesViewController {
-                vc.category = Category.userFavoritesCategory()
-                show(vc, sender: nil)
-            }
+            let vc = UIStoryboard(name: "EditPhrases", bundle: nil).instantiateViewController(identifier: "MyPhrases") as! EditPhrasesViewController
+            vc.category = Category.userFavoritesCategory()
+            show(vc, sender: nil)
+
         case .timingSensitivity:
-            if let vc = UIStoryboard(name: "TimingSensitivity", bundle: nil).instantiateViewController(identifier: "TimingSensitivity") as? TimingSensitivityViewController {
-                show(vc, sender: nil)
-            }
+            let vc = UIStoryboard(name: "TimingSensitivity", bundle: nil).instantiateViewController(identifier: "TimingSensitivity") as! TimingSensitivityViewController
+            show(vc, sender: nil)
+
         case .selectionMode:
-            if let vc = UIStoryboard(name: "SelectionMode", bundle: nil).instantiateViewController(identifier: "SelectionMode") as? SelectionModeViewController {
-                show(vc, sender: nil)
-            }
+            let vc = UIStoryboard(name: "SelectionMode", bundle: nil).instantiateViewController(identifier: "SelectionMode") as! SelectionModeViewController
+            show(vc, sender: nil)
+
         case .categories:
-            if let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategories") as? EditCategoriesViewController {
-                show(vc, sender: nil)
-            }
+            let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategories") as! EditCategoriesViewController
+            show(vc, sender: nil)
+
         case .contactDevs:
             presentEmail()
+
         case .pidTuner:
-            guard let gazeWindow = view.window as? HeadGazeWindow else { return }
-            for child in gazeWindow.rootViewController?.children ?? [] {
-                if let child = child as? UIHeadGazeViewController {
-                    child.pidInterpolator.pidSmoothingInterpolator.pulse.showTunningView(minimumValue: -1.0, maximumValue: 1.0)
-                    gazeWindow.cursorView?.isDebugCursorHidden = false
-                }
-            }
+            presentPidTuner()
+
         default:
             break
         }
@@ -313,7 +307,11 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         }
     }
 
-    // MARK: Presentations
+    // MARK: Actions
+
+    @objc private func dismissVC() {
+        presentingViewController?.dismiss(animated: true, completion: nil)
+    }
 
     private func presentPrivacyAlert() {
         let url = URL(string: "https://vocable.app/privacy.html")!
@@ -360,6 +358,16 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         self.composeVC = composeVC
 
         self.present(composeVC, animated: true)
+    }
+
+    private func presentPidTuner() {
+        guard let gazeWindow = view.window as? HeadGazeWindow else { return }
+        for child in gazeWindow.rootViewController?.children ?? [] {
+            if let child = child as? UIHeadGazeViewController {
+                child.pidInterpolator.pidSmoothingInterpolator.pulse.showTunningView(minimumValue: -1.0, maximumValue: 1.0)
+                gazeWindow.cursorView?.isDebugCursorHidden = false
+            }
+        }
     }
 
     // MARK: MFMailComposeViewControllerDelegate
