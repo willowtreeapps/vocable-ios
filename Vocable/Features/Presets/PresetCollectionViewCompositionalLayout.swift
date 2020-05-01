@@ -392,6 +392,12 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
             } else {
                 dimensions = (rows: 3, columns: 11)
             }
+        case .it:
+            if isCompactPortrait {
+                dimensions = (rows: 6, columns: 6)
+            } else {
+                dimensions = (rows: 3, columns: 12)
+            }
         }
         
         return dimensions

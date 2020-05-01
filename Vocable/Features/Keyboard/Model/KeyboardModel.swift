@@ -13,6 +13,7 @@ struct KeyboardLocale {
     enum LanguageCode: String {
         case en
         case de
+        case it
     }
     
     private struct OrientationKeyMapping {
@@ -48,6 +49,9 @@ struct KeyboardLocale {
         case .de:
             return .init(landscape: "QWERTZUIOPÜASDFGHJKLÖÄYXCVBNMẞ'.?",
                          compactPortrait: "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜẞ/-',.?")
+        case .it:
+            return .init(landscape: "QWERTYUIOPÀÈ‘ASDFGHJKLÌÒ,.ZXCVBNM?!Ù",
+                         compactPortrait: "ABCDEFGHIJKLMNOPQRSTUVWXYZ,.‘?ÀÈÌÒÙ!")
         }
     }
 }
