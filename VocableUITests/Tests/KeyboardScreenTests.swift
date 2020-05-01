@@ -14,14 +14,6 @@ class VocableUITests: BaseTest {
     let mainScreen = MainScreen()
     let testPhrase = "Test"
 
-    override func setUp() {
-        continueAfterFailure = false
-        app.launch()
-    }
-
-    override func tearDown() {
-    }
-
     func testWhenTyping_ThenTextShown() {
         MainScreen.keyboardNavButton.tap()
         keyboardScreen.typeText(testPhrase)
