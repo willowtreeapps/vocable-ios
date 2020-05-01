@@ -87,7 +87,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
             collectionView.layout.numberOfRows = .fixedCount(4)
         case (.compact, .regular):
             collectionView.layout.numberOfColumns = .fixedCount(1)
-            collectionView.layout.numberOfRows = .fixedCount(3)
+            collectionView.layout.numberOfRows = .minimumHeight(130)
         case (.compact, .compact), (.regular, .compact):
             collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(2)
