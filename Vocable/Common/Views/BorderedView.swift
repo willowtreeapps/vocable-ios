@@ -128,7 +128,7 @@ class BorderedView: UIView {
     }
 
     private func updateShapeLayer() {
-        guard bounds.size != .zero else { return }
+        guard bounds.size != .zero || frame.size != .zero else { return }
         let cornerRadii = CGSize(width: cornerRadius, height: cornerRadius)
         let boundsRect = CGRect(origin: .zero, size: bounds.size)
         let insetRect = boundsRect.insetBy(dx: borderWidth / 2, dy: borderWidth / 2)

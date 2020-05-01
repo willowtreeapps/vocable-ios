@@ -8,11 +8,18 @@
 
 import UIKit
 
-class RootViewController: UIViewController {
+@IBDesignable class RootViewController: VocableViewController {
+
+    @IBOutlet weak var outputLabel: UILabel!
+    @IBOutlet weak var keyboardButton: VocableNavigationBarButton!
+    @IBOutlet weak var settingsButton: VocableNavigationBarButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
     }
 
 }

@@ -13,37 +13,32 @@ import UIKit
 class GazeableButton: UIButton {
     
     fileprivate var gazeBeganDate: Date?
-    
-    let backgroundView = BorderedView()
-    private var buttonImageView = UIImageView()
-    private var buttonImageWidthConstraint: NSLayoutConstraint?
-    private var buttonImageHeightConstraint: NSLayoutConstraint?
-    
+
     override var isEnabled: Bool {
         didSet {
             updateContentViews()
         }
     }
 
-    @IBInspectable
-    var buttonImage: UIImage? {
-        didSet {
-            buttonImage = buttonImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 34, weight: .bold))
-            buttonImageView.image = buttonImage
-            updateContentViews()
-        }
-    }
-    @IBInspectable
-    var fillColor: UIColor = .defaultCellBackgroundColor {
-        didSet {
-            updateContentViews()
-        }
+    override func setImage(_ image: UIImage?, for state: UIControl.State) {
+        let image = image?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 34, weight: .bold))
+        super.setImage(image, for: state)
     }
     
-    var selectionFillColor: UIColor = .cellSelectionColor {
-        didSet {
-            updateContentViews()
-       }
+    func setFillColor(_ color: UIColor?, for state: UIControl.State) {
+
+        guard let color = color else {
+            setBackgroundImage(nil, for: state)
+            return
+        }
+
+        let image = renderBackgroundImage(withFillColor: color, withHighlight: state.contains(.highlighted))
+        setBackgroundImage(image, for: state)
+
+        if state == .normal {
+            let highlightedImage = renderBackgroundImage(withFillColor: color, withHighlight: true)
+            setBackgroundImage(highlightedImage, for: .highlighted)
+        }
     }
 
     override var isHighlighted: Bool {
@@ -80,69 +75,52 @@ class GazeableButton: UIButton {
     
     private func commonInit() {
 
-        backgroundView.isUserInteractionEnabled = false
+        tintColor = .defaultTextColor
+        setFillColor(.defaultCellBackgroundColor, for: .normal)
+        setFillColor(.cellSelectionColor, for: .selected)
+        setFillColor(.cellSelectionColor, for: [.selected, .highlighted])
+
         layoutMargins = .zero
 
-        addSubview(backgroundView)
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: topAnchor),
-            backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-
-        buttonImageView = UIImageView(image: buttonImage)
-        buttonImageView.contentMode = .scaleAspectFit
-
-        addSubview(buttonImageView)
-        buttonImageView.translatesAutoresizingMaskIntoConstraints = false
-
-        let buttonSize = buttonImageViewSizeForCurrentTraitCollection()
-        let widthConstraint = buttonImageView.widthAnchor.constraint(equalToConstant: buttonSize.width)
-        let heightConstraint = buttonImageView.heightAnchor.constraint(equalToConstant: buttonSize.height)
-        NSLayoutConstraint.activate([
-            buttonImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            buttonImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            buttonImageView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leadingAnchor),
-            buttonImageView.trailingAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.trailingAnchor),
-
-            widthConstraint,
-            heightConstraint
-        ])
-        buttonImageWidthConstraint = widthConstraint
-        buttonImageHeightConstraint = heightConstraint
-
-        updateContentViews()
-    }
-
-    private func buttonImageViewSizeForCurrentTraitCollection() -> CGSize {
-        if traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular {
-            return CGSize(width: 42, height: 42)
+        let ibStates = [UIControl.State.normal, .highlighted, .selected, .disabled]
+        for state in ibStates {
+            if let original = image(for: state) {
+                setImage(original, for: state)
+            }
         }
-        return CGSize(width: 34, height: 34)
-    }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        let buttonSize = buttonImageViewSizeForCurrentTraitCollection()
-        buttonImageWidthConstraint?.constant = buttonSize.width
-        buttonImageHeightConstraint?.constant = buttonSize.height
         updateContentViews()
     }
     
     fileprivate func updateContentViews() {
+        titleLabel?.alpha = CGFloat(isEnabled ? 1.0 : 0.5)
+    }
 
-        let alpha = CGFloat(isEnabled ? 1.0 : 0.5)
-        backgroundView.alpha = alpha
-        titleLabel?.alpha = alpha
-        buttonImageView.alpha = alpha
+    private func renderBackgroundImage(withFillColor fillColor: UIColor, withHighlight isHighlighted: Bool) -> UIImage {
+        let cornerRadius: CGFloat = 8
+        let borderWidth: CGFloat = 4
+        let dimension = cornerRadius * 2 + 1
+        let bounds = CGRect(origin: .zero, size: CGSize(width: dimension, height: dimension))
+        let image = UIGraphicsImageRenderer(bounds: bounds).image { _ in
 
-        backgroundView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
-        backgroundView.fillColor = isSelected ? selectionFillColor : fillColor
-        backgroundView.borderColor = .cellBorderHighlightColor
-        backgroundView.cornerRadius = 8
-        backgroundView.isOpaque = true
+            UIColor.collectionViewBackgroundColor.setFill()
+            UIRectFill(bounds)
+
+            let insetRect = bounds.insetBy(dx: borderWidth * 0.5, dy: borderWidth * 0.5)
+            let path = UIBezierPath(roundedRect: insetRect, cornerRadius: cornerRadius - borderWidth * 0.5)
+            path.lineWidth = borderWidth
+
+            fillColor.setFill()
+            path.fill()
+
+            if isHighlighted {
+                UIColor.cellBorderHighlightColor.setStroke()
+                path.stroke()
+            }
+        }
+        let capInsets = UIEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius)
+        let stretchableImage = image.resizableImage(withCapInsets: capInsets, resizingMode: .stretch)
+        return stretchableImage
     }
     
     override var canReceiveGaze: Bool {
