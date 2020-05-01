@@ -33,6 +33,19 @@ class GazeableButton: UIButton {
         }
     }
 
+    @available(*, deprecated, message: "Use setFillColor(forState:) instead")
+    @IBInspectable var fillColor: UIColor? {
+        get {
+            return fillColor(for: .normal)
+        }
+        set {
+            print("Warning: using deprecated `fillColor` property on GazeableButton")
+            for state in defaultIBStates {
+                setFillColor(newValue, for: state)
+            }
+        }
+    }
+
     @IBInspectable var cornerRadius: CGFloat = 8 {
         didSet {
             guard oldValue != cornerRadius else { return }
@@ -124,6 +137,10 @@ class GazeableButton: UIButton {
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 34, weight: .bold)
         let image = image?.withConfiguration(symbolConfiguration)
         super.setImage(image, for: state)
+    }
+
+    func fillColor(for state: UIControl.State) -> UIColor? {
+        return cachedFillColors[state]
     }
 
     func setFillColor(_ color: UIColor?, for state: UIControl.State) {

@@ -28,17 +28,23 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1OT-dF-ssX" userLabel="Navigation Buttons Stack View">
                                         <rect key="frame" x="0.0" y="36.666666666666671" width="343" height="59.333333333333329"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abu-M3-qXM" userLabel="Keyboard Button" customClass="VocableNavigationBarButton" customModule="Vocable" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abu-M3-qXM" userLabel="Keyboard Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="59.333333333333336"/>
                                                 <state key="normal" image="keyboard" catalog="system"/>
+                                                <connections>
+                                                    <action selector="keyboardButtonSelected:" destination="yUp-dU-mBF" eventType="primaryActionTriggered" id="FjK-bf-PNb"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EnH-qh-EMS" userLabel="Settings Button" customClass="VocableNavigationBarButton" customModule="Vocable" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EnH-qh-EMS" userLabel="Settings Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                                 <rect key="frame" x="175.66666666666663" y="0.0" width="167.33333333333337" height="59.333333333333336"/>
                                                 <color key="tintColor" name="DefaultFontColor"/>
                                                 <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                                 <state key="normal" image="gear" catalog="system">
                                                     <color key="titleColor" name="DefaultFontColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="settingsButtonSelected:" destination="yUp-dU-mBF" eventType="primaryActionTriggered" id="ppS-Lw-f5e"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -53,7 +59,7 @@
                                     </constraint>
                                 </constraints>
                                 <connections>
-                                    <segue destination="33R-xW-UrQ" kind="embed" id="mSs-SS-3vM"/>
+                                    <segue destination="33R-xW-UrQ" kind="embed" identifier="CategoryCarousel" id="mSs-SS-3vM"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -141,6 +147,7 @@
                             <constraint firstAttribute="bottom" secondItem="ezX-4t-yw5" secondAttribute="bottom" id="mJy-gj-ga8"/>
                             <constraint firstItem="ezX-4t-yw5" firstAttribute="leading" secondItem="ysz-No-obO" secondAttribute="leading" id="pVr-r2-IRL"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="IFh-yd-6Ve"/>
                     </view>
                     <connections>
                         <outlet property="backChevron" destination="Fb7-Uu-X9X" id="o9e-Kt-i5m"/>
