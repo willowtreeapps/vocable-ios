@@ -38,7 +38,7 @@ import UIKit
     }
 
     @IBAction private func keyboardButtonSelected(_ sender: Any) {
-        let vc = EditTextViewController()
+        let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateInitialViewController()!
         self.present(vc, animated: true)
     }
 
