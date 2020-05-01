@@ -573,9 +573,8 @@ class PresetsViewController: UICollectionViewController, VocableCollectionViewLa
     }
     
     private func presentSettingsViewController() {
-        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-        let vc = storyboard.instantiateInitialViewController()!
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        let navigationController = VocableNavigationController(rootViewController: SettingsViewController())
+        self.present(navigationController, animated: true)
     }
+
 }
