@@ -8,7 +8,7 @@
 
 import XCTest
 
-class MainScreenTests: BaseScreen {
+class MainScreenTests: BaseTest {
     let mainScreen = MainScreen()
     
     func testDefaultCategoriesExist() {

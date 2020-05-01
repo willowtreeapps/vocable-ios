@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 
-class BaseScreen: XCTestCase {
+class BaseTest: XCTestCase {
     override func setUp() {
         let app = XCUIApplication()
         continueAfterFailure = false
