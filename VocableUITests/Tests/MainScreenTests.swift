@@ -19,20 +19,22 @@ class MainScreenTests: BaseTest {
     }
     
     func testDefaultSayingsInGeneralCategoryExist() {
-        for phrase in mainScreen.defaultPhraseGeneral {
-            XCTAssert(mainScreen.isTextDisplayed(phrase), "Expected the phrase \(phrase) to be displayed")
-        }
+        verifyGivenPhrasesDisplay(setOfPhrases: mainScreen.defaultPhraseGeneral)
     }
     
     func testSelectingCategoryChangesPhrases() {
         mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 1)
-        for phrase in mainScreen.defaultPhraseBasicNeeds {
-            XCTAssert(mainScreen.isTextDisplayed(phrase), "Expected the phrase \(phrase) to be displayed")
-        }
+        verifyGivenPhrasesDisplay(setOfPhrases: mainScreen.defaultPhraseBasicNeeds)
     }
     
     func testWhenTappingPhrase_ThenTextFieldPopulates() {
         XCUIApplication().collectionViews.collectionViews.staticTexts[mainScreen.defaultPhraseGeneral[0]].tap()
         XCTAssert(mainScreen.isTextDisplayedInTextView("Please be patient"))
+    }
+    
+    private func verifyGivenPhrasesDisplay(setOfPhrases: [String]) {
+        for phrase in setOfPhrases {
+            XCTAssert(mainScreen.isTextDisplayed(phrase), "Expected the phrase \(phrase) to be displayed")
+        }
     }
 }
