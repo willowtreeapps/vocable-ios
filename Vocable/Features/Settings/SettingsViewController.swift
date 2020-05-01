@@ -256,9 +256,9 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         case .privacyPolicy:
             presentLeavingHeadTrackableDomainAlert(withConfirmation: presentPrivacyAlert)
         case .editMySayings:
-            let vc = UIStoryboard(name: "EditPhrases", bundle: nil).instantiateViewController(identifier: "MyPhrases") as! EditPhrasesViewController
-            vc.category = Category.userFavoritesCategory()
-            show(vc, sender: nil)
+            let viewController = EditPhrasesViewController()
+            viewController.category = Category.userFavoritesCategory()
+            show(viewController, sender: nil)
 
         case .timingSensitivity:
             let vc = UIStoryboard(name: "TimingSensitivity", bundle: nil).instantiateViewController(identifier: "TimingSensitivity") as! TimingSensitivityViewController

@@ -1,8 +1,8 @@
 //
-//  EditSayingsViewController.swift
+//  EditPhrasesViewController.swift
 //  Vocable AAC
 //
-//  Created by Thomas Shealy on 3/11/20.
+//  Created by Thomas Shealy on 3/31/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
@@ -10,14 +10,11 @@ import UIKit
 import Combine
 import CoreData
 
-final class EditPhrasesViewController: UIViewController, UICollectionViewDelegate, NSFetchedResultsControllerDelegate {
+final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedResultsControllerDelegate {
 
     var category: Category!
 
-    private var carouselCollectionViewController: CarouselGridCollectionViewController?
-    private var disposables = Set<AnyCancellable>()
-
-    private lazy var diffableDataSource = CarouselCollectionViewDataSourceProxy<Int, PhraseViewModel>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
+    private lazy var diffableDataSource = CarouselCollectionViewDataSourceProxy<Int, PhraseViewModel>(collectionView: collectionView) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier, for: indexPath) as! EditPhrasesCollectionViewCell
         cell.textLabel.text = phrase.utterance
@@ -42,69 +39,35 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
                                                                                  sectionNameKeyPath: nil,
                                                                                  cacheName: nil)
 
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var addButton: GazeableButton!
-    @IBOutlet private weak var backButton: GazeableButton!
-    @IBOutlet private weak var collectionView: CarouselGridCollectionView!
-    @IBOutlet private weak var paginationView: PaginationView!
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "CarouselCollectionViewController" {
-           carouselCollectionViewController = segue.destination as? CarouselGridCollectionViewController
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         assert(category != nil, "Category not provided")
-
-        collectionView.register(UINib(nibName: "EditPhrasesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier)
-        collectionView.backgroundColor = .collectionViewBackgroundColor
 
         updateLayoutForCurrentTraitCollection()
 
         fetchResultsController.delegate = self
         try? fetchResultsController.performFetch()
         updateDataSource(animated: false)
-        
-        collectionView.progressPublisher.sink(receiveValue: { (pagingProgress) in
-            self.paginationView.setPaginationButtonsEnabled(pagingProgress.pageCount > 1)
-            self.paginationView.textLabel.text = pagingProgress.localizedString
-        }).store(in: &disposables)
-        
-        paginationView.nextPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToNextPage), for: .primaryActionTriggered)
-        paginationView.previousPageButton.addTarget(carouselCollectionViewController, action: #selector(CarouselGridCollectionViewController.scrollToPreviousPage), for: .primaryActionTriggered)
 
-        titleLabel.text = category.name
+        setupNavigationBar()
+        setupCollectionView()
     }
-    
-    @IBAction private func backToSettings(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+
+    private func setupNavigationBar() {
+        navigationBar.title = category.name
+        navigationBar.rightButton = {
+            let button = GazeableButton(frame: .zero)
+            button.setImage(UIImage(systemName: "plus"), for: .normal)
+            button.addTarget(self, action: #selector(addPhrasePressed), for: .primaryActionTriggered)
+            return button
+        }()
     }
-    
-    @IBAction private func addPhrasePressed() {
-        let vc = EditTextViewController()
-        vc.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
 
-            _ = Phrase.create(withUserEntry: newText, category: self.category, in: context)
-            do {
-                try context.save()
-
-                let alertMessage: String = {
-                    let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
-                    let categoryName = self.category.name ?? ""
-                    return String.localizedStringWithFormat(format, categoryName)
-                }()
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-            } catch {
-                assertionFailure("Failed to save user generated phrase: \(error)")
-            }
-        }
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+    private func setupCollectionView() {
+        collectionView.register(UINib(nibName: "EditPhrasesCollectionViewCell", bundle: nil),
+                                forCellWithReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier)
+        collectionView.backgroundColor = .collectionViewBackgroundColor
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -122,6 +85,7 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
         case (.compact, .regular):
             collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(3)
+            collectionView.layout.numberOfRows = .minimumHeight(130)
         case (.compact, .compact), (.regular, .compact):
             collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(2)
@@ -164,7 +128,7 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
         }
 
         if pageCountBefore < 2, pageCountAfter > 1 {
-            collectionView.scrollToMiddleSection(animated: animated)
+            collectionView.scrollToMiddleSection(animated: true)
         }
     }
 
@@ -178,6 +142,33 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
     private func removeEmptyStateIfNeeded() {
         paginationView.isHidden = false
         collectionView.backgroundView = nil
+    }
+
+    // MARK: Actions 
+
+    @IBAction private func addPhrasePressed() {
+        let storyboard = UIStoryboard(name: "EditTextViewController", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
+        vc.editTextCompletionHandler = { (newText) -> Void in
+            let context = NSPersistentContainer.shared.viewContext
+
+            _ = Phrase.create(withUserEntry: newText, category: self.category, in: context)
+            do {
+                try context.save()
+
+                let alertMessage: String = {
+                    let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
+                    let categoryName = Category.userFavoritesCategoryName()
+                    return String.localizedStringWithFormat(format, categoryName)
+                }()
+
+                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+            } catch {
+                assertionFailure("Failed to save user generated phrase: \(error)")
+            }
+        }
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 
     @objc private func handleCellDeletionButton(_ sender: UIButton) {
