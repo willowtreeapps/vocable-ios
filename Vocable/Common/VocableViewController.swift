@@ -87,7 +87,7 @@ import UIKit
         }
 
         navigationBar.leftButton = {
-            let button = VocableNavigationBarButton(frame: .zero)
+            let button = GazeableButton(frame: .zero)
             button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             button.addTarget(navigationController,
                              action: #selector(UINavigationController.popViewController(animated:)),

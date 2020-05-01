@@ -134,7 +134,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ezX-4t-yw5" secondAttribute="trailing" id="3sh-Me-Hi6"/>
                             <constraint firstItem="ezX-4t-yw5" firstAttribute="top" secondItem="ysz-No-obO" secondAttribute="top" id="Ag0-YW-ioe"/>

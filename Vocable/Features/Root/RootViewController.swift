@@ -11,8 +11,8 @@ import UIKit
 @IBDesignable class RootViewController: VocableViewController {
 
     @IBOutlet weak var outputLabel: UILabel!
-    @IBOutlet weak var keyboardButton: VocableNavigationBarButton!
-    @IBOutlet weak var settingsButton: VocableNavigationBarButton!
+    @IBOutlet weak var keyboardButton: GazeableButton!
+    @IBOutlet weak var settingsButton: GazeableButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -16,13 +16,13 @@ private class ContentView: UIView {
         }
     }
 
-    var leftButton: VocableNavigationBarButton? {
+    var leftButton: GazeableButton? {
         didSet {
             updateVolatileView(new: leftButton, old: oldValue)
         }
     }
 
-    var rightButton: VocableNavigationBarButton? {
+    var rightButton: GazeableButton? {
         didSet {
             updateVolatileView(new: rightButton, old: oldValue)
         }
@@ -159,7 +159,7 @@ class VocableNavigationBar: UIView {
         }
     }
 
-    var leftButton: VocableNavigationBarButton? {
+    var leftButton: GazeableButton? {
         get {
             contentView.leftButton
         }
@@ -168,7 +168,7 @@ class VocableNavigationBar: UIView {
         }
     }
 
-    var rightButton: VocableNavigationBarButton? {
+    var rightButton: GazeableButton? {
         get {
             contentView.rightButton
         }

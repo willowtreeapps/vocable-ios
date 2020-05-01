@@ -9,35 +9,54 @@
 import Foundation
 import UIKit
 
+extension UIControl.State: Hashable {
+
+}
+
 @IBDesignable
 class GazeableButton: UIButton {
-    
+
     fileprivate var gazeBeganDate: Date?
+    private var cachedFillColors = [UIControl.State: UIColor]()
+    private let defaultIBStates = [UIControl.State.normal, .highlighted, .selected, .disabled]
+
+    @available(*, deprecated, message: "Use setImage(forState:) instead")
+    @IBInspectable var buttonImage: UIImage? {
+        get {
+            return image(for: .normal)
+        }
+        set {
+            print("Warning: using deprecated `buttonImage` property on GazeableButton")
+            for state in defaultIBStates {
+                setImage(newValue, for: state)
+            }
+        }
+    }
+
+    @IBInspectable var cornerRadius: CGFloat = 8 {
+        didSet {
+            guard oldValue != cornerRadius else { return }
+            updateBackgroundImagesForCurrentParameters()
+        }
+    }
+
+    @IBInspectable var borderWidth: CGFloat = 4 {
+        didSet {
+            guard oldValue != borderWidth else { return }
+            updateBackgroundImagesForCurrentParameters()
+        }
+    }
+
+    var roundedCorners: UIRectCorner = .allCorners {
+        didSet {
+            guard oldValue != roundedCorners else { return }
+            updateBackgroundImagesForCurrentParameters()
+        }
+    }
 
     override var isEnabled: Bool {
         didSet {
             updateContentViews()
-        }
-    }
-
-    override func setImage(_ image: UIImage?, for state: UIControl.State) {
-        let image = image?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 34, weight: .bold))
-        super.setImage(image, for: state)
-    }
-    
-    func setFillColor(_ color: UIColor?, for state: UIControl.State) {
-
-        guard let color = color else {
-            setBackgroundImage(nil, for: state)
-            return
-        }
-
-        let image = renderBackgroundImage(withFillColor: color, withHighlight: state.contains(.highlighted))
-        setBackgroundImage(image, for: state)
-
-        if state == .normal {
-            let highlightedImage = renderBackgroundImage(withFillColor: color, withHighlight: true)
-            setBackgroundImage(highlightedImage, for: .highlighted)
         }
     }
 
@@ -53,6 +72,14 @@ class GazeableButton: UIButton {
         }
     }
 
+    override var backgroundColor: UIColor? {
+        didSet {
+            guard oldValue != backgroundColor else { return }
+            updateBackgroundImagesForCurrentParameters()
+            updateContentViews()
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -62,52 +89,88 @@ class GazeableButton: UIButton {
         super.init(coder: coder)
         commonInit()
     }
+    
+    private func commonInit() {
+        setDefaultAppearance()
+        updateContentViews()
+    }
+
+    private func setDefaultAppearance() {
+        tintColor = .defaultTextColor
+        setFillColor(.defaultCellBackgroundColor, for: .normal)
+        setFillColor(.cellSelectionColor, for: .selected)
+        setFillColor(.cellSelectionColor, for: [.selected, .highlighted])
+        contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
+        layoutMargins = .zero
+        for state in defaultIBStates {
+            if let original = image(for: state) {
+                setImage(original, for: state)
+            }
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         updateContentViews()
     }
-    
+
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
+        setDefaultAppearance()
         updateContentViews()
     }
-    
-    private func commonInit() {
 
-        tintColor = .defaultTextColor
-        setFillColor(.defaultCellBackgroundColor, for: .normal)
-        setFillColor(.cellSelectionColor, for: .selected)
-        setFillColor(.cellSelectionColor, for: [.selected, .highlighted])
+    override func setImage(_ image: UIImage?, for state: UIControl.State) {
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 34, weight: .bold)
+        let image = image?.withConfiguration(symbolConfiguration)
+        super.setImage(image, for: state)
+    }
 
-        layoutMargins = .zero
+    func setFillColor(_ color: UIColor?, for state: UIControl.State) {
 
-        let ibStates = [UIControl.State.normal, .highlighted, .selected, .disabled]
-        for state in ibStates {
-            if let original = image(for: state) {
-                setImage(original, for: state)
-            }
+        defer {
+            cachedFillColors[state] = color
         }
 
-        updateContentViews()
+        guard let color = color else {
+            setBackgroundImage(nil, for: state)
+            return
+        }
+
+        let image = renderBackgroundImage(withFillColor: color, withHighlight: state.contains(.highlighted))
+        setBackgroundImage(image, for: state)
+
+        if state == .normal {
+            let highlightedImage = renderBackgroundImage(withFillColor: color, withHighlight: true)
+            setBackgroundImage(highlightedImage, for: .highlighted)
+        }
+    }
+
+    private func updateBackgroundImagesForCurrentParameters() {
+        for (state, color) in cachedFillColors {
+            setFillColor(color, for: state)
+        }
     }
     
     fileprivate func updateContentViews() {
         titleLabel?.alpha = CGFloat(isEnabled ? 1.0 : 0.5)
+        adjustsImageWhenHighlighted = false
+        showsTouchWhenHighlighted = false
+        imageView?.contentMode = .scaleAspectFit
     }
 
     private func renderBackgroundImage(withFillColor fillColor: UIColor, withHighlight isHighlighted: Bool) -> UIImage {
-        let cornerRadius: CGFloat = 8
-        let borderWidth: CGFloat = 4
         let dimension = cornerRadius * 2 + 1
         let bounds = CGRect(origin: .zero, size: CGSize(width: dimension, height: dimension))
         let image = UIGraphicsImageRenderer(bounds: bounds).image { _ in
 
-            UIColor.collectionViewBackgroundColor.setFill()
+            let backgroundFillColor: UIColor = backgroundColor ?? .collectionViewBackgroundColor
+            backgroundFillColor.setFill()
             UIRectFill(bounds)
 
             let insetRect = bounds.insetBy(dx: borderWidth * 0.5, dy: borderWidth * 0.5)
-            let path = UIBezierPath(roundedRect: insetRect, cornerRadius: cornerRadius - borderWidth * 0.5)
+            let cornerSize = CGSize(width: cornerRadius, height: cornerRadius)
+            let path = UIBezierPath(roundedRect: insetRect, byRoundingCorners: roundedCorners, cornerRadii: cornerSize)
             path.lineWidth = borderWidth
 
             fillColor.setFill()

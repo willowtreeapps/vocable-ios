@@ -73,7 +73,6 @@
 		6BE7E9842459D328007B01F2 /* PagingCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E9832459D328007B01F2 /* PagingCarouselViewController.swift */; };
 		6BE7E9882459DFD5007B01F2 /* VocableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E9872459DFD5007B01F2 /* VocableNavigationBar.swift */; };
 		6BE7E98C245A19F8007B01F2 /* UITraitCollection+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E98B245A19F8007B01F2 /* UITraitCollection+Helpers.swift */; };
-		6BE7E98E245A1D75007B01F2 /* VocableNavigationBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E98D245A1D75007B01F2 /* VocableNavigationBarButton.swift */; };
 		6BFB18BE24002BFE002C3515 /* NSPersistentContainer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18BD24002BFE002C3515 /* NSPersistentContainer+Shared.swift */; };
 		6BFB18C224002C7B002C3515 /* Phrases.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C024002C7B002C3515 /* Phrases.xcdatamodeld */; };
 		6BFB18C424004406002C3515 /* NSManagedObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */; };
@@ -274,7 +273,6 @@
 		6BE7E9872459DFD5007B01F2 /* VocableNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableNavigationBar.swift; sourceTree = "<group>"; };
 		6BE7E9892459F7C3007B01F2 /* MySayingsReplacementStubsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySayingsReplacementStubsVC.swift; sourceTree = "<group>"; };
 		6BE7E98B245A19F8007B01F2 /* UITraitCollection+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITraitCollection+Helpers.swift"; sourceTree = "<group>"; };
-		6BE7E98D245A1D75007B01F2 /* VocableNavigationBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableNavigationBarButton.swift; sourceTree = "<group>"; };
 		6BFB18BD24002BFE002C3515 /* NSPersistentContainer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPersistentContainer+Shared.swift"; sourceTree = "<group>"; };
 		6BFB18C124002C7B002C3515 /* Phrases.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Phrases.xcdatamodel; sourceTree = "<group>"; };
 		6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Helpers.swift"; sourceTree = "<group>"; };
@@ -757,7 +755,6 @@
 				6B8440D82448B3FC007A4DC6 /* CarouselCollectionViewDataSourceProxy.swift */,
 				6B8440E0244A0F97007A4DC6 /* VocableCollectionViewLayoutTransitioningDelegate.swift */,
 				6BE7E9872459DFD5007B01F2 /* VocableNavigationBar.swift */,
-				6BE7E98D245A1D75007B01F2 /* VocableNavigationBarButton.swift */,
 				6B005AE8245B2201004919F4 /* Refactor_Stubs */,
 				6BE7E98B245A19F8007B01F2 /* UITraitCollection+Helpers.swift */,
 				6BE7E9832459D328007B01F2 /* PagingCarouselViewController.swift */,
@@ -1158,7 +1155,6 @@
 				6BB56BAA2422B40300EA787E /* PublishedDefault.swift in Sources */,
 				6B823BCD23F4ADE30099F65E /* TunningWindow.swift in Sources */,
 				6B005AE3245B057E004919F4 /* VocableCollectionViewController.swift in Sources */,
-				6BE7E98E245A1D75007B01F2 /* VocableNavigationBarButton.swift in Sources */,
 				A94720CE241A8D9B00F7B4FF /* PaginationView.swift in Sources */,
 				B838200F23F4B011005A79CD /* VocableCollectionViewCell.swift in Sources */,
 				B8EB51D12409860A00F425A6 /* GazeableAlertViewController.swift in Sources */,
