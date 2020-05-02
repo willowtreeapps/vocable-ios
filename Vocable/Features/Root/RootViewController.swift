@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Combine
+import CoreData
 
 @IBDesignable class RootViewController: VocableViewController {
 
@@ -14,10 +16,32 @@ import UIKit
     @IBOutlet private weak var keyboardButton: GazeableButton!
     @IBOutlet private weak var settingsButton: GazeableButton!
 
+    private let contentLayoutGuide = UILayoutGuide()
+    private var contentViewController: UIViewController?
+
     private var categoryCarousel: CategoriesCarouselViewController!
-    
+    private var disposables = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addLayoutGuide(contentLayoutGuide)
+
+        // Content layout guide
+        NSLayoutConstraint.activate([
+            contentLayoutGuide.topAnchor.constraint(equalTo: categoryCarousel.view.bottomAnchor),
+            contentLayoutGuide.leftAnchor.constraint(equalTo: view.leftAnchor),
+            contentLayoutGuide.rightAnchor.constraint(equalTo: view.rightAnchor),
+            contentLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+
+        outputLabel.text = NSLocalizedString("main_screen.textfield_placeholder.default",
+        comment: "Select something below to speak Hint Text")
+
+        categoryCarousel.$categoryObjectID
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .sink { self.categoryDidChange($0) }
+            .store(in: &disposables)
     }
 
     override func prepareForInterfaceBuilder() {
@@ -42,4 +66,90 @@ import UIKit
         self.present(vc, animated: true)
     }
 
+    private func categoryDidChange(_ categoryID: NSManagedObjectID) {
+        let category = NSPersistentContainer.shared.viewContext.object(with: categoryID) as! Category
+        let viewController: UIViewController
+        if category.identifier == Category.Identifier.numPad {
+            #warning("Handle numpad")
+            viewController = UIViewController(nibName: nil, bundle: nil)
+        } else {
+            let vc = CategoryDetailViewController()
+            vc.category = category
+            vc.$lastUtterance.receive(on: DispatchQueue.main)
+                .filter({!($0?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)})
+                .assign(to: \UILabel.text, on: outputLabel)
+                .store(in: &disposables)
+            viewController = vc
+        }
+        setContentViewController(viewController, animated: true)
+    }
+
+    private func setContentViewController(_ viewController: UIViewController?, animated: Bool) {
+
+        let childrenToDisposeOf = children.filter {
+            ![categoryCarousel, viewController].contains($0)
+        }
+
+        let contentTransform = CGAffineTransform.identity
+        let transitionTransform = CGAffineTransform(translationX: 0,
+                                                    y: contentLayoutGuide.layoutFrame.height)
+        let contentAlpha: CGFloat = 1.0
+        let transitionAlpha: CGFloat = 0.0
+
+        func prepare() {
+            if let viewController = viewController {
+                installViewController(viewController, in: contentLayoutGuide)
+                if animated {
+                    viewController.view.transform = transitionTransform
+                    viewController.view.alpha = transitionAlpha
+                }
+            }
+        }
+
+        func actions() {
+            if let viewController = viewController {
+                viewController.view.transform = contentTransform
+                viewController.view.alpha = contentAlpha
+            }
+            for inactiveViewController in childrenToDisposeOf {
+                inactiveViewController.view.transform = transitionTransform
+                inactiveViewController.view.alpha = transitionAlpha
+            }
+        }
+
+        func finalize(_ didFinish: Bool) {
+            for inactiveViewController in childrenToDisposeOf {                inactiveViewController.removeFromParent()
+                inactiveViewController.view.removeFromSuperview()
+            }
+            self.contentViewController = viewController
+        }
+
+        prepare()
+        UIView.animate(withDuration: 0.6,
+                       delay: 0,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 1.0,
+                       options: .beginFromCurrentState,
+                       animations: actions,
+                       completion: finalize)
+    }
+
+    private func installViewController(_ viewController: UIViewController, in layoutGuide: UILayoutGuide) {
+
+        addChild(viewController)
+
+        let viewToInsertBelow = view.subviews.first { categoryCarousel.view.isDescendant(of: $0) }
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        viewController.view.removeFromSuperview()
+        view.insertSubview(viewController.view, belowSubview: viewToInsertBelow ?? view)
+
+        NSLayoutConstraint.activate([
+            viewController.view.topAnchor.constraint(equalTo: layoutGuide.topAnchor),
+            viewController.view.leftAnchor.constraint(equalTo: layoutGuide.leftAnchor),
+            viewController.view.rightAnchor.constraint(equalTo: layoutGuide.rightAnchor),
+            viewController.view.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor)
+        ])
+
+        viewController.didMove(toParent: self)
+    }
 }

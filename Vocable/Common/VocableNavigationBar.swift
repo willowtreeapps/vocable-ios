@@ -52,17 +52,17 @@ private class ContentView: UIView {
         titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         titleLabel?.textColor = .defaultTextColor
 
-        leftButton?.layoutMargins = .init(top: 8, left: 8, bottom: 8, right: 8)
-        rightButton?.layoutMargins = .init(top: 8, left: 8, bottom: 8, right: 8)
+        leftButton?.contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
+        rightButton?.contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
 
         updateContentLayout()
     }
 
     override var intrinsicContentSize: CGSize {
         if sizeClass.contains(any: .compact) {
-            return CGSize(width: UIView.noIntrinsicMetric, height: 54)
+            return CGSize(width: UIView.noIntrinsicMetric, height: 48)
         }
-        return CGSize(width: UIView.noIntrinsicMetric, height: 100)
+        return CGSize(width: UIView.noIntrinsicMetric, height: 96)
     }
 
     private func updateContentLayout() {
@@ -70,10 +70,13 @@ private class ContentView: UIView {
         layoutMargins = .zero
 
         let buttonSpacing: CGFloat
+        let buttonSize: CGSize
         if sizeClass.contains(any: .compact) {
             buttonSpacing = 8
+            buttonSize = CGSize(width: 64, height: intrinsicContentSize.height)
         } else {
             buttonSpacing = 16
+            buttonSize = CGSize(width: 104, height: intrinsicContentSize.height)
         }
 
         NSLayoutConstraint.deactivate(volatileConstraints)
@@ -86,11 +89,13 @@ private class ContentView: UIView {
         if let titleLabel = titleLabel {
             let titleCenterX = titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
             titleCenterX.priority = .init(rawValue: 999)
+            let titleCenterY = titleLabel.centerYAnchor.constraint(equalTo: layoutMargins.centerYAnchor)
+            titleCenterY.priority = .init(rawValue: 999)
             constraints += [
                 titleCenterX,
+                titleCenterY,
                 titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMargins.leadingAnchor),
-                titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: layoutMargins.trailingAnchor),
-                titleLabel.centerYAnchor.constraint(equalTo: layoutMargins.centerYAnchor)
+                titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: layoutMargins.trailingAnchor)
             ]
         }
 
@@ -100,7 +105,8 @@ private class ContentView: UIView {
                 leftButton.topAnchor.constraint(equalTo: layoutMargins.topAnchor),
                 leftButton.bottomAnchor.constraint(equalTo: layoutMargins.bottomAnchor),
                 leftButton.leadingAnchor.constraint(equalTo: layoutMargins.leadingAnchor),
-                leftButton.widthAnchor.constraint(equalTo: leftButton.heightAnchor)
+                leftButton.widthAnchor.constraint(equalToConstant: buttonSize.width),
+                leftButton.heightAnchor.constraint(equalToConstant: buttonSize.height)
             ]
 
             if let titleLabel = titleLabel {
@@ -116,7 +122,8 @@ private class ContentView: UIView {
                 rightButton.topAnchor.constraint(equalTo: layoutMargins.topAnchor),
                 rightButton.bottomAnchor.constraint(equalTo: layoutMargins.bottomAnchor),
                 rightButton.trailingAnchor.constraint(equalTo: layoutMargins.trailingAnchor),
-                rightButton.widthAnchor.constraint(equalTo: rightButton.heightAnchor)
+                rightButton.widthAnchor.constraint(equalToConstant: buttonSize.width),
+                rightButton.heightAnchor.constraint(equalToConstant: buttonSize.height)
             ]
 
             if let titleLabel = titleLabel {

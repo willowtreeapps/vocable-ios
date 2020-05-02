@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import VocablePresets
 import Combine
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         updatePersistentStoreForCurrentLanguagePreferences()
         
         addObservers()
+
+        // Warm up the speech engine to prevent lag on first invocation
+        AVSpeechSynthesizer.shared.speak("", language: "en")
 
         application.isIdleTimerDisabled = true
         let window = HeadGazeWindow(frame: UIScreen.main.bounds)

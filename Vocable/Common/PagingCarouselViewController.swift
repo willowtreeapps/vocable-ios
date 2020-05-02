@@ -64,12 +64,16 @@ import Combine
     }
 
     private func updateMarginsForSubviews() {
-        let margins = view.layoutMargins
-        if sizeClass.contains(any: .compact) {
-            collectionView.layout.pageInsets = .init(top: 8, left: margins.left, bottom: 24, right: margins.right)
-        } else {
-            collectionView.layout.pageInsets = .init(top: 16, left: margins.left, bottom: 32, right: margins.right)
+        var insets = view.layoutMargins
+
+        // The navigation bar will inherit this inset
+        // and we'll specify our desired inset from the
+        // navigation bar separately
+        if navigationBarIfLoaded() != nil {
+            insets.top = 8
         }
+        insets.bottom = 8
+        collectionView.layout.pageInsets = insets
     }
 
     override func updateViewConstraints() {

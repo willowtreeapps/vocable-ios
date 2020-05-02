@@ -154,7 +154,7 @@ class GazeableButton: UIButton {
             return
         }
 
-        let image = renderBackgroundImage(withFillColor: color, withHighlight: state.contains(.highlighted))
+        let image = renderBackgroundImage(withFillColor: color, withHighlight: state.contains(.highlighted) && !state.contains(.selected))
         setBackgroundImage(image, for: state)
 
         if state == .normal {
@@ -193,10 +193,9 @@ class GazeableButton: UIButton {
             fillColor.setFill()
             path.fill()
 
-            if isHighlighted {
-                UIColor.cellBorderHighlightColor.setStroke()
-                path.stroke()
-            }
+            let strokeColor = isHighlighted ? UIColor.cellBorderHighlightColor : fillColor
+            strokeColor.setStroke()
+            path.stroke()
         }
         let capInsets = UIEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius)
         let stretchableImage = image.resizableImage(withCapInsets: capInsets, resizingMode: .stretch)

@@ -37,6 +37,7 @@
 		6B3DCC1F24101F530039E45E /* TrackingDebugOverlayViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B3DCC1E24101F530039E45E /* TrackingDebugOverlayViewController.storyboard */; };
 		6B3DCC2124101FA80039E45E /* TrackingDebugOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3DCC2024101FA80039E45E /* TrackingDebugOverlayViewController.swift */; };
 		6B5C490B245B73F700A4433C /* CategoriesCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C490A245B73F700A4433C /* CategoriesCarouselViewController.swift */; };
+		6B5C490D245CB92700A4433C /* CategoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C490C245CB92700A4433C /* CategoryDetailViewController.swift */; };
 		6B823BC223F4ADE30099F65E /* PIDControlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BAD23F4ADE30099F65E /* PIDControlConstants.swift */; };
 		6B823BC623F4ADE30099F65E /* FormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BB323F4ADE30099F65E /* FormatterExtensions.swift */; };
 		6B823BC823F4ADE30099F65E /* SingleControlDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BB623F4ADE30099F65E /* SingleControlDisplayable.swift */; };
@@ -240,6 +241,7 @@
 		6B3DCC1E24101F530039E45E /* TrackingDebugOverlayViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TrackingDebugOverlayViewController.storyboard; sourceTree = "<group>"; };
 		6B3DCC2024101FA80039E45E /* TrackingDebugOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingDebugOverlayViewController.swift; sourceTree = "<group>"; };
 		6B5C490A245B73F700A4433C /* CategoriesCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCarouselViewController.swift; sourceTree = "<group>"; };
+		6B5C490C245CB92700A4433C /* CategoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailViewController.swift; sourceTree = "<group>"; };
 		6B823BAD23F4ADE30099F65E /* PIDControlConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIDControlConstants.swift; sourceTree = "<group>"; };
 		6B823BB323F4ADE30099F65E /* FormatterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterExtensions.swift; sourceTree = "<group>"; };
 		6B823BB623F4ADE30099F65E /* SingleControlDisplayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleControlDisplayable.swift; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 				64A220BD2452173C0014EA80 /* Root.storyboard */,
 				64A220BA2452171C0014EA80 /* RootViewController.swift */,
 				6B5C490A245B73F700A4433C /* CategoriesCarouselViewController.swift */,
+				6B5C490C245CB92700A4433C /* CategoryDetailViewController.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -1142,6 +1145,7 @@
 				A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */,
 				A9B6960B2433CCFD004E6960 /* EditCategoriesDefaultCollectionViewCell.swift in Sources */,
 				6BE7E9882459DFD5007B01F2 /* VocableNavigationBar.swift in Sources */,
+				6B5C490D245CB92700A4433C /* CategoryDetailViewController.swift in Sources */,
 				6B3DCC2124101FA80039E45E /* TrackingDebugOverlayViewController.swift in Sources */,
 				6B8440E8244A9557007A4DC6 /* EmptyStateView.swift in Sources */,
 				6B1C7F3223F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift in Sources */,
