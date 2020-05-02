@@ -19,7 +19,7 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
                 return .selectedTextColor
             }
             if !isEnabled {
-                return .disabledTextColor
+                return UIColor.defaultTextColor.blended(with: borderedView.backgroundColor!, amount: 0.8)
             }
             return .defaultTextColor
         }()
@@ -94,9 +94,20 @@ class CategoryItemCollectionViewCell: PresetItemCollectionViewCell {
     
     override func updateContentViews() {
         super.updateContentViews()
-        borderedView.fillColor = isSelected ? .cellSelectionColor : .categoryBackgroundColor
-        borderedView.backgroundColor = (traitCollection.verticalSizeClass == .compact
-            || traitCollection.horizontalSizeClass == .compact)
+
+        borderedView.fillColor = {
+            var result: UIColor
+            if isSelected {
+                result = .cellSelectionColor
+            } else {
+                result = .categoryBackgroundColor
+            }
+            if isHighlighted && isTrackingTouches {
+                result = result.darkenedForHighlight()
+            }
+            return result
+        }()
+        borderedView.backgroundColor = sizeClass.contains(any: .compact)
             ? .collectionViewBackgroundColor : .categoryBackgroundColor
         
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
