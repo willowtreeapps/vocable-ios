@@ -17,6 +17,18 @@ import Combine
     private var disposables = Set<AnyCancellable>()
     private var volatileConstraints = [NSLayoutConstraint]()
 
+    var isPaginationViewHidden = false {
+        didSet {
+            guard oldValue != isPaginationViewHidden else { return }
+            if isPaginationViewHidden {
+                paginationView.removeFromSuperview()
+            } else {
+                view.addSubview(paginationView)
+            }
+            view.setNeedsUpdateConstraints()
+        }
+    }
+
     convenience init() {
         self.init(nibName: nil, bundle: nil)
     }
@@ -107,13 +119,19 @@ import Combine
         ]
 
         // Pagination view
-        constraints += [
-            paginationView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            paginationView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMargins.leadingAnchor),
-            paginationView.trailingAnchor.constraint(lessThanOrEqualTo: layoutMargins.trailingAnchor),
-            paginationView.bottomAnchor.constraint(greaterThanOrEqualTo: layoutMargins.bottomAnchor),
-            paginationView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ]
+        if isPaginationViewHidden {
+            constraints += [
+                collectionView.bottomAnchor.constraint(greaterThanOrEqualTo: layoutMargins.bottomAnchor)
+            ]
+        } else {
+            constraints += [
+                paginationView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+                paginationView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMargins.leadingAnchor),
+                paginationView.trailingAnchor.constraint(lessThanOrEqualTo: layoutMargins.trailingAnchor),
+                paginationView.bottomAnchor.constraint(greaterThanOrEqualTo: layoutMargins.bottomAnchor),
+                paginationView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            ]
+        }
         NSLayoutConstraint.activate(constraints)
         volatileConstraints = constraints
     }

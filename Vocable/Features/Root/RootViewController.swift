@@ -70,8 +70,7 @@ import CoreData
         let category = NSPersistentContainer.shared.viewContext.object(with: categoryID) as! Category
         let viewController: UIViewController
         if category.identifier == Category.Identifier.numPad {
-            #warning("Handle numpad")
-            viewController = UIViewController(nibName: nil, bundle: nil)
+            viewController = NumericCategoryContentViewController()
         } else {
             let vc = CategoryDetailViewController()
             vc.category = category
