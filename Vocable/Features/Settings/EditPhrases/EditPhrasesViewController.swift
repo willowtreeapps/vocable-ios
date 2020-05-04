@@ -13,6 +13,7 @@ import CoreData
 final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedResultsControllerDelegate {
 
     var category: Category!
+    private var disposables = Set<AnyCancellable>()
 
     private lazy var diffableDataSource = CarouselCollectionViewDataSourceProxy<Int, PhraseViewModel>(collectionView: collectionView) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
@@ -46,6 +47,9 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         super.viewDidLoad()
 
         assert(category != nil, "Category not provided")
+
+        collectionView.register(UINib(nibName: "EditPhrasesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier)
+        collectionView.backgroundColor = .collectionViewBackgroundColor
 
         updateLayoutForCurrentTraitCollection()
 

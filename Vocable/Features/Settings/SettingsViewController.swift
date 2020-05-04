@@ -101,8 +101,6 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         return "Version \(versionNumber)-\(buildNumber)"
     }
 
-    @IBOutlet private var headerView: UINavigationItem!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -111,9 +109,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     }
 
     private func setupNavigationBar() {
-        navigationBar.title = NSLocalizedString("settings.header.title",
-                                                comment: "Settings screen header title")
-
+        navigationBar.title = NSLocalizedString("settings.header.title", comment: "Settings screen header title")
         navigationBar.leftButton = {
             let button = GazeableButton()
             button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)

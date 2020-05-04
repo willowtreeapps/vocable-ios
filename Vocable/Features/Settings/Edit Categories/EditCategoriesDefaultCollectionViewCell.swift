@@ -10,15 +10,15 @@ import UIKit
 
 final class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet var moveDownButton: GazeableButton!
-    @IBOutlet var moveUpButton: GazeableButton!
+    @IBOutlet weak var moveDownButton: GazeableButton!
+    @IBOutlet weak var moveUpButton: GazeableButton!
     
-    @IBOutlet private var categoryNameLabel: UILabel!
+    @IBOutlet private weak var categoryNameLabel: UILabel!
     
-    @IBOutlet var showCategoryDetailButton: GazeableButton!
+    @IBOutlet weak var showCategoryDetailButton: GazeableButton!
     
-    @IBOutlet private var topSeparator: UIView!
-    @IBOutlet private var bottomSeparator: UIView!
+    @IBOutlet private weak var topSeparator: UIView!
+    @IBOutlet private weak var bottomSeparator: UIView!
     
     var separatorMask: CellSeparatorMask = .both {
         didSet {
@@ -38,6 +38,7 @@ final class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         updateSeparatorMask()
     }
     
@@ -50,4 +51,5 @@ final class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
         moveUpButton.isEnabled = ordinalButtonMask.contains(.topUpArrow)
         moveDownButton.isEnabled = ordinalButtonMask.contains(.bottomDownArrow)
     }
+	
 }

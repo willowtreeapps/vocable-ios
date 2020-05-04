@@ -93,7 +93,7 @@ private class ContentView: UIView {
             titleCenterY.priority = .init(rawValue: 999)
             constraints += [
                 titleCenterX,
-                titleCenterY,
+                titleCenterY
 //                titleView.leadingAnchor.constraint(lessThanOrEqualTo: layoutMargins.leadingAnchor),
 //                titleView.trailingAnchor.constraint(greaterThanOrEqualTo: layoutMargins.trailingAnchor)
             ]

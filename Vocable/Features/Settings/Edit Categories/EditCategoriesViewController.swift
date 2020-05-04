@@ -95,20 +95,20 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
             self.collectionView.reloadData()
         }
     }
-
+    
     private func updateLayoutForCurrentTraitCollection() {
         collectionView.layout.interItemSpacing = 0
-
+        
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
-            layout.numberOfColumns = .fixedCount(1)
-            layout.numberOfRows = .minimumHeight(75)
+            collectionView.layout.numberOfColumns = .fixedCount(1)
+            collectionView.layout.numberOfRows = .minimumHeight(75)
         case (.compact, .regular):
-            layout.numberOfColumns = .fixedCount(1)
-            layout.numberOfRows = .minimumHeight(135)
+            collectionView.layout.numberOfColumns = .fixedCount(1)
+            collectionView.layout.numberOfRows = .minimumHeight(135)
         case (.compact, .compact), (.regular, .compact):
-            layout.numberOfColumns = .fixedCount(1)
-            layout.numberOfRows = .minimumHeight(75)
+            collectionView.layout.numberOfColumns = .fixedCount(1)
+            collectionView.layout.numberOfRows = .minimumHeight(75)
         default:
             break
         }
