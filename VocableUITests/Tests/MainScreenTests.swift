@@ -11,29 +11,29 @@ import XCTest
 class MainScreenTests: BaseTest {
 
     func testDefaultCategoriesExist() {
-        for categoryName in MainScreen.defaultCategories {
-            XCTAssert(MainScreen.isTextDisplayed(categoryName), "Expected the current category name to be \(categoryName)")
-            MainScreen.categoryRightButton.tap()
+        for categoryName in mainScreen.defaultCategories {
+            XCTAssert(mainScreen.isTextDisplayed(categoryName), "Expected the current category name to be \(categoryName)")
+            mainScreen.categoryRightButton.tap()
         }
     }
     
     func testDefaultSayingsInGeneralCategoryExist() {
-        verifyGivenPhrasesDisplay(setOfPhrases: MainScreen.defaultPhraseGeneral)
+        verifyGivenPhrasesDisplay(setOfPhrases: mainScreen.defaultPhraseGeneral)
     }
     
     func testSelectingCategoryChangesPhrases() {
-        MainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 1)
-        verifyGivenPhrasesDisplay(setOfPhrases: MainScreen.defaultPhraseBasicNeeds)
+        mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 1)
+        verifyGivenPhrasesDisplay(setOfPhrases: mainScreen.defaultPhraseBasicNeeds)
     }
     
-    func testWhenTappingPhrase_ThenTextFieldPopulates() {
-        XCUIApplication().collectionViews.staticTexts[MainScreen.defaultPhraseGeneral[0]].tap()
-//        XCTAssert(MainScreen.isTextDisplayedInTextView("Please be patient"))
+    func testWhenTappingPhrase_ThenThatPhraseDisplaysOnOutputLabel() {
+        XCUIApplication().collectionViews.staticTexts[mainScreen.defaultPhraseGeneral[0]].tap()
+        XCTAssertEqual(mainScreen.outputLabel.label, "Please be patient")
     }
     
     private func verifyGivenPhrasesDisplay(setOfPhrases: [String]) {
         for phrase in setOfPhrases {
-            XCTAssert(MainScreen.isTextDisplayed(phrase), "Expected the phrase \(phrase) to be displayed")
+            XCTAssert(mainScreen.isTextDisplayed(phrase), "Expected the phrase \(phrase) to be displayed")
         }
     }
 }
