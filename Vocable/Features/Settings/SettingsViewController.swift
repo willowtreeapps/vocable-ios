@@ -118,8 +118,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                                                 comment: "Settings screen header title")
 
         navigationBar.leftButton = {
-            let button = VocableNavigationBarButton()
-            button.buttonImage = UIImage(systemName: "xmark.circle")
+            let button = GazeableButton()
+            button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
             button.addTarget(self, action: #selector(dismissVC), for: .primaryActionTriggered)
             return button
         }()

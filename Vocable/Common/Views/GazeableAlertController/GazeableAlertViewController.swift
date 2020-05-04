@@ -127,11 +127,13 @@ private final class GazeableAlertButton: GazeableButton {
     }
 
     private func commonInit() {
-        fillColor = .alertBackgroundColor
-        selectionFillColor = .primaryColor
+        setFillColor(.alertBackgroundColor, for: .normal)
+        setFillColor(.primaryColor, for: .selected)
+
         setTitleColor(.white, for: .selected)
         setTitleColor(.black, for: .normal)
-        backgroundView.cornerRadius = 14
+
+        cornerRadius = 14
         titleLabel?.adjustsFontSizeToFitWidth = true
         setContentCompressionResistancePriority(.required, for: .horizontal)
         setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
@@ -290,7 +292,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         actions.forEach { action in
             let button = GazeableAlertButton(frame: .zero)
             button.setTitle(action.title, for: .normal)
-            button.backgroundView.cornerRadius = alertView.cornerRadius
+            button.cornerRadius = alertView.cornerRadius
             button.style = action.style
             button.addTarget(action, action: #selector(GazeableAlertAction.performActions), for: .primaryActionTriggered)
 
@@ -318,7 +320,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
 
         let buttons: [GazeableAlertButton] = actionButtonStackView.arrangedSubviews.compactMap {
             if let button = $0 as? GazeableAlertButton {
-                button.backgroundView.roundedCorners = []
+                button.roundedCorners = []
                 return button
             }
             return nil
@@ -328,10 +330,10 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         let lastAlertButton = buttons.last
 
         if actions.count < 3 {
-            firstAlertButton?.backgroundView.roundedCorners.insert(.bottomLeft)
-            lastAlertButton?.backgroundView.roundedCorners.insert(.bottomRight)
+            firstAlertButton?.roundedCorners.insert(.bottomLeft)
+            lastAlertButton?.roundedCorners.insert(.bottomRight)
         } else {
-            lastAlertButton?.backgroundView.roundedCorners.insert([.bottomLeft, .bottomRight])
+            lastAlertButton?.roundedCorners.insert([.bottomLeft, .bottomRight])
         }
     }
 

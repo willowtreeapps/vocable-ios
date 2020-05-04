@@ -58,10 +58,10 @@ final class PaginationView: UIView {
         textLabel.textColor = .defaultTextColor
         textLabel.textAlignment = .center
 
-        nextPageButton.buttonImage = UIImage(systemName: "chevron.right")
+        nextPageButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         nextPageButton.tintColor = .defaultTextColor
 
-        previousPageButton.buttonImage = UIImage(systemName: "chevron.left")
+        previousPageButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         previousPageButton.tintColor = .defaultTextColor
 
         stackView.axis = .horizontal

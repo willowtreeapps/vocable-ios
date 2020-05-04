@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VocableViewController: UIViewController {
+@IBDesignable class VocableViewController: UIViewController {
     
     private var _navigationBar: VocableNavigationBar?
     var navigationBar: VocableNavigationBar {
@@ -52,6 +52,15 @@ class VocableViewController: UIViewController {
         (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
     }
 
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        if sizeClass.contains(any: .compact) {
+            view.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        } else {
+            view.layoutMargins = UIEdgeInsets(top: 32, left: 32, bottom: 32, right: 32)
+        }
+    }
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         view.setNeedsUpdateConstraints()
         super.traitCollectionDidChange(previousTraitCollection)
@@ -69,7 +78,7 @@ class VocableViewController: UIViewController {
 
     private func installBackButtonIfNeeded() {
 
-        guard navigationBar.leftButton == nil, let navigationController = navigationController else {
+        guard let navigationBar = navigationBarIfLoaded(), navigationBar.leftButton == nil, let navigationController = navigationController else {
             return
         }
         let viewControllers = navigationController.viewControllers
@@ -78,8 +87,8 @@ class VocableViewController: UIViewController {
         }
 
         navigationBar.leftButton = {
-            let button = VocableNavigationBarButton(frame: .zero)
-            button.buttonImage = UIImage(systemName: "arrow.left")
+            let button = GazeableButton(frame: .zero)
+            button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             button.addTarget(navigationController,
                              action: #selector(UINavigationController.popViewController(animated:)),
                              for: .primaryActionTriggered)

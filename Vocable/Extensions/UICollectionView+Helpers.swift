@@ -18,4 +18,27 @@ extension UICollectionView {
         }
         return nil
     }
+
+    func indexPath(nearestTo indexPath: IndexPath) -> IndexPath? {
+        return self.indexPath(before: indexPath) ?? self.indexPath(after: indexPath)
+    }
+
+    func indexPath(after indexPath: IndexPath) -> IndexPath? {
+        let itemsInSection = numberOfItems(inSection: indexPath.section)
+        let candidateIndex = indexPath.item + 1
+        if candidateIndex >= itemsInSection {
+            return nil
+        } else {
+            return IndexPath(row: candidateIndex, section: 0)
+        }
+    }
+
+    func indexPath(before indexPath: IndexPath) -> IndexPath? {
+        let candidateIndex = indexPath.item - 1
+        if candidateIndex < 0 {
+            return nil
+        } else {
+            return IndexPath(row: candidateIndex, section: 0)
+        }
+    }
 }
