@@ -160,8 +160,7 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
     }
 
     @IBAction func editCategoryButtonPressed(_ sender: Any) {
-        let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
-        vc.modalPresentationStyle = .fullScreen
+        let vc = EditTextViewController()
         vc.initialText = category.name ?? ""
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext

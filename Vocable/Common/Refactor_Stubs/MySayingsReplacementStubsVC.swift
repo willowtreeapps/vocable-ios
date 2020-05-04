@@ -62,8 +62,7 @@ class MySayingsReplacementStubsVC: PagingCarouselViewController, NSFetchedResult
     }
 
     @IBAction private func addPhrasePressed() {
-        let storyboard = UIStoryboard(name: "EditTextViewController", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
+        let vc = EditTextViewController()
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
@@ -198,9 +197,7 @@ class MySayingsReplacementStubsVC: PagingCarouselViewController, NSFetchedResult
         }
 
         let safeIndexPath = diffableDataSource.indexPath(fromMappedIndexPath: indexPath)
-        let vc = UIStoryboard(name: "EditTextViewController", bundle: nil)
-            .instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
-        vc.modalPresentationStyle = .fullScreen
+        let vc = EditTextViewController()
 
         let phrase = fetchResultsController.object(at: safeIndexPath)
         vc.initialText = phrase.utterance ?? ""

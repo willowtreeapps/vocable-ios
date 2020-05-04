@@ -66,7 +66,7 @@ import CoreData
     }
 
     @IBAction private func keyboardButtonSelected(_ sender: Any) {
-        let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateInitialViewController()!
+        let vc = RootEditTextViewController()
         self.present(vc, animated: true)
     }
 

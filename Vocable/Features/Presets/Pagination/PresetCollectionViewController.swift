@@ -175,8 +175,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     }
 
     private func addPhrasePressed() {
-        let storyboard = UIStoryboard(name: "EditTextViewController", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
+        let vc = EditTextViewController()
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 

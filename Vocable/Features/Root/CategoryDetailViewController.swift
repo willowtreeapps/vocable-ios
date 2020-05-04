@@ -167,9 +167,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         }
 
         let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        let vc = UIStoryboard(name: "EditTextViewController", bundle: nil)
-            .instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
-        vc.modalPresentationStyle = .fullScreen
+        let vc = EditTextViewController()
 
         let phrase = frc.object(at: safeIndexPath)
         vc.initialText = phrase.utterance ?? ""
@@ -213,8 +211,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
     }
 
     @IBAction func addNewPhraseButtonSelected() {
-        let storyboard = UIStoryboard(name: "EditTextViewController", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
+        let vc = EditTextViewController()
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 

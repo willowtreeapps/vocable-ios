@@ -63,10 +63,6 @@ import UIKit
         super.traitCollectionDidChange(previousTraitCollection)
     }
 
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-    }
-
     private func setViewMarginsForCurrentTraitCollection() {
         let proposedMargins: UIEdgeInsets
         if sizeClass.contains(any: .compact) {

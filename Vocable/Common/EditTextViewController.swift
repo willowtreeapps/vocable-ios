@@ -12,56 +12,135 @@ import UIKit
 import CoreData
 import Combine
 
-final class EditTextViewController: UIViewController, UICollectionViewDelegate {
-    
-    private var disposables = Set<AnyCancellable>()
-    
-    private var keyboardViewController: KeyboardViewController?
-    
+class EditTextViewController: VocableViewController, UICollectionViewDelegate {
+
     var initialText: String = ""
+    let textView = OutputTextView(frame: .zero)
 
-    private var textHasChanged = false
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "KeyboardViewController" {
-            keyboardViewController = segue.destination as? KeyboardViewController
-        }
-    }
-
+    var shouldWarnOnDismiss = true
     var editTextCompletionHandler: (String) -> Void = { (_) in
         assertionFailure("Completion not handled")
     }
 
-    @IBOutlet var textView: OutputTextView!
-    @IBOutlet private var confirmEditButton: GazeableButton!
-    @IBOutlet private var dismissButton: GazeableButton!
+    @PublishedValue private(set) var text: String?
+
+    private var textHasChanged = false
+    private var disposables = Set<AnyCancellable>()
+    private var volatileConstraints = [NSLayoutConstraint]()
+    
+    private lazy var keyboardViewController = KeyboardViewController()
+
+    private lazy var confirmEditButton: GazeableButton = {
+        let button = GazeableButton()
+        button.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        button.accessibilityIdentifier = "keyboard.confirmButton"
+        button.addTarget(self, action: #selector(confirmEdit(_:)), for: .primaryActionTriggered)
+        return button
+    }()
+
+    private lazy var dismissButton: GazeableButton = {
+        let button = GazeableButton()
+        button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+        button.accessibilityIdentifier = "keyboard.dismissButton"
+        button.addTarget(self, action: #selector(dismiss(_:)), for: .primaryActionTriggered)
+        return button
+    }()
+
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+        commonInit()
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+
+    private func commonInit() {
+        modalPresentationStyle = .fullScreen
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        addChild(keyboardViewController)
+        keyboardViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        keyboardViewController.view.preservesSuperviewLayoutMargins = true
+        view.addSubview(keyboardViewController.view)
+
         let initialAttributedText = NSAttributedString(string: initialText)
-        keyboardViewController?.attributedText = initialAttributedText
+        keyboardViewController.attributedText = initialAttributedText
         confirmEditButton.isEnabled = false
-        dismissButton.accessibilityIdentifier = "keyboard.dismissButton"
-        confirmEditButton.accessibilityIdentifier = "keyboard.confirmButton"
+
+        navigationBar.leftButton = dismissButton
+        navigationBar.rightButton = confirmEditButton
+
+        textView.translatesAutoresizingMaskIntoConstraints = false
         textView.accessibilityIdentifier = "keyboard.textView"
+        textView.textAlignment = .natural
         
-        keyboardViewController?.$attributedText.sink(receiveValue: { (attributedText) in
+        keyboardViewController.$attributedText.sink(receiveValue: { (attributedText) in
             self.textView.attributedText = attributedText
             let didTextChange = self.initialText != attributedText?.string
 
             let isTextEmpty = attributedText?.string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
             self.textHasChanged = didTextChange
             self.confirmEditButton.isEnabled = didTextChange && !isTextEmpty
+            self.text = attributedText?.string
         }).store(in: &disposables)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        view.setNeedsUpdateConstraints()
     }
-    
-    @IBAction func dismiss(_ sender: Any) {
+
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+
+        NSLayoutConstraint.deactivate(volatileConstraints)
+
+        var constraints = [NSLayoutConstraint]()
+
+        if sizeClass.contains(.vCompact) {
+            navigationBar.titleView = textView
+            let widthConstraint = textView.widthAnchor.constraint(equalTo: view.widthAnchor)
+            widthConstraint.priority = .defaultHigh
+            constraints += [
+                widthConstraint,
+                keyboardViewController.view.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 8)
+            ]
+        } else {
+            navigationBar.titleView = nil
+            if textView.superview != view {
+                view.addSubview(textView)
+            }
+            constraints += [
+                textView.heightAnchor.constraint(equalTo: navigationBar.layoutMarginsGuide.heightAnchor, multiplier: 2),
+                textView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 8),
+                textView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+                textView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+                keyboardViewController.view.topAnchor.constraint(equalTo: textView.bottomAnchor)
+            ]
+        }
+
+        // Collection view
+        constraints += [
+            keyboardViewController.view.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            keyboardViewController.view.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            keyboardViewController.view.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
+        ]
+
+        NSLayoutConstraint.activate(constraints)
+        volatileConstraints = constraints
+    }
+
+    @objc private func dismiss(_ sender: Any) {
         if textHasChanged {
             handleDismissAlert()
         } else {
@@ -69,7 +148,7 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     
-    @IBAction func confirmEdit(_ sender: Any) {
+    @objc private func confirmEdit(_ sender: Any) {
         editTextCompletionHandler(textView.text ?? "")
         dismiss(animated: true, completion: nil)
     }
@@ -77,6 +156,11 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
     private func handleDismissAlert() {
         func discardChangesAction() {
             dismiss(animated: true, completion: nil)
+        }
+
+        guard shouldWarnOnDismiss else {
+            discardChangesAction()
+            return
         }
         
         let title = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.title",
