@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        if !AppConfig.isHeadTrackingSupported {
+            AppConfig.isHeadTrackingEnabled = false
+        }
+    
         // Ensure that the persistent store has the current
         // default presets before presenting UI
         updatePersistentStoreForCurrentLanguagePreferences()
