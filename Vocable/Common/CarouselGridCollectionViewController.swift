@@ -27,7 +27,7 @@ struct CarouselGridPagingProgress {
 private extension CarouselGridLayout {
     static func `default`() -> CarouselGridLayout {
         let layout = CarouselGridLayout()
-        layout.numberOfColumns = 2
+        layout.numberOfColumns = .fixedCount(2)
         layout.numberOfRows = .fixedCount(3)
         layout.interItemSpacing = 24
         return layout

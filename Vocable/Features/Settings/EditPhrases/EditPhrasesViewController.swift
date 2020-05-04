@@ -118,13 +118,13 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
 
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
-            collectionView.layout.numberOfColumns = 2
+            collectionView.layout.numberOfColumns = .fixedCount(2)
             collectionView.layout.numberOfRows = .fixedCount(4)
         case (.compact, .regular):
-            collectionView.layout.numberOfColumns = 1
+            collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(3)
         case (.compact, .compact), (.regular, .compact):
-            collectionView.layout.numberOfColumns = 1
+            collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(2)
         default:
             break

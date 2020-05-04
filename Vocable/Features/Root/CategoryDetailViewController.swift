@@ -65,13 +65,13 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         collectionView.layout.interItemSpacing = 8
         switch sizeClass {
         case .hRegular_vRegular:
-            collectionView.layout.numberOfColumns = 3
+            collectionView.layout.numberOfColumns = .fixedCount(3)
             collectionView.layout.numberOfRows = .minimumHeight(120)
         case .hCompact_vRegular:
-            collectionView.layout.numberOfColumns = 2
+            collectionView.layout.numberOfColumns = .fixedCount(2)
             collectionView.layout.numberOfRows = .fixedCount(4)
         case .hCompact_vCompact, .hRegular_vCompact:
-            collectionView.layout.numberOfColumns = 3
+            collectionView.layout.numberOfColumns = .fixedCount(3)
             collectionView.layout.numberOfRows = .fixedCount(2)
         default:
             break

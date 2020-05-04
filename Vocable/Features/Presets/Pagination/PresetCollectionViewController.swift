@@ -118,13 +118,13 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         case .defaultMode:
             switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
             case (.regular, .regular):
-                layout.numberOfColumns = 3
+                layout.numberOfColumns = .fixedCount(3)
                 layout.numberOfRows = .fixedCount(3)
             case (.compact, .regular):
-                layout.numberOfColumns = 2
+                layout.numberOfColumns = .fixedCount(2)
                 layout.numberOfRows = .fixedCount(4)
             case (.compact, .compact), (.regular, .compact):
-                layout.numberOfColumns = 3
+                layout.numberOfColumns = .fixedCount(3)
                 layout.numberOfRows = .fixedCount(2)
             default:
                 break
@@ -132,13 +132,13 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         case .numPadMode:
             switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
             case (.regular, .regular):
-                layout.numberOfColumns = 3
+                layout.numberOfColumns = .fixedCount(3)
                 layout.numberOfRows = .fixedCount(4)
             case (.compact, .regular):
-                layout.numberOfColumns = 3
+                layout.numberOfColumns = .fixedCount(3)
                 layout.numberOfRows = .fixedCount(4)
             case (.compact, .compact), (.regular, .compact):
-                layout.numberOfColumns = 6
+                layout.numberOfColumns = .fixedCount(6)
                 layout.numberOfRows = .fixedCount(2)
             default:
                 break

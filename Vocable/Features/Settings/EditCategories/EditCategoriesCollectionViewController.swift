@@ -75,13 +75,13 @@ final class EditCategoriesCollectionViewController: CarouselGridCollectionViewCo
 
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
-            layout.numberOfColumns = 1
+            layout.numberOfColumns = .fixedCount(1)
             layout.numberOfRows = .minimumHeight(75)
         case (.compact, .regular):
-            layout.numberOfColumns = 1
+            layout.numberOfColumns = .fixedCount(1)
             layout.numberOfRows = .minimumHeight(135)
         case (.compact, .compact), (.regular, .compact):
-            layout.numberOfColumns = 1
+            layout.numberOfColumns = .fixedCount(1)
             layout.numberOfRows = .minimumHeight(75)
         default:
             break

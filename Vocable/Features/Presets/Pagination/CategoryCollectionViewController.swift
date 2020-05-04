@@ -75,15 +75,15 @@ class CategoryCollectionViewController: CarouselGridCollectionViewController, NS
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
             layout.interItemSpacing = 0
-            layout.numberOfColumns = 4
+            layout.numberOfColumns = .fixedCount(4)
             layout.numberOfRows = .fixedCount(1)
         case (.compact, .regular):
             layout.interItemSpacing = 8
-            layout.numberOfColumns = 1
+            layout.numberOfColumns = .fixedCount(1)
             layout.numberOfRows = .fixedCount(1)
         case (.compact, .compact), (.regular, .compact):
             layout.interItemSpacing = 8
-            layout.numberOfColumns = 3
+            layout.numberOfColumns = .fixedCount(3)
             layout.numberOfRows = .fixedCount(1)
         default:
             break

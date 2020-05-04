@@ -46,13 +46,13 @@ class NumericCategoryContentViewController: PagingCarouselViewController {
 
         switch sizeClass {
         case .hRegular_vRegular:
-            collectionView.layout.numberOfColumns = 3
+            collectionView.layout.numberOfColumns = .fixedCount(3)
             collectionView.layout.numberOfRows = .fixedCount(4)
         case .hCompact_vRegular:
-            collectionView.layout.numberOfColumns = 3
+            collectionView.layout.numberOfColumns = .fixedCount(3)
             collectionView.layout.numberOfRows = .fixedCount(4)
         case .hCompact_vCompact, .hRegular_vCompact:
-            collectionView.layout.numberOfColumns = 6
+            collectionView.layout.numberOfColumns = .fixedCount(6)
             collectionView.layout.numberOfRows = .fixedCount(2)
         default:
             break

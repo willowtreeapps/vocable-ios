@@ -180,15 +180,15 @@ import CoreData
         switch sizeClass {
         case .hRegular_vRegular:
             collectionView.layout.interItemSpacing = 0
-            collectionView.layout.numberOfColumns = 4
+            collectionView.layout.numberOfColumns = .minimumWidth(216)
             collectionView.layout.numberOfRows = .fixedCount(1)
         case .hCompact_vRegular:
             collectionView.layout.interItemSpacing = 8
-            collectionView.layout.numberOfColumns = 1
+            collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(1)
         case .hCompact_vCompact, .hRegular_vCompact:
             collectionView.layout.interItemSpacing = 8
-            collectionView.layout.numberOfColumns = 3
+            collectionView.layout.numberOfColumns = .fixedCount(3)
             collectionView.layout.numberOfRows = .fixedCount(1)
         default:
             break
