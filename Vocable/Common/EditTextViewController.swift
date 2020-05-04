@@ -34,13 +34,18 @@ final class EditTextViewController: UIViewController, UICollectionViewDelegate {
 
     @IBOutlet var textView: OutputTextView!
     @IBOutlet private var confirmEditButton: GazeableButton!
-    
+    @IBOutlet private var dismissButton: GazeableButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let initialAttributedText = NSAttributedString(string: initialText)
         keyboardViewController?.attributedText = initialAttributedText
         confirmEditButton.isEnabled = false
+        dismissButton.accessibilityIdentifier = "keyboard.dismissButton"
+        confirmEditButton.accessibilityIdentifier = "keyboard.confirmButton"
+        textView.accessibilityIdentifier = "keyboard.textView"
+        
         keyboardViewController?.$attributedText.sink(receiveValue: { (attributedText) in
             self.textView.attributedText = attributedText
             let didTextChange = self.initialText != attributedText?.string

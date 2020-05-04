@@ -55,6 +55,9 @@ import CoreData
 
         view.backgroundColor = .collectionViewBackgroundColor
 
+        backChevron.accessibilityIdentifier = "root.categories_carousel.left_chevron"
+        forwardChevron.accessibilityIdentifier = "root.categories_carousel.right_chevron"
+
         collectionViewMask.fillColor = .black
         collectionViewMask.backgroundColor = .clear
         collectionViewContainer.mask = collectionViewMask

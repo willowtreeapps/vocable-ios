@@ -26,6 +26,10 @@ import CoreData
         super.viewDidLoad()
         view.addLayoutGuide(contentLayoutGuide)
 
+        outputLabel.accessibilityIdentifier = "root.outputTextLabel"
+        keyboardButton.accessibilityIdentifier = "root.keyboardButton"
+        settingsButton.accessibilityIdentifier = "root.settingsButton"
+        
         // Content layout guide
         NSLayoutConstraint.activate([
             contentLayoutGuide.topAnchor.constraint(equalTo: categoryCarousel.view.bottomAnchor),

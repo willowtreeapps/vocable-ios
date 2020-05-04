@@ -9,10 +9,10 @@
 import XCTest
 
 class KeyboardScreen {
-    let app = XCUIApplication()
-    static let keyboardTextView = XCUIApplication().collectionViews.children(matching: .cell).element(boundBy: 0).children(matching: .other).element(boundBy: 1)
-    static let mySayingsSaveButton = XCUIApplication().collectionViews.children(matching: .cell).element(boundBy: 1).children(matching: .staticText).element
-    static let returnToMainScreenButton = XCUIApplication().collectionViews.children(matching: .cell).element(boundBy: 2).children(matching: .staticText).element
+    private let app = XCUIApplication()
+    lazy var keyboardTextView = app.textViews.matching(identifier: "keyboard.textView").element
+    lazy var mySayingsSaveButton = app.buttons.matching(identifier: "keyboard.confirmButton").element
+    lazy var returnToMainScreenButton = app.buttons.matching(identifier: "keyboard.dismissButton").element
     
     func typeText(_ textToType: String) {
         for char in textToType {

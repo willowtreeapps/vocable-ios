@@ -12,6 +12,7 @@ import XCTest
 class BaseTest: XCTestCase {
     override func setUp() {
         let app = XCUIApplication()
+        app.launchEnvironment["RefactoredInterfaceEnabled"] = "1"
         continueAfterFailure = false
         app.launch()
     }

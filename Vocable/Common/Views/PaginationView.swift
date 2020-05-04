@@ -60,9 +60,11 @@ final class PaginationView: UIView {
 
         nextPageButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         nextPageButton.tintColor = .defaultTextColor
+        nextPageButton.accessibilityIdentifier = "bottomPagination.right_chevron"
 
         previousPageButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         previousPageButton.tintColor = .defaultTextColor
+        previousPageButton.accessibilityIdentifier = "bottomPagination.left_chevron"
 
         stackView.axis = .horizontal
         stackView.backgroundColor = .collectionViewBackgroundColor

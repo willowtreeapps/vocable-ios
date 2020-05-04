@@ -161,6 +161,7 @@
                     </view>
                     <connections>
                         <outlet property="confirmEditButton" destination="J5X-by-k2g" id="nmL-7x-Anq"/>
+                        <outlet property="dismissButton" destination="4fV-dK-pnw" id="9hL-yl-aw6"/>
                         <outlet property="textView" destination="ndB-G0-Hnk" id="C4e-zm-jE9"/>
                     </connections>
                 </viewController>
