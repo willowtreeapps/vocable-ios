@@ -249,8 +249,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             show(vc, sender: nil)
 
         case .categories:
-            let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategories") as! EditCategoriesViewController
-            show(vc, sender: nil)
+            let viewController = EditCategoriesViewController()
+            show(viewController, sender: nil)
 
         case .contactDevs:
             presentEmail()
