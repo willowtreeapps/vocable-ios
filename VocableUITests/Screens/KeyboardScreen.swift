@@ -12,8 +12,7 @@ class KeyboardScreen {
     private let app = XCUIApplication()
     
     let keyboardTextView = XCUIApplication().textViews["keyboard.textView"]
-    let mySayingsSaveButton = XCUIApplication().buttons["keyboard.confirmButton"]
-    let returnToMainScreenButton = XCUIApplication().buttons["keyboard.dismissButton"]
+    let dismissKeyboardButton = XCUIApplication().buttons["keyboard.dismissButton"]
     let favoriteButton = XCUIApplication().buttons["keyboard.favoriteButton"]
     
     func typeText(_ textToType: String) {
