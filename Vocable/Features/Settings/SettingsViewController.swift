@@ -265,8 +265,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             show(vc, sender: nil)
 
         case .selectionMode:
-            let vc = UIStoryboard(name: "SelectionMode", bundle: nil).instantiateViewController(identifier: "SelectionMode") as! SelectionModeViewController
-            show(vc, sender: nil)
+            let viewController = SelectionModeViewController()
+            show(viewController, sender: nil)
 
         case .categories:
             let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategories") as! EditCategoriesViewController
