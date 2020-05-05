@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import VocablePresets
 import Combine
 
 @UIApplicationMain
@@ -187,45 +186,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func createPrescribedEntities(in context: NSManagedObjectContext, with presets: PresetData) throws {
 
-        let orderedLanguages = Array(Locale.preferredLanguages.map { regionalLanguage -> [String] in
-            let rootLanguage = Locale(identifier: regionalLanguage).languageCode
-            let languages = [regionalLanguage, rootLanguage].compactMap { $0 }
-            return languages // If no match exists for the regional language code, fall-back to the main language code
-        }.joined()) + [AppConfig.defaultLanguageCode] // Ensure the default language code is always in the list so the UI will be populated with *something*
-
-        try updateDefaultCategories(in: context, withPresets: presets, orderedLanguages: orderedLanguages)
-        try updateDefaultPhrases(in: context, withPresets: presets, orderedLanguages: orderedLanguages)
+        try updateDefaultCategories(in: context, withPresets: presets)
+        try updateDefaultPhrases(in: context, withPresets: presets)
         try updateCategoryForUserGeneratedPhrases(in: context)
 
     }
 
-    private func updateDefaultCategories(in context: NSManagedObjectContext, withPresets presets: PresetData, orderedLanguages: [String]) throws {
+    private func updateDefaultCategories(in context: NSManagedObjectContext, withPresets presets: PresetData) throws {
         for presetCategory in presets.categories {
-            let supportLanguages = Set(presetCategory.localizedName.keys)
-            guard let languageCode = orderedLanguages.first(where: supportLanguages.contains) else {
-                assertionFailure("Matching language not found for category \(presetCategory)")
-                continue
-            }
             let category = Category.fetchOrCreate(in: context, matching: presetCategory.id)
-            category.name = presetCategory.localizedName[languageCode]
-            category.languageCode = languageCode
+            category.name = presetCategory.utterance
+            category.languageCode = presetCategory.languageCode
             if category.isInserted {
                 category.isHidden = presetCategory.hidden
             }
         }
     }
 
-    private func updateDefaultPhrases(in context: NSManagedObjectContext, withPresets presets: PresetData, orderedLanguages: [String]) throws {
+    private func updateDefaultPhrases(in context: NSManagedObjectContext, withPresets presets: PresetData) throws {
         for presetPhrase in presets.phrases {
-            let supportLanguages = Set(presetPhrase.localizedUtterance.keys)
-            guard let languageCode = orderedLanguages.first(where: supportLanguages.contains) else {
-                assertionFailure("Matching language not found for phrase \(presetPhrase)")
-                continue
-            }
 
             let phrase = Phrase.fetchOrCreate(in: context, matching: presetPhrase.id)
-            phrase.utterance = presetPhrase.localizedUtterance[languageCode]
-            phrase.languageCode = languageCode
+            phrase.utterance = presetPhrase.utterance
+            phrase.languageCode = presetPhrase.languageCode
             
             for identifier in presetPhrase.categoryIds {
                 if let category = Category.fetchObject(in: context, matching: identifier) {
