@@ -133,7 +133,7 @@
 		A9B6960D2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */; };
 		A9B696112433CF31004E6960 /* EditCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */; };
 		A9C32CFF242271F3000EC6F7 /* Phrase+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */; };
-		A9CF2AEB242D431E005633A7 /* TimingSensitivity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9CF2AEA242D431E005633A7 /* TimingSensitivity.storyboard */; };
+		A9CF2AE9242D41BE005633A7 /* EditPhrases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9CF2AE8242D41BE005633A7 /* EditPhrases.storyboard */; };
 		A9CF2AED242D44CA005633A7 /* TimingSensitivityCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF2AEC242D44CA005633A7 /* TimingSensitivityCollectionViewController.swift */; };
 		A9CF2AEF242D44EE005633A7 /* TimingSensitivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF2AEE242D44EE005633A7 /* TimingSensitivityViewController.swift */; };
 		A9CF2AF3242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9CF2AF2242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib */; };
@@ -338,7 +338,7 @@
 		A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCategoriesCompactCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoriesViewController.swift; sourceTree = "<group>"; };
 		A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Phrase+Helpers.swift"; sourceTree = "<group>"; };
-		A9CF2AEA242D431E005633A7 /* TimingSensitivity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimingSensitivity.storyboard; sourceTree = "<group>"; };
+		A9CF2AE8242D41BE005633A7 /* EditPhrases.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditPhrases.storyboard; sourceTree = "<group>"; };
 		A9CF2AEC242D44CA005633A7 /* TimingSensitivityCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingSensitivityCollectionViewController.swift; sourceTree = "<group>"; };
 		A9CF2AEE242D44EE005633A7 /* TimingSensitivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingSensitivityViewController.swift; sourceTree = "<group>"; };
 		A9CF2AF2242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DwellTimeCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -707,7 +707,6 @@
 		A9DFCC21242D3A5000136136 /* TimingSensitivity */ = {
 			isa = PBXGroup;
 			children = (
-				A9CF2AEA242D431E005633A7 /* TimingSensitivity.storyboard */,
 				A9CF2AEE242D44EE005633A7 /* TimingSensitivityViewController.swift */,
 				A9CF2AEC242D44CA005633A7 /* TimingSensitivityCollectionViewController.swift */,
 				A95D07BC24326465004ECE64 /* Model */,
@@ -998,7 +997,6 @@
 				30B979B82425583E00309D7C /* InfoPlist.strings in Resources */,
 				A9F56FC824365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib in Resources */,
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,
-				A9CF2AEB242D431E005633A7 /* TimingSensitivity.storyboard in Resources */,
 				6B9DFA6923E88A1B0037673E /* GazeLib.scnassets in Resources */,
 				6BE23D562444DCBE0032CAE4 /* Localizable.strings in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,

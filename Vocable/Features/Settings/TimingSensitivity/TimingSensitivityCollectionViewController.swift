@@ -40,18 +40,29 @@ final class TimingSensitivityCollectionViewController: UICollectionViewControlle
     private func setupCollectionView() {
         collectionView.delaysContentTouches = false
         collectionView.backgroundColor = .collectionViewBackgroundColor
-        collectionView.register(UINib(nibName: "DwellTimeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DwellTimeCollectionViewCell")
-        collectionView.register(UINib(nibName: "SensitivityCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SensitivityCollectionViewCell")
+        collectionView.register(UINib(nibName: "DwellTimeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: DwellTimeCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "SensitivityCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SensitivityCollectionViewCell.reuseIdentifier)
         
         updateDataSource()
         
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
     }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        collectionView.setCollectionViewLayout(createLayout(), animated: false)
+    }
+
+    override func viewLayoutMarginsDidChange() {
+        super.viewLayoutMarginsDidChange()
+
+        collectionView.setCollectionViewLayout(createLayout(), animated: false)
+    }
     
     private func createLayout() -> UICollectionViewLayout {
-        if case .compact = traitCollection.horizontalSizeClass,
-            case .regular = traitCollection.verticalSizeClass {
+        if case .compact = traitCollection.horizontalSizeClass, case .regular = traitCollection.verticalSizeClass {
             return compactWidthLayout()
         } else {
             return defaultLayout()
@@ -78,15 +89,7 @@ final class TimingSensitivityCollectionViewController: UICollectionViewControlle
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        collectionView.setCollectionViewLayout(createLayout(), animated: false)
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-    }
-    
+
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         switch item {
