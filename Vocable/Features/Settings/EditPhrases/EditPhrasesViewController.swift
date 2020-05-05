@@ -85,7 +85,6 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         case (.compact, .regular):
             collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(3)
-            collectionView.layout.numberOfRows = .minimumHeight(130)
         case (.compact, .compact), (.regular, .compact):
             collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(2)
@@ -147,9 +146,8 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
     // MARK: Actions 
 
     @IBAction private func addPhrasePressed() {
-        let storyboard = UIStoryboard(name: "EditTextViewController", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
-        vc.editTextCompletionHandler = { (newText) -> Void in
+        let viewController = EditTextViewController()
+        viewController.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
             _ = Phrase.create(withUserEntry: newText, category: self.category, in: context)
@@ -167,8 +165,8 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
                 assertionFailure("Failed to save user generated phrase: \(error)")
             }
         }
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
     }
 
     @objc private func handleCellDeletionButton(_ sender: UIButton) {
