@@ -37,13 +37,11 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
     private func setupCollectionView() {
         collectionView.delaysContentTouches = false
         collectionView.backgroundColor = .collectionViewBackgroundColor
-        collectionView.register(UINib(nibName: "DwellTimeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DwellTimeCollectionViewCell")
-        collectionView.register(UINib(nibName: "SensitivityCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SensitivityCollectionViewCell")
+        collectionView.register(UINib(nibName: "DwellTimeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: DwellTimeCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "SensitivityCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SensitivityCollectionViewCell.reuseIdentifier)
 
         updateDataSource()
-
-        let layout = createLayout()
-        collectionView.collectionViewLayout = layout
+        collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
 
     // MARK: UICollectionViewDataSource
@@ -71,10 +69,7 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [settingsItem, settingsItem])
 
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets.leading = view.layoutMargins.left
-        section.contentInsets.trailing = view.layoutMargins.right
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
+        return UICollectionViewCompositionalLayout(section: section)
     }
 
     private func defaultLayout() -> UICollectionViewLayout {
@@ -92,10 +87,14 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
+    }
+
+    override func viewLayoutMarginsDidChange() {
+        super.viewLayoutMarginsDidChange()
+
+        collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
@@ -127,8 +126,7 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
             return cell
         case .sensitivity:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SensitivityCollectionViewCell.reuseIdentifier, for: indexPath) as! SensitivityCollectionViewCell
-            if traitCollection.horizontalSizeClass == .compact
-                && traitCollection.verticalSizeClass == .regular {
+            if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
                 cell.topSeparator.isHidden = true
             } else {
                 cell.topSeparator.isHidden = false
