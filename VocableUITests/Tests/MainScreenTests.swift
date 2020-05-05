@@ -9,12 +9,11 @@
 import XCTest
 
 class MainScreenTests: BaseTest {
-    let mainScreen = MainScreen()
-    
+
     func testDefaultCategoriesExist() {
-        for categoryName in MainScreen().defaultCategories {
+        for categoryName in mainScreen.defaultCategories {
             XCTAssert(mainScreen.isTextDisplayed(categoryName), "Expected the current category name to be \(categoryName)")
-            MainScreen.categoryRightButton.tap()
+            mainScreen.categoryRightButton.tap()
         }
     }
     
@@ -27,9 +26,9 @@ class MainScreenTests: BaseTest {
         verifyGivenPhrasesDisplay(setOfPhrases: mainScreen.defaultPhraseBasicNeeds)
     }
     
-    func testWhenTappingPhrase_ThenTextFieldPopulates() {
-        XCUIApplication().collectionViews.collectionViews.staticTexts[mainScreen.defaultPhraseGeneral[0]].tap()
-        XCTAssert(mainScreen.isTextDisplayedInTextView("Please be patient"))
+    func testWhenTappingPhrase_ThenThatPhraseDisplaysOnOutputLabel() {
+        XCUIApplication().collectionViews.staticTexts[mainScreen.defaultPhraseGeneral[0]].tap()
+        XCTAssertEqual(mainScreen.outputLabel.label, "Please be patient")
     }
     
     private func verifyGivenPhrasesDisplay(setOfPhrases: [String]) {

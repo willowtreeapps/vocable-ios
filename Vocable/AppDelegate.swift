@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import VocablePresets
 import Combine
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,11 +27,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        if !AppConfig.isHeadTrackingSupported {
+            AppConfig.isHeadTrackingEnabled = false
+        }
+    
         // Ensure that the persistent store has the current
         // default presets before presenting UI
         updatePersistentStoreForCurrentLanguagePreferences()
         
         addObservers()
+
+        // Warm up the speech engine to prevent lag on first invocation
+        AVSpeechSynthesizer.shared.speak("", language: "en")
 
         application.isIdleTimerDisabled = true
         let window = HeadGazeWindow(frame: UIScreen.main.bounds)

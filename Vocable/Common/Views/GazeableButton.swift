@@ -20,6 +20,30 @@ class GazeableButton: UIButton {
     private var cachedFillColors = [UIControl.State: UIColor]()
     private let defaultIBStates = [UIControl.State.normal, .highlighted, .selected, .disabled]
 
+    private var cachedHighlightColor: UIColor?
+    private(set) var isTrackingTouches: Bool = false {
+        didSet {
+            guard oldValue != isTrackingTouches else { return }
+
+            if isTrackingTouches {
+
+                if let currentFill = fillColor(for: .highlighted) ?? fillColor(for: .normal) {
+                    cachedHighlightColor = currentFill
+                    let newFill = currentFill.darkenedForHighlight()
+                    setFillColor(newFill, for: .highlighted)
+                }
+
+                isHighlighted = true
+            } else {
+                if let cached = cachedHighlightColor {
+                    setFillColor(cached, for: .highlighted)
+                    cachedHighlightColor = nil
+                }
+            }
+            updateContentViews()
+        }
+    }
+    
     @available(*, deprecated, message: "Use setImage(forState:) instead")
     @IBInspectable var buttonImage: UIImage? {
         get {
@@ -76,6 +100,17 @@ class GazeableButton: UIButton {
     override var isHighlighted: Bool {
         didSet {
             updateContentViews()
+
+            func actions() {
+                let scale: CGFloat = isHighlighted ? 0.96 : 1.0
+                transform = .init(scaleX: scale, y: scale)
+            }
+
+            UIView.animate(withDuration: 0.2,
+                           delay: 0,
+                           options: [.beginFromCurrentState, .curveEaseOut, .overrideInheritedOptions, .overrideInheritedCurve, .overrideInheritedDuration],
+                           animations: actions,
+                           completion: nil)
         }
     }
     
@@ -154,7 +189,7 @@ class GazeableButton: UIButton {
             return
         }
 
-        let image = renderBackgroundImage(withFillColor: color, withHighlight: state.contains(.highlighted))
+        let image = renderBackgroundImage(withFillColor: color, withHighlight: state.contains(.highlighted) && !state.contains(.selected))
         setBackgroundImage(image, for: state)
 
         if state == .normal {
@@ -193,10 +228,9 @@ class GazeableButton: UIButton {
             fillColor.setFill()
             path.fill()
 
-            if isHighlighted {
-                UIColor.cellBorderHighlightColor.setStroke()
-                path.stroke()
-            }
+            let strokeColor = isHighlighted ? UIColor.cellBorderHighlightColor : fillColor
+            strokeColor.setStroke()
+            path.stroke()
         }
         let capInsets = UIEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius)
         let stretchableImage = image.resizableImage(withCapInsets: capInsets, resizingMode: .stretch)
@@ -244,7 +278,24 @@ class GazeableButton: UIButton {
         isSelected = false
         gazeBeganDate = .distantFuture
     }
-    
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        guard !(touches.first is UIHeadGaze) else { return }
+        isTrackingTouches = true
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        guard !(touches.first is UIHeadGaze) else { return }
+        isTrackingTouches = false
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        guard !(touches.first is UIHeadGaze) else { return }
+        isTrackingTouches = false
+    }
 }
 
 class GazeableSegmentedButton: GazeableButton {

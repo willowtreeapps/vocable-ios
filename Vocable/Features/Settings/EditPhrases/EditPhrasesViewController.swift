@@ -84,8 +84,7 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
     }
     
     @IBAction private func addPhrasePressed() {
-        let storyboard = UIStoryboard(name: "EditTextViewController", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
+        let vc = EditTextViewController()
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
@@ -118,13 +117,13 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
 
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
-            collectionView.layout.numberOfColumns = 2
+            collectionView.layout.numberOfColumns = .fixedCount(2)
             collectionView.layout.numberOfRows = .fixedCount(4)
         case (.compact, .regular):
-            collectionView.layout.numberOfColumns = 1
+            collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(3)
         case (.compact, .compact), (.regular, .compact):
-            collectionView.layout.numberOfColumns = 1
+            collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(2)
         default:
             break
@@ -220,9 +219,7 @@ final class EditPhrasesViewController: UIViewController, UICollectionViewDelegat
         }
 
         let safeIndexPath = diffableDataSource.indexPath(fromMappedIndexPath: indexPath)
-        let vc = UIStoryboard(name: "EditTextViewController", bundle: nil)
-            .instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
-        vc.modalPresentationStyle = .fullScreen
+        let vc = EditTextViewController()
 
         let phrase = fetchResultsController.object(at: safeIndexPath)
         vc.initialText = phrase.utterance ?? ""

@@ -19,7 +19,7 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
                 return .selectedTextColor
             }
             if !isEnabled {
-                return .disabledTextColor
+                return UIColor.defaultTextColor.blended(with: borderedView.backgroundColor!, amount: 0.8)
             }
             return .defaultTextColor
         }()
@@ -41,17 +41,28 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
     }
     
     private func commonInit() {
-        addSubview(textLabel)
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        contentView.preservesSuperviewLayoutMargins = true
+
         textLabel.textAlignment = .center
         textLabel.numberOfLines = 0
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.minimumScaleFactor = 0.5
-        textLabel.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor).isActive = true
-        textLabel.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor).isActive = true
-        textLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor).isActive = true
-        textLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).isActive = true
-        textLabel.textAlignment = .center
+
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(textLabel)
+
+        // Needs a weak spot that can break while resizing to avoid
+        // constraint errors
+        let rightConstraint = textLabel.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor)
+        rightConstraint.priority = .init(999)
+        NSLayoutConstraint.activate([
+            rightConstraint,
+            textLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            textLabel.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor),
+            textLabel.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
+        ])
+
         updateContentViews()
     }
 
@@ -83,9 +94,20 @@ class CategoryItemCollectionViewCell: PresetItemCollectionViewCell {
     
     override func updateContentViews() {
         super.updateContentViews()
-        borderedView.fillColor = isSelected ? .cellSelectionColor : .categoryBackgroundColor
-        borderedView.backgroundColor = (traitCollection.verticalSizeClass == .compact
-            || traitCollection.horizontalSizeClass == .compact)
+
+        borderedView.fillColor = {
+            var result: UIColor
+            if isSelected {
+                result = .cellSelectionColor
+            } else {
+                result = .categoryBackgroundColor
+            }
+            if isHighlighted && isTrackingTouches {
+                result = result.darkenedForHighlight()
+            }
+            return result
+        }()
+        borderedView.backgroundColor = sizeClass.contains(any: .compact)
             ? .collectionViewBackgroundColor : .categoryBackgroundColor
         
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor

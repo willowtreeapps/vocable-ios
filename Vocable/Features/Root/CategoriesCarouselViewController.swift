@@ -55,6 +55,9 @@ import CoreData
 
         view.backgroundColor = .collectionViewBackgroundColor
 
+        backChevron.accessibilityIdentifier = "root.categories_carousel.left_chevron"
+        forwardChevron.accessibilityIdentifier = "root.categories_carousel.right_chevron"
+
         collectionViewMask.fillColor = .black
         collectionViewMask.backgroundColor = .clear
         collectionViewContainer.mask = collectionViewMask
@@ -63,6 +66,10 @@ import CoreData
 
         collectionView.delaysContentTouches = true
         collectionView.delegate = self
+        for button in [backChevron, forwardChevron] {
+            button?.setFillColor(.categoryBackgroundColor, for: .normal)
+            button?.cornerRadius = 8
+        }
 
         updateForCurrentTraitCollection()
 
@@ -81,7 +88,7 @@ import CoreData
     }
 
     private func updateCollectionViewMaskFrame() {
-        self.collectionViewMask.frame = CGRect(origin: .zero, size: self.collectionViewContainer.bounds.size)
+        self.collectionViewMask.frame = collectionViewContainer.layoutMarginsGuide.layoutFrame
     }
 
     private func updateSelectedIndexPathsInProxyDataSource() {
@@ -163,26 +170,28 @@ import CoreData
             collectionViewMask.cornerRadius = 8
             collectionView.layout.pageInsets = .init(top: 0, left: 8, bottom: 0, right: 8)
             collectionView.backgroundColor = .collectionViewBackgroundColor
-            outerStackView.spacing = 0
+            backChevron.cornerRadius = collectionViewMask.cornerRadius
+            forwardChevron.cornerRadius = collectionViewMask.cornerRadius
         } else {
-            collectionViewMask.cornerRadius = 16
+            collectionViewMask.cornerRadius = 8
             collectionView.layout.pageInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
             collectionView.backgroundColor = .categoryBackgroundColor
-            outerStackView.spacing = 8
+            backChevron.cornerRadius = collectionViewMask.cornerRadius
+            forwardChevron.cornerRadius = collectionViewMask.cornerRadius
         }
 
         switch sizeClass {
         case .hRegular_vRegular:
             collectionView.layout.interItemSpacing = 0
-            collectionView.layout.numberOfColumns = 4
+            collectionView.layout.numberOfColumns = .minimumWidth(216)
             collectionView.layout.numberOfRows = .fixedCount(1)
         case .hCompact_vRegular:
             collectionView.layout.interItemSpacing = 8
-            collectionView.layout.numberOfColumns = 1
+            collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(1)
         case .hCompact_vCompact, .hRegular_vCompact:
             collectionView.layout.interItemSpacing = 8
-            collectionView.layout.numberOfColumns = 3
+            collectionView.layout.numberOfColumns = .fixedCount(3)
             collectionView.layout.numberOfRows = .fixedCount(1)
         default:
             break

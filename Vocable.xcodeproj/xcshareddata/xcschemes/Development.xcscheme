@@ -93,7 +93,7 @@
          <EnvironmentVariable
             key = "RefactoredInterfaceEnabled"
             value = ""
-            isEnabled = "NO">
+            isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>

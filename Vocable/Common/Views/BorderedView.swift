@@ -139,4 +139,11 @@ class BorderedView: UIView {
         shapeLayer.shadowPath = path
         shapeLayer.fillColor = fillColor.cgColor
     }
+
+    override func action(for layer: CALayer, forKey event: String) -> CAAction? {
+        if event == "backgroundColor" {
+            return nil
+        }
+        return super.action(for: layer, forKey: event)
+    }
 }
