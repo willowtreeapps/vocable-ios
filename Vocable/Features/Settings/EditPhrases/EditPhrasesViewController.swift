@@ -16,6 +16,9 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
     private lazy var diffableDataSource = CarouselCollectionViewDataSourceProxy<Int, PhraseViewModel>(collectionView: collectionView) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
         guard let self = self else { return nil }
+
+        #warning("Refactor diffableDataSource to use NSFetchedResultsControllerDelegate")
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier, for: indexPath) as! EditPhrasesCollectionViewCell
         cell.textLabel.text = phrase.utterance
         cell.deleteButton.addTarget(self,
@@ -65,13 +68,13 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
     }
 
     private func setupCollectionView() {
-        collectionView.register(UINib(nibName: "EditPhrasesCollectionViewCell", bundle: nil),
-                                forCellWithReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier)
         collectionView.backgroundColor = .collectionViewBackgroundColor
+        collectionView.register(UINib(nibName: "EditPhrasesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+
         updateLayoutForCurrentTraitCollection()
     }
 
@@ -165,6 +168,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
                 assertionFailure("Failed to save user generated phrase: \(error)")
             }
         }
+
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
@@ -198,7 +202,13 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         let phrase = self.fetchResultsController.object(at: safeIndexPath)
         let context = NSPersistentContainer.shared.viewContext
         context.delete(phrase)
-        try? context.save()
+
+        do {
+            try context.save()
+        } catch {
+            assertionFailure("Could not save phrase: \(error)")
+        }
+
     }
 
     @objc private func handleCellEditButton(_ sender: UIButton) {
@@ -230,6 +240,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
                 assertionFailure("Failed to save user generated phrase: \(error)")
             }
         }
+
         present(vc, animated: true)
 
     }
