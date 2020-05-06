@@ -1,0 +1,3 @@
+files:
+  - source: /Vocable/LocalizedExport/en.xloc/LocalizedContents/en.xliff
+    translation: /CrowdinImports/%osx_locale%.xliff
