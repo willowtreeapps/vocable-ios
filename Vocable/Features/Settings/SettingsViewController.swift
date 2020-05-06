@@ -162,15 +162,21 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 
+    private func sectionInsets(for environment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
+        return NSDirectionalEdgeInsets(top: 0,
+                                       leading: max(view.layoutMargins.left - environment.container.contentInsets.leading, 0),
+                                       bottom: 0,
+                                       trailing: max(view.layoutMargins.right - environment.container.contentInsets.trailing, 0))
+    }
+
     private func internalLinksSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         return defaultSection(environment: environment)
     }
 
     private func externalLinksSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let section = defaultSection(environment: environment)
+        section.contentInsets = sectionInsets(for: environment)
         section.contentInsets.top = 24
-        section.contentInsets.leading = view.layoutMargins.left
-        section.contentInsets.trailing = view.layoutMargins.right
         return section
     }
 
@@ -179,13 +185,12 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = sectionInsets(for: environment)
         if sizeClass.contains(.vCompact) {
             section.contentInsets.top = 8
         } else {
             section.contentInsets.top = 24
         }
-        section.contentInsets.leading = view.layoutMargins.left
-        section.contentInsets.trailing = view.layoutMargins.right
         return section
     }
 
@@ -215,10 +220,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
 
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                        leading: view.layoutMargins.left,
-                                                        bottom: 0,
-                                                        trailing: view.layoutMargins.right)
+        section.contentInsets = sectionInsets(for: environment)
         return section
     }
 
