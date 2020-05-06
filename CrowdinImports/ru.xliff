@@ -307,7 +307,7 @@
       </trans-unit>
       <trans-unit id="preset_6AD93FB9-437C-455F-A4AF-C96033BCBCAE" xml:space="preserve">
         <source>I am hot</source>
-        <target state="needs-translation">I am hot</target>
+        <target state="translated">Мне жарко</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_6B463AF1-C884-45CD-9194-90806E75FD70" xml:space="preserve">
@@ -337,7 +337,7 @@
       </trans-unit>
       <trans-unit id="preset_8C4D0099-9BA8-4914-A6B5-730FFDC8C499" xml:space="preserve">
         <source>I am cold</source>
-        <target state="needs-translation">I am cold</target>
+        <target state="translated">Мне холодно</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_9A808275-0D67-49E4-8BF8-6F22A0C7E169" xml:space="preserve">
@@ -347,7 +347,7 @@
       </trans-unit>
       <trans-unit id="preset_9DEB32B5-8606-4689-8F6A-0B251F4DB377" xml:space="preserve">
         <source>I am thirsty</source>
-        <target state="needs-translation">I am thirsty</target>
+        <target state="translated">Я хочу пить</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_9E3230D7-1172-491A-8A00-E734B1661DC1" xml:space="preserve">
@@ -447,7 +447,7 @@
       </trans-unit>
       <trans-unit id="preset_9929E83B-997D-40AA-841C-130709F5115B" xml:space="preserve">
         <source>Good morning</source>
-        <target state="needs-translation">Good morning</target>
+        <target state="translated">Доброе утро</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_30153E11-D48C-47C8-9186-47988D0A5B7A" xml:space="preserve">
@@ -542,7 +542,7 @@
       </trans-unit>
       <trans-unit id="preset_D6A67E02-3D07-4D44-8B04-2C1B9B8B167E" xml:space="preserve">
         <source>Good evening</source>
-        <target state="needs-translation">Good evening</target>
+        <target state="translated">Добрый вечер</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_D64EE532-14D3-4434-B671-8F4368EC0A8D" xml:space="preserve">
@@ -572,12 +572,12 @@
       </trans-unit>
       <trans-unit id="preset_E012D902-E8BA-4BEA-92C7-7107ECF8051C" xml:space="preserve">
         <source>I am hungry</source>
-        <target state="needs-translation">I am hungry</target>
+        <target state="translated">Я хочу есть</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_EB7A9732-E28E-4440-A88B-BA2A1ACFBD76" xml:space="preserve">
         <source>Conversation</source>
-        <target state="needs-translation">Conversation</target>
+        <target state="translated">Беседа</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_F6F03BBD-B9CD-41F5-B26A-FCC13CCBB199" xml:space="preserve">
@@ -607,7 +607,7 @@
       </trans-unit>
       <trans-unit id="preset_user_keypad" xml:space="preserve">
         <source>123</source>
-        <target state="needs-translation">123</target>
+        <target state="translated">123</target>
         <note/>
       </trans-unit>
     </body>

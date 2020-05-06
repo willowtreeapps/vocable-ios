@@ -34,17 +34,17 @@
       </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
         <source>Categories</source>
-        <target state="needs-translation">Categories</target>
+        <target state="translated">श्रेणियाँ</target>
         <note>Categories list editor screen header title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="needs-translation">Cancel</target>
+        <target state="translated">रद्द करें</target>
         <note>Cancel exit editing alert action title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
         <source>Confirm</source>
-        <target state="needs-translation">Confirm</target>
+        <target state="translated">पुष्टि करें</target>
         <note>Confirm exit category alert action title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
@@ -54,7 +54,7 @@
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="needs-translation">Cancel</target>
+        <target state="translated">रद्द करें</target>
         <note>Cancel alert action title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
@@ -69,17 +69,17 @@
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="needs-translation">Cancel</target>
+        <target state="translated">रद्द करें</target>
         <note>Delete phrase alert cancel button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
         <source>Delete</source>
-        <target state="needs-translation">Delete</target>
+        <target state="translated">हटाएँ</target>
         <note>Delete phrase alert action button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
         <source>Deleted phrases cannot be recovered.</source>
-        <target state="needs-translation">Deleted phrases cannot be recovered.</target>
+        <target state="translated">हटाए गए shabd पुनर्प्राप्त नहीं किया जा सकता है</target>
         <note>Delete phrase confirmation alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
@@ -94,7 +94,7 @@
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
         <source>Changes saved</source>
-        <target state="needs-translation">Changes saved</target>
+        <target state="translated">परिवर्तन सहेजा गया!</target>
         <note>changes to an existing phrase were saved successfully</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve">
@@ -110,12 +110,12 @@
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="needs-translation">Cancel</target>
+        <target state="translated">रद्द करें</target>
         <note>Cancel alert action title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
         <source>Confirm</source>
-        <target state="needs-translation">Confirm</target>
+        <target state="translated">पुष्टि करें</target>
         <note>Confirm alert action title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
@@ -140,12 +140,12 @@
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
-        <target state="needs-translation">Continue Editing</target>
+        <target state="translated">संपादन जारी रखें</target>
         <note>Continue editing alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
-        <target state="needs-translation">Discard</target>
+        <target state="translated">छोड़ें</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
@@ -160,17 +160,17 @@
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
         <source>No</source>
-        <target state="needs-translation">No</target>
+        <target state="translated">नहीं</target>
         <note>'No' num pad response</note>
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.yes.title" xml:space="preserve">
         <source>Yes</source>
-        <target state="needs-translation">Yes</target>
+        <target state="translated">हाँ</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
         <source>OK</source>
-        <target state="needs-translation">OK</target>
+        <target state="translated">ठीक है</target>
         <note>No email account configured error alert dismiss button title</note>
       </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve">
@@ -185,22 +185,22 @@
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="needs-translation">Cancel</target>
+        <target state="translated">रद्द करें</target>
         <note>Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.confirm.title" xml:space="preserve">
         <source>Confirm</source>
-        <target state="needs-translation">Confirm</target>
+        <target state="translated">पुष्टि करें</target>
         <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.cell.categories.title" xml:space="preserve">
         <source>Categories</source>
-        <target state="needs-translation">Categories</target>
+        <target state="translated">श्रेणियाँ</target>
         <note>edit categories settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve">
         <source>Contact Developers</source>
-        <target state="needs-translation">Contact Developers</target>
+        <target state="translated">डेवलपर से संपर्क करें</target>
         <note>contact developers settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.edit_user_favorites.title_format" xml:space="preserve">
@@ -215,12 +215,12 @@
       </trans-unit>
       <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
         <source>Privacy Policy</source>
-        <target state="needs-translation">Privacy Policy</target>
+        <target state="translated">गोपनीयता नीति</target>
         <note>view privacy policy settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.reset_all.title" xml:space="preserve">
         <source>Reset App Settings</source>
-        <target state="needs-translation">Reset App Settings</target>
+        <target state="translated">सेटिंग्स रीसेट करें</target>
         <note>reset all settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.selection_mode.title" xml:space="preserve">
@@ -240,17 +240,17 @@
       </trans-unit>
       <trans-unit id="settings.header.title" xml:space="preserve">
         <source>Settings</source>
-        <target state="needs-translation">Settings</target>
+        <target state="translated">सेटिंग्स</target>
         <note>Settings screen header title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
-        <target state="needs-translation">Continue Editing</target>
+        <target state="translated">संपादन जारी रखें</target>
         <note>Continue editing alert action title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
-        <target state="needs-translation">Discard</target>
+        <target state="translated">छोड़ें</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
@@ -332,7 +332,7 @@
       </trans-unit>
       <trans-unit id="preset_8BCBACFB-D5ED-46CB-B3E2-21FB31D8D6AD" xml:space="preserve">
         <source>Yes</source>
-        <target state="needs-translation">Yes</target>
+        <target state="translated">हाँ</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_8C4D0099-9BA8-4914-A6B5-730FFDC8C499" xml:space="preserve">
@@ -592,7 +592,7 @@
       </trans-unit>
       <trans-unit id="preset_FABE749C-B54D-4031-B8E7-62777B34D273" xml:space="preserve">
         <source>No</source>
-        <target state="needs-translation">No</target>
+        <target state="translated">नहीं</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" xml:space="preserve">
