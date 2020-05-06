@@ -160,12 +160,12 @@
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
         <source>No</source>
-        <target state="needs-translation">No</target>
+        <target state="translated">Non</target>
         <note>'No' num pad response</note>
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.yes.title" xml:space="preserve">
         <source>Yes</source>
-        <target state="needs-translation">Yes</target>
+        <target state="translated">Oui</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
