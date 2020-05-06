@@ -1,3 +1,0 @@
-files:
-  - source: Vocable/Supporting Files/en.lproj/Presets.strings
-    translation: /Vocable/Supporting Files/%osx_locale%.lproj/%original_file_name%
