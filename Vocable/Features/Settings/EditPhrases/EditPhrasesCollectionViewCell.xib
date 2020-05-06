@@ -36,16 +36,12 @@
                                     </constraint>
                                 </constraints>
                                 <color key="tintColor" name="DefaultFontColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="pencil" catalog="system"/>
-                                </userDefinedRuntimeAttributes>
+                                <state key="normal" image="pencil" catalog="system"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r2i-5v-HG5" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="64" height="64"/>
                                 <color key="tintColor" name="DefaultFontColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="trash" catalog="system"/>
-                                </userDefinedRuntimeAttributes>
+                                <state key="normal" image="trash" catalog="system"/>
                             </button>
                         </subviews>
                         <variation key="heightClass=regular-widthClass=compact" axis="vertical"/>

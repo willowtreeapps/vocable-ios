@@ -61,8 +61,8 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
     }
 
     private func setupNavigationBar() {
-        navigationController?.title = NSLocalizedString("categories_list_editor.header.title",
-                                                        comment: "Categories list editor screen header title")
+        navigationBar.title = NSLocalizedString("categories_list_editor.header.title",
+                                                comment: "Categories list editor screen header title")
 
         navigationBar.leftButton = {
             let button = GazeableButton(frame: .zero)
