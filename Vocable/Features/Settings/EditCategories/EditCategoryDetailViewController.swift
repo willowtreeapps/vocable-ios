@@ -204,7 +204,7 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
     }
 
     private func displayEditPhrasesViewController() {
-        let viewController = UIStoryboard(name: "EditPhrases", bundle: nil).instantiateViewController(identifier: "MyPhrases") as! EditPhrasesViewController
+        let viewController = EditPhrasesViewController()
         viewController.category = category
         show(viewController, sender: nil)
     }

@@ -34,7 +34,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="e6f-uI-tYv">
                         <rect key="frame" x="20" y="52" width="668" height="84"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIe-C4-EHn" userLabel="MoveUpButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIe-C4-EHn" userLabel="MoveUpButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="15" width="84" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="eF3-ax-GmT"/>
@@ -45,7 +45,7 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.up" catalog="system"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveDownButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveDownButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="92" y="15" width="84" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="84" id="DnU-vb-Ln9"/>
@@ -62,7 +62,7 @@
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfR-1l-Qp7" userLabel="ShowCategoryDetailButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfR-1l-Qp7" userLabel="ShowCategoryDetailButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="620" y="15" width="48" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="Gqm-Up-tsr"/>

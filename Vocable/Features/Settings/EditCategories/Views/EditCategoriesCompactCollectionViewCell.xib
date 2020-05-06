@@ -24,7 +24,7 @@
                             <constraint firstAttribute="height" constant="2" id="tSY-ue-dhy"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveDownButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveDownButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                         <rect key="frame" x="112" y="98" width="84" height="54"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="84" id="DnU-vb-Ln9"/>
@@ -35,7 +35,7 @@
                             <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.down" catalog="system"/>
                         </userDefinedRuntimeAttributes>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIe-C4-EHn" userLabel="MoveUpButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIe-C4-EHn" userLabel="MoveUpButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                         <rect key="frame" x="20" y="98" width="84" height="54"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="54" id="eF3-ax-GmT"/>
@@ -46,7 +46,7 @@
                             <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.up" catalog="system"/>
                         </userDefinedRuntimeAttributes>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfR-1l-Qp7" userLabel="ShowCategoryDetailButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfR-1l-Qp7" userLabel="ShowCategoryDetailButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                         <rect key="frame" x="636" y="71" width="48" height="54"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="54" id="Gqm-Up-tsr"/>

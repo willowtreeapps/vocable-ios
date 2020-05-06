@@ -13,9 +13,6 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
 
     private weak var composeVC: MFMailComposeViewController?
 
-    // Contact Developers + Privact Policy + Version Number
-    private let externalLinksItemCount = 3
-
     private enum Section: Int, CaseIterable {
         case internalSettings
         case externalURL
@@ -75,7 +72,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         }
     }
 
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SettingsItem> = .init(collectionView: collectionView) {
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, SettingsItem> = .init(collectionView: collectionView) {
         (collectionView, indexPath, item) -> UICollectionViewCell in
 
         switch item {
@@ -133,115 +130,98 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "SettingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier)
 
+        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout { (sectionIndex, environment) -> NSCollectionLayoutSection? in
+            let section = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
+            switch section {
+            case .internalSettings:
+                return self.internalLinksSection(environment: environment)
+            case .externalURL:
+                return self.externalLinksSection(environment: environment)
+            case .version:
+                return self.versionLabelSection(environment: environment)
+            }
+        }
+
         updateDataSource()
     }
 
     private func updateDataSource() {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, SettingsItem>()
-        snapshot.appendSections([0])
+        var snapshot = NSDiffableDataSourceSnapshot<Section, SettingsItem>()
+        snapshot.appendSections([.internalSettings])
         snapshot.appendItems([.editMySayings,
                               .categories,
                               .timingSensitivity,
                               .resetAppSettings,
                               .selectionMode,
-                              .pidTuner,
-                              .privacyPolicy,
+                              .pidTuner].filter({$0.isFeatureEnabled}))
+        snapshot.appendSections([.externalURL])
+        snapshot.appendItems([.privacyPolicy,
                               .contactDevs].filter({$0.isFeatureEnabled}))
+        snapshot.appendSections([.version])
         snapshot.appendItems([.versionNum])
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        collectionView.setCollectionViewLayout(createLayout(), animated: false)
+    private func sectionInsets(for environment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
+        return NSDirectionalEdgeInsets(top: 0,
+                                       leading: max(view.layoutMargins.left - environment.container.contentInsets.leading, 0),
+                                       bottom: 0,
+                                       trailing: max(view.layoutMargins.right - environment.container.contentInsets.trailing, 0))
     }
 
-    override func viewLayoutMarginsDidChange() {
-        super.viewLayoutMarginsDidChange()
-
-        collectionView.setCollectionViewLayout(createLayout(), animated: false)
+    private func internalLinksSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        return defaultSection(environment: environment)
     }
 
-    func createLayout() -> UICollectionViewLayout {
-        if case .compact = self.traitCollection.horizontalSizeClass, case .regular = self.traitCollection.verticalSizeClass {
-            return compactWidthLayout()
+    private func externalLinksSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let section = defaultSection(environment: environment)
+        section.contentInsets = sectionInsets(for: environment)
+        section.contentInsets.top = 24
+        return section
+    }
+
+    private func versionLabelSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = sectionInsets(for: environment)
+        if sizeClass.contains(.vCompact) {
+            section.contentInsets.top = 8
         } else {
-            return defaultLayout()
+            section.contentInsets.top = 24
         }
+        return section
     }
 
-    private func compactWidthLayout() -> UICollectionViewLayout {
-        let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - externalLinksItemCount
+    private func defaultSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
-        let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        settingsButtonItem.contentInsets = .init(top: 4, leading: 0, bottom: 4, trailing: 0)
+        let itemHeightDimension: NSCollectionLayoutDimension
+        let itemWidthDimension = NSCollectionLayoutDimension.fractionalWidth(1.0)
+        let columnCount: Int
 
-        let internalLinksGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                            heightDimension: .fractionalHeight(CGFloat(internalLinksItemCount) / 9))
-        let internalLinksGroup = NSCollectionLayoutGroup.vertical(layoutSize: internalLinksGroupSize, subitem: settingsButtonItem, count: internalLinksItemCount)
+        if sizeClass.contains(any: .compact) {
+            itemHeightDimension = .absolute(50)
+        } else {
+            itemHeightDimension = .absolute(100)
+        }
 
-        let externalLinksGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                            heightDimension: .fractionalHeight(2 / 9))
-        let externalLinksGroup = NSCollectionLayoutGroup.vertical(layoutSize: externalLinksGroupSize, subitem: settingsButtonItem, count: 2)
-        externalLinksGroup.edgeSpacing = .init(leading: nil, top: .fixed(24), trailing: nil, bottom: nil)
+        if sizeClass == .hCompact_vRegular {
+            columnCount = 1
+        } else {
+            columnCount = 2
+        }
 
-        let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/7))
-        let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
+        let itemSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columnCount)
+        group.interItemSpacing = .fixed(8)
 
-        let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
-        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: [internalLinksGroup, externalLinksGroup, versionItem])
-
-        let section = NSCollectionLayoutSection(group: settingPageGroup)
-        section.contentInsets.leading = view.layoutMargins.left
-        section.contentInsets.trailing = view.layoutMargins.right
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
-    }
-
-    private func defaultLayout() -> UICollectionViewLayout {
-        let internalLinksItemCount = dataSource.snapshot().itemIdentifiers.count - externalLinksItemCount
-        let numOfRows = CGFloat(ceil(Double(internalLinksItemCount) / 2.0))
-        let isEvenNumOfItems = internalLinksItemCount.isMultiple(of: 2)
-        let columnCount = 2
-
-        let settingsButtonItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1.0)))
-        settingsButtonItem.contentInsets = .init(top: 4, leading: 8, bottom: 4, trailing: 8)
-
-        let internalLinkRowGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                              heightDimension: .fractionalHeight(1.0))
-        let internalLinkRowGroup = NSCollectionLayoutGroup.horizontal(layoutSize: internalLinkRowGroupSize,
-                                                                      subitem: settingsButtonItem,
-                                                                      count: columnCount)
-
-        let internalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                                    heightDimension: .fractionalHeight((numOfRows == 1 ? numOfRows : numOfRows - 1) / 5))
-        let internalLinkContainerGroup = NSCollectionLayoutGroup.vertical(layoutSize: internalLinkContainerGroupSize,
-                                                                          subitem: internalLinkRowGroup,
-                                                                          count: numOfRows == 1 ? Int(numOfRows) : Int(numOfRows - 1))
-
-        let internalLinkLastRowGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(isEvenNumOfItems ? 1.0 : 0.5),
-                                                                  heightDimension: .fractionalHeight(1 / 5))
-        let internalLinkLastRowGroup = NSCollectionLayoutGroup.horizontal(layoutSize: internalLinkLastRowGroupSize, subitem: settingsButtonItem, count: isEvenNumOfItems ? 2 : 1)
-        internalLinkLastRowGroup.edgeSpacing = .init(leading: nil, top: nil, trailing: nil, bottom: .fixed(24))
-
-        let externalLinkContainerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 5))
-        let externalLinkContainerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: externalLinkContainerGroupSize, subitem: settingsButtonItem, count: 2)
-
-        let versionItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(80.0 / 834.0))
-        let versionItem = NSCollectionLayoutItem(layoutSize: versionItemSize)
-
-        // If there is one row, only contain last row group in the subitems
-        let settingsPageSubItems = (numOfRows == 1) ? [internalLinkLastRowGroup, externalLinkContainerGroup, versionItem]
-            : [internalLinkContainerGroup, internalLinkLastRowGroup, externalLinkContainerGroup, versionItem]
-        let settingPageGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let settingPageGroup = NSCollectionLayoutGroup.vertical(layoutSize: settingPageGroupSize, subitems: settingsPageSubItems)
-
-        let section = NSCollectionLayoutSection(group: settingPageGroup)
-        section.contentInsets.leading = 23
-        section.contentInsets.trailing = 23
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 8
+        section.contentInsets = sectionInsets(for: environment)
+        return section
     }
 
     // MARK: UICollectionViewController
@@ -256,9 +236,9 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         case .privacyPolicy:
             presentLeavingHeadTrackableDomainAlert(withConfirmation: presentPrivacyAlert)
         case .editMySayings:
-            let vc = UIStoryboard(name: "EditPhrases", bundle: nil).instantiateViewController(identifier: "MyPhrases") as! EditPhrasesViewController
-            vc.category = Category.userFavoritesCategory()
-            show(vc, sender: nil)
+            let viewController = EditPhrasesViewController()
+            viewController.category = Category.userFavoritesCategory()
+            show(viewController, sender: nil)
 
         case .timingSensitivity:
             let vc = UIStoryboard(name: "TimingSensitivity", bundle: nil).instantiateViewController(identifier: "TimingSensitivity") as! TimingSensitivityViewController
