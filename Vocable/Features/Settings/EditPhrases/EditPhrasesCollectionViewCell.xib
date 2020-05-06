@@ -26,7 +26,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZG4-Zl-Ck6">
                         <rect key="frame" x="478" y="65" width="64" height="136"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jx7-73-ctO" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jx7-73-ctO" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Jx7-73-ctO" secondAttribute="height" multiplier="1:1" id="CTi-ne-Wfe"/>
@@ -40,7 +40,7 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="pencil" catalog="system"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r2i-5v-HG5" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r2i-5v-HG5" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="64" height="64"/>
                                 <color key="tintColor" name="DefaultFontColor"/>
                                 <userDefinedRuntimeAttributes>

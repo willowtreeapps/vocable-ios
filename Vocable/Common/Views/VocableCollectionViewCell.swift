@@ -14,9 +14,7 @@ class VocableCollectionViewCell: UICollectionViewCell {
     let borderedView = BorderedView()
     private(set) var isTrackingTouches: Bool = false {
         didSet {
-            if isTrackingTouches {
-                isHighlighted = true
-            }
+            updateSelectionAppearance()
             updateContentViews()
         }
     }
@@ -29,22 +27,7 @@ class VocableCollectionViewCell: UICollectionViewCell {
     
     override var isHighlighted: Bool {
         didSet {
-
-            func actions() {
-                let scale: CGFloat = (isHighlighted && isTrackingTouches) ? 0.97 : 1.0
-                transform = .init(scaleX: scale, y: scale)
-            }
-
-            if UIView.inheritedAnimationDuration == 0 {
-                UIView.animate(withDuration: 0.2,
-                               delay: 0,
-                               options: [.beginFromCurrentState, .curveEaseOut],
-                               animations: actions,
-                               completion: nil)
-            } else {
-                actions()
-            }
-
+            updateSelectionAppearance()
             updateContentViews()
         }
     }
@@ -109,6 +92,24 @@ class VocableCollectionViewCell: UICollectionViewCell {
         borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
         borderedView.fillColor = fillColor
         borderedView.isOpaque = true
+    }
+
+    private func updateSelectionAppearance() {
+
+        func actions() {
+            let scale: CGFloat = (isHighlighted && isTrackingTouches) ? 0.97 : 1.0
+            transform = .init(scaleX: scale, y: scale)
+        }
+
+        if UIView.inheritedAnimationDuration == 0 {
+            UIView.animate(withDuration: 0.2,
+                           delay: 0,
+                           options: [.beginFromCurrentState, .curveEaseOut],
+                           animations: actions,
+                           completion: nil)
+        } else {
+            actions()
+        }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

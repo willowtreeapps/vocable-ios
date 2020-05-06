@@ -33,13 +33,13 @@ class GazeableButton: UIButton {
                     setFillColor(newFill, for: .highlighted)
                 }
 
-                isHighlighted = true
             } else {
                 if let cached = cachedHighlightColor {
                     setFillColor(cached, for: .highlighted)
                     cachedHighlightColor = nil
                 }
             }
+            updateSelectionAppearance()
             updateContentViews()
         }
     }
@@ -99,18 +99,8 @@ class GazeableButton: UIButton {
 
     override var isHighlighted: Bool {
         didSet {
+            updateSelectionAppearance()
             updateContentViews()
-
-            func actions() {
-                let scale: CGFloat = isHighlighted ? 0.96 : 1.0
-                transform = .init(scaleX: scale, y: scale)
-            }
-
-            UIView.animate(withDuration: 0.2,
-                           delay: 0,
-                           options: [.beginFromCurrentState, .curveEaseOut, .overrideInheritedOptions, .overrideInheritedCurve, .overrideInheritedDuration],
-                           animations: actions,
-                           completion: nil)
         }
     }
     
@@ -195,6 +185,24 @@ class GazeableButton: UIButton {
         if state == .normal {
             let highlightedImage = renderBackgroundImage(withFillColor: color, withHighlight: true)
             setBackgroundImage(highlightedImage, for: .highlighted)
+        }
+    }
+
+    private func updateSelectionAppearance() {
+
+        func actions() {
+            let scale: CGFloat = (isHighlighted && isTrackingTouches) ? 0.95 : 1.0
+            transform = .init(scaleX: scale, y: scale)
+        }
+
+        if UIView.inheritedAnimationDuration == 0 {
+            UIView.animate(withDuration: 0.2,
+                           delay: 0,
+                           options: [.beginFromCurrentState, .curveEaseOut],
+                           animations: actions,
+                           completion: nil)
+        } else {
+            actions()
         }
     }
 
