@@ -937,8 +937,6 @@
 				en,
 				Base,
 				de,
-				da,
-				fr,
 			);
 			mainGroup = 130C00AB20D2AD2A007C3163;
 			productRefGroup = 130C00B520D2AD2A007C3163 /* Products */;
