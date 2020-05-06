@@ -40,7 +40,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="O5j-z4-VrA">
                         <rect key="frame" x="20" y="97.5" width="626" height="116.5"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ph1-lE-gZj" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ph1-lE-gZj" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="31" width="205.5" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="j1g-Cd-qVb"/>
@@ -60,7 +60,7 @@
                                     <action selector="handleLowSensitivity:" destination="ogd-WG-kCh" eventType="primaryActionTriggered" id="zSN-xf-d9O"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDi-eA-7a0" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDi-eA-7a0" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="210.5" y="31" width="205" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="b7m-b2-4tl"/>
@@ -80,7 +80,7 @@
                                     <action selector="handleMediumSensitivity:" destination="ogd-WG-kCh" eventType="touchUpInside" id="vcJ-HP-s9x"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4K-JS-vwn" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4K-JS-vwn" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="420.5" y="31" width="205.5" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="kG5-sF-Ej8"/>
