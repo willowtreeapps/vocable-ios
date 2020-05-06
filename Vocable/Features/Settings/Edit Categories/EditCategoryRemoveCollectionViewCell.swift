@@ -15,7 +15,7 @@ final class EditCategoryRemoveCollectionViewCell: VocableCollectionViewCell {
     override func updateContentViews() {
         super.updateContentViews()
 
-        textLabel?.textColor = isEnabled ? .defaultTextColor : UIColor.defaultTextColor.withAlphaComponent(0.6)
+        textLabel?.textColor = isEnabled ? .defaultTextColor : UIColor.defaultTextColor.disabled(blending: borderedView.backgroundColor)
     }
 
 }

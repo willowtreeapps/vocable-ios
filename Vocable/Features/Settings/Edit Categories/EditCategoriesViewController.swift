@@ -203,9 +203,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         let toCategory = fetchResultsController.object(at: toIndexPath)
 
         swapOrdinal(fromCategory: fromCategory, toCategory: toCategory)
-
         saveContext()
-
     }
 
     @objc private func handleShowEditCategoryDetail(_ sender: UIButton) {
@@ -265,30 +263,30 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         return .both
     }
 
-    @IBAction func backToEditCategories(_ sender: Any) {
+    @objc func backToEditCategories(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func addButtonPressed(_ sender: Any) {
-        if let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as? EditTextViewController {
-            vc.editTextCompletionHandler = { (newText) -> Void in
-                let context = NSPersistentContainer.shared.viewContext
+    @objc func addButtonPressed(_ sender: Any) {
+        let viewController = EditTextViewController()
+        viewController.editTextCompletionHandler = { (newText) -> Void in
+            let context = NSPersistentContainer.shared.viewContext
 
-                _ = Category.create(withUserEntry: newText, in: context)
-                do {
-                    try Category.updateAllOrdinalValues(in: context)
-                    try context.save()
+            _ = Category.create(withUserEntry: newText, in: context)
+            do {
+                try Category.updateAllOrdinalValues(in: context)
+                try context.save()
 
-                    let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
+                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
 
-                    ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-                } catch {
-                    assertionFailure("Failed to save category: \(error)")
-                }
+                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+            } catch {
+                assertionFailure("Failed to save category: \(error)")
             }
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true)
         }
+
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
     }
     
 }

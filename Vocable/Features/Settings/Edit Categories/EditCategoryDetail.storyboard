@@ -30,12 +30,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="tintColor" name="DefaultFontColor"/>
-                                <state key="normal" image="xmark.circle" catalog="system">
+                                <state key="normal" image="arrow.left" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="34" weight="bold"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="arrow.left" catalog="system"/>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="6hz-tb-yd2" eventType="primaryActionTriggered" id="25W-FQ-stj"/>
                                 </connections>
@@ -49,19 +46,14 @@
                                         <color key="textColor" name="DefaultFontColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZe-iv-ZgI" userLabel="Edit Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZe-iv-ZgI" userLabel="Edit Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                         <rect key="frame" x="336" y="0.0" width="38" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="38" id="W2F-kz-XX5"/>
                                             <constraint firstAttribute="height" constant="41" id="hvB-0q-JJ8"/>
                                         </constraints>
                                         <color key="tintColor" name="DefaultFontColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="pencil" catalog="system"/>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
-                                                <color key="value" name="Background"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
+                                        <state key="normal" image="pencil" catalog="system"/>
                                         <connections>
                                             <action selector="editCategoryButtonPressed:" destination="6hz-tb-yd2" eventType="primaryActionTriggered" id="ggX-Qt-Mkk"/>
                                         </connections>
@@ -127,7 +119,6 @@
     <resources>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
-        <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <namedColor name="Background">
             <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

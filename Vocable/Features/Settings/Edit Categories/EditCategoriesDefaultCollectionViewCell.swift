@@ -40,6 +40,12 @@ final class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
 
         updateSeparatorMask()
+        for button in [moveUpButton, moveDownButton, showCategoryDetailButton].compactMap({$0}) {
+            button.backgroundColor = .collectionViewBackgroundColor
+            button.setFillColor(.defaultCellBackgroundColor, for: .normal)
+            button.setTitleColor(.defaultTextColor, for: .normal)
+            button.isOpaque = true
+        }
     }
     
     private func updateSeparatorMask() {
@@ -51,5 +57,5 @@ final class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
         moveUpButton.isEnabled = ordinalButtonMask.contains(.topUpArrow)
         moveDownButton.isEnabled = ordinalButtonMask.contains(.bottomDownArrow)
     }
-	
+
 }

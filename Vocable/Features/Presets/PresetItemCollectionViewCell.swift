@@ -19,7 +19,7 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
                 return .selectedTextColor
             }
             if !isEnabled {
-                return UIColor.defaultTextColor.blended(with: borderedView.backgroundColor!, amount: 0.8)
+                return UIColor.defaultTextColor.disabled(blending: borderedView.backgroundColor)
             }
             return .defaultTextColor
         }()

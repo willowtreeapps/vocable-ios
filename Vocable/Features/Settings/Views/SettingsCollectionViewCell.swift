@@ -17,7 +17,9 @@ final class SettingsCollectionViewCell: VocableCollectionViewCell {
     override func updateContentViews() {
         super.updateContentViews()
 
-        textLabel?.textColor = isEnabled ? .defaultTextColor : UIColor.defaultTextColor.withAlphaComponent(0.6)
+        let disabledColor = isEnabled ? .defaultTextColor : UIColor.defaultTextColor.withAlphaComponent(0.6)
+        textLabel?.textColor = disabledColor
+        imageView?.tintColor = disabledColor
     }
 
     func setup(title: String, image: UIImage?) {

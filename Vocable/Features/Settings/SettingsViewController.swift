@@ -166,7 +166,10 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     }
 
     private func internalLinksSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        return defaultSection(environment: environment)
+        let section = defaultSection(environment: environment)
+        section.contentInsets = sectionInsets(for: environment)
+        section.contentInsets.top = 16
+        return section
     }
 
     private func externalLinksSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
