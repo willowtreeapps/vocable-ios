@@ -66,7 +66,7 @@ class PaginationCollectionViewCell: VocableCollectionViewCell {
         let systemImageAttachment = NSTextAttachment(image: image)
         let attributedString = NSMutableAttributedString(attachment: systemImageAttachment)
         let fontSize = CGFloat([traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) ? 22 : 48)
-        attributedString.addAttributes([.font: UIFont.boldSystemFont(ofSize: fontSize), .foregroundColor: isEnabled ? UIColor.defaultTextColor : UIColor.defaultTextColor.blended(with: borderedView.backgroundColor!, amount: 0.8)],
+        attributedString.addAttributes([.font: UIFont.boldSystemFont(ofSize: fontSize), .foregroundColor: isEnabled ? UIColor.defaultTextColor : UIColor.defaultTextColor.disabled(blending: borderedView.backgroundColor)],
                                        range: NSRange(location: 0, length: attributedString.length))
         paginationLabel.attributedText = attributedString
     }

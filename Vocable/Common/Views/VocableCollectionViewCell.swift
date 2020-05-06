@@ -73,7 +73,7 @@ class VocableCollectionViewCell: UICollectionViewCell {
             if isSelected {
                 result = .cellSelectionColor
             } else if !isEnabled {
-                result = self.fillColor.blended(with: .collectionViewBackgroundColor, amount: 0.8)
+                result = self.fillColor.disabled(blending: .collectionViewBackgroundColor)
             } else {
                 result = self.fillColor
             }

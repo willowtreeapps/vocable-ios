@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,10 +40,9 @@
                                     <constraint firstAttribute="height" constant="54" id="eF3-ax-GmT"/>
                                     <constraint firstAttribute="width" constant="84" id="m2b-i3-ggR"/>
                                 </constraints>
-                                <color key="tintColor" name="DefaultFontColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.up" catalog="system"/>
-                                </userDefinedRuntimeAttributes>
+                                <state key="normal" image="chevron.up" catalog="system">
+                                    <color key="titleColor" name="DefaultFontColor"/>
+                                </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveDownButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="92" y="15" width="84" height="54"/>
@@ -51,10 +50,9 @@
                                     <constraint firstAttribute="width" constant="84" id="DnU-vb-Ln9"/>
                                     <constraint firstAttribute="height" constant="54" id="FOm-kP-JDa"/>
                                 </constraints>
-                                <color key="tintColor" name="DefaultFontColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.down" catalog="system"/>
-                                </userDefinedRuntimeAttributes>
+                                <state key="normal" image="chevron.down" catalog="system">
+                                    <color key="titleColor" name="DefaultFontColor"/>
+                                </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. General" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3t9-YV-add" userLabel="CategoryName">
                                 <rect key="frame" x="184" y="25.5" width="428" height="33.5"/>
@@ -68,10 +66,9 @@
                                     <constraint firstAttribute="height" constant="54" id="Gqm-Up-tsr"/>
                                     <constraint firstAttribute="width" constant="48" id="iZI-pH-Vfy"/>
                                 </constraints>
-                                <color key="tintColor" name="DefaultFontColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.right" catalog="system"/>
-                                </userDefinedRuntimeAttributes>
+                                <state key="normal" image="chevron.right" catalog="system">
+                                    <color key="titleColor" name="DefaultFontColor"/>
+                                </state>
                             </button>
                         </subviews>
                     </stackView>

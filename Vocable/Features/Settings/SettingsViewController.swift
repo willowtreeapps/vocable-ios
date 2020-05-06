@@ -101,8 +101,6 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         return "Version \(versionNumber)-\(buildNumber)"
     }
 
-    @IBOutlet private var headerView: UINavigationItem!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -111,9 +109,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     }
 
     private func setupNavigationBar() {
-        navigationBar.title = NSLocalizedString("settings.header.title",
-                                                comment: "Settings screen header title")
-
+        navigationBar.title = NSLocalizedString("settings.header.title", comment: "Settings screen header title")
         navigationBar.leftButton = {
             let button = GazeableButton()
             button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
@@ -170,7 +166,10 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     }
 
     private func internalLinksSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        return defaultSection(environment: environment)
+        let section = defaultSection(environment: environment)
+        section.contentInsets = sectionInsets(for: environment)
+        section.contentInsets.top = 16
+        return section
     }
 
     private func externalLinksSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
@@ -249,8 +248,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             show(vc, sender: nil)
 
         case .categories:
-            let vc = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategories") as! EditCategoriesViewController
-            show(vc, sender: nil)
+            let viewController = EditCategoriesViewController()
+            show(viewController, sender: nil)
 
         case .contactDevs:
             presentEmail()

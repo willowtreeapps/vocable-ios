@@ -91,9 +91,11 @@ private class ContentView: UIView {
             titleCenterX.priority = .init(rawValue: 999)
             let titleCenterY = titleView.centerYAnchor.constraint(equalTo: layoutMargins.centerYAnchor)
             titleCenterY.priority = .init(rawValue: 999)
+
+            #warning("This layout may need to be refactor to better handle long title")
             constraints += [
                 titleCenterX,
-                titleCenterY,
+                titleCenterY
 //                titleView.leadingAnchor.constraint(lessThanOrEqualTo: layoutMargins.leadingAnchor),
 //                titleView.trailingAnchor.constraint(greaterThanOrEqualTo: layoutMargins.trailingAnchor)
             ]
@@ -167,6 +169,7 @@ class VocableNavigationBar: UIView {
             } else {
                 contentView.titleView = defaultTitleLabel
             }
+            updateSubviewAppearances()
         }
         get {
             if let titleView = contentView.titleView {
@@ -185,6 +188,7 @@ class VocableNavigationBar: UIView {
         }
         set {
             contentView.leftButton = newValue
+            updateSubviewAppearances()
         }
     }
 
@@ -194,6 +198,13 @@ class VocableNavigationBar: UIView {
         }
         set {
             contentView.rightButton = newValue
+            updateSubviewAppearances()
+        }
+    }
+
+    override var backgroundColor: UIColor? {
+        didSet {
+            updateSubviewAppearances()
         }
     }
 
@@ -208,6 +219,7 @@ class VocableNavigationBar: UIView {
     }
 
     private func commonInit() {
+        backgroundColor = .collectionViewBackgroundColor
         contentView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(contentView)
         NSLayoutConstraint.activate([
@@ -217,6 +229,24 @@ class VocableNavigationBar: UIView {
             contentView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)
         ])
         updateDefaultLabelFontForCurrentTraitCollection()
+        updateSubviewAppearances()
+    }
+
+    private func updateSubviewAppearances() {
+        contentView.backgroundColor = backgroundColor
+        contentView.isOpaque = true
+
+        leftButton?.backgroundColor = backgroundColor
+        leftButton?.isOpaque = true
+
+        rightButton?.backgroundColor = backgroundColor
+        rightButton?.isOpaque = true
+
+        titleView?.backgroundColor = backgroundColor
+        titleView?.isOpaque = true
+
+        defaultTitleLabel.backgroundColor = backgroundColor
+        defaultTitleLabel.isOpaque = true
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
