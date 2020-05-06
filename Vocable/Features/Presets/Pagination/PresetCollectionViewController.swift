@@ -47,8 +47,8 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     private func updateFetchedResultsController(with selectedCategoryID: NSManagedObjectID? = nil) {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         if let selectedCategoryID = selectedCategoryID {
-            let category = NSPersistentContainer.shared.viewContext.object(with: selectedCategoryID)
-            request.predicate = NSComparisonPredicate(\Phrase.categories, .contains, category)
+            let category = NSPersistentContainer.shared.viewContext.object(with: selectedCategoryID) as! Category
+            request.predicate = NSComparisonPredicate(\Phrase.category, .equalTo, category)
         }
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
         

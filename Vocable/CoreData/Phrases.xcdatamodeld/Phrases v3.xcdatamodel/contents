@@ -8,7 +8,7 @@
         <attribute name="languageCode" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="ordinal" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="phrases" toMany="YES" deletionRule="Nullify" destinationEntity="Phrase" inverseName="categories" inverseEntity="Phrase"/>
+        <relationship name="phrases" toMany="YES" deletionRule="Cascade" destinationEntity="Phrase" inverseName="category" inverseEntity="Phrase"/>
     </entity>
     <entity name="Phrase" representedClassName="Phrase" syncable="YES" codeGenerationType="class">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -17,7 +17,7 @@
         <attribute name="languageCode" optional="YES" attributeType="String"/>
         <attribute name="lastSpokenDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="utterance" optional="YES" attributeType="String"/>
-        <relationship name="categories" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="phrases" inverseEntity="Category" elementID="categoryRelationship"/>
+        <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="phrases" inverseEntity="Category" elementID="categoryRelationship"/>
     </entity>
     <elements>
         <element name="Category" positionX="-63" positionY="-18" width="128" height="163"/>

@@ -32,7 +32,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Phrase.categories, .contains, category)
+        request.predicate = NSComparisonPredicate(\Phrase.category, .equalTo, category)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
         return request
     }()
