@@ -233,6 +233,7 @@
 		6B005AE4245B06F3004919F4 /* VocableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableViewController.swift; sourceTree = "<group>"; };
 		6B005AE6245B21ED004919F4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6B005AEC245B25E9004919F4 /* VocableNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableNavigationController.swift; sourceTree = "<group>"; };
+		6B1086712463102F00E729A8 /* Phrases v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Phrases v3.xcdatamodel"; sourceTree = "<group>"; };
 		6B14DC722419590E0050C287 /* OutputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTextView.swift; sourceTree = "<group>"; };
 		6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVSpeechSynthesizer+Shared.swift"; sourceTree = "<group>"; };
 		6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapperView.swift; sourceTree = "<group>"; };
@@ -1718,10 +1719,11 @@
 		6BFB18C024002C7B002C3515 /* Phrases.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				6B1086712463102F00E729A8 /* Phrases v3.xcdatamodel */,
 				B8D55689242FE8B900B0F6FE /* Phrases v2.xcdatamodel */,
 				6BFB18C124002C7B002C3515 /* Phrases.xcdatamodel */,
 			);
-			currentVersion = B8D55689242FE8B900B0F6FE /* Phrases v2.xcdatamodel */;
+			currentVersion = 6B1086712463102F00E729A8 /* Phrases v3.xcdatamodel */;
 			path = Phrases.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

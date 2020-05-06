@@ -237,7 +237,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             for identifier in presetPhrase.categoryIds {
                 if let category = Category.fetchObject(in: context, matching: identifier) {
-                    phrase.addToCategories(category)
+                    phrase.category = category
                     category.addToPhrases(phrase)
                 }
             }
@@ -252,7 +252,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let phraseResults = try context.fetch(request)
 
         for phrase in phraseResults {
-            phrase.addToCategories(mySayingsCategory)
+            phrase.category = mySayingsCategory
             mySayingsCategory.addToPhrases(phrase)
         }
     }

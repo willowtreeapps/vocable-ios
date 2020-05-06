@@ -28,7 +28,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Phrase.categories, .contains, self.category)
+        request.predicate = NSComparisonPredicate(\Phrase.category, .equalTo, self.category)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
         return request
     }()
