@@ -91,6 +91,8 @@ private class ContentView: UIView {
             titleCenterX.priority = .init(rawValue: 999)
             let titleCenterY = titleView.centerYAnchor.constraint(equalTo: layoutMargins.centerYAnchor)
             titleCenterY.priority = .init(rawValue: 999)
+
+            #warning("This layout may need to be refactor to better handle long title")
             constraints += [
                 titleCenterX,
                 titleCenterY

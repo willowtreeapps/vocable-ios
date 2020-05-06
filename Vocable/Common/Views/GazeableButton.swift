@@ -45,32 +45,6 @@ class GazeableButton: UIButton {
         }
     }
 
-//    @available(*, deprecated, message: "Use setImage(forState:) instead")
-//    @IBInspectable var buttonImage: UIImage? {
-//        get {
-//            return image(for: .normal)
-//        }
-//        set {
-//            print("Warning: using deprecated `buttonImage` property on GazeableButton")
-//            for state in defaultIBStates {
-//                setImage(newValue, for: state)
-//            }
-//        }
-//    }
-
-//    @available(*, deprecated, message: "Use setFillColor(forState:) instead")
-//    @IBInspectable var fillColor: UIColor? {
-//        get {
-//            return fillColor(for: .normal)
-//        }
-//        set {
-//            print("Warning: using deprecated `fillColor` property on GazeableButton")
-//            for state in defaultIBStates {
-//                setFillColor(newValue, for: state)
-//            }
-//        }
-//    }
-
     @IBInspectable var cornerRadius: CGFloat = 8 {
         didSet {
             guard oldValue != cornerRadius else { return }
