@@ -85,12 +85,6 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
         return layout
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        collectionView.setCollectionViewLayout(createLayout(), animated: false)
-    }
-
     override func viewLayoutMarginsDidChange() {
         super.viewLayoutMarginsDidChange()
 
