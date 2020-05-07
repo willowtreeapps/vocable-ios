@@ -71,6 +71,7 @@ final class PaginationView: UIView {
         nextPageButton.backgroundColor = backgroundColor
         nextPageButton.isOpaque = true
         nextPageButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        nextPageButton.setContentHuggingPriority(.required, for: .horizontal)
 
         previousPageButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         previousPageButton.tintColor = .defaultTextColor
@@ -78,6 +79,7 @@ final class PaginationView: UIView {
         previousPageButton.backgroundColor = backgroundColor
         previousPageButton.isOpaque = true
         previousPageButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        previousPageButton.setContentHuggingPriority(.required, for: .horizontal)
 
         stackView.axis = .horizontal
         stackView.backgroundColor = .collectionViewBackgroundColor
