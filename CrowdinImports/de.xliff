@@ -27,9 +27,9 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3.1" build-num="11C504"/>
     </header>
     <body>
-      <trans-unit id="MISSING_LOCALIZATION_Add Phrases" xml:space="preserve">
-        <source>MISSING_LOCALIZATION_Add Phrases</source>
-        <target state="needs-translation">MISSING_LOCALIZATION_Add Phrases</target>
+      <trans-unit id="MISSING_LOCALIZATION_Add Phrases" xml:space="preserve" approved="yes">
+        <source>Add Phrases</source>
+        <target state="final">Phrasen Hinzufügen</target>
         <note>Add Phrases</note>
       </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve" approved="yes">
