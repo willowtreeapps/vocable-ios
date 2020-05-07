@@ -21,6 +21,12 @@ class GazeableButton: UIButton {
     private var cachedTitleColors = [UIControl.State: UIColor]()
     private let defaultIBStates = [UIControl.State.normal, .highlighted, .selected, .disabled]
 
+    var shouldShrinkWhenTouched = true {
+        didSet {
+            updateSelectionAppearance()
+        }
+    }
+
     private var cachedHighlightColor: UIColor?
     private(set) var isTrackingTouches: Bool = false {
         didSet {
@@ -190,7 +196,7 @@ class GazeableButton: UIButton {
     private func updateSelectionAppearance() {
 
         func actions() {
-            let scale: CGFloat = (isHighlighted && isTrackingTouches) ? 0.95 : 1.0
+            let scale: CGFloat = (isHighlighted && isTrackingTouches && shouldShrinkWhenTouched) ? 0.95 : 1.0
             transform = .init(scaleX: scale, y: scale)
         }
 
