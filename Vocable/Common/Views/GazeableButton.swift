@@ -18,6 +18,7 @@ class GazeableButton: UIButton {
 
     fileprivate var gazeBeganDate: Date?
     private var cachedFillColors = [UIControl.State: UIColor]()
+    private var cachedTitleColors = [UIControl.State: UIColor]()
     private let defaultIBStates = [UIControl.State.normal, .highlighted, .selected, .disabled]
 
     private var cachedHighlightColor: UIColor?
@@ -33,40 +34,14 @@ class GazeableButton: UIButton {
                     setFillColor(newFill, for: .highlighted)
                 }
 
-                isHighlighted = true
             } else {
                 if let cached = cachedHighlightColor {
                     setFillColor(cached, for: .highlighted)
                     cachedHighlightColor = nil
                 }
             }
+            updateSelectionAppearance()
             updateContentViews()
-        }
-    }
-    
-    @available(*, deprecated, message: "Use setImage(forState:) instead")
-    @IBInspectable var buttonImage: UIImage? {
-        get {
-            return image(for: .normal)
-        }
-        set {
-            print("Warning: using deprecated `buttonImage` property on GazeableButton")
-            for state in defaultIBStates {
-                setImage(newValue, for: state)
-            }
-        }
-    }
-
-    @available(*, deprecated, message: "Use setFillColor(forState:) instead")
-    @IBInspectable var fillColor: UIColor? {
-        get {
-            return fillColor(for: .normal)
-        }
-        set {
-            print("Warning: using deprecated `fillColor` property on GazeableButton")
-            for state in defaultIBStates {
-                setFillColor(newValue, for: state)
-            }
         }
     }
 
@@ -99,18 +74,8 @@ class GazeableButton: UIButton {
 
     override var isHighlighted: Bool {
         didSet {
+            updateSelectionAppearance()
             updateContentViews()
-
-            func actions() {
-                let scale: CGFloat = isHighlighted ? 0.96 : 1.0
-                transform = .init(scaleX: scale, y: scale)
-            }
-
-            UIView.animate(withDuration: 0.2,
-                           delay: 0,
-                           options: [.beginFromCurrentState, .curveEaseOut, .overrideInheritedOptions, .overrideInheritedCurve, .overrideInheritedDuration],
-                           animations: actions,
-                           completion: nil)
         }
     }
     
@@ -148,6 +113,9 @@ class GazeableButton: UIButton {
         setFillColor(.defaultCellBackgroundColor, for: .normal)
         setFillColor(.cellSelectionColor, for: .selected)
         setFillColor(.cellSelectionColor, for: [.selected, .highlighted])
+        setTitleColor(.collectionViewBackgroundColor, for: .selected)
+        setTitleColor(.collectionViewBackgroundColor, for: [.selected, .highlighted])
+        
         contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
         layoutMargins = .zero
         for state in defaultIBStates {
@@ -196,6 +164,45 @@ class GazeableButton: UIButton {
             let highlightedImage = renderBackgroundImage(withFillColor: color, withHighlight: true)
             setBackgroundImage(highlightedImage, for: .highlighted)
         }
+
+        let disabledState = state.union(.disabled)
+        if [.normal, .selected].contains(state), cachedFillColors[disabledState] == nil {
+            let disabledImage = renderBackgroundImage(withFillColor: color.disabled(blending: backgroundColor ?? .orange), withHighlight: false)
+            setBackgroundImage(disabledImage, for: disabledState)
+        }
+    }
+
+    override func setTitleColor(_ color: UIColor?, for state: UIControl.State) {
+
+        defer {
+            cachedTitleColors[state] = color
+        }
+
+        super.setTitleColor(color, for: state)
+
+        let disabledState = state.union(.disabled)
+        if [.normal, .selected].contains(state), cachedTitleColors[disabledState] == nil {
+            let disabledColor = color?.disabled(blending: backgroundColor ?? .orange)
+            super.setTitleColor(disabledColor, for: disabledState)
+        }
+    }
+
+    private func updateSelectionAppearance() {
+
+        func actions() {
+            let scale: CGFloat = (isHighlighted && isTrackingTouches) ? 0.95 : 1.0
+            transform = .init(scaleX: scale, y: scale)
+        }
+
+        if UIView.inheritedAnimationDuration == 0 {
+            UIView.animate(withDuration: 0.2,
+                           delay: 0,
+                           options: [.beginFromCurrentState, .curveEaseOut],
+                           animations: actions,
+                           completion: nil)
+        } else {
+            actions()
+        }
     }
 
     private func updateBackgroundImagesForCurrentParameters() {
@@ -205,7 +212,7 @@ class GazeableButton: UIButton {
     }
     
     fileprivate func updateContentViews() {
-        titleLabel?.alpha = CGFloat(isEnabled ? 1.0 : 0.5)
+        imageView?.tintColor = titleColor(for: state) ?? tintColor
         adjustsImageWhenHighlighted = false
         showsTouchWhenHighlighted = false
         imageView?.contentMode = .scaleAspectFit

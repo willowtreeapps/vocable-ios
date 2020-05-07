@@ -24,7 +24,7 @@ extension Phrase {
         phrase.lastSpokenDate = Date()
         phrase.utterance = text
         phrase.languageCode = AppConfig.activePreferredLanguageCode
-        phrase.addToCategories(category)
+        phrase.category = category
         category.addToPhrases(phrase)
         return phrase
     }

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Edit Category Detail View Controller-->
+        <scene sceneID="FIn-Tv-o2a">
+            <objects>
+                <viewController storyboardIdentifier="EditCategoryDetail" id="6hz-tb-yd2" customClass="EditCategoryDetailViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6iL-6J-UCo" customClass="GazeEatingView" customModule="Vocable" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bhv-Ll-Ibf" userLabel="Back Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="20" y="76" width="63" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="104" id="7nx-C3-iVu">
+                                        <variation key="heightClass=compact" constant="63"/>
+                                        <variation key="widthClass=compact" constant="63"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="96" id="gtU-U1-eHy">
+                                        <variation key="heightClass=compact" constant="48"/>
+                                        <variation key="widthClass=compact" constant="48"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <state key="normal" image="arrow.left" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="34" weight="bold"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="6hz-tb-yd2" eventType="primaryActionTriggered" id="25W-FQ-stj"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NGL-9m-pbg" userLabel="Top Bar View">
+                                <rect key="frame" x="20" y="140" width="374" height="41"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Sb3-QR-EDr">
+                                        <rect key="frame" x="0.0" y="0.0" width="328" height="41"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                        <color key="textColor" name="DefaultFontColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZe-iv-ZgI" userLabel="Edit Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                        <rect key="frame" x="336" y="0.0" width="38" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="38" id="W2F-kz-XX5"/>
+                                            <constraint firstAttribute="height" constant="41" id="hvB-0q-JJ8"/>
+                                        </constraints>
+                                        <color key="tintColor" name="DefaultFontColor"/>
+                                        <state key="normal" image="pencil" catalog="system"/>
+                                        <connections>
+                                            <action selector="editCategoryButtonPressed:" destination="6hz-tb-yd2" eventType="primaryActionTriggered" id="ggX-Qt-Mkk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Sb3-QR-EDr" secondAttribute="bottom" id="6q7-n6-neF"/>
+                                    <constraint firstItem="Sb3-QR-EDr" firstAttribute="top" secondItem="NGL-9m-pbg" secondAttribute="top" id="Q2P-uG-lxr"/>
+                                    <constraint firstItem="hZe-iv-ZgI" firstAttribute="centerY" secondItem="NGL-9m-pbg" secondAttribute="centerY" id="Z78-TA-sAL"/>
+                                    <constraint firstItem="hZe-iv-ZgI" firstAttribute="leading" secondItem="Sb3-QR-EDr" secondAttribute="trailing" constant="8" id="dRC-6v-Zka"/>
+                                    <constraint firstAttribute="trailing" secondItem="hZe-iv-ZgI" secondAttribute="trailing" id="fJq-0B-qB0"/>
+                                    <constraint firstItem="Sb3-QR-EDr" firstAttribute="leading" secondItem="NGL-9m-pbg" secondAttribute="leading" id="jbz-bT-ggy"/>
+                                </constraints>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RN1-9R-Gw7">
+                                <rect key="frame" x="20" y="189" width="374" height="673"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RnN-VN-3zB">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="NGL-9m-pbg" firstAttribute="top" secondItem="Bhv-Ll-Ibf" secondAttribute="bottom" constant="24" id="0bL-v1-n1I">
+                                <variation key="heightClass=compact" constant="16"/>
+                                <variation key="widthClass=compact" constant="16"/>
+                            </constraint>
+                            <constraint firstItem="Bhv-Ll-Ibf" firstAttribute="leading" secondItem="6iL-6J-UCo" secondAttribute="leadingMargin" id="3eB-Dn-WXE"/>
+                            <constraint firstItem="NGL-9m-pbg" firstAttribute="leading" secondItem="6iL-6J-UCo" secondAttribute="leadingMargin" id="Msj-62-yQE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RN1-9R-Gw7" secondAttribute="trailing" id="QwE-qe-yFh"/>
+                            <constraint firstItem="RN1-9R-Gw7" firstAttribute="top" secondItem="NGL-9m-pbg" secondAttribute="bottom" constant="8" id="cjS-O9-5i5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NGL-9m-pbg" secondAttribute="trailing" id="p50-Zm-kfd"/>
+                            <constraint firstItem="RN1-9R-Gw7" firstAttribute="leading" secondItem="6iL-6J-UCo" secondAttribute="leadingMargin" id="poc-ph-EMH"/>
+                            <constraint firstItem="Bhv-Ll-Ibf" firstAttribute="top" secondItem="1FZ-FF-jZn" secondAttribute="top" constant="32" id="sdT-D3-p9C"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="RN1-9R-Gw7" secondAttribute="bottom" id="vXh-jn-7bS"/>
+                        </constraints>
+                        <edgeInsets key="layoutMargins" top="0.0" left="32" bottom="0.0" right="32"/>
+                        <viewLayoutGuide key="safeArea" id="1FZ-FF-jZn"/>
+                        <variation key="heightClass=compact">
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="bdC-TG-6Cn"/>
+                    <connections>
+                        <outlet property="collectionView" destination="RN1-9R-Gw7" id="Ctb-gR-tIz"/>
+                        <outlet property="editButton" destination="hZe-iv-ZgI" id="23a-KV-BmD"/>
+                        <outlet property="titleLabel" destination="Sb3-QR-EDr" id="rrt-wU-KXI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zWQ-ET-OYh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2576.811594202899" y="866.51785714285711"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="arrow.left" catalog="system" width="128" height="98"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DefaultFontColor">
+            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

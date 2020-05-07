@@ -115,7 +115,7 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
 
         case .addPhrase:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
-            let title = NSLocalizedString("MISSING_LOCALIZATION_Add Phrases", comment: "Add Phrases")
+            let title = NSLocalizedString("Add Phrases", comment: "Add Phrases")
             cell.setup(title: title, image: UIImage(systemName: "chevron.right"))
             cell.isEnabled = shouldEnableItem(at: indexPath)
             return cell
@@ -204,7 +204,7 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
     }
 
     private func displayEditPhrasesViewController() {
-        let viewController = UIStoryboard(name: "EditPhrases", bundle: nil).instantiateViewController(identifier: "MyPhrases") as! EditPhrasesViewController
+        let viewController = EditPhrasesViewController()
         viewController.category = category
         show(viewController, sender: nil)
     }

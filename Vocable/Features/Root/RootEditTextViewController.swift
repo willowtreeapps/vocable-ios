@@ -53,7 +53,7 @@ class RootEditTextViewController: EditTextViewController {
         let userFavorites = Category.userFavoritesCategory()
         let fetchRequest: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         fetchRequest.predicate = {
-            let categoryPredicate = NSComparisonPredicate(\Phrase.categories, .contains, userFavorites)
+            let categoryPredicate = NSComparisonPredicate(\Phrase.category, .equalTo, userFavorites)
             let userGenerated = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
             let textMatches = NSComparisonPredicate(\Phrase.utterance, .equalTo, trimmed)
             let subpredicates = [categoryPredicate, userGenerated, textMatches]

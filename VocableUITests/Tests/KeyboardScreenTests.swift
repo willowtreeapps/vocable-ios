@@ -18,15 +18,14 @@ class KeyboardScreenTests: BaseTest {
         XCTAssert(keyboardScreen.keyboardTextView.staticTexts[testPhrase].exists, "Expected the text \(testPhrase) to be displayed")
     }
     
-// TODO: Uncomment when my sayins button added to keyboard modal
-//    func testWhenAddingPhraseToMySayings_ThenItAppearsOnMainScreen() {
-//        mainScreen.keyboardNavButton.tap()
-//        keyboardScreen.typeText(testPhrase)
-//        KeyboardScreen.mySayingsSaveButton.tap()
-//        KeyboardScreen.returnToMainScreenButton.tap()
-//        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 1)
-//
-//        XCTAssert(mainScreen.isTextDisplayed(testPhrase), "Expected the phrase \(testPhrase) to be added to an displayed in 'My Sayings'")
-//    }
+    func testWhenAddingPhraseToMySayings_ThenItAppearsOnMainScreen() {
+        mainScreen.keyboardNavButton.tap()
+        keyboardScreen.typeText(testPhrase)
+        keyboardScreen.favoriteButton.tap()
+        keyboardScreen.dismissKeyboardButton.tap()
+        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 1)
+
+        XCTAssert(mainScreen.isTextDisplayed(testPhrase), "Expected the phrase \(testPhrase) to be added to an displayed in 'My Sayings'")
+    }
     
 }

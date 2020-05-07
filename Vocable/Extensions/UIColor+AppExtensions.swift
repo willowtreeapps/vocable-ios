@@ -28,7 +28,7 @@ extension UIColor {
         getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
 
         var r2: CGFloat = 0, g2: CGFloat = 0, b2: CGFloat = 0, a2: CGFloat = 0
-        getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
+        otherColor.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
 
         let r = blendAmount * r1 + (1.0 - blendAmount) * r2
         let g = blendAmount * g1 + (1.0 - blendAmount) * g2
@@ -36,6 +36,12 @@ extension UIColor {
         let a = blendAmount * a1 + (1.0 - blendAmount) * a2
 
         return UIColor(red: r, green: g, blue: b, alpha: a)
+    }
+
+    func disabled(blending otherColor: UIColor?) -> UIColor {
+        guard let otherColor = otherColor else { return self }
+
+        return blended(with: otherColor, amount: 0.6)
     }
 
     // MARK: New Branded Colors
