@@ -37,6 +37,9 @@
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "Select something below to speak";
 
+/* Add Phrases */
+"MISSING_LOCALIZATION_Add Phrases" = "Add Phrases";
+
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "Page %1$d of %2$d";
 

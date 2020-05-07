@@ -28,8 +28,8 @@
     </header>
     <body>
       <trans-unit id="MISSING_LOCALIZATION_Add Phrases" xml:space="preserve">
-        <source>MISSING_LOCALIZATION_Add Phrases</source>
-        <target>MISSING_LOCALIZATION_Add Phrases</target>
+        <source>Add Phrases</source>
+        <target>Add Phrases</target>
         <note>Add Phrases</note>
       </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
