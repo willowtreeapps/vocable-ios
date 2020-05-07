@@ -19,6 +19,15 @@ final class EditCategoryDetailTitleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var editButton: GazeableButton!
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        editButton.backgroundColor = .collectionViewBackgroundColor
+        editButton.setFillColor(.defaultCellBackgroundColor, for: .normal)
+        editButton.setTitleColor(.defaultTextColor, for: .normal)
+        editButton.isOpaque = true
+    }
+
     @IBAction func didTapEdit(_ sender: Any) {
         delegate?.didTapEdit()
     }

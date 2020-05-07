@@ -163,6 +163,11 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryDetailTitleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryDetailTitleCollectionViewCell
             cell.delegate = self
             cell.textLabel.text = category.name
+
+            if !category.isUserGenerated {
+                cell.editButton.isEnabled = false
+            }
+
             return cell
 
         case .showCategoryToggle:
@@ -323,7 +328,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
                                                      comment: "User edited name of the category and saved it successfully")
 
                 ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-                self.updateDataSource()
+                self.collectionView.reloadData()
             } catch {
                 assertionFailure("Failed to save category: \(error)")
             }
