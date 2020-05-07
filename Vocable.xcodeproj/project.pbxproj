@@ -19,7 +19,6 @@
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
-		643D14272460537B00F9DFC9 /* EditCategoryDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 643D14262460537B00F9DFC9 /* EditCategoryDetail.storyboard */; };
 		64A220BB2452171C0014EA80 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A220BA2452171C0014EA80 /* RootViewController.swift */; };
 		64A220BE2452173C0014EA80 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64A220BD2452173C0014EA80 /* Root.storyboard */; };
 		64A4AF0B2446270E00262F6F /* VocablePresets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A4AF0A2446270E00262F6F /* VocablePresets.framework */; };
@@ -224,7 +223,6 @@
 		54D3C41423E37CD40061EF47 /* VocableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		643D14262460537B00F9DFC9 /* EditCategoryDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditCategoryDetail.storyboard; sourceTree = "<group>"; };
 		64A220BA2452171C0014EA80 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		64A220BD2452173C0014EA80 /* Root.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
 		64A4AF0A2446270E00262F6F /* VocablePresets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VocablePresets.framework; path = Carthage/Build/iOS/VocablePresets.framework; sourceTree = "<group>"; };
@@ -507,7 +505,6 @@
 		643D14282460538A00F9DFC9 /* Edit Category Detail */ = {
 			isa = PBXGroup;
 			children = (
-				643D14262460537B00F9DFC9 /* EditCategoryDetail.storyboard */,
 				7192E4112433E4BE008E4A0A /* EditCategoryDetailViewController.swift */,
 				7192E4192434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.swift */,
 				7192E41A2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.xib */,
@@ -530,13 +527,6 @@
 				6B5C49102460AEF900A4433C /* RootEditTextViewController.swift */,
 			);
 			path = Root;
-			sourceTree = "<group>";
-		};
-		6B005AE8245B2201004919F4 /* Refactor_Stubs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Refactor_Stubs;
 			sourceTree = "<group>";
 		};
 		6B823BA923F4ADE30099F65E /* PulseController */ = {
@@ -785,7 +775,6 @@
 				6B8440D82448B3FC007A4DC6 /* CarouselCollectionViewDataSourceProxy.swift */,
 				6B8440E0244A0F97007A4DC6 /* VocableCollectionViewLayoutTransitioningDelegate.swift */,
 				6BE7E9872459DFD5007B01F2 /* VocableNavigationBar.swift */,
-				6B005AE8245B2201004919F4 /* Refactor_Stubs */,
 				6BE7E98B245A19F8007B01F2 /* UITraitCollection+Helpers.swift */,
 				6BE7E9832459D328007B01F2 /* PagingCarouselViewController.swift */,
 				6B005AE2245B057E004919F4 /* VocableCollectionViewController.swift */,
@@ -1009,7 +998,6 @@
 				130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */,
 				A946553223FC2CB20033D71F /* TextFieldCollectionViewCell.xib in Resources */,
 				B838202F23FD894C005A79CD /* CategoryPaginationContainerCollectionViewCell.xib in Resources */,
-				643D14272460537B00F9DFC9 /* EditCategoryDetail.storyboard in Resources */,
 				A9CF2AF3242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib in Resources */,
 				A944D00B2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib in Resources */,
 				6B3DCC1F24101F530039E45E /* TrackingDebugOverlayViewController.storyboard in Resources */,

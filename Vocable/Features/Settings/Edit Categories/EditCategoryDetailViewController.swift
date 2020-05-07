@@ -9,11 +9,11 @@
 import UIKit
 import CoreData
 
-final class EditCategoryDetailViewController: UIViewController, UICollectionViewDelegate {
+final class EditCategoryDetailViewController: VocableCollectionViewController, EditCategoryDetailTitleCollectionViewCellDelegate {
 
     var category: Category!
 
-    private enum EditCategoryItem: Int, CaseIterable {
+    private enum EditCategoryItem: Int {
         case titleEditView
         case showCategoryToggle
         case addPhrase
@@ -25,18 +25,22 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
 
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var editButton: GazeableButton!
-    @IBOutlet private weak var collectionView: UICollectionView!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         assert(category != nil, "Category not provided")
-        
-        titleLabel.text = category.name
-        editButton.isHidden = !category.isUserGenerated
+
+        setupNavigationBar()
         setupCollectionView()
+    }
+
+    private func setupNavigationBar() {
+        navigationBar.leftButton = {
+            let button = GazeableButton()
+            button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            button.addTarget(self, action: #selector(handleBackButton(_:)), for: .primaryActionTriggered)
+            return button
+        }()
     }
 
     // MARK: UICollectionViewDataSource
@@ -94,18 +98,15 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+        
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        titleLabel.text = category.name
     }
 
     private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: EditCategoryItem) -> UICollectionViewCell {
         switch item {
         case .titleEditView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryDetailTitleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryDetailTitleCollectionViewCell
+            cell.delegate = self
             cell.textLabel.text = category.name
             return cell
 
@@ -164,34 +165,6 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
         return shouldEnableItem(at: indexPath)
     }
 
-    @IBAction func backButtonPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-
-    @IBAction func editCategoryButtonPressed(_ sender: Any) {
-        let vc = EditTextViewController()
-        vc.initialText = category.name ?? ""
-        vc.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
-
-            if let categoryIdentifier = self.category.identifier {
-                let originalCategory = Category.fetchObject(in: context, matching: categoryIdentifier)
-                originalCategory?.name = newText
-            }
-            do {
-                try Category.updateAllOrdinalValues(in: context)
-                try context.save()
-
-                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "User edited name of the category and saved it successfully")
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-            } catch {
-                assertionFailure("Failed to save category: \(error)")
-            }
-        }
-        present(vc, animated: true)
-    }
-
     private func shouldEnableItem(at indexPath: IndexPath) -> Bool {
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return false }
 
@@ -203,6 +176,16 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
         case .addPhrase, .removeCategory:
             return category.isUserGenerated
         }
+    }
+
+    // MARK: Actions
+    
+    @objc func backButtonPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    @objc func handleBackButton(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
     
     private func handleToggle(at indexPath: IndexPath) {
@@ -263,6 +246,32 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
         } catch {
             assertionFailure("Failed to unsave user generated phrase: \(error)")
         }
+    }
+
+    // MARK: EditCategoryDetailTitleCollectionViewCellDelegate
+
+    func didTapEdit() {
+        let vc = EditTextViewController()
+        vc.initialText = category.name ?? ""
+        vc.editTextCompletionHandler = { (newText) -> Void in
+            let context = NSPersistentContainer.shared.viewContext
+
+            if let categoryIdentifier = self.category.identifier {
+                let originalCategory = Category.fetchObject(in: context, matching: categoryIdentifier)
+                originalCategory?.name = newText
+            }
+            do {
+                try Category.updateAllOrdinalValues(in: context)
+                try context.save()
+
+                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "User edited name of the category and saved it successfully")
+
+                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+            } catch {
+                assertionFailure("Failed to save category: \(error)")
+            }
+        }
+        present(vc, animated: true)
     }
     
 }

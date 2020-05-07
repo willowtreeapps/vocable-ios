@@ -212,7 +212,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
             return
         }
 
-        let viewController = UIStoryboard(name: "EditCategoryDetail", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as! EditCategoryDetailViewController
+        let viewController = EditCategoryDetailViewController()
         viewController.category = fetchResultsController.object(at: indexPath)
         show(viewController, sender: nil)
     }

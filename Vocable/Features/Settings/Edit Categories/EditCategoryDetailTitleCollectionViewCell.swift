@@ -1,6 +1,6 @@
 //
 //  EditCategoryDetailsHeaderCollectionViewCell.swift
-//  Vocable
+//  Vocable AAC
 //
 //  Created by Steve Foster on 5/7/20.
 //  Copyright © 2020 WillowTree. All rights reserved.
