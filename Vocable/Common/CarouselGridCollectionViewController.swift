@@ -104,12 +104,20 @@ class CarouselGridCollectionView: UICollectionView {
     }
 
     @objc func scrollToNextPage() {
+        if needsInitialScrollToMiddle {
+            scrollToMiddleSection(animated: false)
+            needsInitialScrollToMiddle = false
+        }
         if let offset = layout.scrollOffsetForPageWithOffsetFromCurrentPage(offset: 1) {
             scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: true)
         }
     }
 
     @objc func scrollToPreviousPage() {
+        if needsInitialScrollToMiddle {
+            scrollToMiddleSection(animated: false)
+            needsInitialScrollToMiddle = false
+        }
         if let offset = layout.scrollOffsetForPageWithOffsetFromCurrentPage(offset: -1) {
             scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: true)
         }
