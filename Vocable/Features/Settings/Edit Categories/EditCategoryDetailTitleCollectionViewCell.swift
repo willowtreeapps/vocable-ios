@@ -26,9 +26,10 @@ final class EditCategoryDetailTitleCollectionViewCell: UICollectionViewCell {
         editButton.setFillColor(.defaultCellBackgroundColor, for: .normal)
         editButton.setTitleColor(.defaultTextColor, for: .normal)
         editButton.isOpaque = true
+        editButton.addTarget(self, action: #selector(didTapEdit(_:)), for: .primaryActionTriggered)
     }
 
-    @IBAction func didTapEdit(_ sender: Any) {
+    @objc func didTapEdit(_ sender: Any) {
         delegate?.didTapEdit()
     }
 

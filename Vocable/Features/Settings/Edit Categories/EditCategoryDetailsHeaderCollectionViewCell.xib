@@ -30,9 +30,6 @@
                             <constraint firstAttribute="height" constant="41" id="zuz-z2-g9K"/>
                         </constraints>
                         <state key="normal" image="pencil" catalog="system"/>
-                        <connections>
-                            <action selector="didTapEdit:" destination="gTV-IL-0wX" eventType="touchUpInside" id="vqo-3Y-9IG"/>
-                        </connections>
                     </button>
                 </subviews>
             </view>
