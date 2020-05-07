@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class NumericCategoryContentViewController: PagingCarouselViewController {
 
@@ -56,6 +57,16 @@ class NumericCategoryContentViewController: PagingCarouselViewController {
             collectionView.layout.numberOfRows = .fixedCount(2)
         default:
             break
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath != collectionView.indexPathForGazedItem {
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
+        guard let item = diffableDataSource.itemIdentifier(for: indexPath) else { return }
+        DispatchQueue.global(qos: .userInitiated).async {
+            AVSpeechSynthesizer.shared.speak(item, language: AppConfig.activePreferredLanguageCode)
         }
     }
 
