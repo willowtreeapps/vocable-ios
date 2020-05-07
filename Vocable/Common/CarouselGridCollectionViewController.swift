@@ -62,14 +62,17 @@ class CarouselGridCollectionView: UICollectionView {
     private var lastInvalidatedContentSize: CGSize = .zero
     override var contentSize: CGSize {
         didSet {
+            defer {
+                if !needsInitialScrollToMiddle {
+                    lastInvalidatedContentSize = contentSize
+                }
+            }
             guard contentSize != lastInvalidatedContentSize else { return }
-            if !contentSize.area.isZero && needsInitialScrollToMiddle {
-                scrollToMiddleSection(animated: false)
-                needsInitialScrollToMiddle = false
+            if needsInitialScrollToMiddle {
+                needsInitialScrollToMiddle = !scrollToMiddleSection(animated: false)
             } else {
                 snapToBoundaryIfNeeded()
             }
-            lastInvalidatedContentSize = contentSize
         }
     }
 
@@ -111,13 +114,17 @@ class CarouselGridCollectionView: UICollectionView {
         }
     }
 
-    func scrollToMiddleSection(animated: Bool) {
-        if let offset = layout.scrollOffsetForLeftmostCellOfCurrentPageInMiddleSection() {
-            scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: animated)
+    @discardableResult
+    func scrollToMiddleSection(animated: Bool) -> Bool {
+
+        guard let offset = layout.scrollOffsetForLeftmostCellOfCurrentPageInMiddleSection() else {
+            return false
         }
+        scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: animated)
         if !animated {
             layoutIfNeeded()
         }
+        return true
     }
 
     private func snapToBoundaryIfNeeded() {
