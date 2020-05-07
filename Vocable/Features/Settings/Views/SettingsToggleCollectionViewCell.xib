@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,15 +10,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nEO-5f-YSR" customClass="SettingsToggleCollectionViewCell" customModule="Vocable" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nEO-5f-YSR" customClass="SettingsToggleCollectionViewCell" customModule="Vocable" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="523" height="99"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0GQ-x3-4PV">
                 <rect key="frame" x="0.0" y="0.0" width="523" height="99"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6VK-zy-47F">
-                        <rect key="frame" x="16" y="36" width="56.5" height="27"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6VK-zy-47F">
+                        <rect key="frame" x="20" y="8" width="418" height="83"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                         <color key="textColor" name="DefaultFontColor"/>
                         <nil key="highlightedColor"/>
@@ -26,15 +26,17 @@
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                         </variation>
                     </label>
-                    <switch contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rux-wr-INz">
-                        <rect key="frame" x="458" y="34" width="51" height="31"/>
+                    <switch contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rux-wr-INz">
+                        <rect key="frame" x="454" y="34" width="51" height="31"/>
                     </switch>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="6VK-zy-47F" firstAttribute="leading" secondItem="0GQ-x3-4PV" secondAttribute="leading" constant="16" id="Acm-dF-bue"/>
-                    <constraint firstAttribute="trailing" secondItem="rux-wr-INz" secondAttribute="trailing" constant="16" id="C1k-Fw-WXx"/>
+                    <constraint firstItem="6VK-zy-47F" firstAttribute="leading" secondItem="0GQ-x3-4PV" secondAttribute="leadingMargin" id="Acm-dF-bue"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="rux-wr-INz" secondAttribute="trailing" id="C1k-Fw-WXx"/>
+                    <constraint firstItem="6VK-zy-47F" firstAttribute="top" secondItem="0GQ-x3-4PV" secondAttribute="topMargin" id="F49-tX-Ugo"/>
                     <constraint firstItem="rux-wr-INz" firstAttribute="centerY" secondItem="0GQ-x3-4PV" secondAttribute="centerY" id="P1e-pV-gFd"/>
-                    <constraint firstItem="6VK-zy-47F" firstAttribute="centerY" secondItem="0GQ-x3-4PV" secondAttribute="centerY" id="ZkI-fu-JDe"/>
+                    <constraint firstItem="rux-wr-INz" firstAttribute="leading" secondItem="6VK-zy-47F" secondAttribute="trailing" constant="16" id="S7m-Aj-WNw"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="6VK-zy-47F" secondAttribute="bottom" id="p8A-iC-suS"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="523" height="99"/>

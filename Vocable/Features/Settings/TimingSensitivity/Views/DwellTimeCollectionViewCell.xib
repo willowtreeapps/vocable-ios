@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,7 +40,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="BeL-yu-x15">
                         <rect key="frame" x="20" y="58.5" width="598" height="55"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYz-0h-pvW" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYz-0h-pvW" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="85" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="OdC-6c-nVk"/>
@@ -49,11 +49,8 @@
                                         <variation key="widthClass=compact" constant="55"/>
                                     </constraint>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" name="DefaultFontColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="minus" catalog="system"/>
-                                </userDefinedRuntimeAttributes>
+                                <state key="normal" image="minus" catalog="system"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2s" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="9Ym-ys-KLL">
                                 <rect key="frame" x="199.5" y="0.0" width="199" height="55"/>
@@ -61,7 +58,7 @@
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0m-iz-XHs" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0m-iz-XHs" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="513" y="0.0" width="85" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="85" id="hwY-fa-zSH">
@@ -70,11 +67,8 @@
                                     </constraint>
                                     <constraint firstAttribute="height" constant="55" id="zGP-DE-Jdz"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" name="DefaultFontColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="plus" catalog="system"/>
-                                </userDefinedRuntimeAttributes>
+                                <state key="normal" image="plus" catalog="system"/>
                             </button>
                         </subviews>
                     </stackView>
@@ -106,8 +100,8 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="minus" catalog="system" width="64" height="12"/>
-        <image name="plus" catalog="system" width="64" height="56"/>
+        <image name="minus" catalog="system" width="128" height="24"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <namedColor name="DefaultCellBackground">
             <color red="0.21799999475479126" green="0.19499999284744263" blue="0.62699997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
