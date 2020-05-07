@@ -29,7 +29,7 @@
     <body>
       <trans-unit id="MISSING_LOCALIZATION_Add Phrases" xml:space="preserve">
         <source>MISSING_LOCALIZATION_Add Phrases</source>
-        <target state="needs-translation">MISSING_LOCALIZATION_Add Phrases</target>
+        <target state="translated">Frasi MISSING_LOCALIZATION_Add</target>
         <note>Add Phrases</note>
       </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
@@ -105,7 +105,7 @@
       </trans-unit>
       <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve">
         <source>No presets found</source>
-        <target state="needs-translation">No presets found</target>
+        <target state="translated">Nessun preset trovato</target>
         <note>Debugging error message for when preloaded content is not found</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
