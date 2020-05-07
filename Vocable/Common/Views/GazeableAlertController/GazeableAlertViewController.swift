@@ -294,6 +294,8 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
             button.setTitle(action.title, for: .normal)
             button.cornerRadius = alertView.cornerRadius
             button.style = action.style
+            button.shouldShrinkWhenTouched = false
+            button.backgroundColor = .clear
             button.addTarget(action, action: #selector(GazeableAlertAction.performActions), for: .primaryActionTriggered)
 
             if actionButtonStackView.arrangedSubviews.isEmpty {
