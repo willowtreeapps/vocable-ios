@@ -7,17 +7,17 @@
     <body>
       <trans-unit id="CFBundleDisplayName" xml:space="preserve">
         <source>Vocable</source>
-        <target state="translated">Vocable</target>
+        <target state="needs-translation">Vocable</target>
         <note>Bundle display name</note>
       </trans-unit>
       <trans-unit id="CFBundleName" xml:space="preserve">
         <source>Vocable</source>
-        <target state="translated">Vocable</target>
+        <target state="needs-translation">Vocable</target>
         <note>Bundle name</note>
       </trans-unit>
       <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
         <source>Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
-        <target state="translated">Vocable benutzt ARKit um Kopfbewegungen mit der TrueDepth Kamera zu erkennen. Das ermöglicht das Steuern der App bei eingeschränkter Bewegungsfähigkeit. Die Kameradaten werden ausdrücklich nur zum Steuern des Navigationszeigers verwendet und nicht gespeichert oder übermittelt. Deshalb braucht Vocable die Erlaubnis zur Nutzung der Kamera.</target>
+        <target state="needs-translation">Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</target>
         <note>Camera usage description</note>
       </trans-unit>
     </body>
@@ -34,228 +34,228 @@
       </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
         <source>Categories</source>
-        <target state="translated">Kategorien</target>
+        <target state="needs-translation">Categories</target>
         <note>Categories list editor screen header title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="translated">Abbrechen</target>
+        <target state="needs-translation">Cancel</target>
         <note>Cancel exit editing alert action title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
         <source>Confirm</source>
-        <target state="translated">Bestätigen</target>
+        <target state="needs-translation">Confirm</target>
         <note>Confirm exit category alert action title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
         <source>If you close this without saving your custom category will be deleted.</source>
-        <target state="translated">Wenn Sie dies schließen, ohne Ihre benutzerdefinierte Kategorie zu speichern, wird gelöscht.</target>
+        <target state="needs-translation">If you close this without saving your custom category will be deleted.</target>
         <note>Exit edit categories alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="translated">Abbrechen</target>
+        <target state="needs-translation">Cancel</target>
         <note>Cancel alert action title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
         <source>Remove</source>
-        <target state="translated">Entfernen</target>
+        <target state="needs-translation">Remove</target>
         <note>Remove category alert action title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve">
         <source>Deleted categories cannot be recovered.</source>
-        <target state="translated">Gelöschte Kategorien können nicht wiederhergestellt werden.</target>
+        <target state="needs-translation">Deleted categories cannot be recovered.</target>
         <note>Remove category alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="translated">Abbrechen</target>
+        <target state="needs-translation">Cancel</target>
         <note>Delete phrase alert cancel button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
         <source>Delete</source>
-        <target state="translated">Löschen</target>
+        <target state="needs-translation">Delete</target>
         <note>Delete phrase alert action button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
         <source>Deleted phrases cannot be recovered.</source>
-        <target state="translated">Gelöschte Sätze können nicht wiederhergestellt werden.</target>
+        <target state="needs-translation">Deleted phrases cannot be recovered.</target>
         <note>Delete phrase confirmation alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
         <source>Remove Category</source>
-        <target state="translated">Kategorie entfernen</target>
+        <target state="needs-translation">Remove Category</target>
         <note>Remove category button label within the category detail screen.</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
         <source>Show</source>
-        <target state="translated">Anzeigen</target>
+        <target state="needs-translation">Show</target>
         <note>Show category button label within the category detail screen.</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
         <source>Changes saved</source>
-        <target state="translated">Änderungen gespeichert</target>
+        <target state="needs-translation">Changes saved</target>
         <note>changes to an existing phrase were saved successfully</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve">
         <source>Changes Saved</source>
-        <target state="translated">Änderungen gespeichert</target>
+        <target state="needs-translation">Changes Saved</target>
         <note>Saved to Categories
    User edited name of the category and saved it successfully</note>
       </trans-unit>
       <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve">
         <source>No presets found</source>
-        <target state="translated">No presets found</target>
+        <target state="needs-translation">No presets found</target>
         <note>Debugging error message for when preloaded content is not found</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="translated">Abbrechen</target>
+        <target state="needs-translation">Cancel</target>
         <note>Cancel alert action title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
         <source>Confirm</source>
-        <target state="translated">Bestätigen</target>
+        <target state="needs-translation">Confirm</target>
         <note>Confirm alert action title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
         <source>Turn off head tracking?</source>
-        <target state="translated">Steuerung per Kopfbewegung ausschalten?</target>
+        <target state="needs-translation">Turn off head tracking?</target>
         <note>Disable head tracking confirmation alert title</note>
       </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
         <source>Please move closer to the device.</source>
-        <target state="translated">Bitte näher ans Gerät kommen.</target>
+        <target state="needs-translation">Please move closer to the device.</target>
         <note>Warning message presented to the user when the head tracking system</note>
       </trans-unit>
       <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve">
         <source>Select something below to speak</source>
-        <target state="translated">Wähle unten etwas aus, um zu sprechen</target>
+        <target state="needs-translation">Select something below to speak</target>
         <note>Select something below to speak Hint Text</note>
       </trans-unit>
       <trans-unit id="paging_progress_indicator_format" xml:space="preserve">
         <source>Page %1$d of %2$d</source>
-        <target state="translated">Seite %1$d von %2$d</target>
+        <target state="needs-translation">Page %1$d of %2$d</target>
         <note>Page indicator progress format. \"Page x of n\"</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
-        <target state="translated">Weiter editieren</target>
+        <target state="needs-translation">Continue Editing</target>
         <note>Continue editing alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
-        <target state="translated">Verwerfen</target>
+        <target state="needs-translation">Discard</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
         <source>Going back before saving will clear any edits made.</source>
-        <target state="translated">Nicht gespeicherte Veränderungen werden beim Verlassen des Menüs verworfen.</target>
+        <target state="needs-translation">Going back before saving will clear any edits made.</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
         <source>Saved to %@</source>
-        <target state="translated">In %@ gespeichert</target>
+        <target state="needs-translation">Saved to %@</target>
         <note>Saved to user favorites category toast title</note>
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
         <source>No</source>
-        <target state="translated">Nein</target>
+        <target state="needs-translation">No</target>
         <note>'No' num pad response</note>
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.yes.title" xml:space="preserve">
         <source>Yes</source>
-        <target state="translated">Ja</target>
+        <target state="needs-translation">Yes</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
         <source>OK</source>
-        <target state="translated">OK</target>
+        <target state="needs-translation">OK</target>
         <note>No email account configured error alert dismiss button title</note>
       </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve">
         <source>Email not configured.</source>
-        <target state="translated">E-Mail ist nicht konfiguriert.</target>
+        <target state="needs-translation">Email not configured.</target>
         <note>No email account configured error alert title</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
         <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
-        <target state="translated">Dieser link wir außerhalb der Vocable App geöffnet. Sie laufen möglicherweise Gefahr, nicht mehr per Kopfbewegung steuern zu können.</target>
+        <target state="needs-translation">You're about to be taken outside of the Vocable app. You may lose head tracking control.</target>
         <note>body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="translated">Abbrechen</target>
+        <target state="needs-translation">Cancel</target>
         <note>Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.confirm.title" xml:space="preserve">
         <source>Confirm</source>
-        <target state="translated">Bestätigen</target>
+        <target state="needs-translation">Confirm</target>
         <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.cell.categories.title" xml:space="preserve">
         <source>Categories</source>
-        <target state="translated">Kategorien</target>
+        <target state="needs-translation">Categories</target>
         <note>edit categories settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve">
         <source>Contact Developers</source>
-        <target state="translated">Entwickler kontaktieren</target>
+        <target state="needs-translation">Contact Developers</target>
         <note>contact developers settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.edit_user_favorites.title_format" xml:space="preserve">
         <source>Edit %@</source>
-        <target state="translated">%@ editieren</target>
+        <target state="needs-translation">Edit %@</target>
         <note>edit user's favorite phrases category settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve">
         <source>Head Tracking</source>
-        <target state="translated">Per Kopfbewegung</target>
+        <target state="needs-translation">Head Tracking</target>
         <note>Settings head tracking cell title</note>
       </trans-unit>
       <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
         <source>Privacy Policy</source>
-        <target state="translated">Datenschutz</target>
+        <target state="needs-translation">Privacy Policy</target>
         <note>view privacy policy settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.reset_all.title" xml:space="preserve">
         <source>Reset App Settings</source>
-        <target state="translated">App Einstellungen zurücksetzen</target>
+        <target state="needs-translation">Reset App Settings</target>
         <note>reset all settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.selection_mode.title" xml:space="preserve">
         <source>Selection Mode</source>
-        <target state="translated">Steuerungsmodus</target>
+        <target state="needs-translation">Selection Mode</target>
         <note>edit cursor selection mode settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.timing_sensitivity.title" xml:space="preserve">
         <source>Timing and Sensitivity</source>
-        <target state="translated">Timing und Empfindlichkeit</target>
+        <target state="needs-translation">Timing and Sensitivity</target>
         <note>edit cursor timing and sensititivy settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.tune_cursor.title" xml:space="preserve">
         <source>Tune Cursor</source>
-        <target state="translated">Feineinstellung des Zeigers</target>
+        <target state="needs-translation">Tune Cursor</target>
         <note>tune cursor debug settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.header.title" xml:space="preserve">
         <source>Settings</source>
-        <target state="translated">Einstellungen</target>
+        <target state="needs-translation">Settings</target>
         <note>Settings screen header title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
-        <target state="translated">Weiter editieren</target>
+        <target state="needs-translation">Continue Editing</target>
         <note>Continue editing alert action title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
-        <target state="translated">Verwerfen</target>
+        <target state="needs-translation">Discard</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
         <source>Going back before saving will clear any edits made.</source>
-        <target state="translated">Nicht gespeicherte Veränderungen werden beim Verlassen des Menüs verworfen.</target>
+        <target state="needs-translation">Going back before saving will clear any edits made.</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
     </body>
@@ -267,347 +267,347 @@
     <body>
       <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve">
         <source>I want to lie down</source>
-        <target state="translated">Ich möchte mich hinlegen</target>
+        <target state="needs-translation">I want to lie down</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_0EE14D06-92D7-4A26-A15F-253528F14A69" xml:space="preserve">
         <source>Pleased to meet you</source>
-        <target state="translated">Freut mich dich zu sehen</target>
+        <target state="needs-translation">Pleased to meet you</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_0EF33A3F-41E8-4E47-9B2C-69FC86B957FC" xml:space="preserve">
         <source>How is your day?</source>
-        <target state="translated">Wie läuft dein Tag?</target>
+        <target state="needs-translation">How is your day?</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_1B634A96-563E-4275-875A-2B705A5D1178" xml:space="preserve">
         <source>How are you?</source>
-        <target state="translated">Wie geht es dir?</target>
+        <target state="needs-translation">How are you?</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_1BAD392A-C26C-4080-B0F2-FC544E08349C" xml:space="preserve">
         <source>I need to brush my hair</source>
-        <target state="translated">Ich möchte mein Haar kämmen</target>
+        <target state="needs-translation">I need to brush my hair</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_2BF1A363-CE24-4F26-9727-C5EAD1FEC27C" xml:space="preserve">
         <source>Please open the window</source>
-        <target state="translated">Bitte das Fenster öffnen</target>
+        <target state="needs-translation">Please open the window</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_3EF1FBFA-E07A-47B5-BDF6-3AE7A684B834" xml:space="preserve">
         <source>Hello</source>
-        <target state="translated">Hallo</target>
+        <target state="needs-translation">Hello</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_4F776A4A-4154-4DFE-89AC-E603C2A578EE" xml:space="preserve">
         <source>Please fix my pillow</source>
-        <target state="translated">Bitte mein Kissen aufschütteln</target>
+        <target state="needs-translation">Please fix my pillow</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_6AD93FB9-437C-455F-A4AF-C96033BCBCAE" xml:space="preserve">
         <source>I am hot</source>
-        <target state="translated">Mir ist heiß</target>
+        <target state="needs-translation">I am hot</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_6B463AF1-C884-45CD-9194-90806E75FD70" xml:space="preserve">
         <source>That makes sense</source>
-        <target state="translated">Das macht Sinn</target>
+        <target state="needs-translation">That makes sense</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_6CBD6D3E-42A7-435C-B661-2ABD669DC6BE" xml:space="preserve">
         <source>I don't know</source>
-        <target state="translated">Das weiß ich nicht</target>
+        <target state="needs-translation">I don't know</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_7ACA0926-DB7F-4B9E-872C-AE9690AD79E7" xml:space="preserve">
         <source>I need to go to the restroom</source>
-        <target state="translated">Ich muss aufs Klo</target>
+        <target state="needs-translation">I need to go to the restroom</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_7FF4503F-F838-48BE-B529-758B3531093C" xml:space="preserve">
         <source>Please wait</source>
-        <target state="translated">Einen Moment</target>
+        <target state="needs-translation">Please wait</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_8BCBACFB-D5ED-46CB-B3E2-21FB31D8D6AD" xml:space="preserve">
         <source>Yes</source>
-        <target state="translated">Ja</target>
+        <target state="needs-translation">Yes</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_8C4D0099-9BA8-4914-A6B5-730FFDC8C499" xml:space="preserve">
         <source>I am cold</source>
-        <target state="translated">Mir ist kalt</target>
+        <target state="needs-translation">I am cold</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_9A808275-0D67-49E4-8BF8-6F22A0C7E169" xml:space="preserve">
         <source>No visitors please</source>
-        <target state="translated">Kein Besuch bitte</target>
+        <target state="needs-translation">No visitors please</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_9DEB32B5-8606-4689-8F6A-0B251F4DB377" xml:space="preserve">
         <source>I am thirsty</source>
-        <target state="translated">Ich bin durstig</target>
+        <target state="needs-translation">I am thirsty</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_9E3230D7-1172-491A-8A00-E734B1661DC1" xml:space="preserve">
         <source>Please turn the lights on</source>
-        <target state="translated">Bitte das Licht anschalten</target>
+        <target state="needs-translation">Please turn the lights on</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_9EE3A781-E84E-4728-976F-8EF993B8174C" xml:space="preserve">
         <source>Please turn the TV off</source>
-        <target state="translated">Bitte den Fernseher ausschalten</target>
+        <target state="needs-translation">Please turn the TV off</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_24B48F19-EA3A-49A1-88C1-AACB67FE7278" xml:space="preserve">
         <source>How was your weekend?</source>
-        <target state="translated">Wie war dein Wochenende?</target>
+        <target state="needs-translation">How was your weekend?</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_28A8F6B6-E196-4981-B762-652C288A0C29" xml:space="preserve">
         <source>I am finished</source>
-        <target state="translated">Ich bin fertig</target>
+        <target state="needs-translation">I am finished</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_31E8760F-E728-4261-A82E-B50AB40C73FF" xml:space="preserve">
         <source>How's it going?</source>
-        <target state="translated">Wie läuft's?</target>
+        <target state="needs-translation">How's it going?</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_33B3F4B7-2438-439B-A21B-46D2599C8840" xml:space="preserve">
         <source>Please</source>
-        <target state="translated">Bitte</target>
+        <target state="needs-translation">Please</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_42DC7273-92F9-4149-8166-966C3C201862" xml:space="preserve">
         <source>Please open the blinds</source>
-        <target state="translated">Bitte die Vorhänge öffnen</target>
+        <target state="needs-translation">Please open the blinds</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_045EF309-3EB7-46B9-8AB7-31BC8482E3DC" xml:space="preserve">
         <source>Okay</source>
-        <target state="translated">OK</target>
+        <target state="needs-translation">Okay</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_46EF7041-50F7-4B64-A0F6-879A8A3D7532" xml:space="preserve">
         <source>Please turn the lights off</source>
-        <target state="translated">Bitte das Licht ausschalten</target>
+        <target state="needs-translation">Please turn the lights off</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_52CA4E71-4A8C-4EA8-8EA8-C4B18AA16EC8" xml:space="preserve">
         <source>Environment</source>
-        <target state="translated">Umgebung</target>
+        <target state="needs-translation">Environment</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_73B654AA-C999-4864-BF5A-77379DAA991C" xml:space="preserve">
         <source>I need to wash my face</source>
-        <target state="translated">Ich möchte mein Gesicht waschen</target>
+        <target state="needs-translation">I need to wash my face</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_81B473E3-2FC9-40F0-AE59-3C658EC6CD91" xml:space="preserve">
         <source>I need a shower</source>
-        <target state="translated">Ich möchte duschen</target>
+        <target state="needs-translation">I need a shower</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_0167AA43-587D-436F-91A9-9CEEAF1CCCF1" xml:space="preserve">
         <source>I would like to talk</source>
-        <target state="translated">Ich möchte reden</target>
+        <target state="needs-translation">I would like to talk</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_573DD827-7201-49F1-8BE8-0BC18028A8CB" xml:space="preserve">
         <source>Bad</source>
-        <target state="translated">Schlecht</target>
+        <target state="needs-translation">Bad</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_702D3BAD-6C56-4DC6-8290-8E0693B63152" xml:space="preserve">
         <source>Please turn the volume down</source>
-        <target state="translated">Bitte leiser</target>
+        <target state="needs-translation">Please turn the volume down</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_939B4829-D8B4-42F1-B8A2-0E956AAE1FEE" xml:space="preserve">
         <source>I am having trouble breathing</source>
-        <target state="translated">Ich habe Atembeschwerden</target>
+        <target state="needs-translation">I am having trouble breathing</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_5542BE2F-419E-41A5-BBF2-5B82E0A49834" xml:space="preserve">
         <source>I am in pain</source>
-        <target state="translated">Ich habe Schmerzen</target>
+        <target state="needs-translation">I am in pain</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_05754D0C-962D-48C3-8554-E4F7D5E86D93" xml:space="preserve">
         <source>I need a jacket</source>
-        <target state="translated">Ich brauchen eine Jacke</target>
+        <target state="needs-translation">I need a jacket</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_8359B09D-7259-40CC-B258-02895ECC4DB7" xml:space="preserve">
         <source>I need to spit</source>
-        <target state="translated">Ich muss spucken</target>
+        <target state="needs-translation">I need to spit</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_9929E83B-997D-40AA-841C-130709F5115B" xml:space="preserve">
         <source>Good morning</source>
-        <target state="translated">Guten Morgen</target>
+        <target state="needs-translation">Good morning</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_30153E11-D48C-47C8-9186-47988D0A5B7A" xml:space="preserve">
         <source>I do not agree</source>
-        <target state="translated">Ich stimme nicht zu</target>
+        <target state="needs-translation">I do not agree</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_63980C93-EE77-40DE-BDE7-BF8F97EC0304" xml:space="preserve">
         <source>Please be patient</source>
-        <target state="translated">Hab bitte Geduld</target>
+        <target state="needs-translation">Please be patient</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_64348AD1-9F63-4ADA-B391-E1742913C0E6" xml:space="preserve">
         <source>I need a bath</source>
-        <target state="translated">Ich möchte baden</target>
+        <target state="needs-translation">I need a bath</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_72633C5C-47A2-4D5E-9615-E1408234478F" xml:space="preserve">
         <source>Thank you</source>
-        <target state="translated">Danke</target>
+        <target state="needs-translation">Thank you</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_88556B8E-FE61-401D-888C-0D79568715A0" xml:space="preserve">
         <source>Please close the blinds</source>
-        <target state="translated">Bitte die Vorhänge schließen</target>
+        <target state="needs-translation">Please close the blinds</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_1244394F-2793-47EF-BCAC-DB8BBDAB78C6" xml:space="preserve">
         <source>I need my medication</source>
-        <target state="translated">Ich brauche meine Medikamente</target>
+        <target state="needs-translation">I need my medication</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_30474911-619F-4FBF-B7DA-F64039F556F2" xml:space="preserve">
         <source>Please be quiet</source>
-        <target state="translated">Bitte leise sein</target>
+        <target state="needs-translation">Please be quiet</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_A02D6604-5C7C-4BB0-8C4A-E1C5E0D1A869" xml:space="preserve">
         <source>Please stop</source>
-        <target state="translated">Bitte aufhören</target>
+        <target state="needs-translation">Please stop</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_A436EAAF-BD8A-4D8D-81EA-DC6D3C849D4A" xml:space="preserve">
         <source>I like it</source>
-        <target state="translated">Das mag ich</target>
+        <target state="needs-translation">I like it</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_A74483A8-4069-40D7-992C-01295934E97C" xml:space="preserve">
         <source>Please repeat what you said</source>
-        <target state="translated">Wie bitte?</target>
+        <target state="needs-translation">Please repeat what you said</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_ADDD57C6-D11E-4B32-A2B3-05AA43D9AC8C" xml:space="preserve">
         <source>I am fine</source>
-        <target state="translated">Mir geht es gut</target>
+        <target state="needs-translation">I am fine</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_B2442AA0-6004-4636-9B39-2DB97ADD1DA1" xml:space="preserve">
         <source>Goodbye</source>
-        <target state="translated">Tschüss</target>
+        <target state="needs-translation">Goodbye</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_BBE8BABC-CCBF-49BF-87D4-057016AADBC5" xml:space="preserve">
         <source>I want to sit up</source>
-        <target state="translated">Ich möchte mich aufsetzen</target>
+        <target state="needs-translation">I want to sit up</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_BEE6FF86-CE30-4096-9E37-C469F63630B7" xml:space="preserve">
         <source>I didn't mean to say that</source>
-        <target state="translated">Das wollte ich nicht sagen</target>
+        <target state="needs-translation">I didn't mean to say that</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_C0B2A1A8-8333-4121-B4A8-FFFA185EB5D2" xml:space="preserve">
         <source>General</source>
-        <target state="translated">Allgemeines</target>
+        <target state="needs-translation">General</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_C6C14627-E48E-4EF3-B81D-64C191F2EC75" xml:space="preserve">
         <source>I am good</source>
-        <target state="translated">Das reicht</target>
+        <target state="needs-translation">I am good</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_C6E6B6E7-BEB6-466D-822A-F8CE2D092B9E" xml:space="preserve">
         <source>I am uncomfortable</source>
-        <target state="translated">Ich fühle mich unwohl</target>
+        <target state="needs-translation">I am uncomfortable</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_C865BE96-40B5-406C-9BAA-0A0D3280E377" xml:space="preserve">
         <source>Please close the window</source>
-        <target state="translated">Bitte das Fenster schließen</target>
+        <target state="needs-translation">Please close the window</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_D6A67E02-3D07-4D44-8B04-2C1B9B8B167E" xml:space="preserve">
         <source>Good evening</source>
-        <target state="translated">Guten Abend</target>
+        <target state="needs-translation">Good evening</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_D64EE532-14D3-4434-B671-8F4368EC0A8D" xml:space="preserve">
         <source>Good</source>
-        <target state="translated">Gut</target>
+        <target state="needs-translation">Good</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_DC942BB6-B2BF-4ABB-8931-719BD2A504E6" xml:space="preserve">
         <source>Please turn the volume up</source>
-        <target state="translated">Bitte lauter</target>
+        <target state="needs-translation">Please turn the volume up</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_DFB79E0D-CF93-4744-B9EE-12738E1864E2" xml:space="preserve">
         <source>Maybe</source>
-        <target state="translated">Vielleicht</target>
+        <target state="needs-translation">Maybe</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_E7ADBE88-2722-4DE7-BDC1-994F07EA294B" xml:space="preserve">
         <source>Personal Care</source>
-        <target state="translated">Hygiene</target>
+        <target state="needs-translation">Personal Care</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_E7D11E13-BC4F-4FE5-9C8A-BE2DE31AEE7F" xml:space="preserve">
         <source>I would like visitors</source>
-        <target state="translated">Ich hätte gerne Besuch</target>
+        <target state="needs-translation">I would like visitors</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_E012D902-E8BA-4BEA-92C7-7107ECF8051C" xml:space="preserve">
         <source>I am hungry</source>
-        <target state="translated">Ich habe Hunger</target>
+        <target state="needs-translation">I am hungry</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_EB7A9732-E28E-4440-A88B-BA2A1ACFBD76" xml:space="preserve">
         <source>Conversation</source>
-        <target state="translated">Unterhaltung</target>
+        <target state="needs-translation">Conversation</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_F6F03BBD-B9CD-41F5-B26A-FCC13CCBB199" xml:space="preserve">
         <source>I am tired</source>
-        <target state="translated">Ich bin müde</target>
+        <target state="needs-translation">I am tired</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_F8F5D1C9-0AA6-4152-BF7C-0851ACD1406B" xml:space="preserve">
         <source>Basic Needs</source>
-        <target state="translated">Bedürfnisse</target>
+        <target state="needs-translation">Basic Needs</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_FABE749C-B54D-4031-B8E7-62777B34D273" xml:space="preserve">
         <source>No</source>
-        <target state="translated">Nein</target>
+        <target state="needs-translation">No</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" xml:space="preserve">
         <source>Please turn the TV on</source>
-        <target state="translated">Bitte den Fernseher anschalten</target>
+        <target state="needs-translation">Please turn the TV on</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_user_favorites" xml:space="preserve">
         <source>My Sayings</source>
-        <target state="translated">Meine Sätze</target>
+        <target state="needs-translation">My Sayings</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_user_keypad" xml:space="preserve">
         <source>123</source>
-        <target state="translated">123</target>
+        <target state="needs-translation">123</target>
         <note/>
       </trans-unit>
     </body>
