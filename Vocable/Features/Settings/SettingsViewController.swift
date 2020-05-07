@@ -240,8 +240,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             show(viewController, sender: nil)
 
         case .timingSensitivity:
-            let vc = UIStoryboard(name: "TimingSensitivity", bundle: nil).instantiateViewController(identifier: "TimingSensitivity") as! TimingSensitivityViewController
-            show(vc, sender: nil)
+            let viewController = TimingSensitivityViewController()
+            show(viewController, sender: nil)
 
         case .selectionMode:
             let vc = UIStoryboard(name: "SelectionMode", bundle: nil).instantiateViewController(identifier: "SelectionMode") as! SelectionModeViewController

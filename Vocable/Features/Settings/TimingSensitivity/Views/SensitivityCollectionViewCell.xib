@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,7 +40,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="O5j-z4-VrA">
                         <rect key="frame" x="20" y="97.5" width="626" height="116.5"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ph1-lE-gZj" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ph1-lE-gZj" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="31" width="205.5" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="j1g-Cd-qVb"/>
@@ -60,7 +60,7 @@
                                     <action selector="handleLowSensitivity:" destination="ogd-WG-kCh" eventType="primaryActionTriggered" id="zSN-xf-d9O"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDi-eA-7a0" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDi-eA-7a0" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="210.5" y="31" width="205" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="b7m-b2-4tl"/>
@@ -80,7 +80,7 @@
                                     <action selector="handleMediumSensitivity:" destination="ogd-WG-kCh" eventType="touchUpInside" id="vcJ-HP-s9x"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4K-JS-vwn" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4K-JS-vwn" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="420.5" y="31" width="205.5" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="kG5-sF-Ej8"/>
