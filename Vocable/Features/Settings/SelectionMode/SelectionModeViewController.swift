@@ -23,6 +23,7 @@ final class SelectionModeViewController: VocableCollectionViewController {
 
         setupNavigationBar()
         setupCollectionView()
+        updateDataSource()
     }
 
     private func setupNavigationBar() {
@@ -42,54 +43,39 @@ final class SelectionModeViewController: VocableCollectionViewController {
         collectionView.backgroundColor = .collectionViewBackgroundColor
         collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier)
 
-        updateDataSource()
-
-        collectionView.setCollectionViewLayout(createLayout(), animated: false)
+        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (_, environment) -> NSCollectionLayoutSection? in
+            return self?.layoutSection(environment: environment)
+        })
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        collectionView.setCollectionViewLayout(createLayout(), animated: false)
+    private func sectionInsets(for environment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
+        return NSDirectionalEdgeInsets(top: 0,
+                                       leading: max(view.layoutMargins.left - environment.container.contentInsets.leading, 0),
+                                       bottom: 0,
+                                       trailing: max(view.layoutMargins.right - environment.container.contentInsets.trailing, 0))
     }
 
-    override func viewLayoutMarginsDidChange() {
-        super.viewLayoutMarginsDidChange()
+    private func layoutSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
-        collectionView.setCollectionViewLayout(createLayout(), animated: false)
-    }
+        let itemHeightDimension = NSCollectionLayoutDimension.absolute(50)
+        let itemWidthDimension = NSCollectionLayoutDimension.fractionalWidth(1.0)
+        let columnCount = 1
 
-    private func createLayout() -> UICollectionViewLayout {
-        if case .compact = traitCollection.horizontalSizeClass, case .regular = traitCollection.verticalSizeClass {
-            return compactVerticalLayout()
-        } else {
-            return defaultLayout()
-        }
-    }
+        let itemSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columnCount)
+        group.interItemSpacing = .fixed(8)
 
-    private func compactVerticalLayout() -> UICollectionViewLayout {
-        let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        let headTrackingToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/5))
-        let headTrackingToggleGroup = NSCollectionLayoutGroup.vertical(layoutSize: headTrackingToggleGroupSize, subitems: [headTrackingToggleItem])
-
-        let section = NSCollectionLayoutSection(group: headTrackingToggleGroup)
-        section.contentInsets.leading = view.layoutMargins.left
-        section.contentInsets.trailing = view.layoutMargins.right
-        return UICollectionViewCompositionalLayout(section: section)
-    }
-
-    private func defaultLayout() -> UICollectionViewLayout {
-        let headTrackingToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        let headTrackingToggleGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/9))
-        let headTrackingToggleGroup = NSCollectionLayoutGroup.vertical(layoutSize: headTrackingToggleGroupSize, subitems: [headTrackingToggleItem])
-
-        let section = NSCollectionLayoutSection(group: headTrackingToggleGroup)
-        section.contentInsets.leading = view.layoutMargins.left
-        section.contentInsets.trailing = view.layoutMargins.right
-        return UICollectionViewCompositionalLayout(section: section)
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 8
+        section.contentInsets = sectionInsets(for: environment)
+        section.contentInsets.top = 16
+        return section
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
         if collectionView.indexPathForGazedItem != indexPath {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
