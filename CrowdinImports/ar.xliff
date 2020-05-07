@@ -7,17 +7,17 @@
     <body>
       <trans-unit id="CFBundleDisplayName" xml:space="preserve">
         <source>Vocable</source>
-        <target state="translated">Vocable</target>
+        <target state="needs-translation">Vocable</target>
         <note>Bundle display name</note>
       </trans-unit>
       <trans-unit id="CFBundleName" xml:space="preserve">
         <source>Vocable</source>
-        <target state="translated">Vocable</target>
+        <target state="needs-translation">Vocable</target>
         <note>Bundle name</note>
       </trans-unit>
       <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
         <source>Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
-        <target state="translated">Vocable يستخدم تعقب الرأس بتقنية ال ARKit لتحديد حركت رأس المستخدم كما يرى في الكمرات الأماميه حقيقية العمق للأجهزة لهدف التحكم من مأشر الشاشه، للسماح من المستخدمين ذو القدره الحركية المحدوده من إستخدام التطبيق. موقع الرأس و تدويره بيانات تستخدم مباشرة في التحم بمأشر الشاشة. بيانات تعقب الرأس لا تخزن و لا يتم إرسالها بأي شكل. Vocable يحتاج الإذن لإستخدام الكاميرا لهذه الأسباب.</target>
+        <target state="needs-translation">Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</target>
         <note>Camera usage description</note>
       </trans-unit>
     </body>
@@ -34,17 +34,17 @@
       </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
         <source>Categories</source>
-        <target state="translated">تصنيف</target>
+        <target state="needs-translation">Categories</target>
         <note>Categories list editor screen header title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="translated">إلغاء</target>
+        <target state="needs-translation">Cancel</target>
         <note>Cancel exit editing alert action title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
         <source>Confirm</source>
-        <target state="translated">تأكيد</target>
+        <target state="needs-translation">Confirm</target>
         <note>Confirm exit category alert action title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
@@ -54,7 +54,7 @@
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="translated">إلغاء</target>
+        <target state="needs-translation">Cancel</target>
         <note>Cancel alert action title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
@@ -69,17 +69,17 @@
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="translated">إلغاء</target>
+        <target state="needs-translation">Cancel</target>
         <note>Delete phrase alert cancel button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
         <source>Delete</source>
-        <target state="translated">حذف</target>
+        <target state="needs-translation">Delete</target>
         <note>Delete phrase alert action button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
         <source>Deleted phrases cannot be recovered.</source>
-        <target state="translated">فالعبارات التي يتم مسحها لا يمكن إسترجاعها.</target>
+        <target state="needs-translation">Deleted phrases cannot be recovered.</target>
         <note>Delete phrase confirmation alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
@@ -94,7 +94,7 @@
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
         <source>Changes saved</source>
-        <target state="translated">تم حفظ التغييرات</target>
+        <target state="needs-translation">Changes saved</target>
         <note>changes to an existing phrase were saved successfully</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve">
@@ -110,47 +110,47 @@
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="translated">إلغاء</target>
+        <target state="needs-translation">Cancel</target>
         <note>Cancel alert action title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
         <source>Confirm</source>
-        <target state="translated">تأكيد</target>
+        <target state="needs-translation">Confirm</target>
         <note>Confirm alert action title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
         <source>Turn off head tracking?</source>
-        <target state="translated">إيقاف تشغيل تعقب حركة الرأس؟</target>
+        <target state="needs-translation">Turn off head tracking?</target>
         <note>Disable head tracking confirmation alert title</note>
       </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
         <source>Please move closer to the device.</source>
-        <target state="translated">من فضلك إقترب أكثر من الجهاز.</target>
+        <target state="needs-translation">Please move closer to the device.</target>
         <note>Warning message presented to the user when the head tracking system</note>
       </trans-unit>
       <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve">
         <source>Select something below to speak</source>
-        <target state="translated">إختر شيئ بالأسفل لتقوله</target>
+        <target state="needs-translation">Select something below to speak</target>
         <note>Select something below to speak Hint Text</note>
       </trans-unit>
       <trans-unit id="paging_progress_indicator_format" xml:space="preserve">
         <source>Page %1$d of %2$d</source>
-        <target state="translated">صفحه %1$d من %2$d</target>
+        <target state="needs-translation">Page %1$d of %2$d</target>
         <note>Page indicator progress format. \"Page x of n\"</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
-        <target state="translated">الإستمرار في التعديل</target>
+        <target state="needs-translation">Continue Editing</target>
         <note>Continue editing alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
-        <target state="translated">تجاهل</target>
+        <target state="needs-translation">Discard</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
         <source>Going back before saving will clear any edits made.</source>
-        <target state="translated">العودة للخلف قبل الحفظ سوف يمحوا كل التعديلات التي تمت.</target>
+        <target state="needs-translation">Going back before saving will clear any edits made.</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
@@ -160,12 +160,12 @@
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
         <source>No</source>
-        <target state="translated">لا</target>
+        <target state="needs-translation">No</target>
         <note>'No' num pad response</note>
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.yes.title" xml:space="preserve">
         <source>Yes</source>
-        <target state="translated">نعم</target>
+        <target state="needs-translation">Yes</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
@@ -185,22 +185,22 @@
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
-        <target state="translated">إلغاء</target>
+        <target state="needs-translation">Cancel</target>
         <note>Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.confirm.title" xml:space="preserve">
         <source>Confirm</source>
-        <target state="translated">تأكيد</target>
+        <target state="needs-translation">Confirm</target>
         <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.cell.categories.title" xml:space="preserve">
         <source>Categories</source>
-        <target state="translated">تصنيف</target>
+        <target state="needs-translation">Categories</target>
         <note>edit categories settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve">
         <source>Contact Developers</source>
-        <target state="translated">تواصل مع المطورين</target>
+        <target state="needs-translation">Contact Developers</target>
         <note>contact developers settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.edit_user_favorites.title_format" xml:space="preserve">
@@ -210,52 +210,52 @@
       </trans-unit>
       <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve">
         <source>Head Tracking</source>
-        <target state="translated">تعقب الرأس</target>
+        <target state="needs-translation">Head Tracking</target>
         <note>Settings head tracking cell title</note>
       </trans-unit>
       <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
         <source>Privacy Policy</source>
-        <target state="translated">حقوق الخصوصية</target>
+        <target state="needs-translation">Privacy Policy</target>
         <note>view privacy policy settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.reset_all.title" xml:space="preserve">
         <source>Reset App Settings</source>
-        <target state="translated">العودة إلي إعدادات التطبيق</target>
+        <target state="needs-translation">Reset App Settings</target>
         <note>reset all settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.selection_mode.title" xml:space="preserve">
         <source>Selection Mode</source>
-        <target state="translated">إختيار النمط</target>
+        <target state="needs-translation">Selection Mode</target>
         <note>edit cursor selection mode settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.timing_sensitivity.title" xml:space="preserve">
         <source>Timing and Sensitivity</source>
-        <target state="translated">التوقيت و حساسيت الإستجابة</target>
+        <target state="needs-translation">Timing and Sensitivity</target>
         <note>edit cursor timing and sensititivy settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.tune_cursor.title" xml:space="preserve">
         <source>Tune Cursor</source>
-        <target state="translated">ضبط المؤشر</target>
+        <target state="needs-translation">Tune Cursor</target>
         <note>tune cursor debug settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.header.title" xml:space="preserve">
         <source>Settings</source>
-        <target state="translated">الإعدادات</target>
+        <target state="needs-translation">Settings</target>
         <note>Settings screen header title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
-        <target state="translated">الإستمرار في التعديل</target>
+        <target state="needs-translation">Continue Editing</target>
         <note>Continue editing alert action title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
-        <target state="translated">تجاهل</target>
+        <target state="needs-translation">Discard</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
         <source>Going back before saving will clear any edits made.</source>
-        <target state="translated">العودة للخلف قبل الحفظ سوف يمحوا كل التعديلات التي تمت.</target>
+        <target state="needs-translation">Going back before saving will clear any edits made.</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
     </body>
@@ -332,7 +332,7 @@
       </trans-unit>
       <trans-unit id="preset_8BCBACFB-D5ED-46CB-B3E2-21FB31D8D6AD" xml:space="preserve">
         <source>Yes</source>
-        <target state="translated">نعم</target>
+        <target state="needs-translation">Yes</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_8C4D0099-9BA8-4914-A6B5-730FFDC8C499" xml:space="preserve">
@@ -592,7 +592,7 @@
       </trans-unit>
       <trans-unit id="preset_FABE749C-B54D-4031-B8E7-62777B34D273" xml:space="preserve">
         <source>No</source>
-        <target state="translated">لا</target>
+        <target state="needs-translation">No</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" xml:space="preserve">
