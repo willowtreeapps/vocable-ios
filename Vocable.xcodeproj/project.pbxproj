@@ -25,6 +25,8 @@
 		64A4AF0B2446270E00262F6F /* VocablePresets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A4AF0A2446270E00262F6F /* VocablePresets.framework */; };
 		64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A54544242A490700218BE8 /* GazeEatingView.swift */; };
 		64D04A58242951C00006962D /* GazeableAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */; };
+		64D847ED2464718900832479 /* EditCategoryDetailTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D847EB2464718900832479 /* EditCategoryDetailTitleCollectionViewCell.swift */; };
+		64D847EE2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64D847EC2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib */; };
 		64F49906245B40BC00348592 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B005AE6245B21ED004919F4 /* SettingsViewController.swift */; };
 		64F8A5FA245CC9FA00B7C0F9 /* EditPhrasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E9892459F7C3007B01F2 /* EditPhrasesViewController.swift */; };
 		6B005AE3245B057E004919F4 /* VocableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B005AE2245B057E004919F4 /* VocableCollectionViewController.swift */; };
@@ -228,6 +230,8 @@
 		64A4AF0A2446270E00262F6F /* VocablePresets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VocablePresets.framework; path = Carthage/Build/iOS/VocablePresets.framework; sourceTree = "<group>"; };
 		64A54544242A490700218BE8 /* GazeEatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeEatingView.swift; sourceTree = "<group>"; };
 		64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableAlertPresentationController.swift; sourceTree = "<group>"; };
+		64D847EB2464718900832479 /* EditCategoryDetailTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryDetailTitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		64D847EC2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditCategoryDetailsHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		6B005AE2245B057E004919F4 /* VocableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableCollectionViewController.swift; sourceTree = "<group>"; };
 		6B005AE4245B06F3004919F4 /* VocableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableViewController.swift; sourceTree = "<group>"; };
 		6B005AE6245B21ED004919F4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -509,6 +513,8 @@
 				7192E41A2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.xib */,
 				7192E4172433FDF5008E4A0A /* EditCategoryToggleCollectionViewCell.swift */,
 				7192E4152433FD8B008E4A0A /* EditCategoryToggleCollectionViewCell.xib */,
+				64D847EB2464718900832479 /* EditCategoryDetailTitleCollectionViewCell.swift */,
+				64D847EC2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib */,
 			);
 			name = "Edit Category Detail";
 			sourceTree = "<group>";
@@ -996,8 +1002,8 @@
 				6B9DFA6923E88A1B0037673E /* GazeLib.scnassets in Resources */,
 				6BE23D562444DCBE0032CAE4 /* Localizable.strings in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
+				64D847EE2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib in Resources */,
 				7192E4162433FD8B008E4A0A /* EditCategoryToggleCollectionViewCell.xib in Resources */,
-				71004B0D242926A2006833B8 /* SelectionMode.storyboard in Resources */,
 				7192E41C2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.xib in Resources */,
 				64A220BE2452173C0014EA80 /* Root.storyboard in Resources */,
 				130C00BF20D2AD2A007C3163 /* Main.storyboard in Resources */,
@@ -1117,9 +1123,9 @@
 				64F49906245B40BC00348592 /* SettingsViewController.swift in Sources */,
 				6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */,
 				A96D61D524229F6400577144 /* SettingsCollectionViewCell.swift in Sources */,
+				64D847ED2464718900832479 /* EditCategoryDetailTitleCollectionViewCell.swift in Sources */,
 				A95D07BE24326475004ECE64 /* CursorSensitivity.swift in Sources */,
 				B81D235623FED535005741E8 /* PresetPaginationContainerCollectionViewCell.swift in Sources */,
-				714EFD45241964D800DC773C /* EditPhrasesViewController.swift in Sources */,
 				6B9DFA7423E8D1270037673E /* TrackingContainerViewController.swift in Sources */,
 				A93E94052450EEC8008B61D2 /* KeyboardViewController.swift in Sources */,
 				6B32EA96244F717E007DC6BB /* PhraseCollectionEmptyStateView.swift in Sources */,

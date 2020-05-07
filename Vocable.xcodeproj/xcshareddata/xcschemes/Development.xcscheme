@@ -88,7 +88,7 @@
          <EnvironmentVariable
             key = "EditPhrasesEnabled"
             value = ""
-            isEnabled = "NO">
+            isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "RefactoredInterfaceEnabled"

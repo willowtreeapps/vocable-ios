@@ -14,6 +14,7 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
     var category: Category!
 
     private enum EditCategoryItem: Int, CaseIterable {
+        case titleEditView
         case showCategoryToggle
         case addPhrase
         case removeCategory
@@ -45,9 +46,9 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
         snapshot.appendSections([0])
 
         if AppConfig.editPhrasesEnabled {
-            snapshot.appendItems([.showCategoryToggle, .addPhrase, .removeCategory])
+            snapshot.appendItems([.titleEditView, .showCategoryToggle, .addPhrase, .removeCategory])
         } else {
-            snapshot.appendItems([.showCategoryToggle, .removeCategory])
+            snapshot.appendItems([.titleEditView, .showCategoryToggle, .removeCategory])
         }
 
         dataSource.apply(snapshot, animatingDifferences: false)
@@ -61,6 +62,7 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
         collectionView.allowsSelection = true
         collectionView.delaysContentTouches = false
 
+        collectionView.register(UINib(nibName: "EditCategoryDetailsHeaderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryDetailTitleCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "EditCategoryToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "EditCategoryRemoveCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "SettingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier)
@@ -102,6 +104,11 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
 
     private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: EditCategoryItem) -> UICollectionViewCell {
         switch item {
+        case .titleEditView:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryDetailTitleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryDetailTitleCollectionViewCell
+            cell.textLabel.text = category.name
+            return cell
+
         case .showCategoryToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryToggleCollectionViewCell
             cell.isEnabled = shouldEnableItem(at: indexPath)
@@ -134,6 +141,8 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
             collectionView.deselectItem(at: indexPath, animated: true)
         }
         switch selectedItem {
+        case .titleEditView:
+            return
         case .showCategoryToggle:
             handleToggle(at: indexPath)
         case .addPhrase:
@@ -187,6 +196,8 @@ final class EditCategoryDetailViewController: UIViewController, UICollectionView
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return false }
 
         switch selectedItem {
+        case .titleEditView:
+            return true
         case .showCategoryToggle:
             return (category.identifier != .userFavorites)
         case .addPhrase, .removeCategory:
