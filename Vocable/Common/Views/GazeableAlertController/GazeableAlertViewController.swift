@@ -341,8 +341,77 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
 
     // MARK: UIViewControllerTransitioningDelegate
 
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return GazeableAlertViewControllerTransitionAnimator()
+    }
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return GazeableAlertViewControllerTransitionAnimator(isForward: false)
+    }
+
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return GazeableAlertPresentationController(presentedViewController: presented, presenting: presenting)
     }
 
+}
+
+private final class GazeableAlertViewControllerTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+
+    let isForward: Bool
+    required init(isForward: Bool = true) {
+        self.isForward = isForward
+        super.init()
+    }
+
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 0.4
+    }
+
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+
+        let isForward = self.isForward
+
+        guard let presentedViewController = transitionContext.viewController(forKey: isForward ? .to : .from)
+        else {
+            transitionContext.completeTransition(false)
+            return
+        }
+
+        let transform = CGAffineTransform.identity
+        let alpha: CGFloat = isForward ? 1 : 0
+
+        let presentedView = presentedViewController.view!
+
+        if isForward {
+            transitionContext.containerView.addSubview(presentedView)
+            presentedView.frame = transitionContext.finalFrame(for: presentedViewController)
+            presentedView.layoutIfNeeded()
+            presentedView.alpha = 0
+            presentedView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        } else {
+            presentedView.alpha = 1
+            presentedView.transform = .identity
+        }
+
+        func actions() {
+            presentedView.transform = transform
+            presentedView.alpha = alpha
+        }
+
+        let duration = transitionDuration(using: transitionContext)
+        let delay = isForward ? duration * 0.5 : 0.1
+        UIView.animate(withDuration: delay,
+                       delay: 0,
+                       options: [],
+                       animations: {
+        }, completion: nil)
+
+        UIView.animate(withDuration: duration,
+                       delay: isForward ? delay : 0,
+                       usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 1.4,
+                       options: .beginFromCurrentState,
+                       animations: actions,
+                       completion: transitionContext.completeTransition)
+    }
 }
