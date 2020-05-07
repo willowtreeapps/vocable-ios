@@ -15,9 +15,9 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
     private var carouselCollectionViewController: CarouselGridCollectionViewController?
     private var disposables = Set<AnyCancellable>()
 
-    private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, Category>(collectionView: collectionView) { [weak self] (collectionView, indexPath, category) -> UICollectionViewCell? in
+    private lazy var diffableDataSource = CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID>(collectionView: collectionView) { [weak self] (collectionView, indexPath, category) -> UICollectionViewCell? in
         guard let self = self else { return nil }
-
+        let category = self.fetchResultsController.object(at: indexPath)
         let cell: EditCategoriesDefaultCollectionViewCell
         if self.traitCollection.horizontalSizeClass == .compact && self.traitCollection.verticalSizeClass == .regular {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditCategoriesCompactCollectionViewCell", for: indexPath) as! EditCategoriesDefaultCollectionViewCell
@@ -43,9 +43,9 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
     }()
 
     private lazy var fetchResultsController = NSFetchedResultsController<Category>(fetchRequest: self.fetchRequest,
-                                                                                 managedObjectContext: NSPersistentContainer.shared.viewContext,
-                                                                                 sectionNameKeyPath: nil,
-                                                                                 cacheName: nil)
+                                                                                   managedObjectContext: NSPersistentContainer.shared.viewContext,
+                                                                                   sectionNameKeyPath: nil,
+                                                                                   cacheName: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +54,6 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
 
         fetchResultsController.delegate = self
         try? fetchResultsController.performFetch()
-        updateDataSource(animated: false)
 
         setupNavigationBar()
         setupCollectionView()
@@ -122,35 +121,33 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         return false
     }
 
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateDataSource(animated: true)
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        guard [.move, .update].contains(type) else { return }
-
-        updateDataSource(animated: true, completion: { [weak self] in
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
+        let snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
+        
+        let shouldAnimate = view.window != nil
+        self.diffableDataSource.apply(snapshot, animatingDifferences: shouldAnimate, completion: { [weak self] in
+            for indexPath in self?.collectionView.indexPathsForVisibleItems ?? [] {
+                self?.setupCell(indexPath: indexPath)
+            }
             guard let window = self?.view.window as? HeadGazeWindow, let target = window.activeGazeTarget else {
-                    return
+                return
             }
             if let _ = self?.collectionView.indexPath(containing: target) {
                 window.cancelActiveGazeTarget()
             }
         })
 
-        if let newIndexPath = newIndexPath {
-            setupCell(indexPath: newIndexPath)
-        }
-        if let oldIndexPath = indexPath {
-            setupCell(indexPath: oldIndexPath)
-        }
     }
 
-    func setupCell(indexPath: IndexPath, cell inputCell: EditCategoriesDefaultCollectionViewCell? = nil, category: Category? = nil) {
+    private static let rowIndexFormatter = NumberFormatter()
+    private func setupCell(indexPath: IndexPath, cell inputCell: EditCategoriesDefaultCollectionViewCell? = nil, category: Category? = nil) {
         guard let cell = inputCell ?? collectionView.cellForItem(at: indexPath) as? EditCategoriesDefaultCollectionViewCell else { return }
+        let indexPath = diffableDataSource.indexPath(fromMappedIndexPath: indexPath)
         let category = category ?? fetchResultsController.object(at: indexPath)
 
-        let visibleTitleString = NSMutableAttributedString(string: "\(indexPath.row + 1). \(category.name ?? "")")
+        let rowOrdinal = indexPath.row + 1
+        let formattedRowOrdinal = EditCategoriesViewController.rowIndexFormatter.string(from: NSNumber(value: rowOrdinal)) ?? "\(rowOrdinal)"
+        let visibleTitleString = NSMutableAttributedString(string: "\(formattedRowOrdinal). \(category.name ?? "")")
         let hiddenTitleString = NSMutableAttributedString(string: "\(category.name ?? "")")
 
         if category.isHidden {
@@ -160,29 +157,22 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         }
 
         cell.separatorMask = collectionView.layout.separatorMask(for: indexPath)
-        cell.ordinalButtonMask = cellOrdinalButtonMask(with: category, for: indexPath)
+        cell.ordinalButtonMask = cellOrdinalButtonMask(for: indexPath)
         cell.showCategoryDetailButton.isEnabled = (category.identifier != .userFavorites)
     }
 
-    private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
-        let content = fetchResultsController.fetchedObjects ?? []
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Category>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(content)
-        diffableDataSource.apply(snapshot,
-                                 animatingDifferences: animated,
-                                 completion: completion)
-    }
-
     @objc private func handleMoveCategoryUp(_ sender: UIButton) {
-        guard let fromIndexPath = collectionView.indexPath(containing: sender) else {
+        guard let _fromIndexPath = collectionView.indexPath(containing: sender) else {
             assertionFailure("Failed to obtain index path")
             return
         }
-        guard let toIndexPath = collectionView.indexPath(before: fromIndexPath) else {
+        let fromIndexPath = diffableDataSource.indexPath(fromMappedIndexPath: _fromIndexPath)
+
+        guard let toIndexPath = collectionView.indexPath(before: _fromIndexPath) else {
             assertionFailure("Failed to obtain index before indexPath")
             return
         }
+
         let fromCategory = fetchResultsController.object(at: fromIndexPath)
         let toCategory = fetchResultsController.object(at: toIndexPath)
 
@@ -191,10 +181,12 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
     }
 
     @objc private func handleMoveCategoryDown(_ sender: UIButton) {
-        guard let fromIndexPath = collectionView.indexPath(containing: sender) else {
+        guard let _fromIndexPath = collectionView.indexPath(containing: sender) else {
             assertionFailure("Failed to obtain index path")
             return
         }
+        let fromIndexPath = diffableDataSource.indexPath(fromMappedIndexPath: _fromIndexPath)
+
         guard let toIndexPath = collectionView.indexPath(after: fromIndexPath) else {
             assertionFailure("Failed to obtain index before indexPath")
             return
@@ -207,10 +199,12 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
     }
 
     @objc private func handleShowEditCategoryDetail(_ sender: UIButton) {
-        guard let indexPath = collectionView.indexPath(containing: sender) else {
+        guard let _indexPath = collectionView.indexPath(containing: sender) else {
             assertionFailure("Failed to obtain index path")
             return
         }
+
+        let indexPath = diffableDataSource.indexPath(fromMappedIndexPath: _indexPath)
 
         let viewController = UIStoryboard(name: "EditCategoryDetail", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as! EditCategoryDetailViewController
         viewController.category = fetchResultsController.object(at: indexPath)
@@ -242,7 +236,11 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         return titleString
     }
 
-    private func cellOrdinalButtonMask(with category: Category, for indexPath: IndexPath) -> CellOrdinalButtonMask {
+    private func cellOrdinalButtonMask(for indexPath: IndexPath) -> CellOrdinalButtonMask {
+
+        let indexPath = diffableDataSource.indexPath(fromMappedIndexPath: indexPath)
+        let category = fetchResultsController.object(at: indexPath)
+
         if category.isHidden {
             return .none
         }
@@ -263,11 +261,11 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         return .both
     }
 
-    @objc func backToEditCategories(_ sender: Any) {
+    @objc private func backToEditCategories(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func addButtonPressed(_ sender: Any) {
+    @objc private func addButtonPressed(_ sender: Any) {
         let viewController = EditTextViewController()
         viewController.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
