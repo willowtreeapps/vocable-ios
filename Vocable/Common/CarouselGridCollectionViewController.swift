@@ -69,6 +69,7 @@ class CarouselGridCollectionView: UICollectionView {
             }
             guard contentSize != lastInvalidatedContentSize else { return }
             if needsInitialScrollToMiddle {
+                layoutIfNeeded()
                 needsInitialScrollToMiddle = !scrollToMiddleSection(animated: false)
             } else {
                 snapToBoundaryIfNeeded()
