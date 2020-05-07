@@ -62,14 +62,18 @@ class CarouselGridCollectionView: UICollectionView {
     private var lastInvalidatedContentSize: CGSize = .zero
     override var contentSize: CGSize {
         didSet {
+            defer {
+                if !needsInitialScrollToMiddle {
+                    lastInvalidatedContentSize = contentSize
+                }
+            }
             guard contentSize != lastInvalidatedContentSize else { return }
-            if !contentSize.area.isZero && needsInitialScrollToMiddle {
-                scrollToMiddleSection(animated: false)
-                needsInitialScrollToMiddle = false
+            if needsInitialScrollToMiddle {
+                layoutIfNeeded()
+                needsInitialScrollToMiddle = !scrollToMiddleSection(animated: false)
             } else {
                 snapToBoundaryIfNeeded()
             }
-            lastInvalidatedContentSize = contentSize
         }
     }
 
@@ -100,24 +104,36 @@ class CarouselGridCollectionView: UICollectionView {
     }
 
     @objc func scrollToNextPage() {
+        if needsInitialScrollToMiddle {
+            scrollToMiddleSection(animated: false)
+            needsInitialScrollToMiddle = false
+        }
         if let offset = layout.scrollOffsetForPageWithOffsetFromCurrentPage(offset: 1) {
             scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: true)
         }
     }
 
     @objc func scrollToPreviousPage() {
+        if needsInitialScrollToMiddle {
+            scrollToMiddleSection(animated: false)
+            needsInitialScrollToMiddle = false
+        }
         if let offset = layout.scrollOffsetForPageWithOffsetFromCurrentPage(offset: -1) {
             scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: true)
         }
     }
 
-    func scrollToMiddleSection(animated: Bool) {
-        if let offset = layout.scrollOffsetForLeftmostCellOfCurrentPageInMiddleSection() {
-            scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: animated)
+    @discardableResult
+    func scrollToMiddleSection(animated: Bool) -> Bool {
+
+        guard let offset = layout.scrollOffsetForLeftmostCellOfCurrentPageInMiddleSection() else {
+            return false
         }
+        scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: animated)
         if !animated {
             layoutIfNeeded()
         }
+        return true
     }
 
     private func snapToBoundaryIfNeeded() {
