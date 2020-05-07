@@ -230,7 +230,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             collectionView.deselectItem(at: indexPath, animated: true)
         }
 
-        let item = dataSource.snapshot().itemIdentifiers[indexPath.item]
+        let item = dataSource.itemIdentifier(for: indexPath)
         switch item {
         case .privacyPolicy:
             presentLeavingHeadTrackableDomainAlert(withConfirmation: presentPrivacyAlert)
