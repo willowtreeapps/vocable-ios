@@ -66,7 +66,7 @@ private class ContentView: UIView {
     override func updateConstraints() {
         super.updateConstraints()
 
-//        layoutMargins = .zero
+        layoutMargins = .zero
 
         let buttonSpacing: CGFloat
         let buttonSize: CGSize
@@ -86,18 +86,17 @@ private class ContentView: UIView {
 
         // Title label
         if let titleView = titleView {
-            titleView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+            titleView.setContentCompressionResistancePriority(.init(rawValue: 999), for: .horizontal)
             let titleCenterX = titleView.centerXAnchor.constraint(equalTo: centerXAnchor)
             titleCenterX.priority = .init(rawValue: 999)
             let titleCenterY = titleView.centerYAnchor.constraint(equalTo: layoutMargins.centerYAnchor)
             titleCenterY.priority = .init(rawValue: 999)
 
-            #warning("This layout may need to be refactor to better handle long title")
             constraints += [
                 titleCenterX,
-                titleCenterY
-//                titleView.leadingAnchor.constraint(lessThanOrEqualTo: layoutMargins.leadingAnchor),
-//                titleView.trailingAnchor.constraint(greaterThanOrEqualTo: layoutMargins.trailingAnchor)
+                titleCenterY,
+                titleView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMargins.leadingAnchor),
+                titleView.trailingAnchor.constraint(lessThanOrEqualTo: layoutMargins.trailingAnchor)
             ]
         }
 
