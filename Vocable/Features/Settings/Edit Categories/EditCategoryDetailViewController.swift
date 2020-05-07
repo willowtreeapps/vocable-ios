@@ -13,6 +13,11 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
 
     var category: Category!
 
+    private enum Section: Int, CaseIterable {
+        case header
+        case body
+    }
+
     private enum EditCategoryItem: Int {
         case titleEditView
         case showCategoryToggle
@@ -21,7 +26,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
     }
 
     private let context = NSPersistentContainer.shared.viewContext
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, EditCategoryItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, EditCategoryItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
 
@@ -32,6 +37,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
 
         setupNavigationBar()
         setupCollectionView()
+        updateDataSource()
     }
 
     private func setupNavigationBar() {
@@ -46,60 +52,109 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
     // MARK: UICollectionViewDataSource
     
     private func updateDataSource() {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, EditCategoryItem>()
-        snapshot.appendSections([0])
+        var snapshot = NSDiffableDataSourceSnapshot<Section, EditCategoryItem>()
+        snapshot.appendSections([.header])
+        snapshot.appendItems([.titleEditView])
 
+        snapshot.appendSections([.body])
         if AppConfig.editPhrasesEnabled {
-            snapshot.appendItems([.titleEditView, .showCategoryToggle, .addPhrase, .removeCategory])
+            snapshot.appendItems([.showCategoryToggle, .addPhrase, .removeCategory])
         } else {
-            snapshot.appendItems([.titleEditView, .showCategoryToggle, .removeCategory])
+            snapshot.appendItems([.showCategoryToggle, .removeCategory])
         }
 
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     private func setupCollectionView() {
-        collectionView.dataSource = dataSource
-        collectionView.delegate = self
-        collectionView.backgroundColor = .collectionViewBackgroundColor
-        collectionView.allowsMultipleSelection = true
-        collectionView.allowsSelection = true
-        collectionView.delaysContentTouches = false
-
         collectionView.register(UINib(nibName: "EditCategoryDetailsHeaderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryDetailTitleCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "EditCategoryToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "EditCategoryRemoveCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "SettingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier)
-        
-        updateDataSource()
-        
-        let layout = createLayout()
-        collectionView.collectionViewLayout = layout
-    }
-    
-    private func createLayout() -> UICollectionViewLayout {
-        let showCategoryToggleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        showCategoryToggleItem.contentInsets = .init(top: 8, leading: 0, bottom: 8, trailing: 0)
-        
-        var showRemoveCategoryGroupFractionalHeight: NSCollectionLayoutDimension {
-            if case .compact = traitCollection.verticalSizeClass {
-                return .fractionalHeight(1 / 3)
+        collectionView.backgroundColor = .collectionViewBackgroundColor
+
+        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout { (sectionIndex, environment) -> NSCollectionLayoutSection? in
+
+            let section = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
+            switch section {
+            case .header:
+                return self.headerSection(environment: environment)
+            case .body:
+                return self.bodySection(environment: environment)
             }
-            return .fractionalHeight(1 / 8)
         }
-        
-        let showRemoveCategoryGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: showRemoveCategoryGroupFractionalHeight)
-        let showRemoveCategoryGroup = NSCollectionLayoutGroup.vertical(layoutSize: showRemoveCategoryGroupSize, subitems: [showCategoryToggleItem])
-        
-        let section = NSCollectionLayoutSection(group: showRemoveCategoryGroup)
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
     }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        collectionView.setCollectionViewLayout(createLayout(), animated: false)
+
+    private func headerSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+
+        let itemHeightDimension = NSCollectionLayoutDimension.absolute(50)
+        let itemWidthDimension = NSCollectionLayoutDimension.fractionalWidth(1.0)
+
+        let itemSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        group.interItemSpacing = .fixed(8)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 8
+        section.contentInsets = sectionInsets(for: environment)
+        section.contentInsets.top = 8
+        return section
+    }
+
+    private func bodySection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+
+        let itemHeightDimension: NSCollectionLayoutDimension
+        let itemWidthDimension = NSCollectionLayoutDimension.fractionalWidth(1.0)
+
+        if sizeClass.contains(any: .compact) {
+            itemHeightDimension = .absolute(50)
+        } else {
+            itemHeightDimension = .absolute(100)
+        }
+
+        let itemSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        group.interItemSpacing = .fixed(8)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 8
+        section.contentInsets = sectionInsets(for: environment)
+        section.contentInsets.top = 8
+        return section
+    }
+
+    private func sectionInsets(for environment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
+        return NSDirectionalEdgeInsets(top: 0,
+                                       leading: max(view.layoutMargins.left - environment.container.contentInsets.leading, 0),
+                                       bottom: 0,
+                                       trailing: max(view.layoutMargins.right - environment.container.contentInsets.trailing, 0))
+    }
+
+    private func defaultSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+
+        let itemHeightDimension: NSCollectionLayoutDimension
+        let itemWidthDimension = NSCollectionLayoutDimension.fractionalWidth(1.0)
+
+        if sizeClass.contains(any: .compact) {
+            itemHeightDimension = .absolute(50)
+        } else {
+            itemHeightDimension = .absolute(100)
+        }
+
+        let itemSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        group.interItemSpacing = .fixed(8)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 8
+        section.contentInsets = sectionInsets(for: environment)
+        return section
     }
 
     private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: EditCategoryItem) -> UICollectionViewCell {
@@ -251,9 +306,9 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
     // MARK: EditCategoryDetailTitleCollectionViewCellDelegate
 
     func didTapEdit() {
-        let vc = EditTextViewController()
-        vc.initialText = category.name ?? ""
-        vc.editTextCompletionHandler = { (newText) -> Void in
+        let viewController = EditTextViewController()
+        viewController.initialText = category.name ?? ""
+        viewController.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
             if let categoryIdentifier = self.category.identifier {
@@ -264,14 +319,17 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
                 try Category.updateAllOrdinalValues(in: context)
                 try context.save()
 
-                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "User edited name of the category and saved it successfully")
+                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title",
+                                                     comment: "User edited name of the category and saved it successfully")
 
                 ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                self.updateDataSource()
             } catch {
                 assertionFailure("Failed to save category: \(error)")
             }
         }
-        present(vc, animated: true)
+
+        present(viewController, animated: true)
     }
     
 }

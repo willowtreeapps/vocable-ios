@@ -48,16 +48,15 @@ final class SelectionModeViewController: VocableCollectionViewController {
         })
     }
 
-    private func sectionInsets(for environment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
-        return NSDirectionalEdgeInsets(top: 0,
-                                       leading: max(view.layoutMargins.left - environment.container.contentInsets.leading, 0),
-                                       bottom: 0,
-                                       trailing: max(view.layoutMargins.right - environment.container.contentInsets.trailing, 0))
-    }
-
     private func layoutSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
-        let itemHeightDimension = NSCollectionLayoutDimension.absolute(50)
+        let itemHeightDimension: NSCollectionLayoutDimension
+        if sizeClass.contains(.vCompact) {
+                itemHeightDimension = NSCollectionLayoutDimension.absolute(50)
+            } else {
+                itemHeightDimension = NSCollectionLayoutDimension.absolute(100)
+            }
+
         let itemWidthDimension = NSCollectionLayoutDimension.fractionalWidth(1.0)
         let columnCount = 1
 
@@ -72,6 +71,13 @@ final class SelectionModeViewController: VocableCollectionViewController {
         section.contentInsets = sectionInsets(for: environment)
         section.contentInsets.top = 16
         return section
+    }
+
+    private func sectionInsets(for environment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
+        return NSDirectionalEdgeInsets(top: 0,
+                                       leading: max(view.layoutMargins.left - environment.container.contentInsets.leading, 0),
+                                       bottom: 0,
+                                       trailing: max(view.layoutMargins.right - environment.container.contentInsets.trailing, 0))
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
