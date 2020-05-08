@@ -46,7 +46,7 @@ jobs:
           command: bundle exec fastlane $FASTLANE_LANE
       - store_artifacts:
           path: output
-  export-locations-for-crowdin:
+  export-localizations-for-crowdin:
     macos: 
       xcode: 11.4.0
     steps:
@@ -62,10 +62,8 @@ jobs:
             git config credential.helper 'cache --timeout=120'
             git config user.email "localization_bot@willowtreeapps.com"
             git config user.name "Localization Bot"
-            if git diff-index --quiet HEAD --; then
-                # No changes
-            else
-                git commit -m "Updated localizations for Crowdin Export [ci skip]"
+            if ! git diff-index --quiet HEAD --; then
+                git commit -m "Updatedapp localizations for Crowdin Export [ci skip]"
                 git push -q git@github.com:willowtreeapps/vocable-ios.git ${CIRCLE_BRANCH}
             fi
             
@@ -95,16 +93,19 @@ jobs:
 workflows:
   build-test-adhoc-testflight:
     jobs:
-      - export-locations-for-crowdin
       - build-and-test:
           filters:
             branches:
               ignore: /crowdin.*/ 
+      - export-localizations-for-crowdin:
+          requires:
+            - build-and-test
       - buildanddeploytotestflight:
           filters:
             branches:
               only: develop
           requires:
+            - export-localizations-for-crowdin
             - build-and-test
   localize-build-test:
     jobs:
