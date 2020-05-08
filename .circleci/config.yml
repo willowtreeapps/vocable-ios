@@ -48,14 +48,14 @@ jobs:
           path: output
           
   update-localizations-test-deploy:
-	  macos: 
-	    xcode: 11.4.0
+    macos: 
+      xcode: 11.4.0
     steps:
-	    - checkout
-	    - run: bundle install
-	    - run:
-	        name: Fastlane
-	        command: bundle exec fastlane xliffimport
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane xliffimport
       - run:
           name: Fastlane
           command: bundle exec fastlane test
