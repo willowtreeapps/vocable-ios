@@ -1,5 +1,5 @@
 //
-//  EditCategoriesCollectionViewController.swift
+//  EditCategoriesViewController.swift
 //  Vocable AAC
 //
 //  Created by Jesse Morgan on 3/31/20.
@@ -7,26 +7,30 @@
 //
 
 import UIKit
+import Combine
 import CoreData
 
-final class EditCategoriesCollectionViewController: CarouselGridCollectionViewController, NSFetchedResultsControllerDelegate {
-    
-    private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, Category>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, category) -> UICollectionViewCell? in
+final class EditCategoriesViewController: PagingCarouselViewController, NSFetchedResultsControllerDelegate {
+
+    private var carouselCollectionViewController: CarouselGridCollectionViewController?
+    private var disposables = Set<AnyCancellable>()
+
+    private lazy var diffableDataSource = CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID>(collectionView: collectionView) { [weak self] (collectionView, indexPath, category) -> UICollectionViewCell? in
         guard let self = self else { return nil }
-        
+        let category = self.fetchResultsController.object(at: indexPath)
         let cell: EditCategoriesDefaultCollectionViewCell
         if self.traitCollection.horizontalSizeClass == .compact && self.traitCollection.verticalSizeClass == .regular {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EditCategoriesCompactCollectionViewCell", for: indexPath) as! EditCategoriesDefaultCollectionViewCell
         } else {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoriesDefaultCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoriesDefaultCollectionViewCell
         }
-        
+
         self.setupCell(indexPath: indexPath, cell: cell, category: category)
-        
+
         cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
         cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
         cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
-        
+
         return cell
     }
 
@@ -37,188 +41,181 @@ final class EditCategoriesCollectionViewController: CarouselGridCollectionViewCo
         NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)]
         return request
     }()
-    
+
     private lazy var fetchResultsController = NSFetchedResultsController<Category>(fetchRequest: self.fetchRequest,
-                                                                                 managedObjectContext: NSPersistentContainer.shared.viewContext,
-                                                                                 sectionNameKeyPath: nil,
-                                                                                 cacheName: nil)
+                                                                                   managedObjectContext: NSPersistentContainer.shared.viewContext,
+                                                                                   sectionNameKeyPath: nil,
+                                                                                   cacheName: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        collectionView.register(UINib(nibName: "EditCategoriesDefaultCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoriesDefaultCollectionViewCell.reuseIdentifier)
-        collectionView.register(UINib(nibName: "EditCategoriesCompactCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EditCategoriesCompactCollectionViewCell")
-        collectionView.backgroundColor = .collectionViewBackgroundColor
 
         updateLayoutForCurrentTraitCollection()
 
         fetchResultsController.delegate = self
         try? fetchResultsController.performFetch()
-        updateDataSource(animated: false)
+
+        setupNavigationBar()
+        setupCollectionView()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateDataSource(animated: false)
+
+    private func setupNavigationBar() {
+        navigationBar.title = NSLocalizedString("categories_list_editor.header.title",
+                                                comment: "Categories list editor screen header title")
+
+        navigationBar.leftButton = {
+            let button = GazeableButton(frame: .zero)
+            button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            button.addTarget(self, action: #selector(backToEditCategories), for: .primaryActionTriggered)
+            return button
+        }()
+
+        if AppConfig.editPhrasesEnabled {
+            navigationBar.rightButton = {
+                let button = GazeableButton(frame: .zero)
+                button.setImage(UIImage(systemName: "plus"), for: .normal)
+                button.addTarget(self, action: #selector(addButtonPressed), for: .primaryActionTriggered)
+                return button
+            }()
+        }
+    }
+
+    private func setupCollectionView() {
+        collectionView.register(UINib(nibName: "EditCategoriesDefaultCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoriesDefaultCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "EditCategoriesCompactCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EditCategoriesCompactCollectionViewCell")
+        collectionView.backgroundColor = .collectionViewBackgroundColor
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+
         updateLayoutForCurrentTraitCollection()
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
     }
-
+    
     private func updateLayoutForCurrentTraitCollection() {
-        layout.interItemSpacing = 0
+        collectionView.layout.interItemSpacing = 0
+        collectionView.layout.numberOfColumns = .fixedCount(1)
 
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
-            layout.numberOfColumns = 1
-            layout.numberOfRows = .minimumHeight(75)
+            collectionView.layout.numberOfRows = .minimumHeight(75)
         case (.compact, .regular):
-            layout.numberOfColumns = 1
-            layout.numberOfRows = .minimumHeight(135)
+            collectionView.layout.numberOfRows = .minimumHeight(135)
         case (.compact, .compact), (.regular, .compact):
-            layout.numberOfColumns = 1
-            layout.numberOfRows = .minimumHeight(75)
+            collectionView.layout.numberOfRows = .minimumHeight(75)
         default:
             break
         }
     }
 
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return false
     }
 
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return false
     }
 
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateDataSource(animated: true)
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        guard [.move, .update].contains(type) else { return }
-
-        updateDataSource(animated: true, completion: { [weak self] in
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
+        let snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
+        
+        let shouldAnimate = view.window != nil
+        self.diffableDataSource.apply(snapshot, animatingDifferences: shouldAnimate, completion: { [weak self] in
+            for indexPath in self?.collectionView.indexPathsForVisibleItems ?? [] {
+                self?.setupCell(indexPath: indexPath)
+            }
             guard let window = self?.view.window as? HeadGazeWindow, let target = window.activeGazeTarget else {
-                    return
+                return
             }
             if let _ = self?.collectionView.indexPath(containing: target) {
                 window.cancelActiveGazeTarget()
             }
         })
-        
-        if let newIndexPath = newIndexPath {
-            setupCell(indexPath: newIndexPath)
-        }
-        if let oldIndexPath = indexPath {
-            setupCell(indexPath: oldIndexPath)
-        }
+
     }
-    
-    func setupCell(indexPath: IndexPath, cell inputCell: EditCategoriesDefaultCollectionViewCell? = nil, category: Category? = nil) {
+
+    private static let rowIndexFormatter = NumberFormatter()
+    private func setupCell(indexPath: IndexPath, cell inputCell: EditCategoriesDefaultCollectionViewCell? = nil, category: Category? = nil) {
         guard let cell = inputCell ?? collectionView.cellForItem(at: indexPath) as? EditCategoriesDefaultCollectionViewCell else { return }
+        let indexPath = diffableDataSource.indexPath(fromMappedIndexPath: indexPath)
         let category = category ?? fetchResultsController.object(at: indexPath)
-        
-        let visibleTitleString = NSMutableAttributedString(string: "\(indexPath.row + 1). \(category.name ?? "")")
+
+        let rowOrdinal = indexPath.row + 1
+        let formattedRowOrdinal = EditCategoriesViewController.rowIndexFormatter.string(from: NSNumber(value: rowOrdinal)) ?? "\(rowOrdinal)"
+        let visibleTitleString = NSMutableAttributedString(string: "\(formattedRowOrdinal). \(category.name ?? "")")
         let hiddenTitleString = NSMutableAttributedString(string: "\(category.name ?? "")")
-       
+
         if category.isHidden {
             cell.setup(title: addHiddenIconIfNeeded(to: hiddenTitleString))
         } else {
             cell.setup(title: visibleTitleString)
         }
-        cell.separatorMask = self.layout.separatorMask(for: indexPath)
-        cell.ordinalButtonMask = cellOrdinalButtonMask(with: category, for: indexPath)
+
+        cell.separatorMask = collectionView.layout.separatorMask(for: indexPath)
+        cell.ordinalButtonMask = cellOrdinalButtonMask(for: indexPath)
         cell.showCategoryDetailButton.isEnabled = (category.identifier != .userFavorites)
-    }
-    
-    private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
-        let content = fetchResultsController.fetchedObjects ?? []
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Category>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(content)
-        diffableDataSource.apply(snapshot,
-                                 animatingDifferences: animated,
-                                 completion: completion)
     }
 
     @objc private func handleMoveCategoryUp(_ sender: UIButton) {
-        guard let fromIndexPath = collectionView.indexPath(containing: sender) else {
+        guard let _fromIndexPath = collectionView.indexPath(containing: sender) else {
             assertionFailure("Failed to obtain index path")
             return
         }
-        guard let toIndexPath = indexPath(before: fromIndexPath) else {
+        let fromIndexPath = diffableDataSource.indexPath(fromMappedIndexPath: _fromIndexPath)
+
+        guard let toIndexPath = collectionView.indexPath(before: _fromIndexPath) else {
             assertionFailure("Failed to obtain index before indexPath")
             return
         }
+
         let fromCategory = fetchResultsController.object(at: fromIndexPath)
         let toCategory = fetchResultsController.object(at: toIndexPath)
-        
+
         swapOrdinal(fromCategory: fromCategory, toCategory: toCategory)
         saveContext()
     }
-    
+
     @objc private func handleMoveCategoryDown(_ sender: UIButton) {
-        guard let fromIndexPath = collectionView.indexPath(containing: sender) else {
+        guard let _fromIndexPath = collectionView.indexPath(containing: sender) else {
             assertionFailure("Failed to obtain index path")
             return
         }
-        guard let toIndexPath = indexPath(after: fromIndexPath) else {
+        let fromIndexPath = diffableDataSource.indexPath(fromMappedIndexPath: _fromIndexPath)
+
+        guard let toIndexPath = collectionView.indexPath(after: fromIndexPath) else {
             assertionFailure("Failed to obtain index before indexPath")
             return
         }
         let fromCategory = fetchResultsController.object(at: fromIndexPath)
         let toCategory = fetchResultsController.object(at: toIndexPath)
-        
+
         swapOrdinal(fromCategory: fromCategory, toCategory: toCategory)
-        
         saveContext()
-        
     }
-    
+
     @objc private func handleShowEditCategoryDetail(_ sender: UIButton) {
-        guard let indexPath = collectionView.indexPath(containing: sender) else {
+        guard let _indexPath = collectionView.indexPath(containing: sender) else {
             assertionFailure("Failed to obtain index path")
             return
         }
-        
-        let viewController = UIStoryboard(name: "EditCategories", bundle: nil).instantiateViewController(identifier: "EditCategoryDetail") as! EditCategoryDetailViewController
+
+        let viewController = EditCategoryDetailViewController()
+        let indexPath = diffableDataSource.indexPath(fromMappedIndexPath: _indexPath)
         viewController.category = fetchResultsController.object(at: indexPath)
         show(viewController, sender: nil)
     }
-    
-    private func indexPath(after indexPath: IndexPath) -> IndexPath? {
-        let itemsInSection = collectionView.numberOfItems(inSection: 0)
-        let candidateIndex = indexPath.item + 1
-        if candidateIndex >= itemsInSection {
-            return nil
-        } else {
-            return IndexPath(row: candidateIndex, section: 0)
-        }
-    }
-    
-    private func indexPath(before indexPath: IndexPath) -> IndexPath? {
-        let candidateIndex = indexPath.item - 1
-        if candidateIndex < 0 {
-            return nil
-        } else {
-            return IndexPath(row: candidateIndex, section: 0)
-        }
-    }
-    
+
     private func swapOrdinal(fromCategory: Category, toCategory: Category) {
         let fromOrdinal = fromCategory.ordinal
         let toOrdinal = toCategory.ordinal
-        
+
         fromCategory.ordinal = toOrdinal
         toCategory.ordinal = fromOrdinal
     }
-    
+
     private func saveContext() {
         do {
             try fetchResultsController.managedObjectContext.save()
@@ -226,7 +223,7 @@ final class EditCategoriesCollectionViewController: CarouselGridCollectionViewCo
             assertionFailure("Failed to move category: \(error)")
         }
     }
-    
+
     private func addHiddenIconIfNeeded(to titleString: NSMutableAttributedString) -> NSMutableAttributedString {
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "eye.slash.fill")?.withTintColor(UIColor.white)
@@ -235,12 +232,16 @@ final class EditCategoriesCollectionViewController: CarouselGridCollectionViewCo
         titleString.insert(NSAttributedString(attachment: imageAttachment), at: 0)
         return titleString
     }
-    
-    private func cellOrdinalButtonMask(with category: Category, for indexPath: IndexPath) -> CellOrdinalButtonMask {
+
+    private func cellOrdinalButtonMask(for indexPath: IndexPath) -> CellOrdinalButtonMask {
+
+        let indexPath = diffableDataSource.indexPath(fromMappedIndexPath: indexPath)
+        let category = fetchResultsController.object(at: indexPath)
+
         if category.isHidden {
             return .none
         }
-        
+
         //Check if the cell below the current one is hidden, disable down button if needed.
         if indexPath.row + 1 < fetchResultsController.fetchedObjects?.count ?? 0 {
             let nextIndex = IndexPath(row: indexPath.row + 1, section: indexPath.section)
@@ -248,7 +249,7 @@ final class EditCategoriesCollectionViewController: CarouselGridCollectionViewCo
                 return .topUpArrow
             }
         }
-        
+
         if indexPath.row == 0 {
             return .bottomDownArrow
         } else if indexPath.row == collectionView.numberOfItems(inSection: 0) - 1 {
@@ -256,4 +257,31 @@ final class EditCategoriesCollectionViewController: CarouselGridCollectionViewCo
         }
         return .both
     }
+
+    @objc private func backToEditCategories(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func addButtonPressed(_ sender: Any) {
+        let viewController = EditTextViewController()
+        viewController.editTextCompletionHandler = { (newText) -> Void in
+            let context = NSPersistentContainer.shared.viewContext
+
+            _ = Category.create(withUserEntry: newText, in: context)
+            do {
+                try Category.updateAllOrdinalValues(in: context)
+                try context.save()
+
+                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
+
+                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+            } catch {
+                assertionFailure("Failed to save category: \(error)")
+            }
+        }
+
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true)
+    }
+    
 }

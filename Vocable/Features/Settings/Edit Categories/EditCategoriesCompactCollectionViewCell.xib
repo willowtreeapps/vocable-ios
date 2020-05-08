@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EditCategoriesCompactCollectionViewCell" id="yFj-S9-Vtf" customClass="EditCategoriesDefaultCollectionViewCell" customModule="Vocable" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="EditCategoriesCompactCollectionViewCell" id="yFj-S9-Vtf" customClass="EditCategoriesDefaultCollectionViewCell" customModule="Vocable" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="704" height="196"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="PX7-fo-08L">
@@ -18,47 +18,41 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWY-nm-Hv6" userLabel="BottomSeparator">
-                        <rect key="frame" x="20" y="160" width="664" height="2"/>
+                        <rect key="frame" x="20" y="194" width="664" height="2"/>
                         <color key="backgroundColor" name="DefaultCellBackground"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="tSY-ue-dhy"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveDownButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                        <rect key="frame" x="112" y="98" width="84" height="54"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-WK-NlS" userLabel="MoveDownButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                        <rect key="frame" x="112" y="132" width="84" height="54"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="84" id="DnU-vb-Ln9"/>
                             <constraint firstAttribute="height" constant="54" id="FOm-kP-JDa"/>
                         </constraints>
                         <color key="tintColor" name="DefaultFontColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.down" catalog="system"/>
-                        </userDefinedRuntimeAttributes>
+                        <state key="normal" image="chevron.down" catalog="system"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIe-C4-EHn" userLabel="MoveUpButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                        <rect key="frame" x="20" y="98" width="84" height="54"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIe-C4-EHn" userLabel="MoveUpButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                        <rect key="frame" x="20" y="132" width="84" height="54"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="54" id="eF3-ax-GmT"/>
                             <constraint firstAttribute="width" constant="84" id="m2b-i3-ggR"/>
                         </constraints>
                         <color key="tintColor" name="DefaultFontColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.up" catalog="system"/>
-                        </userDefinedRuntimeAttributes>
+                        <state key="normal" image="chevron.up" catalog="system"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfR-1l-Qp7" userLabel="ShowCategoryDetailButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfR-1l-Qp7" userLabel="ShowCategoryDetailButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                         <rect key="frame" x="636" y="71" width="48" height="54"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="54" id="Gqm-Up-tsr"/>
                             <constraint firstAttribute="width" constant="48" id="iZI-pH-Vfy"/>
                         </constraints>
                         <color key="tintColor" name="DefaultFontColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="chevron.right" catalog="system"/>
-                        </userDefinedRuntimeAttributes>
+                        <state key="normal" image="chevron.right" catalog="system"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. General" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3t9-YV-add" userLabel="CategoryName">
-                        <rect key="frame" x="20" y="52" width="128" height="34"/>
+                        <rect key="frame" x="20" y="8" width="128" height="34"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                         <color key="textColor" name="DefaultFontColor"/>
                         <nil key="highlightedColor"/>
@@ -77,7 +71,7 @@
                     <constraint firstItem="Ieb-WK-NlS" firstAttribute="leading" secondItem="yIe-C4-EHn" secondAttribute="trailing" constant="8" id="xeB-Dh-o8W"/>
                     <constraint firstItem="3t9-YV-add" firstAttribute="top" secondItem="PX7-fo-08L" secondAttribute="topMargin" constant="8" id="ytA-aR-5fq"/>
                 </constraints>
-                <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
+                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
             </collectionViewCellContentView>
             <size key="customSize" width="704" height="196"/>
             <connections>

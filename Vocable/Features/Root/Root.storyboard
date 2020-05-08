@@ -2,25 +2,249 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yUp-dU-mBF">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Root View Controller-->
         <scene sceneID="ojk-qs-2Ke">
             <objects>
-                <viewController id="yUp-dU-mBF" sceneMemberID="viewController">
+                <viewController id="yUp-dU-mBF" customClass="RootViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gXE-mI-utM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YZa-3u-zGZ" userLabel="Text Container Stack View">
+                                <rect key="frame" x="20" y="44" width="374" height="124"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J42-u9-ywg">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="68"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="68" id="lAv-Xu-XWF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
+                                        <color key="textColor" name="DefaultFontColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="lAv-Xu-XWF"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="lAv-Xu-XWF"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1OT-dF-ssX" userLabel="Navigation Buttons Stack View">
+                                        <rect key="frame" x="0.0" y="76" width="374" height="48"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abu-M3-qXM" userLabel="Keyboard Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="183" height="48"/>
+                                                <color key="tintColor" name="DefaultFontColor"/>
+                                                <state key="normal" image="keyboard" catalog="system">
+                                                    <color key="titleColor" name="DefaultFontColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="keyboardButtonSelected:" destination="yUp-dU-mBF" eventType="primaryActionTriggered" id="FjK-bf-PNb"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EnH-qh-EMS" userLabel="Settings Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                                <rect key="frame" x="191" y="0.0" width="183" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="61" id="uZE-bU-gjN">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="104"/>
+                                                    </constraint>
+                                                </constraints>
+                                                <color key="tintColor" name="DefaultFontColor"/>
+                                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                                <state key="normal" image="gear" catalog="system">
+                                                    <color key="titleColor" name="DefaultFontColor"/>
+                                                </state>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <mask key="constraints">
+                                                        <exclude reference="uZE-bU-gjN"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="settingsButtonSelected:" destination="yUp-dU-mBF" eventType="primaryActionTriggered" id="ppS-Lw-f5e"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="999" constant="48" id="9pf-8F-etE">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="96"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" secondItem="1OT-dF-ssX" secondAttribute="height" multiplier="2:1" id="Olp-S3-43F"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Olp-S3-43F"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <mask key="constraints">
+                                                <exclude reference="Olp-S3-43F"/>
+                                            </mask>
+                                        </variation>
+                                    </stackView>
+                                </subviews>
+                                <variation key="heightClass=compact" axis="horizontal"/>
+                                <variation key="widthClass=regular" axis="horizontal"/>
+                            </stackView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="duu-pz-FR0">
+                                <rect key="frame" x="20" y="176" width="374" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="3at-Br-903">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="110"/>
+                                    </constraint>
+                                </constraints>
+                                <connections>
+                                    <segue destination="33R-xW-UrQ" kind="embed" identifier="CategoryCarousel" id="mSs-SS-3vM"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="YZa-3u-zGZ" firstAttribute="height" secondItem="duu-pz-FR0" secondAttribute="height" id="KoW-Oy-V25"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YZa-3u-zGZ" secondAttribute="trailing" id="UfM-Xk-zaS"/>
+                            <constraint firstItem="duu-pz-FR0" firstAttribute="leading" secondItem="gXE-mI-utM" secondAttribute="leadingMargin" id="al4-yI-ohn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="duu-pz-FR0" secondAttribute="trailing" id="dwG-M9-PDn"/>
+                            <constraint firstItem="YZa-3u-zGZ" firstAttribute="top" secondItem="gXE-mI-utM" secondAttribute="topMargin" id="j1v-s5-Xxp"/>
+                            <constraint firstItem="duu-pz-FR0" firstAttribute="top" secondItem="YZa-3u-zGZ" secondAttribute="bottom" constant="8" id="pmR-lh-rWw"/>
+                            <constraint firstItem="YZa-3u-zGZ" firstAttribute="leading" secondItem="gXE-mI-utM" secondAttribute="leadingMargin" id="rfh-em-47L"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="gns-yT-Ewt"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="KoW-Oy-V25"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="KoW-Oy-V25"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="keyboardButton" destination="Abu-M3-qXM" id="0tx-N3-C5W"/>
+                        <outlet property="outputLabel" destination="J42-u9-ywg" id="brG-gy-yme"/>
+                        <outlet property="settingsButton" destination="EnH-qh-EMS" id="8bD-ip-Wqv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vf6-JT-R6r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-201" y="134"/>
+            <point key="canvasLocation" x="-202.40000000000001" y="133.74384236453201"/>
+        </scene>
+        <!--Categories Carousel View Controller-->
+        <scene sceneID="Jls-X7-tzh">
+            <objects>
+                <viewController id="33R-xW-UrQ" customClass="CategoriesCarouselViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ysz-No-obO">
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="48"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fb7-Uu-X9X" userLabel="Left Chevron" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="4bS-Hn-9Cw">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="104"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" secondItem="Fb7-Uu-X9X" secondAttribute="height" multiplier="1:1" id="Rgz-03-SMt"/>
+                                </constraints>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                <state key="normal" image="chevron.left" catalog="system">
+                                    <color key="titleColor" name="DefaultFontColor"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Rgz-03-SMt"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="previousButtonAction:" destination="33R-xW-UrQ" eventType="primaryActionTriggered" id="L11-rJ-R51"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIs-oB-LmA" userLabel="Collection View Container">
+                                <rect key="frame" x="48" y="0.0" width="278" height="48"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4Nn-jU-gEe" customClass="CarouselGridCollectionView" customModule="Vocable" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="278" height="48"/>
+                                        <color key="backgroundColor" name="Background"/>
+                                        <collectionViewLayout key="collectionViewLayout" id="N88-SP-98N" customClass="CarouselGridLayout" customModule="Vocable" customModuleProvider="target"/>
+                                        <cells/>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" name="Background"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="4Nn-jU-gEe" secondAttribute="bottom" id="4QP-Eb-pGV"/>
+                                    <constraint firstItem="4Nn-jU-gEe" firstAttribute="leading" secondItem="WIs-oB-LmA" secondAttribute="leadingMargin" id="JMv-uw-OdN"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="4Nn-jU-gEe" secondAttribute="trailing" id="iXF-pe-JRA"/>
+                                    <constraint firstItem="4Nn-jU-gEe" firstAttribute="top" secondItem="WIs-oB-LmA" secondAttribute="top" id="ngB-1B-NnF"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
+                                </variation>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdi-sC-FYx" userLabel="Right Chevron" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="326" y="0.0" width="48" height="48"/>
+                                <color key="tintColor" name="DefaultFontColor"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                <state key="normal" image="chevron.right" catalog="system">
+                                    <color key="titleColor" name="DefaultFontColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextButtonAction:" destination="33R-xW-UrQ" eventType="primaryActionTriggered" id="e60-cT-TEU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="WIs-oB-LmA" firstAttribute="leading" secondItem="Fb7-Uu-X9X" secondAttribute="trailing" id="1lS-uE-Rd1"/>
+                            <constraint firstItem="kdi-sC-FYx" firstAttribute="top" secondItem="ysz-No-obO" secondAttribute="top" id="3RD-UB-q0M"/>
+                            <constraint firstItem="Fb7-Uu-X9X" firstAttribute="bottom" secondItem="ysz-No-obO" secondAttribute="bottom" priority="999" id="Fp1-ew-emV"/>
+                            <constraint firstItem="WIs-oB-LmA" firstAttribute="top" secondItem="ysz-No-obO" secondAttribute="top" id="OlV-JB-UBI"/>
+                            <constraint firstAttribute="trailing" secondItem="kdi-sC-FYx" secondAttribute="trailing" priority="999" id="RaU-Lj-qYM"/>
+                            <constraint firstItem="kdi-sC-FYx" firstAttribute="width" secondItem="Fb7-Uu-X9X" secondAttribute="width" id="Ywc-d7-2z3"/>
+                            <constraint firstAttribute="bottom" secondItem="WIs-oB-LmA" secondAttribute="bottom" id="dud-9N-uBo"/>
+                            <constraint firstItem="Fb7-Uu-X9X" firstAttribute="leading" secondItem="ysz-No-obO" secondAttribute="leading" id="eB3-hD-fwA"/>
+                            <constraint firstItem="kdi-sC-FYx" firstAttribute="bottom" secondItem="ysz-No-obO" secondAttribute="bottom" id="qFg-fG-1P3"/>
+                            <constraint firstItem="Fb7-Uu-X9X" firstAttribute="top" secondItem="ysz-No-obO" secondAttribute="top" id="qPj-Wf-DaN"/>
+                            <constraint firstItem="kdi-sC-FYx" firstAttribute="leading" secondItem="WIs-oB-LmA" secondAttribute="trailing" id="wIw-nR-4TS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backChevron" destination="Fb7-Uu-X9X" id="o9e-Kt-i5m"/>
+                        <outlet property="collectionView" destination="4Nn-jU-gEe" id="qwb-N1-Nxa"/>
+                        <outlet property="collectionViewContainer" destination="WIs-oB-LmA" id="cdt-rX-LTH"/>
+                        <outlet property="forwardChevron" destination="kdi-sC-FYx" id="g5L-iz-SPl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZAc-94-rU7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="667" y="-27"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="keyboard" catalog="system" width="128" height="70"/>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DefaultFontColor">
+            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

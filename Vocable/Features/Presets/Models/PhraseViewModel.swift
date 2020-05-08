@@ -16,14 +16,14 @@ struct PhraseViewModel: Hashable {
         return _languageCode ?? AppConfig.activePreferredLanguageCode
     }
     let creationDate: Date
-    let categories: [CategoryViewModel]
+    let category: CategoryViewModel?
     
     init(unpersistedPhrase phrase: String) {
         self.utterance = phrase
         self._languageCode = nil
         self.identifier = UUID().uuidString
         self.creationDate = Date()
-        self.categories = []
+        self.category = nil
     }
     
     init?(_ phrase: Phrase?) {
@@ -32,14 +32,14 @@ struct PhraseViewModel: Hashable {
             let identifier = phrase.identifier,
             let utterance = phrase.utterance,
             let creationDate = phrase.creationDate,
-            let categories = phrase.categories else {
+            let category = phrase.category else {
                 return nil
         }
         self._languageCode = phrase.languageCode
         self.identifier = identifier
         self.utterance = utterance
         self.creationDate = creationDate
-        self.categories = categories.compactMap { CategoryViewModel($0 as? Category) }
+        self.category = CategoryViewModel(category)
     }
 
     private var _languageCode: String?

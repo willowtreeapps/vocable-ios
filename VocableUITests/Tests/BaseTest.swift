@@ -10,8 +10,12 @@ import Foundation
 import XCTest
 
 class BaseTest: XCTestCase {
+    let mainScreen = MainScreen()
+    let keyboardScreen = KeyboardScreen()
+    
     override func setUp() {
         let app = XCUIApplication()
+        app.launchEnvironment["RefactoredInterfaceEnabled"] = "1"
         continueAfterFailure = false
         app.launch()
     }

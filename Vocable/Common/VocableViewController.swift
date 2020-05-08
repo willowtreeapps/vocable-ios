@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VocableViewController: UIViewController {
+@IBDesignable class VocableViewController: UIViewController {
     
     private var _navigationBar: VocableNavigationBar?
     var navigationBar: VocableNavigationBar {
@@ -44,6 +44,7 @@ class VocableViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setViewMarginsForCurrentTraitCollection()
         installBackButtonIfNeeded()
     }
 
@@ -52,24 +53,46 @@ class VocableViewController: UIViewController {
         (self.view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
     }
 
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        setViewMarginsForCurrentTraitCollection()
+    }
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        view.setNeedsUpdateConstraints()
+        setViewMarginsForCurrentTraitCollection()
         super.traitCollectionDidChange(previousTraitCollection)
     }
 
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-
+    private func setViewMarginsForCurrentTraitCollection() {
+        let proposedMargins: UIEdgeInsets
         if sizeClass.contains(any: .compact) {
-            view.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+            proposedMargins = UIEdgeInsets(top: 8, left: 8, bottom: 24, right: 8)
         } else {
-            view.layoutMargins = UIEdgeInsets(top: 32, left: 32, bottom: 32, right: 32)
+            proposedMargins = UIEdgeInsets(top: 24, left: 24, bottom: 32, right: 24)
+        }
+        var newMargins = view.layoutMargins
+
+        if edgesForExtendedLayout.contains(.top) {
+            newMargins.top = proposedMargins.top
+        }
+        if edgesForExtendedLayout.contains(.left) {
+            newMargins.left = proposedMargins.left
+        }
+        if edgesForExtendedLayout.contains(.right) {
+            newMargins.right = proposedMargins.right
+        }
+        if edgesForExtendedLayout.contains(.bottom) {
+            newMargins.bottom = proposedMargins.bottom
+        }
+
+        if view.layoutMargins != newMargins {
+            view.layoutMargins = newMargins
         }
     }
 
     private func installBackButtonIfNeeded() {
 
-        guard navigationBar.leftButton == nil, let navigationController = navigationController else {
+        guard let navigationBar = navigationBarIfLoaded(), navigationBar.leftButton == nil, let navigationController = navigationController else {
             return
         }
         let viewControllers = navigationController.viewControllers
@@ -78,8 +101,8 @@ class VocableViewController: UIViewController {
         }
 
         navigationBar.leftButton = {
-            let button = VocableNavigationBarButton(frame: .zero)
-            button.buttonImage = UIImage(systemName: "arrow.left")
+            let button = GazeableButton(frame: .zero)
+            button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             button.addTarget(navigationController,
                              action: #selector(UINavigationController.popViewController(animated:)),
                              for: .primaryActionTriggered)

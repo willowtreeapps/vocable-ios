@@ -47,8 +47,8 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     private func updateFetchedResultsController(with selectedCategoryID: NSManagedObjectID? = nil) {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         if let selectedCategoryID = selectedCategoryID {
-            let category = NSPersistentContainer.shared.viewContext.object(with: selectedCategoryID)
-            request.predicate = NSComparisonPredicate(\Phrase.categories, .contains, category)
+            let category = NSPersistentContainer.shared.viewContext.object(with: selectedCategoryID) as! Category
+            request.predicate = NSComparisonPredicate(\Phrase.category, .equalTo, category)
         }
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
         
@@ -118,13 +118,13 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         case .defaultMode:
             switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
             case (.regular, .regular):
-                layout.numberOfColumns = 3
+                layout.numberOfColumns = .fixedCount(3)
                 layout.numberOfRows = .fixedCount(3)
             case (.compact, .regular):
-                layout.numberOfColumns = 2
+                layout.numberOfColumns = .fixedCount(2)
                 layout.numberOfRows = .fixedCount(4)
             case (.compact, .compact), (.regular, .compact):
-                layout.numberOfColumns = 3
+                layout.numberOfColumns = .fixedCount(3)
                 layout.numberOfRows = .fixedCount(2)
             default:
                 break
@@ -132,13 +132,13 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
         case .numPadMode:
             switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
             case (.regular, .regular):
-                layout.numberOfColumns = 3
+                layout.numberOfColumns = .fixedCount(3)
                 layout.numberOfRows = .fixedCount(4)
             case (.compact, .regular):
-                layout.numberOfColumns = 3
+                layout.numberOfColumns = .fixedCount(3)
                 layout.numberOfRows = .fixedCount(4)
             case (.compact, .compact), (.regular, .compact):
-                layout.numberOfColumns = 6
+                layout.numberOfColumns = .fixedCount(6)
                 layout.numberOfRows = .fixedCount(2)
             default:
                 break
@@ -175,8 +175,7 @@ class PresetCollectionViewController: CarouselGridCollectionViewController, NSFe
     }
 
     private func addPhrasePressed() {
-        let storyboard = UIStoryboard(name: "EditTextViewController", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "EditTextViewController") as! EditTextViewController
+        let vc = EditTextViewController()
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 

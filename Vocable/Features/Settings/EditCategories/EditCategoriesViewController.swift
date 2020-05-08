@@ -46,25 +46,24 @@ final class EditCategoriesViewController: UIViewController {
     }
     
     @IBAction func addButtonPressed(_ sender: Any) {
-        if let vc = UIStoryboard(name: "EditTextViewController", bundle: nil).instantiateViewController(identifier: "EditTextViewController") as? EditTextViewController {
-            vc.editTextCompletionHandler = { (newText) -> Void in
-                let context = NSPersistentContainer.shared.viewContext
+        let vc = EditTextViewController()
+        vc.editTextCompletionHandler = { (newText) -> Void in
+            let context = NSPersistentContainer.shared.viewContext
 
-                _ = Category.create(withUserEntry: newText, in: context)
-                do {
-                    try Category.updateAllOrdinalValues(in: context)
-                    try context.save()
+            _ = Category.create(withUserEntry: newText, in: context)
+            do {
+                try Category.updateAllOrdinalValues(in: context)
+                try context.save()
 
-                    let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
+                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
 
-                    ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-                } catch {
-                    assertionFailure("Failed to save category: \(error)")
-                }
+                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+            } catch {
+                assertionFailure("Failed to save category: \(error)")
             }
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true)
         }
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
 }

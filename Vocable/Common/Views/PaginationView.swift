@@ -54,15 +54,32 @@ final class PaginationView: UIView {
 
         backgroundColor = .collectionViewBackgroundColor
         isOpaque = true
+        insetsLayoutMarginsFromSafeArea = false
 
         textLabel.textColor = .defaultTextColor
         textLabel.textAlignment = .center
+        textLabel.backgroundColor = backgroundColor
+        textLabel.isOpaque = true
+        textLabel.adjustsFontSizeToFitWidth = true
+        textLabel.minimumScaleFactor = 0.8
+        textLabel.numberOfLines = 2
+        textLabel.setContentCompressionResistancePriority(.init(999), for: .horizontal)
 
-        nextPageButton.buttonImage = UIImage(systemName: "chevron.right")
+        nextPageButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         nextPageButton.tintColor = .defaultTextColor
+        nextPageButton.accessibilityIdentifier = "bottomPagination.right_chevron"
+        nextPageButton.backgroundColor = backgroundColor
+        nextPageButton.isOpaque = true
+        nextPageButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        nextPageButton.setContentHuggingPriority(.required, for: .horizontal)
 
-        previousPageButton.buttonImage = UIImage(systemName: "chevron.left")
+        previousPageButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         previousPageButton.tintColor = .defaultTextColor
+        previousPageButton.accessibilityIdentifier = "bottomPagination.left_chevron"
+        previousPageButton.backgroundColor = backgroundColor
+        previousPageButton.isOpaque = true
+        previousPageButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        previousPageButton.setContentHuggingPriority(.required, for: .horizontal)
 
         stackView.axis = .horizontal
         stackView.backgroundColor = .collectionViewBackgroundColor
@@ -72,7 +89,8 @@ final class PaginationView: UIView {
         stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         stackView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-
+        stackView.isOpaque = true
+        
         stackView.addArrangedSubview(previousPageButton)
         stackView.addArrangedSubview(textLabel)
         stackView.addArrangedSubview(nextPageButton)
@@ -91,7 +109,7 @@ final class PaginationView: UIView {
     }
 
     private func updateForCurrentTraitCollection() {
-        if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
+        if sizeClass.contains(any: .compact) {
             stackView.spacing = 24
             textLabel.font = .systemFont(ofSize: 22, weight: .bold)
             return

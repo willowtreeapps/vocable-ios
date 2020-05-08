@@ -127,11 +127,13 @@ private final class GazeableAlertButton: GazeableButton {
     }
 
     private func commonInit() {
-        fillColor = .alertBackgroundColor
-        selectionFillColor = .primaryColor
+        setFillColor(.alertBackgroundColor, for: .normal)
+        setFillColor(.primaryColor, for: .selected)
+
         setTitleColor(.white, for: .selected)
         setTitleColor(.black, for: .normal)
-        backgroundView.cornerRadius = 14
+
+        cornerRadius = 14
         titleLabel?.adjustsFontSizeToFitWidth = true
         setContentCompressionResistancePriority(.required, for: .horizontal)
         setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
@@ -290,8 +292,10 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         actions.forEach { action in
             let button = GazeableAlertButton(frame: .zero)
             button.setTitle(action.title, for: .normal)
-            button.backgroundView.cornerRadius = alertView.cornerRadius
+            button.cornerRadius = alertView.cornerRadius
             button.style = action.style
+            button.shouldShrinkWhenTouched = false
+            button.backgroundColor = .clear
             button.addTarget(action, action: #selector(GazeableAlertAction.performActions), for: .primaryActionTriggered)
 
             if actionButtonStackView.arrangedSubviews.isEmpty {
@@ -318,7 +322,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
 
         let buttons: [GazeableAlertButton] = actionButtonStackView.arrangedSubviews.compactMap {
             if let button = $0 as? GazeableAlertButton {
-                button.backgroundView.roundedCorners = []
+                button.roundedCorners = []
                 return button
             }
             return nil
@@ -328,17 +332,86 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         let lastAlertButton = buttons.last
 
         if actions.count < 3 {
-            firstAlertButton?.backgroundView.roundedCorners.insert(.bottomLeft)
-            lastAlertButton?.backgroundView.roundedCorners.insert(.bottomRight)
+            firstAlertButton?.roundedCorners.insert(.bottomLeft)
+            lastAlertButton?.roundedCorners.insert(.bottomRight)
         } else {
-            lastAlertButton?.backgroundView.roundedCorners.insert([.bottomLeft, .bottomRight])
+            lastAlertButton?.roundedCorners.insert([.bottomLeft, .bottomRight])
         }
     }
 
     // MARK: UIViewControllerTransitioningDelegate
 
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return GazeableAlertViewControllerTransitionAnimator()
+    }
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return GazeableAlertViewControllerTransitionAnimator(isForward: false)
+    }
+
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return GazeableAlertPresentationController(presentedViewController: presented, presenting: presenting)
     }
 
+}
+
+private final class GazeableAlertViewControllerTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+
+    let isForward: Bool
+    required init(isForward: Bool = true) {
+        self.isForward = isForward
+        super.init()
+    }
+
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 0.4
+    }
+
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+
+        let isForward = self.isForward
+
+        guard let presentedViewController = transitionContext.viewController(forKey: isForward ? .to : .from)
+        else {
+            transitionContext.completeTransition(false)
+            return
+        }
+
+        let transform = CGAffineTransform.identity
+        let alpha: CGFloat = isForward ? 1 : 0
+
+        let presentedView = presentedViewController.view!
+
+        if isForward {
+            transitionContext.containerView.addSubview(presentedView)
+            presentedView.frame = transitionContext.finalFrame(for: presentedViewController)
+            presentedView.layoutIfNeeded()
+            presentedView.alpha = 0
+            presentedView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        } else {
+            presentedView.alpha = 1
+            presentedView.transform = .identity
+        }
+
+        func actions() {
+            presentedView.transform = transform
+            presentedView.alpha = alpha
+        }
+
+        let duration = transitionDuration(using: transitionContext)
+        let delay = isForward ? duration * 0.5 : 0.1
+        UIView.animate(withDuration: delay,
+                       delay: 0,
+                       options: [],
+                       animations: {
+        }, completion: nil)
+
+        UIView.animate(withDuration: duration,
+                       delay: isForward ? delay : 0,
+                       usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 1.4,
+                       options: .beginFromCurrentState,
+                       animations: actions,
+                       completion: transitionContext.completeTransition)
+    }
 }

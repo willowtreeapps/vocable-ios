@@ -15,13 +15,24 @@ class CarouselGridLayout: UICollectionViewLayout {
         case minimumHeight(CGFloat)
     }
 
-    var numberOfColumns = 1 {
+    enum ColumnCount {
+        case fixedCount(Int)
+        case minimumWidth(CGFloat)
+    }
+
+    var numberOfColumns: ColumnCount = .fixedCount(1) {
         didSet {
-            guard oldValue != numberOfColumns else {
-                return
-            }
-            if numberOfColumns < 1 {
-                numberOfColumns = 1
+            switch (oldValue, numberOfColumns) {
+            case (.fixedCount(let countA), .fixedCount(let countB)):
+                if countA == countB {
+                    return
+                }
+            case (.minimumWidth(let widthA), .minimumWidth(let widthB)):
+                if widthA == widthB {
+                    return
+                }
+            case (_, _):
+                break
             }
             invalidateLayout()
         }
@@ -60,7 +71,7 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     var itemsPerPage: Int {
-        return rowCount * numberOfColumns
+        return rowCount * columnCount
     }
 
     @PublishedValue
@@ -70,14 +81,8 @@ class CarouselGridLayout: UICollectionViewLayout {
         return collectionView?.delegate as? VocableCollectionViewLayoutTransitioningDelegate
     }
 
-    private var rowCount: Int {
-        switch numberOfRows {
-        case .fixedCount(let count):
-            return count
-        case .minimumHeight(let minimumHeight):
-            return Int((collectionView?.bounds.height ?? 0) / minimumHeight)
-        }
-    }
+    private(set) var rowCount: Int = 1
+    private(set) var columnCount: Int = 1
 
     private var itemsPerSection: Int {
         guard numberOfSections > 0, let count = collectionView?.numberOfItems(inSection: 0) else {
@@ -129,6 +134,10 @@ class CarouselGridLayout: UICollectionViewLayout {
     override func prepare() {
         super.prepare()
         lastLayoutSize = collectionView?.frame.size ?? .zero
+
+        columnCount = computeColumnCount()
+        rowCount = computeRowCount()
+
         updatePagingProgress()
 
         if lastDataSourceProxyInvalidationCount != itemsPerPage {
@@ -144,6 +153,54 @@ class CarouselGridLayout: UICollectionViewLayout {
         return lastLayoutSize != newBounds.size
     }
 
+    private func computeColumnCount() -> Int {
+        switch numberOfColumns {
+        case .fixedCount(let count):
+            return count
+        case .minimumWidth(let minimumWidth):
+            guard let width = collectionView?.bounds.width, width > 0 else {
+                return 1
+            }
+            var itemCount = Int(width / minimumWidth)
+            while itemCount > 0 {
+                let interItemWidth = CGFloat(itemCount - 1) * interItemSpacing
+                let availableWidth = width - interItemWidth
+                if (availableWidth / CGFloat(itemCount)) >= minimumWidth {
+                    break
+                }
+                itemCount -= 1
+            }
+            if itemCount == 0 {
+                assertionFailure("interItemSpacing (\(interItemSpacing)) and numberOfColumns(.minimumWidth(\(minimumWidth))) could not be resolved")
+            }
+            return itemCount
+        }
+    }
+
+    private func computeRowCount() -> Int {
+        switch numberOfRows {
+        case .fixedCount(let count):
+            return count
+        case .minimumHeight(let minimumHeight):
+            guard let height = collectionView?.bounds.height, height > 0 else {
+                return 1
+            }
+            var itemCount = Int(height / minimumHeight)
+            while itemCount > 0 {
+                let interItemHeight = CGFloat(itemCount - 1) * interItemSpacing
+                let availableHeight = height - interItemHeight
+                if (availableHeight / CGFloat(itemCount)) >= minimumHeight {
+                    break
+                }
+                itemCount -= 1
+            }
+            if itemCount == 0 {
+                assertionFailure("interItemSpacing (\(interItemSpacing)) and numberOfRows(.minimumHeight(\(minimumHeight))) could not be resolved")
+            }
+            return itemCount
+        }
+    }
+
     private func frameForCell(at indexPath: IndexPath) -> CGRect {
 
         guard itemsPerPage > 0 else { return .zero }
@@ -151,12 +208,12 @@ class CarouselGridLayout: UICollectionViewLayout {
         let pageRect: CGRect = rectForPage(containing: indexPath)
 
         let contentRect = pageRect.inset(by: pageInsets)
-        let cellColumnIndex = indexPath.item % numberOfColumns
-        let cellRowIndex = (indexPath.item % itemsPerPage) / numberOfColumns
+        let cellColumnIndex = indexPath.item % columnCount
+        let cellRowIndex = (indexPath.item % itemsPerPage) / columnCount
 
-        let totalInterItemSpace = CGSize(width: CGFloat(numberOfColumns - 1) * interItemSpacing,
+        let totalInterItemSpace = CGSize(width: CGFloat(columnCount - 1) * interItemSpacing,
                                          height: CGFloat(rowCount - 1) * interItemSpacing)
-        let cellWidth = (contentRect.width - totalInterItemSpace.width) / CGFloat(numberOfColumns)
+        let cellWidth = (contentRect.width - totalInterItemSpace.width) / CGFloat(columnCount)
         let cellHeight = (contentRect.height - totalInterItemSpace.height) / CGFloat(rowCount)
 
         let cellX = CGFloat(cellColumnIndex) * (cellWidth + interItemSpacing)
