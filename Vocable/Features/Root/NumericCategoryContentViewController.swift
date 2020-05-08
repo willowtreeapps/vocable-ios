@@ -11,6 +11,8 @@ import AVFoundation
 
 class NumericCategoryContentViewController: PagingCarouselViewController {
 
+    @PublishedValue private(set) var lastUtterance: String?
+
     private static let formatter = NumberFormatter()
 
     private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, String>(collectionView: self.collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
@@ -64,9 +66,11 @@ class NumericCategoryContentViewController: PagingCarouselViewController {
         if indexPath != collectionView.indexPathForGazedItem {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
-        guard let item = diffableDataSource.itemIdentifier(for: indexPath) else { return }
+        guard let utterance = diffableDataSource.itemIdentifier(for: indexPath) else { return }
+        lastUtterance = utterance
+
         DispatchQueue.global(qos: .userInitiated).async {
-            AVSpeechSynthesizer.shared.speak(item, language: AppConfig.activePreferredLanguageCode)
+            AVSpeechSynthesizer.shared.speak(utterance, language: AppConfig.activePreferredLanguageCode)
         }
     }
 
