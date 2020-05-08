@@ -132,7 +132,6 @@
 		A9B6960D2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */; };
 		A9B696112433CF31004E6960 /* EditCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */; };
 		A9C32CFF242271F3000EC6F7 /* Phrase+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */; };
-		A9CF2AE9242D41BE005633A7 /* EditPhrases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9CF2AE8242D41BE005633A7 /* EditPhrases.storyboard */; };
 		A9CF2AEF242D44EE005633A7 /* TimingSensitivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF2AEE242D44EE005633A7 /* TimingSensitivityViewController.swift */; };
 		A9CF2AF3242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9CF2AF2242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib */; };
 		A9CF2AF5242D4EF1005633A7 /* SensitivityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9CF2AF4242D4EF1005633A7 /* SensitivityCollectionViewCell.xib */; };
@@ -335,7 +334,6 @@
 		A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCategoriesCompactCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoriesViewController.swift; sourceTree = "<group>"; };
 		A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Phrase+Helpers.swift"; sourceTree = "<group>"; };
-		A9CF2AE8242D41BE005633A7 /* EditPhrases.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditPhrases.storyboard; sourceTree = "<group>"; };
 		A9CF2AEE242D44EE005633A7 /* TimingSensitivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingSensitivityViewController.swift; sourceTree = "<group>"; };
 		A9CF2AF2242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DwellTimeCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9CF2AF4242D4EF1005633A7 /* SensitivityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SensitivityCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -624,7 +622,6 @@
 				A9B696002433C33F004E6960 /* Edit Categories */,
 				A9DFCC21242D3A5000136136 /* TimingSensitivity */,
 				A9DFCC22242D3CF500136136 /* SelectionMode */,
-				A96D61D82422A00D00577144 /* Views */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -708,6 +705,7 @@
 			isa = PBXGroup;
 			children = (
 				71FA2854242406540051498A /* SelectionModeViewController.swift */,
+				A96D61D82422A00D00577144 /* Views */,
 			);
 			path = SelectionMode;
 			sourceTree = "<group>";

@@ -40,8 +40,11 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
         collectionView.register(UINib(nibName: "DwellTimeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: DwellTimeCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "SensitivityCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SensitivityCollectionViewCell.reuseIdentifier)
 
+        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout { (_, environment) -> NSCollectionLayoutSection? in
+            self.section(environment: environment)
+        }
+
         updateDataSource()
-        collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
 
     // MARK: UICollectionViewDataSource
@@ -53,42 +56,36 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 
-    // MARK: CollectionView Layout
+    private func section(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
-    private func createLayout() -> UICollectionViewLayout {
-        if case .compact = traitCollection.horizontalSizeClass, case .regular = traitCollection.verticalSizeClass {
-            return compactWidthLayout()
+        let itemHeightDimension = NSCollectionLayoutDimension.absolute(130)
+        let itemWidthDimension = NSCollectionLayoutDimension.fractionalWidth(1.0)
+        let columnCount: Int
+
+        if sizeClass == .hCompact_vRegular {
+            columnCount = 1
         } else {
-            return defaultLayout()
+            columnCount = 2
         }
-    }
 
-    private func compactWidthLayout() -> UICollectionViewLayout {
-        let settingsItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/5))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [settingsItem, settingsItem])
-
-        let section = NSCollectionLayoutSection(group: group)
-        return UICollectionViewCompositionalLayout(section: section)
-    }
-
-    private func defaultLayout() -> UICollectionViewLayout {
-        let settingsItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0)))
-        let fractionalHeight = CGFloat(traitCollection.verticalSizeClass == .compact ? 0.5 : 0.225)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(fractionalHeight))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [settingsItem, settingsItem])
+        let itemSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columnCount)
+        group.interItemSpacing = .fixed(8)
 
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets.leading = 20
-        section.contentInsets.trailing = 20
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
+        section.interGroupSpacing = 8
+        section.contentInsets = sectionInsets(for: environment)
+        section.contentInsets.top = 16
+        return section
     }
 
-    override func viewLayoutMarginsDidChange() {
-        super.viewLayoutMarginsDidChange()
-
-        collectionView.setCollectionViewLayout(createLayout(), animated: false)
+    private func sectionInsets(for environment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
+        return NSDirectionalEdgeInsets(top: 0,
+                                       leading: max(view.layoutMargins.left - environment.container.contentInsets.leading, 0),
+                                       bottom: 0,
+                                       trailing: max(view.layoutMargins.right - environment.container.contentInsets.trailing, 0))
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {

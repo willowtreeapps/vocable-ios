@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,8 +18,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6VK-zy-47F">
-                        <rect key="frame" x="20" y="8" width="418" height="83"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                        <rect key="frame" x="36" y="8" width="402" height="83"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                         <color key="textColor" name="DefaultFontColor"/>
                         <nil key="highlightedColor"/>
                         <variation key="heightClass=compact-widthClass=compact">
@@ -31,7 +31,7 @@
                     </switch>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="6VK-zy-47F" firstAttribute="leading" secondItem="0GQ-x3-4PV" secondAttribute="leadingMargin" id="Acm-dF-bue"/>
+                    <constraint firstItem="6VK-zy-47F" firstAttribute="leading" secondItem="0GQ-x3-4PV" secondAttribute="leadingMargin" constant="16" id="Acm-dF-bue"/>
                     <constraint firstAttribute="trailingMargin" secondItem="rux-wr-INz" secondAttribute="trailing" id="C1k-Fw-WXx"/>
                     <constraint firstItem="6VK-zy-47F" firstAttribute="top" secondItem="0GQ-x3-4PV" secondAttribute="topMargin" id="F49-tX-Ugo"/>
                     <constraint firstItem="rux-wr-INz" firstAttribute="centerY" secondItem="0GQ-x3-4PV" secondAttribute="centerY" id="P1e-pV-gFd"/>

@@ -37,14 +37,17 @@ class RootEditTextViewController: EditTextViewController {
         shouldWarnOnDismiss = false
         navigationBar.rightButton = favoriteButton
         $text.receive(on: DispatchQueue.main).sink { [weak self] newText in
-            self?.updateFavoriteButton(with: newText)
+            self?.updateFavoriteButton(with: self?.normalizedText(from: newText))
         }.store(in: &disposables)
     }
 
-    private func updateFavoriteButton(with text: String?) {
-
+    private func normalizedText(from text: String?) -> String {
         let trimmed = text?.trimmingCharacters(in: .whitespaces) ?? ""
-        if trimmed.isEmpty {
+        return trimmed
+    }
+
+    private func updateFavoriteButton(with text: String?) {
+        guard let text = text, !text.isEmpty else {
             self.currentPhrase = nil
             self.favoriteButton.isEnabled = false
             return
@@ -55,7 +58,7 @@ class RootEditTextViewController: EditTextViewController {
         fetchRequest.predicate = {
             let categoryPredicate = NSComparisonPredicate(\Phrase.category, .equalTo, userFavorites)
             let userGenerated = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
-            let textMatches = NSComparisonPredicate(\Phrase.utterance, .equalTo, trimmed)
+            let textMatches = NSComparisonPredicate(\Phrase.utterance, .equalTo, text)
             let subpredicates = [categoryPredicate, userGenerated, textMatches]
             return NSCompoundPredicate(andPredicateWithSubpredicates: subpredicates)
         }()
@@ -65,7 +68,7 @@ class RootEditTextViewController: EditTextViewController {
     }
 
     @objc private func favoriteButtonSelected(_ sender: Any) {
-        guard let text = text else { return }
+        let text = normalizedText(from: self.text)
 
         let context = NSPersistentContainer.shared.viewContext
 
