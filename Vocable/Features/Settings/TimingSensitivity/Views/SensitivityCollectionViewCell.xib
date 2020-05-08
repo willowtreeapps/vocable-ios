@@ -117,7 +117,7 @@
                     <constraint firstItem="DYW-L9-31N" firstAttribute="bottom" secondItem="O5j-z4-VrA" secondAttribute="bottom" constant="20" id="u2a-bp-dkD"/>
                     <constraint firstItem="O5j-z4-VrA" firstAttribute="top" secondItem="PJa-d1-ik7" secondAttribute="bottom" constant="8" id="xRL-4k-Y9k"/>
                 </constraints>
-                <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
+                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
             </collectionViewCellContentView>
             <size key="customSize" width="666" height="268"/>
             <connections>
