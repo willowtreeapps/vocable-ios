@@ -47,13 +47,43 @@ jobs:
       - store_artifacts:
           path: output
           
+  update-localizations-test-deploy:
+	  macos: 
+	    xcode: 11.4.0
+    steps:
+	    - checkout
+	    - run: bundle install
+	    - run:
+	        name: Fastlane
+	        command: bundle exec fastlane xliffimport
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane test
+      - deploy:
+          name: Push back to branch
+          command: |
+            git config credential.helper 'cache --timeout=120'
+            git config user.email "actions@github.com" # Not sure what anonymous email to give this?
+            git config user.name "XLIFF Bot"
+            git commit --allow-empty -m "Updated localizations [ci skip]"
+            git push -q https://${LOCALIZATION_DEPLOYMENT_KEY}@github.com/willowtreeapps/vocable-ios.git ${CIRCLE_BRANCH}
+    
 workflows:
   build-test-adhoc-testflight:
     jobs:
-      - build-and-test
+      - build-and-test:
+          filters:
+            branches:
+              ignore: /crowdin.*/ 
       - buildanddeploytotestflight:
           filters:
             branches:
               only: develop
           requires:
-            - build-and-test            
+            - build-and-test
+  localize-build-test:
+    jobs:
+      - update-localizations-test-deploy:
+          filters:
+            branches:
+              only: /crowdin.*/           
