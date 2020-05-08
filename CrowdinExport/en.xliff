@@ -103,11 +103,6 @@
         <note>Saved to Categories
    User edited name of the category and saved it successfully</note>
       </trans-unit>
-      <trans-unit id="com.vocable.localization_debugging" xml:space="preserve">
-        <source>com.vocable.localization_debugging</source>
-        <target>com.vocable.localization_debugging</target>
-        <note>Ignore this</note>
-      </trans-unit>
       <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve">
         <source>No presets found</source>
         <target>No presets found</target>
