@@ -149,7 +149,8 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
     }
     
     @objc private func confirmEdit(_ sender: Any) {
-        editTextCompletionHandler(textView.text ?? "")
+        let trimmed = textView.text?.trimmingCharacters(in: .whitespaces) ?? ""
+        editTextCompletionHandler(trimmed)
         dismiss(animated: true, completion: nil)
     }
     
