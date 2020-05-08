@@ -28,7 +28,7 @@
     </header>
     <body>
       <trans-unit id="MISSING_LOCALIZATION_Add Phrases" xml:space="preserve" approved="yes">
-        <source>Add Phrases</source>
+        <source>MISSING_LOCALIZATION_Add Phrases</source>
         <target state="final">Phrasen Hinzufügen</target>
         <note>Add Phrases</note>
       </trans-unit>
