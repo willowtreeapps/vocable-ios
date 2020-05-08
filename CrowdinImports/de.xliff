@@ -30,7 +30,7 @@
       <trans-unit id="MISSING_LOCALIZATION_Add Phrases" xml:space="preserve" approved="yes">
         <source>MISSING_LOCALIZATION_Add Phrases</source>
         <target state="final">Phrasen Hinzufügen</target>
-        <note>Add Phrases test</note>
+        <note>Add Phrases</note>
       </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve" approved="yes">
         <source>Categories</source>
