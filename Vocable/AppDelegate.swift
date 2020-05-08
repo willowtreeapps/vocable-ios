@@ -36,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         addObservers()
 
+        let _ = NSLocalizedString("com.vocable.localization_debugging", comment: "Ignore this")
+
         // Warm up the speech engine to prevent lag on first invocation
         AVSpeechSynthesizer.shared.speak("", language: "en")
 
