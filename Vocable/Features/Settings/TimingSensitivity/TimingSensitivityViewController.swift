@@ -72,7 +72,7 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columnCount)
-        group.interItemSpacing = .fixed(8)
+        group.interItemSpacing = .fixed(16)
 
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8

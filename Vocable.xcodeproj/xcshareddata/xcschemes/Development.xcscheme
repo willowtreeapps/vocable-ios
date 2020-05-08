@@ -90,11 +90,6 @@
             value = ""
             isEnabled = "NO">
          </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "RefactoredInterfaceEnabled"
-            value = ""
-            isEnabled = "YES">
-         </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
