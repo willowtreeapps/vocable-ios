@@ -48,9 +48,6 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
         assert(category != nil, "Category not provided")
 
-        collectionView.register(UINib(nibName: "EditPhrasesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier)
-        collectionView.backgroundColor = .collectionViewBackgroundColor
-
         updateLayoutForCurrentTraitCollection()
 
         fetchResultsController.delegate = self

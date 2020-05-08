@@ -86,7 +86,7 @@
                     <constraint firstItem="Wpa-XA-zUK" firstAttribute="leading" secondItem="YVu-RA-dFE" secondAttribute="leadingMargin" id="ic9-vj-GYy"/>
                     <constraint firstItem="OLA-YL-VeV" firstAttribute="top" secondItem="YVu-RA-dFE" secondAttribute="topMargin" constant="12" id="s6L-ll-p3Q"/>
                 </constraints>
-                <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
+                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
             </collectionViewCellContentView>
             <size key="customSize" width="638" height="137"/>
             <connections>
@@ -100,7 +100,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="minus" catalog="system" width="128" height="24"/>
+        <image name="minus" catalog="system" width="32" height="32"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <namedColor name="DefaultCellBackground">
             <color red="0.21799999475479126" green="0.19499999284744263" blue="0.62699997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
