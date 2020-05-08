@@ -62,10 +62,9 @@ jobs:
             git config credential.helper 'cache --timeout=120'
             git config user.email "localization_bot@willowtreeapps.com"
             git config user.name "Localization Bot"
-            if ! git diff-index --quiet HEAD --; then
-                git commit -m "Updatedapp localizations for Crowdin Export [ci skip]"
-                git push -q git@github.com:willowtreeapps/vocable-ios.git ${CIRCLE_BRANCH}
-            fi
+            git add -A
+            git diff-index --quiet HEAD || git commit -m "Updated app localizations for Crowdin Export [ci skip]"
+            git push -q git@github.com:willowtreeapps/vocable-ios.git ${CIRCLE_BRANCH}
             
   update-localizations-test-deploy:
     macos: 
