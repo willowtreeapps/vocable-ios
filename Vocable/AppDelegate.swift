@@ -42,13 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         application.isIdleTimerDisabled = true
         let window = HeadGazeWindow(frame: UIScreen.main.bounds)
-
-        if AppConfig.refactoredInterfaceEnabled {
-            window.rootViewController = UIStoryboard(name: "Root", bundle: nil).instantiateInitialViewController()
-        } else {
-            window.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-        }
-
+        window.rootViewController = UIStoryboard(name: "Root", bundle: nil).instantiateInitialViewController()
         window.makeKeyAndVisible()
         self.window = window
 
