@@ -51,7 +51,6 @@ jobs:
     macos: 
       xcode: 11.4.0
     steps:
-      - add_ssh_keys
       - checkout
       - run: bundle install
       - run:
@@ -60,6 +59,7 @@ jobs:
       - run:
           name: Fastlane
           command: bundle exec fastlane test
+      - add_ssh_keys
       - deploy:
           name: Push back to branch
           command: |

@@ -13,7 +13,7 @@ platform :ios do
       devices: ["iPhone 11"]
     )
     # in the meantime, build the app for PRs
-    # match(type: "development")
+    match(type: "development")
     gym(
       scheme: "Development",
       skip_archive: true,
