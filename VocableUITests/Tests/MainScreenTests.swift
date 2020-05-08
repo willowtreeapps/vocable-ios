@@ -28,7 +28,13 @@ class MainScreenTests: BaseTest {
     
     func testWhenTappingPhrase_ThenThatPhraseDisplaysOnOutputLabel() {
         XCUIApplication().collectionViews.staticTexts[mainScreen.defaultPhraseGeneral[0]].tap()
-        XCTAssertEqual(mainScreen.outputLabel.label, "Please be patient")
+        XCTAssertEqual(mainScreen.outputLabel.label, mainScreen.defaultPhraseGeneral[0])
+    }
+    
+    func testWhenTapping123Phrase_ThenThatPhraseDisplaysOnOutputLabel() {
+        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 2)
+        XCUIApplication().collectionViews.staticTexts[mainScreen.defaultPhrase123[0]].tap()
+        XCTAssertEqual(mainScreen.outputLabel.label, mainScreen.defaultPhrase123[0])
     }
     
     private func verifyGivenPhrasesDisplay(setOfPhrases: [String]) {
