@@ -66,4 +66,11 @@ platform :ios do
     match(type:"development", force_for_new_devices: true)
   end
 
+  desc "Integrate latest XLIFF files with project"
+  lane :xliffimport do
+    Dir.glob('./../CrowdinImports/*.xliff') do |xliff|
+      sh "xcodebuild -importLocalizations -localizationPath #{xliff} -project ./../Vocable.xcodeproj"
+    end
+  end
+  
 end

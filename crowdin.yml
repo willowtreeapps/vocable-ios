@@ -1,0 +1,3 @@
+files:
+  - source: /CrowdinExport/en.xliff
+    translation: /CrowdinImports/%osx_locale%.xliff
