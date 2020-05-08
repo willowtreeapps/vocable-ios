@@ -38,6 +38,11 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
                                                                                  sectionNameKeyPath: nil,
                                                                                  cacheName: nil)
 
+    convenience init(category: Category) {
+        self.init(nibName: nil, bundle: nil)
+        self.category = category
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

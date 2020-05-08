@@ -73,17 +73,20 @@ import CoreData
     private func categoryDidChange(_ categoryID: NSManagedObjectID) {
         let category = NSPersistentContainer.shared.viewContext.object(with: categoryID) as! Category
         let viewController: UIViewController
+        let utterancePublisher: PublishedValue<String?>.Publisher
         if category.identifier == Category.Identifier.numPad {
-            viewController = NumericCategoryContentViewController()
+            let vc = NumericCategoryContentViewController()
+            utterancePublisher = vc.$lastUtterance
+            viewController = vc
         } else {
-            let vc = CategoryDetailViewController()
-            vc.category = category
-            vc.$lastUtterance.receive(on: DispatchQueue.main)
-                .filter({!($0?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)})
-                .assign(to: \UILabel.text, on: outputLabel)
-                .store(in: &disposables)
+            let vc = CategoryDetailViewController(category: category)
+            utterancePublisher = vc.$lastUtterance
             viewController = vc
         }
+        utterancePublisher.receive(on: DispatchQueue.main)
+            .filter({!($0?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)})
+            .assign(to: \UILabel.text, on: outputLabel)
+            .store(in: &disposables)
         setContentViewController(viewController, animated: true)
     }
 

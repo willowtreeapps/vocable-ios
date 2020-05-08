@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import AVFoundation
 
 class NumericCategoryContentViewController: PagingCarouselViewController {
+
+    @PublishedValue private(set) var lastUtterance: String?
 
     private static let formatter = NumberFormatter()
 
@@ -56,6 +59,18 @@ class NumericCategoryContentViewController: PagingCarouselViewController {
             collectionView.layout.numberOfRows = .fixedCount(2)
         default:
             break
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath != collectionView.indexPathForGazedItem {
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
+        guard let utterance = diffableDataSource.itemIdentifier(for: indexPath) else { return }
+        lastUtterance = utterance
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            AVSpeechSynthesizer.shared.speak(utterance, language: AppConfig.activePreferredLanguageCode)
         }
     }
 
