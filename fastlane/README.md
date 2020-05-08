@@ -41,6 +41,11 @@ AppStore build and upload to TestFlight
 fastlane ios register
 ```
 Add devices via the command line to the device portal and regenerate the development provisioning profile with the device
+### ios xliffimport
+```
+fastlane ios xliffimport
+```
+Integrate latest XLIFF files with project
 
 ----
 
