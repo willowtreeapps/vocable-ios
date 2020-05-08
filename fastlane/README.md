@@ -46,6 +46,11 @@ Add devices via the command line to the device portal and regenerate the develop
 fastlane ios xliffimport
 ```
 Integrate latest XLIFF files with project
+### ios xliffexport
+```
+fastlane ios xliffexport
+```
+Export current XLIFF file from project
 
 ----
 
