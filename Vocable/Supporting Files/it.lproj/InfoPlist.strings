@@ -1,9 +1,0 @@
-/* Bundle display name */
-"CFBundleDisplayName" = "Vocable";
-
-/* Bundle name */
-"CFBundleName" = "Vocable";
-
-/* Camera usage description */
-"NSCameraUsageDescription" = "Vocabile utilizza il monitoraggio della testa di ARKit per rilevare il viso dell'utente come visto nel feed della fotocamera frontale del dispositivo TrueDepth al fine di controllare un puntatore sullo schermo, consentire agli utenti con mobilità limitata di interagire con l'app. L'orientamento della testa e la posizione dei dati vengono utilizzati espressamente per controllare il puntatore sullo schermo. I dati di tracciamento della testa non sono memorizzati o trasmessi in alcun modo. Il vocale richiede l'autorizzazione per utilizzare la fotocamera per questo scopo.";
-

@@ -10,19 +10,19 @@ import UIKit
 
 private class ContentView: UIView {
 
-    var titleLabel: UILabel? {
+    var titleView: UIView? {
         didSet {
-            updateVolatileView(new: titleLabel, old: oldValue)
+            updateVolatileView(new: titleView, old: oldValue)
         }
     }
 
-    var leftButton: VocableNavigationBarButton? {
+    var leftButton: GazeableButton? {
         didSet {
             updateVolatileView(new: leftButton, old: oldValue)
         }
     }
 
-    var rightButton: VocableNavigationBarButton? {
+    var rightButton: GazeableButton? {
         didSet {
             updateVolatileView(new: rightButton, old: oldValue)
         }
@@ -31,13 +31,14 @@ private class ContentView: UIView {
     private var volatileConstraints = [NSLayoutConstraint]()
 
     private func updateVolatileView(new newValue: UIView?, old oldValue: UIView?) {
-        guard oldValue != newValue else { return }
+        guard oldValue != newValue else {
+            return
+        }
         if let newButton = newValue {
             newButton.translatesAutoresizingMaskIntoConstraints = false
             addSubview(newButton)
-        } else {
-            oldValue?.removeFromSuperview()
         }
+        oldValue?.removeFromSuperview()
         updateContentViews()
     }
 
@@ -47,33 +48,34 @@ private class ContentView: UIView {
     }
 
     private func updateContentViews() {
-        let fontSize: CGFloat = sizeClass.contains(any: .compact) ? 28 : 48
-        titleLabel?.textAlignment = .center
-        titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
-        titleLabel?.textColor = .defaultTextColor
 
-        leftButton?.layoutMargins = .init(top: 8, left: 8, bottom: 8, right: 8)
-        rightButton?.layoutMargins = .init(top: 8, left: 8, bottom: 8, right: 8)
+        layoutMargins = .zero
+        leftButton?.contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
+        rightButton?.contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
 
-        updateContentLayout()
+        setNeedsUpdateConstraints()
     }
 
     override var intrinsicContentSize: CGSize {
         if sizeClass.contains(any: .compact) {
-            return CGSize(width: UIView.noIntrinsicMetric, height: 54)
+            return CGSize(width: UIView.noIntrinsicMetric, height: 48)
         }
-        return CGSize(width: UIView.noIntrinsicMetric, height: 100)
+        return CGSize(width: UIView.noIntrinsicMetric, height: 96)
     }
 
-    private func updateContentLayout() {
+    override func updateConstraints() {
+        super.updateConstraints()
 
         layoutMargins = .zero
 
         let buttonSpacing: CGFloat
+        let buttonSize: CGSize
         if sizeClass.contains(any: .compact) {
             buttonSpacing = 8
+            buttonSize = CGSize(width: 64, height: intrinsicContentSize.height)
         } else {
             buttonSpacing = 16
+            buttonSize = CGSize(width: 104, height: intrinsicContentSize.height)
         }
 
         NSLayoutConstraint.deactivate(volatileConstraints)
@@ -83,14 +85,18 @@ private class ContentView: UIView {
         let layoutMargins = layoutMarginsGuide
 
         // Title label
-        if let titleLabel = titleLabel {
-            let titleCenterX = titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+        if let titleView = titleView {
+            titleView.setContentCompressionResistancePriority(.init(rawValue: 999), for: .horizontal)
+            let titleCenterX = titleView.centerXAnchor.constraint(equalTo: centerXAnchor)
             titleCenterX.priority = .init(rawValue: 999)
+            let titleCenterY = titleView.centerYAnchor.constraint(equalTo: layoutMargins.centerYAnchor)
+            titleCenterY.priority = .init(rawValue: 999)
+
             constraints += [
                 titleCenterX,
-                titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMargins.leadingAnchor),
-                titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: layoutMargins.trailingAnchor),
-                titleLabel.centerYAnchor.constraint(equalTo: layoutMargins.centerYAnchor)
+                titleCenterY,
+                titleView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMargins.leadingAnchor),
+                titleView.trailingAnchor.constraint(lessThanOrEqualTo: layoutMargins.trailingAnchor)
             ]
         }
 
@@ -100,12 +106,13 @@ private class ContentView: UIView {
                 leftButton.topAnchor.constraint(equalTo: layoutMargins.topAnchor),
                 leftButton.bottomAnchor.constraint(equalTo: layoutMargins.bottomAnchor),
                 leftButton.leadingAnchor.constraint(equalTo: layoutMargins.leadingAnchor),
-                leftButton.widthAnchor.constraint(equalTo: leftButton.heightAnchor)
+                leftButton.widthAnchor.constraint(equalToConstant: buttonSize.width),
+                leftButton.heightAnchor.constraint(equalToConstant: buttonSize.height)
             ]
 
-            if let titleLabel = titleLabel {
+            if let titleView = titleView {
                 constraints += [
-                    titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: leftButton.leadingAnchor, constant: buttonSpacing)
+                    titleView.leadingAnchor.constraint(greaterThanOrEqualTo: leftButton.trailingAnchor, constant: buttonSpacing)
                 ]
             }
         }
@@ -116,17 +123,19 @@ private class ContentView: UIView {
                 rightButton.topAnchor.constraint(equalTo: layoutMargins.topAnchor),
                 rightButton.bottomAnchor.constraint(equalTo: layoutMargins.bottomAnchor),
                 rightButton.trailingAnchor.constraint(equalTo: layoutMargins.trailingAnchor),
-                rightButton.widthAnchor.constraint(equalTo: rightButton.heightAnchor)
+                rightButton.widthAnchor.constraint(equalToConstant: buttonSize.width),
+                rightButton.heightAnchor.constraint(equalToConstant: buttonSize.height)
             ]
 
-            if let titleLabel = titleLabel {
+            if let titleView = titleView {
                 constraints += [
-                    titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: rightButton.leadingAnchor, constant: buttonSpacing)
+                    rightButton.leadingAnchor.constraint(greaterThanOrEqualTo: titleView.trailingAnchor, constant: buttonSpacing)
                 ]
             }
         }
 
         NSLayoutConstraint.activate(constraints)
+        volatileConstraints = constraints
 
         invalidateIntrinsicContentSize()
     }
@@ -134,46 +143,67 @@ private class ContentView: UIView {
 
 class VocableNavigationBar: UIView {
 
-    var title: String? {
-        get {
-            titleLabel?.text
-        }
-        set {
-            guard let text = newValue else {
-                titleLabel = nil
-                return
-            }
-            let label = titleLabel ?? UILabel(frame: .zero)
-            label.text = text
-            self.titleLabel = label
-        }
-    }
-
     private var contentView = ContentView(frame: .zero)
-    private var titleLabel: UILabel? {
-        get {
-            contentView.titleLabel
-        }
-        set {
-            contentView.titleLabel = newValue
+
+    private var defaultTitleLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.textAlignment = .center
+        label.textColor = .defaultTextColor
+        return label
+    }()
+
+    var title: String? {
+        didSet {
+            defaultTitleLabel.text = title
+            if contentView.titleView == nil {
+                contentView.titleView = defaultTitleLabel
+            }
         }
     }
 
-    var leftButton: VocableNavigationBarButton? {
+    var titleView: UIView? {
+        set {
+            if let newValue = newValue {
+                contentView.titleView = newValue
+            } else {
+                contentView.titleView = defaultTitleLabel
+            }
+            updateSubviewAppearances()
+        }
+        get {
+            if let titleView = contentView.titleView {
+                if titleView == defaultTitleLabel {
+                    return nil
+                }
+                return titleView
+            }
+            return nil
+        }
+    }
+
+    var leftButton: GazeableButton? {
         get {
             contentView.leftButton
         }
         set {
             contentView.leftButton = newValue
+            updateSubviewAppearances()
         }
     }
 
-    var rightButton: VocableNavigationBarButton? {
+    var rightButton: GazeableButton? {
         get {
             contentView.rightButton
         }
         set {
             contentView.rightButton = newValue
+            updateSubviewAppearances()
+        }
+    }
+
+    override var backgroundColor: UIColor? {
+        didSet {
+            updateSubviewAppearances()
         }
     }
 
@@ -188,6 +218,7 @@ class VocableNavigationBar: UIView {
     }
 
     private func commonInit() {
+        backgroundColor = .collectionViewBackgroundColor
         contentView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(contentView)
         NSLayoutConstraint.activate([
@@ -196,5 +227,34 @@ class VocableNavigationBar: UIView {
             contentView.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor),
             contentView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)
         ])
+        updateDefaultLabelFontForCurrentTraitCollection()
+        updateSubviewAppearances()
+    }
+
+    private func updateSubviewAppearances() {
+        contentView.backgroundColor = backgroundColor
+        contentView.isOpaque = true
+
+        leftButton?.backgroundColor = backgroundColor
+        leftButton?.isOpaque = true
+
+        rightButton?.backgroundColor = backgroundColor
+        rightButton?.isOpaque = true
+
+        titleView?.backgroundColor = backgroundColor
+        titleView?.isOpaque = true
+
+        defaultTitleLabel.backgroundColor = backgroundColor
+        defaultTitleLabel.isOpaque = true
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateDefaultLabelFontForCurrentTraitCollection()
+    }
+
+    private func updateDefaultLabelFontForCurrentTraitCollection() {
+        let fontSize: CGFloat = sizeClass.contains(any: .compact) ? 28 : 48
+        defaultTitleLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
     }
 }

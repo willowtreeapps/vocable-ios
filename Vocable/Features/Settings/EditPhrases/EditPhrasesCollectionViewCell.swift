@@ -12,13 +12,15 @@ import Combine
 final class EditPhrasesCollectionViewCell: VocableCollectionViewCell {
     
     @IBOutlet var textLabel: UILabel!
-    @IBOutlet var deleteButton: UIButton!
-    @IBOutlet var editButton: UIButton!
+    @IBOutlet var deleteButton: GazeableButton!
+    @IBOutlet var editButton: GazeableButton!
     
     override func updateContentViews() {
         super.updateContentViews()
 
         borderedView.fillColor = .defaultCellBackgroundColor
+        deleteButton?.backgroundColor = .defaultCellBackgroundColor
+        editButton?.backgroundColor = .defaultCellBackgroundColor
     }
 
 }

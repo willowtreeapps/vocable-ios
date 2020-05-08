@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Combine
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,21 +26,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        if !AppConfig.isHeadTrackingSupported {
+            AppConfig.isHeadTrackingEnabled = false
+        }
+    
         // Ensure that the persistent store has the current
         // default presets before presenting UI
         updatePersistentStoreForCurrentLanguagePreferences()
         
         addObservers()
 
+        // Warm up the speech engine to prevent lag on first invocation
+        AVSpeechSynthesizer.shared.speak("", language: "en")
+
         application.isIdleTimerDisabled = true
         let window = HeadGazeWindow(frame: UIScreen.main.bounds)
-
-        if AppConfig.refactoredInterfaceEnabled {
-            window.rootViewController = UIStoryboard(name: "Root", bundle: nil).instantiateInitialViewController()
-        } else {
-            window.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-        }
-
+        window.rootViewController = UIStoryboard(name: "Root", bundle: nil).instantiateInitialViewController()
         window.makeKeyAndVisible()
         self.window = window
 
@@ -212,7 +214,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             for identifier in presetPhrase.categoryIds {
                 if let category = Category.fetchObject(in: context, matching: identifier) {
-                    phrase.addToCategories(category)
+                    phrase.category = category
                     category.addToPhrases(phrase)
                 }
             }
@@ -227,7 +229,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let phraseResults = try context.fetch(request)
 
         for phrase in phraseResults {
-            phrase.addToCategories(mySayingsCategory)
+            phrase.category = mySayingsCategory
             mySayingsCategory.addToPhrases(phrase)
         }
     }

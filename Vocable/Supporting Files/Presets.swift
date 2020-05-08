@@ -80,9 +80,9 @@ public struct TextPresets {
     
     static func localizedPreset(_ locale: String, _ key: String, comment: String? = nil) -> String {
         guard let path = Bundle.main.path(forResource: locale, ofType: "lproj"), let bundle = Bundle(path: path) else {
-            return NSLocalizedString(key, comment: comment ?? "")
+            return NSLocalizedString(key, tableName: "Presets", comment: "")
         }
-        return NSLocalizedString(key, tableName: "Presets", bundle: bundle, value: key, comment: "")
+        return NSLocalizedString(key, tableName: "Presets", bundle: bundle, comment: "")
     }
 
     private static func dataFromBundle() -> Data? {

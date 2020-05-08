@@ -11,19 +11,9 @@ import CoreData
 
 extension Phrase {
 
-    //TODO: This should be removed after refactoring PresetsViewController et al
     static func create(withUserEntry text: String, in context: NSManagedObjectContext) -> Phrase {
-        let newIdentifier = "user_\(UUID().uuidString)"
-        let savedCategory = Category.fetch(.userFavorites, in: context)
-        let phrase = Phrase.fetchOrCreate(in: context, matching: newIdentifier)
-        phrase.isUserGenerated = true
-        phrase.creationDate = Date()
-        phrase.lastSpokenDate = Date()
-        phrase.utterance = text
-        phrase.languageCode = AppConfig.activePreferredLanguageCode
-        phrase.addToCategories(savedCategory)
-        savedCategory.addToPhrases(phrase)
-        return phrase
+        let userFavorites = Category.fetch(.userFavorites, in: context)
+        return create(withUserEntry: text, category: userFavorites, in: context)
     }
 
     static func create(withUserEntry text: String, category: Category, in context: NSManagedObjectContext) -> Phrase {
@@ -34,7 +24,7 @@ extension Phrase {
         phrase.lastSpokenDate = Date()
         phrase.utterance = text
         phrase.languageCode = AppConfig.activePreferredLanguageCode
-        phrase.addToCategories(category)
+        phrase.category = category
         category.addToPhrases(phrase)
         return phrase
     }

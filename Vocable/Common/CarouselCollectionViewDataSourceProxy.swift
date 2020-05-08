@@ -19,7 +19,9 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
     private let collectionView: UICollectionView
     private let cellProvider: (UICollectionView, IndexPath, ItemIdentifier) -> UICollectionViewCell?
     private lazy var impl = UICollectionViewDiffableDataSource<ContentWrapper<SectionIdentifier>, ContentWrapper<ItemIdentifier>>(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, item) in
-        return self?.cellProvider(collectionView, indexPath, item.item)
+        guard let self = self else { return nil }
+        let mappedPath = self.indexPath(fromMappedIndexPath: indexPath)
+        return self.cellProvider(collectionView, mappedPath, item.item)
     })
 
     init(collectionView: UICollectionView, cellProvider: @escaping (UICollectionView, IndexPath, ItemIdentifier) -> UICollectionViewCell?) {
@@ -31,8 +33,15 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
             collectionView.dataSourceProxyInvalidationCallback = { [weak self] in
                 DispatchQueue.main.async {
                     guard let self = self else { return }
+                    let selections = collectionView.indexPathsForSelectedItems
                     let snapshot = self.snapshot()
                     self.apply(snapshot, animatingDifferences: false)
+                    let afterSnapshot = self.snapshot()
+                    if snapshot.itemIdentifiers.count == afterSnapshot.itemIdentifiers.count {
+                        for path in selections ?? [] {
+                            collectionView.selectItem(at: path, animated: false, scrollPosition: [])
+                        }
+                    }
                 }
             }
         }

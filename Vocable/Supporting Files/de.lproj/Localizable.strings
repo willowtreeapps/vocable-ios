@@ -60,7 +60,7 @@
 "main_screen.textfield_placeholder.default" = "Wähle unten etwas aus, um zu sprechen";
 
 /* Add Phrases */
-"MISSING_LOCALIZATION_Add Phrases" = "MISSING_LOCALIZATION_Add Phrases";
+"MISSING_LOCALIZATION_Add Phrases" = "Add Phrases";
 
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "Seite %1$d von %2$d";

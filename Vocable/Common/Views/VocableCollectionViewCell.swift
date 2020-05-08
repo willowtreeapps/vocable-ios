@@ -12,7 +12,13 @@ import UIKit
 class VocableCollectionViewCell: UICollectionViewCell {
     
     let borderedView = BorderedView()
-    
+    private(set) var isTrackingTouches: Bool = false {
+        didSet {
+            updateSelectionAppearance()
+            updateContentViews()
+        }
+    }
+
     var fillColor: UIColor = .defaultCellBackgroundColor {
         didSet {
             updateContentViews()
@@ -21,6 +27,7 @@ class VocableCollectionViewCell: UICollectionViewCell {
     
     override var isHighlighted: Bool {
         didSet {
+            updateSelectionAppearance()
             updateContentViews()
         }
     }
@@ -62,14 +69,22 @@ class VocableCollectionViewCell: UICollectionViewCell {
     func updateContentViews() {
 
         let fillColor: UIColor = {
+            var result: UIColor
             if isSelected {
-                return .cellSelectionColor
+                result = .cellSelectionColor
+            } else if !isEnabled {
+                result = self.fillColor.disabled(blending: .collectionViewBackgroundColor)
+            } else {
+                result = self.fillColor
             }
-            if !isEnabled {
-                return self.fillColor.withAlphaComponent(0.5)
+
+            if isHighlighted && isTrackingTouches {
+                result = result.darkenedForHighlight()
             }
-            return self.fillColor
+            return result
         }()
+
+        insetsLayoutMarginsFromSafeArea = false
 
         borderedView.cornerRadius = 8
         borderedView.borderColor = .cellBorderHighlightColor
@@ -77,6 +92,42 @@ class VocableCollectionViewCell: UICollectionViewCell {
         borderedView.borderWidth = (isHighlighted && !isSelected) ? 4 : 0
         borderedView.fillColor = fillColor
         borderedView.isOpaque = true
+    }
+
+    private func updateSelectionAppearance() {
+
+        func actions() {
+            let scale: CGFloat = (isHighlighted && isTrackingTouches) ? 0.97 : 1.0
+            transform = .init(scaleX: scale, y: scale)
+        }
+
+        if UIView.inheritedAnimationDuration == 0 {
+            UIView.animate(withDuration: 0.2,
+                           delay: 0,
+                           options: [.beginFromCurrentState, .curveEaseOut],
+                           animations: actions,
+                           completion: nil)
+        } else {
+            actions()
+        }
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        guard !(touches.first is UIHeadGaze) else { return }
+        isTrackingTouches = true
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        guard !(touches.first is UIHeadGaze) else { return }
+        isTrackingTouches = false
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        guard !(touches.first is UIHeadGaze) else { return }
+        isTrackingTouches = false
     }
 
 }

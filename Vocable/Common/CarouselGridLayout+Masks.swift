@@ -29,7 +29,7 @@ extension CarouselGridLayout {
 
     func separatorMask(for indexPath: IndexPath) -> CellSeparatorMask {
         let index = indexPath.item
-        let rowIndexWithinPage = Int((index % itemsPerPage) / numberOfColumns)
+        let rowIndexWithinPage = Int((index % itemsPerPage) / columnCount)
 
         if rowIndexWithinPage == 0 {
             return .both

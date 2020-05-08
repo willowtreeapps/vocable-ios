@@ -128,7 +128,7 @@ class BorderedView: UIView {
     }
 
     private func updateShapeLayer() {
-        guard bounds.size != .zero else { return }
+        guard bounds.size != .zero || frame.size != .zero else { return }
         let cornerRadii = CGSize(width: cornerRadius, height: cornerRadius)
         let boundsRect = CGRect(origin: .zero, size: bounds.size)
         let insetRect = boundsRect.insetBy(dx: borderWidth / 2, dy: borderWidth / 2)
@@ -138,5 +138,12 @@ class BorderedView: UIView {
         shapeLayer.path = path
         shapeLayer.shadowPath = path
         shapeLayer.fillColor = fillColor.cgColor
+    }
+
+    override func action(for layer: CALayer, forKey event: String) -> CAAction? {
+        if event == "backgroundColor" {
+            return nil
+        }
+        return super.action(for: layer, forKey: event)
     }
 }

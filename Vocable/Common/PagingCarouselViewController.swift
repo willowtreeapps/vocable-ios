@@ -17,6 +17,18 @@ import Combine
     private var disposables = Set<AnyCancellable>()
     private var volatileConstraints = [NSLayoutConstraint]()
 
+    var isPaginationViewHidden = false {
+        didSet {
+            guard oldValue != isPaginationViewHidden else { return }
+            if isPaginationViewHidden {
+                paginationView.removeFromSuperview()
+            } else {
+                view.addSubview(paginationView)
+            }
+            view.setNeedsUpdateConstraints()
+        }
+    }
+
     convenience init() {
         self.init(nibName: nil, bundle: nil)
     }
@@ -64,12 +76,16 @@ import Combine
     }
 
     private func updateMarginsForSubviews() {
-        let margins = view.layoutMargins
-        if sizeClass.contains(any: .compact) {
-            collectionView.layout.pageInsets = .init(top: 8, left: margins.left, bottom: 24, right: margins.right)
-        } else {
-            collectionView.layout.pageInsets = .init(top: 16, left: margins.left, bottom: 32, right: margins.right)
+        var insets = view.layoutMargins
+
+        // The navigation bar will inherit this inset
+        // and we'll specify our desired inset from the
+        // navigation bar separately
+        if navigationBarIfLoaded() != nil {
+            insets.top = 8
         }
+        insets.bottom = 8
+        collectionView.layout.pageInsets = insets
     }
 
     override func updateViewConstraints() {
@@ -103,13 +119,19 @@ import Combine
         ]
 
         // Pagination view
-        constraints += [
-            paginationView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            paginationView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMargins.leadingAnchor),
-            paginationView.trailingAnchor.constraint(lessThanOrEqualTo: layoutMargins.trailingAnchor),
-            paginationView.bottomAnchor.constraint(greaterThanOrEqualTo: layoutMargins.bottomAnchor),
-            paginationView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ]
+        if isPaginationViewHidden {
+            constraints += [
+                collectionView.bottomAnchor.constraint(greaterThanOrEqualTo: layoutMargins.bottomAnchor)
+            ]
+        } else {
+            constraints += [
+                paginationView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+                paginationView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMargins.leadingAnchor),
+                paginationView.trailingAnchor.constraint(lessThanOrEqualTo: layoutMargins.trailingAnchor),
+                paginationView.bottomAnchor.constraint(greaterThanOrEqualTo: layoutMargins.bottomAnchor),
+                paginationView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            ]
+        }
         NSLayoutConstraint.activate(constraints)
         volatileConstraints = constraints
     }
