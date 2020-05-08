@@ -57,9 +57,9 @@ jobs:
       - run:
           name: Fastlane
           command: bundle exec fastlane xliffimport
-     # - run:
-      #    name: Fastlane
-       #   command: bundle exec fastlane test
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane test
       - deploy:
           name: Push back to branch
           command: |
