@@ -51,6 +51,9 @@ jobs:
     macos: 
       xcode: 11.4.0
     steps:
+      - add_ssh_keys:
+            fingerprints:
+              - "${LOCALIZATION_DEPLOYMENT_KEY}"
       - checkout
       - run: bundle install
       - run:
@@ -63,8 +66,8 @@ jobs:
           name: Push back to branch
           command: |
             git config credential.helper 'cache --timeout=120'
-            git config user.email "${LOCALIZATION_EMAIL}"
-            git config user.name "${LOCALIZATION_USERNAME}"
+            git config user.email "actions@github.com"
+            git config user.name "Localization Bot"
             git commit --allow-empty -m "Updated localizations [ci skip]"
             git push -q https://${LOCALIZATION_DEPLOYMENT_KEY}@github.com/willowtreeapps/vocable-ios.git ${CIRCLE_BRANCH}
     
