@@ -46,7 +46,29 @@ jobs:
           command: bundle exec fastlane $FASTLANE_LANE
       - store_artifacts:
           path: output
-          
+  export-locations-for-crowdin:
+    macos: 
+      xcode: 11.4.0
+    steps:
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane xliffexport
+      - add_ssh_keys
+      - run:
+          name: "Diff xliff and push if needed"
+          command: |
+            git config credential.helper 'cache --timeout=120'
+            git config user.email "localization_bot@willowtreeapps.com"
+            git config user.name "Localization Bot"
+            if git diff-index --quiet HEAD --; then
+                # No changes
+            else
+                git commit -m "Updated localizations for Crowdin Export [ci skip]"
+                git push -q git@github.com:willowtreeapps/vocable-ios.git ${CIRCLE_BRANCH}
+            fi
+            
   update-localizations-test-deploy:
     macos: 
       xcode: 11.4.0
@@ -67,12 +89,13 @@ jobs:
             git config user.email "localization_bot@willowtreeapps.com"
             git config user.name "Localization Bot"
             git add -A
-            git commit --allow-empty -m "Updated localizations [ci skip]"
+            git commit -m "Updated localizations [ci skip]"
             git push -q git@github.com:willowtreeapps/vocable-ios.git ${CIRCLE_BRANCH}
     
 workflows:
   build-test-adhoc-testflight:
     jobs:
+      - export-locations-for-crowdin
       - build-and-test:
           filters:
             branches:
