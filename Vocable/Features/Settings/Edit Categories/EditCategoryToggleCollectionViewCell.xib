@@ -28,6 +28,9 @@
                     </label>
                     <switch userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZoC-cN-J0k">
                         <rect key="frame" x="458" y="34" width="51" height="31"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" button="YES" notEnabled="YES"/>
+                        </accessibility>
                     </switch>
                 </subviews>
                 <constraints>
