@@ -2,7 +2,7 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Vocable/Supporting Files/en.lproj/InfoPlist.strings" source-language="en" target-language="it" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3.1" build-num="11C504"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
     </header>
     <body>
       <trans-unit id="CFBundleDisplayName" xml:space="preserve">
@@ -24,13 +24,13 @@
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="it" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3.1" build-num="11C504"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
     </header>
     <body>
-      <trans-unit id="MISSING_LOCALIZATION_Add Phrases" xml:space="preserve">
-        <source>MISSING_LOCALIZATION_Add Phrases</source>
-        <target state="needs-translation">MISSING_LOCALIZATION_Add Phrases</target>
-        <note>Add Phrases</note>
+      <trans-unit id="Edit Phrases" xml:space="preserve">
+        <source>Edit Phrases</source>
+        <target state="translated">Modifica Frasi</target>
+        <note>Edit Phrases</note>
       </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
         <source>Categories</source>
@@ -55,17 +55,17 @@
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">Annulla</target>
-        <note>Cancel alert action title</note>
+        <note>Delete category alert cancel button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
         <source>Remove</source>
         <target state="translated">Rimuovere</target>
-        <note>Remove category alert action title</note>
+        <note>Delete category alert action button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve">
         <source>Deleted categories cannot be recovered.</source>
         <target state="translated">Le categorie eliminate non possono essere recuperate.</target>
-        <note>Remove category alert title</note>
+        <note>Delete category confirmation alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -105,7 +105,7 @@
       </trans-unit>
       <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve">
         <source>No presets found</source>
-        <target state="needs-translation">No presets found</target>
+        <target state="translated">Nessun preset trovato</target>
         <note>Debugging error message for when preloaded content is not found</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
@@ -156,7 +156,9 @@
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
         <source>Saved to %@</source>
         <target state="translated">Salvato in %@</target>
-        <note>Saved to user favorites category toast title</note>
+        <note>new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title</note>
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
         <source>No</source>
@@ -262,7 +264,7 @@
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Presets.strings" source-language="en" target-language="it" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.3.1" build-num="11C504"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
     </header>
     <body>
       <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve">
