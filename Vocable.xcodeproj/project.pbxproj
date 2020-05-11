@@ -297,6 +297,9 @@
 		71FA2854242406540051498A /* SelectionModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionModeViewController.swift; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppExtensions.swift"; sourceTree = "<group>"; };
+		A6D60AAD2469A68A00A042C1 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A6D60AAE2469A68A00A042C1 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Presets.strings; sourceTree = "<group>"; };
+		A6D60AAF2469A68A00A042C1 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A91525412447541200B9B815 /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
 		A920A4AE23EA1BD300CF5B08 /* PresetCollectionViewCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetCollectionViewCompositionalLayout.swift; sourceTree = "<group>"; };
 		A9299C7423F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKeyCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -922,6 +925,7 @@
 				en,
 				Base,
 				de,
+				it,
 			);
 			mainGroup = 130C00AB20D2AD2A007C3163;
 			productRefGroup = 130C00B520D2AD2A007C3163 /* Products */;
@@ -1203,6 +1207,7 @@
 			children = (
 				274540272460DD0F0056EF98 /* en */,
 				274540292460DD170056EF98 /* de */,
+				A6D60AAE2469A68A00A042C1 /* it */,
 			);
 			name = Presets.strings;
 			sourceTree = "<group>";
@@ -1212,6 +1217,7 @@
 			children = (
 				30B979B92425583E00309D7C /* en */,
 				30B979BB2425584300309D7C /* de */,
+				A6D60AAD2469A68A00A042C1 /* it */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1221,6 +1227,7 @@
 			children = (
 				6BE23D552444DCBE0032CAE4 /* en */,
 				6BE23D5724450FDA0032CAE4 /* de */,
+				A6D60AAF2469A68A00A042C1 /* it */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
