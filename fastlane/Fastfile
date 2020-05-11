@@ -73,4 +73,12 @@ platform :ios do
     end
   end
   
+  desc "Export current XLIFF file from project"
+  lane :xliffexport do
+    sh "rm -rf ./../CrowdinExport/*"
+    sh "xcodebuild -exportLocalizations -localizationPath ./../CrowdinExport/ -project ./../Vocable.xcodeproj"
+    sh "mv './../CrowdinExport/en.xcloc/Localized Contents/en.xliff' './../CrowdinExport/en.xliff'"
+    sh "rm -rf ./../CrowdinExport/*.xcloc"
+  end
+  
 end
