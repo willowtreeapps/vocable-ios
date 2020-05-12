@@ -1,0 +1,9 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "Vocable";
+
+/* Bundle name */
+"CFBundleName" = "Vocable";
+
+/* Camera usage description */
+"NSCameraUsageDescription" = "Vocable bruger ARKit-hovedsporing til at registrere brugerens ansigt, som det ses i enhedens TrueDepth-frontkamera til det formål at kontrollere en markør på skærmen, så brugere med begrænset mobilitet kan interagere med appen. Hovedorientering og positionsdata bruges udtrykkeligt til styring af markøren på skærmen. Disse hovedsporingsdata gemmes eller transmitteres ikke på nogen måde. Vocable har brug for tilladelse til at bruge kameraet til dette formål.";
+

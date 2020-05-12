@@ -1,0 +1,141 @@
+/* Categories list editor screen header title */
+"categories_list_editor.header.title" = "Kategorier";
+
+/* Cancel exit editing alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Annuller";
+
+/* Confirm exit category alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Bekræft";
+
+/* Exit edit categories alert title */
+"category_editor.alert.cancel_editing_confirmation.title" = "Hvis du lukker dette uden at gemme, vil din brugerdefinerede kategori blive slettet.";
+
+/* Delete category alert cancel button title */
+"category_editor.alert.delete_category_confirmation.button.cancel.title" = "Annuller";
+
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "Fjern";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "Slettede kategorier kan ikke blive gendannet.";
+
+/* Delete phrase alert cancel button title */
+"category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Annuller";
+
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Slet";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "Slettede sætninger kan ikke genskabes";
+
+/* Remove category button label within the category detail screen. */
+"category_editor.detail.button.remove_category.title" = "Fjern Kategori";
+
+/* Show category button label within the category detail screen. */
+"category_editor.detail.button.show_category.title" = "Vis";
+
+/* changes to an existing phrase were saved successfully */
+"category_editor.toast.changes_saved.title" = "Dine ændringer er gemt";
+
+/* Saved to Categories
+   User edited name of the category and saved it successfully */
+"category_editor.toast.successfully_saved.title" = "Dine ændringer er gemt";
+
+/* Debugging error message for when preloaded content is not found */
+"debug.assertion.presets_file_not_found" = "No presets found";
+
+/* Edit Phrases */
+"Edit Phrases" = "Ændrer Sætninger";
+
+/* Cancel alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Annuller";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Bekræft";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "Deaktiver hovedsporing?";
+
+/* Warning message presented to the user when the head tracking system */
+"gaze_tracking.error.excessive_head_distance.title" = "Kom nærmere din mobilenhed.";
+
+/* Select something below to speak Hint Text */
+"main_screen.textfield_placeholder.default" = "Vælg noget nedenunder for at snakke";
+
+/* Page indicator progress format. \"Page x of n\" */
+"paging_progress_indicator_format" = "Side %1$d af %2$d";
+
+/* Continue editing alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Fortsæt redigering";
+
+/* Discard changes alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Slet";
+
+/* Exit edit sayings alert title */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Hvis du forlader uden at gemme vil dine ændringer blive slettet.";
+
+/* new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title */
+"phrase_editor.toast.successfully_saved_to_favorites.title_format" = "Gemt til %@";
+
+/* 'No' num pad response */
+"preset.category.numberpad.phrase.no.title" = "Nej";
+
+/* 'Yes' num pad response */
+"preset.category.numberpad.phrase.yes.title" = "Ja";
+
+/* No email account configured error alert dismiss button title */
+"settings.alert.no_email_configured.button.dismiss.title" = "OK";
+
+/* No email account configured error alert title */
+"settings.alert.no_email_configured.title" = "E-mail er ikke konfigureret.";
+
+/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.body" = "Du er ved at forlade Vocable. Du vil måske miste hovedsporingskontrol.";
+
+/* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.cancel.title" = "Annuller";
+
+/* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Bekræft";
+
+/* edit categories settings menu item */
+"settings.cell.categories.title" = "Kategorier";
+
+/* contact developers settings menu item */
+"settings.cell.contact_developers.title" = "Kontakt Udvikler";
+
+/* edit user's favorite phrases category settings menu item */
+"settings.cell.edit_user_favorites.title_format" = "Rediger %@";
+
+/* Settings head tracking cell title */
+"settings.cell.head_tracking.title" = "Hovedsporing";
+
+/* view privacy policy settings menu item */
+"settings.cell.privacy_policy.title" = "Privatlivspolitik";
+
+/* reset all settings menu item */
+"settings.cell.reset_all.title" = "Nulstil App Indstillinger";
+
+/* edit cursor selection mode settings menu item */
+"settings.cell.selection_mode.title" = "Markeringstilstand";
+
+/* edit cursor timing and sensititivy settings menu item */
+"settings.cell.timing_sensitivity.title" = "Timing og Følsomhed";
+
+/* tune cursor debug settings menu item */
+"settings.cell.tune_cursor.title" = "Finjustér markøren";
+
+/* Settings screen header title */
+"settings.header.title" = "Indstillinger";
+
+/* Continue editing alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Fortsæt Redigering";
+
+/* Discard changes alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Slet";
+
+/* Exit edit sayings alert title */
+"text_editor.alert.cancel_editing_confirmation.title" = "Hvis du forlader uden at gemme vil dine ændringer blive slettet.";
+
