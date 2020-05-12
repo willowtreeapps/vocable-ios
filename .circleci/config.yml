@@ -86,7 +86,7 @@ jobs:
             git config user.email "localization_bot@willowtreeapps.com"
             git config user.name "Localization Bot"
             git add -A
-            git commit -m "Updated localizations [ci skip]"
+            git diff-index --quiet HEAD || git commit -m "Updated localizations [ci skip]"
             git push -q git@github.com:willowtreeapps/vocable-ios.git ${CIRCLE_BRANCH}
     
 workflows:
