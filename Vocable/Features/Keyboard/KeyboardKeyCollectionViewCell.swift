@@ -53,3 +53,17 @@ class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
         textLabel.attributedText = finalAttributedString
     }
 }
+
+class SpeakFunctionKeyboardKeyCollectionViewCell: KeyboardKeyCollectionViewCell {
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        fillColor = UIColor.highlightedTextColor!
+    }
+    
+    override func updateContentViews() {
+        super.updateContentViews()
+
+        textLabel?.textColor = isSelected ? .selectedTextColor : .collectionViewBackgroundColor
+    }
+}

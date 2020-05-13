@@ -14,45 +14,6 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
     // Intended for use in computing the fractional-size dimensions of collection layout items rather than hard-coding width/height values
     private static let totalSize = CGSize(width: 1130, height: 834)
     
-    var transitioningDelegate: VocableCollectionViewLayoutTransitioningDelegate? {
-        return collectionView?.delegate as? VocableCollectionViewLayoutTransitioningDelegate
-    }
-    
-    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attr = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
-        guard let collectionView = collectionView else {
-            return attr
-        }
-
-        let shouldTranslate = transitioningDelegate?.collectionView?(collectionView,
-                                                        shouldTranslateEntranceAnimationForItemAt: itemIndexPath) ?? false
-        if shouldTranslate {
-            attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
-        } else {
-            attr?.transform = .identity
-        }
-
-        return attr
-    }
-
-    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attr = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
-
-        guard let collectionView = collectionView else {
-            return attr
-        }
-
-        let shouldTranslate = transitioningDelegate?.collectionView?(collectionView,
-                                                        shouldTranslateExitAnimationForItemAt: itemIndexPath) ?? false
-        if shouldTranslate {
-            attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
-        } else {
-            attr?.transform = .identity
-        }
-        
-        return attr
-    }
-    
     // MARK: - Section Layouts
     
     static func topBarPresetSectionLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {

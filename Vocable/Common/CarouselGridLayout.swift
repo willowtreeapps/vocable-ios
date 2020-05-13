@@ -77,10 +77,6 @@ class CarouselGridLayout: UICollectionViewLayout {
     @PublishedValue
     var progress: CarouselGridPagingProgress = .zero
 
-    private var transitioningDelegate: VocableCollectionViewLayoutTransitioningDelegate? {
-        return collectionView?.delegate as? VocableCollectionViewLayoutTransitioningDelegate
-    }
-
     private(set) var rowCount: Int = 1
     private(set) var columnCount: Int = 1
 
@@ -308,41 +304,6 @@ class CarouselGridLayout: UICollectionViewLayout {
             return
         }
         progress = .init(pageIndex: index, pageCount: count)
-    }
-
-    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attr = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
-        guard let collectionView = collectionView else {
-            return attr
-        }
-
-        let shouldTranslate = transitioningDelegate?.collectionView?(collectionView,
-                                                        shouldTranslateEntranceAnimationForItemAt: itemIndexPath) ?? false
-        if shouldTranslate {
-            attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
-        } else {
-            attr?.transform = .identity
-        }
-
-        return attr
-    }
-
-    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attr = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
-
-        guard let collectionView = collectionView else {
-            return attr
-        }
-
-        let shouldTranslate = transitioningDelegate?.collectionView?(collectionView,
-                                                        shouldTranslateExitAnimationForItemAt: itemIndexPath) ?? false
-        if shouldTranslate {
-            attr?.transform = CGAffineTransform(translationX: 0, y: 500.0)
-        } else {
-            attr?.transform = .identity
-        }
-
-        return attr
     }
 
     func scrollOffsetForLeftmostCellOfPage(containing indexPath: IndexPath, inMiddleSection: Bool = false) -> CGPoint? {

@@ -38,8 +38,7 @@ class SuggestionCollectionViewCell: VocableCollectionViewCell {
     }
     
     private func adjustBackgroundColorForSizeClass() {
-        if (traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular)
-            || traitCollection.verticalSizeClass == .compact {
+        if sizeClass.contains(any: .compact) {
             borderedView.backgroundColor = .clear
         } else {
             borderedView.backgroundColor = .categoryBackgroundColor
