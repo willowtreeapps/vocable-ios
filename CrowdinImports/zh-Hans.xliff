@@ -27,237 +27,237 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
     </header>
     <body>
-      <trans-unit id="Edit Phrases" xml:space="preserve">
+      <trans-unit id="Edit Phrases" xml:space="preserve" approved="yes">
         <source>Edit Phrases</source>
-        <target state="translated">编辑对话</target>
+        <target state="final">编辑对话</target>
         <note>Edit Phrases</note>
       </trans-unit>
-      <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
+      <trans-unit id="categories_list_editor.header.title" xml:space="preserve" approved="yes">
         <source>Categories</source>
-        <target state="translated">类别</target>
+        <target state="final">类别</target>
         <note>Categories list editor screen header title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
-        <target state="translated">取消</target>
+        <target state="final">取消</target>
         <note>Cancel exit editing alert action title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
-        <target state="translated">确认</target>
+        <target state="final">确认</target>
         <note>Confirm exit category alert action title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
         <source>If you close this without saving your custom category will be deleted.</source>
-        <target state="translated">如果您关闭了，则您的自定类别将被删除。</target>
+        <target state="final">如果您关闭了，则您的自定类别将被删除。</target>
         <note>Exit edit categories alert title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
-        <target state="translated">取消</target>
+        <target state="final">取消</target>
         <note>Delete category alert cancel button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve" approved="yes">
         <source>Remove</source>
-        <target state="translated">删除</target>
+        <target state="final">删除</target>
         <note>Delete category alert action button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve" approved="yes">
         <source>Deleted categories cannot be recovered.</source>
-        <target state="translated">删除后的对话无法恢复。</target>
+        <target state="final">删除后的对话无法恢复。</target>
         <note>Delete category confirmation alert title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
-        <target state="translated">取消</target>
+        <target state="final">取消</target>
         <note>Delete phrase alert cancel button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve" approved="yes">
         <source>Delete</source>
-        <target state="translated">删除</target>
+        <target state="final">删除</target>
         <note>Delete phrase alert action button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve" approved="yes">
         <source>Deleted phrases cannot be recovered.</source>
-        <target state="translated">删除后的对话无法恢复。</target>
+        <target state="final">删除后的对话无法恢复。</target>
         <note>Delete phrase confirmation alert title</note>
       </trans-unit>
-      <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
+      <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve" approved="yes">
         <source>Remove Category</source>
-        <target state="translated">移除类别</target>
+        <target state="final">移除类别</target>
         <note>Remove category button label within the category detail screen.</note>
       </trans-unit>
-      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
+      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve" approved="yes">
         <source>Show</source>
-        <target state="translated">显示</target>
+        <target state="final">显示</target>
         <note>Show category button label within the category detail screen.</note>
       </trans-unit>
-      <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
+      <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve" approved="yes">
         <source>Changes saved</source>
-        <target state="translated">已保存更改</target>
+        <target state="final">已保存更改</target>
         <note>changes to an existing phrase were saved successfully</note>
       </trans-unit>
-      <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve">
+      <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve" approved="yes">
         <source>Changes Saved</source>
-        <target state="translated">已保存更改</target>
+        <target state="final">已保存更改</target>
         <note>Saved to Categories
    User edited name of the category and saved it successfully</note>
       </trans-unit>
-      <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve">
+      <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve" approved="yes">
         <source>No presets found</source>
-        <target state="translated">找不到预设</target>
+        <target state="final">找不到预设</target>
         <note>Debugging error message for when preloaded content is not found</note>
       </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
-        <target state="translated">取消</target>
+        <target state="final">取消</target>
         <note>Cancel alert action title</note>
       </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
-        <target state="translated">确认</target>
+        <target state="final">确认</target>
         <note>Confirm alert action title</note>
       </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve" approved="yes">
         <source>Turn off head tracking?</source>
-        <target state="translated">关闭头部跟踪？</target>
+        <target state="final">关闭头部跟踪？</target>
         <note>Disable head tracking confirmation alert title</note>
       </trans-unit>
-      <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
+      <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve" approved="yes">
         <source>Please move closer to the device.</source>
-        <target state="translated">请靠近设备</target>
+        <target state="final">请靠近设备</target>
         <note>Warning message presented to the user when the head tracking system</note>
       </trans-unit>
-      <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve">
+      <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve" approved="yes">
         <source>Select something below to speak</source>
-        <target state="translated">请选择下面要说的对话</target>
+        <target state="final">请选择下面要说的对话</target>
         <note>Select something below to speak Hint Text</note>
       </trans-unit>
-      <trans-unit id="paging_progress_indicator_format" xml:space="preserve">
+      <trans-unit id="paging_progress_indicator_format" xml:space="preserve" approved="yes">
         <source>Page %1$d of %2$d</source>
-        <target state="translated">第 %1$d/%2$d 頁</target>
+        <target state="final">第 %1$d/%2$d 頁</target>
         <note>Page indicator progress format. \"Page x of n\"</note>
       </trans-unit>
-      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve" approved="yes">
         <source>Continue Editing</source>
-        <target state="translated">继续编辑</target>
+        <target state="final">继续编辑</target>
         <note>Continue editing alert action title</note>
       </trans-unit>
-      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve" approved="yes">
         <source>Discard</source>
-        <target state="translated">舍弃</target>
+        <target state="final">舍弃</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
-      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
         <source>Going back before saving will clear any edits made.</source>
-        <target state="translated">保存前返回将会清除任何编辑的东西。</target>
+        <target state="final">保存前返回将会清除任何编辑的东西。</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
-      <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
+      <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve" approved="yes">
         <source>Saved to %@</source>
-        <target state="translated">保存到 %@</target>
+        <target state="final">保存到 %@</target>
         <note>new entry saved to user favorites category
    Saved to user favorites category
    Saved to user favorites category toast title</note>
       </trans-unit>
-      <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
+      <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve" approved="yes">
         <source>No</source>
-        <target state="translated">不</target>
+        <target state="final">不</target>
         <note>'No' num pad response</note>
       </trans-unit>
-      <trans-unit id="preset.category.numberpad.phrase.yes.title" xml:space="preserve">
+      <trans-unit id="preset.category.numberpad.phrase.yes.title" xml:space="preserve" approved="yes">
         <source>Yes</source>
-        <target state="translated">是</target>
+        <target state="final">是</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
-      <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
+      <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve" approved="yes">
         <source>OK</source>
-        <target state="translated">确定</target>
+        <target state="final">确定</target>
         <note>No email account configured error alert dismiss button title</note>
       </trans-unit>
-      <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve">
+      <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve" approved="yes">
         <source>Email not configured.</source>
-        <target state="translated">电子邮件没有配置</target>
+        <target state="final">电子邮件没有配置</target>
         <note>No email account configured error alert title</note>
       </trans-unit>
-      <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve" approved="yes">
         <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
-        <target state="translated">您即将被带到可说话之外。您可能会失去头部跟踪控制。</target>
+        <target state="final">您即将被带到可说话之外。您可能会失去头部跟踪控制。</target>
         <note>body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
-      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve">
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
-        <target state="translated">取消</target>
+        <target state="final">取消</target>
         <note>Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app</note>
       </trans-unit>
-      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.confirm.title" xml:space="preserve">
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.confirm.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
-        <target state="translated">确认</target>
+        <target state="final">确认</target>
         <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
-      <trans-unit id="settings.cell.categories.title" xml:space="preserve">
+      <trans-unit id="settings.cell.categories.title" xml:space="preserve" approved="yes">
         <source>Categories</source>
-        <target state="translated">类别</target>
+        <target state="final">类别</target>
         <note>edit categories settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve">
+      <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve" approved="yes">
         <source>Contact Developers</source>
-        <target state="translated">联系开发者</target>
+        <target state="final">联系开发者</target>
         <note>contact developers settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.edit_user_favorites.title_format" xml:space="preserve">
+      <trans-unit id="settings.cell.edit_user_favorites.title_format" xml:space="preserve" approved="yes">
         <source>Edit %@</source>
-        <target state="translated">编辑 %@</target>
+        <target state="final">编辑 %@</target>
         <note>edit user's favorite phrases category settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve">
+      <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve" approved="yes">
         <source>Head Tracking</source>
-        <target state="translated">头部跟踪</target>
+        <target state="final">头部跟踪</target>
         <note>Settings head tracking cell title</note>
       </trans-unit>
-      <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
+      <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve" approved="yes">
         <source>Privacy Policy</source>
-        <target state="translated">隐私政策</target>
+        <target state="final">隐私政策</target>
         <note>view privacy policy settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.reset_all.title" xml:space="preserve">
+      <trans-unit id="settings.cell.reset_all.title" xml:space="preserve" approved="yes">
         <source>Reset App Settings</source>
-        <target state="translated">重置应用设置</target>
+        <target state="final">重置应用设置</target>
         <note>reset all settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.selection_mode.title" xml:space="preserve">
+      <trans-unit id="settings.cell.selection_mode.title" xml:space="preserve" approved="yes">
         <source>Selection Mode</source>
-        <target state="translated">移动对象模式</target>
+        <target state="final">移动对象模式</target>
         <note>edit cursor selection mode settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.timing_sensitivity.title" xml:space="preserve">
+      <trans-unit id="settings.cell.timing_sensitivity.title" xml:space="preserve" approved="yes">
         <source>Timing and Sensitivity</source>
-        <target state="translated">时间和灵敏度</target>
+        <target state="final">时间和灵敏度</target>
         <note>edit cursor timing and sensititivy settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.tune_cursor.title" xml:space="preserve">
+      <trans-unit id="settings.cell.tune_cursor.title" xml:space="preserve" approved="yes">
         <source>Tune Cursor</source>
-        <target state="translated">调指针</target>
+        <target state="final">调指针</target>
         <note>tune cursor debug settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.header.title" xml:space="preserve">
+      <trans-unit id="settings.header.title" xml:space="preserve" approved="yes">
         <source>Settings</source>
-        <target state="translated">设置</target>
+        <target state="final">设置</target>
         <note>Settings screen header title</note>
       </trans-unit>
-      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve" approved="yes">
         <source>Continue Editing</source>
-        <target state="translated">继续编辑</target>
+        <target state="final">继续编辑</target>
         <note>Continue editing alert action title</note>
       </trans-unit>
-      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve" approved="yes">
         <source>Discard</source>
-        <target state="translated">舍弃</target>
+        <target state="final">舍弃</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
-      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
         <source>Going back before saving will clear any edits made.</source>
-        <target state="translated">保存前返回将会清除任何编辑的东西。</target>
+        <target state="final">保存前返回将会清除任何编辑的东西。</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
     </body>
@@ -267,349 +267,349 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
     </header>
     <body>
-      <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve">
+      <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve" approved="yes">
         <source>I want to lie down</source>
-        <target state="translated">我想躺下</target>
+        <target state="final">我想躺下</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_0EE14D06-92D7-4A26-A15F-253528F14A69" xml:space="preserve">
+      <trans-unit id="preset_0EE14D06-92D7-4A26-A15F-253528F14A69" xml:space="preserve" approved="yes">
         <source>Pleased to meet you</source>
-        <target state="translated">很高兴认识你</target>
+        <target state="final">很高兴认识你</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_0EF33A3F-41E8-4E47-9B2C-69FC86B957FC" xml:space="preserve">
+      <trans-unit id="preset_0EF33A3F-41E8-4E47-9B2C-69FC86B957FC" xml:space="preserve" approved="yes">
         <source>How is your day?</source>
-        <target state="translated">今天过的还好吗？</target>
+        <target state="final">今天过的还好吗？</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_1B634A96-563E-4275-875A-2B705A5D1178" xml:space="preserve">
+      <trans-unit id="preset_1B634A96-563E-4275-875A-2B705A5D1178" xml:space="preserve" approved="yes">
         <source>How are you?</source>
-        <target state="translated">你好吗？</target>
+        <target state="final">你好吗？</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_1BAD392A-C26C-4080-B0F2-FC544E08349C" xml:space="preserve">
+      <trans-unit id="preset_1BAD392A-C26C-4080-B0F2-FC544E08349C" xml:space="preserve" approved="yes">
         <source>I need to brush my hair</source>
-        <target state="translated">我需要梳头</target>
+        <target state="final">我需要梳头</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_2BF1A363-CE24-4F26-9727-C5EAD1FEC27C" xml:space="preserve">
+      <trans-unit id="preset_2BF1A363-CE24-4F26-9727-C5EAD1FEC27C" xml:space="preserve" approved="yes">
         <source>Please open the window</source>
-        <target state="translated">请打开窗口</target>
+        <target state="final">请打开窗口</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_3EF1FBFA-E07A-47B5-BDF6-3AE7A684B834" xml:space="preserve">
+      <trans-unit id="preset_3EF1FBFA-E07A-47B5-BDF6-3AE7A684B834" xml:space="preserve" approved="yes">
         <source>Hello</source>
-        <target state="translated">你好</target>
+        <target state="final">你好</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_4F776A4A-4154-4DFE-89AC-E603C2A578EE" xml:space="preserve">
+      <trans-unit id="preset_4F776A4A-4154-4DFE-89AC-E603C2A578EE" xml:space="preserve" approved="yes">
         <source>Please fix my pillow</source>
-        <target state="translated">请安好我的枕头</target>
+        <target state="final">请安好我的枕头</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_6AD93FB9-437C-455F-A4AF-C96033BCBCAE" xml:space="preserve">
+      <trans-unit id="preset_6AD93FB9-437C-455F-A4AF-C96033BCBCAE" xml:space="preserve" approved="yes">
         <source>I am hot</source>
-        <target state="translated">我热</target>
+        <target state="final">我热</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_6B463AF1-C884-45CD-9194-90806E75FD70" xml:space="preserve">
+      <trans-unit id="preset_6B463AF1-C884-45CD-9194-90806E75FD70" xml:space="preserve" approved="yes">
         <source>That makes sense</source>
-        <target state="translated">这是合理</target>
+        <target state="final">这是合理</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_6CBD6D3E-42A7-435C-B661-2ABD669DC6BE" xml:space="preserve">
+      <trans-unit id="preset_6CBD6D3E-42A7-435C-B661-2ABD669DC6BE" xml:space="preserve" approved="yes">
         <source>I don't know</source>
-        <target state="translated">我不知道</target>
+        <target state="final">我不知道</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_7ACA0926-DB7F-4B9E-872C-AE9690AD79E7" xml:space="preserve">
+      <trans-unit id="preset_7ACA0926-DB7F-4B9E-872C-AE9690AD79E7" xml:space="preserve" approved="yes">
         <source>I need to go to the restroom</source>
-        <target state="translated">我要去洗手间</target>
+        <target state="final">我要去洗手间</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_7FF4503F-F838-48BE-B529-758B3531093C" xml:space="preserve">
+      <trans-unit id="preset_7FF4503F-F838-48BE-B529-758B3531093C" xml:space="preserve" approved="yes">
         <source>Please wait</source>
-        <target state="translated">请等待</target>
+        <target state="final">请等待</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_8BCBACFB-D5ED-46CB-B3E2-21FB31D8D6AD" xml:space="preserve">
+      <trans-unit id="preset_8BCBACFB-D5ED-46CB-B3E2-21FB31D8D6AD" xml:space="preserve" approved="yes">
         <source>Yes</source>
-        <target state="translated">是</target>
+        <target state="final">是</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_8C4D0099-9BA8-4914-A6B5-730FFDC8C499" xml:space="preserve">
+      <trans-unit id="preset_8C4D0099-9BA8-4914-A6B5-730FFDC8C499" xml:space="preserve" approved="yes">
         <source>I am cold</source>
-        <target state="translated">我冷</target>
+        <target state="final">我冷</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_9A808275-0D67-49E4-8BF8-6F22A0C7E169" xml:space="preserve">
+      <trans-unit id="preset_9A808275-0D67-49E4-8BF8-6F22A0C7E169" xml:space="preserve" approved="yes">
         <source>No visitors please</source>
-        <target state="translated">请拒绝访客</target>
+        <target state="final">请拒绝访客</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_9DEB32B5-8606-4689-8F6A-0B251F4DB377" xml:space="preserve">
+      <trans-unit id="preset_9DEB32B5-8606-4689-8F6A-0B251F4DB377" xml:space="preserve" approved="yes">
         <source>I am thirsty</source>
-        <target state="translated">我口渴</target>
+        <target state="final">我口渴</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_9E3230D7-1172-491A-8A00-E734B1661DC1" xml:space="preserve">
+      <trans-unit id="preset_9E3230D7-1172-491A-8A00-E734B1661DC1" xml:space="preserve" approved="yes">
         <source>Please turn the lights on</source>
-        <target state="translated">请开灯</target>
+        <target state="final">请开灯</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_9EE3A781-E84E-4728-976F-8EF993B8174C" xml:space="preserve">
+      <trans-unit id="preset_9EE3A781-E84E-4728-976F-8EF993B8174C" xml:space="preserve" approved="yes">
         <source>Please turn the TV off</source>
-        <target state="translated">请关闭电视机</target>
+        <target state="final">请关闭电视机</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_24B48F19-EA3A-49A1-88C1-AACB67FE7278" xml:space="preserve">
+      <trans-unit id="preset_24B48F19-EA3A-49A1-88C1-AACB67FE7278" xml:space="preserve" approved="yes">
         <source>How was your weekend?</source>
-        <target state="translated">您的周末如何？</target>
+        <target state="final">您的周末如何？</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_28A8F6B6-E196-4981-B762-652C288A0C29" xml:space="preserve">
+      <trans-unit id="preset_28A8F6B6-E196-4981-B762-652C288A0C29" xml:space="preserve" approved="yes">
         <source>I am finished</source>
-        <target state="translated">我已完成</target>
+        <target state="final">我已完成</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_31E8760F-E728-4261-A82E-B50AB40C73FF" xml:space="preserve">
+      <trans-unit id="preset_31E8760F-E728-4261-A82E-B50AB40C73FF" xml:space="preserve" approved="yes">
         <source>How's it going?</source>
-        <target state="translated">你好吗？</target>
+        <target state="final">你好吗？</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_33B3F4B7-2438-439B-A21B-46D2599C8840" xml:space="preserve">
+      <trans-unit id="preset_33B3F4B7-2438-439B-A21B-46D2599C8840" xml:space="preserve" approved="yes">
         <source>Please</source>
-        <target state="translated">请</target>
+        <target state="final">请</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_42DC7273-92F9-4149-8166-966C3C201862" xml:space="preserve">
+      <trans-unit id="preset_42DC7273-92F9-4149-8166-966C3C201862" xml:space="preserve" approved="yes">
         <source>Please open the blinds</source>
-        <target state="translated">请打开百叶窗</target>
+        <target state="final">请打开百叶窗</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_045EF309-3EB7-46B9-8AB7-31BC8482E3DC" xml:space="preserve">
+      <trans-unit id="preset_045EF309-3EB7-46B9-8AB7-31BC8482E3DC" xml:space="preserve" approved="yes">
         <source>Okay</source>
-        <target state="translated">好</target>
+        <target state="final">好</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_46EF7041-50F7-4B64-A0F6-879A8A3D7532" xml:space="preserve">
+      <trans-unit id="preset_46EF7041-50F7-4B64-A0F6-879A8A3D7532" xml:space="preserve" approved="yes">
         <source>Please turn the lights off</source>
-        <target state="translated">请关灯</target>
+        <target state="final">请关灯</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_52CA4E71-4A8C-4EA8-8EA8-C4B18AA16EC8" xml:space="preserve">
+      <trans-unit id="preset_52CA4E71-4A8C-4EA8-8EA8-C4B18AA16EC8" xml:space="preserve" approved="yes">
         <source>Environment</source>
-        <target state="translated">环境</target>
+        <target state="final">环境</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_73B654AA-C999-4864-BF5A-77379DAA991C" xml:space="preserve">
+      <trans-unit id="preset_73B654AA-C999-4864-BF5A-77379DAA991C" xml:space="preserve" approved="yes">
         <source>I need to wash my face</source>
-        <target state="translated">我需要洗脸</target>
+        <target state="final">我需要洗脸</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_81B473E3-2FC9-40F0-AE59-3C658EC6CD91" xml:space="preserve">
+      <trans-unit id="preset_81B473E3-2FC9-40F0-AE59-3C658EC6CD91" xml:space="preserve" approved="yes">
         <source>I need a shower</source>
-        <target state="translated">我需要冲凉</target>
+        <target state="final">我需要冲凉</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_0167AA43-587D-436F-91A9-9CEEAF1CCCF1" xml:space="preserve">
+      <trans-unit id="preset_0167AA43-587D-436F-91A9-9CEEAF1CCCF1" xml:space="preserve" approved="yes">
         <source>I would like to talk</source>
-        <target state="translated">我想说几句话</target>
+        <target state="final">我想说几句话</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_573DD827-7201-49F1-8BE8-0BC18028A8CB" xml:space="preserve">
+      <trans-unit id="preset_573DD827-7201-49F1-8BE8-0BC18028A8CB" xml:space="preserve" approved="yes">
         <source>Bad</source>
-        <target state="translated">差</target>
+        <target state="final">差</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_702D3BAD-6C56-4DC6-8290-8E0693B63152" xml:space="preserve">
+      <trans-unit id="preset_702D3BAD-6C56-4DC6-8290-8E0693B63152" xml:space="preserve" approved="yes">
         <source>Please turn the volume down</source>
-        <target state="translated">请调低音量</target>
+        <target state="final">请调低音量</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_939B4829-D8B4-42F1-B8A2-0E956AAE1FEE" xml:space="preserve">
+      <trans-unit id="preset_939B4829-D8B4-42F1-B8A2-0E956AAE1FEE" xml:space="preserve" approved="yes">
         <source>I am having trouble breathing</source>
-        <target state="translated">我呼吸困难</target>
+        <target state="final">我呼吸困难</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_5542BE2F-419E-41A5-BBF2-5B82E0A49834" xml:space="preserve">
+      <trans-unit id="preset_5542BE2F-419E-41A5-BBF2-5B82E0A49834" xml:space="preserve" approved="yes">
         <source>I am in pain</source>
-        <target state="translated">我疼了</target>
+        <target state="final">我疼了</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_05754D0C-962D-48C3-8554-E4F7D5E86D93" xml:space="preserve">
+      <trans-unit id="preset_05754D0C-962D-48C3-8554-E4F7D5E86D93" xml:space="preserve" approved="yes">
         <source>I need a jacket</source>
-        <target state="translated">我需要外套</target>
+        <target state="final">我需要外套</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_8359B09D-7259-40CC-B258-02895ECC4DB7" xml:space="preserve">
+      <trans-unit id="preset_8359B09D-7259-40CC-B258-02895ECC4DB7" xml:space="preserve" approved="yes">
         <source>I need to spit</source>
-        <target state="translated">我要吐</target>
+        <target state="final">我要吐</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_9929E83B-997D-40AA-841C-130709F5115B" xml:space="preserve">
+      <trans-unit id="preset_9929E83B-997D-40AA-841C-130709F5115B" xml:space="preserve" approved="yes">
         <source>Good morning</source>
-        <target state="translated">早上好</target>
+        <target state="final">早上好</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_30153E11-D48C-47C8-9186-47988D0A5B7A" xml:space="preserve">
+      <trans-unit id="preset_30153E11-D48C-47C8-9186-47988D0A5B7A" xml:space="preserve" approved="yes">
         <source>I do not agree</source>
-        <target state="translated">我不同意</target>
+        <target state="final">我不同意</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_63980C93-EE77-40DE-BDE7-BF8F97EC0304" xml:space="preserve">
+      <trans-unit id="preset_63980C93-EE77-40DE-BDE7-BF8F97EC0304" xml:space="preserve" approved="yes">
         <source>Please be patient</source>
-        <target state="translated">请耐心等待</target>
+        <target state="final">请耐心等待</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_64348AD1-9F63-4ADA-B391-E1742913C0E6" xml:space="preserve">
+      <trans-unit id="preset_64348AD1-9F63-4ADA-B391-E1742913C0E6" xml:space="preserve" approved="yes">
         <source>I need a bath</source>
-        <target state="translated">我需要洗操</target>
+        <target state="final">我需要洗操</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_72633C5C-47A2-4D5E-9615-E1408234478F" xml:space="preserve">
+      <trans-unit id="preset_72633C5C-47A2-4D5E-9615-E1408234478F" xml:space="preserve" approved="yes">
         <source>Thank you</source>
-        <target state="translated">谢谢</target>
+        <target state="final">谢谢</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_88556B8E-FE61-401D-888C-0D79568715A0" xml:space="preserve">
+      <trans-unit id="preset_88556B8E-FE61-401D-888C-0D79568715A0" xml:space="preserve" approved="yes">
         <source>Please close the blinds</source>
-        <target state="translated">请关闭百叶窗</target>
+        <target state="final">请关闭百叶窗</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_1244394F-2793-47EF-BCAC-DB8BBDAB78C6" xml:space="preserve">
+      <trans-unit id="preset_1244394F-2793-47EF-BCAC-DB8BBDAB78C6" xml:space="preserve" approved="yes">
         <source>I need my medication</source>
-        <target state="translated">我需要我的药物</target>
+        <target state="final">我需要我的药物</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_30474911-619F-4FBF-B7DA-F64039F556F2" xml:space="preserve">
+      <trans-unit id="preset_30474911-619F-4FBF-B7DA-F64039F556F2" xml:space="preserve" approved="yes">
         <source>Please be quiet</source>
-        <target state="translated">请保持静音</target>
+        <target state="final">请保持静音</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_A02D6604-5C7C-4BB0-8C4A-E1C5E0D1A869" xml:space="preserve">
+      <trans-unit id="preset_A02D6604-5C7C-4BB0-8C4A-E1C5E0D1A869" xml:space="preserve" approved="yes">
         <source>Please stop</source>
-        <target state="translated">请停止</target>
+        <target state="final">请停止</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_A436EAAF-BD8A-4D8D-81EA-DC6D3C849D4A" xml:space="preserve">
+      <trans-unit id="preset_A436EAAF-BD8A-4D8D-81EA-DC6D3C849D4A" xml:space="preserve" approved="yes">
         <source>I like it</source>
-        <target state="translated">我喜欢</target>
+        <target state="final">我喜欢</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_A74483A8-4069-40D7-992C-01295934E97C" xml:space="preserve">
+      <trans-unit id="preset_A74483A8-4069-40D7-992C-01295934E97C" xml:space="preserve" approved="yes">
         <source>Please repeat what you said</source>
-        <target state="translated">请重复你说过的话</target>
+        <target state="final">请重复你说过的话</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_ADDD57C6-D11E-4B32-A2B3-05AA43D9AC8C" xml:space="preserve">
+      <trans-unit id="preset_ADDD57C6-D11E-4B32-A2B3-05AA43D9AC8C" xml:space="preserve" approved="yes">
         <source>I am fine</source>
-        <target state="translated">我好</target>
+        <target state="final">我好</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_B2442AA0-6004-4636-9B39-2DB97ADD1DA1" xml:space="preserve">
+      <trans-unit id="preset_B2442AA0-6004-4636-9B39-2DB97ADD1DA1" xml:space="preserve" approved="yes">
         <source>Goodbye</source>
-        <target state="translated">再見</target>
+        <target state="final">再見</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_BBE8BABC-CCBF-49BF-87D4-057016AADBC5" xml:space="preserve">
+      <trans-unit id="preset_BBE8BABC-CCBF-49BF-87D4-057016AADBC5" xml:space="preserve" approved="yes">
         <source>I want to sit up</source>
-        <target state="translated">我想坐起来</target>
+        <target state="final">我想坐起来</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_BEE6FF86-CE30-4096-9E37-C469F63630B7" xml:space="preserve">
+      <trans-unit id="preset_BEE6FF86-CE30-4096-9E37-C469F63630B7" xml:space="preserve" approved="yes">
         <source>I didn't mean to say that</source>
-        <target state="translated">我不是说这句</target>
+        <target state="final">我不是说这句</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_C0B2A1A8-8333-4121-B4A8-FFFA185EB5D2" xml:space="preserve">
+      <trans-unit id="preset_C0B2A1A8-8333-4121-B4A8-FFFA185EB5D2" xml:space="preserve" approved="yes">
         <source>General</source>
-        <target state="translated">一般</target>
+        <target state="final">一般</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_C6C14627-E48E-4EF3-B81D-64C191F2EC75" xml:space="preserve">
+      <trans-unit id="preset_C6C14627-E48E-4EF3-B81D-64C191F2EC75" xml:space="preserve" approved="yes">
         <source>I am good</source>
-        <target state="translated">我好</target>
+        <target state="final">我好</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_C6E6B6E7-BEB6-466D-822A-F8CE2D092B9E" xml:space="preserve">
+      <trans-unit id="preset_C6E6B6E7-BEB6-466D-822A-F8CE2D092B9E" xml:space="preserve" approved="yes">
         <source>I am uncomfortable</source>
-        <target state="translated">我不舒服</target>
+        <target state="final">我不舒服</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_C865BE96-40B5-406C-9BAA-0A0D3280E377" xml:space="preserve">
+      <trans-unit id="preset_C865BE96-40B5-406C-9BAA-0A0D3280E377" xml:space="preserve" approved="yes">
         <source>Please close the window</source>
-        <target state="translated">请关闭窗口</target>
+        <target state="final">请关闭窗口</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_D6A67E02-3D07-4D44-8B04-2C1B9B8B167E" xml:space="preserve">
+      <trans-unit id="preset_D6A67E02-3D07-4D44-8B04-2C1B9B8B167E" xml:space="preserve" approved="yes">
         <source>Good evening</source>
-        <target state="translated">晚安</target>
+        <target state="final">晚安</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_D64EE532-14D3-4434-B671-8F4368EC0A8D" xml:space="preserve">
+      <trans-unit id="preset_D64EE532-14D3-4434-B671-8F4368EC0A8D" xml:space="preserve" approved="yes">
         <source>Good</source>
-        <target state="translated">好</target>
+        <target state="final">好</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_DC942BB6-B2BF-4ABB-8931-719BD2A504E6" xml:space="preserve">
+      <trans-unit id="preset_DC942BB6-B2BF-4ABB-8931-719BD2A504E6" xml:space="preserve" approved="yes">
         <source>Please turn the volume up</source>
-        <target state="translated">请调高音量</target>
+        <target state="final">请调高音量</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_DFB79E0D-CF93-4744-B9EE-12738E1864E2" xml:space="preserve">
+      <trans-unit id="preset_DFB79E0D-CF93-4744-B9EE-12738E1864E2" xml:space="preserve" approved="yes">
         <source>Maybe</source>
-        <target state="translated">可能</target>
+        <target state="final">可能</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_E7ADBE88-2722-4DE7-BDC1-994F07EA294B" xml:space="preserve">
+      <trans-unit id="preset_E7ADBE88-2722-4DE7-BDC1-994F07EA294B" xml:space="preserve" approved="yes">
         <source>Personal Care</source>
-        <target state="translated">个人护理</target>
+        <target state="final">个人护理</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_E7D11E13-BC4F-4FE5-9C8A-BE2DE31AEE7F" xml:space="preserve">
+      <trans-unit id="preset_E7D11E13-BC4F-4FE5-9C8A-BE2DE31AEE7F" xml:space="preserve" approved="yes">
         <source>I would like visitors</source>
-        <target state="translated">我想要访客</target>
+        <target state="final">我想要访客</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_E012D902-E8BA-4BEA-92C7-7107ECF8051C" xml:space="preserve">
+      <trans-unit id="preset_E012D902-E8BA-4BEA-92C7-7107ECF8051C" xml:space="preserve" approved="yes">
         <source>I am hungry</source>
-        <target state="translated">我饿了</target>
+        <target state="final">我饿了</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_EB7A9732-E28E-4440-A88B-BA2A1ACFBD76" xml:space="preserve">
+      <trans-unit id="preset_EB7A9732-E28E-4440-A88B-BA2A1ACFBD76" xml:space="preserve" approved="yes">
         <source>Conversation</source>
-        <target state="translated">对话</target>
+        <target state="final">对话</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_F6F03BBD-B9CD-41F5-B26A-FCC13CCBB199" xml:space="preserve">
+      <trans-unit id="preset_F6F03BBD-B9CD-41F5-B26A-FCC13CCBB199" xml:space="preserve" approved="yes">
         <source>I am tired</source>
-        <target state="translated">我累了</target>
+        <target state="final">我累了</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_F8F5D1C9-0AA6-4152-BF7C-0851ACD1406B" xml:space="preserve">
+      <trans-unit id="preset_F8F5D1C9-0AA6-4152-BF7C-0851ACD1406B" xml:space="preserve" approved="yes">
         <source>Basic Needs</source>
-        <target state="translated">基本需要</target>
+        <target state="final">基本需要</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_FABE749C-B54D-4031-B8E7-62777B34D273" xml:space="preserve">
+      <trans-unit id="preset_FABE749C-B54D-4031-B8E7-62777B34D273" xml:space="preserve" approved="yes">
         <source>No</source>
-        <target state="translated">不</target>
+        <target state="final">不</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" xml:space="preserve">
+      <trans-unit id="preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" xml:space="preserve" approved="yes">
         <source>Please turn the TV on</source>
-        <target state="translated">请打开电视机</target>
+        <target state="final">请打开电视机</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_user_favorites" xml:space="preserve">
+      <trans-unit id="preset_user_favorites" xml:space="preserve" approved="yes">
         <source>My Sayings</source>
-        <target state="translated">我的对话</target>
+        <target state="final">我的对话</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_user_keypad" xml:space="preserve">
+      <trans-unit id="preset_user_keypad" xml:space="preserve" approved="yes">
         <source>123</source>
-        <target state="translated">数字</target>
+        <target state="final">数字</target>
         <note/>
       </trans-unit>
     </body>
