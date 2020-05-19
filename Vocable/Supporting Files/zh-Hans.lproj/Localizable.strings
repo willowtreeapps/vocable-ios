@@ -1,0 +1,141 @@
+/* Categories list editor screen header title */
+"categories_list_editor.header.title" = "类别";
+
+/* Cancel exit editing alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "取消";
+
+/* Confirm exit category alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "确认";
+
+/* Exit edit categories alert title */
+"category_editor.alert.cancel_editing_confirmation.title" = "如果您关闭了，则您的自定类别将被删除。";
+
+/* Delete category alert cancel button title */
+"category_editor.alert.delete_category_confirmation.button.cancel.title" = "取消";
+
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "删除";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "删除后的对话无法恢复。";
+
+/* Delete phrase alert cancel button title */
+"category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "取消";
+
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "删除";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "删除后的对话无法恢复。";
+
+/* Remove category button label within the category detail screen. */
+"category_editor.detail.button.remove_category.title" = "移除类别";
+
+/* Show category button label within the category detail screen. */
+"category_editor.detail.button.show_category.title" = "显示";
+
+/* changes to an existing phrase were saved successfully */
+"category_editor.toast.changes_saved.title" = "已保存更改";
+
+/* Saved to Categories
+   User edited name of the category and saved it successfully */
+"category_editor.toast.successfully_saved.title" = "已保存更改";
+
+/* Debugging error message for when preloaded content is not found */
+"debug.assertion.presets_file_not_found" = "找不到预设";
+
+/* Edit Phrases */
+"Edit Phrases" = "编辑对话";
+
+/* Cancel alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "取消";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "确认";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "关闭头部跟踪？";
+
+/* Warning message presented to the user when the head tracking system */
+"gaze_tracking.error.excessive_head_distance.title" = "请靠近设备";
+
+/* Select something below to speak Hint Text */
+"main_screen.textfield_placeholder.default" = "请选择下面要说的对话";
+
+/* Page indicator progress format. \"Page x of n\" */
+"paging_progress_indicator_format" = "第 %1$d/%2$d 頁";
+
+/* Continue editing alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "继续编辑";
+
+/* Discard changes alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "舍弃";
+
+/* Exit edit sayings alert title */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "保存前返回将会清除任何编辑的东西。";
+
+/* new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title */
+"phrase_editor.toast.successfully_saved_to_favorites.title_format" = "保存到 %@";
+
+/* 'No' num pad response */
+"preset.category.numberpad.phrase.no.title" = "不";
+
+/* 'Yes' num pad response */
+"preset.category.numberpad.phrase.yes.title" = "是";
+
+/* No email account configured error alert dismiss button title */
+"settings.alert.no_email_configured.button.dismiss.title" = "确定";
+
+/* No email account configured error alert title */
+"settings.alert.no_email_configured.title" = "电子邮件没有配置";
+
+/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.body" = "您即将被带到可说话之外。您可能会失去头部跟踪控制。";
+
+/* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.cancel.title" = "取消";
+
+/* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.confirm.title" = "确认";
+
+/* edit categories settings menu item */
+"settings.cell.categories.title" = "类别";
+
+/* contact developers settings menu item */
+"settings.cell.contact_developers.title" = "联系开发者";
+
+/* edit user's favorite phrases category settings menu item */
+"settings.cell.edit_user_favorites.title_format" = "编辑 %@";
+
+/* Settings head tracking cell title */
+"settings.cell.head_tracking.title" = "头部跟踪";
+
+/* view privacy policy settings menu item */
+"settings.cell.privacy_policy.title" = "隐私政策";
+
+/* reset all settings menu item */
+"settings.cell.reset_all.title" = "重置应用设置";
+
+/* edit cursor selection mode settings menu item */
+"settings.cell.selection_mode.title" = "移动对象模式";
+
+/* edit cursor timing and sensititivy settings menu item */
+"settings.cell.timing_sensitivity.title" = "时间和灵敏度";
+
+/* tune cursor debug settings menu item */
+"settings.cell.tune_cursor.title" = "调指针";
+
+/* Settings screen header title */
+"settings.header.title" = "设置";
+
+/* Continue editing alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "继续编辑";
+
+/* Discard changes alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.discard.title" = "舍弃";
+
+/* Exit edit sayings alert title */
+"text_editor.alert.cancel_editing_confirmation.title" = "保存前返回将会清除任何编辑的东西。";
+
