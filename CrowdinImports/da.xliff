@@ -103,9 +103,9 @@
         <note>Saved to Categories
    User edited name of the category and saved it successfully</note>
       </trans-unit>
-      <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve">
+      <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve" approved="yes">
         <source>No presets found</source>
-        <target state="needs-translation">No presets found</target>
+        <target state="final">Ingen forudstillinger fundet</target>
         <note>Debugging error message for when preloaded content is not found</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
@@ -377,9 +377,9 @@
         <target state="translated">Hvordan går det?</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_33B3F4B7-2438-439B-A21B-46D2599C8840" xml:space="preserve">
+      <trans-unit id="preset_33B3F4B7-2438-439B-A21B-46D2599C8840" xml:space="preserve" approved="yes">
         <source>Please</source>
-        <target state="needs-translation">Please</target>
+        <target state="final">Vær så venlig</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_42DC7273-92F9-4149-8166-966C3C201862" xml:space="preserve">
