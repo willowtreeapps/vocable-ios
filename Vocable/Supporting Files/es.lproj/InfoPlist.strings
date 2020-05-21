@@ -1,0 +1,9 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "Vocable";
+
+/* Bundle name */
+"CFBundleName" = "Vocable";
+
+/* Camera usage description */
+"NSCameraUsageDescription" = "Vocable usa el seguimiento de la cabeza de ARkit para detectar la cara del usuario mediante la cámara frontal TrueDepth. Esto permite controlar un puntero en pantalla con el que los usuarios de movilidad reducida interaccionan con la app. Los datos de orientación y posición de la cabeza solo se usan para controlar el puntero en pantalla y no se almacenan o intercambian. Para su funcionamiento, Vocable necesita permiso para usar la cámara.";
+

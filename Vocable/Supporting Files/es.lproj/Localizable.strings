@@ -1,0 +1,141 @@
+/* Categories list editor screen header title */
+"categories_list_editor.header.title" = "Categorias";
+
+/* Cancel exit editing alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Cancelar";
+
+/* Confirm exit category alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Aceptar";
+
+/* Exit edit categories alert title */
+"category_editor.alert.cancel_editing_confirmation.title" = "Se eliminará su categoría personalizada al salir sin guardar.";
+
+/* Delete category alert cancel button title */
+"category_editor.alert.delete_category_confirmation.button.cancel.title" = "Cancelar";
+
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "Eliminar";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "Las categorías eliminadas son irrecuperables.";
+
+/* Delete phrase alert cancel button title */
+"category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Cancelar";
+
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Eliminar";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "Las frases eliminadas son irrecuperables.";
+
+/* Remove category button label within the category detail screen. */
+"category_editor.detail.button.remove_category.title" = "Eliminar Categoría";
+
+/* Show category button label within the category detail screen. */
+"category_editor.detail.button.show_category.title" = "Mostrar";
+
+/* changes to an existing phrase were saved successfully */
+"category_editor.toast.changes_saved.title" = "Cambios guardados";
+
+/* Saved to Categories
+   User edited name of the category and saved it successfully */
+"category_editor.toast.successfully_saved.title" = "Cambios guardados";
+
+/* Debugging error message for when preloaded content is not found */
+"debug.assertion.presets_file_not_found" = "No hay presets disponibles";
+
+/* Edit Phrases */
+"Edit Phrases" = "Editar frases";
+
+/* Cancel alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Cancelar";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Aceptar";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "¿Apagar el seguimiento de la cabeza?";
+
+/* Warning message presented to the user when the head tracking system */
+"gaze_tracking.error.excessive_head_distance.title" = "Acérquese al dispositivo.";
+
+/* Select something below to speak Hint Text */
+"main_screen.textfield_placeholder.default" = "Selecciona algo a continuación para hablar";
+
+/* Page indicator progress format. \"Page x of n\" */
+"paging_progress_indicator_format" = "Página %1$d de %2$d";
+
+/* Continue editing alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Seguir editando";
+
+/* Discard changes alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Descartar";
+
+/* Exit edit sayings alert title */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Volver atrás antes de guardar eliminará cualquier edición hecha.";
+
+/* new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title */
+"phrase_editor.toast.successfully_saved_to_favorites.title_format" = "Guardado en %@";
+
+/* 'No' num pad response */
+"preset.category.numberpad.phrase.no.title" = "No";
+
+/* 'Yes' num pad response */
+"preset.category.numberpad.phrase.yes.title" = "Sí";
+
+/* No email account configured error alert dismiss button title */
+"settings.alert.no_email_configured.button.dismiss.title" = "OK";
+
+/* No email account configured error alert title */
+"settings.alert.no_email_configured.title" = "Email no configurado.";
+
+/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.body" = "Vas a salir de Vocable, podrías perder el seguimiento de la cabeza.";
+
+/* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.cancel.title" = "Cancelar";
+
+/* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Aceptar";
+
+/* edit categories settings menu item */
+"settings.cell.categories.title" = "Categorías";
+
+/* contact developers settings menu item */
+"settings.cell.contact_developers.title" = "Contactar desarrolladores";
+
+/* edit user's favorite phrases category settings menu item */
+"settings.cell.edit_user_favorites.title_format" = "Modificar %@";
+
+/* Settings head tracking cell title */
+"settings.cell.head_tracking.title" = "Seguimiento de la cabeza";
+
+/* view privacy policy settings menu item */
+"settings.cell.privacy_policy.title" = "Política de privacidad";
+
+/* reset all settings menu item */
+"settings.cell.reset_all.title" = "Restablecer configuración";
+
+/* edit cursor selection mode settings menu item */
+"settings.cell.selection_mode.title" = "Modo de selección";
+
+/* edit cursor timing and sensititivy settings menu item */
+"settings.cell.timing_sensitivity.title" = "Tiempo y sensibilidad";
+
+/* tune cursor debug settings menu item */
+"settings.cell.tune_cursor.title" = "Cursor de sintonía";
+
+/* Settings screen header title */
+"settings.header.title" = "Ajustes";
+
+/* Continue editing alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continuar Edición";
+
+/* Discard changes alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Descartar";
+
+/* Exit edit sayings alert title */
+"text_editor.alert.cancel_editing_confirmation.title" = "Volver antes de guardar borrará todas las ediciones realizadas.";
+
