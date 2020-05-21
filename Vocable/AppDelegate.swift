@@ -33,6 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        // Allow the UI to load from storyboard conventionally, but switch it to
+        // an instance of our custom window class
+        let rootVC = window?.rootViewController
+        window = HeadGazeWindow(frame: window?.frame ?? UIScreen.main.bounds)
+        window?.rootViewController = rootVC
+
         if !AppConfig.isHeadTrackingSupported {
             AppConfig.isHeadTrackingEnabled = false
         }
