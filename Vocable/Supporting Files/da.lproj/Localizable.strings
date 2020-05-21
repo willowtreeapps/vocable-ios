@@ -42,7 +42,7 @@
 "category_editor.toast.successfully_saved.title" = "Dine ændringer er gemt";
 
 /* Debugging error message for when preloaded content is not found */
-"debug.assertion.presets_file_not_found" = "No presets found";
+"debug.assertion.presets_file_not_found" = "Ingen forudstillinger fundet";
 
 /* Edit Phrases */
 "Edit Phrases" = "Ændrer Sætninger";
