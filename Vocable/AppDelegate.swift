@@ -14,11 +14,18 @@ import AVFoundation
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: HeadGazeWindow?
+    var window: UIWindow?
+
+    // This is to silence the console warning "The app delegate must implement the window property if it wants to use a main storyboard file"
+    // It appears to complain if the window property is not explicitly typed as UIWindow
+    private var gazeableWindow: HeadGazeWindow? {
+        return window as? HeadGazeWindow
+    }
+
     var gazeTrackingWindow: UIHeadGazeTrackingWindow?
     var cursorWindow: UIHeadGazeCursorWindow? {
         didSet {
-            window?.cursorView = cursorWindow?.cursorViewController.virtualCursorView
+            gazeableWindow?.cursorView = cursorWindow?.cursorViewController.virtualCursorView
         }
     }
 
@@ -40,10 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AVSpeechSynthesizer.shared.speak("", language: "en")
 
         application.isIdleTimerDisabled = true
-        let window = HeadGazeWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = UIStoryboard(name: "Root", bundle: nil).instantiateInitialViewController()
-        window.makeKeyAndVisible()
-        self.window = window
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(localeDidChange(_:)),
@@ -123,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
-         window?.presentHeadTrackingErrorToastIfNeeded()
+         gazeableWindow?.presentHeadTrackingErrorToastIfNeeded()
     }
 
     @objc private func applicationDidAcquireGaze(_ sender: Any?) {

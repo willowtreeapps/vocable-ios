@@ -222,6 +222,7 @@
                             <constraint firstItem="Fb7-Uu-X9X" firstAttribute="top" secondItem="ysz-No-obO" secondAttribute="top" id="qPj-Wf-DaN"/>
                             <constraint firstItem="kdi-sC-FYx" firstAttribute="leading" secondItem="WIs-oB-LmA" secondAttribute="trailing" id="wIw-nR-4TS"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="ymf-ZS-1dZ"/>
                     </view>
                     <connections>
                         <outlet property="backChevron" destination="Fb7-Uu-X9X" id="o9e-Kt-i5m"/>

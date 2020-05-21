@@ -84,7 +84,6 @@ class KeyboardViewController: UICollectionViewController {
         
         collectionView.register(UINib(nibName: "KeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "SuggestionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SuggestionCollectionViewCell.reuseIdentifier)
-        collectionView.register(UINib(nibName: "FunctionKeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: FunctionKeyboardKeyCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "SpeakFunctionKeyboardKeyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SpeakFunctionKeyboardKeyCollectionViewCell.reuseIdentifier)
 
         let layout = createLayout()
@@ -113,7 +112,7 @@ class KeyboardViewController: UICollectionViewController {
                     cell.setup(with: functionType.image)
                     return cell
                 }
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: FunctionKeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! FunctionKeyboardKeyCollectionViewCell
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: KeyboardKeyCollectionViewCell.reuseIdentifier, for: indexPath) as! KeyboardKeyCollectionViewCell
                 cell.setup(with: functionType.image)
                 return cell
             }

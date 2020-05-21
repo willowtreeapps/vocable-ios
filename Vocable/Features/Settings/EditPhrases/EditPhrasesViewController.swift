@@ -15,11 +15,10 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
     var category: Category!
     private var disposables = Set<AnyCancellable>()
 
-    private lazy var diffableDataSource = CarouselCollectionViewDataSourceProxy<Int, PhraseViewModel>(collectionView: collectionView) { [weak self] (collectionView, indexPath, phrase) -> UICollectionViewCell? in
+    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID>(collectionView: collectionView) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
         guard let self = self else { return nil }
 
-        #warning("Refactor diffableDataSource to use NSFetchedResultsControllerDelegate")
-
+        let phrase = self.fetchResultsController.object(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier, for: indexPath) as! EditPhrasesCollectionViewCell
         cell.textLabel.text = phrase.utterance
         cell.deleteButton.addTarget(self,
@@ -52,7 +51,6 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
         fetchResultsController.delegate = self
         try? fetchResultsController.performFetch()
-        updateDataSource(animated: false)
 
         setupNavigationBar()
         setupCollectionView()
@@ -105,26 +103,15 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         return false
     }
 
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateDataSource(animated: true)
-    }
-
-    private func updateDataSource(animated: Bool, completion: (() -> Void)? = nil) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
 
         let pageCountBefore = collectionView.layout.pagesPerSection
-
-        let content = fetchResultsController.fetchedObjects ?? []
-        let viewModels = content.compactMap(PhraseViewModel.init)
-        var snapshot = NSDiffableDataSourceSnapshot<Int, PhraseViewModel>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(viewModels)
-        diffableDataSource.apply(snapshot,
-                                 animatingDifferences: animated,
-                                 completion: completion)
+        let snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
+        dataSourceProxy.apply(snapshot, animatingDifferences: false)
 
         let pageCountAfter = collectionView.layout.pagesPerSection
 
-        if viewModels.isEmpty {
+        if snapshot.itemIdentifiers.isEmpty {
             installEmptyStateIfNeeded()
         } else {
             removeEmptyStateIfNeeded()
@@ -199,7 +186,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
             return
         }
 
-        let safeIndexPath = diffableDataSource.indexPath(fromMappedIndexPath: indexPath)
+        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
         let phrase = self.fetchResultsController.object(at: safeIndexPath)
         let context = NSPersistentContainer.shared.viewContext
         context.delete(phrase)
@@ -218,7 +205,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
             return
         }
 
-        let safeIndexPath = diffableDataSource.indexPath(fromMappedIndexPath: indexPath)
+        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
         let vc = EditTextViewController()
 
         let phrase = fetchResultsController.object(at: safeIndexPath)
