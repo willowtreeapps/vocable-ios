@@ -14,30 +14,30 @@ import AVFoundation
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    var window: UIWindow? {
+        get {
+            gazeableWindow
+        }
+        //swiftlint:disable unused_setter_value
+        set {
+
+        }
+    }
 
     // This is to silence the console warning "The app delegate must implement the window property if it wants to use a main storyboard file"
     // It appears to complain if the window property is not explicitly typed as UIWindow
-    private var gazeableWindow: HeadGazeWindow? {
-        return window as? HeadGazeWindow
-    }
+    private lazy var gazeableWindow = HeadGazeWindow(frame: UIScreen.main.bounds)
 
     var gazeTrackingWindow: UIHeadGazeTrackingWindow?
     var cursorWindow: UIHeadGazeCursorWindow? {
         didSet {
-            gazeableWindow?.cursorView = cursorWindow?.cursorViewController.virtualCursorView
+            gazeableWindow.cursorView = cursorWindow?.cursorViewController.virtualCursorView
         }
     }
 
     private var disposables: [AnyCancellable] = []
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
-        // Allow the UI to load from storyboard conventionally, but switch it to
-        // an instance of our custom window class
-        let rootVC = window?.rootViewController
-        window = HeadGazeWindow(frame: window?.frame ?? UIScreen.main.bounds)
-        window?.rootViewController = rootVC
 
         if !AppConfig.isHeadTrackingSupported {
             AppConfig.isHeadTrackingEnabled = false
@@ -132,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     @objc private func applicationDidLoseGaze(_ sender: Any?) {
-         gazeableWindow?.presentHeadTrackingErrorToastIfNeeded()
+         gazeableWindow.presentHeadTrackingErrorToastIfNeeded()
     }
 
     @objc private func applicationDidAcquireGaze(_ sender: Any?) {
