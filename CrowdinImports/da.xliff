@@ -118,9 +118,9 @@
         <target state="translated">Bekræft</target>
         <note>Confirm alert action title</note>
       </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve" approved="yes">
         <source>Turn off head tracking?</source>
-        <target state="translated">Deaktiver hovedsporing?</target>
+        <target state="final">Deaktiver hovedsporing?</target>
         <note>Disable head tracking confirmation alert title</note>
       </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
@@ -210,9 +210,9 @@
         <target state="translated">Rediger %@</target>
         <note>edit user's favorite phrases category settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve">
+      <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve" approved="yes">
         <source>Head Tracking</source>
-        <target state="translated">Hovedsporing</target>
+        <target state="final">Hovedsporing</target>
         <note>Settings head tracking cell title</note>
       </trans-unit>
       <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
@@ -407,9 +407,9 @@
         <target state="translated">Jeg har brug for at vaske mit ansigt</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_81B473E3-2FC9-40F0-AE59-3C658EC6CD91" xml:space="preserve">
+      <trans-unit id="preset_81B473E3-2FC9-40F0-AE59-3C658EC6CD91" xml:space="preserve" approved="yes">
         <source>I need a shower</source>
-        <target state="translated">Jeg har brug for et bad</target>
+        <target state="final">Jeg har brug for et brusebad</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_0167AA43-587D-436F-91A9-9CEEAF1CCCF1" xml:space="preserve">
