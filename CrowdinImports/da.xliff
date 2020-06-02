@@ -118,9 +118,9 @@
         <target state="translated">Bekræft</target>
         <note>Confirm alert action title</note>
       </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve" approved="yes">
         <source>Turn off head tracking?</source>
-        <target state="translated">Deaktiver hovedsporing?</target>
+        <target state="final">Deaktiver hovedsporing?</target>
         <note>Disable head tracking confirmation alert title</note>
       </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
