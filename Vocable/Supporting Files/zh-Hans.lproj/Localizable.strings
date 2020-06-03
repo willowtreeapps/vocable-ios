@@ -80,7 +80,7 @@
 "phrase_editor.toast.successfully_saved_to_favorites.title_format" = "保存到 %@";
 
 /* 'No' num pad response */
-"preset.category.numberpad.phrase.no.title" = "不";
+"preset.category.numberpad.phrase.no.title" = "不是";
 
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "是";
