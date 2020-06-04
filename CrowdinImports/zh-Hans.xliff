@@ -374,7 +374,7 @@
       </trans-unit>
       <trans-unit id="preset_31E8760F-E728-4261-A82E-B50AB40C73FF" xml:space="preserve" approved="yes">
         <source>How's it going?</source>
-        <target state="final">您好吗？</target>
+        <target state="final">您最近怎么样了？</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_33B3F4B7-2438-439B-A21B-46D2599C8840" xml:space="preserve" approved="yes">
@@ -389,7 +389,7 @@
       </trans-unit>
       <trans-unit id="preset_045EF309-3EB7-46B9-8AB7-31BC8482E3DC" xml:space="preserve" approved="yes">
         <source>Okay</source>
-        <target state="final">好</target>
+        <target state="final">对</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_46EF7041-50F7-4B64-A0F6-879A8A3D7532" xml:space="preserve" approved="yes">
@@ -504,7 +504,7 @@
       </trans-unit>
       <trans-unit id="preset_ADDD57C6-D11E-4B32-A2B3-05AA43D9AC8C" xml:space="preserve" approved="yes">
         <source>I am fine</source>
-        <target state="final">我很好</target>
+        <target state="final">我还可以</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_B2442AA0-6004-4636-9B39-2DB97ADD1DA1" xml:space="preserve" approved="yes">
@@ -549,7 +549,7 @@
       </trans-unit>
       <trans-unit id="preset_D64EE532-14D3-4434-B671-8F4368EC0A8D" xml:space="preserve" approved="yes">
         <source>Good</source>
-        <target state="final">好</target>
+        <target state="final">很好</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_DC942BB6-B2BF-4ABB-8931-719BD2A504E6" xml:space="preserve" approved="yes">
