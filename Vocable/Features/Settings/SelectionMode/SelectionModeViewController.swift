@@ -27,7 +27,7 @@ final class SelectionModeViewController: VocableCollectionViewController {
     }
 
     private func setupNavigationBar() {
-        navigationBar.title = "Selection Mode"
+        navigationBar.title = NSLocalizedString("selection_mode.header.title", comment: "Selection mode screen header title")
     }
 
     // MARK: UICollectionViewDataSource
