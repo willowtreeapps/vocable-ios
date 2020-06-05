@@ -170,6 +170,11 @@
         <target state="final">Ja</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
+      <trans-unit id="selection_mode.header.title" xml:space="preserve" approved="yes">
+        <source>Selection Mode</source>
+        <target state="final">Steuerungsmodus</target>
+        <note>Selection mode screen header title</note>
+      </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve" approved="yes">
         <source>OK</source>
         <target state="final">OK</target>
@@ -259,6 +264,36 @@
         <source>Going back before saving will clear any edits made.</source>
         <target state="final">Nicht gespeicherte Veränderungen werden beim Verlassen des Menüs verworfen.</target>
         <note>Exit edit sayings alert title</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve" approved="yes">
+        <source>High</source>
+        <target state="final">Hoch</target>
+        <note>High cursor sensitivity option button</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve" approved="yes">
+        <source>Low</source>
+        <target state="final">Niedrig</target>
+        <note>Low cursor sensitivity option button</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve" approved="yes">
+        <source>Medium</source>
+        <target state="final">Mittel</target>
+        <note>Medium cursor sensitivity option button</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve" approved="yes">
+        <source>Cursor Sensitivity</source>
+        <target state="final">Zeigerempfindlichkeit</target>
+        <note>Cursor sensitivity configuration option name</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve" approved="yes">
+        <source>Hover Time</source>
+        <target state="final">Schwebezeit</target>
+        <note>Dwell duration configuration option name</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve" approved="yes">
+        <source>Timing and Sensitivity</source>
+        <target state="final">Timing und Empfindlichkeit</target>
+        <note>Timing and sensitivity header title</note>
       </trans-unit>
     </body>
   </file>
