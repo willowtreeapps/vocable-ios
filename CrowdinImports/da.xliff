@@ -170,6 +170,11 @@
         <target state="translated">Ja</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
+      <trans-unit id="selection_mode.header.title" xml:space="preserve">
+        <source>Selection Mode</source>
+        <target state="translated">Markeringstilstand</target>
+        <note>Selection mode screen header title</note>
+      </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
         <source>OK</source>
         <target state="translated">OK</target>
@@ -259,6 +264,36 @@
         <source>Going back before saving will clear any edits made.</source>
         <target state="translated">Hvis du forlader uden at gemme vil dine ændringer blive slettet.</target>
         <note>Exit edit sayings alert title</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve">
+        <source>High</source>
+        <target state="translated">Høj</target>
+        <note>High cursor sensitivity option button</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve">
+        <source>Low</source>
+        <target state="translated">Lav</target>
+        <note>Low cursor sensitivity option button</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve">
+        <source>Medium</source>
+        <target state="translated">Mellem</target>
+        <note>Medium cursor sensitivity option button</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve">
+        <source>Cursor Sensitivity</source>
+        <target state="translated">Markørfølsomhed</target>
+        <note>Cursor sensitivity configuration option name</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve">
+        <source>Hover Time</source>
+        <target state="translated">Pegetid</target>
+        <note>Dwell duration configuration option name</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve">
+        <source>Timing and Sensitivity</source>
+        <target state="translated">Timing og Følsomhed</target>
+        <note>Timing and sensitivity header title</note>
       </trans-unit>
     </body>
   </file>
