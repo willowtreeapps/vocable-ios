@@ -10,7 +10,8 @@ import UIKit
 import Combine
 
 final class DwellTimeCollectionViewCell: UICollectionViewCell {
-    
+
+    @IBOutlet private var titleLabel: UILabel!
     @IBOutlet var decreaseTimeButton: GazeableButton!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var increaseTimeButton: GazeableButton!
@@ -67,6 +68,7 @@ final class DwellTimeCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        titleLabel.text = NSLocalizedString("timing_and_sensitivity.cell.dwell_duration.title", comment: "Dwell duration configuration option name")
         AppConfig.$selectionHoldDuration.sink(receiveValue: { duration in
             self.timeLabel.text = DwellTimeCollectionViewCell.formattedString(forDuration: duration)
         }).store(in: &disposables)

@@ -94,6 +94,7 @@
                 <outlet property="decreaseTimeButton" destination="NYz-0h-pvW" id="b1m-ks-jcb"/>
                 <outlet property="increaseTimeButton" destination="q0m-iz-XHs" id="5eG-Hh-eRr"/>
                 <outlet property="timeLabel" destination="9Ym-ys-KLL" id="2cU-ix-BQl"/>
+                <outlet property="titleLabel" destination="OLA-YL-VeV" id="a8a-n2-7tD"/>
                 <outlet property="topSeparator" destination="aGT-tV-MsX" id="tVN-tq-sq3"/>
             </connections>
             <point key="canvasLocation" x="446.48437499999994" y="116.17862371888725"/>

@@ -121,3 +121,17 @@
 "phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
 
 "categories_list_editor.header.title" = "Categories";
+
+"timing_and_sensitivity.header.title" = "Timing and Sensitivity";
+
+"timing_and_sensitivity.cell.dwell_duration.title" = "Hover Time";
+
+"timing_and_sensitivity.cell.cursor_sensitivity.title" = "Cursor Sensitivity";
+
+"timing_and_sensitivity.button.low.title" = "Low";
+
+"timing_and_sensitivity.button.medium.title" = "Medium";
+
+"timing_and_sensitivity.button.high.title" = "High";
+
+"selection_mode.header.title" = "Selection Mode";

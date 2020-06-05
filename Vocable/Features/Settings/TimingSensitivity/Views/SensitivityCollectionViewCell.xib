@@ -125,6 +125,7 @@
                 <outlet property="highSensitivityButton" destination="J4K-JS-vwn" id="Gf5-3Y-IEW"/>
                 <outlet property="lowSensitivityButton" destination="Ph1-lE-gZj" id="ffD-He-jQH"/>
                 <outlet property="mediumSensitivityButton" destination="PDi-eA-7a0" id="uCt-S2-XmX"/>
+                <outlet property="titleLabel" destination="PJa-d1-ik7" id="548-WN-XxF"/>
                 <outlet property="topSeparator" destination="e0s-dp-HQO" id="oO4-tu-T1l"/>
             </connections>
             <point key="canvasLocation" x="494.20289855072468" y="139.28571428571428"/>
