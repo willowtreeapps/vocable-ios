@@ -85,6 +85,9 @@
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "Sí";
 
+/* Selection mode screen header title */
+"selection_mode.header.title" = "Modo de selección";
+
 /* No email account configured error alert dismiss button title */
 "settings.alert.no_email_configured.button.dismiss.title" = "OK";
 
@@ -138,4 +141,22 @@
 
 /* Exit edit sayings alert title */
 "text_editor.alert.cancel_editing_confirmation.title" = "Volver antes de guardar borrará todas las ediciones realizadas.";
+
+/* High cursor sensitivity option button */
+"timing_and_sensitivity.button.high.title" = "Alta";
+
+/* Low cursor sensitivity option button */
+"timing_and_sensitivity.button.low.title" = "Baja";
+
+/* Medium cursor sensitivity option button */
+"timing_and_sensitivity.button.medium.title" = "Media";
+
+/* Cursor sensitivity configuration option name */
+"timing_and_sensitivity.cell.cursor_sensitivity.title" = "Sensibilidad del cursor";
+
+/* Dwell duration configuration option name */
+"timing_and_sensitivity.cell.dwell_duration.title" = "Hover Tme";
+
+/* Timing and sensitivity header title */
+"timing_and_sensitivity.header.title" = "Tiempo y sensibilidad";
 

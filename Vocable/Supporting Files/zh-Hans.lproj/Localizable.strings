@@ -85,6 +85,9 @@
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "是";
 
+/* Selection mode screen header title */
+"selection_mode.header.title" = "移动对象模式";
+
 /* No email account configured error alert dismiss button title */
 "settings.alert.no_email_configured.button.dismiss.title" = "确定";
 
@@ -138,4 +141,22 @@
 
 /* Exit edit sayings alert title */
 "text_editor.alert.cancel_editing_confirmation.title" = "保存前返回将会清除任何编辑的东西。";
+
+/* High cursor sensitivity option button */
+"timing_and_sensitivity.button.high.title" = "高";
+
+/* Low cursor sensitivity option button */
+"timing_and_sensitivity.button.low.title" = "低";
+
+/* Medium cursor sensitivity option button */
+"timing_and_sensitivity.button.medium.title" = "中";
+
+/* Cursor sensitivity configuration option name */
+"timing_and_sensitivity.cell.cursor_sensitivity.title" = "指针敏度";
+
+/* Dwell duration configuration option name */
+"timing_and_sensitivity.cell.dwell_duration.title" = "徘徊时间";
+
+/* Timing and sensitivity header title */
+"timing_and_sensitivity.header.title" = "时间和灵敏度";
 
