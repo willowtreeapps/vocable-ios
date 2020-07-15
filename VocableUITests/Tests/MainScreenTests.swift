@@ -39,7 +39,7 @@ class MainScreenTests: BaseTest {
     
     func testDisablingCategory() {
         let generalCategoryText = "1. General"
-        let hiddentGeneralCategoryText = " General"
+        let hiddenGeneralCategoryText = " General"
         
         mainScreen.settingsButton.tap()
         settingsScreen.categoriesButton.tap()
@@ -58,7 +58,7 @@ class MainScreenTests: BaseTest {
         mainScreen.settingsButton.tap()
         settingsScreen.categoriesButton.tap()
         
-        settingsScreen.openCategorySettings(category: hiddentGeneralCategoryText)
+        settingsScreen.openCategorySettings(category: hiddenGeneralCategoryText)
         settingsScreen.showCategoryToggle.tap()
     }
     
