@@ -37,6 +37,31 @@ class MainScreenTests: BaseTest {
         XCTAssertEqual(mainScreen.outputLabel.label, mainScreen.defaultPhrase123[0])
     }
     
+    func testDisablingCategory() {
+        let generalCategoryText = "1. General"
+        let hiddenGeneralCategoryText = " General"
+        
+        mainScreen.settingsButton.tap()
+        settingsScreen.categoriesButton.tap()
+        
+        settingsScreen.openCategorySettings(category: generalCategoryText)
+        settingsScreen.showCategoryToggle.tap()
+
+        settingsScreen.leaveCategoryDetailButton.tap()
+        settingsScreen.leaveCategoriesButton.tap()
+        settingsScreen.exitSettings.tap()
+        
+        XCTAssertFalse(XCUIApplication().collectionViews.staticTexts[mainScreen.defaultCategories[0]].exists)
+        
+        //since settings changes persist through app restarts, we have to reset the categories back to default after our test.
+        //once the reset settings functionality is implemented, or better yet, a reset settings environment variable, this can be deleted
+        mainScreen.settingsButton.tap()
+        settingsScreen.categoriesButton.tap()
+        
+        settingsScreen.openCategorySettings(category: hiddenGeneralCategoryText)
+        settingsScreen.showCategoryToggle.tap()
+    }
+    
     private func verifyGivenPhrasesDisplay(setOfPhrases: [String]) {
         for phrase in setOfPhrases {
             XCTAssert(mainScreen.isTextDisplayed(phrase), "Expected the phrase \(phrase) to be displayed")
