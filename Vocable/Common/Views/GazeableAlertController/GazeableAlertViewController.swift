@@ -169,10 +169,10 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         return stackView
     }()
 
-    private lazy var titleContainerView: UIView = {
-        let view = UIView()
-        return view
-    }()
+        private lazy var titleContainerView: UIView = {
+            let view = UIView()
+            return view
+        }()
 
     private lazy var messageLabel: UILabel = {
         let label = UILabel()
