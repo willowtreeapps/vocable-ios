@@ -436,7 +436,7 @@
 			path = VocableTests;
 			sourceTree = "<group>";
 		};
-		643D14282460538A00F9DFC9 /* Edit Category Detail */ = {
+		643D14282460538A00F9DFC9 /* EditCategoryDetail */ = {
 			isa = PBXGroup;
 			children = (
 				64D847EC2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib */,
@@ -447,7 +447,7 @@
 				7192E4172433FDF5008E4A0A /* EditCategoryToggleCollectionViewCell.swift */,
 				7192E4152433FD8B008E4A0A /* EditCategoryToggleCollectionViewCell.xib */,
 			);
-			name = "Edit Category Detail";
+			name = EditCategoryDetail;
 			sourceTree = "<group>";
 		};
 		64A220BC245217220014EA80 /* Root */ = {
@@ -527,24 +527,24 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		714EFD412419636500DC773C /* Edit Phrases */ = {
+		714EFD412419636500DC773C /* EditPhrases */ = {
 			isa = PBXGroup;
 			children = (
 				718D7FAD2419546F00FDEF93 /* EditPhrasesCollectionViewCell.swift */,
 				718D7FAF241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib */,
 				6BE7E9892459F7C3007B01F2 /* EditPhrasesViewController.swift */,
 			);
-			path = "Edit Phrases";
+			path = EditPhrases;
 			sourceTree = "<group>";
 		};
 		A92FFB9023ECD73400AF2D0B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				6B005AE6245B21ED004919F4 /* SettingsViewController.swift */,
-				714EFD412419636500DC773C /* Edit Phrases */,
+				714EFD412419636500DC773C /* EditPhrases */,
 				A9B696002433C33F004E6960 /* Edit Categories */,
-				A9DFCC21242D3A5000136136 /* Timing Sensitivity */,
-				A9DFCC22242D3CF500136136 /* Selection Mode */,
+				A9DFCC21242D3A5000136136 /* TimingSensitivity */,
+				A9DFCC22242D3CF500136136 /* SelectionMode */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -583,7 +583,7 @@
 		A9B696002433C33F004E6960 /* Edit Categories */ = {
 			isa = PBXGroup;
 			children = (
-				643D14282460538A00F9DFC9 /* Edit Category Detail */,
+				643D14282460538A00F9DFC9 /* EditCategoryDetail */,
 				A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */,
 				A9B6960A2433CCFD004E6960 /* EditCategoriesDefaultCollectionViewCell.swift */,
 				A9B696042433C422004E6960 /* EditCategoriesDefaultCollectionViewCell.xib */,
@@ -603,23 +603,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		A9DFCC21242D3A5000136136 /* Timing Sensitivity */ = {
+		A9DFCC21242D3A5000136136 /* TimingSensitivity */ = {
 			isa = PBXGroup;
 			children = (
 				A9CF2AEE242D44EE005633A7 /* TimingSensitivityViewController.swift */,
 				A95D07BC24326465004ECE64 /* Model */,
 				A9CF2AFA242D4F11005633A7 /* Views */,
 			);
-			path = "Timing Sensitivity";
+			path = TimingSensitivity;
 			sourceTree = "<group>";
 		};
-		A9DFCC22242D3CF500136136 /* Selection Mode */ = {
+		A9DFCC22242D3CF500136136 /* SelectionMode */ = {
 			isa = PBXGroup;
 			children = (
 				71FA2854242406540051498A /* SelectionModeViewController.swift */,
 				A96D61D82422A00D00577144 /* Views */,
 			);
-			path = "Selection Mode";
+			path = SelectionMode;
 			sourceTree = "<group>";
 		};
 		B838202723FC99AE005A79CD /* Views */ = {
