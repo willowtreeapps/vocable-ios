@@ -439,29 +439,29 @@
 			path = VocableTests;
 			sourceTree = "<group>";
 		};
-		643D14282460538A00F9DFC9 /* Edit Category Detail */ = {
+		643D14282460538A00F9DFC9 /* EditCategoryDetail */ = {
 			isa = PBXGroup;
 			children = (
+				64D847EC2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib */,
+				64D847EB2464718900832479 /* EditCategoryDetailTitleCollectionViewCell.swift */,
 				7192E4112433E4BE008E4A0A /* EditCategoryDetailViewController.swift */,
 				7192E4192434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.swift */,
 				7192E41A2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.xib */,
 				7192E4172433FDF5008E4A0A /* EditCategoryToggleCollectionViewCell.swift */,
 				7192E4152433FD8B008E4A0A /* EditCategoryToggleCollectionViewCell.xib */,
-				64D847EB2464718900832479 /* EditCategoryDetailTitleCollectionViewCell.swift */,
-				64D847EC2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib */,
 			);
-			name = "Edit Category Detail";
+			name = EditCategoryDetail;
 			sourceTree = "<group>";
 		};
 		64A220BC245217220014EA80 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				64A220BD2452173C0014EA80 /* Root.storyboard */,
-				64A220BA2452171C0014EA80 /* RootViewController.swift */,
 				6B5C490A245B73F700A4433C /* CategoriesCarouselViewController.swift */,
 				6B5C490C245CB92700A4433C /* CategoryDetailViewController.swift */,
 				6B5C490E2460627A00A4433C /* NumericCategoryContentViewController.swift */,
+				64A220BD2452173C0014EA80 /* Root.storyboard */,
 				6B5C49102460AEF900A4433C /* RootEditTextViewController.swift */,
+				64A220BA2452171C0014EA80 /* RootViewController.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -489,19 +489,19 @@
 		6B9DFA4B23E889DB0037673E /* HeadTracking */ = {
 			isa = PBXGroup;
 			children = (
+				6B9DFA6A23E88A250037673E /* Interpolation */,
+				6B9DFA6823E88A1B0037673E /* GazeLib.scnassets */,
 				6B9DFA5123E889DB0037673E /* Extensions.swift */,
+				6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */,
 				6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */,
 				7192E408242BC58F008E4A0A /* ToastWindow.swift */,
-				6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */,
-				6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */,
 				6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */,
+				6B8A6E3224536085004B5220 /* UIHeadGazeCursorWindow.swift */,
 				6B9DFA5023E889DB0037673E /* UIHeadGazeEvent.swift */,
-				6B9DFA5423E889DB0037673E /* UIVirtualCursorView.swift */,
 				6B9DFA5623E889DB0037673E /* UIHeadGazeRecognizer.swift */,
 				6B8A6E3024533789004B5220 /* UIHeadGazeTrackingWindow.swift */,
-				6B8A6E3224536085004B5220 /* UIHeadGazeCursorWindow.swift */,
-				6B9DFA6823E88A1B0037673E /* GazeLib.scnassets */,
-				6B9DFA6A23E88A250037673E /* Interpolation */,
+				6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */,
+				6B9DFA5423E889DB0037673E /* UIVirtualCursorView.swift */,
 			);
 			path = HeadTracking;
 			sourceTree = "<group>";
@@ -533,9 +533,9 @@
 		714EFD412419636500DC773C /* EditPhrases */ = {
 			isa = PBXGroup;
 			children = (
-				6BE7E9892459F7C3007B01F2 /* EditPhrasesViewController.swift */,
 				718D7FAD2419546F00FDEF93 /* EditPhrasesCollectionViewCell.swift */,
 				718D7FAF241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib */,
+				6BE7E9892459F7C3007B01F2 /* EditPhrasesViewController.swift */,
 			);
 			path = EditPhrases;
 			sourceTree = "<group>";
@@ -555,9 +555,9 @@
 		A94A6CCB2412D33F00625275 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A9B32C8B240EB6250084E151 /* KeyboardModel.swift */,
 				A9DE170523F4C0AF0094DB64 /* TextSuggestion.swift */,
 				A99AF23023FC8BF700BE1184 /* TextTransaction.swift */,
-				A9B32C8B240EB6250084E151 /* KeyboardModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -573,12 +573,12 @@
 		A96D61D82422A00D00577144 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A944D0082406D54400F3863E /* SettingsToggleCollectionViewCell.swift */,
-				A944D00A2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib */,
-				A98E8A2223F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift */,
-				A98E8A2423F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib */,
 				A96D61D424229F6400577144 /* SettingsCollectionViewCell.swift */,
 				A96D61D624229F7400577144 /* SettingsCollectionViewCell.xib */,
+				A98E8A2223F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift */,
+				A98E8A2423F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib */,
+				A944D0082406D54400F3863E /* SettingsToggleCollectionViewCell.swift */,
+				A944D00A2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -586,11 +586,11 @@
 		A9B696002433C33F004E6960 /* Edit Categories */ = {
 			isa = PBXGroup;
 			children = (
-				A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */,
+				643D14282460538A00F9DFC9 /* EditCategoryDetail */,
+				A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */,
 				A9B6960A2433CCFD004E6960 /* EditCategoriesDefaultCollectionViewCell.swift */,
 				A9B696042433C422004E6960 /* EditCategoriesDefaultCollectionViewCell.xib */,
-				A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */,
-				643D14282460538A00F9DFC9 /* Edit Category Detail */,
+				A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */,
 			);
 			path = "Edit Categories";
 			sourceTree = "<group>";
@@ -631,19 +631,19 @@
 				B8EB51CE240985E900F425A6 /* GazeableAlertController */,
 				B8DA9DE723EB833200FEBE19 /* BorderedView.swift */,
 				9D15E0542271F0DC0058DF57 /* CursorView.swift */,
+				6B8440E7244A9557007A4DC6 /* EmptyStateView.swift */,
 				A944D0042405AE8C00F3863E /* GazeableButton.swift */,
 				64A54544242A490700218BE8 /* GazeEatingView.swift */,
 				A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */,
+				A94720CD241A8D9B00F7B4FF /* PaginationView.swift */,
+				6B32EA95244F717E007DC6BB /* PhraseCollectionEmptyStateView.swift */,
+				6BB56BA72422AC2500EA787E /* ToastView.swift */,
+				71B856432416CEB600CB163B /* ToastView.xib */,
 				6B9DFA7323E8D1270037673E /* TrackingContainerViewController.swift */,
 				6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */,
 				B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */,
-				71DBE5EA240DE4D000BA8D01 /* WarningView.xib */,
 				30B979A424254CBC00309D7C /* WarningView.swift */,
-				71B856432416CEB600CB163B /* ToastView.xib */,
-				6BB56BA72422AC2500EA787E /* ToastView.swift */,
-				A94720CD241A8D9B00F7B4FF /* PaginationView.swift */,
-				6B8440E7244A9557007A4DC6 /* EmptyStateView.swift */,
-				6B32EA95244F717E007DC6BB /* PhraseCollectionEmptyStateView.swift */,
+				71DBE5EA240DE4D000BA8D01 /* WarningView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -652,21 +652,21 @@
 			isa = PBXGroup;
 			children = (
 				B838202723FC99AE005A79CD /* Views */,
+				6B8440D82448B3FC007A4DC6 /* CarouselCollectionViewDataSourceProxy.swift */,
+				A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */,
+				6B8440E2244A1007007A4DC6 /* CarouselGridLayout.swift */,
+				6B8440E5244A535A007A4DC6 /* CarouselGridLayout+Masks.swift */,
+				A91525412447541200B9B815 /* EditTextViewController.swift */,
+				6BE7E9832459D328007B01F2 /* PagingCarouselViewController.swift */,
+				B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */,
 				6BB56BA92422B40200EA787E /* PublishedDefault.swift */,
 				A9DFCC1F242D020100136136 /* PublishedValue.swift */,
 				7192E40A242E6562008E4A0A /* ToastContainerViewController.swift */,
-				6B8440E5244A535A007A4DC6 /* CarouselGridLayout+Masks.swift */,
-				6B8440E2244A1007007A4DC6 /* CarouselGridLayout.swift */,
-				A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */,
-				A91525412447541200B9B815 /* EditTextViewController.swift */,
-				6B8440D82448B3FC007A4DC6 /* CarouselCollectionViewDataSourceProxy.swift */,
-				6BE7E9872459DFD5007B01F2 /* VocableNavigationBar.swift */,
 				6BE7E98B245A19F8007B01F2 /* UITraitCollection+Helpers.swift */,
-				6BE7E9832459D328007B01F2 /* PagingCarouselViewController.swift */,
 				6B005AE2245B057E004919F4 /* VocableCollectionViewController.swift */,
-				6B005AE4245B06F3004919F4 /* VocableViewController.swift */,
+				6BE7E9872459DFD5007B01F2 /* VocableNavigationBar.swift */,
 				6B005AEC245B25E9004919F4 /* VocableNavigationController.swift */,
-				B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */,
+				6B005AE4245B06F3004919F4 /* VocableViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -674,8 +674,8 @@
 		B8DA9DF523F30C5E00FEBE19 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				64A220BC245217220014EA80 /* Root */,
 				B8DA9DF823F33B1B00FEBE19 /* Keyboard */,
+				64A220BC245217220014EA80 /* Root */,
 				A92FFB9023ECD73400AF2D0B /* Settings */,
 			);
 			path = Features;
@@ -684,18 +684,18 @@
 		B8DA9DF723F30D9900FEBE19 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */,
-				B8DA9DF323F30BD200FEBE19 /* VectorUtils.swift */,
-				A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */,
-				A9DE16FF23F4900C0094DB64 /* TextExpression.swift */,
 				A9DE170123F492B20094DB64 /* Array+Split.swift */,
-				A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */,
+				6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */,
 				714407EC243CEEA1009D077B /* Category+Helpers.swift */,
-				6B9DFA7523E8D5990037673E /* UICollectionView+Gaze.swift */,
 				B8DA9DF123F30BAF00FEBE19 /* Cell+NibLoading.swift */,
-				9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */,
 				6B8440DE2448C391007A4DC6 /* CGSize+Helpers.swift */,
+				A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */,
+				A9DE16FF23F4900C0094DB64 /* TextExpression.swift */,
+				A9DE16FD23F48FD30094DB64 /* TextSuggestionController.swift */,
+				6B9DFA7523E8D5990037673E /* UICollectionView+Gaze.swift */,
 				A93E9402244E00A5008B61D2 /* UICollectionView+Helpers.swift */,
+				9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */,
+				B8DA9DF323F30BD200FEBE19 /* VectorUtils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -703,16 +703,16 @@
 		B8DA9DF823F33B1B00FEBE19 /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
-				6B14DC722419590E0050C287 /* OutputTextView.swift */,
-				A920A4AE23EA1BD300CF5B08 /* LegacyLayoutSupport.swift */,
 				A97814F923FF3B1200ECC609 /* CategorySectionBackground.swift */,
-				A94A6CCB2412D33F00625275 /* Models */,
 				A9299C7423F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift */,
 				A9299C7623F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib */,
+				A93E94042450EEC8008B61D2 /* KeyboardViewController.swift */,
+				A920A4AE23EA1BD300CF5B08 /* LegacyLayoutSupport.swift */,
+				A94A6CCB2412D33F00625275 /* Models */,
+				6B14DC722419590E0050C287 /* OutputTextView.swift */,
 				A9F56FC724365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib */,
 				A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */,
 				A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */,
-				A93E94042450EEC8008B61D2 /* KeyboardViewController.swift */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
