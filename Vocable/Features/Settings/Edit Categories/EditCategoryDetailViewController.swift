@@ -57,11 +57,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         snapshot.appendItems([.titleEditView])
 
         snapshot.appendSections([.body])
-        if AppConfig.editPhrasesEnabled {
-            snapshot.appendItems([.showCategoryToggle, .addPhrase, .removeCategory])
-        } else {
-            snapshot.appendItems([.showCategoryToggle, .removeCategory])
-        }
+        snapshot.appendItems([.showCategoryToggle, .addPhrase, .removeCategory])
 
         dataSource.apply(snapshot, animatingDifferences: false)
     }

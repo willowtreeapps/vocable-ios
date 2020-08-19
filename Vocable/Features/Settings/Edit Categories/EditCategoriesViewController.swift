@@ -70,14 +70,12 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
             return button
         }()
 
-        if AppConfig.editPhrasesEnabled {
-            navigationBar.rightButton = {
-                let button = GazeableButton(frame: .zero)
-                button.setImage(UIImage(systemName: "plus"), for: .normal)
-                button.addTarget(self, action: #selector(addButtonPressed), for: .primaryActionTriggered)
-                return button
-            }()
-        }
+        navigationBar.rightButton = {
+            let button = GazeableButton(frame: .zero)
+            button.setImage(UIImage(systemName: "plus"), for: .normal)
+            button.addTarget(self, action: #selector(addButtonPressed), for: .primaryActionTriggered)
+            return button
+        }()
     }
 
     private func setupCollectionView() {
