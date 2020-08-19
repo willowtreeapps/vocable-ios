@@ -20,7 +20,6 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     }
 
     private enum SettingsItem: Int, CaseIterable {
-        case editMySayings
         case categories
         case timingSensitivity
         case resetAppSettings
@@ -32,11 +31,6 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
 
         var title: String {
             switch self {
-            case .editMySayings:
-                let format = NSLocalizedString("settings.cell.edit_user_favorites.title_format",
-                                               comment: "edit user's favorite phrases category settings menu item")
-                let categoryName = Category.userFavoritesCategoryName()
-                return String.localizedStringWithFormat(format, categoryName)
             case .categories:
                 return NSLocalizedString("settings.cell.categories.title",
                                          comment: "edit categories settings menu item")
@@ -76,7 +70,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         (collectionView, indexPath, item) -> UICollectionViewCell in
 
         switch item {
-        case .editMySayings, .categories, .timingSensitivity, .resetAppSettings, .selectionMode:
+        case .categories, .timingSensitivity, .resetAppSettings, .selectionMode:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
             cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
             return cell
@@ -144,8 +138,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     private func updateDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, SettingsItem>()
         snapshot.appendSections([.internalSettings])
-        snapshot.appendItems([.editMySayings,
-                              .categories,
+        snapshot.appendItems([.categories,
                               .timingSensitivity,
                               .resetAppSettings,
                               .selectionMode,
@@ -234,10 +227,6 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         switch item {
         case .privacyPolicy:
             presentLeavingHeadTrackableDomainAlert(withConfirmation: presentPrivacyAlert)
-        case .editMySayings:
-            let viewController = EditPhrasesViewController()
-            viewController.category = Category.userFavoritesCategory()
-            show(viewController, sender: nil)
 
         case .timingSensitivity:
             let viewController = TimingSensitivityViewController()

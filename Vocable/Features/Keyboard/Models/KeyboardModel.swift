@@ -69,7 +69,7 @@ enum KeyboardFunctionButton {
         case .backspace:
             return UIImage(systemName: "delete.left")!
         case .space:
-            return UIImage(named: "underscore")!
+            return UIImage(named: "Underscore")!
         case .speak:
             return UIImage(named: "Speak")!
         }
