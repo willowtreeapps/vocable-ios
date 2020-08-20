@@ -41,8 +41,4 @@ struct AppConfig {
         return ProcessInfo.processInfo.environment.keys.contains("EmptyStatesEnabled")
     }
 
-    static var editPhrasesEnabled: Bool {
-        return ProcessInfo.processInfo.environment.keys.contains("EditPhrasesEnabled")
-    }
-
 }
