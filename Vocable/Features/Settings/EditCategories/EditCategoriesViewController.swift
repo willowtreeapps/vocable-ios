@@ -29,6 +29,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
 
         cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
         cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
+        cell.hideCategoryButton.addTarget(self, action: #selector(self.handleHideToggle(_:)), for: .primaryActionTriggered)
         cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
 
         return cell
@@ -147,8 +148,10 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         let hiddenTitleString = NSMutableAttributedString(string: "\(category.name ?? "")")
 
         if category.isHidden {
-            cell.setup(title: addHiddenIconIfNeeded(to: hiddenTitleString))
+            cell.hideCategoryButton.setImage(UIImage(systemName: "eye.slash.fill")?.withTintColor(.white), for: .normal)
+            cell.setup(title: hiddenTitleString)
         } else {
+            cell.hideCategoryButton.setImage(UIImage(systemName: "eye.fill")?.withTintColor(.white), for: .normal)
             cell.setup(title: visibleTitleString)
         }
 
@@ -191,6 +194,18 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         let toCategory = fetchResultsController.object(at: toIndexPath)
 
         swapOrdinal(fromCategory: fromCategory, toCategory: toCategory)
+        saveContext()
+    }
+
+    @objc private func handleHideToggle(_ sender: UIButton) {
+        guard let _indexPath = collectionView.indexPath(containing: sender) else {
+            assertionFailure("Failed to obtain index path")
+            return
+        }
+
+        let indexPath = diffableDataSource.indexPath(fromMappedIndexPath: _indexPath)
+        let category = fetchResultsController.object(at: indexPath)
+        category.setValue(!category.isHidden, forKey: "isHidden")
         saveContext()
     }
 
