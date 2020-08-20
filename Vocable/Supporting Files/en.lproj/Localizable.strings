@@ -67,7 +67,7 @@
 "settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Confirm";
 
 /* edit categories settings menu item */
-"settings.cell.categories.title" = "Categories";
+"settings.cell.categories.title" = "Categories and Phrases";
 
 /* contact developers settings menu item */
 "settings.cell.contact_developers.title" = "Contact Developers";
