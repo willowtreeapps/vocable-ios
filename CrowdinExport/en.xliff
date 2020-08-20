@@ -201,8 +201,8 @@
         <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.cell.categories.title" xml:space="preserve">
-        <source>Categories</source>
-        <target>Categories</target>
+        <source>Categories and Phrases</source>
+        <target>Categories and Phrases</target>
         <note>edit categories settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve">

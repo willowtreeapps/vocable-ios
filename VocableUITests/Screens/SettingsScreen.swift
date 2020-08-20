@@ -10,7 +10,7 @@ import XCTest
 
 class SettingsScreen {
     
-    let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories"]
+    let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
     let showCategoryToggle = XCUIApplication().collectionViews.otherElements.containing(.staticText, identifier: "Show").element
     let leaveCategoryDetailButton = XCUIApplication().buttons["arrow.left"]
     let leaveCategoriesButton = XCUIApplication().buttons["arrow.left"]
