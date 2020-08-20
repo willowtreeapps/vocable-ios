@@ -545,7 +545,7 @@
 			children = (
 				6B005AE6245B21ED004919F4 /* SettingsViewController.swift */,
 				714EFD412419636500DC773C /* EditPhrases */,
-				A9B696002433C33F004E6960 /* Edit Categories */,
+				A9B696002433C33F004E6960 /* EditCategories */,
 				A9DFCC21242D3A5000136136 /* TimingSensitivity */,
 				A9DFCC22242D3CF500136136 /* SelectionMode */,
 			);
@@ -583,7 +583,7 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		A9B696002433C33F004E6960 /* Edit Categories */ = {
+		A9B696002433C33F004E6960 /* EditCategories */ = {
 			isa = PBXGroup;
 			children = (
 				643D14282460538A00F9DFC9 /* EditCategoryDetail */,
@@ -592,7 +592,7 @@
 				A9B696042433C422004E6960 /* EditCategoriesDefaultCollectionViewCell.xib */,
 				A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */,
 			);
-			path = "Edit Categories";
+			path = EditCategories;
 			sourceTree = "<group>";
 		};
 		A9CF2AFA242D4F11005633A7 /* Views */ = {
