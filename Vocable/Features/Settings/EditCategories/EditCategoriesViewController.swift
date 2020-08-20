@@ -133,7 +133,6 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
                 window.cancelActiveGazeTarget()
             }
         })
-
     }
 
     private static let rowIndexFormatter = NumberFormatter()
@@ -148,16 +147,17 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         let hiddenTitleString = NSMutableAttributedString(string: "\(category.name ?? "")")
 
         if category.isHidden {
-            cell.hideCategoryButton.setImage(UIImage(systemName: "eye.slash.fill")?.withTintColor(.white), for: .normal)
             cell.setup(title: hiddenTitleString)
+            cell.hideCategoryButton.setImage(UIImage(systemName: "eye.slash.fill")?.withTintColor(.white), for: .normal)
+            cell.showCategoryDetailButton.isEnabled = false
         } else {
-            cell.hideCategoryButton.setImage(UIImage(systemName: "eye.fill")?.withTintColor(.white), for: .normal)
             cell.setup(title: visibleTitleString)
+            cell.hideCategoryButton.setImage(UIImage(systemName: "eye.fill")?.withTintColor(.white), for: .normal)
+            cell.showCategoryDetailButton.isEnabled = category.isUserGenerated || category.identifier == .userFavorites
         }
 
         cell.separatorMask = collectionView.layout.separatorMask(for: indexPath)
         cell.ordinalButtonMask = cellOrdinalButtonMask(for: indexPath)
-        cell.showCategoryDetailButton.isEnabled = (category.identifier != .userFavorites)
     }
 
     @objc private func handleMoveCategoryUp(_ sender: UIButton) {
@@ -235,15 +235,6 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         } catch {
             assertionFailure("Failed to move category: \(error)")
         }
-    }
-
-    private func addHiddenIconIfNeeded(to titleString: NSMutableAttributedString) -> NSMutableAttributedString {
-        let imageAttachment = NSTextAttachment()
-        imageAttachment.image = UIImage(systemName: "eye.slash.fill")?.withTintColor(UIColor.white)
-        imageAttachment.bounds = CGRect(x: -2, y: 0, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
-        titleString.insert(NSAttributedString(string: " "), at: 0)
-        titleString.insert(NSAttributedString(attachment: imageAttachment), at: 0)
-        return titleString
     }
 
     private func cellOrdinalButtonMask(for indexPath: IndexPath) -> CellOrdinalButtonMask {
