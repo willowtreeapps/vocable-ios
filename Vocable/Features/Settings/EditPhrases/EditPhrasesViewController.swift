@@ -230,10 +230,10 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         }
 
         present(vc, animated: true)
-
     }
 
     private func handleDismissAlert() {
+
         func discardChangesAction() {
             self.navigationController?.popViewController(animated: true)
         }
