@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -42,6 +42,16 @@
                         <color key="tintColor" name="DefaultFontColor"/>
                         <state key="normal" image="chevron.up" catalog="system"/>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmg-4b-lFp" userLabel="HideCategoryButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                        <rect key="frame" x="204" y="132" width="84" height="54"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="84" id="tmB-W4-2CW"/>
+                            <constraint firstAttribute="height" constant="54" id="ygG-I8-Hik"/>
+                        </constraints>
+                        <state key="normal" image="eye.fill" catalog="system">
+                            <color key="titleColor" name="DefaultFontColor"/>
+                        </state>
+                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfR-1l-Qp7" userLabel="ShowCategoryDetailButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
                         <rect key="frame" x="636" y="71" width="48" height="54"/>
                         <constraints>
@@ -66,6 +76,8 @@
                     <constraint firstAttribute="trailingMargin" secondItem="PfR-1l-Qp7" secondAttribute="trailing" id="Tbi-AC-x8g"/>
                     <constraint firstItem="hWY-nm-Hv6" firstAttribute="top" secondItem="yIe-C4-EHn" secondAttribute="bottom" constant="8" id="USs-jy-BFS"/>
                     <constraint firstItem="PfR-1l-Qp7" firstAttribute="centerY" secondItem="PX7-fo-08L" secondAttribute="centerY" id="lXg-ij-cFv"/>
+                    <constraint firstItem="qmg-4b-lFp" firstAttribute="leading" secondItem="Ieb-WK-NlS" secondAttribute="trailing" constant="8" id="o1e-gT-ej6"/>
+                    <constraint firstItem="hWY-nm-Hv6" firstAttribute="top" secondItem="qmg-4b-lFp" secondAttribute="bottom" constant="8" id="ozM-yr-PkO"/>
                     <constraint firstAttribute="trailingMargin" secondItem="hWY-nm-Hv6" secondAttribute="trailing" id="t13-Fa-Tul"/>
                     <constraint firstAttribute="bottomMargin" secondItem="hWY-nm-Hv6" secondAttribute="bottom" id="v6b-vv-Ztm"/>
                     <constraint firstItem="Ieb-WK-NlS" firstAttribute="leading" secondItem="yIe-C4-EHn" secondAttribute="trailing" constant="8" id="xeB-Dh-o8W"/>
@@ -77,6 +89,7 @@
             <connections>
                 <outlet property="bottomSeparator" destination="hWY-nm-Hv6" id="p5S-gZ-TPN"/>
                 <outlet property="categoryNameLabel" destination="3t9-YV-add" id="ENB-CO-MgT"/>
+                <outlet property="hideCategoryButton" destination="qmg-4b-lFp" id="4Zt-Qg-eVY"/>
                 <outlet property="moveDownButton" destination="Ieb-WK-NlS" id="L81-qa-uYF"/>
                 <outlet property="moveUpButton" destination="yIe-C4-EHn" id="zhH-op-CcN"/>
                 <outlet property="showCategoryDetailButton" destination="PfR-1l-Qp7" id="csS-I7-Imd"/>
@@ -88,6 +101,7 @@
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="chevron.up" catalog="system" width="128" height="72"/>
+        <image name="eye.fill" catalog="system" width="128" height="78"/>
         <namedColor name="DefaultCellBackground">
             <color red="0.21799999475479126" green="0.19499999284744263" blue="0.62699997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

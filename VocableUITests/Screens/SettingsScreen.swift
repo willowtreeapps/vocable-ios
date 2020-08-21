@@ -25,4 +25,25 @@ class SettingsScreen {
         }
         
     }
+    
+    func toggleHideShowCategory(category: String, toggle: String){
+        var toggleLabel = ""
+        switch toggle {
+        case "Hide":
+            toggleLabel = "eye.slash.fill"
+        case "Show":
+            toggleLabel = "eye.fill"
+        default:
+            break
+        }
+        
+        
+        if XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).element.exists {
+            XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
+    } else {
+            XCUIApplication().buttons["bottomPagination.right_chevron"].tap()
+            XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
+
+        }
+    }
 }

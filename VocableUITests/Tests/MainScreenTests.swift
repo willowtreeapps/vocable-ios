@@ -39,15 +39,14 @@ class MainScreenTests: BaseTest {
     
     func testDisablingCategory() {
         let generalCategoryText = "1. General"
-        let hiddenGeneralCategoryText = " General"
+        let hiddenGeneralCategoryText = "General"
         
         mainScreen.settingsButton.tap()
         settingsScreen.categoriesButton.tap()
         
-        settingsScreen.openCategorySettings(category: generalCategoryText)
-        settingsScreen.showCategoryToggle.tap()
+        settingsScreen.toggleHideShowCategory(category: generalCategoryText, toggle: "Show")
 
-        settingsScreen.leaveCategoryDetailButton.tap()
+        //settingsScreen.leaveCategoryDetailButton.tap()
         settingsScreen.leaveCategoriesButton.tap()
         settingsScreen.exitSettings.tap()
         
@@ -58,8 +57,7 @@ class MainScreenTests: BaseTest {
         mainScreen.settingsButton.tap()
         settingsScreen.categoriesButton.tap()
         
-        settingsScreen.openCategorySettings(category: hiddenGeneralCategoryText)
-        settingsScreen.showCategoryToggle.tap()
+        settingsScreen.toggleHideShowCategory(category: hiddenGeneralCategoryText, toggle: "Hide")
     }
     
     private func verifyGivenPhrasesDisplay(setOfPhrases: [String]) {
