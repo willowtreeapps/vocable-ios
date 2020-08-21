@@ -73,8 +73,8 @@
         <note>Delete phrase alert action button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
-        <source>Deleted phrases cannot be recovered.</source>
-        <target>Deleted phrases cannot be recovered.</target>
+        <source>Are you sure? Going back before saving will clear any edits made.</source>
+        <target>Are you sure? Going back before saving will clear any edits made.</target>
         <note>Delete phrase confirmation alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
