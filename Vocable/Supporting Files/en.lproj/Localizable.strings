@@ -5,7 +5,7 @@
 "category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Delete";
 
 /* Delete phrase confirmation alert title */
-"category_editor.alert.delete_phrase_confirmation.title" = "Deleted phrases cannot be recovered.";
+"category_editor.alert.delete_phrase_confirmation.title" = "Are you sure? Going back before saving will clear any edits made.";
 
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "Cancel";
