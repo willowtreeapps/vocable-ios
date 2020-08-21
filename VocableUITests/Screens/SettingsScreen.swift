@@ -23,10 +23,9 @@ class SettingsScreen {
             XCUIApplication().buttons["bottomPagination.right_chevron"].tap()
             XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).buttons["Forward"].tap()
         }
-        
     }
     
-    func toggleHideShowCategory(category: String, toggle: String){
+    func toggleHideShowCategory(category: String, toggle: String) {
         var toggleLabel = ""
         switch toggle {
         case "Hide":
@@ -36,14 +35,12 @@ class SettingsScreen {
         default:
             break
         }
-        
-        
+
         if XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).element.exists {
             XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
-    } else {
+        } else {
             XCUIApplication().buttons["bottomPagination.right_chevron"].tap()
             XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
-
         }
     }
 }

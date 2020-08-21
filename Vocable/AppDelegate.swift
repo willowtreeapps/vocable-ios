@@ -233,7 +233,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func updateCategoryForUserGeneratedPhrases(in context: NSManagedObjectContext) throws {
         let mySayingsCategory = Category.fetch(.userFavorites, in: context)
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
+
+        let firstPredicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
+        let secondPredicate = NSComparisonPredicate(\Phrase.category?.isUserGenerated, .equalTo, false)
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [firstPredicate, secondPredicate])
 
         let phraseResults = try context.fetch(request)
 
