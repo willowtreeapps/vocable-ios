@@ -63,7 +63,7 @@ class SettingsScreenTests: BaseTest {
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: expectedbasicNeedsCategoryText).element.exists)
         
         
-        settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.settingsPageCategoryUpButton].tap()
+        settingsScreen.otherElements.containing(.staticText, identifier: expectedGeneralCategoryText).buttons[settingsScreen.settingsPageCategoryUpButton].tap()
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: basicNeedsCategoryText).element.exists)
