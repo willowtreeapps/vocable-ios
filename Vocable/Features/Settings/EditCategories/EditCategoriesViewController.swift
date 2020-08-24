@@ -215,7 +215,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
             return
         }
 
-        let viewController = EditCategoryDetailViewController()
+        let viewController = EditPhrasesViewController()
         let indexPath = diffableDataSource.indexPath(fromMappedIndexPath: _indexPath)
         viewController.category = fetchResultsController.object(at: indexPath)
         show(viewController, sender: nil)

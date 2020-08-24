@@ -147,8 +147,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
                 let alertMessage: String = {
                     let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
-                    let categoryName = Category.userFavoritesCategoryName()
-                    return String.localizedStringWithFormat(format, categoryName)
+                    return String.localizedStringWithFormat(format, self.category.name ?? "")
                 }()
 
                 ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
@@ -230,10 +229,10 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         }
 
         present(vc, animated: true)
-
     }
 
     private func handleDismissAlert() {
+
         func discardChangesAction() {
             self.navigationController?.popViewController(animated: true)
         }

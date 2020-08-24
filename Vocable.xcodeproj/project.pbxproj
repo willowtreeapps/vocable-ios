@@ -26,8 +26,6 @@
 		64A220BE2452173C0014EA80 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64A220BD2452173C0014EA80 /* Root.storyboard */; };
 		64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A54544242A490700218BE8 /* GazeEatingView.swift */; };
 		64D04A58242951C00006962D /* GazeableAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */; };
-		64D847ED2464718900832479 /* EditCategoryDetailTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D847EB2464718900832479 /* EditCategoryDetailTitleCollectionViewCell.swift */; };
-		64D847EE2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64D847EC2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib */; };
 		64F49906245B40BC00348592 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B005AE6245B21ED004919F4 /* SettingsViewController.swift */; };
 		64F8A5FA245CC9FA00B7C0F9 /* EditPhrasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E9892459F7C3007B01F2 /* EditPhrasesViewController.swift */; };
 		6B005AE3245B057E004919F4 /* VocableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B005AE2245B057E004919F4 /* VocableCollectionViewController.swift */; };
@@ -92,11 +90,6 @@
 		718D7FB0241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718D7FAF241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib */; };
 		7192E409242BC58F008E4A0A /* ToastWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7192E408242BC58F008E4A0A /* ToastWindow.swift */; };
 		7192E40B242E6562008E4A0A /* ToastContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7192E40A242E6562008E4A0A /* ToastContainerViewController.swift */; };
-		7192E4122433E4BE008E4A0A /* EditCategoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7192E4112433E4BE008E4A0A /* EditCategoryDetailViewController.swift */; };
-		7192E4162433FD8B008E4A0A /* EditCategoryToggleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7192E4152433FD8B008E4A0A /* EditCategoryToggleCollectionViewCell.xib */; };
-		7192E4182433FDF5008E4A0A /* EditCategoryToggleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7192E4172433FDF5008E4A0A /* EditCategoryToggleCollectionViewCell.swift */; };
-		7192E41B2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7192E4192434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.swift */; };
-		7192E41C2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7192E41A2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.xib */; };
 		71B856442416CEB600CB163B /* ToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71B856432416CEB600CB163B /* ToastView.xib */; };
 		71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71DBE5EA240DE4D000BA8D01 /* WarningView.xib */; };
 		71FA2855242406540051498A /* SelectionModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA2854242406540051498A /* SelectionModeViewController.swift */; };
@@ -194,8 +187,6 @@
 		64A220BD2452173C0014EA80 /* Root.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
 		64A54544242A490700218BE8 /* GazeEatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeEatingView.swift; sourceTree = "<group>"; };
 		64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableAlertPresentationController.swift; sourceTree = "<group>"; };
-		64D847EB2464718900832479 /* EditCategoryDetailTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryDetailTitleCollectionViewCell.swift; sourceTree = "<group>"; };
-		64D847EC2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditCategoryDetailsHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		6B005AE2245B057E004919F4 /* VocableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableCollectionViewController.swift; sourceTree = "<group>"; };
 		6B005AE4245B06F3004919F4 /* VocableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableViewController.swift; sourceTree = "<group>"; };
 		6B005AE6245B21ED004919F4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -262,11 +253,6 @@
 		718D7FAF241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditPhrasesCollectionViewCell.xib; sourceTree = "<group>"; };
 		7192E408242BC58F008E4A0A /* ToastWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastWindow.swift; sourceTree = "<group>"; };
 		7192E40A242E6562008E4A0A /* ToastContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastContainerViewController.swift; sourceTree = "<group>"; };
-		7192E4112433E4BE008E4A0A /* EditCategoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryDetailViewController.swift; sourceTree = "<group>"; };
-		7192E4152433FD8B008E4A0A /* EditCategoryToggleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditCategoryToggleCollectionViewCell.xib; sourceTree = "<group>"; };
-		7192E4172433FDF5008E4A0A /* EditCategoryToggleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryToggleCollectionViewCell.swift; sourceTree = "<group>"; };
-		7192E4192434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryRemoveCollectionViewCell.swift; sourceTree = "<group>"; };
-		7192E41A2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditCategoryRemoveCollectionViewCell.xib; sourceTree = "<group>"; };
 		71B856432416CEB600CB163B /* ToastView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToastView.xib; sourceTree = "<group>"; };
 		71DBE5EA240DE4D000BA8D01 /* WarningView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		71FA2854242406540051498A /* SelectionModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionModeViewController.swift; sourceTree = "<group>"; };
@@ -439,20 +425,6 @@
 			path = VocableTests;
 			sourceTree = "<group>";
 		};
-		643D14282460538A00F9DFC9 /* EditCategoryDetail */ = {
-			isa = PBXGroup;
-			children = (
-				64D847EC2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib */,
-				64D847EB2464718900832479 /* EditCategoryDetailTitleCollectionViewCell.swift */,
-				7192E4112433E4BE008E4A0A /* EditCategoryDetailViewController.swift */,
-				7192E4192434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.swift */,
-				7192E41A2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.xib */,
-				7192E4172433FDF5008E4A0A /* EditCategoryToggleCollectionViewCell.swift */,
-				7192E4152433FD8B008E4A0A /* EditCategoryToggleCollectionViewCell.xib */,
-			);
-			name = EditCategoryDetail;
-			sourceTree = "<group>";
-		};
 		64A220BC245217220014EA80 /* Root */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,7 +558,6 @@
 		A9B696002433C33F004E6960 /* EditCategories */ = {
 			isa = PBXGroup;
 			children = (
-				643D14282460538A00F9DFC9 /* EditCategoryDetail */,
 				A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */,
 				A9B6960A2433CCFD004E6960 /* EditCategoriesDefaultCollectionViewCell.swift */,
 				A9B696042433C422004E6960 /* EditCategoriesDefaultCollectionViewCell.xib */,
@@ -853,10 +824,7 @@
 				6B9DFA6923E88A1B0037673E /* GazeLib.scnassets in Resources */,
 				6BE23D562444DCBE0032CAE4 /* Localizable.strings in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
-				64D847EE2464718900832479 /* EditCategoryDetailsHeaderCollectionViewCell.xib in Resources */,
 				2745402E2460DD760056EF98 /* presets.json in Resources */,
-				7192E4162433FD8B008E4A0A /* EditCategoryToggleCollectionViewCell.xib in Resources */,
-				7192E41C2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.xib in Resources */,
 				64A220BE2452173C0014EA80 /* Root.storyboard in Resources */,
 				A9CF2AF3242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib in Resources */,
 				A944D00B2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib in Resources */,
@@ -930,7 +898,6 @@
 				6B823BCF23F4ADE30099F65E /* TunningViewController.swift in Sources */,
 				7192E40B242E6562008E4A0A /* ToastContainerViewController.swift in Sources */,
 				A9E665A7241A785F00FE577A /* CarouselGridCollectionViewController.swift in Sources */,
-				7192E4182433FDF5008E4A0A /* EditCategoryToggleCollectionViewCell.swift in Sources */,
 				6B14DC732419590E0050C287 /* OutputTextView.swift in Sources */,
 				A944D0052405AE8C00F3863E /* GazeableButton.swift in Sources */,
 				6B9DFA6423E889DB0037673E /* UIHeadGazeRecognizer.swift in Sources */,
@@ -943,7 +910,6 @@
 				64F49906245B40BC00348592 /* SettingsViewController.swift in Sources */,
 				6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */,
 				A96D61D524229F6400577144 /* SettingsCollectionViewCell.swift in Sources */,
-				64D847ED2464718900832479 /* EditCategoryDetailTitleCollectionViewCell.swift in Sources */,
 				A95D07BE24326475004ECE64 /* CursorSensitivity.swift in Sources */,
 				6B9DFA7423E8D1270037673E /* TrackingContainerViewController.swift in Sources */,
 				A93E94052450EEC8008B61D2 /* KeyboardViewController.swift in Sources */,
@@ -978,7 +944,6 @@
 				A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */,
 				A99AF23123FC8BF700BE1184 /* TextTransaction.swift in Sources */,
 				6B8440E3244A1007007A4DC6 /* CarouselGridLayout.swift in Sources */,
-				7192E4122433E4BE008E4A0A /* EditCategoryDetailViewController.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
 				6B823BCB23F4ADE30099F65E /* Pulse.swift in Sources */,
 				6B5C49112460AEF900A4433C /* RootEditTextViewController.swift in Sources */,
@@ -993,7 +958,6 @@
 				6BE7E98C245A19F8007B01F2 /* UITraitCollection+Helpers.swift in Sources */,
 				718D7FAE2419546F00FDEF93 /* EditPhrasesCollectionViewCell.swift in Sources */,
 				A9299C7523F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift in Sources */,
-				7192E41B2434050E008E4A0A /* EditCategoryRemoveCollectionViewCell.swift in Sources */,
 				6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */,
 				6BB56BAA2422B40300EA787E /* PublishedDefault.swift in Sources */,
 				6B823BCD23F4ADE30099F65E /* TunningWindow.swift in Sources */,

@@ -5,7 +5,7 @@
 "category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Delete";
 
 /* Delete phrase confirmation alert title */
-"category_editor.alert.delete_phrase_confirmation.title" = "Deleted phrases cannot be recovered.";
+"category_editor.alert.delete_phrase_confirmation.title" = "Are you sure you want to delete? Removed phrases cannot be restored.";
 
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "Cancel";
@@ -102,7 +102,7 @@
 
 "category_editor.toast.successfully_saved.title" = "Changes Saved";
 
-"text_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
+"text_editor.alert.cancel_editing_confirmation.title" = "Are you sure? Going back before saving will clear any edits made.";
 
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
 
@@ -114,7 +114,7 @@
 
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Cancel";
 
-"phrase_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Are you sure? Going back before saving will clear any edits made.";
 
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
 
