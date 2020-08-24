@@ -142,6 +142,7 @@
 		B8EB51D12409860A00F425A6 /* GazeableAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EB51CF2409860A00F425A6 /* GazeableAlertViewController.swift */; };
 		CE12277624F586CB008F7866 /* CustomCategoriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12277524F586CB008F7866 /* CustomCategoriesTests.swift */; };
 		CE12277824F58706008F7866 /* CustomCategoriesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */; };
+		CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -320,6 +321,7 @@
 		B8EB51CF2409860A00F425A6 /* GazeableAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableAlertViewController.swift; sourceTree = "<group>"; };
 		CE12277524F586CB008F7866 /* CustomCategoriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoriesTests.swift; sourceTree = "<group>"; };
 		CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoriesScreen.swift; sourceTree = "<group>"; };
+		CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,6 +420,7 @@
 				17793C2D24574CB500758BC0 /* MainScreenTests.swift */,
 				17D4162B245C6FE800FD81CD /* KeyboardScreenTests.swift */,
 				CE12277524F586CB008F7866 /* CustomCategoriesTests.swift */,
+				CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -994,6 +997,7 @@
 				CE12277824F58706008F7866 /* CustomCategoriesScreen.swift in Sources */,
 				17D4162C245C6FE800FD81CD /* KeyboardScreenTests.swift in Sources */,
 				17D4162E245C6FF600FD81CD /* KeyboardScreen.swift in Sources */,
+				CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */,
 				17793C2E24574CB500758BC0 /* MainScreenTests.swift in Sources */,
 				CE12277624F586CB008F7866 /* CustomCategoriesTests.swift in Sources */,
 				17793C2B24574B2800758BC0 /* MainScreen.swift in Sources */,
