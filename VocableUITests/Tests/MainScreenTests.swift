@@ -46,7 +46,6 @@ class MainScreenTests: BaseTest {
         
         settingsScreen.toggleHideShowCategory(category: generalCategoryText, toggle: "Show")
 
-        //settingsScreen.leaveCategoryDetailButton.tap()
         settingsScreen.leaveCategoriesButton.tap()
         settingsScreen.exitSettings.tap()
         
