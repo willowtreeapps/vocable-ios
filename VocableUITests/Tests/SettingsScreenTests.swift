@@ -20,7 +20,7 @@ class SettingsScreenTests: BaseTest {
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
               
-        settingsScreen.toggleHideShowCategory(category: generalCategoryText, toggle: "Show")
+        settingsScreen.toggleHideShowCategory(category: generalCategoryText, toggle: "Hide")
         XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
        
         
@@ -32,7 +32,7 @@ class SettingsScreenTests: BaseTest {
 
         // Verify category goes back to original spot when shown.
     
-        settingsScreen.toggleHideShowCategory(category: hiddenGeneralCategoryText, toggle: "Hide")
+        settingsScreen.toggleHideShowCategory(category: hiddenGeneralCategoryText, toggle: "Show")
         XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: hiddenGeneralCategoryText).element.exists)
         
         settingsScreen.navigateToCategory(category: generalCategoryText)
@@ -80,7 +80,7 @@ class SettingsScreenTests: BaseTest {
         
         // Verify Category is not added if edits are discarded
         keyboardScreen.typeText("A")
-        keyboardScreen.keyboardCloseButton.tap()
+        keyboardScreen.dismissKeyboardButton.tap()
         XCTAssertEqual(XCUIApplication().staticTexts.element(boundBy: 1).label, confirmationAlert)
         
         keyboardScreen.alertDiscardButton.tap()
@@ -91,7 +91,7 @@ class SettingsScreenTests: BaseTest {
         // Verify Category can be added if continuing edit.
         settingsScreen.settingsPageAddCategoryButton.tap()
         keyboardScreen.typeText("A")
-        keyboardScreen.keyboardCloseButton.tap()
+        keyboardScreen.dismissKeyboardButton.tap()
         XCTAssertEqual(XCUIApplication().staticTexts.element(boundBy: 1).label, confirmationAlert)
         keyboardScreen.alertContinueButton.tap()
     
