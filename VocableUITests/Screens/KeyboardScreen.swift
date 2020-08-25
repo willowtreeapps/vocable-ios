@@ -15,7 +15,6 @@ class KeyboardScreen {
     let dismissKeyboardButton = XCUIApplication().buttons["keyboard.dismissButton"]
     let favoriteButton = XCUIApplication().buttons["keyboard.favoriteButton"]
     let checkmarkAddButton = XCUIApplication().buttons["checkmark"]
-    let keyboardCloseButton = XCUIApplication().buttons["xmark.circle"]
     let alertContinueButton = XCUIApplication().buttons["Continue Editing"]
     let alertDiscardButton = XCUIApplication().buttons["Discard"]
     
