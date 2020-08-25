@@ -148,11 +148,11 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
 
         if category.isHidden {
             cell.setup(title: hiddenTitleString)
-            cell.hideCategoryButton.setImage(UIImage(systemName: "eye.slash.fill")?.withTintColor(.white), for: .normal)
+            cell.hideCategoryButton.setImage(UIImage(systemName: "eye.fill")?.withTintColor(.white), for: .normal)
             cell.showCategoryDetailButton.isEnabled = false
         } else {
             cell.setup(title: visibleTitleString)
-            cell.hideCategoryButton.setImage(UIImage(systemName: "eye.fill")?.withTintColor(.white), for: .normal)
+            cell.hideCategoryButton.setImage(UIImage(systemName: "eye.slash.fill")?.withTintColor(.white), for: .normal)
             cell.showCategoryDetailButton.isEnabled = category.isUserGenerated || category.identifier == .userFavorites
         }
 
