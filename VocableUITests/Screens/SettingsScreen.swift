@@ -13,7 +13,7 @@ class SettingsScreen: BaseTest {
     let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
     let leaveCategoryDetailButton = XCUIApplication().buttons["arrow.left"]
     let leaveCategoriesButton = XCUIApplication().buttons["arrow.left"]
-    let exitSettings = XCUIApplication().buttons["xmark.circle"]
+    let exitSettings = XCUIApplication().buttons["settings.dismissButton"]
     let otherElements = XCUIApplication().collectionViews.cells.otherElements
     let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
     let settingsPageCategoryUpButton = "chevron.up"
