@@ -44,9 +44,8 @@ class MainScreenTests: BaseTest {
         mainScreen.settingsButton.tap()
         settingsScreen.categoriesButton.tap()
         
-        settingsScreen.toggleHideShowCategory(category: generalCategoryText, toggle: "Show")
+        settingsScreen.toggleHideShowCategory(category: generalCategoryText, toggle: "Hide")
 
-        //settingsScreen.leaveCategoryDetailButton.tap()
         settingsScreen.leaveCategoriesButton.tap()
         settingsScreen.exitSettings.tap()
         
@@ -57,7 +56,7 @@ class MainScreenTests: BaseTest {
         mainScreen.settingsButton.tap()
         settingsScreen.categoriesButton.tap()
         
-        settingsScreen.toggleHideShowCategory(category: hiddenGeneralCategoryText, toggle: "Hide")
+        settingsScreen.toggleHideShowCategory(category: hiddenGeneralCategoryText, toggle: "Show")
     }
     
     private func verifyGivenPhrasesDisplay(setOfPhrases: [String]) {
