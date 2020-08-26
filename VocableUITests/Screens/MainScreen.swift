@@ -22,7 +22,9 @@ class MainScreen {
     let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
     let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]
     let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
-
+    let paginationLeftButton = XCUIApplication().buttons["bottomPagination.left_chevron"]
+    let paginationRightButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
+  
 
     func isTextDisplayed(_ text: String) -> Bool {
         return app.collectionViews.staticTexts[text].exists
@@ -43,4 +45,6 @@ class MainScreen {
         let currentCategory = defaultCategories.count - (numTimesToScroll % defaultCategories.count)
         app.collectionViews.staticTexts[defaultCategories[currentCategory]].tap()
     }
+    
+  
 }
