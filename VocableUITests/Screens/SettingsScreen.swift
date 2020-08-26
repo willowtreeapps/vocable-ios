@@ -8,7 +8,7 @@
 
 import XCTest
 
-class SettingsScreen {
+class SettingsScreen: BaseTest {
     
     let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
     let showCategoryToggle = XCUIApplication().collectionViews.otherElements.containing(.staticText, identifier: "Show").element
@@ -42,5 +42,10 @@ class SettingsScreen {
             XCUIApplication().buttons["bottomPagination.right_chevron"].tap()
             XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
         }
+    }
+    
+    func navigateToSettingsScreen() {
+        mainScreen.settingsButton.tap()
+        categoriesButton.tap()
     }
 }

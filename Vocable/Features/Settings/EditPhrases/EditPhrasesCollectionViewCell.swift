@@ -20,7 +20,11 @@ final class EditPhrasesCollectionViewCell: VocableCollectionViewCell {
 
         borderedView.fillColor = .defaultCellBackgroundColor
         deleteButton?.backgroundColor = .defaultCellBackgroundColor
+        deleteButton?.accessibilityIdentifier = "categoryPhrase.deleteButton"
         editButton?.backgroundColor = .defaultCellBackgroundColor
+        editButton?.accessibilityIdentifier = "categoryPhrase.editButton"
+        
+        
     }
 
 }

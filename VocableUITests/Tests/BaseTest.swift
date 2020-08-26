@@ -13,6 +13,7 @@ class BaseTest: XCTestCase {
     let mainScreen = MainScreen()
     let keyboardScreen = KeyboardScreen()
     let settingsScreen = SettingsScreen()
+    let customCategoriesScreen = CustomCategoriesScreen()
     
     override func setUp() {
         let app = XCUIApplication()
