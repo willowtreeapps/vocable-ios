@@ -103,6 +103,7 @@ import UIKit
         navigationBar.leftButton = {
             let button = GazeableButton(frame: .zero)
             button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            button.accessibilityIdentifier = "navigationBar.backButton"
             button.addTarget(navigationController,
                              action: #selector(UINavigationController.popViewController(animated:)),
                              for: .primaryActionTriggered)

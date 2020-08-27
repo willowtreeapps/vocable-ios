@@ -24,6 +24,8 @@ class MainScreen {
     let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
     let paginationLeftButton = XCUIApplication().buttons["bottomPagination.left_chevron"]
     let paginationRightButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
+    
+    let keyboardScreen = KeyboardScreen()
   
 
     func isTextDisplayed(_ text: String) -> Bool {
@@ -46,5 +48,18 @@ class MainScreen {
         app.collectionViews.staticTexts[defaultCategories[currentCategory]].tap()
     }
     
+    
+    func addMySayings(numberOfSayings: Int){
+         for _ in 1...numberOfSayings {
+            let randomPhrase = keyboardScreen.randomString(length: 5)
+          
+            keyboardNavButton.tap()
+            keyboardScreen.typeText(randomPhrase)
+            keyboardScreen.favoriteButton.tap()
+          
+            // Do this until accessibility identifiers are add and trash icon can be accessed.
+            keyboardScreen.dismissKeyboardButton.tap()
+          }
+      }
   
 }

@@ -66,7 +66,14 @@ class SettingsScreen {
         }
     }
     
-    func navigateToSettingsScreen() {
+    func addCategory(categoryName: String){
+        settingsPageAddCategoryButton.tap()
+        let newCategory = keyboardScreen.randomString(length: 5)
+        keyboardScreen.typeText(newCategory)
+        keyboardScreen.checkmarkAddButton.tap()
+    }
+    
+    func  navigateToSettingsScreen() {
         mainScreen.settingsButton.tap()
         categoriesButton.tap()
     }

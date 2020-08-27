@@ -64,9 +64,9 @@ class MainScreenTests: BaseTest {
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 1")
         XCTAssertFalse(mainScreen.paginationLeftButton.isEnabled)
         XCTAssertFalse(mainScreen.paginationRightButton.isEnabled)
-        addMySayings(numberOfSayings: 8)
+        mainScreen.addMySayings(numberOfSayings: 8)
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 1")
-        addMySayings(numberOfSayings: 1)
+        mainScreen.addMySayings(numberOfSayings: 1)
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 2")
         XCTAssertTrue(mainScreen.paginationRightButton.isEnabled)
         
@@ -82,16 +82,5 @@ class MainScreenTests: BaseTest {
         }
     }
     
-    private func addMySayings(numberOfSayings: Int){
-         for _ in 1...numberOfSayings {
-            let randomPhrase = keyboardScreen.randomString(length: 5)
-          
-            mainScreen.keyboardNavButton.tap()
-            keyboardScreen.typeText(randomPhrase)
-            keyboardScreen.favoriteButton.tap()
-          
-            // Do this until accessibility identifiers are add and trash icon can be accessed.
-            keyboardScreen.dismissKeyboardButton.tap()
-          }
-      }
+
 }
