@@ -8,8 +8,11 @@
 
 import XCTest
 
-class CustomCategoriesScreen: BaseTest {
+class CustomCategoriesScreen {
 
+    let settingsScreen = SettingsScreen()
+    let keyboardScreen = KeyboardScreen()
+    
     func createCustomCategory(categoryName: String){
         settingsScreen.settingsPageAddCategoryButton.tap()
         keyboardScreen.typeText(categoryName)
