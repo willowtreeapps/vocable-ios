@@ -83,7 +83,7 @@ class SettingsScreenTests: BaseTest {
         keyboardScreen.dismissKeyboardButton.tap()
         XCTAssertEqual(XCUIApplication().staticTexts.element(boundBy: 1).label, confirmationAlert)
         
-        keyboardScreen.alertDiscardButton.tap()
+        settingsScreen.alertDiscardButton.tap()
         XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: "A").element.exists)
         settingsScreen.settingsPageNextButton.tap()
         XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: "A").element.exists)
@@ -93,7 +93,7 @@ class SettingsScreenTests: BaseTest {
         keyboardScreen.typeText("A")
         keyboardScreen.dismissKeyboardButton.tap()
         XCTAssertEqual(XCUIApplication().staticTexts.element(boundBy: 1).label, confirmationAlert)
-        keyboardScreen.alertContinueButton.tap()
+        settingsScreen.alertContinueButton.tap()
     
         keyboardScreen.typeText(customCategory)
         keyboardScreen.checkmarkAddButton.tap()

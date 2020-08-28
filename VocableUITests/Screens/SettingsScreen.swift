@@ -22,6 +22,9 @@ class SettingsScreen {
     let settingsPageCategoryHideButton = "eye.slash.fill"
     let settingsPageCategoryShowButton = "eye.fill"
     let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
+    let alertContinueButton = XCUIApplication().buttons["Continue Editing"]
+    let alertDiscardButton = XCUIApplication().buttons["Discard"]
+    let alertDeleteButton = XCUIApplication().buttons["Delete"]
     
     
    
