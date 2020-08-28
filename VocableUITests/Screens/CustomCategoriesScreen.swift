@@ -12,6 +12,10 @@ class CustomCategoriesScreen {
 
     let settingsScreen = SettingsScreen()
     let keyboardScreen = KeyboardScreen()
+    let mainScreen = MainScreen()
+    
+    let categoriesPageAddPhraseButton = XCUIApplication().buttons["settingsCategory.addPhraseButton"]
+
     
     func createCustomCategory(categoryName: String){
         settingsScreen.settingsPageAddCategoryButton.tap()

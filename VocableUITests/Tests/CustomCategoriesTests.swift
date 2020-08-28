@@ -12,40 +12,40 @@ import XCTest
 class CustomCategoriesTest: BaseTest {
 
     func testaddNewPhrase() {
-        let customPhrase = "ddingcustomcategorytest"
-        let customCategory = "CreateNewCategory"
-        let predicateCategoryStr = NSPredicate(format: "label CONTAINS 'CreateNewCategory'")
-        settingsScreen.navigateToSettingsScreen()
-        customCategoriesScreen.createCustomCategory(categoryName: customCategory)
-      //  settingsScreen.navigateToCategory(predicateCategoryStr) // Dependent on PR392
-        
-        
+        let customPhrase = "ddingcustomcategoryphrasetest"
+        let customCategory = "Createnewcategory"
+        let createdCustomCategory = "8. "+customCategory
         let confirmationAlert = "Are you sure? Going back before saving will clear any edits made."
 
         
-   //     settingsScreen.settingsPageAddCategoryButton.tap() // Dependent on PR392
+        
+        // Add a new Category and navigate into it
+        settingsScreen.navigateToSettingsScreen()
+        customCategoriesScreen.createCustomCategory(categoryName: customCategory)
+        settingsScreen.openCategorySettings(category: createdCustomCategory)
+        customCategoriesScreen.categoriesPageAddPhraseButton.tap()
 
-        // Verify Category is not added if edits are discarded
+        // Verify Phrase is not added if edits are discarded
         keyboardScreen.typeText("A")
         keyboardScreen.dismissKeyboardButton.tap()
         XCTAssertEqual(XCUIApplication().staticTexts.element(boundBy: 1).label, confirmationAlert)
 
-  //      keyboardScreen.alertDiscardButton.tap()  // Dependent on PR392
+        keyboardScreen.alertDiscardButton.tap()
         XCTAssertFalse(XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: "A").element.exists)
- //       settingsScreen.settingsPageNextButton.tap() // Dependent on PR392
+        settingsScreen.settingsPageNextButton.tap()
         XCTAssertFalse(XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: "A").element.exists)
 
-        // Verify Category can be added if continuing edit.
-  //      settingsScreen.settingsPageAddCategoryButton.tap() // Dependent on PR392
+        // Verify Phrase can be added if continuing edit.
+        customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText("A")
         keyboardScreen.dismissKeyboardButton.tap()
         XCTAssertEqual(XCUIApplication().staticTexts.element(boundBy: 1).label, confirmationAlert)
-    //    keyboardScreen.alertContinueButton.tap() // Dependent on PR392
+        keyboardScreen.alertContinueButton.tap()
 
-        keyboardScreen.typeText(customCategory)
- //       keyboardScreen.checkmarkAddButton.tap() // Dependent on PR392
+        keyboardScreen.typeText(customPhrase)
+        keyboardScreen.checkmarkAddButton.tap()
 
-        XCTAssert(XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: "8. A"+customPhrase).element.exists)
+        XCTAssert(mainScreen.isTextDisplayed("A"+customPhrase), "Expected the phrase \("A"+customPhrase) to be displayed")
     }
 
 

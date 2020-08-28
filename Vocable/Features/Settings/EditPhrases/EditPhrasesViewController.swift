@@ -61,7 +61,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         navigationBar.rightButton = {
             let button = GazeableButton(frame: .zero)
             button.setImage(UIImage(systemName: "plus"), for: .normal)
-            button.accessibilityIdentifier = "settingsCategory.addButton"
+            button.accessibilityIdentifier = "settingsCategory.addPhraseButton"
             button.addTarget(self, action: #selector(addPhrasePressed), for: .primaryActionTriggered)
             return button
         }()

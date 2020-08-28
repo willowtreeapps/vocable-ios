@@ -8,7 +8,8 @@
 
 import XCTest
 
-class SettingsScreen: BaseTest {
+class SettingsScreen {
+    let mainScreen = MainScreen()
     
     let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
     let leaveCategoryDetailButton = XCUIApplication().buttons["arrow.left"]
@@ -20,7 +21,7 @@ class SettingsScreen: BaseTest {
     let settingsPageCategoryDownButton = "chevron.down"
     let settingsPageCategoryHideButton = "eye.slash.fill"
     let settingsPageCategoryShowButton = "eye.fill"
-    let settingsPageAddCategoryButton = XCUIApplication().buttons["plus"]
+    let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
     
     
    
@@ -54,9 +55,11 @@ class SettingsScreen: BaseTest {
     
     
     func navigateToCategory(category: String){
-        // If the settings is not on the first page go back to the beginning.
         while !otherElements.containing(.staticText, identifier: category).element.exists {
             settingsPageNextButton.tap()
+            if (mainScreen.pageNumber.label == "Page 1 of 1"){
+                break
+            }
         }
     }
     

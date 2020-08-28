@@ -21,6 +21,8 @@ class MainScreen {
     let keyboardNavButton = XCUIApplication().buttons["root.keyboardButton"]
     let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
     let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]
+    let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
+
 
     func isTextDisplayed(_ text: String) -> Bool {
         return app.collectionViews.staticTexts[text].exists
