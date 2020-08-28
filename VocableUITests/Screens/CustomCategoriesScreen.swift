@@ -15,6 +15,8 @@ class CustomCategoriesScreen {
     let mainScreen = MainScreen()
     
     let categoriesPageAddPhraseButton = XCUIApplication().buttons["settingsCategory.addPhraseButton"]
+    let categoriesPageEditPhraseButton = XCUIApplication().buttons["categoryPhrase.editButton"]
+    let categoriesPageDeletePhraseButton = XCUIApplication().buttons["categoryPhrase.deleteButton"]
 
     
     func createCustomCategory(categoryName: String){

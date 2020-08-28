@@ -10,12 +10,13 @@ import XCTest
 
 
 class CustomCategoriesTest: BaseTest {
+    let customCategory = "Createnewcategory"
+
 
     func testaddNewPhrase() {
         let customPhrase = "ddingcustomcategoryphrasetest"
-        let customCategory = "Createnewcategory"
-        let createdCustomCategory = "8. "+customCategory
         let confirmationAlert = "Are you sure? Going back before saving will clear any edits made."
+        let createdCustomCategory = ("8. "+customCategory)
 
         
         
@@ -48,6 +49,32 @@ class CustomCategoriesTest: BaseTest {
         XCTAssert(mainScreen.isTextDisplayed("A"+customPhrase), "Expected the phrase \("A"+customPhrase) to be displayed")
     }
 
+    func testEditCustomPhrase(){
+    // This test builds off of the last test.
+        let customPhrase = "Addingcustomcategoryphrasetest"
+        let createdCustomCategory = ("8. "+customCategory)
 
+        // Navigate to Custom Category
+        settingsScreen.navigateToSettingsScreen()
+        settingsScreen.openCategorySettings(category: createdCustomCategory)
+        
+        // Edit the phrase
+        customCategoriesScreen.categoriesPageEditPhraseButton.tap()
+        keyboardScreen.typeText("test")
+        keyboardScreen.checkmarkAddButton.tap()
+        XCTAssert(mainScreen.isTextDisplayed(customPhrase+"test"), "Expected the phrase \(customPhrase+"test") to be displayed")
+    }
+    
+    func testDeleteCustomPhrase(){
+       // This test builds off of the last test.
+           let customPhrase = "Addingcustomcategoryphrasetesttest"
+           let createdCustomCategory = ("8. "+customCategory)
 
+           // Navigate to custom category
+           settingsScreen.navigateToSettingsScreen()
+           settingsScreen.openCategorySettings(category: createdCustomCategory)
+        
+           customCategoriesScreen.categoriesPageDeletePhraseButton.tap()
+           XCTAssertFalse(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to not be displayed")
+    }
 }
