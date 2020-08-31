@@ -14,6 +14,8 @@ class KeyboardScreen {
     let keyboardTextView = XCUIApplication().textViews["keyboard.textView"]
     let dismissKeyboardButton = XCUIApplication().buttons["keyboard.dismissButton"]
     let favoriteButton = XCUIApplication().buttons["keyboard.favoriteButton"]
+    let checkmarkAddButton = XCUIApplication().buttons["checkmark"]
+
     
     func typeText(_ textToType: String) {
         for char in textToType {

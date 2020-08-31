@@ -180,6 +180,7 @@ class KeyboardViewController: UICollectionViewController {
             switch functionType {
             case .space:
                 setTextTransaction(textTransaction.appendingCharacter(with: " "))
+                
             case .speak:
                 guard !textTransaction.isHint else {
                     break

@@ -9,19 +9,31 @@
 import XCTest
 
 class SettingsScreen {
+    let mainScreen = MainScreen()
     
     let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
-    let showCategoryToggle = XCUIApplication().collectionViews.otherElements.containing(.staticText, identifier: "Show").element
     let leaveCategoryDetailButton = XCUIApplication().buttons["arrow.left"]
     let leaveCategoriesButton = XCUIApplication().buttons["arrow.left"]
-    let exitSettings = XCUIApplication().buttons["xmark.circle"]
+    let exitSettings = XCUIApplication().buttons["settings.dismissButton"]
+    let otherElements = XCUIApplication().collectionViews.cells.otherElements
+    let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
+    let settingsPageCategoryUpButton = "chevron.up"
+    let settingsPageCategoryDownButton = "chevron.down"
+    let settingsPageCategoryHideButton = "eye.slash.fill"
+    let settingsPageCategoryShowButton = "eye.fill"
+    let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
+    let alertContinueButton = XCUIApplication().buttons["Continue Editing"]
+    let alertDiscardButton = XCUIApplication().buttons["Discard"]
+    let alertDeleteButton = XCUIApplication().buttons["Delete"]
     
+    
+   
     func openCategorySettings(category: String) {
-        if XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).element.exists {
-            XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).buttons["Forward"].tap()
+        if otherElements.containing(.staticText, identifier: category).element.exists {
+            otherElements.containing(.staticText, identifier: category).buttons["Forward"].tap()
         } else {
-            XCUIApplication().buttons["bottomPagination.right_chevron"].tap()
-            XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).buttons["Forward"].tap()
+            settingsPageNextButton.tap()
+            otherElements.containing(.staticText, identifier: category).buttons["Forward"].tap()
         }
     }
     
@@ -29,18 +41,33 @@ class SettingsScreen {
         var toggleLabel = ""
         switch toggle {
         case "Hide":
-            toggleLabel = "eye.slash.fill"
+            toggleLabel = settingsPageCategoryHideButton
         case "Show":
-            toggleLabel = "eye.fill"
+            toggleLabel = settingsPageCategoryShowButton
         default:
             break
         }
 
-        if XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).element.exists {
-            XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
+        if otherElements.containing(.staticText, identifier: category).element.exists {
+            otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
         } else {
-            XCUIApplication().buttons["bottomPagination.right_chevron"].tap()
-            XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
+            settingsPageNextButton.tap()
+           otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
         }
+    }
+    
+    
+    func navigateToCategory(category: String){
+        while !otherElements.containing(.staticText, identifier: category).element.exists {
+            settingsPageNextButton.tap()
+            if (mainScreen.pageNumber.label == "Page 1 of 1"){
+                break
+            }
+        }
+    }
+    
+    func navigateToSettingsScreen() {
+        mainScreen.settingsButton.tap()
+        categoriesButton.tap()
     }
 }

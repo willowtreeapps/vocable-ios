@@ -107,6 +107,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         navigationBar.leftButton = {
             let button = GazeableButton()
             button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+            button.accessibilityIdentifier = "settings.dismissButton"
             button.addTarget(self, action: #selector(dismissVC), for: .primaryActionTriggered)
             return button
         }()

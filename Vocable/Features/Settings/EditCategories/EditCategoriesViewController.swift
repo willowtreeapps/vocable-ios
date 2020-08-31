@@ -74,6 +74,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         navigationBar.rightButton = {
             let button = GazeableButton(frame: .zero)
             button.setImage(UIImage(systemName: "plus"), for: .normal)
+            button.accessibilityIdentifier = "settingsCategory.addCategoryButton"
             button.addTarget(self, action: #selector(addButtonPressed), for: .primaryActionTriggered)
             return button
         }()
