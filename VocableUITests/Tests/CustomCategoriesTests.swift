@@ -21,7 +21,7 @@ class CustomCategoriesTest: BaseTest {
         
         
         // Add a new Category and navigate into it
-        settingsScreen.navigateToSettingsScreen()
+        settingsScreen.navigateToSettingsCategoryScreen()
         customCategoriesScreen.createCustomCategory(categoryName: customCategory)
         settingsScreen.openCategorySettings(category: createdCustomCategory)
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
@@ -55,7 +55,7 @@ class CustomCategoriesTest: BaseTest {
         let createdCustomCategory = ("8. "+customCategory)
 
         // Navigate to Custom Category
-        settingsScreen.navigateToSettingsScreen()
+        settingsScreen.navigateToSettingsCategoryScreen()
         settingsScreen.openCategorySettings(category: createdCustomCategory)
         
         // Edit the phrase
@@ -71,7 +71,7 @@ class CustomCategoriesTest: BaseTest {
            let createdCustomCategory = ("8. "+customCategory)
 
            // Navigate to custom category
-           settingsScreen.navigateToSettingsScreen()
+           settingsScreen.navigateToSettingsCategoryScreen()
            settingsScreen.openCategorySettings(category: createdCustomCategory)
         
            customCategoriesScreen.categoriesPageDeletePhraseButton.tap()
@@ -94,7 +94,7 @@ class CustomCategoriesTest: BaseTest {
 
         
         // Navigate to Settings and create a custom category
-        settingsScreen.navigateToSettingsScreen()
+        settingsScreen.navigateToSettingsCategoryScreen()
         customCategoriesScreen.createCustomCategory(categoryName: customCategoryTwo)
         
         // Add an existing custom phrase

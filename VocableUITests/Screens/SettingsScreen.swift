@@ -10,11 +10,12 @@ import XCTest
 
 class SettingsScreen {
     let mainScreen = MainScreen()
+    let keyboardScreen = KeyboardScreen()
     
     let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
     let leaveCategoryDetailButton = XCUIApplication().buttons["arrow.left"]
     let leaveCategoriesButton = XCUIApplication().buttons["arrow.left"]
-    let exitSettings = XCUIApplication().buttons["settings.dismissButton"]
+    let exitSettingsButton = XCUIApplication().buttons["settings.dismissButton"]
     let otherElements = XCUIApplication().collectionViews.cells.otherElements
     let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
     let settingsPageCategoryUpButton = "chevron.up"
@@ -73,8 +74,24 @@ class SettingsScreen {
         keyboardScreen.checkmarkAddButton.tap()
     }
     
-    func  navigateToSettingsScreen() {
+    func navigateToSettingsCategoryScreen() {
         mainScreen.settingsButton.tap()
         categoriesButton.tap()
     }
+    
+    func navigateToMainScreenFromSettings(from: String){
+           switch from {
+           case "categoryDetails":
+               leaveCategoryDetailButton.tap()
+               leaveCategoriesButton.tap()
+               exitSettingsButton.tap()
+           case "categories":
+               leaveCategoriesButton.tap()
+               exitSettingsButton.tap()
+           case "settings":
+               exitSettingsButton.tap()
+           default:
+               break;
+           }
+       }
 }

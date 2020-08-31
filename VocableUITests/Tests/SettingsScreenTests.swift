@@ -14,7 +14,7 @@ class SettingsScreenTests: BaseTest {
         let generalCategoryText = "1. General"
         let hiddenGeneralCategoryText = "General"
               
-        settingsScreen.navigateToSettingsScreen()
+        settingsScreen.navigateToSettingsCategoryScreen()
         
         // Verify the category is not numbered when hidden and correct button states are shown.
         
@@ -51,7 +51,7 @@ class SettingsScreenTests: BaseTest {
         let expectedGeneralCategoryText = "2. General"
         let expectedbasicNeedsCategoryText = "1. Basic Needs"
     
-       settingsScreen.navigateToSettingsScreen()
+       settingsScreen.navigateToSettingsCategoryScreen()
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: basicNeedsCategoryText).element.exists)
@@ -75,7 +75,7 @@ class SettingsScreenTests: BaseTest {
         let customCategory = "ddingcustomcategorytest"
         let confirmationAlert = "Are you sure? Going back before saving will clear any edits made."
      
-        settingsScreen.navigateToSettingsScreen()
+        settingsScreen.navigateToSettingsCategoryScreen()
         settingsScreen.settingsPageAddCategoryButton.tap()
         
         // Verify Category is not added if edits are discarded

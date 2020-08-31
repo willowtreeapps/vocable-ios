@@ -32,7 +32,7 @@ class MainScreenTests: BaseTest {
     }
     
     func testWhenTapping123Phrase_ThenThatPhraseDisplaysOnOutputLabel() {
-        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 2)
+        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 2, newCategory: nil)
         XCUIApplication().collectionViews.staticTexts[mainScreen.defaultPhrase123[0]].tap()
         XCTAssertEqual(mainScreen.outputLabel.label, mainScreen.defaultPhrase123[0])
     }
@@ -47,7 +47,7 @@ class MainScreenTests: BaseTest {
         settingsScreen.toggleHideShowCategory(category: generalCategoryText, toggle: "Hide")
 
         settingsScreen.leaveCategoriesButton.tap()
-        settingsScreen.exitSettings.tap()
+        settingsScreen.exitSettingsButton.tap()
         
         XCTAssertFalse(XCUIApplication().collectionViews.staticTexts[mainScreen.defaultCategories[0]].exists)
         
@@ -59,14 +59,40 @@ class MainScreenTests: BaseTest {
         settingsScreen.toggleHideShowCategory(category: hiddenGeneralCategoryText, toggle: "Show")
     }
     
-    func testMySettingsPagination() {
-        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 1)
+    func testCustonCategoryPagination() {
+        let customCategory = "Paginationtest"
+        let addedCustomCategory = "8. "+customCategory
+        // Adding custom category via Settings screen at it is unknown yet whether we want to implment via keyboard screen.
+        settingsScreen.navigateToSettingsCategoryScreen()
+    
+        customCategoriesScreen.createCustomCategory(categoryName: customCategory)
+        settingsScreen.leaveCategoriesButton.tap()
+        settingsScreen.exitSettingsButton.tap()
+        
+        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 1, newCategory: customCategory)
+        
+        // Verify initial state.
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 1")
         XCTAssertFalse(mainScreen.paginationLeftButton.isEnabled)
         XCTAssertFalse(mainScreen.paginationRightButton.isEnabled)
-        mainScreen.addMySayings(numberOfSayings: 8)
+        
+        // Add custom phrases to new category, NOTE: 8 is for an iPhone 11 (2 columns of 4).
+        settingsScreen.navigateToSettingsCategoryScreen()
+        settingsScreen.openCategorySettings(category: addedCustomCategory)
+        customCategoriesScreen.addCustomPhrases(numberOfSayings: 8)
+        
+        // Navigate to home screen to verify page numbers
+        settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
+        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 1, newCategory: customCategory)
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 1")
-        mainScreen.addMySayings(numberOfSayings: 1)
+        
+        // Add custom phrases to new category
+        settingsScreen.navigateToSettingsCategoryScreen()
+        settingsScreen.openCategorySettings(category: addedCustomCategory)
+        customCategoriesScreen.addCustomPhrases(numberOfSayings: 1)
+        
+        // Navigate to home screen to verify page numbers.
+        settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 2")
         XCTAssertTrue(mainScreen.paginationRightButton.isEnabled)
         
@@ -82,5 +108,4 @@ class MainScreenTests: BaseTest {
         }
     }
     
-
 }

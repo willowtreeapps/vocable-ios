@@ -17,7 +17,8 @@ class KeyboardScreenTests: BaseTest {
        
         XCTAssert(keyboardScreen.keyboardTextView.staticTexts[testPhrase].exists, "Expected the text \(testPhrase) to be displayed")
     }
-    
+    /*
+     // My sayings is being replaced with Custom Categories so this test will no longer apply.
     func testWhenAddingPhraseToMySayings_ThenItAppearsOnMainScreen() {
         mainScreen.keyboardNavButton.tap()
         keyboardScreen.typeText(testPhrase)
@@ -27,5 +28,5 @@ class KeyboardScreenTests: BaseTest {
 
         XCTAssert(mainScreen.isTextDisplayed(testPhrase), "Expected the phrase \(testPhrase) to be added to an displayed in 'My Sayings'")
     }
-    
+    */
 }

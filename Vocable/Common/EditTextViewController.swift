@@ -33,7 +33,7 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
     private lazy var confirmEditButton: GazeableButton = {
         let button = GazeableButton()
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.accessibilityIdentifier = "keyboard.confirmButton"
+        button.accessibilityIdentifier = "keyboard.saveButton"
         button.addTarget(self, action: #selector(confirmEdit(_:)), for: .primaryActionTriggered)
         return button
     }()
