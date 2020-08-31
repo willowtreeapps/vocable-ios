@@ -116,5 +116,11 @@ class CustomCategoriesTest: BaseTest {
         settingsScreen.leaveCategoryDetailButton.tap()
         settingsScreen.openCategorySettings(category: "9. "+customCategoryTwo)
         XCTAssert(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to be displayed")
+        
+        // Cleanup: Hide categories for now until delete feature is implemented so Automation tests pass:
+        settingsScreen.leaveCategoryDetailButton.tap()
+        settingsScreen.toggleHideShowCategory(category: "8. "+customCategory, toggle: "Hide")
+        settingsScreen.toggleHideShowCategory(category: "8. "+customCategoryTwo, toggle: "Hide")
+        
     }
 }

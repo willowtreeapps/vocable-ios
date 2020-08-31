@@ -28,7 +28,7 @@ class SettingsScreenTests: BaseTest {
                 
         XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: hiddenGeneralCategoryText).buttons[settingsScreen.settingsPageCategoryUpButton].isEnabled)
         XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: hiddenGeneralCategoryText).buttons[settingsScreen.settingsPageCategoryDownButton].isEnabled)
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: hiddenGeneralCategoryText).buttons[settingsScreen.settingsPageCategoryHideButton].isEnabled)
+        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: hiddenGeneralCategoryText).buttons[settingsScreen.settingsPageCategoryShowButton].isEnabled)
 
         // Verify category goes back to original spot when shown.
     
@@ -40,7 +40,7 @@ class SettingsScreenTests: BaseTest {
         
         XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.settingsPageCategoryUpButton].isEnabled)
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.settingsPageCategoryDownButton].isEnabled)
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.settingsPageCategoryShowButton].isEnabled)
+        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.settingsPageCategoryHideButton].isEnabled)
     }
 
 
