@@ -116,10 +116,5 @@ class CustomCategoriesTest: BaseTest {
         settingsScreen.leaveCategoryDetailButton.tap()
         settingsScreen.openCategorySettings(category: "9. "+customCategoryTwo)
         XCTAssert(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to be displayed")
-
-
-        //
-
-        
     }
 }
