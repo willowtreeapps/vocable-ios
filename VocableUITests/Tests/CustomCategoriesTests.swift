@@ -167,8 +167,9 @@ class CustomCategoriesTest: BaseTest {
         XCTAssertFalse(mainScreen.paginationLeftButton.isEnabled)
         XCTAssertFalse(mainScreen.paginationRightButton.isEnabled)
         
-        
-    
+        // Hide category until Delete is implemented
+        settingsScreen.leaveCategoryDetailButton.tap()
+        settingsScreen.toggleHideShowCategory(category: createdCustomCategory, toggle: "Hide")
         
     
     }
