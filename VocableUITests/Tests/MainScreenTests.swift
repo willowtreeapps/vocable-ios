@@ -99,6 +99,10 @@ class MainScreenTests: BaseTest {
         mainScreen.paginationRightButton.tap()
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 2 of 2")
         
+        // Hide new category to Reset state until delete functionality is implemented:
+        settingsScreen.navigateToSettingsCategoryScreen()
+        settingsScreen.navigateToCategory(category: addedCustomCategory)
+        settingsScreen.toggleHideShowCategory(category: addedCustomCategory, toggle: "Hide")
     }
 
     

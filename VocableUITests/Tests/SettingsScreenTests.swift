@@ -97,6 +97,7 @@ class SettingsScreenTests: BaseTest {
     
         keyboardScreen.typeText(customCategory)
         keyboardScreen.checkmarkAddButton.tap()
+        settingsScreen.navigateToCategory(category: "8. A"+customCategory)
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: "8. A"+customCategory).element.exists)
 

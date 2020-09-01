@@ -61,7 +61,7 @@ class SettingsScreen {
     func navigateToCategory(category: String){
         while !otherElements.containing(.staticText, identifier: category).element.exists {
             settingsPageNextButton.tap()
-            if (mainScreen.pageNumber.label == "Page 1 of 1"){
+            if (mainScreen.pageNumber.label.contains("Page 1")){
                 break
             }
         }

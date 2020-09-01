@@ -43,7 +43,10 @@ class MainScreen {
         for _ in 1...numTimesToScroll {
             categoryLeftButton.tap()
         }
-        defaultCategories.append(newCategory!)
+        defaultCategories.append(newCategory ?? " ")
+        if (newCategory == nil) {
+            defaultCategories.popLast()
+        }
         let currentCategory = defaultCategories.count - (numTimesToScroll % defaultCategories.count)
         app.collectionViews.staticTexts[defaultCategories[currentCategory]].tap()
     }
