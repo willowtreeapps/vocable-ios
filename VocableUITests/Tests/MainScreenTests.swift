@@ -99,6 +99,17 @@ class MainScreenTests: BaseTest {
         mainScreen.paginationRightButton.tap()
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 2 of 2")
         
+        // Delete a phrase and verify pagination.
+        settingsScreen.navigateToSettingsCategoryScreen()
+        settingsScreen.openCategorySettings(category: addedCustomCategory)
+        customCategoriesScreen.categoriesPageDeletePhraseButton.firstMatch.tap()
+        settingsScreen.alertDeleteButton.tap()
+        
+        
+        // Navigate to home screen and verify page numbers
+        settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
+        XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 1")
+        
         // Hide new category to Reset state until delete functionality is implemented:
         settingsScreen.navigateToSettingsCategoryScreen()
         settingsScreen.navigateToCategory(category: addedCustomCategory)
