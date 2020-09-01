@@ -25,8 +25,8 @@ class CustomCategoriesScreen {
         keyboardScreen.checkmarkAddButton.tap()
     }
     
-    func addCustomPhrases(numberOfSayings: Int){        
-         for _ in 1...numberOfSayings {
+    func addCustomPhrases(numberOfPhrases: Int){
+         for _ in 1...numberOfPhrases {
             let randomPhrase = keyboardScreen.randomString(length: 2)
             categoriesPageAddPhraseButton.tap()
             keyboardScreen.typeText(randomPhrase)
