@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Combine
 import AVFoundation
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -42,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !AppConfig.isHeadTrackingSupported {
             AppConfig.isHeadTrackingEnabled = false
         }
+
+        FirebaseApp.configure()
     
         // Ensure that the persistent store has the current
         // default presets before presenting UI

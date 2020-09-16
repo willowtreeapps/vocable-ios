@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,9 @@
 		17D4162C245C6FE800FD81CD /* KeyboardScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4162B245C6FE800FD81CD /* KeyboardScreenTests.swift */; };
 		17D4162E245C6FF600FD81CD /* KeyboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4162D245C6FF600FD81CD /* KeyboardScreen.swift */; };
 		17F29479247419DD00A05434 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F29478247419DD00A05434 /* SettingsScreen.swift */; };
+		2631B366251181C400B94402 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2631B365251181C400B94402 /* GoogleService-Info.plist */; };
+		2631B4092511926C00B94402 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2631B4082511926C00B94402 /* FirebaseAnalytics */; };
+		2631B40B2511926C00B94402 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2631B40A2511926C00B94402 /* FirebaseCrashlytics */; };
 		274540282460DD0F0056EF98 /* Presets.strings in Resources */ = {isa = PBXBuildFile; fileRef = 274540262460DD0F0056EF98 /* Presets.strings */; };
 		2745402B2460DD490056EF98 /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2745402A2460DD490056EF98 /* Presets.swift */; };
 		2745402E2460DD760056EF98 /* presets.json in Resources */ = {isa = PBXBuildFile; fileRef = 2745402D2460DD760056EF98 /* presets.json */; };
@@ -176,6 +179,7 @@
 		17D4162B245C6FE800FD81CD /* KeyboardScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardScreenTests.swift; sourceTree = "<group>"; };
 		17D4162D245C6FF600FD81CD /* KeyboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardScreen.swift; sourceTree = "<group>"; };
 		17F29478247419DD00A05434 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		2631B365251181C400B94402 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		274540272460DD0F0056EF98 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Presets.strings; sourceTree = "<group>"; };
 		274540292460DD170056EF98 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Presets.strings; sourceTree = "<group>"; };
 		2745402A2460DD490056EF98 /* Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presets.swift; sourceTree = "<group>"; };
@@ -332,6 +336,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2631B3FF251191C500B94402 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2631B4092511926C00B94402 /* FirebaseAnalytics in Frameworks */,
+				2631B40B2511926C00B94402 /* FirebaseCrashlytics in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		54D3C41123E37CD40061EF47 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -349,6 +362,7 @@
 				54D3C41523E37CD40061EF47 /* VocableTests */,
 				17191A30245089270079F9BE /* VocableUITests */,
 				130C00B520D2AD2A007C3163 /* Products */,
+				2631B400251191D500B94402 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -372,6 +386,7 @@
 				B8DA9DF523F30C5E00FEBE19 /* Features */,
 				130C00B720D2AD2A007C3163 /* AppDelegate.swift */,
 				B8DA9DEF23EDECEE00FEBE19 /* AppConfig.swift */,
+				2631B365251181C400B94402 /* GoogleService-Info.plist */,
 				139EDEE921419C400009A99F /* Supporting Files */,
 			);
 			path = Vocable;
@@ -423,6 +438,13 @@
 				CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		2631B400251191D500B94402 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		54D3C41523E37CD40061EF47 /* VocableTests */ = {
@@ -714,14 +736,20 @@
 			buildConfigurationList = 130C00C820D2AD2C007C3163 /* Build configuration list for PBXNativeTarget "Vocable" */;
 			buildPhases = (
 				130C00B020D2AD2A007C3163 /* Sources */,
+				2631B3FF251191C500B94402 /* Frameworks */,
 				130C00B220D2AD2A007C3163 /* Resources */,
 				54481D4823E9CBF000ECF249 /* Swift Lint */,
+				2631B40F2511939600B94402 /* Initialize Crashlytics */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Vocable;
+			packageProductDependencies = (
+				2631B4082511926C00B94402 /* FirebaseAnalytics */,
+				2631B40A2511926C00B94402 /* FirebaseCrashlytics */,
+			);
 			productName = EyeTrackingTest;
 			productReference = 130C00B420D2AD2A007C3163 /* Vocable.app */;
 			productType = "com.apple.product-type.application";
@@ -800,6 +828,9 @@
 				es,
 			);
 			mainGroup = 130C00AB20D2AD2A007C3163;
+			packageReferences = (
+				2631B4072511926C00B94402 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 130C00B520D2AD2A007C3163 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -835,6 +866,7 @@
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
 				2745402E2460DD760056EF98 /* presets.json in Resources */,
 				64A220BE2452173C0014EA80 /* Root.storyboard in Resources */,
+				2631B366251181C400B94402 /* GoogleService-Info.plist in Resources */,
 				A9CF2AF3242D4EDE005633A7 /* DwellTimeCollectionViewCell.xib in Resources */,
 				A944D00B2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib in Resources */,
 				6B3DCC1F24101F530039E45E /* TrackingDebugOverlayViewController.storyboard in Resources */,
@@ -858,6 +890,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2631B40F2511939600B94402 /* Initialize Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}\n",
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "Initialize Crashlytics";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# This locates the crashlytics framework downloaded by the SPM in order to execute the included script\n\nSEARCH_FRAME_PATH=\"${FRAMEWORK_SEARCH_PATHS//\\ }\"\n\"$SEARCH_FRAME_PATH/../../../SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
 		54481D4823E9CBF000ECF249 /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1136,6 +1188,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1193,6 +1246,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1211,6 +1265,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 753J68XC6W;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Vocable/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1218,6 +1273,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.3.4;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.willowtreeapps.eyespeakaac";
@@ -1234,6 +1290,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753J68XC6W;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Vocable/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1241,6 +1298,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.3.4;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.willowtreeapps.eyespeakaac";
@@ -1406,6 +1464,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1423,6 +1482,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753J68XC6W;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Vocable/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1430,6 +1490,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.3.4;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.willowtreeapps.eyespeakaac";
@@ -1505,6 +1566,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2631B4072511926C00B94402 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				branch = "6.32-spm-beta";
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2631B4082511926C00B94402 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2631B4072511926C00B94402 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		2631B40A2511926C00B94402 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2631B4072511926C00B94402 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		6BFB18C024002C7B002C3515 /* Phrases.xcdatamodeld */ = {

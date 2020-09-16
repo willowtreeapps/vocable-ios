@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/stevefoster/Development/github/vocable-ios/Vocable.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>
