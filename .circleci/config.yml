@@ -1,8 +1,8 @@
-version: 2.1
+version: 2.2
 jobs:
   build-and-test:
     macos:
-      xcode: 11.4.0
+      xcode: 12.0.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -19,7 +19,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 11.4.0
+      xcode: 12.0.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -34,7 +34,7 @@ jobs:
 
   buildanddeploytotestflight:
     macos:
-      xcode: 11.4.0
+      xcode: 12.0.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: buildanddeploytotestflight
@@ -48,7 +48,7 @@ jobs:
           path: output
   export-localizations-for-crowdin:
     macos: 
-      xcode: 11.4.0
+      xcode: 12.0.0
     steps:
       - checkout
       - run: bundle install
@@ -68,7 +68,7 @@ jobs:
             
   update-localizations-test-deploy:
     macos: 
-      xcode: 11.4.0
+      xcode: 12.0.0
     steps:
       - checkout
       - run: bundle install
