@@ -2,6 +2,7 @@ default_platform :ios
 
 platform :ios do
   before_all do
+    ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "60"
     setup_circle_ci
   end
 
