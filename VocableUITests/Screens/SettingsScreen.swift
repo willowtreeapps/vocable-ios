@@ -13,15 +13,15 @@ class SettingsScreen {
     let keyboardScreen = KeyboardScreen()
     
     let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
-    let leaveCategoryDetailButton = XCUIApplication().buttons["arrow.left"]
-    let leaveCategoriesButton = XCUIApplication().buttons["arrow.left"]
+    let leaveCategoryDetailButton = XCUIApplication().buttons["navigationBar.backButton"]
+    let leaveCategoriesButton = XCUIApplication().buttons["Left"]
     let exitSettingsButton = XCUIApplication().buttons["settings.dismissButton"]
     let otherElements = XCUIApplication().collectionViews.cells.otherElements
     let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
-    let settingsPageCategoryUpButton = "chevron.up"
-    let settingsPageCategoryDownButton = "chevron.down"
-    let settingsPageCategoryHideButton = "eye.slash.fill"
-    let settingsPageCategoryShowButton = "eye.fill"
+    let settingsPageCategoryUpButton = "go up"
+    let settingsPageCategoryDownButton = "go down"
+    let settingsPageCategoryHideButton = "hide"
+    let settingsPageCategoryShowButton = "show"
     let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
     let alertContinueButton = XCUIApplication().buttons["Continue Editing"]
     let alertDiscardButton = XCUIApplication().buttons["Discard"]

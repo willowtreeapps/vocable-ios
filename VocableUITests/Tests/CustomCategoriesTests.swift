@@ -139,8 +139,8 @@ class CustomCategoriesTest: BaseTest {
         XCTAssertFalse(mainScreen.paginationLeftButton.isEnabled)
         XCTAssertFalse(mainScreen.paginationRightButton.isEnabled)
         
-        // Add Phrases - 5 is the max for an iphone 11 in Settings Portrait View.
-        customCategoriesScreen.addCustomPhrases(numberOfPhrases: 5)
+        // Add Phrases - 4 is the max for an iphone 11 in Settings Portrait View.
+        customCategoriesScreen.addCustomPhrases(numberOfPhrases: 4)
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 1")
         XCTAssertFalse(mainScreen.paginationLeftButton.isEnabled)
         XCTAssertFalse(mainScreen.paginationRightButton.isEnabled)
