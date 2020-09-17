@@ -44,7 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppConfig.isHeadTrackingEnabled = false
         }
 
+        // Only enable Firebase Crashlytics for release builds
+        #if RELEASE
         FirebaseApp.configure()
+        #endif
     
         // Ensure that the persistent store has the current
         // default presets before presenting UI
