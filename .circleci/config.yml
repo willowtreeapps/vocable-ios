@@ -21,7 +21,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 12.0.0
+      xcode: 12.0.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -38,7 +38,7 @@ jobs:
 
   buildanddeploytotestflight:
     macos:
-      xcode: 12.0.0
+      xcode: 12.0.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: buildanddeploytotestflight
@@ -54,7 +54,7 @@ jobs:
           path: output
   export-localizations-for-crowdin:
     macos: 
-      xcode: 12.0.0
+      xcode: 12.0.1
     steps:
       - checkout
       - run: rm ~/.ssh/id_rsa
@@ -76,7 +76,7 @@ jobs:
             
   update-localizations-test-deploy:
     macos: 
-      xcode: 12.0.0
+      xcode: 12.0.1
     steps:
       - checkout
       - run: rm ~/.ssh/id_rsa
