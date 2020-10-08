@@ -43,7 +43,7 @@
         "state": {
           "branch": null,
           "revision": "1d4ef59335abfccee6150ca5c9b436c17c801fa9",
-          "version": "1.4.0"
+          "version": null
         }
       },
       {
@@ -70,7 +70,7 @@
         "state": {
           "branch": null,
           "revision": "c5cdb6bdc2d3db8ef81e3bc71d55d31baf638837",
-          "version": "1.2.10"
+          "version": null
         }
       }
     ]
