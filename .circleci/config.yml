@@ -11,7 +11,7 @@ jobs:
       - run: rm ~/.ssh/id_rsa
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       - run: bundle install
-      - run: xcodebuild -showBuildSettings
+      - run: xcodebuild -resolvePackageDependencies
       - run:
           name: Fastlane
           command: bundle exec fastlane $FASTLANE_LANE
