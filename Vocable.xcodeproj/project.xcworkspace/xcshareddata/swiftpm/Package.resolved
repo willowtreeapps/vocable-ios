@@ -23,7 +23,7 @@
         "package": "Firebase",
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
-          "branch": "6.34-spm-beta",
+          "branch": null,
           "revision": "70b54ba972e5768fe84f69f700ae362c8fbf8e8b",
           "version": null
         }
