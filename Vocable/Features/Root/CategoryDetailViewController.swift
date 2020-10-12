@@ -124,9 +124,8 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
         if category.identifier != Category.Identifier.recents {
             phrase.lastSpokenDate = Date()
+            try? frc.managedObjectContext.save()
         }
-
-        try! frc.managedObjectContext.save()
 
         // Dispatch to get off the main queue for performance
         DispatchQueue.global(qos: .userInitiated).async {

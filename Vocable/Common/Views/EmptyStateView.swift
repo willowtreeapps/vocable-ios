@@ -45,7 +45,7 @@ class EmptyStateView: UIView {
         }
     }
 
-    var text: String? {
+    var headerText: String? {
         get {
             headerLabel.text
         }
@@ -54,7 +54,7 @@ class EmptyStateView: UIView {
         }
     }
 
-    var attributedText: NSAttributedString? {
+    var headerAttributedText: NSAttributedString? {
         get {
             headerLabel.attributedText
         }
@@ -89,7 +89,7 @@ class EmptyStateView: UIView {
     init(text: String, image: UIImage? = nil, action: ButtonConfiguration? = nil) {
         self.action = action
         super.init(frame: .zero)
-        self.text = text
+        self.headerText = text
         self.image = image
         self.bodyAttributedText = nil
         commonInit()
@@ -98,20 +98,20 @@ class EmptyStateView: UIView {
     init(attributedText: NSAttributedString, action: ButtonConfiguration? = nil) {
         self.action = action
         super.init(frame: .zero)
-        self.text = nil
+        self.headerText = nil
         self.image = nil
-        self.attributedText = attributedText
+        self.headerAttributedText = attributedText
         self.bodyAttributedText = nil
         commonInit()
     }
 
-    init(attributedText: NSAttributedString, image: UIImage? = nil, extraAttributedText: NSAttributedString? = nil, action: ButtonConfiguration? = nil) {
+    init(headerAttributedText: NSAttributedString, image: UIImage? = nil, bodyAttributedText: NSAttributedString? = nil, action: ButtonConfiguration? = nil) {
         self.action = action
         super.init(frame: .zero)
         self.image = image
         commonInit()
-        self.attributedText = attributedText
-        self.bodyAttributedText = extraAttributedText
+        self.headerAttributedText = headerAttributedText
+        self.bodyAttributedText = bodyAttributedText
     }
 
     required init?(coder: NSCoder) {
