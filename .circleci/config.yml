@@ -8,7 +8,8 @@ jobs:
       FASTLANE_LANE: test
     steps:
       - checkout
-      - run: rm ~/.ssh/id_rsa
+      - run: sudo defaults write com.apple.dt.Xcode IDEPackageSupportUseBuiltinSCM YES
+      - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       - run: bundle install
       - run: xcodebuild -resolvePackageDependencies
@@ -28,7 +29,8 @@ jobs:
       FASTLANE_LANE: adhoc
     steps:
       - checkout
-      - run: rm ~/.ssh/id_rsa
+      - run: sudo defaults write com.apple.dt.Xcode IDEPackageSupportUseBuiltinSCM YES
+      - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       - run: bundle install
       - run:
@@ -45,7 +47,8 @@ jobs:
       FASTLANE_LANE: buildanddeploytotestflight
     steps:
       - checkout
-      - run: rm ~/.ssh/id_rsa
+      - run: sudo defaults write com.apple.dt.Xcode IDEPackageSupportUseBuiltinSCM YES
+      - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       - run: bundle install
       - run:
@@ -58,7 +61,8 @@ jobs:
       xcode: 12.0.1
     steps:
       - checkout
-      - run: rm ~/.ssh/id_rsa
+      - run: sudo defaults write com.apple.dt.Xcode IDEPackageSupportUseBuiltinSCM YES
+      - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       - run: bundle install
       - run:
@@ -80,7 +84,8 @@ jobs:
       xcode: 12.0.1
     steps:
       - checkout
-      - run: rm ~/.ssh/id_rsa
+      - run: sudo defaults write com.apple.dt.Xcode IDEPackageSupportUseBuiltinSCM YES
+      - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       - run: bundle install
       - run:
