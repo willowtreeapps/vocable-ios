@@ -3,19 +3,19 @@
     "pins": [
       {
         "package": "abseil",
-        "repositoryURL": "https://github.com/firebase/abseil-cpp.git",
+        "repositoryURL": "https://github.com/firebase/abseil-cpp-SwiftPM.git",
         "state": {
           "branch": null,
-          "revision": "d30bd7751ce343a05fca6413de0dec062163e5e9",
+          "revision": "05d8107f2971a37e6c77245b7c4c6b0a7e97bc99",
           "version": null
         }
       },
       {
         "package": "BoringSSL-GRPC",
-        "repositoryURL": "https://github.com/firebase/boringssl.git",
+        "repositoryURL": "https://github.com/firebase/boringssl-SwiftPM.git",
         "state": {
           "branch": null,
-          "revision": "897ffb6fbb5a5ea149216d664ce8b04d77e3df22",
+          "revision": "7bcafa2660bc58715c39637494550d1ed7cd7229",
           "version": null
         }
       },
@@ -23,17 +23,17 @@
         "package": "Firebase",
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
-          "branch": "6.32-spm-beta",
-          "revision": "f25eda58236c2408302bf0f981ac59e951264cea",
+          "branch": null,
+          "revision": "70b54ba972e5768fe84f69f700ae362c8fbf8e8b",
           "version": null
         }
       },
       {
         "package": "gRPC",
-        "repositoryURL": "https://github.com/firebase/grpc.git",
+        "repositoryURL": "https://github.com/firebase/grpc-SwiftPM.git",
         "state": {
           "branch": null,
-          "revision": "cae939a8823bbc39912aa2990cf95e29ace381b3",
+          "revision": "5bb2669317ae2183f4cb00c675423af1924f0b46",
           "version": null
         }
       },
@@ -51,7 +51,7 @@
         "repositoryURL": "https://github.com/firebase/leveldb.git",
         "state": {
           "branch": null,
-          "revision": "3f046978ecffd57ea6eb9a0897cc8a3b45b44df8",
+          "revision": "fa1f25f296a766e5a789c4dacd4798dea798b2c2",
           "version": null
         }
       },
@@ -60,7 +60,7 @@
         "repositoryURL": "https://github.com/nanopb/nanopb.git",
         "state": {
           "branch": null,
-          "revision": "3cfa21200eea012d8765239ad4c50d8a36c283f1",
+          "revision": "8119dfe5631f2616d11e50ead95448d12e816062",
           "version": null
         }
       },
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/google/promises.git",
         "state": {
           "branch": null,
-          "revision": "c5cdb6bdc2d3db8ef81e3bc71d55d31baf638837",
-          "version": "1.2.10"
+          "revision": "d8accebc8fa32f57196df191e733f946e955c549",
+          "version": "1.2.11"
         }
       }
     ]

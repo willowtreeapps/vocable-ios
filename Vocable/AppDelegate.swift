@@ -44,7 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppConfig.isHeadTrackingEnabled = false
         }
 
+        #if RELEASE
         FirebaseApp.configure()
+        #endif
     
         // Ensure that the persistent store has the current
         // default presets before presenting UI
