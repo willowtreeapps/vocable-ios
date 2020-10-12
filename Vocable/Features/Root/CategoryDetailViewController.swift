@@ -28,8 +28,14 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Phrase.category, .equalTo, self.category)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
+
+        if category.identifier == Category.Identifier.recents {
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.lastSpokenDate, ascending: false)]
+            request.fetchLimit = 9
+        } else {
+            request.predicate = NSComparisonPredicate(\Phrase.category, .equalTo, self.category)
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
+        }
         return request
     }()
 
@@ -109,11 +115,18 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         }
 
         let path = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        guard let utterance = frc.object(at: path).utterance else {
+        let phrase = frc.object(at: path)
+        guard let utterance = phrase.utterance else {
             lastUtterance = nil
             return
         }
         lastUtterance = utterance
+
+        if category.identifier != Category.Identifier.recents {
+            phrase.lastSpokenDate = Date()
+        }
+
+        try! frc.managedObjectContext.save()
 
         // Dispatch to get off the main queue for performance
         DispatchQueue.global(qos: .userInitiated).async {
@@ -125,7 +138,11 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         guard AppConfig.emptyStatesEnabled else { return }
         guard collectionView.backgroundView == nil else { return }
         paginationView.isHidden = true
-        collectionView.backgroundView = PhraseCollectionEmptyStateView(action: addNewPhraseButtonSelected)
+        if category.identifier == Category.Identifier.recents {
+            collectionView.backgroundView = RecentsEmptyStateView()
+        } else {
+            collectionView.backgroundView = PhraseCollectionEmptyStateView(action: addNewPhraseButtonSelected)
+        }
     }
 
     private func removeEmptyStateIfNeeded() {

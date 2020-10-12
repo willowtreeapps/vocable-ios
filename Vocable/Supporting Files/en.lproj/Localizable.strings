@@ -135,3 +135,11 @@
 "timing_and_sensitivity.button.high.title" = "High";
 
 "selection_mode.header.title" = "Selection Mode";
+
+"recents_empty_state.header.title" = "No recently used phrases";
+
+"recents_empty_state.body.title" = "Start using your app to see your most recently used phrases here.";
+
+"empty_state.header.title" = "This category has no phrases yet";
+
+"empty_state.button.title" = "Add Phrase";

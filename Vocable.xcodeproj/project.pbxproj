@@ -146,6 +146,7 @@
 		CE12277624F586CB008F7866 /* CustomCategoriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12277524F586CB008F7866 /* CustomCategoriesTests.swift */; };
 		CE12277824F58706008F7866 /* CustomCategoriesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */; };
 		CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */; };
+		D113A33A2534850700DF45D5 /* RecentsEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D113A3392534850700DF45D5 /* RecentsEmptyStateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -326,6 +327,7 @@
 		CE12277524F586CB008F7866 /* CustomCategoriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoriesTests.swift; sourceTree = "<group>"; };
 		CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoriesScreen.swift; sourceTree = "<group>"; };
 		CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
+		D113A3392534850700DF45D5 /* RecentsEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsEmptyStateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -646,6 +648,7 @@
 				B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */,
 				30B979A424254CBC00309D7C /* WarningView.swift */,
 				71DBE5EA240DE4D000BA8D01 /* WarningView.xib */,
+				D113A3392534850700DF45D5 /* RecentsEmptyStateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1013,6 +1016,7 @@
 				B879831523E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift in Sources */,
 				6B823BCC23F4ADE30099F65E /* TunningView.swift in Sources */,
 				6B005AE5245B06F3004919F4 /* VocableViewController.swift in Sources */,
+				D113A33A2534850700DF45D5 /* RecentsEmptyStateView.swift in Sources */,
 				6B9DFA5F23E889DB0037673E /* UIHeadGazeEvent.swift in Sources */,
 				A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */,
 				A9B32C8C240EB6250084E151 /* KeyboardModel.swift in Sources */,

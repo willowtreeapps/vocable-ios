@@ -47,34 +47,51 @@ class EmptyStateView: UIView {
 
     var text: String? {
         get {
-            label.text
+            headerLabel.text
         }
         set {
-            label.text = newValue
+            headerLabel.text = newValue
         }
     }
 
     var attributedText: NSAttributedString? {
         get {
-            label.attributedText
+            headerLabel.attributedText
         }
         set {
-            label.attributedText = newValue
+            headerLabel.attributedText = newValue
+        }
+    }
+
+    var bodyAttributedText: NSAttributedString? {
+        get {
+            bodyLabel.attributedText
+        }
+        set {
+            bodyLabel.attributedText = newValue
+            if newValue != nil {
+                stackView.insertSubview(bodyLabel, belowSubview: headerLabel)
+            } else {
+                stackView.removeArrangedSubview(bodyLabel)
+                bodyLabel.removeFromSuperview()
+            }
         }
     }
 
     private let imageView = UIImageView(frame: .zero)
-    private let label = UILabel(frame: .zero)
+    private let headerLabel = UILabel(frame: .zero)
+    private let bodyLabel = UILabel(frame: .zero)
     private let button = EmptyStateButton(frame: .zero)
     private let action: ButtonConfiguration?
 
-    private lazy var stackView = UIStackView(arrangedSubviews: [self.imageView, self.label])
+    private lazy var stackView = UIStackView(arrangedSubviews: [self.imageView, self.headerLabel, self.bodyLabel])
 
     init(text: String, image: UIImage? = nil, action: ButtonConfiguration? = nil) {
         self.action = action
         super.init(frame: .zero)
         self.text = text
         self.image = image
+        self.bodyAttributedText = nil
         commonInit()
     }
 
@@ -84,7 +101,17 @@ class EmptyStateView: UIView {
         self.text = nil
         self.image = nil
         self.attributedText = attributedText
+        self.bodyAttributedText = nil
         commonInit()
+    }
+
+    init(attributedText: NSAttributedString, image: UIImage? = nil, extraAttributedText: NSAttributedString? = nil, action: ButtonConfiguration? = nil) {
+        self.action = action
+        super.init(frame: .zero)
+        self.image = image
+        commonInit()
+        self.attributedText = attributedText
+        self.bodyAttributedText = extraAttributedText
     }
 
     required init?(coder: NSCoder) {
@@ -116,10 +143,8 @@ class EmptyStateView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.topAnchor),
             stackView.leftAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leftAnchor),
             stackView.rightAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.rightAnchor),
-            stackView.bottomAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.bottomAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
@@ -127,12 +152,12 @@ class EmptyStateView: UIView {
         let color = UIColor.defaultTextColor
         imageView.tintColor = color
 
-        label.textColor = color
-        label.textAlignment = .center
-        label.numberOfLines = 0
+        headerLabel.textColor = color
+        headerLabel.textAlignment = .center
+        headerLabel.numberOfLines = 0
 
         NSLayoutConstraint.activate([
-            label.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor)
+            headerLabel.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor)
         ])
 
         updateContentForCurrentTraitCollection()
@@ -146,9 +171,9 @@ class EmptyStateView: UIView {
     private func updateContentForCurrentTraitCollection() {
 
         if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
-            label.font = .boldSystemFont(ofSize: 28)
+            headerLabel.font = .boldSystemFont(ofSize: 28)
         } else {
-            label.font = .boldSystemFont(ofSize: 20)
+            headerLabel.font = .boldSystemFont(ofSize: 20)
         }
     }
 
