@@ -35,13 +35,7 @@ class EmptyStateView: UIView {
         }
         set {
             imageView.image = newValue
-
-            if newValue != nil {
-                stackView.insertArrangedSubview(imageView, at: 0)
-            } else {
-                stackView.removeArrangedSubview(imageView)
-                imageView.removeFromSuperview()
-            }
+            updateStackView()
         }
     }
 
@@ -63,18 +57,23 @@ class EmptyStateView: UIView {
         }
     }
 
+    var bodyText: String? {
+        get {
+            bodyLabel.text
+        }
+        set {
+            bodyLabel.text = newValue
+            updateStackView()
+        }
+    }
+
     var bodyAttributedText: NSAttributedString? {
         get {
             bodyLabel.attributedText
         }
         set {
             bodyLabel.attributedText = newValue
-            if newValue != nil {
-                stackView.insertSubview(bodyLabel, belowSubview: headerLabel)
-            } else {
-                stackView.removeArrangedSubview(bodyLabel)
-                bodyLabel.removeFromSuperview()
-            }
+            updateStackView()
         }
     }
 
@@ -86,32 +85,21 @@ class EmptyStateView: UIView {
 
     private lazy var stackView = UIStackView(arrangedSubviews: [self.imageView, self.headerLabel, self.bodyLabel])
 
-    init(text: String, image: UIImage? = nil, action: ButtonConfiguration? = nil) {
+    init(headerText: String? =  nil, headerAttributedText: NSAttributedString? = nil,
+         bodyText: String? = nil, bodyAttributedText: NSAttributedString? = nil,
+         image: UIImage? = nil, action: ButtonConfiguration? = nil) {
         self.action = action
         super.init(frame: .zero)
-        self.headerText = text
-        self.image = image
-        self.bodyAttributedText = nil
-        commonInit()
-    }
-
-    init(attributedText: NSAttributedString, action: ButtonConfiguration? = nil) {
-        self.action = action
-        super.init(frame: .zero)
-        self.headerText = nil
-        self.image = nil
-        self.headerAttributedText = attributedText
-        self.bodyAttributedText = nil
-        commonInit()
-    }
-
-    init(headerAttributedText: NSAttributedString, image: UIImage? = nil, bodyAttributedText: NSAttributedString? = nil, action: ButtonConfiguration? = nil) {
-        self.action = action
-        super.init(frame: .zero)
+        self.headerText = headerText
+        if headerText == nil {
+            self.headerAttributedText = headerAttributedText
+        }
+        self.bodyText = bodyText
+        if bodyText == nil {
+            self.bodyAttributedText = bodyAttributedText
+        }
         self.image = image
         commonInit()
-        self.headerAttributedText = headerAttributedText
-        self.bodyAttributedText = bodyAttributedText
     }
 
     required init?(coder: NSCoder) {
@@ -161,6 +149,7 @@ class EmptyStateView: UIView {
         ])
 
         updateContentForCurrentTraitCollection()
+        updateStackView()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -179,5 +168,28 @@ class EmptyStateView: UIView {
 
     @objc private func handleButton(_ sender: GazeableButton) {
         action?.action()
+    }
+
+    private func updateStackView() {
+        if imageView.image != nil {
+            stackView.insertArrangedSubview(imageView, at: 0)
+        } else {
+            stackView.removeArrangedSubview(imageView)
+            imageView.removeFromSuperview()
+        }
+
+        if bodyLabel.text != nil {
+            stackView.insertSubview(bodyLabel, belowSubview: headerLabel)
+        } else {
+            stackView.removeArrangedSubview(bodyLabel)
+            bodyLabel.removeFromSuperview()
+        }
+
+        if bodyLabel.attributedText != nil {
+            stackView.insertSubview(bodyLabel, belowSubview: headerLabel)
+        } else {
+            stackView.removeArrangedSubview(bodyLabel)
+            bodyLabel.removeFromSuperview()
+        }
     }
 }

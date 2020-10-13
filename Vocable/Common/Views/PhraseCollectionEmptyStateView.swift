@@ -13,7 +13,7 @@ class PhraseCollectionEmptyStateView: EmptyStateView {
     init(action: @escaping () -> Void) {
         let text = NSLocalizedString("empty_state.header.title", comment: "Empty state title")
         let buttonTitle = NSLocalizedString("empty_state.button.title", comment: "Empty state Add Phrase button title")
-        super.init(text: text, action: (title: buttonTitle, action: action))
+        super.init(headerText: text, action: (title: buttonTitle, action: action))
     }
 
     required init?(coder: NSCoder) {

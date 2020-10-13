@@ -17,7 +17,7 @@ class RecentsEmptyStateView: EmptyStateView {
         let text = NSAttributedString(string: title, attributes: [.font: UIFont.boldSystemFont(ofSize: 24), .foregroundColor: UIColor.defaultTextColor])
         let image = UIImage(named: "recents")
         let extraText = NSAttributedString(string: body, attributes: [.foregroundColor: UIColor.defaultTextColor])
-        super.init(attributedText: text, image: image, extraAttributedText: extraText)
+        super.init(headerAttributedText: text, bodyAttributedText: extraText, image: image)
     }
 
     required init?(coder: NSCoder) {
