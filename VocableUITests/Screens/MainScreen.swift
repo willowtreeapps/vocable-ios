@@ -10,8 +10,7 @@ import XCTest
 
 class MainScreen {
     private let app = XCUIApplication()
-   
-    
+
     var defaultCategories = ["General", "Basic Needs", "Personal Care", "Conversation", "Environment", "123", "My Sayings"]
     let defaultPhraseGeneral = ["Please be patient", "I don't know", "Maybe", "Yes", "I didn't mean to say that", "Please wait", "No", "Thank you"]
     let defaultPhrase123 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "No", "Yes"]
@@ -25,7 +24,6 @@ class MainScreen {
     let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
     let paginationLeftButton = XCUIApplication().buttons["bottomPagination.left_chevron"]
     let paginationRightButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
-    
     
     func isTextDisplayed(_ text: String) -> Bool {
         return app.collectionViews.staticTexts[text].exists
