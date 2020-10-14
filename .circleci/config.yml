@@ -2,12 +2,14 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.0.0
+      xcode: 12.0.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
     steps:
       - checkout
+      - run: rm ~/.ssh/id_rsa || true
+      - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       - run: bundle install
       - run:
           name: Fastlane
@@ -19,12 +21,14 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 12.0.0
+      xcode: 12.0.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
     steps:
       - checkout
+      - run: rm ~/.ssh/id_rsa || true
+      - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       - run: bundle install
       - run:
           name: Fastlane
@@ -34,12 +38,14 @@ jobs:
 
   buildanddeploytotestflight:
     macos:
-      xcode: 12.0.0
+      xcode: 12.0.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: buildanddeploytotestflight
     steps:
       - checkout
+      - run: rm ~/.ssh/id_rsa || true
+      - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       - run: bundle install
       - run:
           name: Fastlane
@@ -48,9 +54,11 @@ jobs:
           path: output
   export-localizations-for-crowdin:
     macos: 
-      xcode: 12.0.0
+      xcode: 12.0.1
     steps:
       - checkout
+      - run: rm ~/.ssh/id_rsa || true
+      - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       - run: bundle install
       - run:
           name: Fastlane
@@ -68,9 +76,11 @@ jobs:
             
   update-localizations-test-deploy:
     macos: 
-      xcode: 12.0.0
+      xcode: 12.0.1
     steps:
       - checkout
+      - run: rm ~/.ssh/id_rsa || true
+      - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       - run: bundle install
       - run:
           name: Fastlane
