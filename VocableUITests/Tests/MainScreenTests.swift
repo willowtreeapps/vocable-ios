@@ -32,7 +32,7 @@ class MainScreenTests: BaseTest {
     }
     
     func testWhenTapping123Phrase_ThenThatPhraseDisplaysOnOutputLabel() {
-        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 2, newCategory: nil)
+        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 3, newCategory: nil)
         XCUIApplication().collectionViews.staticTexts[mainScreen.defaultPhrase123[0]].tap()
         XCTAssertEqual(mainScreen.outputLabel.label, mainScreen.defaultPhrase123[0])
     }
@@ -61,7 +61,7 @@ class MainScreenTests: BaseTest {
     
     func testCustonCategoryPagination() {
         let customCategory = "Paginationtest"
-        let addedCustomCategory = "9. "+customCategory
+        let addedCustomCategory = "\(getNumberOfDefaultCategories() + 1). "+customCategory
         // Adding custom category via Settings screen at it is unknown yet whether we want to implment via keyboard screen.
         settingsScreen.navigateToSettingsCategoryScreen()
     

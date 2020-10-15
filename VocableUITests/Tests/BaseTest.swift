@@ -34,4 +34,8 @@ class BaseTest: XCTestCase {
         attachment.lifetime = .deleteOnSuccess
         add(attachment)
     }
+
+    func getNumberOfDefaultCategories() -> Int {
+        return mainScreen.defaultCategories.count
+    }
 }

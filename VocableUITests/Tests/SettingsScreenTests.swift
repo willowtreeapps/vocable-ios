@@ -22,7 +22,6 @@ class SettingsScreenTests: BaseTest {
               
         settingsScreen.toggleHideShowCategory(category: generalCategoryText, toggle: "Hide")
         XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
-       
         
         settingsScreen.navigateToCategory(category: hiddenGeneralCategoryText)
                 
@@ -43,7 +42,6 @@ class SettingsScreenTests: BaseTest {
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.settingsPageCategoryHideButton].isEnabled)
     }
 
-
     func testReorder() {
         let generalCategoryText = "1. General"
         let basicNeedsCategoryText = "2. Basic Needs"
@@ -55,14 +53,12 @@ class SettingsScreenTests: BaseTest {
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: basicNeedsCategoryText).element.exists)
-        
-    
+
         settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.settingsPageCategoryDownButton].tap()
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: expectedGeneralCategoryText).element.exists)
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: expectedbasicNeedsCategoryText).element.exists)
-        
-        
+
         settingsScreen.otherElements.containing(.staticText, identifier: expectedGeneralCategoryText).buttons[settingsScreen.settingsPageCategoryUpButton].tap()
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
@@ -97,9 +93,9 @@ class SettingsScreenTests: BaseTest {
     
         keyboardScreen.typeText(customCategory)
         keyboardScreen.checkmarkAddButton.tap()
-        settingsScreen.navigateToCategory(category: "9. A"+customCategory)
+        settingsScreen.navigateToCategory(category: "\(getNumberOfDefaultCategories() + 1). A"+customCategory)
         
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: "9. A"+customCategory).element.exists)
+        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: "\(getNumberOfDefaultCategories() + 1). A"+customCategory).element.exists)
 
      }
 

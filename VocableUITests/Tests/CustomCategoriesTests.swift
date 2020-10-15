@@ -14,7 +14,8 @@ class CustomCategoriesTest: BaseTest {
     func testAddNewPhrase() {
         let customPhrase = "ddingcustomcategoryphrasetest"
         let confirmationAlert = "Are you sure? Going back before saving will clear any edits made."
-        let createdCustomCategory = ("9. "+customCategory)
+        let numberOfPresetCategories = getNumberOfDefaultCategories()
+        let createdCustomCategory = ("\(numberOfPresetCategories + 1). \(customCategory)")
         
         // Add a new Category and navigate into it
         settingsScreen.navigateToSettingsCategoryScreen()
@@ -48,7 +49,7 @@ class CustomCategoriesTest: BaseTest {
     func testCustomPhraseEdit() {
     // This test builds off of the last test.
         let customPhrase = "Addingcustomcategoryphrasetest"
-        let createdCustomCategory = ("9. "+customCategory)
+        let createdCustomCategory = ("\(getNumberOfDefaultCategories() + 1). \(customCategory)")
 
         // Navigate to Custom Category
         settingsScreen.navigateToSettingsCategoryScreen()
@@ -61,10 +62,10 @@ class CustomCategoriesTest: BaseTest {
         XCTAssert(mainScreen.isTextDisplayed(customPhrase+"test"), "Expected the phrase \(customPhrase+"test") to be displayed")
     }
     
-    func testDeleteCustomPhrase(){
+    func testDeleteCustomPhrase() {
        // This test builds off of the last test.
            let customPhrase = "Test"
-           let createdCustomCategory = ("9. "+customCategory)
+           let createdCustomCategory = ("\(getNumberOfDefaultCategories() + 1). \(customCategory)")
 
            // Navigate to custom category
            settingsScreen.navigateToSettingsCategoryScreen()
@@ -75,10 +76,10 @@ class CustomCategoriesTest: BaseTest {
            XCTAssertFalse(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to not be displayed")
     }
     
-    func testDuplicatePhrasesInDifferentCategories(){
+    func testDuplicatePhrasesInDifferentCategories() {
         // This test builds off of the last test.
 
-        let createdCustomCategory = ("9. "+customCategory)
+        let createdCustomCategory = ("\(getNumberOfDefaultCategories() + 1). \(customCategory)")
         let customCategoryTwo = "Testb"
         let customPhrase = "Testa"
 
@@ -120,9 +121,9 @@ class CustomCategoriesTest: BaseTest {
         
     }
     
-    func testPagination(){
+    func testPagination() {
         let customCategoryThree = "Testc"
-        let createdCustomCategory = ("9. "+customCategoryThree)
+        let createdCustomCategory = "\(getNumberOfDefaultCategories() + 1). \(customCategoryThree)"
         
         settingsScreen.navigateToSettingsCategoryScreen()
         
@@ -164,7 +165,5 @@ class CustomCategoriesTest: BaseTest {
         // Hide category until Delete is implemented
         settingsScreen.leaveCategoryDetailButton.tap()
         settingsScreen.toggleHideShowCategory(category: createdCustomCategory, toggle: "Hide")
-        
-    
     }
 }

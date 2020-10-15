@@ -11,7 +11,8 @@ import XCTest
 class MainScreen {
     private let app = XCUIApplication()
 
-    var defaultCategories = ["General", "Basic Needs", "Personal Care", "Conversation", "Environment", "123", "My Sayings"]
+    // You must update this list if you create another default category
+    var defaultCategories = ["General", "Basic Needs", "Personal Care", "Conversation", "Environment", "123", "My Sayings", "Recents"]
     let defaultPhraseGeneral = ["Please be patient", "I don't know", "Maybe", "Yes", "I didn't mean to say that", "Please wait", "No", "Thank you"]
     let defaultPhrase123 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "No", "Yes"]
     let defaultPhraseBasicNeeds = ["I want to sit up", "I am finished", "I am uncomfortable", "I am fine", "I want to lie down", "I am in pain", "I am good", "I am tired"]
@@ -42,7 +43,7 @@ class MainScreen {
             categoryLeftButton.tap()
         }
         defaultCategories.append(newCategory ?? " ")
-        if (newCategory == nil) {
+        if newCategory == nil {
             defaultCategories.popLast()
         }
         let currentCategory = defaultCategories.count - (numTimesToScroll % defaultCategories.count)

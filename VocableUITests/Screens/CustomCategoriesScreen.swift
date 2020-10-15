@@ -18,14 +18,13 @@ class CustomCategoriesScreen {
     let categoriesPageEditPhraseButton = XCUIApplication().buttons["categoryPhrase.editButton"]
     let categoriesPageDeletePhraseButton = XCUIApplication().buttons["categoryPhrase.deleteButton"]
 
-    
-    func createCustomCategory(categoryName: String){
+    func createCustomCategory(categoryName: String) {
         settingsScreen.settingsPageAddCategoryButton.tap()
         keyboardScreen.typeText(categoryName)
         keyboardScreen.checkmarkAddButton.tap()
     }
     
-    func addCustomPhrases(numberOfPhrases: Int){
+    func addCustomPhrases(numberOfPhrases: Int) {
          for _ in 1...numberOfPhrases {
             let randomPhrase = keyboardScreen.randomString(length: 2)
             categoriesPageAddPhraseButton.tap()
