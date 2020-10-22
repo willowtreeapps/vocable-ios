@@ -177,7 +177,7 @@
       <trans-unit id="recents_empty_state.body.title" xml:space="preserve">
         <source>Start using Vocable to see your most recently used phrases here.</source>
         <target>Start using Vocable to see your most recently used phrases here.</target>
-        <note>Recents empty state body</note>
+        <note>Recents empty state description</note>
       </trans-unit>
       <trans-unit id="recents_empty_state.header.title" xml:space="preserve">
         <source>No recently used phrases</source>
