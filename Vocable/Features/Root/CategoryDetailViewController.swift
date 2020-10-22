@@ -140,8 +140,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         if category.identifier == Category.Identifier.recents {
             collectionView.backgroundView = EmptyStateView(type: .recents)
         } else {
-            let buttonTitle = NSLocalizedString("empty_state.button.title", comment: "Empty state Add Phrase button title")
-            collectionView.backgroundView = EmptyStateView(type: .phraseCollection, action: (title: buttonTitle, addNewPhraseButtonSelected))
+            collectionView.backgroundView = EmptyStateView(type: .phraseCollection, action: addNewPhraseButtonSelected)
         }
     }
 

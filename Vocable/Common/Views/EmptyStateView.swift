@@ -51,9 +51,18 @@ class EmptyStateView: UIView {
                 return nil
             }
         }
+
+        var buttonTitle: String? {
+            switch self {
+            case .recents:
+                return nil
+            default:
+                return NSLocalizedString("empty_state.button.title", comment: "Empty state Add Phrase button title")
+            }
+        }
     }
 
-    typealias ButtonConfiguration = (title: String, action: () -> Void)
+    typealias ButtonConfiguration = (() -> Void)
 
     var image: UIImage? {
         get {
@@ -123,11 +132,13 @@ class EmptyStateView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .center
 
-        if let action = action {
+        if action != nil {
             let font = UIFont.boldSystemFont(ofSize: 18)
-            let attributed = NSAttributedString(string: action.title,
-                                                attributes: [.font: font, .foregroundColor: UIColor.defaultTextColor])
-            button.setAttributedTitle(attributed, for: .normal)
+            if let title = EmptyStateType.phraseCollection.buttonTitle {
+                let attributed = NSAttributedString(string: title,
+                                                    attributes: [.font: font, .foregroundColor: UIColor.defaultTextColor])
+                button.setAttributedTitle(attributed, for: .normal)
+            }
             button.addTarget(self,
                              action: #selector(handleButton(_:)),
                              for: .primaryActionTriggered)
@@ -173,7 +184,9 @@ class EmptyStateView: UIView {
     }
 
     @objc private func handleButton(_ sender: GazeableButton) {
-        action?.action()
+        if let action = action {
+            action()
+        }
     }
 
     private func updateStackView() {
