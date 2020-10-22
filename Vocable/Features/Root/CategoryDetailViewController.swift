@@ -138,9 +138,10 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         guard collectionView.backgroundView == nil else { return }
         paginationView.isHidden = true
         if category.identifier == Category.Identifier.recents {
-            collectionView.backgroundView = RecentsEmptyStateView()
+            collectionView.backgroundView = EmptyStateView(type: .recents)
         } else {
-            collectionView.backgroundView = PhraseCollectionEmptyStateView(action: addNewPhraseButtonSelected)
+            let buttonTitle = NSLocalizedString("empty_state.button.title", comment: "Empty state Add Phrase button title")
+            collectionView.backgroundView = EmptyStateView(type: .phraseCollection, action: (title: buttonTitle, addNewPhraseButtonSelected))
         }
     }
 

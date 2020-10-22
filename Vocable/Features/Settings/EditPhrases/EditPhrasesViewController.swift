@@ -127,7 +127,8 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         guard AppConfig.emptyStatesEnabled else { return }
         guard collectionView.backgroundView == nil else { return }
         paginationView.isHidden = true
-        collectionView.backgroundView = PhraseCollectionEmptyStateView(action: addPhrasePressed)
+        let buttonTitle = NSLocalizedString("empty_state.button.title", comment: "Empty state Add Phrase button title")
+        collectionView.backgroundView = EmptyStateView(type: .phraseCollection, action: (title: buttonTitle, addPhrasePressed))
     }
 
     private func removeEmptyStateIfNeeded() {
