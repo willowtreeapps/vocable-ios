@@ -102,6 +102,16 @@
         <target>No presets found</target>
         <note>Debugging error message for when preloaded content is not found</note>
       </trans-unit>
+      <trans-unit id="empty_state.button.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target>Add Phrase</target>
+        <note>Empty state Add Phrase button title</note>
+      </trans-unit>
+      <trans-unit id="empty_state.header.title" xml:space="preserve">
+        <source>This category has no phrases yet</source>
+        <target>This category has no phrases yet</target>
+        <note>Empty state title</note>
+      </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target>Cancel</target>
@@ -163,6 +173,16 @@
         <source>Yes</source>
         <target>Yes</target>
         <note>'Yes' num pad response</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.body.title" xml:space="preserve">
+        <source>Start using Vocable to see your most recently used phrases here.</source>
+        <target>Start using Vocable to see your most recently used phrases here.</target>
+        <note>Recents empty state description</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.header.title" xml:space="preserve">
+        <source>No recently used phrases</source>
+        <target>No recently used phrases</target>
+        <note>Recents empty state title</note>
       </trans-unit>
       <trans-unit id="selection_mode.header.title" xml:space="preserve">
         <source>Selection Mode</source>
@@ -639,6 +659,11 @@
       <trans-unit id="preset_user_keypad" xml:space="preserve">
         <source>123</source>
         <target>123</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_user_recents" xml:space="preserve">
+        <source>Recents</source>
+        <target>Recents</target>
         <note/>
       </trans-unit>
     </body>

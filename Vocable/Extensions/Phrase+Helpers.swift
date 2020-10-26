@@ -21,7 +21,6 @@ extension Phrase {
         let phrase = Phrase.fetchOrCreate(in: context, matching: newIdentifier)
         phrase.isUserGenerated = true
         phrase.creationDate = Date()
-        phrase.lastSpokenDate = Date()
         phrase.utterance = text
         phrase.languageCode = AppConfig.activePreferredLanguageCode
         phrase.category = category

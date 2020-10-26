@@ -26,8 +26,6 @@ class SettingsScreen {
     let alertContinueButton = XCUIApplication().buttons["Continue Editing"]
     let alertDiscardButton = XCUIApplication().buttons["Discard"]
     let alertDeleteButton = XCUIApplication().buttons["Delete"]
-    
-    
    
     func openCategorySettings(category: String) {
         if otherElements.containing(.staticText, identifier: category).element.exists {
@@ -56,7 +54,6 @@ class SettingsScreen {
            otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
         }
     }
-    
     
     func navigateToCategory(category: String){
         while !otherElements.containing(.staticText, identifier: category).element.exists {

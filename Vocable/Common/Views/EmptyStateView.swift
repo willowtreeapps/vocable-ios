@@ -27,7 +27,42 @@ private class EmptyStateButton: GazeableButton {
 
 class EmptyStateView: UIView {
 
-    typealias ButtonConfiguration = (title: String, action: () -> Void)
+    enum EmptyStateType {
+        case recents
+        case phraseCollection
+
+        var title: NSAttributedString {
+            switch self {
+            case.recents:
+                let title = NSLocalizedString("recents_empty_state.header.title", comment: "Recents empty state title")
+                return NSAttributedString(string: title, attributes: [.font: UIFont.boldSystemFont(ofSize: 24), .foregroundColor: UIColor.defaultTextColor])
+            case .phraseCollection:
+                let title = NSLocalizedString("empty_state.header.title", comment: "Empty state title")
+                return NSAttributedString(string: title)
+            }
+        }
+
+        var description: NSAttributedString? {
+            switch self {
+            case .recents:
+                let description = NSLocalizedString("recents_empty_state.body.title", comment: "Recents empty state description")
+                return NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
+            default:
+                return nil
+            }
+        }
+
+        var buttonTitle: String? {
+            switch self {
+            case .recents:
+                return nil
+            default:
+                return NSLocalizedString("empty_state.button.title", comment: "Empty state Add Phrase button title")
+            }
+        }
+    }
+
+    typealias ButtonConfiguration = (() -> Void)
 
     var image: UIImage? {
         get {
@@ -35,55 +70,50 @@ class EmptyStateView: UIView {
         }
         set {
             imageView.image = newValue
-
-            if newValue != nil {
-                stackView.insertArrangedSubview(imageView, at: 0)
-            } else {
-                stackView.removeArrangedSubview(imageView)
-                imageView.removeFromSuperview()
-            }
+            updateStackView()
         }
     }
 
-    var text: String? {
+    var titleAttributedText: NSAttributedString? {
         get {
-            label.text
+            titleLabel.attributedText
         }
         set {
-            label.text = newValue
+            titleLabel.attributedText = newValue
         }
     }
 
-    var attributedText: NSAttributedString? {
+    var descriptionAttributedText: NSAttributedString? {
         get {
-            label.attributedText
+            descriptionLabel.attributedText
         }
         set {
-            label.attributedText = newValue
+            descriptionLabel.attributedText = newValue
+            updateStackView()
         }
     }
 
     private let imageView = UIImageView(frame: .zero)
-    private let label = UILabel(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+    private let descriptionLabel = UILabel(frame: .zero)
     private let button = EmptyStateButton(frame: .zero)
-    private let action: ButtonConfiguration?
+    private var action: ButtonConfiguration?
 
-    private lazy var stackView = UIStackView(arrangedSubviews: [self.imageView, self.label])
+    private lazy var stackView = UIStackView(arrangedSubviews: [self.imageView, self.titleLabel, self.descriptionLabel])
 
-    init(text: String, image: UIImage? = nil, action: ButtonConfiguration? = nil) {
+    init(type: EmptyStateType, action: ButtonConfiguration? = nil) {
         self.action = action
         super.init(frame: .zero)
-        self.text = text
-        self.image = image
-        commonInit()
-    }
 
-    init(attributedText: NSAttributedString, action: ButtonConfiguration? = nil) {
-        self.action = action
-        super.init(frame: .zero)
-        self.text = nil
-        self.image = nil
-        self.attributedText = attributedText
+        switch type {
+        case .recents:
+            imageView.image = UIImage(named: "recents")
+            titleAttributedText = type.title
+            descriptionAttributedText = type.description
+        case .phraseCollection:
+            titleAttributedText = type.title
+        }
+
         commonInit()
     }
 
@@ -102,11 +132,13 @@ class EmptyStateView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .center
 
-        if let action = action {
+        if action != nil {
             let font = UIFont.boldSystemFont(ofSize: 18)
-            let attributed = NSAttributedString(string: action.title,
-                                                attributes: [.font: font, .foregroundColor: UIColor.defaultTextColor])
-            button.setAttributedTitle(attributed, for: .normal)
+            if let title = EmptyStateType.phraseCollection.buttonTitle {
+                let attributed = NSAttributedString(string: title,
+                                                    attributes: [.font: font, .foregroundColor: UIColor.defaultTextColor])
+                button.setAttributedTitle(attributed, for: .normal)
+            }
             button.addTarget(self,
                              action: #selector(handleButton(_:)),
                              for: .primaryActionTriggered)
@@ -116,10 +148,8 @@ class EmptyStateView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.topAnchor),
             stackView.leftAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leftAnchor),
             stackView.rightAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.rightAnchor),
-            stackView.bottomAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.bottomAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
@@ -127,15 +157,16 @@ class EmptyStateView: UIView {
         let color = UIColor.defaultTextColor
         imageView.tintColor = color
 
-        label.textColor = color
-        label.textAlignment = .center
-        label.numberOfLines = 0
+        titleLabel.textColor = color
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
 
         NSLayoutConstraint.activate([
-            label.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor)
+            titleLabel.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor)
         ])
 
         updateContentForCurrentTraitCollection()
+        updateStackView()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -146,13 +177,38 @@ class EmptyStateView: UIView {
     private func updateContentForCurrentTraitCollection() {
 
         if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
-            label.font = .boldSystemFont(ofSize: 28)
+            titleLabel.font = .boldSystemFont(ofSize: 28)
         } else {
-            label.font = .boldSystemFont(ofSize: 20)
+            titleLabel.font = .boldSystemFont(ofSize: 20)
         }
     }
 
     @objc private func handleButton(_ sender: GazeableButton) {
-        action?.action()
+        if let action = action {
+            action()
+        }
+    }
+
+    private func updateStackView() {
+        if imageView.image != nil {
+            stackView.insertArrangedSubview(imageView, at: 0)
+        } else {
+            stackView.removeArrangedSubview(imageView)
+            imageView.removeFromSuperview()
+        }
+
+        if descriptionLabel.text != nil {
+            stackView.insertSubview(descriptionLabel, belowSubview: titleLabel)
+        } else {
+            stackView.removeArrangedSubview(descriptionLabel)
+            descriptionLabel.removeFromSuperview()
+        }
+
+        if descriptionLabel.attributedText != nil {
+            stackView.insertSubview(descriptionLabel, belowSubview: titleLabel)
+        } else {
+            stackView.removeArrangedSubview(descriptionLabel)
+            descriptionLabel.removeFromSuperview()
+        }
     }
 }

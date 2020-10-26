@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -110,6 +111,20 @@
             <point key="canvasLocation" x="1681.1594202898552" y="-14.732142857142856"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="Ieb-WK-NlS">
+            <size key="intrinsicContentSize" width="18.5" height="22"/>
+        </designable>
+        <designable name="NvG-PJ-EHy">
+            <size key="intrinsicContentSize" width="26" height="22"/>
+        </designable>
+        <designable name="PfR-1l-Qp7">
+            <size key="intrinsicContentSize" width="12.5" height="22"/>
+        </designable>
+        <designable name="yIe-C4-EHn">
+            <size key="intrinsicContentSize" width="18.5" height="22"/>
+        </designable>
+    </designables>
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>

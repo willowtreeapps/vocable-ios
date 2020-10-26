@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yUp-dU-mBF">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yUp-dU-mBF">
+    <device id="ipad11_0rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,14 +14,14 @@
             <objects>
                 <viewController id="yUp-dU-mBF" customClass="RootViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gXE-mI-utM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YZa-3u-zGZ" userLabel="Text Container Stack View">
-                                <rect key="frame" x="20" y="44" width="374" height="124"/>
+                                <rect key="frame" x="20" y="0.0" width="1154" height="110"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J42-u9-ywg">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="68"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="930" height="110"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="68" id="lAv-Xu-XWF"/>
                                         </constraints>
@@ -45,10 +46,10 @@
                                         </variation>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1OT-dF-ssX" userLabel="Navigation Buttons Stack View">
-                                        <rect key="frame" x="0.0" y="76" width="374" height="48"/>
+                                        <rect key="frame" x="938" y="0.0" width="216" height="110"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abu-M3-qXM" userLabel="Keyboard Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="183" height="48"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="104" height="110"/>
                                                 <color key="tintColor" name="DefaultFontColor"/>
                                                 <state key="normal" image="keyboard" catalog="system">
                                                     <color key="titleColor" name="DefaultFontColor"/>
@@ -58,7 +59,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EnH-qh-EMS" userLabel="Settings Button" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                                <rect key="frame" x="191" y="0.0" width="183" height="48"/>
+                                                <rect key="frame" x="112" y="0.0" width="104" height="110"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="61" id="uZE-bU-gjN">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="104"/>
@@ -101,7 +102,7 @@
                                 <variation key="widthClass=regular" axis="horizontal"/>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="duu-pz-FR0">
-                                <rect key="frame" x="20" y="176" width="374" height="48"/>
+                                <rect key="frame" x="20" y="118" width="1154" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="3at-Br-903">
                                         <variation key="heightClass=regular-widthClass=regular" constant="110"/>
@@ -112,6 +113,7 @@
                                 </connections>
                             </containerView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="gns-yT-Ewt"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="YZa-3u-zGZ" firstAttribute="height" secondItem="duu-pz-FR0" secondAttribute="height" id="KoW-Oy-V25"/>
@@ -122,7 +124,6 @@
                             <constraint firstItem="duu-pz-FR0" firstAttribute="top" secondItem="YZa-3u-zGZ" secondAttribute="bottom" constant="8" id="pmR-lh-rWw"/>
                             <constraint firstItem="YZa-3u-zGZ" firstAttribute="leading" secondItem="gXE-mI-utM" secondAttribute="leadingMargin" id="rfh-em-47L"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="gns-yT-Ewt"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="KoW-Oy-V25"/>
@@ -149,11 +150,11 @@
             <objects>
                 <viewController id="33R-xW-UrQ" customClass="CategoriesCarouselViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ysz-No-obO">
-                        <rect key="frame" x="0.0" y="0.0" width="374" height="48"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1154" height="110"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fb7-Uu-X9X" userLabel="Left Chevron" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                <rect key="frame" x="0.0" y="0.0" width="104" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="4bS-Hn-9Cw">
                                         <variation key="heightClass=regular-widthClass=regular" constant="104"/>
@@ -175,10 +176,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIs-oB-LmA" userLabel="Collection View Container">
-                                <rect key="frame" x="48" y="0.0" width="278" height="48"/>
+                                <rect key="frame" x="104" y="0.0" width="946" height="110"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4Nn-jU-gEe" customClass="CarouselGridCollectionView" customModule="Vocable" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="278" height="48"/>
+                                        <rect key="frame" x="8" y="0.0" width="930" height="110"/>
                                         <color key="backgroundColor" name="Background"/>
                                         <collectionViewLayout key="collectionViewLayout" id="N88-SP-98N" customClass="CarouselGridLayout" customModule="Vocable" customModuleProvider="target"/>
                                         <cells/>
@@ -197,7 +198,7 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdi-sC-FYx" userLabel="Right Chevron" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="326" y="0.0" width="48" height="48"/>
+                                <rect key="frame" x="1050" y="0.0" width="104" height="110"/>
                                 <color key="tintColor" name="DefaultFontColor"/>
                                 <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                 <state key="normal" image="chevron.right" catalog="system">
@@ -208,6 +209,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ymf-ZS-1dZ"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="WIs-oB-LmA" firstAttribute="leading" secondItem="Fb7-Uu-X9X" secondAttribute="trailing" id="1lS-uE-Rd1"/>
@@ -222,7 +224,6 @@
                             <constraint firstItem="Fb7-Uu-X9X" firstAttribute="top" secondItem="ysz-No-obO" secondAttribute="top" id="qPj-Wf-DaN"/>
                             <constraint firstItem="kdi-sC-FYx" firstAttribute="leading" secondItem="WIs-oB-LmA" secondAttribute="trailing" id="wIw-nR-4TS"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ymf-ZS-1dZ"/>
                     </view>
                     <connections>
                         <outlet property="backChevron" destination="Fb7-Uu-X9X" id="o9e-Kt-i5m"/>
@@ -236,11 +237,25 @@
             <point key="canvasLocation" x="667" y="-27"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="Abu-M3-qXM">
+            <size key="intrinsicContentSize" width="25" height="22"/>
+        </designable>
+        <designable name="EnH-qh-EMS">
+            <size key="intrinsicContentSize" width="38" height="38"/>
+        </designable>
+        <designable name="Fb7-Uu-X9X">
+            <size key="intrinsicContentSize" width="28.5" height="38"/>
+        </designable>
+        <designable name="kdi-sC-FYx">
+            <size key="intrinsicContentSize" width="28.5" height="38"/>
+        </designable>
+    </designables>
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="keyboard" catalog="system" width="128" height="70"/>
+        <image name="keyboard" catalog="system" width="128" height="79"/>
         <namedColor name="Background">
             <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -61,7 +61,7 @@ class MainScreenTests: BaseTest {
     
     func testCustonCategoryPagination() {
         let customCategory = "Paginationtest"
-        let addedCustomCategory = "8. "+customCategory
+        let addedCustomCategory = "9. "+customCategory
         // Adding custom category via Settings screen at it is unknown yet whether we want to implment via keyboard screen.
         settingsScreen.navigateToSettingsCategoryScreen()
     
@@ -96,7 +96,6 @@ class MainScreenTests: BaseTest {
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 2")
         XCTAssertTrue(mainScreen.paginationRightButton.isEnabled)
         XCTAssertTrue(mainScreen.paginationLeftButton.isEnabled)
-
         
         mainScreen.paginationRightButton.tap()
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 2 of 2")
@@ -105,7 +104,6 @@ class MainScreenTests: BaseTest {
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 2")
         mainScreen.paginationLeftButton.tap()
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 2 of 2")
-
         
         // Delete a phrase and verify pagination.
         settingsScreen.navigateToSettingsCategoryScreen()
@@ -113,20 +111,17 @@ class MainScreenTests: BaseTest {
         customCategoriesScreen.categoriesPageDeletePhraseButton.firstMatch.tap()
         settingsScreen.alertDeleteButton.tap()
         
-        
         // Navigate to home screen and verify page numbers
         settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 1")
         XCTAssertFalse(mainScreen.paginationLeftButton.isEnabled)
         XCTAssertFalse(mainScreen.paginationRightButton.isEnabled)
         
-        
         // Hide new category to Reset state until delete functionality is implemented:
         settingsScreen.navigateToSettingsCategoryScreen()
         settingsScreen.navigateToCategory(category: addedCustomCategory)
         settingsScreen.toggleHideShowCategory(category: addedCustomCategory, toggle: "Hide")
     }
-
     
     private func verifyGivenPhrasesDisplay(setOfPhrases: [String]) {
         for phrase in setOfPhrases {

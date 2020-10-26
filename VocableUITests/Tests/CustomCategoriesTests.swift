@@ -8,17 +8,13 @@
 
 import XCTest
 
-
 class CustomCategoriesTest: BaseTest {
     let customCategory = "Createnewcategory"
-
 
     func testAddNewPhrase() {
         let customPhrase = "ddingcustomcategoryphrasetest"
         let confirmationAlert = "Are you sure? Going back before saving will clear any edits made."
-        let createdCustomCategory = ("8. "+customCategory)
-
-        
+        let createdCustomCategory = ("9. "+customCategory)
         
         // Add a new Category and navigate into it
         settingsScreen.navigateToSettingsCategoryScreen()
@@ -49,10 +45,10 @@ class CustomCategoriesTest: BaseTest {
         XCTAssert(mainScreen.isTextDisplayed("A"+customPhrase), "Expected the phrase \("A"+customPhrase) to be displayed")
     }
 
-    func testCustomPhraseEdit(){
+    func testCustomPhraseEdit() {
     // This test builds off of the last test.
         let customPhrase = "Addingcustomcategoryphrasetest"
-        let createdCustomCategory = ("8. "+customCategory)
+        let createdCustomCategory = ("9. "+customCategory)
 
         // Navigate to Custom Category
         settingsScreen.navigateToSettingsCategoryScreen()
@@ -68,7 +64,7 @@ class CustomCategoriesTest: BaseTest {
     func testDeleteCustomPhrase(){
        // This test builds off of the last test.
            let customPhrase = "Test"
-           let createdCustomCategory = ("8. "+customCategory)
+           let createdCustomCategory = ("9. "+customCategory)
 
            // Navigate to custom category
            settingsScreen.navigateToSettingsCategoryScreen()
@@ -82,7 +78,7 @@ class CustomCategoriesTest: BaseTest {
     func testDuplicatePhrasesInDifferentCategories(){
         // This test builds off of the last test.
 
-        let createdCustomCategory = ("8. "+customCategory)
+        let createdCustomCategory = ("9. "+customCategory)
         let customCategoryTwo = "Testb"
         let customPhrase = "Testa"
 
@@ -98,7 +94,7 @@ class CustomCategoriesTest: BaseTest {
         customCategoriesScreen.createCustomCategory(categoryName: customCategoryTwo)
         
         // Add an existing custom phrase
-        settingsScreen.openCategorySettings(category: "9. "+customCategoryTwo)
+        settingsScreen.openCategorySettings(category: "10. "+customCategoryTwo)
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText(customPhrase)
         keyboardScreen.checkmarkAddButton.tap()
@@ -114,20 +110,19 @@ class CustomCategoriesTest: BaseTest {
         
         // Go back to the other category
         settingsScreen.leaveCategoryDetailButton.tap()
-        settingsScreen.openCategorySettings(category: "9. "+customCategoryTwo)
+        settingsScreen.openCategorySettings(category: "10. "+customCategoryTwo)
         XCTAssert(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to be displayed")
         
         // Cleanup: Hide categories for now until delete feature is implemented so Automation tests pass:
         settingsScreen.leaveCategoryDetailButton.tap()
-        settingsScreen.toggleHideShowCategory(category: "8. "+customCategory, toggle: "Hide")
-        settingsScreen.toggleHideShowCategory(category: "8. "+customCategoryTwo, toggle: "Hide")
+        settingsScreen.toggleHideShowCategory(category: "9. "+customCategory, toggle: "Hide")
+        settingsScreen.toggleHideShowCategory(category: "9. "+customCategoryTwo, toggle: "Hide")
         
     }
     
     func testPagination(){
         let customCategoryThree = "Testc"
-        let createdCustomCategory = ("8. "+customCategoryThree)
-        
+        let createdCustomCategory = ("9. "+customCategoryThree)
         
         settingsScreen.navigateToSettingsCategoryScreen()
         
@@ -144,7 +139,6 @@ class CustomCategoriesTest: BaseTest {
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 1")
         XCTAssertFalse(mainScreen.paginationLeftButton.isEnabled)
         XCTAssertFalse(mainScreen.paginationRightButton.isEnabled)
-        
         
         customCategoriesScreen.addCustomPhrases(numberOfPhrases: 1)
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 2")
