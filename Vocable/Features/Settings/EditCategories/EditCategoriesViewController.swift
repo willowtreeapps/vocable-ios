@@ -71,13 +71,20 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
             return button
         }()
 
-        navigationBar.rightButton = {
-            let button = GazeableButton(frame: .zero)
-            button.setImage(UIImage(systemName: "plus"), for: .normal)
-            button.accessibilityIdentifier = "settingsCategory.addCategoryButton"
-            button.addTarget(self, action: #selector(addButtonPressed), for: .primaryActionTriggered)
-            return button
-        }()
+//        navigationBar.rightButton = {
+//            let button = GazeableButton(frame: .zero)
+//            button.setImage(UIImage(systemName: "plus"), for: .normal)
+//            button.accessibilityIdentifier = "settingsCategory.addCategoryButton"
+//            button.addTarget(self, action: #selector(addButtonPressed), for: .primaryActionTriggered)
+//            return button
+//        }()
+
+        let button = GazeableButton(frame: .zero)
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.accessibilityIdentifier = "settingsCategory.addCategoryButton"
+        button.addTarget(self, action: #selector(addButtonPressed), for: .primaryActionTriggered)
+
+        navigationBar.rightButtonsStackView = UIStackView(arrangedSubviews: [button])
     }
 
     private func setupCollectionView() {

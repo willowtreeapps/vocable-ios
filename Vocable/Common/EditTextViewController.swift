@@ -78,7 +78,8 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
         confirmEditButton.isEnabled = false
 
         navigationBar.leftButton = dismissButton
-        navigationBar.rightButton = confirmEditButton
+//        navigationBar.rightButton = confirmEditButton
+        navigationBar.rightButtonsStackView = UIStackView(arrangedSubviews: [confirmEditButton])
 
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.accessibilityIdentifier = "keyboard.textView"

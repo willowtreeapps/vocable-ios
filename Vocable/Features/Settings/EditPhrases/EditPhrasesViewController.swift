@@ -58,13 +58,25 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
     private func setupNavigationBar() {
         navigationBar.title = category.name
-        navigationBar.rightButton = {
-            let button = GazeableButton(frame: .zero)
-            button.setImage(UIImage(systemName: "plus"), for: .normal)
-            button.accessibilityIdentifier = "settingsCategory.addPhraseButton"
-            button.addTarget(self, action: #selector(addPhrasePressed), for: .primaryActionTriggered)
-            return button
-        }()
+//        navigationBar.rightButton = {
+//            let button = GazeableButton(frame: .zero)
+//            button.setImage(UIImage(systemName: "plus"), for: .normal)
+//            button.accessibilityIdentifier = "settingsCategory.addPhraseButton"
+//            button.addTarget(self, action: #selector(addPhrasePressed), for: .primaryActionTriggered)
+//            return button
+//        }()
+
+        let button = GazeableButton(frame: .zero)
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.accessibilityIdentifier = "settingsCategory.addPhraseButton"
+        button.addTarget(self, action: #selector(addPhrasePressed), for: .primaryActionTriggered)
+
+        let deleteButton = GazeableButton(frame: .zero)
+        deleteButton.setImage(UIImage(systemName: "plus"), for: .normal)
+//        button.accessibilityIdentifier = "settingsCategory.deletePhraseButton"
+//        button.addTarget(self, action: #selector(addPhrasePressed), for: .primaryActionTriggered)
+
+        navigationBar.rightButtonsStackView = UIStackView(arrangedSubviews: [button, deleteButton])
     }
 
     private func setupCollectionView() {
