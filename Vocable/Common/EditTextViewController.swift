@@ -79,7 +79,7 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
 
         navigationBar.leftButton = dismissButton
 //        navigationBar.rightButton = confirmEditButton
-        navigationBar.rightButtonsStackView = UIStackView(arrangedSubviews: [confirmEditButton])
+        navigationBar.rightButtons = [confirmEditButton]
 
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.accessibilityIdentifier = "keyboard.textView"
@@ -172,8 +172,8 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
         let continueButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
                                                     comment: "Continue editing alert action title")
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
-        alert.addAction(GazeableAlertAction(title: continueButtonTitle, style: .bold))
+        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
+        alert.addAction(GazeableAlertAction(title: discardButtonTitle, style: .destructive, handler: discardChangesAction))
         self.present(alert, animated: true)
     }
     

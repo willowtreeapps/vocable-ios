@@ -11,10 +11,10 @@
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "Cancel";
 
 /* Delete category alert action button title */
-"category_editor.alert.delete_category_confirmation.button.remove.title" = "Remove";
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "Delete";
 
 /* Delete category confirmation alert title */
-"category_editor.alert.delete_category_confirmation.title" = "Deleted categories cannot be recovered.";
+"category_editor.alert.delete_category_confirmation.title" = "Are you sure you want to delete? Removed categories cannot be restored.";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "Changes saved";

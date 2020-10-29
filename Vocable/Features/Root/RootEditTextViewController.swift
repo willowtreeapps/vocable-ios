@@ -36,7 +36,7 @@ class RootEditTextViewController: EditTextViewController {
         super.viewDidLoad()
         shouldWarnOnDismiss = false
 //        navigationBar.rightButton = favoriteButton
-        navigationBar.rightButtonsStackView = UIStackView(arrangedSubviews: [favoriteButton])
+        navigationBar.rightButtons = [favoriteButton]
         $text.receive(on: DispatchQueue.main).sink { [weak self] newText in
             self?.updateFavoriteButton(with: self?.normalizedText(from: newText))
         }.store(in: &disposables)

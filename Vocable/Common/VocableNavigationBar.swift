@@ -22,12 +22,6 @@ private class ContentView: UIView {
         }
     }
 
-//    var rightButton: GazeableButton? {
-//        didSet {
-//            updateVolatileView(new: rightButton, old: oldValue)
-//        }
-//    }
-
     var rightButtonsStackView: UIStackView? {
         didSet {
             // initialize
@@ -42,9 +36,9 @@ private class ContentView: UIView {
         guard oldValue != newValue else {
             return
         }
-        if let newButton = newValue {
-            newButton.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(newButton)
+        if let newView = newValue {
+            newView.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(newView)
         }
         oldValue?.removeFromSuperview()
         updateContentViews()
@@ -59,8 +53,6 @@ private class ContentView: UIView {
 
         layoutMargins = .zero
         leftButton?.contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
-//        rightButton?.contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
-        // probably need to do something for the stackview
         setNeedsUpdateConstraints()
     }
 
@@ -125,23 +117,7 @@ private class ContentView: UIView {
             }
         }
 
-        // Right button
-//        if let rightButton = rightButton {
-//            constraints += [
-//                rightButton.topAnchor.constraint(equalTo: layoutMargins.topAnchor),
-//                rightButton.bottomAnchor.constraint(equalTo: layoutMargins.bottomAnchor),
-//                rightButton.trailingAnchor.constraint(equalTo: layoutMargins.trailingAnchor),
-//                rightButton.widthAnchor.constraint(equalToConstant: buttonSize.width),
-//                rightButton.heightAnchor.constraint(equalToConstant: buttonSize.height)
-//            ]
-//
-//            if let titleView = titleView {
-//                constraints += [
-//                    rightButton.leadingAnchor.constraint(greaterThanOrEqualTo: titleView.trailingAnchor, constant: buttonSpacing)
-//                ]
-//            }
-//        }
-
+        // Right StackView
         if let stackView = rightButtonsStackView {
 
             rightButtonsStackView?.spacing = 8
@@ -226,23 +202,11 @@ class VocableNavigationBar: UIView {
         }
     }
 
-//    var rightButton: GazeableButton? {
-//        get {
-//            contentView.rightButton
-//        }
-//        set {
-//            contentView.rightButton = newValue
-//            updateSubviewAppearances()
-//        }
-//    }
-
-    var rightButtonsStackView: UIStackView? {
-        get {
-            contentView.rightButtonsStackView
-        }
-        set {
-            contentView.rightButtonsStackView = newValue
-            updateSubviewAppearances()
+    var rightButtons: [GazeableButton]? {
+        didSet {
+            if let buttons = rightButtons {
+                contentView.rightButtonsStackView = UIStackView(arrangedSubviews: buttons)
+            }
         }
     }
 
@@ -283,11 +247,8 @@ class VocableNavigationBar: UIView {
         leftButton?.backgroundColor = backgroundColor
         leftButton?.isOpaque = true
 
-//        rightButton?.backgroundColor = backgroundColor
-//        rightButton?.isOpaque = true
-
-        rightButtonsStackView?.backgroundColor = backgroundColor
-        rightButtonsStackView?.isOpaque = true
+        contentView.rightButtonsStackView?.backgroundColor = backgroundColor
+        contentView.rightButtonsStackView?.isOpaque = true
 
         titleView?.backgroundColor = backgroundColor
         titleView?.isOpaque = true

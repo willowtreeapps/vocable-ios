@@ -58,13 +58,6 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
     private func setupNavigationBar() {
         navigationBar.title = category.name
-//        navigationBar.rightButton = {
-//            let button = GazeableButton(frame: .zero)
-//            button.setImage(UIImage(systemName: "plus"), for: .normal)
-//            button.accessibilityIdentifier = "settingsCategory.addPhraseButton"
-//            button.addTarget(self, action: #selector(addPhrasePressed), for: .primaryActionTriggered)
-//            return button
-//        }()
 
         let button = GazeableButton(frame: .zero)
         button.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -72,11 +65,18 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         button.addTarget(self, action: #selector(addPhrasePressed), for: .primaryActionTriggered)
 
         let deleteButton = GazeableButton(frame: .zero)
-        deleteButton.setImage(UIImage(systemName: "plus"), for: .normal)
-//        button.accessibilityIdentifier = "settingsCategory.deletePhraseButton"
-//        button.addTarget(self, action: #selector(addPhrasePressed), for: .primaryActionTriggered)
+        deleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
+        deleteButton.accessibilityIdentifier = "settingsCategory.deleteCategoryButton"
+        deleteButton.addTarget(self, action: #selector(handleCategoryDeletionButton), for: .primaryActionTriggered)
 
-        navigationBar.rightButtonsStackView = UIStackView(arrangedSubviews: [button, deleteButton])
+        var buttons = [button]
+
+        // Don't add the delete button to My Sayings category
+        if category.identifier != Category.Identifier.userFavorites {
+            buttons.append(deleteButton)
+        }
+        
+        navigationBar.rightButtons = buttons
     }
 
     private func setupCollectionView() {
@@ -173,6 +173,39 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         present(viewController, animated: true)
     }
 
+    @objc private func handleCategoryDeletionButton(_ sender: UIButton) {
+        func deleteAction() {
+            self.deleteCategory(sender)
+        }
+
+        let title = NSLocalizedString("category_editor.alert.delete_category_confirmation.title",
+                                      comment: "Delete category confirmation alert title")
+        let deleteButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.remove.title",
+                                                  comment: "Delete category alert action button title")
+        let cancelButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.cancel.title",
+                                                  comment: "Delete phrase alert cancel button title")
+
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
+        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, style: .destructive, handler: deleteAction))
+        self.present(alert, animated: true)
+    }
+
+    private func deleteCategory(_ sender: UIButton) {
+        // delete the category
+        let context = NSPersistentContainer.shared.viewContext
+        context.delete(category)
+
+        do {
+            try context.save()
+            navigationController?.popViewController(animated: true)
+        } catch {
+            // put an alert that tells em we couldn't delete the category
+            assertionFailure("Could not save phrase: \(error)")
+        }
+
+    }
+
     @objc private func handleCellDeletionButton(_ sender: UIButton) {
 
         func deleteAction() {
@@ -188,7 +221,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
-        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, handler: deleteAction))
+        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, style: .destructive, handler: deleteAction))
         self.present(alert, animated: true)
     }
 
