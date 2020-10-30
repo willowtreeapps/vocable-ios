@@ -905,7 +905,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# This locates the crashlytics framework downloaded by the SPM in order to execute the included script\n\n\"${PROJECT_DIR}/scripts/run\"../SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# This locates the crashlytics framework downloaded by the SPM in order to execute the included script\n\n\"${PROJECT_DIR}/scripts/run\"\n";
 		};
 		54481D4823E9CBF000ECF249 /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
