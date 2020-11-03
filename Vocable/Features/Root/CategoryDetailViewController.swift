@@ -236,14 +236,14 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
-            _ = Phrase.create(withUserEntry: newText, in: context)
+            _ = Phrase.create(withUserEntry: newText, category: self.category, in: context)
             do {
                 try context.save()
 
                 let alertMessage: String = {
                     let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
-                    let categoryName = Category.userFavoritesCategoryName()
-                    return String.localizedStringWithFormat(format, categoryName)
+                    let categoryName = self.category.name
+                    return String.localizedStringWithFormat(format, categoryName as! CVarArg)
                 }()
 
                 ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
