@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="f0V-FH-tzc" customClass="EditCategoryToggleCollectionViewCell" customModule="Vocable" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="523" height="99"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="HgV-9Q-ihf">
+                <rect key="frame" x="0.0" y="0.0" width="523" height="99"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="an4-x2-fF0">
+                        <rect key="frame" x="16" y="33" width="71.5" height="33.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                        <color key="textColor" name="DefaultFontColor"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                        </variation>
+                    </label>
+                    <switch userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZoC-cN-J0k">
+                        <rect key="frame" x="458" y="34" width="51" height="31"/>
+                    </switch>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="an4-x2-fF0" firstAttribute="leading" secondItem="HgV-9Q-ihf" secondAttribute="leading" constant="16" id="QKt-xu-TNa"/>
+                    <constraint firstItem="ZoC-cN-J0k" firstAttribute="centerY" secondItem="HgV-9Q-ihf" secondAttribute="centerY" id="SV7-wt-lWu"/>
+                    <constraint firstAttribute="trailing" secondItem="ZoC-cN-J0k" secondAttribute="trailing" constant="16" id="VG6-bO-h0c"/>
+                    <constraint firstItem="an4-x2-fF0" firstAttribute="centerY" secondItem="HgV-9Q-ihf" secondAttribute="centerY" id="wtq-7x-7nN"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="523" height="99"/>
+            <connections>
+                <outlet property="showCategorySwitch" destination="ZoC-cN-J0k" id="wrE-Aw-tzJ"/>
+                <outlet property="textLabel" destination="an4-x2-fF0" id="bzH-ua-ng4"/>
+            </connections>
+            <point key="canvasLocation" x="-667.39130434782612" y="-405.46875"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="DefaultFontColor">
+            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
