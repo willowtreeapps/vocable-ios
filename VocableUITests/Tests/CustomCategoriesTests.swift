@@ -61,7 +61,7 @@ class CustomCategoriesTest: BaseTest {
         XCTAssert(mainScreen.isTextDisplayed(customPhrase+"test"), "Expected the phrase \(customPhrase+"test") to be displayed")
     }
     
-    func testDeleteCustomPhrase(){
+    func testDeleteCustomPhrase() {
        // This test builds off of the last test.
            let customPhrase = "Test"
            let createdCustomCategory = ("9. "+customCategory)
@@ -75,7 +75,7 @@ class CustomCategoriesTest: BaseTest {
            XCTAssertFalse(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to not be displayed")
     }
     
-    func testDuplicatePhrasesInDifferentCategories(){
+    func testDuplicatePhrasesInDifferentCategories() {
         // This test builds off of the last test.
 
         let createdCustomCategory = ("9. "+customCategory)
@@ -120,7 +120,7 @@ class CustomCategoriesTest: BaseTest {
         
     }
     
-    func testPagination(){
+    func testPagination() {
         let customCategoryThree = "Testc"
         let createdCustomCategory = ("9. "+customCategoryThree)
         
@@ -164,7 +164,5 @@ class CustomCategoriesTest: BaseTest {
         // Hide category until Delete is implemented
         settingsScreen.leaveCategoryDetailButton.tap()
         settingsScreen.toggleHideShowCategory(category: createdCustomCategory, toggle: "Hide")
-        
-    
     }
 }

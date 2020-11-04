@@ -66,8 +66,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         }
     }
 
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, SettingsItem> = .init(collectionView: collectionView) {
-        (collectionView, indexPath, item) -> UICollectionViewCell in
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, SettingsItem> =
+        .init(collectionView: collectionView) {(collectionView, indexPath, item) -> UICollectionViewCell in
 
         switch item {
         case .categories, .timingSensitivity, .resetAppSettings, .selectionMode:
