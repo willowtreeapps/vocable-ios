@@ -51,11 +51,11 @@ class SingleControlView: UIView {
     
     /// Current value
     var value: Float {
-        set {
-            update(newValue: newValue)
-        }
         get {
             return valueSlider.value
+        }
+        set {
+            update(newValue: newValue)
         }
     }
     

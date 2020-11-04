@@ -55,16 +55,16 @@ class SettingsScreen {
         }
     }
     
-    func navigateToCategory(category: String){
+    func navigateToCategory(category: String) {
         while !otherElements.containing(.staticText, identifier: category).element.exists {
             settingsPageNextButton.tap()
-            if (mainScreen.pageNumber.label.contains("Page 1")){
+            if mainScreen.pageNumber.label.contains("Page 1") {
                 break
             }
         }
     }
     
-    func addCategory(categoryName: String){
+    func addCategory(categoryName: String) {
         settingsPageAddCategoryButton.tap()
         let newCategory = keyboardScreen.randomString(length: 5)
         keyboardScreen.typeText(newCategory)
@@ -76,7 +76,7 @@ class SettingsScreen {
         categoriesButton.tap()
     }
     
-    func navigateToMainScreenFromSettings(from: String){
+    func navigateToMainScreenFromSettings(from: String) {
            switch from {
            case "categoryDetails":
                leaveCategoryDetailButton.tap()
@@ -88,7 +88,7 @@ class SettingsScreen {
            case "settings":
                exitSettingsButton.tap()
            default:
-               break;
+               break
            }
        }
 }

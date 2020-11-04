@@ -23,8 +23,5 @@ final class EditPhrasesCollectionViewCell: VocableCollectionViewCell {
         deleteButton?.accessibilityIdentifier = "categoryPhrase.deleteButton"
         editButton?.backgroundColor = .defaultCellBackgroundColor
         editButton?.accessibilityIdentifier = "categoryPhrase.editButton"
-        
-        
     }
-
 }

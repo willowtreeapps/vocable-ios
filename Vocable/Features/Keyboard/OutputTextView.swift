@@ -103,11 +103,11 @@ class OutputTextView: UITextView {
     }
 
     @IBInspectable var isCursorHidden: Bool {
-        set {
-            beamView.isHidden = newValue
-        }
         get {
             beamView.isHidden
+        }
+        set {
+            beamView.isHidden = newValue
         }
     }
 
