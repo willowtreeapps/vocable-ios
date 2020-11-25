@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yUp-dU-mBF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yUp-dU-mBF">
     <device id="ipad11_0rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -239,16 +239,16 @@
     </scenes>
     <designables>
         <designable name="Abu-M3-qXM">
-            <size key="intrinsicContentSize" width="25" height="22"/>
+            <size key="intrinsicContentSize" width="67.5" height="50"/>
         </designable>
         <designable name="EnH-qh-EMS">
-            <size key="intrinsicContentSize" width="38" height="38"/>
+            <size key="intrinsicContentSize" width="61" height="60"/>
         </designable>
         <designable name="Fb7-Uu-X9X">
-            <size key="intrinsicContentSize" width="28.5" height="38"/>
+            <size key="intrinsicContentSize" width="43" height="52"/>
         </designable>
         <designable name="kdi-sC-FYx">
-            <size key="intrinsicContentSize" width="28.5" height="38"/>
+            <size key="intrinsicContentSize" width="43" height="52"/>
         </designable>
     </designables>
     <resources>

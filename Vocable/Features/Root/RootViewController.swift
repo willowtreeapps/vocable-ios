@@ -60,6 +60,10 @@ import CoreData
         super.prepare(for: segue, sender: sender)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        present(TrackingOnboardingViewController(), animated: true, completion: nil)
+    }
+
     @IBAction private func settingsButtonSelected(_ sender: Any) {
         let navigationController = VocableNavigationController(rootViewController: SettingsViewController())
         self.present(navigationController, animated: true)
