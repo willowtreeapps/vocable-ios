@@ -22,6 +22,8 @@ import CoreData
     private var categoryCarousel: CategoriesCarouselViewController!
     private var disposables = Set<AnyCancellable>()
 
+    private var presented = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addLayoutGuide(contentLayoutGuide)
@@ -39,7 +41,7 @@ import CoreData
         ])
 
         outputLabel.text = NSLocalizedString("main_screen.textfield_placeholder.default",
-        comment: "Select something below to speak Hint Text")
+                                             comment: "Select something below to speak Hint Text")
 
         categoryCarousel.$categoryObjectID
             .removeDuplicates()
@@ -61,7 +63,12 @@ import CoreData
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        present(TrackingOnboardingViewController(), animated: true, completion: nil)
+        if !presented {
+            let vc = UIStoryboard(name: "TrackingOnboarding", bundle: nil).instantiateInitialViewController()!
+            present(vc, animated: true, completion: { [weak self] in
+                self?.presented = true
+            })
+        }
     }
 
     @IBAction private func settingsButtonSelected(_ sender: Any) {
@@ -128,7 +135,8 @@ import CoreData
         }
 
         func finalize(_ didFinish: Bool) {
-            for inactiveViewController in childrenToDisposeOf {                inactiveViewController.removeFromParent()
+            for inactiveViewController in childrenToDisposeOf {
+                inactiveViewController.removeFromParent()
                 inactiveViewController.view.removeFromSuperview()
             }
             self.contentViewController = viewController

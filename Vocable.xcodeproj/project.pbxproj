@@ -22,6 +22,8 @@
 		274540282460DD0F0056EF98 /* Presets.strings in Resources */ = {isa = PBXBuildFile; fileRef = 274540262460DD0F0056EF98 /* Presets.strings */; };
 		2745402B2460DD490056EF98 /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2745402A2460DD490056EF98 /* Presets.swift */; };
 		2745402E2460DD760056EF98 /* presets.json in Resources */ = {isa = PBXBuildFile; fileRef = 2745402D2460DD760056EF98 /* presets.json */; };
+		2F02E133257579E2004ABAAD /* TrackingOnboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F02E132257579E2004ABAAD /* TrackingOnboarding.storyboard */; };
+		2F02E13825758325004ABAAD /* OnboardingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F02E13725758325004ABAAD /* OnboardingEngine.swift */; };
 		2FF5F617256EAEBA00E69D5E /* TrackingOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF5F616256EAEBA00E69D5E /* TrackingOnboardingViewController.swift */; };
 		2FF5F61F256EDC8000E69D5E /* QuarterCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF5F61E256EDC8000E69D5E /* QuarterCircle.swift */; };
 		2FF5F624256EF5B000E69D5E /* UIImage+Rotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF5F623256EF5B000E69D5E /* UIImage+Rotations.swift */; };
@@ -186,6 +188,8 @@
 		274540292460DD170056EF98 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Presets.strings; sourceTree = "<group>"; };
 		2745402A2460DD490056EF98 /* Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presets.swift; sourceTree = "<group>"; };
 		2745402D2460DD760056EF98 /* presets.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = presets.json; sourceTree = "<group>"; };
+		2F02E132257579E2004ABAAD /* TrackingOnboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TrackingOnboarding.storyboard; sourceTree = "<group>"; };
+		2F02E13725758325004ABAAD /* OnboardingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEngine.swift; sourceTree = "<group>"; };
 		2FF5F616256EAEBA00E69D5E /* TrackingOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingOnboardingViewController.swift; sourceTree = "<group>"; };
 		2FF5F61E256EDC8000E69D5E /* QuarterCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuarterCircle.swift; sourceTree = "<group>"; };
 		2FF5F623256EF5B000E69D5E /* UIImage+Rotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Rotations.swift"; sourceTree = "<group>"; };
@@ -457,6 +461,8 @@
 				2FF5F616256EAEBA00E69D5E /* TrackingOnboardingViewController.swift */,
 				2FF5F61E256EDC8000E69D5E /* QuarterCircle.swift */,
 				2FF5F623256EF5B000E69D5E /* UIImage+Rotations.swift */,
+				2F02E132257579E2004ABAAD /* TrackingOnboarding.storyboard */,
+				2F02E13725758325004ABAAD /* OnboardingEngine.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -863,6 +869,7 @@
 			files = (
 				A9CF2AF5242D4EF1005633A7 /* SensitivityCollectionViewCell.xib in Resources */,
 				718D7FB0241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib in Resources */,
+				2F02E133257579E2004ABAAD /* TrackingOnboarding.storyboard in Resources */,
 				71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */,
 				A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */,
 				A9299C7723F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib in Resources */,
@@ -1040,6 +1047,7 @@
 				6B823BCD23F4ADE30099F65E /* TunningWindow.swift in Sources */,
 				6B005AE3245B057E004919F4 /* VocableCollectionViewController.swift in Sources */,
 				A94720CE241A8D9B00F7B4FF /* PaginationView.swift in Sources */,
+				2F02E13825758325004ABAAD /* OnboardingEngine.swift in Sources */,
 				B838200F23F4B011005A79CD /* VocableCollectionViewCell.swift in Sources */,
 				B8EB51D12409860A00F425A6 /* GazeableAlertViewController.swift in Sources */,
 				A99AF23323FDA8B600BE1184 /* SuggestionCollectionViewCell.swift in Sources */,

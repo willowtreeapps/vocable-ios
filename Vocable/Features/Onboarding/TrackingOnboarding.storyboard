@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NkS-LH-F0u">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tracking Onboarding View Controller-->
+        <scene sceneID="SjJ-4B-c4G">
+            <objects>
+                <viewController id="NkS-LH-F0u" customClass="TrackingOnboardingViewController" customModule="Vocable" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="10t-KN-XU8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FOC-5s-ZHg">
+                                <rect key="frame" x="47" y="363" width="320" height="170.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's learn how tracking works! Slowly move your head until you can point the dot at the top left corner." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pab-vN-0Rl">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="110.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="320" id="FDH-kl-YCd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <color key="textColor" name="DefaultFontColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Lg-IJ-QoM" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                        <rect key="frame" x="88" y="126.5" width="144" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="DLr-cR-MXh"/>
+                                            <constraint firstAttribute="width" constant="144" id="svd-UV-Aoe"/>
+                                        </constraints>
+                                        <state key="normal" title="Skip Tutorial">
+                                            <color key="titleColor" name="DefaultFontColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="skipTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="5S5-1o-gSo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Mft-iw-Awi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="FOC-5s-ZHg" firstAttribute="centerY" secondItem="10t-KN-XU8" secondAttribute="centerY" id="F8g-im-1i1"/>
+                            <constraint firstItem="FOC-5s-ZHg" firstAttribute="centerX" secondItem="10t-KN-XU8" secondAttribute="centerX" id="Jr1-Nq-M6t"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="exitButton" destination="9Lg-IJ-QoM" id="A0K-Ws-0C6"/>
+                        <outlet property="onboardingLabel" destination="Pab-vN-0Rl" id="S6H-AY-M1R"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ors-2B-YEO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="80" y="131"/>
+        </scene>
+    </scenes>
+    <designables>
+        <designable name="9Lg-IJ-QoM">
+            <size key="intrinsicContentSize" width="115" height="38"/>
+        </designable>
+    </designables>
+    <resources>
+        <namedColor name="DefaultFontColor">
+            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

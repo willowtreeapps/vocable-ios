@@ -35,12 +35,14 @@ final class TrackingOnboardingViewController: VocableViewController {
     let trailingTop: GazeableButton = GazeableButton()
     let trailingBottom: GazeableButton = GazeableButton()
 
-    // add a dismiss button in order to skip this onboarding exercise.
+    @IBOutlet weak var exitButton: GazeableButton!
+    @IBOutlet weak var onboardingLabel: UILabel!
+    var onboardingEngine = OnboardingEngine(OnboardingStep.testSteps)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let buttons = [leadingTop, leadingBottom, trailingTop, trailingBottom]
-        // Do any additional setup after loading the view.
+        onboardingLabel.text = onboardingEngine.currentStep?.description
 
         for (key, placement) in ButtonPlacement.allCases.enumerated() {
             let button = buttons[key]
@@ -67,6 +69,10 @@ final class TrackingOnboardingViewController: VocableViewController {
         button.clipsToBounds = true
     }
 
+    @IBAction func skipTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+
     private func setButtonConstraints(button: GazeableButton, placement: ButtonPlacement) {
         var constraints: [NSLayoutConstraint] = []
         switch placement {
@@ -90,6 +96,16 @@ final class TrackingOnboardingViewController: VocableViewController {
     }
 
     @objc private func activatedButton() {
-        print("Gazed upon the button.")
+        guard onboardingEngine.currentStep?.placement != nil else {
+            return
+        }
+        onboardingEngine.nextStep()
+        UIView.transition(with: onboardingLabel, duration: 1.0, options: .transitionCrossDissolve, animations: {
+            self.onboardingLabel.text = self.onboardingEngine.currentStep?.description
+        }, completion: nil)
+
+        if onboardingEngine.currentStep?.placement == nil {
+            exitButton.setTitle("Finish", for: .normal)
+        }
     }
 }
