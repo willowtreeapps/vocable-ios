@@ -46,28 +46,40 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Lk-bf-WQV" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="82" height="38"/>
+                                <rect key="frame" x="0.0" y="44" width="66" height="34"/>
                                 <state key="normal" title="Top Left">
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="leadingTopTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="ivP-3l-Ky5"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7x-Op-ZST" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="321" y="44" width="93" height="38"/>
+                                <rect key="frame" x="337" y="44" width="77" height="34"/>
                                 <state key="normal" title="Top Right">
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="trailingTopTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="YxH-BF-KMo"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpR-79-IcC" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="858" width="111" height="38"/>
+                                <rect key="frame" x="0.0" y="862" width="95" height="34"/>
                                 <state key="normal" title="Bottom Left">
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="leadingBottomTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="X6C-sL-0vq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aow-wI-Bdv" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="292" y="858" width="122" height="38"/>
+                                <rect key="frame" x="308" y="862" width="106" height="34"/>
                                 <state key="normal" title="Bottom Right">
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="trailingBottomTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="pbC-qq-88N"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Mft-iw-Awi"/>
@@ -101,19 +113,19 @@
     </scenes>
     <designables>
         <designable name="2Lk-bf-WQV">
-            <size key="intrinsicContentSize" width="82" height="38"/>
+            <size key="intrinsicContentSize" width="66" height="34"/>
         </designable>
         <designable name="9Lg-IJ-QoM">
-            <size key="intrinsicContentSize" width="115" height="38"/>
+            <size key="intrinsicContentSize" width="99" height="34"/>
         </designable>
         <designable name="C7x-Op-ZST">
-            <size key="intrinsicContentSize" width="93" height="38"/>
+            <size key="intrinsicContentSize" width="77" height="34"/>
         </designable>
         <designable name="FpR-79-IcC">
-            <size key="intrinsicContentSize" width="111" height="38"/>
+            <size key="intrinsicContentSize" width="95" height="34"/>
         </designable>
         <designable name="aow-wI-Bdv">
-            <size key="intrinsicContentSize" width="122" height="38"/>
+            <size key="intrinsicContentSize" width="106" height="34"/>
         </designable>
     </designables>
     <resources>

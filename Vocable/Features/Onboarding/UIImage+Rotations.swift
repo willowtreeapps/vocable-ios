@@ -46,14 +46,13 @@ extension UIImage {
 
 extension UIButton {
     func addArcAnimation(with placement: ButtonPlacement) {
-
         let animation = CABasicAnimation(keyPath: "lineWidth")
         animation.toValue = 3
         animation.fillMode = .forwards
         animation.autoreverses = true
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         animation.duration = 1.0
-        animation.repeatCount = 10
+        animation.repeatCount = 5
 
         var point: CGPoint = CGPoint()
         switch placement {
@@ -67,7 +66,6 @@ extension UIButton {
             point = CGPoint(x: self.bounds.maxX, y: self.bounds.maxY)
         }
 
-        // Animate background image on uibutton
         let shapeLayer = CAShapeLayer()
         self.layer.addSublayer(shapeLayer)
         shapeLayer.strokeColor = UIColor.systemGreen.cgColor
@@ -78,5 +76,10 @@ extension UIButton {
         shapeLayer.path = path.cgPath
         shapeLayer.add(animation, forKey: "customAnimation")
     }
-}
 
+    func removeCustomAnimations() {
+        for layer in self.layer.sublayers ?? [] {
+            layer.removeAnimation(forKey: "customAnimation")
+        }
+    }
+}
