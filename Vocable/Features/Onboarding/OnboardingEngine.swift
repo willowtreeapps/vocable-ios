@@ -38,11 +38,12 @@ struct OnboardingEngine {
         self.steps = steps
     }
 
-    mutating func nextStep() {
+    mutating func nextStep() -> OnboardingStep? {
         guard currentIndex < steps.count else {
-            return
+            return nil
         }
 
         currentIndex += 1
+        return steps[currentIndex]
     }
 }
