@@ -44,27 +44,6 @@ extension UIImage {
     }
 }
 
-extension UIView {
-
-    func rotationFor(placement: ButtonPlacement) {
-        switch placement {
-        case .leadingBottom:
-            self.rotate(radians: 3 * .pi / 2)
-        case .trailingTop:
-            self.rotate(radians: .pi / 2)
-        case .trailingBottom:
-            self.rotate(radians: .pi)
-        default:
-            break
-        }
-    }
-
-    func rotate(radians: CGFloat) {
-        let rotation = self.transform.rotated(by: radians)
-        self.transform = rotation
-    }
-}
-
 extension UIButton {
     func addArcAnimation(with placement: ButtonPlacement) {
 

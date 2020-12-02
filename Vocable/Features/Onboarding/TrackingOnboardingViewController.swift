@@ -8,44 +8,14 @@
 
 import UIKit
 
-enum ButtonPlacement: CaseIterable {
-    case leadingTop
-    case leadingBottom
-    case trailingTop
-    case trailingBottom
-
-    var title: String {
-        switch self {
-        case .leadingTop:
-            return "Top Left"
-        case .leadingBottom:
-            return "Bottom Left"
-        case .trailingTop:
-            return "Top Right"
-        case .trailingBottom:
-            return "Bottom Right"
-        }
-    }
-
-    var clockwise: Bool {
-        switch self {
-        case .leadingTop, .trailingTop:
-            return true
-        case .leadingBottom, .trailingBottom:
-            return false
-        }
-    }
-}
-
 final class TrackingOnboardingViewController: VocableViewController {
-
-    let leadingTop: GazeableButton = GazeableButton()
-    let leadingBottom: GazeableButton  = GazeableButton()
-    let trailingTop: GazeableButton = GazeableButton()
-    let trailingBottom: GazeableButton = GazeableButton()
-
+    @IBOutlet weak var leadingTop: GazeableButton!
+    @IBOutlet weak var trailingTop: GazeableButton!
+    @IBOutlet weak var leadingBottom: GazeableButton!
+    @IBOutlet weak var trailingBottom: GazeableButton!
     @IBOutlet weak var exitButton: GazeableButton!
     @IBOutlet weak var onboardingLabel: UILabel!
+
     var onboardingEngine = OnboardingEngine(OnboardingStep.testSteps)
 
     private var buttonDictionary: [ButtonPlacement: GazeableButton] = [:]
@@ -65,11 +35,8 @@ final class TrackingOnboardingViewController: VocableViewController {
             guard let button = buttonDictionary[placement] else {
                 return
             }
-            view.addSubview(button)
             commonInit(for: button)
-            button.setTitle(placement.title, for: .normal)
             setButtonBackgrounds(button: button, placement: placement)
-            setButtonConstraints(button: button, placement: placement)
         }
     }
 
@@ -78,8 +45,6 @@ final class TrackingOnboardingViewController: VocableViewController {
     }
 
     private func commonInit(for button: GazeableButton) {
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.frame = CGRect(x: 100, y: 100, width: 100, height: 50)
         button.addTarget(self, action: #selector(activatedButton), for: .primaryActionTriggered)
     }
 
@@ -94,28 +59,6 @@ final class TrackingOnboardingViewController: VocableViewController {
 
     @IBAction func skipTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
-
-    private func setButtonConstraints(button: GazeableButton, placement: ButtonPlacement) {
-        var constraints: [NSLayoutConstraint] = []
-        switch placement {
-        case .leadingTop:
-            constraints.append(button.leadingAnchor.constraint(equalTo: view.leadingAnchor))
-            constraints.append(button.topAnchor.constraint(equalTo: view.topAnchor))
-        case .leadingBottom:
-            constraints.append(button.leadingAnchor.constraint(equalTo: view.leadingAnchor))
-            constraints.append(button.bottomAnchor.constraint(equalTo: view.bottomAnchor))
-        case .trailingTop:
-            constraints.append(button.trailingAnchor.constraint(equalTo: view.trailingAnchor))
-            constraints.append(button.topAnchor.constraint(equalTo: view.topAnchor))
-        case .trailingBottom:
-            constraints.append(button.trailingAnchor.constraint(equalTo: view.trailingAnchor))
-            constraints.append(button.bottomAnchor.constraint(equalTo: view.bottomAnchor))
-        }
-
-        NSLayoutConstraint.activate(constraints + [
-            button.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor)
-        ])
     }
 
     private func addAnimation(for placement: ButtonPlacement?) {
@@ -135,7 +78,7 @@ final class TrackingOnboardingViewController: VocableViewController {
 
             UIView.transition(with: onboardingLabel, duration: 1.0, options: .transitionCrossDissolve, animations: {
                 self.onboardingLabel.text = step.description
-            }, completion: nil)
+            })
 
             if step.placement == nil {
                 exitButton.setTitle("Finish", for: .normal)

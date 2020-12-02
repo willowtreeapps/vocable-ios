@@ -45,17 +45,53 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Lk-bf-WQV" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="82" height="38"/>
+                                <state key="normal" title="Top Left">
+                                    <color key="titleColor" name="DefaultFontColor"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7x-Op-ZST" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="321" y="44" width="93" height="38"/>
+                                <state key="normal" title="Top Right">
+                                    <color key="titleColor" name="DefaultFontColor"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpR-79-IcC" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="858" width="111" height="38"/>
+                                <state key="normal" title="Bottom Left">
+                                    <color key="titleColor" name="DefaultFontColor"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aow-wI-Bdv" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="292" y="858" width="122" height="38"/>
+                                <state key="normal" title="Bottom Right">
+                                    <color key="titleColor" name="DefaultFontColor"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Mft-iw-Awi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="2Lk-bf-WQV" firstAttribute="top" secondItem="Mft-iw-Awi" secondAttribute="top" id="AtH-MU-Wm5"/>
                             <constraint firstItem="FOC-5s-ZHg" firstAttribute="centerY" secondItem="10t-KN-XU8" secondAttribute="centerY" id="F8g-im-1i1"/>
                             <constraint firstItem="FOC-5s-ZHg" firstAttribute="centerX" secondItem="10t-KN-XU8" secondAttribute="centerX" id="Jr1-Nq-M6t"/>
+                            <constraint firstAttribute="bottom" secondItem="aow-wI-Bdv" secondAttribute="bottom" id="a71-K8-mX7"/>
+                            <constraint firstItem="C7x-Op-ZST" firstAttribute="top" secondItem="Mft-iw-Awi" secondAttribute="top" id="bnG-wJ-r7A"/>
+                            <constraint firstItem="Mft-iw-Awi" firstAttribute="trailing" secondItem="aow-wI-Bdv" secondAttribute="trailing" id="h1o-LQ-L0B"/>
+                            <constraint firstItem="2Lk-bf-WQV" firstAttribute="leading" secondItem="Mft-iw-Awi" secondAttribute="leading" id="jy3-V8-pZa"/>
+                            <constraint firstAttribute="bottom" secondItem="FpR-79-IcC" secondAttribute="bottom" id="kBX-iG-yQz"/>
+                            <constraint firstItem="Mft-iw-Awi" firstAttribute="trailing" secondItem="C7x-Op-ZST" secondAttribute="trailing" id="tBx-t9-DnK"/>
+                            <constraint firstItem="FpR-79-IcC" firstAttribute="leading" secondItem="Mft-iw-Awi" secondAttribute="leading" id="vwz-xV-lMD"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="exitButton" destination="9Lg-IJ-QoM" id="A0K-Ws-0C6"/>
+                        <outlet property="leadingBottom" destination="FpR-79-IcC" id="HS5-T8-xY8"/>
+                        <outlet property="leadingTop" destination="2Lk-bf-WQV" id="FIg-sv-BJA"/>
                         <outlet property="onboardingLabel" destination="Pab-vN-0Rl" id="S6H-AY-M1R"/>
+                        <outlet property="trailingBottom" destination="aow-wI-Bdv" id="h3L-8H-1xI"/>
+                        <outlet property="trailingTop" destination="C7x-Op-ZST" id="ac3-ai-WMe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ors-2B-YEO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -64,8 +100,20 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="2Lk-bf-WQV">
+            <size key="intrinsicContentSize" width="82" height="38"/>
+        </designable>
         <designable name="9Lg-IJ-QoM">
             <size key="intrinsicContentSize" width="115" height="38"/>
+        </designable>
+        <designable name="C7x-Op-ZST">
+            <size key="intrinsicContentSize" width="93" height="38"/>
+        </designable>
+        <designable name="FpR-79-IcC">
+            <size key="intrinsicContentSize" width="111" height="38"/>
+        </designable>
+        <designable name="aow-wI-Bdv">
+            <size key="intrinsicContentSize" width="122" height="38"/>
         </designable>
     </designables>
     <resources>
