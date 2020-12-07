@@ -19,16 +19,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FOC-5s-ZHg">
-                                <rect key="frame" x="47" y="375.5" width="320" height="145"/>
+                                <rect key="frame" x="47" y="239.5" width="320" height="417"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7SR-rT-4zN" customClass="AnimationView" customModule="Lottie">
+                                        <rect key="frame" x="32" y="0.0" width="256" height="256"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="256" id="AZE-Y6-Ne6"/>
+                                            <constraint firstAttribute="width" constant="256" id="YnZ-30-Bgv"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="faceTracking"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's learn how tracking works!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gw-jN-ifB">
-                                        <rect key="frame" x="13.5" y="0.0" width="293" height="26.5"/>
+                                        <rect key="frame" x="13.5" y="272" width="293" height="26.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <color key="textColor" name="DefaultFontColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slowly move your head until you can point the dot at the top left corner." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pab-vN-0Rl">
-                                        <rect key="frame" x="0.0" y="42.5" width="320" height="42.5"/>
+                                        <rect key="frame" x="0.0" y="314.5" width="320" height="42.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="320" id="FDH-kl-YCd"/>
                                         </constraints>
@@ -37,7 +48,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Lg-IJ-QoM" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                        <rect key="frame" x="88" y="101" width="144" height="44"/>
+                                        <rect key="frame" x="88" y="373" width="144" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="DLr-cR-MXh"/>
                                             <constraint firstAttribute="width" constant="144" id="svd-UV-Aoe"/>
@@ -51,36 +62,40 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Lk-bf-WQV" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="82" height="38"/>
-                                <state key="normal" title="Top Left">
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Lk-bf-WQV" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="40" height="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="TL">
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
                                 <connections>
                                     <action selector="leadingTopTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="ivP-3l-Ky5"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7x-Op-ZST" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="321" y="44" width="93" height="38"/>
-                                <state key="normal" title="Top Right">
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7x-Op-ZST" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="372" y="44" width="42" height="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="TR">
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
                                 <connections>
                                     <action selector="trailingTopTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="YxH-BF-KMo"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpR-79-IcC" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="858" width="111" height="38"/>
-                                <state key="normal" title="Bottom Left">
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpR-79-IcC" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="856" width="40" height="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="BL">
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
                                 <connections>
                                     <action selector="leadingBottomTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="X6C-sL-0vq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aow-wI-Bdv" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="292" y="858" width="122" height="38"/>
-                                <state key="normal" title="Bottom Right">
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aow-wI-Bdv" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                                <rect key="frame" x="372" y="856" width="42" height="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="BR">
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
                                 <connections>
@@ -105,6 +120,7 @@
                     </view>
                     <connections>
                         <outlet property="exitButton" destination="9Lg-IJ-QoM" id="A0K-Ws-0C6"/>
+                        <outlet property="faceTrackingAnimation" destination="7SR-rT-4zN" id="XHT-16-zQo"/>
                         <outlet property="leadingBottom" destination="FpR-79-IcC" id="HS5-T8-xY8"/>
                         <outlet property="leadingTop" destination="2Lk-bf-WQV" id="FIg-sv-BJA"/>
                         <outlet property="onboardingLabel" destination="Pab-vN-0Rl" id="S6H-AY-M1R"/>
@@ -120,19 +136,19 @@
     </scenes>
     <designables>
         <designable name="2Lk-bf-WQV">
-            <size key="intrinsicContentSize" width="82" height="38"/>
+            <size key="intrinsicContentSize" width="40" height="40"/>
         </designable>
         <designable name="9Lg-IJ-QoM">
             <size key="intrinsicContentSize" width="115" height="38"/>
         </designable>
         <designable name="C7x-Op-ZST">
-            <size key="intrinsicContentSize" width="93" height="38"/>
+            <size key="intrinsicContentSize" width="42" height="40"/>
         </designable>
         <designable name="FpR-79-IcC">
-            <size key="intrinsicContentSize" width="111" height="38"/>
+            <size key="intrinsicContentSize" width="40" height="40"/>
         </designable>
         <designable name="aow-wI-Bdv">
-            <size key="intrinsicContentSize" width="122" height="38"/>
+            <size key="intrinsicContentSize" width="42" height="40"/>
         </designable>
     </designables>
     <resources>

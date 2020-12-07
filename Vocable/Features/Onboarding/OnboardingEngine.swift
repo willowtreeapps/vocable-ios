@@ -14,10 +14,10 @@ struct OnboardingStep {
     let placement: ButtonPlacement?
 
     static let testSteps: [OnboardingStep] = [
-        OnboardingStep(title: "Let's learn how head-tracking works!", description: "Slowly move your head until you can point the dot at the top left corner.", placement: .leadingTop),
-        OnboardingStep(title: nil, description: "Now, move your head until you can point the dot at the bottom right corner.", placement: .trailingBottom),
-        OnboardingStep(title: nil, description: "Great! Next try the top right corner button.", placement: .trailingTop),
-        OnboardingStep(title: nil, description: "Finally, look at the bottom left corner button.", placement: .leadingBottom),
+        OnboardingStep(title: "Let's learn how head-tracking works!", description: "Slowly move your head until you can point the dot at the top left (TL) corner.", placement: .leadingTop),
+        OnboardingStep(title: nil, description: "Now, move your head until you can point the dot at the bottom right (BR) corner.", placement: .trailingBottom),
+        OnboardingStep(title: nil, description: "Great! Next try the top right (TR) corner button.", placement: .trailingTop),
+        OnboardingStep(title: nil, description: "Finally, look at the bottom left (BL) corner button.", placement: .leadingBottom),
         OnboardingStep(title: "Good work!", description: "Use the finish button to exit!", placement: nil)
     ]
 }

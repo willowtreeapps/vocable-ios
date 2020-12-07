@@ -45,7 +45,7 @@ extension UIImage {
 }
 
 extension UIButton {
-    func addArcAnimation(with placement: ButtonPlacement) {
+    func addArcAnimation(with placement: ButtonPlacement, radius: CGFloat = 175) {
         let animation = CABasicAnimation(keyPath: "lineWidth")
         animation.toValue = 3
         animation.fillMode = .forwards
@@ -72,7 +72,7 @@ extension UIButton {
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineWidth = 0
         let path = UIBezierPath()
-        path.addArc(withCenter: point, radius: 200, startAngle: 0, endAngle: .pi, clockwise: placement.clockwise)
+        path.addArc(withCenter: point, radius: radius, startAngle: 0, endAngle: .pi, clockwise: placement.clockwise)
         shapeLayer.path = path.cgPath
         shapeLayer.add(animation, forKey: "customAnimation")
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 final class TrackingOnboardingViewController: VocableViewController {
     @IBOutlet weak var leadingTop: GazeableButton!
@@ -16,6 +17,7 @@ final class TrackingOnboardingViewController: VocableViewController {
     @IBOutlet weak var exitButton: GazeableButton!
     @IBOutlet weak var onboardingLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var faceTrackingAnimation: AnimationView!
 
     var onboardingEngine = OnboardingEngine(OnboardingStep.testSteps)
 
@@ -31,6 +33,10 @@ final class TrackingOnboardingViewController: VocableViewController {
             .trailingTop: trailingTop,
             .trailingBottom: trailingBottom
         ]
+
+        faceTrackingAnimation.contentMode = .scaleAspectFit
+        faceTrackingAnimation.loopMode = .loop
+        faceTrackingAnimation.play()
 
         onboardingLabel.text = onboardingEngine.currentStep?.description
         titleLabel.text = onboardingEngine.currentStep?.title
@@ -48,7 +54,7 @@ final class TrackingOnboardingViewController: VocableViewController {
     }
 
     private func setButtonBackgrounds(button: GazeableButton, placement: ButtonPlacement) {
-        let quarterCircle = QuarterCircle(frame: CGRect(x: 0.0, y: 0.0, width: 200, height: 200)).asImage()
+        let quarterCircle = QuarterCircle(frame: CGRect(x: 0.0, y: 0.0, width: 175, height: 175)).asImage()
         let bgImage = quarterCircle.rotationFor(placement: placement)
         button.setBackgroundImage(bgImage, for: .normal)
         button.setBackgroundImage(bgImage, for: .selected)
@@ -65,6 +71,7 @@ final class TrackingOnboardingViewController: VocableViewController {
         guard requiredCurrentStep == .leadingTop else {
             return
         }
+        sender.setImage(UIImage(systemName: "checkmark"), for: .normal)
         sender.removeCustomAnimations()
         setupNextButtonStep()
     }
@@ -73,6 +80,7 @@ final class TrackingOnboardingViewController: VocableViewController {
         guard requiredCurrentStep == .trailingTop else {
             return
         }
+        sender.setImage(UIImage(systemName: "checkmark"), for: .normal)
         sender.removeCustomAnimations()
         setupNextButtonStep()
     }
@@ -81,6 +89,7 @@ final class TrackingOnboardingViewController: VocableViewController {
         guard requiredCurrentStep == .leadingBottom else {
             return
         }
+        sender.setImage(UIImage(systemName: "checkmark"), for: .normal)
         sender.removeCustomAnimations()
         setupNextButtonStep()
     }
@@ -89,6 +98,7 @@ final class TrackingOnboardingViewController: VocableViewController {
         guard requiredCurrentStep == .trailingBottom else {
             return
         }
+        sender.setImage(UIImage(systemName: "checkmark"), for: .normal)
         sender.removeCustomAnimations()
         setupNextButtonStep()
     }
@@ -104,18 +114,16 @@ final class TrackingOnboardingViewController: VocableViewController {
         guard onboardingEngine.currentStep?.placement != nil else {
             return
         }
+        faceTrackingAnimation.isHidden = true
 
         if let step = onboardingEngine.nextStep() {
             requiredCurrentStep = step.placement
             addAnimation(for: step.placement)
-
-            UIView.transition(with: onboardingLabel, duration: 1.0, options: .transitionCrossDissolve, animations: {
-                self.titleLabel.text = step.title
-                self.onboardingLabel.text = step.description
-                if step.placement == nil {
-                    self.exitButton.setTitle("Finish", for: .normal)
-                }
-            })
+            titleLabel.text = step.title
+            onboardingLabel.text = step.description
+            if step.placement == nil {
+                exitButton.setTitle("Finish", for: .normal)
+            }
         }
     }
 }
