@@ -18,7 +18,7 @@ struct OnboardingStep {
         OnboardingStep(title: nil, description: "Now, move your head until you can point the dot at the bottom right (BR) corner.", placement: .trailingBottom),
         OnboardingStep(title: nil, description: "Great! Next try the top right (TR) corner button.", placement: .trailingTop),
         OnboardingStep(title: nil, description: "Finally, look at the bottom left (BL) corner button.", placement: .leadingBottom),
-        OnboardingStep(title: "Good work!", description: "Use the finish button to exit!", placement: nil)
+        OnboardingStep(title: "Good work!", description: "Use the finish button to exit.", placement: nil)
     ]
 }
 

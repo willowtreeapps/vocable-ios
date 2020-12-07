@@ -10,10 +10,10 @@ import UIKit
 import Lottie
 
 final class TrackingOnboardingViewController: VocableViewController {
-    @IBOutlet weak var leadingTop: GazeableButton!
-    @IBOutlet weak var trailingTop: GazeableButton!
-    @IBOutlet weak var leadingBottom: GazeableButton!
-    @IBOutlet weak var trailingBottom: GazeableButton!
+    @IBOutlet weak var leadingTop: GazeableCornerButton!
+    @IBOutlet weak var trailingTop: GazeableCornerButton!
+    @IBOutlet weak var leadingBottom: GazeableCornerButton!
+    @IBOutlet weak var trailingBottom: GazeableCornerButton!
     @IBOutlet weak var exitButton: GazeableButton!
     @IBOutlet weak var onboardingLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -21,7 +21,7 @@ final class TrackingOnboardingViewController: VocableViewController {
 
     var onboardingEngine = OnboardingEngine(OnboardingStep.testSteps)
 
-    private var buttonDictionary: [ButtonPlacement: GazeableButton] = [:]
+    private var buttonDictionary: [ButtonPlacement: GazeableCornerButton] = [:]
 
     private var requiredCurrentStep: ButtonPlacement? = .leadingTop
 
@@ -53,9 +53,10 @@ final class TrackingOnboardingViewController: VocableViewController {
         addAnimation(for: onboardingEngine.currentStep?.placement)
     }
 
-    private func setButtonBackgrounds(button: GazeableButton, placement: ButtonPlacement) {
+    private func setButtonBackgrounds(button: GazeableCornerButton, placement: ButtonPlacement) {
         let quarterCircle = QuarterCircle(frame: CGRect(x: 0.0, y: 0.0, width: 175, height: 175)).asImage()
         let bgImage = quarterCircle.rotationFor(placement: placement)
+        button.placement = placement
         button.setBackgroundImage(bgImage, for: .normal)
         button.setBackgroundImage(bgImage, for: .selected)
         button.setBackgroundImage(bgImage, for: .highlighted)
@@ -67,35 +68,8 @@ final class TrackingOnboardingViewController: VocableViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func leadingTopTapped(_ sender: UIButton) {
-        guard requiredCurrentStep == .leadingTop else {
-            return
-        }
-        sender.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        sender.removeCustomAnimations()
-        setupNextButtonStep()
-    }
-
-    @IBAction func trailingTopTapped(_ sender: UIButton) {
-        guard requiredCurrentStep == .trailingTop else {
-            return
-        }
-        sender.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        sender.removeCustomAnimations()
-        setupNextButtonStep()
-    }
-
-    @IBAction func leadingBottomTapped(_ sender: UIButton) {
-        guard requiredCurrentStep == .leadingBottom else {
-            return
-        }
-        sender.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        sender.removeCustomAnimations()
-        setupNextButtonStep()
-    }
-
-    @IBAction func trailingBottomTapped(_ sender: UIButton) {
-        guard requiredCurrentStep == .trailingBottom else {
+    @IBAction func cornerButtonTapped(_ sender: GazeableCornerButton) {
+        guard requiredCurrentStep == sender.placement else {
             return
         }
         sender.setImage(UIImage(systemName: "checkmark"), for: .normal)

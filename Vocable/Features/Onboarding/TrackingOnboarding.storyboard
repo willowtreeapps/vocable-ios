@@ -57,49 +57,49 @@
                                             <color key="titleColor" name="DefaultFontColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="skipTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="5S5-1o-gSo"/>
+                                            <action selector="skipTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="Ll8-ix-Kmy"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Lk-bf-WQV" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Lk-bf-WQV" customClass="GazeableCornerButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="40" height="40"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <state key="normal" title="TL">
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="leadingTopTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="ivP-3l-Ky5"/>
+                                    <action selector="cornerButtonTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="dal-fh-Yqh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7x-Op-ZST" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7x-Op-ZST" customClass="GazeableCornerButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="372" y="44" width="42" height="40"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <state key="normal" title="TR">
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="trailingTopTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="YxH-BF-KMo"/>
+                                    <action selector="cornerButtonTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="Ckj-DU-l3O"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpR-79-IcC" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpR-79-IcC" customClass="GazeableCornerButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="856" width="40" height="40"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <state key="normal" title="BL">
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="leadingBottomTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="X6C-sL-0vq"/>
+                                    <action selector="cornerButtonTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="2zc-Xd-Ag1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aow-wI-Bdv" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aow-wI-Bdv" customClass="GazeableCornerButton" customModule="Vocable" customModuleProvider="target">
                                 <rect key="frame" x="372" y="856" width="42" height="40"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <state key="normal" title="BR">
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="trailingBottomTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="pbC-qq-88N"/>
+                                    <action selector="cornerButtonTapped:" destination="NkS-LH-F0u" eventType="touchUpInside" id="CuW-YI-F98"/>
                                 </connections>
                             </button>
                         </subviews>

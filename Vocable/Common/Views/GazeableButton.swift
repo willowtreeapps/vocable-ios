@@ -224,7 +224,7 @@ class GazeableButton: UIButton {
         imageView?.contentMode = .scaleAspectFit
     }
 
-    private func renderBackgroundImage(withFillColor fillColor: UIColor, withHighlight isHighlighted: Bool) -> UIImage {
+    internal func renderBackgroundImage(withFillColor fillColor: UIColor, withHighlight isHighlighted: Bool) -> UIImage {
         let dimension = cornerRadius * 2 + 1
         let bounds = CGRect(origin: .zero, size: CGSize(width: dimension, height: dimension))
         let image = UIGraphicsImageRenderer(bounds: bounds).image { _ in
