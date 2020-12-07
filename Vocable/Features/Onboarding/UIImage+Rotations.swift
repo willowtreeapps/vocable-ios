@@ -52,7 +52,7 @@ extension UIButton {
         animation.autoreverses = true
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         animation.duration = 1.0
-        animation.repeatCount = 5
+        animation.repeatCount = .infinity
 
         var point: CGPoint = CGPoint()
         switch placement {

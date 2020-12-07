@@ -15,6 +15,7 @@ final class TrackingOnboardingViewController: VocableViewController {
     @IBOutlet weak var trailingBottom: GazeableButton!
     @IBOutlet weak var exitButton: GazeableButton!
     @IBOutlet weak var onboardingLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
 
     var onboardingEngine = OnboardingEngine(OnboardingStep.testSteps)
 
@@ -32,6 +33,7 @@ final class TrackingOnboardingViewController: VocableViewController {
         ]
 
         onboardingLabel.text = onboardingEngine.currentStep?.description
+        titleLabel.text = onboardingEngine.currentStep?.title
 
         for placement in ButtonPlacement.allCases {
             guard let button = buttonDictionary[placement] else {
@@ -51,7 +53,8 @@ final class TrackingOnboardingViewController: VocableViewController {
         button.setBackgroundImage(bgImage, for: .normal)
         button.setBackgroundImage(bgImage, for: .selected)
         button.setBackgroundImage(bgImage, for: .highlighted)
-        button.clipsToBounds = true
+        button.clipsToBounds = false
+
     }
 
     @IBAction func skipTapped(_ sender: Any) {
@@ -63,7 +66,7 @@ final class TrackingOnboardingViewController: VocableViewController {
             return
         }
         sender.removeCustomAnimations()
-        proceedToNextStep()
+        setupNextButtonStep()
     }
 
     @IBAction func trailingTopTapped(_ sender: UIButton) {
@@ -71,7 +74,7 @@ final class TrackingOnboardingViewController: VocableViewController {
             return
         }
         sender.removeCustomAnimations()
-        proceedToNextStep()
+        setupNextButtonStep()
     }
 
     @IBAction func leadingBottomTapped(_ sender: UIButton) {
@@ -79,7 +82,7 @@ final class TrackingOnboardingViewController: VocableViewController {
             return
         }
         sender.removeCustomAnimations()
-        proceedToNextStep()
+        setupNextButtonStep()
     }
 
     @IBAction func trailingBottomTapped(_ sender: UIButton) {
@@ -87,7 +90,7 @@ final class TrackingOnboardingViewController: VocableViewController {
             return
         }
         sender.removeCustomAnimations()
-        proceedToNextStep()
+        setupNextButtonStep()
     }
 
     private func addAnimation(for placement: ButtonPlacement?) {
@@ -97,7 +100,7 @@ final class TrackingOnboardingViewController: VocableViewController {
         button.addArcAnimation(with: placement)
     }
 
-    private func proceedToNextStep() {
+    private func setupNextButtonStep() {
         guard onboardingEngine.currentStep?.placement != nil else {
             return
         }
@@ -107,12 +110,12 @@ final class TrackingOnboardingViewController: VocableViewController {
             addAnimation(for: step.placement)
 
             UIView.transition(with: onboardingLabel, duration: 1.0, options: .transitionCrossDissolve, animations: {
+                self.titleLabel.text = step.title
                 self.onboardingLabel.text = step.description
                 if step.placement == nil {
                     self.exitButton.setTitle("Finish", for: .normal)
                 }
             })
-
         }
     }
 }
