@@ -1,5 +1,5 @@
 //
-//  OnboardingEngine.swift
+//  OnboardingTracker.swift
 //  Vocable
 //
 //  Created by Joe Romero on 11/30/20.
@@ -14,7 +14,7 @@ struct OnboardingStep {
     let placement: CornerPlacement?
 
     static let testSteps: [OnboardingStep] = [
-        OnboardingStep(title: "Let's learn how head-tracking works!", description: "Slowly move your head until you can point the dot at the top left (TL) corner.", placement: .leadingTop),
+        OnboardingStep(title: "Learn how head-tracking works!", description: "Slowly move your head until you can point the dot at the top left (TL) corner.", placement: .leadingTop),
         OnboardingStep(title: nil, description: "Now, move your head until you can point the dot at the bottom right (BR) corner.", placement: .trailingBottom),
         OnboardingStep(title: nil, description: "Great! Next try the top right (TR) corner button.", placement: .trailingTop),
         OnboardingStep(title: nil, description: "Finally, look at the bottom left (BL) corner button.", placement: .leadingBottom),
@@ -22,7 +22,7 @@ struct OnboardingStep {
     ]
 }
 
-struct OnboardingEngine<T> {
+struct OnboardingTracker<T> {
 
     private let steps: [T]
     private(set) var currentIndex: Int = 0

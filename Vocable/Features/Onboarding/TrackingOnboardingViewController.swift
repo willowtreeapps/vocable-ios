@@ -20,7 +20,7 @@ final class TrackingOnboardingViewController: VocableViewController {
     @IBOutlet weak var faceTrackingAnimation: AnimationView!
     @IBOutlet weak var stepInfoContainerView: UIStackView!
     
-    var onboardingEngine = OnboardingEngine(OnboardingStep.testSteps)
+    var onboardingEngine = OnboardingTracker(OnboardingStep.testSteps)
 
     private var buttonDictionary: [CornerPlacement: GazeableCornerButton] = [:]
 
@@ -28,12 +28,7 @@ final class TrackingOnboardingViewController: VocableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        buttonDictionary = [
-            .leadingTop: leadingTop,
-            .leadingBottom: leadingBottom,
-            .trailingTop: trailingTop,
-            .trailingBottom: trailingBottom
-        ]
+        buttonDictionary = [.leadingTop: leadingTop, .leadingBottom: leadingBottom, .trailingTop: trailingTop, .trailingBottom: trailingBottom]
 
         faceTrackingAnimation.contentMode = .scaleAspectFit
         faceTrackingAnimation.loopMode = .loop
@@ -90,11 +85,14 @@ final class TrackingOnboardingViewController: VocableViewController {
         if let step = onboardingEngine.nextStep() {
             requiredCurrentStep = step.placement
             addAnimation(for: step.placement)
-            titleLabel.text = step.title
-            onboardingLabel.text = step.description
-            if step.placement == nil {
-                exitButton.setTitle("Finish", for: .normal)
-            }
+
+            UIView.transition(with: stepInfoContainerView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.titleLabel.text = step.title
+                self.onboardingLabel.text = step.description
+                if step.placement == nil {
+                    self.exitButton.setTitle("Finish", for: .normal)
+                }
+            }, completion: nil)
         }
     }
 }
