@@ -23,8 +23,7 @@ final class TrackingOnboardingViewController: VocableViewController {
     var onboardingEngine = OnboardingTracker(OnboardingStep.testSteps)
 
     private var buttonDictionary: [CornerPlacement: GazeableCornerButton] = [:]
-
-    private var requiredCurrentStep: CornerPlacement? = .leadingTop
+    private var requiredCurrentStep: CornerPlacement?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,24 +35,18 @@ final class TrackingOnboardingViewController: VocableViewController {
 
         onboardingLabel.text = onboardingEngine.currentStep?.description
         titleLabel.text = onboardingEngine.currentStep?.title
+        requiredCurrentStep = onboardingEngine.currentStep?.placement
 
         for placement in CornerPlacement.allCases {
             guard let button = buttonDictionary[placement] else {
                 return
             }
-            setButtonBackgrounds(button: button, placement: placement)
+            button.placement = placement
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         addAnimation(for: onboardingEngine.currentStep?.placement)
-    }
-
-    private func setButtonBackgrounds(button: GazeableCornerButton, placement: CornerPlacement) {
-        let quarterCircle = QuarterCircle(frame: CGRect(x: 0.0, y: 0.0, width: 150, height: 150)).asImage()
-        let bgImage = quarterCircle.rotationFor(placement: placement)
-        button.placement = placement
-        button.setBackgroundImage(bgImage, for: .normal)
     }
 
     @IBAction func skipTapped(_ sender: Any) {
@@ -66,7 +59,7 @@ final class TrackingOnboardingViewController: VocableViewController {
         }
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
         button.removeCustomAnimations()
-        setupNextButtonStep()
+        startNextAvailableStep()
     }
 
     private func addAnimation(for placement: CornerPlacement?) {
@@ -76,7 +69,7 @@ final class TrackingOnboardingViewController: VocableViewController {
         button.addArcAnimation()
     }
 
-    private func setupNextButtonStep() {
+    private func startNextAvailableStep() {
         guard onboardingEngine.currentStep?.placement != nil else {
             return
         }

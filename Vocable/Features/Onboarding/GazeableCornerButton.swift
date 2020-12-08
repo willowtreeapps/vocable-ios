@@ -10,7 +10,33 @@ import UIKit
 
 final class GazeableCornerButton: GazeableButton {
 
-    var placement: CornerPlacement = .leadingTop
+    var placement: CornerPlacement = .leadingTop {
+        didSet {
+            updateBackgroundImagesForCurrentParameters()
+        }
+    }
+
+    override func renderBackgroundImage(withFillColor fillColor: UIColor, withHighlight isHighlighted: Bool) -> UIImage {
+        let image = UIGraphicsImageRenderer(bounds: bounds).image { _ in
+            let strokeColor = isHighlighted ? UIColor.cellBorderHighlightColor : fillColor
+            let size = self.bounds.insetBy(dx: borderWidth, dy: borderWidth)
+            let path = UIBezierPath()
+            path.lineWidth = borderWidth
+            let point = CGPoint(x: borderWidth, y: borderWidth)
+            path.move(to: point)
+            path.addLine(to: CGPoint(x: size.width, y: borderWidth))
+            path.addArc(withCenter: point, radius: size.width, startAngle: 0, endAngle: .pi / 2, clockwise: true)
+            path.addLine(to: point)
+            fillColor.setFill()
+            strokeColor.setStroke()
+            path.fill()
+            path.stroke()
+        }
+        return image.rotationFor(placement: placement)
+    }
+}
+
+extension GazeableCornerButton {
 
     var originPoint: CGPoint {
         switch placement {
@@ -25,32 +51,9 @@ final class GazeableCornerButton: GazeableButton {
         }
     }
 
-    override func renderBackgroundImage(withFillColor fillColor: UIColor, withHighlight isHighlighted: Bool) -> UIImage {
-        let image = UIGraphicsImageRenderer(bounds: bounds).image { _ in
-            let backgroundFillColor: UIColor = backgroundColor ?? .collectionViewBackgroundColor
-            let strokeColor = isHighlighted ? UIColor.cellBorderHighlightColor : fillColor
-            let size = self.bounds.insetBy(dx: borderWidth, dy: borderWidth)
-            let path = UIBezierPath()
-            path.lineWidth = borderWidth
-            let point = CGPoint(x: borderWidth, y: borderWidth)
-            path.move(to: point)
-            path.addLine(to: CGPoint(x: size.width, y: borderWidth))
-            path.addArc(withCenter: point, radius: size.width, startAngle: 0, endAngle: .pi / 2, clockwise: true)
-            path.addLine(to: point)
-            backgroundFillColor.setFill()
-            strokeColor.setStroke()
-            path.fill()
-            path.stroke()
-        }
-        let stretchableImage = image.resizableImage(withCapInsets: .zero, resizingMode: .stretch)
-        return stretchableImage.rotationFor(placement: placement)
-    }
-}
-
-extension GazeableCornerButton {
     func addArcAnimation() {
         let animation = CABasicAnimation(keyPath: "lineWidth")
-        animation.toValue = 3
+        animation.toValue = 4
         animation.fillMode = .forwards
         animation.autoreverses = true
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)

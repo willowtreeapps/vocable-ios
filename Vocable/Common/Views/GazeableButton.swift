@@ -211,7 +211,7 @@ class GazeableButton: UIButton {
         }
     }
 
-    private func updateBackgroundImagesForCurrentParameters() {
+    internal func updateBackgroundImagesForCurrentParameters() {
         for (state, color) in cachedFillColors {
             setFillColor(color, for: state)
         }

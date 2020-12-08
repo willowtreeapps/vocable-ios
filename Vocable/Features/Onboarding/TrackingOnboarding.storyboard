@@ -64,7 +64,11 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Lk-bf-WQV" customClass="GazeableCornerButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="40" height="40"/>
+                                <rect key="frame" x="0.0" y="44" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="GsS-Gw-vcU"/>
+                                    <constraint firstAttribute="width" constant="150" id="K4q-Bf-v1a"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="TL">
                                     <color key="titleColor" name="DefaultFontColor"/>
@@ -74,7 +78,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7x-Op-ZST" customClass="GazeableCornerButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="372" y="44" width="42" height="40"/>
+                                <rect key="frame" x="264" y="44" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="C2g-N8-7VV"/>
+                                    <constraint firstAttribute="width" constant="150" id="azx-AR-Bmw"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="TR">
                                     <color key="titleColor" name="DefaultFontColor"/>
@@ -84,7 +92,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpR-79-IcC" customClass="GazeableCornerButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="856" width="41" height="40"/>
+                                <rect key="frame" x="0.0" y="746" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="Dck-MV-eMf"/>
+                                    <constraint firstAttribute="height" constant="150" id="TKg-Kx-DD4"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="BL">
                                     <color key="titleColor" name="DefaultFontColor"/>
@@ -94,7 +106,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aow-wI-Bdv" customClass="GazeableCornerButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="371" y="856" width="43" height="40"/>
+                                <rect key="frame" x="264" y="746" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="3dc-GG-8cs"/>
+                                    <constraint firstAttribute="height" constant="150" id="pxs-iy-by9"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="BR">
                                     <color key="titleColor" name="DefaultFontColor"/>
@@ -138,19 +154,19 @@
     </scenes>
     <designables>
         <designable name="2Lk-bf-WQV">
-            <size key="intrinsicContentSize" width="40" height="40"/>
+            <size key="intrinsicContentSize" width="150" height="150"/>
         </designable>
         <designable name="9Lg-IJ-QoM">
             <size key="intrinsicContentSize" width="124" height="38"/>
         </designable>
         <designable name="C7x-Op-ZST">
-            <size key="intrinsicContentSize" width="42" height="40"/>
+            <size key="intrinsicContentSize" width="150" height="150"/>
         </designable>
         <designable name="FpR-79-IcC">
-            <size key="intrinsicContentSize" width="41" height="40"/>
+            <size key="intrinsicContentSize" width="150" height="150"/>
         </designable>
         <designable name="aow-wI-Bdv">
-            <size key="intrinsicContentSize" width="43" height="40"/>
+            <size key="intrinsicContentSize" width="150" height="150"/>
         </designable>
     </designables>
     <resources>
