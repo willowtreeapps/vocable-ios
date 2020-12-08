@@ -52,7 +52,7 @@ class QuarterCircle: UIView {
         path.lineWidth = lineWidth
         path.move(to: CGPoint(x: 0.0, y: 0.0))
         path.addLine(to: CGPoint(x: width, y: 0.0))
-        path.addArc(withCenter: CGPoint(x: 0.0, y: 0.0), radius: width, startAngle: 0, endAngle: 3 * (.pi/2), clockwise: true)
+        path.addArc(withCenter: CGPoint(x: 0.0, y: 0.0), radius: width, startAngle: 0, endAngle: .pi / 2, clockwise: true)
         path.close()
         fillColor.setFill()
         strokeColor.setStroke()

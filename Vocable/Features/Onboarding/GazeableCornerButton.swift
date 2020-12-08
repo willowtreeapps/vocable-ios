@@ -29,13 +29,14 @@ final class GazeableCornerButton: GazeableButton {
         let image = UIGraphicsImageRenderer(bounds: bounds).image { _ in
             let backgroundFillColor: UIColor = backgroundColor ?? .collectionViewBackgroundColor
             let strokeColor = isHighlighted ? UIColor.cellBorderHighlightColor : fillColor
-            let size = self.bounds.insetBy(dx: borderWidth / 2, dy: borderWidth / 2)
+            let size = self.bounds.insetBy(dx: borderWidth, dy: borderWidth)
             let path = UIBezierPath()
             path.lineWidth = borderWidth
-            path.move(to: CGPoint(x: 0.0, y: 0.0))
-            path.addLine(to: CGPoint(x: size.width, y: 0.0))
-            path.addArc(withCenter: CGPoint(x: 0.0, y: 0.0), radius: size.width, startAngle: 0, endAngle: 3 * (.pi/2), clockwise: true)
-            path.close()
+            let point = CGPoint(x: borderWidth, y: borderWidth)
+            path.move(to: point)
+            path.addLine(to: CGPoint(x: size.width, y: borderWidth))
+            path.addArc(withCenter: point, radius: size.width, startAngle: 0, endAngle: .pi / 2, clockwise: true)
+            path.addLine(to: point)
             backgroundFillColor.setFill()
             strokeColor.setStroke()
             path.fill()
