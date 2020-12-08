@@ -50,7 +50,7 @@ final class TrackingOnboardingViewController: VocableViewController {
     }
 
     private func setButtonBackgrounds(button: GazeableCornerButton, placement: CornerPlacement) {
-        let quarterCircle = QuarterCircle(frame: CGRect(x: 0.0, y: 0.0, width: 175, height: 175)).asImage()
+        let quarterCircle = QuarterCircle(frame: CGRect(x: 0.0, y: 0.0, width: 150, height: 150)).asImage()
         let bgImage = quarterCircle.rotationFor(placement: placement)
         button.placement = placement
         button.setBackgroundImage(bgImage, for: .normal)

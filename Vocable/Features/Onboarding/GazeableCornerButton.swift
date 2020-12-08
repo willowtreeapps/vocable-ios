@@ -46,3 +46,31 @@ final class GazeableCornerButton: GazeableButton {
         return stretchableImage.rotationFor(placement: placement)
     }
 }
+
+extension GazeableCornerButton {
+    func addArcAnimation() {
+        let animation = CABasicAnimation(keyPath: "lineWidth")
+        animation.toValue = 3
+        animation.fillMode = .forwards
+        animation.autoreverses = true
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        animation.duration = 1.0
+        animation.repeatCount = .infinity
+
+        let shapeLayer = CAShapeLayer()
+        self.layer.addSublayer(shapeLayer)
+        shapeLayer.strokeColor = UIColor.cellSelectionColor.cgColor
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.lineWidth = 0
+        let path = UIBezierPath()
+        path.addArc(withCenter: originPoint, radius: bounds.width, startAngle: 0, endAngle: .pi, clockwise: placement.clockwise)
+        shapeLayer.path = path.cgPath
+        shapeLayer.add(animation, forKey: "customAnimation")
+    }
+
+    func removeCustomAnimations() {
+        for layer in self.layer.sublayers ?? [] {
+            layer.removeAnimation(forKey: "customAnimation")
+        }
+    }
+}
