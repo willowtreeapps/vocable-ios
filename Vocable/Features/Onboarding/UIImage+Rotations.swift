@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIImage {
-    func rotationFor(placement: ButtonPlacement) -> UIImage {
+    func rotationFor(placement: CornerPlacement) -> UIImage {
         switch placement {
         case .leadingBottom:
             return self.rotate(radians: 3 * .pi / 2)

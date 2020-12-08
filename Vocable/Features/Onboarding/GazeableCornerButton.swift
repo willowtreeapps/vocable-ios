@@ -8,9 +8,9 @@
 
 import UIKit
 
-class GazeableCornerButton: GazeableButton {
+final class GazeableCornerButton: GazeableButton {
 
-    var placement: ButtonPlacement = .leadingTop
+    var placement: CornerPlacement = .leadingTop
 
     var originPoint: CGPoint {
         switch placement {

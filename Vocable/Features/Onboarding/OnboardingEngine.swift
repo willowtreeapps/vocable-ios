@@ -11,7 +11,7 @@ import Foundation
 struct OnboardingStep {
     let title: String?
     let description: String
-    let placement: ButtonPlacement?
+    let placement: CornerPlacement?
 
     static let testSteps: [OnboardingStep] = [
         OnboardingStep(title: "Let's learn how head-tracking works!", description: "Slowly move your head until you can point the dot at the top left (TL) corner.", placement: .leadingTop),

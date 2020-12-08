@@ -24,7 +24,7 @@
 		2745402E2460DD760056EF98 /* presets.json in Resources */ = {isa = PBXBuildFile; fileRef = 2745402D2460DD760056EF98 /* presets.json */; };
 		2F02E133257579E2004ABAAD /* TrackingOnboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F02E132257579E2004ABAAD /* TrackingOnboarding.storyboard */; };
 		2F02E13825758325004ABAAD /* OnboardingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F02E13725758325004ABAAD /* OnboardingEngine.swift */; };
-		2F02E13D2577F4A0004ABAAD /* ButtonPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F02E13C2577F4A0004ABAAD /* ButtonPlacement.swift */; };
+		2F02E13D2577F4A0004ABAAD /* CornerPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F02E13C2577F4A0004ABAAD /* CornerPlacement.swift */; };
 		2F197FD6257ED08E00507585 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 2F197FD5257ED08E00507585 /* Lottie */; };
 		2F197FDE257ED18B00507585 /* faceTracking.json in Resources */ = {isa = PBXBuildFile; fileRef = 2F197FDD257ED18B00507585 /* faceTracking.json */; };
 		2F197FEE257EDDEE00507585 /* GazeableCornerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F197FED257EDDEE00507585 /* GazeableCornerButton.swift */; };
@@ -194,7 +194,7 @@
 		2745402D2460DD760056EF98 /* presets.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = presets.json; sourceTree = "<group>"; };
 		2F02E132257579E2004ABAAD /* TrackingOnboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TrackingOnboarding.storyboard; sourceTree = "<group>"; };
 		2F02E13725758325004ABAAD /* OnboardingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEngine.swift; sourceTree = "<group>"; };
-		2F02E13C2577F4A0004ABAAD /* ButtonPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPlacement.swift; sourceTree = "<group>"; };
+		2F02E13C2577F4A0004ABAAD /* CornerPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerPlacement.swift; sourceTree = "<group>"; };
 		2F197FDD257ED18B00507585 /* faceTracking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = faceTracking.json; path = Vocable/faceTracking.json; sourceTree = SOURCE_ROOT; };
 		2F197FED257EDDEE00507585 /* GazeableCornerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableCornerButton.swift; sourceTree = "<group>"; };
 		2FF5F616256EAEBA00E69D5E /* TrackingOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingOnboardingViewController.swift; sourceTree = "<group>"; };
@@ -472,7 +472,7 @@
 				2FF5F623256EF5B000E69D5E /* UIImage+Rotations.swift */,
 				2F02E132257579E2004ABAAD /* TrackingOnboarding.storyboard */,
 				2F02E13725758325004ABAAD /* OnboardingEngine.swift */,
-				2F02E13C2577F4A0004ABAAD /* ButtonPlacement.swift */,
+				2F02E13C2577F4A0004ABAAD /* CornerPlacement.swift */,
 				2F197FED257EDDEE00507585 /* GazeableCornerButton.swift */,
 			);
 			path = Onboarding;
@@ -1052,7 +1052,7 @@
 				6B823BCC23F4ADE30099F65E /* TunningView.swift in Sources */,
 				6B005AE5245B06F3004919F4 /* VocableViewController.swift in Sources */,
 				6B9DFA5F23E889DB0037673E /* UIHeadGazeEvent.swift in Sources */,
-				2F02E13D2577F4A0004ABAAD /* ButtonPlacement.swift in Sources */,
+				2F02E13D2577F4A0004ABAAD /* CornerPlacement.swift in Sources */,
 				A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */,
 				A9B32C8C240EB6250084E151 /* KeyboardModel.swift in Sources */,
 				6BE7E98C245A19F8007B01F2 /* UITraitCollection+Helpers.swift in Sources */,

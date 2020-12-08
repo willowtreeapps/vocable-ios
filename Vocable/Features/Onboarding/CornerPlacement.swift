@@ -1,5 +1,5 @@
 //
-//  ButtonPlacement.swift
+//  CornerPlacement.swift
 //  Vocable
 //
 //  Created by Joe Romero on 12/2/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ButtonPlacement: CaseIterable {
+enum CornerPlacement: CaseIterable {
     case leadingTop
     case leadingBottom
     case trailingTop

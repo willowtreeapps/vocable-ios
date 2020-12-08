@@ -22,9 +22,9 @@ final class TrackingOnboardingViewController: VocableViewController {
     
     var onboardingEngine = OnboardingEngine(OnboardingStep.testSteps)
 
-    private var buttonDictionary: [ButtonPlacement: GazeableCornerButton] = [:]
+    private var buttonDictionary: [CornerPlacement: GazeableCornerButton] = [:]
 
-    private var requiredCurrentStep: ButtonPlacement? = .leadingTop
+    private var requiredCurrentStep: CornerPlacement? = .leadingTop
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ final class TrackingOnboardingViewController: VocableViewController {
         onboardingLabel.text = onboardingEngine.currentStep?.description
         titleLabel.text = onboardingEngine.currentStep?.title
 
-        for placement in ButtonPlacement.allCases {
+        for placement in CornerPlacement.allCases {
             guard let button = buttonDictionary[placement] else {
                 return
             }
@@ -54,7 +54,7 @@ final class TrackingOnboardingViewController: VocableViewController {
         addAnimation(for: onboardingEngine.currentStep?.placement)
     }
 
-    private func setButtonBackgrounds(button: GazeableCornerButton, placement: ButtonPlacement) {
+    private func setButtonBackgrounds(button: GazeableCornerButton, placement: CornerPlacement) {
         let quarterCircle = QuarterCircle(frame: CGRect(x: 0.0, y: 0.0, width: 175, height: 175)).asImage()
         let bgImage = quarterCircle.rotationFor(placement: placement)
         button.placement = placement
@@ -74,7 +74,7 @@ final class TrackingOnboardingViewController: VocableViewController {
         setupNextButtonStep()
     }
 
-    private func addAnimation(for placement: ButtonPlacement?) {
+    private func addAnimation(for placement: CornerPlacement?) {
         guard let placement = placement, let button = buttonDictionary[placement] else {
             return
         }
