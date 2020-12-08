@@ -28,15 +28,12 @@ extension UIImage {
             .integral.size
         UIGraphicsBeginImageContext(rotatedSize)
         if let context = UIGraphicsGetCurrentContext() {
-            let origin = CGPoint(x: rotatedSize.width / 2.0,
-                                 y: rotatedSize.height / 2.0)
+            let origin = CGPoint(x: rotatedSize.width / 2.0, y: rotatedSize.height / 2.0)
             context.translateBy(x: origin.x, y: origin.y)
             context.rotate(by: radians)
-            draw(in: CGRect(x: -origin.y, y: -origin.x,
-                            width: size.width, height: size.height))
+            draw(in: CGRect(x: -origin.y, y: -origin.x, width: size.width, height: size.height))
             let rotatedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-
             return rotatedImage ?? self
         }
 
@@ -44,8 +41,8 @@ extension UIImage {
     }
 }
 
-extension UIButton {
-    func addArcAnimation(with placement: ButtonPlacement, radius: CGFloat = 175) {
+extension GazeableCornerButton {
+    func addArcAnimation() {
         let animation = CABasicAnimation(keyPath: "lineWidth")
         animation.toValue = 3
         animation.fillMode = .forwards
@@ -54,25 +51,13 @@ extension UIButton {
         animation.duration = 1.0
         animation.repeatCount = .infinity
 
-        var point: CGPoint = CGPoint()
-        switch placement {
-        case .leadingTop:
-            point = CGPoint(x: 0, y: 0)
-        case .leadingBottom:
-            point = CGPoint(x: 0, y: self.bounds.maxY)
-        case .trailingTop:
-            point = CGPoint(x: self.bounds.maxX, y: 0)
-        case .trailingBottom:
-            point = CGPoint(x: self.bounds.maxX, y: self.bounds.maxY)
-        }
-
         let shapeLayer = CAShapeLayer()
         self.layer.addSublayer(shapeLayer)
         shapeLayer.strokeColor = UIColor.systemGreen.cgColor
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineWidth = 0
         let path = UIBezierPath()
-        path.addArc(withCenter: point, radius: radius, startAngle: 0, endAngle: .pi, clockwise: placement.clockwise)
+        path.addArc(withCenter: originPoint, radius: bounds.width, startAngle: 0, endAngle: .pi, clockwise: placement.clockwise)
         shapeLayer.path = path.cgPath
         shapeLayer.add(animation, forKey: "customAnimation")
     }

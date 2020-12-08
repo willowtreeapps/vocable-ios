@@ -124,6 +124,7 @@
                         <outlet property="leadingBottom" destination="FpR-79-IcC" id="HS5-T8-xY8"/>
                         <outlet property="leadingTop" destination="2Lk-bf-WQV" id="FIg-sv-BJA"/>
                         <outlet property="onboardingLabel" destination="Pab-vN-0Rl" id="S6H-AY-M1R"/>
+                        <outlet property="stepInfoContainerView" destination="FOC-5s-ZHg" id="zAX-sy-mdG"/>
                         <outlet property="titleLabel" destination="2gw-jN-ifB" id="pQ7-dW-haV"/>
                         <outlet property="trailingBottom" destination="aow-wI-Bdv" id="h3L-8H-1xI"/>
                         <outlet property="trailingTop" destination="C7x-Op-ZST" id="ac3-ai-WMe"/>

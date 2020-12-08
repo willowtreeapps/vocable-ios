@@ -18,7 +18,8 @@ final class TrackingOnboardingViewController: VocableViewController {
     @IBOutlet weak var onboardingLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var faceTrackingAnimation: AnimationView!
-
+    @IBOutlet weak var stepInfoContainerView: UIStackView!
+    
     var onboardingEngine = OnboardingEngine(OnboardingStep.testSteps)
 
     private var buttonDictionary: [ButtonPlacement: GazeableCornerButton] = [:]
@@ -58,22 +59,18 @@ final class TrackingOnboardingViewController: VocableViewController {
         let bgImage = quarterCircle.rotationFor(placement: placement)
         button.placement = placement
         button.setBackgroundImage(bgImage, for: .normal)
-        button.setBackgroundImage(bgImage, for: .selected)
-        button.setBackgroundImage(bgImage, for: .highlighted)
-        button.clipsToBounds = false
-
     }
 
     @IBAction func skipTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func cornerButtonTapped(_ sender: GazeableCornerButton) {
-        guard requiredCurrentStep == sender.placement else {
+    @IBAction func cornerButtonTapped(_ button: GazeableCornerButton) {
+        guard requiredCurrentStep == button.placement else {
             return
         }
-        sender.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        sender.removeCustomAnimations()
+        button.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        button.removeCustomAnimations()
         setupNextButtonStep()
     }
 
@@ -81,7 +78,7 @@ final class TrackingOnboardingViewController: VocableViewController {
         guard let placement = placement, let button = buttonDictionary[placement] else {
             return
         }
-        button.addArcAnimation(with: placement)
+        button.addArcAnimation()
     }
 
     private func setupNextButtonStep() {

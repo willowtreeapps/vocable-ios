@@ -12,15 +12,36 @@ class GazeableCornerButton: GazeableButton {
 
     var placement: ButtonPlacement = .leadingTop
 
+    var originPoint: CGPoint {
+        switch placement {
+        case .leadingTop:
+            return CGPoint(x: 0, y: 0)
+        case .leadingBottom:
+            return CGPoint(x: 0, y: self.bounds.maxY)
+        case .trailingTop:
+            return CGPoint(x: self.bounds.maxX, y: 0)
+        case .trailingBottom:
+            return CGPoint(x: self.bounds.maxX, y: self.bounds.maxY)
+        }
+    }
+
     override func renderBackgroundImage(withFillColor fillColor: UIColor, withHighlight isHighlighted: Bool) -> UIImage {
-        let quarterCircle = QuarterCircle(frame: self.frame.insetBy(dx: borderWidth * 0.5, dy: borderWidth * 0.5))
-        quarterCircle.layer.masksToBounds = false
-        let backgroundFillColor: UIColor = backgroundColor ?? .collectionViewBackgroundColor
-        let strokeColor = isHighlighted ? UIColor.cellBorderHighlightColor : fillColor
-        quarterCircle.fillColor = backgroundFillColor
-        quarterCircle.lineWidth = borderWidth
-        quarterCircle.strokeColor = strokeColor
-        let bgImage = quarterCircle.asImage().rotationFor(placement: placement)
-        return bgImage
+        let image = UIGraphicsImageRenderer(bounds: bounds).image { _ in
+            let backgroundFillColor: UIColor = backgroundColor ?? .collectionViewBackgroundColor
+            let strokeColor = isHighlighted ? UIColor.cellBorderHighlightColor : fillColor
+            let size = self.bounds.insetBy(dx: borderWidth / 2, dy: borderWidth / 2)
+            let path = UIBezierPath()
+            path.lineWidth = borderWidth
+            path.move(to: CGPoint(x: 0.0, y: 0.0))
+            path.addLine(to: CGPoint(x: size.width, y: 0.0))
+            path.addArc(withCenter: CGPoint(x: 0.0, y: 0.0), radius: size.width, startAngle: 0, endAngle: 3 * (.pi/2), clockwise: true)
+            path.close()
+            backgroundFillColor.setFill()
+            strokeColor.setStroke()
+            path.fill()
+            path.stroke()
+        }
+        let stretchableImage = image.resizableImage(withCapInsets: .zero, resizingMode: .stretch)
+        return stretchableImage.rotationFor(placement: placement)
     }
 }
