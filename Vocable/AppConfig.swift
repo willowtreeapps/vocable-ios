@@ -41,4 +41,6 @@ struct AppConfig {
         return ProcessInfo.processInfo.environment.keys.contains("EmptyStatesEnabled")
     }
 
+    @PublishedDefault(key: "hasSeenOnboarding", defaultValue: false)
+    static var hasSeenOnboarding: Bool
 }

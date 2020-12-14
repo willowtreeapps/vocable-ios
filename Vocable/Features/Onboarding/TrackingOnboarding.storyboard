@@ -53,8 +53,8 @@
                                             <constraint firstAttribute="height" constant="44" id="DLr-cR-MXh"/>
                                             <constraint firstAttribute="width" constant="144" id="svd-UV-Aoe"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="Skip Tutorial">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="Skip">
                                             <color key="titleColor" name="DefaultFontColor"/>
                                         </state>
                                         <connections>
@@ -157,7 +157,7 @@
             <size key="intrinsicContentSize" width="150" height="150"/>
         </designable>
         <designable name="9Lg-IJ-QoM">
-            <size key="intrinsicContentSize" width="124" height="38"/>
+            <size key="intrinsicContentSize" width="58" height="40"/>
         </designable>
         <designable name="C7x-Op-ZST">
             <size key="intrinsicContentSize" width="150" height="150"/>

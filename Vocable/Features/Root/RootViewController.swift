@@ -22,8 +22,6 @@ import CoreData
     private var categoryCarousel: CategoriesCarouselViewController!
     private var disposables = Set<AnyCancellable>()
 
-    private var presented = false
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addLayoutGuide(contentLayoutGuide)
@@ -63,10 +61,10 @@ import CoreData
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        if !presented {
+        if !AppConfig.hasSeenOnboarding {
             let vc = UIStoryboard(name: "TrackingOnboarding", bundle: nil).instantiateInitialViewController()!
-            present(vc, animated: true, completion: { [weak self] in
-                self?.presented = true
+            present(vc, animated: true, completion: {
+                AppConfig.hasSeenOnboarding = true
             })
         }
     }

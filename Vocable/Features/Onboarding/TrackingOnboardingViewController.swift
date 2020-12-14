@@ -23,7 +23,6 @@ final class TrackingOnboardingViewController: VocableViewController {
     var onboardingEngine = OnboardingTracker(OnboardingStep.testSteps)
 
     private var buttonDictionary: [CornerPlacement: GazeableCornerButton] = [:]
-    private var requiredCurrentStep: CornerPlacement?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +34,6 @@ final class TrackingOnboardingViewController: VocableViewController {
 
         onboardingLabel.text = onboardingEngine.currentStep?.description
         titleLabel.text = onboardingEngine.currentStep?.title
-        requiredCurrentStep = onboardingEngine.currentStep?.placement
 
         for placement in CornerPlacement.allCases {
             guard let button = buttonDictionary[placement] else {
@@ -54,7 +52,7 @@ final class TrackingOnboardingViewController: VocableViewController {
     }
 
     @IBAction func cornerButtonTapped(_ button: GazeableCornerButton) {
-        guard requiredCurrentStep == button.placement else {
+        guard onboardingEngine.currentStep?.placement == button.placement else {
             return
         }
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
@@ -76,7 +74,6 @@ final class TrackingOnboardingViewController: VocableViewController {
         faceTrackingAnimation.isHidden = true
 
         if let step = onboardingEngine.nextStep() {
-            requiredCurrentStep = step.placement
             addAnimation(for: step.placement)
 
             UIView.transition(with: stepInfoContainerView, duration: 0.5, options: .transitionCrossDissolve, animations: {
