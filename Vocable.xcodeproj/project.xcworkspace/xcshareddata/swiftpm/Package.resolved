@@ -72,6 +72,15 @@
           "revision": "d8accebc8fa32f57196df191e733f946e955c549",
           "version": "1.2.11"
         }
+      },
+      {
+        "package": "VocableCore",
+        "repositoryURL": "https://github.com/willowtreeapps/vocable-ios-spm.git",
+        "state": {
+          "branch": "main",
+          "revision": "ebd76c369a39b60c4cd9b9fd3f0ffc9b888f91b8",
+          "version": null
+        }
       }
     ]
   },

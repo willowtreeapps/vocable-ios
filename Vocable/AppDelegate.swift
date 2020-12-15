@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import Combine
 import AVFoundation
-import Firebase
+import VocableVoiceCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -39,6 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var disposables: [AnyCancellable] = []
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        let newHello = HelloWorld.sayHello()
+        print(newHello)
 
         if !AppConfig.isHeadTrackingSupported {
             AppConfig.isHeadTrackingEnabled = false

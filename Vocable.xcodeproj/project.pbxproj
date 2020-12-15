@@ -25,6 +25,7 @@
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
+		64599429258933370010EEFF /* VocableCore in Frameworks */ = {isa = PBXBuildFile; productRef = 64599428258933370010EEFF /* VocableCore */; };
 		64A220BB2452171C0014EA80 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A220BA2452171C0014EA80 /* RootViewController.swift */; };
 		64A220BE2452173C0014EA80 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64A220BD2452173C0014EA80 /* Root.storyboard */; };
 		64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A54544242A490700218BE8 /* GazeEatingView.swift */; };
@@ -340,6 +341,7 @@
 			files = (
 				2631B4092511926C00B94402 /* FirebaseAnalytics in Frameworks */,
 				2631B40B2511926C00B94402 /* FirebaseCrashlytics in Frameworks */,
+				64599429258933370010EEFF /* VocableCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +748,7 @@
 			packageProductDependencies = (
 				2631B4082511926C00B94402 /* FirebaseAnalytics */,
 				2631B40A2511926C00B94402 /* FirebaseCrashlytics */,
+				64599428258933370010EEFF /* VocableCore */,
 			);
 			productName = EyeTrackingTest;
 			productReference = 130C00B420D2AD2A007C3163 /* Vocable.app */;
@@ -827,6 +830,7 @@
 			mainGroup = 130C00AB20D2AD2A007C3163;
 			packageReferences = (
 				2631B4072511926C00B94402 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				64599427258933370010EEFF /* XCRemoteSwiftPackageReference "vocable-ios-spm" */,
 			);
 			productRefGroup = 130C00B520D2AD2A007C3163 /* Products */;
 			projectDirPath = "";
@@ -1263,6 +1267,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 753J68XC6W;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Vocable/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1288,6 +1296,10 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753J68XC6W;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Vocable/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1481,6 +1493,10 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753J68XC6W;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Vocable/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1575,6 +1591,14 @@
 				revision = 70b54ba972e5768fe84f69f700ae362c8fbf8e8b;
 			};
 		};
+		64599427258933370010EEFF /* XCRemoteSwiftPackageReference "vocable-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/willowtreeapps/vocable-ios-spm.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1587,6 +1611,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2631B4072511926C00B94402 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		64599428258933370010EEFF /* VocableCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64599427258933370010EEFF /* XCRemoteSwiftPackageReference "vocable-ios-spm" */;
+			productName = VocableCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 
