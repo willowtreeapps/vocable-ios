@@ -242,7 +242,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             show(viewController, sender: nil)
 
         case .contactDevs:
-            presentEmail()
+            presentEmailAlert()
 
         case .pidTuner:
             presentPidTuner()
@@ -302,7 +302,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         present(alertViewController, animated: true)
     }
 
-    private func presentEmail() {
+    private func presentEmailAlert() {
         if MFMailComposeViewController.canSendMail() {
             presentLeavingHeadTrackableDomainAlert(withConfirmation: presentEmail)
         } else {
@@ -315,10 +315,10 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             present(alertViewController, animated: true)
             return
         }
+    }
 
-        guard composeVC == nil else {
-            return
-        }
+    private func presentEmail() {
+        guard composeVC == nil else { return }
 
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
