@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import Speech
 
 class AudioEngineController {
 
@@ -17,6 +18,7 @@ class AudioEngineController {
 
     private let audioEngine = AVAudioEngine()
     private let audioSession = AVAudioSession.sharedInstance()
+    private let conversionQueue = DispatchQueue(label: "SpeechConversion")
 
     private var registeredSpeechControllers = Set<SpeechRecognizerController>() {
         didSet {
@@ -26,8 +28,8 @@ class AudioEngineController {
 
     private init() {
         setupRouteChangeNotifications()
-        updateAudioSession()
         updateInputNodeTapIfNeeded()
+        updateAudioSession()
     }
 
     @objc private func handleRouteChange(notification: Notification) {
@@ -44,20 +46,49 @@ class AudioEngineController {
 
     private var installedTapFormat: AVAudioFormat?
     private func updateInputNodeTapIfNeeded() {
+
         let bus = 0
         let node = audioEngine.inputNode
-        let currentRecordingFormat = node.outputFormat(forBus: bus)
+        let micInputFormat = node.outputFormat(forBus: bus)
 
-        if let installedFormat = installedTapFormat, installedFormat == currentRecordingFormat {
+        if let installedFormat = installedTapFormat, installedFormat == micInputFormat {
             return
         }
 
+        let speechInputFormat = SFSpeechAudioBufferRecognitionRequest().nativeAudioFormat
+        let formatConverter = AVAudioConverter(from: micInputFormat, to: speechInputFormat)!
+
         node.removeTap(onBus: bus)
-        node.installTap(onBus: bus, bufferSize: 1024, format: currentRecordingFormat) { [weak self] buffer, timestamp in
-            self?.audioBuffer = (buffer: buffer, timestamp: timestamp)
+        node.installTap(onBus: bus, bufferSize: 1024, format: micInputFormat) { [weak self] buffer, timestamp in
+            self?.conversionQueue.async {
+                let frameCapacity = AVAudioFrameCount(micInputFormat.sampleRate * 2.0)
+                guard let convertedBuffer = AVAudioPCMBuffer(pcmFormat: speechInputFormat, frameCapacity: frameCapacity) else {
+                    return
+                }
+                var error: NSError? = nil
+
+                var haveData = false
+                let inputBlock: AVAudioConverterInputBlock = { inNumPackets, outStatus in
+                    if haveData {
+                        outStatus.pointee = .noDataNow
+                        return nil
+                    }
+                    outStatus.pointee = .haveData
+                    haveData = true
+                    return buffer
+                }
+
+                formatConverter.convert(to: convertedBuffer, error: &error, withInputFrom: inputBlock)
+
+                if let error = error {
+                    assertionFailure(error.localizedDescription)
+                } else {
+                    self?.audioBuffer = (buffer: convertedBuffer, timestamp: timestamp)
+                }
+            }
         }
 
-        installedTapFormat = currentRecordingFormat
+        installedTapFormat = micInputFormat
         audioEngine.prepare()
     }
 

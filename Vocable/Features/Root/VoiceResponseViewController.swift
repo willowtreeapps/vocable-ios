@@ -116,8 +116,6 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
         let text = speechRecognitionResult.bestTranscription.formattedString
         delegate?.didUpdateSpeechResponse(speechRecognitionResult.bestTranscription.formattedString)
 
-        speechRecognizerController.startListening()
-
         let model = try! VocableChoicesModel(configuration: .init())
         guard let prediction = try? model.prediction(text: text) else {
             assertionFailure("Predictions failed...")
@@ -182,7 +180,6 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
 
     func transcriptionDidCancel() {
         print("Speech framework cancelled")
-        speechRecognizerController.startListening()
         delegate?.didUpdateSpeechResponse(nil)
     }
 

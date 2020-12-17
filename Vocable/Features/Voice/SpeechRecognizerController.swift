@@ -28,7 +28,8 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     }()
 
     private var bufferCancellable: AnyCancellable?
-    private var recognitionTask: SFSpeechRecognitionTask?
+    private var recognitionTasks = Set<SFSpeechRecognitionTask>()
+
     private var recognitionBuffer: SFSpeechAudioBufferRecognitionRequest?
 
     static private let speechRecognitionQueue: OperationQueue = {
@@ -40,17 +41,20 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     private var timeout: Timer?
 
     private static let timeoutInterval: TimeInterval = 1.2
+    private var lastErrorDate = Date.distantPast
 
-    private var isListening = false
+    @Published private(set) var isListening = false
+
+    private func countOfRecognitionTasks(matching states: SFSpeechRecognitionTaskState...) -> Int {
+        return recognitionTasks.filter {
+            states.contains($0.state)
+        }.count
+    }
 
     func startListening() {
         print("START LISTENING...")
         isListening = true
-
-        guard recognitionTask == nil else {
-            assertionFailure("Recognition task still running...")
-            return
-        }
+        AudioEngineController.shared.register(speechRecognizer: self)
 
         SFSpeechRecognizer.requestAuthorization { [weak self] (authStatus) in
             guard let self = self else { return }
@@ -76,16 +80,16 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         print("STOP LISTENING...")
         isListening = false
 
-        recognitionTask?.finish()
-        recognitionTask = nil
+        for task in recognitionTasks {
+            task.finish()
+        }
+        recognitionTasks.removeAll()
 
         AudioEngineController.shared.unregister(speechRecognizer: self)
     }
 
     private func startTimer() {
         print("STARTING TIMER...")
-
-        UIApplication.shared.isIdleTimerDisabled = true
 
         self.timeout?.invalidate()
         self.timeout = Timer.scheduledTimer(timeInterval: SpeechRecognizerController.timeoutInterval,
@@ -100,17 +104,51 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
         timeout?.invalidate()
 
-        recognitionTask?.finish()
-        stopListening()
+        for task in recognitionTasks {
+            task.finish()
+        }
+    }
+
+    private func prepareSpeechBuffer() {
+
+        if bufferCancellable == nil {
+            bufferCancellable = AudioEngineController.shared.$audioBuffer
+                .compactMap { $0 }
+                .sink { [weak self] in
+                    self?.recognitionBuffer?.append($0.buffer)
+                }
+        }
     }
 
     private func requestTranscription() {
+
+        guard countOfRecognitionTasks(matching: .starting, .running) == 0 else {
+            return
+        }
+
+        if recognitionTasks.count < 10 {
+            print(recognitionTasks.map(\.state))
+        }
+
+        prepareSpeechBuffer()
+        
         let request = SFSpeechAudioBufferRecognitionRequest()
         request.shouldReportPartialResults = true
         request.requiresOnDeviceRecognition = false
+        request.taskHint = .dictation
         recognitionBuffer = request
 
-        recognitionTask = SpeechRecognizerController.speechRecognizer?.recognitionTask(with: request, delegate: self)
+        if let task = SpeechRecognizerController.speechRecognizer?.recognitionTask(with: request, delegate: self) {
+            recognitionTasks.insert(task)
+        }
+
+    }
+
+    private func transcribeAgainIfNeeded() {
+        guard isListening else {
+            return
+        }
+        requestTranscription()
     }
 
     //
@@ -134,15 +172,14 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.delegate?.didGetFinalResult(recognitionResult)
-            self.recognitionTask = nil
         }
     }
 
     // Called when the task is no longer accepting new audio but may be finishing final processing
     func speechRecognitionTaskFinishedReadingAudio(_ task: SFSpeechRecognitionTask) {
         // TODO: Potentially buffer the next task? Probably not necessary
-        if isListening {
-            requestTranscription()
+        DispatchQueue.main.async { [weak self] in
+            self?.transcribeAgainIfNeeded()
         }
     }
 
@@ -150,11 +187,10 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     func speechRecognitionTaskWasCancelled(_ task: SFSpeechRecognitionTask) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            print("Audio engine did cancel")
-            self.delegate?.transcriptionDidCancel()
-        }
-        if isListening {
-            requestTranscription()
+            print("speechRecognitionTaskWasCancelled")
+//            self.delegate?.transcriptionDidCancel()
+            self.transcribeAgainIfNeeded()
+            self.recognitionTasks.remove(task)
         }
     }
 
@@ -163,13 +199,16 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            print("Audio engine did finish \(successfully ? "successfully" : "unsuccessfully")")
-            if !successfully {
-                self.delegate?.transcriptionDidCancel()
+            print("speechRecognitionTaskDidFinish \(successfully ? "successfully" : "unsuccessfully")")
+            if successfully {
+                self.transcribeAgainIfNeeded()
+            } else {
+                if Date().timeIntervalSince(self.lastErrorDate) < 0.05 {
+                    self.stopListening()
+                }
+                self.lastErrorDate = Date()
             }
-        }
-        if isListening {
-            requestTranscription()
+            self.recognitionTasks.remove(task)
         }
     }
 }
