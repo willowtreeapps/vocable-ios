@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import CoreData
 
-@IBDesignable class RootViewController: VocableViewController {
+@IBDesignable class RootViewController: VocableViewController, VoiceResponseViewControllerDelegate {
 
     @IBOutlet private weak var outputLabel: UILabel!
     @IBOutlet private weak var keyboardButton: GazeableButton!
@@ -76,6 +76,11 @@ import CoreData
         let utterancePublisher: PublishedValue<String?>.Publisher
         if category.identifier == Category.Identifier.numPad {
             let vc = NumericCategoryContentViewController()
+            utterancePublisher = vc.$lastUtterance
+            viewController = vc
+        } else if category.identifier == Category.Identifier.voice {
+            let vc = VoiceResponseViewController()
+            vc.delegate = self
             utterancePublisher = vc.$lastUtterance
             viewController = vc
         } else {
@@ -158,4 +163,13 @@ import CoreData
 
         viewController.didMove(toParent: self)
     }
+
+    // MARK: VoiceResponseViewControllerDelegate
+
+    func didUpdateSpeechRespones(_ text: String) {
+        DispatchQueue.main.async {
+            self.outputLabel.text = text
+        }
+    }
+
 }

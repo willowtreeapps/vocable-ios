@@ -18,6 +18,7 @@ extension Category {
         case userFavorites = "preset_user_favorites"
         case numPad = "preset_user_keypad"
         case recents = "preset_user_recents"
+        case voice = "Voice"
 
         static func == (lhs: String?, rhs: Identifier) -> Bool {
             guard let lhs = lhs else { return false }
