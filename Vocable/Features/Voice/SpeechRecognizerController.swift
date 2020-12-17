@@ -20,15 +20,14 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     weak var delegate: SpeechRecognizerControllerDelegate?
 
-    static private let audioEngine = AVAudioEngine()
     static private let speechRecognizer: SFSpeechRecognizer? = {
         let recognizer = SFSpeechRecognizer()
-        recognizer?.supportsOnDeviceRecognition = SpeechRecognizerController.shouldUseOnDeviceProcessing
+        recognizer?.supportsOnDeviceRecognition = true
         recognizer?.queue = SpeechRecognizerController.speechRecognitionQueue
         return recognizer
     }()
 
-    private var audioRecorder: AVAudioRecorder?
+    private var bufferCancellable: AnyCancellable?
     private var recognitionTask: SFSpeechRecognitionTask?
     private var recognitionBuffer: SFSpeechAudioBufferRecognitionRequest?
 
@@ -38,27 +37,15 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         return queue
     }()
 
-    private static let _spelledOutFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .spellOut
-        return formatter
-    }()
-
     private var timeout: Timer?
 
     private static let timeoutInterval: TimeInterval = 1.2
 
-    private static var shouldUseOnDeviceProcessing: Bool {
-        #if targetEnvironment(simulator)
-            return false
-        #else
-        return true
-//            return ProcessInfo.processInfo.environment.keys.contains("UseOnDeviceVoiceProcessing")
-        #endif
-    }
+    private var isListening = false
 
     func startListening() {
         print("START LISTENING...")
+        isListening = true
 
         guard recognitionTask == nil else {
             assertionFailure("Recognition task still running...")
@@ -76,18 +63,8 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
                         assertionFailure("Recording permission denied")
                         return
                     }
-                    do {
-                        try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .mixWithOthers)
-                        if SyntheticInput.values == nil {
-                            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
-                            self.setupRouteChangeNotifications()
-                            self.requestTranscription()
-                        } else {
-                            try audioSession.setActive(false, options: .notifyOthersOnDeactivation)
-                        }
-                    } catch {
-                        assertionFailure("Failed to start audio session: \(error)")
-                    }
+                    guard SyntheticInput.values == nil else { return }
+                    self.requestTranscription()
                 }
             default:
                 NSLog("Voice recognition not authorized")
@@ -97,35 +74,12 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     func stopListening() {
         print("STOP LISTENING...")
-
-        audioRecorder?.stop()
-        audioRecorder = nil
+        isListening = false
 
         recognitionTask?.finish()
         recognitionTask = nil
 
-        SpeechRecognizerController.audioEngine.stop()
-
-        let audioSession = AVAudioSession.sharedInstance()
-
-        do {
-            try audioSession.setActive(false, options: .notifyOthersOnDeactivation)
-        } catch {
-            print("Failed to deactivate audio session: \(error)")
-        }
-    }
-
-    @objc private func handleRouteChange(notification: Notification) {
-        updateInputNodeTapIfNeeded()
-    }
-
-    private func setupRouteChangeNotifications() {
-        // Get the default notification center instance.
-        let nc = NotificationCenter.default
-        nc.addObserver(self,
-                       selector: #selector(handleRouteChange),
-                       name: .AVAudioEngineConfigurationChange,
-                       object: nil)
+        AudioEngineController.shared.unregister(speechRecognizer: self)
     }
 
     private func startTimer() {
@@ -139,17 +93,12 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
                                             selector: #selector(self.handleTimeout),
                                             userInfo: nil,
                                             repeats: false)
-
     }
 
     @objc private func handleTimeout() {
         print("HANDLE TIMEOUT...")
 
         timeout?.invalidate()
-
-        DispatchQueue.main.async {
-            UIApplication.shared.isIdleTimerDisabled = false
-        }
 
         recognitionTask?.finish()
         stopListening()
@@ -161,34 +110,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         request.requiresOnDeviceRecognition = false
         recognitionBuffer = request
 
-        updateInputNodeTapIfNeeded()
-
-        do {
-            try SpeechRecognizerController.audioEngine.start()
-        } catch {
-            assertionFailure("Failed to start audio engine: \(error)")
-        }
-
         recognitionTask = SpeechRecognizerController.speechRecognizer?.recognitionTask(with: request, delegate: self)
-    }
-
-    private var installedTapFormat: AVAudioFormat?
-    private func updateInputNodeTapIfNeeded() {
-        let bus = 0
-        let node = SpeechRecognizerController.audioEngine.inputNode
-        let currentRecordingFormat = node.outputFormat(forBus: bus)
-
-        if let installedFormat = installedTapFormat, installedFormat == currentRecordingFormat {
-            return
-        }
-
-        node.removeTap(onBus: bus)
-        node.installTap(onBus: bus, bufferSize: 1024, format: currentRecordingFormat) { [weak self] buffer, _ in
-            self?.recognitionBuffer?.append(buffer)
-        }
-
-        installedTapFormat = currentRecordingFormat
-        SpeechRecognizerController.audioEngine.prepare()
     }
 
     //
@@ -219,6 +141,9 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     // Called when the task is no longer accepting new audio but may be finishing final processing
     func speechRecognitionTaskFinishedReadingAudio(_ task: SFSpeechRecognitionTask) {
         // TODO: Potentially buffer the next task? Probably not necessary
+        if isListening {
+            requestTranscription()
+        }
     }
 
     // Called when the task has been cancelled, either by client app, the user, or the system
@@ -226,8 +151,10 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             print("Audio engine did cancel")
-            self.stopListening()
             self.delegate?.transcriptionDidCancel()
+        }
+        if isListening {
+            requestTranscription()
         }
     }
 
@@ -235,12 +162,14 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     // If successfully is false, the error property of the task will contain error information
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
         DispatchQueue.main.async { [weak self] in
-        guard let self = self else { return }
+            guard let self = self else { return }
             print("Audio engine did finish \(successfully ? "successfully" : "unsuccessfully")")
             if !successfully {
-                self.stopListening()
                 self.delegate?.transcriptionDidCancel()
             }
+        }
+        if isListening {
+            requestTranscription()
         }
     }
 }
