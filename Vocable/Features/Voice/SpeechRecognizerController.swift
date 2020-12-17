@@ -11,6 +11,7 @@ import Speech
 import Combine
 
 protocol SpeechRecognizerControllerDelegate: AnyObject {
+    func didReceivePartialTranscription(_ transcription: String)
     func didGetFinalResult(_ speechRecognitionResult: SFSpeechRecognitionResult)
     func transcriptionDidCancel()
 }
@@ -44,7 +45,8 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     }()
 
     private var timeout: Timer?
-    private static let timeoutInterval: TimeInterval = 2.5
+
+    private static let timeoutInterval: TimeInterval = 1.2
 
     private static var shouldUseOnDeviceProcessing: Bool {
         #if targetEnvironment(simulator)
@@ -83,7 +85,6 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
                         } else {
                             try audioSession.setActive(false, options: .notifyOthersOnDeactivation)
                         }
-                        self.startTimer()
                     } catch {
                         assertionFailure("Failed to start audio session: \(error)")
                     }
@@ -130,16 +131,14 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     private func startTimer() {
         print("STARTING TIMER...")
 
-        DispatchQueue.main.async {
-            UIApplication.shared.isIdleTimerDisabled = true
+        UIApplication.shared.isIdleTimerDisabled = true
 
-            self.timeout?.invalidate()
-            self.timeout = Timer.scheduledTimer(timeInterval: SpeechRecognizerController.timeoutInterval,
-                                           target: self,
-                                           selector: #selector(self.handleTimeout),
-                                           userInfo: nil,
-                                           repeats: false)
-        }
+        self.timeout?.invalidate()
+        self.timeout = Timer.scheduledTimer(timeInterval: SpeechRecognizerController.timeoutInterval,
+                                            target: self,
+                                            selector: #selector(self.handleTimeout),
+                                            userInfo: nil,
+                                            repeats: false)
 
     }
 
@@ -170,26 +169,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
             assertionFailure("Failed to start audio engine: \(error)")
         }
 
-        recognitionTask = SpeechRecognizerController.speechRecognizer?.recognitionTask(with: request) { [weak self] result, error in
-            var isFinal = false
-
-            if let result = result {
-                isFinal = result.isFinal
-                self?.delegate?.didGetFinalResult(result)
-                print("Recognizer RESULT: \(result.bestTranscription.formattedString)")
-
-                if isFinal {
-                    print("FINAL Recognizer RESULT: \(result.bestTranscription.formattedString)")
-                    self?.recognitionTask = nil
-                }
-            }
-
-            if error != nil {
-                assertionFailure("Recognizer ERROR: \(String(describing: error))")
-                self?.recognitionTask = nil
-            }
-        }
-
+        recognitionTask = SpeechRecognizerController.speechRecognizer?.recognitionTask(with: request, delegate: self)
     }
 
     private var installedTapFormat: AVAudioFormat?
@@ -211,4 +191,57 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         SpeechRecognizerController.audioEngine.prepare()
     }
 
+    //
+    // Called when the task first detects speech in the source audio
+    func speechRecognitionDidDetectSpeech(_ task: SFSpeechRecognitionTask) {
+        // TODO: May be useful for UI to indicate when speech is detected (hot word)
+    }
+
+    // Called for all recognitions, including non-final hypothesis
+    func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didHypothesizeTranscription transcription: SFTranscription) {
+        print("didHypothesizeTranscription")
+        DispatchQueue.main.async { [weak self] in
+            self?.startTimer()
+            self?.delegate?.didReceivePartialTranscription(transcription.formattedString)
+        }
+    }
+
+    // Called only for final recognitions of utterances. No more about the utterance will be reported
+    func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishRecognition recognitionResult: SFSpeechRecognitionResult) {
+        print("didFinishRecognition")
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.delegate?.didGetFinalResult(recognitionResult)
+            self.recognitionTask = nil
+        }
+    }
+
+    // Called when the task is no longer accepting new audio but may be finishing final processing
+    func speechRecognitionTaskFinishedReadingAudio(_ task: SFSpeechRecognitionTask) {
+        // TODO: Potentially buffer the next task? Probably not necessary
+    }
+
+    // Called when the task has been cancelled, either by client app, the user, or the system
+    func speechRecognitionTaskWasCancelled(_ task: SFSpeechRecognitionTask) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            print("Audio engine did cancel")
+            self.stopListening()
+            self.delegate?.transcriptionDidCancel()
+        }
+    }
+
+    // Called when recognition of all requested utterances is finished.
+    // If successfully is false, the error property of the task will contain error information
+    func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
+        DispatchQueue.main.async { [weak self] in
+        guard let self = self else { return }
+            print("Audio engine did finish \(successfully ? "successfully" : "unsuccessfully")")
+            if !successfully {
+                self.stopListening()
+                self.delegate?.transcriptionDidCancel()
+            }
+        }
+    }
 }
+

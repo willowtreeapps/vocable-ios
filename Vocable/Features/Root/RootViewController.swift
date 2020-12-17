@@ -38,8 +38,7 @@ import CoreData
             contentLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
-        outputLabel.text = NSLocalizedString("main_screen.textfield_placeholder.default",
-        comment: "Select something below to speak Hint Text")
+        updateOutputLabelText(nil)
 
         categoryCarousel.$categoryObjectID
             .removeDuplicates()
@@ -164,12 +163,16 @@ import CoreData
         viewController.didMove(toParent: self)
     }
 
+    private func updateOutputLabelText(_ text: String?, isDictated: Bool = false) {
+        outputLabel.text = text ?? NSLocalizedString("main_screen.textfield_placeholder.default",
+                                                     comment: "Select something below to speak Hint Text")
+        outputLabel.textColor = isDictated ? .cellBorderHighlightColor : .defaultTextColor
+    }
+
     // MARK: VoiceResponseViewControllerDelegate
 
-    func didUpdateSpeechRespones(_ text: String) {
-        DispatchQueue.main.async {
-            self.outputLabel.text = text
-        }
+    func didUpdateSpeechResponse(_ text: String?) {
+        updateOutputLabelText(text, isDictated: (text != nil))
     }
 
 }

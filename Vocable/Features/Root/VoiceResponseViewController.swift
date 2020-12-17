@@ -10,7 +10,7 @@ import UIKit
 import Speech
 
 protocol VoiceResponseViewControllerDelegate: AnyObject {
-    func didUpdateSpeechRespones(_ text: String)
+    func didUpdateSpeechResponse(_ text: String?)
 }
 
 final class VoiceResponseViewController: PagingCarouselViewController, SpeechRecognizerControllerDelegate {
@@ -107,10 +107,16 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
 
     // MARK: SpeechRecognizerControllerDelegate
 
+    func didReceivePartialTranscription(_ transcription: String) {
+        delegate?.didUpdateSpeechResponse(transcription)
+    }
+
     func didGetFinalResult(_ speechRecognitionResult: SFSpeechRecognitionResult) {
 
         let text = speechRecognitionResult.bestTranscription.formattedString
-        delegate?.didUpdateSpeechRespones(speechRecognitionResult.bestTranscription.formattedString)
+        delegate?.didUpdateSpeechResponse(speechRecognitionResult.bestTranscription.formattedString)
+
+        speechRecognizerController.startListening()
 
         let model = try! VocableChoicesModel(configuration: .init())
         guard let prediction = try? model.prediction(text: text) else {
@@ -175,7 +181,9 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
     }
 
     func transcriptionDidCancel() {
-        assertionFailure("Speech framework cancelled")
+        print("Speech framework cancelled")
+        speechRecognizerController.startListening()
+        delegate?.didUpdateSpeechResponse(nil)
     }
 
 }
