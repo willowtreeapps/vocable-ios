@@ -243,7 +243,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
                 let alertMessage: String = {
                     let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
                     let categoryName = self.category.name
-                    return String.localizedStringWithFormat(format, categoryName as! CVarArg)
+                    return String.localizedStringWithFormat(format, categoryName!)
                 }()
 
                 ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)

@@ -818,7 +818,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = WillowTree;
 				TargetAttributes = {
 					130C00B320D2AD2A007C3163 = {
