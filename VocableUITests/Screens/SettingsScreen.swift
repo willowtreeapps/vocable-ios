@@ -26,7 +26,7 @@ class SettingsScreen {
     let alertContinueButton = XCUIApplication().buttons["Continue Editing"]
     let alertDiscardButton = XCUIApplication().buttons["Discard"]
     let alertDeleteButton = XCUIApplication().buttons["Delete"]
-   
+
     func openCategorySettings(category: String) {
         if otherElements.containing(.staticText, identifier: category).element.exists {
             otherElements.containing(.staticText, identifier: category).buttons["Forward"].tap()
@@ -51,7 +51,7 @@ class SettingsScreen {
             otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
         } else {
             settingsPageNextButton.tap()
-           otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
+            otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
         }
     }
     
@@ -77,18 +77,18 @@ class SettingsScreen {
     }
     
     func navigateToMainScreenFromSettings(from: String) {
-           switch from {
-           case "categoryDetails":
-               leaveCategoryDetailButton.tap()
-               leaveCategoriesButton.tap()
-               exitSettingsButton.tap()
-           case "categories":
-               leaveCategoriesButton.tap()
-               exitSettingsButton.tap()
-           case "settings":
-               exitSettingsButton.tap()
-           default:
-               break
-           }
-       }
+        switch from {
+        case "categoryDetails":
+            leaveCategoryDetailButton.tap()
+            leaveCategoriesButton.tap()
+            exitSettingsButton.tap()
+        case "categories":
+            leaveCategoriesButton.tap()
+            exitSettingsButton.tap()
+        case "settings":
+            exitSettingsButton.tap()
+        default:
+            break
+        }
+    }
 }

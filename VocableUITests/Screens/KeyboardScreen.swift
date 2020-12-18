@@ -22,7 +22,7 @@ class KeyboardScreen {
     }
     
     func randomString(length: Int) -> String {
-      let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-      return String((0..<length).map { _ in letters.randomElement()! })
+        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        return String((0..<length).map { _ in letters.randomElement()! })
     }
 }

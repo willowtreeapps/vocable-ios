@@ -21,12 +21,12 @@ class BaseTest: XCTestCase {
         continueAfterFailure = false
         app.launch()
     }
-
+    
     override func tearDown() {
         super.tearDown()
         captureFailure(name: self.name)
     }
-
+    
     func captureFailure(name: String) {
         let screenshot = XCUIScreen.main.screenshot()
         let attachment = XCTAttachment(screenshot: screenshot)

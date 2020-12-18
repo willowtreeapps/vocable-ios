@@ -48,8 +48,8 @@ class SettingsScreenTests: BaseTest {
         
         let expectedGeneralCategoryText = "2. General"
         let expectedbasicNeedsCategoryText = "1. Basic Needs"
-    
-       settingsScreen.navigateToSettingsCategoryScreen()
+
+        settingsScreen.navigateToSettingsCategoryScreen()
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: basicNeedsCategoryText).element.exists)
@@ -63,7 +63,7 @@ class SettingsScreenTests: BaseTest {
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: basicNeedsCategoryText).element.exists)
-    
+
     }
 
     func testAddCustomCategory() {
@@ -97,6 +97,6 @@ class SettingsScreenTests: BaseTest {
 
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: "9. A"+customCategory).element.exists)
 
-     }
+    }
 
 }
