@@ -56,6 +56,29 @@
                BlueprintName = "VocableUITests"
                ReferencedContainer = "container:Vocable.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "CustomCategoriesTest">
+               </Test>
+               <Test
+                  Identifier = "MainScreenTests/testCustonCategoryPagination()">
+               </Test>
+               <Test
+                  Identifier = "MainScreenTests/testDefaultCategoriesExist()">
+               </Test>
+               <Test
+                  Identifier = "MainScreenTests/testDisablingCategory()">
+               </Test>
+               <Test
+                  Identifier = "MainScreenTests/testSelectingCategoryChangesPhrases()">
+               </Test>
+               <Test
+                  Identifier = "SettingsScreenTests/testAddCustomCategory()">
+               </Test>
+               <Test
+                  Identifier = "SettingsScreenTests/testHideShowToggle()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

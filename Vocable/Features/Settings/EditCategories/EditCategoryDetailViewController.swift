@@ -233,7 +233,9 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             return true
         case .showCategoryToggle:
             return (category.identifier != .userFavorites)
-        case .addPhrase, .removeCategory:
+        case .addPhrase:
+            return category.identifier == Category.Identifier.userFavorites ? true : category.isUserGenerated
+        case .removeCategory:
             return category.isUserGenerated
         }
     }
