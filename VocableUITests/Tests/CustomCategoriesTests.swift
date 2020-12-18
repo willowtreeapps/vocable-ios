@@ -46,7 +46,7 @@ class CustomCategoriesTest: BaseTest {
     }
 
     func testCustomPhraseEdit() {
-    // This test builds off of the last test.
+        // This test builds off of the last test.
         let customPhrase = "Addingcustomcategoryphrasetest"
         let createdCustomCategory = ("9. "+customCategory)
 
@@ -62,17 +62,17 @@ class CustomCategoriesTest: BaseTest {
     }
     
     func testDeleteCustomPhrase() {
-       // This test builds off of the last test.
-           let customPhrase = "Test"
-           let createdCustomCategory = ("9. "+customCategory)
+        // This test builds off of the last test.
+        let customPhrase = "Test"
+        let createdCustomCategory = ("9. "+customCategory)
 
-           // Navigate to custom category
-           settingsScreen.navigateToSettingsCategoryScreen()
-           settingsScreen.openCategorySettings(category: createdCustomCategory)
+        // Navigate to custom category
+        settingsScreen.navigateToSettingsCategoryScreen()
+        settingsScreen.openCategorySettings(category: createdCustomCategory)
         
-           customCategoriesScreen.categoriesPageDeletePhraseButton.tap()
-           settingsScreen.alertDeleteButton.tap()
-           XCTAssertFalse(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to not be displayed")
+        customCategoriesScreen.categoriesPageDeletePhraseButton.tap()
+        settingsScreen.alertDeleteButton.tap()
+        XCTAssertFalse(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to not be displayed")
     }
     
     func testDuplicatePhrasesInDifferentCategories() {

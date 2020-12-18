@@ -25,16 +25,16 @@ class CustomCategoriesScreen {
     }
     
     func addCustomPhrases(numberOfPhrases: Int) {
-         for _ in 1...numberOfPhrases {
+        for _ in 1...numberOfPhrases {
             let randomPhrase = keyboardScreen.randomString(length: 2)
             categoriesPageAddPhraseButton.tap()
             keyboardScreen.typeText(randomPhrase)
             keyboardScreen.checkmarkAddButton.tap()
-          
+
             // Do this until accessibility identifiers are add and trash icon can be accessed.
             // Not needed until when change the screen to stay.
             //keyboardScreen.dismissKeyboardButton.tap()
-          }
-      }
+        }
+    }
     
 }

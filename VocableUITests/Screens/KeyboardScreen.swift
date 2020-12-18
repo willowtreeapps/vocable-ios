@@ -15,7 +15,6 @@ class KeyboardScreen {
     let dismissKeyboardButton = XCUIApplication().buttons["keyboard.dismissButton"]
     let favoriteButton = XCUIApplication().buttons["keyboard.favoriteButton"]
     let checkmarkAddButton = XCUIApplication().buttons["keyboard.saveButton"]
-    
     func typeText(_ textToType: String) {
         for char in textToType {
             app.collectionViews.staticTexts[String(char).uppercased()].tap()
@@ -23,7 +22,7 @@ class KeyboardScreen {
     }
     
     func randomString(length: Int) -> String {
-      let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-      return String((0..<length).map {_ in letters.randomElement()! })
+        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        return String((0..<length).map { _ in letters.randomElement()! })
     }
 }

@@ -28,7 +28,14 @@
 		64A220BB2452171C0014EA80 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A220BA2452171C0014EA80 /* RootViewController.swift */; };
 		64A220BE2452173C0014EA80 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64A220BD2452173C0014EA80 /* Root.storyboard */; };
 		64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A54544242A490700218BE8 /* GazeEatingView.swift */; };
+		64B32588254B550600023566 /* EditCategoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B32587254B550500023566 /* EditCategoryDetailViewController.swift */; };
+		64B32593254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B32592254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift */; };
+		64B3259B254B591D00023566 /* EditCategoryRemoveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B32597254B591C00023566 /* EditCategoryRemoveCollectionViewCell.swift */; };
+		64B3259C254B591D00023566 /* EditCategoryToggleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B32598254B591D00023566 /* EditCategoryToggleCollectionViewCell.swift */; };
+		64B3259D254B591D00023566 /* EditCategoryRemoveCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64B32599254B591D00023566 /* EditCategoryRemoveCollectionViewCell.xib */; };
+		64B3259E254B591D00023566 /* EditCategoryToggleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64B3259A254B591D00023566 /* EditCategoryToggleCollectionViewCell.xib */; };
 		64D04A58242951C00006962D /* GazeableAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */; };
+		64E9CD60258D35B400A2DC1F /* EditCategoryDetailsHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64E9CD5F258D35B400A2DC1F /* EditCategoryDetailsHeaderCollectionViewCell.xib */; };
 		64F49906245B40BC00348592 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B005AE6245B21ED004919F4 /* SettingsViewController.swift */; };
 		64F8A5FA245CC9FA00B7C0F9 /* EditPhrasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E9892459F7C3007B01F2 /* EditPhrasesViewController.swift */; };
 		6B005AE3245B057E004919F4 /* VocableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B005AE2245B057E004919F4 /* VocableCollectionViewController.swift */; };
@@ -192,7 +199,14 @@
 		64A220BA2452171C0014EA80 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		64A220BD2452173C0014EA80 /* Root.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
 		64A54544242A490700218BE8 /* GazeEatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeEatingView.swift; sourceTree = "<group>"; };
+		64B32587254B550500023566 /* EditCategoryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoryDetailViewController.swift; sourceTree = "<group>"; };
+		64B32592254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoryDetailTitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		64B32597254B591C00023566 /* EditCategoryRemoveCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoryRemoveCollectionViewCell.swift; sourceTree = "<group>"; };
+		64B32598254B591D00023566 /* EditCategoryToggleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoryToggleCollectionViewCell.swift; sourceTree = "<group>"; };
+		64B32599254B591D00023566 /* EditCategoryRemoveCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCategoryRemoveCollectionViewCell.xib; sourceTree = "<group>"; };
+		64B3259A254B591D00023566 /* EditCategoryToggleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCategoryToggleCollectionViewCell.xib; sourceTree = "<group>"; };
 		64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableAlertPresentationController.swift; sourceTree = "<group>"; };
+		64E9CD5F258D35B400A2DC1F /* EditCategoryDetailsHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCategoryDetailsHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		6B005AE2245B057E004919F4 /* VocableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableCollectionViewController.swift; sourceTree = "<group>"; };
 		6B005AE4245B06F3004919F4 /* VocableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableViewController.swift; sourceTree = "<group>"; };
 		6B005AE6245B21ED004919F4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -467,6 +481,22 @@
 			path = Root;
 			sourceTree = "<group>";
 		};
+		64E9CD67258D3E5500A2DC1F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */,
+				A9B6960A2433CCFD004E6960 /* EditCategoriesDefaultCollectionViewCell.swift */,
+				A9B696042433C422004E6960 /* EditCategoriesDefaultCollectionViewCell.xib */,
+				64E9CD5F258D35B400A2DC1F /* EditCategoryDetailsHeaderCollectionViewCell.xib */,
+				64B32592254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift */,
+				64B32597254B591C00023566 /* EditCategoryRemoveCollectionViewCell.swift */,
+				64B32599254B591D00023566 /* EditCategoryRemoveCollectionViewCell.xib */,
+				64B32598254B591D00023566 /* EditCategoryToggleCollectionViewCell.swift */,
+				64B3259A254B591D00023566 /* EditCategoryToggleCollectionViewCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		6B823BA923F4ADE30099F65E /* PulseController */ = {
 			isa = PBXGroup;
 			children = (
@@ -587,10 +617,9 @@
 		A9B696002433C33F004E6960 /* EditCategories */ = {
 			isa = PBXGroup;
 			children = (
-				A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */,
-				A9B6960A2433CCFD004E6960 /* EditCategoriesDefaultCollectionViewCell.swift */,
-				A9B696042433C422004E6960 /* EditCategoriesDefaultCollectionViewCell.xib */,
 				A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */,
+				64B32587254B550500023566 /* EditCategoryDetailViewController.swift */,
+				64E9CD67258D3E5500A2DC1F /* Cells */,
 			);
 			path = EditCategories;
 			sourceTree = "<group>";
@@ -794,7 +823,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = WillowTree;
 				TargetAttributes = {
 					130C00B320D2AD2A007C3163 = {
@@ -844,12 +873,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64E9CD60258D35B400A2DC1F /* EditCategoryDetailsHeaderCollectionViewCell.xib in Resources */,
 				A9CF2AF5242D4EF1005633A7 /* SensitivityCollectionViewCell.xib in Resources */,
 				718D7FB0241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib in Resources */,
 				71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */,
 				A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */,
 				A9299C7723F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib in Resources */,
 				A96D61D724229F7400577144 /* SettingsCollectionViewCell.xib in Resources */,
+				64B3259D254B591D00023566 /* EditCategoryRemoveCollectionViewCell.xib in Resources */,
 				71B856442416CEB600CB163B /* ToastView.xib in Resources */,
 				A98E8A2523F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib in Resources */,
 				274540282460DD0F0056EF98 /* Presets.strings in Resources */,
@@ -861,6 +892,7 @@
 				6B9DFA6923E88A1B0037673E /* GazeLib.scnassets in Resources */,
 				6BE23D562444DCBE0032CAE4 /* Localizable.strings in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
+				64B3259E254B591D00023566 /* EditCategoryToggleCollectionViewCell.xib in Resources */,
 				2745402E2460DD760056EF98 /* presets.json in Resources */,
 				64A220BE2452173C0014EA80 /* Root.storyboard in Resources */,
 				2631B366251181C400B94402 /* GoogleService-Info.plist in Resources */,
@@ -962,7 +994,9 @@
 				64A220BB2452171C0014EA80 /* RootViewController.swift in Sources */,
 				6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */,
 				B8DA9DF223F30BAF00FEBE19 /* Cell+NibLoading.swift in Sources */,
+				64B3259C254B591D00023566 /* EditCategoryToggleCollectionViewCell.swift in Sources */,
 				6BB56BA82422AC2500EA787E /* ToastView.swift in Sources */,
+				64B3259B254B591D00023566 /* EditCategoryRemoveCollectionViewCell.swift in Sources */,
 				A9DFCC20242D020100136136 /* PublishedValue.swift in Sources */,
 				A9C32CFF242271F3000EC6F7 /* Phrase+Helpers.swift in Sources */,
 				64F49906245B40BC00348592 /* SettingsViewController.swift in Sources */,
@@ -997,6 +1031,7 @@
 				6B823BD023F4ADE30099F65E /* PulseExtension.swift in Sources */,
 				130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */,
 				6B8A6E3124533789004B5220 /* UIHeadGazeTrackingWindow.swift in Sources */,
+				64B32588254B550600023566 /* EditCategoryDetailViewController.swift in Sources */,
 				A93E9403244E00A6008B61D2 /* UICollectionView+Helpers.swift in Sources */,
 				A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */,
 				A99AF23123FC8BF700BE1184 /* TextTransaction.swift in Sources */,
@@ -1005,6 +1040,7 @@
 				6B823BCB23F4ADE30099F65E /* Pulse.swift in Sources */,
 				6B5C49112460AEF900A4433C /* RootEditTextViewController.swift in Sources */,
 				A9CF2AEF242D44EE005633A7 /* TimingSensitivityViewController.swift in Sources */,
+				64B32593254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift in Sources */,
 				B8DA9DF423F30BD200FEBE19 /* VectorUtils.swift in Sources */,
 				B879831523E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift in Sources */,
 				6B823BCC23F4ADE30099F65E /* TunningView.swift in Sources */,

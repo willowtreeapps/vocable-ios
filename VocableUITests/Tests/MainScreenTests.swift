@@ -9,7 +9,7 @@
 import XCTest
 
 class MainScreenTests: BaseTest {
-
+    
     func testDefaultCategoriesExist() {
         for categoryName in mainScreen.defaultCategories {
             XCTAssert(mainScreen.isTextDisplayed(categoryName), "Expected the current category name to be \(categoryName)")
@@ -45,7 +45,7 @@ class MainScreenTests: BaseTest {
         settingsScreen.categoriesButton.tap()
         
         settingsScreen.toggleHideShowCategory(category: generalCategoryText, toggle: "Hide")
-
+        
         settingsScreen.leaveCategoriesButton.tap()
         settingsScreen.exitSettingsButton.tap()
         
@@ -64,7 +64,7 @@ class MainScreenTests: BaseTest {
         let addedCustomCategory = "9. "+customCategory
         // Adding custom category via Settings screen at it is unknown yet whether we want to implment via keyboard screen.
         settingsScreen.navigateToSettingsCategoryScreen()
-    
+        
         customCategoriesScreen.createCustomCategory(categoryName: customCategory)
         settingsScreen.leaveCategoriesButton.tap()
         settingsScreen.exitSettingsButton.tap()
