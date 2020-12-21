@@ -55,18 +55,8 @@
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NvG-PJ-EHy" userLabel="HideCategoryButton" customClass="GazeableButton" customModule="Vocable" customModuleProvider="target">
-                                <rect key="frame" x="184" y="54" width="84" height="54"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="896-D0-r7y"/>
-                                    <constraint firstAttribute="width" constant="84" id="MpJ-vr-07N"/>
-                                </constraints>
-                                <state key="normal" image="eye.slash" catalog="system">
-                                    <color key="titleColor" name="DefaultFontColor"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. General" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3t9-YV-add" userLabel="CategoryName">
-                                <rect key="frame" x="276" y="64.5" width="336" height="33.5"/>
+                                <rect key="frame" x="184" y="64.5" width="428" height="33.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                 <color key="textColor" name="DefaultFontColor"/>
                                 <nil key="highlightedColor"/>
@@ -102,7 +92,6 @@
             <connections>
                 <outlet property="bottomSeparator" destination="hWY-nm-Hv6" id="Sue-pL-2Uw"/>
                 <outlet property="categoryNameLabel" destination="3t9-YV-add" id="Ehe-LR-iFr"/>
-                <outlet property="hideCategoryButton" destination="NvG-PJ-EHy" id="fYj-hG-d25"/>
                 <outlet property="moveDownButton" destination="Ieb-WK-NlS" id="uok-e2-jWH"/>
                 <outlet property="moveUpButton" destination="yIe-C4-EHn" id="e1c-iy-MGb"/>
                 <outlet property="showCategoryDetailButton" destination="PfR-1l-Qp7" id="yjb-aR-8sS"/>
@@ -115,9 +104,6 @@
         <designable name="Ieb-WK-NlS">
             <size key="intrinsicContentSize" width="18.5" height="22"/>
         </designable>
-        <designable name="NvG-PJ-EHy">
-            <size key="intrinsicContentSize" width="26" height="22"/>
-        </designable>
         <designable name="PfR-1l-Qp7">
             <size key="intrinsicContentSize" width="12.5" height="22"/>
         </designable>
@@ -129,7 +115,6 @@
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="chevron.up" catalog="system" width="128" height="72"/>
-        <image name="eye.slash" catalog="system" width="128" height="86"/>
         <namedColor name="DefaultCellBackground">
             <color red="0.21799999475479126" green="0.19499999284744263" blue="0.62699997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1210"
+   LastUpgradeVersion = "1230"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -65,6 +65,26 @@
                BlueprintName = "VocableUITests"
                ReferencedContainer = "container:Vocable.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "MainScreenTests/testCustonCategoryPagination()">
+               </Test>
+               <Test
+                  Identifier = "MainScreenTests/testDefaultSayingsInGeneralCategoryExist()">
+               </Test>
+               <Test
+                  Identifier = "MainScreenTests/testDisablingCategory()">
+               </Test>
+               <Test
+                  Identifier = "MainScreenTests/testWhenTapping123Phrase_ThenThatPhraseDisplaysOnOutputLabel()">
+               </Test>
+               <Test
+                  Identifier = "SettingsScreenTests/testAddCustomCategory()">
+               </Test>
+               <Test
+                  Identifier = "SettingsScreenTests/testHideShowToggle()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

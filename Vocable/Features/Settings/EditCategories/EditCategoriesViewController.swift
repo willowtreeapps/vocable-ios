@@ -29,7 +29,6 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
 
         cell.moveUpButton.addTarget(self, action: #selector(self.handleMoveCategoryUp(_:)), for: .primaryActionTriggered)
         cell.moveDownButton.addTarget(self, action: #selector(self.handleMoveCategoryDown(_:)), for: .primaryActionTriggered)
-        cell.hideCategoryButton.addTarget(self, action: #selector(self.handleHideToggle(_:)), for: .primaryActionTriggered)
         cell.showCategoryDetailButton.addTarget(self, action: #selector(self.handleShowEditCategoryDetail(_:)), for: .primaryActionTriggered)
 
         return cell
@@ -145,17 +144,8 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         let rowOrdinal = indexPath.row + 1
         let formattedRowOrdinal = EditCategoriesViewController.rowIndexFormatter.string(from: NSNumber(value: rowOrdinal)) ?? "\(rowOrdinal)"
         let visibleTitleString = NSMutableAttributedString(string: "\(formattedRowOrdinal). \(category.name ?? "")")
-        let hiddenTitleString = NSMutableAttributedString(string: "\(category.name ?? "")")
-
-        if category.isHidden {
-            cell.setup(title: hiddenTitleString)
-            cell.hideCategoryButton.setImage(UIImage(systemName: "eye.fill")?.withTintColor(.white), for: .normal)
-            cell.showCategoryDetailButton.isEnabled = false
-        } else {
-            cell.setup(title: visibleTitleString)
-            cell.hideCategoryButton.setImage(UIImage(systemName: "eye.slash.fill")?.withTintColor(.white), for: .normal)
-            cell.showCategoryDetailButton.isEnabled = category.isUserGenerated || category.identifier == .userFavorites
-        }
+        cell.showCategoryDetailButton.isEnabled = true
+        cell.setup(title: visibleTitleString)
 
         cell.separatorMask = collectionView.layout.separatorMask(for: indexPath)
         cell.ordinalButtonMask = cellOrdinalButtonMask(for: indexPath)
@@ -198,25 +188,13 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         saveContext()
     }
 
-    @objc private func handleHideToggle(_ sender: UIButton) {
-        guard let _indexPath = collectionView.indexPath(containing: sender) else {
-            assertionFailure("Failed to obtain index path")
-            return
-        }
-
-        let indexPath = diffableDataSource.indexPath(fromMappedIndexPath: _indexPath)
-        let category = fetchResultsController.object(at: indexPath)
-        category.setValue(!category.isHidden, forKey: "isHidden")
-        saveContext()
-    }
-
     @objc private func handleShowEditCategoryDetail(_ sender: UIButton) {
         guard let _indexPath = collectionView.indexPath(containing: sender) else {
             assertionFailure("Failed to obtain index path")
             return
         }
 
-        let viewController = EditPhrasesViewController()
+        let viewController = EditCategoryDetailViewController()
         let indexPath = diffableDataSource.indexPath(fromMappedIndexPath: _indexPath)
         viewController.category = fetchResultsController.object(at: indexPath)
         show(viewController, sender: nil)
