@@ -32,7 +32,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     private var bufferCancellable: AnyCancellable?
     private var recognitionTasks = Set<SFSpeechRecognitionTask>()
 
-    private var recognitionBuffer: SFSpeechAudioBufferRecognitionRequest?
+    private var recognitionBuffers = [SFSpeechRecognitionTask: SFSpeechAudioBufferRecognitionRequest]()
 
     private var timeout: Timer?
 
@@ -48,6 +48,9 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     }
 
     func startListening() {
+        guard !isListening else {
+            return
+        }
         print("START LISTENING...")
         isListening = true
         AudioEngineController.shared.register(speechRecognizer: self)
@@ -73,6 +76,9 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     }
 
     func stopListening() {
+        guard isListening else {
+            return
+        }
         print("STOP LISTENING...")
         isListening = false
 
@@ -101,8 +107,12 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         timeout?.invalidate()
 
         for task in recognitionTasks {
+            if let buffer = recognitionBuffers[task] {
+                buffer.endAudio()
+            }
             task.finish()
         }
+        recognitionTasks.removeAll()
     }
 
     private func prepareSpeechBuffer() {
@@ -111,7 +121,10 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
             bufferCancellable = AudioEngineController.shared.$audioBuffer
                 .compactMap { $0 }
                 .sink { [weak self] in
-                    self?.recognitionBuffer?.append($0.buffer)
+                    guard let self = self else { return }
+                    for buffer in self.recognitionBuffers.values {
+                        buffer.append($0.buffer)
+                    }
                 }
         }
     }
@@ -133,9 +146,8 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
             request.contextualStrings = [phrase]
         }
 
-        recognitionBuffer = request
-
         if let task = SpeechRecognizerController.speechRecognizer?.recognitionTask(with: request, delegate: self) {
+            recognitionBuffers[task] = request
             recognitionTasks.insert(task)
         }
 
@@ -177,7 +189,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     // Called when the task is no longer accepting new audio but may be finishing final processing
     func speechRecognitionTaskFinishedReadingAudio(_ task: SFSpeechRecognitionTask) {
         // TODO: Potentially buffer the next task? Probably not necessary
-        transcribeAgainIfNeeded()
+        //       - Calling transcribeAgainIfNeeded() will cause this current one to fail
     }
 
     // Called when the task has been cancelled, either by client app, the user, or the system
@@ -185,16 +197,14 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         print("speechRecognitionTaskWasCancelled")
         transcribeAgainIfNeeded()
         recognitionTasks.remove(task)
+        recognitionBuffers[task] = nil
     }
 
     // Called when recognition of all requested utterances is finished.
     // If successfully is false, the error property of the task will contain error information
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
         print("speechRecognitionTaskDidFinish \(successfully ? "successfully" : "unsuccessfully")")
-        if successfully {
-            transcribeAgainIfNeeded()
-        } else {
-
+        if !successfully {
             // If we get spammed with errors, stop trying to obtain a transcription.
             // This can occur for a number of reasons and it's difficult to enumerate
             // the possible error codes ahead of time
@@ -204,6 +214,8 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
             lastErrorDate = Date()
         }
         recognitionTasks.remove(task)
+        recognitionBuffers[task] = nil
+        transcribeAgainIfNeeded()
     }
 }
 
