@@ -183,4 +183,8 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
         delegate?.didUpdateSpeechResponse(nil)
     }
 
+    func didReceiveRequiredPhrase() {
+        // no-op
+    }
+
 }

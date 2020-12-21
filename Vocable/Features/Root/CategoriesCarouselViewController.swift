@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreData
+import Speech
 
-@IBDesignable class CategoriesCarouselViewController: UIViewController, NSFetchedResultsControllerDelegate, UICollectionViewDelegate {
+@IBDesignable class CategoriesCarouselViewController: UIViewController, NSFetchedResultsControllerDelegate, UICollectionViewDelegate, SpeechRecognizerControllerDelegate {
 
     static func fetchInitialCategoryID() -> NSManagedObjectID {
         let ctx = NSPersistentContainer.shared.viewContext
@@ -21,12 +22,27 @@ import CoreData
         return categories[0].objectID
     }
 
+    static func fetchVoiceCategoryID() -> NSManagedObjectID {
+        let ctx = NSPersistentContainer.shared.viewContext
+        let predicate = NSComparisonPredicate(\Category.identifier, .equalTo, Category.Identifier.voice.rawValue)
+        let categories = Category.fetchAll(in: ctx, matching: predicate)
+        return categories[0].objectID
+    }
+
     @PublishedValue private(set) var categoryObjectID = fetchInitialCategoryID()
     @IBOutlet private weak var backChevron: GazeableButton!
     @IBOutlet private weak var forwardChevron: GazeableButton!
     @IBOutlet private weak var collectionViewContainer: UIView!
     @IBOutlet private weak var collectionView: CarouselGridCollectionView!
     @IBOutlet private weak var outerStackView: UIStackView!
+
+    private lazy var hotWordRecognizer: SpeechRecognizerController = {
+        let recognizer = SpeechRecognizerController()
+        recognizer.requiredPhrase = "hey vocable"
+        recognizer.timeoutInterval = 1.2
+        recognizer.delegate = self
+        return recognizer
+    }()
 
     private var collectionViewMask = BorderedView(frame: .zero)
 
@@ -80,6 +96,12 @@ import CoreData
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateCollectionViewMaskFrame()
+        hotWordRecognizer.startListening()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        hotWordRecognizer.stopListening()
     }
 
     override func viewDidLayoutSubviews() {
@@ -237,4 +259,37 @@ import CoreData
         categoryObjectID = frc.object(at: mappedIndexPath).objectID
         updateSelectedIndexPathsInProxyDataSource()
     }
+
+    // MARK: - SpeechRecognizerControllerDelegate
+
+    func didReceivePartialTranscription(_ transcription: String) {
+        // no-op
+    }
+
+    func didGetFinalResult(_ speechRecognitionResult: SFSpeechRecognitionResult) {
+        // no-op
+    }
+
+    func transcriptionDidCancel() {
+        // no-op
+    }
+
+    func didReceiveRequiredPhrase() {
+
+        let objectID = CategoriesCarouselViewController.fetchVoiceCategoryID()
+        guard let desiredIndexPath = dataSourceProxy.indexPath(for: objectID) else {
+            return
+        }
+
+        for indexPath in collectionView.indexPathsForSelectedItems ?? [] {
+            collectionView.deselectItem(at: indexPath, animated: false)
+        }
+        dataSourceProxy.performActions(on: desiredIndexPath) { (aPath) in
+            collectionView.selectItem(at: aPath, animated: false, scrollPosition: [])
+        }
+
+        collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary()
+        self.categoryObjectID = objectID
+    }
+
 }
