@@ -23,7 +23,6 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     static private let speechRecognizer: SFSpeechRecognizer? = {
         let recognizer = SFSpeechRecognizer()
         recognizer?.supportsOnDeviceRecognition = true
-        recognizer?.queue = SpeechRecognizerController.speechRecognitionQueue
         return recognizer
     }()
 
@@ -32,22 +31,17 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     private var recognitionBuffer: SFSpeechAudioBufferRecognitionRequest?
 
-    static private let speechRecognitionQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.qualityOfService = .userInteractive
-        return queue
-    }()
-
     private var timeout: Timer?
 
     private static let timeoutInterval: TimeInterval = 1.2
     private var lastErrorDate = Date.distantPast
 
     @Published private(set) var isListening = false
+    @Published private(set) var isHearingWords = false
 
     private func countOfRecognitionTasks(matching states: SFSpeechRecognitionTaskState...) -> Int {
-        return recognitionTasks.filter {
-            states.contains($0.state)
+        return recognitionTasks.filter { task in
+            states.contains(task.state)
         }.count
     }
 
@@ -91,12 +85,12 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     private func startTimer() {
         print("STARTING TIMER...")
 
-        self.timeout?.invalidate()
-        self.timeout = Timer.scheduledTimer(timeInterval: SpeechRecognizerController.timeoutInterval,
-                                            target: self,
-                                            selector: #selector(self.handleTimeout),
-                                            userInfo: nil,
-                                            repeats: false)
+        timeout?.invalidate()
+        timeout = Timer.scheduledTimer(timeInterval: SpeechRecognizerController.timeoutInterval,
+                                       target: self,
+                                       selector: #selector(self.handleTimeout),
+                                       userInfo: nil,
+                                       repeats: false)
     }
 
     @objc private func handleTimeout() {
@@ -126,10 +120,6 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
             return
         }
 
-        if recognitionTasks.count < 10 {
-            print(recognitionTasks.map(\.state))
-        }
-
         prepareSpeechBuffer()
         
         let request = SFSpeechAudioBufferRecognitionRequest()
@@ -155,61 +145,52 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     // Called when the task first detects speech in the source audio
     func speechRecognitionDidDetectSpeech(_ task: SFSpeechRecognitionTask) {
         // TODO: May be useful for UI to indicate when speech is detected (hot word)
+        isHearingWords = true
     }
 
     // Called for all recognitions, including non-final hypothesis
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didHypothesizeTranscription transcription: SFTranscription) {
         print("didHypothesizeTranscription")
-        DispatchQueue.main.async { [weak self] in
-            self?.startTimer()
-            self?.delegate?.didReceivePartialTranscription(transcription.formattedString)
-        }
+        startTimer()
+        delegate?.didReceivePartialTranscription(transcription.formattedString)
     }
 
     // Called only for final recognitions of utterances. No more about the utterance will be reported
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishRecognition recognitionResult: SFSpeechRecognitionResult) {
         print("didFinishRecognition")
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.delegate?.didGetFinalResult(recognitionResult)
-        }
+        delegate?.didGetFinalResult(recognitionResult)
     }
 
     // Called when the task is no longer accepting new audio but may be finishing final processing
     func speechRecognitionTaskFinishedReadingAudio(_ task: SFSpeechRecognitionTask) {
         // TODO: Potentially buffer the next task? Probably not necessary
-        DispatchQueue.main.async { [weak self] in
-            self?.transcribeAgainIfNeeded()
-        }
+        transcribeAgainIfNeeded()
     }
 
     // Called when the task has been cancelled, either by client app, the user, or the system
     func speechRecognitionTaskWasCancelled(_ task: SFSpeechRecognitionTask) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            print("speechRecognitionTaskWasCancelled")
-//            self.delegate?.transcriptionDidCancel()
-            self.transcribeAgainIfNeeded()
-            self.recognitionTasks.remove(task)
-        }
+        print("speechRecognitionTaskWasCancelled")
+        transcribeAgainIfNeeded()
+        recognitionTasks.remove(task)
     }
 
     // Called when recognition of all requested utterances is finished.
     // If successfully is false, the error property of the task will contain error information
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            print("speechRecognitionTaskDidFinish \(successfully ? "successfully" : "unsuccessfully")")
-            if successfully {
-                self.transcribeAgainIfNeeded()
-            } else {
-                if Date().timeIntervalSince(self.lastErrorDate) < 0.05 {
-                    self.stopListening()
-                }
-                self.lastErrorDate = Date()
+        print("speechRecognitionTaskDidFinish \(successfully ? "successfully" : "unsuccessfully")")
+        if successfully {
+            transcribeAgainIfNeeded()
+        } else {
+
+            // If we get spammed with errors, stop trying to obtain a transcription.
+            // This can occur for a number of reasons and it's difficult to enumerate
+            // the possible error codes ahead of time
+            if Date().timeIntervalSince(lastErrorDate) < 0.05 {
+                stopListening()
             }
-            self.recognitionTasks.remove(task)
+            lastErrorDate = Date()
         }
+        recognitionTasks.remove(task)
     }
 }
 
