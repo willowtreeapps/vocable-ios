@@ -53,13 +53,13 @@
         <note>Delete category alert cancel button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
-        <source>Remove</source>
-        <target>Remove</target>
+        <source>Delete</source>
+        <target>Delete</target>
         <note>Delete category alert action button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve">
-        <source>Deleted categories cannot be recovered.</source>
-        <target>Deleted categories cannot be recovered.</target>
+        <source>Are you sure you want to delete? Removed categories cannot be restored.</source>
+        <target>Are you sure you want to delete? Removed categories cannot be restored.</target>
         <note>Delete category confirmation alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
