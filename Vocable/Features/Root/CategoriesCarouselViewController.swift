@@ -29,7 +29,12 @@ import Speech
         return categories[0].objectID
     }
 
-    @PublishedValue private(set) var categoryObjectID = fetchInitialCategoryID()
+    @PublishedValue private(set) var categoryObjectID = fetchInitialCategoryID() {
+        didSet {
+            categorySelectionDidChange()
+        }
+    }
+
     @IBOutlet private weak var backChevron: GazeableButton!
     @IBOutlet private weak var forwardChevron: GazeableButton!
     @IBOutlet private weak var collectionViewContainer: UIView!
@@ -242,6 +247,15 @@ import Speech
         coordinator.animate(alongsideTransition: { _ in
             self.updateCollectionViewMaskFrame()
         })
+    }
+
+    private func categorySelectionDidChange() {
+        let voiceID = CategoriesCarouselViewController.fetchVoiceCategoryID()
+        if categoryObjectID == voiceID {
+            hotWordRecognizer.stopListening()
+        } else {
+            hotWordRecognizer.startListening()
+        }
     }
 
     // MARK: - UICollectionViewDelegate
