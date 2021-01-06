@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import Combine
 import AVFoundation
-import Firebase
+import VocableVoiceCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

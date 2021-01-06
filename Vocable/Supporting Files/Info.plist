@@ -24,6 +24,10 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Your microphone will be used to record your speech when you press the &quot;Start Recording&quot; button.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>Speech recognition will be used to determine which words you speak into the device&apos;s microphone.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

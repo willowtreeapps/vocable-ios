@@ -25,6 +25,10 @@
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
+		64599429258933370010EEFF /* VocableCore in Frameworks */ = {isa = PBXBuildFile; productRef = 64599428258933370010EEFF /* VocableCore */; };
+		64599431258938F50010EEFF /* VoiceResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64599430258938F50010EEFF /* VoiceResponseViewController.swift */; };
+		6459943E25895D9C0010EEFF /* SpeechRecognizerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6459943D25895D9C0010EEFF /* SpeechRecognizerController.swift */; };
+		64981D7C258A8014007EFA82 /* VocableChoicesModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 64981D7B258A8014007EFA82 /* VocableChoicesModel.mlmodel */; };
 		64A220BB2452171C0014EA80 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A220BA2452171C0014EA80 /* RootViewController.swift */; };
 		64A220BE2452173C0014EA80 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64A220BD2452173C0014EA80 /* Root.storyboard */; };
 		64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A54544242A490700218BE8 /* GazeEatingView.swift */; };
@@ -46,6 +50,7 @@
 		6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */; };
 		6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */; };
 		6B1C7F3223F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */; };
+		6B2E78A0258BE6A400A3DC82 /* AudioEngineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2E789F258BE6A200A3DC82 /* AudioEngineController.swift */; };
 		6B3DCC1F24101F530039E45E /* TrackingDebugOverlayViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B3DCC1E24101F530039E45E /* TrackingDebugOverlayViewController.storyboard */; };
 		6B3DCC2124101FA80039E45E /* TrackingDebugOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3DCC2024101FA80039E45E /* TrackingDebugOverlayViewController.swift */; };
 		6B5C490B245B73F700A4433C /* CategoriesCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C490A245B73F700A4433C /* CategoriesCarouselViewController.swift */; };
@@ -196,6 +201,9 @@
 		54D3C41423E37CD40061EF47 /* VocableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64599430258938F50010EEFF /* VoiceResponseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceResponseViewController.swift; sourceTree = "<group>"; };
+		6459943D25895D9C0010EEFF /* SpeechRecognizerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizerController.swift; sourceTree = "<group>"; };
+		64981D7B258A8014007EFA82 /* VocableChoicesModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = VocableChoicesModel.mlmodel; sourceTree = "<group>"; };
 		64A220BA2452171C0014EA80 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		64A220BD2452173C0014EA80 /* Root.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
 		64A54544242A490700218BE8 /* GazeEatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeEatingView.swift; sourceTree = "<group>"; };
@@ -217,6 +225,7 @@
 		6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVSpeechSynthesizer+Shared.swift"; sourceTree = "<group>"; };
 		6B17CD7F23EA045D0050BCB8 /* ViewControllerWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWrapperView.swift; sourceTree = "<group>"; };
 		6B1C7F3123F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadGazeTrackingInterpolator.swift; sourceTree = "<group>"; };
+		6B2E789F258BE6A200A3DC82 /* AudioEngineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngineController.swift; sourceTree = "<group>"; };
 		6B3DCC1E24101F530039E45E /* TrackingDebugOverlayViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TrackingDebugOverlayViewController.storyboard; sourceTree = "<group>"; };
 		6B3DCC2024101FA80039E45E /* TrackingDebugOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingDebugOverlayViewController.swift; sourceTree = "<group>"; };
 		6B5C490A245B73F700A4433C /* CategoriesCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCarouselViewController.swift; sourceTree = "<group>"; };
@@ -354,6 +363,7 @@
 			files = (
 				2631B4092511926C00B94402 /* FirebaseAnalytics in Frameworks */,
 				2631B40B2511926C00B94402 /* FirebaseCrashlytics in Frameworks */,
+				64599429258933370010EEFF /* VocableCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +478,24 @@
 			path = VocableTests;
 			sourceTree = "<group>";
 		};
+		6459943C25895D630010EEFF /* Voice */ = {
+			isa = PBXGroup;
+			children = (
+				6B2E789F258BE6A200A3DC82 /* AudioEngineController.swift */,
+				6459943D25895D9C0010EEFF /* SpeechRecognizerController.swift */,
+				64981DA1258A9BBE007EFA82 /* Supporting Resources */,
+			);
+			path = Voice;
+			sourceTree = "<group>";
+		};
+		64981DA1258A9BBE007EFA82 /* Supporting Resources */ = {
+			isa = PBXGroup;
+			children = (
+				64981D7B258A8014007EFA82 /* VocableChoicesModel.mlmodel */,
+			);
+			name = "Supporting Resources";
+			sourceTree = "<group>";
+		};
 		64A220BC245217220014EA80 /* Root */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +505,7 @@
 				64A220BD2452173C0014EA80 /* Root.storyboard */,
 				6B5C49102460AEF900A4433C /* RootEditTextViewController.swift */,
 				64A220BA2452171C0014EA80 /* RootViewController.swift */,
+				64599430258938F50010EEFF /* VoiceResponseViewController.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -705,6 +734,7 @@
 				B8DA9DF823F33B1B00FEBE19 /* Keyboard */,
 				64A220BC245217220014EA80 /* Root */,
 				A92FFB9023ECD73400AF2D0B /* Settings */,
+				6459943C25895D630010EEFF /* Voice */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -775,6 +805,7 @@
 			packageProductDependencies = (
 				2631B4082511926C00B94402 /* FirebaseAnalytics */,
 				2631B40A2511926C00B94402 /* FirebaseCrashlytics */,
+				64599428258933370010EEFF /* VocableCore */,
 			);
 			productName = EyeTrackingTest;
 			productReference = 130C00B420D2AD2A007C3163 /* Vocable.app */;
@@ -856,6 +887,7 @@
 			mainGroup = 130C00AB20D2AD2A007C3163;
 			packageReferences = (
 				2631B4072511926C00B94402 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				64599427258933370010EEFF /* XCRemoteSwiftPackageReference "vocable-ios-spm" */,
 			);
 			productRefGroup = 130C00B520D2AD2A007C3163 /* Products */;
 			projectDirPath = "";
@@ -999,6 +1031,7 @@
 				64B3259B254B591D00023566 /* EditCategoryRemoveCollectionViewCell.swift in Sources */,
 				A9DFCC20242D020100136136 /* PublishedValue.swift in Sources */,
 				A9C32CFF242271F3000EC6F7 /* Phrase+Helpers.swift in Sources */,
+				64981D7C258A8014007EFA82 /* VocableChoicesModel.mlmodel in Sources */,
 				64F49906245B40BC00348592 /* SettingsViewController.swift in Sources */,
 				6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */,
 				A96D61D524229F6400577144 /* SettingsCollectionViewCell.swift in Sources */,
@@ -1024,6 +1057,7 @@
 				6B8440E8244A9557007A4DC6 /* EmptyStateView.swift in Sources */,
 				6B1C7F3223F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift in Sources */,
 				64D04A58242951C00006962D /* GazeableAlertPresentationController.swift in Sources */,
+				64599431258938F50010EEFF /* VoiceResponseViewController.swift in Sources */,
 				6B8A6E3324536085004B5220 /* UIHeadGazeCursorWindow.swift in Sources */,
 				A9DE170223F492B20094DB64 /* Array+Split.swift in Sources */,
 				6B9DFA5D23E889DB0037673E /* UIHeadGaze.swift in Sources */,
@@ -1040,6 +1074,7 @@
 				6B823BCB23F4ADE30099F65E /* Pulse.swift in Sources */,
 				6B5C49112460AEF900A4433C /* RootEditTextViewController.swift in Sources */,
 				A9CF2AEF242D44EE005633A7 /* TimingSensitivityViewController.swift in Sources */,
+				6459943E25895D9C0010EEFF /* SpeechRecognizerController.swift in Sources */,
 				64B32593254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift in Sources */,
 				B8DA9DF423F30BD200FEBE19 /* VectorUtils.swift in Sources */,
 				B879831523E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift in Sources */,
@@ -1057,6 +1092,7 @@
 				6B005AE3245B057E004919F4 /* VocableCollectionViewController.swift in Sources */,
 				A94720CE241A8D9B00F7B4FF /* PaginationView.swift in Sources */,
 				B838200F23F4B011005A79CD /* VocableCollectionViewCell.swift in Sources */,
+				6B2E78A0258BE6A400A3DC82 /* AudioEngineController.swift in Sources */,
 				B8EB51D12409860A00F425A6 /* GazeableAlertViewController.swift in Sources */,
 				A99AF23323FDA8B600BE1184 /* SuggestionCollectionViewCell.swift in Sources */,
 				6BFB18C224002C7B002C3515 /* Phrases.xcdatamodeld in Sources */,
@@ -1299,6 +1335,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 753J68XC6W;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Vocable/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1324,6 +1364,10 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753J68XC6W;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Vocable/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1517,6 +1561,10 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753J68XC6W;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Vocable/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1611,6 +1659,14 @@
 				revision = 70b54ba972e5768fe84f69f700ae362c8fbf8e8b;
 			};
 		};
+		64599427258933370010EEFF /* XCRemoteSwiftPackageReference "vocable-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/willowtreeapps/vocable-ios-spm.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1623,6 +1679,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2631B4072511926C00B94402 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		64599428258933370010EEFF /* VocableCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64599427258933370010EEFF /* XCRemoteSwiftPackageReference "vocable-ios-spm" */;
+			productName = VocableCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 
