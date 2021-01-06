@@ -57,16 +57,14 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         speechRecognizerController.startListening()
         SoundEffect.listening.play()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         speechRecognizerController.stopListening()
         SoundEffect.paused.play()
     }
