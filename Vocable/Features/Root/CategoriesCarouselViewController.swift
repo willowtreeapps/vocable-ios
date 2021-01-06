@@ -53,7 +53,12 @@ import Speech
 
     private lazy var fetchRequest: NSFetchRequest<Category> = {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Category.isHidden, .equalTo, false)
+        var predicate: NSPredicate = NSComparisonPredicate(\Category.isHidden, .equalTo, false)
+        if !AppConfig.isVoiceExperimentEnabled {
+            let notVoicePredicate = NSComparisonPredicate(\Category.identifier, .notEqualTo, Category.Identifier.voice.rawValue)
+            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, notVoicePredicate])
+        }
+        request.predicate = predicate
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)]
         return request
     }()
@@ -101,12 +106,16 @@ import Speech
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateCollectionViewMaskFrame()
-        hotWordRecognizer.startListening()
+        if AppConfig.isVoiceExperimentEnabled {
+            hotWordRecognizer.startListening()
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        hotWordRecognizer.stopListening()
+        if AppConfig.isVoiceExperimentEnabled {
+            hotWordRecognizer.stopListening()
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -250,6 +259,9 @@ import Speech
     }
 
     private func categorySelectionDidChange() {
+        guard AppConfig.isVoiceExperimentEnabled else {
+            return
+        }
         let voiceID = CategoriesCarouselViewController.fetchVoiceCategoryID()
         if categoryObjectID == voiceID {
             hotWordRecognizer.stopListening()
@@ -289,6 +301,10 @@ import Speech
     }
 
     func didReceiveRequiredPhrase() {
+
+        guard AppConfig.isVoiceExperimentEnabled else {
+            return
+        }
 
         let objectID = CategoriesCarouselViewController.fetchVoiceCategoryID()
         guard let desiredIndexPath = dataSourceProxy.indexPath(for: objectID) else {
