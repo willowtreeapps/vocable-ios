@@ -61,12 +61,14 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
         super.viewDidAppear(animated)
 
         speechRecognizerController.startListening()
+        SoundEffect.listening.play()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         speechRecognizerController.stopListening()
+        SoundEffect.paused.play()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
