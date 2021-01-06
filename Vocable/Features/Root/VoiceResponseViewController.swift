@@ -135,7 +135,7 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
         }
 
         sentence = sentence.trimmingCharacters(in: .whitespaces)
-        var choicesArray = sentence.components(separatedBy: "or")
+        var choicesArray = sentence.components(separatedBy: " or ")
 
         choicesArray = choicesArray.map { (choice) -> String in
             var sanitizedChoice = choice.trimmingCharacters(in: .whitespaces)
