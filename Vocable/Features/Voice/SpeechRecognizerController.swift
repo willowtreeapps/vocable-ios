@@ -13,12 +13,15 @@ import Combine
 protocol SpeechRecognizerControllerDelegate: AnyObject {
     func didReceivePartialTranscription(_ transcription: String)
     func didGetFinalResult(_ speechRecognitionResult: SFSpeechRecognitionResult)
+    func didReceiveRequiredPhrase()
     func transcriptionDidCancel()
 }
 
 class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     weak var delegate: SpeechRecognizerControllerDelegate?
+    var timeoutInterval: TimeInterval = 1.2
+    var requiredPhrase: String?
 
     static private let speechRecognizer: SFSpeechRecognizer? = {
         let recognizer = SFSpeechRecognizer()
@@ -33,7 +36,6 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     private var timeout: Timer?
 
-    private static let timeoutInterval: TimeInterval = 1.2
     private var lastErrorDate = Date.distantPast
 
     @Published private(set) var isListening = false
@@ -85,7 +87,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         print("STARTING TIMER...")
 
         timeout?.invalidate()
-        timeout = Timer.scheduledTimer(timeInterval: SpeechRecognizerController.timeoutInterval,
+        timeout = Timer.scheduledTimer(timeInterval: timeoutInterval,
                                        target: self,
                                        selector: #selector(self.handleTimeout),
                                        userInfo: nil,
@@ -125,6 +127,11 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         request.shouldReportPartialResults = true
         request.requiresOnDeviceRecognition = false
         request.taskHint = .dictation
+
+        if let phrase = requiredPhrase {
+            request.contextualStrings = [phrase]
+        }
+
         recognitionBuffer = request
 
         if let task = SpeechRecognizerController.speechRecognizer?.recognitionTask(with: request, delegate: self) {
@@ -149,14 +156,20 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     // Called for all recognitions, including non-final hypothesis
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didHypothesizeTranscription transcription: SFTranscription) {
-        print("didHypothesizeTranscription")
+        print("didHypothesizeTranscription: \(transcription.formattedString.lowercased())")
+        if let requiredPhrase = requiredPhrase, transcription.formattedString.lowercased().contains(requiredPhrase.lowercased()) {
+            delegate?.didReceiveRequiredPhrase()
+        }
         startTimer()
         delegate?.didReceivePartialTranscription(transcription.formattedString)
     }
 
     // Called only for final recognitions of utterances. No more about the utterance will be reported
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishRecognition recognitionResult: SFSpeechRecognitionResult) {
-        print("didFinishRecognition")
+        print("didFinishRecognition: \(recognitionResult.bestTranscription.formattedString.lowercased())")
+        if let requiredPhrase = requiredPhrase, recognitionResult.bestTranscription.formattedString.lowercased().contains(requiredPhrase.lowercased()) {
+            delegate?.didReceiveRequiredPhrase()
+        }
         delegate?.didGetFinalResult(recognitionResult)
     }
 
