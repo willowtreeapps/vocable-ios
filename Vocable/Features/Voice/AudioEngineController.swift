@@ -20,15 +20,10 @@ class AudioEngineController {
     private let audioSession = AVAudioSession.sharedInstance()
     private let conversionQueue = DispatchQueue(label: "SpeechConversion")
 
-    private var registeredSpeechControllers = Set<SpeechRecognizerController>() {
-        didSet {
-            updateAudioSession()
-        }
-    }
+    private var registeredSpeechControllers = Set<SpeechRecognizerController>()
 
     private init() {
         setupRouteChangeNotifications()
-        updateInputNodeTapIfNeeded()
         updateAudioSession()
     }
 
@@ -45,14 +40,25 @@ class AudioEngineController {
     }
 
     private var installedTapFormat: AVAudioFormat?
-    private func updateInputNodeTapIfNeeded() {
+
+    @discardableResult
+    private func updateInputNodeTapIfNeeded() -> Bool {
+
+        let hasRecordPermission = AVAudioSession.sharedInstance().recordPermission == .granted
+        guard hasRecordPermission else {
+            return false
+        }
+
+        let node = audioEngine.inputNode
+        guard node.numberOfOutputs > 0 else {
+            return false
+        }
 
         let bus = 0
-        let node = audioEngine.inputNode
         let micInputFormat = node.outputFormat(forBus: bus)
 
         if let installedFormat = installedTapFormat, installedFormat == micInputFormat {
-            return
+            return true
         }
 
         let speechInputFormat = SFSpeechAudioBufferRecognitionRequest().nativeAudioFormat
@@ -65,7 +71,7 @@ class AudioEngineController {
                 guard let convertedBuffer = AVAudioPCMBuffer(pcmFormat: speechInputFormat, frameCapacity: frameCapacity) else {
                     return
                 }
-                var error: NSError? = nil
+                var error: NSError?
 
                 var haveData = false
                 let inputBlock: AVAudioConverterInputBlock = { inNumPackets, outStatus in
@@ -90,33 +96,58 @@ class AudioEngineController {
 
         installedTapFormat = micInputFormat
         audioEngine.prepare()
+        return true
     }
 
-    func register(speechRecognizer: SpeechRecognizerController) {
+    func register(speechRecognizer: SpeechRecognizerController, completion: @escaping (Bool) -> Void) {
         registeredSpeechControllers.insert(speechRecognizer)
+
+        // Give the audio engine a chance to warm up.
+        // This is a prospective fix for the output bus not being available yet.
+        // The extra dispatch may be unnecessary.
+        DispatchQueue.main.async { [weak self] in
+            let result = self?.updateAudioSession() ?? false
+            completion(result)
+        }
     }
 
     func unregister(speechRecognizer: SpeechRecognizerController) {
         registeredSpeechControllers.remove(speechRecognizer)
+        updateAudioSession()
     }
 
-    private func updateAudioSession() {
+    @discardableResult
+    private func updateAudioSession() -> Bool {
+
         do {
+
             if registeredSpeechControllers.isEmpty {
                 try audioSession.setCategory(.playback, mode: .spokenAudio)
                 if audioEngine.isRunning {
                     audioEngine.stop()
                 }
             } else {
-                try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .mixWithOthers)
-                if !audioEngine.isRunning {
-                    try audioEngine.start()
+
+                if updateInputNodeTapIfNeeded() {
+                    try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .mixWithOthers)
+                    if !audioEngine.isRunning {
+                        try audioEngine.start()
+                    }
+                } else {
+
+                    // This is not the desired path if speech controllers are
+                    // registered, but it ensures the audio session will at least
+                    // be prepared for speech synthesis
+                    try audioSession.setCategory(.playback, mode: .spokenAudio)
+                    return false
                 }
             }
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             assertionFailure("Failed to activate audio session: \(error)")
+            return false
         }
+        return true
     }
     
 }

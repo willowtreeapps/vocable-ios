@@ -53,7 +53,6 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         }
         print("START LISTENING...")
         isListening = true
-        AudioEngineController.shared.register(speechRecognizer: self)
 
         SFSpeechRecognizer.requestAuthorization { [weak self] (authStatus) in
             guard let self = self else { return }
@@ -66,7 +65,13 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
                         assertionFailure("Recording permission denied")
                         return
                     }
-                    self.requestTranscription()
+                    AudioEngineController.shared.register(speechRecognizer: self) { engineIsReady in
+                        guard engineIsReady else {
+                            print("Audio engine failed to initialize")
+                            return
+                        }
+                        self.requestTranscription()
+                    }
                 }
             default:
                 NSLog("Voice recognition not authorized")
