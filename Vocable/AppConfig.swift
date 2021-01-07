@@ -41,6 +41,6 @@ struct AppConfig {
         return ProcessInfo.processInfo.environment.keys.contains("EmptyStatesEnabled")
     }
 
-    static let isVoiceExperimentEnabled = false
+    static let isVoiceExperimentEnabled = true
 
 }

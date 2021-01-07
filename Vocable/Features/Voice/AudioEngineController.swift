@@ -50,9 +50,9 @@ class AudioEngineController {
         }
 
         let node = audioEngine.inputNode
-        guard node.numberOfOutputs > 0 else {
-            return false
-        }
+//        guard node.numberOfOutputs > 0, node.numberOfInputs > 0 else {
+//            return false
+//        }
 
         let bus = 0
         let micInputFormat = node.outputFormat(forBus: bus)
