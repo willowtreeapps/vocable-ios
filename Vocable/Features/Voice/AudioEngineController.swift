@@ -74,7 +74,7 @@ class AudioEngineController {
                 var error: NSError?
 
                 var haveData = false
-                let inputBlock: AVAudioConverterInputBlock = { inNumPackets, outStatus in
+                let inputBlock: AVAudioConverterInputBlock = { _, outStatus in
                     if haveData {
                         outStatus.pointee = .noDataNow
                         return nil

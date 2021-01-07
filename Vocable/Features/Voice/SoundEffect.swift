@@ -12,7 +12,7 @@ import AudioToolbox
 enum SoundEffect: String {
 
     private struct Storage {
-        var identifiers = [SoundEffect : SystemSoundID]()
+        var identifiers = [SoundEffect: SystemSoundID]()
         static var shared = Storage()
     }
 

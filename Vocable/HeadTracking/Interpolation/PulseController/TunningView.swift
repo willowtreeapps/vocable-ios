@@ -90,7 +90,7 @@ class TunningView: UIView {
         controlsView.translatesAutoresizingMaskIntoConstraints = false
         
         // Listen to configuration changes
-        controlsView.configurationChanged = { [weak self] (sender, configuration) in
+        controlsView.configurationChanged = { [weak self] (_, configuration) in
             guard let `self` = self else { return }
             self.configurationChanged(self, configuration)
         }

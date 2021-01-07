@@ -167,7 +167,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     //
     // Called when the task first detects speech in the source audio
     func speechRecognitionDidDetectSpeech(_ task: SFSpeechRecognitionTask) {
-        // TODO: May be useful for UI to indicate when speech is detected (hot word)
+        // May be useful for UI to indicate when speech is detected (hot word)
         isHearingWords = true
     }
 
@@ -192,7 +192,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     // Called when the task is no longer accepting new audio but may be finishing final processing
     func speechRecognitionTaskFinishedReadingAudio(_ task: SFSpeechRecognitionTask) {
-        // TODO: Potentially buffer the next task? Probably not necessary
+        // Potentially buffer the next task? Probably not necessary
         //       - Calling transcribeAgainIfNeeded() will cause this current one to fail
     }
 
@@ -222,4 +222,3 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         transcribeAgainIfNeeded()
     }
 }
-
