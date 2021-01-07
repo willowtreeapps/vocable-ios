@@ -17,8 +17,6 @@
 		17D4162E245C6FF600FD81CD /* KeyboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4162D245C6FF600FD81CD /* KeyboardScreen.swift */; };
 		17F29479247419DD00A05434 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F29478247419DD00A05434 /* SettingsScreen.swift */; };
 		2631B366251181C400B94402 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2631B365251181C400B94402 /* GoogleService-Info.plist */; };
-		2631B4092511926C00B94402 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2631B4082511926C00B94402 /* FirebaseAnalytics */; };
-		2631B40B2511926C00B94402 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2631B40A2511926C00B94402 /* FirebaseCrashlytics */; };
 		274540282460DD0F0056EF98 /* Presets.strings in Resources */ = {isa = PBXBuildFile; fileRef = 274540262460DD0F0056EF98 /* Presets.strings */; };
 		2745402B2460DD490056EF98 /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2745402A2460DD490056EF98 /* Presets.swift */; };
 		2745402E2460DD760056EF98 /* presets.json in Resources */ = {isa = PBXBuildFile; fileRef = 2745402D2460DD760056EF98 /* presets.json */; };
@@ -367,8 +365,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2631B4092511926C00B94402 /* FirebaseAnalytics in Frameworks */,
-				2631B40B2511926C00B94402 /* FirebaseCrashlytics in Frameworks */,
 				64599429258933370010EEFF /* VocableCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -820,8 +816,6 @@
 			);
 			name = Vocable;
 			packageProductDependencies = (
-				2631B4082511926C00B94402 /* FirebaseAnalytics */,
-				2631B40A2511926C00B94402 /* FirebaseCrashlytics */,
 				64599428258933370010EEFF /* VocableCore */,
 			);
 			productName = EyeTrackingTest;
@@ -903,7 +897,6 @@
 			);
 			mainGroup = 130C00AB20D2AD2A007C3163;
 			packageReferences = (
-				2631B4072511926C00B94402 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				64599427258933370010EEFF /* XCRemoteSwiftPackageReference "vocable-ios-spm" */,
 			);
 			productRefGroup = 130C00B520D2AD2A007C3163 /* Products */;
@@ -1671,14 +1664,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2631B4072511926C00B94402 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = revision;
-				revision = 70b54ba972e5768fe84f69f700ae362c8fbf8e8b;
-			};
-		};
 		64599427258933370010EEFF /* XCRemoteSwiftPackageReference "vocable-ios-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/willowtreeapps/vocable-ios-spm.git";
@@ -1690,16 +1675,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2631B4082511926C00B94402 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2631B4072511926C00B94402 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		2631B40A2511926C00B94402 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2631B4072511926C00B94402 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
 		64599428258933370010EEFF /* VocableCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 64599427258933370010EEFF /* XCRemoteSwiftPackageReference "vocable-ios-spm" */;
