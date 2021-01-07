@@ -50,12 +50,13 @@ class AudioEngineController {
         }
 
         let node = audioEngine.inputNode
-//        guard node.numberOfOutputs > 0, node.numberOfInputs > 0 else {
-//            return false
-//        }
-
         let bus = 0
         let micInputFormat = node.outputFormat(forBus: bus)
+
+        if micInputFormat.sampleRate == 0 {
+            print("Audio engine input node sample rate 0. Cannot proceed.")
+            return false
+        }
 
         if let installedFormat = installedTapFormat, installedFormat == micInputFormat {
             return true
