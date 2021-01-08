@@ -89,7 +89,9 @@ import CoreData
         }
         utterancePublisher.receive(on: DispatchQueue.main)
             .filter({!($0?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)})
-            .assign(to: \UILabel.text, on: outputLabel)
+            .sink { [weak self] newValue in
+                self?.updateOutputLabelText(newValue, isDictated: false)
+            }
             .store(in: &disposables)
         setContentViewController(viewController, animated: true)
     }
