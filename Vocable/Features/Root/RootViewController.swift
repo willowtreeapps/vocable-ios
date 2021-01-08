@@ -166,7 +166,7 @@ import CoreData
     private func updateOutputLabelText(_ text: String?, isDictated: Bool = false) {
         outputLabel.text = text ?? NSLocalizedString("main_screen.textfield_placeholder.default",
                                                      comment: "Select something below to speak Hint Text")
-        outputLabel.textColor = isDictated ? .cellBorderHighlightColor : .defaultTextColor
+        outputLabel.textColor = isDictated ? .cellSelectionColor : .defaultTextColor
     }
 
     // MARK: VoiceResponseViewControllerDelegate
