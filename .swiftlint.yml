@@ -10,6 +10,8 @@ disabled_rules:
 opt_in_rules:
 - empty_count
 - empty_string
+included:
+  - Vocable
 excluded:
 - Carthage
 - Pods

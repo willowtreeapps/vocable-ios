@@ -16,14 +16,7 @@ extension AVSpeechSynthesizer {
     }
 
     static let shared: AVSpeechSynthesizer = {
-
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
-        } catch {
-            assertionFailure(error.localizedDescription)
-        }
-
-        return AVSpeechSynthesizer()
+        return Storage.shared
     }()
     
     func speak(_ string: String, language: String) {

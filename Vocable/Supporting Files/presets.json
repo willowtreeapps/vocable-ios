@@ -406,6 +406,10 @@
         {
             "id": "preset_user_recents",
             "hidden": false
+        },
+        {
+            "id": "Voice",
+            "hidden": false
         }
     ]
 }

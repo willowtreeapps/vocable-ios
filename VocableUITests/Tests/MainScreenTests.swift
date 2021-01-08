@@ -32,7 +32,7 @@ class MainScreenTests: BaseTest {
     }
     
     func testWhenTapping123Phrase_ThenThatPhraseDisplaysOnOutputLabel() {
-        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 2, newCategory: nil)
+        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 4, newCategory: nil)
         XCUIApplication().collectionViews.staticTexts[mainScreen.defaultPhrase123[0]].tap()
         XCTAssertEqual(mainScreen.outputLabel.label, mainScreen.defaultPhrase123[0])
     }

@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreData
+import Speech
 
-@IBDesignable class CategoriesCarouselViewController: UIViewController, NSFetchedResultsControllerDelegate, UICollectionViewDelegate {
+@IBDesignable class CategoriesCarouselViewController: UIViewController, NSFetchedResultsControllerDelegate, UICollectionViewDelegate, SpeechRecognizerControllerDelegate {
 
     static func fetchInitialCategoryID() -> NSManagedObjectID {
         let ctx = NSPersistentContainer.shared.viewContext
@@ -21,18 +22,43 @@ import CoreData
         return categories[0].objectID
     }
 
-    @PublishedValue private(set) var categoryObjectID = fetchInitialCategoryID()
+    static func fetchVoiceCategoryID() -> NSManagedObjectID {
+        let ctx = NSPersistentContainer.shared.viewContext
+        let predicate = NSComparisonPredicate(\Category.identifier, .equalTo, Category.Identifier.voice.rawValue)
+        let categories = Category.fetchAll(in: ctx, matching: predicate)
+        return categories[0].objectID
+    }
+
+    @PublishedValue private(set) var categoryObjectID = fetchInitialCategoryID() {
+        didSet {
+            categorySelectionDidChange()
+        }
+    }
+
     @IBOutlet private weak var backChevron: GazeableButton!
     @IBOutlet private weak var forwardChevron: GazeableButton!
     @IBOutlet private weak var collectionViewContainer: UIView!
     @IBOutlet private weak var collectionView: CarouselGridCollectionView!
     @IBOutlet private weak var outerStackView: UIStackView!
 
+    private lazy var hotWordRecognizer: SpeechRecognizerController = {
+        let recognizer = SpeechRecognizerController()
+        recognizer.requiredPhrase = "hey vocable"
+        recognizer.timeoutInterval = 1.2
+        recognizer.delegate = self
+        return recognizer
+    }()
+
     private var collectionViewMask = BorderedView(frame: .zero)
 
     private lazy var fetchRequest: NSFetchRequest<Category> = {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Category.isHidden, .equalTo, false)
+        var predicate: NSPredicate = NSComparisonPredicate(\Category.isHidden, .equalTo, false)
+        if !AppConfig.isVoiceExperimentEnabled {
+            let notVoicePredicate = NSComparisonPredicate(\Category.identifier, .notEqualTo, Category.Identifier.voice.rawValue)
+            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, notVoicePredicate])
+        }
+        request.predicate = predicate
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)]
         return request
     }()
@@ -80,6 +106,16 @@ import CoreData
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateCollectionViewMaskFrame()
+        if AppConfig.isVoiceExperimentEnabled {
+            hotWordRecognizer.startListening()
+        }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if AppConfig.isVoiceExperimentEnabled {
+            hotWordRecognizer.stopListening()
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -222,6 +258,18 @@ import CoreData
         })
     }
 
+    private func categorySelectionDidChange() {
+        guard AppConfig.isVoiceExperimentEnabled else {
+            return
+        }
+        let voiceID = CategoriesCarouselViewController.fetchVoiceCategoryID()
+        if categoryObjectID == voiceID {
+            hotWordRecognizer.stopListening()
+        } else {
+            hotWordRecognizer.startListening()
+        }
+    }
+
     // MARK: - UICollectionViewDelegate
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -237,4 +285,41 @@ import CoreData
         categoryObjectID = frc.object(at: mappedIndexPath).objectID
         updateSelectedIndexPathsInProxyDataSource()
     }
+
+    // MARK: - SpeechRecognizerControllerDelegate
+
+    func didReceivePartialTranscription(_ transcription: String) {
+        // no-op
+    }
+
+    func didGetFinalResult(_ speechRecognitionResult: SFSpeechRecognitionResult) {
+        // no-op
+    }
+
+    func transcriptionDidCancel() {
+        // no-op
+    }
+
+    func didReceiveRequiredPhrase() {
+
+        guard AppConfig.isVoiceExperimentEnabled else {
+            return
+        }
+
+        let objectID = CategoriesCarouselViewController.fetchVoiceCategoryID()
+        guard let desiredIndexPath = dataSourceProxy.indexPath(for: objectID) else {
+            return
+        }
+
+        for indexPath in collectionView.indexPathsForSelectedItems ?? [] {
+            collectionView.deselectItem(at: indexPath, animated: false)
+        }
+        dataSourceProxy.performActions(on: desiredIndexPath) { (aPath) in
+            collectionView.selectItem(at: aPath, animated: false, scrollPosition: [])
+        }
+
+        collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary()
+        self.categoryObjectID = objectID
+    }
+
 }

@@ -20,6 +20,11 @@ class BaseTest: XCTestCase {
         app.launchEnvironment["RefactoredInterfaceEnabled"] = "1"
         continueAfterFailure = false
         app.launch()
+
+        addUIInterruptionMonitor(withDescription: "SpeechRecognition") { (alert) -> Bool in
+            alert.buttons["OK"].tap()
+            return true
+        }
     }
     
     override func tearDown() {
