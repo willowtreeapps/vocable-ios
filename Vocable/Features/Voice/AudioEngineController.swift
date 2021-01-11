@@ -51,7 +51,7 @@ class AudioEngineController {
 
         let node = audioEngine.inputNode
         let bus = 0
-        let micInputFormat = node.outputFormat(forBus: bus)
+        let micInputFormat = node.inputFormat(forBus: bus)
 
         if micInputFormat.sampleRate == 0 {
             print("Audio engine input node sample rate 0. Cannot proceed.")
@@ -123,14 +123,15 @@ class AudioEngineController {
         do {
 
             if registeredSpeechControllers.isEmpty {
-                try audioSession.setCategory(.playback, mode: .spokenAudio)
                 if audioEngine.isRunning {
                     audioEngine.stop()
                 }
+                try audioSession.setCategory(.playback, mode: .spokenAudio)
             } else {
 
+                try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .mixWithOthers)
+
                 if updateInputNodeTapIfNeeded() {
-                    try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .mixWithOthers)
                     if !audioEngine.isRunning {
                         try audioEngine.start()
                     }
