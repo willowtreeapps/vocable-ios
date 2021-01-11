@@ -84,7 +84,8 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
         textView.accessibilityIdentifier = "keyboard.textView"
         textView.textAlignment = .natural
         
-        keyboardViewController.$attributedText.sink(receiveValue: { (attributedText) in
+        keyboardViewController.$attributedText.sink(receiveValue: { [weak self] (attributedText) in
+            guard let self = self else { return }
             self.textView.attributedText = attributedText
             let didTextChange = self.initialText != attributedText?.string
 

@@ -43,8 +43,9 @@ import CoreData
         categoryCarousel.$categoryObjectID
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
-            .sink { self.categoryDidChange($0) }
-            .store(in: &disposables)
+            .sink { [weak self] in
+                self?.categoryDidChange($0)
+            }.store(in: &disposables)
     }
 
     override func prepareForInterfaceBuilder() {
@@ -89,7 +90,9 @@ import CoreData
         }
         utterancePublisher.receive(on: DispatchQueue.main)
             .filter({!($0?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)})
-            .assign(to: \UILabel.text, on: outputLabel)
+            .sink { [weak self] newValue in
+                self?.updateOutputLabelText(newValue, isDictated: false)
+            }
             .store(in: &disposables)
         setContentViewController(viewController, animated: true)
     }
@@ -166,7 +169,7 @@ import CoreData
     private func updateOutputLabelText(_ text: String?, isDictated: Bool = false) {
         outputLabel.text = text ?? NSLocalizedString("main_screen.textfield_placeholder.default",
                                                      comment: "Select something below to speak Hint Text")
-        outputLabel.textColor = isDictated ? .cellBorderHighlightColor : .defaultTextColor
+        outputLabel.textColor = isDictated ? .cellSelectionColor : .defaultTextColor
     }
 
     // MARK: VoiceResponseViewControllerDelegate

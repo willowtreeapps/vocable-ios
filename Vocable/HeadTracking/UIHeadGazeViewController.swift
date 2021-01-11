@@ -71,7 +71,8 @@ class UIHeadGazeViewController: UIViewController, ARSessionDelegate, ARSCNViewDe
         sceneview?.preferredFramesPerSecond =  UIScreen.main.maximumFramesPerSecond
         setupSceneNode()
         
-        AppConfig.$cursorSensitivity.sink { (sensitivity) in
+        AppConfig.$cursorSensitivity.sink { [weak self] (sensitivity) in
+            guard let self = self else { return }
             self.scalingRange = sensitivity.range
         }.store(in: &disposables)
 

@@ -113,8 +113,8 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
 
     func didGetFinalResult(_ speechRecognitionResult: SFSpeechRecognitionResult) {
 
-        let text = speechRecognitionResult.bestTranscription.formattedString
-        delegate?.didUpdateSpeechResponse(speechRecognitionResult.bestTranscription.formattedString)
+        let text = speechRecognitionResult.bestTranscription.formattedString.lowercased()
+        delegate?.didUpdateSpeechResponse(text)
 
         let model = try! VocableChoicesModel(configuration: .init())
         guard let prediction = try? model.prediction(text: text) else {

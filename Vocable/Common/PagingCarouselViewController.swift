@@ -57,7 +57,8 @@ import Combine
         paginationView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(paginationView)
 
-        collectionView.progressPublisher.sink(receiveValue: { (pagingProgress) in
+        collectionView.progressPublisher.sink(receiveValue: { [weak self] (pagingProgress) in
+            guard let self = self else { return }
             self.paginationView.setPaginationButtonsEnabled(pagingProgress.pageCount > 1)
             self.paginationView.textLabel.text = pagingProgress.localizedString
         }).store(in: &disposables)

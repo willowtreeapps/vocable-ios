@@ -24,7 +24,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     var requiredPhrase: String?
 
     static private let speechRecognizer: SFSpeechRecognizer? = {
-        let recognizer = SFSpeechRecognizer()
+        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
         recognizer?.supportsOnDeviceRecognition = true
         return recognizer
     }()
@@ -173,18 +173,19 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     // Called for all recognitions, including non-final hypothesis
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didHypothesizeTranscription transcription: SFTranscription) {
-        print("didHypothesizeTranscription: \(transcription.formattedString.lowercased())")
-        if let requiredPhrase = requiredPhrase, transcription.formattedString.lowercased().contains(requiredPhrase.lowercased()) {
+        let transcription = transcription.formattedString.lowercased()
+        if let requiredPhrase = requiredPhrase, transcription.contains(requiredPhrase.lowercased()) {
             delegate?.didReceiveRequiredPhrase()
         }
         startTimer()
-        delegate?.didReceivePartialTranscription(transcription.formattedString)
+        delegate?.didReceivePartialTranscription(transcription)
     }
 
     // Called only for final recognitions of utterances. No more about the utterance will be reported
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishRecognition recognitionResult: SFSpeechRecognitionResult) {
-        print("didFinishRecognition: \(recognitionResult.bestTranscription.formattedString.lowercased())")
-        if let requiredPhrase = requiredPhrase, recognitionResult.bestTranscription.formattedString.lowercased().contains(requiredPhrase.lowercased()) {
+        let transcription = recognitionResult.bestTranscription.formattedString.lowercased()
+        print("didFinishRecognition: \(transcription)")
+        if let requiredPhrase = requiredPhrase, transcription.contains(requiredPhrase.lowercased()) {
             delegate?.didReceiveRequiredPhrase()
         }
         delegate?.didGetFinalResult(recognitionResult)
