@@ -43,8 +43,9 @@ import CoreData
         categoryCarousel.$categoryObjectID
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
-            .sink { self.categoryDidChange($0) }
-            .store(in: &disposables)
+            .sink { [weak self] in
+                self?.categoryDidChange($0)
+            }.store(in: &disposables)
     }
 
     override func prepareForInterfaceBuilder() {

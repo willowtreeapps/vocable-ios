@@ -60,7 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                name: NSLocale.currentLocaleDidChangeNotification,
                                                object: nil)
 
-        AppConfig.$isHeadTrackingEnabled.receive(on: DispatchQueue.main).sink { isEnabled in
+        AppConfig.$isHeadTrackingEnabled.receive(on: DispatchQueue.main).sink { [weak self] isEnabled in
+            guard let self = self else { return }
             if isEnabled {
                 self.installTrackingWindowsIfNeeded()
             } else {

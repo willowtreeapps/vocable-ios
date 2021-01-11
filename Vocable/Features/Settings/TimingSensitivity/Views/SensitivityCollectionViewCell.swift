@@ -40,7 +40,8 @@ final class SensitivityCollectionViewCell: UICollectionViewCell {
         mediumSensitivityButton.setTitle(mediumTitle, for: .normal)
         highSensitivityButton.setTitle(highTitle, for: .normal)
 
-        AppConfig.$cursorSensitivity.sink { (sensitivity) in
+        AppConfig.$cursorSensitivity.sink { [weak self] (sensitivity) in
+            guard let self = self else { return }
             self.lowSensitivityButton.isSelected = false
             self.mediumSensitivityButton.isSelected = false
             self.highSensitivityButton.isSelected = false
