@@ -67,6 +67,9 @@ class AudioEngineController {
 
         node.removeTap(onBus: bus)
         node.installTap(onBus: bus, bufferSize: 1024, format: micInputFormat) { [weak self] buffer, timestamp in
+            guard !AVSpeechSynthesizer.shared.isSpeaking else {
+                return
+            }
             self?.conversionQueue.async {
                 let frameCapacity = AVAudioFrameCount(micInputFormat.sampleRate * 2.0)
                 guard let convertedBuffer = AVAudioPCMBuffer(pcmFormat: speechInputFormat, frameCapacity: frameCapacity) else {
