@@ -24,7 +24,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     var requiredPhrase: String?
 
     static private let speechRecognizer: SFSpeechRecognizer? = {
-        let recognizer = SFSpeechRecognizer()
+        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
         recognizer?.supportsOnDeviceRecognition = true
         return recognizer
     }()
