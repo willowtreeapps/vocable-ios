@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 import Speech
 
-class AudioEngineController {
+class AudioEngineController: NSObject, AVSpeechSynthesizerDelegate {
 
     static let shared = AudioEngineController()
 
@@ -22,7 +22,24 @@ class AudioEngineController {
 
     private var registeredSpeechControllers = Set<SpeechRecognizerController>()
 
-    private init() {
+    private var audioEngineShouldRun = false {
+        didSet {
+            try? updateAudioEngineRunningState()
+        }
+    }
+
+    // Could likely be a semaphore or something more thread-safe,
+    // but for now this seems adequate
+    private var listeningInterruptionCount = 0 {
+        didSet {
+            try? updateAudioEngineRunningState()
+        }
+    }
+
+    private var installedTapFormat: AVAudioFormat?
+
+    override init() {
+        super.init()
         setupRouteChangeNotifications()
         updateAudioSession()
     }
@@ -38,8 +55,6 @@ class AudioEngineController {
                        name: .AVAudioEngineConfigurationChange,
                        object: nil)
     }
-
-    private var installedTapFormat: AVAudioFormat?
 
     @discardableResult
     private func updateInputNodeTapIfNeeded() -> Bool {
@@ -67,9 +82,7 @@ class AudioEngineController {
 
         node.removeTap(onBus: bus)
         node.installTap(onBus: bus, bufferSize: 1024, format: micInputFormat) { [weak self] buffer, timestamp in
-            guard !AVSpeechSynthesizer.shared.isSpeaking else {
-                return
-            }
+
             self?.conversionQueue.async {
                 let frameCapacity = AVAudioFrameCount(micInputFormat.sampleRate * 2.0)
                 guard let convertedBuffer = AVAudioPCMBuffer(pcmFormat: speechInputFormat, frameCapacity: frameCapacity) else {
@@ -103,21 +116,36 @@ class AudioEngineController {
         return true
     }
 
-    func register(speechRecognizer: SpeechRecognizerController, completion: @escaping (Bool) -> Void) {
+    func register(speechRecognizer: SpeechRecognizerController) -> Bool {
         registeredSpeechControllers.insert(speechRecognizer)
-
-        // Give the audio engine a chance to warm up.
-        // This is a prospective fix for the output bus not being available yet.
-        // The extra dispatch may be unnecessary.
-        DispatchQueue.main.async { [weak self] in
-            let result = self?.updateAudioSession() ?? false
-            completion(result)
-        }
+        return updateAudioSession()
     }
 
     func unregister(speechRecognizer: SpeechRecognizerController) {
         registeredSpeechControllers.remove(speechRecognizer)
         updateAudioSession()
+    }
+
+    func beginListeningInterruption() {
+        listeningInterruptionCount += 1
+    }
+
+    func endListeningInterruption() {
+        listeningInterruptionCount = max(listeningInterruptionCount - 1, 0)
+    }
+
+    private func updateAudioEngineRunningState() throws {
+
+        let interruptionInProgress = listeningInterruptionCount > 0
+        if !interruptionInProgress && audioEngineShouldRun {
+            if !audioEngine.isRunning {
+                try audioEngine.start()
+            }
+        } else {
+            if audioEngine.isRunning {
+                audioEngine.pause()
+            }
+        }
     }
 
     @discardableResult
@@ -126,18 +154,14 @@ class AudioEngineController {
         do {
 
             if registeredSpeechControllers.isEmpty {
-                if audioEngine.isRunning {
-                    audioEngine.stop()
-                }
                 try audioSession.setCategory(.playback, mode: .spokenAudio)
+                audioEngineShouldRun = false
             } else {
 
                 try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .mixWithOthers)
 
                 if updateInputNodeTapIfNeeded() {
-                    if !audioEngine.isRunning {
-                        try audioEngine.start()
-                    }
+                    audioEngineShouldRun = true
                 } else {
 
                     // This is not the desired path if speech controllers are
@@ -147,6 +171,7 @@ class AudioEngineController {
                     return false
                 }
             }
+
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             assertionFailure("Failed to activate audio session: \(error)")
@@ -154,5 +179,30 @@ class AudioEngineController {
         }
         return true
     }
-    
+
+    // MARK: AVSpeechSynthesizerDelegate
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        beginListeningInterruption()
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
+        endListeningInterruption()
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        endListeningInterruption()
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        endListeningInterruption()
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didContinue utterance: AVSpeechUtterance) {
+        beginListeningInterruption()
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+        // no-op
+    }
 }

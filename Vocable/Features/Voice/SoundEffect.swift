@@ -43,6 +43,10 @@ enum SoundEffect: String {
             assertionFailure("No sound ID exists for \"\(rawValue)\"")
             return
         }
-        AudioServicesPlaySystemSound(soundID)
+        AudioEngineController.shared.beginListeningInterruption()
+        AudioServicesPlaySystemSoundWithCompletion(soundID) {
+            AudioEngineController.shared.endListeningInterruption()
+            print("\"\(self.rawValue).wav\" playback completed")
+        }
     }
 }
