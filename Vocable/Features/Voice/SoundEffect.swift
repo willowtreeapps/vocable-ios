@@ -35,6 +35,18 @@ enum SoundEffect: String {
             return nil
         }
         Storage.shared.identifiers[self] = soundID
+
+        var completePlayback: UInt32 = 1
+        let propertyResult = AudioServicesSetProperty(kAudioServicesPropertyCompletePlaybackIfAppDies,
+                                                      UInt32(MemoryLayout<SystemSoundID>.size),
+                                                      &soundID,
+                                                      UInt32(MemoryLayout<UInt32>.size),
+                                                      &completePlayback)
+        guard propertyResult == .zero else {
+            assertionFailure("Failed to set kAudioServicesPropertyCompletePlaybackIfAppDies = 1 for sound effect (OSStatus=\(propertyResult)")
+            return soundID
+        }
+
         return soundID
     }
 

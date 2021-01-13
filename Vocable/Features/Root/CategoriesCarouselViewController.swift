@@ -322,4 +322,16 @@ import Speech
         self.categoryObjectID = objectID
     }
 
+    func didStartListening() {
+        // no-op
+    }
+
+    func didPauseListening() {
+        // no-op
+    }
+
+    func didStopListening() {
+        // no-op
+    }
+
 }

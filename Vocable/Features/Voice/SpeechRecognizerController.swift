@@ -15,9 +15,18 @@ protocol SpeechRecognizerControllerDelegate: AnyObject {
     func didGetFinalResult(_ speechRecognitionResult: SFSpeechRecognitionResult)
     func didReceiveRequiredPhrase()
     func transcriptionDidCancel()
+    func didStartListening()
+    func didPauseListening()
+    func didStopListening()
 }
 
 class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
+
+    enum ListeningStatus {
+        case stopped    // Not listening
+        case paused     // Not listening, but will automatically resume once the current interruption ends
+        case listening  // Actively listening
+    }
 
     weak var delegate: SpeechRecognizerControllerDelegate?
     var timeoutInterval: TimeInterval = 1.2
@@ -38,7 +47,20 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     private var lastErrorDate = Date.distantPast
 
-    @Published private(set) var isListening = false
+    @Published private(set) var status: ListeningStatus = .stopped {
+        didSet {
+            guard oldValue != status else { return }
+            switch status {
+            case .listening:
+                delegate?.didStartListening()
+            case .paused:
+                delegate?.didPauseListening()
+            case .stopped:
+                delegate?.didStopListening()
+            }
+        }
+    }
+
     @Published private(set) var isHearingWords = false
 
     private func countOfRecognitionTasks(matching states: SFSpeechRecognitionTaskState...) -> Int {
@@ -47,43 +69,70 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         }.count
     }
 
+    override init() {
+        super.init()
+        registerForApplicationLifecycleEvents()
+    }
+
     func startListening() {
-        guard !isListening else {
+        guard status != .listening else {
             return
         }
-        print("START LISTENING...")
-        isListening = true
 
         SFSpeechRecognizer.requestAuthorization { [weak self] (authStatus) in
             guard let self = self else { return }
             switch authStatus {
             case .authorized:
-
                 let audioSession = AVAudioSession.sharedInstance()
                 audioSession.requestRecordPermission { (canRecord) in
                     guard canRecord else {
                         assertionFailure("Recording permission denied")
                         return
                     }
-                    guard AudioEngineController.shared.register(speechRecognizer: self) else {
-                        print("Audio engine failed to initialize")
-                        return
+                    DispatchQueue.main.async {
+                        guard AudioEngineController.shared.register(speechRecognizer: self) else {
+                            print("Audio engine failed to initialize")
+                            return
+                        }
+                        print("START LISTENING...")
+                        self.status = .listening
+                        self.requestTranscription()
                     }
-                    self.requestTranscription()
                 }
+            case .denied:
+                assertionFailure("Speech permission denied")
             default:
-                NSLog("Voice recognition not authorized")
+                assertionFailure("Speech permission unknown")
             }
         }
     }
 
     func stopListening() {
-        guard isListening else {
+        guard status != .stopped else {
             return
         }
         print("STOP LISTENING...")
-        isListening = false
+        status = .stopped
+        unscheduleListeners()
+    }
 
+    private func pauseListening() {
+        guard status == .listening else {
+            return
+        }
+        print("PAUSE LISTENING...")
+        status = .paused
+        unscheduleListeners()
+    }
+
+    private func resumeListening() {
+        guard status == .paused else {
+            return
+        }
+        startListening()
+    }
+
+    private func unscheduleListeners() {
         for task in recognitionTasks {
             task.finish()
         }
@@ -156,13 +205,16 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     }
 
     private func transcribeAgainIfNeeded() {
-        guard isListening else {
+        guard status == .listening else {
             return
         }
         requestTranscription()
     }
 
     //
+    // MARK: SFSpeechRecognizerDelegate
+    //
+
     // Called when the task first detects speech in the source audio
     func speechRecognitionDidDetectSpeech(_ task: SFSpeechRecognitionTask) {
         // May be useful for UI to indicate when speech is detected (hot word)
@@ -219,5 +271,36 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         recognitionTasks.remove(task)
         recognitionBuffers[task] = nil
         transcribeAgainIfNeeded()
+    }
+
+    //
+    // MARK: UIApplication Lifecycle Events
+    //
+
+    private func registerForApplicationLifecycleEvents() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self,
+                       selector: #selector(didBecomeActiveNotification(_:)),
+                       name: UIApplication.didBecomeActiveNotification,
+                       object: nil)
+
+        nc.addObserver(self,
+                       selector: #selector(willResignActiveNotification(_:)),
+                       name: UIApplication.willResignActiveNotification,
+                       object: nil)
+    }
+
+    @objc
+    private func willResignActiveNotification(_ notification: Notification) {
+        if AppConfig.isVoiceExperimentEnabled {
+            pauseListening()
+        }
+    }
+
+    @objc
+    private func didBecomeActiveNotification(_ notification: Notification) {
+        if AppConfig.isVoiceExperimentEnabled {
+            resumeListening()
+        }
     }
 }
