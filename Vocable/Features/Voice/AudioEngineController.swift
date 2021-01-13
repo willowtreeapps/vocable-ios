@@ -158,7 +158,7 @@ class AudioEngineController: NSObject, AVSpeechSynthesizerDelegate {
                 audioEngineShouldRun = false
             } else {
 
-                try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .mixWithOthers)
+                try audioSession.setCategory(.playAndRecord, mode: .measurement, options: [.mixWithOthers, .defaultToSpeaker])
 
                 if updateInputNodeTapIfNeeded() {
                     audioEngineShouldRun = true
