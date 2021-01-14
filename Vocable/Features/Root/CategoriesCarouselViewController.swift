@@ -31,7 +31,7 @@ import Speech
 
     @PublishedValue private(set) var categoryObjectID = fetchInitialCategoryID() {
         didSet {
-            categorySelectionDidChange()
+            updateHotWordRecognizerForSelectedCategory()
         }
     }
 
@@ -42,7 +42,7 @@ import Speech
     @IBOutlet private weak var outerStackView: UIStackView!
 
     private lazy var hotWordRecognizer: SpeechRecognizerController = {
-        let recognizer = SpeechRecognizerController()
+        let recognizer = SpeechRecognizerController(name: "Hot Word")
         recognizer.requiredPhrase = "hey vocable"
         recognizer.timeoutInterval = 1.2
         recognizer.delegate = self
@@ -106,16 +106,12 @@ import Speech
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateCollectionViewMaskFrame()
-        if AppConfig.isVoiceExperimentEnabled {
-            hotWordRecognizer.startListening()
-        }
+        updateHotWordRecognizerForSelectedCategory()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if AppConfig.isVoiceExperimentEnabled {
-            hotWordRecognizer.stopListening()
-        }
+        updateHotWordRecognizerForSelectedCategory()
     }
 
     override func viewDidLayoutSubviews() {
@@ -258,7 +254,7 @@ import Speech
         })
     }
 
-    private func categorySelectionDidChange() {
+    private func updateHotWordRecognizerForSelectedCategory() {
         guard AppConfig.isVoiceExperimentEnabled else {
             return
         }
@@ -320,6 +316,10 @@ import Speech
 
         collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary()
         self.categoryObjectID = objectID
+    }
+
+    func willStartListening() {
+        // no-op
     }
 
     func didStartListening() {

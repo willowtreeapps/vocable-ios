@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 import Speech
 
-class AudioEngineController: NSObject, AVSpeechSynthesizerDelegate {
+class AudioEngineController {
 
     static let shared = AudioEngineController()
 
@@ -20,32 +20,51 @@ class AudioEngineController: NSObject, AVSpeechSynthesizerDelegate {
     private let audioSession = AVAudioSession.sharedInstance()
     private let conversionQueue = DispatchQueue(label: "SpeechConversion")
 
+    private let internalQueueKey = DispatchSpecificKey<Void>()
+
+    private lazy var internalQueue: DispatchQueue = {
+        let queue = DispatchQueue(label: "AudioEngineController_Internal", qos: .userInteractive)
+        queue.setSpecific(key: self.internalQueueKey, value: ())
+        return queue
+    }()
+
     private var registeredSpeechControllers = Set<SpeechRecognizerController>()
 
-    private var audioEngineShouldRun = false {
-        didSet {
-            try? updateAudioEngineRunningState()
-        }
-    }
+    private var audioEngineShouldRun = false
 
     // Could likely be a semaphore or something more thread-safe,
     // but for now this seems adequate
-    private var listeningInterruptionCount = 0 {
-        didSet {
-            try? updateAudioEngineRunningState()
-        }
-    }
+    private var listeningInterruptionCount = 0
 
     private var installedTapFormat: AVAudioFormat?
 
-    override init() {
-        super.init()
+    init() {
         setupRouteChangeNotifications()
         updateAudioSession()
     }
 
+    func dispatchInternalAsync(_ actions: @escaping () -> Void) {
+        let isInternal = DispatchQueue.getSpecific(key: internalQueueKey) != nil
+        if isInternal {
+            actions()
+        } else {
+            internalQueue.async(execute: actions)
+        }
+    }
+
+    func dispatchInternalSync(_ actions: @escaping () throws -> Void) rethrows {
+        let isInternal = DispatchQueue.getSpecific(key: internalQueueKey) != nil
+        if isInternal {
+            try actions()
+        } else {
+            try internalQueue.sync(execute: actions)
+        }
+    }
+
     @objc private func handleRouteChange(notification: Notification) {
-        updateInputNodeTapIfNeeded()
+        dispatchInternalAsync { [weak self] in
+            self?.updateInputNodeTapIfNeeded()
+        }
     }
 
     private func setupRouteChangeNotifications() {
@@ -83,6 +102,10 @@ class AudioEngineController: NSObject, AVSpeechSynthesizerDelegate {
         node.removeTap(onBus: bus)
         node.installTap(onBus: bus, bufferSize: 1024, format: micInputFormat) { [weak self] buffer, timestamp in
 
+            guard !AVSpeechSynthesizer.shared.isSpeaking else {
+                return
+            }
+
             self?.conversionQueue.async {
                 let frameCapacity = AVAudioFrameCount(micInputFormat.sampleRate * 2.0)
                 guard let convertedBuffer = AVAudioPCMBuffer(pcmFormat: speechInputFormat, frameCapacity: frameCapacity) else {
@@ -116,93 +139,131 @@ class AudioEngineController: NSObject, AVSpeechSynthesizerDelegate {
         return true
     }
 
-    func register(speechRecognizer: SpeechRecognizerController) -> Bool {
-        registeredSpeechControllers.insert(speechRecognizer)
-        return updateAudioSession()
+    func register(speechRecognizer: SpeechRecognizerController, completion: @escaping (Bool) -> Void) {
+        dispatchInternalAsync { [weak self] in
+            guard let self = self else { return }
+            self.registeredSpeechControllers.insert(speechRecognizer)
+            self.updateAudioSession(completion: completion)
+        }
     }
 
-    func unregister(speechRecognizer: SpeechRecognizerController) {
-        registeredSpeechControllers.remove(speechRecognizer)
-        updateAudioSession()
+    func unregister(speechRecognizer: SpeechRecognizerController, completion: ((Bool) -> Void)? = nil) {
+        dispatchInternalAsync { [weak self] in
+            guard let self = self else { return }
+            self.registeredSpeechControllers.remove(speechRecognizer)
+            self.updateAudioSession(completion: completion)
+        }
     }
 
-    func beginListeningInterruption() {
-        listeningInterruptionCount += 1
-    }
+    func playEffect(_ effect: SoundEffect, completion: @escaping () -> Void) {
 
-    func endListeningInterruption() {
-        listeningInterruptionCount = max(listeningInterruptionCount - 1, 0)
-    }
+        guard let soundID = effect.soundID else {
+            completion()
+            return
+        }
 
-    private func updateAudioEngineRunningState() throws {
-
-        let interruptionInProgress = listeningInterruptionCount > 0
-        if !interruptionInProgress && audioEngineShouldRun {
-            if !audioEngine.isRunning {
-                try audioEngine.start()
-            }
-        } else {
-            if audioEngine.isRunning {
-                audioEngine.pause()
+        beginListeningInterruption {
+            print("Playing \"\(effect.rawValue).wav\"...")
+            AudioServicesPlaySystemSoundWithCompletion(soundID) { [weak self] in
+                guard let self = self else { return }
+                print("\"\(effect.rawValue).wav\" playback completed")
+                self.endListeningInterruption(completion: completion)
             }
         }
     }
 
-    @discardableResult
-    private func updateAudioSession() -> Bool {
+    func beginListeningInterruption(completion: (() -> Void)? = nil) {
+        dispatchInternalAsync { [weak self] in
+            self?.listeningInterruptionCount += 1
+            self?.updateAudioSession(completion: { _ in
+                print("LISTENING INTERRUPTION BEGAN")
+                completion?()
+            })
+        }
+    }
 
-        do {
+    func endListeningInterruption(completion: (() -> Void)? = nil) {
+        dispatchInternalAsync { [weak self] in
+            guard let self = self else {
+                completion?()
+                return
+            }
+            self.listeningInterruptionCount = max(self.listeningInterruptionCount - 1, 0)
+            print("LISTENING INTERRUPTION ENDED")
 
-            if registeredSpeechControllers.isEmpty {
-                try audioSession.setCategory(.playback, mode: .spokenAudio)
-                audioEngineShouldRun = false
-            } else {
+            self.updateAudioSession { _ in
+                completion?()
+            }
+        }
+    }
 
-                try audioSession.setCategory(.playAndRecord, mode: .measurement, options: [.mixWithOthers, .defaultToSpeaker])
+    private func updateAudioSession(completion: ((Bool) -> Void)? = nil) {
 
-                if updateInputNodeTapIfNeeded() {
-                    audioEngineShouldRun = true
+        dispatchInternalSync { [weak self] in
+            var result = false
+            var sessionNeedsActivation = false
+            guard let self = self else {
+                completion?(result)
+                return
+            }
+            do {
+                if self.registeredSpeechControllers.isEmpty || self.listeningInterruptionCount > 0 {
+                    if self.audioSession.category != .playback {
+                        print("AUDIO SESSION CATEGORY: playback")
+                        try self.audioSession.setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
+                        sessionNeedsActivation = true
+                    }
+                    self.audioEngineShouldRun = !self.registeredSpeechControllers.isEmpty
+                    result = true
                 } else {
 
-                    // This is not the desired path if speech controllers are
-                    // registered, but it ensures the audio session will at least
-                    // be prepared for speech synthesis
-                    try audioSession.setCategory(.playback, mode: .spokenAudio)
-                    return false
+                    if self.audioSession.category != .playAndRecord {
+                        print("AUDIO SESSION CATEGORY: playAndRecord")
+                        try self.audioSession.setCategory(.playAndRecord, mode: .voiceChat, options: [.defaultToSpeaker])
+                        sessionNeedsActivation = true
+                    }
+
+                    if self.updateInputNodeTapIfNeeded() {
+                        self.audioEngineShouldRun = true
+                        result = true
+                    } else {
+
+                        // This is not the desired path if speech controllers are
+                        // registered, but it ensures the audio session will at least
+                        // be prepared for speech synthesis
+                        if self.audioSession.category != .playback {
+                            print("AUDIO SESSION CATEGORY: playback")
+                            try self.audioSession.setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
+                            sessionNeedsActivation = true
+                        }
+                        result = false
+                    }
+                }
+
+                if sessionNeedsActivation {
+                    try self.audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+                    print("AUDIO SESSION ACTIVATED")
+                }
+            } catch {
+                assertionFailure("Failed to activate audio session: \(error)")
+                result = false
+            }
+            result = true
+
+            let interruptionInProgress = self.listeningInterruptionCount > 0
+            if !interruptionInProgress && self.audioEngineShouldRun {
+                if !self.audioEngine.isRunning {
+                    try? self.audioEngine.start()
+                    print("AUDIO ENGINE STARTED")
+                }
+            } else {
+                if self.audioEngine.isRunning {
+                    self.audioEngine.pause()
+                    print("AUDIO ENGINE PAUSED")
                 }
             }
 
-            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
-        } catch {
-            assertionFailure("Failed to activate audio session: \(error)")
-            return false
+            completion?(result)
         }
-        return true
-    }
-
-    // MARK: AVSpeechSynthesizerDelegate
-
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
-        beginListeningInterruption()
-    }
-
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
-        endListeningInterruption()
-    }
-
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        endListeningInterruption()
-    }
-
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
-        endListeningInterruption()
-    }
-
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didContinue utterance: AVSpeechUtterance) {
-        beginListeningInterruption()
-    }
-
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
-        // no-op
     }
 }

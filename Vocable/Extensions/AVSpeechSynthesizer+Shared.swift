@@ -17,7 +17,6 @@ extension AVSpeechSynthesizer {
 
     static let shared: AVSpeechSynthesizer = {
         let synthesizer = Storage.shared
-        synthesizer.delegate = AudioEngineController.shared
         return synthesizer
     }()
     

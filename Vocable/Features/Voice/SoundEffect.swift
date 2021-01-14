@@ -19,7 +19,7 @@ enum SoundEffect: String {
     case listening = "Listening"
     case paused = "Paused"
 
-    private var soundID: SystemSoundID? {
+    var soundID: SystemSoundID? {
         if let effect = Storage.shared.identifiers[self] {
             return effect
         }
@@ -36,6 +36,17 @@ enum SoundEffect: String {
         }
         Storage.shared.identifiers[self] = soundID
 
+        var isUISound: UInt32 = 0
+        let isUISoundResult = AudioServicesSetProperty(kAudioServicesPropertyIsUISound,
+                                                      UInt32(MemoryLayout<SystemSoundID>.size),
+                                                      &soundID,
+                                                      UInt32(MemoryLayout<UInt32>.size),
+                                                      &isUISound)
+        guard isUISoundResult == .zero else {
+            assertionFailure("Failed to set kAudioServicesPropertyIsUISound = \(isUISound) for sound effect (OSStatus=\(isUISoundResult)")
+            return soundID
+        }
+
         var completePlayback: UInt32 = 1
         let propertyResult = AudioServicesSetProperty(kAudioServicesPropertyCompletePlaybackIfAppDies,
                                                       UInt32(MemoryLayout<SystemSoundID>.size),
@@ -43,22 +54,10 @@ enum SoundEffect: String {
                                                       UInt32(MemoryLayout<UInt32>.size),
                                                       &completePlayback)
         guard propertyResult == .zero else {
-            assertionFailure("Failed to set kAudioServicesPropertyCompletePlaybackIfAppDies = 1 for sound effect (OSStatus=\(propertyResult)")
+            assertionFailure("Failed to set kAudioServicesPropertyCompletePlaybackIfAppDies = \(completePlayback) for sound effect (OSStatus=\(propertyResult)")
             return soundID
         }
 
         return soundID
-    }
-
-    func play() {
-        guard let soundID = self.soundID else {
-            assertionFailure("No sound ID exists for \"\(rawValue)\"")
-            return
-        }
-        AudioEngineController.shared.beginListeningInterruption()
-        AudioServicesPlaySystemSoundWithCompletion(soundID) {
-            AudioEngineController.shared.endListeningInterruption()
-            print("\"\(self.rawValue).wav\" playback completed")
-        }
     }
 }

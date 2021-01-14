@@ -17,7 +17,7 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
 
     weak var delegate: VoiceResponseViewControllerDelegate?
 
-    private let speechRecognizerController = SpeechRecognizerController()
+    private let speechRecognizerController = SpeechRecognizerController(name: "General", registerEffect: .listening, unregisterEffect: .paused)
 
     private let yesNoResponses = ["Yes", "No"]
     private let quantityResponses = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
@@ -184,17 +184,17 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
     func didReceiveRequiredPhrase() {
         // no-op
     }
-
-    func didStartListening() {
-        SoundEffect.listening.play()
-    }
-
-    func didStopListening() {
-        SoundEffect.paused.play()
-    }
-
-    func didPauseListening() {
-        SoundEffect.paused.play()
-    }
+//
+//    func didStartListening() {
+//        SoundEffect.listening.play()
+//    }
+//
+//    func didStopListening() {
+//        SoundEffect.paused.play()
+//    }
+//
+//    func didPauseListening() {
+//        SoundEffect.paused.play()
+//    }
 
 }

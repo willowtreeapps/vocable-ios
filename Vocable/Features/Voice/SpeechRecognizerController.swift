@@ -15,9 +15,6 @@ protocol SpeechRecognizerControllerDelegate: AnyObject {
     func didGetFinalResult(_ speechRecognitionResult: SFSpeechRecognitionResult)
     func didReceiveRequiredPhrase()
     func transcriptionDidCancel()
-    func didStartListening()
-    func didPauseListening()
-    func didStopListening()
 }
 
 class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
@@ -47,20 +44,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     private var lastErrorDate = Date.distantPast
 
-    @Published private(set) var status: ListeningStatus = .stopped {
-        didSet {
-            guard oldValue != status else { return }
-            switch status {
-            case .listening:
-                delegate?.didStartListening()
-            case .paused:
-                delegate?.didPauseListening()
-            case .stopped:
-                delegate?.didStopListening()
-            }
-        }
-    }
-
+    @Published private(set) var status: ListeningStatus = .stopped
     @Published private(set) var isHearingWords = false
 
     private func countOfRecognitionTasks(matching states: SFSpeechRecognitionTaskState...) -> Int {
@@ -69,7 +53,14 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         }.count
     }
 
-    override init() {
+    private let name: String
+    private let registerEffect: SoundEffect?
+    private let unregisterEffect: SoundEffect?
+
+    init(name: String, registerEffect: SoundEffect? = nil, unregisterEffect: SoundEffect? = nil) {
+        self.name = name
+        self.registerEffect = registerEffect
+        self.unregisterEffect = unregisterEffect
         super.init()
         registerForApplicationLifecycleEvents()
     }
@@ -89,16 +80,28 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
                         assertionFailure("Recording permission denied")
                         return
                     }
-                    DispatchQueue.main.async {
-                        guard AudioEngineController.shared.register(speechRecognizer: self) else {
+
+                    let audioController = AudioEngineController.shared
+
+                    audioController.register(speechRecognizer: self, completion: { didInit in
+                        guard didInit else {
                             print("Audio engine failed to initialize")
                             return
                         }
-                        print("START LISTENING...")
-                        self.status = .listening
-                        self.requestTranscription()
-                    }
+                        func actions() {
+                            print("[\(self.name)] START LISTENING...")
+                            self.status = .listening
+                            self.requestTranscription()
+                        }
+
+                        if let effect = self.registerEffect {
+                            audioController.playEffect(effect, completion: actions)
+                        } else {
+                            actions()
+                        }
+                    })
                 }
+
             case .denied:
                 assertionFailure("Speech permission denied")
             default:
@@ -111,7 +114,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         guard status != .stopped else {
             return
         }
-        print("STOP LISTENING...")
+        print("[\(name)] STOP LISTENING...")
         status = .stopped
         unscheduleListeners()
     }
@@ -120,7 +123,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         guard status == .listening else {
             return
         }
-        print("PAUSE LISTENING...")
+        print("[\(name)] PAUSE LISTENING...")
         status = .paused
         unscheduleListeners()
     }
@@ -138,11 +141,19 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
         }
         recognitionTasks.removeAll()
 
-        AudioEngineController.shared.unregister(speechRecognizer: self)
+        let audioController = AudioEngineController.shared
+        func unregister() {
+            audioController.unregister(speechRecognizer: self)
+        }
+        if let effect = unregisterEffect {
+            audioController.playEffect(effect, completion: unregister)
+        } else {
+            unregister()
+        }
     }
 
     private func startTimer() {
-        print("STARTING TIMER...")
+        print("[\(name)] STARTING TIMER...")
 
         timeout?.invalidate()
         timeout = Timer.scheduledTimer(timeInterval: timeoutInterval,
@@ -153,7 +164,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     }
 
     @objc private func handleTimeout() {
-        print("HANDLE TIMEOUT...")
+        print("[\(name)] HANDLE TIMEOUT...")
 
         timeout?.invalidate()
 
@@ -234,7 +245,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     // Called only for final recognitions of utterances. No more about the utterance will be reported
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishRecognition recognitionResult: SFSpeechRecognitionResult) {
         let transcription = recognitionResult.bestTranscription.formattedString.lowercased()
-        print("didFinishRecognition: \(transcription)")
+        print("[\(name)] didFinishRecognition: \(transcription)")
         if let requiredPhrase = requiredPhrase, transcription.contains(requiredPhrase.lowercased()) {
             delegate?.didReceiveRequiredPhrase()
         }
@@ -249,7 +260,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     // Called when the task has been cancelled, either by client app, the user, or the system
     func speechRecognitionTaskWasCancelled(_ task: SFSpeechRecognitionTask) {
-        print("speechRecognitionTaskWasCancelled")
+        print("[\(name)] speechRecognitionTaskWasCancelled")
         transcribeAgainIfNeeded()
         recognitionTasks.remove(task)
         recognitionBuffers[task] = nil
@@ -258,7 +269,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     // Called when recognition of all requested utterances is finished.
     // If successfully is false, the error property of the task will contain error information
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
-        print("speechRecognitionTaskDidFinish \(successfully ? "successfully" : "unsuccessfully")")
+        print("[\(name)] speechRecognitionTaskDidFinish \(successfully ? "successfully" : "unsuccessfully")")
         if !successfully {
             // If we get spammed with errors, stop trying to obtain a transcription.
             // This can occur for a number of reasons and it's difficult to enumerate
