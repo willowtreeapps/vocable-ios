@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 import Speech
 
-class AudioEngineController {
+class AudioEngineController: NSObject, AVAudioPlayerDelegate {
 
     static let shared = AudioEngineController()
 
@@ -20,15 +20,50 @@ class AudioEngineController {
     private let audioSession = AVAudioSession.sharedInstance()
     private let conversionQueue = DispatchQueue(label: "SpeechConversion")
 
+    private let internalQueueKey = DispatchSpecificKey<Void>()
+
+    private lazy var internalQueue: DispatchQueue = {
+        let queue = DispatchQueue(label: "AudioEngineController_Internal", qos: .userInteractive)
+        queue.setSpecific(key: self.internalQueueKey, value: ())
+        return queue
+    }()
+
     private var registeredSpeechControllers = Set<SpeechRecognizerController>()
 
-    private init() {
+    private var audioEngineShouldRun = false
+
+    private var installedTapFormat: AVAudioFormat?
+
+    private var audioPlayers = Set<AVAudioPlayer>()
+
+    override init() {
+        super.init()
         setupRouteChangeNotifications()
         updateAudioSession()
     }
 
+    func dispatchInternalAsync(_ actions: @escaping () -> Void) {
+        let isInternal = DispatchQueue.getSpecific(key: internalQueueKey) != nil
+        if isInternal {
+            actions()
+        } else {
+            internalQueue.async(execute: actions)
+        }
+    }
+
+    func dispatchInternalSync(_ actions: @escaping () throws -> Void) rethrows {
+        let isInternal = DispatchQueue.getSpecific(key: internalQueueKey) != nil
+        if isInternal {
+            try actions()
+        } else {
+            try internalQueue.sync(execute: actions)
+        }
+    }
+
     @objc private func handleRouteChange(notification: Notification) {
-        updateInputNodeTapIfNeeded()
+        dispatchInternalAsync { [weak self] in
+            self?.updateInputNodeTapIfNeeded()
+        }
     }
 
     private func setupRouteChangeNotifications() {
@@ -38,8 +73,6 @@ class AudioEngineController {
                        name: .AVAudioEngineConfigurationChange,
                        object: nil)
     }
-
-    private var installedTapFormat: AVAudioFormat?
 
     @discardableResult
     private func updateInputNodeTapIfNeeded() -> Bool {
@@ -67,9 +100,11 @@ class AudioEngineController {
 
         node.removeTap(onBus: bus)
         node.installTap(onBus: bus, bufferSize: 1024, format: micInputFormat) { [weak self] buffer, timestamp in
+
             guard !AVSpeechSynthesizer.shared.isSpeaking else {
                 return
             }
+
             self?.conversionQueue.async {
                 let frameCapacity = AVAudioFrameCount(micInputFormat.sampleRate * 2.0)
                 guard let convertedBuffer = AVAudioPCMBuffer(pcmFormat: speechInputFormat, frameCapacity: frameCapacity) else {
@@ -104,55 +139,111 @@ class AudioEngineController {
     }
 
     func register(speechRecognizer: SpeechRecognizerController, completion: @escaping (Bool) -> Void) {
-        registeredSpeechControllers.insert(speechRecognizer)
-
-        // Give the audio engine a chance to warm up.
-        // This is a prospective fix for the output bus not being available yet.
-        // The extra dispatch may be unnecessary.
-        DispatchQueue.main.async { [weak self] in
-            let result = self?.updateAudioSession() ?? false
-            completion(result)
+        dispatchInternalAsync { [weak self] in
+            guard let self = self else { return }
+            self.registeredSpeechControllers.insert(speechRecognizer)
+            self.updateAudioSession(completion: completion)
         }
     }
 
-    func unregister(speechRecognizer: SpeechRecognizerController) {
-        registeredSpeechControllers.remove(speechRecognizer)
-        updateAudioSession()
+    func unregister(speechRecognizer: SpeechRecognizerController, completion: ((Bool) -> Void)? = nil) {
+        dispatchInternalAsync { [weak self] in
+            guard let self = self else { return }
+            self.registeredSpeechControllers.remove(speechRecognizer)
+            self.updateAudioSession(completion: completion)
+        }
     }
 
-    @discardableResult
-    private func updateAudioSession() -> Bool {
+    func playEffect(_ effect: SoundEffect, completion: @escaping () -> Void) {
 
-        do {
+        guard let data = effect.soundData else {
+            return
+        }
+        print("Playing \"\(effect.rawValue).wav\"...")
+        guard let player = try? AVAudioPlayer(data: data, fileTypeHint: "wav") else {
+            return
+        }
+        player.delegate = self
+        player.play()
+        audioPlayers.insert(player)
+    }
 
-            if registeredSpeechControllers.isEmpty {
-                if audioEngine.isRunning {
-                    audioEngine.stop()
-                }
-                try audioSession.setCategory(.playback, mode: .spokenAudio)
-            } else {
+    private func updateAudioSession(completion: ((Bool) -> Void)? = nil) {
 
-                try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .mixWithOthers)
-
-                if updateInputNodeTapIfNeeded() {
-                    if !audioEngine.isRunning {
-                        try audioEngine.start()
+        dispatchInternalSync { [weak self] in
+            var result = false
+            var sessionNeedsActivation = false
+            guard let self = self else {
+                completion?(result)
+                return
+            }
+            do {
+                if self.registeredSpeechControllers.isEmpty {
+                    if self.audioSession.category != .playback {
+                        print("AUDIO SESSION CATEGORY: playback")
+                        try self.audioSession.setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
+                        sessionNeedsActivation = true
                     }
+                    self.audioEngineShouldRun = !self.registeredSpeechControllers.isEmpty
+                    result = true
                 } else {
 
-                    // This is not the desired path if speech controllers are
-                    // registered, but it ensures the audio session will at least
-                    // be prepared for speech synthesis
-                    try audioSession.setCategory(.playback, mode: .spokenAudio)
-                    return false
+                    if self.audioSession.category != .playAndRecord {
+                        print("AUDIO SESSION CATEGORY: playAndRecord")
+                        try self.audioSession.setCategory(.playAndRecord, mode: .voiceChat, options: [.defaultToSpeaker])
+                        sessionNeedsActivation = true
+                    }
+
+                    if self.updateInputNodeTapIfNeeded() {
+                        self.audioEngineShouldRun = true
+                        result = true
+                    } else {
+
+                        // This is not the desired path if speech controllers are
+                        // registered, but it ensures the audio session will at least
+                        // be prepared for speech synthesis
+                        if self.audioSession.category != .playback {
+                            print("AUDIO SESSION CATEGORY: playback")
+                            try self.audioSession.setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
+                            sessionNeedsActivation = true
+                        }
+                        result = false
+                    }
+                }
+
+                if sessionNeedsActivation {
+                    try self.audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+                    print("AUDIO SESSION ACTIVATED")
+                }
+            } catch {
+                assertionFailure("Failed to activate audio session: \(error)")
+                result = false
+            }
+            result = true
+
+            if self.audioEngineShouldRun {
+                if !self.audioEngine.isRunning {
+                    try? self.audioEngine.start()
+                    print("AUDIO ENGINE STARTED")
+                }
+            } else {
+                if self.audioEngine.isRunning {
+                    self.audioEngine.pause()
+                    print("AUDIO ENGINE PAUSED")
                 }
             }
-            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
-        } catch {
-            assertionFailure("Failed to activate audio session: \(error)")
-            return false
+
+            completion?(result)
         }
-        return true
     }
-    
+
+    // MARK: AVAudioPlayerDelegate
+
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        audioPlayers.remove(player)
+    }
+
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        // no-op
+    }
 }

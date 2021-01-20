@@ -21,6 +21,7 @@ import CoreData
 
     private var categoryCarousel: CategoriesCarouselViewController!
     private var disposables = Set<AnyCancellable>()
+    private var utteranceCancellable: AnyCancellable?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,12 +89,12 @@ import CoreData
             utterancePublisher = vc.$lastUtterance
             viewController = vc
         }
-        utterancePublisher.receive(on: DispatchQueue.main)
+
+        utteranceCancellable = utterancePublisher.receive(on: DispatchQueue.main)
             .filter({!($0?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)})
             .sink { [weak self] newValue in
                 self?.updateOutputLabelText(newValue, isDictated: false)
             }
-            .store(in: &disposables)
         setContentViewController(viewController, animated: true)
     }
 

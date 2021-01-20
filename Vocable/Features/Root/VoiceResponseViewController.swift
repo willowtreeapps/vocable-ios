@@ -8,16 +8,19 @@
 
 import UIKit
 import Speech
+import Combine
 
 protocol VoiceResponseViewControllerDelegate: AnyObject {
     func didUpdateSpeechResponse(_ text: String?)
 }
 
-final class VoiceResponseViewController: PagingCarouselViewController, SpeechRecognizerControllerDelegate {
+final class VoiceResponseViewController: PagingCarouselViewController {
 
     weak var delegate: VoiceResponseViewControllerDelegate?
 
-    private let speechRecognizerController = SpeechRecognizerController()
+    private let speechRecognizerController = SpeechRecognizerController.shared
+    private var transcriptionCancellable: AnyCancellable?
+    private let machineLearningQueue = DispatchQueue(label: "machine_learning_queue", qos: .userInitiated)
 
     private let yesNoResponses = ["Yes", "No"]
     private let quantityResponses = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
@@ -33,7 +36,14 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
             var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
             snapshot.appendSections([0])
             snapshot.appendItems(choices)
-            diffableDataSource.apply(snapshot, animatingDifferences: false)
+            UIView.animate(withDuration: 0.5,
+                           delay: 0,
+                           usingSpringWithDamping: 0.8,
+                           initialSpringVelocity: 1.0,
+                           options: [],
+                           animations: { [weak self] in
+                                self?.diffableDataSource.apply(snapshot, animatingDifferences: false)
+                           }, completion: nil)
         }
     }
 
@@ -46,8 +56,6 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        speechRecognizerController.delegate = self
-
         edgesForExtendedLayout = UIRectEdge.all.subtracting(.top)
         view.layoutMargins.top = 4
 
@@ -55,18 +63,31 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
         updateLayoutForCurrentTraitCollection()
 
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
+        collectionView.layout.itemAnimationStyle = .shrinkExpand
+
+        transcriptionCancellable = speechRecognizerController.$transcription
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newValue in
+                switch newValue {
+                case .partialTranscription(let transcription):
+                    self?.delegate?.didUpdateSpeechResponse(transcription)
+                case .finalTranscription(let transcription):
+                    self?.delegate?.didUpdateSpeechResponse(transcription)
+                    self?.classify(transcription: transcription)
+                default:
+                    break
+                }
+            }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        speechRecognizerController.startListening()
-        SoundEffect.listening.play()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        speechRecognizerController.startTranscribing()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        speechRecognizerController.stopListening()
-        SoundEffect.paused.play()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        speechRecognizerController.stopTranscribing()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -105,86 +126,74 @@ final class VoiceResponseViewController: PagingCarouselViewController, SpeechRec
         }
     }
 
-    // MARK: SpeechRecognizerControllerDelegate
+    // MARK: ML Stubs
 
-    func didReceivePartialTranscription(_ transcription: String) {
-        delegate?.didUpdateSpeechResponse(transcription)
-    }
+    private func classify(transcription: String) {
 
-    func didGetFinalResult(_ speechRecognitionResult: SFSpeechRecognitionResult) {
+        machineLearningQueue.async { [weak self] in
 
-        let text = speechRecognitionResult.bestTranscription.formattedString.lowercased()
-        delegate?.didUpdateSpeechResponse(text)
+            guard let self = self else { return }
 
-        let model = try! VocableChoicesModel(configuration: .init())
-        guard let prediction = try? model.prediction(text: text) else {
-            assertionFailure("Predictions failed...")
-            return
-        }
-
-        //get choices
-        var sentence = text
-
-        // Sanitize the sentence by removing non key words
-        for prefix in self.prefixes {
-            if sentence.hasPrefix(prefix) {
-                if let rangeToRemove = sentence.range(of: prefix) {
-                    sentence.removeSubrange(rangeToRemove)
-                }
+            let model = try! VocableChoicesModel(configuration: .init())
+            guard let prediction = try? model.prediction(text: transcription) else {
+                assertionFailure("Predictions failed...")
+                return
             }
-        }
 
-        sentence = sentence.trimmingCharacters(in: .whitespaces)
-        var choicesArray = sentence.components(separatedBy: " or ")
+            //get choices
+            var sentence = transcription
 
-        choicesArray = choicesArray.map { (choice) -> String in
-            var sanitizedChoice = choice.trimmingCharacters(in: .whitespaces)
-            if sanitizedChoice.hasPrefix("a ") {
-                if let rangeToRemove = sanitizedChoice.range(of: "a ") {
-                    sanitizedChoice.removeSubrange(rangeToRemove)
+            // Sanitize the sentence by removing non key words
+            for prefix in self.prefixes {
+                if sentence.hasPrefix(prefix) {
+                    if let rangeToRemove = sentence.range(of: prefix) {
+                        sentence.removeSubrange(rangeToRemove)
+                    }
                 }
             }
 
-            if sanitizedChoice.hasSuffix("?") {
-                if let rangeToRemove = sanitizedChoice.range(of: "?") {
-                    sanitizedChoice.removeSubrange(rangeToRemove)
+            sentence = sentence.trimmingCharacters(in: .whitespaces)
+            var choicesArray = sentence.components(separatedBy: " or ")
+
+            choicesArray = choicesArray.map { (choice) -> String in
+                var sanitizedChoice = choice.trimmingCharacters(in: .whitespaces)
+                if sanitizedChoice.hasPrefix("a ") {
+                    if let rangeToRemove = sanitizedChoice.range(of: "a ") {
+                        sanitizedChoice.removeSubrange(rangeToRemove)
+                    }
+                }
+
+                if sanitizedChoice.hasSuffix("?") {
+                    if let rangeToRemove = sanitizedChoice.range(of: "?") {
+                        sanitizedChoice.removeSubrange(rangeToRemove)
+                    }
+                }
+
+                return sanitizedChoice
+            }
+
+            DispatchQueue.main.async {
+                self.choices.removeAll()
+
+                let label = prediction.label
+                if label == "boolean" {
+                    print("bool")
+                    self.isNumberResponse = false
+                    self.choices = self.yesNoResponses
+                } else if label == "quantity" {
+                    print("numbers")
+                    self.isNumberResponse = true
+                    self.choices = self.quantityResponses
+                } else if label == "feelings" {
+                    print("feels")
+                    self.isNumberResponse = false
+                    self.choices = self.feelingsResponses
+                } else if label == "choices" {
+                    print("choice -> \(choicesArray)")
+                    self.isNumberResponse = false
+                    self.choices = choicesArray
                 }
             }
-
-            return sanitizedChoice
-        }
-
-        DispatchQueue.main.async {
-            self.choices.removeAll()
-
-            let label = prediction.label
-            if label == "boolean" {
-                print("bool")
-                self.isNumberResponse = false
-                self.choices = self.yesNoResponses
-            } else if label == "quantity" {
-                print("numbers")
-                self.isNumberResponse = true
-                self.choices = self.quantityResponses
-            } else if label == "feelings" {
-                print("feels")
-                self.isNumberResponse = false
-                self.choices = self.feelingsResponses
-            } else if label == "choices" {
-                print("choice -> \(choicesArray)")
-                self.isNumberResponse = false
-                self.choices = choicesArray
-            }
         }
     }
-
-    func transcriptionDidCancel() {
-        print("Speech framework cancelled")
-        delegate?.didUpdateSpeechResponse(nil)
-    }
-
-    func didReceiveRequiredPhrase() {
-        // no-op
-    }
-
 }

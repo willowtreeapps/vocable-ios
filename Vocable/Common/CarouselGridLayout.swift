@@ -20,6 +20,13 @@ class CarouselGridLayout: UICollectionViewLayout {
         case minimumWidth(CGFloat)
     }
 
+    enum ItemAnimationStyle {
+        case none
+        case shrinkExpand
+    }
+
+    var itemAnimationStyle: ItemAnimationStyle = .none
+
     var numberOfColumns: ColumnCount = .fixedCount(1) {
         didSet {
             switch (oldValue, numberOfColumns) {
@@ -246,7 +253,30 @@ class CarouselGridLayout: UICollectionViewLayout {
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attr = super.layoutAttributesForItem(at: indexPath) ?? UICollectionViewLayoutAttributes(forCellWith: indexPath)
         attr.frame = frameForCell(at: indexPath)
+        attr.alpha = 1
+        attr.transform = .identity
         return attr
+    }
+
+    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        guard let superAttributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath) else { return nil }
+        if itemAnimationStyle == .shrinkExpand {
+            superAttributes.transform = superAttributes.transform.scaledBy(x: 0.8, y: 0.8)
+            superAttributes.alpha = 0.0
+            if let finalAttributes = layoutAttributesForItem(at: itemIndexPath) {
+                superAttributes.frame = finalAttributes.frame
+            }
+        }
+        return superAttributes
+    }
+
+    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        guard let superAttributes = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath) else { return nil }
+        if itemAnimationStyle == .shrinkExpand {
+            superAttributes.transform = superAttributes.transform.scaledBy(x: 0.8, y: 0.8)
+            superAttributes.alpha = 0.0
+        }
+        return superAttributes
     }
 
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {

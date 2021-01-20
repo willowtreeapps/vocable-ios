@@ -12,37 +12,25 @@ import AudioToolbox
 enum SoundEffect: String {
 
     private struct Storage {
-        var identifiers = [SoundEffect: SystemSoundID]()
+        var data = [SoundEffect: Data]()
         static var shared = Storage()
     }
 
     case listening = "Listening"
     case paused = "Paused"
 
-    private var soundID: SystemSoundID? {
-        if let effect = Storage.shared.identifiers[self] {
-            return effect
+    var soundData: Data? {
+
+        if let contents = Storage.shared.data[self] {
+            return contents
         }
 
-        guard let url = Bundle.main.url(forResource: rawValue, withExtension: "wav") else {
+        guard let url = Bundle.main.url(forResource: rawValue, withExtension: "wav"),
+              let data = try? Data(contentsOf: url) else {
             assertionFailure("File not found for name \"\(rawValue)\" of type .wav")
             return nil
         }
-        var soundID: SystemSoundID = .zero
-        let registrationResult = AudioServicesCreateSystemSoundID(url as CFURL, &soundID)
-        guard registrationResult == .zero else {
-            assertionFailure("Failed to register system sound effect (OSStatus \(registrationResult))")
-            return nil
-        }
-        Storage.shared.identifiers[self] = soundID
-        return soundID
-    }
-
-    func play() {
-        guard let soundID = self.soundID else {
-            assertionFailure("No sound ID exists for \"\(rawValue)\"")
-            return
-        }
-        AudioServicesPlaySystemSound(soundID)
+        Storage.shared.data[self] = data
+        return data
     }
 }

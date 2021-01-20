@@ -28,6 +28,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         case contactDevs
         case pidTuner
         case versionNum
+        case listeningMode
 
         var title: String {
             switch self {
@@ -52,6 +53,9 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             case .pidTuner:
                 return NSLocalizedString("settings.cell.tune_cursor.title",
                                          comment: "tune cursor debug settings menu item")
+            case .listeningMode:
+                #warning("Needs localization")
+                return "Listening Mode"
             case .versionNum:
                 return ""
             }
@@ -62,6 +66,9 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             if debugFeatures.contains(self) {
                 return AppConfig.showDebugOptions
             }
+            if self == .listeningMode {
+                return AppConfig.isVoiceExperimentEnabled
+            }
             return true
         }
     }
@@ -70,7 +77,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         .init(collectionView: collectionView) {(collectionView, indexPath, item) -> UICollectionViewCell in
 
         switch item {
-        case .categories, .timingSensitivity, .resetAppSettings, .selectionMode:
+        case .categories, .timingSensitivity, .resetAppSettings, .selectionMode, .listeningMode:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
             cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
             return cell
@@ -142,6 +149,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         snapshot.appendItems([.categories,
                               .timingSensitivity,
                               .resetAppSettings,
+                              .listeningMode,
                               .selectionMode,
                               .pidTuner].filter({$0.isFeatureEnabled}))
         snapshot.appendSections([.externalURL])
@@ -240,7 +248,9 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         case .categories:
             let viewController = EditCategoriesViewController()
             show(viewController, sender: nil)
-
+        case .listeningMode:
+            let viewController = ListeningModeViewController()
+            show(viewController, sender: nil)
         case .contactDevs:
             presentEmailAlert()
 
