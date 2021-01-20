@@ -69,6 +69,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }.store(in: &disposables)
 
+        _ = SpeechRecognizerController.shared
+        
         return true
     }
 

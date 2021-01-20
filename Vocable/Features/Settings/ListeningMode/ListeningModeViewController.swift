@@ -1,20 +1,21 @@
 //
-//  SelectionModeViewController.swift
-//  Vocable AAC
+//  ListeningModeViewController.swift
+//  Vocable
 //
-//  Created by Thomas Shealy on 3/19/20.
-//  Copyright © 2020 WillowTree. All rights reserved.
+//  Created by Chris Stroud on 1/19/21.
+//  Copyright © 2021 WillowTree. All rights reserved.
 //
 
 import UIKit
 
-final class SelectionModeViewController: VocableCollectionViewController {
+final class ListeningModeViewController: VocableCollectionViewController {
 
-    private enum SelectionModeItem: Int {
-        case headTrackingToggle
+    private enum ContentItem: Int {
+        case listeningModeEnabled
+        case hotWordEnabled
     }
 
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SelectionModeItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, ContentItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
 
@@ -27,16 +28,20 @@ final class SelectionModeViewController: VocableCollectionViewController {
     }
 
     private func setupNavigationBar() {
-        navigationBar.title = NSLocalizedString("selection_mode.header.title", comment: "Selection mode screen header title")
+        #warning("Needs localization")
+        navigationBar.title = "Listening Mode"
     }
 
     // MARK: UICollectionViewDataSource
 
-    private func updateDataSource() {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, SelectionModeItem>()
+    private func updateDataSource(animated: Bool = false) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, ContentItem>()
         snapshot.appendSections([0])
-        snapshot.appendItems([.headTrackingToggle])
-        dataSource.apply(snapshot, animatingDifferences: false)
+        snapshot.appendItems([.listeningModeEnabled])
+        if AppConfig.isListeningModeEnabled {
+            snapshot.appendItems([.hotWordEnabled])
+        }
+        dataSource.apply(snapshot, animatingDifferences: animated)
     }
 
     private func setupCollectionView() {
@@ -52,10 +57,10 @@ final class SelectionModeViewController: VocableCollectionViewController {
 
         let itemHeightDimension: NSCollectionLayoutDimension
         if sizeClass.contains(.vCompact) {
-                itemHeightDimension = NSCollectionLayoutDimension.absolute(50)
-            } else {
-                itemHeightDimension = NSCollectionLayoutDimension.absolute(100)
-            }
+            itemHeightDimension = NSCollectionLayoutDimension.absolute(50)
+        } else {
+            itemHeightDimension = NSCollectionLayoutDimension.absolute(100)
+        }
 
         let itemWidthDimension = NSCollectionLayoutDimension.fractionalWidth(1.0)
         let columnCount = 1
@@ -85,54 +90,50 @@ final class SelectionModeViewController: VocableCollectionViewController {
         if collectionView.indexPathForGazedItem != indexPath {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
-
-        if AppConfig.isHeadTrackingEnabled {
-            let title = NSLocalizedString("gaze_settings.alert.disable_head_tracking_confirmation.title",
-                                          comment: "Disable head tracking confirmation alert title")
-            let cancelButtonTitle = NSLocalizedString("gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title",
-                                                      comment: "Cancel alert action title")
-            let confirmButtonTitle = NSLocalizedString("gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title",
-                                                       comment: "Confirm alert action title")
-            let alertViewController = GazeableAlertViewController.init(alertTitle: title)
-            alertViewController.addAction(GazeableAlertAction(title: cancelButtonTitle))
-            alertViewController.addAction(GazeableAlertAction(title: confirmButtonTitle, style: .bold, handler: self.toggleHeadTracking))
-            present(alertViewController, animated: true)
-        } else {
-            AppConfig.isHeadTrackingEnabled.toggle()
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        switch item {
+        case .listeningModeEnabled:
+            AppConfig.isListeningModeEnabled.toggle()
+            updateDataSource(animated: true)
+        case .hotWordEnabled:
+            AppConfig.isHotWordPermitted.toggle()
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         switch item {
-        case .headTrackingToggle:
-            return AppConfig.isHeadTrackingSupported
+        case .listeningModeEnabled:
+            return true
+        case .hotWordEnabled:
+            return AppConfig.isListeningModeEnabled && AppConfig.isVoiceExperimentEnabled
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         switch item {
-        case .headTrackingToggle:
-            return AppConfig.isHeadTrackingSupported
+        case .listeningModeEnabled:
+            return true
+        case .hotWordEnabled:
+            return AppConfig.isListeningModeEnabled && AppConfig.isVoiceExperimentEnabled
         }
     }
 
-    private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: SelectionModeItem) -> UICollectionViewCell {
+    private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: ContentItem) -> UICollectionViewCell {
         switch item {
-        case .headTrackingToggle:
+        case .listeningModeEnabled:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsToggleCollectionViewCell
-            let title = NSLocalizedString("settings.cell.head_tracking.title",
-                                          comment: "Settings head tracking cell title")
-            cell.setup(title: title, value: AppConfig.$isHeadTrackingEnabled)
+            #warning("Needs localization")
+            let title = "Listening mode"
+            cell.setup(title: title, value: AppConfig.$isListeningModeEnabled)
+            return cell
+        case .hotWordEnabled:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsToggleCollectionViewCell
+            #warning("Needs localization")
+            let title = "\"Hey Vocable\" shortcut"
+            cell.setup(title: title, value: AppConfig.$isHotWordPermitted)
             return cell
         }
     }
-
-    // MARK: Helpers
-
-    private func toggleHeadTracking() {
-        AppConfig.isHeadTrackingEnabled.toggle()
-    }
-
 }

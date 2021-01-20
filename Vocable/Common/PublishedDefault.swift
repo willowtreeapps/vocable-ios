@@ -28,9 +28,9 @@ import Combine
         }
     }
 
-    var projectedValue: AnyPublisher<T, Never> {
+    var projectedValue: CurrentValueSubject<T, Never> {
         mutating get {
-            return subject.eraseToAnyPublisher()
+            return subject
         }
     }
 

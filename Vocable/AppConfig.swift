@@ -32,6 +32,12 @@ struct AppConfig {
     @PublishedDefault(key: "sensitivitySetting", defaultValue: CursorSensitivity.medium)
     static var cursorSensitivity: CursorSensitivity
 
+    @PublishedDefault(key: "isHotWordPermitted", defaultValue: true)
+    static var isHotWordPermitted: Bool
+
+    @PublishedDefault(key: "isListeningModeEnabled", defaultValue: true)
+    static var isListeningModeEnabled: Bool
+
     static let defaultLanguageCode = "en"
     static var activePreferredLanguageCode: String {
         return Locale.preferredLanguages.first ?? defaultLanguageCode

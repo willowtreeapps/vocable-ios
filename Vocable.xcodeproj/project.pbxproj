@@ -58,6 +58,7 @@
 		6B5C490D245CB92700A4433C /* CategoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C490C245CB92700A4433C /* CategoryDetailViewController.swift */; };
 		6B5C490F2460627B00A4433C /* NumericCategoryContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C490E2460627A00A4433C /* NumericCategoryContentViewController.swift */; };
 		6B5C49112460AEF900A4433C /* RootEditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C49102460AEF900A4433C /* RootEditTextViewController.swift */; };
+		6B6A4D9125B7609900A7F489 /* ListeningModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6A4D9025B7609900A7F489 /* ListeningModeViewController.swift */; };
 		6B823BC223F4ADE30099F65E /* PIDControlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BAD23F4ADE30099F65E /* PIDControlConstants.swift */; };
 		6B823BC623F4ADE30099F65E /* FormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BB323F4ADE30099F65E /* FormatterExtensions.swift */; };
 		6B823BC823F4ADE30099F65E /* SingleControlDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B823BB623F4ADE30099F65E /* SingleControlDisplayable.swift */; };
@@ -236,6 +237,7 @@
 		6B5C490C245CB92700A4433C /* CategoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailViewController.swift; sourceTree = "<group>"; };
 		6B5C490E2460627A00A4433C /* NumericCategoryContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericCategoryContentViewController.swift; sourceTree = "<group>"; };
 		6B5C49102460AEF900A4433C /* RootEditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootEditTextViewController.swift; sourceTree = "<group>"; };
+		6B6A4D9025B7609900A7F489 /* ListeningModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningModeViewController.swift; sourceTree = "<group>"; };
 		6B823BAD23F4ADE30099F65E /* PIDControlConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIDControlConstants.swift; sourceTree = "<group>"; };
 		6B823BB323F4ADE30099F65E /* FormatterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterExtensions.swift; sourceTree = "<group>"; };
 		6B823BB623F4ADE30099F65E /* SingleControlDisplayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleControlDisplayable.swift; sourceTree = "<group>"; };
@@ -539,6 +541,14 @@
 			name = Sounds;
 			sourceTree = "<group>";
 		};
+		6B6A4D8F25B7607800A7F489 /* ListeningMode */ = {
+			isa = PBXGroup;
+			children = (
+				6B6A4D9025B7609900A7F489 /* ListeningModeViewController.swift */,
+			);
+			path = ListeningMode;
+			sourceTree = "<group>";
+		};
 		6B823BA923F4ADE30099F65E /* PulseController */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,6 +629,7 @@
 				6B005AE6245B21ED004919F4 /* SettingsViewController.swift */,
 				714EFD412419636500DC773C /* EditPhrases */,
 				A9B696002433C33F004E6960 /* EditCategories */,
+				6B6A4D8F25B7607800A7F489 /* ListeningMode */,
 				A9DFCC21242D3A5000136136 /* TimingSensitivity */,
 				A9DFCC22242D3CF500136136 /* SelectionMode */,
 			);
@@ -1029,6 +1040,7 @@
 				6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */,
 				9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */,
 				6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */,
+				6B6A4D9125B7609900A7F489 /* ListeningModeViewController.swift in Sources */,
 				6B823BCF23F4ADE30099F65E /* TunningViewController.swift in Sources */,
 				7192E40B242E6562008E4A0A /* ToastContainerViewController.swift in Sources */,
 				A9E665A7241A785F00FE577A /* CarouselGridCollectionViewController.swift in Sources */,

@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 import Speech
 
-class AudioEngineController {
+class AudioEngineController: NSObject, AVAudioPlayerDelegate {
 
     static let shared = AudioEngineController()
 
@@ -32,13 +32,12 @@ class AudioEngineController {
 
     private var audioEngineShouldRun = false
 
-    // Could likely be a semaphore or something more thread-safe,
-    // but for now this seems adequate
-    private var listeningInterruptionCount = 0
-
     private var installedTapFormat: AVAudioFormat?
 
-    init() {
+    private var audioPlayers = Set<AVAudioPlayer>()
+
+    override init() {
+        super.init()
         setupRouteChangeNotifications()
         updateAudioSession()
     }
@@ -157,44 +156,16 @@ class AudioEngineController {
 
     func playEffect(_ effect: SoundEffect, completion: @escaping () -> Void) {
 
-        guard let soundID = effect.soundID else {
-            completion()
+        guard let data = effect.soundData else {
             return
         }
-
-        beginListeningInterruption {
-            print("Playing \"\(effect.rawValue).wav\"...")
-            AudioServicesPlaySystemSoundWithCompletion(soundID) { [weak self] in
-                guard let self = self else { return }
-                print("\"\(effect.rawValue).wav\" playback completed")
-                self.endListeningInterruption(completion: completion)
-            }
+        print("Playing \"\(effect.rawValue).wav\"...")
+        guard let player = try? AVAudioPlayer(data: data, fileTypeHint: "wav") else {
+            return
         }
-    }
-
-    func beginListeningInterruption(completion: (() -> Void)? = nil) {
-        dispatchInternalAsync { [weak self] in
-            self?.listeningInterruptionCount += 1
-            self?.updateAudioSession(completion: { _ in
-                print("LISTENING INTERRUPTION BEGAN")
-                completion?()
-            })
-        }
-    }
-
-    func endListeningInterruption(completion: (() -> Void)? = nil) {
-        dispatchInternalAsync { [weak self] in
-            guard let self = self else {
-                completion?()
-                return
-            }
-            self.listeningInterruptionCount = max(self.listeningInterruptionCount - 1, 0)
-            print("LISTENING INTERRUPTION ENDED")
-
-            self.updateAudioSession { _ in
-                completion?()
-            }
-        }
+        player.delegate = self
+        player.play()
+        audioPlayers.insert(player)
     }
 
     private func updateAudioSession(completion: ((Bool) -> Void)? = nil) {
@@ -207,7 +178,7 @@ class AudioEngineController {
                 return
             }
             do {
-                if self.registeredSpeechControllers.isEmpty || self.listeningInterruptionCount > 0 {
+                if self.registeredSpeechControllers.isEmpty {
                     if self.audioSession.category != .playback {
                         print("AUDIO SESSION CATEGORY: playback")
                         try self.audioSession.setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
@@ -250,8 +221,7 @@ class AudioEngineController {
             }
             result = true
 
-            let interruptionInProgress = self.listeningInterruptionCount > 0
-            if !interruptionInProgress && self.audioEngineShouldRun {
+            if self.audioEngineShouldRun {
                 if !self.audioEngine.isRunning {
                     try? self.audioEngine.start()
                     print("AUDIO ENGINE STARTED")
@@ -265,5 +235,15 @@ class AudioEngineController {
 
             completion?(result)
         }
+    }
+
+    // MARK: AVAudioPlayerDelegate
+
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        audioPlayers.remove(player)
+    }
+
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        // no-op
     }
 }
