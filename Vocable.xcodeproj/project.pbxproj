@@ -25,7 +25,7 @@
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
 		64599429258933370010EEFF /* VocableCore in Frameworks */ = {isa = PBXBuildFile; productRef = 64599428258933370010EEFF /* VocableCore */; };
 		64599431258938F50010EEFF /* VoiceResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64599430258938F50010EEFF /* VoiceResponseViewController.swift */; };
-		6459943E25895D9C0010EEFF /* SpeechRecognizerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6459943D25895D9C0010EEFF /* SpeechRecognizerController.swift */; };
+		6459943E25895D9C0010EEFF /* SpeechRecognitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6459943D25895D9C0010EEFF /* SpeechRecognitionController.swift */; };
 		64981D7C258A8014007EFA82 /* VocableChoicesModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 64981D7B258A8014007EFA82 /* VocableChoicesModel.mlmodel */; };
 		64A220BB2452171C0014EA80 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A220BA2452171C0014EA80 /* RootViewController.swift */; };
 		64A220BE2452173C0014EA80 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64A220BD2452173C0014EA80 /* Root.storyboard */; };
@@ -204,7 +204,7 @@
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64599430258938F50010EEFF /* VoiceResponseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceResponseViewController.swift; sourceTree = "<group>"; };
-		6459943D25895D9C0010EEFF /* SpeechRecognizerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizerController.swift; sourceTree = "<group>"; };
+		6459943D25895D9C0010EEFF /* SpeechRecognitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionController.swift; sourceTree = "<group>"; };
 		64981D7B258A8014007EFA82 /* VocableChoicesModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = VocableChoicesModel.mlmodel; sourceTree = "<group>"; };
 		64A220BA2452171C0014EA80 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		64A220BD2452173C0014EA80 /* Root.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
@@ -486,7 +486,7 @@
 			isa = PBXGroup;
 			children = (
 				6B2E789F258BE6A200A3DC82 /* AudioEngineController.swift */,
-				6459943D25895D9C0010EEFF /* SpeechRecognizerController.swift */,
+				6459943D25895D9C0010EEFF /* SpeechRecognitionController.swift */,
 				64981DA1258A9BBE007EFA82 /* Supporting Resources */,
 			);
 			path = Voice;
@@ -1099,7 +1099,7 @@
 				6B5C49112460AEF900A4433C /* RootEditTextViewController.swift in Sources */,
 				A9CF2AEF242D44EE005633A7 /* TimingSensitivityViewController.swift in Sources */,
 				64B32593254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift in Sources */,
-				6459943E25895D9C0010EEFF /* SpeechRecognizerController.swift in Sources */,
+				6459943E25895D9C0010EEFF /* SpeechRecognitionController.swift in Sources */,
 				B8DA9DF423F30BD200FEBE19 /* VectorUtils.swift in Sources */,
 				B879831523E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift in Sources */,
 				6B823BCC23F4ADE30099F65E /* TunningView.swift in Sources */,

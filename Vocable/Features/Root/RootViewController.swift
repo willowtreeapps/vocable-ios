@@ -79,7 +79,7 @@ import CoreData
             let vc = NumericCategoryContentViewController()
             utterancePublisher = vc.$lastUtterance
             viewController = vc
-        } else if category.identifier == Category.Identifier.voice {
+        } else if category.identifier == Category.Identifier.listeningMode {
             let vc = VoiceResponseViewController()
             vc.delegate = self
             utterancePublisher = vc.$lastUtterance

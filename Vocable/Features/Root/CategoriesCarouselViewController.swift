@@ -25,7 +25,7 @@ import Combine
 
     static func fetchVoiceCategoryID() -> NSManagedObjectID {
         let ctx = NSPersistentContainer.shared.viewContext
-        let predicate = NSComparisonPredicate(\Category.identifier, .equalTo, Category.Identifier.voice.rawValue)
+        let predicate = NSComparisonPredicate(\Category.identifier, .equalTo, Category.Identifier.listeningMode.rawValue)
         let categories = Category.fetchAll(in: ctx, matching: predicate)
         return categories[0].objectID
     }
@@ -77,7 +77,7 @@ import Combine
 
         updateFetchedResultsController()
 
-        hotWordCancellable = SpeechRecognizerController.shared.$transcription
+        hotWordCancellable = SpeechRecognitionController.shared.$transcription
             .filter { value in
                 if case .hotWord = value {
                     return true
@@ -140,8 +140,8 @@ import Combine
     private func categoriesFetchRequest() -> NSFetchRequest<Category> {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         var predicate: NSPredicate = NSComparisonPredicate(\Category.isHidden, .equalTo, false)
-        if !AppConfig.isVoiceExperimentEnabled || !AppConfig.isListeningModeEnabled {
-            let notVoicePredicate = NSComparisonPredicate(\Category.identifier, .notEqualTo, Category.Identifier.voice.rawValue)
+        if !AppConfig.isVoiceExperimentEnabled || !AppConfig.isListeningModeEnabled || !SpeechRecognitionController.shared.deviceSupportsSpeech {
+            let notVoicePredicate = NSComparisonPredicate(\Category.identifier, .notEqualTo, Category.Identifier.listeningMode.rawValue)
             predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, notVoicePredicate])
         }
         request.predicate = predicate

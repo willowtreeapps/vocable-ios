@@ -67,7 +67,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 return AppConfig.showDebugOptions
             }
             if self == .listeningMode {
-                return AppConfig.isVoiceExperimentEnabled
+                return AppConfig.isVoiceExperimentEnabled && SpeechRecognitionController.shared.deviceSupportsSpeech
             }
             return true
         }
@@ -151,10 +151,10 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                               .resetAppSettings,
                               .listeningMode,
                               .selectionMode,
-                              .pidTuner].filter({$0.isFeatureEnabled}))
+                              .pidTuner].filter(\.isFeatureEnabled))
         snapshot.appendSections([.externalURL])
         snapshot.appendItems([.privacyPolicy,
-                              .contactDevs].filter({$0.isFeatureEnabled}))
+                              .contactDevs].filter(\.isFeatureEnabled))
         snapshot.appendSections([.version])
         snapshot.appendItems([.versionNum])
         dataSource.apply(snapshot, animatingDifferences: false)

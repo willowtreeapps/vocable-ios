@@ -30,6 +30,11 @@ extension Category: NSManagedObjectIdentifiable {
         return category
     }
 
+    static func listeningModeCategory() -> Category {
+        let context = NSPersistentContainer.shared.viewContext
+        let category = Category.fetch(.listeningMode, in: context)
+        return category
+    }
 }
 
 extension Phrase: NSManagedObjectIdentifiable {

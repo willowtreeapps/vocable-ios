@@ -1,5 +1,5 @@
 //
-//  SpeechRecognizerController.swift
+//  SpeechRecognitionController.swift
 //  Vocable
 //
 //  Created by Steve Foster on 12/15/20.
@@ -10,17 +10,17 @@ import UIKit
 import Speech
 import Combine
 
-class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
+class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
 
-    static let shared = SpeechRecognizerController()
+    static let shared = SpeechRecognitionController()
 
     @Published private(set) var isPaused: Bool = false {
         didSet {
             guard oldValue != isPaused, mode == .transcribing else { return }
             if isPaused {
-                AudioEngineController.shared.playEffect(.paused, completion: {})
+                soundEffectSubject.send(.paused)
             } else {
-                AudioEngineController.shared.playEffect(.listening, completion: {})
+                soundEffectSubject.send(.listening)
             }
         }
     }
@@ -35,12 +35,11 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     @Published private(set) var mode: ListeningMode = .off {
         didSet {
-            print("\(oldValue) -> \(mode)")
             guard oldValue != mode else { return }
             if mode == .transcribing {
-                AudioEngineController.shared.playEffect(.listening, completion: {})
+                soundEffectSubject.send(.listening)
             } else if oldValue == .transcribing {
-                AudioEngineController.shared.playEffect(.paused, completion: {})
+                soundEffectSubject.send(.paused)
             }
         }
     }
@@ -53,6 +52,9 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     }
 
     @Published private(set) var transcription: TranscriptionResult = .none
+
+    @Published private(set) var microphonePermissionStatus = AVAudioSession.sharedInstance().recordPermission
+    @Published private(set) var speechPermissionStatus = SFSpeechRecognizer.authorizationStatus()
 
     private var isTranscriptionPermitted: Bool {
         let recordingIsPermitted = AVAudioSession.sharedInstance().recordPermission == .granted
@@ -81,10 +83,30 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     private var lastErrorDate = Date.distantPast
 
+    // When accepting permissions for speech/microphone, the engine is paused due to
+    // app lifecycle notifications. This flow causes the "listening" sound to happen
+    // twice. Removing duplicate values via Combine gives us a quick fix that doesn't require
+    // messing with other state variables.
+    private var soundEffectSubject = PassthroughSubject<SoundEffect, Never>()
+    private var soundEffectPlaybackCancellable: AnyCancellable?
+
     @Published private(set) var isHearingWords = false
+
+    var deviceSupportsSpeech: Bool {
+        return speechPermissionStatus != .restricted
+    }
+
+    private var isAuthorizedToTranscribe: Bool {
+        let micIsAuthorized = microphonePermissionStatus == .granted
+        let speechIsAuthorized = speechPermissionStatus == .authorized
+        return micIsAuthorized && speechIsAuthorized
+    }
 
     override init() {
         super.init()
+
+        updatePermissionStatuses()
+        
         registerForApplicationLifecycleEvents()
         hotWordEnabledCancellable = AppConfig.$isHotWordPermitted
             .receive(on: DispatchQueue.main)
@@ -97,11 +119,17 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
             .sink { [weak self] _ in
                 self?.startListeningForHotWordOrDeactivate()
             }
+
+        soundEffectPlaybackCancellable = soundEffectSubject
+            .removeDuplicates()
+            .sink { newValue in
+                AudioEngineController.shared.playEffect(newValue, completion: {})
+            }
     }
 
-    func startTranscribing() {
-        mode = .transcribing
-        startListening()
+    func startTranscribing(requestPermissions: Bool = false) {
+        guard isAuthorizedToTranscribe || requestPermissions else { return }
+        startListening(mode: .transcribing)
     }
 
     func stopTranscribing() {
@@ -115,49 +143,65 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
     }
 
     private func startListeningForHotWordOrDeactivate() {
-        guard AppConfig.isListeningModeEnabled, AppConfig.isHotWordPermitted else {
-            mode = .off
+        guard AppConfig.isListeningModeEnabled, AppConfig.isHotWordPermitted, deviceSupportsSpeech, isAuthorizedToTranscribe else {
             stopListening()
             return
         }
-        mode = .hotWord
-        startListening()
+        startListening(mode: .hotWord)
     }
 
-    private func startListening(resumingFromPause: Bool = false) {
+    private func updatePermissionStatuses() {
+        self.speechPermissionStatus = SFSpeechRecognizer.authorizationStatus()
+        self.microphonePermissionStatus = AVAudioSession.sharedInstance().recordPermission
+    }
 
-        guard (!isListening && !isPaused) || (resumingFromPause && isListening) else {
+    private func startListening(mode: ListeningMode, resumingFromPause: Bool = false) {
+
+        guard !isPaused && ((mode != self.mode) || (resumingFromPause && isListening)) else {
             return
         }
 
-        SFSpeechRecognizer.requestAuthorization { [weak self] (authStatus) in
+        SFSpeechRecognizer.requestAuthorization { [weak self] authStatus in
             guard let self = self else { return }
+
+            self.updatePermissionStatuses()
+
             switch authStatus {
             case .authorized:
                 let audioSession = AVAudioSession.sharedInstance()
-                audioSession.requestRecordPermission { (canRecord) in
+                audioSession.requestRecordPermission { canRecord in
                     guard canRecord else {
-                        assertionFailure("Recording permission denied")
+                        print("Recording permission denied")
+                        self.isListening = false
+                        self.mode = .off
                         return
                     }
+                    self.updatePermissionStatuses()
 
                     let audioController = AudioEngineController.shared
 
                     audioController.register(speechRecognizer: self, completion: { didInit in
                         guard didInit else {
                             print("Audio engine failed to initialize")
+                            self.isListening = false
+                            self.mode = .off
                             return
                         }
                         print("START LISTENING...")
                         self.isListening = true
+                        self.mode = mode
                         self.requestTranscription()
                     })
                 }
 
             case .denied:
-                assertionFailure("Speech permission denied")
+                print("Speech permission denied")
+                self.isListening = false
+                self.mode = .off
             default:
-                assertionFailure("Speech permission unknown")
+                print("Speech permission unknown")
+                self.isListening = false
+                self.mode = .off
             }
         }
     }
@@ -167,6 +211,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
             return
         }
         print("STOP LISTENING...")
+        mode = .off
         isListening = false
         unscheduleListeners()
     }
@@ -184,7 +229,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
             return
         }
         isPaused = false
-        startListening(resumingFromPause: true)
+        startListening(mode: mode, resumingFromPause: true)
     }
 
     private func unscheduleListeners() {
@@ -379,6 +424,7 @@ class SpeechRecognizerController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     @objc
     private func didBecomeActiveNotification(_ notification: Notification) {
+        updatePermissionStatuses()
         if AppConfig.isVoiceExperimentEnabled {
             resumeListening()
         }
