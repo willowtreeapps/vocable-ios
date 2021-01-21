@@ -257,6 +257,10 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         category.setValue(!category.isHidden, forKey: "isHidden")
         cell.showCategorySwitch.isOn = shouldShowCategory
         saveContext()
+
+        if category == Category.listeningModeCategory() {
+            AppConfig.isListeningModeEnabled = shouldShowCategory
+        }
     }
 
     private func displayEditPhrasesViewController() {

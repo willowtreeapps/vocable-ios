@@ -28,8 +28,13 @@ private class EmptyStateButton: GazeableButton {
 class EmptyStateView: UIView {
 
     enum EmptyStateType {
+
         case recents
         case phraseCollection
+        case speechPermissionDenied
+        case speechPermissionUndetermined
+        case microphonePermissionDenied
+        case microphonePermissionUndetermined
 
         var title: NSAttributedString {
             switch self {
@@ -39,6 +44,14 @@ class EmptyStateView: UIView {
             case .phraseCollection:
                 let title = NSLocalizedString("empty_state.header.title", comment: "Empty state title")
                 return NSAttributedString(string: title)
+            case .microphonePermissionUndetermined, .microphonePermissionDenied:
+                #warning("Needs localization")
+                let title = "Microphone Access"
+                return NSAttributedString(string: title)
+            case .speechPermissionDenied, .speechPermissionUndetermined:
+                #warning("Needs localization")
+                let title = "Speech Recognition"
+                return NSAttributedString(string: title)
             }
         }
 
@@ -46,6 +59,22 @@ class EmptyStateView: UIView {
             switch self {
             case .recents:
                 let description = NSLocalizedString("recents_empty_state.body.title", comment: "Recents empty state description")
+                return NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
+            case .microphonePermissionUndetermined:
+                #warning("Needs localization")
+                let description = "Vocable needs microphone access to enable Listening Mode. The button below presents an iOS permission dialog that Vocable's head tracking cannot interract with."
+                return NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
+            case .microphonePermissionDenied:
+                #warning("Needs localization")
+                let description = "Vocable needs to use the microphone to enable Listening Mode. Please enable microphone access in the system Settings app.\n\nYou can also disable Listening Mode to hide this category in Vocable's settings."
+                return NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
+            case .speechPermissionUndetermined:
+                #warning("Needs localization")
+                let description = "Vocable needs to request speech permissions to enable Listening Mode. This will present an iOS permission dialog that Vocable's head tracking cannot interract with."
+                return NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
+            case .speechPermissionDenied:
+                #warning("Needs localization")
+                let description = "Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in the system Settings app.\n\nYou can also disable Listening Mode to hide this category in Vocable's settings."
                 return NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
             default:
                 return nil
@@ -56,6 +85,12 @@ class EmptyStateView: UIView {
             switch self {
             case .recents:
                 return nil
+            case .microphonePermissionUndetermined, .speechPermissionUndetermined:
+                #warning("Needs localization")
+                return "Grant Access"
+            case .microphonePermissionDenied, .speechPermissionDenied:
+                #warning("Needs localization")
+                return "Open Settings"
             default:
                 return NSLocalizedString("empty_state.button.title", comment: "Empty state Add Phrase button title")
             }
@@ -108,10 +143,11 @@ class EmptyStateView: UIView {
         switch type {
         case .recents:
             imageView.image = UIImage(named: "recents")
+            fallthrough
+        default:
             titleAttributedText = type.title
             descriptionAttributedText = type.description
-        case .phraseCollection:
-            titleAttributedText = type.title
+            button.setTitle(type.buttonTitle, for: .normal)
         }
 
         commonInit()
@@ -126,6 +162,7 @@ class EmptyStateView: UIView {
     private func commonInit() {
 
         layoutMargins = .zero
+
         backgroundColor = .collectionViewBackgroundColor
 
         stackView.spacing = 24
@@ -134,7 +171,7 @@ class EmptyStateView: UIView {
 
         if action != nil {
             let font = UIFont.boldSystemFont(ofSize: 18)
-            if let title = EmptyStateType.phraseCollection.buttonTitle {
+            if let title = button.title(for: .normal) {
                 let attributed = NSAttributedString(string: title,
                                                     attributes: [.font: font, .foregroundColor: UIColor.defaultTextColor])
                 button.setAttributedTitle(attributed, for: .normal)
@@ -164,6 +201,8 @@ class EmptyStateView: UIView {
         NSLayoutConstraint.activate([
             titleLabel.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor)
         ])
+
+        descriptionLabel.numberOfLines = 0
 
         updateContentForCurrentTraitCollection()
         updateStackView()

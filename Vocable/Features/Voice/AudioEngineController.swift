@@ -28,7 +28,7 @@ class AudioEngineController: NSObject, AVAudioPlayerDelegate {
         return queue
     }()
 
-    private var registeredSpeechControllers = Set<SpeechRecognizerController>()
+    private var registeredSpeechControllers = Set<SpeechRecognitionController>()
 
     private var audioEngineShouldRun = false
 
@@ -138,7 +138,7 @@ class AudioEngineController: NSObject, AVAudioPlayerDelegate {
         return true
     }
 
-    func register(speechRecognizer: SpeechRecognizerController, completion: @escaping (Bool) -> Void) {
+    func register(speechRecognizer: SpeechRecognitionController, completion: @escaping (Bool) -> Void) {
         dispatchInternalAsync { [weak self] in
             guard let self = self else { return }
             self.registeredSpeechControllers.insert(speechRecognizer)
@@ -146,7 +146,7 @@ class AudioEngineController: NSObject, AVAudioPlayerDelegate {
         }
     }
 
-    func unregister(speechRecognizer: SpeechRecognizerController, completion: ((Bool) -> Void)? = nil) {
+    func unregister(speechRecognizer: SpeechRecognitionController, completion: ((Bool) -> Void)? = nil) {
         dispatchInternalAsync { [weak self] in
             guard let self = self else { return }
             self.registeredSpeechControllers.remove(speechRecognizer)

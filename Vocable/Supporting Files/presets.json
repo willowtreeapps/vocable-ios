@@ -408,7 +408,7 @@
             "hidden": false
         },
         {
-            "id": "Voice",
+            "id": "preset_listening_mode",
             "hidden": false
         }
     ]
