@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import CoreData
 
-@IBDesignable class RootViewController: VocableViewController, VoiceResponseViewControllerDelegate {
+@IBDesignable class RootViewController: VocableViewController, ListeningResponseViewControllerDelegate {
 
     @IBOutlet private weak var outputLabel: UILabel!
     @IBOutlet private weak var keyboardButton: GazeableButton!
@@ -80,7 +80,7 @@ import CoreData
             utterancePublisher = vc.$lastUtterance
             viewController = vc
         } else if category.identifier == Category.Identifier.listeningMode {
-            let vc = VoiceResponseViewController()
+            let vc = ListeningResponseViewController()
             vc.delegate = self
             utterancePublisher = vc.$lastUtterance
             viewController = vc
@@ -173,7 +173,7 @@ import CoreData
         outputLabel.textColor = isDictated ? .cellSelectionColor : .defaultTextColor
     }
 
-    // MARK: VoiceResponseViewControllerDelegate
+    // MARK: ListeningResponseViewControllerDelegate
 
     func didUpdateSpeechResponse(_ text: String?) {
         updateOutputLabelText(text, isDictated: (text != nil))

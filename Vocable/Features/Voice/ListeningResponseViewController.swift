@@ -1,5 +1,5 @@
 //
-//  VoiceResponseViewController.swift
+//  ListeningResponseViewController.swift
 //  Vocable
 //
 //  Created by Steve Foster on 12/15/20.
@@ -10,13 +10,13 @@ import UIKit
 import Speech
 import Combine
 
-protocol VoiceResponseViewControllerDelegate: AnyObject {
+protocol ListeningResponseViewControllerDelegate: AnyObject {
     func didUpdateSpeechResponse(_ text: String?)
 }
 
-final class VoiceResponseViewController: PagingCarouselViewController, AudioPermissionPromptPresenter {
+final class ListeningResponseViewController: PagingCarouselViewController, AudioPermissionPromptPresenter {
 
-    weak var delegate: VoiceResponseViewControllerDelegate?
+    weak var delegate: ListeningResponseViewControllerDelegate?
 
     private let speechRecognizerController = SpeechRecognitionController.shared
     private var transcriptionCancellable: AnyCancellable?
