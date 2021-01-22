@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import CoreData
+import Combine
 
-final class ListeningModeViewController: VocableCollectionViewController {
+final class ListeningModeViewController: VocableCollectionViewController, AudioPermissionPromptPresenter {
 
     private enum ContentItem: Int {
         case listeningModeEnabled
@@ -19,11 +21,20 @@ final class ListeningModeViewController: VocableCollectionViewController {
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
 
+    internal var isDisplayingAuthorizationPrompt = false {
+        didSet {
+            updateDataSource()
+        }
+    }
+
+    private var authorizationCancellable: AnyCancellable?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupNavigationBar()
         setupCollectionView()
+        authorizationCancellable = registerAuthorizationObservers()
         updateDataSource()
     }
 
@@ -36,10 +47,12 @@ final class ListeningModeViewController: VocableCollectionViewController {
 
     private func updateDataSource(animated: Bool = false) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, ContentItem>()
-        snapshot.appendSections([0])
-        snapshot.appendItems([.listeningModeEnabled])
-        if AppConfig.isListeningModeEnabled {
-            snapshot.appendItems([.hotWordEnabled])
+        if !isDisplayingAuthorizationPrompt {
+            snapshot.appendSections([0])
+            snapshot.appendItems([.listeningModeEnabled])
+            if AppConfig.isListeningModeEnabled {
+                snapshot.appendItems([.hotWordEnabled])
+            }
         }
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
@@ -95,6 +108,13 @@ final class ListeningModeViewController: VocableCollectionViewController {
         case .listeningModeEnabled:
             AppConfig.isListeningModeEnabled.toggle()
             updateDataSource(animated: true)
+            let context = NSPersistentContainer.shared.viewContext
+            context.perform {
+                let listeningModeCategory = Category.fetch(.listeningMode, in: context)
+                listeningModeCategory.isHidden = !AppConfig.isListeningModeEnabled
+                try? context.save()
+            }
+
         case .hotWordEnabled:
             AppConfig.isHotWordPermitted.toggle()
         }

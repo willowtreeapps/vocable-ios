@@ -193,11 +193,17 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
             assertionFailure("Failed to obtain index path")
             return
         }
-
-        let viewController = EditCategoryDetailViewController()
         let indexPath = diffableDataSource.indexPath(fromMappedIndexPath: _indexPath)
-        viewController.category = fetchResultsController.object(at: indexPath)
-        show(viewController, sender: nil)
+        let category = fetchResultsController.object(at: indexPath)
+        let destination: UIViewController
+        if category == Category.listeningModeCategory() {
+            destination = ListeningModeViewController()
+        } else {
+            let viewController = EditCategoryDetailViewController()
+            viewController.category = fetchResultsController.object(at: indexPath)
+            destination = viewController
+        }
+        show(destination, sender: nil)
     }
 
     private func swapOrdinal(fromCategory: Category, toCategory: Category) {

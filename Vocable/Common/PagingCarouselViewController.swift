@@ -9,10 +9,12 @@
 import UIKit
 import Combine
 
-@IBDesignable class PagingCarouselViewController: VocableViewController, UICollectionViewDelegate {
+@IBDesignable class PagingCarouselViewController: VocableViewController, CollectionViewProvider, UICollectionViewDelegate {
+
+    typealias CollectionViewType = CarouselGridCollectionView
 
     private(set) var paginationView = PaginationView()
-    private(set) var collectionView = CarouselGridCollectionView()
+    private(set) var collectionView = CollectionViewType()
 
     private var disposables = Set<AnyCancellable>()
     private var volatileConstraints = [NSLayoutConstraint]()

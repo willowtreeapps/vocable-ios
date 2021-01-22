@@ -94,6 +94,7 @@
 		6BB56BA82422AC2500EA787E /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB56BA72422AC2500EA787E /* ToastView.swift */; };
 		6BB56BAA2422B40300EA787E /* PublishedDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB56BA92422B40200EA787E /* PublishedDefault.swift */; };
 		6BE23D562444DCBE0032CAE4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BE23D542444DCBE0032CAE4 /* Localizable.strings */; };
+		6BE2628B25BB376700281BB5 /* AudioPermissionPromptPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE2628A25BB376700281BB5 /* AudioPermissionPromptPresenter.swift */; };
 		6BE7E9842459D328007B01F2 /* PagingCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E9832459D328007B01F2 /* PagingCarouselViewController.swift */; };
 		6BE7E9882459DFD5007B01F2 /* VocableNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E9872459DFD5007B01F2 /* VocableNavigationBar.swift */; };
 		6BE7E98C245A19F8007B01F2 /* UITraitCollection+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E98B245A19F8007B01F2 /* UITraitCollection+Helpers.swift */; };
@@ -274,6 +275,7 @@
 		6BB56BA92422B40200EA787E /* PublishedDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishedDefault.swift; sourceTree = "<group>"; };
 		6BE23D552444DCBE0032CAE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BE23D5724450FDA0032CAE4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6BE2628A25BB376700281BB5 /* AudioPermissionPromptPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPermissionPromptPresenter.swift; sourceTree = "<group>"; };
 		6BE7E9832459D328007B01F2 /* PagingCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingCarouselViewController.swift; sourceTree = "<group>"; };
 		6BE7E9872459DFD5007B01F2 /* VocableNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableNavigationBar.swift; sourceTree = "<group>"; };
 		6BE7E9892459F7C3007B01F2 /* EditPhrasesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhrasesViewController.swift; sourceTree = "<group>"; };
@@ -487,6 +489,8 @@
 			children = (
 				6B2E789F258BE6A200A3DC82 /* AudioEngineController.swift */,
 				6459943D25895D9C0010EEFF /* SpeechRecognitionController.swift */,
+				6BE2628A25BB376700281BB5 /* AudioPermissionPromptPresenter.swift */,
+				64599430258938F50010EEFF /* VoiceResponseViewController.swift */,
 				64981DA1258A9BBE007EFA82 /* Supporting Resources */,
 			);
 			path = Voice;
@@ -510,7 +514,6 @@
 				64A220BD2452173C0014EA80 /* Root.storyboard */,
 				6B5C49102460AEF900A4433C /* RootEditTextViewController.swift */,
 				64A220BA2452171C0014EA80 /* RootViewController.swift */,
-				64599430258938F50010EEFF /* VoiceResponseViewController.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -1105,6 +1108,7 @@
 				6B823BCC23F4ADE30099F65E /* TunningView.swift in Sources */,
 				6B005AE5245B06F3004919F4 /* VocableViewController.swift in Sources */,
 				6B9DFA5F23E889DB0037673E /* UIHeadGazeEvent.swift in Sources */,
+				6BE2628B25BB376700281BB5 /* AudioPermissionPromptPresenter.swift in Sources */,
 				6B4F3C6325A5137F008A3CB2 /* SoundEffect.swift in Sources */,
 				A9DE170023F4900C0094DB64 /* TextExpression.swift in Sources */,
 				A9B32C8C240EB6250084E151 /* KeyboardModel.swift in Sources */,

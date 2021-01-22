@@ -14,13 +14,18 @@ protocol VoiceResponseViewControllerDelegate: AnyObject {
     func didUpdateSpeechResponse(_ text: String?)
 }
 
-final class VoiceResponseViewController: PagingCarouselViewController {
+final class VoiceResponseViewController: PagingCarouselViewController, AudioPermissionPromptPresenter {
 
     weak var delegate: VoiceResponseViewControllerDelegate?
 
     private let speechRecognizerController = SpeechRecognitionController.shared
     private var transcriptionCancellable: AnyCancellable?
     private var permissionsCancellable: AnyCancellable?
+    internal var isDisplayingAuthorizationPrompt = false {
+        didSet {
+            choices = []
+        }
+    }
 
     private let machineLearningQueue = DispatchQueue(label: "machine_learning_queue", qos: .userInitiated)
 
@@ -81,13 +86,7 @@ final class VoiceResponseViewController: PagingCarouselViewController {
                 }
             }
 
-        let micStatusPublisher = speechRecognizerController.$microphonePermissionStatus.removeDuplicates()
-        let speechStatusPublisher = speechRecognizerController.$speechPermissionStatus.removeDuplicates()
-        permissionsCancellable = Publishers.CombineLatest(micStatusPublisher, speechStatusPublisher)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] (micStatus, speechStatus) in
-                self?.authorizationStatusDidChange(micStatus, speechStatus)
-            }
+        permissionsCancellable = registerAuthorizationObservers()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -133,55 +132,6 @@ final class VoiceResponseViewController: PagingCarouselViewController {
 
         DispatchQueue.global(qos: .userInitiated).async {
             AVSpeechSynthesizer.shared.speak(utterance, language: AppConfig.activePreferredLanguageCode)
-        }
-    }
-
-    private func authorizationStatusDidChange(_ recordingStatus: AVAudioSession.RecordPermission, _ speechStatus: SFSpeechRecognizerAuthorizationStatus) {
-
-        defer {
-            collectionView.backgroundView?.layoutMargins = .init(top: 12, left: 12, bottom: 12, right: 12)
-        }
-
-        switch speechStatus {
-        case .authorized:
-            collectionView.backgroundView = nil
-        case .denied: // Need to go to settings
-            collectionView.backgroundView = EmptyStateView(type: .speechPermissionDenied, action: {
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    if UIApplication.shared.canOpenURL(url) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    }
-                }
-            })
-            return
-        case .notDetermined: // Need to present alert
-            collectionView.backgroundView = EmptyStateView(type: .speechPermissionUndetermined, action: { [weak self] in
-                self?.speechRecognizerController.startTranscribing(requestPermissions: true)
-            })
-            return
-        default:
-            assertionFailure("Unsupported speech status: \(recordingStatus)")
-        }
-
-        switch recordingStatus {
-        case .granted:
-            collectionView.backgroundView = nil
-        case .denied: // Need to go to settings
-            collectionView.backgroundView = EmptyStateView(type: .microphonePermissionDenied, action: {
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    if UIApplication.shared.canOpenURL(url) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    }
-                }
-            })
-            return
-        case .undetermined: // Need to present alert
-            collectionView.backgroundView = EmptyStateView(type: .microphonePermissionUndetermined, action: { [weak self] in
-                self?.speechRecognizerController.startTranscribing(requestPermissions: true)
-            })
-            return
-        default:
-            assertionFailure("Unknown recording status: \(recordingStatus)")
         }
     }
 
