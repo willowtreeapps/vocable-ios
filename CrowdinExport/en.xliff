@@ -667,6 +667,11 @@
         <target>Please turn the TV on</target>
         <note/>
       </trans-unit>
+      <trans-unit id="preset_listening_mode" xml:space="preserve">
+        <source>Listen</source>
+        <target>Listen</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="preset_user_favorites" xml:space="preserve">
         <source>My Sayings</source>
         <target>My Sayings</target>
