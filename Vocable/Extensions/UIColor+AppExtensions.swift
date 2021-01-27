@@ -54,6 +54,7 @@ extension UIColor {
     }
 
     static let primaryColor = UIColor(safelyNamed: "Primary")!
+    static let primaryBackgroundColor = UIColor(safelyNamed: "Background")!
 
     static let defaultTextColor = UIColor(safelyNamed: "DefaultFontColor")!
     static var selectedTextColor: UIColor {
