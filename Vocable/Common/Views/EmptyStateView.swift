@@ -31,6 +31,7 @@ class EmptyStateView: UIView {
 
         case recents
         case phraseCollection
+        case listeningResponse
         case speechPermissionDenied
         case speechPermissionUndetermined
         case microphonePermissionDenied
@@ -51,6 +52,10 @@ class EmptyStateView: UIView {
             case .speechPermissionDenied, .speechPermissionUndetermined:
                 #warning("Needs localization")
                 let title = "Speech Recognition"
+                return NSAttributedString(string: title)
+            case .listeningResponse:
+                #warning("Needs localization")
+                let title = "Listening..."
                 return NSAttributedString(string: title)
             }
         }
@@ -75,6 +80,10 @@ class EmptyStateView: UIView {
             case .speechPermissionDenied:
                 #warning("Needs localization")
                 let description = "Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in the system Settings app.\n\nYou can also disable Listening Mode to hide this category in Vocable's settings."
+                return NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
+            case .listeningResponse:
+                #warning("Needs localization")
+                let description = "When in listening mode, if someone starts speaking, Vocable will try to show quick responses."
                 return NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
             default:
                 return nil

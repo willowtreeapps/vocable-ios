@@ -124,7 +124,7 @@ import Combine
         // Pagination view
         if isPaginationViewHidden {
             constraints += [
-                collectionView.bottomAnchor.constraint(greaterThanOrEqualTo: layoutMargins.bottomAnchor)
+                collectionView.bottomAnchor.constraint(equalTo: layoutMargins.bottomAnchor)
             ]
         } else {
             constraints += [

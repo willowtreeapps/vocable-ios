@@ -12,6 +12,11 @@ import Combine
 
 class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
 
+    enum AudioPermission {
+        case speech
+        case microphone
+    }
+
     static let shared = SpeechRecognitionController()
 
     @Published private(set) var isPaused: Bool = false {
@@ -127,12 +132,13 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
             }
     }
 
-    func startTranscribing(requestPermissions: Bool = false) {
-        guard isAuthorizedToTranscribe || requestPermissions else { return }
-        startListening(mode: .transcribing)
+    func startTranscribing(requestPermission: AudioPermission? = nil) {
+        guard isAuthorizedToTranscribe || requestPermission != nil else { return }
+        startListening(mode: .transcribing, requestablePermission: requestPermission)
     }
 
     func stopTranscribing() {
+        transcription = .none
         startListeningForHotWordOrDeactivate()
     }
 
@@ -155,12 +161,17 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
         self.microphonePermissionStatus = AVAudioSession.sharedInstance().recordPermission
     }
 
-    private func startListening(mode: ListeningMode, resumingFromPause: Bool = false) {
+    private func startListening(mode: ListeningMode, resumingFromPause: Bool = false, requestablePermission: AudioPermission? = nil) {
 
         guard !isPaused && ((mode != self.mode) || (resumingFromPause && isListening)) else {
             return
         }
 
+        if SFSpeechRecognizer.authorizationStatus() == .notDetermined {
+            if requestablePermission != .speech {
+                return
+            }
+        }
         SFSpeechRecognizer.requestAuthorization { [weak self] authStatus in
             guard let self = self else { return }
 
@@ -169,6 +180,11 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
             switch authStatus {
             case .authorized:
                 let audioSession = AVAudioSession.sharedInstance()
+                if audioSession.recordPermission == .undetermined {
+                    if requestablePermission != .microphone {
+                        return
+                    }
+                }
                 audioSession.requestRecordPermission { canRecord in
                     guard canRecord else {
                         print("Recording permission denied")

@@ -44,7 +44,7 @@ extension AudioPermissionPromptPresenter where CollectionViewType: UICollectionV
 
         switch speechStatus {
         case .authorized:
-            collectionView.backgroundView = nil
+            collectionView.backgroundView = (self as? EmptyStateViewProvider)?.emptyStateView()
         case .denied: // Need to go to settings
             collectionView.backgroundView = EmptyStateView(type: .speechPermissionDenied, action: {
                 if let url = URL(string: UIApplication.openSettingsURLString) {
@@ -56,7 +56,7 @@ extension AudioPermissionPromptPresenter where CollectionViewType: UICollectionV
             return
         case .notDetermined: // Need to present alert
             collectionView.backgroundView = EmptyStateView(type: .speechPermissionUndetermined, action: {
-                SpeechRecognitionController.shared.startTranscribing(requestPermissions: true)
+                SpeechRecognitionController.shared.startTranscribing(requestPermission: .speech)
             })
             return
         default:
@@ -65,7 +65,7 @@ extension AudioPermissionPromptPresenter where CollectionViewType: UICollectionV
 
         switch recordingStatus {
         case .granted:
-            collectionView.backgroundView = nil
+            collectionView.backgroundView = (self as? EmptyStateViewProvider)?.emptyStateView()
         case .denied: // Need to go to settings
             collectionView.backgroundView = EmptyStateView(type: .microphonePermissionDenied, action: {
                 if let url = URL(string: UIApplication.openSettingsURLString) {
@@ -77,7 +77,7 @@ extension AudioPermissionPromptPresenter where CollectionViewType: UICollectionV
             return
         case .undetermined: // Need to present alert
             collectionView.backgroundView = EmptyStateView(type: .microphonePermissionUndetermined, action: {
-                SpeechRecognitionController.shared.startTranscribing(requestPermissions: true)
+                SpeechRecognitionController.shared.startTranscribing(requestPermission: .microphone)
             })
             return
         default:

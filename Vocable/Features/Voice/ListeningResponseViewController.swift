@@ -14,7 +14,7 @@ protocol ListeningResponseViewControllerDelegate: AnyObject {
     func didUpdateSpeechResponse(_ text: String?)
 }
 
-final class ListeningResponseViewController: PagingCarouselViewController, AudioPermissionPromptPresenter {
+final class ListeningResponseViewController: PagingCarouselViewController, AudioPermissionPromptPresenter, EmptyStateViewProvider {
 
     weak var delegate: ListeningResponseViewControllerDelegate?
 
@@ -27,6 +27,15 @@ final class ListeningResponseViewController: PagingCarouselViewController, Audio
         }
     }
 
+    private var desiredEmptyStateView: UIView? {
+        didSet {
+            if collectionView.backgroundView == oldValue {
+                collectionView.backgroundView = desiredEmptyStateView
+            }
+        }
+    }
+
+    private let synthesizedSpeechQueue = DispatchQueue(label: "speech_synthesis_queue", qos: .userInitiated)
     private let machineLearningQueue = DispatchQueue(label: "machine_learning_queue", qos: .userInitiated)
 
     private let yesNoResponses = ["Yes", "No"]
@@ -71,22 +80,32 @@ final class ListeningResponseViewController: PagingCarouselViewController, Audio
 
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
         collectionView.layout.itemAnimationStyle = .shrinkExpand
+    }
 
-        transcriptionCancellable = speechRecognizerController.$transcription
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] newValue in
-                switch newValue {
-                case .partialTranscription(let transcription):
-                    self?.delegate?.didUpdateSpeechResponse(transcription)
-                case .finalTranscription(let transcription):
-                    self?.delegate?.didUpdateSpeechResponse(transcription)
-                    self?.classify(transcription: transcription)
-                default:
-                    break
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if permissionsCancellable == nil {
+            permissionsCancellable = registerAuthorizationObservers()
+        }
+
+        if transcriptionCancellable == nil {
+            transcriptionCancellable = speechRecognizerController.$transcription
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] newValue in
+                    switch newValue {
+                    case .partialTranscription(let transcription):
+                        self?.delegate?.didUpdateSpeechResponse(transcription)
+                        self?.setIsEmptyStateHidden(true)
+                    case .finalTranscription(let transcription):
+                        self?.delegate?.didUpdateSpeechResponse(transcription)
+                        self?.classify(transcription: transcription)
+                        self?.setIsEmptyStateHidden(true)
+                    default:
+                        self?.setIsEmptyStateHidden(false)
+                    }
                 }
-            }
-
-        permissionsCancellable = registerAuthorizationObservers()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -130,9 +149,21 @@ final class ListeningResponseViewController: PagingCarouselViewController, Audio
         guard let utterance = diffableDataSource.itemIdentifier(for: indexPath) else { return }
         lastUtterance = utterance
 
-        DispatchQueue.global(qos: .userInitiated).async {
+        synthesizedSpeechQueue.async {
             AVSpeechSynthesizer.shared.speak(utterance, language: AppConfig.activePreferredLanguageCode)
         }
+    }
+
+    func setIsEmptyStateHidden(_ isHidden: Bool) {
+        if isHidden {
+            desiredEmptyStateView = nil
+        } else if desiredEmptyStateView == nil {
+            desiredEmptyStateView = EmptyStateView(type: .listeningResponse)
+        }
+    }
+
+    func emptyStateView() -> UIView? {
+        return desiredEmptyStateView
     }
 
     // MARK: ML Stubs
