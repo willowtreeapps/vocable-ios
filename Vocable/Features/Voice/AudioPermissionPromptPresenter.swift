@@ -37,51 +37,59 @@ extension AudioPermissionPromptPresenter where CollectionViewType: UICollectionV
 
     func authorizationStatusDidChange(_ recordingStatus: AVAudioSession.RecordPermission, _ speechStatus: SFSpeechRecognizerAuthorizationStatus) {
 
-        defer {
-            collectionView.backgroundView?.layoutMargins = .init(top: 12, left: 12, bottom: 12, right: 12)
-            isDisplayingAuthorizationPrompt = collectionView.backgroundView != nil
+        let backgroundView = speechPermissionBackgroundView(speechStatus: speechStatus) ??
+            microphonePermissionBackgroundView(recordingStatus: recordingStatus) ??
+            (self as? EmptyStateViewProvider)?.emptyStateView()
+        
+        UIView.performWithoutAnimation {
+            self.collectionView.backgroundView = backgroundView
+            backgroundView?.layoutIfNeeded()
         }
 
+        isDisplayingAuthorizationPrompt = collectionView.backgroundView != nil
+    }
+
+    private func speechPermissionBackgroundView(speechStatus: SFSpeechRecognizerAuthorizationStatus) -> UIView? {
         switch speechStatus {
         case .authorized:
-            collectionView.backgroundView = (self as? EmptyStateViewProvider)?.emptyStateView()
+            return nil
         case .denied: // Need to go to settings
-            collectionView.backgroundView = EmptyStateView(type: .speechPermissionDenied, action: {
+            return EmptyStateView(type: .speechPermissionDenied, action: {
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     if UIApplication.shared.canOpenURL(url) {
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     }
                 }
             })
-            return
         case .notDetermined: // Need to present alert
-            collectionView.backgroundView = EmptyStateView(type: .speechPermissionUndetermined, action: {
+            return EmptyStateView(type: .speechPermissionUndetermined, action: {
                 SpeechRecognitionController.shared.startTranscribing(requestPermission: .speech)
             })
-            return
         default:
-            assertionFailure("Unsupported speech status: \(recordingStatus)")
+            assertionFailure("Unsupported speech status: \(speechStatus)")
+            return nil
         }
+    }
 
+    private func microphonePermissionBackgroundView(recordingStatus: AVAudioSession.RecordPermission) -> UIView? {
         switch recordingStatus {
         case .granted:
-            collectionView.backgroundView = (self as? EmptyStateViewProvider)?.emptyStateView()
+            return nil
         case .denied: // Need to go to settings
-            collectionView.backgroundView = EmptyStateView(type: .microphonePermissionDenied, action: {
+            return EmptyStateView(type: .microphonePermissionDenied, action: {
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     if UIApplication.shared.canOpenURL(url) {
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     }
                 }
             })
-            return
         case .undetermined: // Need to present alert
-            collectionView.backgroundView = EmptyStateView(type: .microphonePermissionUndetermined, action: {
+            return EmptyStateView(type: .microphonePermissionUndetermined, action: {
                 SpeechRecognitionController.shared.startTranscribing(requestPermission: .microphone)
             })
-            return
         default:
             assertionFailure("Unknown recording status: \(recordingStatus)")
+            return nil
         }
     }
 }

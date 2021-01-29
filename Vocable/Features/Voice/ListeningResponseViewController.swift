@@ -82,8 +82,8 @@ final class ListeningResponseViewController: PagingCarouselViewController, Audio
         collectionView.layout.itemAnimationStyle = .shrinkExpand
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         if permissionsCancellable == nil {
             permissionsCancellable = registerAuthorizationObservers()
@@ -106,10 +106,7 @@ final class ListeningResponseViewController: PagingCarouselViewController, Audio
                     }
                 }
         }
-    }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         speechRecognizerController.startTranscribing()
     }
 

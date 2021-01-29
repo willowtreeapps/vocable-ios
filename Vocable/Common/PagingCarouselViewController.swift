@@ -54,6 +54,7 @@ import Combine
 
         collectionView.delegate = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.preservesSuperviewLayoutMargins = true
         view.addSubview(collectionView)
 
         paginationView.translatesAutoresizingMaskIntoConstraints = false

@@ -170,7 +170,7 @@ class EmptyStateView: UIView {
 
     private func commonInit() {
 
-        layoutMargins = .zero
+        preservesSuperviewLayoutMargins = true
 
         backgroundColor = .collectionViewBackgroundColor
 
@@ -197,7 +197,8 @@ class EmptyStateView: UIView {
             stackView.leftAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leftAnchor),
             stackView.rightAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.rightAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stackView.centerXAnchor.constraint(equalTo: centerXAnchor)
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            stackView.widthAnchor.constraint(lessThanOrEqualTo: readableContentGuide.widthAnchor)
         ])
 
         let color = UIColor.defaultTextColor
@@ -206,10 +207,6 @@ class EmptyStateView: UIView {
         titleLabel.textColor = color
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
-
-        NSLayoutConstraint.activate([
-            titleLabel.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor)
-        ])
 
         descriptionLabel.numberOfLines = 0
 
