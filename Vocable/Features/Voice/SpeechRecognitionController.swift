@@ -71,7 +71,6 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
     private let timeoutInterval: TimeInterval = 1.2
     private let hotWordPhrase = "hey vocable"
     private var hotWordEnabledCancellable: AnyCancellable?
-    private var listeningModeEnabledCancellable: AnyCancellable?
 
     private let speechRecognizer: SFSpeechRecognizer? = {
         let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
@@ -113,13 +112,8 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
         updatePermissionStatuses()
         
         registerForApplicationLifecycleEvents()
-        hotWordEnabledCancellable = AppConfig.$isHotWordPermitted
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.startListeningForHotWordOrDeactivate()
-            }
-
-        listeningModeEnabledCancellable = AppConfig.$isListeningModeEnabled
+        hotWordEnabledCancellable = Publishers.Merge(AppConfig.$isHotWordPermitted, AppConfig.$isListeningModeEnabled)
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.startListeningForHotWordOrDeactivate()
@@ -166,6 +160,8 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
         guard !isPaused && ((mode != self.mode) || (resumingFromPause && isListening)) else {
             return
         }
+
+        cancelActiveRecognitionTasks()
 
         if SFSpeechRecognizer.authorizationStatus() == .notDetermined {
             if requestablePermission != .speech {
@@ -248,11 +244,15 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
         startListening(mode: mode, resumingFromPause: true)
     }
 
-    private func unscheduleListeners() {
+    private func cancelActiveRecognitionTasks() {
         for task in recognitionTasks {
             task.finish()
         }
         recognitionTasks.removeAll()
+    }
+
+    private func unscheduleListeners() {
+        cancelActiveRecognitionTasks()
 
         let audioController = AudioEngineController.shared
         func unregister() {
@@ -363,7 +363,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
             self.mode = .transcribing
         }
         startTimer()
-        if let partial = transcription {
+        if self.mode == .transcribing, let partial = transcription {
             self.transcription = .partialTranscription(partial)
         }
     }
@@ -377,7 +377,8 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
             self.mode = .transcribing
         }
         print("didFinishRecognition: \(String(describing: transcription))")
-        if let phrase = transcription {
+
+        if self.mode == .transcribing, let phrase = transcription {
             self.transcription = .finalTranscription(phrase)
         }
     }
