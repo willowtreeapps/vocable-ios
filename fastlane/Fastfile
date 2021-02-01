@@ -14,7 +14,7 @@ platform :ios do
       devices: ["iPhone 11"]
     )
     # in the meantime, build the app for PRs
-    match(type: "development")
+    match(type: "development", readonly: true)
     gym(
       scheme: "Development",
       skip_archive: true,
@@ -32,7 +32,7 @@ platform :ios do
 
   desc "Ad-hoc build"
   lane :adhoc do
-    match(type: "adhoc")
+    match(type: "adhoc", readonly: true)
 
     increment_build_number(
       build_number: ENV['CIRCLE_BUILD_NUM'],
@@ -45,7 +45,7 @@ platform :ios do
 
   desc "AppStore build and upload to TestFlight"
   lane :buildanddeploytotestflight do
-    match(type: "appstore")
+    match(type: "appstore", readonly: true)
 
     increment_build_number(
       build_number: ENV['CIRCLE_BUILD_NUM'],
