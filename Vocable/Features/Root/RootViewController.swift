@@ -10,9 +10,10 @@ import UIKit
 import Combine
 import CoreData
 
-@IBDesignable class RootViewController: VocableViewController, VoiceResponseViewControllerDelegate {
+@IBDesignable class RootViewController: VocableViewController, ListeningResponseViewControllerDelegate {
 
     @IBOutlet private weak var outputLabel: UILabel!
+    @IBOutlet private weak var outputAlignmentView: UIView!
     @IBOutlet private weak var keyboardButton: GazeableButton!
     @IBOutlet private weak var settingsButton: GazeableButton!
 
@@ -22,6 +23,8 @@ import CoreData
     private var categoryCarousel: CategoriesCarouselViewController!
     private var disposables = Set<AnyCancellable>()
     private var utteranceCancellable: AnyCancellable?
+
+    private let transcriptionOutputView = TranscriptionOutputTextView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +83,7 @@ import CoreData
             utterancePublisher = vc.$lastUtterance
             viewController = vc
         } else if category.identifier == Category.Identifier.listeningMode {
-            let vc = VoiceResponseViewController()
+            let vc = ListeningResponseViewController()
             vc.delegate = self
             utterancePublisher = vc.$lastUtterance
             viewController = vc
@@ -167,13 +170,80 @@ import CoreData
         viewController.didMove(toParent: self)
     }
 
-    private func updateOutputLabelText(_ text: String?, isDictated: Bool = false) {
-        outputLabel.text = text ?? NSLocalizedString("main_screen.textfield_placeholder.default",
-                                                     comment: "Select something below to speak Hint Text")
-        outputLabel.textColor = isDictated ? .cellSelectionColor : .defaultTextColor
+    private func setIsTranscriptionOutputHidden(_ isHidden: Bool, animated: Bool) {
+
+        guard transcriptionOutputView.isHidden != isHidden else { return }
+
+        func actions() {
+            transcriptionOutputView.isHidden = isHidden
+            outputLabel.isHidden = !isHidden
+            if isHidden {
+                outputAlignmentView.addSubview(outputLabel)
+                outputLabel.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    outputLabel.topAnchor.constraint(equalTo: outputAlignmentView.topAnchor),
+                    outputLabel.leftAnchor.constraint(equalTo: outputAlignmentView.leftAnchor),
+                    outputLabel.rightAnchor.constraint(equalTo: outputAlignmentView.rightAnchor),
+                    outputLabel.bottomAnchor.constraint(equalTo: outputAlignmentView.bottomAnchor)
+                ])
+            } else {
+                outputAlignmentView.addSubview(transcriptionOutputView)
+                transcriptionOutputView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    transcriptionOutputView.topAnchor.constraint(equalTo: view.topAnchor),
+                    transcriptionOutputView.leftAnchor.constraint(equalTo: outputAlignmentView.leftAnchor),
+                    transcriptionOutputView.rightAnchor.constraint(equalTo: outputAlignmentView.rightAnchor),
+                    transcriptionOutputView.bottomAnchor.constraint(equalTo: outputAlignmentView.bottomAnchor)
+                ])
+            }
+        }
+
+        func completion(_ didFinish: Bool) {
+            guard didFinish else { return }
+            if isHidden {
+                transcriptionOutputView.text = "\n\n\n"
+                transcriptionOutputView.removeFromSuperview()
+            } else {
+                outputLabel.removeFromSuperview()
+            }
+        }
+
+        if animated {
+            UIView.transition(with: self.view,
+                              duration: 0.3,
+                              options: .beginFromCurrentState,
+                              animations: actions,
+                              completion: completion)
+        } else {
+            actions()
+            completion(true)
+        }
     }
 
-    // MARK: VoiceResponseViewControllerDelegate
+    private func updateOutputLabelText(_ text: String?, isDictated: Bool = false) {
+
+        setIsTranscriptionOutputHidden(!isDictated, animated: true)
+
+        func outputLabelPlaceholder() -> String {
+            return NSLocalizedString("main_screen.textfield_placeholder.default",
+                                     comment: "Select something below to speak Hint Text")
+        }
+
+        if isDictated {
+            outputLabel.text = outputLabelPlaceholder()
+            UIView.transition(with: transcriptionOutputView,
+                              duration: 0.2,
+                              options: [.transitionCrossDissolve, .beginFromCurrentState],
+                              animations: { [weak self] in
+                                self?.transcriptionOutputView.text = "\n\n\n" + (text ?? "")
+                              }, completion: nil)
+        } else {
+            transcriptionOutputView.text = "\n\n\n"
+            outputLabel.text = text ?? outputLabelPlaceholder()
+        }
+    }
+
+    // MARK: ListeningResponseViewControllerDelegate
 
     func didUpdateSpeechResponse(_ text: String?) {
         updateOutputLabelText(text, isDictated: (text != nil))

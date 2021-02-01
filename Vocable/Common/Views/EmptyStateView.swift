@@ -31,6 +31,7 @@ class EmptyStateView: UIView {
 
         case recents
         case phraseCollection
+        case listeningResponse
         case speechPermissionDenied
         case speechPermissionUndetermined
         case microphonePermissionDenied
@@ -51,6 +52,10 @@ class EmptyStateView: UIView {
             case .speechPermissionDenied, .speechPermissionUndetermined:
                 #warning("Needs localization")
                 let title = "Speech Recognition"
+                return NSAttributedString(string: title)
+            case .listeningResponse:
+                #warning("Needs localization")
+                let title = "Listening..."
                 return NSAttributedString(string: title)
             }
         }
@@ -75,6 +80,10 @@ class EmptyStateView: UIView {
             case .speechPermissionDenied:
                 #warning("Needs localization")
                 let description = "Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in the system Settings app.\n\nYou can also disable Listening Mode to hide this category in Vocable's settings."
+                return NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
+            case .listeningResponse:
+                #warning("Needs localization")
+                let description = "When in listening mode, if someone starts speaking, Vocable will try to show quick responses."
                 return NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
             default:
                 return nil
@@ -161,7 +170,7 @@ class EmptyStateView: UIView {
 
     private func commonInit() {
 
-        layoutMargins = .zero
+        preservesSuperviewLayoutMargins = true
 
         backgroundColor = .collectionViewBackgroundColor
 
@@ -188,7 +197,8 @@ class EmptyStateView: UIView {
             stackView.leftAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leftAnchor),
             stackView.rightAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.rightAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stackView.centerXAnchor.constraint(equalTo: centerXAnchor)
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            stackView.widthAnchor.constraint(lessThanOrEqualTo: readableContentGuide.widthAnchor)
         ])
 
         let color = UIColor.defaultTextColor
@@ -197,10 +207,6 @@ class EmptyStateView: UIView {
         titleLabel.textColor = color
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
-
-        NSLayoutConstraint.activate([
-            titleLabel.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor)
-        ])
 
         descriptionLabel.numberOfLines = 0
 

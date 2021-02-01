@@ -1,5 +1,5 @@
 //
-//  VoiceResponseViewController.swift
+//  ListeningResponseViewController.swift
 //  Vocable
 //
 //  Created by Steve Foster on 12/15/20.
@@ -10,18 +10,32 @@ import UIKit
 import Speech
 import Combine
 
-protocol VoiceResponseViewControllerDelegate: AnyObject {
+protocol ListeningResponseViewControllerDelegate: AnyObject {
     func didUpdateSpeechResponse(_ text: String?)
 }
 
-final class VoiceResponseViewController: PagingCarouselViewController {
+final class ListeningResponseViewController: PagingCarouselViewController, AudioPermissionPromptPresenter, EmptyStateViewProvider {
 
-    weak var delegate: VoiceResponseViewControllerDelegate?
+    weak var delegate: ListeningResponseViewControllerDelegate?
 
     private let speechRecognizerController = SpeechRecognitionController.shared
     private var transcriptionCancellable: AnyCancellable?
     private var permissionsCancellable: AnyCancellable?
+    internal var isDisplayingAuthorizationPrompt = false {
+        didSet {
+            choices = []
+        }
+    }
 
+    private var desiredEmptyStateView: UIView? {
+        didSet {
+            if collectionView.backgroundView == oldValue {
+                collectionView.backgroundView = desiredEmptyStateView
+            }
+        }
+    }
+
+    private let synthesizedSpeechQueue = DispatchQueue(label: "speech_synthesis_queue", qos: .userInitiated)
     private let machineLearningQueue = DispatchQueue(label: "machine_learning_queue", qos: .userInitiated)
 
     private let yesNoResponses = ["Yes", "No"]
@@ -66,32 +80,33 @@ final class VoiceResponseViewController: PagingCarouselViewController {
 
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
         collectionView.layout.itemAnimationStyle = .shrinkExpand
-
-        transcriptionCancellable = speechRecognizerController.$transcription
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] newValue in
-                switch newValue {
-                case .partialTranscription(let transcription):
-                    self?.delegate?.didUpdateSpeechResponse(transcription)
-                case .finalTranscription(let transcription):
-                    self?.delegate?.didUpdateSpeechResponse(transcription)
-                    self?.classify(transcription: transcription)
-                default:
-                    break
-                }
-            }
-
-        let micStatusPublisher = speechRecognizerController.$microphonePermissionStatus.removeDuplicates()
-        let speechStatusPublisher = speechRecognizerController.$speechPermissionStatus.removeDuplicates()
-        permissionsCancellable = Publishers.CombineLatest(micStatusPublisher, speechStatusPublisher)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] (micStatus, speechStatus) in
-                self?.authorizationStatusDidChange(micStatus, speechStatus)
-            }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        if permissionsCancellable == nil {
+            permissionsCancellable = registerAuthorizationObservers()
+        }
+
+        if transcriptionCancellable == nil {
+            transcriptionCancellable = speechRecognizerController.$transcription
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] newValue in
+                    switch newValue {
+                    case .partialTranscription(let transcription):
+                        self?.delegate?.didUpdateSpeechResponse(transcription)
+                        self?.setIsEmptyStateHidden(true)
+                    case .finalTranscription(let transcription):
+                        self?.delegate?.didUpdateSpeechResponse(transcription)
+                        self?.classify(transcription: transcription)
+                        self?.setIsEmptyStateHidden(true)
+                    default:
+                        self?.setIsEmptyStateHidden(false)
+                    }
+                }
+        }
+
         speechRecognizerController.startTranscribing()
     }
 
@@ -131,58 +146,21 @@ final class VoiceResponseViewController: PagingCarouselViewController {
         guard let utterance = diffableDataSource.itemIdentifier(for: indexPath) else { return }
         lastUtterance = utterance
 
-        DispatchQueue.global(qos: .userInitiated).async {
+        synthesizedSpeechQueue.async {
             AVSpeechSynthesizer.shared.speak(utterance, language: AppConfig.activePreferredLanguageCode)
         }
     }
 
-    private func authorizationStatusDidChange(_ recordingStatus: AVAudioSession.RecordPermission, _ speechStatus: SFSpeechRecognizerAuthorizationStatus) {
-
-        defer {
-            collectionView.backgroundView?.layoutMargins = .init(top: 12, left: 12, bottom: 12, right: 12)
+    func setIsEmptyStateHidden(_ isHidden: Bool) {
+        if isHidden {
+            desiredEmptyStateView = nil
+        } else if desiredEmptyStateView == nil {
+            desiredEmptyStateView = EmptyStateView(type: .listeningResponse)
         }
+    }
 
-        switch speechStatus {
-        case .authorized:
-            collectionView.backgroundView = nil
-        case .denied: // Need to go to settings
-            collectionView.backgroundView = EmptyStateView(type: .speechPermissionDenied, action: {
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    if UIApplication.shared.canOpenURL(url) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    }
-                }
-            })
-            return
-        case .notDetermined: // Need to present alert
-            collectionView.backgroundView = EmptyStateView(type: .speechPermissionUndetermined, action: { [weak self] in
-                self?.speechRecognizerController.startTranscribing(requestPermissions: true)
-            })
-            return
-        default:
-            assertionFailure("Unsupported speech status: \(recordingStatus)")
-        }
-
-        switch recordingStatus {
-        case .granted:
-            collectionView.backgroundView = nil
-        case .denied: // Need to go to settings
-            collectionView.backgroundView = EmptyStateView(type: .microphonePermissionDenied, action: {
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    if UIApplication.shared.canOpenURL(url) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    }
-                }
-            })
-            return
-        case .undetermined: // Need to present alert
-            collectionView.backgroundView = EmptyStateView(type: .microphonePermissionUndetermined, action: { [weak self] in
-                self?.speechRecognizerController.startTranscribing(requestPermissions: true)
-            })
-            return
-        default:
-            assertionFailure("Unknown recording status: \(recordingStatus)")
-        }
+    func emptyStateView() -> UIView? {
+        return desiredEmptyStateView
     }
 
     // MARK: ML Stubs

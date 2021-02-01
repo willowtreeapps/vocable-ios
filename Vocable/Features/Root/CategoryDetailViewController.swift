@@ -63,6 +63,10 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         updateLayoutForCurrentTraitCollection()
 
         frc.delegate = self
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         try? frc.performFetch()
     }
 
