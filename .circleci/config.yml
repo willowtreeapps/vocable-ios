@@ -9,6 +9,7 @@ jobs:
     steps:
       - run: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
       - run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
+      - run: rm -f "AppleWWDRCAG3.cer"
       - checkout
       - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
@@ -30,6 +31,7 @@ jobs:
     steps:
       - run: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
       - run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
+      - run: rm -f "AppleWWDRCAG3.cer"
       - checkout
       - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
@@ -49,6 +51,7 @@ jobs:
     steps:
       - run: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
       - run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
+      - run: rm -f "AppleWWDRCAG3.cer"
       - checkout
       - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
@@ -86,6 +89,7 @@ jobs:
     steps:
       - run: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
       - run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
+      - run: rm -f "AppleWWDRCAG3.cer"
       - checkout
       - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
