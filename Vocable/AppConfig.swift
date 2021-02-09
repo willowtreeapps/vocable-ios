@@ -35,8 +35,15 @@ struct AppConfig {
     @PublishedDefault(key: "isHotWordPermitted", defaultValue: true)
     static var isHotWordPermitted: Bool
 
-    @PublishedDefault(key: "isListeningModeEnabled", defaultValue: true)
+    @PublishedDefault(key: "isListeningModeEnabled", defaultValue: isListeningModeSupported)
     static var isListeningModeEnabled: Bool
+
+    static var isListeningModeSupported: Bool {
+        if #available(iOS 14.0, *) {
+            return true
+        }
+        return false
+    }
 
     static let defaultLanguageCode = "en"
     static var activePreferredLanguageCode: String {

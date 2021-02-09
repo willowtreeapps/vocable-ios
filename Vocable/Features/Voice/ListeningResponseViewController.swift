@@ -9,11 +9,13 @@
 import UIKit
 import Speech
 import Combine
+import VocableListenCore
 
 protocol ListeningResponseViewControllerDelegate: AnyObject {
     func didUpdateSpeechResponse(_ text: String?)
 }
 
+@available(iOS 14.0, *)
 final class ListeningResponseViewController: PagingCarouselViewController, AudioPermissionPromptPresenter, EmptyStateViewProvider {
 
     weak var delegate: ListeningResponseViewControllerDelegate?

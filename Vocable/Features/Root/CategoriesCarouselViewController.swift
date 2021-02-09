@@ -140,7 +140,14 @@ import Combine
     private func categoriesFetchRequest() -> NSFetchRequest<Category> {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         var predicate: NSPredicate = NSComparisonPredicate(\Category.isHidden, .equalTo, false)
-        if !AppConfig.isVoiceExperimentEnabled || !AppConfig.isListeningModeEnabled || !SpeechRecognitionController.shared.deviceSupportsSpeech {
+
+        let shouldRemoveListeningCategory = false
+        || !AppConfig.isListeningModeSupported
+        || !AppConfig.isVoiceExperimentEnabled
+        || !AppConfig.isListeningModeEnabled
+        || !SpeechRecognitionController.shared.deviceSupportsSpeech
+
+        if shouldRemoveListeningCategory {
             let notVoicePredicate = NSComparisonPredicate(\Category.identifier, .notEqualTo, Category.Identifier.listeningMode.rawValue)
             predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, notVoicePredicate])
         }

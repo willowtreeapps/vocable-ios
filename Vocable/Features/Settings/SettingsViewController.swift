@@ -67,7 +67,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 return AppConfig.showDebugOptions
             }
             if self == .listeningMode {
-                return AppConfig.isVoiceExperimentEnabled && SpeechRecognitionController.shared.deviceSupportsSpeech
+                return AppConfig.isVoiceExperimentEnabled && SpeechRecognitionController.shared.deviceSupportsSpeech &&
+                    AppConfig.isListeningModeSupported
             }
             return true
         }
