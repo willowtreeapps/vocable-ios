@@ -10,7 +10,7 @@ import UIKit
 import Speech
 import Combine
 
-class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
+class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SFSpeechRecognizerDelegate {
 
     enum AudioPermission {
         case speech
@@ -18,6 +18,8 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
     }
 
     static let shared = SpeechRecognitionController()
+
+    @Published private(set) var isAvailable: Bool = true
 
     @Published private(set) var isPaused: Bool = false {
         didSet {
@@ -72,9 +74,10 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
     private let hotWordPhrase = "hey vocable"
     private var hotWordEnabledCancellable: AnyCancellable?
 
-    private let speechRecognizer: SFSpeechRecognizer? = {
+    private lazy var speechRecognizer: SFSpeechRecognizer? = {
         let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
         recognizer?.supportsOnDeviceRecognition = true
+        recognizer?.delegate = self
         return recognizer
     }()
 
@@ -112,6 +115,9 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
         updatePermissionStatuses()
         
         registerForApplicationLifecycleEvents()
+
+        isAvailable = speechRecognizer?.isAvailable ?? false
+
         hotWordEnabledCancellable = Publishers.Merge(AppConfig.$isHotWordPermitted, AppConfig.$isListeningModeEnabled)
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
@@ -143,7 +149,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
     }
 
     private func startListeningForHotWordOrDeactivate() {
-        guard AppConfig.isListeningModeEnabled, AppConfig.isHotWordPermitted, deviceSupportsSpeech, isAuthorizedToTranscribe else {
+        guard isAvailable, AppConfig.isListeningModeEnabled, AppConfig.isHotWordPermitted, deviceSupportsSpeech, isAuthorizedToTranscribe else {
             stopListening()
             return
         }
@@ -190,6 +196,10 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
                     }
                     self.updatePermissionStatuses()
 
+                    guard self.isAvailable else {
+                        return
+                    }
+
                     let audioController = AudioEngineController.shared
 
                     audioController.register(speechRecognizer: self, completion: { didInit in
@@ -223,6 +233,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
             return
         }
         print("STOP LISTENING...")
+        cancelTimer()
         mode = .off
         isListening = false
         unscheduleListeners()
@@ -269,6 +280,14 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
                                        selector: #selector(self.handleTimeout),
                                        userInfo: nil,
                                        repeats: false)
+    }
+
+    private func cancelTimer() {
+        if let timer = timeout {
+            timer.invalidate()
+            print("TIMER CANCELLED")
+        }
+        timeout = nil
     }
 
     @objc private func handleTimeout() {
@@ -370,6 +389,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
 
     // Called only for final recognitions of utterances. No more about the utterance will be reported
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishRecognition recognitionResult: SFSpeechRecognitionResult) {
+        cancelTimer()
         var containsHotWord = false
         let transcription = normalizedTranscription(from: recognitionResult.bestTranscription.formattedString, containedHotWord: &containsHotWord)
         if mode == .hotWord, containsHotWord {
@@ -392,6 +412,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
     // Called when the task has been cancelled, either by client app, the user, or the system
     func speechRecognitionTaskWasCancelled(_ task: SFSpeechRecognitionTask) {
         print("speechRecognitionTaskWasCancelled")
+        cancelTimer()
         transcribeAgainIfNeeded()
         recognitionTasks.remove(task)
         recognitionBuffers[task] = nil
@@ -400,6 +421,9 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
     // Called when recognition of all requested utterances is finished.
     // If successfully is false, the error property of the task will contain error information
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
+
+        cancelTimer()
+
         print("speechRecognitionTaskDidFinish \(successfully ? "successfully" : "unsuccessfully")")
         if !successfully {
             // If we get spammed with errors, stop trying to obtain a transcription.
@@ -413,6 +437,26 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate {
         recognitionTasks.remove(task)
         recognitionBuffers[task] = nil
         transcribeAgainIfNeeded()
+    }
+
+    //
+    // MARK: SFSpeechRecognizerDelegate
+    //
+
+    func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
+        isAvailable = available
+
+        if isAvailable {
+            switch mode {
+            case .hotWord, .off:
+                startListeningForHotWordOrDeactivate()
+            case .transcribing:
+                startListening(mode: .transcribing)
+            }
+        } else {
+            stopListening()
+            transcription = .none
+        }
     }
 
     //
