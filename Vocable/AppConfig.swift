@@ -39,6 +39,13 @@ struct AppConfig {
     static var isListeningModeEnabled: Bool
 
     static var isListeningModeSupported: Bool {
+
+        // Listening mode is currently only supported for English
+        if Locale(identifier: activePreferredLanguageCode).languageCode != "en" {
+            return false
+        }
+
+        // ML models currently rely on CoreML features introduced in iOS 14
         if #available(iOS 14.0, *) {
             return true
         }
