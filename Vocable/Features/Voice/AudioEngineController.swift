@@ -42,7 +42,7 @@ class AudioEngineController: NSObject, AVAudioPlayerDelegate {
         updateAudioSession()
     }
 
-    func dispatchInternalAsync(_ actions: @escaping () -> Void) {
+    private func dispatchInternalAsync(_ actions: @escaping () -> Void) {
         let isInternal = DispatchQueue.getSpecific(key: internalQueueKey) != nil
         if isInternal {
             actions()
@@ -51,7 +51,7 @@ class AudioEngineController: NSObject, AVAudioPlayerDelegate {
         }
     }
 
-    func dispatchInternalSync(_ actions: @escaping () throws -> Void) rethrows {
+    private func dispatchInternalSync(_ actions: @escaping () throws -> Void) rethrows {
         let isInternal = DispatchQueue.getSpecific(key: internalQueueKey) != nil
         if isInternal {
             try actions()

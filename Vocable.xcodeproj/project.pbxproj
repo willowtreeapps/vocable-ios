@@ -23,7 +23,7 @@
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
-		64599429258933370010EEFF /* VocableCore in Frameworks */ = {isa = PBXBuildFile; productRef = 64599428258933370010EEFF /* VocableCore */; };
+		64599429258933370010EEFF /* VocableCore in Frameworks */ = {isa = PBXBuildFile; productRef = 64599428258933370010EEFF /* VocableCore */; settings = {ATTRIBUTES = (Required, ); }; };
 		64599431258938F50010EEFF /* ListeningResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64599430258938F50010EEFF /* ListeningResponseViewController.swift */; };
 		6459943E25895D9C0010EEFF /* SpeechRecognitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6459943D25895D9C0010EEFF /* SpeechRecognitionController.swift */; };
 		64981D7C258A8014007EFA82 /* VocableChoicesModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 64981D7B258A8014007EFA82 /* VocableChoicesModel.mlmodel */; };
@@ -1384,7 +1384,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.4.0;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-w",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.willowtreeapps.eyespeakaac";
@@ -1413,7 +1416,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.4.0;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-w",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.willowtreeapps.eyespeakaac";
@@ -1610,7 +1616,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.4.0;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-w",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.willowtreeapps.eyespeakaac";
@@ -1692,8 +1701,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/willowtreeapps/vocable-ios-spm.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

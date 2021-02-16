@@ -9,23 +9,27 @@
 import UIKit
 import Speech
 import Combine
+import VocableListenCore
 
 protocol ListeningResponseViewControllerDelegate: AnyObject {
     func didUpdateSpeechResponse(_ text: String?)
 }
 
+@available(iOS 14.0, *)
 final class ListeningResponseViewController: PagingCarouselViewController, AudioPermissionPromptPresenter, EmptyStateViewProvider {
+
+    private enum Content {
+        case choices([String])
+        case empty(EmptyStateView.EmptyStateType)
+    }
 
     weak var delegate: ListeningResponseViewControllerDelegate?
 
     private let speechRecognizerController = SpeechRecognitionController.shared
     private var transcriptionCancellable: AnyCancellable?
     private var permissionsCancellable: AnyCancellable?
-    internal var isDisplayingAuthorizationPrompt = false {
-        didSet {
-            choices = []
-        }
-    }
+    private var classificationCancellable: AnyCancellable?
+    private var availabilityCancellable: AnyCancellable?
 
     private var desiredEmptyStateView: UIView? {
         didSet {
@@ -35,31 +39,43 @@ final class ListeningResponseViewController: PagingCarouselViewController, Audio
         }
     }
 
-    private let synthesizedSpeechQueue = DispatchQueue(label: "speech_synthesis_queue", qos: .userInitiated)
-    private let machineLearningQueue = DispatchQueue(label: "machine_learning_queue", qos: .userInitiated)
+    private var emptyState: EmptyStateView.EmptyStateType?
 
-    private let yesNoResponses = ["Yes", "No"]
-    private let quantityResponses = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+    private let synthesizedSpeechQueue = DispatchQueue(label: "speech_synthesis_queue", qos: .userInitiated)
+    let classifier = VLClassifier()
+
     private let feelingsResponses = ["Okay", "Good", "Bad"]
     private let prefixes = ["Would you like", "Do you want"]
 
-    @PublishedValue private(set) var lastUtterance: String?
-    private static let formatter = NumberFormatter()
-
-    private(set) var isNumberResponse: Bool = false
-    private(set) var choices: [String] = [] {
+    internal var isDisplayingAuthorizationPrompt = false {
         didSet {
-            var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
-            snapshot.appendSections([0])
-            snapshot.appendItems(choices)
-            UIView.animate(withDuration: 0.5,
-                           delay: 0,
-                           usingSpringWithDamping: 0.8,
-                           initialSpringVelocity: 1.0,
-                           options: [],
-                           animations: { [weak self] in
-                                self?.diffableDataSource.apply(snapshot, animatingDifferences: false)
-                           }, completion: nil)
+            if speechRecognizerController.isAvailable {
+                content = .empty(.listeningResponse)
+            }
+        }
+    }
+
+    @PublishedValue private(set) var lastUtterance: String?
+
+    private var content: Content = .empty(.listeningResponse) {
+        didSet {
+            switch content {
+            case .choices(let choices):
+                var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
+                snapshot.appendSections([0])
+                snapshot.appendItems(choices)
+                UIView.animate(withDuration: 0.5,
+                               delay: 0,
+                               usingSpringWithDamping: 0.8,
+                               initialSpringVelocity: 1.0,
+                               options: [],
+                               animations: { [weak self] in
+                                    self?.diffableDataSource.apply(snapshot, animatingDifferences: false)
+                               }, completion: nil)
+                desiredEmptyStateView = nil
+            case .empty(let emptyStateType):
+                desiredEmptyStateView = EmptyStateView(type: emptyStateType)
+            }
         }
     }
 
@@ -93,16 +109,59 @@ final class ListeningResponseViewController: PagingCarouselViewController, Audio
             transcriptionCancellable = speechRecognizerController.$transcription
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] newValue in
+                    guard let self = self else { return }
                     switch newValue {
                     case .partialTranscription(let transcription):
-                        self?.delegate?.didUpdateSpeechResponse(transcription)
-                        self?.setIsEmptyStateHidden(true)
+                        self.delegate?.didUpdateSpeechResponse(transcription)
                     case .finalTranscription(let transcription):
-                        self?.delegate?.didUpdateSpeechResponse(transcription)
-                        self?.classify(transcription: transcription)
-                        self?.setIsEmptyStateHidden(true)
+                        self.delegate?.didUpdateSpeechResponse(transcription)
+                        self.classifier.classify(transcription)
                     default:
-                        self?.setIsEmptyStateHidden(false)
+                        if self.speechRecognizerController.isListening {
+                            self.content = .empty(.listeningResponse)
+                        }
+                    }
+                }
+        }
+
+        if classificationCancellable == nil {
+            classificationCancellable = classifier.$classification
+                .removeDuplicates()
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] newValue in
+                    self?.updateResponses(for: newValue)
+                }
+        }
+
+        if availabilityCancellable == nil {
+            availabilityCancellable = speechRecognizerController.$isAvailable
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] isAvailable in
+                    guard let self = self else { return }
+                    if isAvailable {
+                        if case .choices = self.content {
+                            // no-op
+                        } else {
+                            self.content = .empty(.listeningResponse)
+                        }
+                    } else {
+                        if case .empty(let emptyKind) = self.content {
+                            switch emptyKind {
+                            case .speechServiceUnavailable:
+                                return
+                            case .speechPermissionDenied:
+                                return
+                            case .speechPermissionUndetermined:
+                                return
+                            case .microphonePermissionDenied:
+                                return
+                            case .microphonePermissionUndetermined:
+                                return
+                            default:
+                                break
+                            }
+                        }
+                        self.content = .empty(.speechServiceUnavailable)
                     }
                 }
         }
@@ -151,86 +210,73 @@ final class ListeningResponseViewController: PagingCarouselViewController, Audio
         }
     }
 
-    func setIsEmptyStateHidden(_ isHidden: Bool) {
-        if isHidden {
-            desiredEmptyStateView = nil
-        } else if desiredEmptyStateView == nil {
-            desiredEmptyStateView = EmptyStateView(type: .listeningResponse)
-        }
-    }
-
     func emptyStateView() -> UIView? {
         return desiredEmptyStateView
     }
 
     // MARK: ML Stubs
 
-    private func classify(transcription: String) {
+    private func updateResponses(for result: VLClassificationResult?) {
 
-        machineLearningQueue.async { [weak self] in
+        guard let result = result else {
+            content = .empty(.listeningResponse)
+            return
+        }
 
-            guard let self = self else { return }
+        switch result.result {
+        case .freeResponse:
+            updateForFreeResponse(result)
+        case .yesOrNo:
+            content = .choices(["Yes", "No"])
+        case .numerical:
+            content = .choices(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"])
+        case .interval:
+            content = .choices(["1", "2", "3", "4", "5"])
+        @unknown default:
+            content = .empty(.listeningResponse)
+        }
+    }
 
-            let model = try! VocableChoicesModel(configuration: .init())
-            guard let prediction = try? model.prediction(text: transcription) else {
-                assertionFailure("Predictions failed...")
-                return
-            }
+    private func updateForFreeResponse(_ result: VLClassificationResult) {
 
-            //get choices
-            var sentence = transcription
+        // Placeholder to try and preserve this functionality from the
+        // demo model until the new model supports it
+        guard result.text.contains(" or ") else {
+            content = .empty(.listenModeFreeResponse)
+            return
+        }
 
-            // Sanitize the sentence by removing non key words
-            for prefix in self.prefixes {
-                if sentence.hasPrefix(prefix) {
-                    if let rangeToRemove = sentence.range(of: prefix) {
-                        sentence.removeSubrange(rangeToRemove)
-                    }
-                }
-            }
+        var sentence = result.text.trimmingCharacters(in: .whitespaces)
 
-            sentence = sentence.trimmingCharacters(in: .whitespaces)
-            var choicesArray = sentence.components(separatedBy: " or ")
-
-            choicesArray = choicesArray.map { (choice) -> String in
-                var sanitizedChoice = choice.trimmingCharacters(in: .whitespaces)
-                if sanitizedChoice.hasPrefix("a ") {
-                    if let rangeToRemove = sanitizedChoice.range(of: "a ") {
-                        sanitizedChoice.removeSubrange(rangeToRemove)
-                    }
-                }
-
-                if sanitizedChoice.hasSuffix("?") {
-                    if let rangeToRemove = sanitizedChoice.range(of: "?") {
-                        sanitizedChoice.removeSubrange(rangeToRemove)
-                    }
-                }
-
-                return sanitizedChoice
-            }
-
-            DispatchQueue.main.async {
-                self.choices.removeAll()
-
-                let label = prediction.label
-                if label == "boolean" {
-                    print("bool")
-                    self.isNumberResponse = false
-                    self.choices = self.yesNoResponses
-                } else if label == "quantity" {
-                    print("numbers")
-                    self.isNumberResponse = true
-                    self.choices = self.quantityResponses
-                } else if label == "feelings" {
-                    print("feels")
-                    self.isNumberResponse = false
-                    self.choices = self.feelingsResponses
-                } else if label == "choices" {
-                    print("choice -> \(choicesArray)")
-                    self.isNumberResponse = false
-                    self.choices = choicesArray
+        // Sanitize the sentence by removing non key words
+        for prefix in self.prefixes {
+            if sentence.hasPrefix(prefix) {
+                if let rangeToRemove = sentence.range(of: prefix) {
+                    sentence.removeSubrange(rangeToRemove)
                 }
             }
         }
+
+        sentence = sentence.trimmingCharacters(in: .whitespaces)
+
+        let operands = sentence.components(separatedBy: " or ")
+
+        let choices = operands.map { (choice) -> String in
+            var sanitizedChoice = choice.trimmingCharacters(in: .whitespaces)
+            if sanitizedChoice.hasPrefix("a ") {
+                if let rangeToRemove = sanitizedChoice.range(of: "a ") {
+                    sanitizedChoice.removeSubrange(rangeToRemove)
+                }
+            }
+
+            if sanitizedChoice.hasSuffix("?") {
+                if let rangeToRemove = sanitizedChoice.range(of: "?") {
+                    sanitizedChoice.removeSubrange(rangeToRemove)
+                }
+            }
+
+            return sanitizedChoice
+        }
+        content = .choices(choices)
     }
 }

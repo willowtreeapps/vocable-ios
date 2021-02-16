@@ -35,8 +35,22 @@ struct AppConfig {
     @PublishedDefault(key: "isHotWordPermitted", defaultValue: true)
     static var isHotWordPermitted: Bool
 
-    @PublishedDefault(key: "isListeningModeEnabled", defaultValue: true)
+    @PublishedDefault(key: "isListeningModeEnabled", defaultValue: isListeningModeSupported)
     static var isListeningModeEnabled: Bool
+
+    static var isListeningModeSupported: Bool {
+
+        // Listening mode is currently only supported for English
+        if Locale(identifier: activePreferredLanguageCode).languageCode != "en" {
+            return false
+        }
+
+        // ML models currently rely on CoreML features introduced in iOS 14
+        if #available(iOS 14.0, *) {
+            return true
+        }
+        return false
+    }
 
     static let defaultLanguageCode = "en"
     static var activePreferredLanguageCode: String {
