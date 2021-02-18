@@ -3,6 +3,7 @@ default_platform :ios
 platform :ios do
   before_all do
     ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "60"
+    ENV["SPACESHIP_SKIP_2FA_UPGRADE"]="1"
     setup_circle_ci
   end
 
