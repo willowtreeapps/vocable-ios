@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import Combine
 
-final class ListeningModeViewController: VocableCollectionViewController, AudioPermissionPromptPresenter {
+final class ListeningModeViewController: VocableCollectionViewController {
 
     private enum ContentItem: Int {
         case listeningModeEnabled
@@ -21,20 +21,24 @@ final class ListeningModeViewController: VocableCollectionViewController, AudioP
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
 
-    internal var isDisplayingAuthorizationPrompt = false {
-        didSet {
-            updateDataSource()
-        }
-    }
-
+    private var authorizationController = AudioPermissionPromptController()
     private var authorizationCancellable: AnyCancellable?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        authorizationCancellable = authorizationController.$state
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.updateDataSource(animated: true)
+            }
         setupNavigationBar()
         setupCollectionView()
-        authorizationCancellable = registerAuthorizationObservers()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         updateDataSource()
     }
 
@@ -47,12 +51,15 @@ final class ListeningModeViewController: VocableCollectionViewController, AudioP
 
     private func updateDataSource(animated: Bool = false) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, ContentItem>()
-        if !isDisplayingAuthorizationPrompt {
+        if let state = authorizationController.state {
+            collectionView.backgroundView = EmptyStateView.listening(state.state, action: state.action)
+        } else {
             snapshot.appendSections([0])
             snapshot.appendItems([.listeningModeEnabled])
             if AppConfig.isListeningModeEnabled {
                 snapshot.appendItems([.hotWordEnabled])
             }
+            collectionView.backgroundView = nil
         }
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
@@ -60,6 +67,19 @@ final class ListeningModeViewController: VocableCollectionViewController, AudioP
     private func setupCollectionView() {
         collectionView.backgroundColor = .collectionViewBackgroundColor
         collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "SettingsFooterTextSupplementaryView", bundle: nil),
+                                forSupplementaryViewOfKind: "footerText",
+                                withReuseIdentifier: "footerText")
+
+        dataSource.supplementaryViewProvider = { (collectionView, elementKind, indexPath) in
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: elementKind, withReuseIdentifier: elementKind, for: indexPath) as! SettingsFooterTextSupplementaryView
+            footerView.textLabel.text = """
+When this shortcut is enabled, someone saying \"Hey Vocable\" aloud will automatically navigate to the listening mode screen.
+
+This shortcut makes it fast to kick off a conversation by saying something like \"Hey Vocable, are you feeling okay?\" and jumping straight to the suggested responses.
+"""
+            return footerView
+        }
 
         collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (_, environment) -> NSCollectionLayoutSection? in
             return self?.layoutSection(environment: environment)
@@ -84,10 +104,14 @@ final class ListeningModeViewController: VocableCollectionViewController, AudioP
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columnCount)
         group.interItemSpacing = .fixed(8)
 
+        let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(500))
+        let footerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: "footerText", alignment: .bottom)
+
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
         section.contentInsets = sectionInsets(for: environment)
         section.contentInsets.top = 16
+        section.boundarySupplementaryItems = [footerItem]
         return section
     }
 

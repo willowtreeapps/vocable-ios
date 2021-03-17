@@ -9,7 +9,7 @@
 import UIKit
 import Combine
 
-@IBDesignable class PagingCarouselViewController: VocableViewController, CollectionViewProvider, UICollectionViewDelegate {
+@IBDesignable class PagingCarouselViewController: VocableViewController, UICollectionViewDelegate {
 
     typealias CollectionViewType = CarouselGridCollectionView
 
@@ -88,7 +88,12 @@ import Combine
         if navigationBarIfLoaded() != nil {
             insets.top = 8
         }
+
         insets.bottom = 8
+        if isPaginationViewHidden {
+            insets.bottom += view.safeAreaInsets.bottom
+        }
+        
         collectionView.layout.pageInsets = insets
     }
 
@@ -125,7 +130,7 @@ import Combine
         // Pagination view
         if isPaginationViewHidden {
             constraints += [
-                collectionView.bottomAnchor.constraint(equalTo: layoutMargins.bottomAnchor)
+                collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ]
         } else {
             constraints += [

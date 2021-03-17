@@ -46,6 +46,7 @@ import UIKit
         super.viewWillAppear(animated)
         setViewMarginsForCurrentTraitCollection()
         installBackButtonIfNeeded()
+        view.layoutIfNeeded()
     }
 
     override func viewDidAppear(_ animated: Bool) {

@@ -8,15 +8,31 @@
 
 import UIKit
 
+private class VCShapeLayer: CAShapeLayer {
+
+    override func action(forKey event: String) -> CAAction? {
+        var action = super.action(forKey: event)
+        if action == nil, UIView.inheritedAnimationDuration != 0, ["path", "shadowPath"].contains(event) {
+            if let basicAction = super.action(forKey: "backgroundColor") as? CABasicAnimation {
+                let newAction = basicAction.copy() as! CABasicAnimation
+                newAction.keyPath = event
+                newAction.fromValue = presentation()?.value(forKey: event)
+                action = newAction
+            }
+        }
+        return action
+    }
+}
+
 @IBDesignable
 class BorderedView: UIView {
 
     override class var layerClass: AnyClass {
-        return CAShapeLayer.self
+        return VCShapeLayer.self
     }
 
-    private var shapeLayer: CAShapeLayer {
-        return self.layer as! CAShapeLayer
+    private var shapeLayer: VCShapeLayer {
+        return self.layer as! VCShapeLayer
     }
 
     var roundedCorners: UIRectCorner = .allCorners {

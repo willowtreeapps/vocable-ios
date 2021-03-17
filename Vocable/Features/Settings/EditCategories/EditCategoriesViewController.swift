@@ -100,11 +100,11 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
 
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
-            collectionView.layout.numberOfRows = .minimumHeight(75)
+            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(75))
         case (.compact, .regular):
-            collectionView.layout.numberOfRows = .minimumHeight(135)
+            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(135))
         case (.compact, .compact), (.regular, .compact):
-            collectionView.layout.numberOfRows = .minimumHeight(75)
+            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(75))
         default:
             break
         }

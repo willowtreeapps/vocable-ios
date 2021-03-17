@@ -8,14 +8,43 @@
 
 import UIKit
 
-class CarouselGridLayout: UICollectionViewLayout {
+final class CarouselGridLayout: UICollectionViewLayout {
 
-    enum RowCount {
-        case fixedCount(Int)
-        case minimumHeight(CGFloat)
+    fileprivate enum SizingAxis {
+        case horizontal
+        case vertical
+    }
+    
+    enum SizingValue: Equatable {
+        case absolute(CGFloat)
+        case relative(CGFloat)
+
+        fileprivate func value(from rect: CGRect, axis: SizingAxis) -> CGFloat {
+            switch axis {
+            case .horizontal:
+                switch self {
+                case .absolute(let fixed):
+                    return fixed
+                case .relative(let relative):
+                    return rect.width * relative + rect.minX
+                }
+            case .vertical:
+                switch self {
+                case .absolute(let fixed):
+                    return fixed
+                case .relative(let relative):
+                    return rect.height * relative + rect.minY
+                }
+            }
+        }
     }
 
-    enum ColumnCount {
+    enum RowCount: Equatable {
+        case fixedCount(Int, maxHeight: SizingValue = .relative(1.0))
+        case flexible(minHeight: SizingValue = .absolute(0), maxHeight: SizingValue = .relative(1.0))
+    }
+
+    enum ColumnCount: Equatable {
         case fixedCount(Int)
         case minimumWidth(CGFloat)
     }
@@ -23,57 +52,55 @@ class CarouselGridLayout: UICollectionViewLayout {
     enum ItemAnimationStyle {
         case none
         case shrinkExpand
+        case verticalTimeline
+    }
+
+    enum VerticalAlignment {
+        case top
+        case center
+        case bottom
+    }
+
+    var alignment: VerticalAlignment = .top {
+        didSet {
+            guard oldValue != alignment else { return }
+            invalidateItemAttributesForParameterChange()
+        }
     }
 
     var itemAnimationStyle: ItemAnimationStyle = .none
 
     var numberOfColumns: ColumnCount = .fixedCount(1) {
         didSet {
-            switch (oldValue, numberOfColumns) {
-            case (.fixedCount(let countA), .fixedCount(let countB)):
-                if countA == countB {
-                    return
-                }
-            case (.minimumWidth(let widthA), .minimumWidth(let widthB)):
-                if widthA == widthB {
-                    return
-                }
-            case (_, _):
-                break
+            guard oldValue != numberOfColumns else {
+                return
             }
-            invalidateLayout()
+
+            invalidateItemAttributesForParameterChange()
         }
     }
 
     var numberOfRows: RowCount = .fixedCount(1) {
         didSet {
-            switch (oldValue, numberOfRows) {
-            case (.fixedCount(let countA), .fixedCount(let countB)):
-                if countA == countB {
-                    return
-                }
-            case (.minimumHeight(let heightA), .minimumHeight(let heightB)):
-                if heightA == heightB {
-                    return
-                }
-            case (_, _):
-                break
+            guard oldValue != numberOfRows else {
+                return
             }
-            invalidateLayout()
+
+            invalidateItemAttributesForParameterChange()
         }
     }
 
     var interItemSpacing: CGFloat = 0 {
         didSet {
             guard oldValue != interItemSpacing else { return }
-            invalidateLayout()
+            invalidateItemAttributesForParameterChange()
         }
     }
 
     var pageInsets: UIEdgeInsets = .zero {
         didSet {
             guard oldValue != pageInsets else { return }
-            invalidateLayout()
+            invalidateItemAttributesForParameterChange()
         }
     }
 
@@ -156,6 +183,12 @@ class CarouselGridLayout: UICollectionViewLayout {
         return lastLayoutSize != newBounds.size
     }
 
+    private func invalidateItemAttributesForParameterChange() {
+        let invalidationContext = UICollectionViewFlowLayoutInvalidationContext()
+        invalidationContext.invalidateFlowLayoutAttributes = true
+        invalidateLayout(with: invalidationContext)
+    }
+
     private func computeColumnCount() -> Int {
         switch numberOfColumns {
         case .fixedCount(let count):
@@ -182,17 +215,18 @@ class CarouselGridLayout: UICollectionViewLayout {
 
     private func computeRowCount() -> Int {
         switch numberOfRows {
-        case .fixedCount(let count):
+        case .fixedCount(let count, _):
             return count
-        case .minimumHeight(let minimumHeight):
+        case .flexible(let minimumHeight, _):
             guard let height = collectionView?.bounds.height, height > 0 else {
                 return 1
             }
-            var itemCount = Int(height / minimumHeight)
+            let minHeightValue = minimumHeight.value(from: collectionView?.bounds ?? .zero, axis: .vertical)
+            var itemCount = Int(height / minHeightValue)
             while itemCount > 0 {
                 let interItemHeight = CGFloat(itemCount - 1) * interItemSpacing
                 let availableHeight = height - interItemHeight
-                if (availableHeight / CGFloat(itemCount)) >= minimumHeight {
+                if (availableHeight / CGFloat(itemCount)) >= minHeightValue {
                     break
                 }
                 itemCount -= 1
@@ -204,23 +238,70 @@ class CarouselGridLayout: UICollectionViewLayout {
         }
     }
 
-    private func frameForCell(at indexPath: IndexPath) -> CGRect {
+    private func frameForCell(at indexPath: IndexPath, additionalPageInsets: UIEdgeInsets = .zero, pageOffset: UIOffset = .zero, interItemSpacing: CGFloat? = nil) -> CGRect {
 
         guard itemsPerPage > 0 else { return .zero }
 
-        let pageRect: CGRect = rectForPage(containing: indexPath)
+        let interItemSpacing = interItemSpacing ?? self.interItemSpacing
+        let pageRect: CGRect = rectForPage(containing: indexPath).offsetBy(dx: pageOffset.horizontal, dy: pageOffset.vertical)
 
-        let contentRect = pageRect.inset(by: pageInsets)
+        let contentRect = pageRect.inset(by: pageInsets + additionalPageInsets)
         let cellColumnIndex = indexPath.item % columnCount
         let cellRowIndex = (indexPath.item % itemsPerPage) / columnCount
 
         let totalInterItemSpace = CGSize(width: CGFloat(columnCount - 1) * interItemSpacing,
                                          height: CGFloat(rowCount - 1) * interItemSpacing)
-        let cellWidth = (contentRect.width - totalInterItemSpace.width) / CGFloat(columnCount)
-        let cellHeight = (contentRect.height - totalInterItemSpace.height) / CGFloat(rowCount)
 
-        let cellX = CGFloat(cellColumnIndex) * (cellWidth + interItemSpacing)
-        let cellY = CGFloat(cellRowIndex) * (cellHeight + interItemSpacing)
+        let maximumAvailableCellHeight = (contentRect.height - totalInterItemSpace.height) / CGFloat(rowCount)
+        let cellWidth = (contentRect.width - totalInterItemSpace.width) / CGFloat(columnCount)
+        var cellHeight = maximumAvailableCellHeight
+
+        switch numberOfRows {
+        case .fixedCount(_, maxHeight: let maxHeight):
+            let _max = maxHeight.value(from: contentRect, axis: .vertical)
+            cellHeight = min(min(cellHeight, _max), maximumAvailableCellHeight)
+        case .flexible(let minHeight, let maxHeight):
+            let _min = minHeight.value(from: contentRect, axis: .vertical)
+            let _max = maxHeight.value(from: contentRect, axis: .vertical)
+            cellHeight = min(min(max(cellHeight, _min), _max), maximumAvailableCellHeight)
+        }
+
+        let cellContentOffset: UIOffset = {
+
+            let numberOfItemsInPage: Int = {
+                let totalNumberOfItems = collectionView?.numberOfItems(inSection: indexPath.section) ?? 0
+                switch numberOfRows {
+                case .fixedCount:
+                    return itemsPerPage
+                case .flexible:
+                    return min(totalNumberOfItems - ((indexPath.item / itemsPerPage) * itemsPerPage), itemsPerPage)
+                }
+            }()
+            let numberOfOccupiedRows = (CGFloat(numberOfItemsInPage) / CGFloat(columnCount)).rounded(.up)
+            let occupiedInterItemSpace = CGSize(width: CGFloat(columnCount - 1) * interItemSpacing,
+                                                height: CGFloat(numberOfOccupiedRows - 1) * interItemSpacing)
+            var size = CGSize.zero
+            size.width = cellWidth * CGFloat(columnCount) + occupiedInterItemSpace.width
+            size.height = cellHeight * CGFloat(numberOfOccupiedRows) + occupiedInterItemSpace.height
+
+            var origin = CGPoint.zero
+            switch alignment {
+            case .top:
+                origin.y = 0
+                origin.x = max((contentRect.width - size.width) / 2, 0)
+            case .bottom:
+                origin.y = max(contentRect.height - size.height, 0)
+                origin.x = max((contentRect.width - size.width) / 2, 0)
+            case .center:
+                origin.y = max((contentRect.height - size.height) / 2, 0)
+                origin.x = max((contentRect.width - size.width) / 2, 0)
+            }
+            let offset = UIOffset(horizontal: origin.x, vertical: origin.y)
+            return offset
+        }()
+
+        let cellX = CGFloat(cellColumnIndex) * (cellWidth + interItemSpacing) + cellContentOffset.horizontal
+        let cellY = CGFloat(cellRowIndex) * (cellHeight + interItemSpacing) + cellContentOffset.vertical
 
         let cellRect = CGRect(x: contentRect.minX + cellX,
                               y: contentRect.minY + cellY,
@@ -236,8 +317,7 @@ class CarouselGridLayout: UICollectionViewLayout {
         var items = [UICollectionViewLayoutAttributes]()
 
         let section = Int(rect.midX / sectionContentSize.width)
-        let sections = [section, section + 1, section - 1].filter { (0..<numberOfSections).contains($0)
-        }
+        let sections = [section, section + 1, section - 1].filter((0..<numberOfSections).contains)
 
         for section in sections {
             let itemCountForSection = collectionView.numberOfItems(inSection: section)
@@ -251,7 +331,7 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attr = super.layoutAttributesForItem(at: indexPath) ?? UICollectionViewLayoutAttributes(forCellWith: indexPath)
+        let attr = super.layoutAttributesForItem(at: indexPath)?.copy() as? UICollectionViewLayoutAttributes ?? UICollectionViewLayoutAttributes(forCellWith: indexPath)
         attr.frame = frameForCell(at: indexPath)
         attr.alpha = 1
         attr.transform = .identity
@@ -259,19 +339,18 @@ class CarouselGridLayout: UICollectionViewLayout {
     }
 
     override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        guard let superAttributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath) else { return nil }
+        guard let superAttributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)?.copy() as? UICollectionViewLayoutAttributes else { return nil }
         if itemAnimationStyle == .shrinkExpand {
             superAttributes.transform = superAttributes.transform.scaledBy(x: 0.8, y: 0.8)
             superAttributes.alpha = 0.0
-            if let finalAttributes = layoutAttributesForItem(at: itemIndexPath) {
-                superAttributes.frame = finalAttributes.frame
-            }
+            superAttributes.frame = frameForCell(at: itemIndexPath)
         }
+
         return superAttributes
     }
 
     override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        guard let superAttributes = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath) else { return nil }
+        guard let superAttributes = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)?.copy() as? UICollectionViewLayoutAttributes else { return nil }
         if itemAnimationStyle == .shrinkExpand {
             superAttributes.transform = superAttributes.transform.scaledBy(x: 0.8, y: 0.8)
             superAttributes.alpha = 0.0
