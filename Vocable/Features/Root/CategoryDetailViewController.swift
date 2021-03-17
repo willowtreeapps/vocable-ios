@@ -30,6 +30,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
 
         if category.identifier == Category.Identifier.recents {
+            request.predicate = NSComparisonPredicate(\Phrase.lastSpokenDate, .notEqualTo, nil)
             request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.lastSpokenDate, ascending: false)]
             request.fetchLimit = 9
         } else {
