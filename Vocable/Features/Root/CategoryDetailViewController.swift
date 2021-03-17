@@ -82,7 +82,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         switch sizeClass {
         case .hRegular_vRegular:
             collectionView.layout.numberOfColumns = .fixedCount(3)
-            collectionView.layout.numberOfRows = .minimumHeight(120)
+            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(120))
         case .hCompact_vRegular:
             collectionView.layout.numberOfColumns = .fixedCount(2)
             collectionView.layout.numberOfRows = .fixedCount(4)
@@ -143,9 +143,9 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         guard collectionView.backgroundView == nil else { return }
         paginationView.isHidden = true
         if category.identifier == Category.Identifier.recents {
-            collectionView.backgroundView = EmptyStateView(type: .recents)
+            collectionView.backgroundView = EmptyStateView(type: EmptyStateType.recents)
         } else {
-            collectionView.backgroundView = EmptyStateView(type: .phraseCollection, action: addNewPhraseButtonSelected)
+            collectionView.backgroundView = EmptyStateView(type: EmptyStateType.phraseCollection, action: addNewPhraseButtonSelected)
         }
     }
 

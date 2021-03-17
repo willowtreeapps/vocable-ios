@@ -87,7 +87,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
             collectionView.layout.numberOfRows = .fixedCount(4)
         case (.compact, .regular):
             collectionView.layout.numberOfColumns = .fixedCount(1)
-            collectionView.layout.numberOfRows = .minimumHeight(130)
+            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(130))
         case (.compact, .compact), (.regular, .compact):
             collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(2)
@@ -127,7 +127,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         guard AppConfig.emptyStatesEnabled else { return }
         guard collectionView.backgroundView == nil else { return }
         paginationView.isHidden = true
-        collectionView.backgroundView = EmptyStateView(type: .phraseCollection, action: addPhrasePressed)
+        collectionView.backgroundView = EmptyStateView(type: EmptyStateType.phraseCollection, action: addPhrasePressed)
     }
 
     private func removeEmptyStateIfNeeded() {

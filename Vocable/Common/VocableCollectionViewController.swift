@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VocableCollectionViewController: VocableViewController, CollectionViewProvider, UICollectionViewDelegate {
+class VocableCollectionViewController: VocableViewController, UICollectionViewDelegate {
 
     typealias CollectionViewType = UICollectionView
 

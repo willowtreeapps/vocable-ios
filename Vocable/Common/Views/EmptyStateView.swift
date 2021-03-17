@@ -25,98 +25,58 @@ private class EmptyStateButton: GazeableButton {
     }
 }
 
-class EmptyStateView: UIView {
+protocol EmptyStateRepresentable {
+    var title: String { get }
+    var description: String? { get }
+    var buttonTitle: String? { get }
+    var image: UIImage? { get }
+}
 
-    enum EmptyStateType {
+enum EmptyStateType: EmptyStateRepresentable {
 
-        case recents
-        case phraseCollection
-        case listeningResponse
-        case speechServiceUnavailable
-        case speechPermissionDenied
-        case speechPermissionUndetermined
-        case microphonePermissionDenied
-        case microphonePermissionUndetermined
-        case listenModeFreeResponse
+    case recents
+    case phraseCollection
 
-        var title: NSAttributedString {
-            let title: String
-            switch self {
-            case.recents:
-                title = NSLocalizedString("recents_empty_state.header.title", comment: "Recents empty state title")
-            case .phraseCollection:
-                title = NSLocalizedString("empty_state.header.title", comment: "Empty state title")
-            case .microphonePermissionUndetermined, .microphonePermissionDenied:
-                #warning("Needs localization & Final copy")
-                title = "Microphone Access"
-            case .speechPermissionDenied, .speechPermissionUndetermined:
-                #warning("Needs localization & Final copy")
-                title = "Speech Recognition"
-            case .listeningResponse:
-                #warning("Needs localization & Final copy")
-                title = "Listening..."
-            case .listenModeFreeResponse:
-                #warning("Needs localization & Final copy")
-                title = "Sounds complicated"
-            case .speechServiceUnavailable:
-                #warning("Needs localization & Final copy")
-                title = "Speech services unavailable"
-            }
-            return NSAttributedString(string: title, attributes: [.font: UIFont.boldSystemFont(ofSize: 24), .foregroundColor: UIColor.defaultTextColor])
-        }
-
-        var description: NSAttributedString? {
-            let value: String?
-            switch self {
-            case .recents:
-                value = NSLocalizedString("recents_empty_state.body.title", comment: "Recents empty state description")
-            case .microphonePermissionUndetermined:
-                #warning("Needs localization & Final copy")
-                value = "Vocable needs microphone access to enable Listening Mode. The button below presents an iOS permission dialog that Vocable's head tracking cannot interract with."
-            case .microphonePermissionDenied:
-                #warning("Needs localization & Final copy")
-                value = "Vocable needs to use the microphone to enable Listening Mode. Please enable microphone access in the system Settings app.\n\nYou can also disable Listening Mode to hide this category in Vocable's settings."
-            case .speechPermissionUndetermined:
-                #warning("Needs localization & Final copy")
-                value = "Vocable needs to request speech permissions to enable Listening Mode. This will present an iOS permission dialog that Vocable's head tracking cannot interract with."
-            case .speechPermissionDenied:
-                #warning("Needs localization & Final copy")
-                value = "Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in the system Settings app.\n\nYou can also disable Listening Mode to hide this category in Vocable's settings."
-            case .listeningResponse:
-                #warning("Needs localization & Final copy")
-                value = "When in listening mode, if someone starts speaking, Vocable will try to show quick responses."
-            case .listenModeFreeResponse:
-                #warning("Needs localization & Final copy")
-                value = "Not sure what to suggest. Please repeat or use the rest of Vocable to respond."
-            case .speechServiceUnavailable:
-                #warning("Needs localization & Final copy")
-                value = "Please try again later"
-            default:
-                return nil
-            }
-            if let description = value {
-                return NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
-            }
-            return nil
-        }
-
-        var buttonTitle: String? {
-            switch self {
-            case .recents, .listenModeFreeResponse:
-                return nil
-            case .microphonePermissionUndetermined, .speechPermissionUndetermined:
-                #warning("Needs localization & Final copy")
-                return "Grant Access"
-            case .microphonePermissionDenied, .speechPermissionDenied:
-                #warning("Needs localization & Final copy")
-                return "Open Settings"
-            default:
-                return NSLocalizedString("empty_state.button.title", comment: "Empty state Add Phrase button title")
-            }
+    var title: String {
+        switch self {
+        case.recents:
+            return NSLocalizedString("recents_empty_state.header.title", comment: "Recents empty state title")
+        case .phraseCollection:
+            return NSLocalizedString("empty_state.header.title", comment: "Empty state title")
         }
     }
 
-    typealias ButtonConfiguration = (() -> Void)
+    var description: String? {
+        switch self {
+        case .recents:
+            return NSLocalizedString("recents_empty_state.body.title", comment: "Recents empty state description")
+        default:
+            return nil
+        }
+    }
+
+    var buttonTitle: String? {
+        switch self {
+        case .recents:
+            return nil
+        default:
+            return NSLocalizedString("empty_state.button.title", comment: "Empty state Add Phrase button title")
+        }
+    }
+
+    var image: UIImage? {
+        switch self {
+        case .recents:
+            return UIImage(named: "recents")
+        default:
+            return nil
+        }
+    }
+}
+
+final class EmptyStateView: UIView {
+
+    typealias ButtonConfiguration = (() -> Void)?
 
     var image: UIImage? {
         get {
@@ -151,23 +111,25 @@ class EmptyStateView: UIView {
     private let titleLabel = UILabel(frame: .zero)
     private let descriptionLabel = UILabel(frame: .zero)
     private let button = EmptyStateButton(frame: .zero)
-    private var action: ButtonConfiguration?
+    private var action: ButtonConfiguration
 
     private lazy var stackView = UIStackView(arrangedSubviews: [self.imageView, self.titleLabel, self.descriptionLabel])
 
-    init(type: EmptyStateType, action: ButtonConfiguration? = nil) {
+    init<T: EmptyStateRepresentable>(type: T, action: ButtonConfiguration = nil) {
         self.action = action
         super.init(frame: .zero)
 
-        switch type {
-        case .recents:
-            imageView.image = UIImage(named: "recents")
-            fallthrough
-        default:
-            titleAttributedText = type.title
-            descriptionAttributedText = type.description
-            button.setTitle(type.buttonTitle, for: .normal)
+        imageView.image = type.image
+        let attributedTitle = NSAttributedString(string: type.title, attributes: [.font: UIFont.boldSystemFont(ofSize: 24), .foregroundColor: UIColor.defaultTextColor])
+        titleAttributedText = attributedTitle
+
+        if let description = type.description {
+            let attributedDescription = NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
+            descriptionAttributedText = attributedDescription
+        } else {
+            descriptionAttributedText = nil
         }
+        button.setTitle(type.buttonTitle, for: .normal)
 
         commonInit()
     }
