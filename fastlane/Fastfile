@@ -55,7 +55,7 @@ platform :ios do
 
     build_app(scheme: "AppStore")
     upload_to_testflight(
-      api_key_path: "api_info.json",
+      api_key_path: "fastlane/api_info.json",
       skip_waiting_for_build_processing: true
     )
   end
