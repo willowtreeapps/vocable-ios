@@ -3,7 +3,6 @@ default_platform :ios
 platform :ios do
   before_all do
     ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "60"
-    ENV["SPACESHIP_SKIP_2FA_UPGRADE"]="1"
     setup_circle_ci
   end
 
@@ -46,6 +45,8 @@ platform :ios do
 
   desc "AppStore build and upload to TestFlight"
   lane :buildanddeploytotestflight do
+    sh "echo \"${APP_STORE_API_KEY_JSON}\" > \"api_info.json\""
+    
     match(type: "appstore", readonly: true)
 
     increment_build_number(
@@ -54,6 +55,7 @@ platform :ios do
 
     build_app(scheme: "AppStore")
     upload_to_testflight(
+      api_key_path: "api_info.json",
       skip_waiting_for_build_processing: true
     )
   end

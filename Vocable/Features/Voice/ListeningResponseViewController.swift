@@ -134,7 +134,7 @@ final class ListeningResponseViewController: VocableViewController {
 
     private func observeClassification() {
         guard classificationCancellable == nil else { return }
-        classificationCancellable = classifier.$classification
+        classificationCancellable = classifier.classificationPublisher
             .dropFirst()
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
@@ -222,73 +222,25 @@ final class ListeningResponseViewController: VocableViewController {
 
     private func updateResponses(for result: VLClassificationResult?) {
 
-        var content: Content?
-        content = nil
+        var content: Content? = .none
         defer {
             if let content = content {
                 self.setContent(content, animated: true)
             }
         }
+
         guard let result = result else {
             content = .empty(.listeningResponse)
             return
         }
 
-        switch result.result {
-        case .freeResponse:
-            updateForFreeResponse(result)
-        case .yesOrNo:
-            content = .choices(["Yes", "No"])
-        case .numerical:
-            content = .choices(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"])
-        case .interval:
-            content = .choices(["1", "2", "3", "4", "5"])
-        @unknown default:
-            content = .empty(.listeningResponse)
-        }
-    }
-
-    private func updateForFreeResponse(_ result: VLClassificationResult) {
-
-        // Placeholder to try and preserve this functionality from the
-        // demo model until the new model supports it
-        guard result.text.contains(" or ") else {
-            setContent(.empty(.listenModeFreeResponse), animated: true)
+        // TODO: Store the logging context
+        guard let responses = result.responses, !responses.isEmpty else {
+            content = .empty(.listenModeFreeResponse)
             return
         }
 
-        var sentence = result.text.trimmingCharacters(in: .whitespaces)
-
-        // Sanitize the sentence by removing non key words
-        for prefix in self.prefixes {
-            if sentence.hasPrefix(prefix) {
-                if let rangeToRemove = sentence.range(of: prefix) {
-                    sentence.removeSubrange(rangeToRemove)
-                }
-            }
-        }
-
-        sentence = sentence.trimmingCharacters(in: .whitespaces)
-
-        let operands = sentence.components(separatedBy: " or ")
-
-        let choices = operands.map { (choice) -> String in
-            var sanitizedChoice = choice.trimmingCharacters(in: .whitespaces)
-            if sanitizedChoice.hasPrefix("a ") {
-                if let rangeToRemove = sanitizedChoice.range(of: "a ") {
-                    sanitizedChoice.removeSubrange(rangeToRemove)
-                }
-            }
-
-            if sanitizedChoice.hasSuffix("?") {
-                if let rangeToRemove = sanitizedChoice.range(of: "?") {
-                    sanitizedChoice.removeSubrange(rangeToRemove)
-                }
-            }
-
-            return sanitizedChoice
-        }
-        setContent(.choices(choices), animated: true)
+        content = .choices(responses)
     }
 
     private func setContentViewController(_ viewController: UIViewController?, animated: Bool) {
