@@ -9,6 +9,7 @@
 import UIKit
 import Combine
 import CoreData
+import SwiftUI
 
 @IBDesignable class RootViewController: VocableViewController, ListeningResponseViewControllerDelegate {
 
@@ -135,7 +136,8 @@ import CoreData
         }
 
         func finalize(_ didFinish: Bool) {
-            for inactiveViewController in childrenToDisposeOf {                inactiveViewController.removeFromParent()
+            for inactiveViewController in childrenToDisposeOf {
+                inactiveViewController.removeFromParent()
                 inactiveViewController.view.removeFromSuperview()
             }
             self.contentViewController = viewController
@@ -240,6 +242,15 @@ import CoreData
         } else {
             transcriptionOutputView.text = "\n\n\n"
             outputLabel.text = text ?? outputLabelPlaceholder()
+        }
+    }
+
+    // MARK: Transcription Output Debug Gesture Handling
+
+    @IBAction private func handleTranscriptionOutputDebugGesture(_ recognizer: UIGestureRecognizer?) {
+        if #available(iOS 14.0, *) {
+            let controller = UIHostingController(rootView: ListenModeDebugView())
+            present(controller, animated: true, completion: nil)
         }
     }
 
