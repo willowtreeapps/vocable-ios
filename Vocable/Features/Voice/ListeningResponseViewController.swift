@@ -234,7 +234,8 @@ final class ListeningResponseViewController: VocableViewController {
             return
         }
 
-        // TODO: Store the logging context
+        ListenModeDebugStorage.shared.contexts.append(result.context)
+
         guard let responses = result.responses, !responses.isEmpty else {
             content = .empty(.listenModeFreeResponse)
             return
