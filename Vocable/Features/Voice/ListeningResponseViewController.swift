@@ -34,6 +34,31 @@ final class ListeningResponseViewController: VocableViewController {
         }
     }
 
+    private struct TransitionAnimator {
+
+        let propertyAnimator: UIViewPropertyAnimator
+        let preflightActions: () -> Void
+        let delay: TimeInterval
+
+        init(propertyAnimator: UIViewPropertyAnimator, preflightActions: @escaping () -> Void, delay: TimeInterval = .zero) {
+            self.propertyAnimator = propertyAnimator
+            self.preflightActions = preflightActions
+            self.delay = delay
+        }
+
+        func withDelay(_ delay: TimeInterval) -> TransitionAnimator {
+            return TransitionAnimator(propertyAnimator: propertyAnimator, preflightActions: preflightActions, delay: delay)
+        }
+    }
+
+    private enum TransitionStyle {
+        case none
+        case timeline
+        case inline
+    }
+
+    private var transitionAnimators = Set<UIViewPropertyAnimator>()
+
     weak var delegate: ListeningResponseViewControllerDelegate?
 
     private let permissionsController = AudioPermissionPromptController()
@@ -84,8 +109,29 @@ final class ListeningResponseViewController: VocableViewController {
                 return
             }
         }
-
+        let previousContent = self.content
         self.content = content
+        let outgoingTransition: TransitionStyle
+        let incomingTransition: TransitionStyle
+
+        if animated {
+
+            if case .empty = previousContent {
+                outgoingTransition = .inline
+            } else {
+                outgoingTransition = .timeline
+            }
+
+            if case .empty = content {
+                incomingTransition = .inline
+            } else {
+                incomingTransition = .timeline
+            }
+
+        } else {
+            outgoingTransition = .none
+            incomingTransition = .none
+        }
 
         switch content {
         case .choices(let choices):
@@ -97,10 +143,10 @@ final class ListeningResponseViewController: VocableViewController {
                     self?.lastUtterance = utterance
                 }
                 .store(in: &viewController.disposables)
-            setContentViewController(viewController, animated: animated)
+            setContentViewController(viewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
         case .empty(let state, let action):
             let viewController = ListeningResponseEmptyStateViewController(state: state, action: action)
-            setContentViewController(viewController, animated: animated)
+            setContentViewController(viewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
         }
     }
 
@@ -234,7 +280,7 @@ final class ListeningResponseViewController: VocableViewController {
             return
         }
 
-        ListenModeDebugStorage.shared.contexts.append(result.context)
+        ListenModeDebugStorage.shared.append(result.context)
 
         guard let responses = result.responses, !responses.isEmpty else {
             content = .empty(.listenModeFreeResponse)
@@ -244,62 +290,143 @@ final class ListeningResponseViewController: VocableViewController {
         content = .choices(responses)
     }
 
-    private func setContentViewController(_ viewController: UIViewController?, animated: Bool) {
+    private func setContentViewController(_ viewController: UIViewController?, outgoingTransition: TransitionStyle = .none, incomingTransition: TransitionStyle = .none) {
 
-        let childrenToDisposeOf = children.filter {
-            ![viewController].contains($0)
-        }
+        transitionAnimators.removeAll()
 
         let layoutGuide = self.contentViewLayoutGuide
-        let exitTransform = CGAffineTransform.identity
-            .translatedBy(x: 0, y: -layoutGuide.layoutFrame.height)
+        if let viewController = viewController {
+            installViewController(viewController, in: layoutGuide)
+        }
 
-        let contentTransform = CGAffineTransform.identity
+        let previousContentViewController = self.contentViewController
+        self.contentViewController = viewController
+
+        let entranceAnimator: TransitionAnimator? = {
+
+            var animator: TransitionAnimator? = .none
+
+            switch incomingTransition {
+            case .none:
+                return nil
+            case .inline:
+                animator = inlineTransitionAnimator(for: viewController, in: layoutGuide.layoutFrame, isEntering: true)
+            case .timeline:
+                animator = timelineTransitionAnimator(for: viewController, in: layoutGuide.layoutFrame, isEntering: true)
+            }
+
+            if [incomingTransition, outgoingTransition].contains(.inline) {
+                animator = animator?.withDelay(0.33)
+            }
+
+            return animator
+        }()
+
+        let exitAnimator: TransitionAnimator? = {
+            func didFinish(_ completed: Bool) {
+                previousContentViewController?.removeFromParent()
+                previousContentViewController?.view.removeFromSuperview()
+            }
+            var animator: TransitionAnimator?
+            switch outgoingTransition {
+            case .none:
+                didFinish(true)
+                animator = nil
+            case .inline:
+                animator = inlineTransitionAnimator(for: previousContentViewController, in: layoutGuide.layoutFrame, isEntering: false)
+            case .timeline:
+                animator = timelineTransitionAnimator(for: previousContentViewController, in: layoutGuide.layoutFrame, isEntering: false)
+            }
+
+            animator?.propertyAnimator.addCompletion { position in
+                didFinish(position == .end)
+            }
+            return animator
+        }()
+
+        [entranceAnimator, exitAnimator].dropNils().forEach { [weak self] animator in
+            animator.preflightActions()
+            transitionAnimators.insert(animator.propertyAnimator)
+            animator.propertyAnimator.addCompletion { _ in
+                self?.transitionAnimators.remove(animator.propertyAnimator)
+            }
+            animator.propertyAnimator.startAnimation(afterDelay: animator.delay)
+        }
+    }
+
+    private func timelineTransitionAnimator(for viewController: UIViewController?, in rect: CGRect, isEntering: Bool) -> TransitionAnimator? {
+
+        guard let viewController = viewController else { return nil }
+
+        let exitTransform = CGAffineTransform.identity
+            .translatedBy(x: 0, y: -rect.height)
+
+        let neutralTransform = CGAffineTransform.identity
         let entranceTransform = CGAffineTransform.identity
             .scaledBy(x: 0.8, y: 0.8)
-            .translatedBy(x: 0, y: layoutGuide.layoutFrame.height)
+            .translatedBy(x: 0, y: rect.height)
 
-        let contentAlpha: CGFloat = 1
+        let neutralAlpha: CGFloat = 1
         let exitAlpha: CGFloat = .zero
         let entranceAlpha: CGFloat = .zero
+        let duration: TimeInterval = 1.5
+        let dampingRatio: CGFloat = 0.8
 
         func prepare() {
-            if let viewController = viewController {
-                installViewController(viewController, in: layoutGuide)
-                if animated {
-                    viewController.view.transform = entranceTransform
-                    viewController.view.alpha = entranceAlpha
-                }
+            if isEntering {
+                viewController.view.transform = entranceTransform
+                viewController.view.alpha = entranceAlpha
             }
         }
 
         func actions() {
-            if let viewController = viewController {
-                viewController.view.transform = contentTransform
-                viewController.view.alpha = contentAlpha
-            }
-            for inactiveViewController in childrenToDisposeOf {
-                inactiveViewController.view.transform = exitTransform
-                inactiveViewController.view.alpha = exitAlpha
+            if isEntering {
+                viewController.view.transform = neutralTransform
+                viewController.view.alpha = neutralAlpha
+            } else {
+                viewController.view.transform = exitTransform
+                viewController.view.alpha = exitAlpha
             }
         }
 
-        func finalize(_ didFinish: Bool) {
-            for inactiveViewController in childrenToDisposeOf {
-                inactiveViewController.removeFromParent()
-                inactiveViewController.view.removeFromSuperview()
+        let animator = UIViewPropertyAnimator(duration: duration, dampingRatio: dampingRatio, animations: actions)
+        return TransitionAnimator(propertyAnimator: animator, preflightActions: prepare)
+    }
+
+    private func inlineTransitionAnimator(for viewController: UIViewController?, in rect: CGRect, isEntering: Bool) -> TransitionAnimator? {
+
+        guard let viewController = viewController else { return nil }
+
+        let exitTransform: CGAffineTransform = .identity
+        let neutralTransform: CGAffineTransform = .identity
+        let entranceTransform: CGAffineTransform = .identity
+
+        let neutralAlpha: CGFloat = 1
+        let exitAlpha: CGFloat = .zero
+        let entranceAlpha: CGFloat = .zero
+        let duration: TimeInterval = 0.33
+        let curve: UIView.AnimationCurve = isEntering ? .easeIn : .easeOut
+
+        func prepare() {
+            if isEntering {
+                viewController.view.transform = entranceTransform
+                viewController.view.alpha = entranceAlpha
             }
-            self.contentViewController = viewController
         }
 
-        prepare()
-        UIView.animate(withDuration: 1.5,
-                       delay: 0,
-                       usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: 0.8,
-                       options: [.beginFromCurrentState, .curveEaseOut],
-                       animations: actions,
-                       completion: finalize)
+        func actions() {
+            if isEntering {
+                viewController.view.transform = neutralTransform
+                viewController.view.alpha = neutralAlpha
+            } else {
+                viewController.view.transform = exitTransform
+                viewController.view.alpha = exitAlpha
+            }
+        }
+
+        let animator = UIViewPropertyAnimator(duration: duration, curve: curve, animations: actions)
+
+        return TransitionAnimator(propertyAnimator: animator, preflightActions: prepare)
     }
 
     private func installViewController(_ viewController: UIViewController, in layoutGuide: UILayoutGuide) {

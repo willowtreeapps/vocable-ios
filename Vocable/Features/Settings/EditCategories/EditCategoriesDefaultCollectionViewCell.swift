@@ -38,7 +38,7 @@ final class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
 
         updateSeparatorMask()
-        for button in [moveUpButton, moveDownButton, showCategoryDetailButton].compactMap({$0}) {
+        for button in [moveUpButton, moveDownButton, showCategoryDetailButton].dropNils() {
             button.backgroundColor = .collectionViewBackgroundColor
             button.setFillColor(.defaultCellBackgroundColor, for: .normal)
             button.setTitleColor(.defaultTextColor, for: .normal)
