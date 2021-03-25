@@ -140,12 +140,12 @@ struct ListenModeDebugView: View {
 
     private func clearEntries() {
         withAnimation {
-            storage.contexts = []
+            storage.clear()
         }
     }
 
     private func delete(at offsets: IndexSet) {
-        storage.contexts.remove(atOffsets: offsets)
+        storage.delete(at: offsets)
     }
 
 }

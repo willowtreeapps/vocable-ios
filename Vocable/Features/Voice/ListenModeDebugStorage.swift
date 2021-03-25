@@ -23,6 +23,16 @@ final class ListenModeDebugStorage: ObservableObject {
         return ListenModeDebugStorage.defaultsKey
     }
 
+    private static func orderedContexts(_ contexts: [VLLoggingContext]) -> [VLLoggingContext] {
+        let sorted = contexts.sorted { (lhs, rhs) -> Bool in
+            guard let lhsStartDate = lhs.startDate, let rhsStartDate = rhs.startDate else {
+                return false
+            }
+            return lhsStartDate > rhsStartDate
+        }
+        return sorted
+    }
+
     private static func retrieveContexts() -> [VLLoggingContext] {
         guard let data = UserDefaults.standard.data(forKey: defaultsKey) else {
             return []
@@ -30,12 +40,26 @@ final class ListenModeDebugStorage: ObservableObject {
         guard let result = try? JSONDecoder().decode([VLLoggingContext].self, from: data) else {
             return []
         }
-        return result
+
+        return orderedContexts(result)
     }
 
-    @Published var contexts: [VLLoggingContext] = ListenModeDebugStorage.retrieveContexts() {
+    func append(_ context: VLLoggingContext) {
+        contexts.insert(context, at: 0)
+    }
+
+    func clear() {
+        contexts = []
+    }
+
+    func delete(at offsets: IndexSet) {
+        contexts.remove(atOffsets: offsets)
+    }
+
+    @Published private(set) var contexts: [VLLoggingContext] = ListenModeDebugStorage.retrieveContexts() {
         didSet {
-            let truncated = Array(contexts.suffix(maxHistoryCount))
+            let sorted = ListenModeDebugStorage.orderedContexts(contexts)
+            let truncated = Array(sorted.suffix(maxHistoryCount))
             guard let data = try? JSONEncoder().encode(truncated) else {
                 assertionFailure("Failed to encode data")
                 return
