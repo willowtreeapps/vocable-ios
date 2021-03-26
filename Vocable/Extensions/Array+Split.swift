@@ -23,7 +23,7 @@ extension Collection {
         return indices.contains(index) ? self[index] : nil
     }
 
-    func dropNils<T>() -> [T] where Element == Optional<T> {
+    func dropNils<T>() -> [T] where Element == T? {
         return self.compactMap({$0})
     }
 }

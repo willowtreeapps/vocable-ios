@@ -231,7 +231,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
             return .none
         }
 
-        //Check if the cell below the current one is hidden, disable down button if needed.
+        // Check if the cell below the current one is hidden, disable down button if needed.
         if indexPath.row + 1 < fetchResultsController.fetchedObjects?.count ?? 0 {
             let nextIndex = IndexPath(row: indexPath.row + 1, section: indexPath.section)
             if fetchResultsController.object(at: nextIndex).isHidden {

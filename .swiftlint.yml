@@ -16,7 +16,6 @@ excluded:
 - Carthage
 - Pods
 - SwiftLint/Common/3rdPartyLib
-force_cast: warning
 line_length:
     warning: 250
     error: 300

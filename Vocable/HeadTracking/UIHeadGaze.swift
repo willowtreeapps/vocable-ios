@@ -4,8 +4,8 @@ class UIHeadGaze: UITouch {
 
     private weak var _window: UIWindow?
     private let _receiver: UIView
-    private let _position: CGPoint //NDC coordinates [0,1] x [0,1], origin is lower left corner of the screen
-    private let _previousPosition: CGPoint //NDC coordinates [0,1] x [0,1], origin is lower left corner of the screen
+    private let _position: CGPoint // NDC coordinates [0,1] x [0,1], origin is lower left corner of the screen
+    private let _previousPosition: CGPoint // NDC coordinates [0,1] x [0,1], origin is lower left corner of the screen
 
     /**
      The time when the event occurred
