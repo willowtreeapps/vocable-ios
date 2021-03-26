@@ -71,7 +71,13 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     }
     
     private let timeoutInterval: TimeInterval = 1.2
-    private let hotWordPhrase = "hey vocable"
+
+    // ASR hears what it hears, this regex is just trying to catch common errors
+    private let hotWordFirstComponentRegex = "(hey|he|she|a|i)"
+    private lazy var hotWordPartialMatchRegex = "^\\s*\(hotWordFirstComponentRegex)\\s*$"
+    private lazy var hotWordRegex = "(\(hotWordFirstComponentRegex) (voc|book|fuck)able)|(revocable)"
+    private let hotWordIntendedPhrase = "hey vocable"
+
     private var hotWordEnabledCancellable: AnyCancellable?
 
     private lazy var speechRecognizer: SFSpeechRecognizer? = {
@@ -233,7 +239,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
             return
         }
         print("STOP LISTENING...")
-        cancelTimer()
+        cancelTimer(reason: "stopListening() invoked")
         mode = .off
         isListening = false
         unscheduleListeners()
@@ -271,21 +277,27 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
         }
     }
 
-    private func startTimer() {
+    private func startTimer(customTimeout: TimeInterval? = nil) {
         print("STARTING TIMER...")
 
         timeout?.invalidate()
-        timeout = Timer.scheduledTimer(timeInterval: timeoutInterval,
+        timeout = Timer.scheduledTimer(timeInterval: customTimeout ?? timeoutInterval,
                                        target: self,
                                        selector: #selector(self.handleTimeout),
                                        userInfo: nil,
                                        repeats: false)
     }
 
-    private func cancelTimer() {
+    private func cancelTimer(reason: String? = nil) {
         if let timer = timeout {
             timer.invalidate()
-            print("TIMER CANCELLED")
+            let reasonString: String
+            if let reason = reason {
+                reasonString = ": \(reason)"
+            } else {
+                reasonString = ""
+            }
+            print("TIMER CANCELLED" + reasonString)
         }
         timeout = nil
     }
@@ -332,9 +344,10 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
         request.requiresOnDeviceRecognition = false
         request.taskHint = .dictation
 
-        if mode == .hotWord {
-            request.contextualStrings = [hotWordPhrase]
-        }
+        // Making this always be available as a contextual string
+        // because the person speaking may not be able to see the
+        // device screen to recognize what state we're in
+        request.contextualStrings = [hotWordIntendedPhrase]
 
         if let task = speechRecognizer?.recognitionTask(with: request, delegate: self) {
             recognitionBuffers[task] = request
@@ -355,11 +368,32 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     //
 
     private func normalizedTranscription(from original: String, containedHotWord: inout Bool) -> String? {
-        let lowercased = original.lowercased()
-        containedHotWord = lowercased.contains(hotWordPhrase.lowercased())
-        let partial = original.lowercased()
-            .replacingOccurrences(of: hotWordPhrase.lowercased(), with: "")
-            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let lowercased = original.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+
+        let regex = try! NSRegularExpression(pattern: hotWordRegex, options: [.anchorsMatchLines])
+        let matches = regex.matches(in: lowercased, options: [], range: NSRange(lowercased.startIndex..<lowercased.endIndex, in: lowercased))
+
+        // Check for a full hotword match
+        guard let _range = matches.last?.range, let hotWordRange = Range(_range, in: lowercased) else {
+            containedHotWord = false
+
+            // If we have a WIP potential hot word, wait until we have the next
+            // chunk of the utterance before allowing it to propagate to the UI
+            let partialRegex = try! NSRegularExpression(pattern: hotWordPartialMatchRegex, options: [.anchorsMatchLines])
+            let partialMatches = partialRegex.matches(in: lowercased, options: [], range: NSRange(lowercased.startIndex..<lowercased.endIndex, in: lowercased))
+            if partialMatches.isEmpty {
+                return lowercased
+            }
+            return nil
+        }
+        containedHotWord = true
+
+        // Anything preceeding the hotword can be discarded
+        var partial = ""
+        if hotWordRange.upperBound < lowercased.endIndex {
+            partial = String(lowercased.suffix(from: hotWordRange.upperBound))
+        }
+        partial = partial.trimmingCharacters(in: .whitespacesAndNewlines)
         if !partial.isEmpty {
             return partial
         } else {
@@ -375,13 +409,22 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     // Called for all recognitions, including non-final hypothesis
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didHypothesizeTranscription transcription: SFTranscription) {
+
+        cancelTimer(reason: "New hypothesis")
+
         var containsHotWord = false
         let transcription = normalizedTranscription(from: transcription.formattedString, containedHotWord: &containsHotWord)
         if mode == .hotWord, containsHotWord {
             self.transcription = .hotWord
             self.mode = .transcribing
+
+            // Wait a bit longer since the person speaking
+            // may pause for the UI transition to complete
+            startTimer(customTimeout: timeoutInterval * 2)
+        } else {
+            startTimer()
         }
-        startTimer()
+
         if self.mode == .transcribing, let partial = transcription {
             self.transcription = .partialTranscription(partial)
         }
@@ -389,14 +432,17 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     // Called only for final recognitions of utterances. No more about the utterance will be reported
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishRecognition recognitionResult: SFSpeechRecognitionResult) {
-        cancelTimer()
+
         var containsHotWord = false
         let transcription = normalizedTranscription(from: recognitionResult.bestTranscription.formattedString, containedHotWord: &containsHotWord)
+        print("didFinishRecognition: \(String(describing: transcription))")
+
+        cancelTimer(reason: "Recognition finished")
+
         if mode == .hotWord, containsHotWord {
             self.transcription = .hotWord
             self.mode = .transcribing
         }
-        print("didFinishRecognition: \(String(describing: transcription))")
 
         if self.mode == .transcribing, let phrase = transcription {
             self.transcription = .finalTranscription(phrase)
@@ -412,7 +458,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     // Called when the task has been cancelled, either by client app, the user, or the system
     func speechRecognitionTaskWasCancelled(_ task: SFSpeechRecognitionTask) {
         print("speechRecognitionTaskWasCancelled")
-        cancelTimer()
+        cancelTimer(reason: "recognition task was cancelled")
         transcribeAgainIfNeeded()
         recognitionTasks.remove(task)
         recognitionBuffers[task] = nil
@@ -422,7 +468,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     // If successfully is false, the error property of the task will contain error information
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
 
-        cancelTimer()
+        cancelTimer(reason: "recognition task finished")
 
         print("speechRecognitionTaskDidFinish \(successfully ? "successfully" : "unsuccessfully")")
         if !successfully {
