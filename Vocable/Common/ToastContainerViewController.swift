@@ -36,7 +36,7 @@ class ToastContainerViewController: UIViewController {
         }
     }
     
-    //In the future we should get away from manipulating the window here.
+    // In the future we should get away from manipulating the window here.
     func handlePhraseSaved(toastLabelText: String) {
         if phraseSavedView == nil {
             let phraseSavedView = UINib(nibName: "ToastView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! ToastView

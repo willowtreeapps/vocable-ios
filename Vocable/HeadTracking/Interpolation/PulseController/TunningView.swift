@@ -152,7 +152,7 @@ class TunningView: UIView {
     @objc func buttonPressed() {
         switch visibilityState {
         case .fullyVisible:
-            visibilityState = .notVisible//.graphOnly
+            visibilityState = .notVisible // .graphOnly
         case .graphOnly:
             visibilityState = .notVisible
         case .notVisible:

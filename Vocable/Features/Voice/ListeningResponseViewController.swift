@@ -86,9 +86,6 @@ final class ListeningResponseViewController: VocableViewController {
     private let synthesizedSpeechQueue = DispatchQueue(label: "speech_synthesis_queue", qos: .userInitiated)
     let classifier = VLClassifier()
 
-    private let feelingsResponses = ["Okay", "Good", "Bad"]
-    private let prefixes = ["Would you like", "Do you want"]
-
     @PublishedValue private(set) var lastUtterance: String?
 
     private var content: Content = .empty(.listeningResponse)
