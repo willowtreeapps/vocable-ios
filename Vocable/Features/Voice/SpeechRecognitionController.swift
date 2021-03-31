@@ -51,7 +51,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
         }
     }
 
-    enum TranscriptionResult {
+    enum TranscriptionResult: Equatable {
         case none
         case hotWord
         case partialTranscription(String)
@@ -410,7 +410,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     // Called for all recognitions, including non-final hypothesis
     func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didHypothesizeTranscription transcription: SFTranscription) {
 
-        cancelTimer(reason: "New hypothesis")
+        cancelTimer(reason: "New hypothesis \"\(transcription.formattedString)\"")
 
         var containsHotWord = false
         let transcription = normalizedTranscription(from: transcription.formattedString, containedHotWord: &containsHotWord)
