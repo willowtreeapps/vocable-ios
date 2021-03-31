@@ -71,6 +71,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         _ = SpeechRecognitionController.shared
 
+        AppConfig.$isListeningModeEnabled
+            .removeDuplicates()
+            .sink { isEnabled in
+                if #available(iOS 14.0, *), isEnabled {
+                    VLClassifier.prepare()
+                }
+            }.store(in: &disposables)
+
         return true
     }
 
