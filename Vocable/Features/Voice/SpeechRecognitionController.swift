@@ -75,7 +75,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     // ASR hears what it hears, this regex is just trying to catch common errors
     private let hotWordFirstComponentRegex = "(hey|he|she|a|i)"
     private lazy var hotWordPartialMatchRegex = "^\\s*\(hotWordFirstComponentRegex)\\s*$"
-    private lazy var hotWordRegex = "(\(hotWordFirstComponentRegex) (voc|book|fuck)able)|(revocable)"
+    private lazy var hotWordRegex = "(\(hotWordFirstComponentRegex) (voc|book|fuck)able)|((re|in)vocable)"
     private let hotWordIntendedPhrase = "hey vocable"
 
     private var hotWordEnabledCancellable: AnyCancellable?
