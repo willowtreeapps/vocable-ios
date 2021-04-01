@@ -191,6 +191,8 @@ final class ListeningResponseViewController: VocableViewController {
 
         transcriptionCancellable = speechRecognizerController.$transcription
             .dropFirst()
+            .debounce(for: .seconds(0.08), scheduler: DispatchQueue.main)
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newValue in
                 guard let self = self else { return }
