@@ -19,6 +19,7 @@ protocol ListeningResponseViewControllerDelegate: AnyObject {
 final class ListeningResponseViewController: VocableViewController {
 
     private enum Content: Equatable {
+        case numerical
         case choices([String])
         case empty(ListeningEmptyState, action: EmptyStateView.ButtonConfiguration = nil)
 
@@ -28,6 +29,8 @@ final class ListeningResponseViewController: VocableViewController {
                 return items_lhs == items_rhs
             case (.empty(let state_lhs, _), .empty(let state_rhs, _)):
                 return state_lhs == state_rhs
+            case (.numerical, .numerical):
+                return true
             default:
                 return false
             }
@@ -131,6 +134,15 @@ final class ListeningResponseViewController: VocableViewController {
         }
 
         switch content {
+        case .numerical:
+            let viewController = NumericCategoryContentViewController()
+            viewController.$lastUtterance
+                .sink { [weak self] utterance in
+                    self?.lastUtterance = utterance
+                }
+                .store(in: &viewController.disposables)
+            setContentViewController(viewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
+
         case .choices(let choices):
             let viewController = ListeningResponseContentViewController()
             viewController.content = choices
@@ -141,6 +153,7 @@ final class ListeningResponseViewController: VocableViewController {
                 }
                 .store(in: &viewController.disposables)
             setContentViewController(viewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
+
         case .empty(let state, let action):
             let viewController = ListeningResponseEmptyStateViewController(state: state, action: action)
             setContentViewController(viewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
@@ -286,7 +299,11 @@ final class ListeningResponseViewController: VocableViewController {
             return
         }
 
-        content = .choices(responses)
+        if case .numerical = result.classification {
+            content = .numerical
+        } else {
+            content = .choices(responses)
+        }
     }
 
     private func setContentViewController(_ viewController: UIViewController?, outgoingTransition: TransitionStyle = .none, incomingTransition: TransitionStyle = .none) {

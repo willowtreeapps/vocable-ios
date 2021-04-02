@@ -8,10 +8,13 @@
 
 import UIKit
 import AVFoundation
+import Combine
 
 class NumericCategoryContentViewController: PagingCarouselViewController {
 
     @PublishedValue private(set) var lastUtterance: String?
+
+    var disposables = Set<AnyCancellable>()
 
     private static let formatter = NumberFormatter()
 
