@@ -79,11 +79,19 @@ import SwiftUI
         let category = NSPersistentContainer.shared.viewContext.object(with: categoryID) as! Category
         let viewController: UIViewController
         let utterancePublisher: PublishedValue<String?>.Publisher
+
+        let destinationIsListeningMode: Bool
+        if #available(iOS 14.0, *), category.identifier == Category.Identifier.listeningMode {
+            destinationIsListeningMode = true
+        } else {
+            destinationIsListeningMode = false
+        }
+
         if category.identifier == Category.Identifier.numPad {
             let vc = NumericCategoryContentViewController()
             utterancePublisher = vc.$lastUtterance
             viewController = vc
-        } else if #available(iOS 14.0, *), category.identifier == Category.Identifier.listeningMode {
+        } else if #available(iOS 14.0, *), destinationIsListeningMode {
             let vc = ListeningResponseViewController()
             vc.delegate = self
             utterancePublisher = vc.$lastUtterance
@@ -92,6 +100,17 @@ import SwiftUI
             let vc = CategoryDetailViewController(category: category)
             utterancePublisher = vc.$lastUtterance
             viewController = vc
+        }
+
+        if !destinationIsListeningMode {
+            // If the user navigates away from the listening response VC, ensure they won't
+            // continue to see the transcription as it gives the impression dictation is still running
+            // Selected responses, however, should persist as usual
+            if #available(iOS 14.0, *), contentViewController is ListeningResponseViewController {
+                if outputLabel.isHidden {
+                    updateOutputLabelText(nil, isDictated: false)
+                }
+            }
         }
 
         utteranceCancellable = utterancePublisher.receive(on: DispatchQueue.main)
