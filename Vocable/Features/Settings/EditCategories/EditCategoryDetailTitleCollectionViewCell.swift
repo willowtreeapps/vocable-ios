@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol EditCategoryDetailsHeaderCollectionViewCellDelegate: class {
+protocol EditCategoryDetailsHeaderCollectionViewCellDelegate: AnyObject {
     func didTapEdit()
 }
 
-protocol EditCategoryDetailTitleCollectionViewCellDelegate: class {
+protocol EditCategoryDetailTitleCollectionViewCellDelegate: AnyObject {
     func didTapEdit()
 }
 
