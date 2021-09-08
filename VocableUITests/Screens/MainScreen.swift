@@ -28,13 +28,19 @@ class MainScreen {
     func isTextDisplayed(_ text: String) -> Bool {
         return app.collectionViews.staticTexts[text].exists
     }
-    
-    func scrollRightAndTapCurrentCategory(numTimesToScroll: Int) {
+       
+    // added a parameter currentCategory, so that it is not always assumed started at "General"
+    func scrollRightAndTapCurrentCategory(numTimesToScroll: Int, currentCategory: String) {
+        
         for _ in 1...numTimesToScroll {
             categoryRightButton.tap()
         }
-        let currentCategory = numTimesToScroll % defaultCategories.count
-        app.collectionViews.staticTexts[defaultCategories[currentCategory]].tap()
+        
+        // let currentCategory = numTimesToScroll % defaultCategories.count
+        let currentPosition = defaultCategories.firstIndex(of: currentCategory)!
+        // FIXED: changed +1 to +numTimesToScroll
+        let categoryToClick = (currentPosition+numTimesToScroll) % defaultCategories.count
+        app.collectionViews.staticTexts[defaultCategories[categoryToClick]].tap()
     }
     
     func scrollLeftAndTapCurrentCategory(numTimesToScroll: Int, newCategory: String?) {

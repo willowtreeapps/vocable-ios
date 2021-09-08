@@ -10,6 +10,32 @@ import XCTest
 
 class MainScreenTests: BaseTest {
     
+    func testRecentScreen(){
+            /*
+         for each categoryName (the first 5 categories), tap() the top left
+         speech button, then verify that all pressed buttons appear in "Recents"
+            */
+        let app = XCUIApplication()
+        
+        var listOfPressedButtons: [String] = []
+        var buttonText = ""
+        
+        for categoryName in mainScreen.defaultCategories {
+            if categoryName == "123" { // "123" categoryName does not add to RECENTS category
+                break;
+            }
+            buttonText = app.collectionViews.staticTexts.element(boundBy: 0).label // first button's label
+            app.collectionViews.staticTexts[buttonText].tap() // tap top left button
+            listOfPressedButtons.append(buttonText) // add that button's text to listOfPressedButtons
+            mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 1, currentCategory: categoryName)
+        }
+        mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 2, currentCategory: "123")
+        
+        for text in listOfPressedButtons {
+            XCTAssert(mainScreen.isTextDisplayed(text))
+        }
+    }
+    
     func testDefaultCategoriesExist() {
         for categoryName in mainScreen.defaultCategories {
             XCTAssert(mainScreen.isTextDisplayed(categoryName), "Expected the current category name to be \(categoryName)")
@@ -22,7 +48,7 @@ class MainScreenTests: BaseTest {
     }
     
     func testSelectingCategoryChangesPhrases() {
-        mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 1)
+        mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 1, currentCategory: "General")
         verifyGivenPhrasesDisplay(setOfPhrases: mainScreen.defaultPhraseBasicNeeds)
     }
     
