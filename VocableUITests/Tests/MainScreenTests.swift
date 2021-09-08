@@ -10,29 +10,28 @@ import XCTest
 
 class MainScreenTests: BaseTest {
     
+        /*
+     for each categoryName (the first 5 categories), tap() the top left
+     speech button, then verify that all pressed buttons appear in "Recents"
+        */
     func testRecentScreen(){
-            /*
-         for each categoryName (the first 5 categories), tap() the top left
-         speech button, then verify that all pressed buttons appear in "Recents"
-            */
         let app = XCUIApplication()
-        
         var listOfPressedButtons: [String] = []
-        var buttonText = ""
+        var firstButtonText = ""
         
         for categoryName in mainScreen.defaultCategories {
             if categoryName == "123" { // "123" categoryName does not add to RECENTS category
                 break;
             }
-            buttonText = app.collectionViews.staticTexts.element(boundBy: 0).label // first button's label
-            app.collectionViews.staticTexts[buttonText].tap() // tap top left button
-            listOfPressedButtons.append(buttonText) // add that button's text to listOfPressedButtons
-            mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 1, currentCategory: categoryName)
+            firstButtonText = app.collectionViews.staticTexts.element(boundBy: 0).label
+            app.collectionViews.staticTexts[firstButtonText].tap()
+            listOfPressedButtons.append(firstButtonText)
+            mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 1, startingCategory: categoryName)
         }
-        mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 2, currentCategory: "123")
+        mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 2, startingCategory: "123")
         
-        for text in listOfPressedButtons {
-            XCTAssert(mainScreen.isTextDisplayed(text))
+        for pressedButtonText in listOfPressedButtons {
+            XCTAssert(mainScreen.isTextDisplayed(pressedButtonText))
         }
     }
     
@@ -48,7 +47,7 @@ class MainScreenTests: BaseTest {
     }
     
     func testSelectingCategoryChangesPhrases() {
-        mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 1, currentCategory: "General")
+        mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 1, startingCategory: "General")
         verifyGivenPhrasesDisplay(setOfPhrases: mainScreen.defaultPhraseBasicNeeds)
     }
     

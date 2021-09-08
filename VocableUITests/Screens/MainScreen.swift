@@ -29,16 +29,13 @@ class MainScreen {
         return app.collectionViews.staticTexts[text].exists
     }
        
-    // added a parameter currentCategory, so that it is not always assumed started at "General"
-    func scrollRightAndTapCurrentCategory(numTimesToScroll: Int, currentCategory: String) {
+    func scrollRightAndTapCurrentCategory(numTimesToScroll: Int, startingCategory: String) {
         
         for _ in 1...numTimesToScroll {
             categoryRightButton.tap()
         }
         
-        // let currentCategory = numTimesToScroll % defaultCategories.count
-        let currentPosition = defaultCategories.firstIndex(of: currentCategory)!
-        // FIXED: changed +1 to +numTimesToScroll
+        let currentPosition = defaultCategories.firstIndex(of: startingCategory)!
         let categoryToClick = (currentPosition+numTimesToScroll) % defaultCategories.count
         app.collectionViews.staticTexts[defaultCategories[categoryToClick]].tap()
     }
