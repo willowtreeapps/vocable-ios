@@ -14,7 +14,7 @@ class MainScreenTests: BaseTest {
      for each categoryName (the first 5 categories), tap() the top left
      speech button, then verify that all pressed buttons appear in "Recents"
         */
-    func testRecentScreen(){
+    func testRecentScreen_ShowsPressedButtons(){
         let app = XCUIApplication()
         var listOfPressedButtons: [String] = []
         var firstButtonText = ""
@@ -31,7 +31,7 @@ class MainScreenTests: BaseTest {
         mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 2, startingCategory: "123")
         
         for pressedButtonText in listOfPressedButtons {
-            XCTAssert(mainScreen.isTextDisplayed(pressedButtonText))
+            XCTAssert(mainScreen.isTextDisplayed(pressedButtonText), "Expected \(pressedButtonText) to appear in Recents category")
         }
     }
     
