@@ -93,7 +93,7 @@ extension UICollectionView {
         if newTarget == oldTarget {
 
             // Update the existing target's selection state if needed
-            if let oldTarget = gazeTarget, !oldTarget.isCancelled, !indexPathIsSelected(oldTarget.indexPath) {
+            if let oldTarget = gazeTarget, !oldTarget.isCancelled, !indexPathIsSelected(oldTarget.indexPath), AppConfig.selectionMode == .hover {
                 let timeElapsed = Date().timeIntervalSince(oldTarget.beginDate)
                 if timeElapsed >= AppConfig.selectionHoldDuration {
                     guard delegate?.collectionView?(self, shouldSelectItemAt: oldTarget.indexPath) ?? true else {
@@ -109,6 +109,8 @@ extension UICollectionView {
 
         if let oldTarget = oldTarget {
             setItemHighlighted(false, at: oldTarget.indexPath)
+            self.blinkCancelled(gaze, with: event)
+            (self.window as? HeadGazeWindow)?.isTrackingBlinking = .cancelled
             gazeTarget = nil
         }
 
@@ -137,6 +139,7 @@ extension UICollectionView {
     override func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
         if let oldTarget = gazeTarget, !oldTarget.isCancelled {
             setItemHighlighted(false, at: oldTarget.indexPath)
+            blinkCancelled(gaze, with: event)
             gazeTarget = nil
         }
     }
@@ -145,5 +148,34 @@ extension UICollectionView {
         guard let target = gazeTarget else { return }
         target.isCancelled = true
         setItemHighlighted(false, at: target.indexPath)
+        blinkCancelled(gaze, with: event)
+    }
+    
+    override func blinkBegan(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        guard let target = gazeTarget else { return }
+        
+        if let cell = cellForItem(at: target.indexPath) {
+            cell.blinkBegan(gaze, with: event)
+        }
+    }
+
+    override func blinkEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        guard let target = gazeTarget else { return }
+        
+        if let cell = cellForItem(at: target.indexPath) {
+            cell.blinkEnded(gaze, with: event)
+            
+            (self.window as? HeadGazeWindow)?.animateCursorSelection()
+            delegate?.collectionView?(self, didSelectItemAt: target.indexPath)
+            setItemHighlighted(true, at: target.indexPath)
+        }
+    }
+    
+    override func blinkCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        guard let target = gazeTarget else { return }
+        
+        if let cell = cellForItem(at: target.indexPath) {
+            cell.blinkCancelled(gaze, with: event)
+        }
     }
 }

@@ -18,6 +18,8 @@ class UIHeadGaze: UITouch {
     public var timeStamp: TimeInterval {
         return _timestamp
     }
+    
+    public var isUserBlinking: Bool = false
 
     override public var description: String {
             return """

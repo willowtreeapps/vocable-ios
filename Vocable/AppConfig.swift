@@ -10,6 +10,11 @@ import Foundation
 import Combine
 import ARKit
 
+enum SelectionMode: Codable {
+    case hover
+    case blink
+}
+
 struct AppConfig {
 
     static let showDebugOptions: Bool = {
@@ -25,6 +30,9 @@ struct AppConfig {
     static var isHeadTrackingSupported: Bool {
         return ARFaceTrackingConfiguration.isSupported
     }
+    
+    @PublishedDefault(key: "selectionMode", defaultValue: .blink)
+    static var selectionMode: SelectionMode
 
     @PublishedDefault(key: "dwellDuration", defaultValue: 1)
     static var selectionHoldDuration: TimeInterval

@@ -32,22 +32,15 @@ class GazeableButton: UIButton {
         didSet {
             guard oldValue != isTrackingTouches else { return }
 
-            if isTrackingTouches {
-
-                if let currentFill = fillColor(for: .highlighted) ?? fillColor(for: .normal) {
-                    cachedHighlightColor = currentFill
-                    let newFill = currentFill.darkenedForHighlight()
-                    setFillColor(newFill, for: .highlighted)
-                }
-
-            } else {
-                if let cached = cachedHighlightColor {
-                    setFillColor(cached, for: .highlighted)
-                    cachedHighlightColor = nil
-                }
-            }
-            updateSelectionAppearance()
-            updateContentViews()
+            updateFillColor()
+        }
+    }
+    
+    private(set) var isTrackingBlinking: Bool = false {
+        didSet {
+            guard oldValue != isTrackingBlinking else { return }
+            
+            updateFillColor()
         }
     }
 
@@ -192,11 +185,31 @@ class GazeableButton: UIButton {
             super.setTitleColor(disabledColor, for: disabledState)
         }
     }
+    
+    private func updateFillColor() {
+        if isTrackingTouches || isTrackingBlinking {
 
+            if let currentFill = fillColor(for: .highlighted) ?? fillColor(for: .normal) {
+                cachedHighlightColor = currentFill
+                let newFill = currentFill.darkenedForHighlight()
+                setFillColor(newFill, for: .highlighted)
+            }
+
+        } else {
+            if let cached = cachedHighlightColor {
+                setFillColor(cached, for: .highlighted)
+                cachedHighlightColor = nil
+            }
+        }
+        
+        updateSelectionAppearance()
+        updateContentViews()
+    }
+    
     private func updateSelectionAppearance() {
 
         func actions() {
-            let scale: CGFloat = (isHighlighted && isTrackingTouches && shouldShrinkWhenTouched) ? 0.95 : 1.0
+            let scale: CGFloat = (isHighlighted && (isTrackingTouches || isTrackingBlinking) && shouldShrinkWhenTouched) ? 0.95 : 1.0
             transform = .init(scaleX: scale, y: scale)
         }
 
@@ -269,10 +282,10 @@ class GazeableButton: UIButton {
         }
         
         let timeElapsed = Date().timeIntervalSince(beganDate)
-        if timeElapsed >= AppConfig.selectionHoldDuration {
+        if timeElapsed >= AppConfig.selectionHoldDuration && AppConfig.selectionMode == .hover {
             isSelected = true
-            sendActions(for: .primaryActionTriggered)
             gazeBeganDate = nil
+            sendActions(for: .primaryActionTriggered)
             (self.window as? HeadGazeWindow)?.animateCursorSelection()
         }
     }
@@ -290,6 +303,24 @@ class GazeableButton: UIButton {
         isHighlighted = false
         isSelected = false
         gazeBeganDate = .distantFuture
+    }
+    
+    override func blinkBegan(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        super.blinkBegan(gaze, with: event)
+        isTrackingBlinking = true
+    }
+
+    override func blinkEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        super.blinkEnded(gaze, with: event)
+        isTrackingBlinking = false
+        
+        (self.window as? HeadGazeWindow)?.animateCursorSelection()
+        sendActions(for: .primaryActionTriggered)
+    }
+
+    override func blinkCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        super.blinkCancelled(gaze, with: event)
+        isTrackingBlinking = false
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -334,4 +365,9 @@ class GazeableSegmentedButton: GazeableButton {
         isHighlighted = false
     }
     
+    override func blinkBegan(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        if !isSelected {
+            super.blinkBegan(gaze, with: event)
+        }
+    }
 }
