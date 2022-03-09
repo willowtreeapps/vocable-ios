@@ -53,12 +53,10 @@ We love contributions! To get started, please see our [Contributing Guidelines](
 - iOS devices with TrueDepth camera
 
 ## Device Provisioning
-1. Run `fastlane` from the project command line.
-2. From the menu select the option for `Add devices via....`
-3. When prompted enter a `device name` and press enter. This can be any name.
-4. When prompted enter the `device UDID` and press enter. Found in `Xcode -> Window -> Devices and Simulators`
-5. When prompted enter a `eyespeakstore@willowtreeapps.com` for `username` and press enter.
-6. Fastlane might ask you to enter a username again, use `eyespeakstore@willowtreeapps.com`.
+
+External contributors will need to provision their device and sign Vocable to run on that device in a way that is convenient for them.
+
+Internal/WillowTree contributors can follow the steps outlined in the [Technical Onboarding](https://github.com/willowtreeapps/vocable-ios/wiki/WillowTree-Technical-Onboarding) page
 
 ## Credits
 Matt Kubota, Kyle Ohanian, Duncan Lewis, Ameir Al-Zoubi, and many more from [WillowTree](https://willowtreeapps.com/) 💙.
