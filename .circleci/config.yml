@@ -2,14 +2,11 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.2.0
+      xcode: 13.2.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
     steps:
-      - run: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
-      - run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
-      - run: rm -f "AppleWWDRCAG3.cer"
       - checkout
       - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
@@ -24,14 +21,11 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 12.2.0
+      xcode: 13.2.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
     steps:
-      - run: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
-      - run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
-      - run: rm -f "AppleWWDRCAG3.cer"
       - checkout
       - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
@@ -44,14 +38,11 @@ jobs:
 
   buildanddeploytotestflight:
     macos:
-      xcode: 12.2.0
+      xcode: 13.2.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: buildanddeploytotestflight
     steps:
-      - run: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
-      - run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
-      - run: rm -f "AppleWWDRCAG3.cer"
       - checkout
       - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
@@ -63,7 +54,7 @@ jobs:
           path: output
   export-localizations-for-crowdin:
     macos: 
-      xcode: 12.2.0
+      xcode: 13.2.0
     steps:
       - checkout
       - run: rm ~/.ssh/id_rsa || true
@@ -85,11 +76,8 @@ jobs:
             
   update-localizations-test-deploy:
     macos: 
-      xcode: 12.2.0
+      xcode: 13.2.0
     steps:
-      - run: curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o AppleWWDRCAG3.cer
-      - run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
-      - run: rm -f "AppleWWDRCAG3.cer"
       - checkout
       - run: rm ~/.ssh/id_rsa || true
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
