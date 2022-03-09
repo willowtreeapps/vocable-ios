@@ -47,13 +47,21 @@ Ad-hoc build
 
 AppStore build and upload to TestFlight
 
-### ios register
+### ios wt_register_new_device
 
 ```sh
-[bundle exec] fastlane ios register
+[bundle exec] fastlane ios wt_register_new_device
 ```
 
 Add devices via the command line to the device portal and regenerate the development provisioning profile with the device
+
+### ios wt_setup_build_environment
+
+```sh
+[bundle exec] fastlane ios wt_setup_build_environment
+```
+
+Setup local development environment (WillowTree Internal)
 
 ### ios xliffimport
 
