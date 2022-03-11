@@ -28,11 +28,15 @@ class SettingsScreen {
     let alertDeleteButton = XCUIApplication().buttons["Delete"]
 
     func openCategorySettings(category: String) {
-        if otherElements.containing(.staticText, identifier: category).element.exists {
-            otherElements.containing(.staticText, identifier: category).buttons["Forward"].tap()
+        var cellLabel = ""
+        let predicate = NSPredicate(format: "label CONTAINS %@", category)
+        if otherElements.staticTexts.containing(predicate).element.exists {
+            cellLabel = otherElements.staticTexts.containing(predicate).element.label
+            otherElements.containing(.staticText, identifier: cellLabel).buttons["Forward"].tap()
         } else {
+            // TODO: Ensure we avoid an infinite loop by refactoring this
             settingsPageNextButton.tap()
-            otherElements.containing(.staticText, identifier: category).buttons["Forward"].tap()
+            openCategorySettings(category: category)
         }
     }
     
@@ -72,7 +76,9 @@ class SettingsScreen {
     }
     
     func navigateToSettingsCategoryScreen() {
+        mainScreen.settingsButton.waitForExistence(timeout: 2)
         mainScreen.settingsButton.tap()
+        categoriesButton.waitForExistence(timeout: 2)
         categoriesButton.tap()
     }
     
