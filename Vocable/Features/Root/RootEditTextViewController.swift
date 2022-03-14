@@ -18,7 +18,7 @@ class RootEditTextViewController: EditTextViewController {
         let button = GazeableButton()
         button.setImage(UIImage(systemName: "star"), for: .normal)
         button.accessibilityIdentifier = "keyboard.favoriteButton"
-        button.addTarget(self, action: #selector(favoriteButtonSelected), for: .primaryActionTriggered)
+        button.addTarget(RootEditTextViewController.self, action: #selector(favoriteButtonSelected), for: .primaryActionTriggered)
         return button
     }()
 
