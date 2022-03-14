@@ -8,7 +8,7 @@
 
 import XCTest
 
-class CustomCategoriesScreen {
+class CustomCategoriesScreen: BaseScreen {
 
     let settingsScreen = SettingsScreen()
     let keyboardScreen = KeyboardScreen()

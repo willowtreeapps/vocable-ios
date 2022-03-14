@@ -41,7 +41,6 @@ class CustomCategoriesTest: CustomCategoriesBaseTest {
         XCTAssert(mainScreen.isTextDisplayed("A"+customPhrase), "Expected the phrase \("A"+customPhrase) to be displayed")
     }
 
-    // TODO: WE MAY WANT TO PULL THIS OUT OF THE TEST SUITE; ADD TO ITS OWN. THIS TEST EDITS THE PHRASE, INSTEAD OF THE CATEGORY
     func testCustomPhraseEdit() {
         let customPhrase = "Add" + randomString(length: 2)
         
@@ -100,7 +99,8 @@ class CustomCategoriesTest: CustomCategoriesBaseTest {
         XCTAssertEqual(phraseQuery.count, 2, "Expected both phrases to be present")
     }
     
-    // TODO: Re-Enable this test and fix it or move it to a different test class
+    // TODO: Disabled for now. Moving it to a different test class as part of issue #405
+    // https://github.com/willowtreeapps/vocable-ios/issues/405
     func testPagination() {
         let customCategoryThree = "Testc"
         let createdCustomCategory = ("9. "+customCategoryThree)
