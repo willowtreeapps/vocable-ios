@@ -206,17 +206,46 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         }
 
         let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        let vc = EditTextViewController()
-
         let phrase = fetchResultsController.object(at: safeIndexPath)
-        vc.initialText = phrase.utterance ?? ""
+        guard let originalPhraseIdentifier = phrase.identifier else {
+            assertionFailure("Phrase has no identifier at indexPath: \(safeIndexPath)")
+            return
+        }
+
+        guard let categoryIdentifier = category.identifier else {
+            assertionFailure("Category has no identifier")
+            return
+        }
+
+        let initialValue = phrase.utterance ?? ""
+
+        let vc = EditTextViewController()
+        vc.initialText = initialValue
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
-            if let phraseIdentifier = phrase.identifier {
-                let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                originalPhrase?.utterance = newText
+            guard let originalPhrase = Phrase.fetchObject(in: context, matching: originalPhraseIdentifier) else {
+                assertionFailure("Could not locate original phrase for editing")
+                return
             }
+
+            if originalPhrase.isUserGenerated {
+                originalPhrase.utterance = newText
+            } else {
+
+                // If the phrase is not user generated, swap in a custom phrase and hide the old one
+                guard let originalCategory = Category.fetchObject(in: context, matching: categoryIdentifier) else {
+                    assertionFailure("Could not locate original category for phrase swap")
+                    return
+                }
+
+                let newPhrase = Phrase.create(withUserEntry: newText, category: originalCategory, in: context)
+                newPhrase.lastSpokenDate = originalPhrase.lastSpokenDate
+                newPhrase.languageCode = originalPhrase.languageCode
+                newPhrase.creationDate = originalPhrase.creationDate
+                originalPhrase.isUserRemoved = true
+            }
+
             do {
                 try context.save()
 

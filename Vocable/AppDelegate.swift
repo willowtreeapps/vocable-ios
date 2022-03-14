@@ -208,8 +208,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         try updateDefaultCategories(in: context, withPresets: presets)
         try updateDefaultPhrases(in: context, withPresets: presets)
-        try updateCategoryForUserGeneratedPhrases(in: context)
-
     }
 
     private func updateDefaultCategories(in context: NSManagedObjectContext, withPresets presets: PresetData) throws {
@@ -238,22 +236,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     category.addToPhrases(phrase)
                 }
             }
-        }
-    }
-
-    private func updateCategoryForUserGeneratedPhrases(in context: NSManagedObjectContext) throws {
-        let mySayingsCategory = Category.fetch(.userFavorites, in: context)
-        let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-
-        let firstPredicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
-        let secondPredicate = NSComparisonPredicate(\Phrase.category?.isUserGenerated, .equalTo, false)
-        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [firstPredicate, secondPredicate])
-
-        let phraseResults = try context.fetch(request)
-
-        for phrase in phraseResults {
-            phrase.category = mySayingsCategory
-            mySayingsCategory.addToPhrases(phrase)
         }
     }
 }
