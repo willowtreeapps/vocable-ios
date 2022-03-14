@@ -218,8 +218,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func updateDefaultCategories(in context: NSManagedObjectContext, withPresets presets: PresetData) throws {
         for presetCategory in presets.categories {
             let category = Category.fetchOrCreate(in: context, matching: presetCategory.id)
-            category.name = presetCategory.utterance
-            category.languageCode = presetCategory.languageCode
+            if !category.isUserRenamed {
+                category.name = presetCategory.utterance
+                category.languageCode = presetCategory.languageCode
+            }
             if category.isInserted {
                 category.isHidden = presetCategory.hidden
             }

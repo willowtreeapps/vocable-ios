@@ -57,11 +57,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         snapshot.appendItems([.titleEditView])
 
         snapshot.appendSections([.body])
-//        if AppConfig.editPhrasesEnabled {
-            snapshot.appendItems([.showCategoryToggle, .addPhrase, .removeCategory])
-//        } else {
-//            snapshot.appendItems([.showCategoryToggle, .removeCategory])
-//        }
+        snapshot.appendItems([.showCategoryToggle, .addPhrase, .removeCategory])
 
         dataSource.apply(snapshot, animatingDifferences: false)
     }
@@ -163,10 +159,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryDetailTitleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryDetailTitleCollectionViewCell
             cell.delegate = self
             cell.textLabel.text = category.name
-
-            if !category.isUserGenerated {
-                cell.editButton.isEnabled = false
-            }
+            cell.editButton.isEnabled = true
 
             return cell
 
@@ -234,9 +227,9 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         case .showCategoryToggle:
             return (category.identifier != .userFavorites)
         case .addPhrase:
-            return (category.identifier == Category.Identifier.userFavorites) || category.isUserGenerated
+            return true
         case .removeCategory:
-            return category.isUserGenerated
+            return (category.identifier != .userFavorites)
         }
     }
 
@@ -294,10 +287,15 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
     }
     
     private func removeCategory() {
-       guard let category = category else { return }
-        context.delete(category)
-        saveContext()
-        self.navigationController?.popViewController(animated: true)
+        guard let category = category else { return }
+        if category.isUserGenerated {
+            context.delete(category)
+        } else {
+            category.isUserRemoved = true
+        }
+        if saveContext() {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     private func deselectCell() {
@@ -305,27 +303,39 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             collectionView.deselectItem(at: path, animated: true)
         }
     }
-    
-    private func saveContext() {
+
+    @discardableResult
+    private func saveContext() -> Bool {
         do {
             try context.save()
+            return true
         } catch {
             assertionFailure("Failed to unsave user generated phrase: \(error)")
         }
+        return false
     }
 
     // MARK: EditCategoryDetailTitleCollectionViewCellDelegate
 
     func didTapEdit() {
+
+        guard let categoryIdentifier = category.identifier else {
+            assertionFailure("Category has no identifier")
+            return
+        }
+
+        let initialValue = category.name ?? ""
         let viewController = EditTextViewController()
-        viewController.initialText = category.name ?? ""
+        viewController.initialText = initialValue
         viewController.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
-            if let categoryIdentifier = self.category.identifier {
-                let originalCategory = Category.fetchObject(in: context, matching: categoryIdentifier)
-                originalCategory?.name = newText
+            if let category = Category.fetchObject(in: context, matching: categoryIdentifier) {
+                let textDidChange = (newText != initialValue)
+                category.name = newText
+                category.isUserRenamed = category.isUserRenamed || textDidChange
             }
+
             do {
                 try Category.updateAllOrdinalValues(in: context)
                 try context.save()
