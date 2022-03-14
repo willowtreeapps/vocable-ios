@@ -159,11 +159,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         request.predicate = {
-            let identifiers = Set(presets.phrases.map { $0.id })
-            let isNotUserGenerated = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, false)
-            let identifierInSet = NSComparisonPredicate(\Phrase.identifier, .in, identifiers)
-            let identifierNotInSet = NSCompoundPredicate(notPredicateWithSubpredicate: identifierInSet)
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [isNotUserGenerated, identifierNotInSet])
+            let identifiers = Set(presets.phrases.map(\.id))
+            let isNotUserGenerated = !Predicate(\Phrase.isUserGenerated)
+            let identifierNotInSet = !Predicate(\Phrase.identifier, .in, identifiers)
+            return isNotUserGenerated && identifierNotInSet
         }()
 
         let results = try context.fetch(request)
@@ -177,10 +176,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         request.predicate = {
             let identifiers = Set(presets.categories.map { $0.id })
-            let isNotUserGenerated = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, false)
-            let identifierInSet = NSComparisonPredicate(\Category.identifier, .in, identifiers)
-            let identifierNotInSet = NSCompoundPredicate(notPredicateWithSubpredicate: identifierInSet)
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [isNotUserGenerated, identifierNotInSet])
+            let isNotUserGenerated = !Predicate(\Category.isUserGenerated)
+            let identifierNotInSet = !Predicate(\Category.identifier, .in, identifiers)
+            return isNotUserGenerated && identifierNotInSet
         }()
 
         let results = try context.fetch(request)
@@ -195,10 +193,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Legacy favorites category was .isUserGenerated = true with identifier = localized version
             // of "My Sayings." Going forward, all identifiers for Phrases/Categories are prefixed, so
             // we can use that to isolate the legacy category entry
-            let isUserGenerated = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, true)
-            let identifierPrefixed = NSComparisonPredicate(\Category.identifier, .beginsWith, "user_")
-            let identifierNotPrefixed = NSCompoundPredicate(notPredicateWithSubpredicate: identifierPrefixed)
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [isUserGenerated, identifierNotPrefixed])
+            let isUserGenerated = Predicate(\Category.isUserGenerated)
+            let identifierNotPrefixed = !Predicate(\Category.identifier, .beginsWith, "user_")
+            return isUserGenerated && identifierNotPrefixed
         }()
 
         let results = try context.fetch(request)

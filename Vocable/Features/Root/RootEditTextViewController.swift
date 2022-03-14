@@ -54,14 +54,13 @@ class RootEditTextViewController: EditTextViewController {
         }
         self.favoriteButton.isEnabled = true
         let userFavorites = Category.userFavoritesCategory()
+
+        var predicate = Predicate(\Phrase.category, equalTo: userFavorites)
+        predicate &= Predicate(\Phrase.isUserGenerated)
+        predicate &= Predicate(\Phrase.utterance, equalTo: text)
+
         let fetchRequest: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        fetchRequest.predicate = {
-            let categoryPredicate = NSComparisonPredicate(\Phrase.category, .equalTo, userFavorites)
-            let userGenerated = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
-            let textMatches = NSComparisonPredicate(\Phrase.utterance, .equalTo, text)
-            let subpredicates = [categoryPredicate, userGenerated, textMatches]
-            return NSCompoundPredicate(andPredicateWithSubpredicates: subpredicates)
-        }()
+        fetchRequest.predicate = predicate
         fetchRequest.fetchLimit = 1
         let results = (try? NSPersistentContainer.shared.viewContext.fetch(fetchRequest)) ?? []
         self.currentPhrase = results.first
