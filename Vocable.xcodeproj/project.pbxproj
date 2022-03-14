@@ -248,6 +248,7 @@
 		6B5C490C245CB92700A4433C /* CategoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailViewController.swift; sourceTree = "<group>"; };
 		6B5C490E2460627A00A4433C /* NumericCategoryContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericCategoryContentViewController.swift; sourceTree = "<group>"; };
 		6B5C49102460AEF900A4433C /* RootEditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootEditTextViewController.swift; sourceTree = "<group>"; };
+		6B5C73A527DFACBA00004713 /* Phrases v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Phrases v4.xcdatamodel"; sourceTree = "<group>"; };
 		6B6A4D9025B7609900A7F489 /* ListeningModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningModeViewController.swift; sourceTree = "<group>"; };
 		6B724A4B25E046B90033891F /* SettingsFooterTextSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterTextSupplementaryView.swift; sourceTree = "<group>"; };
 		6B724A4C25E046B90033891F /* SettingsFooterTextSupplementaryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsFooterTextSupplementaryView.xib; sourceTree = "<group>"; };
@@ -1751,11 +1752,12 @@
 		6BFB18C024002C7B002C3515 /* Phrases.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				6B5C73A527DFACBA00004713 /* Phrases v4.xcdatamodel */,
 				6B1086712463102F00E729A8 /* Phrases v3.xcdatamodel */,
 				B8D55689242FE8B900B0F6FE /* Phrases v2.xcdatamodel */,
 				6BFB18C124002C7B002C3515 /* Phrases.xcdatamodel */,
 			);
-			currentVersion = 6B1086712463102F00E729A8 /* Phrases v3.xcdatamodel */;
+			currentVersion = 6B5C73A527DFACBA00004713 /* Phrases v4.xcdatamodel */;
 			path = Phrases.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
