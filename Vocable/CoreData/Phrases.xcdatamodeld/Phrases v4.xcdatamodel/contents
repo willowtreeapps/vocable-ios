@@ -17,6 +17,7 @@
         <attribute name="identifier" attributeType="String"/>
         <attribute name="isUserGenerated" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="isUserRemoved" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isUserRenamed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="languageCode" optional="YES" attributeType="String"/>
         <attribute name="lastSpokenDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="utterance" optional="YES" attributeType="String"/>
@@ -24,6 +25,6 @@
     </entity>
     <elements>
         <element name="Category" positionX="-63" positionY="-18" width="128" height="179"/>
-        <element name="Phrase" positionX="-54" positionY="-9" width="128" height="149"/>
+        <element name="Phrase" positionX="-54" positionY="-9" width="128" height="164"/>
     </elements>
 </model>

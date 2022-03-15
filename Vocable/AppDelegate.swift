@@ -227,9 +227,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for presetPhrase in presets.phrases {
 
             let phrase = Phrase.fetchOrCreate(in: context, matching: presetPhrase.id)
-            phrase.utterance = presetPhrase.utterance
-            phrase.languageCode = presetPhrase.languageCode
-            
+            if !phrase.isUserRenamed {
+                phrase.utterance = presetPhrase.utterance
+                phrase.languageCode = presetPhrase.languageCode
+            }
             for identifier in presetPhrase.categoryIds {
                 if let category = Category.fetchObject(in: context, matching: identifier) {
                     phrase.category = category

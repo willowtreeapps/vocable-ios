@@ -47,5 +47,6 @@ extension Phrase: NSManagedObjectIdentifiable {
         setPrimitiveValue(Date(), forKey: #keyPath(creationDate))
         setPrimitiveValue(false, forKey: #keyPath(isUserGenerated))
         setPrimitiveValue(false, forKey: #keyPath(isUserRemoved))
+        setPrimitiveValue(false, forKey: #keyPath(isUserRenamed))
     }
 }

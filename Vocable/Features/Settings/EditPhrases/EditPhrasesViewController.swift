@@ -217,11 +217,6 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
             return
         }
 
-        guard let categoryIdentifier = category.identifier else {
-            assertionFailure("Category has no identifier")
-            return
-        }
-
         let initialValue = phrase.utterance ?? ""
 
         let vc = EditTextViewController()
@@ -237,18 +232,9 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
             if originalPhrase.isUserGenerated {
                 originalPhrase.utterance = newText
             } else {
-
-                // If the phrase is not user generated, swap in a custom phrase and hide the old one
-                guard let originalCategory = Category.fetchObject(in: context, matching: categoryIdentifier) else {
-                    assertionFailure("Could not locate original category for phrase swap")
-                    return
-                }
-
-                let newPhrase = Phrase.create(withUserEntry: newText, category: originalCategory, in: context)
-                newPhrase.lastSpokenDate = originalPhrase.lastSpokenDate
-                newPhrase.languageCode = originalPhrase.languageCode
-                newPhrase.creationDate = originalPhrase.creationDate
-                originalPhrase.isUserRemoved = true
+                let textDidChange = (newText != initialValue)
+                originalPhrase.utterance = newText
+                originalPhrase.isUserRenamed = originalPhrase.isUserRenamed || textDidChange
             }
 
             do {
