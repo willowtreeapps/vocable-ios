@@ -189,7 +189,12 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
         let phrase = self.fetchResultsController.object(at: safeIndexPath)
         let context = NSPersistentContainer.shared.viewContext
-        context.delete(phrase)
+
+        if phrase.isUserGenerated {
+            context.delete(phrase)
+        } else {
+            phrase.isUserRemoved = true
+        }
 
         do {
             try context.save()
