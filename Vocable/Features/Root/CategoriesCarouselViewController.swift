@@ -15,7 +15,7 @@ import Combine
 
     static func fetchInitialCategoryID() -> NSManagedObjectID {
         let ctx = NSPersistentContainer.shared.viewContext
-        let predicate = !Predicate(\Category.isHidden)
+        let predicate = !Predicate(\Category.isHidden) && !Predicate(\Category.isUserRemoved)
         let sort = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)]
         let categories = Category.fetchAll(in: ctx, matching: predicate, sortDescriptors: sort)
         return categories[0].objectID
