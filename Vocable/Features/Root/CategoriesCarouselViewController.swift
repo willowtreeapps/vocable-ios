@@ -137,7 +137,7 @@ import Combine
 
     private func categoriesFetchRequest() -> NSFetchRequest<Category> {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        var predicate = !Predicate(\Category.isHidden)
+        var predicate = !Predicate(\Category.isHidden) && !Predicate(\Category.isUserRemoved)
 
         let shouldRemoveListeningCategory = false
         || !AppConfig.isListeningModeSupported

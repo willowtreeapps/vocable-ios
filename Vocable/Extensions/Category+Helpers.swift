@@ -82,6 +82,7 @@ extension Category {
     static func updateAllOrdinalValues(in context: NSManagedObjectContext) throws {
 
         let request: NSFetchRequest<Category> = Category.fetchRequest()
+        request.predicate = !Predicate(\Category.isUserRemoved)
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \Category.ordinal, ascending: true),
             NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)

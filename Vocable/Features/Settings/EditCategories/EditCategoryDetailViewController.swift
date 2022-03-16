@@ -291,6 +291,9 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         } else {
             category.isUserRemoved = true
         }
+
+        try? Category.updateAllOrdinalValues(in: context)
+
         if saveContext() {
             self.navigationController?.popViewController(animated: true)
         }
