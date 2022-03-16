@@ -318,7 +318,6 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
     // MARK: EditCategoryDetailTitleCollectionViewCellDelegate
 
     func didTapEdit() {
-
         guard let categoryIdentifier = category.identifier else {
             assertionFailure("Category has no identifier")
             return
