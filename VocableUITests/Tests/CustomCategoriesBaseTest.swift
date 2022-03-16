@@ -10,7 +10,7 @@ import XCTest
 
 class CustomCategoriesBaseTest: BaseTest {
     
-    var customCategory: String = ""
+    private(set) var customCategoryName: String = ""
     
     override func setUp() {
         super.setUp()
@@ -19,12 +19,12 @@ class CustomCategoriesBaseTest: BaseTest {
         
         // Create a custom category and open it
         settingsScreen.navigateToSettingsCategoryScreen()
-        customCategoriesScreen.createCustomCategory(categoryName: customCategory)
-        settingsScreen.openCategorySettings(category: customCategory)
+        customCategoriesScreen.createCustomCategory(categoryName: customCategoryName)
+        settingsScreen.openCategorySettings(category: customCategoryName)
     }
     
-    func setCustomCategory(name: String, numOfRandomLetters: Int) {
-        customCategory = name + randomString(length: numOfRandomLetters).lowercased()
+    private func setCustomCategory(name: String, numOfRandomLetters: Int) {
+        customCategoryName = name + randomString(length: numOfRandomLetters)
     }
     
     override func tearDown() {
