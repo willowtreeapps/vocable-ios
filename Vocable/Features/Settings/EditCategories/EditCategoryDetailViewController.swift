@@ -224,12 +224,10 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         switch selectedItem {
         case .titleEditView:
             return true
-        case .showCategoryToggle:
+        case .showCategoryToggle, .removeCategory:
             return (category.identifier != .userFavorites)
         case .addPhrase:
-            return true
-        case .removeCategory:
-            return (category.identifier != .userFavorites)
+            return category.allowsCustomPhrases
         }
     }
 

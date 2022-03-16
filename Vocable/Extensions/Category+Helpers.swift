@@ -39,6 +39,26 @@ extension Category {
             guard let lhs = lhs else { return true }
             return rhs.rawValue != lhs
         }
+
+        fileprivate var allowsCustomPhrases: Bool {
+            switch self {
+            case .userFavorites:
+                return true
+            case .numPad, .recents, .listeningMode:
+                return false
+            }
+        }
+    }
+
+    var allowsCustomPhrases: Bool {
+        guard let categoryID = self.identifier else {
+            assertionFailure("No identifier present")
+            return false
+        }
+        if let specialIdentifier = Identifier(rawValue: categoryID) {
+            return specialIdentifier.allowsCustomPhrases
+        }
+        return true
     }
 
     static func fetch(_ identifier: Identifier, in context: NSManagedObjectContext) -> Category {
