@@ -10,11 +10,11 @@ import Foundation
 
 extension NSPredicate {
 
-    public static func && (_ lhs: NSPredicate, _ rhs: NSPredicate) -> NSCompoundPredicate {
+    public static func && (_ lhs: NSPredicate, _ rhs: NSPredicate) -> NSPredicate {
         NSCompoundPredicate(andPredicateWithSubpredicates: [lhs, rhs])
     }
 
-    public static func || (_ lhs: NSPredicate, _ rhs: NSPredicate) -> NSCompoundPredicate {
+    public static func || (_ lhs: NSPredicate, _ rhs: NSPredicate) -> NSPredicate {
         NSCompoundPredicate(orPredicateWithSubpredicates: [lhs, rhs])
     }
 
