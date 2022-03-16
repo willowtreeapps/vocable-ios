@@ -15,20 +15,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
     var category: Category!
     private var disposables = Set<AnyCancellable>()
 
-    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID>(collectionView: collectionView) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
-        guard let self = self else { return nil }
-
-        let phrase = self.fetchResultsController.object(at: indexPath)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier, for: indexPath) as! EditPhrasesCollectionViewCell
-        cell.textLabel.text = phrase.utterance
-        cell.deleteButton.addTarget(self,
-                                    action: #selector(self.handleCellDeletionButton(_:)),
-                                    for: .primaryActionTriggered)
-        cell.editButton.addTarget(self,
-                                  action: #selector(self.handleCellEditButton(_:)),
-                                  for: .primaryActionTriggered)
-        return cell
-    }
+    private lazy var dataSourceProxy = makeDataSourceProxy()
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
@@ -248,5 +235,41 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
         alert.addAction(GazeableAlertAction(title: continueButtonTitle, style: .bold))
         self.present(alert, animated: true)
+    }
+}
+
+// MARK: - Data Source Proxy
+
+private extension EditPhrasesViewController {
+
+    func makeDataSourceProxy() -> CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID> {
+        let cellRegistration = phraseCellRegistration()
+
+        return CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID>(collectionView: collectionView) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
+            guard let self = self else { return nil }
+
+            let phrase = self.fetchResultsController.object(at: indexPath)
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
+                                                                for: indexPath,
+                                                                item: phrase)
+        }
+    }
+
+    func phraseCellRegistration() ->
+    UICollectionView.CellRegistration<EditPhrasesCollectionViewListCell, Phrase> {
+        return .init { cell, _, phrase in
+            let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white,
+                                                             .font: UIFont.systemFont(ofSize: 22, weight: .bold)]
+
+            let attributedText = NSAttributedString(string: phrase.utterance ?? "", attributes: attributes)
+
+            let deleteAction = ActionCellAccessory(image: UIImage(systemName: "trash")) {
+                // TODO: figure out how to delete
+            }
+
+            cell.contentConfiguration = SettingsCellContentConfiguration(attributedText: attributedText,
+                                                                         accessories: [deleteAction],
+                                                                         disclosureStyle: .none)
+        }
     }
 }
