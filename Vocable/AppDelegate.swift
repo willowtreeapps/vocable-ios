@@ -159,10 +159,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         request.predicate = {
-            let identifiers = Set(presets.phrases.map(\.id))
+            let presetPhraseIdentifiers = Set(presets.phrases.map(\.id))
             let isNotUserGenerated = !Predicate(\Phrase.isUserGenerated)
-            let identifierNotInSet = !Predicate(\Phrase.identifier, .in, identifiers)
-            return isNotUserGenerated && identifierNotInSet
+            let isNotPresetPhrase = !Predicate(\Phrase.identifier, isContainedIn: presetPhraseIdentifiers)
+            return isNotUserGenerated && isNotPresetPhrase
         }()
 
         let results = try context.fetch(request)
@@ -175,10 +175,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         request.predicate = {
-            let identifiers = Set(presets.categories.map { $0.id })
+            let presetCategoryIdentifiers = Set(presets.categories.map(\.id))
             let isNotUserGenerated = !Predicate(\Category.isUserGenerated)
-            let identifierNotInSet = !Predicate(\Category.identifier, .in, identifiers)
-            return isNotUserGenerated && identifierNotInSet
+            let isNotPresetCategory = !Predicate(\Category.identifier, isContainedIn: presetCategoryIdentifiers)
+            return isNotUserGenerated && isNotPresetCategory
         }()
 
         let results = try context.fetch(request)
@@ -193,9 +193,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Legacy favorites category was .isUserGenerated = true with identifier = localized version
             // of "My Sayings." Going forward, all identifiers for Phrases/Categories are prefixed, so
             // we can use that to isolate the legacy category entry
-            let isUserGenerated = Predicate(\Category.isUserGenerated)
-            let identifierNotPrefixed = !Predicate(\Category.identifier, .beginsWith, "user_")
-            return isUserGenerated && identifierNotPrefixed
+            let isUserGeneratedCategory = Predicate(\Category.isUserGenerated)
+            let isNotUserPrefixed = !Predicate(\Category.identifier, beginsWith: "user_")
+            return isUserGeneratedCategory && isNotUserPrefixed
         }()
 
         let results = try context.fetch(request)

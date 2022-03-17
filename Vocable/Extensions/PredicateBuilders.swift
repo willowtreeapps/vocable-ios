@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias PredicateOperator = NSComparisonPredicate.Operator
+private typealias PredicateOperator = NSComparisonPredicate.Operator
 
 /// Constructs an `NSPredicate` where the given `KeyPath` must equal `true`
 ///
@@ -45,7 +45,7 @@ func Predicate<A, B>(_ lhs: KeyPath<A, B>, notEqualTo rhs: B) -> NSPredicate {
 ///   - rhs: value which `lhs` will be compared against
 ///   - operation: the method of comparison
 /// - Returns: `NSPredicate`
-func Predicate<A, B>(_ lhs: KeyPath<A, B>, _ operation: PredicateOperator, _ rhs: B) -> NSPredicate {
+private func Predicate<A, B>(_ lhs: KeyPath<A, B>, _ operation: PredicateOperator, _ rhs: B) -> NSPredicate {
     let lhs = NSExpression(forKeyPath: lhs)
     let rhs = NSExpression(forConstantValue: rhs)
     return NSComparisonPredicate(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operation)
@@ -78,7 +78,7 @@ func Predicate<A, B>(_ lhs: KeyPath<A, B?>, notEqualTo rhs: B?) -> NSPredicate {
 ///   - rhs: optional value which `lhs` will be compared against
 ///   - operation: the method of comparison
 /// - Returns: `NSPredicate`
-func Predicate<A, B>(_ lhs: KeyPath<A, B?>, _ operation: PredicateOperator, _ rhs: B?) -> NSPredicate {
+private func Predicate<A, B>(_ lhs: KeyPath<A, B?>, _ operation: PredicateOperator, _ rhs: B?) -> NSPredicate {
     let lhs = NSExpression(forKeyPath: lhs)
     let rhs = NSExpression(forConstantValue: rhs)
     return NSComparisonPredicate(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operation)
@@ -131,7 +131,7 @@ func Predicate<A, B: RawRepresentable, C>(_ lhs: KeyPath<A, C?>, notEqualTo rhs:
 ///   - rhs: `RawRepresentable` value which `lhs` will be compared against
 ///   - operation: the method of comparison
 /// - Returns: `NSPredicate`
-func Predicate<A, B: RawRepresentable, C>(_ lhs: KeyPath<A, C>, _ operation: PredicateOperator, _ rhs: B) -> NSPredicate where B.RawValue == C {
+private func Predicate<A, B: RawRepresentable, C>(_ lhs: KeyPath<A, C>, _ operation: PredicateOperator, _ rhs: B) -> NSPredicate where B.RawValue == C {
     let lhs = NSExpression(forKeyPath: lhs)
     let rhs = NSExpression(forConstantValue: rhs.rawValue)
     return NSComparisonPredicate(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operation)
@@ -144,7 +144,7 @@ func Predicate<A, B: RawRepresentable, C>(_ lhs: KeyPath<A, C>, _ operation: Pre
 ///   - rhs: optional `RawRepresentable` value which `lhs` will be compared against
 ///   - operation: the method of comparison
 /// - Returns: `NSPredicate`
-func Predicate<A, B: RawRepresentable, C>(_ lhs: KeyPath<A, C?>, _ operation: PredicateOperator, _ rhs: B?) -> NSPredicate where B.RawValue == C {
+private func Predicate<A, B: RawRepresentable, C>(_ lhs: KeyPath<A, C?>, _ operation: PredicateOperator, _ rhs: B?) -> NSPredicate where B.RawValue == C {
     let lhs = NSExpression(forKeyPath: lhs)
     let rhs = NSExpression(forConstantValue: rhs?.rawValue)
     return NSComparisonPredicate(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operation)
@@ -157,7 +157,7 @@ func Predicate<A, B: RawRepresentable, C>(_ lhs: KeyPath<A, C?>, _ operation: Pr
 ///   - rhs: `Collection` which `lhs` will be compared against
 ///   - operation: the method of comparison
 /// - Returns: `NSPredicate`
-func Predicate<A, B, C: Collection>(_ lhs: KeyPath<A, B>, _ operation: PredicateOperator, _ rhs: C) -> NSPredicate where C.Element == B {
+private func Predicate<A, B, C: Collection>(_ lhs: KeyPath<A, B>, _ operation: PredicateOperator, _ rhs: C) -> NSPredicate where C.Element == B {
     let lhs = NSExpression(forKeyPath: lhs)
     let rhs = NSExpression(forConstantValue: rhs)
     return NSComparisonPredicate(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operation)
@@ -170,8 +170,28 @@ func Predicate<A, B, C: Collection>(_ lhs: KeyPath<A, B>, _ operation: Predicate
 ///   - rhs: `Collection` which `lhs` will be compared against
 ///   - operation: the method of comparison
 /// - Returns: `NSPredicate`
-func Predicate<A, B: NSFastEnumeration, C: NSObjectProtocol>(_ lhs: KeyPath<A, B?>, _ operation: PredicateOperator, _ rhs: C) -> NSPredicate {
+private func Predicate<A, B: NSFastEnumeration, C: NSObjectProtocol>(_ lhs: KeyPath<A, B?>, _ operation: PredicateOperator, _ rhs: C) -> NSPredicate {
     let lhs = NSExpression(forKeyPath: lhs)
     let rhs = NSExpression(forConstantValue: rhs)
     return NSComparisonPredicate(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operation)
+}
+
+/// Constructs an `NSPredicate` where the value at the given `KeyPath` must be contained in the provided `Collection`
+///
+/// - Parameters:
+///   - lhs: `KeyPath` whose value must be contained by `rhs`
+///   - rhs: `Collection` which must contain `lhs` to evaluate `true`
+/// - Returns: `NSPredicate`
+func Predicate<A, B, C: Collection>(_ lhs: KeyPath<A, B>, isContainedIn rhs: C) -> NSPredicate where C.Element == B {
+    return Predicate(lhs, .in, rhs)
+}
+
+/// Constructs an `NSPredicate` where the string value at the given `KeyPath` must begin with the provided value
+///
+/// - Parameters:
+///   - lhs: `KeyPath` whose value is must begin with `rhs`
+///   - rhs: `String` which `lhs` must begin with
+/// - Returns: `NSPredicate`
+func Predicate<A>(_ lhs: KeyPath<A, String?>, beginsWith rhs: String) -> NSPredicate {
+    return Predicate(lhs, .beginsWith, rhs)
 }
