@@ -18,7 +18,6 @@ class RootEditTextViewController: EditTextViewController {
         let button = GazeableButton()
         button.setImage(UIImage(systemName: "star"), for: .normal)
         button.accessibilityIdentifier = "keyboard.favoriteButton"
-        button.addTarget(RootEditTextViewController.self, action: #selector(favoriteButtonSelected), for: .primaryActionTriggered)
         return button
     }()
 
@@ -34,6 +33,9 @@ class RootEditTextViewController: EditTextViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonSelected), for: .primaryActionTriggered)
+
         shouldWarnOnDismiss = false
         navigationBar.rightButton = favoriteButton
         $text.receive(on: DispatchQueue.main).sink { [weak self] newText in
