@@ -8,7 +8,7 @@
 
 import XCTest
 
-class MainScreen {
+class MainScreen: BaseScreen {
     private let app = XCUIApplication()
     
     var defaultCategories = ["General", "Basic Needs", "Personal Care", "Conversation", "Environment", "123", "My Sayings", "Recents", "Listen"]

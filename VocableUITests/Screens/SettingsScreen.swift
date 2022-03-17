@@ -8,7 +8,7 @@
 
 import XCTest
 
-class SettingsScreen {
+class SettingsScreen: BaseScreen {
     let mainScreen = MainScreen()
     let keyboardScreen = KeyboardScreen()
     
@@ -28,11 +28,18 @@ class SettingsScreen {
     let alertDeleteButton = XCUIApplication().buttons["Delete"]
 
     func openCategorySettings(category: String) {
-        if otherElements.containing(.staticText, identifier: category).element.exists {
-            otherElements.containing(.staticText, identifier: category).buttons["Forward"].tap()
-        } else {
-            settingsPageNextButton.tap()
-            otherElements.containing(.staticText, identifier: category).buttons["Forward"].tap()
+        var cellLabel = ""
+        let predicate = NSPredicate(format: "label CONTAINS %@", category)
+        
+        // Loop through each page to find our category
+        for _ in 1...totalPageCount {
+            if otherElements.staticTexts.containing(predicate).element.exists {
+                cellLabel = otherElements.staticTexts.containing(predicate).element.label
+                otherElements.containing(.staticText, identifier: cellLabel).buttons["Forward"].tap()
+                break
+            } else {
+                settingsPageNextButton.tap()
+            }
         }
     }
     
@@ -72,7 +79,9 @@ class SettingsScreen {
     }
     
     func navigateToSettingsCategoryScreen() {
+        _ = mainScreen.settingsButton.waitForExistence(timeout: 2)
         mainScreen.settingsButton.tap()
+        _ = categoriesButton.waitForExistence(timeout: 2)
         categoriesButton.tap()
     }
     

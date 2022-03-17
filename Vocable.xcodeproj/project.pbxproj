@@ -23,6 +23,8 @@
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
+		620DD31927DA90F1003B01A0 /* CustomCategoriesBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620DD31827DA90F1003B01A0 /* CustomCategoriesBaseTest.swift */; };
+		628B35C227DF9C6B00299312 /* BaseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628B35C127DF9C6B00299312 /* BaseScreen.swift */; };
 		64599429258933370010EEFF /* VocableCore in Frameworks */ = {isa = PBXBuildFile; productRef = 64599428258933370010EEFF /* VocableCore */; settings = {ATTRIBUTES = (Required, ); }; };
 		64599431258938F50010EEFF /* ListeningResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64599430258938F50010EEFF /* ListeningResponseViewController.swift */; };
 		6459943E25895D9C0010EEFF /* SpeechRecognitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6459943D25895D9C0010EEFF /* SpeechRecognitionController.swift */; };
@@ -214,6 +216,8 @@
 		54D3C41423E37CD40061EF47 /* VocableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		620DD31827DA90F1003B01A0 /* CustomCategoriesBaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoriesBaseTest.swift; sourceTree = "<group>"; };
+		628B35C127DF9C6B00299312 /* BaseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScreen.swift; sourceTree = "<group>"; };
 		64599430258938F50010EEFF /* ListeningResponseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningResponseViewController.swift; sourceTree = "<group>"; };
 		6459943D25895D9C0010EEFF /* SpeechRecognitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionController.swift; sourceTree = "<group>"; };
 		64981D7B258A8014007EFA82 /* VocableChoicesModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = VocableChoicesModel.mlmodel; sourceTree = "<group>"; };
@@ -473,6 +477,7 @@
 				17D4162D245C6FF600FD81CD /* KeyboardScreen.swift */,
 				17F29478247419DD00A05434 /* SettingsScreen.swift */,
 				CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */,
+				628B35C127DF9C6B00299312 /* BaseScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -485,6 +490,7 @@
 				17D4162B245C6FE800FD81CD /* KeyboardScreenTests.swift */,
 				CE12277524F586CB008F7866 /* CustomCategoriesTests.swift */,
 				CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */,
+				620DD31827DA90F1003B01A0 /* CustomCategoriesBaseTest.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1193,10 +1199,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE12277824F58706008F7866 /* CustomCategoriesScreen.swift in Sources */,
+				628B35C227DF9C6B00299312 /* BaseScreen.swift in Sources */,
 				17D4162C245C6FE800FD81CD /* KeyboardScreenTests.swift in Sources */,
 				17D4162E245C6FF600FD81CD /* KeyboardScreen.swift in Sources */,
 				CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */,
 				17793C2E24574CB500758BC0 /* MainScreenTests.swift in Sources */,
+				620DD31927DA90F1003B01A0 /* CustomCategoriesBaseTest.swift in Sources */,
 				CE12277624F586CB008F7866 /* CustomCategoriesTests.swift in Sources */,
 				17793C2B24574B2800758BC0 /* MainScreen.swift in Sources */,
 				17F29479247419DD00A05434 /* SettingsScreen.swift in Sources */,

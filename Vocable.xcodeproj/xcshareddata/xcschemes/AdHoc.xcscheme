@@ -67,6 +67,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "CustomCategoriesTest/testPagination()">
+               </Test>
+               <Test
                   Identifier = "MainScreenTests/testCustonCategoryPagination()">
                </Test>
                <Test
