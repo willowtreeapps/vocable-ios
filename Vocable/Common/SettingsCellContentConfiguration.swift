@@ -21,26 +21,28 @@ struct ActionCellAccessory {
     let action: (() -> Void)?
     let isEnabled: Bool
 
-    init(text: String? = nil, image: UIImage?, action: (() -> Void)?, isEnabled: Bool = true) {
+    init(text: String? = nil, image: UIImage?, isEnabled: Bool = true, action: (() -> Void)?) {
         self.text = text
         self.image = image
-        self.action = action
         self.isEnabled = isEnabled
+        self.action = action
     }
 }
 
-struct SettingsCellContentConfiguration: UIContentConfiguration, Hashable {
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(attributedText)
-    }
-
-    static func == (lhs: SettingsCellContentConfiguration, rhs: SettingsCellContentConfiguration) -> Bool {
-        return lhs.attributedText.hashValue == rhs.attributedText.hashValue
-    }
+final class SettingsCellContentConfiguration: NSObject, UIContentConfiguration {
 
     var attributedText: NSAttributedString?
     var accessories: [ActionCellAccessory]
     var disclosureStyle: CellDisclosureStyle
+
+    var cellAction: () -> Void
+
+    init(attributedText: NSAttributedString?, accessories: [ActionCellAccessory] = [], disclosureStyle: CellDisclosureStyle = .none, cellAction: @escaping () -> Void) {
+        self.attributedText = attributedText
+        self.accessories = accessories
+        self.disclosureStyle = disclosureStyle
+        self.cellAction = cellAction
+    }
 
     func makeContentView() -> UIView & UIContentView {
         SettingsCellContentView(configuration: self)

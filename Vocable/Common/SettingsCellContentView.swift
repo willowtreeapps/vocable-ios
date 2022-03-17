@@ -67,6 +67,10 @@ final class SettingsCellContentView: UIView, UIContentView {
         configuration.accessories.map { accessory -> UIButton in
             let button = GazeableButton()
             button.setImage(accessory.image, for: .normal)
+            button.addAction(UIAction(title: "Accessory action", handler: { _ in
+                guard let action = accessory.action else { return }
+                action()
+            }), for: .touchUpInside)
             return button
         }.forEach { stackView.addArrangedSubview($0) }
 
@@ -80,6 +84,9 @@ final class SettingsCellContentView: UIView, UIContentView {
         labelButton.setAttributedTitle(configuration.attributedText, for: .normal)
         labelButton.contentHorizontalAlignment = .left
         labelButton.contentEdgeInsets = .init(uniform: 16)
+        labelButton.addAction(UIAction(title: "Cell action", handler: { _ in
+            configuration.cellAction()
+        }), for: .touchUpInside)
         labelButton.constrain(toHeightOf: stackView)
     }
 }

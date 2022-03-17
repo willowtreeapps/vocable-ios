@@ -148,10 +148,9 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         present(viewController, animated: true)
     }
 
-    @objc private func handleCellDeletionButton(_ sender: UIButton) {
-
+    private func handleDeletingPhrase(for phrase: Phrase) {
         func deleteAction() {
-            self.deletePhrase(sender)
+            self.deletePhrase(phrase)
         }
 
         let title = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.title",
@@ -167,14 +166,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         self.present(alert, animated: true)
     }
 
-    private func deletePhrase(_ sender: UIButton) {
-        guard let indexPath = collectionView.indexPath(containing: sender) else {
-            assertionFailure("Failed to obtain index path")
-            return
-        }
-
-        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        let phrase = self.fetchResultsController.object(at: safeIndexPath)
+    private func deletePhrase(_ phrase: Phrase) {
         let context = NSPersistentContainer.shared.viewContext
         context.delete(phrase)
 
@@ -183,19 +175,11 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         } catch {
             assertionFailure("Could not save phrase: \(error)")
         }
-
     }
 
-    @objc private func handleCellEditButton(_ sender: UIButton) {
-        guard let indexPath = collectionView.indexPath(containing: sender) else {
-            assertionFailure("Failed to obtain index path")
-            return
-        }
-
-        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
+    @objc private func handleEditingPhrase(for phrase: Phrase) {
         let vc = EditTextViewController()
 
-        let phrase = fetchResultsController.object(at: safeIndexPath)
         vc.initialText = phrase.utterance ?? ""
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
@@ -211,6 +195,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
                                                      comment: "changes to an existing phrase were saved successfully")
 
                 ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                self.collectionView.reloadData()
             } catch {
                 assertionFailure("Failed to save user generated phrase: \(error)")
             }
@@ -263,13 +248,15 @@ private extension EditPhrasesViewController {
 
             let attributedText = NSAttributedString(string: phrase.utterance ?? "", attributes: attributes)
 
-            let deleteAction = ActionCellAccessory(image: UIImage(systemName: "trash")) {
-                // TODO: figure out how to delete
+            let deleteAction = ActionCellAccessory(image: UIImage(systemName: "trash")) { [weak self] in
+                self?.handleDeletingPhrase(for: phrase)
             }
 
             cell.contentConfiguration = SettingsCellContentConfiguration(attributedText: attributedText,
                                                                          accessories: [deleteAction],
-                                                                         disclosureStyle: .none)
+                                                                         disclosureStyle: .none) { [weak self] in
+                self?.handleEditingPhrase(for: phrase)
+            }
         }
     }
 }
