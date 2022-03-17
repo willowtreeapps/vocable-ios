@@ -51,4 +51,39 @@ class MainScreen: BaseScreen {
         let currentCategory = defaultCategories.count - (numTimesToScroll % defaultCategories.count)
         app.collectionViews.staticTexts[defaultCategories[currentCategory]].tap()
     }
+    
+    func scrollToMySayings() {
+        let mySayingsIdentifier = "category_title_cell_preset_user_favorites"
+        scrollRightFindCategoryAndTap(identifier: mySayingsIdentifier)
+    }
+    
+    private func scrollRightFindCategoryAndTap(identifier: String){
+       
+        // Loop through each category to find our category
+        let maxNumOfClickToReachCategory = 15
+        for _ in 1...maxNumOfClickToReachCategory {
+            if app.cells[identifier].exists {
+                app.cells[identifier].tap()
+                paginationRightButton.waitForExistence(timeout: 1)
+                break
+            } else {
+                categoryRightButton.tap()
+            }
+        }
+    }
+    
+    func findPhrase(phrase: String) {
+        
+        let predicate = NSPredicate(format: "label CONTAINS %@", phrase)
+        
+        // Loop through each custom category page to find our phrase
+        for _ in 1...totalPageCount {
+            if app.cells.staticTexts.containing(predicate).element.exists {
+                break
+            } else {
+                paginationRightButton.tap()
+            }
+        }
+    }
+    
 }
