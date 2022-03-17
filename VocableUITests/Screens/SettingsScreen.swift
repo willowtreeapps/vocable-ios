@@ -32,8 +32,7 @@ class SettingsScreen: BaseScreen {
         let predicate = NSPredicate(format: "label CONTAINS %@", category)
         
         // Loop through each page to find our category
-        let totalNumOfPages = Int(getTotalNumOfPages())!
-        for _ in 1...totalNumOfPages {
+        for _ in 1...totalPageCount {
             if otherElements.staticTexts.containing(predicate).element.exists {
                 cellLabel = otherElements.staticTexts.containing(predicate).element.label
                 otherElements.containing(.staticText, identifier: cellLabel).buttons["Forward"].tap()

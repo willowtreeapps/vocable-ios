@@ -15,6 +15,26 @@ import XCTest
 class BaseScreen {
     let paginationLabel = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
     
+    /// From Pagination: the current page (X) being viewed from the "Page X of Y" pagination label.
+    var currentPageNumber: Int {
+        // Define a regex pattern with named matching group, 'current', for reference
+        let pattern = #"(?<current>\d)+ .+ (\d)+"#
+        
+        let pageNumber = getNamedGroupInRegexPatternFromText(namedGroup: "current", regexPattern: pattern, text: paginationLabel.label)
+        
+        return Int(pageNumber)!
+    }
+    
+    /// From Pagination: the total number of pages (Y) from the "Page X of Y" pagination label.
+    var totalPageCount: Int {
+        // Define a regex pattern with named matching group, 'total', for reference
+        let pattern = #"(\d)+ .+ (?<total>\d)+"#
+        
+        let pageCount = getNamedGroupInRegexPatternFromText(namedGroup: "total", regexPattern: pattern, text: paginationLabel.label)
+        
+        return Int(pageCount)!
+    }
+    
     /**
      This method extracts a substring from text, that matches the named group within a defined regex pattern.
      
@@ -26,7 +46,7 @@ class BaseScreen {
     private func getNamedGroupInRegexPatternFromText(namedGroup: String, regexPattern: String, text: String) -> String {
         var matchingText = ""
         let regex = try! NSRegularExpression(pattern: regexPattern)
-        let range = NSRange(location: 0, length: text.count) // Used for the NSRegularExpression
+        let range = NSRange(text.startIndex..<text.endIndex, in: text) // Used for the NSRegularExpression
         
         // Find a match to the regex pattern...
         if let match = regex.firstMatch(in: text, options: [], range: range) {
@@ -38,24 +58,6 @@ class BaseScreen {
         }
         
         return matchingText
-    }
-    
-    /// For Pagination: retrieve the current page (X) being viewed
-    /// from the "Page X of Y" pagination label.
-    func getCurrentPage() -> String {
-        // Define a regex pattern with named matching group, 'current', for reference
-        let pattern = #"(?<current>\d)+ of (\d)+"#
-        
-        return getNamedGroupInRegexPatternFromText(namedGroup: "current", regexPattern: pattern, text: paginationLabel.label)
-    }
-    
-    /// For Pagination: retrieve the total number of pages (Y) from the
-    ///  "Page X of Y" pagination label.
-    func getTotalNumOfPages() -> String {
-        // Define a regex pattern with named matching group, 'total', for reference
-        let pattern = #"(\d)+ of (?<total>\d)+"#
-        
-        return getNamedGroupInRegexPatternFromText(namedGroup: "total", regexPattern: pattern, text: paginationLabel.label)
     }
     
 }

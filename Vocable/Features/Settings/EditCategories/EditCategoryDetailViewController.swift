@@ -45,6 +45,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             let button = GazeableButton()
             button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             button.addTarget(self, action: #selector(handleBackButton(_:)), for: .primaryActionTriggered)
+            button.accessibilityIdentifier = "navigationBar.backButton"
             return button
         }()
     }
@@ -167,6 +168,10 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             if !category.isUserGenerated {
                 cell.editButton.isEnabled = false
             }
+            
+            // Assign identifiers for automation
+            cell.accessibilityIdentifier = "category_title"
+            cell.editButton.accessibilityIdentifier = "category_title_edit_button"
 
             return cell
 
@@ -179,6 +184,10 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
                 cell.showCategorySwitch.isOn = !category.isHidden
                 cell.showCategorySwitch.isEnabled = (category.identifier != .userFavorites)
             }
+            
+            // Assign an identifier for automation
+            cell.showCategorySwitch.accessibilityIdentifier = "show_category_toggle"
+            
             return cell
 
         case .addPhrase:
@@ -186,12 +195,20 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             let title = NSLocalizedString("Edit Phrases", comment: "Edit Phrases")
             cell.setup(title: title, image: UIImage(systemName: "chevron.right"))
             cell.isEnabled = shouldEnableItem(at: indexPath)
+            
+            // Assign an identifier for automation
+            cell.accessibilityIdentifier = "edit_phrases_cell"
+            
             return cell
 
         case .removeCategory:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryRemoveCollectionViewCell
             cell.isEnabled = shouldEnableItem(at: indexPath)
             cell.textLabel.text = NSLocalizedString("category_editor.detail.button.remove_category.title", comment: "Remove category button label within the category detail screen.")
+            
+            // Assign an identifier for automation
+            cell.accessibilityIdentifier = "remove_category_cell"
+            
             return cell
         }
     }
