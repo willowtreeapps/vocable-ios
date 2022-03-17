@@ -204,8 +204,7 @@ import Combine
             }()
 
             guard let newPath = newItemIndexPath else {
-                // No new path to select
-                assertionFailure("New selection index path not found")
+                // No new path to select. This can occur during app reset.
                 return
             }
 
