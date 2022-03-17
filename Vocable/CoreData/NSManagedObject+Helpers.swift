@@ -48,23 +48,3 @@ extension NSManagedObjectIdentifiable where Self: NSManagedObject {
     }
     
 }
-
-extension NSComparisonPredicate {
-    convenience init<A, B>(_ lhsKeyPath: KeyPath<A, B>, _ operationType: Operator, _ rhsValue: B) {
-        let lhs = NSExpression(forKeyPath: lhsKeyPath)
-        let rhs = NSExpression(forConstantValue: rhsValue)
-        self.init(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operationType)
-    }
-
-    convenience init<A, B, C: Collection>(_ lhsKeyPath: KeyPath<A, B>, _ operationType: Operator, _ rhsValue: C) where C.Element == B {
-        let lhs = NSExpression(forKeyPath: lhsKeyPath)
-        let rhs = NSExpression(forConstantValue: rhsValue)
-        self.init(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operationType)
-    }
-    
-    convenience init<A, B: NSFastEnumeration, C: NSObjectProtocol>(_ lhsKeyPath: KeyPath<A, B?>, _ operationType: Operator, _ rhsValue: C) {
-        let lhs = NSExpression(forKeyPath: lhsKeyPath)
-        let rhs = NSExpression(forConstantValue: rhsValue)
-        self.init(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: operationType)
-    }
-}
