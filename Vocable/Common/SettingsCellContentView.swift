@@ -37,7 +37,11 @@ final class SettingsCellContentView: UIView, UIContentView {
 
     // MARK: - Properties
 
-    var configuration: UIContentConfiguration
+    var configuration: UIContentConfiguration {
+        didSet {
+            configure(with: configuration)
+        }
+    }
 
     // MARK: - Lifecycle
 
@@ -61,9 +65,9 @@ final class SettingsCellContentView: UIView, UIContentView {
     private func configure(with configuration: UIContentConfiguration) {
         guard let configuration = configuration as? SettingsCellContentConfiguration else { return }
 
+        // TODO: guard against configuration changes
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        print(configuration.accessories)
         configuration.accessories.map { accessory -> UIButton in
             let button = GazeableButton()
             button.setImage(accessory.image, for: .normal)
@@ -83,8 +87,8 @@ final class SettingsCellContentView: UIView, UIContentView {
         stackView.addArrangedSubview(labelButton)
         labelButton.setAttributedTitle(configuration.attributedText, for: .normal)
         labelButton.contentHorizontalAlignment = .left
-//        labelButton.contentEdgeInsets = .init(uniform: 16)
-        labelButton.setRightImage(image: UIImage(systemName: "chevron.right"), offset: 24)
+        // TODO: better handle disclosure image
+        labelButton.setTrailingImage(image: UIImage(systemName: "chevron.right"), offset: 24)
         labelButton.addAction(UIAction(title: "Cell action", handler: { _ in
             configuration.cellAction()
         }), for: .touchUpInside)

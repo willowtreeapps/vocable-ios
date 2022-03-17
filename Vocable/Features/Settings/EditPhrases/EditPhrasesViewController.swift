@@ -261,7 +261,6 @@ private extension EditPhrasesViewController {
                                                                          disclosureStyle: .none) { [weak self] in
                 self?.handleEditingPhrase(for: phrase)
             }
-            cell.setNeedsUpdateConfiguration()
         }
     }
 }

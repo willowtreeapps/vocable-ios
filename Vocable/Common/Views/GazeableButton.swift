@@ -178,7 +178,7 @@ class GazeableButton: UIButton {
         }
     }
 
-    func setRightImage(image: UIImage?, offset: CGFloat) {
+    func setTrailingImage(image: UIImage?, offset: CGFloat) {
         setImage(image, for: .normal)
         imageView?.translatesAutoresizingMaskIntoConstraints = false
         imageView?.constrain(centerVerticallyIn: self)
