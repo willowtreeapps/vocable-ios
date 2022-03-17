@@ -83,7 +83,8 @@ final class SettingsCellContentView: UIView, UIContentView {
         stackView.addArrangedSubview(labelButton)
         labelButton.setAttributedTitle(configuration.attributedText, for: .normal)
         labelButton.contentHorizontalAlignment = .left
-        labelButton.contentEdgeInsets = .init(uniform: 16)
+//        labelButton.contentEdgeInsets = .init(uniform: 16)
+        labelButton.setRightImage(image: UIImage(systemName: "chevron.right"), offset: 24)
         labelButton.addAction(UIAction(title: "Cell action", handler: { _ in
             configuration.cellAction()
         }), for: .touchUpInside)

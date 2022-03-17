@@ -178,6 +178,13 @@ class GazeableButton: UIButton {
         }
     }
 
+    func setRightImage(image: UIImage?, offset: CGFloat) {
+        setImage(image, for: .normal)
+        imageView?.translatesAutoresizingMaskIntoConstraints = false
+        imageView?.constrain(centerVerticallyIn: self)
+        imageView?.constrain(.right, to: .right, of: self, constant: -offset)
+    }
+
     override func setTitleColor(_ color: UIColor?, for state: UIControl.State) {
 
         defer {

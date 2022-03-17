@@ -72,7 +72,11 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
                 repeatedSnapshot.appendItems(snapshot.itemIdentifiers.map {.init(index: index, item: $0)})
             }
         }
-        impl.apply(repeatedSnapshot, animatingDifferences: animatingDifferences, completion: completion)
+        if #available(iOS 15, *), !animatingDifferences {
+            impl.applySnapshotUsingReloadData(repeatedSnapshot, completion: completion)
+        } else {
+            impl.apply(repeatedSnapshot, animatingDifferences: animatingDifferences, completion: completion)
+        }
     }
 
     private func mappedIndexPaths(`for` indexPath: IndexPath) -> [IndexPath] {

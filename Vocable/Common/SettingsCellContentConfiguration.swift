@@ -29,7 +29,7 @@ struct ActionCellAccessory {
     }
 }
 
-final class SettingsCellContentConfiguration: NSObject, UIContentConfiguration {
+struct SettingsCellContentConfiguration: UIContentConfiguration {
 
     var attributedText: NSAttributedString?
     var accessories: [ActionCellAccessory]
@@ -49,7 +49,7 @@ final class SettingsCellContentConfiguration: NSObject, UIContentConfiguration {
     }
 
     func updated(for state: UIConfigurationState) -> SettingsCellContentConfiguration {
-        return self
+        let config = SettingsCellContentConfiguration(attributedText: self.attributedText, accessories: self.accessories, disclosureStyle: self.disclosureStyle, cellAction: self.cellAction)
+        return config
     }
-
 }

@@ -71,7 +71,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
             collectionView.layout.numberOfColumns = .fixedCount(2)
-            collectionView.layout.numberOfRows = .fixedCount(4)
+            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(104))
         case (.compact, .regular):
             collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(130))
@@ -96,6 +96,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         let pageCountBefore = collectionView.layout.pagesPerSection
         let snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
         dataSourceProxy.apply(snapshot, animatingDifferences: false)
+
 
         let pageCountAfter = collectionView.layout.pagesPerSection
 
@@ -242,7 +243,7 @@ private extension EditPhrasesViewController {
 
     func phraseCellRegistration() ->
     UICollectionView.CellRegistration<EditPhrasesCollectionViewListCell, Phrase> {
-        return .init { cell, _, phrase in
+        return .init { cell, indexPath, phrase in
             let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white,
                                                              .font: UIFont.systemFont(ofSize: 22, weight: .bold)]
 
@@ -252,11 +253,15 @@ private extension EditPhrasesViewController {
                 self?.handleDeletingPhrase(for: phrase)
             }
 
+            print("Configuring for index path: \(indexPath)")
+            print("\t Configuring for phrase: \(phrase.utterance ?? "nil")")
+
             cell.contentConfiguration = SettingsCellContentConfiguration(attributedText: attributedText,
                                                                          accessories: [deleteAction],
                                                                          disclosureStyle: .none) { [weak self] in
                 self?.handleEditingPhrase(for: phrase)
             }
+            cell.setNeedsUpdateConfiguration()
         }
     }
 }
