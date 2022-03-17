@@ -102,6 +102,12 @@
             ReferencedContainer = "container:Vocable.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "resetAppDataOnLaunch"
+            isEnabled = "NO">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "EmptyStatesEnabled"

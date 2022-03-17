@@ -43,7 +43,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !AppConfig.isHeadTrackingSupported {
             AppConfig.isHeadTrackingEnabled = false
         }
-    
+
+        if ProcessInfo.processInfo.arguments.contains("resetAppDataOnLaunch") {
+            print("-resetAppDataOnLaunch detected, resetting app data")
+            let resetController = AppResetController()
+            if resetController.performReset() {
+                print("\t...Succeeded")
+            } else {
+                print("\t...Reset failed")
+            }
+        }
+
         // Ensure that the persistent store has the current
         // default presets before presenting UI
         updatePersistentStoreForCurrentLanguagePreferences()
