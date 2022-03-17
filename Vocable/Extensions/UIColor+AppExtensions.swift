@@ -72,4 +72,5 @@ extension UIColor {
     static let alertBackgroundColor = UIColor(safelyNamed: "AlertBackground")!
 
     static let grayDivider = UIColor(safelyNamed: "GrayDivider")!
+    static let errorRed = UIColor(safelyNamed: "ErrorRed")!
 }
