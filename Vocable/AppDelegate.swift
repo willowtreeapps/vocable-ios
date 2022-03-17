@@ -169,11 +169,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         request.predicate = {
-            let identifiers = Set(presets.phrases.map { $0.id })
-            let isNotUserGenerated = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, false)
-            let identifierInSet = NSComparisonPredicate(\Phrase.identifier, .in, identifiers)
-            let identifierNotInSet = NSCompoundPredicate(notPredicateWithSubpredicate: identifierInSet)
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [isNotUserGenerated, identifierNotInSet])
+            let presetPhraseIdentifiers = Set(presets.phrases.map(\.id))
+            let isNotUserGenerated = !Predicate(\Phrase.isUserGenerated)
+            let isNotPresetPhrase = !Predicate(\Phrase.identifier, isContainedIn: presetPhraseIdentifiers)
+            return isNotUserGenerated && isNotPresetPhrase
         }()
 
         let results = try context.fetch(request)
@@ -186,11 +185,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         request.predicate = {
-            let identifiers = Set(presets.categories.map { $0.id })
-            let isNotUserGenerated = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, false)
-            let identifierInSet = NSComparisonPredicate(\Category.identifier, .in, identifiers)
-            let identifierNotInSet = NSCompoundPredicate(notPredicateWithSubpredicate: identifierInSet)
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [isNotUserGenerated, identifierNotInSet])
+            let presetCategoryIdentifiers = Set(presets.categories.map(\.id))
+            let isNotUserGenerated = !Predicate(\Category.isUserGenerated)
+            let isNotPresetCategory = !Predicate(\Category.identifier, isContainedIn: presetCategoryIdentifiers)
+            return isNotUserGenerated && isNotPresetCategory
         }()
 
         let results = try context.fetch(request)
@@ -205,10 +203,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Legacy favorites category was .isUserGenerated = true with identifier = localized version
             // of "My Sayings." Going forward, all identifiers for Phrases/Categories are prefixed, so
             // we can use that to isolate the legacy category entry
-            let isUserGenerated = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, true)
-            let identifierPrefixed = NSComparisonPredicate(\Category.identifier, .beginsWith, "user_")
-            let identifierNotPrefixed = NSCompoundPredicate(notPredicateWithSubpredicate: identifierPrefixed)
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [isUserGenerated, identifierNotPrefixed])
+            let isUserGeneratedCategory = Predicate(\Category.isUserGenerated)
+            let isNotUserPrefixed = !Predicate(\Category.identifier, beginsWith: "user_")
+            return isUserGeneratedCategory && isNotUserPrefixed
         }()
 
         let results = try context.fetch(request)
@@ -221,15 +218,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         try updateDefaultCategories(in: context, withPresets: presets)
         try updateDefaultPhrases(in: context, withPresets: presets)
-        try updateCategoryForUserGeneratedPhrases(in: context)
-
     }
 
     private func updateDefaultCategories(in context: NSManagedObjectContext, withPresets presets: PresetData) throws {
         for presetCategory in presets.categories {
             let category = Category.fetchOrCreate(in: context, matching: presetCategory.id)
-            category.name = presetCategory.utterance
-            category.languageCode = presetCategory.languageCode
+            if !category.isUserRenamed {
+                category.name = presetCategory.utterance
+                category.languageCode = presetCategory.languageCode
+            }
             if category.isInserted {
                 category.isHidden = presetCategory.hidden
             }
@@ -240,31 +237,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for presetPhrase in presets.phrases {
 
             let phrase = Phrase.fetchOrCreate(in: context, matching: presetPhrase.id)
-            phrase.utterance = presetPhrase.utterance
-            phrase.languageCode = presetPhrase.languageCode
-            
+            if !phrase.isUserRenamed {
+                phrase.utterance = presetPhrase.utterance
+                phrase.languageCode = presetPhrase.languageCode
+            }
             for identifier in presetPhrase.categoryIds {
                 if let category = Category.fetchObject(in: context, matching: identifier) {
                     phrase.category = category
                     category.addToPhrases(phrase)
                 }
             }
-        }
-    }
-
-    private func updateCategoryForUserGeneratedPhrases(in context: NSManagedObjectContext) throws {
-        let mySayingsCategory = Category.fetch(.userFavorites, in: context)
-        let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-
-        let firstPredicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
-        let secondPredicate = NSComparisonPredicate(\Phrase.category?.isUserGenerated, .equalTo, false)
-        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [firstPredicate, secondPredicate])
-
-        let phraseResults = try context.fetch(request)
-
-        for phrase in phraseResults {
-            phrase.category = mySayingsCategory
-            mySayingsCategory.addToPhrases(phrase)
         }
     }
 }
