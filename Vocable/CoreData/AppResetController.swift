@@ -15,8 +15,8 @@ struct AppResetController {
         case unexpectedFetchResult
     }
 
-    let persistentContainer: NSPersistentContainer
-    let userDefaults: UserDefaults
+    private let persistentContainer: NSPersistentContainer
+    private let userDefaults: UserDefaults
 
     init(persistentContainer: NSPersistentContainer = .shared, userDefaults: UserDefaults = .standard) {
         self.persistentContainer = persistentContainer
