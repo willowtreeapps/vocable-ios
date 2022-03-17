@@ -148,6 +148,13 @@ class GazeableButton: UIButton {
         super.setImage(image, for: state)
     }
 
+    func setTrailingImage(image: UIImage?, offset: CGFloat) {
+        setImage(image, for: .normal)
+        imageView?.translatesAutoresizingMaskIntoConstraints = false
+        imageView?.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        imageView?.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -offset).isActive = true
+    }
+
     func fillColor(for state: UIControl.State) -> UIColor? {
         return cachedFillColors[state]
     }

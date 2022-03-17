@@ -15,20 +15,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
     var category: Category!
     private var disposables = Set<AnyCancellable>()
 
-    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID>(collectionView: collectionView) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
-        guard let self = self else { return nil }
-
-        let phrase = self.fetchResultsController.object(at: indexPath)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditPhrasesCollectionViewCell.reuseIdentifier, for: indexPath) as! EditPhrasesCollectionViewCell
-        cell.textLabel.text = phrase.utterance
-        cell.deleteButton.addTarget(self,
-                                    action: #selector(self.handleCellDeletionButton(_:)),
-                                    for: .primaryActionTriggered)
-        cell.editButton.addTarget(self,
-                                  action: #selector(self.handleCellEditButton(_:)),
-                                  for: .primaryActionTriggered)
-        return cell
-    }
+    private lazy var dataSourceProxy = makeDataSourceProxy()
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
@@ -84,7 +71,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
             collectionView.layout.numberOfColumns = .fixedCount(2)
-            collectionView.layout.numberOfRows = .fixedCount(4)
+            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(130))
         case (.compact, .regular):
             collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(130))
@@ -135,8 +122,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         collectionView.backgroundView = nil
     }
 
-    // MARK: Actions 
-
+    // MARK: Actions
     @IBAction private func addPhrasePressed() {
         let viewController = EditTextViewController()
         viewController.editTextCompletionHandler = { (newText) -> Void in
@@ -161,10 +147,9 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         present(viewController, animated: true)
     }
 
-    @objc private func handleCellDeletionButton(_ sender: UIButton) {
-
+    private func handleDeletingPhrase(for phrase: Phrase) {
         func deleteAction() {
-            self.deletePhrase(sender)
+            self.deletePhrase(phrase)
         }
 
         let title = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.title",
@@ -180,14 +165,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         self.present(alert, animated: true)
     }
 
-    private func deletePhrase(_ sender: UIButton) {
-        guard let indexPath = collectionView.indexPath(containing: sender) else {
-            assertionFailure("Failed to obtain index path")
-            return
-        }
-
-        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        let phrase = self.fetchResultsController.object(at: safeIndexPath)
+    private func deletePhrase(_ phrase: Phrase) {
         let context = NSPersistentContainer.shared.viewContext
         context.delete(phrase)
 
@@ -196,19 +174,11 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         } catch {
             assertionFailure("Could not save phrase: \(error)")
         }
-
     }
 
-    @objc private func handleCellEditButton(_ sender: UIButton) {
-        guard let indexPath = collectionView.indexPath(containing: sender) else {
-            assertionFailure("Failed to obtain index path")
-            return
-        }
-
-        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
+    @objc private func handleEditingPhrase(for phrase: Phrase) {
         let vc = EditTextViewController()
 
-        let phrase = fetchResultsController.object(at: safeIndexPath)
         vc.initialText = phrase.utterance ?? ""
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
@@ -224,6 +194,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
                                                      comment: "changes to an existing phrase were saved successfully")
 
                 ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                self.collectionView.reloadData()
             } catch {
                 assertionFailure("Failed to save user generated phrase: \(error)")
             }
@@ -248,5 +219,44 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
         alert.addAction(GazeableAlertAction(title: continueButtonTitle, style: .bold))
         self.present(alert, animated: true)
+    }
+}
+
+// MARK: - Data Source Proxy
+private extension EditPhrasesViewController {
+
+    func makeDataSourceProxy() -> CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID> {
+        let cellRegistration = phraseCellRegistration()
+
+        return CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID>(collectionView: collectionView) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
+            guard let self = self else { return nil }
+
+            let phrase = self.fetchResultsController.object(at: indexPath)
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
+                                                                for: indexPath,
+                                                                item: phrase)
+        }
+    }
+
+    func phraseCellRegistration() ->
+    UICollectionView.CellRegistration<SettingsCollectionViewListCell, Phrase> {
+        return .init { cell, indexPath, phrase in
+            let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white,
+                                                             .font: UIFont.systemFont(ofSize: 22, weight: .bold)]
+
+            let attributedText = NSAttributedString(string: phrase.utterance ?? "", attributes: attributes)
+
+            let deleteAction = ActionCellAccessory(image: UIImage(systemName: "trash")) { [weak self] in
+                // TODO: pass in indexPath instead of phrase
+                self?.handleDeletingPhrase(for: phrase)
+            }
+
+            cell.contentConfiguration = SettingsCellContentConfiguration(attributedText: attributedText,
+                                                                         accessories: [deleteAction],
+                                                                         disclosureStyle: .none) { [weak self] in
+                // TODO: pass in indexPath instead of phrase
+                self?.handleEditingPhrase(for: phrase)
+            }
+        }
     }
 }

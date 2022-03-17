@@ -86,14 +86,14 @@ import Combine
         // and we'll specify our desired inset from the
         // navigation bar separately
         if navigationBarIfLoaded() != nil {
-            insets.top = 8
+            insets.top = 32
         }
 
-        insets.bottom = 8
+        insets.bottom = 32
         if isPaginationViewHidden {
             insets.bottom += view.safeAreaInsets.bottom
         }
-        
+
         collectionView.layout.pageInsets = insets
     }
 
