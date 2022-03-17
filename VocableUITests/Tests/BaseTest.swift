@@ -39,4 +39,9 @@ class BaseTest: XCTestCase {
         attachment.lifetime = .deleteOnSuccess
         add(attachment)
     }
+    
+    func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyz"
+        return String((0..<length).map { _ in letters.randomElement()! })
+    }
 }

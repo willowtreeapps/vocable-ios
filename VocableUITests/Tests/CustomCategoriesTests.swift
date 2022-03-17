@@ -8,18 +8,14 @@
 
 import XCTest
 
-class CustomCategoriesTest: BaseTest {
-    let customCategory = "Createnewcategory"
+class CustomCategoriesTest: CustomCategoriesBaseTest {
 
     func testAddNewPhrase() {
-        let customPhrase = "ddingcustomcategoryphrasetest"
+        let customPhrase = "dd"
         let confirmationAlert = "Are you sure? Going back before saving will clear any edits made."
-        let createdCustomCategory = ("9. "+customCategory)
         
-        // Add a new Category and navigate into it
-        settingsScreen.navigateToSettingsCategoryScreen()
-        customCategoriesScreen.createCustomCategory(categoryName: customCategory)
-        settingsScreen.openCategorySettings(category: createdCustomCategory)
+        // Navigate to our test category (created in the base class setup() method)
+        customCategoriesScreen.editCategoryPhrasesCell.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
 
         // Verify Phrase is not added if edits are discarded
@@ -46,13 +42,13 @@ class CustomCategoriesTest: BaseTest {
     }
 
     func testCustomPhraseEdit() {
-        // This test builds off of the last test.
-        let customPhrase = "Addingcustomcategoryphrasetest"
-        let createdCustomCategory = ("9. "+customCategory)
-
-        // Navigate to Custom Category
-        settingsScreen.navigateToSettingsCategoryScreen()
-        settingsScreen.openCategorySettings(category: createdCustomCategory)
+        let customPhrase = "Add" + randomString(length: 2)
+        
+        // Add our test phrase
+        customCategoriesScreen.editCategoryPhrasesCell.tap()
+        customCategoriesScreen.categoriesPageAddPhraseButton.tap()
+        keyboardScreen.typeText(customPhrase)
+        keyboardScreen.checkmarkAddButton.tap()
         
         // Edit the phrase
         customCategoriesScreen.categoriesPageEditPhraseButton.tap()
@@ -63,63 +59,48 @@ class CustomCategoriesTest: BaseTest {
     
     func testDeleteCustomPhrase() {
         // This test builds off of the last test.
-        let customPhrase = "Test"
-        let createdCustomCategory = ("9. "+customCategory)
-
-        // Navigate to custom category
-        settingsScreen.navigateToSettingsCategoryScreen()
-        settingsScreen.openCategorySettings(category: createdCustomCategory)
+        let customPhrase = "Delete" + randomString(length: 2)
+        
+        // Add our test phrase
+        customCategoriesScreen.editCategoryPhrasesCell.tap()
+        customCategoriesScreen.categoriesPageAddPhraseButton.tap()
+        keyboardScreen.typeText(customPhrase)
+        keyboardScreen.checkmarkAddButton.tap()
+        
+        // Confirm that our phrase to-be-deleted has been created
+        // TODO: MAKE A isTextDisplayed HELPER METHOD THAT IS AGNOSTIC OF SCREEN...each screen class has its own?
+        XCTAssert(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to be displayed")
         
         customCategoriesScreen.categoriesPageDeletePhraseButton.tap()
         settingsScreen.alertDeleteButton.tap()
         XCTAssertFalse(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to not be displayed")
     }
     
-    func testDuplicatePhrasesInDifferentCategories() {
-        // This test builds off of the last test.
+    func testCanAddDuplicatePhrasesToCategories() {
+        let testPhrase = "Testa"
 
-        let createdCustomCategory = ("9. "+customCategory)
-        let customCategoryTwo = "Testb"
-        let customPhrase = "Testa"
-
-        // Test Setup
-        settingsScreen.navigateToSettingsCategoryScreen()
-        settingsScreen.openCategorySettings(category: createdCustomCategory)
+        // Add our first test phrase
+        customCategoriesScreen.editCategoryPhrasesCell.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
-        keyboardScreen.typeText(customPhrase)
+        keyboardScreen.typeText(testPhrase)
         keyboardScreen.checkmarkAddButton.tap()
-        settingsScreen.leaveCategoryDetailButton.tap()
+        
+        // Assert that our phrase was added
+        XCTAssertTrue(mainScreen.isTextDisplayed(testPhrase), "Expected our first phrase to be added to category.")
 
-        // Navigate to Settings and create a custom category
-        customCategoriesScreen.createCustomCategory(categoryName: customCategoryTwo)
-        
-        // Add an existing custom phrase
-        settingsScreen.openCategorySettings(category: "10. "+customCategoryTwo)
+        // Add the same phrase again to the same category
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
-        keyboardScreen.typeText(customPhrase)
+        keyboardScreen.typeText(testPhrase)
         keyboardScreen.checkmarkAddButton.tap()
         
-        // Edit first phrase.
-        settingsScreen.leaveCategoryDetailButton.tap()
-        settingsScreen.openCategorySettings(category: createdCustomCategory)
-        customCategoriesScreen.categoriesPageEditPhraseButton.tap()
-        keyboardScreen.typeText("Two")
-        keyboardScreen.checkmarkAddButton.tap()
-        
-        XCTAssert(mainScreen.isTextDisplayed(customPhrase+"two"), "Expected the phrase \(customPhrase+"two") to be displayed")
-        
-        // Go back to the other category
-        settingsScreen.leaveCategoryDetailButton.tap()
-        settingsScreen.openCategorySettings(category: "10. "+customCategoryTwo)
-        XCTAssert(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to be displayed")
-        
-        // Cleanup: Hide categories for now until delete feature is implemented so Automation tests pass:
-        settingsScreen.leaveCategoryDetailButton.tap()
-        settingsScreen.toggleHideShowCategory(category: "9. "+customCategory, toggle: "Hide")
-        settingsScreen.toggleHideShowCategory(category: "9. "+customCategoryTwo, toggle: "Hide")
-        
+        // Assert that now we have two cells containing the same phrase
+        let phrasePredicate = NSPredicate(format: "label MATCHES %@", testPhrase)
+        let phraseQuery = XCUIApplication().staticTexts.containing(phrasePredicate)
+        XCTAssertEqual(phraseQuery.count, 2, "Expected both phrases to be present")
     }
     
+    // TODO: Disabled for now. Moving it to a different test class as part of issue #405
+    // https://github.com/willowtreeapps/vocable-ios/issues/405
     func testPagination() {
         let customCategoryThree = "Testc"
         let createdCustomCategory = ("9. "+customCategoryThree)

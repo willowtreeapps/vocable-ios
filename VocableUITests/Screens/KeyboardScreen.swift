@@ -8,7 +8,7 @@
 
 import XCTest
 
-class KeyboardScreen {
+class KeyboardScreen: BaseScreen {
     private let app = XCUIApplication()
     
     let keyboardTextView = XCUIApplication().textViews["keyboard.textView"]
