@@ -15,17 +15,15 @@ import Combine
 
     static func fetchInitialCategoryID() -> NSManagedObjectID {
         let ctx = NSPersistentContainer.shared.viewContext
-        let predicate = NSComparisonPredicate(\Category.isHidden, .equalTo, false)
+        let predicate = !Predicate(\Category.isHidden) && !Predicate(\Category.isUserRemoved)
         let sort = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)]
-        let categories = Category.fetchAll(in: ctx,
-                          matching: predicate,
-                          sortDescriptors: sort)
+        let categories = Category.fetchAll(in: ctx, matching: predicate, sortDescriptors: sort)
         return categories[0].objectID
     }
 
     static func fetchVoiceCategoryID() -> NSManagedObjectID {
         let ctx = NSPersistentContainer.shared.viewContext
-        let predicate = NSComparisonPredicate(\Category.identifier, .equalTo, Category.Identifier.listeningMode.rawValue)
+        let predicate = Predicate(\Category.identifier, equalTo: Category.Identifier.listeningMode)
         let categories = Category.fetchAll(in: ctx, matching: predicate)
         return categories[0].objectID
     }
@@ -140,7 +138,7 @@ import Combine
 
     private func categoriesFetchRequest() -> NSFetchRequest<Category> {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        var predicate: NSPredicate = NSComparisonPredicate(\Category.isHidden, .equalTo, false)
+        var predicate = !Predicate(\Category.isHidden) && !Predicate(\Category.isUserRemoved)
 
         let shouldRemoveListeningCategory = false
         || !AppConfig.isListeningModeSupported
@@ -149,8 +147,7 @@ import Combine
         || !SpeechRecognitionController.shared.deviceSupportsSpeech
 
         if shouldRemoveListeningCategory {
-            let notVoicePredicate = NSComparisonPredicate(\Category.identifier, .notEqualTo, Category.Identifier.listeningMode.rawValue)
-            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, notVoicePredicate])
+            predicate &= Predicate(\Category.identifier, notEqualTo: Category.Identifier.listeningMode)
         }
         request.predicate = predicate
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)]
