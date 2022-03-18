@@ -36,6 +36,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
 
     private lazy var fetchRequest: NSFetchRequest<Category> = {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
+        request.predicate = !Predicate(\Category.isUserRemoved)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.isHidden, ascending: true),
         NSSortDescriptor(keyPath: \Category.ordinal, ascending: true),
         NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)]

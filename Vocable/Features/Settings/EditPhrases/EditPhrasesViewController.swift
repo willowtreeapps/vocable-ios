@@ -19,7 +19,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Phrase.category, .equalTo, category)
+        request.predicate = Predicate(\Phrase.category, equalTo: category) && !Predicate(\Phrase.isUserRemoved)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
         return request
     }()
@@ -167,9 +167,15 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
     }
 
     private func deletePhrase(at indexPath: IndexPath) {
-        let phrase = fetchResultsController.object(at: indexPath)
+        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
+        let phrase = fetchResultsController.object(at: safeIndexPath)
         let context = NSPersistentContainer.shared.viewContext
-        context.delete(phrase)
+
+        if phrase.isUserGenerated {
+            context.delete(phrase)
+        } else {
+            phrase.isUserRemoved = true
+        }
 
         do {
             try context.save()
@@ -180,17 +186,33 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
     fileprivate func presentEditorForPhrase(at indexPath: IndexPath) {
 
-        let phrase = fetchResultsController.object(at: indexPath)
-        let vc = EditTextViewController()
+        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
+        let phrase = fetchResultsController.object(at: safeIndexPath)
+        guard let originalPhraseIdentifier = phrase.identifier else {
+            assertionFailure("Phrase has no identifier at indexPath: \(safeIndexPath)")
+            return
+        }
 
-        vc.initialText = phrase.utterance ?? ""
+        let initialValue = phrase.utterance ?? ""
+
+        let vc = EditTextViewController()
+        vc.initialText = initialValue
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
-            if let phraseIdentifier = phrase.identifier {
-                let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                originalPhrase?.utterance = newText
+            guard let originalPhrase = Phrase.fetchObject(in: context, matching: originalPhraseIdentifier) else {
+                assertionFailure("Could not locate original phrase for editing")
+                return
             }
+
+            if originalPhrase.isUserGenerated {
+                originalPhrase.utterance = newText
+            } else {
+                let textDidChange = (newText != initialValue)
+                originalPhrase.utterance = newText
+                originalPhrase.isUserRenamed = originalPhrase.isUserRenamed || textDidChange
+            }
+
             do {
                 try context.save()
 

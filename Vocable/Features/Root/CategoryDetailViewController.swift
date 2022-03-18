@@ -29,21 +29,23 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
 
+        var predicate = !Predicate(\Phrase.isUserRemoved)
         if category.identifier == Category.Identifier.recents {
-            request.predicate = NSComparisonPredicate(\Phrase.lastSpokenDate, .notEqualTo, nil)
+            predicate &= Predicate(\Phrase.lastSpokenDate, notEqualTo: nil)
             request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.lastSpokenDate, ascending: false)]
             request.fetchLimit = 9
         } else {
-            request.predicate = NSComparisonPredicate(\Phrase.category, .equalTo, self.category)
+            predicate &= Predicate(\Phrase.category, equalTo: self.category)
             request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
         }
+        request.predicate = predicate
         return request
     }()
 
     private lazy var frc = NSFetchedResultsController<Phrase>(fetchRequest: self.fetchRequest,
-                                                                                 managedObjectContext: NSPersistentContainer.shared.viewContext,
-                                                                                 sectionNameKeyPath: nil,
-                                                                                 cacheName: nil)
+                                                              managedObjectContext: NSPersistentContainer.shared.viewContext,
+                                                              sectionNameKeyPath: nil,
+                                                              cacheName: nil)
 
     convenience init(category: Category) {
         self.init(nibName: nil, bundle: nil)
