@@ -40,6 +40,7 @@ final class VocableListCellContentView: UIView, UIContentView {
     private lazy var primaryLabelButton: GazeableButton = {
         let button = GazeableButton()
         button.contentHorizontalAlignment = .left
+        button.contentEdgeInsets = .init(uniform: 16)
         return button
     }()
 

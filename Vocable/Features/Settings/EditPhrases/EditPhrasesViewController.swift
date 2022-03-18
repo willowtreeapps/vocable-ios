@@ -66,7 +66,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
     }
 
     private func updateLayoutForCurrentTraitCollection() {
-        collectionView.layout.interItemSpacing = 8
+        collectionView.layout.interItemSpacing = .init(interRowSpacing: 8, interColumnSpacing: 30)
 
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .regular):
