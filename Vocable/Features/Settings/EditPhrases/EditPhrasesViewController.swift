@@ -147,10 +147,10 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         present(viewController, animated: true)
     }
 
-    fileprivate func presentDeletionPromptForPhrase(at indexPath: IndexPath) {
+    fileprivate func presentDeletionPromptForPhrase(with id: NSManagedObjectID) {
 
         func deleteAction() {
-            self.deletePhrase(at: indexPath)
+            self.deletePhrase(with: id)
         }
 
         let title = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.title",
@@ -166,10 +166,9 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         self.present(alert, animated: true)
     }
 
-    private func deletePhrase(at indexPath: IndexPath) {
-        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        let phrase = fetchResultsController.object(at: safeIndexPath)
+    private func deletePhrase(with id: NSManagedObjectID) {
         let context = NSPersistentContainer.shared.viewContext
+        guard let phrase = context.object(with: id) as? Phrase else { return }
 
         if phrase.isUserGenerated {
             context.delete(phrase)
@@ -184,33 +183,24 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         }
     }
 
-    fileprivate func presentEditorForPhrase(at indexPath: IndexPath) {
+    fileprivate func presentEditorForPhrase(with id: NSManagedObjectID) {
 
-        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        let phrase = fetchResultsController.object(at: safeIndexPath)
-        guard let originalPhraseIdentifier = phrase.identifier else {
-            assertionFailure("Phrase has no identifier at indexPath: \(safeIndexPath)")
-            return
-        }
+        let context = NSPersistentContainer.shared.viewContext
+        guard let phrase = context.object(with: id) as? Phrase else { return }
 
         let initialValue = phrase.utterance ?? ""
 
         let vc = EditTextViewController()
         vc.initialText = initialValue
         vc.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
+            guard let phrase = context.object(with: id) as? Phrase else { return }
 
-            guard let originalPhrase = Phrase.fetchObject(in: context, matching: originalPhraseIdentifier) else {
-                assertionFailure("Could not locate original phrase for editing")
-                return
-            }
-
-            if originalPhrase.isUserGenerated {
-                originalPhrase.utterance = newText
+            if phrase.isUserGenerated {
+                phrase.utterance = newText
             } else {
                 let textDidChange = (newText != initialValue)
-                originalPhrase.utterance = newText
-                originalPhrase.isUserRenamed = originalPhrase.isUserRenamed || textDidChange
+                phrase.utterance = newText
+                phrase.isUserRenamed = phrase.isUserRenamed || textDidChange
             }
 
             do {
@@ -266,20 +256,21 @@ private extension EditPhrasesViewController {
 
     func phraseCellRegistration() ->
     UICollectionView.CellRegistration<VocableListCell, Phrase> {
-        return .init { cell, indexPath, phrase in
+        return .init { cell, _, phrase in
             let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white,
                                                              .font: UIFont.systemFont(ofSize: 22, weight: .bold)]
 
             let attributedText = NSAttributedString(string: phrase.utterance ?? "", attributes: attributes)
+            let phraseIdentifier = phrase.objectID
 
             let deleteAction = VocableListCellContentView.Configuration.AccessoryAction(image: UIImage(systemName: "trash")!) { [weak self] in
-                self?.presentDeletionPromptForPhrase(at: indexPath)
+                self?.presentDeletionPromptForPhrase(with: phraseIdentifier)
             }
 
             cell.contentConfiguration = VocableListCellContentView.Configuration(attributedText: attributedText,
                                                                                  accessories: [deleteAction],
                                                                                  trailingAccessory: .disclosureIndicator) { [weak self] in
-                self?.presentEditorForPhrase(at: indexPath)
+                self?.presentEditorForPhrase(with: phraseIdentifier)
             }
         }
     }
