@@ -1,5 +1,5 @@
 //
-//  SettingsCollectionViewListCell.swift
+//  VocableListCell.swift
 //  Vocable
 //
 //  Created by Jesse Morgan on 3/14/22.
@@ -7,7 +7,7 @@
 //
 import UIKit
 
-final class SettingsCollectionViewListCell: UICollectionViewListCell {
+final class VocableListCell: UICollectionViewListCell {
 
     override func updateConfiguration(using state: UICellConfigurationState) {
         super.updateConfiguration(using: state)

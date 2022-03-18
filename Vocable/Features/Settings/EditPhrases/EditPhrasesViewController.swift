@@ -239,21 +239,21 @@ private extension EditPhrasesViewController {
     }
 
     func phraseCellRegistration() ->
-    UICollectionView.CellRegistration<SettingsCollectionViewListCell, Phrase> {
+    UICollectionView.CellRegistration<VocableListCell, Phrase> {
         return .init { cell, indexPath, phrase in
             let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white,
                                                              .font: UIFont.systemFont(ofSize: 22, weight: .bold)]
 
             let attributedText = NSAttributedString(string: phrase.utterance ?? "", attributes: attributes)
 
-            let deleteAction = ActionCellAccessory(image: UIImage(systemName: "trash")!) { [weak self] in
+            let deleteAction = VocableListCellContentView.Configuration.AccessoryAction(image: UIImage(systemName: "trash")!) { [weak self] in
                 // TODO: pass in indexPath instead of phrase
                 self?.handleDeletingPhrase(for: phrase)
             }
 
-            cell.contentConfiguration = SettingsCellContentConfiguration(attributedText: attributedText,
-                                                                         accessories: [deleteAction],
-                                                                         disclosureStyle: .none) { [weak self] in
+            cell.contentConfiguration = VocableListCellContentView.Configuration(attributedText: attributedText,
+                                                                                 accessories: [deleteAction],
+                                                                                 disclosureStyle: .none) { [weak self] in
                 // TODO: pass in indexPath instead of phrase
                 self?.handleEditingPhrase(for: phrase)
             }
