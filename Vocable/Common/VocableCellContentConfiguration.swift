@@ -8,11 +8,17 @@
 
 import UIKit
 
-enum CellDisclosureStyle: Equatable {
-    case none
-    case disclosure
-    case link
-    case toggle(Bool)
+extension VocableListCellContentView.Configuration {
+    struct TrailingAccessory: Equatable {
+
+        let customView: UIView
+
+        private static func systemImage(_ imageName: String) -> TrailingAccessory {
+            TrailingAccessory(customView: UIImageView(image: UIImage(systemName: imageName)?.applyingSymbolConfiguration(.init(pointSize: 36, weight: .bold))))
+        }
+
+        static var disclosureIndicator: TrailingAccessory { .systemImage("chevron.right") }
+    }
 }
 
 extension VocableListCellContentView.Configuration {
@@ -58,15 +64,15 @@ extension VocableListCellContentView {
 
         var attributedText: NSAttributedString
         var accessories: [AccessoryAction]
-        var disclosureStyle: CellDisclosureStyle?
+        var trailingAccessory: TrailingAccessory?
 
         var primaryAction: () -> Void
 
-        init(attributedText: NSAttributedString, accessories: [AccessoryAction] = [], disclosureStyle: CellDisclosureStyle = .none, cellAction: @escaping () -> Void) {
+        init(attributedText: NSAttributedString, accessories: [AccessoryAction] = [], trailingAccessory: TrailingAccessory? = nil, primaryAction: @escaping () -> Void) {
             self.attributedText = attributedText
             self.accessories = accessories
-            self.disclosureStyle = disclosureStyle
-            self.primaryAction = cellAction
+            self.trailingAccessory = trailingAccessory
+            self.primaryAction = primaryAction
         }
 
         func makeContentView() -> UIView & UIContentView {
@@ -78,7 +84,7 @@ extension VocableListCellContentView {
         }
 
         static func == (lhs: VocableListCellContentView.Configuration, rhs: VocableListCellContentView.Configuration) -> Bool {
-            return lhs.attributedText.isEqual(to: rhs.attributedText) && lhs.accessories.elementsEqual(rhs.accessories)  && lhs.disclosureStyle == rhs.disclosureStyle
+            return lhs.attributedText.isEqual(to: rhs.attributedText) && lhs.accessories.elementsEqual(rhs.accessories) && lhs.trailingAccessory == rhs.trailingAccessory
         }
     }
 }

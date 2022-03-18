@@ -278,7 +278,7 @@ private extension EditPhrasesViewController {
 
             cell.contentConfiguration = VocableListCellContentView.Configuration(attributedText: attributedText,
                                                                                  accessories: [deleteAction],
-                                                                                 disclosureStyle: .none) { [weak self] in
+                                                                                 trailingAccessory: .disclosureIndicator) { [weak self] in
                 self?.presentEditorForPhrase(at: indexPath)
             }
         }

@@ -93,7 +93,7 @@ final class VocableListCellContentView: UIView, UIContentView {
         primaryLabelButton.contentHorizontalAlignment = .left
         primaryLabelButton.setAttributedTitle(configuration?.attributedText, for: .normal)
         primaryLabelButton.addTarget(self, action: #selector(handlePrimaryActionSelection(_:)), for: .primaryActionTriggered)
-        primaryLabelButton.setTrailingImage(image: UIImage(systemName: "chevron.right"), offset: 24) // Must be rectified
+        primaryLabelButton.setTrailingAccessoryView(configuration?.trailingAccessory?.customView, insets: .init(top: 0, leading: 12, bottom: 0, trailing: 12))
     }
 
     private func updateAccessoryButtons(with configuration: Configuration?) {
