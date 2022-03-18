@@ -147,9 +147,10 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         present(viewController, animated: true)
     }
 
-    private func handleDeletingPhrase(for phrase: Phrase) {
+    fileprivate func presentDeletionPromptForPhrase(at indexPath: IndexPath) {
+
         func deleteAction() {
-            self.deletePhrase(phrase)
+            self.deletePhrase(at: indexPath)
         }
 
         let title = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.title",
@@ -165,7 +166,8 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         self.present(alert, animated: true)
     }
 
-    private func deletePhrase(_ phrase: Phrase) {
+    private func deletePhrase(at indexPath: IndexPath) {
+        let phrase = fetchResultsController.object(at: indexPath)
         let context = NSPersistentContainer.shared.viewContext
         context.delete(phrase)
 
@@ -176,7 +178,9 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         }
     }
 
-    @objc private func handleEditingPhrase(for phrase: Phrase) {
+    fileprivate func presentEditorForPhrase(at indexPath: IndexPath) {
+
+        let phrase = fetchResultsController.object(at: indexPath)
         let vc = EditTextViewController()
 
         vc.initialText = phrase.utterance ?? ""
@@ -247,15 +251,13 @@ private extension EditPhrasesViewController {
             let attributedText = NSAttributedString(string: phrase.utterance ?? "", attributes: attributes)
 
             let deleteAction = VocableListCellContentView.Configuration.AccessoryAction(image: UIImage(systemName: "trash")!) { [weak self] in
-                // TODO: pass in indexPath instead of phrase
-                self?.handleDeletingPhrase(for: phrase)
+                self?.presentDeletionPromptForPhrase(at: indexPath)
             }
 
             cell.contentConfiguration = VocableListCellContentView.Configuration(attributedText: attributedText,
                                                                                  accessories: [deleteAction],
                                                                                  disclosureStyle: .none) { [weak self] in
-                // TODO: pass in indexPath instead of phrase
-                self?.handleEditingPhrase(for: phrase)
+                self?.presentEditorForPhrase(at: indexPath)
             }
         }
     }
