@@ -246,7 +246,7 @@ private extension EditPhrasesViewController {
 
             let attributedText = NSAttributedString(string: phrase.utterance ?? "", attributes: attributes)
 
-            let deleteAction = ActionCellAccessory(image: UIImage(systemName: "trash")) { [weak self] in
+            let deleteAction = ActionCellAccessory(image: UIImage(systemName: "trash")!) { [weak self] in
                 // TODO: pass in indexPath instead of phrase
                 self?.handleDeletingPhrase(for: phrase)
             }

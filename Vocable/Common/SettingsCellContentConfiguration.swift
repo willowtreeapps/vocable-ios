@@ -8,36 +8,39 @@
 
 import UIKit
 
-enum CellDisclosureStyle {
+enum CellDisclosureStyle: Equatable {
     case none
     case disclosure
     case link
     case toggle(Bool)
 }
 
-struct ActionCellAccessory {
-    let text: String?
-    let image: UIImage?
+struct ActionCellAccessory: Equatable {
+
+    let image: UIImage
     let action: (() -> Void)?
     let isEnabled: Bool
 
-    init(text: String? = nil, image: UIImage?, isEnabled: Bool = true, action: (() -> Void)?) {
-        self.text = text
+    init(image: UIImage, isEnabled: Bool = true, action: (() -> Void)?) {
         self.image = image
         self.isEnabled = isEnabled
         self.action = action
     }
+
+    static func == (lhs: ActionCellAccessory, rhs: ActionCellAccessory) -> Bool {
+        return lhs.isEnabled == rhs.isEnabled && lhs.image.isEqual(rhs.image)
+    }
 }
 
-struct SettingsCellContentConfiguration: UIContentConfiguration {
+struct SettingsCellContentConfiguration: UIContentConfiguration, Equatable {
 
-    var attributedText: NSAttributedString?
+    var attributedText: NSAttributedString
     var accessories: [ActionCellAccessory]
     var disclosureStyle: CellDisclosureStyle
 
     var cellAction: () -> Void
 
-    init(attributedText: NSAttributedString?, accessories: [ActionCellAccessory] = [], disclosureStyle: CellDisclosureStyle = .none, cellAction: @escaping () -> Void) {
+    init(attributedText: NSAttributedString, accessories: [ActionCellAccessory] = [], disclosureStyle: CellDisclosureStyle = .none, cellAction: @escaping () -> Void) {
         self.attributedText = attributedText
         self.accessories = accessories
         self.disclosureStyle = disclosureStyle
@@ -50,5 +53,9 @@ struct SettingsCellContentConfiguration: UIContentConfiguration {
 
     func updated(for state: UIConfigurationState) -> SettingsCellContentConfiguration {
         return self
+    }
+
+    static func == (lhs: SettingsCellContentConfiguration, rhs: SettingsCellContentConfiguration) -> Bool {
+        return lhs.attributedText.isEqual(to: rhs.attributedText) && lhs.accessories.elementsEqual(rhs.accessories)  && lhs.disclosureStyle == rhs.disclosureStyle
     }
 }
