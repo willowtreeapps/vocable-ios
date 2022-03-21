@@ -23,7 +23,7 @@ struct AppResetController {
         self.userDefaults = userDefaults
     }
 
-    func performReset() -> Bool {
+    func performReset(withPresets presets: PresetData? = TextPresets.presets) -> Bool {
 
         guard resetUserDefaults() else {
             return false
@@ -32,7 +32,13 @@ struct AppResetController {
         guard resetPersistentStore() else {
             return false
         }
-        
+
+        let migrationController = PersistenceMigrationController()
+        let didMigrate = migrationController.performMigrationForCurrentLanguagePreferences(using: presets)
+        guard didMigrate else {
+            return false
+        }
+
         return true
     }
 
