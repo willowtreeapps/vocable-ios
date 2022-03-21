@@ -25,6 +25,22 @@ class MainScreen: BaseScreen {
     let paginationLeftButton = XCUIApplication().buttons["bottomPagination.left_chevron"]
     let paginationRightButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
     
+    // Find the current selected category and return it as a CategoryTitleCellIdentifier
+    var selectedCategoryCell: CategoryTitleCellIdentifier {
+        let identifierPrefix = CategoryTitleCellIdentifier().categoryTitleCellPrefix
+        let identifierPredicate = NSPredicate(format: "identifier CONTAINS %@", identifierPrefix)
+        let isSelectedPredicate = NSPredicate(format: "isSelected == true")
+        
+        // Build our query that first finds all category title cells, then finds among those the one that is selected
+        let query = XCUIApplication().cells.containing(identifierPredicate).containing(isSelectedPredicate)
+        
+        // Remove the identifierPrefix
+        let categoryTitleCellIdentifierString = query.element.identifier.replacingOccurrences(of: identifierPrefix, with: "")
+          
+        // Return the selected category's full identifier
+        return CategoryTitleCellIdentifier(CategoryIdentifier(categoryTitleCellIdentifierString))
+    }
+    
     func isTextDisplayed(_ text: String) -> Bool {
         return app.collectionViews.staticTexts[text].exists
     }
@@ -52,29 +68,23 @@ class MainScreen: BaseScreen {
         app.collectionViews.staticTexts[defaultCategories[currentCategory]].tap()
     }
     
-    func scrollToMySayings() {
-        let mySayingsIdentifier = "category_title_cell_preset_user_favorites"
-        scrollRightFindCategoryAndTap(identifier: mySayingsIdentifier)
-    }
-    
-    private func scrollRightFindCategoryAndTap(identifier: String){
-       
-        // Loop through each category to find our category
-        let maxNumOfClickToReachCategory = 15
-        for _ in 1...maxNumOfClickToReachCategory {
-            if app.cells[identifier].exists {
-                app.cells[identifier].tap()
-                paginationRightButton.waitForExistence(timeout: 1)
-                break
-            } else {
-                categoryRightButton.tap()
-            }
-        }
-    }
-    
-    func findPhrase(phrase: String) {
+    func locateAndSelectDestinationCategory(_ destinationCategory: CategoryIdentifier) {
+        let titleCellIdentifier = CategoryTitleCellIdentifier(destinationCategory).identifier
+        let destinationCell = app.cells[titleCellIdentifier]
+        let selectedCell = app.cells[selectedCategoryCell.identifier]
         
-        let predicate = NSPredicate(format: "label CONTAINS %@", phrase)
+        repeat {
+            if (destinationCell.exists) {
+                destinationCell.tap()
+                break
+            }
+            categoryRightButton.tap()
+            // We break the loop when we return to our original starting point
+        } while (!selectedCell.waitForExistence(timeout: 0.33))
+    }
+    
+    func locatePhraseCell(phrase: String) -> XCUIElement {
+        let predicate = NSPredicate(format: "label MATCHES %@", phrase)
         
         // Loop through each custom category page to find our phrase
         for _ in 1...totalPageCount {
@@ -84,6 +94,7 @@ class MainScreen: BaseScreen {
                 paginationRightButton.tap()
             }
         }
+        return app.cells.staticTexts.containing(predicate).element
     }
     
 }

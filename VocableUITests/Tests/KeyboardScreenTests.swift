@@ -12,7 +12,7 @@ import XCTest
 class KeyboardScreenTests: BaseTest {
     
     func testKeyboardOutputIsDisplayed() {
-        let testPhrase = "Test" + randomString(length: 2)
+        let testPhrase = "Test"
         
         mainScreen.keyboardNavButton.tap()
         keyboardScreen.typeText(testPhrase)
@@ -21,41 +21,37 @@ class KeyboardScreenTests: BaseTest {
     }
   
     func testAddPhraseToMySayingsFromKeyboard() {
-        let testPhrase = "Test" + randomString(length: 2)
+        let testPhrase = "Test"
         
         mainScreen.keyboardNavButton.tap()
         keyboardScreen.typeText(testPhrase)
         keyboardScreen.favoriteButton.tap()
         keyboardScreen.dismissKeyboardButton.tap()
         
-        mainScreen.scrollToMySayings()
-        mainScreen.findPhrase(phrase: testPhrase)
-        
-        XCTAssertTrue(mainScreen.isTextDisplayed(testPhrase), "Expected the phrase \(testPhrase) to be added to an displayed in 'My Sayings'")
+        mainScreen.locateAndSelectDestinationCategory(.mySayings)
+
+        XCTAssertTrue(mainScreen.locatePhraseCell(phrase: testPhrase).exists, "Expected the phrase \(testPhrase) to be added to an displayed in 'My Sayings'")
     }
     
     func testRemovePhraseFromMySayingsFromKeyboard() {
-       let testPhrase = "Test" + randomString(length: 2)
+       let testPhrase = "Test"
        
         mainScreen.keyboardNavButton.tap()
         keyboardScreen.typeText(testPhrase)
         keyboardScreen.favoriteButton.tap()
         keyboardScreen.dismissKeyboardButton.tap()
        
-        mainScreen.scrollToMySayings()
-        mainScreen.findPhrase(phrase: testPhrase)
+        mainScreen.locateAndSelectDestinationCategory(.mySayings)
        
-        XCTAssertTrue(mainScreen.isTextDisplayed(testPhrase), "Expected the phrase \(testPhrase) to be added to an displayed in 'My Sayings'")
+        XCTAssertTrue(mainScreen.locatePhraseCell(phrase: testPhrase).exists, "Expected the phrase \(testPhrase) to be added to an displayed in 'My Sayings'")
         
         mainScreen.keyboardNavButton.tap()
         keyboardScreen.typeText(testPhrase)
         keyboardScreen.favoriteButton.tap()
         keyboardScreen.dismissKeyboardButton.tap()
-        mainScreen.scrollToMySayings()
-         
-        XCTAssertFalse(mainScreen.isTextDisplayed(testPhrase), "Expected the phrase \(testPhrase) to be deleted from 'My Sayings'")
+        mainScreen.locateAndSelectDestinationCategory(.mySayings)
+        
+        XCTAssertFalse(mainScreen.locatePhraseCell(phrase: testPhrase).exists, "Expected the phrase \(testPhrase) to be deleted from 'My Sayings'")
     }
-    
-
-    
+     
 }
