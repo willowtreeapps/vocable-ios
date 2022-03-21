@@ -235,6 +235,37 @@
         <target>Email not configured.</target>
         <note>No email account configured error alert title</note>
       </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve">
+        <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
+        <target>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</target>
+        <note>Reset app settings confirmation prompt</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Button cancelling the action to reset Vocable's application settings</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Reset</source>
+        <target>Reset</target>
+        <note>Button confirming that the user would like to reset Vocable's application settings</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve">
+        <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
+        <target>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</target>
+        <note>Reset app settings failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
+        <source>Vocable has been reset successfully</source>
+        <target>Vocable has been reset successfully</target>
+        <note>Reset app settings success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target>OK</target>
+        <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset
+   Button dismissing the alert informing the user that Vocable's application settings were successfully reset</note>
+      </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
         <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
         <target>You're about to be taken outside of the Vocable app. You may lose head tracking control.</target>
