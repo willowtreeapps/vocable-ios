@@ -97,21 +97,6 @@ private final class GazeableAlertButton: GazeableButton {
 
     var style: GazeableAlertAction.Style = .default {
         didSet {
-            switch style {
-            case .bold, .destructive:
-                if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
-                    titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-                } else {
-                    titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-                }
-
-            case .default:
-                if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
-                    titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-                } else {
-                    titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .regular)
-                }
-            }
             updateForCurrentTraitCollection()
         }
     }
@@ -139,6 +124,23 @@ private final class GazeableAlertButton: GazeableButton {
     }
 
     private func updateForCurrentTraitCollection() {
+
+        switch style {
+        case .bold, .destructive:
+            if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
+                titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+            } else {
+                titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+            }
+
+        case .default:
+            if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
+                titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+            } else {
+                titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .regular)
+            }
+        }
+        
         contentEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24)
 
         setFillColor(.alertBackgroundColor, for: .normal)
@@ -177,10 +179,10 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         return stackView
     }()
 
-        private lazy var titleContainerView: UIView = {
-            let view = UIView()
-            return view
-        }()
+    private lazy var titleContainerView: UIView = {
+        let view = UIView()
+        return view
+    }()
 
     private lazy var messageLabel: UILabel = {
         let label = UILabel()
