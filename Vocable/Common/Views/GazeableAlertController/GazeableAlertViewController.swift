@@ -10,7 +10,7 @@ import UIKit
 
 final class GazeableAlertAction: NSObject {
 
-    public enum Style {
+    enum Style {
         case bold
         case `default`
         case destructive
