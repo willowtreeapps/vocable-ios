@@ -29,17 +29,18 @@ struct AppResetController {
             return false
         }
 
-        guard resetPersistentStore() else {
-            return false
-        }
-
         let migrationController = PersistenceMigrationController(persistentContainer: persistentContainer)
-        let didMigrate = migrationController.performMigrationForCurrentLanguagePreferences(using: presets)
-        guard didMigrate else {
+
+        let context = persistentContainer.newBackgroundContext()
+        do {
+            try resetPersistentStore(in: context)
+            try migrationController.performMigrationForCurrentLanguagePreferences(using: presets, in: context)
+            try context.save()
+            return true
+        } catch {
+            print("Failed to perform reset: \(error)")
             return false
         }
-
-        return true
     }
 
     // MARK: UserDefaults
@@ -55,17 +56,9 @@ struct AppResetController {
 
     // MARK: Persistent Store
 
-    private func resetPersistentStore() -> Bool {
-        do {
-            let context = persistentContainer.newBackgroundContext()
-            try deleteAllEntities(ofType: Phrase.self, in: context)
-            try deleteAllEntities(ofType: Category.self, in: context)
-            try context.save()
-            return true
-        } catch {
-            assertionFailure("Failed to reset persistent store: \(error)")
-            return false
-        }
+    private func resetPersistentStore(in context: NSManagedObjectContext) throws {
+        try deleteAllEntities(ofType: Phrase.self, in: context)
+        try deleteAllEntities(ofType: Category.self, in: context)
     }
 
     private func deleteAllEntities<T: NSManagedObject>(ofType: T.Type, in context: NSManagedObjectContext) throws {

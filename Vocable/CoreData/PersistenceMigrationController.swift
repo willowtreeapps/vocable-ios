@@ -11,6 +11,10 @@ import CoreData
 
 struct PersistenceMigrationController {
 
+    enum MigrationError: Error {
+        case failedToLoadPresets
+    }
+
     private let persistentContainer: NSPersistentContainer
 
     init(persistentContainer: NSPersistentContainer = .shared) {
@@ -24,30 +28,29 @@ struct PersistenceMigrationController {
             print("[PersistenceMigrationController] persistentStore URL: \(url)")
         }
 
-        let context = persistentContainer.viewContext
-
-        guard let presets = presetData else {
-            let message = NSLocalizedString("debug.assertion.presets_file_not_found",
-                                            comment: "Debugging error message for when preloaded content is not found")
-            assertionFailure(message)
-            return false
-        }
+        let context = persistentContainer.newBackgroundContext()
 
         do {
-
-            try createPrescribedEntities(in: context, with: presets)
-            try deleteOrphanedPhrases(in: context, with: presets)
-            try deleteOrphanedCategories(in: context, with: presets)
-            try deleteLegacyUserFavoritesCategoryIfNeeded(in: context)
-            try Category.updateAllOrdinalValues(in: context)
-
+            try performMigrationForCurrentLanguagePreferences(using: presetData, in: context)
             try context.save()
+            return true
         } catch {
-            assertionFailure(error.localizedDescription)
+            print("Failed to migrate for current language preferences: \(error)")
             return false
         }
+    }
 
-        return true
+    func performMigrationForCurrentLanguagePreferences(using presetData: PresetData? = TextPresets.presets, in context: NSManagedObjectContext) throws {
+
+        guard let presets = presetData else {
+            throw MigrationError.failedToLoadPresets
+        }
+
+        try createPrescribedEntities(in: context, with: presets)
+        try deleteOrphanedPhrases(in: context, with: presets)
+        try deleteOrphanedCategories(in: context, with: presets)
+        try deleteLegacyUserFavoritesCategoryIfNeeded(in: context)
+        try Category.updateAllOrdinalValues(in: context)
     }
 
     private func deleteOrphanedPhrases(in context: NSManagedObjectContext, with presets: PresetData) throws {
