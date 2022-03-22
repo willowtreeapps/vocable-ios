@@ -33,7 +33,7 @@ struct AppResetController {
             return false
         }
 
-        let migrationController = PersistenceMigrationController()
+        let migrationController = PersistenceMigrationController(persistentContainer: persistentContainer)
         let didMigrate = migrationController.performMigrationForCurrentLanguagePreferences(using: presets)
         guard didMigrate else {
             return false
