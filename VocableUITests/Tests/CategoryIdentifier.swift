@@ -30,19 +30,20 @@ struct CategoryIdentifier {
 struct CategoryTitleCellIdentifier {
 
     private let categoryIdentifier: CategoryIdentifier
-    let categoryTitleCellPrefix: String = "category_title_cell_"
+    static let categoryTitleCellPrefix: String = "category_title_cell_"
+    var identifier: String {
+        CategoryTitleCellIdentifier.categoryTitleCellPrefix + categoryIdentifier.identifier
+    }
     
-    // Empty: used to retrieve the prefix only
-    init() {
-        self.categoryIdentifier = CategoryIdentifier("")
+    init?(_ identifier: String){
+        if identifier.isEmpty{
+            return nil
+        }
+        self.categoryIdentifier = CategoryIdentifier(identifier.replacingOccurrences(of: CategoryTitleCellIdentifier.categoryTitleCellPrefix, with: ""))
     }
     
     init(_ identifier: CategoryIdentifier) {
         self.categoryIdentifier = identifier
-    }
-    
-    var identifier: String {
-        categoryTitleCellPrefix + categoryIdentifier.identifier
     }
     
 }
