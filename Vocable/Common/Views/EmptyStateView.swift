@@ -214,7 +214,7 @@ final class EmptyStateView: UIView {
 
         if let attributedButtonTitle = button.attributedTitle(for: .normal) {
             let updatedButtonTitle = NSMutableAttributedString(attributedString: attributedButtonTitle)
-            updatedButtonTitle.addAttribute(.font, value: font, range: updatedButtonTitle.string.fullNSRange)
+            updatedButtonTitle.addAttribute(.font, value: font, range: .entireRange(of: updatedButtonTitle.string))
             button.setAttributedTitle(updatedButtonTitle, for: .normal)
         }
 

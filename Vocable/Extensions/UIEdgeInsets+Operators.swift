@@ -39,5 +39,4 @@ extension UIEdgeInsets {
     static func horizontal(_ horizontalInset: CGFloat) -> UIEdgeInsets {
         .init(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)
     }
-
 }
