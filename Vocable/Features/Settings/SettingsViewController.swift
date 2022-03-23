@@ -257,7 +257,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
 
         case .pidTuner:
             presentPidTuner()
-
+        case .resetAppSettings:
+            presentAppResetPrompt()
         default:
             break
         }
@@ -348,6 +349,54 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 gazeWindow.cursorView?.isDebugCursorHidden = false
             }
         }
+    }
+
+    // MARK: Reset App Data
+
+    private func presentAppResetPrompt() {
+        let alertString = NSLocalizedString("settings.alert.reset_app_settings_confirmation.body",
+                                            comment: "body of alert presented when user attempts to reset Vocable's application settings")
+        let cancelTitle = NSLocalizedString("settings.alert.reset_app_settings_confirmation.button.cancel.title",
+        comment: "Button cancelling the action to reset Vocable's application settings")
+        let confirmationTitle = NSLocalizedString("settings.alert.reset_app_settings_confirmation.button.confirm.title",
+        comment: "Button confirming that the user would like to reset Vocable's application settings")
+
+        let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+
+        alertViewController.addAction(GazeableAlertAction(title: cancelTitle))
+        alertViewController.addAction(GazeableAlertAction(title: confirmationTitle, style: .destructive, handler: { [weak self] in
+
+            let resetController = AppResetController()
+            if resetController.performReset() {
+                self?.presentResetSuccessAlert()
+            } else {
+                self?.presentResetFailureAlert()
+            }
+
+        }))
+        present(alertViewController, animated: true)
+    }
+
+    private func presentResetSuccessAlert() {
+        let alertString = NSLocalizedString("settings.alert.reset_app_settings_success.body",
+                                            comment: "body of alert presented when the user successfully resets Vocable's application settings")
+        let dismissTitle = NSLocalizedString("settings.alert.reset_app_settings_success.button.ok",
+        comment: "Button dismissing the alert informing the user that Vocable's application settings were successfully reset")
+
+        let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+        alertViewController.addAction(GazeableAlertAction(title: dismissTitle))
+        present(alertViewController, animated: true)
+    }
+
+    private func presentResetFailureAlert() {
+        let alertString = NSLocalizedString("settings.alert.reset_app_settings_failure.body",
+                                            comment: "body of alert presented when Vocable's application settings failed to reset")
+        let dismissTitle = NSLocalizedString("settings.alert.reset_app_settings_success.button.ok",
+        comment: "Button dismissing the alert informing the user that Vocable's application settings failed to reset")
+
+        let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+        alertViewController.addAction(GazeableAlertAction(title: dismissTitle))
+        present(alertViewController, animated: true)
     }
 
     // MARK: MFMailComposeViewControllerDelegate
