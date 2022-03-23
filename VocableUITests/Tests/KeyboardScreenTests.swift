@@ -30,7 +30,7 @@ class KeyboardScreenTests: BaseTest {
         
         mainScreen.locateAndSelectDestinationCategory(.mySayings)
 
-        XCTAssertTrue(mainScreen.locatePhraseCell(phrase: testPhrase).exists, "Expected the phrase \(testPhrase) to be added to an displayed in 'My Sayings'")
+        XCTAssertTrue(mainScreen.locatePhraseCell(phrase: testPhrase).exists, "Expected the phrase \(testPhrase) to be added to and displayed in 'My Sayings'")
     }
     
     func testRemovePhraseFromMySayingsFromKeyboard() {
@@ -43,7 +43,7 @@ class KeyboardScreenTests: BaseTest {
        
         mainScreen.locateAndSelectDestinationCategory(.mySayings)
        
-        XCTAssertTrue(mainScreen.locatePhraseCell(phrase: testPhrase).exists, "Expected the phrase \(testPhrase) to be added to an displayed in 'My Sayings'")
+        XCTAssertTrue(mainScreen.locatePhraseCell(phrase: testPhrase).exists, "Expected the phrase \(testPhrase) to be added to and displayed in 'My Sayings'")
         
         mainScreen.keyboardNavButton.tap()
         keyboardScreen.typeText(testPhrase)
