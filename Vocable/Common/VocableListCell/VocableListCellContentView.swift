@@ -95,16 +95,17 @@ final class VocableListCellContentView: UIView, UIContentView {
         primaryLabelButton.setAttributedTitle(configuration?.attributedTitle, for: .normal)
         primaryLabelButton.addTarget(self, action: #selector(handlePrimaryActionSelection(_:)), for: .primaryActionTriggered)
 
-        // TODO: Handle updating the accessory content
-        
-//        let trailingInsets: NSDirectionalEdgeInsets = .init(top: 0, leading: 12, bottom: 0, trailing: 12)
-//        if let image = configuration?.trailingAccessory?.image {
-//            primaryLabelButton.setTrailingAccessoryView(UIImageView(image: image), insets: trailingInsets)
-//        } else if let customView = configuration?.trailingAccessory?.customView {
-//            primaryLabelButton.setTrailingAccessoryView(customView, insets: trailingInsets)
-//        } else {
-//            primaryLabelButton.setTrailingAccessoryView(nil, insets: .zero)
-//        }
+        let trailingInsets: NSDirectionalEdgeInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
+        switch configuration?.accessory?.content {
+        case .image(let image):
+            primaryLabelButton.setTrailingAccessoryView(UIImageView(image: image), insets: trailingInsets)
+        case .toggle(let isOn):
+            let toggle = UISwitch()
+            toggle.isOn = isOn
+            primaryLabelButton.setTrailingAccessoryView(toggle, insets: trailingInsets)
+        default:
+            primaryLabelButton.setTrailingAccessoryView(nil, insets: .zero)
+        }
     }
 
     private func updateLeadingActionAccessoryButtons(with configuration: VocableListContentConfiguration?) {
