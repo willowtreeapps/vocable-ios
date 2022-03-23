@@ -263,13 +263,13 @@ private extension EditPhrasesViewController {
             let attributedText = NSAttributedString(string: phrase.utterance ?? "", attributes: attributes)
             let phraseIdentifier = phrase.objectID
 
-            let deleteAction = VocableListCellContentView.Configuration.AccessoryAction(image: UIImage(systemName: "trash")!) { [weak self] in
+            let deleteAction = VocableListCellAction.delete { [weak self] in
                 self?.presentDeletionPromptForPhrase(with: phraseIdentifier)
             }
 
-            cell.contentConfiguration = VocableListCellContentView.Configuration(attributedText: attributedText,
-                                                                                 accessories: [deleteAction],
-                                                                                 trailingAccessory: .disclosureIndicator) { [weak self] in
+            cell.contentConfiguration = VocableListContentConfiguration(attributedText: attributedText,
+                                                                        actions: [deleteAction],
+                                                                        accessory: .disclosureIndicator()) { [weak self] in
                 self?.presentEditorForPhrase(with: phraseIdentifier)
             }
         }

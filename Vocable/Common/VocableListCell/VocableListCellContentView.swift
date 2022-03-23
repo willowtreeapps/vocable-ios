@@ -80,47 +80,58 @@ final class VocableListCellContentView: UIView, UIContentView {
     }
 
     private func configure(with configuration: UIContentConfiguration) {
-        guard let configuration = configuration as? Configuration else {
-            updateAccessoryButtons(with: nil)
+        guard let configuration = configuration as? VocableListContentConfiguration else {
+            updateLeadingActionAccessoryButtons(with: nil)
             updatePrimaryLabelButton(with: nil)
             return
         }
 
-        updateAccessoryButtons(with: configuration)
+        updateLeadingActionAccessoryButtons(with: configuration)
         updatePrimaryLabelButton(with: configuration)
     }
 
-    private func updatePrimaryLabelButton(with configuration: Configuration?) {
+    private func updatePrimaryLabelButton(with configuration: VocableListContentConfiguration?) {
         primaryLabelButton.contentHorizontalAlignment = .left
-        primaryLabelButton.setAttributedTitle(configuration?.attributedText, for: .normal)
+        primaryLabelButton.setAttributedTitle(configuration?.attributedTitle, for: .normal)
         primaryLabelButton.addTarget(self, action: #selector(handlePrimaryActionSelection(_:)), for: .primaryActionTriggered)
-        primaryLabelButton.setTrailingAccessoryView(configuration?.trailingAccessory?.customView, insets: .init(top: 0, leading: 12, bottom: 0, trailing: 12))
+
+        // TODO: Handle updating the accessory content
+        
+//        let trailingInsets: NSDirectionalEdgeInsets = .init(top: 0, leading: 12, bottom: 0, trailing: 12)
+//        if let image = configuration?.trailingAccessory?.image {
+//            primaryLabelButton.setTrailingAccessoryView(UIImageView(image: image), insets: trailingInsets)
+//        } else if let customView = configuration?.trailingAccessory?.customView {
+//            primaryLabelButton.setTrailingAccessoryView(customView, insets: trailingInsets)
+//        } else {
+//            primaryLabelButton.setTrailingAccessoryView(nil, insets: .zero)
+//        }
     }
 
-    private func updateAccessoryButtons(with configuration: Configuration?) {
+    private func updateLeadingActionAccessoryButtons(with configuration: VocableListContentConfiguration?) {
 
-        let accessories = configuration?.accessories ?? []
+        let actions = configuration?.actions ?? []
 
         // Ensure the minimum number of action buttons are present
-        let numberOfButtonsNeeded = max(accessories.count - accessoryButtonStackView.arrangedSubviews.count, 0)
+        let numberOfButtonsNeeded = max(actions.count - accessoryButtonStackView.arrangedSubviews.count, 0)
         (0 ..< numberOfButtonsNeeded).forEach { _ in
             insertAccessoryButton()
         }
 
         // Update existing buttons to match new states
         let arrangedButtons = accessoryButtonStackView.arrangedSubviews.compactMap { $0 as? GazeableButton }
-        zip(accessories, arrangedButtons).forEach { (action, button) in
+        zip(actions, arrangedButtons).forEach { (action, button) in
             button.isHidden = false
             button.setImage(action.image, for: .normal)
-
+            button.isEnabled = action.isEnabled
+            
             // Using UIControlEvent to avoid having to de-duplicate UIAction invocations
             button.addTarget(self,
-                             action: #selector(handleAccessoryActionSelection(_:)),
+                             action: #selector(handleLeadingAccessoryActionSelection(_:)),
                              for: .primaryActionTriggered)
         }
 
         // Hide extraneous buttons, if present
-        let numberOfButtonsToHide = min(arrangedButtons.count - accessories.count, 0)
+        let numberOfButtonsToHide = min(arrangedButtons.count - actions.count, 0)
         let buttonsToHide = arrangedButtons.suffix(numberOfButtonsToHide)
         buttonsToHide.forEach { button in
             button.isHidden = true
@@ -143,22 +154,22 @@ final class VocableListCellContentView: UIView, UIContentView {
 
     @objc
     private func handlePrimaryActionSelection(_ sender: GazeableButton) {
-        guard let configuration = configuration as? Configuration else {
+        guard let configuration = configuration as? VocableListContentConfiguration else {
             return
         }
-        configuration.primaryAction()
+        configuration.primaryAction?()
     }
 
     @objc
-    private func handleAccessoryActionSelection(_ sender: GazeableButton) {
+    private func handleLeadingAccessoryActionSelection(_ sender: GazeableButton) {
 
         guard let buttonIndex = accessoryButtonStackView.arrangedSubviews.firstIndex(of: sender) else {
             return
         }
-        guard let configuration = configuration as? Configuration else {
+        guard let configuration = configuration as? VocableListContentConfiguration else {
             return
         }
-        guard let accessory = configuration.accessories[safe: buttonIndex] else {
+        guard let accessory = configuration.actions[safe: buttonIndex] else {
             return
         }
         accessory.action?()
