@@ -22,7 +22,7 @@ class GazeableButton: UIButton {
     private let defaultIBStates = [UIControl.State.normal, .highlighted, .selected, .disabled]
 
     private var trailingAccessoryViewLayoutGuide = UILayoutGuide()
-    private var trailingAccessoryView: UIView?
+    private(set) var trailingAccessoryView: UIView?
 
     var shouldShrinkWhenTouched = true {
         didSet {

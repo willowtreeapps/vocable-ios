@@ -98,11 +98,20 @@ final class VocableListCellContentView: UIView, UIContentView {
         let trailingInsets: NSDirectionalEdgeInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
         switch configuration?.accessory?.content {
         case .image(let image):
-            primaryLabelButton.setTrailingAccessoryView(UIImageView(image: image), insets: trailingInsets)
+            if let trailingImageView = primaryLabelButton.trailingAccessoryView as? UIImageView {
+                trailingImageView.image = image
+            } else {
+                primaryLabelButton.setTrailingAccessoryView(UIImageView(image: image), insets: trailingInsets)
+            }
         case .toggle(let isOn):
-            let toggle = UISwitch()
-            toggle.isOn = isOn
-            primaryLabelButton.setTrailingAccessoryView(toggle, insets: trailingInsets)
+            if let trailingToggle = primaryLabelButton.trailingAccessoryView as? UISwitch {
+                trailingToggle.setOn(isOn, animated: true)
+            } else {
+                let toggle = UISwitch()
+                toggle.setOn(isOn, animated: true)
+                toggle.isUserInteractionEnabled = false
+                primaryLabelButton.setTrailingAccessoryView(toggle, insets: trailingInsets)
+            }
         default:
             primaryLabelButton.setTrailingAccessoryView(nil, insets: .zero)
         }
