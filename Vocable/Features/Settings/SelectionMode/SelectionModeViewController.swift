@@ -124,7 +124,7 @@ final class SelectionModeViewController: VocableCollectionViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsToggleCollectionViewCell
             let title = NSLocalizedString("settings.cell.head_tracking.title",
                                           comment: "Settings head tracking cell title")
-            cell.setup(title: title)
+            cell.setup(title: title, value: AppConfig.$isHeadTrackingEnabled)
             return cell
         }
     }

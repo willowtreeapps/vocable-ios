@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Oy-Td-pUY">
-                        <rect key="frame" x="0.0" y="93" width="147.5" height="41"/>
+                        <rect key="frame" x="0.0" y="93" width="147" height="41"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                         <color key="textColor" name="DefaultFontColor"/>
                         <nil key="highlightedColor"/>
@@ -33,13 +34,13 @@
                     </button>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="48G-ra-bCk" secondAttribute="trailing" id="84j-e9-XoT"/>
                 <constraint firstItem="7Oy-Td-pUY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="FgR-lF-rLd"/>
                 <constraint firstAttribute="bottom" secondItem="7Oy-Td-pUY" secondAttribute="bottom" id="Vtn-gY-E5Q"/>
                 <constraint firstAttribute="bottom" secondItem="48G-ra-bCk" secondAttribute="bottom" id="wlo-yo-vgd"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="346" height="134"/>
             <connections>
                 <outlet property="editButton" destination="48G-ra-bCk" id="grZ-up-r9Z"/>
@@ -48,6 +49,11 @@
             <point key="canvasLocation" x="352.17391304347831" y="124.55357142857142"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="48G-ra-bCk">
+            <size key="intrinsicContentSize" width="53.5" height="51.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <namedColor name="DefaultFontColor">

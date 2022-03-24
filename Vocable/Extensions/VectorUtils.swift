@@ -91,7 +91,7 @@ extension SCNVector3 {
     }
 
     func angleToReach(_ vectorB: SCNVector3) -> SCNFloat {
-        //cos(angle) = (A.B)/(|A||B|)
+        // cos(angle) = (A.B)/(|A||B|)
         let cosineAngle = (dot(vector: vectorB) / (magnitude * vectorB.magnitude))
         return SCNFloat(acos(cosineAngle))
     }

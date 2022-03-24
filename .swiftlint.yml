@@ -10,11 +10,12 @@ disabled_rules:
 opt_in_rules:
 - empty_count
 - empty_string
+included:
+  - Vocable
 excluded:
 - Carthage
 - Pods
 - SwiftLint/Common/3rdPartyLib
-force_cast: warning
 line_length:
     warning: 250
     error: 300

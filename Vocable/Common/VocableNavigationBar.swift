@@ -162,14 +162,6 @@ class VocableNavigationBar: UIView {
     }
 
     var titleView: UIView? {
-        set {
-            if let newValue = newValue {
-                contentView.titleView = newValue
-            } else {
-                contentView.titleView = defaultTitleLabel
-            }
-            updateSubviewAppearances()
-        }
         get {
             if let titleView = contentView.titleView {
                 if titleView == defaultTitleLabel {
@@ -178,6 +170,14 @@ class VocableNavigationBar: UIView {
                 return titleView
             }
             return nil
+        }
+        set {
+            if let newValue = newValue {
+                contentView.titleView = newValue
+            } else {
+                contentView.titleView = defaultTitleLabel
+            }
+            updateSubviewAppearances()
         }
     }
 

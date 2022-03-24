@@ -402,6 +402,14 @@
         {
             "id": "preset_user_favorites",
             "hidden": false
+        },
+        {
+            "id": "preset_user_recents",
+            "hidden": false
+        },
+        {
+            "id": "preset_listening_mode",
+            "hidden": false
         }
     ]
 }

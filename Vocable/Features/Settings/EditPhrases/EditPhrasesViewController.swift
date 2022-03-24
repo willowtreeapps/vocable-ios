@@ -32,7 +32,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Phrase.category, .equalTo, category)
+        request.predicate = Predicate(\Phrase.category, equalTo: category) && !Predicate(\Phrase.isUserRemoved)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
         return request
     }()
@@ -61,6 +61,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         navigationBar.rightButton = {
             let button = GazeableButton(frame: .zero)
             button.setImage(UIImage(systemName: "plus"), for: .normal)
+            button.accessibilityIdentifier = "settingsCategory.addPhraseButton"
             button.addTarget(self, action: #selector(addPhrasePressed), for: .primaryActionTriggered)
             return button
         }()
@@ -86,7 +87,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
             collectionView.layout.numberOfRows = .fixedCount(4)
         case (.compact, .regular):
             collectionView.layout.numberOfColumns = .fixedCount(1)
-            collectionView.layout.numberOfRows = .minimumHeight(130)
+            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(130))
         case (.compact, .compact), (.regular, .compact):
             collectionView.layout.numberOfColumns = .fixedCount(1)
             collectionView.layout.numberOfRows = .fixedCount(2)
@@ -123,10 +124,9 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
     }
 
     private func installEmptyStateIfNeeded() {
-        guard AppConfig.emptyStatesEnabled else { return }
         guard collectionView.backgroundView == nil else { return }
         paginationView.isHidden = true
-        collectionView.backgroundView = PhraseCollectionEmptyStateView(action: addPhrasePressed)
+        collectionView.backgroundView = EmptyStateView(type: EmptyStateType.phraseCollection, action: addPhrasePressed)
     }
 
     private func removeEmptyStateIfNeeded() {
@@ -147,8 +147,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
                 let alertMessage: String = {
                     let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
-                    let categoryName = Category.userFavoritesCategoryName()
-                    return String.localizedStringWithFormat(format, categoryName)
+                    return String.localizedStringWithFormat(format, self.category.name ?? "")
                 }()
 
                 ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
@@ -189,7 +188,12 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
         let phrase = self.fetchResultsController.object(at: safeIndexPath)
         let context = NSPersistentContainer.shared.viewContext
-        context.delete(phrase)
+
+        if phrase.isUserGenerated {
+            context.delete(phrase)
+        } else {
+            phrase.isUserRemoved = true
+        }
 
         do {
             try context.save()
@@ -206,17 +210,32 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         }
 
         let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        let vc = EditTextViewController()
-
         let phrase = fetchResultsController.object(at: safeIndexPath)
-        vc.initialText = phrase.utterance ?? ""
+        guard let originalPhraseIdentifier = phrase.identifier else {
+            assertionFailure("Phrase has no identifier at indexPath: \(safeIndexPath)")
+            return
+        }
+
+        let initialValue = phrase.utterance ?? ""
+
+        let vc = EditTextViewController()
+        vc.initialText = initialValue
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
-            if let phraseIdentifier = phrase.identifier {
-                let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                originalPhrase?.utterance = newText
+            guard let originalPhrase = Phrase.fetchObject(in: context, matching: originalPhraseIdentifier) else {
+                assertionFailure("Could not locate original phrase for editing")
+                return
             }
+
+            if originalPhrase.isUserGenerated {
+                originalPhrase.utterance = newText
+            } else {
+                let textDidChange = (newText != initialValue)
+                originalPhrase.utterance = newText
+                originalPhrase.isUserRenamed = originalPhrase.isUserRenamed || textDidChange
+            }
+
             do {
                 try context.save()
 
@@ -230,10 +249,10 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         }
 
         present(vc, animated: true)
-
     }
 
     private func handleDismissAlert() {
+
         func discardChangesAction() {
             self.navigationController?.popViewController(animated: true)
         }

@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Combine
 import AVFoundation
+import VocableListenCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         get {
             gazeableWindow
         }
-        //swiftlint:disable unused_setter_value
+        // swiftlint:disable unused_setter_value
         set {
 
         }
@@ -42,10 +43,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !AppConfig.isHeadTrackingSupported {
             AppConfig.isHeadTrackingEnabled = false
         }
-    
+
+        if ProcessInfo.processInfo.arguments.contains("resetAppDataOnLaunch") {
+            print("-resetAppDataOnLaunch detected, resetting app data")
+            let resetController = AppResetController()
+            if resetController.performReset() {
+                print("\t...Succeeded")
+            } else {
+                print("\t...Reset failed")
+            }
+        }
+
         // Ensure that the persistent store has the current
         // default presets before presenting UI
-        updatePersistentStoreForCurrentLanguagePreferences()
+        performPersistenceMigrationForCurrentLanguage()
         
         addObservers()
 
@@ -59,13 +70,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                name: NSLocale.currentLocaleDidChangeNotification,
                                                object: nil)
 
-        AppConfig.$isHeadTrackingEnabled.receive(on: DispatchQueue.main).sink { isEnabled in
+        AppConfig.$isHeadTrackingEnabled.receive(on: DispatchQueue.main).sink { [weak self] isEnabled in
+            guard let self = self else { return }
             if isEnabled {
                 self.installTrackingWindowsIfNeeded()
             } else {
                 self.removeTrackingWindowsIfNeeded()
             }
         }.store(in: &disposables)
+
+        _ = SpeechRecognitionController.shared
+
+        AppConfig.$isListeningModeEnabled
+            .removeDuplicates()
+            .sink { isEnabled in
+                if #available(iOS 14.0, *), isEnabled {
+                    VLClassifier.prepare()
+                }
+            }.store(in: &disposables)
 
         return true
     }
@@ -93,36 +115,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     @objc
     private func localeDidChange(_ note: Notification?) {
-        updatePersistentStoreForCurrentLanguagePreferences()
+        performPersistenceMigrationForCurrentLanguage()
     }
 
-    private func updatePersistentStoreForCurrentLanguagePreferences() {
-        let container = NSPersistentContainer.shared
-        if let url = container.persistentStoreCoordinator.persistentStores.first?.url?.absoluteString.removingPercentEncoding {
-            print("NSPersistentStore URL: \(url)")
-        }
-
-        let context = container.viewContext
-
-        guard let presets = TextPresets.presets else {
-            let message = NSLocalizedString("debug.assertion.presets_file_not_found",
-                                            comment: "Debugging error message for when preloaded content is not found")
-            assertionFailure(message)
-            return
-        }
-
-        do {
-
-            try createPrescribedEntities(in: context, with: presets)
-            try deleteOrphanedPhrases(in: context, with: presets)
-            try deleteOrphanedCategories(in: context, with: presets)
-            try deleteLegacyUserFavoritesCategoryIfNeeded(in: context)
-            try Category.updateAllOrdinalValues(in: context)
-
-            try context.save()
-        } catch {
-            assertionFailure(error.localizedDescription)
-        }
+    private func performPersistenceMigrationForCurrentLanguage() {
+        let migrationController = PersistenceMigrationController()
+        migrationController.performMigrationForCurrentLanguagePreferences()
     }
     
     private func addObservers() {
@@ -141,105 +139,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc private func headTrackingDisabled(_ sender: Any?) {
         ToastWindow.shared.dismissPersistentWarning()
-    }
-
-    private func deleteOrphanedPhrases(in context: NSManagedObjectContext, with presets: PresetData) throws {
-
-        let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = {
-            let identifiers = Set(presets.phrases.map { $0.id })
-            let isNotUserGenerated = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, false)
-            let identifierInSet = NSComparisonPredicate(\Phrase.identifier, .in, identifiers)
-            let identifierNotInSet = NSCompoundPredicate(notPredicateWithSubpredicate: identifierInSet)
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [isNotUserGenerated, identifierNotInSet])
-        }()
-
-        let results = try context.fetch(request)
-        for phrase in results {
-            context.delete(phrase)
-        }
-    }
-
-    private func deleteOrphanedCategories(in context: NSManagedObjectContext, with presets: PresetData) throws {
-
-        let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.predicate = {
-            let identifiers = Set(presets.categories.map { $0.id })
-            let isNotUserGenerated = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, false)
-            let identifierInSet = NSComparisonPredicate(\Category.identifier, .in, identifiers)
-            let identifierNotInSet = NSCompoundPredicate(notPredicateWithSubpredicate: identifierInSet)
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [isNotUserGenerated, identifierNotInSet])
-        }()
-
-        let results = try context.fetch(request)
-        for phrase in results {
-            context.delete(phrase)
-        }
-    }
-
-    private func deleteLegacyUserFavoritesCategoryIfNeeded(in context: NSManagedObjectContext) throws {
-        let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.predicate = {
-            // Legacy favorites category was .isUserGenerated = true with identifier = localized version
-            // of "My Sayings." Going forward, all identifiers for Phrases/Categories are prefixed, so
-            // we can use that to isolate the legacy category entry
-            let isUserGenerated = NSComparisonPredicate(\Category.isUserGenerated, .equalTo, true)
-            let identifierPrefixed = NSComparisonPredicate(\Category.identifier, .beginsWith, "user_")
-            let identifierNotPrefixed = NSCompoundPredicate(notPredicateWithSubpredicate: identifierPrefixed)
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [isUserGenerated, identifierNotPrefixed])
-        }()
-
-        let results = try context.fetch(request)
-        for category in results {
-            context.delete(category)
-        }
-    }
-
-    private func createPrescribedEntities(in context: NSManagedObjectContext, with presets: PresetData) throws {
-
-        try updateDefaultCategories(in: context, withPresets: presets)
-        try updateDefaultPhrases(in: context, withPresets: presets)
-        try updateCategoryForUserGeneratedPhrases(in: context)
-
-    }
-
-    private func updateDefaultCategories(in context: NSManagedObjectContext, withPresets presets: PresetData) throws {
-        for presetCategory in presets.categories {
-            let category = Category.fetchOrCreate(in: context, matching: presetCategory.id)
-            category.name = presetCategory.utterance
-            category.languageCode = presetCategory.languageCode
-            if category.isInserted {
-                category.isHidden = presetCategory.hidden
-            }
-        }
-    }
-
-    private func updateDefaultPhrases(in context: NSManagedObjectContext, withPresets presets: PresetData) throws {
-        for presetPhrase in presets.phrases {
-
-            let phrase = Phrase.fetchOrCreate(in: context, matching: presetPhrase.id)
-            phrase.utterance = presetPhrase.utterance
-            phrase.languageCode = presetPhrase.languageCode
-            
-            for identifier in presetPhrase.categoryIds {
-                if let category = Category.fetchObject(in: context, matching: identifier) {
-                    phrase.category = category
-                    category.addToPhrases(phrase)
-                }
-            }
-        }
-    }
-
-    private func updateCategoryForUserGeneratedPhrases(in context: NSManagedObjectContext) throws {
-        let mySayingsCategory = Category.fetch(.userFavorites, in: context)
-        let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Phrase.isUserGenerated, .equalTo, true)
-
-        let phraseResults = try context.fetch(request)
-
-        for phrase in phraseResults {
-            phrase.category = mySayingsCategory
-            mySayingsCategory.addToPhrases(phrase)
-        }
     }
 }

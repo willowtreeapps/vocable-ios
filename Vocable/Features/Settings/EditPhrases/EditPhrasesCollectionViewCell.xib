@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="vav-Zc-tQ2">
-                        <rect key="frame" x="20" y="44" width="56.5" height="188"/>
+                        <rect key="frame" x="20" y="44" width="56" height="188"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                         <color key="textColor" name="DefaultFontColor"/>
                         <nil key="highlightedColor"/>
@@ -68,6 +69,14 @@
             <point key="canvasLocation" x="-115.94202898550725" y="167.41071428571428"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="Jx7-73-ctO">
+            <size key="intrinsicContentSize" width="53.5" height="51.5"/>
+        </designable>
+        <designable name="r2i-5v-HG5">
+            <size key="intrinsicContentSize" width="55" height="59.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="trash" catalog="system" width="121" height="128"/>

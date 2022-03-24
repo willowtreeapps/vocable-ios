@@ -46,6 +46,7 @@ import UIKit
         super.viewWillAppear(animated)
         setViewMarginsForCurrentTraitCollection()
         installBackButtonIfNeeded()
+        view.layoutIfNeeded()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -103,6 +104,7 @@ import UIKit
         navigationBar.leftButton = {
             let button = GazeableButton(frame: .zero)
             button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            button.accessibilityIdentifier = "navigationBar.backButton"
             button.addTarget(navigationController,
                              action: #selector(UINavigationController.popViewController(animated:)),
                              for: .primaryActionTriggered)

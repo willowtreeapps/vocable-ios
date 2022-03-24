@@ -45,6 +45,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             let button = GazeableButton()
             button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             button.addTarget(self, action: #selector(handleBackButton(_:)), for: .primaryActionTriggered)
+            button.accessibilityIdentifier = "navigationBar.backButton"
             return button
         }()
     }
@@ -57,11 +58,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         snapshot.appendItems([.titleEditView])
 
         snapshot.appendSections([.body])
-        if AppConfig.editPhrasesEnabled {
-            snapshot.appendItems([.showCategoryToggle, .addPhrase, .removeCategory])
-        } else {
-            snapshot.appendItems([.showCategoryToggle, .removeCategory])
-        }
+        snapshot.appendItems([.showCategoryToggle, .addPhrase, .removeCategory])
 
         dataSource.apply(snapshot, animatingDifferences: false)
     }
@@ -163,10 +160,11 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryDetailTitleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryDetailTitleCollectionViewCell
             cell.delegate = self
             cell.textLabel.text = category.name
-
-            if !category.isUserGenerated {
-                cell.editButton.isEnabled = false
-            }
+            cell.editButton.isEnabled = true            
+            
+            // Assign identifiers for automation
+            cell.accessibilityIdentifier = "category_title"
+            cell.editButton.accessibilityIdentifier = "category_title_edit_button"
 
             return cell
 
@@ -179,6 +177,10 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
                 cell.showCategorySwitch.isOn = !category.isHidden
                 cell.showCategorySwitch.isEnabled = (category.identifier != .userFavorites)
             }
+            
+            // Assign an identifier for automation
+            cell.showCategorySwitch.accessibilityIdentifier = "show_category_toggle"
+            
             return cell
 
         case .addPhrase:
@@ -186,12 +188,20 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             let title = NSLocalizedString("Edit Phrases", comment: "Edit Phrases")
             cell.setup(title: title, image: UIImage(systemName: "chevron.right"))
             cell.isEnabled = shouldEnableItem(at: indexPath)
+            
+            // Assign an identifier for automation
+            cell.accessibilityIdentifier = "edit_phrases_cell"
+            
             return cell
 
         case .removeCategory:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryRemoveCollectionViewCell
             cell.isEnabled = shouldEnableItem(at: indexPath)
             cell.textLabel.text = NSLocalizedString("category_editor.detail.button.remove_category.title", comment: "Remove category button label within the category detail screen.")
+            
+            // Assign an identifier for automation
+            cell.accessibilityIdentifier = "remove_category_cell"
+            
             return cell
         }
     }
@@ -231,10 +241,10 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         switch selectedItem {
         case .titleEditView:
             return true
-        case .showCategoryToggle:
+        case .showCategoryToggle, .removeCategory:
             return (category.identifier != .userFavorites)
-        case .addPhrase, .removeCategory:
-            return category.isUserGenerated
+        case .addPhrase:
+            return category.allowsCustomPhrases
         }
     }
 
@@ -255,6 +265,10 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         category.setValue(!category.isHidden, forKey: "isHidden")
         cell.showCategorySwitch.isOn = shouldShowCategory
         saveContext()
+
+        if category == Category.listeningModeCategory() {
+            AppConfig.isListeningModeEnabled = shouldShowCategory
+        }
     }
 
     private func displayEditPhrasesViewController() {
@@ -288,10 +302,18 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
     }
     
     private func removeCategory() {
-       guard let category = category else { return }
-        context.delete(category)
-        saveContext()
-        self.navigationController?.popViewController(animated: true)
+        guard let category = category else { return }
+        if category.isUserGenerated {
+            context.delete(category)
+        } else {
+            category.isUserRemoved = true
+        }
+
+        try? Category.updateAllOrdinalValues(in: context)
+
+        if saveContext() {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     private func deselectCell() {
@@ -299,27 +321,38 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             collectionView.deselectItem(at: path, animated: true)
         }
     }
-    
-    private func saveContext() {
+
+    @discardableResult
+    private func saveContext() -> Bool {
         do {
             try context.save()
+            return true
         } catch {
             assertionFailure("Failed to unsave user generated phrase: \(error)")
         }
+        return false
     }
 
     // MARK: EditCategoryDetailTitleCollectionViewCellDelegate
 
     func didTapEdit() {
+        guard let categoryIdentifier = category.identifier else {
+            assertionFailure("Category has no identifier")
+            return
+        }
+
+        let initialValue = category.name ?? ""
         let viewController = EditTextViewController()
-        viewController.initialText = category.name ?? ""
+        viewController.initialText = initialValue
         viewController.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
-            if let categoryIdentifier = self.category.identifier {
-                let originalCategory = Category.fetchObject(in: context, matching: categoryIdentifier)
-                originalCategory?.name = newText
+            if let category = Category.fetchObject(in: context, matching: categoryIdentifier) {
+                let textDidChange = (newText != initialValue)
+                category.name = newText
+                category.isUserRenamed = category.isUserRenamed || textDidChange
             }
+
             do {
                 try Category.updateAllOrdinalValues(in: context)
                 try context.save()

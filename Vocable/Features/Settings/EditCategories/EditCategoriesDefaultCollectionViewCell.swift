@@ -12,11 +12,9 @@ final class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var moveDownButton: GazeableButton!
     @IBOutlet weak var moveUpButton: GazeableButton!
-    
-    @IBOutlet private weak var categoryNameLabel: UILabel!
-    
     @IBOutlet weak var showCategoryDetailButton: GazeableButton!
-    
+
+    @IBOutlet private weak var categoryNameLabel: UILabel!
     @IBOutlet private weak var topSeparator: UIView!
     @IBOutlet private weak var bottomSeparator: UIView!
     
@@ -40,7 +38,7 @@ final class EditCategoriesDefaultCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
 
         updateSeparatorMask()
-        for button in [moveUpButton, moveDownButton, showCategoryDetailButton].compactMap({$0}) {
+        for button in [moveUpButton, moveDownButton, showCategoryDetailButton].dropNils() {
             button.backgroundColor = .collectionViewBackgroundColor
             button.setFillColor(.defaultCellBackgroundColor, for: .normal)
             button.setTitleColor(.defaultTextColor, for: .normal)

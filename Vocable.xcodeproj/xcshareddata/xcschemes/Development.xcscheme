@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1140"
+   LastUpgradeVersion = "1230"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -56,6 +56,29 @@
                BlueprintName = "VocableUITests"
                ReferencedContainer = "container:Vocable.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "CustomCategoriesTest">
+               </Test>
+               <Test
+                  Identifier = "MainScreenTests/testCustonCategoryPagination()">
+               </Test>
+               <Test
+                  Identifier = "MainScreenTests/testDefaultCategoriesExist()">
+               </Test>
+               <Test
+                  Identifier = "MainScreenTests/testDisablingCategory()">
+               </Test>
+               <Test
+                  Identifier = "MainScreenTests/testSelectingCategoryChangesPhrases()">
+               </Test>
+               <Test
+                  Identifier = "SettingsScreenTests/testAddCustomCategory()">
+               </Test>
+               <Test
+                  Identifier = "SettingsScreenTests/testHideShowToggle()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
@@ -79,21 +102,15 @@
             ReferencedContainer = "container:Vocable.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "EmptyStatesEnabled"
-            value = ""
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "resetAppDataOnLaunch"
             isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "EditPhrasesEnabled"
-            value = ""
-            isEnabled = "NO">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
+         </CommandLineArgument>
+      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"

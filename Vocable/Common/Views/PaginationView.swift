@@ -64,6 +64,7 @@ final class PaginationView: UIView {
         textLabel.minimumScaleFactor = 0.8
         textLabel.numberOfLines = 2
         textLabel.setContentCompressionResistancePriority(.init(999), for: .horizontal)
+        textLabel.accessibilityIdentifier = "bottomPagination.pageNumber"
 
         nextPageButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         nextPageButton.tintColor = .defaultTextColor

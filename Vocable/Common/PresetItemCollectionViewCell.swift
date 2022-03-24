@@ -56,11 +56,14 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
         // constraint errors
         let rightConstraint = textLabel.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor)
         rightConstraint.priority = .init(999)
+
+        let bottomConstraint = textLabel.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
+        bottomConstraint.priority = .init(999)
         NSLayoutConstraint.activate([
             rightConstraint,
             textLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
             textLabel.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor),
-            textLabel.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
+            bottomConstraint
         ])
 
         updateContentViews()

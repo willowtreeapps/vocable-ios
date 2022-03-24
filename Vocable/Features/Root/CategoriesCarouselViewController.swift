@@ -8,20 +8,30 @@
 
 import UIKit
 import CoreData
+import Speech
+import Combine
 
 @IBDesignable class CategoriesCarouselViewController: UIViewController, NSFetchedResultsControllerDelegate, UICollectionViewDelegate {
 
     static func fetchInitialCategoryID() -> NSManagedObjectID {
         let ctx = NSPersistentContainer.shared.viewContext
-        let predicate = NSComparisonPredicate(\Category.isHidden, .equalTo, false)
+        let predicate = !Predicate(\Category.isHidden) && !Predicate(\Category.isUserRemoved)
         let sort = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)]
-        let categories = Category.fetchAll(in: ctx,
-                          matching: predicate,
-                          sortDescriptors: sort)
+        let categories = Category.fetchAll(in: ctx, matching: predicate, sortDescriptors: sort)
+        return categories[0].objectID
+    }
+
+    static func fetchVoiceCategoryID() -> NSManagedObjectID {
+        let ctx = NSPersistentContainer.shared.viewContext
+        let predicate = Predicate(\Category.identifier, equalTo: Category.Identifier.listeningMode)
+        let categories = Category.fetchAll(in: ctx, matching: predicate)
         return categories[0].objectID
     }
 
     @PublishedValue private(set) var categoryObjectID = fetchInitialCategoryID()
+    private var hotWordCancellable: AnyCancellable?
+    private var listeningModeEnabledCancellable: AnyCancellable?
+
     @IBOutlet private weak var backChevron: GazeableButton!
     @IBOutlet private weak var forwardChevron: GazeableButton!
     @IBOutlet private weak var collectionViewContainer: UIView!
@@ -30,23 +40,14 @@ import CoreData
 
     private var collectionViewMask = BorderedView(frame: .zero)
 
-    private lazy var fetchRequest: NSFetchRequest<Category> = {
-        let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Category.isHidden, .equalTo, false)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)]
-        return request
-    }()
-
-    private lazy var frc = NSFetchedResultsController<Category>(fetchRequest: self.fetchRequest,
-                                                                managedObjectContext: NSPersistentContainer.shared.viewContext,
-                                                                sectionNameKeyPath: nil,
-                                                                cacheName: nil)
+    private var frc: NSFetchedResultsController<Category>!
 
     private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
         guard let self = self else { return nil }
         let category = self.frc.object(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
         cell.setup(title: category.name!)
+        cell.accessibilityIdentifier = ["category_title_cell", category.identifier].compactMap{$0}.joined(separator: "_")
         return cell
     }
 
@@ -73,8 +74,25 @@ import CoreData
 
         updateForCurrentTraitCollection()
 
-        frc.delegate = self
-        try? frc.performFetch()
+        updateFetchedResultsController()
+
+        hotWordCancellable = SpeechRecognitionController.shared.$transcription
+            .filter { value in
+                if case .hotWord = value {
+                    return true
+                }
+                return false
+            }.receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.navigateToVoiceCategory()
+            }
+
+        listeningModeEnabledCancellable = AppConfig.$isListeningModeEnabled
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isEnabled in
+                self?.listeningModeEnabledStateDidChange(isEnabled)
+            }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -118,6 +136,40 @@ import CoreData
         }
     }
 
+    private func categoriesFetchRequest() -> NSFetchRequest<Category> {
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        var predicate = !Predicate(\Category.isHidden) && !Predicate(\Category.isUserRemoved)
+
+        let shouldRemoveListeningCategory = false
+        || !AppConfig.isListeningModeSupported
+        || !AppConfig.isVoiceExperimentEnabled
+        || !AppConfig.isListeningModeEnabled
+        || !SpeechRecognitionController.shared.deviceSupportsSpeech
+
+        if shouldRemoveListeningCategory {
+            predicate &= Predicate(\Category.identifier, notEqualTo: Category.Identifier.listeningMode)
+        }
+        request.predicate = predicate
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)]
+        return request
+    }
+
+    private func categoriesFetchedResultsController() -> NSFetchedResultsController<Category> {
+        return NSFetchedResultsController<Category>(fetchRequest: categoriesFetchRequest(),
+                                                    managedObjectContext: NSPersistentContainer.shared.viewContext,
+                                                    sectionNameKeyPath: nil,
+                                                    cacheName: nil)
+    }
+
+    private func updateFetchedResultsController() {
+        frc?.delegate = nil
+
+        let controller = categoriesFetchedResultsController()
+        controller.delegate = self
+        frc = controller
+        try? frc.performFetch()
+    }
+
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
 
         let previousItem: (objectID: NSManagedObjectID, indexPath: IndexPath)? = {
@@ -149,8 +201,7 @@ import CoreData
             }()
 
             guard let newPath = newItemIndexPath else {
-                // No new path to select
-                assertionFailure("New selection index path not found")
+                // No new path to select. This can occur during app reset.
                 return
             }
 
@@ -222,6 +273,34 @@ import CoreData
         })
     }
 
+    private func listeningModeEnabledStateDidChange(_ isEnabled: Bool) {
+
+        let previousSelectedCategory = categoryObjectID
+        updateFetchedResultsController()
+
+        let destinationIndexPath: IndexPath
+        let destinationObjectID: NSManagedObjectID
+        if let desiredIndexPath = dataSourceProxy.indexPath(for: previousSelectedCategory) {
+            destinationIndexPath = desiredIndexPath
+            destinationObjectID = previousSelectedCategory
+        } else {
+            let initialCategory = CategoriesCarouselViewController.fetchInitialCategoryID()
+            guard let indexPath = dataSourceProxy.indexPath(for: initialCategory) else { return }
+            destinationIndexPath = indexPath
+            destinationObjectID = initialCategory
+        }
+
+        for indexPath in collectionView.indexPathsForSelectedItems ?? [] {
+            collectionView.deselectItem(at: indexPath, animated: false)
+        }
+        dataSourceProxy.performActions(on: destinationIndexPath) { (aPath) in
+            collectionView.selectItem(at: aPath, animated: false, scrollPosition: [])
+        }
+
+        collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary()
+        self.categoryObjectID = destinationObjectID
+    }
+
     // MARK: - UICollectionViewDelegate
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -236,5 +315,31 @@ import CoreData
         let mappedIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
         categoryObjectID = frc.object(at: mappedIndexPath).objectID
         updateSelectedIndexPathsInProxyDataSource()
+    }
+
+    private func navigateToVoiceCategory() {
+
+        guard AppConfig.isVoiceExperimentEnabled else {
+            return
+        }
+
+        if self.presentedViewController != nil {
+            dismiss(animated: true, completion: nil)
+        }
+
+        let objectID = CategoriesCarouselViewController.fetchVoiceCategoryID()
+        guard categoryObjectID != objectID, let desiredIndexPath = dataSourceProxy.indexPath(for: objectID) else {
+            return
+        }
+
+        for indexPath in collectionView.indexPathsForSelectedItems ?? [] {
+            collectionView.deselectItem(at: indexPath, animated: false)
+        }
+        dataSourceProxy.performActions(on: desiredIndexPath) { (aPath) in
+            collectionView.selectItem(at: aPath, animated: false, scrollPosition: [])
+        }
+
+        collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary()
+        self.categoryObjectID = objectID
     }
 }

@@ -16,6 +16,8 @@ extension Category: NSManagedObjectIdentifiable {
         setPrimitiveValue(Date(), forKey: #keyPath(creationDate))
         setPrimitiveValue(false, forKey: #keyPath(isUserGenerated))
         setPrimitiveValue(Int32.max, forKey: #keyPath(ordinal))
+        setPrimitiveValue(false, forKey: #keyPath(isUserRemoved))
+        setPrimitiveValue(false, forKey: #keyPath(isUserRenamed))
     }
 
     static func userFavoritesCategoryName() -> String {
@@ -30,6 +32,11 @@ extension Category: NSManagedObjectIdentifiable {
         return category
     }
 
+    static func listeningModeCategory() -> Category {
+        let context = NSPersistentContainer.shared.viewContext
+        let category = Category.fetch(.listeningMode, in: context)
+        return category
+    }
 }
 
 extension Phrase: NSManagedObjectIdentifiable {
@@ -39,5 +46,7 @@ extension Phrase: NSManagedObjectIdentifiable {
         super.awakeFromInsert()
         setPrimitiveValue(Date(), forKey: #keyPath(creationDate))
         setPrimitiveValue(false, forKey: #keyPath(isUserGenerated))
+        setPrimitiveValue(false, forKey: #keyPath(isUserRemoved))
+        setPrimitiveValue(false, forKey: #keyPath(isUserRenamed))
     }
 }

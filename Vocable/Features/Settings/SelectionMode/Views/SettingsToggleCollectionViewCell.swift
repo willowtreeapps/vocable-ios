@@ -14,28 +14,24 @@ import ARKit
 class SettingsToggleCollectionViewCell: VocableCollectionViewCell {
 
     @IBOutlet private weak var textLabel: UILabel!
-    @IBOutlet weak var enabledSwitch: UISwitch!
-    
-    private var cancellables = Set<AnyCancellable>()
+    @IBOutlet private weak var enabledSwitch: UISwitch!
+
+    private var valueCancellable: AnyCancellable?
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         enabledSwitch.isUserInteractionEnabled = false
-        enabledSwitch.isEnabled = AppConfig.isHeadTrackingSupported
-        enabledSwitch.isOn = AppConfig.isHeadTrackingEnabled
-        
-        AppConfig.$isHeadTrackingEnabled.sink { [weak self] isEnabled in
-            self?.enabledSwitch.setOn(isEnabled, animated: true)
-        }.store(in: &cancellables)
-    }
-    
-    override func updateContentViews() {
-        super.updateContentViews()
     }
 
-    func setup(title: String) {
+    func setup(title: String, value: CurrentValueSubject<Bool, Never>) {
         textLabel.text = title
+        enabledSwitch.isEnabled = value.value
+        enabledSwitch.isOn = value.value
+        valueCancellable = value.dropFirst().sink { [weak self] isEnabled in
+            self?.enabledSwitch.setOn(isEnabled, animated: true)
+            self?.enabledSwitch.isEnabled = isEnabled
+        }
     }
     
     func setup(with image: UIImage?) {

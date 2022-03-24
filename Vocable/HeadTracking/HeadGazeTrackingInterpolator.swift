@@ -181,7 +181,7 @@ class HeadGazeTrackingInterpolator {
         let scale = getFaceScale()
         let mtx = getFaceTransformationMatrix()
         var (c0, c1, c2, c3) = mtx.columns
-        c3 = simd_float4(0, 0, 0, 1) //zero out translation components
+        c3 = simd_float4(0, 0, 0, 1) // zero out translation components
         c0 /= scale[0]
         c1 /= scale[1]
         c2 /= scale[2]

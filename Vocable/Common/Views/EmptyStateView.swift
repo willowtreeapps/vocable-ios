@@ -21,13 +21,76 @@ private class EmptyStateButton: GazeableButton {
     }
 
     private func commonInit() {
-        contentEdgeInsets = .init(top: 16, left: 16, bottom: 16, right: 16)
+        updateForCurrentTraitCollection()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateForCurrentTraitCollection()
+    }
+
+    private func updateForCurrentTraitCollection() {
+        let hasCompactSize = [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass]
+            .contains(.compact)
+
+        contentEdgeInsets = hasCompactSize ?
+            .vertical(8) + .horizontal(48) :
+            .uniform(32)
     }
 }
 
-class EmptyStateView: UIView {
+protocol EmptyStateRepresentable {
+    var title: String { get }
+    var description: String? { get }
+    var buttonTitle: String? { get }
+    var image: UIImage? { get }
+}
 
-    typealias ButtonConfiguration = (title: String, action: () -> Void)
+enum EmptyStateType: EmptyStateRepresentable {
+
+    case recents
+    case phraseCollection
+
+    var title: String {
+        switch self {
+        case.recents:
+            return NSLocalizedString("recents_empty_state.header.title", comment: "Recents empty state title")
+        case .phraseCollection:
+            return NSLocalizedString("empty_state.header.title", comment: "Empty state title")
+        }
+    }
+
+    var description: String? {
+        switch self {
+        case .recents:
+            return NSLocalizedString("recents_empty_state.body.title", comment: "Recents empty state description")
+        default:
+            return nil
+        }
+    }
+
+    var buttonTitle: String? {
+        switch self {
+        case .recents:
+            return nil
+        default:
+            return NSLocalizedString("empty_state.button.title", comment: "Empty state Add Phrase button title")
+        }
+    }
+
+    var image: UIImage? {
+        switch self {
+        case .recents:
+            return UIImage(named: "recents")
+        default:
+            return nil
+        }
+    }
+}
+
+final class EmptyStateView: UIView {
+
+    typealias ButtonConfiguration = (() -> Void)?
 
     var image: UIImage? {
         get {
@@ -35,55 +98,53 @@ class EmptyStateView: UIView {
         }
         set {
             imageView.image = newValue
-
-            if newValue != nil {
-                stackView.insertArrangedSubview(imageView, at: 0)
-            } else {
-                stackView.removeArrangedSubview(imageView)
-                imageView.removeFromSuperview()
-            }
+            updateStackView()
         }
     }
 
-    var text: String? {
+    var titleAttributedText: NSAttributedString? {
         get {
-            label.text
+            titleLabel.attributedText
         }
         set {
-            label.text = newValue
+            titleLabel.attributedText = newValue
         }
     }
 
-    var attributedText: NSAttributedString? {
+    var descriptionAttributedText: NSAttributedString? {
         get {
-            label.attributedText
+            descriptionLabel.attributedText
         }
         set {
-            label.attributedText = newValue
+            descriptionLabel.attributedText = newValue
+            updateStackView()
         }
     }
 
     private let imageView = UIImageView(frame: .zero)
-    private let label = UILabel(frame: .zero)
+    private let titleLabel = UILabel(frame: .zero)
+    private let descriptionLabel = UILabel(frame: .zero)
     private let button = EmptyStateButton(frame: .zero)
-    private let action: ButtonConfiguration?
+    private var action: ButtonConfiguration
 
-    private lazy var stackView = UIStackView(arrangedSubviews: [self.imageView, self.label])
+    private lazy var stackView = UIStackView(arrangedSubviews: [self.imageView, self.titleLabel, self.descriptionLabel])
 
-    init(text: String, image: UIImage? = nil, action: ButtonConfiguration? = nil) {
+    init<T: EmptyStateRepresentable>(type: T, action: ButtonConfiguration = nil) {
         self.action = action
         super.init(frame: .zero)
-        self.text = text
-        self.image = image
-        commonInit()
-    }
 
-    init(attributedText: NSAttributedString, action: ButtonConfiguration? = nil) {
-        self.action = action
-        super.init(frame: .zero)
-        self.text = nil
-        self.image = nil
-        self.attributedText = attributedText
+        imageView.image = type.image
+        let attributedTitle = NSAttributedString(string: type.title, attributes: [.font: UIFont.boldSystemFont(ofSize: 24), .foregroundColor: UIColor.defaultTextColor])
+        titleAttributedText = attributedTitle
+
+        if let description = type.description {
+            let attributedDescription = NSAttributedString(string: description, attributes: [.foregroundColor: UIColor.defaultTextColor])
+            descriptionAttributedText = attributedDescription
+        } else {
+            descriptionAttributedText = nil
+        }
+        button.setTitle(type.buttonTitle, for: .normal)
+
         commonInit()
     }
 
@@ -95,18 +156,18 @@ class EmptyStateView: UIView {
 
     private func commonInit() {
 
-        layoutMargins = .zero
         backgroundColor = .collectionViewBackgroundColor
 
         stackView.spacing = 24
         stackView.axis = .vertical
         stackView.alignment = .center
 
-        if let action = action {
-            let font = UIFont.boldSystemFont(ofSize: 18)
-            let attributed = NSAttributedString(string: action.title,
-                                                attributes: [.font: font, .foregroundColor: UIColor.defaultTextColor])
-            button.setAttributedTitle(attributed, for: .normal)
+        if action != nil {
+            if let title = button.title(for: .normal) {
+                let attributed = NSAttributedString(string: title,
+                                                    attributes: [.foregroundColor: UIColor.defaultTextColor])
+                button.setAttributedTitle(attributed, for: .normal)
+            }
             button.addTarget(self,
                              action: #selector(handleButton(_:)),
                              for: .primaryActionTriggered)
@@ -115,27 +176,25 @@ class EmptyStateView: UIView {
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
+
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.topAnchor),
-            stackView.leftAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leftAnchor),
-            stackView.rightAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.rightAnchor),
-            stackView.bottomAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.bottomAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stackView.centerXAnchor.constraint(equalTo: centerXAnchor)
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            stackView.widthAnchor.constraint(lessThanOrEqualTo: readableContentGuide.widthAnchor),
+            stackView.heightAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.heightAnchor)
         ])
 
         let color = UIColor.defaultTextColor
         imageView.tintColor = color
 
-        label.textColor = color
-        label.textAlignment = .center
-        label.numberOfLines = 0
+        titleLabel.textColor = color
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
 
-        NSLayoutConstraint.activate([
-            label.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor)
-        ])
+        descriptionLabel.numberOfLines = 0
 
         updateContentForCurrentTraitCollection()
+        updateStackView()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -144,15 +203,29 @@ class EmptyStateView: UIView {
     }
 
     private func updateContentForCurrentTraitCollection() {
+        let hasCompactSize = [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass]
+            .contains(.compact)
 
-        if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
-            label.font = .boldSystemFont(ofSize: 28)
-        } else {
-            label.font = .boldSystemFont(ofSize: 20)
+        let font: UIFont = hasCompactSize ?
+            .systemFont(ofSize: 22, weight: .bold) :
+            .systemFont(ofSize: 28, weight: .bold)
+
+        titleLabel.font = font
+
+        if let attributedButtonTitle = button.attributedTitle(for: .normal) {
+            let updatedButtonTitle = NSMutableAttributedString(attributedString: attributedButtonTitle)
+            updatedButtonTitle.addAttribute(.font, value: font, range: .entireRange(of: updatedButtonTitle.string))
+            button.setAttributedTitle(updatedButtonTitle, for: .normal)
         }
+
     }
 
     @objc private func handleButton(_ sender: GazeableButton) {
-        action?.action()
+        action?()
+    }
+
+    private func updateStackView() {
+        imageView.isHidden = imageView.image == nil
+        descriptionLabel.isHidden = descriptionLabel.text == nil && descriptionLabel.attributedText == nil
     }
 }

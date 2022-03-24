@@ -6,6 +6,8 @@
 "preset_52CA4E71-4A8C-4EA8-8EA8-C4B18AA16EC8" = "Environment";
 "preset_user_keypad" = "123";
 "preset_user_favorites" = "My Sayings";
+"preset_user_recents" = "Recents";
+"preset_listening_mode" = "Listen";
 "preset_7ACA0926-DB7F-4B9E-872C-AE9690AD79E7" = "I need to go to the restroom";
 "preset_9DEB32B5-8606-4689-8F6A-0B251F4DB377" = "I am thirsty";
 "preset_E012D902-E8BA-4BEA-92C7-7107ECF8051C" = "I am hungry";

@@ -10,7 +10,9 @@ import UIKit
 
 class VocableCollectionViewController: VocableViewController, UICollectionViewDelegate {
 
-    private(set) var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    typealias CollectionViewType = UICollectionView
+
+    private(set) var collectionView = CollectionViewType(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private var volatileConstraints = [NSLayoutConstraint]()
 
     convenience init() {

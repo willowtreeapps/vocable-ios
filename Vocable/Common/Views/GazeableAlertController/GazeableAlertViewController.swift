@@ -10,9 +10,10 @@ import UIKit
 
 final class GazeableAlertAction: NSObject {
 
-    public enum Style {
+    enum Style {
         case bold
         case `default`
+        case destructive
     }
 
     let title: String
@@ -96,21 +97,7 @@ private final class GazeableAlertButton: GazeableButton {
 
     var style: GazeableAlertAction.Style = .default {
         didSet {
-            switch style {
-            case .bold:
-                if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
-                    titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-                } else {
-                    titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-                }
-
-            case .default:
-                if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
-                    titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-                } else {
-                    titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .regular)
-                }
-            }
+            updateForCurrentTraitCollection()
         }
     }
 
@@ -127,11 +114,6 @@ private final class GazeableAlertButton: GazeableButton {
     }
 
     private func commonInit() {
-        setFillColor(.alertBackgroundColor, for: .normal)
-        setFillColor(.primaryColor, for: .selected)
-
-        setTitleColor(.white, for: .selected)
-        setTitleColor(.black, for: .normal)
 
         cornerRadius = 14
         titleLabel?.adjustsFontSizeToFitWidth = true
@@ -142,7 +124,35 @@ private final class GazeableAlertButton: GazeableButton {
     }
 
     private func updateForCurrentTraitCollection() {
+
+        switch style {
+        case .bold, .destructive:
+            if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
+                titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+            } else {
+                titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+            }
+
+        case .default:
+            if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
+                titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+            } else {
+                titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .regular)
+            }
+        }
+        
         contentEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24)
+
+        setFillColor(.alertBackgroundColor, for: .normal)
+        setFillColor(.primaryColor, for: .selected)
+
+        if case .destructive = style {
+            setTitleColor(.errorRed, for: .normal)
+        } else {
+            setTitleColor(.black, for: .normal)
+        }
+
+        setTitleColor(.white, for: .selected)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -28,15 +28,24 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        request.predicate = NSComparisonPredicate(\Phrase.category, .equalTo, self.category)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
+
+        var predicate = !Predicate(\Phrase.isUserRemoved)
+        if category.identifier == Category.Identifier.recents {
+            predicate &= Predicate(\Phrase.lastSpokenDate, notEqualTo: nil)
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.lastSpokenDate, ascending: false)]
+            request.fetchLimit = 9
+        } else {
+            predicate &= Predicate(\Phrase.category, equalTo: self.category)
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \Phrase.creationDate, ascending: false)]
+        }
+        request.predicate = predicate
         return request
     }()
 
     private lazy var frc = NSFetchedResultsController<Phrase>(fetchRequest: self.fetchRequest,
-                                                                                 managedObjectContext: NSPersistentContainer.shared.viewContext,
-                                                                                 sectionNameKeyPath: nil,
-                                                                                 cacheName: nil)
+                                                              managedObjectContext: NSPersistentContainer.shared.viewContext,
+                                                              sectionNameKeyPath: nil,
+                                                              cacheName: nil)
 
     convenience init(category: Category) {
         self.init(nibName: nil, bundle: nil)
@@ -57,6 +66,10 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         updateLayoutForCurrentTraitCollection()
 
         frc.delegate = self
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         try? frc.performFetch()
     }
 
@@ -71,7 +84,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         switch sizeClass {
         case .hRegular_vRegular:
             collectionView.layout.numberOfColumns = .fixedCount(3)
-            collectionView.layout.numberOfRows = .minimumHeight(120)
+            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(120))
         case .hCompact_vRegular:
             collectionView.layout.numberOfColumns = .fixedCount(2)
             collectionView.layout.numberOfRows = .fixedCount(4)
@@ -109,11 +122,17 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         }
 
         let path = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        guard let utterance = frc.object(at: path).utterance else {
+        let phrase = frc.object(at: path)
+        guard let utterance = phrase.utterance else {
             lastUtterance = nil
             return
         }
         lastUtterance = utterance
+
+        if category.identifier != Category.Identifier.recents {
+            phrase.lastSpokenDate = Date()
+            try? frc.managedObjectContext.save()
+        }
 
         // Dispatch to get off the main queue for performance
         DispatchQueue.global(qos: .userInitiated).async {
@@ -122,10 +141,13 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
     }
 
     private func installEmptyStateIfNeeded() {
-        guard AppConfig.emptyStatesEnabled else { return }
         guard collectionView.backgroundView == nil else { return }
         paginationView.isHidden = true
-        collectionView.backgroundView = PhraseCollectionEmptyStateView(action: addNewPhraseButtonSelected)
+        if category.identifier == Category.Identifier.recents {
+            collectionView.backgroundView = EmptyStateView(type: EmptyStateType.recents)
+        } else {
+            collectionView.backgroundView = EmptyStateView(type: EmptyStateType.phraseCollection, action: addNewPhraseButtonSelected)
+        }
     }
 
     private func removeEmptyStateIfNeeded() {
@@ -220,14 +242,14 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         vc.editTextCompletionHandler = { (newText) -> Void in
             let context = NSPersistentContainer.shared.viewContext
 
-            _ = Phrase.create(withUserEntry: newText, in: context)
+            _ = Phrase.create(withUserEntry: newText, category: self.category, in: context)
             do {
                 try context.save()
 
                 let alertMessage: String = {
                     let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
-                    let categoryName = Category.userFavoritesCategoryName()
-                    return String.localizedStringWithFormat(format, categoryName)
+                    let categoryName = self.category.name
+                    return String.localizedStringWithFormat(format, categoryName!)
                 }()
 
                 ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)

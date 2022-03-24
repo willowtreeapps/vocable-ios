@@ -11,8 +11,10 @@ import Combine
 
 @IBDesignable class PagingCarouselViewController: VocableViewController, UICollectionViewDelegate {
 
+    typealias CollectionViewType = CarouselGridCollectionView
+
     private(set) var paginationView = PaginationView()
-    private(set) var collectionView = CarouselGridCollectionView()
+    private(set) var collectionView = CollectionViewType()
 
     private var disposables = Set<AnyCancellable>()
     private var volatileConstraints = [NSLayoutConstraint]()
@@ -52,12 +54,14 @@ import Combine
 
         collectionView.delegate = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.preservesSuperviewLayoutMargins = true
         view.addSubview(collectionView)
 
         paginationView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(paginationView)
 
-        collectionView.progressPublisher.sink(receiveValue: { (pagingProgress) in
+        collectionView.progressPublisher.sink(receiveValue: { [weak self] (pagingProgress) in
+            guard let self = self else { return }
             self.paginationView.setPaginationButtonsEnabled(pagingProgress.pageCount > 1)
             self.paginationView.textLabel.text = pagingProgress.localizedString
         }).store(in: &disposables)
@@ -84,7 +88,12 @@ import Combine
         if navigationBarIfLoaded() != nil {
             insets.top = 8
         }
+
         insets.bottom = 8
+        if isPaginationViewHidden {
+            insets.bottom += view.safeAreaInsets.bottom
+        }
+        
         collectionView.layout.pageInsets = insets
     }
 
@@ -121,7 +130,7 @@ import Combine
         // Pagination view
         if isPaginationViewHidden {
             constraints += [
-                collectionView.bottomAnchor.constraint(greaterThanOrEqualTo: layoutMargins.bottomAnchor)
+                collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ]
         } else {
             constraints += [

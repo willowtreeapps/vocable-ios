@@ -32,17 +32,31 @@ struct AppConfig {
     @PublishedDefault(key: "sensitivitySetting", defaultValue: CursorSensitivity.medium)
     static var cursorSensitivity: CursorSensitivity
 
+    @PublishedDefault(key: "isHotWordPermitted", defaultValue: true)
+    static var isHotWordPermitted: Bool
+
+    @PublishedDefault(key: "isListeningModeEnabled", defaultValue: isListeningModeSupported)
+    static var isListeningModeEnabled: Bool
+
+    static var isListeningModeSupported: Bool {
+
+        // Listening mode is currently only supported for English
+        if Locale(identifier: activePreferredLanguageCode).languageCode != "en" {
+            return false
+        }
+
+        // ML models currently rely on CoreML features introduced in iOS 14
+        if #available(iOS 14.0, *) {
+            return true
+        }
+        return false
+    }
+
     static let defaultLanguageCode = "en"
     static var activePreferredLanguageCode: String {
         return Locale.preferredLanguages.first ?? defaultLanguageCode
     }
 
-    static var emptyStatesEnabled: Bool {
-        return ProcessInfo.processInfo.environment.keys.contains("EmptyStatesEnabled")
-    }
-
-    static var editPhrasesEnabled: Bool {
-        return ProcessInfo.processInfo.environment.keys.contains("EditPhrasesEnabled")
-    }
+    static let isVoiceExperimentEnabled = true
 
 }

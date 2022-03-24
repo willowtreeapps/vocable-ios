@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "VocableCore",
+        "repositoryURL": "https://github.com/willowtreeapps/vocable-ios-spm.git",
+        "state": {
+          "branch": null,
+          "revision": "666e9f56650705150043b004680710342d77854d",
+          "version": "0.0.9"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

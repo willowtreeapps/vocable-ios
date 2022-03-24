@@ -63,8 +63,8 @@ class KeyboardViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        $attributedText.receive(on: DispatchQueue.main).sink { (newAttributedText) in
-            guard let newAttributedText = newAttributedText,
+        $attributedText.receive(on: DispatchQueue.main).sink { [weak self] (newAttributedText) in
+            guard let self = self, let newAttributedText = newAttributedText,
                 newAttributedText.string != self._textTransaction.text else { return }
             self._textTransaction = TextTransaction(text: newAttributedText.string, intent: .lastCharacter)
         }.store(in: &disposables)
@@ -180,6 +180,7 @@ class KeyboardViewController: UICollectionViewController {
             switch functionType {
             case .space:
                 setTextTransaction(textTransaction.appendingCharacter(with: " "))
+                
             case .speak:
                 guard !textTransaction.isHint else {
                     break

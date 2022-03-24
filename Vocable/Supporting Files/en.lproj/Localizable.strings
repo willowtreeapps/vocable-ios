@@ -5,7 +5,7 @@
 "category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Delete";
 
 /* Delete phrase confirmation alert title */
-"category_editor.alert.delete_phrase_confirmation.title" = "Deleted phrases cannot be recovered.";
+"category_editor.alert.delete_phrase_confirmation.title" = "Are you sure you want to delete? Removed phrases cannot be restored.";
 
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "Cancel";
@@ -67,7 +67,7 @@
 "settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Confirm";
 
 /* edit categories settings menu item */
-"settings.cell.categories.title" = "Categories";
+"settings.cell.categories.title" = "Categories and Phrases";
 
 /* contact developers settings menu item */
 "settings.cell.contact_developers.title" = "Contact Developers";
@@ -102,7 +102,7 @@
 
 "category_editor.toast.successfully_saved.title" = "Changes Saved";
 
-"text_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
+"text_editor.alert.cancel_editing_confirmation.title" = "Are you sure? Going back before saving will clear any edits made.";
 
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
 
@@ -114,7 +114,7 @@
 
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Cancel";
 
-"phrase_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Are you sure? Going back before saving will clear any edits made.";
 
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
 
@@ -135,3 +135,30 @@
 "timing_and_sensitivity.button.high.title" = "High";
 
 "selection_mode.header.title" = "Selection Mode";
+
+"recents_empty_state.header.title" = "No recently used phrases";
+
+"recents_empty_state.body.title" = "Start using Vocable to see your most recently used phrases here.";
+
+"empty_state.header.title" = "This category has no phrases yet";
+
+"empty_state.button.title" = "Add Phrase";
+
+/* Reset app settings confirmation prompt */
+"settings.alert.reset_app_settings_confirmation.body" = "Are you sure you want to reset Vocable to default settings? This action cannot be undone.";
+
+"settings.alert.reset_app_settings_confirmation.button.cancel.title" = "Cancel";
+
+"settings.alert.reset_app_settings_confirmation.button.confirm.title" = "Reset";
+
+/* Reset app settings success alert */
+
+"settings.alert.reset_app_settings_success.body" = "Vocable has been reset successfully";
+
+"settings.alert.reset_app_settings_success.button.ok" = "OK";
+
+/* Reset app settings failure alert */
+
+"settings.alert.reset_app_settings_failure.body" = "Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.";
+
+"settings.alert.reset_app_settings_success.button.ok" = "OK";

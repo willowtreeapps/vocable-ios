@@ -20,7 +20,6 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     }
 
     private enum SettingsItem: Int, CaseIterable {
-        case editMySayings
         case categories
         case timingSensitivity
         case resetAppSettings
@@ -29,14 +28,10 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         case contactDevs
         case pidTuner
         case versionNum
+        case listeningMode
 
         var title: String {
             switch self {
-            case .editMySayings:
-                let format = NSLocalizedString("settings.cell.edit_user_favorites.title_format",
-                                               comment: "edit user's favorite phrases category settings menu item")
-                let categoryName = Category.userFavoritesCategoryName()
-                return String.localizedStringWithFormat(format, categoryName)
             case .categories:
                 return NSLocalizedString("settings.cell.categories.title",
                                          comment: "edit categories settings menu item")
@@ -58,6 +53,9 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             case .pidTuner:
                 return NSLocalizedString("settings.cell.tune_cursor.title",
                                          comment: "tune cursor debug settings menu item")
+            case .listeningMode:
+                #warning("Needs localization")
+                return "Listening Mode"
             case .versionNum:
                 return ""
             }
@@ -68,15 +66,19 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             if debugFeatures.contains(self) {
                 return AppConfig.showDebugOptions
             }
+            if self == .listeningMode {
+                return AppConfig.isVoiceExperimentEnabled && SpeechRecognitionController.shared.deviceSupportsSpeech &&
+                    AppConfig.isListeningModeSupported
+            }
             return true
         }
     }
 
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, SettingsItem> = .init(collectionView: collectionView) {
-        (collectionView, indexPath, item) -> UICollectionViewCell in
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, SettingsItem> =
+        .init(collectionView: collectionView) {(collectionView, indexPath, item) -> UICollectionViewCell in
 
         switch item {
-        case .editMySayings, .categories, .timingSensitivity, .resetAppSettings, .selectionMode:
+        case .categories, .timingSensitivity, .resetAppSettings, .selectionMode, .listeningMode:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
             cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
             return cell
@@ -113,6 +115,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         navigationBar.leftButton = {
             let button = GazeableButton()
             button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+            button.accessibilityIdentifier = "settings.dismissButton"
             button.addTarget(self, action: #selector(dismissVC), for: .primaryActionTriggered)
             return button
         }()
@@ -144,15 +147,15 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     private func updateDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, SettingsItem>()
         snapshot.appendSections([.internalSettings])
-        snapshot.appendItems([.editMySayings,
-                              .categories,
+        snapshot.appendItems([.categories,
                               .timingSensitivity,
                               .resetAppSettings,
+                              .listeningMode,
                               .selectionMode,
-                              .pidTuner].filter({$0.isFeatureEnabled}))
+                              .pidTuner].filter(\.isFeatureEnabled))
         snapshot.appendSections([.externalURL])
         snapshot.appendItems([.privacyPolicy,
-                              .contactDevs].filter({$0.isFeatureEnabled}))
+                              .contactDevs].filter(\.isFeatureEnabled))
         snapshot.appendSections([.version])
         snapshot.appendItems([.versionNum])
         dataSource.apply(snapshot, animatingDifferences: false)
@@ -234,10 +237,6 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         switch item {
         case .privacyPolicy:
             presentLeavingHeadTrackableDomainAlert(withConfirmation: presentPrivacyAlert)
-        case .editMySayings:
-            let viewController = EditPhrasesViewController()
-            viewController.category = Category.userFavoritesCategory()
-            show(viewController, sender: nil)
 
         case .timingSensitivity:
             let viewController = TimingSensitivityViewController()
@@ -250,13 +249,16 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         case .categories:
             let viewController = EditCategoriesViewController()
             show(viewController, sender: nil)
-
+        case .listeningMode:
+            let viewController = ListeningModeViewController()
+            show(viewController, sender: nil)
         case .contactDevs:
-            presentEmail()
+            presentEmailAlert()
 
         case .pidTuner:
             presentPidTuner()
-
+        case .resetAppSettings:
+            presentAppResetPrompt()
         default:
             break
         }
@@ -312,7 +314,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         present(alertViewController, animated: true)
     }
 
-    private func presentEmail() {
+    private func presentEmailAlert() {
         if MFMailComposeViewController.canSendMail() {
             presentLeavingHeadTrackableDomainAlert(withConfirmation: presentEmail)
         } else {
@@ -325,10 +327,10 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             present(alertViewController, animated: true)
             return
         }
+    }
 
-        guard composeVC == nil else {
-            return
-        }
+    private func presentEmail() {
+        guard composeVC == nil else { return }
 
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
@@ -347,6 +349,54 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 gazeWindow.cursorView?.isDebugCursorHidden = false
             }
         }
+    }
+
+    // MARK: Reset App Data
+
+    private func presentAppResetPrompt() {
+        let alertString = NSLocalizedString("settings.alert.reset_app_settings_confirmation.body",
+                                            comment: "body of alert presented when user attempts to reset Vocable's application settings")
+        let cancelTitle = NSLocalizedString("settings.alert.reset_app_settings_confirmation.button.cancel.title",
+        comment: "Button cancelling the action to reset Vocable's application settings")
+        let confirmationTitle = NSLocalizedString("settings.alert.reset_app_settings_confirmation.button.confirm.title",
+        comment: "Button confirming that the user would like to reset Vocable's application settings")
+
+        let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+
+        alertViewController.addAction(GazeableAlertAction(title: cancelTitle))
+        alertViewController.addAction(GazeableAlertAction(title: confirmationTitle, style: .destructive, handler: { [weak self] in
+
+            let resetController = AppResetController()
+            if resetController.performReset() {
+                self?.presentResetSuccessAlert()
+            } else {
+                self?.presentResetFailureAlert()
+            }
+
+        }))
+        present(alertViewController, animated: true)
+    }
+
+    private func presentResetSuccessAlert() {
+        let alertString = NSLocalizedString("settings.alert.reset_app_settings_success.body",
+                                            comment: "body of alert presented when the user successfully resets Vocable's application settings")
+        let dismissTitle = NSLocalizedString("settings.alert.reset_app_settings_success.button.ok",
+        comment: "Button dismissing the alert informing the user that Vocable's application settings were successfully reset")
+
+        let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+        alertViewController.addAction(GazeableAlertAction(title: dismissTitle))
+        present(alertViewController, animated: true)
+    }
+
+    private func presentResetFailureAlert() {
+        let alertString = NSLocalizedString("settings.alert.reset_app_settings_failure.body",
+                                            comment: "body of alert presented when Vocable's application settings failed to reset")
+        let dismissTitle = NSLocalizedString("settings.alert.reset_app_settings_success.button.ok",
+        comment: "Button dismissing the alert informing the user that Vocable's application settings failed to reset")
+
+        let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+        alertViewController.addAction(GazeableAlertAction(title: dismissTitle))
+        present(alertViewController, animated: true)
     }
 
     // MARK: MFMailComposeViewControllerDelegate
