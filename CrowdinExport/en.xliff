@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Vocable/Supporting Files/en.lproj/InfoPlist.strings" source-language="en" target-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
     </header>
     <body>
       <trans-unit id="CFBundleDisplayName" xml:space="preserve">
@@ -20,17 +20,47 @@
         <target>Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</target>
         <note>Camera usage description</note>
       </trans-unit>
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
+        <source>Vocable uses the microphone only when voice responses are enabled. Vocable does not store or transmit audio data beyond transcribing audio into words.</source>
+        <target>Vocable uses the microphone only when voice responses are enabled. Vocable does not store or transmit audio data beyond transcribing audio into words.</target>
+        <note>Privacy - Microphone Usage Description</note>
+      </trans-unit>
+      <trans-unit id="NSSpeechRecognitionUsageDescription" xml:space="preserve">
+        <source>Vocable uses speech recognition to convert audio data into words when voice responses are enabled. Transcribed speech is not stored or transmitted.</source>
+        <target>Vocable uses speech recognition to convert audio data into words when voice responses are enabled. Transcribed speech is not stored or transmitted.</target>
+        <note>Privacy - Speech Recognition Usage Description</note>
+      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
     </header>
     <body>
+      <trans-unit id="%@. %@" xml:space="preserve">
+        <source>%1$@. %2$@</source>
+        <target>%1$@. %2$@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete All" xml:space="preserve">
+        <source>Delete All</source>
+        <target>Delete All</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Edit Phrases" xml:space="preserve">
         <source>Edit Phrases</source>
         <target>Edit Phrases</target>
         <note>Edit Phrases</note>
+      </trans-unit>
+      <trans-unit id="No Entries" xml:space="preserve">
+        <source>No Entries</source>
+        <target>No Entries</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="The most recent listening sessions will be recorded here for easy debugging" xml:space="preserve">
+        <source>The most recent listening sessions will be recorded here for easy debugging</source>
+        <target>The most recent listening sessions will be recorded here for easy debugging</target>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
         <source>Categories</source>
@@ -78,8 +108,8 @@
         <note>Delete phrase alert action button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
-        <source>Deleted phrases cannot be recovered.</source>
-        <target>Deleted phrases cannot be recovered.</target>
+        <source>Are you sure you want to delete? Removed phrases cannot be restored.</source>
+        <target>Are you sure you want to delete? Removed phrases cannot be restored.</target>
         <note>Delete phrase confirmation alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
@@ -107,6 +137,16 @@
         <source>No presets found</source>
         <target>No presets found</target>
         <note>Debugging error message for when preloaded content is not found</note>
+      </trans-unit>
+      <trans-unit id="empty_state.button.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target>Add Phrase</target>
+        <note>Empty state Add Phrase button title</note>
+      </trans-unit>
+      <trans-unit id="empty_state.header.title" xml:space="preserve">
+        <source>You don’t have any phrases saved yet.</source>
+        <target>This category has no phrases yet</target>
+        <note>Empty state title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -149,8 +189,8 @@
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>Going back before saving will clear any edits made.</source>
-        <target>Going back before saving will clear any edits made.</target>
+        <source>Are you sure? Going back before saving will clear any edits made.</source>
+        <target>Are you sure? Going back before saving will clear any edits made.</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
@@ -170,6 +210,16 @@
         <target>Yes</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
+      <trans-unit id="recents_empty_state.body.title" xml:space="preserve">
+        <source>Start using Vocable to see your most recently used phrases here.</source>
+        <target>Start using Vocable to see your most recently used phrases here.</target>
+        <note>Recents empty state description</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.header.title" xml:space="preserve">
+        <source>No recently used phrases</source>
+        <target>No recently used phrases</target>
+        <note>Recents empty state title</note>
+      </trans-unit>
       <trans-unit id="selection_mode.header.title" xml:space="preserve">
         <source>Selection Mode</source>
         <target>Selection Mode</target>
@@ -184,6 +234,37 @@
         <source>Email not configured.</source>
         <target>Email not configured.</target>
         <note>No email account configured error alert title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve">
+        <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
+        <target>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</target>
+        <note>Reset app settings confirmation prompt</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Button cancelling the action to reset Vocable's application settings</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Reset</source>
+        <target>Reset</target>
+        <note>Button confirming that the user would like to reset Vocable's application settings</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve">
+        <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
+        <target>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</target>
+        <note>Reset app settings failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
+        <source>Vocable has been reset successfully</source>
+        <target>Vocable has been reset successfully</target>
+        <note>Reset app settings success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target>OK</target>
+        <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset
+   Button dismissing the alert informing the user that Vocable's application settings were successfully reset</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
         <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
@@ -201,8 +282,8 @@
         <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.cell.categories.title" xml:space="preserve">
-        <source>Categories</source>
-        <target>Categories</target>
+        <source>Categories and Phrases</source>
+        <target>Categories and Phrases</target>
         <note>edit categories settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve">
@@ -261,8 +342,8 @@
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>Going back before saving will clear any edits made.</source>
-        <target>Going back before saving will clear any edits made.</target>
+        <source>Are you sure? Going back before saving will clear any edits made.</source>
+        <target>Are you sure? Going back before saving will clear any edits made.</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve">
@@ -299,7 +380,7 @@
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Presets.strings" source-language="en" target-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
     </header>
     <body>
       <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve">
@@ -637,6 +718,11 @@
         <target>Please turn the TV on</target>
         <note/>
       </trans-unit>
+      <trans-unit id="preset_listening_mode" xml:space="preserve">
+        <source>Listen</source>
+        <target>Listen</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="preset_user_favorites" xml:space="preserve">
         <source>My Sayings</source>
         <target>My Sayings</target>
@@ -645,6 +731,11 @@
       <trans-unit id="preset_user_keypad" xml:space="preserve">
         <source>123</source>
         <target>123</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_user_recents" xml:space="preserve">
+        <source>Recents</source>
+        <target>Recents</target>
         <note/>
       </trans-unit>
     </body>
