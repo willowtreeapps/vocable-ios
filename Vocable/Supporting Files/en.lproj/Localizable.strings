@@ -143,3 +143,22 @@
 "empty_state.header.title" = "This category has no phrases yet";
 
 "empty_state.button.title" = "Add Phrase";
+
+/* Reset app settings confirmation prompt */
+"settings.alert.reset_app_settings_confirmation.body" = "Are you sure you want to reset Vocable to default settings? This action cannot be undone.";
+
+"settings.alert.reset_app_settings_confirmation.button.cancel.title" = "Cancel";
+
+"settings.alert.reset_app_settings_confirmation.button.confirm.title" = "Reset";
+
+/* Reset app settings success alert */
+
+"settings.alert.reset_app_settings_success.body" = "Vocable has been reset successfully";
+
+"settings.alert.reset_app_settings_success.button.ok" = "OK";
+
+/* Reset app settings failure alert */
+
+"settings.alert.reset_app_settings_failure.body" = "Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.";
+
+"settings.alert.reset_app_settings_success.button.ok" = "OK";
