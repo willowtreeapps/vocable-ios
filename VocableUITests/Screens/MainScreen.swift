@@ -24,6 +24,7 @@ class MainScreen: BaseScreen {
     let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
     let paginationLeftButton = XCUIApplication().buttons["bottomPagination.left_chevron"]
     let paginationRightButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
+    let emptyStateAddPhraseButton = XCUIApplication().buttons["empty_state_addPhrase_button"]
     
     // Find the current selected category and return it as a CategoryTitleCellIdentifier
     var selectedCategoryCell: CategoryTitleCellIdentifier {
@@ -80,6 +81,7 @@ class MainScreen: BaseScreen {
         } while (!selectedCell.waitForExistence(timeout: 0.33))
     }
     
+    /// Assuming there is at least one page of phrases within a category, locate the cell containg the given phrase.
     func locatePhraseCell(phrase: String) -> XCUIElement {
         let predicate = NSPredicate(format: "label MATCHES %@", phrase)
         
