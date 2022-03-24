@@ -25,9 +25,6 @@
 /* Delete phrase alert action button title */
 "category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Elimina";
 
-/* Delete phrase confirmation alert title */
-"category_editor.alert.delete_phrase_confirmation.title" = "Eliminati I Rischi Non Possono Essere Recuperati.";
-
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "Rimuovere la categoria";
 
@@ -71,9 +68,6 @@
 /* Discard changes alert action title */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Scartare";
 
-/* Exit edit sayings alert title */
-"phrase_editor.alert.cancel_editing_confirmation.title" = "Tornare indietro prima di salvare cancellerà tutte le modifiche apportate.";
-
 /* new entry saved to user favorites category
    Saved to user favorites category
    Saved to user favorites category toast title */
@@ -102,9 +96,6 @@
 
 /* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Confermare";
-
-/* edit categories settings menu item */
-"settings.cell.categories.title" = "Categorie";
 
 /* contact developers settings menu item */
 "settings.cell.contact_developers.title" = "Contattare gli sviluppatori";
@@ -138,9 +129,6 @@
 
 /* Discard changes alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Scartare";
-
-/* Exit edit sayings alert title */
-"text_editor.alert.cancel_editing_confirmation.title" = "Tornare indietro prima di salvare cancellerà tutte le modifiche apportate.";
 
 /* High cursor sensitivity option button */
 "timing_and_sensitivity.button.high.title" = "Alta";
