@@ -81,7 +81,7 @@ class MainScreen: BaseScreen {
         } while (!selectedCell.waitForExistence(timeout: 0.33))
     }
     
-    /// Assuming there is at least one page of phrases within a category, locate the cell containg the given phrase.
+    /// Assuming there is at least one page of phrases within a category, locate the cell containing the given phrase.
     func locatePhraseCell(phrase: String) -> XCUIElement {
         let predicate = NSPredicate(format: "label MATCHES %@", phrase)
         
