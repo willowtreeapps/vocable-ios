@@ -35,13 +35,13 @@ class HeadGazeTrackingInterpolator {
         let lBlinkAmount = blendShapes[.eyeBlinkLeft]?.floatValue ?? 0.0
         let rBlinkAmount = blendShapes[.eyeBlinkRight]?.floatValue ?? 0.0
 
-        let blinkThreshold: Float = 0.3
+        let blinkThreshold: Float = 0.5
         let leftBlink = lBlinkAmount > blinkThreshold
         let rightBlink = rBlinkAmount > blinkThreshold
         let isBlinking = leftBlink || rightBlink
 
         let cursorPosNDC: CGPoint
-        if !isBlinking && faceAnchor.isTracked {
+        if faceAnchor.isTracked {
 
             let pos = updateGazeNDCLocationByARFaceAnchor(frame: frame, isBlinking: isBlinking, correctionAmount: correctionAmount, scale: scale)
             cursorPosNDC = interpolateCursorLocation(pos)
@@ -64,6 +64,7 @@ class HeadGazeTrackingInterpolator {
                 curGaze = UIHeadGaze(position: cursorPosNDC, view: view, win: window)
             }
 
+            curGaze.isUserBlinking = isBlinking
             allGazes.insert(curGaze)
             previousGaze = curGaze
             event = UIHeadGazeEvent(allGazes: allGazes)

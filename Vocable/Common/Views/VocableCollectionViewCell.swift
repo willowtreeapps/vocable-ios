@@ -18,6 +18,15 @@ class VocableCollectionViewCell: UICollectionViewCell {
             updateContentViews()
         }
     }
+    
+    private(set) var isTrackingBlinking: Bool = false {
+        didSet {
+            guard oldValue != isTrackingBlinking else { return }
+            
+            updateSelectionAppearance()
+            updateContentViews()
+        }
+    }
 
     var fillColor: UIColor = .defaultCellBackgroundColor {
         didSet {
@@ -77,8 +86,8 @@ class VocableCollectionViewCell: UICollectionViewCell {
             } else {
                 result = self.fillColor
             }
-
-            if isHighlighted && isTrackingTouches {
+            
+            if isHighlighted && (isTrackingTouches || isTrackingBlinking) {
                 result = result.darkenedForHighlight()
             }
             return result
@@ -93,11 +102,11 @@ class VocableCollectionViewCell: UICollectionViewCell {
         borderedView.fillColor = fillColor
         borderedView.isOpaque = true
     }
-
+    
     private func updateSelectionAppearance() {
 
         func actions() {
-            let scale: CGFloat = (isHighlighted && isTrackingTouches) ? 0.97 : 1.0
+            let scale: CGFloat = (isHighlighted && (isTrackingTouches || isTrackingBlinking)) ? 0.97 : 1.0
             transform = .init(scaleX: scale, y: scale)
         }
 
@@ -110,6 +119,21 @@ class VocableCollectionViewCell: UICollectionViewCell {
         } else {
             actions()
         }
+    }
+    
+    override func blinkBegan(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        super.blinkBegan(gaze, with: event)
+        isTrackingBlinking = true
+    }
+
+    override func blinkEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        super.blinkEnded(gaze, with: event)
+        isTrackingBlinking = false
+    }
+
+    override func blinkCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        super.blinkCancelled(gaze, with: event)
+        isTrackingBlinking = false
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

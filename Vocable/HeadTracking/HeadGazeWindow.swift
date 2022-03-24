@@ -11,7 +11,13 @@ import Combine
 import ARKit
 
 class HeadGazeWindow: UIWindow {
+    enum BlinkTrackingStatus {
+        case possible
+        case tracking
+        case cancelled
+    }
     
+    var isTrackingBlinking: BlinkTrackingStatus = .possible
     weak var cursorView: UIVirtualCursorView?
 
     var activeGazeTarget: UIView? {
@@ -78,6 +84,7 @@ class HeadGazeWindow: UIWindow {
         }
         self.trackingView = nil
         self.lastGaze = nil
+        self.isTrackingBlinking = .cancelled
     }
 
     private func extendGazeDisabledPeriodForTouchEvent() {
@@ -109,6 +116,7 @@ class HeadGazeWindow: UIWindow {
     func cancelActiveGazeTarget() {
         if let lastGaze = lastGaze, let trackingView = trackingView {
             trackingView.gazeCancelled(lastGaze, with: nil)
+            self.isTrackingBlinking = .cancelled
         }
     }
 
@@ -154,7 +162,6 @@ class HeadGazeWindow: UIWindow {
     }
 
     override func sendEvent(_ originalEvent: UIEvent) {
-
         // Ignore any non-gaze events and let super handle them
         guard let event = originalEvent as? UIHeadGazeEvent,
             let gaze = event.allGazes?.first else {
@@ -194,11 +201,30 @@ class HeadGazeWindow: UIWindow {
             // the current tracking session (if one is active) and
             // start a new one with the newly hit-tested view (if non-nil)
             self.trackingView?.gazeEnded(gaze, with: event)
+            self.isTrackingBlinking = .cancelled
             self.trackingView = hitTestResult
             self.trackingView?.gazeBegan(gaze, with: event)
             return
         }
-
+        
+        // Handle blinking
+        switch self.isTrackingBlinking {
+        case .possible:
+            if gaze.isUserBlinking {
+                trackingView.blinkBegan(gaze, with: event)
+                self.isTrackingBlinking = .tracking
+            }
+        case .tracking:
+            if !gaze.isUserBlinking {
+                trackingView.blinkEnded(gaze, with: event)
+                self.isTrackingBlinking = .possible
+            }
+        case .cancelled:
+            if !gaze.isUserBlinking {
+                self.isTrackingBlinking = .possible
+            }
+        }
+        
         // The same view is being tracked, so make sure the cursor
         // hasn't left its area. If it has, end the gaze session for
         // that particular view.
@@ -209,6 +235,7 @@ class HeadGazeWindow: UIWindow {
         } else {
             trackingView.gazeEnded(gaze, with: event)
             self.trackingView = nil
+            self.isTrackingBlinking = .cancelled
         }
     }
 }
@@ -222,6 +249,12 @@ class HeadGazeWindow: UIWindow {
     fileprivate var gazeGestureRecognizers: [UIHeadGazeRecognizer] {
         return self.gestureRecognizers?.compactMap {
             $0 as? UIHeadGazeRecognizer
+        } ?? []
+    }
+    
+    fileprivate var blinkGestureRecognizers: [UIHeadGazeBlinkRecognizer] {
+        return self.gestureRecognizers?.compactMap {
+            $0 as? UIHeadGazeBlinkRecognizer
         } ?? []
     }
 
@@ -245,7 +278,25 @@ class HeadGazeWindow: UIWindow {
 
     func gazeCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
         for gestureRecognizer in self.gazeGestureRecognizers {
-            gestureRecognizer.gazeEnded(gaze, with: event)
+            gestureRecognizer.gazeCancelled(gaze, with: event)
+        }
+    }
+    
+    func blinkBegan(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        for gestureRecognizer in self.blinkGestureRecognizers {
+            gestureRecognizer.blinkBegan(gaze, with: event)
+        }
+    }
+
+    func blinkEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        for gestureRecognizer in self.blinkGestureRecognizers {
+            gestureRecognizer.blinkEnded(gaze, with: event)
+        }
+    }
+
+    func blinkCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        for gestureRecognizer in self.blinkGestureRecognizers {
+            gestureRecognizer.blinkCancelled(gaze, with: event)
         }
     }
 
@@ -281,5 +332,17 @@ extension UIControl {
 
     override func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
         self.touchesEnded(Set([gaze]), with: nil)
+    }
+    
+    override func blinkBegan(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        self.touchesBegan(Set([gaze]), with: nil)
+    }
+
+    override func blinkEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        self.touchesEnded(Set([gaze]), with: nil)
+    }
+    
+    override func blinkCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        self.touchesCancelled(Set([gaze]), with: nil)
     }
 }
