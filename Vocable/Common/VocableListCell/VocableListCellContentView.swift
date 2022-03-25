@@ -153,7 +153,9 @@ final class VocableListCellContentView: UIView, UIContentView {
         primaryLabelButton.contentHorizontalAlignment = .left
         primaryLabelButton.setAttributedTitle(configuration?.attributedTitle, for: .normal)
         primaryLabelButton.addTarget(self, action: #selector(handlePrimaryActionSelection(_:)), for: .primaryActionTriggered)
-
+        primaryLabelButton.accessibilityLabel = configuration?.accessibilityLabel
+        primaryLabelButton.accessibilityIdentifier = configuration?.accessibilityIdentifier
+        
         let trailingInsets: NSDirectionalEdgeInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
         switch configuration?.accessory?.content {
         case .image(let image):
@@ -193,7 +195,8 @@ final class VocableListCellContentView: UIView, UIContentView {
             button.isHidden = false
             button.setImage(action.image, for: .normal)
             button.isEnabled = action.isEnabled
-            
+            button.accessibilityLabel = action.accessibilityLabel
+            button.accessibilityIdentifier = action.accessibilityIdentifier
             // Using UIControlEvent to avoid having to de-duplicate UIAction invocations
             button.addTarget(self,
                              action: #selector(handleLeadingAccessoryActionSelection(_:)),

@@ -45,16 +45,21 @@ struct VocableListContentConfiguration: UIContentConfiguration, Equatable {
     var accessory: VocableListCellAccessory?
     var primaryAction: (() -> Void)?
     var actionsConfiguration: ActionsConfiguration
+    var accessibilityIdentifier: String?
+    var accessibilityLabel: String?
 
     var traitCollectionChangeHandler: TraitCollectionChangeHandler?
 
-    init(title: String,
-         actions: [VocableListCellAction] = [],
-         actionsConfiguration: ActionsConfiguration = .default,
-         accessory: VocableListCellAccessory? = nil,
-         isPrimaryActionEnabled: Bool = true,
-         primaryAction: @escaping () -> Void)
-    {
+    init(
+        title: String,
+        actions: [VocableListCellAction] = [],
+        actionsConfiguration: ActionsConfiguration = .default,
+        accessory: VocableListCellAccessory? = nil,
+        isPrimaryActionEnabled: Bool = true,
+        accessibilityIdentifier: String? = nil,
+        accessibilityLabel: String? = nil,
+        primaryAction: @escaping () -> Void
+    ) {
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white,
                                                          .font: UIFont.systemFont(ofSize: 22, weight: .bold)]
 
@@ -65,22 +70,29 @@ struct VocableListContentConfiguration: UIContentConfiguration, Equatable {
                   actionsConfiguration: actionsConfiguration,
                   accessory: accessory,
                   isPrimaryActionEnabled: isPrimaryActionEnabled,
+                  accessibilityIdentifier: accessibilityIdentifier,
+                  accessibilityLabel: accessibilityLabel,
                   primaryAction: primaryAction)
     }
 
-    init(attributedText: NSAttributedString,
-         actions: [VocableListCellAction] = [],
-         actionsConfiguration: ActionsConfiguration = .default,
-         accessory: VocableListCellAccessory? = nil,
-         isPrimaryActionEnabled: Bool = true,
-         primaryAction: @escaping () -> Void)
-    {
+    init(
+        attributedText: NSAttributedString,
+        actions: [VocableListCellAction] = [],
+        actionsConfiguration: ActionsConfiguration = .default,
+        accessory: VocableListCellAccessory? = nil,
+        isPrimaryActionEnabled: Bool = true,
+        accessibilityIdentifier: String? = nil,
+        accessibilityLabel: String? = nil,
+        primaryAction: @escaping () -> Void
+    ) {
         self.attributedTitle = attributedText
         self.isPrimaryActionEnabled = isPrimaryActionEnabled
         self.primaryAction = primaryAction
         self.actions = actions
         self.accessory = accessory
         self.actionsConfiguration = actionsConfiguration
+        self.accessibilityLabel = accessibilityLabel
+        self.accessibilityIdentifier = accessibilityIdentifier
     }
 
     func makeContentView() -> UIView & UIContentView {

@@ -18,10 +18,10 @@ class SettingsScreen: BaseScreen {
     let exitSettingsButton = XCUIApplication().buttons["settings.dismissButton"]
     let otherElements = XCUIApplication().collectionViews.cells.otherElements
     let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
-    let settingsPageCategoryUpButton = "go up"
-    let settingsPageCategoryDownButton = "go down"
     let settingsPageCategoryHideButton = "hide"
     let settingsPageCategoryShowButton = "show"
+    let settingsPageCategoryUpButton = "chevron.up"
+    let settingsPageCategoryDownButton = "chevron.down"
     let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
     let alertContinueButton = XCUIApplication().buttons["Continue Editing"]
     let alertDiscardButton = XCUIApplication().buttons["Discard"]

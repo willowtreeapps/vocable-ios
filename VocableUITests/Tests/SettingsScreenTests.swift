@@ -43,11 +43,11 @@ class SettingsScreenTests: BaseTest {
     }
 
     func testReorder() {
-        let generalCategoryText = "1. General"
-        let basicNeedsCategoryText = "2. Basic Needs"
+        let generalCategoryText = "General"
+        let basicNeedsCategoryText = "Basic Needs"
         
-        let expectedGeneralCategoryText = "2. General"
-        let expectedbasicNeedsCategoryText = "1. Basic Needs"
+        let expectedGeneralCategoryText = "General"
+        let expectedbasicNeedsCategoryText = "Basic Needs"
 
         settingsScreen.navigateToSettingsCategoryScreen()
         
