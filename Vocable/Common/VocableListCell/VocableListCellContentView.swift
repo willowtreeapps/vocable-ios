@@ -108,7 +108,11 @@ final class VocableListCellContentView: UIView, UIContentView {
         let currentIndex = stackView.arrangedSubviews.firstIndex(of: accessoryButtonStackView)
         if currentIndex != desiredAccessoryIndex {
             accessoryButtonStackView.removeFromSuperview()
-            stackView.insertArrangedSubview(accessoryButtonStackView, at: desiredAccessoryIndex)
+            if stackView.arrangedSubviews.indices.contains(desiredAccessoryIndex) {
+                stackView.insertArrangedSubview(accessoryButtonStackView, at: desiredAccessoryIndex)
+            } else {
+                stackView.addArrangedSubview(accessoryButtonStackView)
+            }
         }
 
         NSLayoutConstraint.deactivate(buttonWidthConstraints)
