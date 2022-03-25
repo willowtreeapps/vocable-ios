@@ -210,9 +210,11 @@ final class CarouselGridLayout: UICollectionViewLayout {
         case .fixedCount(let count):
             return count
         case .minimumWidth(let minimumWidth):
-            guard let width = collectionView?.bounds.width, width > 0 else {
+            guard let collectionView = collectionView, !collectionView.bounds.isEmpty else {
                 return 1
             }
+            let rect = collectionView.bounds.inset(by: pageInsets)
+            let width = rect.width
             var itemCount = Int(width / minimumWidth)
             while itemCount > 0 {
                 let interItemWidth = CGFloat(itemCount - 1) * interItemSpacing.interColumnSpacing
@@ -234,15 +236,18 @@ final class CarouselGridLayout: UICollectionViewLayout {
         case .fixedCount(let count, _):
             return count
         case .flexible(let minimumHeight, _):
-            guard let height = collectionView?.bounds.height, height > 0 else {
+            guard let collectionView = collectionView, !collectionView.bounds.isEmpty else {
                 return 1
             }
-            let minHeightValue = minimumHeight.value(from: collectionView?.bounds ?? .zero, axis: .vertical)
+            let rect = collectionView.bounds.inset(by: pageInsets)
+            let height = rect.height
+            let minHeightValue = minimumHeight.value(from: rect, axis: .vertical)
             var itemCount = Int(height / minHeightValue)
             while itemCount > 0 {
                 let interItemHeight = CGFloat(itemCount - 1) * interItemSpacing.interRowSpacing
                 let availableHeight = height - interItemHeight
-                if (availableHeight / CGFloat(itemCount)) >= minHeightValue {
+                let proposedItemHeight = availableHeight / CGFloat(itemCount)
+                if proposedItemHeight >= minHeightValue {
                     break
                 }
                 itemCount -= 1
