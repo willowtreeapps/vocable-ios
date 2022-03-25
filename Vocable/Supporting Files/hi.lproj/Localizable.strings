@@ -1,0 +1,66 @@
+/* Categories list editor screen header title */
+"categories_list_editor.header.title" = "श्रेणियाँ";
+
+/* Cancel exit editing alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "रद्द करें";
+
+/* Confirm exit category alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "पुष्टि करें";
+
+/* Delete category alert cancel button title */
+"category_editor.alert.delete_category_confirmation.button.cancel.title" = "रद्द करें";
+
+/* Delete phrase alert cancel button title */
+"category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "रद्द करें";
+
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "हटाएँ";
+
+/* changes to an existing phrase were saved successfully */
+"category_editor.toast.changes_saved.title" = "परिवर्तन सहेजा गया!";
+
+/* Cancel alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "रद्द करें";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "पुष्टि करें";
+
+/* Continue editing alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "संपादन जारी रखें";
+
+/* Discard changes alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "छोड़ें";
+
+/* 'No' num pad response */
+"preset.category.numberpad.phrase.no.title" = "नहीं";
+
+/* 'Yes' num pad response */
+"preset.category.numberpad.phrase.yes.title" = "हाँ";
+
+/* No email account configured error alert dismiss button title */
+"settings.alert.no_email_configured.button.dismiss.title" = "ठीक है";
+
+/* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.cancel.title" = "रद्द करें";
+
+/* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.confirm.title" = "पुष्टि करें";
+
+/* contact developers settings menu item */
+"settings.cell.contact_developers.title" = "डेवलपर से संपर्क करें";
+
+/* view privacy policy settings menu item */
+"settings.cell.privacy_policy.title" = "गोपनीयता नीति";
+
+/* reset all settings menu item */
+"settings.cell.reset_all.title" = "सेटिंग्स रीसेट करें";
+
+/* Settings screen header title */
+"settings.header.title" = "सेटिंग्स";
+
+/* Continue editing alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "संपादन जारी रखें";
+
+/* Discard changes alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.discard.title" = "छोड़ें";
+

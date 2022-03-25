@@ -1,0 +1,64 @@
+/* Categories list editor screen header title */
+"categories_list_editor.header.title" = "目录";
+
+/* Cancel exit editing alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "取消";
+
+/* Confirm exit category alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "確認";
+
+/* Exit edit categories alert title */
+"category_editor.alert.cancel_editing_confirmation.title" = "如果你關閉類別，就會清除了。";
+
+/* Delete category alert cancel button title */
+"category_editor.alert.delete_category_confirmation.button.cancel.title" = "取消";
+
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "刪除";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "清除了的類別不可以恢復的";
+
+/* Delete phrase alert cancel button title */
+"category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "取消";
+
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "刪除";
+
+/* Remove category button label within the category detail screen. */
+"category_editor.detail.button.remove_category.title" = "刪除類別?";
+
+/* Show category button label within the category detail screen. */
+"category_editor.detail.button.show_category.title" = "顯示";
+
+/* changes to an existing phrase were saved successfully */
+"category_editor.toast.changes_saved.title" = "更改已儲存";
+
+/* Saved to Categories
+   User edited name of the category and saved it successfully */
+"category_editor.toast.successfully_saved.title" = "更改已儲存";
+
+/* Debugging error message for when preloaded content is not found */
+"debug.assertion.presets_file_not_found" = "找不到預設";
+
+/* Cancel alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "取消";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "確認";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "關閉頭部追蹤";
+
+/* 'No' num pad response */
+"preset.category.numberpad.phrase.no.title" = "不";
+
+/* 'Yes' num pad response */
+"preset.category.numberpad.phrase.yes.title" = "是";
+
+/* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.cancel.title" = "取消";
+
+/* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.confirm.title" = "確認";
+

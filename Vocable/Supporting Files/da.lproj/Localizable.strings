@@ -25,6 +25,9 @@
 /* Delete phrase alert action button title */
 "category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Slet";
 
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "Er du sikker? Slettede sætninger kan ikke gendannes.";
+
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "Fjern Kategori";
 
@@ -42,7 +45,7 @@
 "debug.assertion.presets_file_not_found" = "Ingen forudstillinger fundet";
 
 /* Edit Phrases */
-"Edit Phrases" = "Ændrer Sætninger";
+"Edit Phrases" = "Rediger Sætninger";
 
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Annuller";
@@ -67,6 +70,9 @@
 
 /* Discard changes alert action title */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Slet";
+
+/* Exit edit sayings alert title */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Hvis du forlader uden at gemme vil dine ændringer blive slettet.";
 
 /* new entry saved to user favorites category
    Saved to user favorites category
@@ -96,6 +102,9 @@
 
 /* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Bekræft";
+
+/* edit categories settings menu item */
+"settings.cell.categories.title" = "Kategorier og sætning";
 
 /* contact developers settings menu item */
 "settings.cell.contact_developers.title" = "Kontakt Udvikler";
@@ -129,6 +138,9 @@
 
 /* Discard changes alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Slet";
+
+/* Exit edit sayings alert title */
+"text_editor.alert.cancel_editing_confirmation.title" = "Hvis du forlader uden at gemme vil dine ændringer blive slettet.";
 
 /* High cursor sensitivity option button */
 "timing_and_sensitivity.button.high.title" = "Høj";

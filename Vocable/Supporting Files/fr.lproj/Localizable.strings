@@ -1,0 +1,63 @@
+/* Categories list editor screen header title */
+"categories_list_editor.header.title" = "Catégories";
+
+/* Cancel exit editing alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Annuler";
+
+/* Delete category alert cancel button title */
+"category_editor.alert.delete_category_confirmation.button.cancel.title" = "Annuler";
+
+/* Delete phrase alert cancel button title */
+"category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Annuler";
+
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Supprimer";
+
+/* Cancel alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Annuler";
+
+/* Warning message presented to the user when the head tracking system */
+"gaze_tracking.error.excessive_head_distance.title" = "Veuillez vous rapprocher du périphérique.";
+
+/* Select something below to speak Hint Text */
+"main_screen.textfield_placeholder.default" = "Select something below to speak";
+
+/* Page indicator progress format. \"Page x of n\" */
+"paging_progress_indicator_format" = "Page %1$d sur %2$d";
+
+/* Discard changes alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Jeter";
+
+/* 'No' num pad response */
+"preset.category.numberpad.phrase.no.title" = "Non";
+
+/* 'Yes' num pad response */
+"preset.category.numberpad.phrase.yes.title" = "Oui";
+
+/* Selection mode screen header title */
+"selection_mode.header.title" = "Mode de sélection";
+
+/* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.cancel.title" = "Annuler";
+
+/* contact developers settings menu item */
+"settings.cell.contact_developers.title" = "Contacter les développeurs";
+
+/* Settings head tracking cell title */
+"settings.cell.head_tracking.title" = "Head Tracking";
+
+/* view privacy policy settings menu item */
+"settings.cell.privacy_policy.title" = "Politique de confidentialité";
+
+/* reset all settings menu item */
+"settings.cell.reset_all.title" = "Réinitialiser les paramètres de l'application";
+
+/* edit cursor selection mode settings menu item */
+"settings.cell.selection_mode.title" = "Mode de sélection";
+
+/* Settings screen header title */
+"settings.header.title" = "Paramètres";
+
+/* Discard changes alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Jeter";
+
