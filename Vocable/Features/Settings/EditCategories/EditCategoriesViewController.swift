@@ -111,6 +111,9 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateLayoutForCurrentTraitCollection()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     private func updateLayoutForCurrentTraitCollection() {
