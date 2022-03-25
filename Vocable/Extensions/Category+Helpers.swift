@@ -90,6 +90,32 @@ extension Category {
         let results = try context.fetch(request)
         for (index, category) in results.enumerated() {
             category.ordinal = Int32(index)
+            category.canMoveToLowerOrdinal = false
+            category.canMoveToHigherOrdinal = false
+        }
+
+        try updateOrdinalReorderability(in: context)
+    }
+
+    private static func updateOrdinalReorderability(in context: NSManagedObjectContext) throws {
+
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        request.predicate = !Predicate(\Category.isUserRemoved) && !Predicate(\Category.isHidden)
+        request.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Category.ordinal, ascending: true),
+            NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)
+        ]
+        let results = try context.fetch(request)
+
+        let lowestMoveableIndex = results.index(results.startIndex, offsetBy: 1, limitedBy: results.endIndex) ?? results.endIndex
+        let canDecreaseOrdinalIndices = lowestMoveableIndex ..< results.endIndex
+
+        let highestMoveableIndex = results.index(results.endIndex, offsetBy: -1, limitedBy: results.startIndex) ?? results.startIndex
+        let canIncreaseOrdinalIndices = results.startIndex ..< highestMoveableIndex
+
+        for (index, category) in results.enumerated() {
+            category.canMoveToHigherOrdinal = canIncreaseOrdinalIndices.contains(index)
+            category.canMoveToLowerOrdinal = canDecreaseOrdinalIndices.contains(index)
         }
     }
 }
