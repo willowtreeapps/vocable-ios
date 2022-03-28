@@ -20,7 +20,7 @@ final class VocableListCellContentView: UIView, UIContentView {
     // MARK: - Subviews
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
+        let stackView = UIStackView(arrangedSubviews: [accessoryButtonStackView, primaryLabelButton])
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fill
@@ -37,8 +37,8 @@ final class VocableListCellContentView: UIView, UIContentView {
         return stackView
     }()
 
-    private lazy var primaryLabelButton: GazeableButton = {
-        let button = GazeableButton()
+    private lazy var primaryLabelButton: VocableListCellPrimaryButton = {
+        let button = VocableListCellPrimaryButton()
         button.contentHorizontalAlignment = .left
         button.contentEdgeInsets = .init(uniform: 16)
         return button
@@ -65,9 +65,6 @@ final class VocableListCellContentView: UIView, UIContentView {
         addSubview(stackView)
 
         accessoryButtonStackView.isHidden = true
-        stackView.addArrangedSubview(accessoryButtonStackView)
-
-        stackView.addArrangedSubview(primaryLabelButton)
 
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -80,11 +77,11 @@ final class VocableListCellContentView: UIView, UIContentView {
         configure(with: configuration)
     }
 
-    private func updateActionConfiguration(to configuration: VocableListContentConfiguration.ActionsConfiguration) {
+    private func updateActionConfiguration(to configuration: VocableListContentConfiguration.ActionsConfiguration?) {
 
         let desiredAccessoryIndex: Array<UIView>.Index
-        switch configuration.position {
-        case .leading:
+        switch configuration?.position {
+        case .leading, .none:
 
             stackView.axis = .horizontal
             stackView.alignment = .fill
@@ -118,8 +115,9 @@ final class VocableListCellContentView: UIView, UIContentView {
         NSLayoutConstraint.deactivate(buttonWidthConstraints)
         buttonWidthConstraints.removeAll()
 
+        let widthDimension = configuration?.size.widthDimension ?? .fractionalHeight(1.0)
         let constraintsToActivate = accessoryButtonStackView.arrangedSubviews.map { view -> NSLayoutConstraint in
-            buttonWidthConstraint(for: view, widthDimension: configuration.size.widthDimension)
+            buttonWidthConstraint(for: view, widthDimension: widthDimension)
         }
 
         NSLayoutConstraint.activate(constraintsToActivate)
@@ -138,44 +136,19 @@ final class VocableListCellContentView: UIView, UIContentView {
     }
 
     private func configure(with configuration: UIContentConfiguration) {
-        guard let configuration = configuration as? VocableListContentConfiguration else {
-            updateLeadingActionAccessoryButtons(with: nil)
-            updatePrimaryLabelButton(with: nil)
-            return
-        }
+        let configuration = configuration as? VocableListContentConfiguration
 
-        updateActionConfiguration(to: configuration.actionsConfiguration)
+        updateActionConfiguration(to: configuration?.actionsConfiguration)
         updateLeadingActionAccessoryButtons(with: configuration)
         updatePrimaryLabelButton(with: configuration)
     }
 
     private func updatePrimaryLabelButton(with configuration: VocableListContentConfiguration?) {
-        primaryLabelButton.contentHorizontalAlignment = .left
+        primaryLabelButton.setTrailingAccessory(configuration?.accessory)
         primaryLabelButton.setAttributedTitle(configuration?.attributedTitle, for: .normal)
-        primaryLabelButton.addTarget(self, action: #selector(handlePrimaryActionSelection(_:)), for: .primaryActionTriggered)
         primaryLabelButton.accessibilityLabel = configuration?.accessibilityLabel
         primaryLabelButton.accessibilityIdentifier = configuration?.accessibilityIdentifier
-        
-        let trailingInsets: NSDirectionalEdgeInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
-        switch configuration?.accessory?.content {
-        case .image(let image):
-            if let trailingImageView = primaryLabelButton.trailingAccessoryView as? UIImageView {
-                trailingImageView.image = image
-            } else {
-                primaryLabelButton.setTrailingAccessoryView(UIImageView(image: image), insets: trailingInsets)
-            }
-        case .toggle(let isOn):
-            if let trailingToggle = primaryLabelButton.trailingAccessoryView as? UISwitch {
-                trailingToggle.setOn(isOn, animated: true)
-            } else {
-                let toggle = UISwitch()
-                toggle.setOn(isOn, animated: true)
-                toggle.isUserInteractionEnabled = false
-                primaryLabelButton.setTrailingAccessoryView(toggle, insets: trailingInsets)
-            }
-        default:
-            primaryLabelButton.setTrailingAccessoryView(nil, insets: .zero)
-        }
+        primaryLabelButton.addTarget(self, action: #selector(handlePrimaryActionSelection(_:)), for: .primaryActionTriggered)
     }
 
     private func updateLeadingActionAccessoryButtons(with configuration: VocableListContentConfiguration?) {
@@ -183,8 +156,8 @@ final class VocableListCellContentView: UIView, UIContentView {
         let actions = configuration?.actions ?? []
 
         // Ensure the minimum number of action buttons are present
-        let numberOfButtonsNeeded = max(actions.count - accessoryButtonStackView.arrangedSubviews.count, 0)
-        (0 ..< numberOfButtonsNeeded).forEach { _ in
+        let numberOfButtonsNeeded = max(actions.count - accessoryButtonStackView.arrangedSubviews.count, .zero)
+        (.zero ..< numberOfButtonsNeeded).forEach { _ in
             guard let configuration = configuration else { return }
             insertAccessoryButton(configuration: configuration.actionsConfiguration)
         }
@@ -236,15 +209,12 @@ final class VocableListCellContentView: UIView, UIContentView {
     @objc
     private func handleLeadingAccessoryActionSelection(_ sender: GazeableButton) {
 
-        guard let buttonIndex = accessoryButtonStackView.arrangedSubviews.firstIndex(of: sender) else {
+        guard let buttonIndex = accessoryButtonStackView.arrangedSubviews.firstIndex(of: sender),
+              let configuration = configuration as? VocableListContentConfiguration,
+              let accessory = configuration.actions[safe: buttonIndex] else {
             return
         }
-        guard let configuration = configuration as? VocableListContentConfiguration else {
-            return
-        }
-        guard let accessory = configuration.actions[safe: buttonIndex] else {
-            return
-        }
+
         accessory.action?()
     }
 }

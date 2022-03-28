@@ -40,20 +40,12 @@ struct VocableListCellAction: Equatable {
         accessibilityLabel: String? = nil,
         action: Action? = nil
     ) {
-        let image = VocableListCellAction.systemImage(imageName, symbolConfiguration: symbolConfiguration)
+        let image = UIImage(systemName: imageName, withConfiguration: symbolConfiguration)!
         self.init(image: image,
                   isEnabled: isEnabled,
                   accessibilityIdentifier: accessibilityIdentifier ?? imageName,
                   accessibilityLabel: accessibilityLabel ?? imageName,
                   action: action)
-    }
-
-    private static func systemImage(_ imageName: String, symbolConfiguration: UIImage.SymbolConfiguration? = nil) -> UIImage {
-        var image = UIImage(systemName: imageName)!
-        if let symbolConfiguration = symbolConfiguration {
-            image = image.applyingSymbolConfiguration(symbolConfiguration)!
-        }
-        return image
     }
 
     private static var defaultSymbolConfiguration: UIImage.SymbolConfiguration {

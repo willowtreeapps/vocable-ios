@@ -21,9 +21,6 @@ class GazeableButton: UIButton {
     private var cachedTitleColors = [UIControl.State: UIColor]()
     private let defaultIBStates = [UIControl.State.normal, .highlighted, .selected, .disabled]
 
-    private var trailingAccessoryViewLayoutGuide = UILayoutGuide()
-    private(set) var trailingAccessoryView: UIView?
-
     var shouldShrinkWhenTouched = true {
         didSet {
             updateSelectionAppearance()
@@ -115,14 +112,6 @@ class GazeableButton: UIButton {
     private func commonInit() {
         setDefaultAppearance()
         updateContentViews()
-        addLayoutGuide(trailingAccessoryViewLayoutGuide)
-        NSLayoutConstraint.activate([
-            trailingAccessoryViewLayoutGuide.topAnchor.constraint(equalTo: topAnchor),
-            trailingAccessoryViewLayoutGuide.bottomAnchor.constraint(equalTo: bottomAnchor),
-            trailingAccessoryViewLayoutGuide.trailingAnchor.constraint(equalTo: trailingAnchor),
-            // 8 to match the minimum default content inset (until an independent UIControl subclass is authored)
-            trailingAccessoryViewLayoutGuide.widthAnchor.constraint(equalToConstant: 8).withPriority(.defaultLow)
-        ])
     }
 
     private func setDefaultAppearance() {
@@ -158,45 +147,6 @@ class GazeableButton: UIButton {
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 34, weight: .bold)
         let image = image?.withConfiguration(symbolConfiguration)
         super.setImage(image, for: state)
-    }
-
-    func setTrailingAccessoryView(_ view: UIView?, insets: NSDirectionalEdgeInsets) {
-
-        defer {
-            trailingAccessoryView = view
-        }
-
-        if let trailingAccessoryView = trailingAccessoryView {
-            if view == trailingAccessoryView {
-                return
-            }
-        }
-
-        trailingAccessoryView?.removeFromSuperview()
-
-        guard let view = view else {
-            return
-        }
-
-        view.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(view)
-
-        NSLayoutConstraint.activate([
-            view.trailingAnchor.constraint(equalTo: trailingAccessoryViewLayoutGuide.trailingAnchor, constant: -insets.trailing),
-            view.centerYAnchor.constraint(equalTo: trailingAccessoryViewLayoutGuide.centerYAnchor),
-            view.leadingAnchor.constraint(equalTo: trailingAccessoryViewLayoutGuide.leadingAnchor, constant: insets.leading)
-        ])
-    }
-
-    override func layoutSubviews() {
-
-        let layoutGuideWidth = trailingAccessoryViewLayoutGuide.layoutFrame.width
-
-        if self.contentEdgeInsets.right != layoutGuideWidth {
-            self.contentEdgeInsets.right = layoutGuideWidth
-        }
-
-        super.layoutSubviews()
     }
 
     func fillColor(for state: UIControl.State) -> UIColor? {
