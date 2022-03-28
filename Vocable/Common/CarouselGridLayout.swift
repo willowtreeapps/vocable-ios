@@ -94,7 +94,7 @@ final class CarouselGridLayout: UICollectionViewLayout {
         let interRowSpacing: CGFloat
         let interColumnSpacing: CGFloat
 
-        static let zero: Self = .init(interRowSpacing: 0, interColumnSpacing: 0)
+        static let zero: Self = .init(interRowSpacing: .zero, interColumnSpacing: .zero)
         static func uniform(_ spacing: CGFloat) -> Self { .init(interRowSpacing: spacing, interColumnSpacing: spacing) }
 
         static func > (lhs: InterItemSpacing, rhs: InterItemSpacing) -> Bool {
@@ -375,7 +375,7 @@ final class CarouselGridLayout: UICollectionViewLayout {
 
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let collectionView = collectionView, pagesPerSection > 0,
-              pageContentSize.width > 0 || interItemSpacing > .zero else { return proposedContentOffset }
+              pageContentSize.width > .zero || interItemSpacing > .zero else { return proposedContentOffset }
         let proposedCenterX: CGFloat
         if velocity.x > 1.0 {
             proposedCenterX = collectionView.bounds.maxX
