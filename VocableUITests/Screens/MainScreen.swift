@@ -40,7 +40,7 @@ class MainScreen: BaseScreen {
     }
     
     func isTextDisplayed(_ text: String) -> Bool {
-        return app.collectionViews.staticTexts[text].exists
+        return app.collectionViews.staticTexts[text].waitForExistence(timeout: 10)
     }
        
     func scrollRightAndTapCurrentCategory(numTimesToScroll: Int, startingCategory: String) {
