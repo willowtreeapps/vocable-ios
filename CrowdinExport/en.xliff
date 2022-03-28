@@ -118,8 +118,8 @@
         <note>Remove category button label within the category detail screen.</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
-        <source>Show</source>
-        <target>Show</target>
+        <source>Show Category</source>
+        <target>Show Category</target>
         <note>Show category button label within the category detail screen.</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">

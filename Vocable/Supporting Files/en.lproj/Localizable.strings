@@ -96,7 +96,7 @@
 /* Settings screen header title */
 "settings.header.title" = "Settings";
 
-"category_editor.detail.button.show_category.title" = "Show";
+"category_editor.detail.button.show_category.title" = "Show Category";
 
 "category_editor.detail.button.remove_category.title" = "Remove Category";
 
