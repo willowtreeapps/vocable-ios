@@ -20,7 +20,7 @@ final class VocableListCellContentView: UIView, UIContentView {
     // MARK: - Subviews
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
+        let stackView = UIStackView(arrangedSubviews: [accessoryButtonStackView, primaryLabelButton])
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fill
@@ -63,9 +63,6 @@ final class VocableListCellContentView: UIView, UIContentView {
         addSubview(stackView)
 
         accessoryButtonStackView.isHidden = true
-        stackView.addArrangedSubview(accessoryButtonStackView)
-
-        stackView.addArrangedSubview(primaryLabelButton)
 
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -80,11 +77,7 @@ final class VocableListCellContentView: UIView, UIContentView {
     }
 
     private func configure(with configuration: UIContentConfiguration) {
-        guard let configuration = configuration as? VocableListContentConfiguration else {
-            updateLeadingActionAccessoryButtons(with: nil)
-            updatePrimaryLabelButton(with: nil)
-            return
-        }
+        let configuration = configuration as? VocableListContentConfiguration
 
         updateLeadingActionAccessoryButtons(with: configuration)
         updatePrimaryLabelButton(with: configuration)

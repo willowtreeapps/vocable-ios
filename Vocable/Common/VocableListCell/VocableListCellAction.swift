@@ -23,18 +23,10 @@ struct VocableListCellAction: Equatable {
     }
 
     private init(systemImage imageName: String, symbolConfiguration: UIImage.SymbolConfiguration? = nil, isEnabled: Bool = true, action: Action? = nil) {
-        let image = VocableListCellAction.systemImage(imageName, symbolConfiguration: symbolConfiguration)
+        let image = UIImage(systemName: imageName, withConfiguration: symbolConfiguration)!
         self.image = image
         self.isEnabled = isEnabled
         self.action = action
-    }
-
-    private static func systemImage(_ imageName: String, symbolConfiguration: UIImage.SymbolConfiguration? = nil) -> UIImage {
-        var image = UIImage(systemName: imageName)!
-        if let symbolConfiguration = symbolConfiguration {
-            image = image.applyingSymbolConfiguration(symbolConfiguration)!
-        }
-        return image
     }
 
     private static var defaultSymbolConfiguration: UIImage.SymbolConfiguration {

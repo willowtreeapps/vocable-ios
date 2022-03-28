@@ -13,18 +13,21 @@ struct VocableListCellAccessory: Equatable {
     enum Content: Equatable {
         case toggle(isOn: Bool)
         case image(UIImage)
+
+        static func == (lhs: Content, rhs: Content) -> Bool {
+            switch (lhs, rhs) {
+            case (.toggle(let isOnLeft), .toggle(let isOnRight)):
+                return isOnLeft == isOnRight
+            case (.image(let leftImage), .image(let rightImage)):
+                return leftImage.isEqual(rightImage)
+            default:
+                return false
+            }
+        }
     }
 
     let content: Content
     let isEnabled: Bool
-
-    private static func systemImage(_ imageName: String, symbolConfiguration: UIImage.SymbolConfiguration? = nil) -> UIImage {
-        var image = UIImage(systemName: imageName)!
-        if let symbolConfiguration = symbolConfiguration {
-            image = image.applyingSymbolConfiguration(symbolConfiguration)!
-        }
-        return image
-    }
 
     private static var trailingDefaultSymbolConfiguration: UIImage.SymbolConfiguration {
         UIImage.SymbolConfiguration(pointSize: 28, weight: .bold)
@@ -38,16 +41,11 @@ struct VocableListCellAccessory: Equatable {
             symbolName = "chevron.left"
         }
 
-        let image = systemImage(symbolName, symbolConfiguration: trailingDefaultSymbolConfiguration)
+        let image = UIImage(systemName: symbolName, withConfiguration: trailingDefaultSymbolConfiguration)!
         return VocableListCellAccessory(content: .image(image), isEnabled: isEnabled)
     }
 
     static func toggle(isOn: Bool, isEnabled: Bool = true) -> VocableListCellAccessory {
         return VocableListCellAccessory(content: .toggle(isOn: isOn), isEnabled: isEnabled)
-    }
-
-    static func == (lhs: VocableListCellAccessory, rhs: VocableListCellAccessory) -> Bool {
-        lhs.isEnabled == rhs.isEnabled &&
-        lhs.content == rhs.content
     }
 }
