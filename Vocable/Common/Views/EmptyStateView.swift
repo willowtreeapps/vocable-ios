@@ -21,7 +21,21 @@ private class EmptyStateButton: GazeableButton {
     }
 
     private func commonInit() {
-        contentEdgeInsets = .init(top: 16, left: 16, bottom: 16, right: 16)
+        updateForCurrentTraitCollection()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateForCurrentTraitCollection()
+    }
+
+    private func updateForCurrentTraitCollection() {
+        let hasCompactSize = [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass]
+            .contains(.compact)
+
+        contentEdgeInsets = hasCompactSize ?
+            .vertical(8) + .horizontal(48) :
+            .uniform(32)
     }
 }
 
@@ -130,6 +144,7 @@ final class EmptyStateView: UIView {
             descriptionAttributedText = nil
         }
         button.setTitle(type.buttonTitle, for: .normal)
+        button.accessibilityIdentifier = "empty_state_addPhrase_button"
 
         commonInit()
     }
@@ -142,8 +157,6 @@ final class EmptyStateView: UIView {
 
     private func commonInit() {
 
-        preservesSuperviewLayoutMargins = true
-
         backgroundColor = .collectionViewBackgroundColor
 
         stackView.spacing = 24
@@ -151,10 +164,9 @@ final class EmptyStateView: UIView {
         stackView.alignment = .center
 
         if action != nil {
-            let font = UIFont.boldSystemFont(ofSize: 18)
             if let title = button.title(for: .normal) {
                 let attributed = NSAttributedString(string: title,
-                                                    attributes: [.font: font, .foregroundColor: UIColor.defaultTextColor])
+                                                    attributes: [.foregroundColor: UIColor.defaultTextColor])
                 button.setAttributedTitle(attributed, for: .normal)
             }
             button.addTarget(self,
@@ -165,12 +177,12 @@ final class EmptyStateView: UIView {
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
+
         NSLayoutConstraint.activate([
-            stackView.leftAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leftAnchor),
-            stackView.rightAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.rightAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            stackView.widthAnchor.constraint(lessThanOrEqualTo: readableContentGuide.widthAnchor)
+            stackView.widthAnchor.constraint(lessThanOrEqualTo: readableContentGuide.widthAnchor),
+            stackView.heightAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.heightAnchor)
         ])
 
         let color = UIColor.defaultTextColor
@@ -192,40 +204,29 @@ final class EmptyStateView: UIView {
     }
 
     private func updateContentForCurrentTraitCollection() {
+        let hasCompactSize = [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass]
+            .contains(.compact)
 
-        if [traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass].contains(.compact) {
-            titleLabel.font = .boldSystemFont(ofSize: 28)
-        } else {
-            titleLabel.font = .boldSystemFont(ofSize: 20)
+        let font: UIFont = hasCompactSize ?
+            .systemFont(ofSize: 22, weight: .bold) :
+            .systemFont(ofSize: 28, weight: .bold)
+
+        titleLabel.font = font
+
+        if let attributedButtonTitle = button.attributedTitle(for: .normal) {
+            let updatedButtonTitle = NSMutableAttributedString(attributedString: attributedButtonTitle)
+            updatedButtonTitle.addAttribute(.font, value: font, range: .entireRange(of: updatedButtonTitle.string))
+            button.setAttributedTitle(updatedButtonTitle, for: .normal)
         }
+
     }
 
     @objc private func handleButton(_ sender: GazeableButton) {
-        if let action = action {
-            action()
-        }
+        action?()
     }
 
     private func updateStackView() {
-        if imageView.image != nil {
-            stackView.insertArrangedSubview(imageView, at: 0)
-        } else {
-            stackView.removeArrangedSubview(imageView)
-            imageView.removeFromSuperview()
-        }
-
-        if descriptionLabel.text != nil {
-            stackView.insertSubview(descriptionLabel, belowSubview: titleLabel)
-        } else {
-            stackView.removeArrangedSubview(descriptionLabel)
-            descriptionLabel.removeFromSuperview()
-        }
-
-        if descriptionLabel.attributedText != nil {
-            stackView.insertSubview(descriptionLabel, belowSubview: titleLabel)
-        } else {
-            stackView.removeArrangedSubview(descriptionLabel)
-            descriptionLabel.removeFromSuperview()
-        }
+        imageView.isHidden = imageView.image == nil
+        descriptionLabel.isHidden = descriptionLabel.text == nil && descriptionLabel.attributedText == nil
     }
 }

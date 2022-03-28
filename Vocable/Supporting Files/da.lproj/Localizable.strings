@@ -26,7 +26,7 @@
 "category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Slet";
 
 /* Delete phrase confirmation alert title */
-"category_editor.alert.delete_phrase_confirmation.title" = "Slettede sætninger kan ikke genskabes";
+"category_editor.alert.delete_phrase_confirmation.title" = "Er du sikker? Slettede sætninger kan ikke gendannes.";
 
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "Fjern Kategori";
@@ -45,7 +45,7 @@
 "debug.assertion.presets_file_not_found" = "Ingen forudstillinger fundet";
 
 /* Edit Phrases */
-"Edit Phrases" = "Ændrer Sætninger";
+"Edit Phrases" = "Rediger Sætninger";
 
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Annuller";
@@ -104,7 +104,7 @@
 "settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Bekræft";
 
 /* edit categories settings menu item */
-"settings.cell.categories.title" = "Kategorier";
+"settings.cell.categories.title" = "Kategorier og sætning";
 
 /* contact developers settings menu item */
 "settings.cell.contact_developers.title" = "Kontakt Udvikler";

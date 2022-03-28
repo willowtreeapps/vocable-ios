@@ -27,4 +27,16 @@ extension UIEdgeInsets {
                             bottom: lhs.bottom - rhs.bottom,
                             right: lhs.right - rhs.right)
     }
+
+    static func uniform(_ inset: CGFloat) -> UIEdgeInsets {
+        .init(top: inset, left: inset, bottom: inset, right: inset)
+    }
+
+    static func vertical(_ verticalInset: CGFloat) -> UIEdgeInsets {
+        .init(top: verticalInset, left: 0, bottom: verticalInset, right: 0)
+    }
+
+    static func horizontal(_ horizontalInset: CGFloat) -> UIEdgeInsets {
+        .init(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)
+    }
 }

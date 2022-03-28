@@ -141,7 +141,6 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
     }
 
     private func installEmptyStateIfNeeded() {
-        guard AppConfig.emptyStatesEnabled else { return }
         guard collectionView.backgroundView == nil else { return }
         paginationView.isHidden = true
         if category.identifier == Category.Identifier.recents {

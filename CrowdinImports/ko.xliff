@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Vocable/Supporting Files/en.lproj/InfoPlist.strings" source-language="en" target-language="ko" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+    </header>
+    <body>
+      
+      
+      
+      
+      
+    </body>
+  </file>
+  <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="ko" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+    </header>
+    <body>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
+        <source>Delete</source>
+        <target state="translated">삭제</target>
+        <note>Delete phrase alert action button title</note>
+      </trans-unit>
+      <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
+        <source>Please move closer to the device.</source>
+        <target state="translated">기기에 가까이 오세요</target>
+        <note>Warning message presented to the user when the head tracking system</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
+        <source>Privacy Policy</source>
+        <target state="translated">개인정보 취급 약관</target>
+        <note>view privacy policy settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.header.title" xml:space="preserve">
+        <source>Settings</source>
+        <target state="translated">설정</target>
+        <note>Settings screen header title</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vocable/Supporting Files/en.lproj/Presets.strings" source-language="en" target-language="ko" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+    </header>
+    <body>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </body>
+  </file>
+</xliff>

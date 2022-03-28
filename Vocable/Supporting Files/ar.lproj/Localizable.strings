@@ -1,0 +1,159 @@
+/* Categories list editor screen header title */
+"categories_list_editor.header.title" = "تصنيف";
+
+/* Cancel exit editing alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "إلغاء";
+
+/* Confirm exit category alert action title */
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "تأكيد";
+
+/* Exit edit categories alert title */
+"category_editor.alert.cancel_editing_confirmation.title" = "إذا أغلقت هذا دون حفظ التصنيف المخصص الخاص بك سيتم حذفه.";
+
+/* Delete category alert cancel button title */
+"category_editor.alert.delete_category_confirmation.button.cancel.title" = "إلغاء";
+
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "إزالة";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "فالعبارات التي يتم مسحها لا يمكن إسترجاعها.";
+
+/* Delete phrase alert cancel button title */
+"category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "إلغاء";
+
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "حذف";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "هل أنت متأكد من أنك تريد الحذف؟ لا يمكن استعادة الجمل المحذوفة.";
+
+/* Remove category button label within the category detail screen. */
+"category_editor.detail.button.remove_category.title" = "إزالة فئة";
+
+/* Show category button label within the category detail screen. */
+"category_editor.detail.button.show_category.title" = "إظهار";
+
+/* changes to an existing phrase were saved successfully */
+"category_editor.toast.changes_saved.title" = "تم حفظ التغييرات";
+
+/* Saved to Categories
+   User edited name of the category and saved it successfully */
+"category_editor.toast.successfully_saved.title" = "تم حفظ التغييرات";
+
+/* Debugging error message for when preloaded content is not found */
+"debug.assertion.presets_file_not_found" = "لم يتم العثور على إعدادات مسبقة";
+
+/* Cancel alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "إلغاء";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "تأكيد";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "إيقاف تشغيل تعقب حركة الرأس؟";
+
+/* Warning message presented to the user when the head tracking system */
+"gaze_tracking.error.excessive_head_distance.title" = "من فضلك إقترب أكثر من الجهاز.";
+
+/* Select something below to speak Hint Text */
+"main_screen.textfield_placeholder.default" = "إختر شيئ بالأسفل لتقوله";
+
+/* Page indicator progress format. \"Page x of n\" */
+"paging_progress_indicator_format" = "صفحه %1$d من %2$d";
+
+/* Continue editing alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "الإستمرار في التعديل";
+
+/* Discard changes alert action title */
+"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "تجاهل";
+
+/* Exit edit sayings alert title */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "هل أنت متأكد؟ العودة قبل الحفظ ستمسح أي تعديلات تم إجراؤها.";
+
+/* new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title */
+"phrase_editor.toast.successfully_saved_to_favorites.title_format" = "تم الحفظ إلى %@";
+
+/* 'No' num pad response */
+"preset.category.numberpad.phrase.no.title" = "لا";
+
+/* 'Yes' num pad response */
+"preset.category.numberpad.phrase.yes.title" = "نعم";
+
+/* Selection mode screen header title */
+"selection_mode.header.title" = "إختيار النمط";
+
+/* No email account configured error alert dismiss button title */
+"settings.alert.no_email_configured.button.dismiss.title" = "حسنا";
+
+/* No email account configured error alert title */
+"settings.alert.no_email_configured.title" = "لم يتم تكوين البريد الإلكتروني.";
+
+/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.body" = "أنت على وشك إخراجك من التطبيق القابل للتقييم. قد تفقد السيطرة على تتبع الرأس.";
+
+/* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.cancel.title" = "إلغاء";
+
+/* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.confirm.title" = "تأكيد";
+
+/* edit categories settings menu item */
+"settings.cell.categories.title" = "الفئات والعبارات";
+
+/* contact developers settings menu item */
+"settings.cell.contact_developers.title" = "تواصل مع المطورين";
+
+/* edit user's favorite phrases category settings menu item */
+"settings.cell.edit_user_favorites.title_format" = "تعديل %@";
+
+/* Settings head tracking cell title */
+"settings.cell.head_tracking.title" = "تعقب الرأس";
+
+/* view privacy policy settings menu item */
+"settings.cell.privacy_policy.title" = "حقوق الخصوصية";
+
+/* reset all settings menu item */
+"settings.cell.reset_all.title" = "العودة إلي إعدادات التطبيق";
+
+/* edit cursor selection mode settings menu item */
+"settings.cell.selection_mode.title" = "إختيار النمط";
+
+/* edit cursor timing and sensititivy settings menu item */
+"settings.cell.timing_sensitivity.title" = "التوقيت و حساسيت الإستجابة";
+
+/* tune cursor debug settings menu item */
+"settings.cell.tune_cursor.title" = "ضبط المؤشر";
+
+/* Settings screen header title */
+"settings.header.title" = "الإعدادات";
+
+/* Continue editing alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "الإستمرار في التعديل";
+
+/* Discard changes alert action title */
+"text_editor.alert.cancel_editing_confirmation.button.discard.title" = "تجاهل";
+
+/* Exit edit sayings alert title */
+"text_editor.alert.cancel_editing_confirmation.title" = "هل أنت متأكد؟ العودة قبل الحفظ ستمسح أي تعديلات تم إجراؤها.";
+
+/* High cursor sensitivity option button */
+"timing_and_sensitivity.button.high.title" = "مرتفع";
+
+/* Low cursor sensitivity option button */
+"timing_and_sensitivity.button.low.title" = "أدنى";
+
+/* Medium cursor sensitivity option button */
+"timing_and_sensitivity.button.medium.title" = "متوسط";
+
+/* Cursor sensitivity configuration option name */
+"timing_and_sensitivity.cell.cursor_sensitivity.title" = "حساسية المؤشر";
+
+/* Dwell duration configuration option name */
+"timing_and_sensitivity.cell.dwell_duration.title" = "الوقت تحوم";
+
+/* Timing and sensitivity header title */
+"timing_and_sensitivity.header.title" = "التوقيت و حساسيت الإستجابة";
+

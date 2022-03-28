@@ -1,0 +1,6 @@
+/* 'No' num pad response */
+"preset.category.numberpad.phrase.no.title" = "Нет";
+
+/* 'Yes' num pad response */
+"preset.category.numberpad.phrase.yes.title" = "Да";
+
