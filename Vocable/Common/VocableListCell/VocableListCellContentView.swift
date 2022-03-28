@@ -101,8 +101,8 @@ final class VocableListCellContentView: UIView, UIContentView {
         let actions = configuration?.actions ?? []
 
         // Ensure the minimum number of action buttons are present
-        let numberOfButtonsNeeded = max(actions.count - accessoryButtonStackView.arrangedSubviews.count, 0)
-        (0 ..< numberOfButtonsNeeded).forEach { _ in
+        let numberOfButtonsNeeded = max(actions.count - accessoryButtonStackView.arrangedSubviews.count, .zero)
+        (.zero ..< numberOfButtonsNeeded).forEach { _ in
             insertAccessoryButton()
         }
 
