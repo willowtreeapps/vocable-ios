@@ -9,31 +9,44 @@
 import UIKit
 import CoreData
 
-final class EditCategoryDetailViewController: VocableCollectionViewController, EditCategoryDetailTitleCollectionViewCellDelegate {
-
-    var category: Category!
+final class EditCategoryDetailViewController: VocableCollectionViewController {
+    private typealias DataSource = UICollectionViewDiffableDataSource<Section, EditCategoryItem>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, EditCategoryItem>
+    private typealias CellRegistration = UICollectionView.CellRegistration<VocableListCell, EditCategoryItem>
 
     private enum Section: Int, CaseIterable {
-        case header
         case body
+        case footer
     }
 
     private enum EditCategoryItem: Int {
-        case titleEditView
+        case renameCategory
         case showCategoryToggle
         case addPhrase
         case removeCategory
     }
 
+    let category: Category
+
     private let context = NSPersistentContainer.shared.viewContext
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, EditCategoryItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
-        return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
+    private lazy var dataSource = DataSource(collectionView: collectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell? in
+        self?.collectionView(collectionView, cellForItem: item, at: indexPath)
+    }
+
+    private var cellRegistration: CellRegistration!
+
+    init(_ category: Category) {
+        self.category = category
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        assert(category != nil, "Category not provided")
 
         setupNavigationBar()
         setupCollectionView()
@@ -41,10 +54,11 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
     }
 
     private func setupNavigationBar() {
+        navigationBar.title = category.name
         navigationBar.leftButton = {
             let button = GazeableButton()
             button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-            button.addTarget(self, action: #selector(handleBackButton(_:)), for: .primaryActionTriggered)
+            button.addTarget(self, action: #selector(handleBackButton), for: .primaryActionTriggered)
             button.accessibilityIdentifier = "navigationBar.backButton"
             return button
         }()
@@ -53,51 +67,47 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
     // MARK: UICollectionViewDataSource
     
     private func updateDataSource() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, EditCategoryItem>()
-        snapshot.appendSections([.header])
-        snapshot.appendItems([.titleEditView])
+        var snapshot = Snapshot()
 
-        snapshot.appendSections([.body])
-        snapshot.appendItems([.showCategoryToggle, .addPhrase, .removeCategory])
+        snapshot.appendSections([.body, .footer])
+        snapshot.appendItems([.renameCategory, .showCategoryToggle, .addPhrase], toSection: .body)
+        snapshot.appendItems([.removeCategory], toSection: .footer)
 
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     private func setupCollectionView() {
-        collectionView.register(UINib(nibName: "EditCategoryDetailsHeaderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryDetailTitleCollectionViewCell.reuseIdentifier)
-        collectionView.register(UINib(nibName: "EditCategoryToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier)
-        collectionView.register(UINib(nibName: "EditCategoryRemoveCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EditCategoryRemoveCollectionViewCell.reuseIdentifier)
-        collectionView.register(UINib(nibName: "SettingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier)
+        collectionView.registerNib(EditCategoryToggleCollectionViewCell.self)
+        collectionView.registerNib(EditCategoryRemoveCollectionViewCell.self)
+        collectionView.registerNib(SettingsCollectionViewCell.self)
         collectionView.backgroundColor = .collectionViewBackgroundColor
 
-        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout { (sectionIndex, environment) -> NSCollectionLayoutSection? in
+        cellRegistration = CellRegistration { cell, _, _ in
+            let config = VocableListContentConfiguration(
+                title: "Rename Category",
+                accessory: .disclosureIndicator(),
+                isPrimaryActionEnabled: true
+            ) { [weak self] in
+                self?.handleRenameCategory()
+            }
 
-            let section = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
+            cell.contentConfiguration = config
+        }
+
+
+        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout { [weak self] (sectionIndex, environment) -> NSCollectionLayoutSection? in
+
+            let section = self?.dataSource.snapshot().sectionIdentifiers[sectionIndex]
+
             switch section {
-            case .header:
-                return self.headerSection(environment: environment)
             case .body:
-                return self.bodySection(environment: environment)
+                return self?.bodySection(environment: environment)
+            case .footer:
+                return self?.footerSection(environment: environment)
+            case .none:
+                return nil
             }
         }
-    }
-
-    private func headerSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-
-        let itemHeightDimension = NSCollectionLayoutDimension.absolute(50)
-        let itemWidthDimension = NSCollectionLayoutDimension.fractionalWidth(1.0)
-
-        let itemSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-        group.interItemSpacing = .fixed(8)
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 8
-        section.contentInsets = sectionInsets(for: environment)
-        section.contentInsets.top = 8
-        return section
     }
 
     private func bodySection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
@@ -124,23 +134,10 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         return section
     }
 
-    private func sectionInsets(for environment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
-        return NSDirectionalEdgeInsets(top: 0,
-                                       leading: max(view.layoutMargins.left - environment.container.contentInsets.leading, 0),
-                                       bottom: 0,
-                                       trailing: max(view.layoutMargins.right - environment.container.contentInsets.trailing, 0))
-    }
+    private func footerSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
-    private func defaultSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-
-        let itemHeightDimension: NSCollectionLayoutDimension
+        let itemHeightDimension = NSCollectionLayoutDimension.absolute(50)
         let itemWidthDimension = NSCollectionLayoutDimension.fractionalWidth(1.0)
-
-        if sizeClass.contains(any: .compact) {
-            itemHeightDimension = .absolute(50)
-        } else {
-            itemHeightDimension = .absolute(100)
-        }
 
         let itemSize = NSCollectionLayoutSize(widthDimension: itemWidthDimension, heightDimension: itemHeightDimension)
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -151,33 +148,38 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
         section.contentInsets = sectionInsets(for: environment)
+        section.contentInsets.top = 8
         return section
     }
 
-    private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: EditCategoryItem) -> UICollectionViewCell {
+    private func sectionInsets(for environment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
+        return NSDirectionalEdgeInsets(top: 0,
+                                       leading: max(view.layoutMargins.left - environment.container.contentInsets.leading, 0),
+                                       bottom: 0,
+                                       trailing: max(view.layoutMargins.right - environment.container.contentInsets.trailing, 0))
+    }
+
+    private func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItem item: EditCategoryItem,
+        at indexPath: IndexPath
+    ) -> UICollectionViewCell {
         switch item {
-        case .titleEditView:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryDetailTitleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryDetailTitleCollectionViewCell
-            cell.delegate = self
-            cell.textLabel.text = category.name
-            cell.editButton.isEnabled = true            
-            
-            // Assign identifiers for automation
-            cell.accessibilityIdentifier = "category_title"
-            cell.editButton.accessibilityIdentifier = "category_title_edit_button"
+        case .renameCategory:
+            let cell = collectionView.dequeueConfiguredReusableCell(
+                using: cellRegistration,
+                for: indexPath,
+                item: item)
 
             return cell
-
         case .showCategoryToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditCategoryToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! EditCategoryToggleCollectionViewCell
             cell.isEnabled = shouldEnableItem(at: indexPath)
             cell.textLabel.text = NSLocalizedString("category_editor.detail.button.show_category.title", comment: "Show category button label within the category detail screen.")
 
-            if let category = category {
-                cell.showCategorySwitch.isOn = !category.isHidden
-                cell.showCategorySwitch.isEnabled = (category.identifier != .userFavorites)
-            }
-            
+            cell.showCategorySwitch.isOn = !category.isHidden
+            cell.showCategorySwitch.isEnabled = (category.identifier != .userFavorites)
+
             // Assign an identifier for automation
             cell.showCategorySwitch.accessibilityIdentifier = "show_category_toggle"
             
@@ -212,8 +214,8 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             collectionView.deselectItem(at: indexPath, animated: true)
         }
         switch selectedItem {
-        case .titleEditView:
-            return
+        case .renameCategory:
+            handleRenameCategory()
         case .showCategoryToggle:
             handleToggle(at: indexPath)
         case .addPhrase:
@@ -227,10 +229,6 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         return shouldEnableItem(at: indexPath)
     }
 
-    func collectionView(_ collectionView: UICollectionView, shouldhi indexPath: IndexPath) -> Bool {
-        return shouldEnableItem(at: indexPath)
-    }
-
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return shouldEnableItem(at: indexPath)
     }
@@ -239,7 +237,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return false }
 
         switch selectedItem {
-        case .titleEditView:
+        case .renameCategory:
             return true
         case .showCategoryToggle, .removeCategory:
             return (category.identifier != .userFavorites)
@@ -250,16 +248,12 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
 
     // MARK: Actions
     
-    @objc func backButtonPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-
-    @objc func handleBackButton(_ sender: Any) {
+    @objc func handleBackButton() {
         navigationController?.popViewController(animated: true)
     }
     
     private func handleToggle(at indexPath: IndexPath) {
-        guard let category = category, let cell = collectionView.cellForItem(at: indexPath) as? EditCategoryToggleCollectionViewCell else { return }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? EditCategoryToggleCollectionViewCell else { return }
 
         let shouldShowCategory = !cell.showCategorySwitch.isOn
         category.setValue(!category.isHidden, forKey: "isHidden")
@@ -303,7 +297,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
     }
     
     private func removeCategory() {
-        guard let category = category else { return }
+
         if category.isUserGenerated {
             context.delete(category)
         } else {
@@ -334,9 +328,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         return false
     }
 
-    // MARK: EditCategoryDetailTitleCollectionViewCellDelegate
-
-    func didTapEdit() {
+    func handleRenameCategory() {
         guard let categoryIdentifier = category.identifier else {
             assertionFailure("Category has no identifier")
             return
@@ -345,7 +337,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         let initialValue = category.name ?? ""
         let viewController = EditTextViewController()
         viewController.initialText = initialValue
-        viewController.editTextCompletionHandler = { (newText) -> Void in
+        viewController.editTextCompletionHandler = { [weak self] newText in
             let context = NSPersistentContainer.shared.viewContext
 
             if let category = Category.fetchObject(in: context, matching: categoryIdentifier) {
@@ -362,7 +354,9 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
                                                      comment: "User edited name of the category and saved it successfully")
 
                 ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-                self.collectionView.reloadData()
+
+                self?.collectionView.reloadData()
+                self?.navigationBar.title = newText
             } catch {
                 assertionFailure("Failed to save category: \(error)")
             }
