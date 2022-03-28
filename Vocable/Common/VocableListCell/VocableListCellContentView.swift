@@ -37,8 +37,8 @@ final class VocableListCellContentView: UIView, UIContentView {
         return stackView
     }()
 
-    private lazy var primaryLabelButton: GazeableButton = {
-        let button = GazeableButton()
+    private lazy var primaryLabelButton: VocableListCellPrimaryButton = {
+        let button = VocableListCellPrimaryButton()
         button.contentHorizontalAlignment = .left
         button.contentEdgeInsets = .init(uniform: 16)
         return button
@@ -91,30 +91,9 @@ final class VocableListCellContentView: UIView, UIContentView {
     }
 
     private func updatePrimaryLabelButton(with configuration: VocableListContentConfiguration?) {
-        primaryLabelButton.contentHorizontalAlignment = .left
+        primaryLabelButton.setTrailingAccessory(configuration?.accessory)
         primaryLabelButton.setAttributedTitle(configuration?.attributedTitle, for: .normal)
         primaryLabelButton.addTarget(self, action: #selector(handlePrimaryActionSelection(_:)), for: .primaryActionTriggered)
-
-        let trailingInsets: NSDirectionalEdgeInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
-        switch configuration?.accessory?.content {
-        case .image(let image):
-            if let trailingImageView = primaryLabelButton.trailingAccessoryView as? UIImageView {
-                trailingImageView.image = image
-            } else {
-                primaryLabelButton.setTrailingAccessoryView(UIImageView(image: image), insets: trailingInsets)
-            }
-        case .toggle(let isOn):
-            if let trailingToggle = primaryLabelButton.trailingAccessoryView as? UISwitch {
-                trailingToggle.setOn(isOn, animated: true)
-            } else {
-                let toggle = UISwitch()
-                toggle.setOn(isOn, animated: true)
-                toggle.isUserInteractionEnabled = false
-                primaryLabelButton.setTrailingAccessoryView(toggle, insets: trailingInsets)
-            }
-        default:
-            primaryLabelButton.setTrailingAccessoryView(nil, insets: .zero)
-        }
     }
 
     private func updateLeadingActionAccessoryButtons(with configuration: VocableListContentConfiguration?) {
@@ -173,15 +152,12 @@ final class VocableListCellContentView: UIView, UIContentView {
     @objc
     private func handleLeadingAccessoryActionSelection(_ sender: GazeableButton) {
 
-        guard let buttonIndex = accessoryButtonStackView.arrangedSubviews.firstIndex(of: sender) else {
+        guard let buttonIndex = accessoryButtonStackView.arrangedSubviews.firstIndex(of: sender),
+              let configuration = configuration as? VocableListContentConfiguration,
+              let accessory = configuration.actions[safe: buttonIndex] else {
             return
         }
-        guard let configuration = configuration as? VocableListContentConfiguration else {
-            return
-        }
-        guard let accessory = configuration.actions[safe: buttonIndex] else {
-            return
-        }
+
         accessory.action?()
     }
 }
