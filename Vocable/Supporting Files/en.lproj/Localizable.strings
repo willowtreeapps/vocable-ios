@@ -140,7 +140,7 @@
 
 "recents_empty_state.body.title" = "Start using Vocable to see your most recently used phrases here.";
 
-"empty_state.header.title" = "You don't have any phrases saved yet.";
+"empty_state.header.title" = "This category has no phrases yet";
 
 "empty_state.button.title" = "Add Phrase";
 
