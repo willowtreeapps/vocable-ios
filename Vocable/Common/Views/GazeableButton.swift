@@ -121,7 +121,7 @@ class GazeableButton: UIButton {
         setFillColor(.cellSelectionColor, for: [.selected, .highlighted])
         setTitleColor(.collectionViewBackgroundColor, for: .selected)
         setTitleColor(.collectionViewBackgroundColor, for: [.selected, .highlighted])
-        
+        titleLabel?.numberOfLines = 3
         contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
         layoutMargins = .zero
         for state in defaultIBStates {

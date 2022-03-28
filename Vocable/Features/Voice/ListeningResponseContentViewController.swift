@@ -82,7 +82,7 @@ final class ListeningResponseContentViewController: PagingCarouselViewController
         let responseCount = content.count
 
         let layout = collectionView.layout
-        layout.interItemSpacing = 8
+        layout.interItemSpacing = .uniform(8)
         layout.pageInsets.top = 24
         layout.pageInsets.bottom = view.safeAreaInsets.bottom + 24
         layout.pageInsets.left = view.layoutMargins.left + 24

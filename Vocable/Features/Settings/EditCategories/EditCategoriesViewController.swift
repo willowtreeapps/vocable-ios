@@ -96,7 +96,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
     }
     
     private func updateLayoutForCurrentTraitCollection() {
-        collectionView.layout.interItemSpacing = 0
+        collectionView.layout.interItemSpacing = .zero
         collectionView.layout.numberOfColumns = .fixedCount(1)
 
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {

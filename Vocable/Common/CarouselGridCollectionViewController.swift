@@ -29,7 +29,7 @@ private extension CarouselGridLayout {
         let layout = CarouselGridLayout()
         layout.numberOfColumns = .fixedCount(2)
         layout.numberOfRows = .fixedCount(3)
-        layout.interItemSpacing = 24
+        layout.interItemSpacing = .uniform(24)
         return layout
     }
 }
