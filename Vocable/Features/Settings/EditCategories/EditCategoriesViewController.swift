@@ -164,13 +164,8 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         })
     }
 
+    @available(iOS, obsoleted: 15, message: "Use snapshot-based reconfiguring instead")
     private func updateVisibleCellConfigurations() {
-
-        if #available(iOS 15, *) {
-            print("Use snapshot-based reconfiguring instead")
-            return
-        }
-
         for indexPath in self.collectionView.indexPathsForVisibleItems {
             if let cell = self.collectionView.cellForItem(at: indexPath) as? VocableListCell {
                 guard let categoryID = self.diffableDataSource.itemIdentifier(for: indexPath) else {
