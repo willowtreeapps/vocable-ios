@@ -107,6 +107,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
                 newConfig.actionsConfiguration.size.widthDimension = .fractionalHeight(1.0)
             }
         }
+
         cell.contentConfiguration = config
     }
 
