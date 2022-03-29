@@ -144,8 +144,8 @@
         <note>Empty state Add Phrase button title</note>
       </trans-unit>
       <trans-unit id="empty_state.header.title" xml:space="preserve">
-        <source>You don't have any phrases saved yet.</source>
-        <target>You don't have any phrases saved yet.</target>
+        <source>This category has no phrases yet</source>
+        <target>This category has no phrases yet</target>
         <note>Empty state title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
