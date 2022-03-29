@@ -79,7 +79,7 @@
                   Identifier = "SettingsScreenTests/testAddCustomCategory()">
                </Test>
                <Test
-                  Identifier = "SettingsScreenTests/testHideShowToggle()">
+                  Identifier = "SettingsScreenTests/testReorder()">
                </Test>
             </SkippedTests>
          </TestableReference>

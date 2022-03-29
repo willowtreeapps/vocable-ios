@@ -14,6 +14,8 @@ import XCTest
 
 class BaseScreen {
     let paginationLabel = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
+    let alertMessageLabel = XCUIApplication().staticTexts["alert_message"]
+    let emptyStateAddPhraseButton = XCUIApplication().buttons["empty_state_addPhrase_button"]
     
     /// From Pagination: the current page (X) being viewed from the "Page X of Y" pagination label.
     var currentPageNumber: Int {

@@ -87,11 +87,6 @@
         <target state="final">Kategorie entfernen</target>
         <note>Remove category button label within the category detail screen.</note>
       </trans-unit>
-      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve" approved="yes">
-        <source>Show</source>
-        <target state="final">Anzeigen</target>
-        <note>Show category button label within the category detail screen.</note>
-      </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve" approved="yes">
         <source>Changes saved</source>
         <target state="final">Änderungen gespeichert</target>
@@ -107,11 +102,6 @@
         <source>No presets found</source>
         <target state="final">No presets found</target>
         <note>Debugging error message for when preloaded content is not found</note>
-      </trans-unit>
-      <trans-unit id="empty_state.header.title" xml:space="preserve" approved="yes">
-        <source>You don't have any phrases saved yet.</source>
-        <target state="final">Sie haben noch keine Phrasen gespeichert.</target>
-        <note>Empty state title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
