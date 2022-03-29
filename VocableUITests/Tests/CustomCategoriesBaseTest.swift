@@ -10,12 +10,10 @@ import XCTest
 
 class CustomCategoriesBaseTest: BaseTest {
     
-    private(set) var customCategoryName: String = ""
+    private(set) var customCategoryName: String = "Test"
     
     override func setUp() {
         super.setUp()
-        
-        setCustomCategory(name: "Hi", numOfRandomLetters: 3)
         
         // Create a custom category and open it
         settingsScreen.navigateToSettingsCategoryScreen()
@@ -23,11 +21,4 @@ class CustomCategoriesBaseTest: BaseTest {
         settingsScreen.openCategorySettings(category: customCategoryName)
     }
     
-    private func setCustomCategory(name: String, numOfRandomLetters: Int) {
-        customCategoryName = name + randomString(length: numOfRandomLetters)
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
 }
