@@ -100,11 +100,8 @@ struct VocableListContentConfiguration: UIContentConfiguration, Equatable {
     }
 
     func updated(for state: UIConfigurationState) -> VocableListContentConfiguration {
-
         var updatedSelf = self
-        if let handler = traitCollectionChangeHandler {
-            handler(state.traitCollection, &updatedSelf)
-        }
+        traitCollectionChangeHandler?(state.traitCollection, &updatedSelf)
         return updatedSelf
     }
 
