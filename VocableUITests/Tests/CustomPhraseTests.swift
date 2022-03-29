@@ -8,7 +8,7 @@
 
 import XCTest
 
-class CustomCategoriesTests: CustomCategoriesBaseTest {
+class CustomPhraseTests: CustomPhraseBaseTest {
 
     func testAddNewPhrase() {
         let customPhrase = "dd"

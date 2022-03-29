@@ -66,37 +66,4 @@ class SettingsScreenTests: BaseTest {
 
     }
 
-    func testAddCustomCategory() {
-
-        let customCategory = "ddingcustomcategorytest"
-        let confirmationAlert = "Are you sure? Going back before saving will clear any edits made."
-
-        settingsScreen.navigateToSettingsCategoryScreen()
-        settingsScreen.settingsPageAddCategoryButton.tap()
-
-        // Verify Category is not added if edits are discarded
-        keyboardScreen.typeText("A")
-        keyboardScreen.dismissKeyboardButton.tap()
-        XCTAssertEqual(XCUIApplication().staticTexts.element(boundBy: 1).label, confirmationAlert)
-
-        settingsScreen.alertDiscardButton.tap()
-        XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: "A").element.exists)
-        settingsScreen.settingsPageNextButton.tap()
-        XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: "A").element.exists)
-
-        // Verify Category can be added if continuing edit.
-        settingsScreen.settingsPageAddCategoryButton.tap()
-        keyboardScreen.typeText("A")
-        keyboardScreen.dismissKeyboardButton.tap()
-        XCTAssertEqual(XCUIApplication().staticTexts.element(boundBy: 1).label, confirmationAlert)
-        settingsScreen.alertContinueButton.tap()
-
-        keyboardScreen.typeText(customCategory)
-        keyboardScreen.checkmarkAddButton.tap()
-        settingsScreen.navigateToCategory(category: "9. A"+customCategory)
-
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: "9. A"+customCategory).element.exists)
-
-    }
-
 }
