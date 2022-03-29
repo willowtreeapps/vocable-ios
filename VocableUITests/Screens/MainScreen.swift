@@ -24,7 +24,6 @@ class MainScreen: BaseScreen {
     let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
     let paginationLeftButton = XCUIApplication().buttons["bottomPagination.left_chevron"]
     let paginationRightButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
-    let emptyStateAddPhraseButton = XCUIApplication().buttons["empty_state_addPhrase_button"]
     
     // Find the current selected category and return it as a CategoryTitleCellIdentifier
     var selectedCategoryCell: CategoryTitleCellIdentifier {
