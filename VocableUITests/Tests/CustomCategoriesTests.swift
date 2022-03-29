@@ -8,7 +8,7 @@
 
 import XCTest
 
-class CustomCategoriesTest: CustomCategoriesBaseTest {
+class CustomCategoriesTests: CustomCategoriesBaseTest {
 
     func testAddNewPhrase() {
         let customPhrase = "dd"
@@ -25,8 +25,6 @@ class CustomCategoriesTest: CustomCategoriesBaseTest {
 
         settingsScreen.alertDiscardButton.tap()
         XCTAssertFalse(XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: "A").element.exists)
-        settingsScreen.settingsPageNextButton.tap()
-        XCTAssertFalse(XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: "A").element.exists)
 
         // Verify Phrase can be added if continuing edit.
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
@@ -42,7 +40,7 @@ class CustomCategoriesTest: CustomCategoriesBaseTest {
     }
 
     func testCustomPhraseEdit() {
-        let customPhrase = "Add" + randomString(length: 2)
+        let customPhrase = "Add"
         
         // Add our test phrase
         customCategoriesScreen.editCategoryPhrasesCell.tap()
@@ -58,8 +56,7 @@ class CustomCategoriesTest: CustomCategoriesBaseTest {
     }
     
     func testDeleteCustomPhrase() {
-        // This test builds off of the last test.
-        let customPhrase = "Delete" + randomString(length: 2)
+        let customPhrase = "Delete"
         
         // Add our test phrase
         customCategoriesScreen.editCategoryPhrasesCell.tap()
@@ -99,8 +96,9 @@ class CustomCategoriesTest: CustomCategoriesBaseTest {
         XCTAssertEqual(phraseQuery.count, 2, "Expected both phrases to be present")
     }
     
-    // TODO: Disabled for now. Moving it to a different test class as part of issue #405
-    // https://github.com/willowtreeapps/vocable-ios/issues/405
+    // TODO: Disabled for now. Moving it to a different test class as part of issue #405; tracked in issue #470
+    // https://github.com/willowtreeapps/vocable-ios/issues/470 -> Implementation
+    // https://github.com/willowtreeapps/vocable-ios/issues/405 -> Parent
     func testPagination() {
         let customCategoryThree = "Testc"
         let createdCustomCategory = ("9. "+customCategoryThree)
