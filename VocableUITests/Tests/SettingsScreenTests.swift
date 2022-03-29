@@ -22,20 +22,20 @@ class SettingsScreenTests: BaseTest {
         settingsScreen.showCategorySwitch.tap()
         settingsScreen.leaveCategoryDetailButton.tap()
         
-        settingsScreen.locateCategoryCell(category)
-        XCTAssertFalse(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryUpButton].isEnabled)
-        XCTAssertFalse(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryDownButton].isEnabled)
-        XCTAssertTrue(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryForwardButton].isEnabled)
+        let hiddenCategory = settingsScreen.locateCategoryCell(category)
+        XCTAssertFalse(hiddenCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
+        XCTAssertFalse(hiddenCategory.buttons[settingsScreen.categoryDownButton].isEnabled)
+        XCTAssertTrue(hiddenCategory.buttons[settingsScreen.categoryForwardButton].isEnabled)
 
         // Verify that when the category is shown, up and down buttons are enabled.
         settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryForwardButton].tap()
         settingsScreen.showCategorySwitch.tap()
         settingsScreen.leaveCategoryDetailButton.tap()
         
-        settingsScreen.locateCategoryCell(category)
-        XCTAssertTrue(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryUpButton].isEnabled)
-        XCTAssertTrue(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryDownButton].isEnabled)
-        XCTAssertTrue(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryForwardButton].isEnabled)
+        let shownCategory = settingsScreen.locateCategoryCell(category)
+        XCTAssertTrue(shownCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
+        XCTAssertTrue(shownCategory.buttons[settingsScreen.categoryDownButton].isEnabled)
+        XCTAssertTrue(shownCategory.buttons[settingsScreen.categoryForwardButton].isEnabled)
     }
 
     // We are disabling this test for now, it will be updated after the issue is completed: https://github.com/willowtreeapps/vocable-ios/issues/492

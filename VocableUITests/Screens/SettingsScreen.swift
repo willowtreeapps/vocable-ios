@@ -49,7 +49,7 @@ class SettingsScreen: BaseScreen {
         return categoryCellQuery(category)
     }
     
-    func categoryCellQuery(_ category: String) -> XCUIElementQuery {
+    private func categoryCellQuery(_ category: String) -> XCUIElementQuery {
         let predicate = NSPredicate(format: "label CONTAINS %@", category)
         let cellLabel = cells.staticTexts.containing(predicate).element.label
         
