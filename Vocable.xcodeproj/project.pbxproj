@@ -50,6 +50,8 @@
 		6B0501FE27EBA471000CFE5A /* VocableListCellAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0501FD27EBA471000CFE5A /* VocableListCellAction.swift */; };
 		6B05020127F3487E000CFE5A /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 6B05020027F3487E000CFE5A /* Algorithms */; };
 		6B05020427F3489D000CFE5A /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6B05020327F3489D000CFE5A /* Collections */; };
+		6B05020727F351A1000CFE5A /* CategoryReordering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05020627F351A1000CFE5A /* CategoryReordering.swift */; };
+		6B05020927F353DE000CFE5A /* CategoryOrderabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05020827F353DE000CFE5A /* CategoryOrderabilityTests.swift */; };
 		6B1086732463662C00E729A8 /* v2_to_v3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6B1086722463662C00E729A8 /* v2_to_v3.xcmappingmodel */; };
 		6B14DC732419590E0050C287 /* OutputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B14DC722419590E0050C287 /* OutputTextView.swift */; };
 		6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */; };
@@ -253,6 +255,8 @@
 		6B005AE6245B21ED004919F4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6B005AEC245B25E9004919F4 /* VocableNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableNavigationController.swift; sourceTree = "<group>"; };
 		6B0501FD27EBA471000CFE5A /* VocableListCellAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableListCellAction.swift; sourceTree = "<group>"; };
+		6B05020627F351A1000CFE5A /* CategoryReordering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryReordering.swift; sourceTree = "<group>"; };
+		6B05020827F353DE000CFE5A /* CategoryOrderabilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOrderabilityTests.swift; sourceTree = "<group>"; };
 		6B1086712463102F00E729A8 /* Phrases v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Phrases v3.xcdatamodel"; sourceTree = "<group>"; };
 		6B1086722463662C00E729A8 /* v2_to_v3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = v2_to_v3.xcmappingmodel; sourceTree = "<group>"; };
 		6B14DC722419590E0050C287 /* OutputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTextView.swift; sourceTree = "<group>"; };
@@ -549,6 +553,7 @@
 			isa = PBXGroup;
 			children = (
 				54D3C41623E37CD40061EF47 /* VocableTests.swift */,
+				6B05020827F353DE000CFE5A /* CategoryOrderabilityTests.swift */,
 				54D3C41823E37CD40061EF47 /* Info.plist */,
 			);
 			path = VocableTests;
@@ -606,6 +611,14 @@
 				64B3259A254B591D00023566 /* EditCategoryToggleCollectionViewCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		6B05020527F3516F000CFE5A /* CategoryReordering */ = {
+			isa = PBXGroup;
+			children = (
+				6B05020627F351A1000CFE5A /* CategoryReordering.swift */,
+			);
+			path = CategoryReordering;
 			sourceTree = "<group>";
 		};
 		6B4F3C5A25A5119E008A3CB2 /* Sounds */ = {
@@ -853,6 +866,7 @@
 				6B005AE4245B06F3004919F4 /* VocableViewController.swift */,
 				6B5C743F27E8CBBE00004713 /* VocableListCell */,
 				A91030B727E3C4FD00281C97 /* NSLayoutConstraint+Priority.swift */,
+				6B05020527F3516F000CFE5A /* CategoryReordering */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1226,6 +1240,7 @@
 				6B5C744127E8CC0000004713 /* VocableListCellAccessory.swift in Sources */,
 				6B8440E3244A1007007A4DC6 /* CarouselGridLayout.swift in Sources */,
 				A91030B627E3C31700281C97 /* VocableListCell.swift in Sources */,
+				6B05020727F351A1000CFE5A /* CategoryReordering.swift in Sources */,
 				A91030B427E3BF9300281C97 /* VocableListContentConfiguration.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
 				6B823BCB23F4ADE30099F65E /* Pulse.swift in Sources */,
@@ -1301,6 +1316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */,
+				6B05020927F353DE000CFE5A /* CategoryOrderabilityTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Algorithms
 
 extension Category {
 
@@ -107,15 +108,11 @@ extension Category {
         ]
         let results = try context.fetch(request)
 
-        let lowestMoveableIndex = results.index(results.startIndex, offsetBy: 1, limitedBy: results.endIndex) ?? results.endIndex
-        let canDecreaseOrdinalIndices = lowestMoveableIndex ..< results.endIndex
+        let orderabilityModel = CategoryOrderabilityModel(categories: results)
 
-        let highestMoveableIndex = results.index(results.endIndex, offsetBy: -1, limitedBy: results.startIndex) ?? results.startIndex
-        let canIncreaseOrdinalIndices = results.startIndex ..< highestMoveableIndex
-
-        for (index, category) in results.enumerated() {
-            category.canMoveToHigherOrdinal = canIncreaseOrdinalIndices.contains(index)
-            category.canMoveToLowerOrdinal = canDecreaseOrdinalIndices.contains(index)
+        for (index, category) in results.indexed() {
+            category.canMoveToHigherOrdinal = orderabilityModel.canMoveToHigherIndex(from: index)
+            category.canMoveToLowerOrdinal = orderabilityModel.canMoveToLowerIndex(from: index)
         }
     }
 }
