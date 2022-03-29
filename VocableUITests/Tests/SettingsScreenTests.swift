@@ -21,8 +21,8 @@ class SettingsScreenTests: BaseTest {
         settingsScreen.openCategorySettings(category: category)
         settingsScreen.showCategorySwitch.tap()
         settingsScreen.leaveCategoryDetailButton.tap()
-       
-        XCTAssertTrue(settingsScreen.locateCategoryCell(category).element.exists)
+        
+        settingsScreen.locateCategoryCell(category)
         XCTAssertFalse(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryUpButton].isEnabled)
         XCTAssertFalse(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryDownButton].isEnabled)
         XCTAssertTrue(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryForwardButton].isEnabled)
@@ -32,7 +32,7 @@ class SettingsScreenTests: BaseTest {
         settingsScreen.showCategorySwitch.tap()
         settingsScreen.leaveCategoryDetailButton.tap()
         
-        XCTAssertTrue(settingsScreen.locateCategoryCell(category).element.exists)
+        settingsScreen.locateCategoryCell(category)
         XCTAssertTrue(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryUpButton].isEnabled)
         XCTAssertTrue(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryDownButton].isEnabled)
         XCTAssertTrue(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryForwardButton].isEnabled)

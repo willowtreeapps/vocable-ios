@@ -36,9 +36,10 @@ class SettingsScreen: BaseScreen {
     }
     
     func locateCategoryCell(_ category: String) -> XCUIElementQuery {
+        let predicate = NSPredicate(format: "label CONTAINS %@", category)
         // Loop through each page to find our category
         for _ in 1...totalPageCount {
-            if categoryCellQuery(category).element.exists{
+            if cells.staticTexts.containing(predicate).element.exists{
                 break
             } else {
                 settingsPageNextButton.tap()
