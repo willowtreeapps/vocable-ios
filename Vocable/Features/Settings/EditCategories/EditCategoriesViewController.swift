@@ -73,7 +73,9 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
 
     private func setupCollectionView() {
         collectionView.backgroundColor = .collectionViewBackgroundColor
-        cellRegistration = UICollectionView.CellRegistration<VocableListCell, Category>(handler: updateContentConfiguration)
+        cellRegistration = UICollectionView.CellRegistration<VocableListCell, Category>(handler: { [weak self] cell, indexPath, category in
+            self?.updateContentConfiguration(for: cell, at: indexPath, category: category)
+        })
     }
 
     private func updateContentConfiguration(for cell: VocableListCell, at indexPath: IndexPath, category: Category) {
