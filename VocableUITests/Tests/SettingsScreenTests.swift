@@ -38,6 +38,7 @@ class SettingsScreenTests: BaseTest {
         XCTAssertTrue(settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryForwardButton].isEnabled)
     }
 
+    // We are disabling this test for now, it will be updated after the issue is completed: https://github.com/willowtreeapps/vocable-ios/issues/492
     func testReorder() {
         let generalCategoryText = "1. General"
         let basicNeedsCategoryText = "2. Basic Needs"
@@ -62,6 +63,7 @@ class SettingsScreenTests: BaseTest {
 
     }
 
+    // We are disabling this test for now, it will be fixed and moved to Custom Categories Tests: https://github.com/willowtreeapps/vocable-ios/issues/514
     func testAddCustomCategory() {
 
         let customCategory = "ddingcustomcategorytest"
