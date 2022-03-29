@@ -12,9 +12,7 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
 
     func testAddNewPhrase() {
         let customPhrase = "dd"
-        let confirmationAlert = "Are you sure? Going back before saving will clear any edits made."
-        let areYouSureAlert = NSPredicate(format: "label CONTAINS %@", confirmationAlert)
-        
+                
         // Navigate to our test category (created in the base class setup() method)
         customCategoriesScreen.editCategoryPhrasesCell.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
@@ -22,16 +20,16 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
         // Verify Phrase is not added if edits are discarded
         keyboardScreen.typeText("A")
         keyboardScreen.dismissKeyboardButton.tap()
-        XCTAssertTrue(XCUIApplication().staticTexts.containing(areYouSureAlert).element.exists)
+        XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
 
         settingsScreen.alertDiscardButton.tap()
-        XCTAssertFalse(XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: "A").element.exists)
+        XCTAssertTrue(customCategoriesScreen.emptyStateAddPhraseButton.exists)
 
         // Verify Phrase can be added if continuing edit.
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText("A")
         keyboardScreen.dismissKeyboardButton.tap()
-        XCTAssertTrue(XCUIApplication().staticTexts.containing(areYouSureAlert).element.exists)
+        XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
         settingsScreen.alertContinueButton.tap()
 
         keyboardScreen.typeText(customPhrase)
