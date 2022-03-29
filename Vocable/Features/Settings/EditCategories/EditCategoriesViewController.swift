@@ -202,8 +202,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         let fromCategory = fetchResultsController.object(at: fromIndexPath)
         let toCategory = fetchResultsController.object(at: toIndexPath)
 
-        swapOrdinal(fromCategory: fromCategory, toCategory: toCategory, in: fetchResultsController.managedObjectContext)
-        saveContext()
+        swapOrdinal(fromCategory: fromCategory, toCategory: toCategory)
     }
 
     private func handleMoveDownForCategory(withObjectID objectID: NSManagedObjectID) {
@@ -217,8 +216,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         let fromCategory = fetchResultsController.object(at: fromIndexPath)
         let toCategory = fetchResultsController.object(at: toIndexPath)
 
-        swapOrdinal(fromCategory: fromCategory, toCategory: toCategory, in: fetchResultsController.managedObjectContext)
-        saveContext()
+        swapOrdinal(fromCategory: fromCategory, toCategory: toCategory)
     }
 
     private func showEditForCategory(withObjectID objectID: NSManagedObjectID) {
@@ -238,20 +236,33 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         show(destination, sender: nil)
     }
 
-    private func swapOrdinal(fromCategory: Category, toCategory: Category, in context: NSManagedObjectContext) {
-        let fromOrdinal = fromCategory.ordinal
-        let toOrdinal = toCategory.ordinal
+    private func swapOrdinal(fromCategory: Category, toCategory: Category) {
 
-        fromCategory.ordinal = toOrdinal
-        toCategory.ordinal = fromOrdinal
-        try? Category.updateAllOrdinalValues(in: context)
-    }
+        let fromCategoryID = fromCategory.objectID
+        let toCategoryID = toCategory.objectID
 
-    private func saveContext() {
-        do {
-            try fetchResultsController.managedObjectContext.save()
-        } catch {
-            assertionFailure("Failed to save categories: \(error)")
+        let context = NSPersistentContainer.shared.newBackgroundContext()
+        context.perform {
+
+            guard
+                let fromCategory = context.object(with: fromCategoryID) as? Category,
+                let toCategory = context.object(with: toCategoryID) as? Category
+            else {
+                return
+            }
+
+            let fromOrdinal = fromCategory.ordinal
+            let toOrdinal = toCategory.ordinal
+
+            fromCategory.ordinal = toOrdinal
+            toCategory.ordinal = fromOrdinal
+            try? Category.updateAllOrdinalValues(in: context)
+
+            do {
+                try context.save()
+            } catch {
+                assertionFailure("Failed to save context: \(error)")
+            }
         }
     }
 
@@ -262,18 +273,20 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
     @objc private func addButtonPressed(_ sender: Any) {
         let viewController = EditTextViewController()
         viewController.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
+            let context = NSPersistentContainer.shared.newBackgroundContext()
+            context.performAndWait {
+                _ = Category.create(withUserEntry: newText, in: context)
+                do {
+                    try Category.updateAllOrdinalValues(in: context)
+                    try context.save()
 
-            _ = Category.create(withUserEntry: newText, in: context)
-            do {
-                try Category.updateAllOrdinalValues(in: context)
-                try context.save()
-
-                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-            } catch {
-                assertionFailure("Failed to save category: \(error)")
+                    DispatchQueue.main.async {
+                        let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
+                        ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                    }
+                } catch {
+                    assertionFailure("Failed to save category: \(error)")
+                }
             }
         }
 
