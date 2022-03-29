@@ -340,18 +340,26 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             assertionFailure("Category has no identifier")
             return
         }
+        let context = NSPersistentContainer.shared.viewContext
 
-        let initialValue = category.name ?? ""
         let viewController = EditTextViewController()
-        viewController.initialText = initialValue
+        viewController.delegate = EditCategoryDelegate(categoryIdentifier: categoryIdentifier, context: context)
         viewController.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
 
-            if let category = Category.fetchObject(in: context, matching: categoryIdentifier) {
-                let textDidChange = (newText != initialValue)
-                category.name = newText
-                category.isUserRenamed = category.isUserRenamed || textDidChange
+
+            guard let category = Category.fetchObject(in: context, matching: categoryIdentifier) else {
+                return
             }
+
+            let categories = Category.fetchAll(in: context)
+            guard !categories.contains(where: { $0.name == newText }) else {
+                self.presentExistingCategoryAlert()
+                return
+            }
+
+            let textDidChange = (newText != initialName)
+            category.name = newText
+            category.isUserRenamed = category.isUserRenamed || textDidChange
 
             do {
                 try Category.updateAllOrdinalValues(in: context)
@@ -365,9 +373,64 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
             } catch {
                 assertionFailure("Failed to save category: \(error)")
             }
+            self.dismiss(animated: true)
         }
 
         present(viewController, animated: true)
     }
-    
+
+    // MARK: - Private Helpers
+
+    private func presentExistingCategoryAlert() {
+        let title = NSLocalizedString("text_editor.alert.category_name_exists.title",
+                                      comment: "Category already exists alert title")
+        let okButtonTitle = NSLocalizedString("text_editor.alert.category_name_exists.button",
+                                                   comment: "Dismiss alert action title")
+
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: okButtonTitle))
+        self.present(alert, animated: true)
+    }
+}
+
+//struct EditPhraseDelegate: EditTextDelegate {
+//    func editTextViewController(_: EditTextViewController, textDidChange: NSAttributedString?) {
+//        <#code#>
+//    }
+//
+//    func editTextViewControllerNavigationButtons(_: EditTextViewController) -> [GazeableButton] {
+//        <#code#>
+//    }
+//}
+
+struct EditCategoryDelegate: EditTextDelegate {
+
+    let categoryIdentifier: String
+    let context: NSManagedObjectContext
+
+    private var canConfirmEdit: Bool = false
+    private var shouldDismiss: Bool = true
+
+    mutating func editTextViewController(_ viewController: EditTextViewController, textDidChange attributedText: NSAttributedString?) {
+        let didTextChange = viewController.initialText != attributedText?.string
+        let isTextEmpty = attributedText?.string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
+
+        canConfirmEdit = didTextChange && !isTextEmpty
+
+        viewController.setNeedsUpdateConfiguration()
+    }
+
+    func editTextViewControllerNavigationItems(_ viewController: EditTextViewController) -> EditTextViewController.NavigationConfiguration {
+        let leftItem = EditTextViewController.NavigationItem(image: UIImage(systemName: "xmark.circle")!, isEnabled: true) {
+            // handle action
+        }
+        let rightItem = EditTextViewController.NavigationItem(image: UIImage(systemName: "checkmark")!, isEnabled: canConfirmEdit) {
+            // handle action
+        }
+        return EditTextViewController.NavigationConfiguration(leftItem: leftItem, rightItem: rightItem)
+    }
+
+    func editTextViewControllerInitialValue(_ viewController: EditTextViewController) -> String? {
+        return Category.fetchObject(in: context, matching: categoryIdentifier)?.name
+    }
 }

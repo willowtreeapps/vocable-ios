@@ -12,39 +12,32 @@ import UIKit
 import CoreData
 import Combine
 
+protocol EditTextDelegate {
+    mutating func editTextViewController(_: EditTextViewController, textDidChange attributedText: NSAttributedString?)
+    func editTextViewControllerNavigationItems(_: EditTextViewController) -> EditTextViewController.NavigationConfiguration
+    func editTextViewControllerInitialValue(_: EditTextViewController) -> String?
+}
+
 class EditTextViewController: VocableViewController, UICollectionViewDelegate {
 
-    var initialText: String = ""
+    struct NavigationConfiguration {
+        var leftItem: EditTextNavigationButton.Configuration?
+        var rightItem: EditTextNavigationButton.Configuration?
+    }
+
     let textView = OutputTextView(frame: .zero)
 
-    var shouldWarnOnDismiss = true
-    var editTextCompletionHandler: (String) -> Void = { (_) in
-        assertionFailure("Completion not handled")
-    }
+    let leftButton = EditTextNavigationButton()
+    let rightButton = EditTextNavigationButton()
+
+    var delegate: EditTextDelegate?
 
     @PublishedValue private(set) var text: String?
 
-    private var textHasChanged = false
     private var disposables = Set<AnyCancellable>()
     private var volatileConstraints = [NSLayoutConstraint]()
     
     private lazy var keyboardViewController = KeyboardViewController()
-
-    private lazy var confirmEditButton: GazeableButton = {
-        let button = GazeableButton()
-        button.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.accessibilityIdentifier = "keyboard.saveButton"
-        button.addTarget(self, action: #selector(confirmEdit(_:)), for: .primaryActionTriggered)
-        return button
-    }()
-
-    private lazy var dismissButton: GazeableButton = {
-        let button = GazeableButton()
-        button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
-        button.accessibilityIdentifier = "keyboard.dismissButton"
-        button.addTarget(self, action: #selector(dismiss(_:)), for: .primaryActionTriggered)
-        return button
-    }()
 
     convenience init() {
         self.init(nibName: nil, bundle: nil)
@@ -73,27 +66,42 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
         keyboardViewController.view.preservesSuperviewLayoutMargins = true
         view.addSubview(keyboardViewController.view)
 
-        let initialAttributedText = NSAttributedString(string: initialText)
+        let initialAttributedText = NSAttributedString(string: delegate?.editTextViewControllerInitialValue(self) ?? "")
         keyboardViewController.attributedText = initialAttributedText
-        confirmEditButton.isEnabled = false
-
-        navigationBar.leftButton = dismissButton
-        navigationBar.rightButton = confirmEditButton
 
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.accessibilityIdentifier = "keyboard.textView"
         textView.textAlignment = .natural
-        
-        keyboardViewController.$attributedText.sink(receiveValue: { [weak self] (attributedText) in
-            guard let self = self else { return }
-            self.textView.attributedText = attributedText
-            let didTextChange = self.initialText != attributedText?.string
 
-            let isTextEmpty = attributedText?.string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
-            self.textHasChanged = didTextChange
-            self.confirmEditButton.isEnabled = didTextChange && !isTextEmpty
-            self.text = attributedText?.string
-        }).store(in: &disposables)
+        navigationBar.leftButton = leftButton
+        navigationBar.rightButton = rightButton
+
+        handleTextChange()
+        updateForConfiguration()
+    }
+
+    private func handleTextChange() {
+        keyboardViewController.$attributedText
+            .dropFirst()
+            .removeDuplicates()
+            .sink(receiveValue: { [weak self] (attributedText) in
+                guard let self = self else { return }
+                self.textView.attributedText = attributedText
+                self.text = attributedText?.string
+                self.delegate?.editTextViewController(self, textDidChange: attributedText)
+            }).store(in: &disposables)
+    }
+
+    private func updateForConfiguration() {
+        guard let configuration = delegate?.editTextViewControllerNavigationItems(self) else { return }
+
+        leftButton.configure(with: configuration.leftItem)
+        rightButton.configure(with: configuration.rightItem)
+    }
+
+    func setNeedsUpdateConfiguration() {
+        // TODO: lazily do this
+        updateForConfiguration()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -141,40 +149,39 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
         volatileConstraints = constraints
     }
 
-    @objc private func dismiss(_ sender: Any) {
-        if textHasChanged {
-            handleDismissAlert()
-        } else {
-            dismiss(animated: true, completion: nil)
-        }
-    }
+//    @objc private func dismiss(_ sender: Any) {
+//        if textHasChanged {
+//            handleDismissAlert()
+//        } else {
+//            dismiss(animated: true, completion: nil)
+//        }
+//    }
+//
+//    @objc private func confirmEdit(_ sender: Any) {
+//        let trimmedText = textView.text?.trimmingCharacters(in: .whitespaces) ?? ""
+//        editTextCompletionHandler(trimmedText)
+//    }
     
-    @objc private func confirmEdit(_ sender: Any) {
-        let trimmed = textView.text?.trimmingCharacters(in: .whitespaces) ?? ""
-        editTextCompletionHandler(trimmed)
-        dismiss(animated: true, completion: nil)
-    }
-    
-    private func handleDismissAlert() {
-        func discardChangesAction() {
-            dismiss(animated: true, completion: nil)
-        }
-
-        guard shouldWarnOnDismiss else {
-            discardChangesAction()
-            return
-        }
-        
-        let title = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.title",
-                                      comment: "Exit edit sayings alert title")
-        let discardButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.discard.title",
-                                                   comment: "Discard changes alert action title")
-        let continueButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
-                                                    comment: "Continue editing alert action title")
-        let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
-        alert.addAction(GazeableAlertAction(title: continueButtonTitle, style: .bold))
-        self.present(alert, animated: true)
-    }
+//    private func handleDismissAlert() {
+//        func discardChangesAction() {
+//            dismiss(animated: true, completion: nil)
+//        }
+//
+//        guard shouldWarnOnDismiss else {
+//            discardChangesAction()
+//            return
+//        }
+//
+//        let title = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.title",
+//                                      comment: "Exit edit sayings alert title")
+//        let discardButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.discard.title",
+//                                                   comment: "Discard changes alert action title")
+//        let continueButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
+//                                                    comment: "Continue editing alert action title")
+//        let alert = GazeableAlertViewController(alertTitle: title)
+//        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
+//        alert.addAction(GazeableAlertAction(title: continueButtonTitle, style: .bold))
+//        self.present(alert, animated: true)
+//    }
     
 }

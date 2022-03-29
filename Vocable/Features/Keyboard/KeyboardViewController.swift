@@ -37,10 +37,6 @@ class KeyboardViewController: UICollectionViewController {
     @PublishedValue
     var attributedText: NSAttributedString?
     
-    var editTextCompletionHandler: (String) -> Void = { (_) in
-        assertionFailure("Completion not handled")
-    }
-    
     private enum ItemWrapper: Hashable {
         case key(String)
         case keyboardFunctionButton(KeyboardFunctionButton)
