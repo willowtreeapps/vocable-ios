@@ -2,104 +2,99 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Vocable/Supporting Files/en.lproj/InfoPlist.strings" source-language="en" target-language="da" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
     </header>
     <body>
-      <trans-unit id="CFBundleDisplayName" xml:space="preserve">
+      <trans-unit id="CFBundleDisplayName" xml:space="preserve" approved="yes">
         <source>Vocable</source>
-        <target state="translated">Vocable</target>
+        <target state="final">Vocable</target>
         <note>Bundle display name</note>
       </trans-unit>
-      <trans-unit id="CFBundleName" xml:space="preserve">
+      <trans-unit id="CFBundleName" xml:space="preserve" approved="yes">
         <source>Vocable</source>
-        <target state="translated">Vocable</target>
+        <target state="final">Vocable</target>
         <note>Bundle name</note>
       </trans-unit>
-      <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
+      <trans-unit id="NSCameraUsageDescription" xml:space="preserve" approved="yes">
         <source>Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
-        <target state="translated">Vocable bruger ARKit-hovedsporing til at registrere brugerens ansigt, som det ses i enhedens TrueDepth-frontkamera til det formål at kontrollere en markør på skærmen, så brugere med begrænset mobilitet kan interagere med appen. Hovedorientering og positionsdata bruges udtrykkeligt til styring af markøren på skærmen. Disse hovedsporingsdata gemmes eller transmitteres ikke på nogen måde. Vocable har brug for tilladelse til at bruge kameraet til dette formål.</target>
+        <target state="final">Vocable bruger ARKit-hovedsporing til at registrere brugerens ansigt, som det ses i enhedens TrueDepth-frontkamera til det formål at kontrollere en markør på skærmen, så brugere med begrænset mobilitet kan interagere med appen. Hovedorientering og positionsdata bruges udtrykkeligt til styring af markøren på skærmen. Disse hovedsporingsdata gemmes eller transmitteres ikke på nogen måde. Vocable har brug for tilladelse til at bruge kameraet til dette formål.</target>
         <note>Camera usage description</note>
       </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="da" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
     </header>
     <body>
-      <trans-unit id="Edit Phrases" xml:space="preserve">
+      <trans-unit id="Edit Phrases" xml:space="preserve" approved="yes">
         <source>Edit Phrases</source>
-        <target state="translated">Ændrer Sætninger</target>
+        <target state="final">Rediger Sætninger</target>
         <note>Edit Phrases</note>
       </trans-unit>
-      <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
+      <trans-unit id="categories_list_editor.header.title" xml:space="preserve" approved="yes">
         <source>Categories</source>
-        <target state="translated">Kategorier</target>
+        <target state="final">Kategorier</target>
         <note>Categories list editor screen header title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
-        <target state="translated">Annuller</target>
+        <target state="final">Annuller</target>
         <note>Cancel exit editing alert action title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
-        <target state="translated">Bekræft</target>
+        <target state="final">Bekræft</target>
         <note>Confirm exit category alert action title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
         <source>If you close this without saving your custom category will be deleted.</source>
-        <target state="translated">Hvis du lukker dette uden at gemme, vil din brugerdefinerede kategori blive slettet.</target>
+        <target state="final">Hvis du lukker dette uden at gemme, vil din brugerdefinerede kategori blive slettet.</target>
         <note>Exit edit categories alert title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
-        <target state="translated">Annuller</target>
+        <target state="final">Annuller</target>
         <note>Delete category alert cancel button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve" approved="yes">
         <source>Remove</source>
-        <target state="translated">Fjern</target>
+        <target state="final">Fjern</target>
         <note>Delete category alert action button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve" approved="yes">
         <source>Deleted categories cannot be recovered.</source>
-        <target state="translated">Slettede kategorier kan ikke blive gendannet.</target>
+        <target state="final">Slettede kategorier kan ikke blive gendannet.</target>
         <note>Delete category confirmation alert title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
-        <target state="translated">Annuller</target>
+        <target state="final">Annuller</target>
         <note>Delete phrase alert cancel button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve" approved="yes">
         <source>Delete</source>
-        <target state="translated">Slet</target>
+        <target state="final">Slet</target>
         <note>Delete phrase alert action button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
-        <source>Deleted phrases cannot be recovered.</source>
-        <target state="translated">Slettede sætninger kan ikke genskabes</target>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve" approved="yes">
+        <source>Are you sure you want to delete? Removed phrases cannot be restored.</source>
+        <target state="final">Er du sikker? Slettede sætninger kan ikke gendannes.</target>
         <note>Delete phrase confirmation alert title</note>
       </trans-unit>
-      <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
+      <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve" approved="yes">
         <source>Remove Category</source>
-        <target state="translated">Fjern Kategori</target>
+        <target state="final">Fjern Kategori</target>
         <note>Remove category button label within the category detail screen.</note>
       </trans-unit>
-      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
-        <source>Show</source>
-        <target state="translated">Vis</target>
-        <note>Show category button label within the category detail screen.</note>
-      </trans-unit>
-      <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
+      <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve" approved="yes">
         <source>Changes saved</source>
-        <target state="translated">Dine ændringer er gemt</target>
+        <target state="final">Dine ændringer er gemt</target>
         <note>changes to an existing phrase were saved successfully</note>
       </trans-unit>
-      <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve">
+      <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve" approved="yes">
         <source>Changes Saved</source>
-        <target state="translated">Dine ændringer er gemt</target>
+        <target state="final">Dine ændringer er gemt</target>
         <note>Saved to Categories
    User edited name of the category and saved it successfully</note>
       </trans-unit>
@@ -108,14 +103,14 @@
         <target state="final">Ingen forudstillinger fundet</target>
         <note>Debugging error message for when preloaded content is not found</note>
       </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
-        <target state="translated">Annuller</target>
+        <target state="final">Annuller</target>
         <note>Cancel alert action title</note>
       </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
-        <target state="translated">Bekræft</target>
+        <target state="final">Bekræft</target>
         <note>Confirm alert action title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve" approved="yes">
@@ -123,96 +118,96 @@
         <target state="final">Deaktiver hovedsporing?</target>
         <note>Disable head tracking confirmation alert title</note>
       </trans-unit>
-      <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
+      <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve" approved="yes">
         <source>Please move closer to the device.</source>
-        <target state="translated">Kom nærmere din mobilenhed.</target>
+        <target state="final">Kom nærmere din mobilenhed.</target>
         <note>Warning message presented to the user when the head tracking system</note>
       </trans-unit>
-      <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve">
+      <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve" approved="yes">
         <source>Select something below to speak</source>
-        <target state="translated">Vælg noget nedenunder for at snakke</target>
+        <target state="final">Vælg noget nedenunder for at snakke</target>
         <note>Select something below to speak Hint Text</note>
       </trans-unit>
-      <trans-unit id="paging_progress_indicator_format" xml:space="preserve">
+      <trans-unit id="paging_progress_indicator_format" xml:space="preserve" approved="yes">
         <source>Page %1$d of %2$d</source>
-        <target state="translated">Side %1$d af %2$d</target>
+        <target state="final">Side %1$d af %2$d</target>
         <note>Page indicator progress format. \"Page x of n\"</note>
       </trans-unit>
-      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve" approved="yes">
         <source>Continue Editing</source>
-        <target state="translated">Fortsæt redigering</target>
+        <target state="final">Fortsæt redigering</target>
         <note>Continue editing alert action title</note>
       </trans-unit>
-      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve" approved="yes">
         <source>Discard</source>
-        <target state="translated">Slet</target>
+        <target state="final">Slet</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
-      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>Going back before saving will clear any edits made.</source>
-        <target state="translated">Hvis du forlader uden at gemme vil dine ændringer blive slettet.</target>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
+        <source>Are you sure? Going back before saving will clear any edits made.</source>
+        <target state="final">Hvis du forlader uden at gemme vil dine ændringer blive slettet.</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
-      <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
+      <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve" approved="yes">
         <source>Saved to %@</source>
-        <target state="translated">Gemt til %@</target>
+        <target state="final">Gemt til %@</target>
         <note>new entry saved to user favorites category
    Saved to user favorites category
    Saved to user favorites category toast title</note>
       </trans-unit>
-      <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
+      <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve" approved="yes">
         <source>No</source>
-        <target state="translated">Nej</target>
+        <target state="final">Nej</target>
         <note>'No' num pad response</note>
       </trans-unit>
-      <trans-unit id="preset.category.numberpad.phrase.yes.title" xml:space="preserve">
+      <trans-unit id="preset.category.numberpad.phrase.yes.title" xml:space="preserve" approved="yes">
         <source>Yes</source>
-        <target state="translated">Ja</target>
+        <target state="final">Ja</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
-      <trans-unit id="selection_mode.header.title" xml:space="preserve">
+      <trans-unit id="selection_mode.header.title" xml:space="preserve" approved="yes">
         <source>Selection Mode</source>
-        <target state="translated">Markeringstilstand</target>
+        <target state="final">Markeringstilstand</target>
         <note>Selection mode screen header title</note>
       </trans-unit>
-      <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
+      <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve" approved="yes">
         <source>OK</source>
-        <target state="translated">OK</target>
+        <target state="final">OK</target>
         <note>No email account configured error alert dismiss button title</note>
       </trans-unit>
-      <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve">
+      <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve" approved="yes">
         <source>Email not configured.</source>
-        <target state="translated">E-mail er ikke konfigureret.</target>
+        <target state="final">E-mail er ikke konfigureret.</target>
         <note>No email account configured error alert title</note>
       </trans-unit>
-      <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve" approved="yes">
         <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
-        <target state="translated">Du er ved at forlade Vocable. Du vil måske miste hovedsporingskontrol.</target>
+        <target state="final">Du er ved at forlade Vocable. Du vil måske miste hovedsporingskontrol.</target>
         <note>body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
-      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve">
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
-        <target state="translated">Annuller</target>
+        <target state="final">Annuller</target>
         <note>Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app</note>
       </trans-unit>
-      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.confirm.title" xml:space="preserve">
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.confirm.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
-        <target state="translated">Bekræft</target>
+        <target state="final">Bekræft</target>
         <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
-      <trans-unit id="settings.cell.categories.title" xml:space="preserve">
-        <source>Categories</source>
-        <target state="translated">Kategorier</target>
+      <trans-unit id="settings.cell.categories.title" xml:space="preserve" approved="yes">
+        <source>Categories and Phrases</source>
+        <target state="final">Kategorier og sætning</target>
         <note>edit categories settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve">
+      <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve" approved="yes">
         <source>Contact Developers</source>
-        <target state="translated">Kontakt Udvikler</target>
+        <target state="final">Kontakt Udvikler</target>
         <note>contact developers settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.edit_user_favorites.title_format" xml:space="preserve">
+      <trans-unit id="settings.cell.edit_user_favorites.title_format" xml:space="preserve" approved="yes">
         <source>Edit %@</source>
-        <target state="translated">Rediger %@</target>
+        <target state="final">Rediger %@</target>
         <note>edit user's favorite phrases category settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve" approved="yes">
@@ -220,196 +215,196 @@
         <target state="final">Hovedsporing</target>
         <note>Settings head tracking cell title</note>
       </trans-unit>
-      <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
+      <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve" approved="yes">
         <source>Privacy Policy</source>
-        <target state="translated">Privatlivspolitik</target>
+        <target state="final">Privatlivspolitik</target>
         <note>view privacy policy settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.reset_all.title" xml:space="preserve">
+      <trans-unit id="settings.cell.reset_all.title" xml:space="preserve" approved="yes">
         <source>Reset App Settings</source>
-        <target state="translated">Nulstil App Indstillinger</target>
+        <target state="final">Nulstil App Indstillinger</target>
         <note>reset all settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.selection_mode.title" xml:space="preserve">
+      <trans-unit id="settings.cell.selection_mode.title" xml:space="preserve" approved="yes">
         <source>Selection Mode</source>
-        <target state="translated">Markeringstilstand</target>
+        <target state="final">Markeringstilstand</target>
         <note>edit cursor selection mode settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.timing_sensitivity.title" xml:space="preserve">
+      <trans-unit id="settings.cell.timing_sensitivity.title" xml:space="preserve" approved="yes">
         <source>Timing and Sensitivity</source>
-        <target state="translated">Timing og Følsomhed</target>
+        <target state="final">Timing og Følsomhed</target>
         <note>edit cursor timing and sensititivy settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.tune_cursor.title" xml:space="preserve">
+      <trans-unit id="settings.cell.tune_cursor.title" xml:space="preserve" approved="yes">
         <source>Tune Cursor</source>
-        <target state="translated">Finjustér markøren</target>
+        <target state="final">Finjustér markøren</target>
         <note>tune cursor debug settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.header.title" xml:space="preserve">
+      <trans-unit id="settings.header.title" xml:space="preserve" approved="yes">
         <source>Settings</source>
-        <target state="translated">Indstillinger</target>
+        <target state="final">Indstillinger</target>
         <note>Settings screen header title</note>
       </trans-unit>
-      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve" approved="yes">
         <source>Continue Editing</source>
-        <target state="translated">Fortsæt Redigering</target>
+        <target state="final">Fortsæt Redigering</target>
         <note>Continue editing alert action title</note>
       </trans-unit>
-      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve" approved="yes">
         <source>Discard</source>
-        <target state="translated">Slet</target>
+        <target state="final">Slet</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
-      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>Going back before saving will clear any edits made.</source>
-        <target state="translated">Hvis du forlader uden at gemme vil dine ændringer blive slettet.</target>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
+        <source>Are you sure? Going back before saving will clear any edits made.</source>
+        <target state="final">Hvis du forlader uden at gemme vil dine ændringer blive slettet.</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve" approved="yes">
         <source>High</source>
-        <target state="translated">Høj</target>
+        <target state="final">Høj</target>
         <note>High cursor sensitivity option button</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve" approved="yes">
         <source>Low</source>
-        <target state="translated">Lav</target>
+        <target state="final">Lav</target>
         <note>Low cursor sensitivity option button</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve" approved="yes">
         <source>Medium</source>
-        <target state="translated">Mellem</target>
+        <target state="final">Mellem</target>
         <note>Medium cursor sensitivity option button</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve" approved="yes">
         <source>Cursor Sensitivity</source>
-        <target state="translated">Markørfølsomhed</target>
+        <target state="final">Markørfølsomhed</target>
         <note>Cursor sensitivity configuration option name</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve" approved="yes">
         <source>Hover Time</source>
-        <target state="translated">Pegetid</target>
+        <target state="final">Pegetid</target>
         <note>Dwell duration configuration option name</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve" approved="yes">
         <source>Timing and Sensitivity</source>
-        <target state="translated">Timing og Følsomhed</target>
+        <target state="final">Timing og Følsomhed</target>
         <note>Timing and sensitivity header title</note>
       </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Presets.strings" source-language="en" target-language="da" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
     </header>
     <body>
-      <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve">
+      <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve" approved="yes">
         <source>I want to lie down</source>
-        <target state="translated">Jeg vil ligge ned</target>
+        <target state="final">Jeg vil ligge ned</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_0EE14D06-92D7-4A26-A15F-253528F14A69" xml:space="preserve">
+      <trans-unit id="preset_0EE14D06-92D7-4A26-A15F-253528F14A69" xml:space="preserve" approved="yes">
         <source>Pleased to meet you</source>
-        <target state="translated">Rart at møde dig</target>
+        <target state="final">Rart at møde dig</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_0EF33A3F-41E8-4E47-9B2C-69FC86B957FC" xml:space="preserve">
+      <trans-unit id="preset_0EF33A3F-41E8-4E47-9B2C-69FC86B957FC" xml:space="preserve" approved="yes">
         <source>How is your day?</source>
-        <target state="translated">Har du haft en god dag?</target>
+        <target state="final">Har du haft en god dag?</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_1B634A96-563E-4275-875A-2B705A5D1178" xml:space="preserve">
+      <trans-unit id="preset_1B634A96-563E-4275-875A-2B705A5D1178" xml:space="preserve" approved="yes">
         <source>How are you?</source>
-        <target state="translated">Hvordan har du det?</target>
+        <target state="final">Hvordan har du det?</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_1BAD392A-C26C-4080-B0F2-FC544E08349C" xml:space="preserve">
+      <trans-unit id="preset_1BAD392A-C26C-4080-B0F2-FC544E08349C" xml:space="preserve" approved="yes">
         <source>I need to brush my hair</source>
-        <target state="translated">Jeg har brug for at vaske redde mit hår</target>
+        <target state="final">Jeg har brug for at vaske redde mit hår</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_2BF1A363-CE24-4F26-9727-C5EAD1FEC27C" xml:space="preserve">
+      <trans-unit id="preset_2BF1A363-CE24-4F26-9727-C5EAD1FEC27C" xml:space="preserve" approved="yes">
         <source>Please open the window</source>
-        <target state="translated">Åben vinduet</target>
+        <target state="final">Åben vinduet</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_3EF1FBFA-E07A-47B5-BDF6-3AE7A684B834" xml:space="preserve">
+      <trans-unit id="preset_3EF1FBFA-E07A-47B5-BDF6-3AE7A684B834" xml:space="preserve" approved="yes">
         <source>Hello</source>
-        <target state="translated">Hej</target>
+        <target state="final">Hej</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_4F776A4A-4154-4DFE-89AC-E603C2A578EE" xml:space="preserve">
+      <trans-unit id="preset_4F776A4A-4154-4DFE-89AC-E603C2A578EE" xml:space="preserve" approved="yes">
         <source>Please fix my pillow</source>
-        <target state="translated">Fix min pude</target>
+        <target state="final">Fix min pude</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_6AD93FB9-437C-455F-A4AF-C96033BCBCAE" xml:space="preserve">
+      <trans-unit id="preset_6AD93FB9-437C-455F-A4AF-C96033BCBCAE" xml:space="preserve" approved="yes">
         <source>I am hot</source>
-        <target state="translated">Jeg har det varmt</target>
+        <target state="final">Jeg har det varmt</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_6B463AF1-C884-45CD-9194-90806E75FD70" xml:space="preserve">
+      <trans-unit id="preset_6B463AF1-C884-45CD-9194-90806E75FD70" xml:space="preserve" approved="yes">
         <source>That makes sense</source>
-        <target state="translated">Det giver mening</target>
+        <target state="final">Det giver mening</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_6CBD6D3E-42A7-435C-B661-2ABD669DC6BE" xml:space="preserve">
+      <trans-unit id="preset_6CBD6D3E-42A7-435C-B661-2ABD669DC6BE" xml:space="preserve" approved="yes">
         <source>I don't know</source>
-        <target state="translated">Det ved jeg ikke</target>
+        <target state="final">Det ved jeg ikke</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_7ACA0926-DB7F-4B9E-872C-AE9690AD79E7" xml:space="preserve">
+      <trans-unit id="preset_7ACA0926-DB7F-4B9E-872C-AE9690AD79E7" xml:space="preserve" approved="yes">
         <source>I need to go to the restroom</source>
-        <target state="translated">Jeg skal på toilettet</target>
+        <target state="final">Jeg skal på toilettet</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_7FF4503F-F838-48BE-B529-758B3531093C" xml:space="preserve">
+      <trans-unit id="preset_7FF4503F-F838-48BE-B529-758B3531093C" xml:space="preserve" approved="yes">
         <source>Please wait</source>
-        <target state="translated">Vent venligst</target>
+        <target state="final">Vent venligst</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_8BCBACFB-D5ED-46CB-B3E2-21FB31D8D6AD" xml:space="preserve">
+      <trans-unit id="preset_8BCBACFB-D5ED-46CB-B3E2-21FB31D8D6AD" xml:space="preserve" approved="yes">
         <source>Yes</source>
-        <target state="translated">Ja</target>
+        <target state="final">Ja</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_8C4D0099-9BA8-4914-A6B5-730FFDC8C499" xml:space="preserve">
+      <trans-unit id="preset_8C4D0099-9BA8-4914-A6B5-730FFDC8C499" xml:space="preserve" approved="yes">
         <source>I am cold</source>
-        <target state="translated">Jeg fryser</target>
+        <target state="final">Jeg fryser</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_9A808275-0D67-49E4-8BF8-6F22A0C7E169" xml:space="preserve">
+      <trans-unit id="preset_9A808275-0D67-49E4-8BF8-6F22A0C7E169" xml:space="preserve" approved="yes">
         <source>No visitors please</source>
-        <target state="translated">Ingen besøgende, tak</target>
+        <target state="final">Ingen besøgende, tak</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_9DEB32B5-8606-4689-8F6A-0B251F4DB377" xml:space="preserve">
+      <trans-unit id="preset_9DEB32B5-8606-4689-8F6A-0B251F4DB377" xml:space="preserve" approved="yes">
         <source>I am thirsty</source>
-        <target state="translated">Jeg er tørstig</target>
+        <target state="final">Jeg er tørstig</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_9E3230D7-1172-491A-8A00-E734B1661DC1" xml:space="preserve">
+      <trans-unit id="preset_9E3230D7-1172-491A-8A00-E734B1661DC1" xml:space="preserve" approved="yes">
         <source>Please turn the lights on</source>
-        <target state="translated">Tænd lyset</target>
+        <target state="final">Tænd lyset</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_9EE3A781-E84E-4728-976F-8EF993B8174C" xml:space="preserve">
+      <trans-unit id="preset_9EE3A781-E84E-4728-976F-8EF993B8174C" xml:space="preserve" approved="yes">
         <source>Please turn the TV off</source>
-        <target state="translated">Sluk fjernsynet</target>
+        <target state="final">Sluk fjernsynet</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_24B48F19-EA3A-49A1-88C1-AACB67FE7278" xml:space="preserve">
+      <trans-unit id="preset_24B48F19-EA3A-49A1-88C1-AACB67FE7278" xml:space="preserve" approved="yes">
         <source>How was your weekend?</source>
-        <target state="translated">Havde du en god weekend?</target>
+        <target state="final">Havde du en god weekend?</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_28A8F6B6-E196-4981-B762-652C288A0C29" xml:space="preserve">
+      <trans-unit id="preset_28A8F6B6-E196-4981-B762-652C288A0C29" xml:space="preserve" approved="yes">
         <source>I am finished</source>
-        <target state="translated">Jeg er færdig</target>
+        <target state="final">Jeg er færdig</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_31E8760F-E728-4261-A82E-B50AB40C73FF" xml:space="preserve">
+      <trans-unit id="preset_31E8760F-E728-4261-A82E-B50AB40C73FF" xml:space="preserve" approved="yes">
         <source>How's it going?</source>
-        <target state="translated">Hvordan går det?</target>
+        <target state="final">Hvordan går det?</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_33B3F4B7-2438-439B-A21B-46D2599C8840" xml:space="preserve" approved="yes">
@@ -417,29 +412,29 @@
         <target state="final">Vær så venlig</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_42DC7273-92F9-4149-8166-966C3C201862" xml:space="preserve">
+      <trans-unit id="preset_42DC7273-92F9-4149-8166-966C3C201862" xml:space="preserve" approved="yes">
         <source>Please open the blinds</source>
-        <target state="translated">Åben persiennerne</target>
+        <target state="final">Åben persiennerne</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_045EF309-3EB7-46B9-8AB7-31BC8482E3DC" xml:space="preserve">
+      <trans-unit id="preset_045EF309-3EB7-46B9-8AB7-31BC8482E3DC" xml:space="preserve" approved="yes">
         <source>Okay</source>
-        <target state="translated">Okay</target>
+        <target state="final">Okay</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_46EF7041-50F7-4B64-A0F6-879A8A3D7532" xml:space="preserve">
+      <trans-unit id="preset_46EF7041-50F7-4B64-A0F6-879A8A3D7532" xml:space="preserve" approved="yes">
         <source>Please turn the lights off</source>
-        <target state="translated">Sluk lyset</target>
+        <target state="final">Sluk lyset</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_52CA4E71-4A8C-4EA8-8EA8-C4B18AA16EC8" xml:space="preserve">
+      <trans-unit id="preset_52CA4E71-4A8C-4EA8-8EA8-C4B18AA16EC8" xml:space="preserve" approved="yes">
         <source>Environment</source>
-        <target state="translated">Omkring mig</target>
+        <target state="final">Omkring mig</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_73B654AA-C999-4864-BF5A-77379DAA991C" xml:space="preserve">
+      <trans-unit id="preset_73B654AA-C999-4864-BF5A-77379DAA991C" xml:space="preserve" approved="yes">
         <source>I need to wash my face</source>
-        <target state="translated">Jeg har brug for at vaske mit ansigt</target>
+        <target state="final">Jeg har brug for at vaske mit ansigt</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_81B473E3-2FC9-40F0-AE59-3C658EC6CD91" xml:space="preserve" approved="yes">
@@ -447,204 +442,204 @@
         <target state="final">Jeg har brug for et brusebad</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_0167AA43-587D-436F-91A9-9CEEAF1CCCF1" xml:space="preserve">
+      <trans-unit id="preset_0167AA43-587D-436F-91A9-9CEEAF1CCCF1" xml:space="preserve" approved="yes">
         <source>I would like to talk</source>
-        <target state="translated">Jeg vil gerne snakke</target>
+        <target state="final">Jeg vil gerne snakke</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_573DD827-7201-49F1-8BE8-0BC18028A8CB" xml:space="preserve">
+      <trans-unit id="preset_573DD827-7201-49F1-8BE8-0BC18028A8CB" xml:space="preserve" approved="yes">
         <source>Bad</source>
-        <target state="translated">Dårligt</target>
+        <target state="final">Dårligt</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_702D3BAD-6C56-4DC6-8290-8E0693B63152" xml:space="preserve">
+      <trans-unit id="preset_702D3BAD-6C56-4DC6-8290-8E0693B63152" xml:space="preserve" approved="yes">
         <source>Please turn the volume down</source>
-        <target state="translated">Skru ned</target>
+        <target state="final">Skru ned</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_939B4829-D8B4-42F1-B8A2-0E956AAE1FEE" xml:space="preserve">
+      <trans-unit id="preset_939B4829-D8B4-42F1-B8A2-0E956AAE1FEE" xml:space="preserve" approved="yes">
         <source>I am having trouble breathing</source>
-        <target state="translated">Jeg har svært ved at trække vejret</target>
+        <target state="final">Jeg har svært ved at trække vejret</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_5542BE2F-419E-41A5-BBF2-5B82E0A49834" xml:space="preserve">
+      <trans-unit id="preset_5542BE2F-419E-41A5-BBF2-5B82E0A49834" xml:space="preserve" approved="yes">
         <source>I am in pain</source>
-        <target state="translated">Jeg har ondt</target>
+        <target state="final">Jeg har ondt</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_05754D0C-962D-48C3-8554-E4F7D5E86D93" xml:space="preserve">
+      <trans-unit id="preset_05754D0C-962D-48C3-8554-E4F7D5E86D93" xml:space="preserve" approved="yes">
         <source>I need a jacket</source>
-        <target state="translated">Jeg vil gerne have en jakke</target>
+        <target state="final">Jeg vil gerne have en jakke</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_8359B09D-7259-40CC-B258-02895ECC4DB7" xml:space="preserve">
+      <trans-unit id="preset_8359B09D-7259-40CC-B258-02895ECC4DB7" xml:space="preserve" approved="yes">
         <source>I need to spit</source>
-        <target state="translated">Jeg skal spytte</target>
+        <target state="final">Jeg skal spytte</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_9929E83B-997D-40AA-841C-130709F5115B" xml:space="preserve">
+      <trans-unit id="preset_9929E83B-997D-40AA-841C-130709F5115B" xml:space="preserve" approved="yes">
         <source>Good morning</source>
-        <target state="translated">Godmorgen</target>
+        <target state="final">Godmorgen</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_30153E11-D48C-47C8-9186-47988D0A5B7A" xml:space="preserve">
+      <trans-unit id="preset_30153E11-D48C-47C8-9186-47988D0A5B7A" xml:space="preserve" approved="yes">
         <source>I do not agree</source>
-        <target state="translated">Jeg er ikke enig</target>
+        <target state="final">Jeg er ikke enig</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_63980C93-EE77-40DE-BDE7-BF8F97EC0304" xml:space="preserve">
+      <trans-unit id="preset_63980C93-EE77-40DE-BDE7-BF8F97EC0304" xml:space="preserve" approved="yes">
         <source>Please be patient</source>
-        <target state="translated">Vær tålmodig</target>
+        <target state="final">Vær tålmodig</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_64348AD1-9F63-4ADA-B391-E1742913C0E6" xml:space="preserve">
+      <trans-unit id="preset_64348AD1-9F63-4ADA-B391-E1742913C0E6" xml:space="preserve" approved="yes">
         <source>I need a bath</source>
-        <target state="translated">Jeg har brug for et bad</target>
+        <target state="final">Jeg har brug for et bad</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_72633C5C-47A2-4D5E-9615-E1408234478F" xml:space="preserve">
+      <trans-unit id="preset_72633C5C-47A2-4D5E-9615-E1408234478F" xml:space="preserve" approved="yes">
         <source>Thank you</source>
-        <target state="translated">Tak</target>
+        <target state="final">Tak</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_88556B8E-FE61-401D-888C-0D79568715A0" xml:space="preserve">
+      <trans-unit id="preset_88556B8E-FE61-401D-888C-0D79568715A0" xml:space="preserve" approved="yes">
         <source>Please close the blinds</source>
-        <target state="translated">Luk persiennerne</target>
+        <target state="final">Luk persiennerne</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_1244394F-2793-47EF-BCAC-DB8BBDAB78C6" xml:space="preserve">
+      <trans-unit id="preset_1244394F-2793-47EF-BCAC-DB8BBDAB78C6" xml:space="preserve" approved="yes">
         <source>I need my medication</source>
-        <target state="translated">Jeg har brug for min medicin</target>
+        <target state="final">Jeg har brug for min medicin</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_30474911-619F-4FBF-B7DA-F64039F556F2" xml:space="preserve">
+      <trans-unit id="preset_30474911-619F-4FBF-B7DA-F64039F556F2" xml:space="preserve" approved="yes">
         <source>Please be quiet</source>
-        <target state="translated">Vær stille</target>
+        <target state="final">Vær stille</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_A02D6604-5C7C-4BB0-8C4A-E1C5E0D1A869" xml:space="preserve">
+      <trans-unit id="preset_A02D6604-5C7C-4BB0-8C4A-E1C5E0D1A869" xml:space="preserve" approved="yes">
         <source>Please stop</source>
-        <target state="translated">Venligst stop</target>
+        <target state="final">Venligst stop</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_A436EAAF-BD8A-4D8D-81EA-DC6D3C849D4A" xml:space="preserve">
+      <trans-unit id="preset_A436EAAF-BD8A-4D8D-81EA-DC6D3C849D4A" xml:space="preserve" approved="yes">
         <source>I like it</source>
-        <target state="translated">Det kan jeg godt lide</target>
+        <target state="final">Det kan jeg godt lide</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_A74483A8-4069-40D7-992C-01295934E97C" xml:space="preserve">
+      <trans-unit id="preset_A74483A8-4069-40D7-992C-01295934E97C" xml:space="preserve" approved="yes">
         <source>Please repeat what you said</source>
-        <target state="translated">Kan du gentage</target>
+        <target state="final">Kan du gentage</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_ADDD57C6-D11E-4B32-A2B3-05AA43D9AC8C" xml:space="preserve">
+      <trans-unit id="preset_ADDD57C6-D11E-4B32-A2B3-05AA43D9AC8C" xml:space="preserve" approved="yes">
         <source>I am fine</source>
-        <target state="translated">Jeg har det fint</target>
+        <target state="final">Jeg har det fint</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_B2442AA0-6004-4636-9B39-2DB97ADD1DA1" xml:space="preserve">
+      <trans-unit id="preset_B2442AA0-6004-4636-9B39-2DB97ADD1DA1" xml:space="preserve" approved="yes">
         <source>Goodbye</source>
-        <target state="translated">Farvel</target>
+        <target state="final">Farvel</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_BBE8BABC-CCBF-49BF-87D4-057016AADBC5" xml:space="preserve">
+      <trans-unit id="preset_BBE8BABC-CCBF-49BF-87D4-057016AADBC5" xml:space="preserve" approved="yes">
         <source>I want to sit up</source>
-        <target state="translated">Jeg vil sidde op</target>
+        <target state="final">Jeg vil sidde op</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_BEE6FF86-CE30-4096-9E37-C469F63630B7" xml:space="preserve">
+      <trans-unit id="preset_BEE6FF86-CE30-4096-9E37-C469F63630B7" xml:space="preserve" approved="yes">
         <source>I didn't mean to say that</source>
-        <target state="translated">Jeg mente ikke at sige det</target>
+        <target state="final">Jeg mente ikke at sige det</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_C0B2A1A8-8333-4121-B4A8-FFFA185EB5D2" xml:space="preserve">
+      <trans-unit id="preset_C0B2A1A8-8333-4121-B4A8-FFFA185EB5D2" xml:space="preserve" approved="yes">
         <source>General</source>
-        <target state="translated">Generelt</target>
+        <target state="final">Generelt</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_C6C14627-E48E-4EF3-B81D-64C191F2EC75" xml:space="preserve">
+      <trans-unit id="preset_C6C14627-E48E-4EF3-B81D-64C191F2EC75" xml:space="preserve" approved="yes">
         <source>I am good</source>
-        <target state="translated">Jeg har det godt</target>
+        <target state="final">Jeg har det godt</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_C6E6B6E7-BEB6-466D-822A-F8CE2D092B9E" xml:space="preserve">
+      <trans-unit id="preset_C6E6B6E7-BEB6-466D-822A-F8CE2D092B9E" xml:space="preserve" approved="yes">
         <source>I am uncomfortable</source>
-        <target state="translated">Jeg er ukomfortabel</target>
+        <target state="final">Jeg er ukomfortabel</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_C865BE96-40B5-406C-9BAA-0A0D3280E377" xml:space="preserve">
+      <trans-unit id="preset_C865BE96-40B5-406C-9BAA-0A0D3280E377" xml:space="preserve" approved="yes">
         <source>Please close the window</source>
-        <target state="translated">Luk vinduet</target>
+        <target state="final">Luk vinduet</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_D6A67E02-3D07-4D44-8B04-2C1B9B8B167E" xml:space="preserve">
+      <trans-unit id="preset_D6A67E02-3D07-4D44-8B04-2C1B9B8B167E" xml:space="preserve" approved="yes">
         <source>Good evening</source>
-        <target state="translated">Godaften</target>
+        <target state="final">Godaften</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_D64EE532-14D3-4434-B671-8F4368EC0A8D" xml:space="preserve">
+      <trans-unit id="preset_D64EE532-14D3-4434-B671-8F4368EC0A8D" xml:space="preserve" approved="yes">
         <source>Good</source>
-        <target state="translated">Godt</target>
+        <target state="final">Godt</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_DC942BB6-B2BF-4ABB-8931-719BD2A504E6" xml:space="preserve">
+      <trans-unit id="preset_DC942BB6-B2BF-4ABB-8931-719BD2A504E6" xml:space="preserve" approved="yes">
         <source>Please turn the volume up</source>
-        <target state="translated">Skru op</target>
+        <target state="final">Skru op</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_DFB79E0D-CF93-4744-B9EE-12738E1864E2" xml:space="preserve">
+      <trans-unit id="preset_DFB79E0D-CF93-4744-B9EE-12738E1864E2" xml:space="preserve" approved="yes">
         <source>Maybe</source>
-        <target state="translated">Måske</target>
+        <target state="final">Måske</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_E7ADBE88-2722-4DE7-BDC1-994F07EA294B" xml:space="preserve">
+      <trans-unit id="preset_E7ADBE88-2722-4DE7-BDC1-994F07EA294B" xml:space="preserve" approved="yes">
         <source>Personal Care</source>
-        <target state="translated">Personligt</target>
+        <target state="final">Personligt</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_E7D11E13-BC4F-4FE5-9C8A-BE2DE31AEE7F" xml:space="preserve">
+      <trans-unit id="preset_E7D11E13-BC4F-4FE5-9C8A-BE2DE31AEE7F" xml:space="preserve" approved="yes">
         <source>I would like visitors</source>
-        <target state="translated">Jeg vil gerne have besøg</target>
+        <target state="final">Jeg vil gerne have besøg</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_E012D902-E8BA-4BEA-92C7-7107ECF8051C" xml:space="preserve">
+      <trans-unit id="preset_E012D902-E8BA-4BEA-92C7-7107ECF8051C" xml:space="preserve" approved="yes">
         <source>I am hungry</source>
-        <target state="translated">Jeg er sulten</target>
+        <target state="final">Jeg er sulten</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_EB7A9732-E28E-4440-A88B-BA2A1ACFBD76" xml:space="preserve">
+      <trans-unit id="preset_EB7A9732-E28E-4440-A88B-BA2A1ACFBD76" xml:space="preserve" approved="yes">
         <source>Conversation</source>
-        <target state="translated">Samtale</target>
+        <target state="final">Samtale</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_F6F03BBD-B9CD-41F5-B26A-FCC13CCBB199" xml:space="preserve">
+      <trans-unit id="preset_F6F03BBD-B9CD-41F5-B26A-FCC13CCBB199" xml:space="preserve" approved="yes">
         <source>I am tired</source>
-        <target state="translated">Jeg er træt</target>
+        <target state="final">Jeg er træt</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_F8F5D1C9-0AA6-4152-BF7C-0851ACD1406B" xml:space="preserve">
+      <trans-unit id="preset_F8F5D1C9-0AA6-4152-BF7C-0851ACD1406B" xml:space="preserve" approved="yes">
         <source>Basic Needs</source>
-        <target state="translated">Basale behov</target>
+        <target state="final">Basale behov</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_FABE749C-B54D-4031-B8E7-62777B34D273" xml:space="preserve">
+      <trans-unit id="preset_FABE749C-B54D-4031-B8E7-62777B34D273" xml:space="preserve" approved="yes">
         <source>No</source>
-        <target state="translated">Nej</target>
+        <target state="final">Nej</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" xml:space="preserve">
+      <trans-unit id="preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" xml:space="preserve" approved="yes">
         <source>Please turn the TV on</source>
-        <target state="translated">Tænd fjernsynet</target>
+        <target state="final">Tænd fjernsynet</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_user_favorites" xml:space="preserve">
+      <trans-unit id="preset_user_favorites" xml:space="preserve" approved="yes">
         <source>My Sayings</source>
-        <target state="translated">Mine Sætninger</target>
+        <target state="final">Mine Sætninger</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_user_keypad" xml:space="preserve">
+      <trans-unit id="preset_user_keypad" xml:space="preserve" approved="yes">
         <source>123</source>
-        <target state="translated">123</target>
+        <target state="final">123</target>
         <note/>
       </trans-unit>
     </body>

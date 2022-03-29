@@ -90,7 +90,15 @@ final class CarouselGridLayout: UICollectionViewLayout {
         }
     }
 
-    var interItemSpacing: CGFloat = 0 {
+    struct InterItemSpacing: Equatable {
+        let interRowSpacing: CGFloat
+        let interColumnSpacing: CGFloat
+
+        static let zero: Self = .init(interRowSpacing: .zero, interColumnSpacing: .zero)
+        static func uniform(_ spacing: CGFloat) -> Self { .init(interRowSpacing: spacing, interColumnSpacing: spacing) }
+    }
+
+    var interItemSpacing: InterItemSpacing = .zero {
         didSet {
             guard oldValue != interItemSpacing else { return }
             invalidateItemAttributesForParameterChange()
@@ -199,7 +207,7 @@ final class CarouselGridLayout: UICollectionViewLayout {
             }
             var itemCount = Int(width / minimumWidth)
             while itemCount > 0 {
-                let interItemWidth = CGFloat(itemCount - 1) * interItemSpacing
+                let interItemWidth = CGFloat(itemCount - 1) * interItemSpacing.interColumnSpacing
                 let availableWidth = width - interItemWidth
                 if (availableWidth / CGFloat(itemCount)) >= minimumWidth {
                     break
@@ -224,7 +232,7 @@ final class CarouselGridLayout: UICollectionViewLayout {
             let minHeightValue = minimumHeight.value(from: collectionView?.bounds ?? .zero, axis: .vertical)
             var itemCount = Int(height / minHeightValue)
             while itemCount > 0 {
-                let interItemHeight = CGFloat(itemCount - 1) * interItemSpacing
+                let interItemHeight = CGFloat(itemCount - 1) * interItemSpacing.interRowSpacing
                 let availableHeight = height - interItemHeight
                 if (availableHeight / CGFloat(itemCount)) >= minHeightValue {
                     break
@@ -238,19 +246,18 @@ final class CarouselGridLayout: UICollectionViewLayout {
         }
     }
 
-    private func frameForCell(at indexPath: IndexPath, additionalPageInsets: UIEdgeInsets = .zero, pageOffset: UIOffset = .zero, interItemSpacing: CGFloat? = nil) -> CGRect {
+    private func frameForCell(at indexPath: IndexPath, additionalPageInsets: UIEdgeInsets = .zero, pageOffset: UIOffset = .zero) -> CGRect {
 
         guard itemsPerPage > 0 else { return .zero }
 
-        let interItemSpacing = interItemSpacing ?? self.interItemSpacing
         let pageRect: CGRect = rectForPage(containing: indexPath).offsetBy(dx: pageOffset.horizontal, dy: pageOffset.vertical)
 
         let contentRect = pageRect.inset(by: pageInsets + additionalPageInsets)
         let cellColumnIndex = indexPath.item % columnCount
         let cellRowIndex = (indexPath.item % itemsPerPage) / columnCount
 
-        let totalInterItemSpace = CGSize(width: CGFloat(columnCount - 1) * interItemSpacing,
-                                         height: CGFloat(rowCount - 1) * interItemSpacing)
+        let totalInterItemSpace = CGSize(width: CGFloat(columnCount - 1) * interItemSpacing.interColumnSpacing,
+                                         height: CGFloat(rowCount - 1) * interItemSpacing.interRowSpacing)
 
         let maximumAvailableCellHeight = (contentRect.height - totalInterItemSpace.height) / CGFloat(rowCount)
         let cellWidth = (contentRect.width - totalInterItemSpace.width) / CGFloat(columnCount)
@@ -278,8 +285,8 @@ final class CarouselGridLayout: UICollectionViewLayout {
                 }
             }()
             let numberOfOccupiedRows = (CGFloat(numberOfItemsInPage) / CGFloat(columnCount)).rounded(.up)
-            let occupiedInterItemSpace = CGSize(width: CGFloat(columnCount - 1) * interItemSpacing,
-                                                height: CGFloat(numberOfOccupiedRows - 1) * interItemSpacing)
+            let occupiedInterItemSpace = CGSize(width: CGFloat(columnCount - 1) * interItemSpacing.interColumnSpacing,
+                                                height: CGFloat(numberOfOccupiedRows - 1) * interItemSpacing.interRowSpacing)
             var size = CGSize.zero
             size.width = cellWidth * CGFloat(columnCount) + occupiedInterItemSpace.width
             size.height = cellHeight * CGFloat(numberOfOccupiedRows) + occupiedInterItemSpace.height
@@ -300,8 +307,8 @@ final class CarouselGridLayout: UICollectionViewLayout {
             return offset
         }()
 
-        let cellX = CGFloat(cellColumnIndex) * (cellWidth + interItemSpacing) + cellContentOffset.horizontal
-        let cellY = CGFloat(cellRowIndex) * (cellHeight + interItemSpacing) + cellContentOffset.vertical
+        let cellX = CGFloat(cellColumnIndex) * (cellWidth + interItemSpacing.interColumnSpacing) + cellContentOffset.horizontal
+        let cellY = CGFloat(cellRowIndex) * (cellHeight + interItemSpacing.interRowSpacing) + cellContentOffset.vertical
 
         let cellRect = CGRect(x: contentRect.minX + cellX,
                               y: contentRect.minY + cellY,
@@ -360,7 +367,7 @@ final class CarouselGridLayout: UICollectionViewLayout {
 
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let collectionView = collectionView, pagesPerSection > 0,
-            pageContentSize.width > 0 || interItemSpacing > 0 else { return proposedContentOffset }
+              pageContentSize.width > .zero else { return proposedContentOffset }
         let proposedCenterX: CGFloat
         if velocity.x > 1.0 {
             proposedCenterX = collectionView.bounds.maxX

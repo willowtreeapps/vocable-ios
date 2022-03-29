@@ -51,7 +51,8 @@ class KeyboardScreenTests: BaseTest {
         keyboardScreen.dismissKeyboardButton.tap()
         mainScreen.locateAndSelectDestinationCategory(.mySayings)
         
-        XCTAssertFalse(mainScreen.locatePhraseCell(phrase: testPhrase).exists, "Expected the phrase \(testPhrase) to be deleted from 'My Sayings'")
+        // We expect 'My Sayings' to be empty now.
+        XCTAssertTrue(mainScreen.emptyStateAddPhraseButton.exists, "Expected the phrase \(testPhrase) to be deleted from 'My Sayings'")
     }
      
 }

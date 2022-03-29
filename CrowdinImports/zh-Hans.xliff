@@ -2,19 +2,9 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Vocable/Supporting Files/en.lproj/InfoPlist.strings" source-language="en" target-language="zh-Hans" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
     </header>
     <body>
-      <trans-unit id="CFBundleDisplayName" xml:space="preserve">
-        <source>Vocable</source>
-        <target state="needs-translation">Vocable</target>
-        <note>Bundle display name</note>
-      </trans-unit>
-      <trans-unit id="CFBundleName" xml:space="preserve">
-        <source>Vocable</source>
-        <target state="needs-translation">Vocable</target>
-        <note>Bundle name</note>
-      </trans-unit>
       <trans-unit id="NSCameraUsageDescription" xml:space="preserve" approved="yes">
         <source>Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
         <target state="final">可说话是用ARKit跟踪头部的科技来检测使用者的脸部。设备上的TrueDepth前部相机供稿为了控制屏幕指针和允许行动不便的使用者能够与应用互动。头部方位和位置数据是用来控制屏幕指针。跟踪头部数据不会储存或传送的。可说话需要您允许才可以用相机是为了这个目的。</target>
@@ -24,7 +14,7 @@
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="zh-Hans" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
     </header>
     <body>
       <trans-unit id="Edit Phrases" xml:space="preserve" approved="yes">
@@ -78,7 +68,7 @@
         <note>Delete phrase alert action button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Deleted phrases cannot be recovered.</source>
+        <source>Are you sure you want to delete? Removed phrases cannot be restored.</source>
         <target state="final">删除后的对话无法恢复。</target>
         <note>Delete phrase confirmation alert title</note>
       </trans-unit>
@@ -86,11 +76,6 @@
         <source>Remove Category</source>
         <target state="final">移除类别</target>
         <note>Remove category button label within the category detail screen.</note>
-      </trans-unit>
-      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve" approved="yes">
-        <source>Show</source>
-        <target state="final">显示</target>
-        <note>Show category button label within the category detail screen.</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve" approved="yes">
         <source>Changes saved</source>
@@ -149,7 +134,7 @@
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Going back before saving will clear any edits made.</source>
+        <source>Are you sure? Going back before saving will clear any edits made.</source>
         <target state="final">保存前返回将会清除任何编辑的东西。</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
@@ -170,9 +155,9 @@
         <target state="final">是</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
-      <trans-unit id="selection_mode.header.title" xml:space="preserve">
+      <trans-unit id="selection_mode.header.title" xml:space="preserve" approved="yes">
         <source>Selection Mode</source>
-        <target state="translated">移动对象模式</target>
+        <target state="final">移动对象模式</target>
         <note>Selection mode screen header title</note>
       </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve" approved="yes">
@@ -201,7 +186,7 @@
         <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.cell.categories.title" xml:space="preserve" approved="yes">
-        <source>Categories</source>
+        <source>Categories and Phrases</source>
         <target state="final">类别</target>
         <note>edit categories settings menu item</note>
       </trans-unit>
@@ -261,45 +246,45 @@
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Going back before saving will clear any edits made.</source>
+        <source>Are you sure? Going back before saving will clear any edits made.</source>
         <target state="final">保存前返回将会清除任何编辑的东西。</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve" approved="yes">
         <source>High</source>
-        <target state="translated">高</target>
+        <target state="final">高</target>
         <note>High cursor sensitivity option button</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve" approved="yes">
         <source>Low</source>
-        <target state="translated">低</target>
+        <target state="final">低</target>
         <note>Low cursor sensitivity option button</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve" approved="yes">
         <source>Medium</source>
-        <target state="translated">中</target>
+        <target state="final">中</target>
         <note>Medium cursor sensitivity option button</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve" approved="yes">
         <source>Cursor Sensitivity</source>
-        <target state="translated">指针敏度</target>
+        <target state="final">指针敏度</target>
         <note>Cursor sensitivity configuration option name</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve" approved="yes">
         <source>Hover Time</source>
-        <target state="translated">徘徊时间</target>
+        <target state="final">徘徊时间</target>
         <note>Dwell duration configuration option name</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve" approved="yes">
         <source>Timing and Sensitivity</source>
-        <target state="translated">时间和灵敏度</target>
+        <target state="final">时间和灵敏度</target>
         <note>Timing and sensitivity header title</note>
       </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Presets.strings" source-language="en" target-language="zh-Hans" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="11.4" build-num="11E146"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
     </header>
     <body>
       <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve" approved="yes">

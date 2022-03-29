@@ -1,9 +1,3 @@
-/* Bundle display name */
-"CFBundleDisplayName" = "Vocable";
-
-/* Bundle name */
-"CFBundleName" = "Vocable";
-
 /* Camera usage description */
 "NSCameraUsageDescription" = "可说话是用ARKit跟踪头部的科技来检测使用者的脸部。设备上的TrueDepth前部相机供稿为了控制屏幕指针和允许行动不便的使用者能够与应用互动。头部方位和位置数据是用来控制屏幕指针。跟踪头部数据不会储存或传送的。可说话需要您允许才可以用相机是为了这个目的。";
 

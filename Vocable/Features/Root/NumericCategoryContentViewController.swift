@@ -48,7 +48,7 @@ class NumericCategoryContentViewController: PagingCarouselViewController {
     }
 
     private func updateLayoutForCurrentTraitCollection() {
-        collectionView.layout.interItemSpacing = 8
+        collectionView.layout.interItemSpacing = .uniform(8)
 
         switch sizeClass {
         case .hRegular_vRegular:

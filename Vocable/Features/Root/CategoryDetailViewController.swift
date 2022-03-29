@@ -80,7 +80,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
     private func updateLayoutForCurrentTraitCollection() {
 
-        collectionView.layout.interItemSpacing = 8
+        collectionView.layout.interItemSpacing = .uniform(8)
         switch sizeClass {
         case .hRegular_vRegular:
             collectionView.layout.numberOfColumns = .fixedCount(3)

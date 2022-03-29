@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Vocable/Supporting Files/en.lproj/InfoPlist.strings" source-language="en" target-language="hi" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+    </header>
+    <body>
+      
+      
+      
+      
+      
+    </body>
+  </file>
+  <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="hi" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+    </header>
+    <body>
+      <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
+        <source>Categories</source>
+        <target state="translated">श्रेणियाँ</target>
+        <note>Categories list editor screen header title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">रद्द करें</target>
+        <note>Cancel exit editing alert action title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
+        <source>Confirm</source>
+        <target state="translated">पुष्टि करें</target>
+        <note>Confirm exit category alert action title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">रद्द करें</target>
+        <note>Delete category alert cancel button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">रद्द करें</target>
+        <note>Delete phrase alert cancel button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
+        <source>Delete</source>
+        <target state="translated">हटाएँ</target>
+        <note>Delete phrase alert action button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
+        <source>Changes saved</source>
+        <target state="translated">परिवर्तन सहेजा गया!</target>
+        <note>changes to an existing phrase were saved successfully</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">रद्द करें</target>
+        <note>Cancel alert action title</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Confirm</source>
+        <target state="translated">पुष्टि करें</target>
+        <note>Confirm alert action title</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+        <source>Continue Editing</source>
+        <target state="translated">संपादन जारी रखें</target>
+        <note>Continue editing alert action title</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
+        <source>Discard</source>
+        <target state="translated">छोड़ें</target>
+        <note>Discard changes alert action title</note>
+      </trans-unit>
+      <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
+        <source>No</source>
+        <target state="translated">नहीं</target>
+        <note>'No' num pad response</note>
+      </trans-unit>
+      <trans-unit id="preset.category.numberpad.phrase.yes.title" xml:space="preserve">
+        <source>Yes</source>
+        <target state="translated">हाँ</target>
+        <note>'Yes' num pad response</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">ठीक है</target>
+        <note>No email account configured error alert dismiss button title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">रद्द करें</target>
+        <note>Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Confirm</source>
+        <target state="translated">पुष्टि करें</target>
+        <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve">
+        <source>Contact Developers</source>
+        <target state="translated">डेवलपर से संपर्क करें</target>
+        <note>contact developers settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
+        <source>Privacy Policy</source>
+        <target state="translated">गोपनीयता नीति</target>
+        <note>view privacy policy settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.reset_all.title" xml:space="preserve">
+        <source>Reset App Settings</source>
+        <target state="translated">सेटिंग्स रीसेट करें</target>
+        <note>reset all settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.header.title" xml:space="preserve">
+        <source>Settings</source>
+        <target state="translated">सेटिंग्स</target>
+        <note>Settings screen header title</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+        <source>Continue Editing</source>
+        <target state="translated">संपादन जारी रखें</target>
+        <note>Continue editing alert action title</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
+        <source>Discard</source>
+        <target state="translated">छोड़ें</target>
+        <note>Discard changes alert action title</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Vocable/Supporting Files/en.lproj/Presets.strings" source-language="en" target-language="hi" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+    </header>
+    <body>
+      <trans-unit id="preset_8BCBACFB-D5ED-46CB-B3E2-21FB31D8D6AD" xml:space="preserve">
+        <source>Yes</source>
+        <target state="translated">हाँ</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_FABE749C-B54D-4031-B8E7-62777B34D273" xml:space="preserve">
+        <source>No</source>
+        <target state="translated">नहीं</target>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -96,7 +96,7 @@
 /* Settings screen header title */
 "settings.header.title" = "Settings";
 
-"category_editor.detail.button.show_category.title" = "Show";
+"category_editor.detail.button.show_category.title" = "Show Category";
 
 "category_editor.detail.button.remove_category.title" = "Remove Category";
 
@@ -144,7 +144,7 @@
 
 "recents_empty_state.body.title" = "Start using Vocable to see your most recently used phrases here.";
 
-"empty_state.header.title" = "This category has no phrases yet";
+"empty_state.header.title" = "You don't have any phrases saved yet.";
 
 "empty_state.button.title" = "Add Phrase";
 

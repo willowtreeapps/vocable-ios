@@ -47,6 +47,9 @@
 /* Edit Phrases */
 "Edit Phrases" = "Phrasen bearbeiten";
 
+/* Empty state title */
+"empty_state.header.title" = "Sie haben noch keine Phrasen gespeichert.";
+
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Abbrechen";
 
