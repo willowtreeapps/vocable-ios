@@ -72,11 +72,6 @@
         <target state="final">刪除類別?</target>
         <note>Remove category button label within the category detail screen.</note>
       </trans-unit>
-      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve" approved="yes">
-        <source>Show</source>
-        <target state="final">顯示</target>
-        <note>Show category button label within the category detail screen.</note>
-      </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve" approved="yes">
         <source>Changes saved</source>
         <target state="final">更改已儲存</target>
