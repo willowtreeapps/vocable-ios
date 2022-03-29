@@ -254,21 +254,21 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
     
     @objc private func addButtonPressed(_ sender: Any) {
         let viewController = EditTextViewController()
-        viewController.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
-
-            _ = Category.create(withUserEntry: newText, in: context)
-            do {
-                try Category.updateAllOrdinalValues(in: context)
-                try context.save()
-
-                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-            } catch {
-                assertionFailure("Failed to save category: \(error)")
-            }
-        }
+//        viewController.editTextCompletionHandler = { (newText) -> Void in
+//            let context = NSPersistentContainer.shared.viewContext
+//
+//            _ = Category.create(withUserEntry: newText, in: context)
+//            do {
+//                try Category.updateAllOrdinalValues(in: context)
+//                try context.save()
+//
+//                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
+//
+//                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+//            } catch {
+//                assertionFailure("Failed to save category: \(error)")
+//            }
+//        }
 
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)

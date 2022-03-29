@@ -124,23 +124,23 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
     // MARK: Actions
     @IBAction private func addPhrasePressed() {
         let viewController = EditTextViewController()
-        viewController.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
-
-            _ = Phrase.create(withUserEntry: newText, category: self.category, in: context)
-            do {
-                try context.save()
-
-                let alertMessage: String = {
-                    let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
-                    return String.localizedStringWithFormat(format, self.category.name ?? "")
-                }()
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-            } catch {
-                assertionFailure("Failed to save user generated phrase: \(error)")
-            }
-        }
+//        viewController.editTextCompletionHandler = { (newText) -> Void in
+//            let context = NSPersistentContainer.shared.viewContext
+//
+//            _ = Phrase.create(withUserEntry: newText, category: self.category, in: context)
+//            do {
+//                try context.save()
+//
+//                let alertMessage: String = {
+//                    let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
+//                    return String.localizedStringWithFormat(format, self.category.name ?? "")
+//                }()
+//
+//                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+//            } catch {
+//                assertionFailure("Failed to save user generated phrase: \(error)")
+//            }
+//        }
 
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
@@ -190,30 +190,30 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         let initialValue = phrase.utterance ?? ""
 
         let vc = EditTextViewController()
-        vc.initialText = initialValue
-        vc.editTextCompletionHandler = { (newText) -> Void in
-            guard let phrase = context.object(with: id) as? Phrase else { return }
-
-            if phrase.isUserGenerated {
-                phrase.utterance = newText
-            } else {
-                let textDidChange = (newText != initialValue)
-                phrase.utterance = newText
-                phrase.isUserRenamed = phrase.isUserRenamed || textDidChange
-            }
-
-            do {
-                try context.save()
-
-                let alertMessage = NSLocalizedString("category_editor.toast.changes_saved.title",
-                                                     comment: "changes to an existing phrase were saved successfully")
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-                self.collectionView.reloadData()
-            } catch {
-                assertionFailure("Failed to save user generated phrase: \(error)")
-            }
-        }
+//        vc.initialText = initialValue
+//        vc.editTextCompletionHandler = { (newText) -> Void in
+//            guard let phrase = context.object(with: id) as? Phrase else { return }
+//
+//            if phrase.isUserGenerated {
+//                phrase.utterance = newText
+//            } else {
+//                let textDidChange = (newText != initialValue)
+//                phrase.utterance = newText
+//                phrase.isUserRenamed = phrase.isUserRenamed || textDidChange
+//            }
+//
+//            do {
+//                try context.save()
+//
+//                let alertMessage = NSLocalizedString("category_editor.toast.changes_saved.title",
+//                                                     comment: "changes to an existing phrase were saved successfully")
+//
+//                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+//                self.collectionView.reloadData()
+//            } catch {
+//                assertionFailure("Failed to save user generated phrase: \(error)")
+//            }
+//        }
 
         present(vc, animated: true)
     }

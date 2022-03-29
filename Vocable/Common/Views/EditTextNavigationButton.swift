@@ -20,6 +20,12 @@ final class EditTextNavigationButton: GazeableButton {
         guard let configuration = configuration else { return }
         setImage(configuration.image, for: .normal)
         isEnabled = configuration.isEnabled
-        addAction(UIAction(handler: { _ in configuration.action() }), for: .touchUpInside)
+
+        enumerateEventHandlers { action, _, event, _ in
+            if let action = action {
+                removeAction(action, for: event)
+            }
+        }
+        addAction(UIAction(handler: { _ in configuration.action() }), for: .primaryActionTriggered)
     }
 }

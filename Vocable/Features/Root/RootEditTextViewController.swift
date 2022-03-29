@@ -36,7 +36,6 @@ class RootEditTextViewController: EditTextViewController {
 
         favoriteButton.addTarget(self, action: #selector(favoriteButtonSelected), for: .primaryActionTriggered)
 
-        shouldWarnOnDismiss = false
         navigationBar.rightButton = favoriteButton
         $text.receive(on: DispatchQueue.main).sink { [weak self] newText in
             self?.updateFavoriteButton(with: self?.normalizedText(from: newText))

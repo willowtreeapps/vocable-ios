@@ -162,26 +162,6 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
 //        editTextCompletionHandler(trimmedText)
 //    }
     
-//    private func handleDismissAlert() {
-//        func discardChangesAction() {
-//            dismiss(animated: true, completion: nil)
-//        }
-//
-//        guard shouldWarnOnDismiss else {
-//            discardChangesAction()
-//            return
-//        }
-//
-//        let title = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.title",
-//                                      comment: "Exit edit sayings alert title")
-//        let discardButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.discard.title",
-//                                                   comment: "Discard changes alert action title")
-//        let continueButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
-//                                                    comment: "Continue editing alert action title")
-//        let alert = GazeableAlertViewController(alertTitle: title)
-//        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
-//        alert.addAction(GazeableAlertAction(title: continueButtonTitle, style: .bold))
-//        self.present(alert, animated: true)
-//    }
+
     
 }

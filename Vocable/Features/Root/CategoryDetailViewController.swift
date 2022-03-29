@@ -197,25 +197,25 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         let vc = EditTextViewController()
 
         let phrase = frc.object(at: safeIndexPath)
-        vc.initialText = phrase.utterance ?? ""
-        vc.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
-
-            if let phraseIdentifier = phrase.identifier {
-                let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                originalPhrase?.utterance = newText
-            }
-            do {
-                try context.save()
-
-                let alertMessage = NSLocalizedString("category_editor.toast.changes_saved.title",
-                                                     comment: "changes to an existing phrase were saved successfully")
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-            } catch {
-                assertionFailure("Failed to save user generated phrase: \(error)")
-            }
-        }
+//        vc.initialText = phrase.utterance ?? ""
+//        vc.editTextCompletionHandler = { (newText) -> Void in
+//            let context = NSPersistentContainer.shared.viewContext
+//
+//            if let phraseIdentifier = phrase.identifier {
+//                let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
+//                originalPhrase?.utterance = newText
+//            }
+//            do {
+//                try context.save()
+//
+//                let alertMessage = NSLocalizedString("category_editor.toast.changes_saved.title",
+//                                                     comment: "changes to an existing phrase were saved successfully")
+//
+//                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+//            } catch {
+//                assertionFailure("Failed to save user generated phrase: \(error)")
+//            }
+//        }
         present(vc, animated: true)
 
     }
@@ -239,24 +239,24 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
     @IBAction func addNewPhraseButtonSelected() {
         let vc = EditTextViewController()
-        vc.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
-
-            _ = Phrase.create(withUserEntry: newText, category: self.category, in: context)
-            do {
-                try context.save()
-
-                let alertMessage: String = {
-                    let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
-                    let categoryName = self.category.name
-                    return String.localizedStringWithFormat(format, categoryName!)
-                }()
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-            } catch {
-                assertionFailure("Failed to save user generated phrase: \(error)")
-            }
-        }
+//        vc.editTextCompletionHandler = { (newText) -> Void in
+//            let context = NSPersistentContainer.shared.viewContext
+//
+//            _ = Phrase.create(withUserEntry: newText, category: self.category, in: context)
+//            do {
+//                try context.save()
+//
+//                let alertMessage: String = {
+//                    let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
+//                    let categoryName = self.category.name
+//                    return String.localizedStringWithFormat(format, categoryName!)
+//                }()
+//
+//                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+//            } catch {
+//                assertionFailure("Failed to save user generated phrase: \(error)")
+//            }
+//        }
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }

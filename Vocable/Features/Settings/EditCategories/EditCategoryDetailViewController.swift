@@ -343,53 +343,8 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         let context = NSPersistentContainer.shared.viewContext
 
         let viewController = EditTextViewController()
-        viewController.delegate = EditCategoryDelegate(categoryIdentifier: categoryIdentifier, context: context)
-        viewController.editTextCompletionHandler = { (newText) -> Void in
-
-
-            guard let category = Category.fetchObject(in: context, matching: categoryIdentifier) else {
-                return
-            }
-
-            let categories = Category.fetchAll(in: context)
-            guard !categories.contains(where: { $0.name == newText }) else {
-                self.presentExistingCategoryAlert()
-                return
-            }
-
-            let textDidChange = (newText != initialName)
-            category.name = newText
-            category.isUserRenamed = category.isUserRenamed || textDidChange
-
-            do {
-                try Category.updateAllOrdinalValues(in: context)
-                try context.save()
-
-                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title",
-                                                     comment: "User edited name of the category and saved it successfully")
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-                self.collectionView.reloadData()
-            } catch {
-                assertionFailure("Failed to save category: \(error)")
-            }
-            self.dismiss(animated: true)
-        }
-
+        viewController.delegate = EditCategoryNameDelegate(categoryIdentifier: categoryIdentifier, context: context)
         present(viewController, animated: true)
-    }
-
-    // MARK: - Private Helpers
-
-    private func presentExistingCategoryAlert() {
-        let title = NSLocalizedString("text_editor.alert.category_name_exists.title",
-                                      comment: "Category already exists alert title")
-        let okButtonTitle = NSLocalizedString("text_editor.alert.category_name_exists.button",
-                                                   comment: "Dismiss alert action title")
-
-        let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: okButtonTitle))
-        self.present(alert, animated: true)
     }
 }
 
@@ -403,34 +358,108 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
 //    }
 //}
 
-struct EditCategoryDelegate: EditTextDelegate {
+struct EditCategoryNameDelegate: EditTextDelegate {
 
     let categoryIdentifier: String
     let context: NSManagedObjectContext
 
+    let initialName: String?
+
     private var canConfirmEdit: Bool = false
     private var shouldDismiss: Bool = true
 
+    init(categoryIdentifier: String, context: NSManagedObjectContext) {
+        self.categoryIdentifier = categoryIdentifier
+        self.context = context
+        self.initialName = Category.fetchObject(in: context, matching: categoryIdentifier)?.name
+    }
+
     mutating func editTextViewController(_ viewController: EditTextViewController, textDidChange attributedText: NSAttributedString?) {
-        let didTextChange = viewController.initialText != attributedText?.string
+        let textDidChange = initialName != attributedText?.string
         let isTextEmpty = attributedText?.string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
 
-        canConfirmEdit = didTextChange && !isTextEmpty
+        canConfirmEdit = textDidChange && !isTextEmpty
 
         viewController.setNeedsUpdateConfiguration()
     }
 
     func editTextViewControllerNavigationItems(_ viewController: EditTextViewController) -> EditTextViewController.NavigationConfiguration {
-        let leftItem = EditTextViewController.NavigationItem(image: UIImage(systemName: "xmark.circle")!, isEnabled: true) {
-            // handle action
+        let currentName = viewController.text
+        let textDidChange = initialName != currentName
+
+        let leftItem = EditTextNavigationButton.Configuration(image: UIImage(systemName: "xmark.circle")!, isEnabled: true) {
+            if textDidChange {
+                handleDismissAlert(for: viewController)
+            } else {
+                viewController.dismiss(animated: true, completion: nil)
+            }
         }
-        let rightItem = EditTextViewController.NavigationItem(image: UIImage(systemName: "checkmark")!, isEnabled: canConfirmEdit) {
-            // handle action
+
+        let rightItem = EditTextNavigationButton.Configuration(image: UIImage(systemName: "checkmark")!, isEnabled: canConfirmEdit) {
+            guard let currentName = currentName else { return }
+            saveCategory(with: currentName, for: viewController)
         }
+
         return EditTextViewController.NavigationConfiguration(leftItem: leftItem, rightItem: rightItem)
     }
 
     func editTextViewControllerInitialValue(_ viewController: EditTextViewController) -> String? {
-        return Category.fetchObject(in: context, matching: categoryIdentifier)?.name
+        return initialName
+    }
+
+    // MARK: - Private Helpers
+
+    private func handleDismissAlert(for viewController: UIViewController) {
+        let title = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.title",
+                                      comment: "Exit edit sayings alert title")
+        let discardButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.discard.title",
+                                                   comment: "Discard changes alert action title")
+        let continueButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
+                                                    comment: "Continue editing alert action title")
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: { viewController.dismiss(animated: true, completion: nil) }))
+        alert.addAction(GazeableAlertAction(title: continueButtonTitle, style: .bold))
+        viewController.present(alert, animated: true)
+    }
+
+    private func saveCategory(with name: String?, for viewController: UIViewController) {
+        guard let category = Category.fetchObject(in: context, matching: categoryIdentifier),
+              let name = name else {
+            return
+        }
+
+        let categories = Category.fetchAll(in: context)
+        guard !categories.contains(where: { $0.name == name }) else {
+            self.presentExistingCategoryAlert(for: viewController)
+            return
+        }
+
+        let textDidChange = (name != initialName)
+        category.name = name
+        category.isUserRenamed = category.isUserRenamed || textDidChange
+
+        do {
+            try Category.updateAllOrdinalValues(in: context)
+            try context.save()
+
+            let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title",
+                                                 comment: "User edited name of the category and saved it successfully")
+
+            ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+        } catch {
+            assertionFailure("Failed to save category: \(error)")
+        }
+        viewController.dismiss(animated: true)
+    }
+
+    private func presentExistingCategoryAlert(for viewController: UIViewController) {
+        let title = NSLocalizedString("text_editor.alert.category_name_exists.title",
+                                      comment: "Category already exists alert title")
+        let okButtonTitle = NSLocalizedString("text_editor.alert.category_name_exists.button",
+                                                   comment: "Dismiss alert action title")
+
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: okButtonTitle))
+        viewController.present(alert, animated: true)
     }
 }
