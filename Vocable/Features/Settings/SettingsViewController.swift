@@ -391,7 +391,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     private func presentResetFailureAlert() {
         let alertString = NSLocalizedString("settings.alert.reset_app_settings_failure.body",
                                             comment: "body of alert presented when Vocable's application settings failed to reset")
-        let dismissTitle = NSLocalizedString("settings.alert.reset_app_settings_success.button.ok",
+        let dismissTitle = NSLocalizedString("settings.alert.reset_app_settings_failure.button.ok",
         comment: "Button dismissing the alert informing the user that Vocable's application settings failed to reset")
 
         let alertViewController = GazeableAlertViewController(alertTitle: alertString)

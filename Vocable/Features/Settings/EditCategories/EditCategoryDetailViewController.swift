@@ -89,12 +89,18 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
 
             switch item {
             case .renameCategory:
-                config = .disclosureCellConfiguration(withTitle: "Rename Category") { [weak self] in
+                config = .disclosureCellConfiguration(
+                    withTitle: NSLocalizedString(
+                        "category_editor.detail.button.rename_category.title",
+                        comment: "Rename Category button label within the category detail screen")
+                ) { [weak self] in
                     self?.handleRenameCategory()
                 }
             case .editPhrases:
                 config = .disclosureCellConfiguration(
-                    withTitle: NSLocalizedString("Edit Phrases", comment: "Edit Phrases")
+                    withTitle: NSLocalizedString(
+                        "category_editor.detail.button.edit_phrases.title",
+                        comment: "Edit Phrases button label within the category detail screen")
                 ) { [weak self] in
                     self?.displayEditPhrasesViewController()
                 }
@@ -105,8 +111,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
                 config = .toggleCellConfiguration(
                     withTitle: NSLocalizedString(
                         "category_editor.detail.button.show_category.title",
-                        comment: "Show category button label within the category detail screen."
-                    ),
+                        comment: "Show category button label within the category detail screen."),
                     toggleIsOn: !category.isHidden
                 ) { [weak self] in
                     self?.handleToggle(at: indexPath)
