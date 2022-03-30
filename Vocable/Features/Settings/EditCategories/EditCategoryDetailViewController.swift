@@ -145,6 +145,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     
     private func setupCollectionView() {
         collectionView.backgroundColor = .collectionViewBackgroundColor
+        collectionView.delaysContentTouches = false
 
         collectionView.collectionViewLayout = UICollectionViewCompositionalLayout { [weak self] (sectionIndex, environment) -> NSCollectionLayoutSection? in
 
@@ -255,13 +256,13 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     }
     
     private func handleRemoveCategory() {
-        let title = NSLocalizedString("category_editor.alert.delete_category_confirmation.title", comment: "Remove category alert title")
-        let confirmButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.remove.title", comment: "Remove category alert action title")
-        let cancelButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.cancel.title", comment: "Cancel alert action title")
-        let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: confirmButtonTitle, handler: { self.removeCategory() }))
-        alert.addAction(GazeableAlertAction(title: cancelButtonTitle, style: .bold, handler: { self.deselectCell() }))
-        self.present(alert, animated: true)
+        let alert: GazeableAlertViewController = .removeCategoryAlert { [weak self] in
+            self?.removeCategory()
+        } cancelAction: { [weak self] in
+            self?.deselectCell()
+        }
+
+        present(alert, animated: true)
     }
     
     private func removeCategory() {
@@ -333,4 +334,21 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         present(viewController, animated: true)
     }
     
+}
+
+private extension GazeableAlertViewController {
+    static func removeCategoryAlert(
+        removeAction: @escaping () -> Void,
+        cancelAction: @escaping () -> Void
+    ) -> GazeableAlertViewController {
+        let title = NSLocalizedString("category_editor.alert.delete_category_confirmation.title", comment: "Remove category alert title")
+        let confirmButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.remove.title", comment: "Remove category alert action title")
+        let cancelButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.cancel.title", comment: "Cancel alert action title")
+
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: cancelButtonTitle, handler: cancelAction))
+        alert.addAction(GazeableAlertAction(title: confirmButtonTitle, style: .destructive, handler: removeAction))
+
+        return alert
+    }
 }
