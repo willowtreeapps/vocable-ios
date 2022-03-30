@@ -115,12 +115,21 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
                 config.isPrimaryActionEnabled = category.identifier != .userFavorites
                 config.accessibilityIdentifier = "show_category_toggle"
             case .removeCategory:
-                config = .init(
-                    title: NSLocalizedString(
-                        "category_editor.detail.button.remove_category.title",
-                        comment: "Remove category button label within the category detail screen."
-                    )
-                ) { [weak self] in
+                let buttonText = NSLocalizedString("category_editor.detail.button.remove_category.title", comment: "Remove category button label within the category detail screen.")
+                let formatString = String.localizedStringWithFormat(" %@", buttonText)
+
+                let attributes: [NSAttributedString.Key: Any] = [
+                    .font: UIFont.systemFont(ofSize: 22, weight: .bold),
+                    .foregroundColor: UIColor.white
+                ]
+
+                let string = NSMutableAttributedString(string: formatString, attributes: attributes)
+                let attachment = NSMutableAttributedString(attachment: NSTextAttachment(image: UIImage(systemName: "trash")!))
+                attachment.addAttributes(attributes, range: .entireRange(of: attachment.string))
+
+                string.insert(attachment, at: 0)
+
+                config = .init(attributedText: string) { [weak self] in
                     self?.handleRemoveCategory()
                 }
 
