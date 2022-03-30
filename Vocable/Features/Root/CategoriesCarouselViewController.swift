@@ -47,7 +47,7 @@ import Combine
         let category = self.frc.object(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
         cell.setup(title: category.name!)
-        cell.accessibilityIdentifier = ["category_title_cell", category.identifier].compactMap{$0}.joined(separator: "_")
+        cell.accessibilityIdentifier = ["category_title_cell", category.identifier].compacted().joined(separator: "_")
         return cell
     }
 

@@ -52,7 +52,7 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
         var snapshot = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>()
         if let firstSection = _snapshot.sectionIdentifiers.first {
             snapshot.appendSections([firstSection.item])
-            snapshot.appendItems(_snapshot.itemIdentifiers(inSection: firstSection).map {$0.item})
+            snapshot.appendItems(_snapshot.itemIdentifiers(inSection: firstSection).map(\.item))
         }
         return snapshot
     }
@@ -61,15 +61,34 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
         var repeatedSnapshot = NSDiffableDataSourceSnapshot<ContentWrapper<SectionIdentifier>, ContentWrapper<ItemIdentifier>>()
         if let firstSection = snapshot.sectionIdentifiers.first {
 
+            let carouselLayout = collectionView.collectionViewLayout as? CarouselGridLayout
+
             let repeatCount: Int
-            if let carouselLayout = collectionView.collectionViewLayout as? CarouselGridLayout, snapshot.itemIdentifiers.count > carouselLayout.itemsPerPage {
+            if let carouselLayout = carouselLayout, snapshot.itemIdentifiers.count > carouselLayout.itemsPerPage {
                 repeatCount = self.repeatCount
             } else {
                 repeatCount = 1
             }
-            for index in 0..<repeatCount {
-                repeatedSnapshot.appendSections([.init(index: index, item: firstSection)])
-                repeatedSnapshot.appendItems(snapshot.itemIdentifiers.map {.init(index: index, item: $0)})
+
+            for index in 0 ..< repeatCount {
+                let section = ContentWrapper(index: index, item: firstSection)
+                repeatedSnapshot.appendSections([section])
+                for originalItem in snapshot.itemIdentifiers {
+
+                    let item = ContentWrapper(index: index, item: originalItem)
+                    repeatedSnapshot.appendItems([item])
+
+                    if #available(iOS 15.0, *), snapshot.reconfiguredItemIdentifiers.contains(originalItem) {
+                        repeatedSnapshot.reconfigureItems([item])
+                    }
+                    if #available(iOS 15.0, *), snapshot.reloadedItemIdentifiers.contains(originalItem) {
+                        repeatedSnapshot.reloadItems([item])
+                    }
+                }
+
+                if #available(iOS 15.0, *), snapshot.reloadedSectionIdentifiers.contains(firstSection) {
+                    repeatedSnapshot.reloadSections([section])
+                }
             }
         }
         impl.apply(repeatedSnapshot, animatingDifferences: animatingDifferences, completion: completion)

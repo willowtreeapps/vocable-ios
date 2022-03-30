@@ -31,8 +31,8 @@ final class VocableListCellContentView: UIView, UIContentView {
     private lazy var accessoryButtonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.distribution = .fill
+        stackView.alignment = .top
+        stackView.distribution = .fillEqually
         stackView.spacing = 8
         return stackView
     }()
@@ -43,6 +43,8 @@ final class VocableListCellContentView: UIView, UIContentView {
         button.contentEdgeInsets = .init(uniform: 16)
         return button
     }()
+
+    private var buttonWidthConstraints = [NSLayoutConstraint]()
 
     // MARK: - Lifecycle
 
@@ -69,16 +71,74 @@ final class VocableListCellContentView: UIView, UIContentView {
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).withPriority(999),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).withPriority(999),
-            accessoryButtonStackView.heightAnchor.constraint(equalTo: stackView.heightAnchor),
-            primaryLabelButton.heightAnchor.constraint(equalTo: stackView.heightAnchor)
+            primaryLabelButton.widthAnchor.constraint(equalTo: stackView.widthAnchor).withPriority(.defaultHigh)
         ])
 
         configure(with: configuration)
     }
 
+    private func updateActionConfiguration(to configuration: VocableListContentConfiguration.ActionsConfiguration?) {
+
+        let desiredAccessoryIndex: Array<UIView>.Index
+        switch configuration?.position {
+        case .leading, .none:
+
+            stackView.axis = .horizontal
+            stackView.alignment = .fill
+            stackView.distribution = .fill
+            accessoryButtonStackView.alignment = .fill
+            accessoryButtonStackView.distribution = .fillEqually
+
+            desiredAccessoryIndex = stackView.arrangedSubviews.indices.lowerBound
+
+        case .bottom:
+
+            stackView.axis = .vertical
+            stackView.alignment = .leading
+            stackView.distribution = .fillEqually
+            accessoryButtonStackView.alignment = .top
+            accessoryButtonStackView.distribution = .fillEqually
+
+            desiredAccessoryIndex = stackView.arrangedSubviews.indices.upperBound
+        }
+
+        let currentIndex = stackView.arrangedSubviews.firstIndex(of: accessoryButtonStackView)
+        if currentIndex != desiredAccessoryIndex {
+            accessoryButtonStackView.removeFromSuperview()
+            if stackView.arrangedSubviews.indices.contains(desiredAccessoryIndex) {
+                stackView.insertArrangedSubview(accessoryButtonStackView, at: desiredAccessoryIndex)
+            } else {
+                stackView.addArrangedSubview(accessoryButtonStackView)
+            }
+        }
+
+        NSLayoutConstraint.deactivate(buttonWidthConstraints)
+        buttonWidthConstraints.removeAll()
+
+        let widthDimension = configuration?.size.widthDimension ?? .fractionalHeight(1.0)
+        let constraintsToActivate = accessoryButtonStackView.arrangedSubviews.map { view -> NSLayoutConstraint in
+            buttonWidthConstraint(for: view, widthDimension: widthDimension)
+        }
+
+        NSLayoutConstraint.activate(constraintsToActivate)
+        buttonWidthConstraints.append(contentsOf: constraintsToActivate)
+    }
+
+    private func buttonWidthConstraint(for view: UIView, widthDimension: VocableListContentConfiguration.ActionsConfiguration.LayoutSize.Dimension) -> NSLayoutConstraint {
+        switch widthDimension {
+        case .absolute(let value):
+            return view.widthAnchor.constraint(equalToConstant: value)
+        case .fractionalHeight(let value):
+            return view.widthAnchor.constraint(equalTo: accessoryButtonStackView.heightAnchor, multiplier: value)
+        case .fractionalWidth(let value):
+            return view.widthAnchor.constraint(equalTo: accessoryButtonStackView.widthAnchor, multiplier: value)
+        }
+    }
+
     private func configure(with configuration: UIContentConfiguration) {
         let configuration = configuration as? VocableListContentConfiguration
 
+        updateActionConfiguration(to: configuration?.actionsConfiguration)
         updateLeadingActionAccessoryButtons(with: configuration)
         updatePrimaryLabelButton(with: configuration)
     }
@@ -86,6 +146,8 @@ final class VocableListCellContentView: UIView, UIContentView {
     private func updatePrimaryLabelButton(with configuration: VocableListContentConfiguration?) {
         primaryLabelButton.setTrailingAccessory(configuration?.accessory)
         primaryLabelButton.setAttributedTitle(configuration?.attributedTitle, for: .normal)
+        primaryLabelButton.accessibilityLabel = configuration?.accessibilityLabel
+        primaryLabelButton.accessibilityIdentifier = configuration?.accessibilityIdentifier
         primaryLabelButton.addTarget(self, action: #selector(handlePrimaryActionSelection(_:)), for: .primaryActionTriggered)
     }
 
@@ -96,7 +158,8 @@ final class VocableListCellContentView: UIView, UIContentView {
         // Ensure the minimum number of action buttons are present
         let numberOfButtonsNeeded = max(actions.count - accessoryButtonStackView.arrangedSubviews.count, .zero)
         (.zero ..< numberOfButtonsNeeded).forEach { _ in
-            insertAccessoryButton()
+            guard let configuration = configuration else { return }
+            insertAccessoryButton(configuration: configuration.actionsConfiguration)
         }
 
         // Update existing buttons to match new states
@@ -105,7 +168,8 @@ final class VocableListCellContentView: UIView, UIContentView {
             button.isHidden = false
             button.setImage(action.image, for: .normal)
             button.isEnabled = action.isEnabled
-            
+            button.accessibilityLabel = action.accessibilityLabel
+            button.accessibilityIdentifier = action.accessibilityIdentifier
             // Using UIControlEvent to avoid having to de-duplicate UIAction invocations
             button.addTarget(self,
                              action: #selector(handleLeadingAccessoryActionSelection(_:)),
@@ -123,11 +187,11 @@ final class VocableListCellContentView: UIView, UIContentView {
         accessoryButtonStackView.isHidden = arrangedButtons.allSatisfy(\.isHidden)
     }
 
-    private func insertAccessoryButton() {
+    private func insertAccessoryButton(configuration: VocableListContentConfiguration.ActionsConfiguration) {
         let button = GazeableButton()
         accessoryButtonStackView.addArrangedSubview(button)
         NSLayoutConstraint.activate([
-            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1),
+            buttonWidthConstraint(for: button, widthDimension: configuration.size.widthDimension),
             button.heightAnchor.constraint(equalTo: accessoryButtonStackView.heightAnchor)
         ])
     }
