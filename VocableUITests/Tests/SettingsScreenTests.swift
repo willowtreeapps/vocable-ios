@@ -25,17 +25,17 @@ class SettingsScreenTests: BaseTest {
         let hiddenCategory = settingsScreen.locateCategoryCell(category)
         XCTAssertFalse(hiddenCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
         XCTAssertFalse(hiddenCategory.buttons[settingsScreen.categoryDownButton].isEnabled)
-        XCTAssertTrue(hiddenCategory.buttons[settingsScreen.categoryForwardButton].isEnabled)
+        XCTAssertTrue(hiddenCategory.element.isEnabled)
 
         // Verify that when the category is shown, up and down buttons are enabled.
-        settingsScreen.locateCategoryCell(category).buttons[settingsScreen.categoryForwardButton].tap()
+        settingsScreen.openCategorySettings(category: category)
         settingsScreen.showCategorySwitch.tap()
         settingsScreen.leaveCategoryDetailButton.tap()
         
         let shownCategory = settingsScreen.locateCategoryCell(category)
         XCTAssertTrue(shownCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
         XCTAssertTrue(shownCategory.buttons[settingsScreen.categoryDownButton].isEnabled)
-        XCTAssertTrue(shownCategory.buttons[settingsScreen.categoryForwardButton].isEnabled)
+        XCTAssertTrue(shownCategory.element.isEnabled)
     }
 
     // We are disabling this test for now, it will be updated after the issue is completed: https://github.com/willowtreeapps/vocable-ios/issues/492

@@ -20,8 +20,8 @@ class SettingsScreen: BaseScreen {
     let otherElements = XCUIApplication().collectionViews.cells.otherElements
     let cells = XCUIApplication().cells
     let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
-    let categoryUpButton = "go up"
-    let categoryDownButton = "go down"
+    let categoryUpButton = "chevron.up"
+    let categoryDownButton = "chevron.down"
     let categoryForwardButton = "Forward"
     let showCategorySwitch = XCUIApplication().switches["show_category_toggle"]
     let hideCategorySwitch = "hide"
