@@ -70,7 +70,7 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
         // TODO: customCategoriesScreen.categoriesPageDeletePhraseButton after Category List UI updates: issue #492 ... need identifiers?
         XCUIApplication().buttons["trash"].tap()
         settingsScreen.alertDeleteButton.tap()
-        XCTAssertFalse(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to not be displayed")
+        XCTAssertTrue(customCategoriesScreen.emptyStateAddPhraseButton.exists, "Expected the phrase \(customPhrase) to not be displayed")
     }
     
     func testCanAddDuplicatePhrasesToCategories() {

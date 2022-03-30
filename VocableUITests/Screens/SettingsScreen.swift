@@ -32,7 +32,7 @@ class SettingsScreen: BaseScreen {
     let alertDeleteButton = XCUIApplication().buttons["Delete"]
 
     func openCategorySettings(category: String) {
-        locateCategoryCell(category).buttons[categoryForwardButton].tap()
+        locateCategoryCell(category).staticTexts[category].tap()
     }
     
     func locateCategoryCell(_ category: String) -> XCUIElementQuery {
