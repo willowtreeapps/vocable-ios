@@ -12,7 +12,7 @@ import UIKit
 import CoreData
 import Combine
 
-protocol EditTextDelegate {
+protocol EditTextDelegate { // swiftlint:disable:this class_delegate_protocol
     mutating func editTextViewController(_: EditTextViewController, textDidChange attributedText: NSAttributedString?)
     func editTextViewControllerNavigationItems(_: EditTextViewController) -> EditTextViewController.NavigationConfiguration
     func editTextViewControllerInitialValue(_: EditTextViewController) -> String?
