@@ -87,11 +87,6 @@
         <target state="final">Rimuovere la categoria</target>
         <note>Remove category button label within the category detail screen.</note>
       </trans-unit>
-      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve" approved="yes">
-        <source>Show</source>
-        <target state="final">Mostrare</target>
-        <note>Show category button label within the category detail screen.</note>
-      </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve" approved="yes">
         <source>Changes saved</source>
         <target state="final">Modifiche salvate</target>
