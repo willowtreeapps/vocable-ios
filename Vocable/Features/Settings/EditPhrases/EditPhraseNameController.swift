@@ -11,22 +11,28 @@ import UIKit
 
 struct EditPhraseNameController: EditTextDelegate {
 
-    let categoryIdentifier: String
+    let categoryIdentifier: NSManagedObjectID
+    let phraseIdentifier: NSManagedObjectID?
     let context: NSManagedObjectContext
 
-    let initialName: String?
+    let initialUtterance: String?
 
     private var canConfirmEdit: Bool = false
     private var shouldDismiss: Bool = true
 
-    init(categoryIdentifier: String, context: NSManagedObjectContext) {
+    init(categoryIdentifier: NSManagedObjectID, phraseIdentifier: NSManagedObjectID? = nil, context: NSManagedObjectContext) {
         self.categoryIdentifier = categoryIdentifier
+        self.phraseIdentifier = phraseIdentifier
         self.context = context
-        self.initialName = Category.fetchObject(in: context, matching: categoryIdentifier)?.name
+        if let phraseIdentifier = phraseIdentifier {
+            self.initialUtterance = (context.object(with: phraseIdentifier) as? Phrase)?.utterance
+        } else {
+            self.initialUtterance = nil
+        }
     }
 
     mutating func editTextViewController(_ viewController: EditTextViewController, textDidChange attributedText: NSAttributedString?) {
-        let textDidChange = initialName != attributedText?.string
+        let textDidChange = initialUtterance != attributedText?.string
         let isTextEmpty = attributedText?.string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
 
         canConfirmEdit = textDidChange && !isTextEmpty
@@ -35,70 +41,65 @@ struct EditPhraseNameController: EditTextDelegate {
     }
 
     func editTextViewControllerNavigationItems(_ viewController: EditTextViewController) -> EditTextViewController.NavigationConfiguration {
-        let currentName = viewController.text
-        let textDidChange = initialName != currentName
+        let currentUtterance = viewController.text
+        let textDidChange = initialUtterance != currentUtterance
 
         let leftItem = EditTextNavigationButton.Configuration.dismissal(for: viewController, textDidChange: textDidChange)
 
         let rightItem = EditTextNavigationButton.Configuration(image: UIImage(systemName: "checkmark")!, isEnabled: canConfirmEdit) {
-            guard let currentName = currentName else { return }
-            saveCategory(with: currentName, for: viewController)
+            guard let currentUtterance = currentUtterance else { return }
+            savePhrase(with: currentUtterance, for: viewController)
         }
 
         return EditTextViewController.NavigationConfiguration(leftItem: leftItem, rightItem: rightItem)
     }
 
     func editTextViewControllerInitialValue(_ viewController: EditTextViewController) -> String? {
-        return initialName
+        return initialUtterance
     }
 
     // MARK: - Private Helpers
 
-    private func presentDismissAlert(for viewController: UIViewController) {
-        let title = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.title",
-                                      comment: "Exit edit sayings alert title")
-        let discardButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.discard.title",
-                                                   comment: "Discard changes alert action title")
-        let continueButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
-                                                    comment: "Continue editing alert action title")
-        let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
-        alert.addAction(GazeableAlertAction(title: discardButtonTitle, style: .destructive, handler: { viewController.dismiss(animated: true) }))
-        viewController.present(alert, animated: true)
-    }
+    private func savePhrase(with utterance: String?, for viewController: UIViewController) {
+        guard let category = context.object(with: categoryIdentifier) as? Category,
+              let utterance = utterance else { return }
 
-    private func saveCategory(with name: String?, for viewController: UIViewController) {
-        guard let category = Category.fetchObject(in: context, matching: categoryIdentifier),
-              let name = name else {
-            return
+        // Edit existing phrase, otherwise create new one
+        let alertMessage: String
+        if let phraseIdentifier = phraseIdentifier, let phrase = context.object(with: phraseIdentifier) as? Phrase {
+            editExistingPhrase(phrase, with: utterance)
+            alertMessage = NSLocalizedString("category_editor.toast.changes_saved.title",
+                                             comment: "changes to an existing phrase were saved successfully")
+        } else {
+            _ = Phrase.create(withUserEntry: utterance, category: category, in: context)
+            alertMessage = {
+                let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format",
+                                               comment: "Saved to user favorites category toast title")
+                return String.localizedStringWithFormat(format, category.name ?? "")
+            }()
         }
-
-        let categories = Category.fetchAll(in: context)
-        guard !categories.contains(where: { $0.name == name }) else {
-            presentExistingCategoryAlert(for: viewController)
-            return
-        }
-
-        let textDidChange = (name != initialName)
-        category.name = name
-        category.isUserRenamed = category.isUserRenamed || textDidChange
 
         do {
-            try Category.updateAllOrdinalValues(in: context)
             try context.save()
-
-            let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title",
-                                                 comment: "User edited name of the category and saved it successfully")
-
             ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+            viewController.dismiss(animated: true)
         } catch {
-            assertionFailure("Failed to save category: \(error)")
+            assertionFailure("Failed to save user generated phrase: \(error)")
         }
-        viewController.dismiss(animated: true)
     }
 
-    private func presentExistingCategoryAlert(for viewController: UIViewController) {
-        // TODO: Find out final design, should be a soft alert allowing confirmation to edit
+    private func editExistingPhrase(_ phrase: Phrase, with utterance: String) {
+        if phrase.isUserGenerated {
+            phrase.utterance = utterance
+        } else {
+            let textDidChange = utterance != initialUtterance
+            phrase.utterance = utterance
+            phrase.isUserRenamed = phrase.isUserRenamed || textDidChange
+        }
+    }
+
+    private func presentExistingPhraseAlert(for viewController: UIViewController) {
+        // TODO:
         let title = NSLocalizedString("text_editor.alert.category_name_exists.title",
                                       comment: "Category already exists alert title")
         let okButtonTitle = NSLocalizedString("text_editor.alert.category_name_exists.button",
@@ -109,4 +110,3 @@ struct EditPhraseNameController: EditTextDelegate {
         viewController.present(alert, animated: true)
     }
 }
-
