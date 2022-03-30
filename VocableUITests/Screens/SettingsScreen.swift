@@ -20,19 +20,19 @@ class SettingsScreen: BaseScreen {
     let otherElements = XCUIApplication().collectionViews.cells.otherElements
     let cells = XCUIApplication().cells
     let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
-    let categoryUpButton = "go up"
-    let categoryDownButton = "go down"
+    let categoryUpButton = "chevron.up"
+    let categoryDownButton = "chevron.down"
     let categoryForwardButton = "Forward"
-    let settingsPageCategoryShowButton = "show"
-    let settingsPageCategoryUpButton = "chevron.up"
-    let settingsPageCategoryDownButton = "chevron.down"
+    let showCategorySwitch = XCUIApplication().switches["show_category_toggle"]
+    let hideCategorySwitch = "hide"
+    let categoryShowButton = "show"
     let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
     let alertContinueButton = XCUIApplication().buttons["Continue Editing"]
     let alertDiscardButton = XCUIApplication().buttons["Discard"]
     let alertDeleteButton = XCUIApplication().buttons["Delete"]
 
     func openCategorySettings(category: String) {
-        locateCategoryCell(category).buttons[categoryForwardButton].tap()
+        locateCategoryCell(category).staticTexts[category].tap()
     }
     
     func locateCategoryCell(_ category: String) -> XCUIElementQuery {
