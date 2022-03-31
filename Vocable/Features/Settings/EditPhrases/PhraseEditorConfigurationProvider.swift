@@ -1,5 +1,5 @@
 //
-//  EditPhraseNameController.swift
+//  PhraseEditorConfigurationProvider.swift
 //  Vocable
 //
 //  Created by Jesse Morgan on 3/30/22.
@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-struct EditPhraseNameController: EditTextDelegate {
+struct PhraseEditorConfigurationProvider: TextEditorConfigurationProviding {
 
     let categoryIdentifier: NSManagedObjectID
     let phraseIdentifier: NSManagedObjectID?
@@ -36,7 +36,7 @@ struct EditPhraseNameController: EditTextDelegate {
         }
     }
 
-    mutating func editTextViewController(_ viewController: EditTextViewController, textDidChange text: String?) {
+    mutating func textEditorViewController(_ viewController: TextEditorViewController, textDidChange text: String?) {
         let textDidChange = initialUtterance != text
         let isTextEmpty = text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
 
@@ -45,7 +45,7 @@ struct EditPhraseNameController: EditTextDelegate {
         viewController.setNeedsUpdateConfiguration()
     }
 
-    func editTextViewControllerNavigationItems(_ viewController: EditTextViewController) -> EditTextViewController.NavigationConfiguration {
+    func textEditorViewControllerConfiguration(_ viewController: TextEditorViewController) -> TextEditorViewController.Configuration {
         let currentUtterance = viewController.text
         let textDidChange = initialUtterance != currentUtterance
 
@@ -56,10 +56,10 @@ struct EditPhraseNameController: EditTextDelegate {
             handleSavingPhrase(with: currentUtterance, in: viewController)
         }
 
-        return EditTextViewController.NavigationConfiguration(leftItem: leftItem, rightItem: rightItem)
+        return TextEditorViewController.Configuration(leftItem: leftItem, rightItem: rightItem)
     }
 
-    func editTextViewControllerInitialValue(_ viewController: EditTextViewController) -> String? {
+    func textEditorViewControllerInitialValue(_ viewController: TextEditorViewController) -> String? {
         return initialUtterance
     }
 

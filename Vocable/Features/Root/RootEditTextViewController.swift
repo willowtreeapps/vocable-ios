@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import CoreData
 
-class RootEditTextViewController: EditTextViewController {
+class RootEditTextViewController: TextEditorViewController {
 
     private var disposables = Set<AnyCancellable>()
 

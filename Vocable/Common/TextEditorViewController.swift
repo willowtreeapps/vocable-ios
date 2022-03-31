@@ -1,5 +1,5 @@
 //
-//  EditTextViewController.swift
+//  TextEditorViewController.swift
 //  Vocable
 //
 //  Created by Jesse Morgan on 4/15/20.
@@ -12,15 +12,15 @@ import UIKit
 import CoreData
 import Combine
 
-protocol EditTextDelegate { // swiftlint:disable:this class_delegate_protocol
-    mutating func editTextViewController(_: EditTextViewController, textDidChange text: String?)
-    func editTextViewControllerNavigationItems(_: EditTextViewController) -> EditTextViewController.NavigationConfiguration
-    func editTextViewControllerInitialValue(_: EditTextViewController) -> String?
+protocol TextEditorConfigurationProviding { // swiftlint:disable:this class_delegate_protocol
+    mutating func textEditorViewController(_: TextEditorViewController, textDidChange text: String?)
+    func textEditorViewControllerConfiguration(_: TextEditorViewController) -> TextEditorViewController.Configuration
+    func textEditorViewControllerInitialValue(_: TextEditorViewController) -> String?
 }
 
-class EditTextViewController: VocableViewController, UICollectionViewDelegate {
+class TextEditorViewController: VocableViewController, UICollectionViewDelegate {
 
-    struct NavigationConfiguration {
+    struct Configuration {
         var leftItem: EditTextNavigationButton.Configuration?
         var rightItem: EditTextNavigationButton.Configuration?
     }
@@ -30,7 +30,7 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
     let leftButton = EditTextNavigationButton()
     let rightButton = EditTextNavigationButton()
 
-    var delegate: EditTextDelegate?
+    var delegate: TextEditorConfigurationProviding?
 
     private var needsConfigurationUpdate = true
 
@@ -68,7 +68,7 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
         keyboardViewController.view.preservesSuperviewLayoutMargins = true
         view.addSubview(keyboardViewController.view)
 
-        let initialAttributedText = NSAttributedString(string: delegate?.editTextViewControllerInitialValue(self) ?? "")
+        let initialAttributedText = NSAttributedString(string: delegate?.textEditorViewControllerInitialValue(self) ?? "")
         keyboardViewController.attributedText = initialAttributedText
 
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -95,12 +95,12 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
             .sink(receiveValue: { [weak self] text in
                 guard let self = self else { return }
                 self.text = text
-                self.delegate?.editTextViewController(self, textDidChange: text)
+                self.delegate?.textEditorViewController(self, textDidChange: text)
             }).store(in: &disposables)
     }
 
     private func updateForConfiguration() {
-        guard let configuration = delegate?.editTextViewControllerNavigationItems(self) else { return }
+        guard let configuration = delegate?.textEditorViewControllerConfiguration(self) else { return }
 
         leftButton.configure(with: configuration.leftItem)
         rightButton.configure(with: configuration.rightItem)

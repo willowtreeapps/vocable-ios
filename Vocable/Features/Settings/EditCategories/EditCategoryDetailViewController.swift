@@ -338,8 +338,8 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
 
     func didTapEdit() {
         let context = NSPersistentContainer.shared.newBackgroundContext()
-        let viewController = EditTextViewController()
-        viewController.delegate = EditCategoryNameController(categoryIdentifier: category.objectID, context: context)
+        let viewController = TextEditorViewController()
+        viewController.delegate = CategoryEditorConfigurationProvider(categoryIdentifier: category.objectID, context: context)
         present(viewController, animated: true)
     }
 }

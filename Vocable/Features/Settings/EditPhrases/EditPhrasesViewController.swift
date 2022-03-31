@@ -123,9 +123,9 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
     // MARK: Actions
     @IBAction private func addPhrasePressed() {
-        let viewController = EditTextViewController()
+        let viewController = TextEditorViewController()
         let context = NSPersistentContainer.shared.newBackgroundContext()
-        viewController.delegate = EditPhraseNameController(categoryIdentifier: category.objectID,
+        viewController.delegate = PhraseEditorConfigurationProvider(categoryIdentifier: category.objectID,
                                                            context: context)
 
         viewController.modalPresentationStyle = .fullScreen
@@ -169,9 +169,9 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
     }
 
     fileprivate func presentEditorForPhrase(with id: NSManagedObjectID) {
-        let vc = EditTextViewController()
+        let vc = TextEditorViewController()
         let context = NSPersistentContainer.shared.newBackgroundContext()
-        vc.delegate = EditPhraseNameController(categoryIdentifier: category.objectID,
+        vc.delegate = PhraseEditorConfigurationProvider(categoryIdentifier: category.objectID,
                                                phraseIdentifier: id,
                                                context: context)
 

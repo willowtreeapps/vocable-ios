@@ -1,5 +1,5 @@
 //
-//  EditCategoryNameController.swift
+//  CategoryEditorConfigurationProvider.swift
 //  Vocable
 //
 //  Created by Jesse Morgan on 3/30/22.
@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-struct EditCategoryNameController: EditTextDelegate {
+struct CategoryEditorConfigurationProvider: TextEditorConfigurationProviding {
 
     let categoryIdentifier: NSManagedObjectID?
     let context: NSManagedObjectContext
@@ -19,6 +19,10 @@ struct EditCategoryNameController: EditTextDelegate {
     private var canConfirmEdit: Bool = false
     private var shouldDismiss: Bool = true
 
+    /// Inititalizer
+    /// - Parameters:
+    ///   - categoryIdentifier: if nil, create a new phrase, otherwise edit existing category
+    ///   - context: the context to fetch, edit, and create the category
     init(categoryIdentifier: NSManagedObjectID? = nil, context: NSManagedObjectContext) {
         self.categoryIdentifier = categoryIdentifier
         self.context = context
@@ -29,7 +33,7 @@ struct EditCategoryNameController: EditTextDelegate {
         }
     }
 
-    mutating func editTextViewController(_ viewController: EditTextViewController, textDidChange text: String?) {
+    mutating func textEditorViewController(_ viewController: TextEditorViewController, textDidChange text: String?) {
         let textDidChange = initialName != text
         let isTextEmpty = text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
 
@@ -38,7 +42,7 @@ struct EditCategoryNameController: EditTextDelegate {
         viewController.setNeedsUpdateConfiguration()
     }
 
-    func editTextViewControllerNavigationItems(_ viewController: EditTextViewController) -> EditTextViewController.NavigationConfiguration {
+    func textEditorViewControllerConfiguration(_ viewController: TextEditorViewController) -> TextEditorViewController.Configuration {
         let currentName = viewController.text
         let textDidChange = initialName != currentName
 
@@ -49,10 +53,10 @@ struct EditCategoryNameController: EditTextDelegate {
             handleSavingCategory(with: currentName, in: viewController)
         }
 
-        return EditTextViewController.NavigationConfiguration(leftItem: leftItem, rightItem: rightItem)
+        return TextEditorViewController.Configuration(leftItem: leftItem, rightItem: rightItem)
     }
 
-    func editTextViewControllerInitialValue(_ viewController: EditTextViewController) -> String? {
+    func textEditorViewControllerInitialValue(_ viewController: TextEditorViewController) -> String? {
         return initialName
     }
 
@@ -85,6 +89,8 @@ struct EditCategoryNameController: EditTextDelegate {
                 let textDidChange = (name != initialName)
                 category.name = name
                 category.isUserRenamed = category.isUserRenamed || textDidChange
+            } else {
+                _ = Category.create(withUserEntry: name, in: context)
             }
 
             do {
