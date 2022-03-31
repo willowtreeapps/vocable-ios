@@ -195,3 +195,13 @@ func Predicate<A, B, C: Collection>(_ lhs: KeyPath<A, B>, isContainedIn rhs: C) 
 func Predicate<A>(_ lhs: KeyPath<A, String?>, beginsWith rhs: String) -> NSPredicate {
     return Predicate(lhs, .beginsWith, rhs)
 }
+
+/// Constructs an `NSPredicate` where the string value at the given `KeyPath` must match the provided value
+///
+/// - Parameters:
+///   - lhs: `KeyPath` whose value is must match `rhs`
+///   - rhs: `String` which `lhs` must match
+/// - Returns: `NSPredicate`
+func Predicate<A>(_ lhs: KeyPath<A, String?>, like rhs: String) -> NSPredicate {
+    return Predicate(lhs, .like, rhs)
+}

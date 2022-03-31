@@ -42,7 +42,7 @@ struct EditCategoryNameController: EditTextDelegate {
 
         let rightItem = EditTextNavigationButton.Configuration(image: UIImage(systemName: "checkmark")!, isEnabled: canConfirmEdit) {
             guard let currentName = currentName else { return }
-            saveCategory(with: currentName, for: viewController)
+            handleSavingCategory(with: currentName, in: viewController)
         }
 
         return EditTextViewController.NavigationConfiguration(leftItem: leftItem, rightItem: rightItem)
@@ -54,18 +54,27 @@ struct EditCategoryNameController: EditTextDelegate {
 
     // MARK: - Private Helpers
 
-    private func saveCategory(with name: String?, for viewController: UIViewController) {
+    private func handleSavingCategory(with name: String?, in viewController: UIViewController) {
         guard let category = Category.fetchObject(in: context, matching: categoryIdentifier),
               let name = name else {
             return
         }
 
-        let categories = Category.fetchAll(in: context)
-        guard !categories.contains(where: { $0.name == name }) else {
-            presentExistingCategoryAlert(for: viewController)
-            return
-        }
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        request.predicate = Predicate(\Category.name, like: name)
+        request.fetchLimit = 1
+        let results = (try? context.fetch(request)) ?? []
 
+        if results.isEmpty {
+            saveCategory(for: category, with: name, in: viewController)
+        } else {
+            presentExistingCategoryAlert(for: viewController) {
+                saveCategory(for: category, with: name, in: viewController)
+            }
+        }
+    }
+
+    private func saveCategory(for category: Category, with name: String, in viewController: UIViewController) {
         let textDidChange = (name != initialName)
         category.name = name
         category.isUserRenamed = category.isUserRenamed || textDidChange
@@ -84,15 +93,17 @@ struct EditCategoryNameController: EditTextDelegate {
         viewController.dismiss(animated: true)
     }
 
-    private func presentExistingCategoryAlert(for viewController: UIViewController) {
-        // TODO: Find out final design, should be a soft alert allowing confirmation to edit
+    private func presentExistingCategoryAlert(for viewController: UIViewController, confirmationHandler: @escaping () -> Void) {
         let title = NSLocalizedString("text_editor.alert.category_name_exists.title",
                                       comment: "Category already exists alert title")
-        let okButtonTitle = NSLocalizedString("text_editor.alert.category_name_exists.button",
-                                                   comment: "Dismiss alert action title")
+        let cancelButtonTitle = NSLocalizedString("text_editor.alert.category_name_exists.cancel.button",
+                                                   comment: "Category already exists alert cancel button")
+        let createButtonTitle = NSLocalizedString("text_editor.alert.category_name_exists.create.button",
+                                                   comment: "Category already exists alert create button")
 
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: okButtonTitle))
+        alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
+        alert.addAction(GazeableAlertAction(title: createButtonTitle, style: .destructive, handler: confirmationHandler))
         viewController.present(alert, animated: true)
     }
 }
