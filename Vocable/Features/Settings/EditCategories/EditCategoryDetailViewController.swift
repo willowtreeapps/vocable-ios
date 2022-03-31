@@ -264,6 +264,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
         let shouldShowCategory = !cell.showCategorySwitch.isOn
         category.setValue(!category.isHidden, forKey: "isHidden")
         cell.showCategorySwitch.isOn = shouldShowCategory
+        try? Category.updateAllOrdinalValues(in: context)
         saveContext()
 
         if category == Category.listeningModeCategory() {

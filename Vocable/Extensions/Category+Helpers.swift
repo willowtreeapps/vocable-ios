@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Algorithms
 
 extension Category {
 
@@ -90,6 +91,28 @@ extension Category {
         let results = try context.fetch(request)
         for (index, category) in results.enumerated() {
             category.ordinal = Int32(index)
+            category.canMoveToLowerOrdinal = false
+            category.canMoveToHigherOrdinal = false
+        }
+
+        try updateOrdinalReorderability(in: context)
+    }
+
+    private static func updateOrdinalReorderability(in context: NSManagedObjectContext) throws {
+
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        request.predicate = !Predicate(\Category.isUserRemoved) && !Predicate(\Category.isHidden)
+        request.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Category.ordinal, ascending: true),
+            NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)
+        ]
+        let results = try context.fetch(request)
+
+        let orderabilityModel = CategoryOrderabilityModel(categories: results)
+
+        for (index, category) in results.indexed() {
+            category.canMoveToHigherOrdinal = orderabilityModel.canMoveToHigherIndex(from: index)
+            category.canMoveToLowerOrdinal = orderabilityModel.canMoveToLowerIndex(from: index)
         }
     }
 }

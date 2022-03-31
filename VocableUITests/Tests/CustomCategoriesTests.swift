@@ -12,8 +12,7 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
 
     func testAddNewPhrase() {
         let customPhrase = "dd"
-        let confirmationAlert = "Are you sure? Going back before saving will clear any edits made."
-        
+                
         // Navigate to our test category (created in the base class setup() method)
         customCategoriesScreen.editCategoryPhrasesCell.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
@@ -21,16 +20,16 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
         // Verify Phrase is not added if edits are discarded
         keyboardScreen.typeText("A")
         keyboardScreen.dismissKeyboardButton.tap()
-        XCTAssertEqual(XCUIApplication().staticTexts.element(boundBy: 1).label, confirmationAlert)
+        XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
 
         settingsScreen.alertDiscardButton.tap()
-        XCTAssertFalse(XCUIApplication().collectionViews.cells.otherElements.containing(.staticText, identifier: "A").element.exists)
+        XCTAssertTrue(customCategoriesScreen.emptyStateAddPhraseButton.exists)
 
         // Verify Phrase can be added if continuing edit.
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText("A")
         keyboardScreen.dismissKeyboardButton.tap()
-        XCTAssertEqual(XCUIApplication().staticTexts.element(boundBy: 1).label, confirmationAlert)
+        XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
         settingsScreen.alertContinueButton.tap()
 
         keyboardScreen.typeText(customPhrase)
@@ -49,14 +48,15 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
         keyboardScreen.checkmarkAddButton.tap()
         
         // Edit the phrase
-        customCategoriesScreen.categoriesPageEditPhraseButton.tap()
+        // TODO: Refactor customCategoriesScreen.categoriesPageEditPhraseButton after Category List UI updates: issue #492 ... need identifiers?
+        XCUIApplication().buttons[customPhrase].tap()
         keyboardScreen.typeText("test")
         keyboardScreen.checkmarkAddButton.tap()
         XCTAssert(mainScreen.isTextDisplayed(customPhrase+"test"), "Expected the phrase \(customPhrase+"test") to be displayed")
     }
     
     func testDeleteCustomPhrase() {
-        let customPhrase = "Delete"
+        let customPhrase = "Test"
         
         // Add our test phrase
         customCategoriesScreen.editCategoryPhrasesCell.tap()
@@ -65,12 +65,12 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
         keyboardScreen.checkmarkAddButton.tap()
         
         // Confirm that our phrase to-be-deleted has been created
-        // TODO: MAKE A isTextDisplayed HELPER METHOD THAT IS AGNOSTIC OF SCREEN...each screen class has its own?
         XCTAssert(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to be displayed")
         
-        customCategoriesScreen.categoriesPageDeletePhraseButton.tap()
+        // TODO: customCategoriesScreen.categoriesPageDeletePhraseButton after Category List UI updates: issue #492 ... need identifiers?
+        XCUIApplication().buttons["trash"].tap()
         settingsScreen.alertDeleteButton.tap()
-        XCTAssertFalse(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to not be displayed")
+        XCTAssertTrue(customCategoriesScreen.emptyStateAddPhraseButton.exists, "Expected the phrase \(customPhrase) to not be displayed")
     }
     
     func testCanAddDuplicatePhrasesToCategories() {

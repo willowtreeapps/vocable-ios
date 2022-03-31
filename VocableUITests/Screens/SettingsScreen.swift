@@ -3,7 +3,8 @@
 //  VocableUITests
 //
 //  Created by Kevin Stechler on 5/19/20.
-//  Copyright © 2020 WillowTree. All rights reserved.
+//  Updated by Canan Arikan and Rudy Salas on 03/28/22.
+//  Copyright © 2022 WillowTree. All rights reserved.
 //
 
 import XCTest
@@ -17,39 +18,51 @@ class SettingsScreen: BaseScreen {
     let leaveCategoriesButton = XCUIApplication().buttons["Left"]
     let exitSettingsButton = XCUIApplication().buttons["settings.dismissButton"]
     let otherElements = XCUIApplication().collectionViews.cells.otherElements
+    let cells = XCUIApplication().cells
     let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
-    let settingsPageCategoryUpButton = "go up"
-    let settingsPageCategoryDownButton = "go down"
-    let settingsPageCategoryHideButton = "hide"
-    let settingsPageCategoryShowButton = "show"
+    let categoryUpButton = "chevron.up"
+    let categoryDownButton = "chevron.down"
+    let categoryForwardButton = "Forward"
+    let showCategorySwitch = XCUIApplication().switches["show_category_toggle"]
+    let hideCategorySwitch = "hide"
+    let categoryShowButton = "show"
     let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
     let alertContinueButton = XCUIApplication().buttons["Continue Editing"]
     let alertDiscardButton = XCUIApplication().buttons["Discard"]
     let alertDeleteButton = XCUIApplication().buttons["Delete"]
 
     func openCategorySettings(category: String) {
-        var cellLabel = ""
+        locateCategoryCell(category).staticTexts[category].tap()
+    }
+    
+    func locateCategoryCell(_ category: String) -> XCUIElementQuery {
         let predicate = NSPredicate(format: "label CONTAINS %@", category)
-        
         // Loop through each page to find our category
         for _ in 1...totalPageCount {
-            if otherElements.staticTexts.containing(predicate).element.exists {
-                cellLabel = otherElements.staticTexts.containing(predicate).element.label
-                otherElements.containing(.staticText, identifier: cellLabel).buttons["Forward"].tap()
+            if cells.staticTexts.containing(predicate).element.exists{
                 break
             } else {
                 settingsPageNextButton.tap()
             }
         }
+        
+        return categoryCellQuery(category)
+    }
+    
+    private func categoryCellQuery(_ category: String) -> XCUIElementQuery {
+        let predicate = NSPredicate(format: "label CONTAINS %@", category)
+        let cellLabel = cells.staticTexts.containing(predicate).element.label
+        
+        return XCUIApplication().cells.containing(.staticText, identifier: cellLabel)
     }
     
     func toggleHideShowCategory(category: String, toggle: String) {
         var toggleLabel = ""
         switch toggle {
         case "Hide":
-            toggleLabel = settingsPageCategoryHideButton
+            toggleLabel = hideCategorySwitch
         case "Show":
-            toggleLabel = settingsPageCategoryShowButton
+            toggleLabel = categoryShowButton
         default:
             break
         }

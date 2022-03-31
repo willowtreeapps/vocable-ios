@@ -3,7 +3,8 @@
 //  VocableUITests
 //
 //  Created by Sashank Patel on 8/24/20.
-//  Copyright © 2020 WillowTree. All rights reserved.
+//  Updated by Canan Arikan and Rudy Salas on 03/28/22.
+//  Copyright © 2022 WillowTree. All rights reserved.
 //
 
 import XCTest
@@ -11,61 +12,58 @@ import XCTest
 class SettingsScreenTests: BaseTest {
 
     func testHideShowToggle() {
-        let generalCategoryText = "1. General"
-        let hiddenGeneralCategoryText = "General"
+        let category = "Environment"
 
         settingsScreen.navigateToSettingsCategoryScreen()
+        XCTAssertTrue(settingsScreen.locateCategoryCell(category).element.exists)
 
-        // Verify the category is not numbered when hidden and correct button states are shown.
+        // Verify that when the category is hidden, up and down buttons are disabled.
+        settingsScreen.openCategorySettings(category: category)
+        settingsScreen.showCategorySwitch.tap()
+        settingsScreen.leaveCategoryDetailButton.tap()
+        
+        let hiddenCategory = settingsScreen.locateCategoryCell(category)
+        XCTAssertFalse(hiddenCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
+        XCTAssertFalse(hiddenCategory.buttons[settingsScreen.categoryDownButton].isEnabled)
+        XCTAssertTrue(hiddenCategory.element.isEnabled)
 
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
-
-        settingsScreen.toggleHideShowCategory(category: generalCategoryText, toggle: "Hide")
-        XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
-
-        settingsScreen.navigateToCategory(category: hiddenGeneralCategoryText)
-
-        XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: hiddenGeneralCategoryText).buttons[settingsScreen.settingsPageCategoryUpButton].isEnabled)
-        XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: hiddenGeneralCategoryText).buttons[settingsScreen.settingsPageCategoryDownButton].isEnabled)
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: hiddenGeneralCategoryText).buttons[settingsScreen.settingsPageCategoryShowButton].isEnabled)
-
-        // Verify category goes back to original spot when shown.
-
-        settingsScreen.toggleHideShowCategory(category: hiddenGeneralCategoryText, toggle: "Show")
-        XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: hiddenGeneralCategoryText).element.exists)
-
-        settingsScreen.navigateToCategory(category: generalCategoryText)
-        settingsScreen.settingsPageNextButton.tap()
-
-        XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.settingsPageCategoryUpButton].isEnabled)
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.settingsPageCategoryDownButton].isEnabled)
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.settingsPageCategoryHideButton].isEnabled)
+        // Verify that when the category is shown, up and down buttons are enabled.
+        settingsScreen.openCategorySettings(category: category)
+        settingsScreen.showCategorySwitch.tap()
+        settingsScreen.leaveCategoryDetailButton.tap()
+        
+        let shownCategory = settingsScreen.locateCategoryCell(category)
+        XCTAssertTrue(shownCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
+        XCTAssertTrue(shownCategory.buttons[settingsScreen.categoryDownButton].isEnabled)
+        XCTAssertTrue(shownCategory.element.isEnabled)
     }
 
+    // We are disabling this test for now, it will be updated after the issue is completed: https://github.com/willowtreeapps/vocable-ios/issues/492
     func testReorder() {
-        let generalCategoryText = "1. General"
-        let basicNeedsCategoryText = "2. Basic Needs"
+        let generalCategoryText = "General"
+        let basicNeedsCategoryText = "Basic Needs"
         
-        let expectedGeneralCategoryText = "2. General"
-        let expectedbasicNeedsCategoryText = "1. Basic Needs"
+        let expectedGeneralCategoryText = "General"
+        let expectedbasicNeedsCategoryText = "Basic Needs"
 
         settingsScreen.navigateToSettingsCategoryScreen()
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: basicNeedsCategoryText).element.exists)
 
-        settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.settingsPageCategoryDownButton].tap()
+        settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.categoryDownButton].tap()
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: expectedGeneralCategoryText).element.exists)
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: expectedbasicNeedsCategoryText).element.exists)
         
-        settingsScreen.otherElements.containing(.staticText, identifier: expectedGeneralCategoryText).buttons[settingsScreen.settingsPageCategoryUpButton].tap()
+        settingsScreen.otherElements.containing(.staticText, identifier: expectedGeneralCategoryText).buttons[settingsScreen.categoryUpButton].tap()
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: basicNeedsCategoryText).element.exists)
 
     }
 
+    // We are disabling this test for now, it will be fixed and moved to Custom Categories Tests: https://github.com/willowtreeapps/vocable-ios/issues/514
     func testAddCustomCategory() {
 
         let customCategory = "ddingcustomcategorytest"

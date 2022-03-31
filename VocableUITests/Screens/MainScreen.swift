@@ -24,7 +24,6 @@ class MainScreen: BaseScreen {
     let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
     let paginationLeftButton = XCUIApplication().buttons["bottomPagination.left_chevron"]
     let paginationRightButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
-    let emptyStateAddPhraseButton = XCUIApplication().buttons["empty_state_addPhrase_button"]
     
     // Find the current selected category and return it as a CategoryTitleCellIdentifier
     var selectedCategoryCell: CategoryTitleCellIdentifier {
@@ -40,7 +39,7 @@ class MainScreen: BaseScreen {
     }
     
     func isTextDisplayed(_ text: String) -> Bool {
-        return app.collectionViews.staticTexts[text].exists
+        return app.collectionViews.staticTexts[text].waitForExistence(timeout: 10)
     }
        
     func scrollRightAndTapCurrentCategory(numTimesToScroll: Int, startingCategory: String) {
