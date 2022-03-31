@@ -46,7 +46,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         super.viewDidLoad()
 
         setupNavigationBar()
-        configureDataSource()
+        setUpDataSource()
         setupCollectionView()
         updateDataSource()
     }
@@ -64,7 +64,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    private func configureDataSource() {
+    private func setUpDataSource() {
         let cellRegistration = makeCellRegistration()
 
         dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
@@ -101,7 +101,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
                     withTitle: NSLocalizedString(
                         "category_editor.detail.button.show_category.title",
                         comment: "Show category button label within the category detail screen."),
-                    toggleIsOn: !category.isHidden
+                    isOn: !category.isHidden
                 ) { [weak self] in
                     self?.handleToggle(at: indexPath)
                 }
@@ -120,7 +120,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
                 config.isPrimaryActionEnabled = category.allowsCustomPhrases
                 config.accessibilityIdentifier = "edit_phrases_cell"
             case .removeCategory:
-                config = .init(title: "") { [weak self] in
+                config = .init(attributedText: .removeCategoryTitle) { [weak self] in
                     self?.handleRemoveCategory()
                 }
 
@@ -128,30 +128,8 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
                 config.accessibilityIdentifier = "remove_category_cell"
                 config.primaryBackgroundColor = .errorRed
                 config.primaryContentHorizontalAlignment = .center
-                config.traitCollectionChangeHandler = { traitCollection, updatedConfig in
-                    let isRightToLeftLayout = traitCollection.layoutDirection == .rightToLeft
-
-                    let buttonText = NSLocalizedString("category_editor.detail.button.remove_category.title", comment: "Remove category button label within the category detail screen.")
-
-                    let formatString: String  = isRightToLeftLayout ?
-                        .localizedStringWithFormat("%@ ", buttonText) :
-                        .localizedStringWithFormat(" %@", buttonText)
-
-                    let attributes: [NSAttributedString.Key: Any] = [
-                        .font: UIFont.systemFont(ofSize: 22, weight: .bold),
-                        .foregroundColor: UIColor.white
-                    ]
-
-                    let text = NSMutableAttributedString(string: formatString, attributes: attributes)
-                    let attachment = NSMutableAttributedString(attachment: NSTextAttachment(image: UIImage(systemName: "trash")!))
-                    attachment.addAttributes(attributes, range: .entireRange(of: attachment.string))
-
-                    let textRange = NSRange(of: text.string)
-                    let insertionIndex = isRightToLeftLayout ? textRange.upperBound : textRange.lowerBound
-
-                    text.insert(attachment, at: insertionIndex)
-
-                    updatedConfig.attributedTitle = text
+                config.traitCollectionChangeHandler = { _, updatedConfig in
+                    updatedConfig.attributedTitle = .removeCategoryTitle
                 }
             }
 
@@ -169,22 +147,22 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
 
             switch section {
             case .editCategory:
-                return self?.defaultSection(environment: environment)
+                return self?.topSection(environment: environment)
             case .editPhrase, .removeCategory:
-                return self?.footerSection(environment: environment)
+                return self?.defaultSection(environment: environment)
             case .none:
                 return nil
             }
         }
     }
 
-    private func footerSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let section = defaultSection(environment: environment)
-        section.contentInsets.top += sizeClass == .hCompact_vRegular ? 32 : 16
+    private func defaultSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let section = topSection(environment: environment)
+        section.contentInsets.top += (sizeClass == .hCompact_vRegular) ? 32 : 16
         return section
     }
 
-    private func defaultSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+    private func topSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let itemHeightDimension: NSCollectionLayoutDimension
         let itemWidthDimension = NSCollectionLayoutDimension.fractionalWidth(1.0)
         let columnCount: Int
@@ -224,7 +202,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
 
     // MARK: Actions
     
-    @objc func handleBackButton() {
+    @objc private func handleBackButton() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -366,5 +344,33 @@ private extension GazeableAlertViewController {
         alert.addAction(GazeableAlertAction(title: confirmButtonTitle, style: .destructive, handler: removeAction))
 
         return alert
+    }
+}
+
+private extension NSAttributedString {
+    static var removeCategoryTitle: NSAttributedString {
+        let isRightToLeftLayout = UITraitCollection.current.layoutDirection == .rightToLeft
+
+        let buttonText = NSLocalizedString("category_editor.detail.button.remove_category.title", comment: "Remove category button label within the category detail screen.")
+
+        let formatString: String  = isRightToLeftLayout ?
+            .localizedStringWithFormat("%@ ", buttonText) :
+            .localizedStringWithFormat(" %@", buttonText)
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 22, weight: .bold),
+            .foregroundColor: UIColor.white
+        ]
+
+        let text = NSMutableAttributedString(string: formatString, attributes: attributes)
+        let attachment = NSMutableAttributedString(attachment: NSTextAttachment(image: UIImage(systemName: "trash")!))
+        attachment.addAttributes(attributes, range: .entireRange(of: attachment.string))
+
+        let textRange = NSRange(of: text.string)
+        let insertionIndex = isRightToLeftLayout ? textRange.upperBound : textRange.lowerBound
+
+        text.insert(attachment, at: insertionIndex)
+
+        return text
     }
 }
