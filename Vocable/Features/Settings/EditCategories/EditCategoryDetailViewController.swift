@@ -96,17 +96,6 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
                 ) { [weak self] in
                     self?.handleRenameCategory()
                 }
-            case .editPhrases:
-                config = .disclosureCellConfiguration(
-                    withTitle: NSLocalizedString(
-                        "category_editor.detail.button.edit_phrases.title",
-                        comment: "Edit Phrases button label within the category detail screen")
-                ) { [weak self] in
-                    self?.displayEditPhrasesViewController()
-                }
-
-                config.isPrimaryActionEnabled = category.allowsCustomPhrases
-                config.accessibilityIdentifier = "edit_phrases_cell"
             case .showCategoryToggle:
                 config = .toggleCellConfiguration(
                     withTitle: NSLocalizedString(
@@ -119,6 +108,17 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
 
                 config.isPrimaryActionEnabled = category.identifier != .userFavorites
                 config.accessibilityIdentifier = "show_category_toggle"
+            case .editPhrases:
+                config = .disclosureCellConfiguration(
+                    withTitle: NSLocalizedString(
+                        "category_editor.detail.button.edit_phrases.title",
+                        comment: "Edit Phrases button label within the category detail screen")
+                ) { [weak self] in
+                    self?.displayEditPhrasesViewController()
+                }
+
+                config.isPrimaryActionEnabled = category.allowsCustomPhrases
+                config.accessibilityIdentifier = "edit_phrases_cell"
             case .removeCategory:
                 config = .init(title: "") { [weak self] in
                     self?.handleRemoveCategory()
