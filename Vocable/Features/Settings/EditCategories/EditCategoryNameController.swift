@@ -25,9 +25,9 @@ struct EditCategoryNameController: EditTextDelegate {
         self.initialName = Category.fetchObject(in: context, matching: categoryIdentifier)?.name
     }
 
-    mutating func editTextViewController(_ viewController: EditTextViewController, textDidChange attributedText: NSAttributedString?) {
-        let textDidChange = initialName != attributedText?.string
-        let isTextEmpty = attributedText?.string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
+    mutating func editTextViewController(_ viewController: EditTextViewController, textDidChange text: String?) {
+        let textDidChange = initialName != text
+        let isTextEmpty = text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
 
         canConfirmEdit = textDidChange && !isTextEmpty
 

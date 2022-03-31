@@ -13,7 +13,7 @@ import CoreData
 import Combine
 
 protocol EditTextDelegate { // swiftlint:disable:this class_delegate_protocol
-    mutating func editTextViewController(_: EditTextViewController, textDidChange attributedText: NSAttributedString?)
+    mutating func editTextViewController(_: EditTextViewController, textDidChange text: String?)
     func editTextViewControllerNavigationItems(_: EditTextViewController) -> EditTextViewController.NavigationConfiguration
     func editTextViewControllerInitialValue(_: EditTextViewController) -> String?
 }
@@ -31,6 +31,8 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
     let rightButton = EditTextNavigationButton()
 
     var delegate: EditTextDelegate?
+
+    private var needsConfigurationUpdate = true
 
     @PublishedValue private(set) var text: String?
 
@@ -77,18 +79,23 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
         navigationBar.rightButton = rightButton
 
         handleTextChange()
-        updateForConfiguration()
+        setNeedsUpdateConfiguration()
     }
 
     private func handleTextChange() {
         keyboardViewController.$attributedText
             .dropFirst()
+            .map { [weak self] attributedText -> NSAttributedString? in
+                self?.textView.attributedText = attributedText
+                return attributedText
+            }
+            .map { $0?.string }
             .removeDuplicates()
-            .sink(receiveValue: { [weak self] (attributedText) in
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] text in
                 guard let self = self else { return }
-                self.textView.attributedText = attributedText
-                self.text = attributedText?.string
-                self.delegate?.editTextViewController(self, textDidChange: attributedText)
+                self.text = text
+                self.delegate?.editTextViewController(self, textDidChange: text)
             }).store(in: &disposables)
     }
 
@@ -97,11 +104,17 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
 
         leftButton.configure(with: configuration.leftItem)
         rightButton.configure(with: configuration.rightItem)
+        needsConfigurationUpdate = false
     }
 
     func setNeedsUpdateConfiguration() {
-        // TODO: lazily do this
-        updateForConfiguration()
+        needsConfigurationUpdate = true
+        view.setNeedsLayout()
+    }
+
+    override func viewDidLayoutSubviews() {
+        if needsConfigurationUpdate { updateForConfiguration() }
+        super.viewDidLayoutSubviews()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -148,20 +161,4 @@ class EditTextViewController: VocableViewController, UICollectionViewDelegate {
         NSLayoutConstraint.activate(constraints)
         volatileConstraints = constraints
     }
-
-//    @objc private func dismiss(_ sender: Any) {
-//        if textHasChanged {
-//            handleDismissAlert()
-//        } else {
-//            dismiss(animated: true, completion: nil)
-//        }
-//    }
-//
-//    @objc private func confirmEdit(_ sender: Any) {
-//        let trimmedText = textView.text?.trimmingCharacters(in: .whitespaces) ?? ""
-//        editTextCompletionHandler(trimmedText)
-//    }
-    
-
-    
 }
