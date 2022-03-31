@@ -126,6 +126,12 @@
 
 "phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
 
+"phrase_editor.alert.phrase_name_exists.title" = "This phrase already exists. Would you like to create a duplicate?";
+
+"phrase_editor.alert.phrase_name_exists.cancel.button" = "Cancel";
+
+"phrase_editor.alert.phrase_name_exists.create.button" = "Create Duplicate";
+
 "categories_list_editor.header.title" = "Categories";
 
 "timing_and_sensitivity.header.title" = "Timing and Sensitivity";

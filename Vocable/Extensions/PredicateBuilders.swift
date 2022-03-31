@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 private typealias PredicateOperator = NSComparisonPredicate.Operator
 
@@ -204,4 +205,16 @@ func Predicate<A>(_ lhs: KeyPath<A, String?>, beginsWith rhs: String) -> NSPredi
 /// - Returns: `NSPredicate`
 func Predicate<A>(_ lhs: KeyPath<A, String?>, like rhs: String) -> NSPredicate {
     return Predicate(lhs, .like, rhs)
+}
+
+/// Constructs an `NSPredicate` where the objectID at the given `KeyPath` must match the provided value
+///
+/// - Parameters:
+///   - lhs: `KeyPath` whose value is must match `rhs`
+///   - rhs: `NSManagedObject` which `lhs` must match
+/// - Returns: `NSPredicate`
+func Predicate<A: NSManagedObject, B: NSManagedObject>(_ lhs: KeyPath<A, B?>, isEqual rhs: NSManagedObjectID) -> NSPredicate {
+    let lhs = NSExpression(forKeyPath: lhs)
+    let rhs = NSExpression(forConstantValue: rhs)
+    return NSComparisonPredicate(leftExpression: lhs, rightExpression: rhs, modifier: .direct, type: .equalTo)
 }

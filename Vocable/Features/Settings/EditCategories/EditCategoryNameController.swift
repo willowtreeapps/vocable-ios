@@ -69,15 +69,15 @@ struct EditCategoryNameController: EditTextDelegate {
         let results = (try? context.fetch(request)) ?? []
 
         if results.isEmpty {
-            saveCategory(for: categoryIdentifier, with: name, in: viewController)
+            saveCategory(with: name, in: viewController)
         } else {
             presentExistingCategoryAlert(for: viewController) {
-                saveCategory(for: categoryIdentifier, with: name, in: viewController)
+                saveCategory(with: name, in: viewController)
             }
         }
     }
 
-    private func saveCategory(for categoryIdentifier: NSManagedObjectID?, with name: String, in viewController: UIViewController) {
+    private func saveCategory(with name: String, in viewController: UIViewController) {
         context.performAndWait {
             if let categoryIdentifier = categoryIdentifier {
                 guard let category = Category.fetchObject(in: context, matching: categoryIdentifier) else { return }
@@ -94,13 +94,13 @@ struct EditCategoryNameController: EditTextDelegate {
                 DispatchQueue.main.async {
                     let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
                     ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                    viewController.dismiss(animated: true)
                 }
 
             } catch {
                 assertionFailure("Failed to save category: \(error)")
             }
         }
-        viewController.dismiss(animated: true)
     }
 
     private func presentExistingCategoryAlert(for viewController: UIViewController, confirmationHandler: @escaping () -> Void) {
