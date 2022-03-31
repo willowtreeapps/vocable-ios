@@ -337,25 +337,9 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, E
     // MARK: EditCategoryDetailTitleCollectionViewCellDelegate
 
     func didTapEdit() {
-        guard let categoryIdentifier = category.identifier else {
-            assertionFailure("Category has no identifier")
-            return
-        }
-        let context = NSPersistentContainer.shared.viewContext
-
+        let context = NSPersistentContainer.shared.newBackgroundContext()
         let viewController = EditTextViewController()
-        viewController.delegate = EditCategoryNameController(categoryIdentifier: categoryIdentifier, context: context)
+        viewController.delegate = EditCategoryNameController(categoryIdentifier: category.objectID, context: context)
         present(viewController, animated: true)
     }
 }
-
-//struct EditPhraseDelegate: EditTextDelegate {
-//    func editTextViewController(_: EditTextViewController, textDidChange: NSAttributedString?) {
-//        <#code#>
-//    }
-//
-//    func editTextViewControllerNavigationButtons(_: EditTextViewController) -> [GazeableButton] {
-//        <#code#>
-//    }
-//}
-

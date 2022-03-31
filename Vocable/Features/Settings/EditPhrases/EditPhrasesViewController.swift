@@ -17,8 +17,6 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
     private lazy var dataSourceProxy = makeDataSourceProxy()
 
-    private let context = NSPersistentContainer.shared.viewContext
-
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
         request.predicate = Predicate(\Phrase.category, equalTo: category) && !Predicate(\Phrase.isUserRemoved)
@@ -126,6 +124,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
     // MARK: Actions
     @IBAction private func addPhrasePressed() {
         let viewController = EditTextViewController()
+        let context = NSPersistentContainer.shared.newBackgroundContext()
         viewController.delegate = EditPhraseNameController(categoryIdentifier: category.objectID,
                                                            context: context)
 
@@ -171,6 +170,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
     fileprivate func presentEditorForPhrase(with id: NSManagedObjectID) {
         let vc = EditTextViewController()
+        let context = NSPersistentContainer.shared.newBackgroundContext()
         vc.delegate = EditPhraseNameController(categoryIdentifier: category.objectID,
                                                phraseIdentifier: id,
                                                context: context)

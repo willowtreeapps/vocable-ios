@@ -11,7 +11,7 @@ import UIKit
 
 struct EditCategoryNameController: EditTextDelegate {
 
-    let categoryIdentifier: String
+    let categoryIdentifier: NSManagedObjectID?
     let context: NSManagedObjectContext
 
     let initialName: String?
@@ -19,10 +19,14 @@ struct EditCategoryNameController: EditTextDelegate {
     private var canConfirmEdit: Bool = false
     private var shouldDismiss: Bool = true
 
-    init(categoryIdentifier: String, context: NSManagedObjectContext) {
+    init(categoryIdentifier: NSManagedObjectID? = nil, context: NSManagedObjectContext) {
         self.categoryIdentifier = categoryIdentifier
         self.context = context
-        self.initialName = Category.fetchObject(in: context, matching: categoryIdentifier)?.name
+        if let categoryIdentifier = categoryIdentifier {
+            self.initialName = Category.fetchObject(in: context, matching: categoryIdentifier)?.name
+        } else {
+            self.initialName = nil
+        }
     }
 
     mutating func editTextViewController(_ viewController: EditTextViewController, textDidChange text: String?) {
@@ -55,8 +59,7 @@ struct EditCategoryNameController: EditTextDelegate {
     // MARK: - Private Helpers
 
     private func handleSavingCategory(with name: String?, in viewController: UIViewController) {
-        guard let category = Category.fetchObject(in: context, matching: categoryIdentifier),
-              let name = name else {
+        guard let name = name else {
             return
         }
 
@@ -66,29 +69,36 @@ struct EditCategoryNameController: EditTextDelegate {
         let results = (try? context.fetch(request)) ?? []
 
         if results.isEmpty {
-            saveCategory(for: category, with: name, in: viewController)
+            saveCategory(for: categoryIdentifier, with: name, in: viewController)
         } else {
             presentExistingCategoryAlert(for: viewController) {
-                saveCategory(for: category, with: name, in: viewController)
+                saveCategory(for: categoryIdentifier, with: name, in: viewController)
             }
         }
     }
 
-    private func saveCategory(for category: Category, with name: String, in viewController: UIViewController) {
-        let textDidChange = (name != initialName)
-        category.name = name
-        category.isUserRenamed = category.isUserRenamed || textDidChange
+    private func saveCategory(for categoryIdentifier: NSManagedObjectID?, with name: String, in viewController: UIViewController) {
+        context.performAndWait {
+            if let categoryIdentifier = categoryIdentifier {
+                guard let category = Category.fetchObject(in: context, matching: categoryIdentifier) else { return }
 
-        do {
-            try Category.updateAllOrdinalValues(in: context)
-            try context.save()
+                let textDidChange = (name != initialName)
+                category.name = name
+                category.isUserRenamed = category.isUserRenamed || textDidChange
+            }
 
-            let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title",
-                                                 comment: "User edited name of the category and saved it successfully")
+            do {
+                try Category.updateAllOrdinalValues(in: context)
+                try context.save()
 
-            ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-        } catch {
-            assertionFailure("Failed to save category: \(error)")
+                DispatchQueue.main.async {
+                    let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
+                    ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                }
+
+            } catch {
+                assertionFailure("Failed to save category: \(error)")
+            }
         }
         viewController.dismiss(animated: true)
     }

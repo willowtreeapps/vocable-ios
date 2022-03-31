@@ -20,12 +20,17 @@ struct EditPhraseNameController: EditTextDelegate {
     private var canConfirmEdit: Bool = false
     private var shouldDismiss: Bool = true
 
+    /// Inititalizer
+    /// - Parameters:
+    ///   - categoryIdentifier: represents the category associated with the phrase
+    ///   - phraseIdentifier: if nil, create a new phrase, otherwise edit existing phrase
+    ///   - context: the context to fetch, edit, and create the phrase
     init(categoryIdentifier: NSManagedObjectID, phraseIdentifier: NSManagedObjectID? = nil, context: NSManagedObjectContext) {
         self.categoryIdentifier = categoryIdentifier
         self.phraseIdentifier = phraseIdentifier
         self.context = context
         if let phraseIdentifier = phraseIdentifier {
-            self.initialUtterance = (context.object(with: phraseIdentifier) as? Phrase)?.utterance
+            self.initialUtterance = Phrase.fetchObject(in: context, matching: phraseIdentifier)?.utterance
         } else {
             self.initialUtterance = nil
         }
@@ -61,12 +66,11 @@ struct EditPhraseNameController: EditTextDelegate {
     // MARK: - Private Helpers
 
     private func savePhrase(with utterance: String?, for viewController: UIViewController) {
-        guard let category = context.object(with: categoryIdentifier) as? Category,
+        guard let category = Category.fetchObject(in: context, matching: categoryIdentifier),
               let utterance = utterance else { return }
 
-        // Edit existing phrase, otherwise create new one
         let alertMessage: String
-        if let phraseIdentifier = phraseIdentifier, let phrase = context.object(with: phraseIdentifier) as? Phrase {
+        if let phraseIdentifier = phraseIdentifier, let phrase = Phrase.fetchObject(in: context, matching: phraseIdentifier) {
             editExistingPhrase(phrase, with: utterance)
             alertMessage = NSLocalizedString("category_editor.toast.changes_saved.title",
                                              comment: "changes to an existing phrase were saved successfully")
