@@ -68,7 +68,6 @@
 		6B5C490B245B73F700A4433C /* CategoriesCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C490A245B73F700A4433C /* CategoriesCarouselViewController.swift */; };
 		6B5C490D245CB92700A4433C /* CategoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C490C245CB92700A4433C /* CategoryDetailViewController.swift */; };
 		6B5C490F2460627B00A4433C /* NumericCategoryContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C490E2460627A00A4433C /* NumericCategoryContentViewController.swift */; };
-		6B5C49112460AEF900A4433C /* RootEditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C49102460AEF900A4433C /* RootEditTextViewController.swift */; };
 		6B5C73A727DFE61600004713 /* PredicateBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C73A627DFE61600004713 /* PredicateBuilders.swift */; };
 		6B5C73A927DFE63600004713 /* NSPredicate+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C73A827DFE63600004713 /* NSPredicate+Operators.swift */; };
 		6B5C73B327E3ADCF00004713 /* AppResetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5C73B227E3ADCF00004713 /* AppResetController.swift */; };
@@ -153,6 +152,7 @@
 		A94C3FAE27F49CBC001D4F01 /* CategoryEditorConfigurationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94C3FAD27F49CBC001D4F01 /* CategoryEditorConfigurationProvider.swift */; };
 		A94C3FB027F4A5DC001D4F01 /* PhraseEditorConfigurationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94C3FAF27F4A5DC001D4F01 /* PhraseEditorConfigurationProvider.swift */; };
 		A95D07BE24326475004ECE64 /* CursorSensitivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95D07BD24326475004ECE64 /* CursorSensitivity.swift */; };
+		A961605027F6383B00CE2F72 /* FreeResponseEditorConfigurationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A961604F27F6383B00CE2F72 /* FreeResponseEditorConfigurationProvider.swift */; };
 		A96D61D524229F6400577144 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96D61D424229F6400577144 /* SettingsCollectionViewCell.swift */; };
 		A96D61D724229F7400577144 /* SettingsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A96D61D624229F7400577144 /* SettingsCollectionViewCell.xib */; };
 		A97814FA23FF3B1200ECC609 /* CategorySectionBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97814F923FF3B1200ECC609 /* CategorySectionBackground.swift */; };
@@ -277,7 +277,6 @@
 		6B5C490A245B73F700A4433C /* CategoriesCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCarouselViewController.swift; sourceTree = "<group>"; };
 		6B5C490C245CB92700A4433C /* CategoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailViewController.swift; sourceTree = "<group>"; };
 		6B5C490E2460627A00A4433C /* NumericCategoryContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericCategoryContentViewController.swift; sourceTree = "<group>"; };
-		6B5C49102460AEF900A4433C /* RootEditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootEditTextViewController.swift; sourceTree = "<group>"; };
 		6B5C73A527DFACBA00004713 /* Phrases v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Phrases v4.xcdatamodel"; sourceTree = "<group>"; };
 		6B5C73A627DFE61600004713 /* PredicateBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateBuilders.swift; sourceTree = "<group>"; };
 		6B5C73A827DFE63600004713 /* NSPredicate+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Operators.swift"; sourceTree = "<group>"; };
@@ -391,6 +390,7 @@
 		A94C3FAD27F49CBC001D4F01 /* CategoryEditorConfigurationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditorConfigurationProvider.swift; sourceTree = "<group>"; };
 		A94C3FAF27F4A5DC001D4F01 /* PhraseEditorConfigurationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraseEditorConfigurationProvider.swift; sourceTree = "<group>"; };
 		A95D07BD24326475004ECE64 /* CursorSensitivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorSensitivity.swift; sourceTree = "<group>"; };
+		A961604F27F6383B00CE2F72 /* FreeResponseEditorConfigurationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeResponseEditorConfigurationProvider.swift; sourceTree = "<group>"; };
 		A96D61D424229F6400577144 /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		A96D61D624229F7400577144 /* SettingsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCollectionViewCell.xib; sourceTree = "<group>"; };
 		A97814F923FF3B1200ECC609 /* CategorySectionBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionBackground.swift; sourceTree = "<group>"; };
@@ -597,8 +597,8 @@
 				6B5C490C245CB92700A4433C /* CategoryDetailViewController.swift */,
 				6B5C490E2460627A00A4433C /* NumericCategoryContentViewController.swift */,
 				64A220BD2452173C0014EA80 /* Root.storyboard */,
-				6B5C49102460AEF900A4433C /* RootEditTextViewController.swift */,
 				64A220BA2452171C0014EA80 /* RootViewController.swift */,
+				A961604F27F6383B00CE2F72 /* FreeResponseEditorConfigurationProvider.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -1197,6 +1197,7 @@
 				6B5C743E27E3CE3900004713 /* PersistenceMigrationController.swift in Sources */,
 				6B9DFA6423E889DB0037673E /* UIHeadGazeRecognizer.swift in Sources */,
 				64A220BB2452171C0014EA80 /* RootViewController.swift in Sources */,
+				A961605027F6383B00CE2F72 /* FreeResponseEditorConfigurationProvider.swift in Sources */,
 				6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */,
 				B8DA9DF223F30BAF00FEBE19 /* Cell+NibLoading.swift in Sources */,
 				64B3259C254B591D00023566 /* EditCategoryToggleCollectionViewCell.swift in Sources */,
@@ -1256,7 +1257,6 @@
 				A91030B427E3BF9300281C97 /* VocableListContentConfiguration.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
 				6B823BCB23F4ADE30099F65E /* Pulse.swift in Sources */,
-				6B5C49112460AEF900A4433C /* RootEditTextViewController.swift in Sources */,
 				A9CF2AEF242D44EE005633A7 /* TimingSensitivityViewController.swift in Sources */,
 				64B32593254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift in Sources */,
 				6459943E25895D9C0010EEFF /* SpeechRecognitionController.swift in Sources */,

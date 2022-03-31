@@ -12,7 +12,7 @@ import UIKit
 import CoreData
 import Combine
 
-protocol TextEditorConfigurationProviding { // swiftlint:disable:this class_delegate_protocol
+protocol TextEditorConfigurationProviding {
     mutating func textEditorViewController(_: TextEditorViewController, textDidChange text: String?)
     func textEditorViewControllerConfiguration(_: TextEditorViewController) -> TextEditorViewController.Configuration
     func textEditorViewControllerInitialValue(_: TextEditorViewController) -> String?

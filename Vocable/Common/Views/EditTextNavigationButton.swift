@@ -28,10 +28,10 @@ final class EditTextNavigationButton: GazeableButton {
     struct Configuration {
         let image: UIImage
         var isEnabled: Bool
-        var action: () -> Void
+        var action: (() -> Void)?
 
-        static func dismissal(for viewController: UIViewController, textDidChange: Bool = false) -> Self {
-            return Configuration(image: UIImage(systemName: "xmark.circle")!, isEnabled: true) {
+        static func dismissal(for viewController: UIViewController, isEnabled: Bool = true, textDidChange: Bool = false) -> Self {
+            Configuration(image: UIImage(systemName: "xmark.circle")!, isEnabled: isEnabled) {
                 if textDidChange {
                     let alert = GazeableAlertViewController.discardChangesAlert {
                         viewController.dismiss(animated: true)
@@ -42,7 +42,6 @@ final class EditTextNavigationButton: GazeableButton {
                 }
             }
         }
-
     }
 
     func configure(with configuration: Configuration?) {
@@ -55,6 +54,8 @@ final class EditTextNavigationButton: GazeableButton {
                 removeAction(action, for: event)
             }
         }
-        addAction(UIAction(handler: { _ in configuration.action() }), for: .primaryActionTriggered)
+        if let action = configuration.action {
+            addAction(UIAction(handler: { _ in action() }), for: .primaryActionTriggered)
+        }
     }
 }

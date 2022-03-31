@@ -71,8 +71,10 @@ import SwiftUI
     }
 
     @IBAction private func keyboardButtonSelected(_ sender: Any) {
-        let vc = RootEditTextViewController()
-        self.present(vc, animated: true)
+        let vc = TextEditorViewController()
+        let context = NSPersistentContainer.shared.newBackgroundContext()
+        vc.delegate = FreeResponseEditorConfigurationProvider(context: context)
+        present(vc, animated: true)
     }
 
     private func categoryDidChange(_ categoryID: NSManagedObjectID) {
