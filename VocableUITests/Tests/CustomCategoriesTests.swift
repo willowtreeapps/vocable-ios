@@ -89,6 +89,7 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText(testPhrase)
         keyboardScreen.checkmarkAddButton.tap()
+        keyboardScreen.createDuplicateButton.tap()
         
         // Assert that now we have two cells containing the same phrase
         let phrasePredicate = NSPredicate(format: "label MATCHES %@", testPhrase)
