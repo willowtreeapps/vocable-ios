@@ -69,7 +69,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, N
         }()
     }
 
-    // MARK: Fetch
+    // MARK: NSFetchedResultsControllerDelegate
 
     private func makeFetchRequest() -> NSFetchRequest<Category> {
         let request = Category.fetchRequest()
@@ -311,17 +311,33 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, N
     @objc private func handleBackButton() {
         navigationController?.popViewController(animated: true)
     }
-    
+
+    private func handleDismissAlert() {
+        func confirmChangesAction() {
+            self.dismiss(animated: true, completion: nil)
+        }
+
+        let title = NSLocalizedString("category_editor.alert.cancel_editing_confirmation.title", comment: "Exit edit categories alert title")
+        let confirmButtonTitle = NSLocalizedString("category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title", comment: "Confirm exit category alert action title")
+        let cancelButtonTitle = NSLocalizedString("category_editor.alert.cancel_editing_confirmation.button.cancel.title", comment: "Cancel exit editing alert action title")
+        let alert = GazeableAlertViewController(alertTitle: title)
+        alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
+        alert.addAction(GazeableAlertAction(title: confirmButtonTitle, style: .bold, handler: confirmChangesAction))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    // MARK: Cell Actions
+
     private func handleToggle(at indexPath: IndexPath) {
         guard
             let category = fetchedResultsController.managedObjectContext.object(with: categoryId) as? Category,
-            let categoryIdButLikeTheStringKindOfId = category.identifier
+            let categoryId = category.identifier
         else { return }
 
         let context = NSPersistentContainer.shared.newBackgroundContext()
 
         context.perform {
-            guard let category = Category.fetchObject(in: context, matching: categoryIdButLikeTheStringKindOfId) else { return }
+            guard let category = Category.fetchObject(in: context, matching: categoryId) else { return }
 
             let shouldShowCategory = !category.isHidden
             category.setValue(shouldShowCategory, forKey: "isHidden")
@@ -358,13 +374,13 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, N
     private func removeCategory() {
         guard
             let category = fetchedResultsController.managedObjectContext.object(with: categoryId) as? Category,
-            let categoryIdButLikeTheStringKindOfId = category.identifier
+            let categoryId = category.identifier
         else { return }
 
         let context = NSPersistentContainer.shared.newBackgroundContext()
 
-        context.performAndWait { [weak self] in
-            guard let category = Category.fetchObject(in: context, matching: categoryIdButLikeTheStringKindOfId) else { return }
+        context.perform { [weak self] in
+            guard let category = Category.fetchObject(in: context, matching: categoryId) else { return }
 
             if category.isUserGenerated {
                 context.delete(category)
@@ -380,23 +396,6 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, N
             }
         }
     }
-    
-    private func deselectCell() {
-        for path in collectionView.indexPathsForSelectedItems ?? [] {
-            collectionView.deselectItem(at: path, animated: true)
-        }
-    }
-
-    @discardableResult
-    private func save(_ context: NSManagedObjectContext) -> Bool {
-        do {
-            try context.save()
-            return true
-        } catch {
-            assertionFailure("Failed to unsave user generated phrase: \(error)")
-        }
-        return false
-    }
 
     func handleRenameCategory() {
         let context = NSPersistentContainer.shared.newBackgroundContext()
@@ -404,6 +403,12 @@ final class EditCategoryDetailViewController: VocableCollectionViewController, N
         viewController.delegate = CategoryNameEditorConfigurationProvider(categoryIdentifier: categoryId, context: context)
 
         present(viewController, animated: true)
+    }
+
+    private func deselectCell() {
+        for path in collectionView.indexPathsForSelectedItems ?? [] {
+            collectionView.deselectItem(at: path, animated: true)
+        }
     }
 }
 
