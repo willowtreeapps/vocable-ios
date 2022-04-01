@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-final class EditCategoryDetailViewController: VocableCollectionViewController {
+final class EditCategoryDetailViewController: VocableCollectionViewController, NSFetchedResultsControllerDelegate {
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, EditCategoryItem>
     private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, EditCategoryItem>
     private typealias CellRegistration = UICollectionView.CellRegistration<VocableListCell, EditCategoryItem>
@@ -20,20 +20,25 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         case removeCategory
     }
 
-    private enum EditCategoryItem: Int {
+    private enum EditCategoryItem: Hashable {
         case renameCategory
-        case showCategoryToggle
+        case showCategoryToggle(Bool)
         case editPhrases
         case removeCategory
     }
 
-    let category: Category
+    let categoryId: NSManagedObjectID
 
-    private let context = NSPersistentContainer.shared.viewContext
     private var dataSource: DataSource?
 
-    init(_ category: Category) {
-        self.category = category
+    private lazy var fetchedResultsController = NSFetchedResultsController(
+        fetchRequest: makeFetchRequest(),
+        managedObjectContext: NSPersistentContainer.shared.viewContext,
+        sectionNameKeyPath: nil,
+        cacheName: nil)
+
+    init(_ categoryId: NSManagedObjectID) {
+        self.categoryId = categoryId
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -46,6 +51,8 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         super.viewDidLoad()
 
         dataSource = makeDataSource()
+        fetchedResultsController.delegate = self
+        try? fetchedResultsController.performFetch()
 
         setupNavigationBar()
         setupCollectionView()
@@ -53,7 +60,6 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     }
 
     private func setupNavigationBar() {
-        navigationBar.title = category.name
         navigationBar.leftButton = {
             let button = GazeableButton()
             button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -61,6 +67,31 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             button.accessibilityIdentifier = "navigationBar.backButton"
             return button
         }()
+    }
+
+    // MARK: Fetch
+
+    private func makeFetchRequest() -> NSFetchRequest<Category> {
+        let request = Category.fetchRequest()
+
+        request.predicate = NSPredicate(format: "(SELF = %@)", categoryId)
+        request.sortDescriptors = []
+        request.fetchLimit = 1
+
+        return request
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
+
+        let snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
+
+        guard
+            let categoryId = snapshot.itemIdentifiers.first,
+            let category = controller.managedObjectContext.object(with: categoryId) as? Category
+        else { return }
+
+        navigationBar.title = category.name
+        updateDataSource()
     }
 
     // MARK: UICollectionViewDataSource
@@ -98,14 +129,16 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     }
     
     private func updateDataSource() {
+        guard let catgegory = fetchedResultsController.managedObjectContext.object(with: categoryId) as? Category else { return }
+
         var snapshot = Snapshot()
 
         snapshot.appendSections([.editCategory, .editPhrase, .removeCategory])
-        snapshot.appendItems([.renameCategory, .showCategoryToggle], toSection: .editCategory)
+        snapshot.appendItems([.renameCategory, .showCategoryToggle(!catgegory.isHidden)], toSection: .editCategory)
         snapshot.appendItems([.editPhrases], toSection: .editPhrase)
         snapshot.appendItems([.removeCategory], toSection: .removeCategory)
 
-        dataSource?.apply(snapshot, animatingDifferences: false)
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
 
     // MARK: Cell Registrations
@@ -131,10 +164,15 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     }
 
     private func makeShowCategoryCellRegistration() -> CellRegistration {
-        CellRegistration { [category] cell, indexPath, item in
-            guard item == .showCategoryToggle else {
+        CellRegistration { [weak self] cell, indexPath, item in
+            guard case .showCategoryToggle = item else {
                 return assertionFailure("This cell registration is for the Show Category cell.")
             }
+
+            guard
+                let id = self?.categoryId,
+                let category = self?.fetchedResultsController.managedObjectContext.object(with: id) as? Category
+            else { return }
 
             var config: VocableListContentConfiguration = .toggleCellConfiguration(
                 withTitle: NSLocalizedString(
@@ -153,10 +191,15 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     }
 
     private func makeEditPhrasesCellRegistration() -> CellRegistration {
-        CellRegistration { [category] cell, _, item in
+        CellRegistration { [weak self] cell, _, item in
             guard item == .editPhrases else {
                 return assertionFailure("This cell registration is for the Edit Phrases cell.")
             }
+
+            guard
+                let id = self?.categoryId,
+                let category = self?.fetchedResultsController.managedObjectContext.object(with: id) as? Category
+            else { return }
 
             var config: VocableListContentConfiguration = .disclosureCellConfiguration(
                 withTitle: NSLocalizedString(
@@ -174,10 +217,15 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     }
 
     private func makeRemoveCategoryCellRegistration() -> CellRegistration {
-        CellRegistration { [category] cell, _, item in
+        CellRegistration { [weak self] cell, _, item in
             guard item == .removeCategory else {
                 return assertionFailure("This cell registration is for the Remove Category cell.")
             }
+
+            guard
+                let id = self?.categoryId,
+                let category = self?.fetchedResultsController.managedObjectContext.object(with: id) as? Category
+            else { return }
 
             var config: VocableListContentConfiguration = .init(attributedText: .removeCategoryTitle) { [weak self] in
                 self?.handleRemoveCategory()
@@ -265,29 +313,33 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     }
     
     private func handleToggle(at indexPath: IndexPath) {
-        let shouldShowCategory = !category.isHidden
-        category.setValue(!category.isHidden, forKey: "isHidden")
+        guard
+            let category = fetchedResultsController.managedObjectContext.object(with: categoryId) as? Category,
+            let categoryIdButLikeTheStringKindOfId = category.identifier
+        else { return }
 
-        try? Category.updateAllOrdinalValues(in: context)
-        saveContext()
+        let context = NSPersistentContainer.shared.newBackgroundContext()
 
-        if category == Category.listeningModeCategory() {
-            AppConfig.isListeningModeEnabled = shouldShowCategory
+        context.perform {
+            guard let category = Category.fetchObject(in: context, matching: categoryIdButLikeTheStringKindOfId) else { return }
+
+            let shouldShowCategory = !category.isHidden
+            category.setValue(shouldShowCategory, forKey: "isHidden")
+
+            if category == Category.listeningModeCategory(context) {
+                AppConfig.isListeningModeEnabled = shouldShowCategory
+            }
+
+            try? Category.updateAllOrdinalValues(in: context)
+
+            try? context.save()
         }
-
-        // Update the cell's config
-
-        guard let cell = collectionView.cellForItem(at: indexPath),
-              var config = cell.contentConfiguration as? VocableListContentConfiguration,
-              case .toggle(let isOn) = config.accessory?.content else {
-            return
-        }
-
-        config.accessory = .toggle(isOn: !isOn)
-        cell.contentConfiguration = config
     }
 
     private func displayEditPhrasesViewController() {
+        guard let category = fetchedResultsController.managedObjectContext.object(with: categoryId) as? Category
+        else { return }
+
         let viewController = EditPhrasesViewController()
         viewController.category = category
         show(viewController, sender: nil)
@@ -304,17 +356,28 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     }
     
     private func removeCategory() {
+        guard
+            let category = fetchedResultsController.managedObjectContext.object(with: categoryId) as? Category,
+            let categoryIdButLikeTheStringKindOfId = category.identifier
+        else { return }
 
-        if category.isUserGenerated {
-            context.delete(category)
-        } else {
-            category.isUserRemoved = true
-        }
+        let context = NSPersistentContainer.shared.newBackgroundContext()
 
-        try? Category.updateAllOrdinalValues(in: context)
+        context.performAndWait { [weak self] in
+            guard let category = Category.fetchObject(in: context, matching: categoryIdButLikeTheStringKindOfId) else { return }
 
-        if saveContext() {
-            self.navigationController?.popViewController(animated: true)
+            if category.isUserGenerated {
+                context.delete(category)
+            } else {
+                category.isUserRemoved = true
+            }
+
+            try? Category.updateAllOrdinalValues(in: context)
+            try? context.save()
+
+            DispatchQueue.main.async {
+                self?.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
@@ -325,7 +388,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     }
 
     @discardableResult
-    private func saveContext() -> Bool {
+    private func save(_ context: NSManagedObjectContext) -> Bool {
         do {
             try context.save()
             return true
@@ -335,19 +398,11 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         return false
     }
 
-    private func reloadData() {
-        collectionView.reloadData()
-        navigationBar.title = category.name
-    }
-
-    // MARK: EditCategoryDetailTitleCollectionViewCellDelegate
-
     func handleRenameCategory() {
         let context = NSPersistentContainer.shared.newBackgroundContext()
         let viewController = TextEditorViewController()
-        viewController.delegate = CategoryNameEditorConfigurationProvider(categoryIdentifier: category.objectID, context: context, didSaveCategory: { [weak self] in
-            self?.reloadData()
-        })
+        viewController.delegate = CategoryNameEditorConfigurationProvider(categoryIdentifier: categoryId, context: context)
+
         present(viewController, animated: true)
     }
 }

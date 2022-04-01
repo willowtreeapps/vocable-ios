@@ -230,7 +230,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         if category == Category.listeningModeCategory() {
             destination = ListeningModeViewController()
         } else {
-            destination = EditCategoryDetailViewController(category)
+            destination = EditCategoryDetailViewController(category.objectID)
         }
         show(destination, sender: nil)
     }
