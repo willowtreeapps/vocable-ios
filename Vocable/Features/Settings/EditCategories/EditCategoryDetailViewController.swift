@@ -45,8 +45,9 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        dataSource = makeDataSource()
+
         setupNavigationBar()
-        setUpDataSource()
         setupCollectionView()
         updateDataSource()
     }
@@ -64,11 +65,35 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    private func setUpDataSource() {
-        let cellRegistration = makeCellRegistration()
+    private func makeDataSource() -> DataSource {
+        let renameCategoryRegistration = makeRenameCategoryCellRegistration()
+        let showCategoryRegistration = makeShowCategoryCellRegistration()
+        let editPhrasesRegistration = makeEditPhrasesCellRegistration()
+        let removeCategoryRegistration = makeRemoveCategoryCellRegistration()
 
-        dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
-            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+        return DataSource(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+            switch item {
+            case .renameCategory:
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: renameCategoryRegistration,
+                    for: indexPath,
+                    item: item)
+            case .showCategoryToggle:
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: showCategoryRegistration,
+                    for: indexPath,
+                    item: item)
+            case .editPhrases:
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: editPhrasesRegistration,
+                    for: indexPath,
+                    item: item)
+            case .removeCategory:
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: removeCategoryRegistration,
+                    for: indexPath,
+                    item: item)
+            }
         }
     }
     
@@ -83,54 +108,87 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
 
-    private func makeCellRegistration() -> CellRegistration {
+    // MARK: Cell Registrations
+
+    private func makeRenameCategoryCellRegistration() -> CellRegistration {
+        CellRegistration { cell, _, item in
+            guard item == .renameCategory else {
+                return assertionFailure("This cell registration is for the Rename Category cell.")
+            }
+
+            var config: VocableListContentConfiguration = .disclosureCellConfiguration(
+                withTitle: NSLocalizedString(
+                    "category_editor.detail.button.rename_category.title",
+                    comment: "Rename Category button label within the category detail screen")
+            ) { [weak self] in
+                self?.handleRenameCategory()
+            }
+
+            config.accessibilityIdentifier = "rename_category_button"
+
+            cell.contentConfiguration = config
+        }
+    }
+
+    private func makeShowCategoryCellRegistration() -> CellRegistration {
         CellRegistration { [category] cell, indexPath, item in
-            var config: VocableListContentConfiguration
+            guard item == .showCategoryToggle else {
+                return assertionFailure("This cell registration is for the Show Category cell.")
+            }
 
-            switch item {
-            case .renameCategory:
-                config = .disclosureCellConfiguration(
-                    withTitle: NSLocalizedString(
-                        "category_editor.detail.button.rename_category.title",
-                        comment: "Rename Category button label within the category detail screen")
-                ) { [weak self] in
-                    self?.handleRenameCategory()
-                }
-            case .showCategoryToggle:
-                config = .toggleCellConfiguration(
-                    withTitle: NSLocalizedString(
-                        "category_editor.detail.button.show_category.title",
-                        comment: "Show category button label within the category detail screen."),
-                    isOn: !category.isHidden
-                ) { [weak self] in
-                    self?.handleToggle(at: indexPath)
-                }
+            var config: VocableListContentConfiguration = .toggleCellConfiguration(
+                withTitle: NSLocalizedString(
+                    "category_editor.detail.button.show_category.title",
+                    comment: "Show category button label within the category detail screen."),
+                isOn: !category.isHidden
+            ) { [weak self] in
+                self?.handleToggle(at: indexPath)
+            }
 
-                config.isPrimaryActionEnabled = category.identifier != .userFavorites
-                config.accessibilityIdentifier = "show_category_toggle"
-            case .editPhrases:
-                config = .disclosureCellConfiguration(
-                    withTitle: NSLocalizedString(
-                        "category_editor.detail.button.edit_phrases.title",
-                        comment: "Edit Phrases button label within the category detail screen")
-                ) { [weak self] in
-                    self?.displayEditPhrasesViewController()
-                }
+            config.isPrimaryActionEnabled = category.identifier != .userFavorites
+            config.accessibilityIdentifier = "show_category_toggle"
 
-                config.isPrimaryActionEnabled = category.allowsCustomPhrases
-                config.accessibilityIdentifier = "edit_phrases_cell"
-            case .removeCategory:
-                config = .init(attributedText: .removeCategoryTitle) { [weak self] in
-                    self?.handleRemoveCategory()
-                }
+            cell.contentConfiguration = config
+        }
+    }
 
-                config.isPrimaryActionEnabled = category.identifier != .userFavorites
-                config.accessibilityIdentifier = "remove_category_cell"
-                config.primaryBackgroundColor = .errorRed
-                config.primaryContentHorizontalAlignment = .center
-                config.traitCollectionChangeHandler = { _, updatedConfig in
-                    updatedConfig.attributedTitle = .removeCategoryTitle
-                }
+    private func makeEditPhrasesCellRegistration() -> CellRegistration {
+        CellRegistration { [category] cell, _, item in
+            guard item == .editPhrases else {
+                return assertionFailure("This cell registration is for the Edit Phrases cell.")
+            }
+
+            var config: VocableListContentConfiguration = .disclosureCellConfiguration(
+                withTitle: NSLocalizedString(
+                    "category_editor.detail.button.edit_phrases.title",
+                    comment: "Edit Phrases button label within the category detail screen")
+            ) { [weak self] in
+                self?.displayEditPhrasesViewController()
+            }
+
+            config.isPrimaryActionEnabled = category.allowsCustomPhrases
+            config.accessibilityIdentifier = "edit_phrases_cell"
+
+            cell.contentConfiguration = config
+        }
+    }
+
+    private func makeRemoveCategoryCellRegistration() -> CellRegistration {
+        CellRegistration { [category] cell, _, item in
+            guard item == .removeCategory else {
+                return assertionFailure("This cell registration is for the Remove Category cell.")
+            }
+
+            var config: VocableListContentConfiguration = .init(attributedText: .removeCategoryTitle) { [weak self] in
+                self?.handleRemoveCategory()
+            }
+
+            config.isPrimaryActionEnabled = category.identifier != .userFavorites
+            config.accessibilityIdentifier = "remove_category_cell"
+            config.primaryBackgroundColor = .errorRed
+            config.primaryContentHorizontalAlignment = .center
+            config.traitCollectionChangeHandler = { _, updatedConfig in
+                updatedConfig.attributedTitle = .removeCategoryTitle
             }
 
             cell.contentConfiguration = config
