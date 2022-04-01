@@ -116,6 +116,7 @@ class GazeableButton: UIButton {
 
     private func setDefaultAppearance() {
         tintColor = .defaultTextColor
+        setFillColor(.defaultCellBackgroundColor.disabled(blending: .collectionViewBackgroundColor), for: .disabled)
         setFillColor(.defaultCellBackgroundColor, for: .normal)
         setFillColor(.cellSelectionColor, for: .selected)
         setFillColor(.cellSelectionColor, for: [.selected, .highlighted])
