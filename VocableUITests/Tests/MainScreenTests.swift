@@ -3,6 +3,7 @@
 //  VocableUITests
 //
 //  Created by Kevin Stechler on 4/27/20.
+//  Updated by Rudy Salas, Canan Arikan, and Rhonda Oglesby on 03/30/2022
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
@@ -36,9 +37,9 @@ class MainScreenTests: BaseTest {
     }
     
     func testDefaultCategoriesExist() {
-        for categoryName in mainScreen.defaultCategories {
-            XCTAssert(mainScreen.isTextDisplayed(categoryName), "Expected the current category name to be \(categoryName)")
-            mainScreen.categoryRightButton.tap()
+        for categoryName in PresetCategories().list {
+            mainScreen.locateAndSelectDestinationCategory(categoryName.categoryIdentifier)
+            XCTAssertEqual(mainScreen.selectedCategoryCell.identifier, categoryName.identifier, "Preset category with ID '\(categoryName.identifier)' was not found")
         }
     }
     
@@ -63,25 +64,29 @@ class MainScreenTests: BaseTest {
     }
     
     func testDisablingCategory() {
-        let generalCategoryText = "1. General"
-        let hiddenGeneralCategoryText = "General"
+        let hiddenCategoryName = "General"
+        let hiddenCategoryIdentifier = CategoryTitleCellIdentifier(CategoryIdentifier.general).identifier
         
-        mainScreen.settingsButton.tap()
-        settingsScreen.categoriesButton.tap()
+        settingsScreen.navigateToSettingsCategoryScreen()
+        XCTAssertTrue(settingsScreen.locateCategoryCell(hiddenCategoryName).element.exists)
+
+        // Navigate to the category and hide it.
+        settingsScreen.openCategorySettings(category: hiddenCategoryName)
+        settingsScreen.showCategorySwitch.tap()
+        settingsScreen.leaveCategoryDetailButton.tap()
         
-        settingsScreen.toggleHideShowCategory(category: generalCategoryText, toggle: "Hide")
-        
+        // Return to the main screen
         settingsScreen.leaveCategoriesButton.tap()
         settingsScreen.exitSettingsButton.tap()
         
-        XCTAssertFalse(XCUIApplication().collectionViews.staticTexts[mainScreen.defaultCategories[0]].exists)
-        
-        //since settings changes persist through app restarts, we have to reset the categories back to default after our test.
-        //once the reset settings functionality is implemented, or better yet, a reset settings environment variable, this can be deleted
-        mainScreen.settingsButton.tap()
-        settingsScreen.categoriesButton.tap()
-        
-        settingsScreen.toggleHideShowCategory(category: hiddenGeneralCategoryText, toggle: "Show")
+        // Confirm that the category is no longer accessible.
+        for category in PresetCategories().list {
+            // If we come across the category we expect to be hidden, fail the test. Otherwise the test will pass.
+            mainScreen.locateAndSelectDestinationCategory(category.categoryIdentifier)
+            if (mainScreen.selectedCategoryCell.identifier == hiddenCategoryIdentifier) {
+                XCTFail("The category with identifier, '\(hiddenCategoryIdentifier)', was not hidden as expected.")
+            }
+        }
     }
     
     func testCustonCategoryPagination() {
