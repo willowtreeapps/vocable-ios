@@ -31,9 +31,6 @@
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "إزالة فئة";
 
-/* Show category button label within the category detail screen. */
-"category_editor.detail.button.show_category.title" = "إظهار";
-
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "تم حفظ التغييرات";
 

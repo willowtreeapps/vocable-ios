@@ -28,9 +28,6 @@
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "刪除類別?";
 
-/* Show category button label within the category detail screen. */
-"category_editor.detail.button.show_category.title" = "顯示";
-
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "更改已儲存";
 
