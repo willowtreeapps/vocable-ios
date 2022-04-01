@@ -23,15 +23,18 @@ private extension GazeableAlertViewController {
     }
 }
 
-final class EditTextNavigationButton: GazeableButton {
+final class TextEditorNavigationButton: GazeableButton {
+
+    typealias Action = () -> Void
 
     struct Configuration {
         let image: UIImage
         var isEnabled: Bool
-        var action: (() -> Void)?
+        let accessibilityIdentifier: String?
+        var action: Action?
 
-        static func dismissal(for viewController: UIViewController, isEnabled: Bool = true, textDidChange: Bool = false) -> Self {
-            Configuration(image: UIImage(systemName: "xmark.circle")!, isEnabled: isEnabled) {
+        static func dismissal(for viewController: UIViewController, isEnabled: Bool = true, textDidChange: Bool = false, accessibilityIdentifier: String = "keyboard.dismissButton") -> Self {
+            Configuration(image: UIImage(systemName: "xmark.circle")!, isEnabled: isEnabled, accessibilityIdentifier: accessibilityIdentifier) {
                 if textDidChange {
                     let alert = GazeableAlertViewController.discardChangesAlert {
                         viewController.dismiss(animated: true)
@@ -42,12 +45,27 @@ final class EditTextNavigationButton: GazeableButton {
                 }
             }
         }
+
+        static func save(isEnabled: Bool = false, accessibilityIdentifier: String = "keyboard.saveButton", action: @escaping Action) -> Self {
+            Configuration(image: UIImage(systemName: "checkmark")!,
+                          isEnabled: isEnabled,
+                          accessibilityIdentifier: accessibilityIdentifier,
+                          action: action)
+        }
+
+        static func favorite(image: UIImage, isEnabled: Bool = false, accessibilityIdentifier: String = "keyboard.favoriteButton", action: @escaping Action) -> Self {
+            Configuration(image: UIImage(systemName: "checkmark")!,
+                          isEnabled: isEnabled,
+                          accessibilityIdentifier: accessibilityIdentifier,
+                          action: action)
+        }
     }
 
     func configure(with configuration: Configuration?) {
         guard let configuration = configuration else { return }
         setImage(configuration.image, for: .normal)
         isEnabled = configuration.isEnabled
+        accessibilityIdentifier = configuration.accessibilityIdentifier
 
         enumerateEventHandlers { action, _, event, _ in
             if let action = action {

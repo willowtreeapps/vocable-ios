@@ -49,14 +49,14 @@ struct PhraseEditorConfigurationProvider: TextEditorConfigurationProviding {
         let currentUtterance = viewController.text
         let textDidChange = initialUtterance != currentUtterance
 
-        let leftItem = EditTextNavigationButton.Configuration.dismissal(for: viewController, textDidChange: textDidChange)
+        let leftConfiguration = TextEditorNavigationButton.Configuration.dismissal(for: viewController, textDidChange: textDidChange)
 
-        let rightItem = EditTextNavigationButton.Configuration(image: UIImage(systemName: "checkmark")!, isEnabled: canConfirmEdit) {
+        let rightConfiguration = TextEditorNavigationButton.Configuration.save(isEnabled: canConfirmEdit) {
             guard let currentUtterance = currentUtterance else { return }
             handleSavingPhrase(with: currentUtterance, in: viewController)
         }
 
-        return TextEditorViewController.Configuration(leftItem: leftItem, rightItem: rightItem)
+        return TextEditorViewController.Configuration(leftItemConfiguraton: leftConfiguration, rightItemConfiguration: rightConfiguration)
     }
 
     func textEditorViewControllerInitialValue(_ viewController: TextEditorViewController) -> String? {

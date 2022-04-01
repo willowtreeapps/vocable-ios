@@ -41,12 +41,14 @@ final class FreeResponseEditorConfigurationProvider: TextEditorConfigurationProv
             updateFavoriteState(for: currentUtterance)
         }
 
-        let rightItem = EditTextNavigationButton.Configuration(image: favoriteImage, isEnabled: canFavoritePhrase) { [weak self] in
+        let leftConfiguration = TextEditorNavigationButton.Configuration.dismissal(for: viewController)
+
+        let rightConfiguration = TextEditorNavigationButton.Configuration.favorite(image: favoriteImage, isEnabled: canFavoritePhrase) { [weak self] in
             guard let currentUtterance = currentUtterance else { return }
             self?.favoritePhrase(with: currentUtterance, in: viewController)
         }
 
-        return TextEditorViewController.Configuration(leftItem: .dismissal(for: viewController), rightItem: rightItem)
+        return TextEditorViewController.Configuration(leftItemConfiguraton: leftConfiguration, rightItemConfiguration: rightConfiguration)
     }
 
     func textEditorViewControllerInitialValue(_ viewController: TextEditorViewController) -> String? {

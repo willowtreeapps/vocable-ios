@@ -21,14 +21,14 @@ protocol TextEditorConfigurationProviding {
 class TextEditorViewController: VocableViewController, UICollectionViewDelegate {
 
     struct Configuration {
-        var leftItem: EditTextNavigationButton.Configuration?
-        var rightItem: EditTextNavigationButton.Configuration?
+        var leftItemConfiguraton: TextEditorNavigationButton.Configuration?
+        var rightItemConfiguration: TextEditorNavigationButton.Configuration?
     }
 
     let textView = OutputTextView(frame: .zero)
 
-    let leftButton = EditTextNavigationButton()
-    let rightButton = EditTextNavigationButton()
+    let leftButton = TextEditorNavigationButton()
+    let rightButton = TextEditorNavigationButton()
 
     var delegate: TextEditorConfigurationProviding?
 
@@ -102,8 +102,8 @@ class TextEditorViewController: VocableViewController, UICollectionViewDelegate 
     private func updateForConfiguration() {
         guard let configuration = delegate?.textEditorViewControllerConfiguration(self) else { return }
 
-        leftButton.configure(with: configuration.leftItem)
-        rightButton.configure(with: configuration.rightItem)
+        leftButton.configure(with: configuration.leftItemConfiguraton)
+        rightButton.configure(with: configuration.rightItemConfiguration)
         needsConfigurationUpdate = false
     }
 
