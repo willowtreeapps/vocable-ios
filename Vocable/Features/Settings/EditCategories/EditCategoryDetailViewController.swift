@@ -293,20 +293,6 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         show(viewController, sender: nil)
     }
 
-    private func handleDismissAlert() {
-        func confirmChangesAction() {
-            self.dismiss(animated: true, completion: nil)
-        }
-
-        let title = NSLocalizedString("category_editor.alert.cancel_editing_confirmation.title", comment: "Exit edit categories alert title")
-        let confirmButtonTitle = NSLocalizedString("category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title", comment: "Confirm exit category alert action title")
-        let cancelButtonTitle = NSLocalizedString("category_editor.alert.cancel_editing_confirmation.button.cancel.title", comment: "Cancel exit editing alert action title")
-        let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
-        alert.addAction(GazeableAlertAction(title: confirmButtonTitle, style: .bold, handler: confirmChangesAction))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     private func handleRemoveCategory() {
         let alert: GazeableAlertViewController = .removeCategoryAlert { [weak self] in
             self?.removeCategory()
