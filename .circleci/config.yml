@@ -107,6 +107,9 @@ workflows:
             branches:
               ignore: /crowdin.*/ 
       - export-localizations-for-crowdin:
+          filters:
+            branches:
+              only: develop
           requires:
             - build-and-test
       - buildanddeploytotestflight:
