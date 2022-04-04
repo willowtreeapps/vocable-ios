@@ -32,7 +32,7 @@ final class GazeableAlertPresentationController: UIPresentationController {
         containerView?.insertSubview(dimmedBackgroundView, at: 0)
 
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
-            self.dimmedBackgroundView.alpha = 0.6
+            self.dimmedBackgroundView.alpha = 0.4
         }, completion: nil)
     }
 
