@@ -147,7 +147,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
 
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
-        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, handler: deleteAction))
+        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, style: .destructive, handler: deleteAction))
         self.present(alert, animated: true)
     }
 
@@ -191,8 +191,8 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         let continueButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
                                                     comment: "Continue editing alert action title")
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
-        alert.addAction(GazeableAlertAction(title: continueButtonTitle, style: .bold))
+        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
+        alert.addAction(GazeableAlertAction(title: discardButtonTitle, style: .destructive, handler: discardChangesAction))
         self.present(alert, animated: true)
     }
 }
