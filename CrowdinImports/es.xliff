@@ -27,11 +27,6 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
     </header>
     <body>
-      <trans-unit id="Edit Phrases" xml:space="preserve" approved="yes">
-        <source>Edit Phrases</source>
-        <target state="final">Editar frases</target>
-        <note>Edit Phrases</note>
-      </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
         <source>Categories</source>
         <target state="translated">Categorias</target>
