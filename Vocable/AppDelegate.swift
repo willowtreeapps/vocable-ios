@@ -11,6 +11,7 @@ import CoreData
 import Combine
 import AVFoundation
 import VocableListenCore
+import SwiftUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -95,6 +96,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     VLClassifier.prepare()
                 }
             }.store(in: &disposables)
+
+        let rootVc = UIHostingController(rootView: TestView())
+        window?.rootViewController = rootVc
+        window?.makeKeyAndVisible()
 
         return true
     }

@@ -244,7 +244,7 @@ class HeadGazeWindow: UIWindow {
 
     func gazeCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
         for gestureRecognizer in self.gazeGestureRecognizers {
-            gestureRecognizer.gazeEnded(gaze, with: event)
+            gestureRecognizer.gazeCancelled(gaze, with: event)
         }
     }
 

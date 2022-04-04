@@ -1,0 +1,102 @@
+//
+//  BridgedGazeableButton.swift
+//  Vocable
+//
+//  Created by Robert Moyer on 4/1/22.
+//  Copyright © 2022 WillowTree. All rights reserved.
+//
+
+import Combine
+import UIKit
+
+class BridgedGazeableButton: UIButton {
+    var minimumGazeDuration: TimeInterval = 2
+
+    private var gazeStartDate: Date?
+
+    var stateSubject: CurrentValueSubject<ControlState, Never> = .init(.normal)
+
+    override var intrinsicContentSize: CGSize {
+        subviews.first?.intrinsicContentSize ??
+            CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
+    }
+
+    init() {
+        super.init(frame: .zero)
+        commmonInit()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commmonInit()
+    }
+
+    private func commmonInit() {
+        setContentHuggingPriority(.defaultHigh, for: .vertical)
+        setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    }
+
+    // MARK: State Updates
+
+    override var isEnabled: Bool {
+        didSet {
+            let currentState = stateSubject.value
+            let newState = isEnabled ?
+                currentState.subtracting(.disabled) :
+                currentState.union(.disabled)
+            stateSubject.send(newState)
+        }
+    }
+
+    override var isHighlighted: Bool {
+        didSet {
+            let currentState = stateSubject.value
+            let newState = isHighlighted ?
+                currentState.union(.highlighted) :
+                currentState.subtracting(.highlighted)
+            stateSubject.send(newState)
+        }
+    }
+
+    override var isSelected: Bool {
+        didSet {
+            let currentState = stateSubject.value
+            let newState = isSelected ?
+                currentState.union(.selected) :
+                currentState.subtracting(.selected)
+            stateSubject.send(newState)
+        }
+    }
+
+    // MARK: Gaze Overrides
+
+    override func gazeBegan(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        gazeStartDate = Date()
+        isHighlighted = true
+    }
+
+    override func gazeMoved(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        guard let gazeStartDate = gazeStartDate else { return }
+
+        let elapsedTime = Date().timeIntervalSince(gazeStartDate)
+
+        if elapsedTime >= minimumGazeDuration {
+            isSelected = true
+            sendActions(for: .primaryActionTriggered)
+            self.gazeStartDate = nil
+            (window as? HeadGazeWindow)?.animateCursorSelection()
+        }
+    }
+
+    override func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        gazeStartDate = nil
+        isSelected = false
+        isHighlighted = false
+    }
+
+    override func gazeCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        gazeStartDate = nil
+        isSelected = false
+        isHighlighted = false
+    }
+}
