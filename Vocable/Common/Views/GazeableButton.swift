@@ -122,6 +122,7 @@ class GazeableButton: UIButton {
         setFillColor(.cellSelectionColor, for: [.selected, .highlighted])
         setTitleColor(.collectionViewBackgroundColor, for: .selected)
         setTitleColor(.collectionViewBackgroundColor, for: [.selected, .highlighted])
+        setTitleColor(.white.withAlphaComponent(0.5), for: .disabled)
         titleLabel?.numberOfLines = 3
         contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
         layoutMargins = .zero
@@ -192,6 +193,11 @@ class GazeableButton: UIButton {
             let disabledColor = color?.disabled(blending: backgroundColor ?? .orange)
             super.setTitleColor(disabledColor, for: disabledState)
         }
+    }
+
+    override func setAttributedTitle(_ title: NSAttributedString?, for state: UIControl.State) {
+        super.setAttributedTitle(title, for: state)
+        setTitleColor(titleColor(for: state), for: state)
     }
 
     private func updateSelectionAppearance() {

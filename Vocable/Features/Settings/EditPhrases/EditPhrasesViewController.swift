@@ -256,17 +256,13 @@ private extension EditPhrasesViewController {
     func phraseCellRegistration() ->
     UICollectionView.CellRegistration<VocableListCell, Phrase> {
         return .init { cell, _, phrase in
-            let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white,
-                                                             .font: UIFont.systemFont(ofSize: 22, weight: .bold)]
-
-            let attributedText = NSAttributedString(string: phrase.utterance ?? "", attributes: attributes)
             let phraseIdentifier = phrase.objectID
 
             let deleteAction = VocableListCellAction.delete { [weak self] in
                 self?.presentDeletionPromptForPhrase(with: phraseIdentifier)
             }
 
-            cell.contentConfiguration = VocableListContentConfiguration(attributedText: attributedText,
+            cell.contentConfiguration = VocableListContentConfiguration(title: phrase.utterance ?? "",
                                                                         actions: [deleteAction],
                                                                         accessory: .disclosureIndicator()) { [weak self] in
                 self?.presentEditorForPhrase(with: phraseIdentifier)
