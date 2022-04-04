@@ -23,7 +23,7 @@ class SettingsScreen: BaseScreen {
     let categoryUpButton = "chevron.up"
     let categoryDownButton = "chevron.down"
     let categoryForwardButton = "Forward"
-    let showCategorySwitch = XCUIApplication().switches["show_category_toggle"]
+    let showCategorySwitch = XCUIApplication().buttons["show_category_toggle"]
     let hideCategorySwitch = "hide"
     let categoryShowButton = "show"
     let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]

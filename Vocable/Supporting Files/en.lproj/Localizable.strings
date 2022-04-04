@@ -96,7 +96,11 @@
 /* Settings screen header title */
 "settings.header.title" = "Settings";
 
+"category_editor.detail.button.rename_category.title" = "Rename Category";
+
 "category_editor.detail.button.show_category.title" = "Show Category";
+
+"category_editor.detail.button.edit_phrases.title" = "Edit Phrases";
 
 "category_editor.detail.button.remove_category.title" = "Remove Category";
 
@@ -161,4 +165,4 @@
 
 "settings.alert.reset_app_settings_failure.body" = "Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.";
 
-"settings.alert.reset_app_settings_success.button.ok" = "OK";
+"settings.alert.reset_app_settings_failure.button.ok" = "OK";

@@ -107,6 +107,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
                 newConfig.actionsConfiguration.size.widthDimension = .fractionalHeight(1.0)
             }
         }
+
         cell.contentConfiguration = config
     }
 
@@ -229,9 +230,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         if category == Category.listeningModeCategory() {
             destination = ListeningModeViewController()
         } else {
-            let viewController = EditCategoryDetailViewController()
-            viewController.category = category
-            destination = viewController
+            destination = EditCategoryDetailViewController(category)
         }
         show(destination, sender: nil)
     }
