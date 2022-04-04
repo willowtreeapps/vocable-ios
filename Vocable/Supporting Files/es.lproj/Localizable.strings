@@ -31,9 +31,6 @@
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "Eliminar Categoría";
 
-/* Show category button label within the category detail screen. */
-"category_editor.detail.button.show_category.title" = "Mostrar";
-
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "Cambios guardados";
 

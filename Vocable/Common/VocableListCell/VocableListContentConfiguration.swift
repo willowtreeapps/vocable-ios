@@ -47,6 +47,8 @@ struct VocableListContentConfiguration: UIContentConfiguration, Equatable {
     var actionsConfiguration: ActionsConfiguration
     var accessibilityIdentifier: String?
     var accessibilityLabel: String?
+    var primaryBackgroundColor: UIColor = .defaultCellBackgroundColor
+    var primaryContentHorizontalAlignment: UIControl.ContentHorizontalAlignment = .leading
 
     var traitCollectionChangeHandler: TraitCollectionChangeHandler?
 
@@ -93,6 +95,14 @@ struct VocableListContentConfiguration: UIContentConfiguration, Equatable {
         self.actionsConfiguration = actionsConfiguration
         self.accessibilityLabel = accessibilityLabel
         self.accessibilityIdentifier = accessibilityIdentifier
+    }
+
+    static func disclosureCellConfiguration(withTitle title: String, action: @escaping () -> Void) -> VocableListContentConfiguration {
+        .init(title: title, accessory: .disclosureIndicator(), primaryAction: action)
+    }
+
+    static func toggleCellConfiguration(withTitle title: String, isOn: Bool, action: @escaping () -> Void) -> VocableListContentConfiguration {
+        .init(title: title, accessory: .toggle(isOn: isOn), primaryAction: action)
     }
 
     func makeContentView() -> UIView & UIContentView {

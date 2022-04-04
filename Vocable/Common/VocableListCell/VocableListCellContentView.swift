@@ -144,11 +144,18 @@ final class VocableListCellContentView: UIView, UIContentView {
     }
 
     private func updatePrimaryLabelButton(with configuration: VocableListContentConfiguration?) {
+        primaryLabelButton.contentHorizontalAlignment = configuration?.primaryContentHorizontalAlignment ?? .center
         primaryLabelButton.setTrailingAccessory(configuration?.accessory)
         primaryLabelButton.setAttributedTitle(configuration?.attributedTitle, for: .normal)
         primaryLabelButton.accessibilityLabel = configuration?.accessibilityLabel
         primaryLabelButton.accessibilityIdentifier = configuration?.accessibilityIdentifier
         primaryLabelButton.addTarget(self, action: #selector(handlePrimaryActionSelection(_:)), for: .primaryActionTriggered)
+        primaryLabelButton.isEnabled = configuration?.isPrimaryActionEnabled ?? true
+
+        if let backgroundColor = configuration?.primaryBackgroundColor {
+            primaryLabelButton.setFillColor(backgroundColor, for: .normal)
+            primaryLabelButton.setFillColor(backgroundColor.disabled(blending: .collectionViewBackgroundColor), for: .disabled)
+        }
     }
 
     private func updateLeadingActionAccessoryButtons(with configuration: VocableListContentConfiguration?) {
