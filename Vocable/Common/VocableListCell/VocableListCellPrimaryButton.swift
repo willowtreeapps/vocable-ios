@@ -13,6 +13,17 @@ final class VocableListCellPrimaryButton: GazeableButton {
     private var trailingAccessoryViewLayoutGuide = UILayoutGuide()
     private(set) var trailingAccessoryView: UIView?
 
+    override var isEnabled: Bool {
+        didSet {
+            trailingAccessoryView?.alpha = isEnabled ? 1 : 0.5
+        }
+    }
+
+    init() {
+        super.init(frame: .zero)
+        commonInit()
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
