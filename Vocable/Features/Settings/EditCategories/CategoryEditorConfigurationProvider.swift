@@ -19,11 +19,13 @@ struct CategoryEditorConfigurationProvider: TextEditorConfigurationProviding {
     private var canConfirmEdit: Bool = false
     private var shouldDismiss: Bool = true
 
+    let didSaveCategory: (() -> Void)?
+
     /// Inititalizer
     /// - Parameters:
     ///   - categoryIdentifier: if nil, create a new phrase, otherwise edit existing category
     ///   - context: the context to fetch, edit, and create the category
-    init(categoryIdentifier: NSManagedObjectID? = nil, context: NSManagedObjectContext) {
+    init(categoryIdentifier: NSManagedObjectID? = nil, context: NSManagedObjectContext, didSaveCategory: (() -> Void)? = nil) {
         self.categoryIdentifier = categoryIdentifier
         self.context = context
         if let categoryIdentifier = categoryIdentifier {
@@ -31,6 +33,7 @@ struct CategoryEditorConfigurationProvider: TextEditorConfigurationProviding {
         } else {
             self.initialName = nil
         }
+        self.didSaveCategory = didSaveCategory
     }
 
     mutating func textEditorViewController(_ viewController: TextEditorViewController, textDidChange text: String?) {
@@ -100,6 +103,9 @@ struct CategoryEditorConfigurationProvider: TextEditorConfigurationProviding {
                 DispatchQueue.main.async {
                     let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
                     ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
+                    if let didSaveCategory = didSaveCategory {
+                        didSaveCategory()
+                    }
                     viewController.dismiss(animated: true)
                 }
 

@@ -349,12 +349,19 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         return false
     }
 
+    private func reloadData() {
+        collectionView.reloadData()
+        navigationBar.title = category.name
+    }
+
     // MARK: EditCategoryDetailTitleCollectionViewCellDelegate
 
     func handleRenameCategory() {
         let context = NSPersistentContainer.shared.newBackgroundContext()
         let viewController = TextEditorViewController()
-        viewController.delegate = CategoryEditorConfigurationProvider(categoryIdentifier: category.objectID, context: context)
+        viewController.delegate = CategoryEditorConfigurationProvider(categoryIdentifier: category.objectID, context: context, didSaveCategory: { [weak self] in
+            self?.reloadData()
+        })
         present(viewController, animated: true)
     }
 }
