@@ -47,11 +47,6 @@
         <target>Delete All</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="Edit Phrases" xml:space="preserve">
-        <source>Edit Phrases</source>
-        <target>Edit Phrases</target>
-        <note>Edit Phrases</note>
-      </trans-unit>
       <trans-unit id="No Entries" xml:space="preserve">
         <source>No Entries</source>
         <target>No Entries</target>
@@ -112,10 +107,20 @@
         <target>Are you sure you want to delete? Removed phrases cannot be restored.</target>
         <note>Delete phrase confirmation alert title</note>
       </trans-unit>
+      <trans-unit id="category_editor.detail.button.edit_phrases.title" xml:space="preserve">
+        <source>Edit Phrases</source>
+        <target>Edit Phrases</target>
+        <note>Edit Phrases button label within the category detail screen</note>
+      </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
         <source>Remove Category</source>
         <target>Remove Category</target>
         <note>Remove category button label within the category detail screen.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.rename_category.title" xml:space="preserve">
+        <source>Rename Category</source>
+        <target>Rename Category</target>
+        <note>Rename Category button label within the category detail screen</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
         <source>Show Category</source>
@@ -255,6 +260,11 @@
         <target>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</target>
         <note>Reset app settings failure alert</note>
       </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target>OK</target>
+        <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset</note>
+      </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
         <source>Vocable has been reset successfully</source>
         <target>Vocable has been reset successfully</target>
@@ -263,8 +273,7 @@
       <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
         <source>OK</source>
         <target>OK</target>
-        <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset
-   Button dismissing the alert informing the user that Vocable's application settings were successfully reset</note>
+        <note>Button dismissing the alert informing the user that Vocable's application settings were successfully reset</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
         <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
