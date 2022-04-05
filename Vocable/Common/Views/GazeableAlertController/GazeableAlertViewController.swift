@@ -17,12 +17,14 @@ final class GazeableAlertAction: NSObject {
     }
 
     let title: String
+    let accessibilityIdentifier: String
     let style: Style
     let handler: (() -> Void)?
     fileprivate var defaultCompletion: (() -> Void)?
 
-    init(title: String, style: Style = .default, handler: (() -> Void)? = nil) {
+    init(title: String, accessibilityIdentifier: String? = nil, style: Style = .default, handler: (() -> Void)? = nil) {
         self.title = title
+        self.accessibilityIdentifier = accessibilityIdentifier ?? title
         self.style = style
         self.handler = handler
     }
@@ -300,6 +302,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
             button.style = action.style
             button.shouldShrinkWhenTouched = false
             button.backgroundColor = .clear
+            button.accessibilityIdentifier = action.accessibilityIdentifier
             button.addTarget(action, action: #selector(GazeableAlertAction.performActions), for: .primaryActionTriggered)
 
             if actionButtonStackView.arrangedSubviews.isEmpty {
