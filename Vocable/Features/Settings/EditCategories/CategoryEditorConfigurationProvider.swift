@@ -72,7 +72,11 @@ struct CategoryEditorConfigurationProvider: TextEditorConfigurationProviding {
         }
 
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.predicate = Predicate(\Category.name, like: name)
+        request.predicate = {
+            let isExistingCategory = Predicate(\Category.name, like: name)
+            let isNotUserRemoved = !Predicate(\Category.isUserRemoved)
+            return isExistingCategory && isNotUserRemoved
+        }()
         request.fetchLimit = 1
         let results = (try? context.fetch(request)) ?? []
 

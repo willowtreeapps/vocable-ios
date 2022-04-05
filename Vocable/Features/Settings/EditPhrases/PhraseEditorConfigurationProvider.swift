@@ -75,7 +75,8 @@ struct PhraseEditorConfigurationProvider: TextEditorConfigurationProviding {
         request.predicate = {
             let isInCategory = Predicate(\Phrase.category, isEqual: categoryIdentifier)
             let isExistingPhrase = Predicate(\Phrase.utterance, like: utterance)
-            return isInCategory && isExistingPhrase
+            let isNotUserRemoved = !Predicate(\Phrase.isUserRemoved)
+            return isInCategory && isExistingPhrase && isNotUserRemoved
         }()
         request.fetchLimit = 1
         let results = (try? context.fetch(request)) ?? []
