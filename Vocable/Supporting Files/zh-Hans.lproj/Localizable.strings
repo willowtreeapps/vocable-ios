@@ -41,9 +41,6 @@
 /* Debugging error message for when preloaded content is not found */
 "debug.assertion.presets_file_not_found" = "找不到预设";
 
-/* Edit Phrases */
-"Edit Phrases" = "编辑对话";
-
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "取消";
 
