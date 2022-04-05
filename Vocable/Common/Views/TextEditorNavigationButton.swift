@@ -17,8 +17,8 @@ private extension GazeableAlertViewController {
         let continueButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
                                                     comment: "Continue editing alert action title")
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: continueButtonTitle))
-        alert.addAction(GazeableAlertAction(title: discardButtonTitle, style: .destructive, handler: onDiscardCompletion))
+        alert.addAction(GazeableAlertAction(title: continueButtonTitle, accessibilityIdentifier: "alert.button.continue_editing"))
+        alert.addAction(GazeableAlertAction(title: discardButtonTitle, accessibilityIdentifier: "alert.button.discard_changes", style: .destructive, handler: onDiscardCompletion))
         return alert
     }
 }

@@ -130,8 +130,8 @@ struct CategoryNameEditorConfigurationProvider: TextEditorConfigurationProviding
                                                    comment: "Category already exists alert create button")
 
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
-        alert.addAction(GazeableAlertAction(title: createButtonTitle, style: .destructive, handler: confirmationHandler))
+        alert.addAction(GazeableAlertAction(title: cancelButtonTitle, accessibilityIdentifier: "alert.button.cancel"))
+        alert.addAction(GazeableAlertAction(title: createButtonTitle, accessibilityIdentifier: "alert.button.create_duplicate", style: .destructive, handler: confirmationHandler))
         viewController.present(alert, animated: true)
     }
 }
