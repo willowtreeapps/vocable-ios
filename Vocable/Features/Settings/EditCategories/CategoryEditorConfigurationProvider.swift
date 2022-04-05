@@ -37,8 +37,9 @@ struct CategoryEditorConfigurationProvider: TextEditorConfigurationProviding {
     }
 
     mutating func textEditorViewController(_ viewController: TextEditorViewController, textDidChange text: String?) {
-        let textDidChange = initialName != text
-        let isTextEmpty = text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
+        let trimmedText = text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let textDidChange = initialName != trimmedText
+        let isTextEmpty = trimmedText?.isEmpty ?? true
 
         canConfirmEdit = textDidChange && !isTextEmpty
 
@@ -46,7 +47,7 @@ struct CategoryEditorConfigurationProvider: TextEditorConfigurationProviding {
     }
 
     func textEditorViewControllerConfiguration(_ viewController: TextEditorViewController) -> TextEditorViewController.Configuration {
-        let currentName = viewController.text
+        let currentName = viewController.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let textDidChange = initialName != currentName
 
         let leftItem = TextEditorNavigationButton.Configuration.dismissal(for: viewController, textDidChange: textDidChange)

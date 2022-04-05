@@ -35,7 +35,7 @@ final class FreeResponseEditorConfigurationProvider: TextEditorConfigurationProv
     }
 
     func textEditorViewControllerConfiguration(_ viewController: TextEditorViewController) -> TextEditorViewController.Configuration {
-        let currentUtterance = viewController.text
+        let currentUtterance = viewController.text?.trimmingCharacters(in: .whitespacesAndNewlines)
 
         if needsUpdateFavoritesState {
             updateFavoriteState(for: currentUtterance)

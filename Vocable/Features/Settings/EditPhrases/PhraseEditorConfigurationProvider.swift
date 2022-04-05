@@ -37,8 +37,9 @@ struct PhraseEditorConfigurationProvider: TextEditorConfigurationProviding {
     }
 
     mutating func textEditorViewController(_ viewController: TextEditorViewController, textDidChange text: String?) {
-        let textDidChange = initialUtterance != text
-        let isTextEmpty = text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
+        let trimmedText = text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let textDidChange = initialUtterance != trimmedText
+        let isTextEmpty = trimmedText?.isEmpty ?? true
 
         canConfirmEdit = textDidChange && !isTextEmpty
 
@@ -46,7 +47,7 @@ struct PhraseEditorConfigurationProvider: TextEditorConfigurationProviding {
     }
 
     func textEditorViewControllerConfiguration(_ viewController: TextEditorViewController) -> TextEditorViewController.Configuration {
-        let currentUtterance = viewController.text
+        let currentUtterance = viewController.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let textDidChange = initialUtterance != currentUtterance
 
         let leftConfiguration = TextEditorNavigationButton.Configuration.dismissal(for: viewController, textDidChange: textDidChange)
