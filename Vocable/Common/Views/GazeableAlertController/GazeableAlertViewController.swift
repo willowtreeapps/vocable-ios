@@ -34,6 +34,39 @@ final class GazeableAlertAction: NSObject {
         handler?()
     }
 
+    static func cancel(withTitle title: String, handler: (() -> Void)? = nil) -> GazeableAlertAction {
+        GazeableAlertAction(
+            title: title,
+            accessibilityIdentifier: "alert.button.cancel",
+            handler: handler
+        )
+    }
+
+    static func delete(withTitle title: String, handler: (() -> Void)? = nil) -> GazeableAlertAction {
+        GazeableAlertAction(
+            title: title,
+            accessibilityIdentifier: "alert.button.delete",
+            style: .destructive,
+            handler: handler
+        )
+    }
+
+    static func continueEditing(withTitle title: String, handler: (() -> Void)? = nil) -> GazeableAlertAction {
+        GazeableAlertAction(
+            title: title,
+            accessibilityIdentifier: "alert.button.continue_editing",
+            handler: handler
+        )
+    }
+
+    static func discardChanges(withTitle title: String, handler: (() -> Void)? = nil) -> GazeableAlertAction {
+        GazeableAlertAction(
+            title: title,
+            accessibilityIdentifier: "alert.button.discard_changes",
+            style: .destructive,
+            handler: handler
+        )
+    }
 }
 
 private final class DividerView: UIView {

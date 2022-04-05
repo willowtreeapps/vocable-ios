@@ -358,12 +358,12 @@ private extension GazeableAlertViewController {
         cancelAction: @escaping () -> Void
     ) -> GazeableAlertViewController {
         let title = NSLocalizedString("category_editor.alert.delete_category_confirmation.title", comment: "Remove category alert title")
-        let confirmButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.remove.title", comment: "Remove category alert action title")
+        let removeButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.remove.title", comment: "Remove category alert action title")
         let cancelButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.cancel.title", comment: "Cancel alert action title")
 
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: cancelButtonTitle, accessibilityIdentifier: "alert.button.cancel", handler: cancelAction))
-        alert.addAction(GazeableAlertAction(title: confirmButtonTitle, accessibilityIdentifier: "alert.button.delete", style: .destructive, handler: removeAction))
+        alert.addAction(.cancel(withTitle: cancelButtonTitle, handler: cancelAction))
+        alert.addAction(.delete(withTitle: removeButtonTitle, handler: removeAction))
 
         return alert
     }
