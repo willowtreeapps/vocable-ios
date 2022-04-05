@@ -65,17 +65,17 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target>Cancel</target>
-        <note>Cancel exit editing alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
         <source>Confirm</source>
         <target>Confirm</target>
-        <note>Confirm exit category alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
         <source>If you close this without saving your custom category will be deleted.</source>
         <target>If you close this without saving your custom category will be deleted.</target>
-        <note>Exit edit categories alert title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -98,13 +98,13 @@
         <note>Delete phrase alert cancel button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
-        <source>Delete</source>
-        <target>Delete</target>
+        <source>Remove</source>
+        <target>Remove</target>
         <note>Delete phrase alert action button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
-        <source>Are you sure you want to delete? Removed phrases cannot be restored.</source>
-        <target>Are you sure you want to delete? Removed phrases cannot be restored.</target>
+        <source>Deleted phrases cannot be recovered.</source>
+        <target>Deleted phrases cannot be recovered.</target>
         <note>Delete phrase confirmation alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.edit_phrases.title" xml:space="preserve">
@@ -193,8 +193,8 @@
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>Are you sure? Going back before saving will clear any edits made.</source>
-        <target>Are you sure? Going back before saving will clear any edits made.</target>
+        <source>Going back before saving will clear any edits made.</source>
+        <target>Going back before saving will clear any edits made.</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve">
@@ -365,8 +365,8 @@
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>Are you sure? Going back before saving will clear any edits made.</source>
-        <target>Are you sure? Going back before saving will clear any edits made.</target>
+        <source>Going back before saving will clear any edits made.</source>
+        <target>Going back before saving will clear any edits made.</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve">
