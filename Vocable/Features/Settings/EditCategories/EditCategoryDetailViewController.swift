@@ -416,8 +416,7 @@ private extension NSAttributedString {
             .localizedStringWithFormat(" %@", buttonText)
 
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 22, weight: .bold),
-            .foregroundColor: UIColor.white
+            .font: UIFont.systemFont(ofSize: 22, weight: .bold)
         ]
 
         let text = NSMutableAttributedString(string: formatString, attributes: attributes)
