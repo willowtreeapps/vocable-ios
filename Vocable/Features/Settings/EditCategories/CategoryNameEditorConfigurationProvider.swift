@@ -1,5 +1,5 @@
 //
-//  CategoryEditorConfigurationProvider.swift
+//  CategoryNameEditorConfigurationProvider.swift
 //  Vocable
 //
 //  Created by Jesse Morgan on 3/30/22.
@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-struct CategoryEditorConfigurationProvider: TextEditorConfigurationProviding {
+struct CategoryNameEditorConfigurationProvider: TextEditorConfigurationProviding {
 
     let categoryIdentifier: NSManagedObjectID?
     let context: NSManagedObjectContext

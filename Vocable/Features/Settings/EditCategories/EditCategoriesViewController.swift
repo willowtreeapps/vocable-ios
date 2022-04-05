@@ -272,7 +272,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
     @objc private func addButtonPressed(_ sender: Any) {
         let viewController = TextEditorViewController()
         let context = NSPersistentContainer.shared.newBackgroundContext()
-        viewController.delegate = CategoryEditorConfigurationProvider(context: context)
+        viewController.delegate = CategoryNameEditorConfigurationProvider(context: context)
 
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)

@@ -359,7 +359,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     func handleRenameCategory() {
         let context = NSPersistentContainer.shared.newBackgroundContext()
         let viewController = TextEditorViewController()
-        viewController.delegate = CategoryEditorConfigurationProvider(categoryIdentifier: category.objectID, context: context, didSaveCategory: { [weak self] in
+        viewController.delegate = CategoryNameEditorConfigurationProvider(categoryIdentifier: category.objectID, context: context, didSaveCategory: { [weak self] in
             self?.reloadData()
         })
         present(viewController, animated: true)

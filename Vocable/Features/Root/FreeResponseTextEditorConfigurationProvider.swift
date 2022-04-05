@@ -1,5 +1,5 @@
 //
-//  FreeResponseEditorConfigurationProvider.swift
+//  FreeResponseTextEditorConfigurationProvider.swift
 //  Vocable
 //
 //  Created by Jesse Morgan on 3/31/22.
@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-final class FreeResponseEditorConfigurationProvider: TextEditorConfigurationProviding {
+final class FreeResponseTextEditorConfigurationProvider: TextEditorConfigurationProviding {
 
     let context: NSManagedObjectContext
 
