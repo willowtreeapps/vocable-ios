@@ -34,7 +34,8 @@ final class TextEditorNavigationButton: GazeableButton {
         var action: Action?
 
         static func dismissal(for viewController: UIViewController, isEnabled: Bool = true, textDidChange: Bool = false, accessibilityIdentifier: String = "keyboard.dismissButton") -> Self {
-            Configuration(image: UIImage(systemName: "xmark.circle")!, isEnabled: isEnabled, accessibilityIdentifier: accessibilityIdentifier) {
+            Configuration(image: UIImage(systemName: "xmark.circle")!, isEnabled: isEnabled, accessibilityIdentifier: accessibilityIdentifier) { [weak viewController] in
+                guard let viewController = viewController else { return }
                 if textDidChange {
                     let alert = GazeableAlertViewController.discardChangesAlert {
                         viewController.dismiss(animated: true)

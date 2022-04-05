@@ -63,6 +63,8 @@ class TextEditorViewController: VocableViewController, UICollectionViewDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        leftButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+
         addChild(keyboardViewController)
         keyboardViewController.view.translatesAutoresizingMaskIntoConstraints = false
         keyboardViewController.view.preservesSuperviewLayoutMargins = true
@@ -80,6 +82,10 @@ class TextEditorViewController: VocableViewController, UICollectionViewDelegate 
 
         handleTextChange()
         setNeedsUpdateConfiguration()
+    }
+
+    @objc private func dismissVC() {
+        dismiss(animated: true)
     }
 
     private func handleTextChange() {

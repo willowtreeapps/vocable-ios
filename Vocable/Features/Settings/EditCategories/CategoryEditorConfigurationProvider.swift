@@ -52,8 +52,9 @@ struct CategoryEditorConfigurationProvider: TextEditorConfigurationProviding {
 
         let leftItem = TextEditorNavigationButton.Configuration.dismissal(for: viewController, textDidChange: textDidChange)
 
-        let rightItem = TextEditorNavigationButton.Configuration(image: UIImage(systemName: "checkmark")!, isEnabled: canConfirmEdit, accessibilityIdentifier: "keyboard.saveButton") {
-            guard let currentName = currentName else { return }
+        let rightItem = TextEditorNavigationButton.Configuration(image: UIImage(systemName: "checkmark")!, isEnabled: canConfirmEdit, accessibilityIdentifier: "keyboard.saveButton") { [weak viewController] in
+            guard let currentName = currentName,
+                  let viewController = viewController else { return }
             handleSavingCategory(with: currentName, in: viewController)
         }
 

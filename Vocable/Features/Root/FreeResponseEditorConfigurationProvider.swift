@@ -43,8 +43,9 @@ final class FreeResponseEditorConfigurationProvider: TextEditorConfigurationProv
 
         let leftConfiguration = TextEditorNavigationButton.Configuration.dismissal(for: viewController)
 
-        let rightConfiguration = TextEditorNavigationButton.Configuration.favorite(image: favoriteImage, isEnabled: canFavoritePhrase) { [weak self] in
-            guard let currentUtterance = currentUtterance else { return }
+        let rightConfiguration = TextEditorNavigationButton.Configuration.favorite(image: favoriteImage, isEnabled: canFavoritePhrase) { [weak self, weak viewController] in
+            guard let currentUtterance = currentUtterance,
+                  let viewController = viewController else { return }
             self?.favoritePhrase(with: currentUtterance, in: viewController)
         }
 

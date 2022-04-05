@@ -52,8 +52,9 @@ struct PhraseEditorConfigurationProvider: TextEditorConfigurationProviding {
 
         let leftConfiguration = TextEditorNavigationButton.Configuration.dismissal(for: viewController, textDidChange: textDidChange)
 
-        let rightConfiguration = TextEditorNavigationButton.Configuration.save(isEnabled: canConfirmEdit) {
-            guard let currentUtterance = currentUtterance else { return }
+        let rightConfiguration = TextEditorNavigationButton.Configuration.save(isEnabled: canConfirmEdit) { [weak viewController] in
+            guard let currentUtterance = currentUtterance,
+                  let viewController = viewController else { return }
             handleSavingPhrase(with: currentUtterance, in: viewController)
         }
 
