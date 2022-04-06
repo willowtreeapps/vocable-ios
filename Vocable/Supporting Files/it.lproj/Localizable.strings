@@ -31,9 +31,6 @@
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "Rimuovere la categoria";
 
-/* Show category button label within the category detail screen. */
-"category_editor.detail.button.show_category.title" = "Mostrare";
-
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "Modifiche salvate";
 
@@ -43,9 +40,6 @@
 
 /* Debugging error message for when preloaded content is not found */
 "debug.assertion.presets_file_not_found" = "Nessun preset trovato";
-
-/* Edit Phrases */
-"Edit Phrases" = "Modifica Frasi";
 
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Annulla";

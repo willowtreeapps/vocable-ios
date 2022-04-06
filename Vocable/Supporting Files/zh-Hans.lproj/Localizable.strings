@@ -31,9 +31,6 @@
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "移除类别";
 
-/* Show category button label within the category detail screen. */
-"category_editor.detail.button.show_category.title" = "显示";
-
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "已保存更改";
 
@@ -43,9 +40,6 @@
 
 /* Debugging error message for when preloaded content is not found */
 "debug.assertion.presets_file_not_found" = "找不到预设";
-
-/* Edit Phrases */
-"Edit Phrases" = "编辑对话";
 
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "取消";

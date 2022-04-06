@@ -35,19 +35,17 @@
 		64A220BE2452173C0014EA80 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64A220BD2452173C0014EA80 /* Root.storyboard */; };
 		64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A54544242A490700218BE8 /* GazeEatingView.swift */; };
 		64B32588254B550600023566 /* EditCategoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B32587254B550500023566 /* EditCategoryDetailViewController.swift */; };
-		64B32593254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B32592254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift */; };
-		64B3259B254B591D00023566 /* EditCategoryRemoveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B32597254B591C00023566 /* EditCategoryRemoveCollectionViewCell.swift */; };
-		64B3259C254B591D00023566 /* EditCategoryToggleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B32598254B591D00023566 /* EditCategoryToggleCollectionViewCell.swift */; };
-		64B3259D254B591D00023566 /* EditCategoryRemoveCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64B32599254B591D00023566 /* EditCategoryRemoveCollectionViewCell.xib */; };
-		64B3259E254B591D00023566 /* EditCategoryToggleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64B3259A254B591D00023566 /* EditCategoryToggleCollectionViewCell.xib */; };
 		64D04A58242951C00006962D /* GazeableAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */; };
-		64E9CD60258D35B400A2DC1F /* EditCategoryDetailsHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64E9CD5F258D35B400A2DC1F /* EditCategoryDetailsHeaderCollectionViewCell.xib */; };
 		64F49906245B40BC00348592 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B005AE6245B21ED004919F4 /* SettingsViewController.swift */; };
 		64F8A5FA245CC9FA00B7C0F9 /* EditPhrasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E9892459F7C3007B01F2 /* EditPhrasesViewController.swift */; };
 		6B005AE3245B057E004919F4 /* VocableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B005AE2245B057E004919F4 /* VocableCollectionViewController.swift */; };
 		6B005AE5245B06F3004919F4 /* VocableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B005AE4245B06F3004919F4 /* VocableViewController.swift */; };
 		6B005AED245B25E9004919F4 /* VocableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B005AEC245B25E9004919F4 /* VocableNavigationController.swift */; };
 		6B0501FE27EBA471000CFE5A /* VocableListCellAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0501FD27EBA471000CFE5A /* VocableListCellAction.swift */; };
+		6B05020127F3487E000CFE5A /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 6B05020027F3487E000CFE5A /* Algorithms */; };
+		6B05020427F3489D000CFE5A /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6B05020327F3489D000CFE5A /* Collections */; };
+		6B05020727F351A1000CFE5A /* CategoryReordering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05020627F351A1000CFE5A /* CategoryReordering.swift */; };
+		6B05020927F353DE000CFE5A /* CategoryOrderabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05020827F353DE000CFE5A /* CategoryOrderabilityTests.swift */; };
 		6B1086732463662C00E729A8 /* v2_to_v3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6B1086722463662C00E729A8 /* v2_to_v3.xcmappingmodel */; };
 		6B14DC732419590E0050C287 /* OutputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B14DC722419590E0050C287 /* OutputTextView.swift */; };
 		6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B17CD7B23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift */; };
@@ -155,9 +153,6 @@
 		A99AF23323FDA8B600BE1184 /* SuggestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */; };
 		A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */; };
 		A9B32C8C240EB6250084E151 /* KeyboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B32C8B240EB6250084E151 /* KeyboardModel.swift */; };
-		A9B696052433C422004E6960 /* EditCategoriesDefaultCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B696042433C422004E6960 /* EditCategoriesDefaultCollectionViewCell.xib */; };
-		A9B6960B2433CCFD004E6960 /* EditCategoriesDefaultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B6960A2433CCFD004E6960 /* EditCategoriesDefaultCollectionViewCell.swift */; };
-		A9B6960D2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */; };
 		A9B696112433CF31004E6960 /* EditCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */; };
 		A9C32CFF242271F3000EC6F7 /* Phrase+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */; };
 		A9CF2AEF242D44EE005633A7 /* TimingSensitivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CF2AEE242D44EE005633A7 /* TimingSensitivityViewController.swift */; };
@@ -239,18 +234,14 @@
 		64A220BD2452173C0014EA80 /* Root.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
 		64A54544242A490700218BE8 /* GazeEatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeEatingView.swift; sourceTree = "<group>"; };
 		64B32587254B550500023566 /* EditCategoryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoryDetailViewController.swift; sourceTree = "<group>"; };
-		64B32592254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoryDetailTitleCollectionViewCell.swift; sourceTree = "<group>"; };
-		64B32597254B591C00023566 /* EditCategoryRemoveCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoryRemoveCollectionViewCell.swift; sourceTree = "<group>"; };
-		64B32598254B591D00023566 /* EditCategoryToggleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoryToggleCollectionViewCell.swift; sourceTree = "<group>"; };
-		64B32599254B591D00023566 /* EditCategoryRemoveCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCategoryRemoveCollectionViewCell.xib; sourceTree = "<group>"; };
-		64B3259A254B591D00023566 /* EditCategoryToggleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCategoryToggleCollectionViewCell.xib; sourceTree = "<group>"; };
 		64D04A57242951C00006962D /* GazeableAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableAlertPresentationController.swift; sourceTree = "<group>"; };
-		64E9CD5F258D35B400A2DC1F /* EditCategoryDetailsHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCategoryDetailsHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		6B005AE2245B057E004919F4 /* VocableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableCollectionViewController.swift; sourceTree = "<group>"; };
 		6B005AE4245B06F3004919F4 /* VocableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableViewController.swift; sourceTree = "<group>"; };
 		6B005AE6245B21ED004919F4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6B005AEC245B25E9004919F4 /* VocableNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableNavigationController.swift; sourceTree = "<group>"; };
 		6B0501FD27EBA471000CFE5A /* VocableListCellAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableListCellAction.swift; sourceTree = "<group>"; };
+		6B05020627F351A1000CFE5A /* CategoryReordering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryReordering.swift; sourceTree = "<group>"; };
+		6B05020827F353DE000CFE5A /* CategoryOrderabilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOrderabilityTests.swift; sourceTree = "<group>"; };
 		6B1086712463102F00E729A8 /* Phrases v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Phrases v3.xcdatamodel"; sourceTree = "<group>"; };
 		6B1086722463662C00E729A8 /* v2_to_v3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = v2_to_v3.xcmappingmodel; sourceTree = "<group>"; };
 		6B14DC722419590E0050C287 /* OutputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTextView.swift; sourceTree = "<group>"; };
@@ -388,9 +379,6 @@
 		A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9B32C8B240EB6250084E151 /* KeyboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardModel.swift; sourceTree = "<group>"; };
-		A9B696042433C422004E6960 /* EditCategoriesDefaultCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditCategoriesDefaultCollectionViewCell.xib; sourceTree = "<group>"; };
-		A9B6960A2433CCFD004E6960 /* EditCategoriesDefaultCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoriesDefaultCollectionViewCell.swift; sourceTree = "<group>"; };
-		A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCategoriesCompactCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoriesViewController.swift; sourceTree = "<group>"; };
 		A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Phrase+Helpers.swift"; sourceTree = "<group>"; };
 		A9CF2AEE242D44EE005633A7 /* TimingSensitivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingSensitivityViewController.swift; sourceTree = "<group>"; };
@@ -432,6 +420,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B05020427F3489D000CFE5A /* Collections in Frameworks */,
+				6B05020127F3487E000CFE5A /* Algorithms in Frameworks */,
 				64599429258933370010EEFF /* VocableCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -545,6 +535,7 @@
 			isa = PBXGroup;
 			children = (
 				54D3C41623E37CD40061EF47 /* VocableTests.swift */,
+				6B05020827F353DE000CFE5A /* CategoryOrderabilityTests.swift */,
 				54D3C41823E37CD40061EF47 /* Info.plist */,
 			);
 			path = VocableTests;
@@ -588,20 +579,12 @@
 			path = Root;
 			sourceTree = "<group>";
 		};
-		64E9CD67258D3E5500A2DC1F /* Cells */ = {
+		6B05020527F3516F000CFE5A /* CategoryReordering */ = {
 			isa = PBXGroup;
 			children = (
-				A9B6960C2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib */,
-				A9B6960A2433CCFD004E6960 /* EditCategoriesDefaultCollectionViewCell.swift */,
-				A9B696042433C422004E6960 /* EditCategoriesDefaultCollectionViewCell.xib */,
-				64E9CD5F258D35B400A2DC1F /* EditCategoryDetailsHeaderCollectionViewCell.xib */,
-				64B32592254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift */,
-				64B32597254B591C00023566 /* EditCategoryRemoveCollectionViewCell.swift */,
-				64B32599254B591D00023566 /* EditCategoryRemoveCollectionViewCell.xib */,
-				64B32598254B591D00023566 /* EditCategoryToggleCollectionViewCell.swift */,
-				64B3259A254B591D00023566 /* EditCategoryToggleCollectionViewCell.xib */,
+				6B05020627F351A1000CFE5A /* CategoryReordering.swift */,
 			);
-			name = Cells;
+			path = CategoryReordering;
 			sourceTree = "<group>";
 		};
 		6B4F3C5A25A5119E008A3CB2 /* Sounds */ = {
@@ -771,7 +754,6 @@
 			children = (
 				A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */,
 				64B32587254B550500023566 /* EditCategoryDetailViewController.swift */,
-				64E9CD67258D3E5500A2DC1F /* Cells */,
 			);
 			path = EditCategories;
 			sourceTree = "<group>";
@@ -849,6 +831,7 @@
 				6B005AE4245B06F3004919F4 /* VocableViewController.swift */,
 				6B5C743F27E8CBBE00004713 /* VocableListCell */,
 				A91030B727E3C4FD00281C97 /* NSLayoutConstraint+Priority.swift */,
+				6B05020527F3516F000CFE5A /* CategoryReordering */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -934,6 +917,8 @@
 			name = Vocable;
 			packageProductDependencies = (
 				64599428258933370010EEFF /* VocableCore */,
+				6B05020027F3487E000CFE5A /* Algorithms */,
+				6B05020327F3489D000CFE5A /* Collections */,
 			);
 			productName = EyeTrackingTest;
 			productReference = 130C00B420D2AD2A007C3163 /* Vocable.app */;
@@ -1021,6 +1006,8 @@
 			mainGroup = 130C00AB20D2AD2A007C3163;
 			packageReferences = (
 				64599427258933370010EEFF /* XCRemoteSwiftPackageReference "vocable-ios-spm" */,
+				6B0501FF27F3487E000CFE5A /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				6B05020227F3489C000CFE5A /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 130C00B520D2AD2A007C3163 /* Products */;
 			projectDirPath = "";
@@ -1038,21 +1025,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64E9CD60258D35B400A2DC1F /* EditCategoryDetailsHeaderCollectionViewCell.xib in Resources */,
 				A9CF2AF5242D4EF1005633A7 /* SensitivityCollectionViewCell.xib in Resources */,
 				718D7FB0241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib in Resources */,
 				71DBE5EB240DE4D000BA8D01 /* WarningView.xib in Resources */,
 				A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */,
 				A9299C7723F5FC6F00903AB6 /* KeyboardKeyCollectionViewCell.xib in Resources */,
 				A96D61D724229F7400577144 /* SettingsCollectionViewCell.xib in Resources */,
-				64B3259D254B591D00023566 /* EditCategoryRemoveCollectionViewCell.xib in Resources */,
 				71B856442416CEB600CB163B /* ToastView.xib in Resources */,
 				A98E8A2523F1DBF200BF1F22 /* SettingsFooterCollectionViewCell.xib in Resources */,
 				6B4F3C5E25A5132D008A3CB2 /* Listening.wav in Resources */,
 				6B724A4E25E046BA0033891F /* SettingsFooterTextSupplementaryView.xib in Resources */,
 				274540282460DD0F0056EF98 /* Presets.strings in Resources */,
-				A9B696052433C422004E6960 /* EditCategoriesDefaultCollectionViewCell.xib in Resources */,
-				A9B6960D2433CD30004E6960 /* EditCategoriesCompactCollectionViewCell.xib in Resources */,
 				30B979B82425583E00309D7C /* InfoPlist.strings in Resources */,
 				A9F56FC824365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib in Resources */,
 				130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */,
@@ -1060,7 +1043,6 @@
 				6B9DFA6923E88A1B0037673E /* GazeLib.scnassets in Resources */,
 				6BE23D562444DCBE0032CAE4 /* Localizable.strings in Resources */,
 				130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */,
-				64B3259E254B591D00023566 /* EditCategoryToggleCollectionViewCell.xib in Resources */,
 				2745402E2460DD760056EF98 /* presets.json in Resources */,
 				64A220BE2452173C0014EA80 /* Root.storyboard in Resources */,
 				2631B366251181C400B94402 /* GoogleService-Info.plist in Resources */,
@@ -1167,9 +1149,7 @@
 				64A220BB2452171C0014EA80 /* RootViewController.swift in Sources */,
 				6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */,
 				B8DA9DF223F30BAF00FEBE19 /* Cell+NibLoading.swift in Sources */,
-				64B3259C254B591D00023566 /* EditCategoryToggleCollectionViewCell.swift in Sources */,
 				6BB56BA82422AC2500EA787E /* ToastView.swift in Sources */,
-				64B3259B254B591D00023566 /* EditCategoryRemoveCollectionViewCell.swift in Sources */,
 				A9DFCC20242D020100136136 /* PublishedValue.swift in Sources */,
 				6B5C73A727DFE61600004713 /* PredicateBuilders.swift in Sources */,
 				A9C32CFF242271F3000EC6F7 /* Phrase+Helpers.swift in Sources */,
@@ -1192,7 +1172,6 @@
 				6B9DFA7623E8D59A0037673E /* UICollectionView+Gaze.swift in Sources */,
 				6B9DFA7023E88A630037673E /* InterpolableValues.swift in Sources */,
 				A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */,
-				A9B6960B2433CCFD004E6960 /* EditCategoriesDefaultCollectionViewCell.swift in Sources */,
 				A91030B227E3BF6600281C97 /* VocableListCellContentView.swift in Sources */,
 				6BE7E9882459DFD5007B01F2 /* VocableNavigationBar.swift in Sources */,
 				6B5C490D245CB92700A4433C /* CategoryDetailViewController.swift in Sources */,
@@ -1218,12 +1197,12 @@
 				6B5C744127E8CC0000004713 /* VocableListCellAccessory.swift in Sources */,
 				6B8440E3244A1007007A4DC6 /* CarouselGridLayout.swift in Sources */,
 				A91030B627E3C31700281C97 /* VocableListCell.swift in Sources */,
+				6B05020727F351A1000CFE5A /* CategoryReordering.swift in Sources */,
 				A91030B427E3BF9300281C97 /* VocableListContentConfiguration.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
 				6B823BCB23F4ADE30099F65E /* Pulse.swift in Sources */,
 				6B5C49112460AEF900A4433C /* RootEditTextViewController.swift in Sources */,
 				A9CF2AEF242D44EE005633A7 /* TimingSensitivityViewController.swift in Sources */,
-				64B32593254B562B00023566 /* EditCategoryDetailTitleCollectionViewCell.swift in Sources */,
 				6459943E25895D9C0010EEFF /* SpeechRecognitionController.swift in Sources */,
 				4E014DAA27EA53BC00561FC8 /* NSRange+.swift in Sources */,
 				B8DA9DF423F30BD200FEBE19 /* VectorUtils.swift in Sources */,
@@ -1293,6 +1272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */,
+				6B05020927F353DE000CFE5A /* CategoryOrderabilityTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1847,6 +1827,22 @@
 				minimumVersion = 0.0.0;
 			};
 		};
+		6B0501FF27F3487E000CFE5A /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		6B05020227F3489C000CFE5A /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1854,6 +1850,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 64599427258933370010EEFF /* XCRemoteSwiftPackageReference "vocable-ios-spm" */;
 			productName = VocableCore;
+		};
+		6B05020027F3487E000CFE5A /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B0501FF27F3487E000CFE5A /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+		6B05020327F3489D000CFE5A /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B05020227F3489C000CFE5A /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
 		};
 /* End XCSwiftPackageProductDependency section */
 

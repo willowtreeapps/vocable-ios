@@ -31,9 +31,6 @@
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "Eliminar Categoría";
 
-/* Show category button label within the category detail screen. */
-"category_editor.detail.button.show_category.title" = "Mostrar";
-
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "Cambios guardados";
 
@@ -43,9 +40,6 @@
 
 /* Debugging error message for when preloaded content is not found */
 "debug.assertion.presets_file_not_found" = "No hay presets disponibles";
-
-/* Edit Phrases */
-"Edit Phrases" = "Editar frases";
 
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Cancelar";
