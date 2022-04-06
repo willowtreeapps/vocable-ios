@@ -18,9 +18,7 @@ final class FreeResponseTextEditorConfigurationProvider: TextEditorConfiguration
     private var needsUpdateFavoritesState = true
 
     private var canFavoritePhrase: Bool = false
-    private var favoriteImage: UIImage {
-        favoritedPhraseIdentifier == nil ? UIImage(systemName: "star")! : UIImage(systemName: "star.fill")!
-    }
+    private var isFavorited: Bool { favoritedPhraseIdentifier != nil }
     private var shouldDismiss: Bool = true
 
     private let initialUtterance = ""
@@ -43,7 +41,7 @@ final class FreeResponseTextEditorConfigurationProvider: TextEditorConfiguration
 
         let leftConfiguration = TextEditorNavigationButton.Configuration.dismissal(for: viewController)
 
-        let rightConfiguration = TextEditorNavigationButton.Configuration.favorite(image: favoriteImage, isEnabled: canFavoritePhrase) { [weak self, weak viewController] in
+        let rightConfiguration = TextEditorNavigationButton.Configuration.favorite(isFavorited: isFavorited, isEnabled: canFavoritePhrase) { [weak self, weak viewController] in
             guard let currentUtterance = currentUtterance,
                   let viewController = viewController else { return }
             self?.favoritePhrase(with: currentUtterance, in: viewController)

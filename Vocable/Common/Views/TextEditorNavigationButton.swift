@@ -54,8 +54,8 @@ final class TextEditorNavigationButton: GazeableButton {
                           action: action)
         }
 
-        static func favorite(image: UIImage, isEnabled: Bool = false, accessibilityIdentifier: String = "keyboard.favoriteButton", action: @escaping Action) -> Self {
-            Configuration(image: image,
+        static func favorite(isFavorited: Bool, isEnabled: Bool = false, accessibilityIdentifier: String = "keyboard.favoriteButton", action: @escaping Action) -> Self {
+            Configuration(image: isFavorited ? UIImage(systemName: "star.fill")! : UIImage(systemName: "star")!,
                           isEnabled: isEnabled,
                           accessibilityIdentifier: accessibilityIdentifier,
                           action: action)
