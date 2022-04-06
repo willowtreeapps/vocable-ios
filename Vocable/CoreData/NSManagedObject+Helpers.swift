@@ -18,12 +18,27 @@ extension NSManagedObjectIdentifiable where Self: NSManagedObject {
         guard let entityName = self.entity().name else {
             return nil
         }
+
         let fetchRequest = NSFetchRequest<Self>(entityName: entityName)
         if let identifier = identifier as? String {
             fetchRequest.predicate = NSPredicate(format: "identifier == %@", identifier)
         } else {
             fetchRequest.predicate = NSPredicate(format: "identifier == \(identifier)")
         }
+        fetchRequest.fetchLimit = 1
+
+        return (try? context.fetch(fetchRequest))?.first
+    }
+
+    static func fetchObject(in context: NSManagedObjectContext, matching identifier: NSManagedObjectID) -> Self? {
+        guard let entityName = self.entity().name else {
+            return nil
+        }
+
+        let fetchRequest = NSFetchRequest<Self>(entityName: entityName)
+        fetchRequest.predicate = NSPredicate(format: "(SELF = %@)", identifier)
+        fetchRequest.fetchLimit = 1
+
         return (try? context.fetch(fetchRequest))?.first
     }
     
