@@ -9,6 +9,13 @@
 import Combine
 import SwiftUI
 
+class DynamicSizeHostingController<Content: View>: UIHostingController<Content> {
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        preferredContentSize = view.intrinsicContentSize
+    }
+}
+
 // MARK: - ButtonRole
 
 @available(iOS, obsoleted: 15, message: "Please use the built-in ButtonRole type")
@@ -39,9 +46,13 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
 
     // MARK: Coordinator
 
+    private typealias Configuration = GazeButtonStyleConfiguration
+
     class Coordinator {
-        fileprivate var cancellable: AnyCancellable?
         private let action: () -> Void
+
+        fileprivate var host: DynamicSizeHostingController<AnyView>?
+        fileprivate var cancellable: AnyCancellable?
 
         init(_ action: @escaping () -> Void) {
             self.action =  action
@@ -82,18 +93,19 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
     }
 
     func makeUIView(context: Context) -> BridgedGazeableButton {
-        let buttonStyle = context.environment.gazeButtonStyle
-        let configuration = GazeButtonStyleConfiguration(label: label, state: $state, role: role)
-        let styledLabel = buttonStyle.makeBody(configuration)
+        let style = context.environment.gazeButtonStyle
+        let configuration = Configuration(label: label, state: $state, role: role)
+        let styledLabel = style.makeBody(configuration)
+            .fixedSize()
 
-        let hostingController = UIHostingController(rootView: styledLabel)
+        let hostingController = DynamicSizeHostingController(rootView: AnyView(styledLabel))
         let hostingView = hostingController.view!
 
-        let control = BridgedGazeableButton()
-        control.minimumGazeDuration = minimumGazeDuration
+        let button = BridgedGazeableButton()
+        button.minimumGazeDuration = minimumGazeDuration
 
-        control.addSubview(hostingView)
-        control.addTarget(
+        button.addSubview(hostingView)
+        button.addTarget(
             context.coordinator,
             action: #selector(Coordinator.performAction),
             for: .primaryActionTriggered
@@ -104,13 +116,14 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
         hostingView.backgroundColor = nil
 
         NSLayoutConstraint.activate([
-            hostingView.leadingAnchor.constraint(equalTo: control.leadingAnchor),
-            hostingView.topAnchor.constraint(equalTo: control.topAnchor),
-            hostingView.trailingAnchor.constraint(equalTo: control.trailingAnchor),
-            hostingView.bottomAnchor.constraint(equalTo: control.bottomAnchor)
+            hostingView.leadingAnchor.constraint(equalTo: button.leadingAnchor),
+            hostingView.topAnchor.constraint(equalTo: button.topAnchor),
+            hostingView.trailingAnchor.constraint(equalTo: button.trailingAnchor),
+            hostingView.bottomAnchor.constraint(equalTo: button.bottomAnchor)
         ])
 
-        context.coordinator.cancellable = control
+        context.coordinator.host = hostingController
+        context.coordinator.cancellable = button
             .stateSubject
             .dropFirst()
             .sink { state in
@@ -119,10 +132,16 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
                 }
             }
 
-        return control
+        return button
     }
 
     func updateUIView(_ uiView: BridgedGazeableButton, context: Context) {
+        let style = context.environment.gazeButtonStyle
+        let configuration = Configuration(label: label, state: $state, role: role)
+        let styledLabel = style.makeBody(configuration).fixedSize()
+
+        context.coordinator.host?.rootView = AnyView(styledLabel)
+
         uiView.isEnabled = context.environment.isEnabled
     }
 }

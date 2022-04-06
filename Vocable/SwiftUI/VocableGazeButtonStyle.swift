@@ -36,7 +36,11 @@ struct VocableGazeButtonStyle: GazeButtonStyle {
 
             let textColor = isSelected ? Color(UIColor.primaryBackgroundColor) : Color.white
 
-            let fillColor = isSelected ? Color(UIColor.cellSelectionColor) : Color(UIColor.defaultCellBackgroundColor)
+            let fillColor = isSelected ?
+                Color(UIColor.cellSelectionColor) :
+                buttonRole == .destructive ?
+                    Color(UIColor.errorRed) :
+                    Color(UIColor.defaultCellBackgroundColor)
 
             if #available(iOS 15.0, *) {
                 label
