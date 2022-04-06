@@ -9,6 +9,20 @@
 import Combine
 import SwiftUI
 
+// MARK: - ButtonRole
+
+@available(iOS, obsoleted: 15, message: "Please use the built-in ButtonRole type")
+struct ButtonRole: Equatable {
+    private let rawValue: String
+
+    private init(_ rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    static let cancel = ButtonRole("cancel")
+    static let destructive = ButtonRole("destructive")
+}
+
 // MARK: - ButtonState
 
 struct ButtonState: OptionSet {
@@ -45,15 +59,18 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
     private let minimumGazeDuration: TimeInterval
     private let action: () -> Void
     private let label: Label
+    private let role: ButtonRole?
 
     // MARK: Initializer
 
     init(
         minimumGazeDuration: TimeInterval = 1,
+        role: ButtonRole? = nil,
         action: @escaping () -> Void,
         @ViewBuilder label: () -> Label
     ) {
         self.minimumGazeDuration = minimumGazeDuration
+        self.role = role
         self.action = action
         self.label = label()
     }
@@ -66,7 +83,7 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
 
     func makeUIView(context: Context) -> BridgedGazeableButton {
         let buttonStyle = context.environment.gazeButtonStyle
-        let configuration = GazeButtonStyleConfiguration(label: label, state: $state)
+        let configuration = GazeButtonStyleConfiguration(label: label, state: $state, role: role)
         let styledLabel = buttonStyle.makeBody(configuration)
 
         let hostingController = UIHostingController(rootView: styledLabel)

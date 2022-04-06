@@ -25,10 +25,11 @@ struct DefaultGazeButtonStyle: GazeButtonStyle {
         @Binding var state: ButtonState
 
         var label: Label
+        var buttonRole: ButtonRole?
 
         var body: some View {
             label
-                .foregroundColor(.accentColor)
+                .foregroundColor(buttonRole == .destructive ? .red : .accentColor)
                 .opacity(
                     (state.contains(.highlighted) || !isEnabled) ? 0.3 : 1
                 )
@@ -36,7 +37,7 @@ struct DefaultGazeButtonStyle: GazeButtonStyle {
     }
 
     func makeBody(_ configuration: Configuration) -> some View {
-        _Body(state: configuration.state, label: configuration.label)
+        _Body(state: configuration.state, label: configuration.label, buttonRole: configuration.role)
     }
 }
 
@@ -54,10 +55,12 @@ struct GazeButtonStyleConfiguration {
 
     let state: Binding<ButtonState>
     let label: Label
+    let role: ButtonRole?
 
-    init<V: View>(label: V, state: Binding<ButtonState>) {
+    init<V: View>(label: V, state: Binding<ButtonState>, role: ButtonRole?) {
         self.label = Label(label)
         self.state = state
+        self.role = role
     }
 }
 

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct VocableGazeButtonStyle: GazeButtonStyle {
     func makeBody(_ configuration: Configuration) -> some View {
-        _Body(state: configuration.state, label: configuration.label)
+        _Body(configuration)
     }
 
     private struct _Body<Label: View>: View {
@@ -20,6 +20,13 @@ struct VocableGazeButtonStyle: GazeButtonStyle {
         @Binding var state: ButtonState
 
         var label: Label
+        var buttonRole: ButtonRole?
+
+        init(_ configuration: Configuration) where Configuration.Label == Label {
+            self._state = configuration.state
+            self.label = configuration.label
+            self.buttonRole = configuration.role
+        }
 
         var body: some View {
             let isHighlighted = state.contains(.highlighted)

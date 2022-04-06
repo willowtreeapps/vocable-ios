@@ -14,7 +14,7 @@ struct TestView: View {
             Color(UIColor.primaryBackgroundColor)
                 .edgesIgnoringSafeArea(.all)
 
-            VStack(spacing: 30) {
+            HStack(spacing: 30) {
                 GazeButton {
                     print("Button #1 pressed")
                 } label: {
