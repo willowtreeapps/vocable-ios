@@ -67,9 +67,6 @@
                   Identifier = "MainScreenTests/testCustonCategoryPagination()">
                </Test>
                <Test
-                  Identifier = "MainScreenTests/testSelectingCategoryChangesPhrases()">
-               </Test>
-               <Test
                   Identifier = "SettingsScreenTests/testAddCustomCategory()">
                </Test>
                <Test

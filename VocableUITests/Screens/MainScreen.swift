@@ -65,6 +65,9 @@ class MainScreen: BaseScreen {
         app.collectionViews.staticTexts[defaultCategories[currentCategory]].tap()
     }
     
+    /// Traverse the categories until the destination category is found, then tap on the category to ensure its phrases appear.
+    ///
+    ///  Categories are interacted with via their identifier, which we represent with the CategoryIdentifier type struct.
     func locateAndSelectDestinationCategory(_ destinationCategory: CategoryIdentifier) {
         let titleCellIdentifier = CategoryTitleCellIdentifier(destinationCategory).identifier
         let destinationCell = app.cells[titleCellIdentifier]
