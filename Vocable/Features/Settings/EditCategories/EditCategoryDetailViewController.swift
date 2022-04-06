@@ -349,43 +349,21 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         return false
     }
 
+    private func reloadData() {
+        collectionView.reloadData()
+        navigationBar.title = category.name
+    }
+
+    // MARK: EditCategoryDetailTitleCollectionViewCellDelegate
+
     func handleRenameCategory() {
-        guard let categoryIdentifier = category.identifier else {
-            assertionFailure("Category has no identifier")
-            return
-        }
-
-        let initialValue = category.name ?? ""
-        let viewController = EditTextViewController()
-        viewController.initialText = initialValue
-        viewController.editTextCompletionHandler = { [weak self] newText in
-            let context = NSPersistentContainer.shared.viewContext
-
-            if let category = Category.fetchObject(in: context, matching: categoryIdentifier) {
-                let textDidChange = (newText != initialValue)
-                category.name = newText
-                category.isUserRenamed = category.isUserRenamed || textDidChange
-            }
-
-            do {
-                try Category.updateAllOrdinalValues(in: context)
-                try context.save()
-
-                let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title",
-                                                     comment: "User edited name of the category and saved it successfully")
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-
-                self?.collectionView.reloadData()
-                self?.navigationBar.title = newText
-            } catch {
-                assertionFailure("Failed to save category: \(error)")
-            }
-        }
-
+        let context = NSPersistentContainer.shared.newBackgroundContext()
+        let viewController = TextEditorViewController()
+        viewController.delegate = CategoryNameEditorConfigurationProvider(categoryIdentifier: category.objectID, context: context, didSaveCategory: { [weak self] in
+            self?.reloadData()
+        })
         present(viewController, animated: true)
     }
-    
 }
 
 private extension GazeableAlertViewController {
@@ -416,8 +394,7 @@ private extension NSAttributedString {
             .localizedStringWithFormat(" %@", buttonText)
 
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 22, weight: .bold),
-            .foregroundColor: UIColor.white
+            .font: UIFont.systemFont(ofSize: 22, weight: .bold)
         ]
 
         let text = NSMutableAttributedString(string: formatString, attributes: attributes)

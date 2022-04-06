@@ -41,9 +41,6 @@
 /* Debugging error message for when preloaded content is not found */
 "debug.assertion.presets_file_not_found" = "Ingen forudstillinger fundet";
 
-/* Edit Phrases */
-"Edit Phrases" = "Rediger Sætninger";
-
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Annuller";
 

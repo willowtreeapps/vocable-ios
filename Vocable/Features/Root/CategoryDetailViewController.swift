@@ -187,76 +187,10 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         try? context.save()
     }
 
-    @objc private func handleCellEditButton(_ sender: UIButton) {
-        guard let indexPath = collectionView.indexPath(containing: sender) else {
-            assertionFailure("Failed to obtain index path")
-            return
-        }
-
-        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        let vc = EditTextViewController()
-
-        let phrase = frc.object(at: safeIndexPath)
-        vc.initialText = phrase.utterance ?? ""
-        vc.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
-
-            if let phraseIdentifier = phrase.identifier {
-                let originalPhrase = Phrase.fetchObject(in: context, matching: phraseIdentifier)
-                originalPhrase?.utterance = newText
-            }
-            do {
-                try context.save()
-
-                let alertMessage = NSLocalizedString("category_editor.toast.changes_saved.title",
-                                                     comment: "changes to an existing phrase were saved successfully")
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-            } catch {
-                assertionFailure("Failed to save user generated phrase: \(error)")
-            }
-        }
-        present(vc, animated: true)
-
-    }
-
-    private func handleDismissAlert() {
-        func discardChangesAction() {
-            self.navigationController?.popViewController(animated: true)
-        }
-
-        let title = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.title",
-                                      comment: "Exit edit sayings alert title")
-        let discardButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.discard.title",
-                                                   comment: "Discard changes alert action title")
-        let continueButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
-                                                    comment: "Continue editing alert action title")
-        let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: discardButtonTitle, handler: discardChangesAction))
-        alert.addAction(GazeableAlertAction(title: continueButtonTitle, style: .bold))
-        self.present(alert, animated: true)
-    }
-
     @IBAction func addNewPhraseButtonSelected() {
-        let vc = EditTextViewController()
-        vc.editTextCompletionHandler = { (newText) -> Void in
-            let context = NSPersistentContainer.shared.viewContext
-
-            _ = Phrase.create(withUserEntry: newText, category: self.category, in: context)
-            do {
-                try context.save()
-
-                let alertMessage: String = {
-                    let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format", comment: "Saved to user favorites category toast title")
-                    let categoryName = self.category.name
-                    return String.localizedStringWithFormat(format, categoryName!)
-                }()
-
-                ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
-            } catch {
-                assertionFailure("Failed to save user generated phrase: \(error)")
-            }
-        }
+        let vc = TextEditorViewController()
+        let context = NSPersistentContainer.shared.newBackgroundContext()
+        vc.delegate = PhraseEditorConfigurationProvider(categoryIdentifier: category.objectID, context: context)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
