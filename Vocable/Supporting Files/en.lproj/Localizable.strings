@@ -26,10 +26,10 @@
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Cancel";
 
 /* Confirm alert action title */
-"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Confirm";
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Continue";
 
 /* Disable head tracking confirmation alert title */
-"gaze_settings.alert.disable_head_tracking_confirmation.title" = "Turn off head tracking?";
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "Turning off head tracking will make the app touch mode only. Would you like to continue?";
 
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "Please move closer to the device.";
