@@ -19,12 +19,13 @@ class MainScreenTests: BaseTest {
      // For each preset category (the first 5 categories), tap() the top left
      // phrase, then verify that all selected phrases appear in "Recents"
     func testRecentScreen_ShowsPressedButtons(){
-        // Skip the 123 (keypad), My Sayings, Recents, and Listen categories because their entries do
-        // not get added to 'Recents'
         var listOfSelectedPhrases: [String] = []
         var firstPhrase = ""
         
         for categoryName in PresetCategories().list {
+            
+            // Skip the 123 (keypad), My Sayings, Recents, and Listen categories because their entries do
+            // not get added to 'Recents'
             if listOfCategoriesToSkip.contains(categoryName.identifier) {
                 continue;
             }
@@ -47,13 +48,15 @@ class MainScreenTests: BaseTest {
         }
     }
     
-    func testDefaultSayingsInGeneralCategoryExist() {
-        verifyGivenPhrasesDisplay(setOfPhrases: mainScreen.defaultPhraseGeneral)
-    }
-    
     func testSelectingCategoryChangesPhrases() {
-        mainScreen.scrollRightAndTapCurrentCategory(numTimesToScroll: 1, startingCategory: "General")
-        verifyGivenPhrasesDisplay(setOfPhrases: mainScreen.defaultPhraseBasicNeeds)
+        // Navigate to a category and grab it's first, top most, phrase
+        mainScreen.locateAndSelectDestinationCategory(.environment)
+        let firstPhrase = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
+        
+        // Navigate to a different category and verify the top most phrase listed has changed
+        mainScreen.locateAndSelectDestinationCategory(.basicNeeds)
+        let secondPhrase = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
+        XCTAssertNotEqual(firstPhrase, secondPhrase, "The list of phrases did not change between selected categories.")
     }
     
     func testWhenTappingPhrase_ThenThatPhraseDisplaysOnOutputLabel() {
@@ -101,6 +104,8 @@ class MainScreenTests: BaseTest {
         }
     }
     
+    // This test is disabled and will remain so until fixed. The effort to fix the test is tracked in
+    // issue https://github.com/willowtreeapps/vocable-ios/issues/470
     func testCustonCategoryPagination() {
         let customCategory = "Paginationtest"
         let addedCustomCategory = "9. "+customCategory
@@ -111,7 +116,7 @@ class MainScreenTests: BaseTest {
         settingsScreen.leaveCategoriesButton.tap()
         settingsScreen.exitSettingsButton.tap()
         
-        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 1, newCategory: customCategory)
+        // mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 1, newCategory: customCategory)
         
         // Verify initial state.
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 1")
@@ -125,7 +130,7 @@ class MainScreenTests: BaseTest {
         
         // Navigate to home screen to verify page numbers
         settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
-        mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 1, newCategory: customCategory)
+        // mainScreen.scrollLeftAndTapCurrentCategory(numTimesToScroll: 1, newCategory: customCategory)
         XCTAssertEqual(mainScreen.pageNumber.label, "Page 1 of 1")
         
         // Add custom phrases to new category
@@ -163,12 +168,6 @@ class MainScreenTests: BaseTest {
         settingsScreen.navigateToSettingsCategoryScreen()
         settingsScreen.navigateToCategory(category: addedCustomCategory)
         settingsScreen.toggleHideShowCategory(category: addedCustomCategory, toggle: "Hide")
-    }
-    
-    private func verifyGivenPhrasesDisplay(setOfPhrases: [String]) {
-        for phrase in setOfPhrases {
-            XCTAssert(mainScreen.isTextDisplayed(phrase), "Expected the phrase \(phrase) to be displayed")
-        }
     }
     
 }
