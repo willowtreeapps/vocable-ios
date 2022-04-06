@@ -57,8 +57,8 @@ class ToastContainerViewController: UIViewController {
             self.phraseSavedView = phraseSavedView
         }
 
-        let fadeInOutDuration: TimeInterval = 0.5
-        let presentationDuration: TimeInterval = 4
+        let fadeInOutDuration: TimeInterval = 0.3
+        let presentationDuration: TimeInterval = 2
 
         // Fade in
         UIView.animate(

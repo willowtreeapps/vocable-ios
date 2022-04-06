@@ -11,61 +11,43 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yiJ-Tr-Jim" userLabel="ToastView" customClass="ToastView" customModule="Vocable" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="516" height="277"/>
+            <rect key="frame" x="0.0" y="0.0" width="498" height="301"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEE-Xk-FQp">
-                    <rect key="frame" x="0.0" y="0.0" width="516" height="277"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="bv8-xY-Cf7">
-                        <rect key="frame" x="0.0" y="0.0" width="516" height="277"/>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3n5-ul-tdD">
+                    <rect key="frame" x="0.0" y="0.0" width="498" height="301"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="K5i-Tb-aju">
+                        <rect key="frame" x="0.0" y="0.0" width="498" height="301"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X50-j0-cP3">
-                                <rect key="frame" x="0.0" y="0.0" width="516" height="277"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7vX-tI-ZLi">
-                                    <rect key="frame" x="0.0" y="0.0" width="516" height="277"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="QaH-Bg-RM9">
-                                            <rect key="frame" x="45" y="45" width="426" height="187"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="P6c-SV-8Wb">
-                                                    <rect key="frame" x="189.5" y="3.5" width="47" height="116"/>
-                                                    <color key="tintColor" name="DefaultFontColor"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="41" weight="bold"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="750" text="Saved to My Sayings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEx-Zh-S4e">
-                                                    <rect key="frame" x="50" y="146" width="326.5" height="41"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
-                                                    <color key="textColor" name="DefaultFontColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=compact">
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
-                                                    </variation>
-                                                    <variation key="widthClass=compact">
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
-                                                    </variation>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="QaH-Bg-RM9" secondAttribute="trailing" constant="45" id="DOG-fr-DQZ"/>
-                                        <constraint firstItem="QaH-Bg-RM9" firstAttribute="leading" secondItem="7vX-tI-ZLi" secondAttribute="leading" constant="45" id="aJR-yl-3zi"/>
-                                        <constraint firstAttribute="bottom" secondItem="QaH-Bg-RM9" secondAttribute="bottom" constant="45" id="lkV-9V-u6w"/>
-                                        <constraint firstItem="QaH-Bg-RM9" firstAttribute="top" secondItem="7vX-tI-ZLi" secondAttribute="top" constant="45" id="y0k-15-zJn"/>
-                                    </constraints>
-                                </view>
-                                <vibrancyEffect>
-                                    <blurEffect style="prominent"/>
-                                </vibrancyEffect>
-                            </visualEffectView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="QaH-Bg-RM9">
+                                <rect key="frame" x="45" y="45" width="408" height="211"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="P6c-SV-8Wb">
+                                        <rect key="frame" x="180.5" y="3.5" width="47" height="140"/>
+                                        <color key="tintColor" name="Background"/>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="41" weight="bold"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="750" text="Saved to My Sayings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEx-Zh-S4e">
+                                        <rect key="frame" x="41" y="170" width="326.5" height="41"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
+                                        <color key="textColor" name="Background"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=compact">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="X50-j0-cP3" firstAttribute="top" secondItem="bv8-xY-Cf7" secondAttribute="top" id="bml-hd-eKd"/>
-                            <constraint firstItem="X50-j0-cP3" firstAttribute="leading" secondItem="bv8-xY-Cf7" secondAttribute="leading" id="fKF-5O-TED"/>
-                            <constraint firstAttribute="trailing" secondItem="X50-j0-cP3" secondAttribute="trailing" id="jNe-WD-NOa"/>
-                            <constraint firstAttribute="bottom" secondItem="X50-j0-cP3" secondAttribute="bottom" id="qY6-qj-5AK"/>
+                            <constraint firstAttribute="trailing" secondItem="QaH-Bg-RM9" secondAttribute="trailing" constant="45" id="J0s-xh-rRF"/>
+                            <constraint firstItem="QaH-Bg-RM9" firstAttribute="leading" secondItem="K5i-Tb-aju" secondAttribute="leading" constant="45" id="Yx9-3A-IXp"/>
+                            <constraint firstItem="QaH-Bg-RM9" firstAttribute="top" secondItem="K5i-Tb-aju" secondAttribute="top" constant="45" id="sBv-LN-eaW"/>
+                            <constraint firstAttribute="bottom" secondItem="QaH-Bg-RM9" secondAttribute="bottom" constant="45" id="zVr-gy-Bd8"/>
                         </constraints>
                     </view>
                     <blurEffect style="systemThinMaterialLight"/>
@@ -73,10 +55,10 @@
             </subviews>
             <accessibility key="accessibilityConfiguration" identifier="ToastView"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="cEE-Xk-FQp" secondAttribute="trailing" id="1NA-c5-U6Z"/>
-                <constraint firstItem="cEE-Xk-FQp" firstAttribute="leading" secondItem="yiJ-Tr-Jim" secondAttribute="leading" id="N1n-i8-TRC"/>
-                <constraint firstAttribute="bottom" secondItem="cEE-Xk-FQp" secondAttribute="bottom" id="lxF-sq-TCM"/>
-                <constraint firstItem="cEE-Xk-FQp" firstAttribute="top" secondItem="yiJ-Tr-Jim" secondAttribute="top" id="pYu-Mg-Qc6"/>
+                <constraint firstAttribute="trailing" secondItem="3n5-ul-tdD" secondAttribute="trailing" id="F9f-5t-MSD"/>
+                <constraint firstItem="3n5-ul-tdD" firstAttribute="leading" secondItem="yiJ-Tr-Jim" secondAttribute="leading" id="VSp-52-I5s"/>
+                <constraint firstItem="3n5-ul-tdD" firstAttribute="top" secondItem="yiJ-Tr-Jim" secondAttribute="top" id="fgs-hm-2WT"/>
+                <constraint firstAttribute="bottom" secondItem="3n5-ul-tdD" secondAttribute="bottom" id="wpM-l0-JLC"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -89,13 +71,13 @@
                 <outlet property="iconView" destination="P6c-SV-8Wb" id="B0m-3L-7T4"/>
                 <outlet property="titleLabel" destination="fEx-Zh-S4e" id="JWw-AS-4Jo"/>
             </connections>
-            <point key="canvasLocation" x="211.59420289855075" y="158.37053571428569"/>
+            <point key="canvasLocation" x="28.985507246376812" y="142.29910714285714"/>
         </view>
     </objects>
     <resources>
         <image name="checkmark" catalog="system" width="128" height="114"/>
-        <namedColor name="DefaultFontColor">
-            <color red="0.81599998474121094" green="0.93199998140335083" blue="0.91299998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Background">
+            <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
