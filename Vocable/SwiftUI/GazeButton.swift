@@ -9,15 +9,14 @@
 import Combine
 import SwiftUI
 
-// MARK: - ControlState
+// MARK: - ButtonState
 
-struct ControlState: OptionSet {
+struct ButtonState: OptionSet {
     let rawValue: UInt
 
     static let normal       = Self([])
     static let highlighted  = Self(rawValue: 1 << 0)
-    static let disabled     = Self(rawValue: 1 << 1)
-    static let selected     = Self(rawValue: 1 << 2)
+    static let selected     = Self(rawValue: 1 << 1)
 }
 
 // MARK: - GazeButton
@@ -42,10 +41,7 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
 
     // MARK: Properties
 
-    @State private var state: ControlState = .normal
-
-    @Environment(\.gazeButtonStyle)
-    private var buttonStyle
+    @State private var state: ButtonState = .normal
 
     private let minimumGazeDuration: TimeInterval
     private let action: () -> Void
@@ -70,9 +66,11 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
     }
 
     func makeUIView(context: Context) -> BridgedGazeableButton {
+        let buttonStyle = context.environment.gazeButtonStyle
         let configuration = GazeButtonStyleConfiguration(label: label, state: $state)
-        let labelBody = buttonStyle.makeBody(configuration)
-        let hostingController = UIHostingController(rootView: AnyView(labelBody))
+        let styledLabel = buttonStyle.makeBody(configuration)
+
+        let hostingController = UIHostingController(rootView: AnyView(styledLabel))
         let hostingView = hostingController.view!
 
         let control = BridgedGazeableButton()
@@ -109,5 +107,7 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
         return control
     }
 
-    func updateUIView(_ uiView: BridgedGazeableButton, context: Context) { /* No op */ }
+    func updateUIView(_ uiView: BridgedGazeableButton, context: Context) {
+        uiView.isEnabled = context.environment.isEnabled
+    }
 }

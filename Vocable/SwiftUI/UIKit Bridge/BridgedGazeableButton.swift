@@ -14,7 +14,7 @@ class BridgedGazeableButton: UIButton {
 
     private var gazeStartDate: Date?
 
-    var stateSubject: CurrentValueSubject<ControlState, Never> = .init(.normal)
+    var stateSubject: CurrentValueSubject<ButtonState, Never> = .init(.normal)
 
     override var intrinsicContentSize: CGSize {
         subviews.first?.intrinsicContentSize ??
@@ -37,16 +37,6 @@ class BridgedGazeableButton: UIButton {
     }
 
     // MARK: State Updates
-
-    override var isEnabled: Bool {
-        didSet {
-            let currentState = stateSubject.value
-            let newState = isEnabled ?
-                currentState.subtracting(.disabled) :
-                currentState.union(.disabled)
-            stateSubject.send(newState)
-        }
-    }
 
     override var isHighlighted: Bool {
         didSet {
@@ -71,11 +61,14 @@ class BridgedGazeableButton: UIButton {
     // MARK: Gaze Overrides
 
     override func gazeBegan(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        guard isEnabled else { return }
+
         gazeStartDate = Date()
         isHighlighted = true
     }
 
     override func gazeMoved(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        guard isEnabled else { return }
         guard let gazeStartDate = gazeStartDate else { return }
 
         let elapsedTime = Date().timeIntervalSince(gazeStartDate)
@@ -89,12 +82,16 @@ class BridgedGazeableButton: UIButton {
     }
 
     override func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        guard isEnabled else { return }
+
         gazeStartDate = nil
         isSelected = false
         isHighlighted = false
     }
 
     override func gazeCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        guard isEnabled else { return }
+
         gazeStartDate = nil
         isSelected = false
         isHighlighted = false

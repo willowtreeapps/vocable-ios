@@ -28,7 +28,7 @@ struct TestView: View {
                     Image(systemName: "gear")
                         .font(.largeTitle)
                         .padding(20)
-                }
+                }.disabled(true)
 
                 GazeButton {
                     print("info button pressed")

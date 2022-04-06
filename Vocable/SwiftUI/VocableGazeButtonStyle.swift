@@ -14,12 +14,16 @@ struct VocableGazeButtonStyle: GazeButtonStyle {
     }
 
     private struct _Body<Label: View>: View {
-        @Binding var state: ControlState
+        @Environment(\.isEnabled)
+        private var isEnabled
+
+        @Binding var state: ButtonState
+
         var label: Label
 
         var body: some View {
             let isHighlighted = state.contains(.highlighted)
-            let isDisabled = state.contains(.disabled)
+            let isDisabled = !isEnabled
             let isSelected = state.contains(.selected)
             let shouldHighlight = isHighlighted && !isSelected
 

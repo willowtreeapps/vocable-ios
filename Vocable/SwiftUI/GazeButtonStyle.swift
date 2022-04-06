@@ -19,14 +19,18 @@ protocol GazeButtonStyle {
 
 struct DefaultGazeButtonStyle: GazeButtonStyle {
     private struct _Body<Label: View>: View {
-        @Binding var state: ControlState
+        @Environment(\.isEnabled)
+        private var isEnabled
+
+        @Binding var state: ButtonState
+
         var label: Label
 
         var body: some View {
             label
                 .foregroundColor(.accentColor)
                 .opacity(
-                    (state.contains(.highlighted) || state.contains(.disabled)) ? 0.3 : 1
+                    (state.contains(.highlighted) || !isEnabled) ? 0.3 : 1
                 )
         }
     }
@@ -48,10 +52,10 @@ struct GazeButtonStyleConfiguration {
         }
     }
 
-    let state: Binding<ControlState>
+    let state: Binding<ButtonState>
     let label: Label
 
-    init<V: View>(label: V, state: Binding<ControlState>) {
+    init<V: View>(label: V, state: Binding<ButtonState>) {
         self.label = Label(label)
         self.state = state
     }
