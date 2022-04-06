@@ -265,20 +265,23 @@ class HeadGazeWindow: UIWindow {
 }
 
 extension UIControl {
-
-    override var canReceiveGaze: Bool {
-        return true
-    }
-
     override func gazeBegan(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
-        self.touchesBegan(Set([gaze]), with: nil)
+        guard canReceiveGaze else { return }
+        self.touchesBegan([gaze], with: nil)
     }
 
     override func gazeMoved(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        guard canReceiveGaze else { return }
         self.touchesMoved(Set([gaze]), with: nil)
     }
 
     override func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        guard canReceiveGaze else { return }
         self.touchesEnded(Set([gaze]), with: nil)
+    }
+
+    override func gazeCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        guard canReceiveGaze else { return }
+        self.touchesCancelled(Set([gaze]), with: nil)
     }
 }

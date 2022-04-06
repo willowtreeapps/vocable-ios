@@ -111,9 +111,9 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
             for: .primaryActionTriggered
         )
 
-        hostingView.translatesAutoresizingMaskIntoConstraints = false
-        hostingView.isUserInteractionEnabled = false
         hostingView.backgroundColor = nil
+        hostingView.isUserInteractionEnabled = false
+        hostingView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             hostingView.leadingAnchor.constraint(equalTo: button.leadingAnchor),

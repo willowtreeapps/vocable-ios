@@ -16,6 +16,8 @@ class BridgedGazeableButton: UIButton {
 
     var stateSubject: CurrentValueSubject<ButtonState, Never> = .init(.normal)
 
+    override var canReceiveGaze: Bool { true }
+
     override var intrinsicContentSize: CGSize {
         subviews.first?.intrinsicContentSize ??
             CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
