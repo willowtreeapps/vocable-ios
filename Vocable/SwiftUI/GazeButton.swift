@@ -26,7 +26,6 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
     // MARK: Coordinator
 
     class Coordinator {
-        fileprivate var hostingController: UIHostingController<AnyView>?
         fileprivate var cancellable: AnyCancellable?
         private let action: () -> Void
 
@@ -70,7 +69,7 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
         let configuration = GazeButtonStyleConfiguration(label: label, state: $state)
         let styledLabel = buttonStyle.makeBody(configuration)
 
-        let hostingController = UIHostingController(rootView: AnyView(styledLabel))
+        let hostingController = UIHostingController(rootView: styledLabel)
         let hostingView = hostingController.view!
 
         let control = BridgedGazeableButton()
@@ -94,7 +93,6 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
             hostingView.bottomAnchor.constraint(equalTo: control.bottomAnchor)
         ])
 
-        context.coordinator.hostingController = hostingController
         context.coordinator.cancellable = control
             .stateSubject
             .dropFirst()

@@ -72,26 +72,26 @@ extension View {
 // MARK: - Environment Values
 
 extension EnvironmentValues {
-  private struct GazeButtonStyleKey: EnvironmentKey {
-    static var defaultValue = AnyGazeButtonStyle(DefaultGazeButtonStyle())
-  }
+    private struct GazeButtonStyleKey: EnvironmentKey {
+        static var defaultValue = AnyGazeButtonStyle(DefaultGazeButtonStyle())
+    }
 
-  var gazeButtonStyle: AnyGazeButtonStyle {
-    get { self[GazeButtonStyleKey.self] }
-    set { self[GazeButtonStyleKey.self] = newValue }
-  }
+    var gazeButtonStyle: AnyGazeButtonStyle {
+        get { self[GazeButtonStyleKey.self] }
+        set { self[GazeButtonStyleKey.self] = newValue }
+    }
 }
 
 // MARK: - Type Erasure
 
 struct AnyGazeButtonStyle: GazeButtonStyle {
-  private let _makeBody: (Configuration) -> AnyView
+    private let _makeBody: (Configuration) -> AnyView
 
-  init<Style: GazeButtonStyle>(_ style: Style) {
-      self._makeBody = { AnyView(style.makeBody($0)) }
-  }
+    init<Style: GazeButtonStyle>(_ style: Style) {
+        self._makeBody = { AnyView(style.makeBody($0)) }
+    }
 
-  func makeBody(_ configuration: Configuration) -> some View {
-    _makeBody(configuration)
-  }
+    func makeBody(_ configuration: Configuration) -> some View {
+        _makeBody(configuration)
+    }
 }
