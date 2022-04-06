@@ -48,7 +48,8 @@ class ToastContainerViewController: UIViewController {
             phraseSavedView.translatesAutoresizingMaskIntoConstraints = false
 
             NSLayoutConstraint.activate([
-                phraseSavedView.widthAnchor.constraint(equalTo: view.readableContentGuide.widthAnchor, multiplier: 0.9),
+                phraseSavedView.widthAnchor.constraint(lessThanOrEqualTo: view.readableContentGuide.widthAnchor, multiplier: 0.9),
+                phraseSavedView.heightAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.heightAnchor),
                 phraseSavedView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
                 phraseSavedView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])
