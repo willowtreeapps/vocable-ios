@@ -158,13 +158,13 @@
         <note>Cancel alert action title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
-        <source>Confirm</source>
-        <target>Confirm</target>
+        <source>Continue</source>
+        <target>Continue</target>
         <note>Confirm alert action title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
-        <source>Turn off head tracking?</source>
-        <target>Turn off head tracking?</target>
+        <source>Turning off head tracking will make the app touch mode only. Would you like to continue?</source>
+        <target>Turning off head tracking will make the app touch mode only. Would you like to continue?</target>
         <note>Disable head tracking confirmation alert title</note>
       </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
