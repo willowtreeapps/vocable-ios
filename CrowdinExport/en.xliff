@@ -135,8 +135,7 @@
       <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve">
         <source>Changes Saved</source>
         <target>Changes Saved</target>
-        <note>Saved to Categories
-   User edited name of the category and saved it successfully</note>
+        <note>Saved to Categories</note>
       </trans-unit>
       <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve">
         <source>No presets found</source>
@@ -197,6 +196,21 @@
         <source>Are you sure? Going back before saving will clear any edits made.</source>
         <target>Are you sure? Going back before saving will clear any edits made.</target>
         <note>Exit edit sayings alert title</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Phrase already exists alert cancel button</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target>Create Duplicate</target>
+        <note>Phrase already exists alert create button</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.title" xml:space="preserve">
+        <source>This phrase already exists. Would you like to create a duplicate?</source>
+        <target>This phrase already exists. Would you like to create a duplicate?</target>
+        <note>Phrase already exists alert title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
         <source>Saved to %@</source>
@@ -354,6 +368,21 @@
         <source>Are you sure? Going back before saving will clear any edits made.</source>
         <target>Are you sure? Going back before saving will clear any edits made.</target>
         <note>Exit edit sayings alert title</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Category already exists alert cancel button</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target>Create Duplicate</target>
+        <note>Category already exists alert create button</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.title" xml:space="preserve">
+        <source>This category name already exists. Would you like to create a duplicate?</source>
+        <target>This category name already exists. Would you like to create a duplicate?</target>
+        <note>Category already exists alert title</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve">
         <source>High</source>
