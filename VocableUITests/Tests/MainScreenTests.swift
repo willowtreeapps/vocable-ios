@@ -65,6 +65,7 @@ class MainScreenTests: BaseTest {
                 continue;
             }
             mainScreen.locateAndSelectDestinationCategory(category.categoryIdentifier)
+            _ = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).waitForExistence(timeout: 0.5) // Wait for scrolling to stop
             let firstPhraseInCategory = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
             XCUIApplication().collectionViews.staticTexts[firstPhraseInCategory].tap()
             XCTAssertEqual(mainScreen.outputLabel.label, firstPhraseInCategory)
