@@ -30,17 +30,17 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">取消</target>
-        <note>Cancel exit editing alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
         <target state="final">確認</target>
-        <note>Confirm exit category alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
         <source>If you close this without saving your custom category will be deleted.</source>
         <target state="final">如果你關閉類別，就會清除了。</target>
-        <note>Exit edit categories alert title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -61,11 +61,6 @@
         <source>Cancel</source>
         <target state="final">取消</target>
         <note>Delete phrase alert cancel button title</note>
-      </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve" approved="yes">
-        <source>Delete</source>
-        <target state="final">刪除</target>
-        <note>Delete phrase alert action button title</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve" approved="yes">
         <source>Remove Category</source>
@@ -91,16 +86,6 @@
         <source>Cancel</source>
         <target state="final">取消</target>
         <note>Cancel alert action title</note>
-      </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve" approved="yes">
-        <source>Confirm</source>
-        <target state="final">確認</target>
-        <note>Confirm alert action title</note>
-      </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Turn off head tracking?</source>
-        <target state="final">關閉頭部追蹤</target>
-        <note>Disable head tracking confirmation alert title</note>
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve" approved="yes">
         <source>No</source>
