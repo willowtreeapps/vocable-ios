@@ -111,7 +111,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         }
 
         if pageCountBefore < 2, pageCountAfter > 1 {
-            collectionView.scrollToMiddleSection(animated: true)
+            collectionView.scrollToMiddleSection(animated: false)
         }
     }
 
