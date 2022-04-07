@@ -17,11 +17,6 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
     </header>
     <body>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
-        <source>Delete</source>
-        <target state="translated">삭제</target>
-        <note>Delete phrase alert action button title</note>
-      </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
         <source>Please move closer to the device.</source>
         <target state="translated">기기에 가까이 오세요</target>
