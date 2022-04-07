@@ -26,9 +26,9 @@ class SettingsScreen: BaseScreen {
     let hideCategorySwitch = "hide"
     let categoryShowButton = "show"
     let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
-    let alertContinueButton = XCUIApplication().buttons["Continue Editing"]
-    let alertDiscardButton = XCUIApplication().buttons["Discard"]
-    let alertDeleteButton = XCUIApplication().buttons["Delete"]
+    let alertContinueButton = XCUIApplication().buttons["alert.button.continue_editing"]
+    let alertDiscardButton = XCUIApplication().buttons["alert.button.discard_changes"]
+    let alertDeleteButton = XCUIApplication().buttons["alert.button.delete"]
     let alertRemoveButton = XCUIApplication().buttons["Remove"]
     let alertCancelButton = XCUIApplication().buttons["Cancel"]
     let categoryDetailsTitle = XCUIApplication().staticTexts["category_title_label"]

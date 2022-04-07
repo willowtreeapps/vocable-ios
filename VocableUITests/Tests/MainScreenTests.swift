@@ -88,7 +88,7 @@ class MainScreenTests: BaseTest {
 
         // Navigate to the category and hide it.
         settingsScreen.openCategorySettings(category: hiddenCategoryName)
-        settingsScreen.showCategorySwitch.tap()
+        settingsScreen.showCategoryButton.tap()
         settingsScreen.leaveCategoryDetailButton.tap()
         
         // Return to the main screen
