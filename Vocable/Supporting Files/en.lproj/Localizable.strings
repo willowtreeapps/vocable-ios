@@ -2,10 +2,10 @@
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Cancel";
 
 /* Delete phrase alert action button title */
-"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Delete";
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Remove";
 
 /* Delete phrase confirmation alert title */
-"category_editor.alert.delete_phrase_confirmation.title" = "Are you sure you want to delete? Removed phrases cannot be restored.";
+"category_editor.alert.delete_phrase_confirmation.title" = "Deleted phrases cannot be recovered.";
 
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "Cancel";
@@ -26,10 +26,10 @@
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Cancel";
 
 /* Confirm alert action title */
-"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Confirm";
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Continue";
 
 /* Disable head tracking confirmation alert title */
-"gaze_settings.alert.disable_head_tracking_confirmation.title" = "Turn off head tracking?";
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "Turning off head tracking will make the app touch mode only. Would you like to continue?";
 
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "Please move closer to the device.";
@@ -106,7 +106,7 @@
 
 "category_editor.toast.successfully_saved.title" = "Changes Saved";
 
-"text_editor.alert.cancel_editing_confirmation.title" = "Are you sure? Going back before saving will clear any edits made.";
+"text_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
 
 "text_editor.alert.category_name_exists.title" = "This category name already exists. Would you like to create a duplicate?";
 
@@ -124,7 +124,7 @@
 
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Cancel";
 
-"phrase_editor.alert.cancel_editing_confirmation.title" = "Are you sure? Going back before saving will clear any edits made.";
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
 
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
 

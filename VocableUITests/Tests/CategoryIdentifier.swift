@@ -29,7 +29,7 @@ struct CategoryIdentifier {
 
 struct CategoryTitleCellIdentifier {
 
-    private let categoryIdentifier: CategoryIdentifier
+    let categoryIdentifier: CategoryIdentifier
     static let categoryTitleCellPrefix: String = "category_title_cell_"
     var identifier: String {
         CategoryTitleCellIdentifier.categoryTitleCellPrefix + categoryIdentifier.identifier
@@ -44,6 +44,26 @@ struct CategoryTitleCellIdentifier {
     
     init(_ identifier: CategoryIdentifier) {
         self.categoryIdentifier = identifier
+    }
+    
+}
+
+struct PresetCategories {
+    
+    var list: [CategoryTitleCellIdentifier]
+    
+    init() {
+        self.list = [
+            CategoryTitleCellIdentifier(CategoryIdentifier.general),
+            CategoryTitleCellIdentifier(CategoryIdentifier.basicNeeds),
+            CategoryTitleCellIdentifier(CategoryIdentifier.personalCare),
+            CategoryTitleCellIdentifier(CategoryIdentifier.conversation),
+            CategoryTitleCellIdentifier(CategoryIdentifier.environment),
+            CategoryTitleCellIdentifier(CategoryIdentifier.keyPad),
+            CategoryTitleCellIdentifier(CategoryIdentifier.mySayings),
+            CategoryTitleCellIdentifier(CategoryIdentifier.recents),
+            CategoryTitleCellIdentifier(CategoryIdentifier.listen)
+        ]
     }
     
 }

@@ -17,12 +17,14 @@ final class GazeableAlertAction: NSObject {
     }
 
     let title: String
+    let accessibilityIdentifier: String
     let style: Style
     let handler: (() -> Void)?
     fileprivate var defaultCompletion: (() -> Void)?
 
-    init(title: String, style: Style = .default, handler: (() -> Void)? = nil) {
+    init(title: String, accessibilityIdentifier: String? = nil, style: Style = .default, handler: (() -> Void)? = nil) {
         self.title = title
+        self.accessibilityIdentifier = accessibilityIdentifier ?? title
         self.style = style
         self.handler = handler
     }
@@ -32,6 +34,39 @@ final class GazeableAlertAction: NSObject {
         handler?()
     }
 
+    static func cancel(withTitle title: String, handler: (() -> Void)? = nil) -> GazeableAlertAction {
+        GazeableAlertAction(
+            title: title,
+            accessibilityIdentifier: "alert.button.cancel",
+            handler: handler
+        )
+    }
+
+    static func delete(withTitle title: String, handler: (() -> Void)? = nil) -> GazeableAlertAction {
+        GazeableAlertAction(
+            title: title,
+            accessibilityIdentifier: "alert.button.delete",
+            style: .destructive,
+            handler: handler
+        )
+    }
+
+    static func continueEditing(withTitle title: String, handler: (() -> Void)? = nil) -> GazeableAlertAction {
+        GazeableAlertAction(
+            title: title,
+            accessibilityIdentifier: "alert.button.continue_editing",
+            handler: handler
+        )
+    }
+
+    static func discardChanges(withTitle title: String, handler: (() -> Void)? = nil) -> GazeableAlertAction {
+        GazeableAlertAction(
+            title: title,
+            accessibilityIdentifier: "alert.button.discard_changes",
+            style: .destructive,
+            handler: handler
+        )
+    }
 }
 
 private final class DividerView: UIView {
@@ -60,10 +95,10 @@ private final class DividerView: UIView {
 
 }
 
-private final class GazeableAlertView: BorderedView {
+private final class GazeableAlertView: UIVisualEffectView {
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(effect: UIBlurEffect(style: .extraLight))
         commonInit()
     }
 
@@ -73,9 +108,8 @@ private final class GazeableAlertView: BorderedView {
     }
 
     private func commonInit() {
-        roundedCorners = .allCorners
-        cornerRadius = 14
-        fillColor = .alertBackgroundColor
+        layer.cornerRadius = 14
+        layer.masksToBounds = true
         setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 
@@ -143,13 +177,13 @@ private final class GazeableAlertButton: GazeableButton {
         
         contentEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24)
 
-        setFillColor(.alertBackgroundColor, for: .normal)
+        setFillColor(.clear, for: .normal)
         setFillColor(.primaryColor, for: .selected)
 
         if case .destructive = style {
             setTitleColor(.errorRed, for: .normal)
         } else {
-            setTitleColor(.black, for: .normal)
+            setTitleColor(.alertNormalText, for: .normal)
         }
 
         setTitleColor(.white, for: .selected)
@@ -164,11 +198,6 @@ private final class GazeableAlertButton: GazeableButton {
 }
 
 final class GazeableAlertViewController: UIViewController, UIViewControllerTransitioningDelegate {
-
-    private lazy var alertView: GazeableAlertView = {
-        let view = GazeableAlertView()
-        return view
-    }()
 
     private lazy var containerStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
@@ -256,7 +285,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         view.addSubview(alertView)
 
         containerStackView.translatesAutoresizingMaskIntoConstraints = false
-        alertView.addSubview(containerStackView)
+        alertView.contentView.addSubview(containerStackView)
         containerStackView.addArrangedSubview(titleContainerView)
 
         let dividerView = DividerView(frame: .zero)
@@ -303,10 +332,10 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         actions.forEach { action in
             let button = GazeableAlertButton(frame: .zero)
             button.setTitle(action.title, for: .normal)
-            button.cornerRadius = alertView.cornerRadius
             button.style = action.style
             button.shouldShrinkWhenTouched = false
             button.backgroundColor = .clear
+            button.accessibilityIdentifier = action.accessibilityIdentifier
             button.addTarget(action, action: #selector(GazeableAlertAction.performActions), for: .primaryActionTriggered)
 
             if actionButtonStackView.arrangedSubviews.isEmpty {
@@ -380,8 +409,6 @@ private final class GazeableAlertViewControllerTransitionAnimator: NSObject, UIV
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 
-        let isForward = self.isForward
-
         guard let presentedViewController = transitionContext.viewController(forKey: isForward ? .to : .from)
         else {
             transitionContext.completeTransition(false)
@@ -411,18 +438,14 @@ private final class GazeableAlertViewControllerTransitionAnimator: NSObject, UIV
 
         let duration = transitionDuration(using: transitionContext)
         let delay = isForward ? duration * 0.5 : 0.1
-        UIView.animate(withDuration: delay,
-                       delay: 0,
-                       options: [],
-                       animations: {
-        }, completion: nil)
 
-        UIView.animate(withDuration: duration,
-                       delay: isForward ? delay : 0,
-                       usingSpringWithDamping: 0.7,
-                       initialSpringVelocity: 1.4,
-                       options: .beginFromCurrentState,
-                       animations: actions,
-                       completion: transitionContext.completeTransition)
+        UIView.animate(
+            withDuration: duration,
+            delay: isForward ? delay : 0,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 1.4,
+            options: .beginFromCurrentState,
+            animations: actions,
+            completion: transitionContext.completeTransition)
     }
 }

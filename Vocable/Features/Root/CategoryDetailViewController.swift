@@ -169,8 +169,8 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
                                                   comment: "Delete phrase alert cancel button title")
 
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
-        alert.addAction(GazeableAlertAction(title: deleteButtonTitle, handler: deleteAction))
+        alert.addAction(.cancel(withTitle: cancelButtonTitle))
+        alert.addAction(.delete(withTitle: deleteButtonTitle, handler: deleteAction))
         self.present(alert, animated: true)
     }
 

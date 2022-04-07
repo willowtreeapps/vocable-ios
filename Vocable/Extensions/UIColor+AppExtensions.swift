@@ -70,6 +70,7 @@ extension UIColor {
     static let cellSelectionColor = UIColor(safelyNamed: "Selection")!
     static let cellBorderHighlightColor = UIColor(safelyNamed: "BorderHighlight")!
     static let alertBackgroundColor = UIColor(safelyNamed: "AlertBackground")!
+    static let alertNormalText = UIColor(safelyNamed: "CategoryBackground")!
 
     static let grayDivider = UIColor(safelyNamed: "GrayDivider")!
     static let errorRed = UIColor(safelyNamed: "ErrorRed")!
