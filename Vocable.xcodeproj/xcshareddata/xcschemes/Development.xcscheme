@@ -64,6 +64,9 @@
                   Identifier = "CustomCategoriesTests/testPagination()">
                </Test>
                <Test
+                  Identifier = "CustomPhraseTests/testPagination()">
+               </Test>
+               <Test
                   Identifier = "MainScreenTests/testCustonCategoryPagination()">
                </Test>
                <Test
