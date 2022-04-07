@@ -17,7 +17,7 @@ struct VocableListCellAction: Equatable {
     let isEnabled: Bool
     let accessibilityIdentifier: String?
     let accessibilityLabel: String?
-    
+
     private init(
         image: UIImage,
         isEnabled: Bool = true,
@@ -28,8 +28,8 @@ struct VocableListCellAction: Equatable {
         self.image = image
         self.isEnabled = isEnabled
         self.action = action
-        self.accessibilityLabel = accessibilityLabel
         self.accessibilityIdentifier = accessibilityIdentifier
+        self.accessibilityLabel = accessibilityLabel
     }
 
     private init(
@@ -44,7 +44,6 @@ struct VocableListCellAction: Equatable {
         self.init(image: image,
                   isEnabled: isEnabled,
                   accessibilityIdentifier: accessibilityIdentifier ?? imageName,
-                  accessibilityLabel: accessibilityLabel ?? imageName,
                   action: action)
     }
 
@@ -56,7 +55,7 @@ struct VocableListCellAction: Equatable {
         UIImage.SymbolConfiguration(pointSize: 28, weight: .bold)
     }
 
-    static func delete(isEnabled: Bool = true, accessibilityIdentifier: String? = nil, accessibilityLabel: String? = nil, action: Action?) -> VocableListCellAction {
+    static func delete(isEnabled: Bool = true, accessibilityIdentifier: String = "deleteButton", accessibilityLabel: String = "delete", action: Action?) -> VocableListCellAction {
         VocableListCellAction(systemImage: "trash",
                               isEnabled: isEnabled,
                               accessibilityIdentifier: accessibilityIdentifier,
@@ -64,7 +63,7 @@ struct VocableListCellAction: Equatable {
                               action: action)
     }
 
-    static func reorderUp(isEnabled: Bool = true, accessibilityIdentifier: String? = nil, accessibilityLabel: String? = nil, action: Action?) -> VocableListCellAction {
+    static func reorderUp(isEnabled: Bool = true, accessibilityIdentifier: String = "reorder.upButton", accessibilityLabel: String = "reorder up", action: Action?) -> VocableListCellAction {
         VocableListCellAction(systemImage: "chevron.up",
                               isEnabled: isEnabled,
                               accessibilityIdentifier: accessibilityIdentifier,
@@ -72,7 +71,7 @@ struct VocableListCellAction: Equatable {
                               action: action)
     }
 
-    static func reorderDown(isEnabled: Bool = true, accessibilityIdentifier: String? = nil, accessibilityLabel: String? = nil, action: Action?) -> VocableListCellAction {
+    static func reorderDown(isEnabled: Bool = true, accessibilityIdentifier: String = "reorder.downButton", accessibilityLabel: String = "reorder down", action: Action?) -> VocableListCellAction {
         VocableListCellAction(systemImage: "chevron.down",
                               isEnabled: isEnabled,
                               accessibilityIdentifier: accessibilityIdentifier,
@@ -82,7 +81,6 @@ struct VocableListCellAction: Equatable {
 
     static func == (lhs: VocableListCellAction, rhs: VocableListCellAction) -> Bool {
         lhs.isEnabled == rhs.isEnabled &&
-        lhs.accessibilityLabel == rhs.accessibilityLabel &&
         lhs.accessibilityIdentifier == rhs.accessibilityIdentifier &&
         lhs.image.isEqual(rhs.image)
     }

@@ -108,6 +108,12 @@
 
 "text_editor.alert.cancel_editing_confirmation.title" = "Are you sure? Going back before saving will clear any edits made.";
 
+"text_editor.alert.category_name_exists.title" = "This category name already exists. Would you like to create a duplicate?";
+
+"text_editor.alert.category_name_exists.cancel.button" = "Cancel";
+
+"text_editor.alert.category_name_exists.create.button" = "Create Duplicate";
+
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
 
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
@@ -123,6 +129,12 @@
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
 
 "phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
+
+"phrase_editor.alert.phrase_name_exists.title" = "This phrase already exists. Would you like to create a duplicate?";
+
+"phrase_editor.alert.phrase_name_exists.cancel.button" = "Cancel";
+
+"phrase_editor.alert.phrase_name_exists.create.button" = "Create Duplicate";
 
 "categories_list_editor.header.title" = "Categories";
 
