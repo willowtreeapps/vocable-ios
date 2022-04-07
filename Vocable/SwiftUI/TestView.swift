@@ -13,69 +13,77 @@ struct TestView: View {
     @State private var tapCount = 0
 
     var body: some View {
-        ZStack {
-            Color(UIColor.primaryBackgroundColor)
-                .edgesIgnoringSafeArea(.all)
-
-            VStack {
-                if switchIsOn {
-                    Label("Lights on!", systemImage: "lightbulb.fill")
-                        .foregroundColor(.white)
-                } else {
-                    Label("Lights off", systemImage: "lightbulb.slash.fill")
-                        .foregroundColor(.white)
+        VStack {
+            Spacer().frame(height: 34)
+            
+            HStack {
+                GazeButton { } label: {
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 25))
+                        .frame(width: 60, height: 60)
                 }
-
-                HStack(spacing: 30) {
-                    GazeButton {
-                        print("Button #1 pressed")
-                    } label: {
-                        Text("Button #1")
-                            .padding(30)
-                    }
-
-                    GazeButton {
-                        print("settings pressed")
-                    } label: {
-                        Image(systemName: "gear")
-                            .font(.largeTitle)
-                            .padding(20)
-                    }.disabled(true)
-
-                    GazeButton {
-                        print("info button pressed")
-                    } label: {
-                        Label("More info", systemImage: "info.circle")
-                            .padding(30)
-                    }
+                Spacer()
+                GazeButton { } label: {
+                    Image(systemName: "keyboard")
+                        .font(.system(size: 25))
+                        .frame(width: 60, height: 60)
                 }
-
-                HStack {
-                    GazeButton(role: .destructive) {
-                        print("remove button pressed")
-                    } label: {
-                        Label("Remove Item", systemImage: "trash")
-                            .padding(30)
-                    }
-
-                    GazeButton {
-                        switchIsOn.toggle()
-                    } label: {
-                        Toggle("Lights", isOn: $switchIsOn)
-                            .padding(30)
-                    }
-
-                    GazeButton {
-                        tapCount += 1
-                    } label: {
-                        Text("Tap count: \(tapCount)")
-                            .lineLimit(1)
-                            .padding(30)
-                    }
+                GazeButton { } label: {
+                    Image(systemName: "gear")
+                        .font(.system(size: 25))
+                        .frame(width: 60, height: 60)
                 }
             }
-            .gazeButtonStyle(.vocable)
+
+            Spacer().frame(height: 40)
+
+            VStack {
+                GazeButton { } label: {
+                    HStack {
+                        Text("Rename Category")
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                    }
+                    .padding(20)
+                }
+
+                GazeButton {
+                    switchIsOn.toggle()
+                } label: {
+                    Toggle("Show Category", isOn: $switchIsOn)
+                        .padding()
+                }
+
+                GazeButton { } label: {
+                    HStack {
+                        Text("Edit Phrases")
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                    }
+                    .padding(20)
+                }
+
+                GazeButton(role: .destructive) { } label: {
+                    Label("Remove Category", systemImage: "trash")
+                        .frame(maxWidth: .infinity)
+                        .padding(20)
+                }
+            }
+            .contentHuggingPriority(.defaultLow, axis: .horizontal)
+
+            Spacer()
+
+            GazeButton {
+                tapCount += 1
+            } label: {
+                Text("Tap Count: \(tapCount)")
+                    .padding(30)
+                    .fixedSize()
+            }
         }
+        .padding()
+        .gazeButtonStyle(.vocable)
+        .background(Color(UIColor.primaryBackgroundColor).ignoresSafeArea())
     }
 }
 

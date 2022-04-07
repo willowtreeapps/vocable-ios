@@ -9,13 +9,6 @@
 import Combine
 import SwiftUI
 
-class DynamicSizeHostingController<Content: View>: UIHostingController<Content> {
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        preferredContentSize = view.intrinsicContentSize
-    }
-}
-
 // MARK: - ButtonRole
 
 @available(iOS, obsoleted: 15, message: "Please use the built-in ButtonRole type")
@@ -51,7 +44,7 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
     class Coordinator {
         private let action: () -> Void
 
-        fileprivate var host: DynamicSizeHostingController<AnyView>?
+        fileprivate var host: ContentHuggingHostingController<AnyView>?
         fileprivate var cancellable: AnyCancellable?
 
         init(_ action: @escaping () -> Void) {
@@ -96,9 +89,8 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
         let style = context.environment.gazeButtonStyle
         let configuration = Configuration(label: label, state: $state, role: role)
         let styledLabel = style.makeBody(configuration)
-            .fixedSize()
 
-        let hostingController = DynamicSizeHostingController(rootView: AnyView(styledLabel))
+        let hostingController = ContentHuggingHostingController(rootView: AnyView(styledLabel))
         let hostingView = hostingController.view!
 
         let button = BridgedGazeableButton()
@@ -138,10 +130,20 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
     func updateUIView(_ uiView: BridgedGazeableButton, context: Context) {
         let style = context.environment.gazeButtonStyle
         let configuration = Configuration(label: label, state: $state, role: role)
-        let styledLabel = style.makeBody(configuration).fixedSize()
+        let styledLabel = style.makeBody(configuration)
 
         context.coordinator.host?.rootView = AnyView(styledLabel)
 
         uiView.isEnabled = context.environment.isEnabled
+
+        uiView.setContentHuggingPriority(
+            context.environment.horizontalContentHuggingPriority,
+            for: .horizontal
+        )
+
+        uiView.setContentHuggingPriority(
+            context.environment.verticalContentHuggingPriority,
+            for: .vertical
+        )
     }
 }

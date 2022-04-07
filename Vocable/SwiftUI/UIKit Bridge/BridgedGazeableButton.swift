@@ -23,21 +23,6 @@ class BridgedGazeableButton: UIButton {
             CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
     }
 
-    init() {
-        super.init(frame: .zero)
-        commmonInit()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commmonInit()
-    }
-
-    private func commmonInit() {
-        setContentHuggingPriority(.defaultHigh, for: .vertical)
-        setContentHuggingPriority(.defaultHigh, for: .horizontal)
-    }
-
     // MARK: State Updates
 
     override var isHighlighted: Bool {

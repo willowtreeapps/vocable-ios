@@ -27,10 +27,12 @@
 		4E014DAA27EA53BC00561FC8 /* NSRange+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E014DA927EA53BC00561FC8 /* NSRange+.swift */; };
 		4E56054627FB864E00719C23 /* GazeButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56054527FB864E00719C23 /* GazeButtonStyle.swift */; };
 		4E56054827FB8C7300719C23 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56054727FB8C7300719C23 /* TestView.swift */; };
+		4E70DA6A27FE859F0027B40B /* ContentHuggingPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E70DA6927FE859F0027B40B /* ContentHuggingPriority.swift */; };
 		4E8A303C27EBB95C000177B1 /* BidirectionalCollection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A303B27EBB95C000177B1 /* BidirectionalCollection+.swift */; };
 		4EA3D1CC27F772E400FE6457 /* GazeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D1CB27F772E400FE6457 /* GazeButton.swift */; };
 		4EA3D1CF27F7773300FE6457 /* BridgedGazeableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D1CE27F7773300FE6457 /* BridgedGazeableButton.swift */; };
 		4EB6A59427FBF84B00F2BFB3 /* VocableGazeButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6A59327FBF84B00F2BFB3 /* VocableGazeButtonStyle.swift */; };
+		4EE2D2EC27FE2FCA00299A1A /* ContentHuggingHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE2D2EB27FE2FCA00299A1A /* ContentHuggingHostingController.swift */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
 		622A6BFE283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622A6BFD283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift */; };
 		622A6BFF283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622A6BFD283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift */; };
@@ -316,10 +318,12 @@
 		4E014DA927EA53BC00561FC8 /* NSRange+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRange+.swift"; sourceTree = "<group>"; };
 		4E56054527FB864E00719C23 /* GazeButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeButtonStyle.swift; sourceTree = "<group>"; };
 		4E56054727FB8C7300719C23 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		4E70DA6927FE859F0027B40B /* ContentHuggingPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentHuggingPriority.swift; sourceTree = "<group>"; };
 		4E8A303B27EBB95C000177B1 /* BidirectionalCollection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BidirectionalCollection+.swift"; sourceTree = "<group>"; };
 		4EA3D1CB27F772E400FE6457 /* GazeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeButton.swift; sourceTree = "<group>"; };
 		4EA3D1CE27F7773300FE6457 /* BridgedGazeableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgedGazeableButton.swift; sourceTree = "<group>"; };
 		4EB6A59327FBF84B00F2BFB3 /* VocableGazeButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableGazeButtonStyle.swift; sourceTree = "<group>"; };
+		4EE2D2EB27FE2FCA00299A1A /* ContentHuggingHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentHuggingHostingController.swift; sourceTree = "<group>"; };
 		54D3C41423E37CD40061EF47 /* VocableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -701,6 +705,8 @@
 			isa = PBXGroup;
 			children = (
 				4EA3D1CE27F7773300FE6457 /* BridgedGazeableButton.swift */,
+				4EE2D2EB27FE2FCA00299A1A /* ContentHuggingHostingController.swift */,
+				4E70DA6927FE859F0027B40B /* ContentHuggingPriority.swift */,
 			);
 			path = "UIKit Bridge";
 			sourceTree = "<group>";
@@ -1378,6 +1384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A944D0092406D54400F3863E /* SettingsToggleCollectionViewCell.swift in Sources */,
+				4E70DA6A27FE859F0027B40B /* ContentHuggingPriority.swift in Sources */,
 				64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */,
 				2745402B2460DD490056EF98 /* Presets.swift in Sources */,
 				A94C3FB027F4A5DC001D4F01 /* PhraseEditorConfigurationProvider.swift in Sources */,
@@ -1514,6 +1521,7 @@
 				A9299C7523F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift in Sources */,
 				6B5C73A927DFE63600004713 /* NSPredicate+Operators.swift in Sources */,
 				6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */,
+				4EE2D2EC27FE2FCA00299A1A /* ContentHuggingHostingController.swift in Sources */,
 				6BB56BAA2422B40300EA787E /* PublishedDefault.swift in Sources */,
 				6B823BCD23F4ADE30099F65E /* TunningWindow.swift in Sources */,
 				6B8D3C02282C227500DDB9B7 /* UIAccessibilityIdentification+AccessibilityID.swift in Sources */,
