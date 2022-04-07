@@ -35,17 +35,17 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">Cancelar</target>
-        <note>Cancel exit editing alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
         <source>Confirm</source>
         <target state="translated">Aceptar</target>
-        <note>Confirm exit category alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
         <source>If you close this without saving your custom category will be deleted.</source>
         <target state="translated">Se eliminará su categoría personalizada al salir sin guardar.</target>
-        <note>Exit edit categories alert title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -66,16 +66,6 @@
         <source>Cancel</source>
         <target state="translated">Cancelar</target>
         <note>Delete phrase alert cancel button title</note>
-      </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
-        <source>Delete</source>
-        <target state="translated">Eliminar</target>
-        <note>Delete phrase alert action button title</note>
-      </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
-        <source>Are you sure you want to delete? Removed phrases cannot be restored.</source>
-        <target state="translated">Las frases eliminadas son irrecuperables.</target>
-        <note>Delete phrase confirmation alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
         <source>Remove Category</source>
@@ -102,16 +92,6 @@
         <target state="translated">Cancelar</target>
         <note>Cancel alert action title</note>
       </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
-        <source>Confirm</source>
-        <target state="translated">Aceptar</target>
-        <note>Confirm alert action title</note>
-      </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
-        <source>Turn off head tracking?</source>
-        <target state="translated">¿Apagar el seguimiento de la cabeza?</target>
-        <note>Disable head tracking confirmation alert title</note>
-      </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
         <source>Please move closer to the device.</source>
         <target state="translated">Acérquese al dispositivo.</target>
@@ -136,11 +116,6 @@
         <source>Discard</source>
         <target state="translated">Descartar</target>
         <note>Discard changes alert action title</note>
-      </trans-unit>
-      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>Are you sure? Going back before saving will clear any edits made.</source>
-        <target state="translated">Volver atrás antes de guardar eliminará cualquier edición hecha.</target>
-        <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
         <source>Saved to %@</source>
@@ -248,11 +223,6 @@
         <source>Discard</source>
         <target state="translated">Descartar</target>
         <note>Discard changes alert action title</note>
-      </trans-unit>
-      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>Are you sure? Going back before saving will clear any edits made.</source>
-        <target state="translated">Volver antes de guardar borrará todas las ediciones realizadas.</target>
-        <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve">
         <source>High</source>
