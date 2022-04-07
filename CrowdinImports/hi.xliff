@@ -25,12 +25,12 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">रद्द करें</target>
-        <note>Cancel exit editing alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
         <source>Confirm</source>
         <target state="translated">पुष्टि करें</target>
-        <note>Confirm exit category alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -42,11 +42,6 @@
         <target state="translated">रद्द करें</target>
         <note>Delete phrase alert cancel button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
-        <source>Delete</source>
-        <target state="translated">हटाएँ</target>
-        <note>Delete phrase alert action button title</note>
-      </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
         <source>Changes saved</source>
         <target state="translated">परिवर्तन सहेजा गया!</target>
@@ -56,11 +51,6 @@
         <source>Cancel</source>
         <target state="translated">रद्द करें</target>
         <note>Cancel alert action title</note>
-      </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
-        <source>Confirm</source>
-        <target state="translated">पुष्टि करें</target>
-        <note>Confirm alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
