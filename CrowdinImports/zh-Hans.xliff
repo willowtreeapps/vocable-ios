@@ -25,17 +25,17 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">取消</target>
-        <note>Cancel exit editing alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
         <target state="final">确认</target>
-        <note>Confirm exit category alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
         <source>If you close this without saving your custom category will be deleted.</source>
         <target state="final">如果您关闭了，则您的自定类别将被删除。</target>
-        <note>Exit edit categories alert title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -56,16 +56,6 @@
         <source>Cancel</source>
         <target state="final">取消</target>
         <note>Delete phrase alert cancel button title</note>
-      </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve" approved="yes">
-        <source>Delete</source>
-        <target state="final">删除</target>
-        <note>Delete phrase alert action button title</note>
-      </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Are you sure you want to delete? Removed phrases cannot be restored.</source>
-        <target state="final">删除后的对话无法恢复。</target>
-        <note>Delete phrase confirmation alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve" approved="yes">
         <source>Remove Category</source>
@@ -92,16 +82,6 @@
         <target state="final">取消</target>
         <note>Cancel alert action title</note>
       </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve" approved="yes">
-        <source>Confirm</source>
-        <target state="final">确认</target>
-        <note>Confirm alert action title</note>
-      </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Turn off head tracking?</source>
-        <target state="final">关闭头部跟踪？</target>
-        <note>Disable head tracking confirmation alert title</note>
-      </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve" approved="yes">
         <source>Please move closer to the device.</source>
         <target state="final">请靠近设备</target>
@@ -126,11 +106,6 @@
         <source>Discard</source>
         <target state="final">舍弃</target>
         <note>Discard changes alert action title</note>
-      </trans-unit>
-      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Are you sure? Going back before saving will clear any edits made.</source>
-        <target state="final">保存前返回将会清除任何编辑的东西。</target>
-        <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve" approved="yes">
         <source>Saved to %@</source>
@@ -238,11 +213,6 @@
         <source>Discard</source>
         <target state="final">舍弃</target>
         <note>Discard changes alert action title</note>
-      </trans-unit>
-      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Are you sure? Going back before saving will clear any edits made.</source>
-        <target state="final">保存前返回将会清除任何编辑的东西。</target>
-        <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve" approved="yes">
         <source>High</source>
