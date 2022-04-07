@@ -17,53 +17,6 @@ protocol GazeButtonStyle {
     @ViewBuilder func makeBody(_ configuration: Configuration) -> Body
 }
 
-struct DefaultGazeButtonStyle: GazeButtonStyle {
-    private struct _Body<Label: View>: View {
-        @Environment(\.isEnabled)
-        private var isEnabled
-
-        @Binding var state: ButtonState
-
-        var label: Label
-        var buttonRole: ButtonRole?
-
-        var body: some View {
-            label
-                .foregroundColor(buttonRole == .destructive ? .red : .accentColor)
-                .opacity(
-                    (state.contains(.highlighted) || !isEnabled) ? 0.3 : 1
-                )
-        }
-    }
-
-    func makeBody(_ configuration: Configuration) -> some View {
-        _Body(state: configuration.state, label: configuration.label, buttonRole: configuration.role)
-    }
-}
-
-// MARK: - Configuration
-
-struct GazeButtonStyleConfiguration {
-    struct Label: View {
-        private var view: AnyView
-        var body: some View { view }
-
-        fileprivate init<V: View>(_ view: V) {
-            self.view = AnyView(view)
-        }
-    }
-
-    let state: Binding<ButtonState>
-    let label: Label
-    let role: ButtonRole?
-
-    init<V: View>(label: V, state: Binding<ButtonState>, role: ButtonRole?) {
-        self.label = Label(label)
-        self.state = state
-        self.role = role
-    }
-}
-
 // MARK: - View Modifier
 
 extension View {
@@ -76,7 +29,7 @@ extension View {
 
 extension EnvironmentValues {
     private struct GazeButtonStyleKey: EnvironmentKey {
-        static var defaultValue = AnyGazeButtonStyle(DefaultGazeButtonStyle())
+        static var defaultValue = AnyGazeButtonStyle(.automatic)
     }
 
     var gazeButtonStyle: AnyGazeButtonStyle {

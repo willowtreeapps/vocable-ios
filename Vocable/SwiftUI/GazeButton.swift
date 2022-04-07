@@ -9,35 +9,13 @@
 import Combine
 import SwiftUI
 
-// MARK: - ButtonRole
-
-@available(iOS, obsoleted: 15, message: "Please use the built-in ButtonRole type")
-struct ButtonRole: Equatable {
-    private let rawValue: String
-
-    private init(_ rawValue: String) {
-        self.rawValue = rawValue
-    }
-
-    static let cancel = ButtonRole("cancel")
-    static let destructive = ButtonRole("destructive")
-}
-
-// MARK: - ButtonState
-
-struct ButtonState: OptionSet {
-    let rawValue: UInt
-
-    static let normal       = Self([])
-    static let highlighted  = Self(rawValue: 1 << 0)
-    static let selected     = Self(rawValue: 1 << 1)
-}
+private let defaultMinimumGazeDuration: TimeInterval = 1
 
 // MARK: - GazeButton
 
 struct GazeButton<Label>: UIViewRepresentable where Label: View {
 
-    // MARK: Coordinator
+    // MARK: Subtypes
 
     private typealias Configuration = GazeButtonStyleConfiguration
 
@@ -68,7 +46,7 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
     // MARK: Initializer
 
     init(
-        minimumGazeDuration: TimeInterval = 1,
+        minimumGazeDuration: TimeInterval = defaultMinimumGazeDuration,
         role: ButtonRole? = nil,
         action: @escaping () -> Void,
         @ViewBuilder label: () -> Label
@@ -145,5 +123,31 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
             context.environment.verticalContentHuggingPriority,
             for: .vertical
         )
+    }
+}
+
+// MARK: Convenience Inits
+
+extension GazeButton {
+    init(
+        _ titleKey: LocalizedStringKey,
+        minimumGazeDuration: TimeInterval = defaultMinimumGazeDuration,
+        role: ButtonRole? = nil,
+        action: @escaping () -> Void
+    ) where Label == Text {
+        self.init(minimumGazeDuration: minimumGazeDuration, role: role, action: action) {
+            Text(titleKey)
+        }
+    }
+
+    init<S: StringProtocol>(
+        _ title: S,
+        minimumGazeDuration: TimeInterval = defaultMinimumGazeDuration,
+        role: ButtonRole? = nil,
+        action: @escaping () -> Void
+    ) where Label == Text {
+        self.init(minimumGazeDuration: minimumGazeDuration, role: role, action: action) {
+            Text(title)
+        }
     }
 }

@@ -44,6 +44,8 @@ struct VocableGazeButtonStyle: GazeButtonStyle {
 
             if #available(iOS 15.0, *) {
                 label
+                    .padding(.horizontal)
+                    .frame(minHeight: 60)
                     .font(.headline)
                     .foregroundColor(textColor)
                     .background(fillColor)
@@ -64,7 +66,5 @@ struct VocableGazeButtonStyle: GazeButtonStyle {
 }
 
 extension GazeButtonStyle where Self == VocableGazeButtonStyle {
-    static var vocable: VocableGazeButtonStyle {
-        VocableGazeButtonStyle()
-    }
+    static var vocable: VocableGazeButtonStyle { .init() }
 }

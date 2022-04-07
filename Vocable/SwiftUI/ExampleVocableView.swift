@@ -1,5 +1,5 @@
 //
-//  TestView.swift
+//  ExampleVocableView.swift
 //  Vocable
 //
 //  Created by Robert Moyer on 4/4/22.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct TestView: View {
+struct ExampleVocableView: View {
     @State private var switchIsOn = false
     @State private var tapCount = 0
 
@@ -20,22 +20,25 @@ struct TestView: View {
                 GazeButton { } label: {
                     Image(systemName: "arrow.left")
                         .font(.system(size: 25))
-                        .frame(width: 60, height: 60)
+                        .frame(width: 30, height: 30)
                 }
                 Spacer()
                 GazeButton { } label: {
                     Image(systemName: "keyboard")
                         .font(.system(size: 25))
-                        .frame(width: 60, height: 60)
-                }
+                        .frame(width: 30, height: 30)
+                }.disabled(true)
                 GazeButton { } label: {
                     Image(systemName: "gear")
                         .font(.system(size: 25))
-                        .frame(width: 60, height: 60)
+                        .frame(width: 30, height: 30)
                 }
             }
 
-            Spacer().frame(height: 40)
+            Text("General")
+                .padding()
+                .font(.system(size: 30, weight: .bold))
+                .foregroundColor(.white)
 
             VStack {
                 GazeButton { } label: {
@@ -44,14 +47,12 @@ struct TestView: View {
                         Spacer()
                         Image(systemName: "chevron.forward")
                     }
-                    .padding(20)
                 }
 
                 GazeButton {
                     switchIsOn.toggle()
                 } label: {
                     Toggle("Show Category", isOn: $switchIsOn)
-                        .padding()
                 }
 
                 GazeButton { } label: {
@@ -60,13 +61,11 @@ struct TestView: View {
                         Spacer()
                         Image(systemName: "chevron.forward")
                     }
-                    .padding(20)
                 }
 
                 GazeButton(role: .destructive) { } label: {
                     Label("Remove Category", systemImage: "trash")
                         .frame(maxWidth: .infinity)
-                        .padding(20)
                 }
             }
             .contentHuggingPriority(.defaultLow, axis: .horizontal)
@@ -77,18 +76,18 @@ struct TestView: View {
                 tapCount += 1
             } label: {
                 Text("Tap Count: \(tapCount)")
-                    .padding(30)
                     .fixedSize()
             }
         }
+        .readableWidth()
         .padding()
         .gazeButtonStyle(.vocable)
         .background(Color(UIColor.primaryBackgroundColor).ignoresSafeArea())
     }
 }
 
-struct TestControlView_Previews: PreviewProvider {
+struct ExampleVocableView_Previews: PreviewProvider {
     static var previews: some View {
-        TestView()
+        ExampleVocableView()
     }
 }
