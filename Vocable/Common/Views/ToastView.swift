@@ -9,21 +9,10 @@
 import UIKit
 
 @IBDesignable
-class ToastView: BorderedView {
+class ToastView: UIView {
     
+    @IBOutlet private var iconView: UIImageView!
     @IBOutlet private var titleLabel: UILabel!
-    
-    override var bounds: CGRect {
-        didSet {
-            cornerRadius = bounds.height / 2
-        }
-    }
-
-    override var frame: CGRect {
-        didSet {
-            cornerRadius = frame.height / 2
-        }
-    }
     
     var text: String = "" {
         didSet {
@@ -31,9 +20,23 @@ class ToastView: BorderedView {
         }
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setContentHuggingPriority(.required, for: .vertical)
-        setContentHuggingPriority(.required, for: .horizontal)
+    init() {
+        super.init(frame: .zero)
+        commonInit()
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+
+    private func commonInit() {
+        layer.cornerRadius = 30
+        layer.masksToBounds = true
     }
 }
