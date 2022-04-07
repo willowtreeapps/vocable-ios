@@ -63,13 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Warm up the speech engine to prevent lag on first invocation
         AVSpeechSynthesizer.shared.speak("", language: "en")
 
-        // Allows audio to be played in silent mode
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
-        } catch let error {
-            print("Failed to set audio category: \(error.localizedDescription)")
-        }
-
         application.isIdleTimerDisabled = true
 
         NotificationCenter.default.addObserver(self,

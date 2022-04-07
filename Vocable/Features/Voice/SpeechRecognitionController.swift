@@ -19,6 +19,8 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     static let shared = SpeechRecognitionController()
 
+    private let audioController = AudioEngineController()
+
     @Published private(set) var isAvailable: Bool = true
 
     @Published private(set) var isPaused: Bool = false {
@@ -134,7 +136,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
         soundEffectPlaybackCancellable = soundEffectSubject
             .removeDuplicates()
             .sink { newValue in
-                AudioEngineController.shared.playEffect(newValue, completion: {})
+                self.audioController.playEffect(newValue, completion: {})
             }
     }
 
@@ -206,9 +208,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
                         return
                     }
 
-                    let audioController = AudioEngineController.shared
-
-                    audioController.register(speechRecognizer: self, completion: { didInit in
+                    self.audioController.register(speechRecognizer: self, completion: { didInit in
                         guard didInit else {
                             print("Audio engine failed to initialize")
                             self.isListening = false
@@ -270,11 +270,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     private func unscheduleListeners() {
         cancelActiveRecognitionTasks()
-
-        let audioController = AudioEngineController.shared
-        func unregister() {
-            audioController.unregister(speechRecognizer: self)
-        }
+        audioController.unregister(speechRecognizer: self)
     }
 
     private func startTimer(customTimeout: TimeInterval? = nil) {
@@ -321,7 +317,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
         guard bufferCancellable == nil else {
             return
         }
-        bufferCancellable = AudioEngineController.shared.$audioBuffer
+        bufferCancellable = audioController.$audioBuffer
             .compactMap { $0 }
             .sink { [weak self] in
                 guard let self = self else { return }
