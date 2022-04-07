@@ -183,6 +183,7 @@
 		CE12277824F58706008F7866 /* CustomCategoriesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */; };
 		CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */; };
 		DC41F55427E4F5130099B7D5 /* CategoryIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */; };
+		DC533C0127FCDF39005FEBBD /* CustomCategoryBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -414,6 +415,7 @@
 		CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoriesScreen.swift; sourceTree = "<group>"; };
 		CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
 		DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIdentifier.swift; sourceTree = "<group>"; };
+		DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryBaseTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -529,6 +531,7 @@
 				CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */,
 				620DD31827DA90F1003B01A0 /* CustomPhraseBaseTest.swift */,
 				62300C7D27F360930005CEF5 /* CustomCategoryTests.swift */,
+				DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1278,6 +1281,7 @@
 				CE12277624F586CB008F7866 /* CustomPhraseTests.swift in Sources */,
 				62300C7E27F360930005CEF5 /* CustomCategoryTests.swift in Sources */,
 				17793C2B24574B2800758BC0 /* MainScreen.swift in Sources */,
+				DC533C0127FCDF39005FEBBD /* CustomCategoryBaseTest.swift in Sources */,
 				17F29479247419DD00A05434 /* SettingsScreen.swift in Sources */,
 				17D4162A2457659700FD81CD /* BaseTest.swift in Sources */,
 			);

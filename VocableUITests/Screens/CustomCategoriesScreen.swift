@@ -3,6 +3,7 @@
 //  VocableUITests
 //
 //  Created by Sashank Patel on 8/25/20.
+//  Updated by Canan Arikan and Rudy Salas on 04/07/2022
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
@@ -15,9 +16,9 @@ class CustomCategoriesScreen: BaseScreen {
     let mainScreen = MainScreen()
     
     let categoriesPageAddPhraseButton = XCUIApplication().buttons["settingsCategory.addPhraseButton"]
-    let editCategoryPhrasesCell = XCUIApplication().buttons["edit_phrases_cell"]
+    let editCategoryPhrasesButton = XCUIApplication().buttons["edit_phrases_cell"]
     let categoriesPageEditPhraseButton = XCUIApplication().buttons["categoryPhrase.editButton"]
-    let categoriesPageDeletePhraseButton = XCUIApplication().buttons["categoryPhrase.deleteButton"]
+    let categoriesPageDeletePhraseButton = XCUIApplication().buttons["deleteButton"]
 
     func createCustomCategory(categoryName: String) {
         settingsScreen.settingsPageAddCategoryButton.tap()

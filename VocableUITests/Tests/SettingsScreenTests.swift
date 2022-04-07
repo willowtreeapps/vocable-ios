@@ -19,7 +19,7 @@ class SettingsScreenTests: BaseTest {
 
         // Verify that when the category is hidden, up and down buttons are disabled.
         settingsScreen.openCategorySettings(category: category)
-        settingsScreen.showCategorySwitch.tap()
+        settingsScreen.showCategoryButton.tap()
         settingsScreen.leaveCategoryDetailButton.tap()
         
         let hiddenCategory = settingsScreen.locateCategoryCell(category)
@@ -29,7 +29,7 @@ class SettingsScreenTests: BaseTest {
 
         // Verify that when the category is shown, up and down buttons are enabled.
         settingsScreen.openCategorySettings(category: category)
-        settingsScreen.showCategorySwitch.tap()
+        settingsScreen.showCategoryButton.tap()
         settingsScreen.leaveCategoryDetailButton.tap()
         
         let shownCategory = settingsScreen.locateCategoryCell(category)
@@ -60,40 +60,6 @@ class SettingsScreenTests: BaseTest {
         
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
         XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: basicNeedsCategoryText).element.exists)
-
-    }
-
-    // We are disabling this test for now, it will be fixed and moved to Custom Categories Tests: https://github.com/willowtreeapps/vocable-ios/issues/514
-    func testAddCustomCategory() {
-
-        let customCategory = "ddingcustomcategorytest"
-        let confirmationAlert = "Are you sure? Going back before saving will clear any edits made."
-
-        settingsScreen.navigateToSettingsCategoryScreen()
-        settingsScreen.settingsPageAddCategoryButton.tap()
-
-        // Verify Category is not added if edits are discarded
-        keyboardScreen.typeText("A")
-        keyboardScreen.dismissKeyboardButton.tap()
-        XCTAssertEqual(XCUIApplication().staticTexts.element(boundBy: 1).label, confirmationAlert)
-
-        settingsScreen.alertDiscardButton.tap()
-        XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: "A").element.exists)
-        settingsScreen.settingsPageNextButton.tap()
-        XCTAssertFalse(settingsScreen.otherElements.containing(.staticText, identifier: "A").element.exists)
-
-        // Verify Category can be added if continuing edit.
-        settingsScreen.settingsPageAddCategoryButton.tap()
-        keyboardScreen.typeText("A")
-        keyboardScreen.dismissKeyboardButton.tap()
-        XCTAssertEqual(XCUIApplication().staticTexts.element(boundBy: 1).label, confirmationAlert)
-        settingsScreen.alertContinueButton.tap()
-
-        keyboardScreen.typeText(customCategory)
-        keyboardScreen.checkmarkAddButton.tap()
-        settingsScreen.navigateToCategory(category: "9. A"+customCategory)
-
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: "9. A"+customCategory).element.exists)
 
     }
 

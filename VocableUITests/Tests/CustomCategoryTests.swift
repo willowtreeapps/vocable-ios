@@ -2,41 +2,71 @@
 //  CustomCategoryTests.swift
 //  VocableUITests
 //
-//  Created by Rudy Salas on 3/29/22.
+//  Created by Canan Arikan and Rudy Salas on 3/29/22.
 //  Copyright © 2022 WillowTree. All rights reserved.
 //
 
 import XCTest
 
-class CustomCategoryTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+class CustomCategoryTests: CustomCategoryBaseTest {
+    
+    func testAddCustomCategory() {
+        XCTAssertTrue(settingsScreen.locateCategoryCell(customCategoryName).element.isEnabled)
+        XCTAssertTrue(settingsScreen.locateCategoryCell(customCategoryName).element.exists)
     }
+    
+    func testCanContinueEditingCategoryName() {
+        let renamedCategory = customCategoryName + nameSuffix
+        
+        settingsScreen.openCategorySettings(category: customCategoryName)
+        settingsScreen.renameCategoryButton.tap()
+        keyboardScreen.typeText(nameSuffix)
+        keyboardScreen.dismissKeyboardButton.tap()
+        XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
+        
+        settingsScreen.alertContinueButton.tap()
+        XCTAssertTrue(keyboardScreen.keyboardTextView.staticTexts[renamedCategory].exists)
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        keyboardScreen.checkmarkAddButton.tap()
+        settingsScreen.leaveCategoriesButton.tap()
+        XCTAssertTrue(settingsScreen.locateCategoryCell(renamedCategory).element.isEnabled)
+        XCTAssertTrue(settingsScreen.locateCategoryCell(renamedCategory).element.exists)
+   }
+    
+    func testCanDiscardEditingCategoryName() {
+        settingsScreen.openCategorySettings(category: customCategoryName)
+        settingsScreen.renameCategoryButton.tap()
+        keyboardScreen.typeText(nameSuffix)
+        keyboardScreen.dismissKeyboardButton.tap()
+        XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
+        
+        settingsScreen.alertDiscardButton.tap()
+        XCTAssertEqual(settingsScreen.categoryDetailsTitle.label, customCategoryName)
+        
+        settingsScreen.leaveCategoriesButton.tap()
+        XCTAssertTrue(settingsScreen.locateCategoryCell(customCategoryName).element.exists)
     }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testCanRenameCategory() {
+        let renamedCategory = customCategoryName + nameSuffix
+        
+        settingsScreen.openCategorySettings(category: customCategoryName)
+        settingsScreen.renameCategoryButton.tap()
+        keyboardScreen.typeText(nameSuffix)
+        keyboardScreen.checkmarkAddButton.tap()
+        XCTAssertEqual(settingsScreen.categoryDetailsTitle.label, renamedCategory)
+        
+        settingsScreen.leaveCategoriesButton.tap()
+        XCTAssertTrue(settingsScreen.locateCategoryCell(renamedCategory).element.exists)
     }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    
+    func testCanRemoveCategory() {
+        XCTAssertTrue(settingsScreen.doesCategoryExist(customCategoryName))
+        
+        settingsScreen.openCategorySettings(category: customCategoryName)
+        settingsScreen.removeCategoryButton.tap()
+        settingsScreen.alertRemoveButton.tap()
+        XCTAssertFalse(settingsScreen.doesCategoryExist(customCategoryName))
     }
+  
 }

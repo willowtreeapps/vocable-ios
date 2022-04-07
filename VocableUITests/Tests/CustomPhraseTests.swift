@@ -14,7 +14,7 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         let customPhrase = "dd"
                 
         // Navigate to our test category (created in the base class setup() method)
-        customCategoriesScreen.editCategoryPhrasesCell.tap()
+        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
 
         // Verify Phrase is not added if edits are discarded
@@ -42,7 +42,7 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         let customPhrase = "Add"
         
         // Add our test phrase
-        customCategoriesScreen.editCategoryPhrasesCell.tap()
+        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText(customPhrase)
         keyboardScreen.checkmarkAddButton.tap()
@@ -59,7 +59,7 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         let customPhrase = "Test"
         
         // Add our test phrase
-        customCategoriesScreen.editCategoryPhrasesCell.tap()
+        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText(customPhrase)
         keyboardScreen.checkmarkAddButton.tap()
@@ -67,8 +67,7 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         // Confirm that our phrase to-be-deleted has been created
         XCTAssert(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to be displayed")
         
-        // TODO: customCategoriesScreen.categoriesPageDeletePhraseButton after Category List UI updates: issue #492 ... need identifiers?
-        XCUIApplication().buttons["trash"].tap()
+        customCategoriesScreen.categoriesPageDeletePhraseButton.tap()
         settingsScreen.alertDeleteButton.tap()
         XCTAssertTrue(customCategoriesScreen.emptyStateAddPhraseButton.exists, "Expected the phrase \(customPhrase) to not be displayed")
     }
@@ -77,7 +76,7 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         let testPhrase = "Testa"
 
         // Add our first test phrase
-        customCategoriesScreen.editCategoryPhrasesCell.tap()
+        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText(testPhrase)
         keyboardScreen.checkmarkAddButton.tap()
