@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Allows audio to be played in silent mode
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback)
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
         } catch let error {
             print("Failed to set audio category: \(error.localizedDescription)")
         }
