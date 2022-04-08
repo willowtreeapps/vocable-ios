@@ -119,17 +119,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         let pageCountBefore = collectionView.layout.pagesPerSection
         let fetchedSnapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
 
-        var updatedSnapshot = Snapshot()
-
-        updatedSnapshot.appendSections(fetchedSnapshot.sectionIdentifiers)
-
-        for sectionId in fetchedSnapshot.sectionIdentifiers {
-            let categoryItems = fetchedSnapshot.itemIdentifiers(inSection: sectionId).map(CategoryItem.persistedPhrase)
-
-            updatedSnapshot.appendItems(categoryItems, toSection: sectionId)
-        }
-
-        updatedSnapshot.appendItems([.addNewPhrase])
+        let updatedSnapshot = transformFetchedSnapshot(fetchedSnapshot)
 
         dataSourceProxy.apply(updatedSnapshot, animatingDifferences: false)
 
@@ -179,6 +169,24 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
             addNewPhraseButtonSelected()
         }
 
+    }
+
+    private func transformFetchedSnapshot(_ fetchedSnapshot: NSDiffableDataSourceSnapshot<String, NSManagedObjectID>) -> Snapshot {
+        var updatedSnapshot = Snapshot()
+
+        updatedSnapshot.appendSections(fetchedSnapshot.sectionIdentifiers)
+
+        for sectionId in fetchedSnapshot.sectionIdentifiers {
+            let categoryItems = fetchedSnapshot.itemIdentifiers(inSection: sectionId).map(CategoryItem.persistedPhrase)
+
+            updatedSnapshot.appendItems(categoryItems, toSection: sectionId)
+        }
+
+        if updatedSnapshot.numberOfItems != 0 {
+            updatedSnapshot.appendItems([.addNewPhrase])
+        }
+
+        return updatedSnapshot
     }
 
     private func installEmptyStateIfNeeded() {
