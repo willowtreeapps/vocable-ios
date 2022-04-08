@@ -27,6 +27,8 @@
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
 		620DD31927DA90F1003B01A0 /* CustomPhraseBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620DD31827DA90F1003B01A0 /* CustomPhraseBaseTest.swift */; };
 		62300C7E27F360930005CEF5 /* CustomCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62300C7D27F360930005CEF5 /* CustomCategoryTests.swift */; };
+		627B53642800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627B53632800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift */; };
+		627B53662800D11200FEBF25 /* MainScreenPaginationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627B53652800D11100FEBF25 /* MainScreenPaginationTests.swift */; };
 		628B35C227DF9C6B00299312 /* BaseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628B35C127DF9C6B00299312 /* BaseScreen.swift */; };
 		64599429258933370010EEFF /* VocableCore in Frameworks */ = {isa = PBXBuildFile; productRef = 64599428258933370010EEFF /* VocableCore */; settings = {ATTRIBUTES = (Required, ); }; };
 		64599431258938F50010EEFF /* ListeningResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64599430258938F50010EEFF /* ListeningResponseViewController.swift */; };
@@ -232,6 +234,8 @@
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		620DD31827DA90F1003B01A0 /* CustomPhraseBaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhraseBaseTest.swift; sourceTree = "<group>"; };
 		62300C7D27F360930005CEF5 /* CustomCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryTests.swift; sourceTree = "<group>"; };
+		627B53632800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPhrasesPaginationTests.swift; sourceTree = "<group>"; };
+		627B53652800D11100FEBF25 /* MainScreenPaginationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPaginationTests.swift; sourceTree = "<group>"; };
 		628B35C127DF9C6B00299312 /* BaseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScreen.swift; sourceTree = "<group>"; };
 		64599430258938F50010EEFF /* ListeningResponseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningResponseViewController.swift; sourceTree = "<group>"; };
 		6459943D25895D9C0010EEFF /* SpeechRecognitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionController.swift; sourceTree = "<group>"; };
@@ -532,6 +536,8 @@
 				620DD31827DA90F1003B01A0 /* CustomPhraseBaseTest.swift */,
 				62300C7D27F360930005CEF5 /* CustomCategoryTests.swift */,
 				DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */,
+				627B53632800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift */,
+				627B53652800D11100FEBF25 /* MainScreenPaginationTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1278,9 +1284,11 @@
 				CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */,
 				17793C2E24574CB500758BC0 /* MainScreenTests.swift in Sources */,
 				620DD31927DA90F1003B01A0 /* CustomPhraseBaseTest.swift in Sources */,
+				627B53642800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift in Sources */,
 				CE12277624F586CB008F7866 /* CustomPhraseTests.swift in Sources */,
 				62300C7E27F360930005CEF5 /* CustomCategoryTests.swift in Sources */,
 				17793C2B24574B2800758BC0 /* MainScreen.swift in Sources */,
+				627B53662800D11200FEBF25 /* MainScreenPaginationTests.swift in Sources */,
 				DC533C0127FCDF39005FEBBD /* CustomCategoryBaseTest.swift in Sources */,
 				17F29479247419DD00A05434 /* SettingsScreen.swift in Sources */,
 				17D4162A2457659700FD81CD /* BaseTest.swift in Sources */,
