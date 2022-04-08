@@ -23,13 +23,18 @@ class SettingsScreen: BaseScreen {
     let categoryUpButton = "reorder.upButton"
     let categoryDownButton = "reorder.downButton"
     let categoryForwardButton = "Forward"
-    let showCategorySwitch = XCUIApplication().buttons["show_category_toggle"]
     let hideCategorySwitch = "hide"
     let categoryShowButton = "show"
     let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
     let alertContinueButton = XCUIApplication().buttons["alert.button.continue_editing"]
     let alertDiscardButton = XCUIApplication().buttons["alert.button.discard_changes"]
     let alertDeleteButton = XCUIApplication().buttons["alert.button.delete"]
+    let alertRemoveButton = XCUIApplication().buttons["Remove"]
+    let alertCancelButton = XCUIApplication().buttons["Cancel"]
+    let categoryDetailsTitle = XCUIApplication().staticTexts["category_title_label"]
+    let renameCategoryButton = XCUIApplication().buttons["rename_category_button"]
+    let showCategoryButton = XCUIApplication().buttons["show_category_toggle"]
+    let removeCategoryButton = XCUIApplication().buttons["remove_category_cell"]
 
     func openCategorySettings(category: String) {
         locateCategoryCell(category).staticTexts[category].tap()
@@ -54,6 +59,23 @@ class SettingsScreen: BaseScreen {
         let cellLabel = cells.staticTexts.containing(predicate).element.label
         
         return XCUIApplication().cells.containing(.staticText, identifier: cellLabel)
+    }
+    
+    func doesCategoryExist(_ category: String) -> Bool {
+        var flag = false
+        let predicate = NSPredicate(format: "label CONTAINS %@", category)
+        
+        // Loop through each custom category page to find our category
+        for _ in 1...totalPageCount {
+            if cells.staticTexts.containing(predicate).element.exists {
+                flag = true
+                break
+            } else {
+                mainScreen.paginationRightButton.tap()
+            }
+        }
+        
+        return flag
     }
     
     func toggleHideShowCategory(category: String, toggle: String) {

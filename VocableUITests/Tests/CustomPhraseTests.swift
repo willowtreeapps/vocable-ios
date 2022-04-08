@@ -8,13 +8,13 @@
 
 import XCTest
 
-class CustomCategoriesTests: CustomCategoriesBaseTest {
+class CustomPhraseTests: CustomPhraseBaseTest {
 
     func testAddNewPhrase() {
         let customPhrase = "dd"
                 
         // Navigate to our test category (created in the base class setup() method)
-        customCategoriesScreen.editCategoryPhrasesCell.tap()
+        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
 
         // Verify Phrase is not added if edits are discarded
@@ -42,7 +42,7 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
         let customPhrase = "Add"
         
         // Add our test phrase
-        customCategoriesScreen.editCategoryPhrasesCell.tap()
+        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText(customPhrase)
         keyboardScreen.checkmarkAddButton.tap()
@@ -59,7 +59,7 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
         let customPhrase = "Test"
         
         // Add our test phrase
-        customCategoriesScreen.editCategoryPhrasesCell.tap()
+        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText(customPhrase)
         keyboardScreen.checkmarkAddButton.tap()
@@ -67,8 +67,7 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
         // Confirm that our phrase to-be-deleted has been created
         XCTAssert(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to be displayed")
         
-        // TODO: customCategoriesScreen.categoriesPageDeletePhraseButton after Category List UI updates: issue #492 ... need identifiers?
-        XCUIApplication().buttons["trash"].tap()
+        customCategoriesScreen.categoriesPageDeletePhraseButton.tap()
         settingsScreen.alertDeleteButton.tap()
         XCTAssertTrue(customCategoriesScreen.emptyStateAddPhraseButton.exists, "Expected the phrase \(customPhrase) to not be displayed")
     }
@@ -77,7 +76,7 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
         let testPhrase = "Testa"
 
         // Add our first test phrase
-        customCategoriesScreen.editCategoryPhrasesCell.tap()
+        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText(testPhrase)
         keyboardScreen.checkmarkAddButton.tap()
@@ -94,6 +93,7 @@ class CustomCategoriesTests: CustomCategoriesBaseTest {
         // Assert that now we have two cells containing the same phrase
         let phrasePredicate = NSPredicate(format: "label MATCHES %@", testPhrase)
         let phraseQuery = XCUIApplication().staticTexts.containing(phrasePredicate)
+        phraseQuery.element.waitForExistence(timeout: 2)
         XCTAssertEqual(phraseQuery.count, 2, "Expected both phrases to be present")
     }
     

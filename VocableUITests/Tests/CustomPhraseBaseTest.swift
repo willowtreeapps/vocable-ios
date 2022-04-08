@@ -8,7 +8,7 @@
 
 import XCTest
 
-class CustomCategoriesBaseTest: BaseTest {
+class CustomPhraseBaseTest: BaseTest {
     
     private(set) var customCategoryName: String = "Test"
     
