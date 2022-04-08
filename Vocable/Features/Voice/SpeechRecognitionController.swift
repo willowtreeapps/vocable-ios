@@ -19,7 +19,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     static let shared = SpeechRecognitionController()
 
-    private let audioController = AudioEngineController()
+    private let audioController = AudioEngineController.shared
 
     @Published private(set) var isAvailable: Bool = true
 
