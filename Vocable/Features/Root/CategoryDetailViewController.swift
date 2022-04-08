@@ -28,17 +28,19 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
     private lazy var dataSourceProxy = DataSource(collectionView: collectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell? in
         guard let self = self else { return nil }
 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as? PresetItemCollectionViewCell
-
         switch item {
         case .persistedPhrase(let objectId):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as? PresetItemCollectionViewCell
+
             guard let phrase = Phrase.fetchObject(in: self.frc.managedObjectContext, matching: objectId) else { return cell }
             cell?.textLabel.text = phrase.utterance
-        case .addNewPhrase:
-            cell?.textLabel.text = "Add New Phrase"
-        }
 
-        return cell
+            return cell
+        case .addNewPhrase:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddPhraseCollectionViewCell.reuseIdentifier, for: indexPath) as? AddPhraseCollectionViewCell
+
+            return cell
+        }
     }
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
@@ -76,6 +78,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         assert(category != nil, "Category not assigned")
 
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
+        collectionView.register(AddPhraseCollectionViewCell.self, forCellWithReuseIdentifier: AddPhraseCollectionViewCell.reuseIdentifier)
         collectionView.delaysContentTouches = false
 
         updateLayoutForCurrentTraitCollection()

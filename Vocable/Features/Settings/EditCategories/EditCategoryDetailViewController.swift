@@ -370,6 +370,7 @@ private extension GazeableAlertViewController {
 }
 
 private extension NSAttributedString {
+    // TODO: use imageAttachedString() instead
     static var removeCategoryTitle: NSAttributedString {
         let isRightToLeftLayout = UITraitCollection.current.layoutDirection == .rightToLeft
 
