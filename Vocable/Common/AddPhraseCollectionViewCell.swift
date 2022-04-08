@@ -16,12 +16,16 @@ class AddPhraseCollectionViewCell: VocableCollectionViewCell {
     override func updateContentViews() {
         super.updateContentViews()
 
-        dashedBorderView.strokeColor = isHighlighted ? nil : UIColor.categoryBackgroundColor.cgColor
+        if isHighlighted && !isSelected {
+            dashedBorderView.strokeColor = UIColor.cellBorderHighlightColor.cgColor
+        } else if isSelected {
+            dashedBorderView.strokeColor = nil
+        } else {
+            dashedBorderView.strokeColor = UIColor.categoryBackgroundColor.cgColor
+        }
 
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
-        textLabel.backgroundColor = .clear
-        textLabel.isOpaque = true
-        textLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        dashedBorderView.fillColor = isSelected ? UIColor.cellSelectionColor.cgColor : nil
     }
 
     override init(frame: CGRect) {
@@ -38,20 +42,15 @@ class AddPhraseCollectionViewCell: VocableCollectionViewCell {
 
         contentView.preservesSuperviewLayoutMargins = true
 
-        fillColor = .clear
+        borderedView.isHidden = true
 
         dashedBorderView.strokeColor = UIColor.categoryBackgroundColor.cgColor
-        dashedBorderView.lineDashPattern = [8, 6]
-        dashedBorderView.frame = bounds
+        dashedBorderView.lineDashPattern = [6, 6]
         dashedBorderView.fillColor = nil
         dashedBorderView.lineWidth = 6
-        dashedBorderView.path = UIBezierPath(roundedRect: bounds, cornerRadius: 8).cgPath
-        layer.addSublayer(dashedBorderView)
+        contentView.layer.addSublayer(dashedBorderView)
 
-        let text = NSLocalizedString("preset.category.add.phrase.title", comment: "Add phrase button title")
-        let image = UIImage(systemName: "plus")!
-        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 22, weight: .bold)]
-        textLabel.attributedText = NSAttributedString.imageAttachedString(for: text, with: image, attributes: attributes)
+        textLabel.attributedText = .addPhraseTitle
         textLabel.textAlignment = .center
         textLabel.numberOfLines = 0
         textLabel.adjustsFontSizeToFitWidth = true
@@ -77,6 +76,12 @@ class AddPhraseCollectionViewCell: VocableCollectionViewCell {
         updateContentViews()
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        dashedBorderView.frame = bounds
+        dashedBorderView.path = UIBezierPath(roundedRect: bounds, cornerRadius: 8).cgPath
+    }
+
     func setup(title: String) {
         textLabel.text = title
         updateContentViews()
@@ -92,5 +97,14 @@ class AddPhraseCollectionViewCell: VocableCollectionViewCell {
 
         textLabel.attributedText = attributedString
         updateContentViews()
+    }
+}
+
+private extension NSAttributedString {
+    static var addPhraseTitle: NSAttributedString {
+        let text = NSLocalizedString("preset.category.add.phrase.title", comment: "Add phrase button title")
+        let image = UIImage(systemName: "plus")!
+        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 22, weight: .bold)]
+        return NSAttributedString.imageAttachedString(for: text, with: image, attributes: attributes)
     }
 }
