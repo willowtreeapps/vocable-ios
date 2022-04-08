@@ -97,10 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }.store(in: &disposables)
 
-        let rootVc = UIHostingController(rootView: ExampleVocableView())
-        window?.rootViewController = rootVc
-        window?.makeKeyAndVisible()
-
         return true
     }
 

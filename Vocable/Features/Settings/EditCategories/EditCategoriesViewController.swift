@@ -6,9 +6,10 @@
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
-import UIKit
 import Combine
 import CoreData
+import SwiftUI
+import UIKit
 
 final class EditCategoriesViewController: PagingCarouselViewController, NSFetchedResultsControllerDelegate {
 
@@ -232,7 +233,14 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         if category.identifier == Category.Identifier.listeningMode.rawValue {
             destination = ListeningModeViewController()
         } else {
-            destination = EditCategoryDetailViewController(category)
+            if #available(iOS 15, *) {
+                destination = UIHostingController(
+                    rootView: EditCategoryDetail(objectId: objectID)
+                        .environment(\.managedObjectContext, NSPersistentContainer.shared.viewContext)
+                )
+            } else {
+                destination = EditCategoryDetailViewController(category)
+            }
         }
         show(destination, sender: nil)
     }

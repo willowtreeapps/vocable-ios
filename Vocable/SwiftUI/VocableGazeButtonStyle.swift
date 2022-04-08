@@ -14,6 +14,12 @@ struct VocableGazeButtonStyle: GazeButtonStyle {
     }
 
     private struct _Body<Label: View>: View {
+        @Environment(\.horizontalSizeClass)
+        private var horizontalSizeClass
+
+        @Environment(\.verticalSizeClass)
+        private var verticalSizeClass
+
         @Environment(\.isEnabled)
         private var isEnabled
 
@@ -29,6 +35,7 @@ struct VocableGazeButtonStyle: GazeButtonStyle {
         }
 
         var body: some View {
+            let isCompact = verticalSizeClass == .compact || horizontalSizeClass == .compact
             let isHighlighted = state.contains(.highlighted)
             let isDisabled = !isEnabled
             let isSelected = state.contains(.selected)
@@ -45,8 +52,8 @@ struct VocableGazeButtonStyle: GazeButtonStyle {
             if #available(iOS 15.0, *) {
                 label
                     .padding(.horizontal)
-                    .frame(minHeight: 60)
-                    .font(.headline)
+                    .frame(minHeight: isCompact ? 60 : 100)
+                    .font(.system(size: 22, weight: .bold))
                     .foregroundColor(textColor)
                     .background(fillColor)
                     .opacity(shouldHighlight || isDisabled ? 0.5 : 1)

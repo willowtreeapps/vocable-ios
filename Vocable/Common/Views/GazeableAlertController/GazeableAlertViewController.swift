@@ -270,9 +270,14 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         }
     }
 
-    func addAction(_ action: GazeableAlertAction) {
-        action.defaultCompletion = { [weak self] in
-            self?.presentingViewController?.dismiss(animated: true)
+    func addAction(
+        _ action: GazeableAlertAction,
+        withAutomaticDismissal dismissAutomatically: Bool = true
+    ) {
+        if dismissAutomatically {
+            action.defaultCompletion = { [weak self] in
+                self?.presentingViewController?.dismiss(animated: true)
+            }
         }
 
         actions.append(action)
