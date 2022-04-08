@@ -46,13 +46,15 @@ class MainScreen: BaseScreen {
         let selectedCell = app.cells[selectedCategoryCell.identifier]
         
         repeat {
+            
             if (destinationCell.exists) {
                 destinationCell.tap()
                 break
             }
             categoryRightButton.tap()
+           
             // We break the loop when we return to our original starting point
-        } while (!selectedCell.waitForExistence(timeout: 0.33))
+        } while (!selectedCell.waitForExistence(timeout: 0.5))
     }
     
     /// Assuming there is at least one page of phrases within a category, locate the cell containing the given phrase.
