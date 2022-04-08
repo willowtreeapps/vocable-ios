@@ -727,13 +727,13 @@
 				4E18DBF327FF4AAA0043A019 /* ButtonRole.swift */,
 				4E18DBF527FF4EED0043A019 /* ButtonState.swift */,
 				4E18DBEF27FF49420043A019 /* DefaultGazeButtonStyle.swift */,
+				4E56054727FB8C7300719C23 /* ExampleVocableView.swift */,
 				4EA3D1CB27F772E400FE6457 /* GazeButton.swift */,
 				4E56054527FB864E00719C23 /* GazeButtonStyle.swift */,
 				4E18DBF127FF49FA0043A019 /* GazeButtonStyleConfiguration.swift */,
-				4E56054727FB8C7300719C23 /* ExampleVocableView.swift */,
+				4E18DBF727FF588A0043A019 /* ReadableWidth.swift */,
 				4EB6A59327FBF84B00F2BFB3 /* VocableGazeButtonStyle.swift */,
 				4E56054427FB863A00719C23 /* UIKit Bridge */,
-				4E18DBF727FF588A0043A019 /* ReadableWidth.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";

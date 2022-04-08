@@ -22,7 +22,7 @@ struct DefaultGazeButtonStyle: GazeButtonStyle {
             label
                 .foregroundColor(buttonRole == .destructive ? .red : .accentColor)
                 .opacity(
-                    (state.contains(.highlighted) || !isEnabled) ? 0.3 : 1
+                    (state.contains(.highlighted) || !isEnabled) ? 0.5 : 1
                 )
         }
     }
