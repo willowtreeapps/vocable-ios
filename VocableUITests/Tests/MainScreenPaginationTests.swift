@@ -17,7 +17,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
     // In order to ensure this test passes on both an iPhone and iPad device, we will add 16 phrase (2 pages on an iPad)
     // then remove 8 of them so that the pages reduce from 2 to 1 page.
     func testDeletingPhrasesAdjustsPagination() {
-        customCategoriesScreen.addCustomPhrases(numberOfPhrases: 16)
+        customCategoriesScreen.createCustomPhrases(numberOfPhrases: 16)
         
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 2"
         settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
@@ -46,7 +46,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
     }
     
     func testAddingPhrasesAdjustsPagination() {
-        customCategoriesScreen.addCustomPhrases(numberOfPhrases: 8)
+        customCategoriesScreen.createCustomPhrases(numberOfPhrases: 8)
         
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 1"
         settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
@@ -60,7 +60,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         settingsScreen.navigateToSettingsCategoryScreen()
         settingsScreen.openCategorySettings(category: customCategoryName)
         customCategoriesScreen.editCategoryPhrasesButton.tap()
-        customCategoriesScreen.addCustomPhrases(numberOfPhrases: 8)
+        customCategoriesScreen.createCustomPhrases(numberOfPhrases: 8)
         settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
         mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         XCTAssertEqual(mainScreen.currentPageNumber, 1)
@@ -71,7 +71,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
     
     func testCanScrollPagesWithPaginationArrows() {
         // Add enough phrases to push the total number of pages to at leaset 2 for iPad and iPhone.
-        customCategoriesScreen.addCustomPhrases(numberOfPhrases: 16)
+        customCategoriesScreen.createCustomPhrases(numberOfPhrases: 16)
         
         // Return to the Main Screen and navigate to the test category
         settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
@@ -108,7 +108,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         let categoryTitleCell = CategoryTitleCellIdentifier(customCategoryIdentifier!)
 
         // Add 13 phrases. This ensures an additional page is needed after device rotation on an iPad.
-        customCategoriesScreen.addCustomPhrases(numberOfPhrases: 13)
+        customCategoriesScreen.createCustomPhrases(numberOfPhrases: 13)
         
         // Return to the Main Screen and navigate to the test category
         settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")

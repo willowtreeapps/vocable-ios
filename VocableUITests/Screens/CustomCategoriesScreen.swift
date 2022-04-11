@@ -33,7 +33,7 @@ class CustomCategoriesScreen: BaseScreen {
         return CategoryIdentifier(customCategoryIdentifier)
     }
     
-    func addCustomPhrases(numberOfPhrases: Int) {
+    func createCustomPhrases(numberOfPhrases: Int) {
         for _ in 1...numberOfPhrases {
             let randomPhrase = keyboardScreen.randomString(length: 2)
             categoriesPageAddPhraseButton.tap()
