@@ -13,6 +13,7 @@ import Foundation
 import XCTest
 
 class BaseScreen {
+    let navBarBackButton = XCUIApplication().buttons["navigationBar.backButton"]
     let paginationLabel = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
     let alertMessageLabel = XCUIApplication().staticTexts["alert_message"]
     let emptyStateAddPhraseButton = XCUIApplication().buttons["empty_state_addPhrase_button"]

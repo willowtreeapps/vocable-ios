@@ -123,8 +123,12 @@ class SettingsScreen: BaseScreen {
     func navigateToMainScreenFromSettings(from: String) {
         switch from {
         case "categoryDetails":
-            leaveCategoryDetailButton.tap()
+            navBarBackButton.tap()
+            _ = navBarBackButton.waitForExistence(timeout: 0.25)
+            navBarBackButton.tap()
+            _ = leaveCategoriesButton.waitForExistence(timeout: 0.25)
             leaveCategoriesButton.tap()
+            _ = exitSettingsButton.waitForExistence(timeout: 0.5)
             exitSettingsButton.tap()
         case "categories":
             leaveCategoriesButton.tap()
