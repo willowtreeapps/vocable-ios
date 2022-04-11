@@ -9,24 +9,9 @@
 import UIKit
 
 class AddPhraseCollectionViewCell: VocableCollectionViewCell {
-    let textLabel = UILabel(frame: .zero)
+    private let textLabel = UILabel(frame: .zero)
 
-    let dashedBorderView = CAShapeLayer()
-
-    override func updateContentViews() {
-        super.updateContentViews()
-
-        if isHighlighted && !isSelected {
-            dashedBorderView.strokeColor = UIColor.cellBorderHighlightColor.cgColor
-        } else if isSelected {
-            dashedBorderView.strokeColor = nil
-        } else {
-            dashedBorderView.strokeColor = UIColor.categoryBackgroundColor.cgColor
-        }
-
-        textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
-        dashedBorderView.fillColor = isSelected ? UIColor.cellSelectionColor.cgColor : nil
-    }
+    private let dashedBorderView = CAShapeLayer()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,11 +46,9 @@ class AddPhraseCollectionViewCell: VocableCollectionViewCell {
 
         // Needs a weak spot that can break while resizing to avoid
         // constraint errors
-        let rightConstraint = textLabel.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor)
-        rightConstraint.priority = .init(999)
+        let rightConstraint = textLabel.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor).withPriority(999)
+        let bottomConstraint = textLabel.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor).withPriority(999)
 
-        let bottomConstraint = textLabel.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
-        bottomConstraint.priority = .init(999)
         NSLayoutConstraint.activate([
             rightConstraint,
             textLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
@@ -76,27 +59,25 @@ class AddPhraseCollectionViewCell: VocableCollectionViewCell {
         updateContentViews()
     }
 
+    override func updateContentViews() {
+        super.updateContentViews()
+
+        if isHighlighted && !isSelected {
+            dashedBorderView.strokeColor = UIColor.cellBorderHighlightColor.cgColor
+        } else if isSelected {
+            dashedBorderView.strokeColor = nil
+        } else {
+            dashedBorderView.strokeColor = UIColor.categoryBackgroundColor.cgColor
+        }
+
+        textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
+        dashedBorderView.fillColor = isSelected ? UIColor.cellSelectionColor.cgColor : nil
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         dashedBorderView.frame = bounds
         dashedBorderView.path = UIBezierPath(roundedRect: bounds, cornerRadius: 8).cgPath
-    }
-
-    func setup(title: String) {
-        textLabel.text = title
-        updateContentViews()
-    }
-
-    func setup(with image: UIImage?) {
-        guard let image = image else {
-            return
-        }
-
-        let systemImageAttachment = NSTextAttachment(image: image)
-        let attributedString = NSAttributedString(attachment: systemImageAttachment)
-
-        textLabel.attributedText = attributedString
-        updateContentViews()
     }
 }
 

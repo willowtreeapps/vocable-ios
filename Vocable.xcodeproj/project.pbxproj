@@ -173,7 +173,7 @@
 		A9E665A7241A785F00FE577A /* CarouselGridCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */; };
 		A9F56FC824365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9F56FC724365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib */; };
 		A9FD68A528008AD3006ABA3F /* AddPhraseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FD68A428008AD3006ABA3F /* AddPhraseCollectionViewCell.swift */; };
-		A9FD68A728009646006ABA3F /* AttributedString+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FD68A628009646006ABA3F /* AttributedString+Helpers.swift */; };
+		A9FD68A728009646006ABA3F /* NSAttributedString+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FD68A628009646006ABA3F /* NSAttributedString+Helpers.swift */; };
 		B838200F23F4B011005A79CD /* VocableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */; };
 		B879831523E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */; };
 		B8DA9DE823EB833200FEBE19 /* BorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DE723EB833200FEBE19 /* BorderedView.swift */; };
@@ -406,7 +406,7 @@
 		A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselGridCollectionViewController.swift; sourceTree = "<group>"; };
 		A9F56FC724365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeakFunctionKeyboardKeyCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9FD68A428008AD3006ABA3F /* AddPhraseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhraseCollectionViewCell.swift; sourceTree = "<group>"; };
-		A9FD68A628009646006ABA3F /* AttributedString+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedString+Helpers.swift"; sourceTree = "<group>"; };
+		A9FD68A628009646006ABA3F /* NSAttributedString+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Helpers.swift"; sourceTree = "<group>"; };
 		B838200E23F4B011005A79CD /* VocableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableCollectionViewCell.swift; sourceTree = "<group>"; };
 		B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		B8D55689242FE8B900B0F6FE /* Phrases v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Phrases v2.xcdatamodel"; sourceTree = "<group>"; };
@@ -852,7 +852,7 @@
 				6B5C743F27E8CBBE00004713 /* VocableListCell */,
 				A91030B727E3C4FD00281C97 /* NSLayoutConstraint+Priority.swift */,
 				6B05020527F3516F000CFE5A /* CategoryReordering */,
-				A9FD68A628009646006ABA3F /* AttributedString+Helpers.swift */,
+				A9FD68A628009646006ABA3F /* NSAttributedString+Helpers.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1205,7 +1205,7 @@
 				6B1C7F3223F5BB5200BB3FD9 /* HeadGazeTrackingInterpolator.swift in Sources */,
 				64D04A58242951C00006962D /* GazeableAlertPresentationController.swift in Sources */,
 				64599431258938F50010EEFF /* ListeningResponseViewController.swift in Sources */,
-				A9FD68A728009646006ABA3F /* AttributedString+Helpers.swift in Sources */,
+				A9FD68A728009646006ABA3F /* NSAttributedString+Helpers.swift in Sources */,
 				6BD84F9D2604F8F600D4CD3E /* ListenModeDebugView.swift in Sources */,
 				6B8A6E3324536085004B5220 /* UIHeadGazeCursorWindow.swift in Sources */,
 				6B0501FE27EBA471000CFE5A /* VocableListCellAction.swift in Sources */,

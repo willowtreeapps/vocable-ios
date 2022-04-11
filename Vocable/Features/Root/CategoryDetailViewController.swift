@@ -20,7 +20,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
     private var disposables = Set<AnyCancellable>()
 
-    enum CategoryItem: Hashable {
+    private enum CategoryItem: Hashable {
         case persistedPhrase(NSManagedObjectID)
         case addNewPhrase
     }

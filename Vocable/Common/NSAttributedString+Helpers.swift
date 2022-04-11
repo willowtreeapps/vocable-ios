@@ -1,5 +1,5 @@
 //
-//  AttributedString+Helpers.swift
+//  NSAttributedString+Helpers.swift
 //  Vocable
 //
 //  Created by Jesse Morgan on 4/8/22.
