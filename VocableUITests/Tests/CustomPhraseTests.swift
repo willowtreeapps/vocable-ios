@@ -12,12 +12,9 @@ class CustomPhraseTests: CustomPhraseBaseTest {
 
     func testAddNewPhrase() {
         let customPhrase = "dd"
-                
-        // Navigate to our test category (created in the base class setup() method)
-        customCategoriesScreen.editCategoryPhrasesButton.tap()
-        customCategoriesScreen.categoriesPageAddPhraseButton.tap()
 
         // Verify Phrase is not added if edits are discarded
+        customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText("A")
         keyboardScreen.dismissKeyboardButton.tap()
         XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
@@ -42,7 +39,6 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         let customPhrase = "Add"
         
         // Add our test phrase
-        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText(customPhrase)
         keyboardScreen.checkmarkAddButton.tap()
@@ -59,7 +55,6 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         let customPhrase = "Test"
         
         // Add our test phrase
-        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText(customPhrase)
         keyboardScreen.checkmarkAddButton.tap()
@@ -76,7 +71,6 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         let testPhrase = "Testa"
 
         // Add our first test phrase
-        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText(testPhrase)
         keyboardScreen.checkmarkAddButton.tap()

@@ -8,30 +8,20 @@
 
 import XCTest
 
-class MainScreenPaginationTests: BaseTest {
-    
-    let customCategoryName = "Test"
+class MainScreenPaginationTests: CustomPhraseBaseTest {
+
     // TODO: DON'T WANT RANDOM PHRASES, JUST IN CASE WE RUN INTO DUPLICATION..REFACTOR TO BE KNOWN LIST
-    
-    // TODO: Add computed property to BaseTest to retrieve ID of custom category for reference in these tests
     
     // TODO: Refactor navigateToMainScreen...don't need current implementation...can nav from test, or each individual screen
     
     // In order to ensure this test passes on both an iPhone and iPad device, we will add 16 phrase (2 pages on an iPad)
     // then remove 8 of them so that the pages reduce from 2 to 1 page.
     func testDeletingPhrasesAdjustsPagination() {
-        // Add a custom category
-        settingsScreen.navigateToSettingsCategoryScreen()
-        let customCategory = customCategoriesScreen.createAndLocateCustomCategory(customCategoryName)
-        
-        // Add custom phrases to our category.
-        settingsScreen.openCategorySettings(category: customCategoryName)
-        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.addCustomPhrases(numberOfPhrases: 16)
         
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 2"
         settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
-        mainScreen.locateAndSelectDestinationCategory(customCategory)
+        mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         XCTAssertEqual(mainScreen.currentPageNumber, 1)
         XCTAssertEqual(mainScreen.totalPageCount, 2)
         XCTAssertTrue(mainScreen.paginationRightButton.isEnabled)
@@ -48,7 +38,7 @@ class MainScreenPaginationTests: BaseTest {
         
         // Navigate back to the home screen to verify that the total pages reduced from 2 to 1.
         settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
-        mainScreen.locateAndSelectDestinationCategory(customCategory)
+        mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         XCTAssertEqual(mainScreen.currentPageNumber, 1)
         XCTAssertEqual(mainScreen.totalPageCount, 1)
         XCTAssertFalse(mainScreen.paginationRightButton.isEnabled)
@@ -56,18 +46,11 @@ class MainScreenPaginationTests: BaseTest {
     }
     
     func testAddingPhrasesAdjustsPagination() {
-        // Add a custom category
-        settingsScreen.navigateToSettingsCategoryScreen()
-        let customCategory = customCategoriesScreen.createAndLocateCustomCategory(customCategoryName)
-        
-        // Add custom phrases to our category.
-        settingsScreen.openCategorySettings(category: customCategoryName)
-        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.addCustomPhrases(numberOfPhrases: 8)
         
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 1"
         settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
-        mainScreen.locateAndSelectDestinationCategory(customCategory)
+        mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         XCTAssertEqual(mainScreen.currentPageNumber, 1)
         XCTAssertEqual(mainScreen.totalPageCount, 1)
         XCTAssertFalse(mainScreen.paginationRightButton.isEnabled)
@@ -79,7 +62,7 @@ class MainScreenPaginationTests: BaseTest {
         customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.addCustomPhrases(numberOfPhrases: 8)
         settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
-        mainScreen.locateAndSelectDestinationCategory(customCategory)
+        mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         XCTAssertEqual(mainScreen.currentPageNumber, 1)
         XCTAssertEqual(mainScreen.totalPageCount, 2)
         XCTAssertTrue(mainScreen.paginationRightButton.isEnabled)
@@ -87,18 +70,12 @@ class MainScreenPaginationTests: BaseTest {
     }
     
     func testCanScrollPagesWithPaginationArrows() {
-        // Add custom category
-        settingsScreen.navigateToSettingsCategoryScreen()
-        let customCategory = customCategoriesScreen.createAndLocateCustomCategory(customCategoryName)
-        settingsScreen.openCategorySettings(category: customCategoryName)
-        customCategoriesScreen.editCategoryPhrasesButton.tap()
-
         // Add enough phrases to push the total number of pages to at leaset 2 for iPad and iPhone.
         customCategoriesScreen.addCustomPhrases(numberOfPhrases: 16)
         
         // Return to the Main Screen and navigate to the test category
         settingsScreen.navigateToMainScreenFromSettings(from: "categoryDetails")
-        mainScreen.locateAndSelectDestinationCategory(customCategory)
+        mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         
         // Verify that the category's pagination is "Page 1 of 2"; page next buttons are enabled
         XCTAssertEqual(mainScreen.currentPageNumber, 1)
@@ -128,14 +105,9 @@ class MainScreenPaginationTests: BaseTest {
     }
     
     func testPaginationAdjustsToDeviceOrientation() {
-        // Add a custom category
-        settingsScreen.navigateToSettingsCategoryScreen()
-        let customCategory = customCategoriesScreen.createAndLocateCustomCategory(customCategoryName)
-        let categoryTitleCell = CategoryTitleCellIdentifier(customCategory)
+        let categoryTitleCell = CategoryTitleCellIdentifier(customCategoryIdentifier!)
 
         // Add 13 phrases. This ensures an additional page is needed after device rotation on an iPad.
-        settingsScreen.openCategorySettings(category: customCategoryName)
-        customCategoriesScreen.editCategoryPhrasesButton.tap()
         customCategoriesScreen.addCustomPhrases(numberOfPhrases: 13)
         
         // Return to the Main Screen and navigate to the test category
