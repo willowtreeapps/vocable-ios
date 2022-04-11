@@ -1,13 +1,13 @@
 /* Categories list editor screen header title */
 "categories_list_editor.header.title" = "目录";
 
-/* Cancel exit editing alert action title */
+/* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "取消";
 
-/* Confirm exit category alert action title */
+/* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "確認";
 
-/* Exit edit categories alert title */
+/* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.title" = "如果你關閉類別，就會清除了。";
 
 /* Delete category alert cancel button title */
@@ -22,17 +22,13 @@
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "取消";
 
-/* Delete phrase alert action button title */
-"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "刪除";
-
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "刪除類別?";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "更改已儲存";
 
-/* Saved to Categories
-   User edited name of the category and saved it successfully */
+/* Saved to Categories */
 "category_editor.toast.successfully_saved.title" = "更改已儲存";
 
 /* Debugging error message for when preloaded content is not found */
@@ -40,12 +36,6 @@
 
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "取消";
-
-/* Confirm alert action title */
-"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "確認";
-
-/* Disable head tracking confirmation alert title */
-"gaze_settings.alert.disable_head_tracking_confirmation.title" = "關閉頭部追蹤";
 
 /* 'No' num pad response */
 "preset.category.numberpad.phrase.no.title" = "不";
