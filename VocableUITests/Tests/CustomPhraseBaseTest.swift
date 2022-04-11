@@ -11,14 +11,16 @@ import XCTest
 class CustomPhraseBaseTest: BaseTest {
     
     private(set) var customCategoryName: String = "Test"
+    private(set) var customCategoryIdentifier: CategoryIdentifier?
     
     override func setUp() {
         super.setUp()
         
-        // Create a custom category and open it
+        // Create a custom category and view its phrases
         settingsScreen.navigateToSettingsCategoryScreen()
-        customCategoriesScreen.createCustomCategory(categoryName: customCategoryName)
+        self.customCategoryIdentifier = customCategoriesScreen.createAndLocateCustomCategory(customCategoryName)
         settingsScreen.openCategorySettings(category: customCategoryName)
+        customCategoriesScreen.editCategoryPhrasesButton.tap()
     }
     
 }
