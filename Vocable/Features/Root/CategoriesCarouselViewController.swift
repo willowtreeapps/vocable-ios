@@ -194,6 +194,11 @@ import Combine
             }
 
             let newItemIndexPath: IndexPath? = {
+                if let category = Category.fetchObject(in: NSPersistentContainer.shared.viewContext, matching: previous.objectID),
+                   category.isUserRemoved {
+                    return previous.indexPath
+                }
+
                 if let indexPath = self.dataSourceProxy.indexPath(for: previous.objectID) {
                     return indexPath
                 }
