@@ -1,6 +1,3 @@
-/* Delete phrase alert action button title */
-"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "삭제";
-
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "기기에 가까이 오세요";
 

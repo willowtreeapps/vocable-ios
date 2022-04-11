@@ -1,7 +1,7 @@
 /* Categories list editor screen header title */
 "categories_list_editor.header.title" = "Catégories";
 
-/* Cancel exit editing alert action title */
+/* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Annuler";
 
 /* Delete category alert cancel button title */
@@ -9,9 +9,6 @@
 
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Annuler";
-
-/* Delete phrase alert action button title */
-"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Supprimer";
 
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Annuler";
