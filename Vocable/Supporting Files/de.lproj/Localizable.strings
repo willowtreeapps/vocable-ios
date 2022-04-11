@@ -1,13 +1,13 @@
 /* Categories list editor screen header title */
 "categories_list_editor.header.title" = "Kategorien";
 
-/* Cancel exit editing alert action title */
+/* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Abbrechen";
 
-/* Confirm exit category alert action title */
+/* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Bestätigen";
 
-/* Exit edit categories alert title */
+/* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.title" = "Wenn Sie dies schließen, ohne Ihre benutzerdefinierte Kategorie zu speichern, wird gelöscht.";
 
 /* Delete category alert cancel button title */
@@ -22,20 +22,13 @@
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Abbrechen";
 
-/* Delete phrase alert action button title */
-"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Löschen";
-
-/* Delete phrase confirmation alert title */
-"category_editor.alert.delete_phrase_confirmation.title" = "Gelöschte Sätze können nicht wiederhergestellt werden.";
-
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "Kategorie entfernen";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "Änderungen gespeichert";
 
-/* Saved to Categories
-   User edited name of the category and saved it successfully */
+/* Saved to Categories */
 "category_editor.toast.successfully_saved.title" = "Änderungen gespeichert";
 
 /* Debugging error message for when preloaded content is not found */
@@ -43,12 +36,6 @@
 
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Abbrechen";
-
-/* Confirm alert action title */
-"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Bestätigen";
-
-/* Disable head tracking confirmation alert title */
-"gaze_settings.alert.disable_head_tracking_confirmation.title" = "Steuerung per Kopfbewegung ausschalten?";
 
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "Bitte näher ans Gerät kommen.";
@@ -64,9 +51,6 @@
 
 /* Discard changes alert action title */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Verwerfen";
-
-/* Exit edit sayings alert title */
-"phrase_editor.alert.cancel_editing_confirmation.title" = "Nicht gespeicherte Veränderungen werden beim Verlassen des Menüs verworfen.";
 
 /* new entry saved to user favorites category
    Saved to user favorites category
@@ -132,9 +116,6 @@
 
 /* Discard changes alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Verwerfen";
-
-/* Exit edit sayings alert title */
-"text_editor.alert.cancel_editing_confirmation.title" = "Nicht gespeicherte Veränderungen werden beim Verlassen des Menüs verworfen.";
 
 /* High cursor sensitivity option button */
 "timing_and_sensitivity.button.high.title" = "Hoch";

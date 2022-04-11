@@ -1,10 +1,10 @@
 /* Categories list editor screen header title */
 "categories_list_editor.header.title" = "श्रेणियाँ";
 
-/* Cancel exit editing alert action title */
+/* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "रद्द करें";
 
-/* Confirm exit category alert action title */
+/* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "पुष्टि करें";
 
 /* Delete category alert cancel button title */
@@ -13,17 +13,11 @@
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "रद्द करें";
 
-/* Delete phrase alert action button title */
-"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "हटाएँ";
-
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "परिवर्तन सहेजा गया!";
 
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "रद्द करें";
-
-/* Confirm alert action title */
-"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "पुष्टि करें";
 
 /* Continue editing alert action title */
 "phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "संपादन जारी रखें";

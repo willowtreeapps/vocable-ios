@@ -206,7 +206,7 @@ import Combine
             }
 
             self.collectionView(self.collectionView, didSelectItemAt: newPath)
-            self.collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary(animated: true)
+            self.collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary(animated: false)
         })
     }
 
