@@ -181,7 +181,7 @@ class AudioEngineController: NSObject, AVAudioPlayerDelegate {
                 if self.registeredSpeechControllers.isEmpty {
                     if self.audioSession.category != .playback {
                         print("AUDIO SESSION CATEGORY: playback")
-                        try self.audioSession.setCategory(.playback, mode: .spokenAudio, options: .interruptSpokenAudioAndMixWithOthers)
+                        try self.audioSession.setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
                         sessionNeedsActivation = true
                     }
                     self.audioEngineShouldRun = !self.registeredSpeechControllers.isEmpty
@@ -204,7 +204,7 @@ class AudioEngineController: NSObject, AVAudioPlayerDelegate {
                         // be prepared for speech synthesis
                         if self.audioSession.category != .playback {
                             print("AUDIO SESSION CATEGORY: playback")
-                            try self.audioSession.setCategory(.playback, mode: .spokenAudio, options: .interruptSpokenAudioAndMixWithOthers)
+                            try self.audioSession.setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
                             sessionNeedsActivation = true
                         }
                         result = false
