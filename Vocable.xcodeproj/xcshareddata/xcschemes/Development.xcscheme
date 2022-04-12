@@ -72,9 +72,6 @@
                <Test
                   Identifier = "SettingsScreenTests/testAddCustomCategory()">
                </Test>
-               <Test
-                  Identifier = "SettingsScreenTests/testReorder()">
-               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>
