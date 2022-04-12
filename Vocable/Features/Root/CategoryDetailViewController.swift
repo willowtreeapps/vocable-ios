@@ -179,7 +179,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
     private func makeSnapshot(from fetchedSnapshot: NSDiffableDataSourceSnapshot<String, NSManagedObjectID>) -> Snapshot {
         var updatedSnapshot = fetchedSnapshot.mapItemIdentifier(CategoryItem.persistedPhrase)
 
-        if updatedSnapshot.numberOfItems != 0 {
+        if category.allowsCustomPhrases, updatedSnapshot.numberOfItems != 0 {
             updatedSnapshot.appendItems([.addNewPhrase])
         }
 
