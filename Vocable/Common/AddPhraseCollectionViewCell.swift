@@ -44,16 +44,12 @@ class AddPhraseCollectionViewCell: VocableCollectionViewCell {
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(textLabel)
 
-        // Needs a weak spot that can break while resizing to avoid
-        // constraint errors
-        let rightConstraint = textLabel.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor).withPriority(999)
-        let bottomConstraint = textLabel.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor).withPriority(999)
-
+        let layoutGuide = contentView.layoutMarginsGuide
         NSLayoutConstraint.activate([
-            rightConstraint,
-            textLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
-            textLabel.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor),
-            bottomConstraint
+            textLabel.rightAnchor.constraint(equalTo: layoutGuide.rightAnchor).withPriority(999),
+            textLabel.topAnchor.constraint(equalTo: layoutGuide.topAnchor),
+            textLabel.leftAnchor.constraint(equalTo: layoutGuide.leftAnchor),
+            textLabel.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).withPriority(999)
         ])
 
         updateContentViews()
@@ -85,7 +81,11 @@ private extension NSAttributedString {
     static var addPhraseTitle: NSAttributedString {
         let text = NSLocalizedString("preset.category.add.phrase.title", comment: "Add phrase button title")
         let image = UIImage(systemName: "plus")!
-        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 22, weight: .bold)]
+        let font: UIFont = (UITraitCollection.current.horizontalSizeClass == .regular
+                            && UITraitCollection.current.verticalSizeClass == .regular)
+                            ? UIFont.systemFont(ofSize: 28, weight: .bold)
+                            : UIFont.systemFont(ofSize: 22, weight: .bold)
+        let attributes: [NSAttributedString.Key: Any] = [.font: font]
         return NSAttributedString.imageAttachedString(for: text, with: image, attributes: attributes)
     }
 }
