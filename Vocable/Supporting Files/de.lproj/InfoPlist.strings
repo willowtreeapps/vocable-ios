@@ -7,3 +7,9 @@
 /* Camera usage description */
 "NSCameraUsageDescription" = "Vocable benutzt ARKit um Kopfbewegungen mit der TrueDepth Kamera zu erkennen. Das ermöglicht das Steuern der App bei eingeschränkter Bewegungsfähigkeit. Die Kameradaten werden ausdrücklich nur zum Steuern des Navigationszeigers verwendet und nicht gespeichert oder übermittelt. Deshalb braucht Vocable die Erlaubnis zur Nutzung der Kamera.";
 
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "Vocable benutzt das Mikrofon nur dann, wenn gesprochene Antworten aktiviert sind. Vocable speichert und übermittelt Audiodaten ausschließlich zur Umwandlung in Text.";
+
+/* Privacy - Speech Recognition Usage Description */
+"NSSpeechRecognitionUsageDescription" = "Vocable benutzt Spracherkennung, um Audiodaten in Text umzuwandeln, wenn gesprochene Antworten aktiviert sind. Umgewandelte Sprachdateien werden nicht gespeichert oder übermittelt.";
+
