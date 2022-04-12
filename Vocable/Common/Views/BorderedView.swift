@@ -103,6 +103,12 @@ class BorderedView: UIView {
         }
     }
 
+    var borderDashPattern: [NSNumber]? {
+        didSet {
+            updateBorderProperties()
+        }
+    }
+
     override var frame: CGRect {
         didSet {
             updateShapeLayer()
@@ -138,6 +144,8 @@ class BorderedView: UIView {
     }
 
     private func updateBorderProperties() {
+        shapeLayer.lineDashPattern = borderDashPattern
+        shapeLayer.lineJoin = .round
         shapeLayer.lineWidth = borderWidth
         shapeLayer.strokeColor = borderColor.cgColor
         shapeLayer.masksToBounds = false

@@ -8,10 +8,10 @@
 
 import UIKit
 
-class AddPhraseCollectionViewCell: VocableCollectionViewCell {
-    private let textLabel = UILabel(frame: .zero)
+class AddPhraseCollectionViewCell: PresetItemCollectionViewCell {
 
-    private let dashedBorderView = CAShapeLayer()
+    private let borderWidth = 6.0
+    private let cornerRadius = 8.0
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,34 +24,11 @@ class AddPhraseCollectionViewCell: VocableCollectionViewCell {
     }
 
     private func commonInit() {
-
         contentView.preservesSuperviewLayoutMargins = true
 
-        borderedView.isHidden = true
-
-        dashedBorderView.strokeColor = UIColor.categoryBackgroundColor.cgColor
-        dashedBorderView.lineDashPattern = [6, 6]
-        dashedBorderView.fillColor = nil
-        dashedBorderView.lineWidth = 6
-        contentView.layer.addSublayer(dashedBorderView)
-
-        textLabel.attributedText = .addPhraseTitle
-        textLabel.textAlignment = .center
-        textLabel.numberOfLines = 0
-        textLabel.adjustsFontSizeToFitWidth = true
-        textLabel.minimumScaleFactor = 0.5
-
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(textLabel)
-
-        let layoutGuide = contentView.layoutMarginsGuide
-        NSLayoutConstraint.activate([
-            textLabel.rightAnchor.constraint(equalTo: layoutGuide.rightAnchor).withPriority(999),
-            textLabel.topAnchor.constraint(equalTo: layoutGuide.topAnchor),
-            textLabel.leftAnchor.constraint(equalTo: layoutGuide.leftAnchor),
-            textLabel.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).withPriority(999)
-        ])
-
+        textLabel.numberOfLines = 1
+        setup(title: NSLocalizedString("preset.category.add.phrase.title", comment: "Add phrase button title"),
+              with: UIImage(systemName: "plus"))
         updateContentViews()
     }
 
@@ -59,21 +36,21 @@ class AddPhraseCollectionViewCell: VocableCollectionViewCell {
         super.updateContentViews()
 
         if isHighlighted && !isSelected {
-            dashedBorderView.strokeColor = UIColor.cellBorderHighlightColor.cgColor
+            borderedView.borderColor = .cellBorderHighlightColor
         } else if isSelected {
-            dashedBorderView.strokeColor = nil
+            borderedView.borderColor = .collectionViewBackgroundColor
         } else {
-            dashedBorderView.strokeColor = UIColor.categoryBackgroundColor.cgColor
+            borderedView.borderColor = .categoryBackgroundColor
         }
 
-        textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
-        dashedBorderView.fillColor = isSelected ? UIColor.cellSelectionColor.cgColor : nil
-    }
+        borderedView.backgroundColor = .collectionViewBackgroundColor
+        borderedView.fillColor = .collectionViewBackgroundColor
+        borderedView.borderWidth = borderWidth
+        borderedView.isOpaque = true
+        borderedView.cornerRadius = cornerRadius
+        borderedView.borderDashPattern = [6, 6]
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        dashedBorderView.frame = bounds
-        dashedBorderView.path = UIBezierPath(roundedRect: bounds, cornerRadius: 8).cgPath
+        layoutMargins = .init(uniform: cornerRadius + borderWidth)
     }
 }
 
