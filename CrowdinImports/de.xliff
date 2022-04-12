@@ -20,14 +20,14 @@
         <target state="final">Vocable benutzt ARKit um Kopfbewegungen mit der TrueDepth Kamera zu erkennen. Das ermöglicht das Steuern der App bei eingeschränkter Bewegungsfähigkeit. Die Kameradaten werden ausdrücklich nur zum Steuern des Navigationszeigers verwendet und nicht gespeichert oder übermittelt. Deshalb braucht Vocable die Erlaubnis zur Nutzung der Kamera.</target>
         <note>Camera usage description</note>
       </trans-unit>
-      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve" approved="yes">
         <source>Vocable uses the microphone only when voice responses are enabled. Vocable does not store or transmit audio data beyond transcribing audio into words.</source>
-        <target state="translated">Vocable benutzt das Mikrofon nur dann, wenn gesprochene Antworten aktiviert sind. Vocable speichert und übermittelt Audiodaten ausschließlich zur Umwandlung in Text.</target>
+        <target state="final">Vocable benutzt das Mikrofon nur dann, wenn gesprochene Antworten aktiviert sind. Vocable speichert und übermittelt Audiodaten ausschließlich zur Umwandlung in Text.</target>
         <note>Privacy - Microphone Usage Description</note>
       </trans-unit>
-      <trans-unit id="NSSpeechRecognitionUsageDescription" xml:space="preserve">
+      <trans-unit id="NSSpeechRecognitionUsageDescription" xml:space="preserve" approved="yes">
         <source>Vocable uses speech recognition to convert audio data into words when voice responses are enabled. Transcribed speech is not stored or transmitted.</source>
-        <target state="translated">Vocable benutzt Spracherkennung, um Audiodaten in Text umzuwandeln, wenn gesprochene Antworten aktiviert sind. Umgewandelte Sprachdateien werden nicht gespeichert oder übermittelt.</target>
+        <target state="final">Vocable benutzt Spracherkennung, um Audiodaten in Text umzuwandeln, wenn gesprochene Antworten aktiviert sind. Umgewandelte Sprachdateien werden nicht gespeichert oder übermittelt.</target>
         <note>Privacy - Speech Recognition Usage Description</note>
       </trans-unit>
     </body>
@@ -254,9 +254,9 @@
         <target state="translated">Zurücksetzen</target>
         <note>Button confirming that the user would like to reset Vocable's application settings</note>
       </trans-unit>
-      <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve">
+      <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve" approved="yes">
         <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
-        <target state="translated">Vocable konnte nicht zurückgesetzt werden. Bitte versuchen Sie es erneut oder installieren Sie Vocable neu, sollte der Fehler bestehen bleiben.</target>
+        <target state="final">Vocable konnte nicht zurückgesetzt werden. Bitte versuchen Sie es erneut oder installieren Sie Vocable neu, sollte der Fehler bestehen bleiben.</target>
         <note>Reset app settings failure alert</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_failure.button.ok" xml:space="preserve">
@@ -264,9 +264,9 @@
         <target state="translated">OK</target>
         <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset</note>
       </trans-unit>
-      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
+      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve" approved="yes">
         <source>Vocable has been reset successfully</source>
-        <target state="translated">Vocable wurde erfolgreich zurückgesetzt</target>
+        <target state="final">Vocable wurde erfolgreich zurückgesetzt</target>
         <note>Reset app settings success alert</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
