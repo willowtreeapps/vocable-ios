@@ -119,7 +119,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         let pageCountBefore = collectionView.layout.pagesPerSection
         let fetchedSnapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
 
-        let updatedSnapshot = transformFetchedSnapshot(fetchedSnapshot)
+        let updatedSnapshot = makeSnapshot(from: fetchedSnapshot)
 
         dataSourceProxy.apply(updatedSnapshot, animatingDifferences: false)
 
@@ -146,24 +146,29 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
         switch item {
         case .persistedPhrase(let objectId):
-            guard
-                let phrase = Phrase.fetchObject(in: frc.managedObjectContext, matching: objectId),
-                let utterance = phrase.utterance
-            else {
-                lastUtterance = nil
-                return
-            }
+            let context = NSPersistentContainer.shared.newBackgroundContext()
 
-            lastUtterance = utterance
+            context.perform { [weak self] in
+                guard
+                    let self = self,
+                    let phrase = Phrase.fetchObject(in: self.frc.managedObjectContext, matching: objectId),
+                    let utterance = phrase.utterance
+                else {
+                    self?.lastUtterance = nil
+                    return
+                }
 
-            if category.identifier != Category.Identifier.recents {
-                phrase.lastSpokenDate = Date()
-                try? frc.managedObjectContext.save()
-            }
+                self.lastUtterance = utterance
 
-            // Dispatch to get off the main queue for performance
-            DispatchQueue.global(qos: .userInitiated).async {
-                AVSpeechSynthesizer.shared.speak(utterance, language: AppConfig.activePreferredLanguageCode)
+                if self.category.identifier != Category.Identifier.recents {
+                    phrase.lastSpokenDate = Date()
+                    try? self.frc.managedObjectContext.save()
+                }
+
+                // Dispatch to get off the main queue for performance
+                DispatchQueue.global(qos: .userInitiated).async {
+                    AVSpeechSynthesizer.shared.speak(utterance, language: AppConfig.activePreferredLanguageCode)
+                }
             }
         case .addNewPhrase:
             addNewPhraseButtonSelected()
@@ -171,7 +176,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
     }
 
-    private func transformFetchedSnapshot(_ fetchedSnapshot: NSDiffableDataSourceSnapshot<String, NSManagedObjectID>) -> Snapshot {
+    private func makeSnapshot(from fetchedSnapshot: NSDiffableDataSourceSnapshot<String, NSManagedObjectID>) -> Snapshot {
         var updatedSnapshot = Snapshot()
 
         updatedSnapshot.appendSections(fetchedSnapshot.sectionIdentifiers)
