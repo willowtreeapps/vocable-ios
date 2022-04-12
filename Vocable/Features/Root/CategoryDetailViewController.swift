@@ -177,15 +177,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
     }
 
     private func makeSnapshot(from fetchedSnapshot: NSDiffableDataSourceSnapshot<String, NSManagedObjectID>) -> Snapshot {
-        var updatedSnapshot = Snapshot()
-
-        updatedSnapshot.appendSections(fetchedSnapshot.sectionIdentifiers)
-
-        for sectionId in fetchedSnapshot.sectionIdentifiers {
-            let categoryItems = fetchedSnapshot.itemIdentifiers(inSection: sectionId).map(CategoryItem.persistedPhrase)
-
-            updatedSnapshot.appendItems(categoryItems, toSection: sectionId)
-        }
+        var updatedSnapshot = fetchedSnapshot.mapItemIdentifier(CategoryItem.persistedPhrase)
 
         if updatedSnapshot.numberOfItems != 0 {
             updatedSnapshot.appendItems([.addNewPhrase])
