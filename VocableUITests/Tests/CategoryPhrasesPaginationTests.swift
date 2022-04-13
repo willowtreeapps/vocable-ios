@@ -12,7 +12,9 @@ class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
     
     func testCanNavigatePages() {
         // Add 11 phrases; this results in 3 total pages for an iPhone and 2 total pages for an iPad
-        customCategoriesScreen.createCustomPhrases(numberOfPhrases: 11)
+        for phrase in listOfPhrases.startIndex..<11 {
+            customCategoriesScreen.addPhrase(listOfPhrases[phrase])
+        }
         
         // Verify that the user is on the first page and the next page buttons are enabled.
         XCTAssertEqual(customCategoriesScreen.currentPageNumber, 1)
@@ -35,8 +37,10 @@ class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
     }
     
     func testPagesAdjustToNewPhrases() {
-        // Add 9 phrases; this results in 3 starting pages for an iPhone and 1 full page for an iPad)
-        customCategoriesScreen.createCustomPhrases(numberOfPhrases: 10)
+        // Add 10 phrases; this results in 3 starting pages for an iPhone and 1 full page for an iPad
+        for phrase in listOfPhrases.startIndex..<10 {
+            customCategoriesScreen.addPhrase(listOfPhrases[phrase])
+        }
         
         // Verify that the user is on the first page.
         XCTAssertEqual(customCategoriesScreen.currentPageNumber, 1)
@@ -44,7 +48,7 @@ class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
         // Add 3 more phrases to push the total number of pages from N to N+1.
         let originalPageCount = customCategoriesScreen.totalPageCount
         let expectedPageCountAfterAddingPhrase = originalPageCount + 1
-        customCategoriesScreen.createCustomPhrases(numberOfPhrases: 3)
+        customCategoriesScreen.addRandomPhrases(numberOfPhrases: 3)
         XCTAssertEqual(customCategoriesScreen.totalPageCount, expectedPageCountAfterAddingPhrase)
         
         // Remove 3 phrases and verify that the page count reduces, back to the original count
@@ -60,7 +64,7 @@ class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
     func testNextPageButtonsDisabled() {
         // Add 1 phrase so that the pagination buttons appear
         XCTAssertTrue(customCategoriesScreen.emptyStateAddPhraseButton.exists, "Expected a new category to be in empty state.")
-        customCategoriesScreen.createCustomPhrases(numberOfPhrases: 1)
+        customCategoriesScreen.addRandomPhrases(numberOfPhrases: 1)
     
         // Verify the page counts and that buttons appear; buttons are disabled.
         XCTAssertEqual(customCategoriesScreen.currentPageNumber, 1)

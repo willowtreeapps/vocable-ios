@@ -26,7 +26,7 @@ class KeyboardScreenTests: BaseTest {
         mainScreen.keyboardNavButton.tap()
         keyboardScreen.typeText(testPhrase)
         keyboardScreen.favoriteButton.tap()
-        keyboardScreen.dismissKeyboardButton.tap()
+        keyboardScreen.navBarDismissButton.tap()
         
         mainScreen.locateAndSelectDestinationCategory(.mySayings)
 
@@ -39,7 +39,7 @@ class KeyboardScreenTests: BaseTest {
         mainScreen.keyboardNavButton.tap()
         keyboardScreen.typeText(testPhrase)
         keyboardScreen.favoriteButton.tap()
-        keyboardScreen.dismissKeyboardButton.tap()
+        keyboardScreen.navBarDismissButton.tap()
        
         mainScreen.locateAndSelectDestinationCategory(.mySayings)
        
@@ -48,7 +48,7 @@ class KeyboardScreenTests: BaseTest {
         mainScreen.keyboardNavButton.tap()
         keyboardScreen.typeText(testPhrase)
         keyboardScreen.favoriteButton.tap()
-        keyboardScreen.dismissKeyboardButton.tap()
+        keyboardScreen.navBarDismissButton.tap()
         mainScreen.locateAndSelectDestinationCategory(.mySayings)
         
         // We expect 'My Sayings' to be empty now.

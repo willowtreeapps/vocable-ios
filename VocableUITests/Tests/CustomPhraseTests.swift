@@ -16,7 +16,7 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         // Verify Phrase is not added if edits are discarded
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText("A")
-        keyboardScreen.dismissKeyboardButton.tap()
+        keyboardScreen.navBarDismissButton.tap()
         XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
 
         settingsScreen.alertDiscardButton.tap()
@@ -25,7 +25,7 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         // Verify Phrase can be added if continuing edit.
         customCategoriesScreen.categoriesPageAddPhraseButton.tap()
         keyboardScreen.typeText("A")
-        keyboardScreen.dismissKeyboardButton.tap()
+        keyboardScreen.navBarDismissButton.tap()
         XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
         settingsScreen.alertContinueButton.tap()
 
@@ -44,7 +44,6 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         keyboardScreen.checkmarkAddButton.tap()
         
         // Edit the phrase
-        // TODO: Refactor customCategoriesScreen.categoriesPageEditPhraseButton after Category List UI updates: issue #492 ... need identifiers?
         XCUIApplication().buttons[customPhrase].tap()
         keyboardScreen.typeText("test")
         keyboardScreen.checkmarkAddButton.tap()

@@ -89,11 +89,11 @@ class MainScreenTests: BaseTest {
         // Navigate to the category and hide it.
         settingsScreen.openCategorySettings(category: hiddenCategoryName)
         settingsScreen.showCategoryButton.tap()
-        settingsScreen.leaveCategoryDetailButton.tap()
+        settingsScreen.navBarBackButton.tap()
         
         // Return to the main screen
-        settingsScreen.leaveCategoriesButton.tap()
-        settingsScreen.exitSettingsButton.tap()
+        settingsScreen.navBarBackButton.tap()
+        settingsScreen.navBarDismissButton.tap()
         
         // Confirm that the category is no longer accessible.
         for category in PresetCategories().list {

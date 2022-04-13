@@ -21,14 +21,14 @@ class CustomCategoryTests: CustomCategoryBaseTest {
         settingsScreen.openCategorySettings(category: customCategoryName)
         settingsScreen.renameCategoryButton.tap()
         keyboardScreen.typeText(nameSuffix)
-        keyboardScreen.dismissKeyboardButton.tap()
+        keyboardScreen.navBarDismissButton.tap()
         XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
         
         settingsScreen.alertContinueButton.tap()
         XCTAssertTrue(keyboardScreen.keyboardTextView.staticTexts[renamedCategory].exists)
 
         keyboardScreen.checkmarkAddButton.tap()
-        settingsScreen.leaveCategoriesButton.tap()
+        settingsScreen.navBarBackButton.tap()
         XCTAssertTrue(settingsScreen.locateCategoryCell(renamedCategory).element.isEnabled)
         XCTAssertTrue(settingsScreen.locateCategoryCell(renamedCategory).element.exists)
    }
@@ -37,13 +37,13 @@ class CustomCategoryTests: CustomCategoryBaseTest {
         settingsScreen.openCategorySettings(category: customCategoryName)
         settingsScreen.renameCategoryButton.tap()
         keyboardScreen.typeText(nameSuffix)
-        keyboardScreen.dismissKeyboardButton.tap()
+        keyboardScreen.navBarDismissButton.tap()
         XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
         
         settingsScreen.alertDiscardButton.tap()
         XCTAssertEqual(settingsScreen.categoryDetailsTitle.label, customCategoryName)
         
-        settingsScreen.leaveCategoriesButton.tap()
+        settingsScreen.navBarBackButton.tap()
         XCTAssertTrue(settingsScreen.locateCategoryCell(customCategoryName).element.exists)
     }
     
@@ -56,7 +56,7 @@ class CustomCategoryTests: CustomCategoryBaseTest {
         keyboardScreen.checkmarkAddButton.tap()
         XCTAssertEqual(settingsScreen.categoryDetailsTitle.label, renamedCategory)
         
-        settingsScreen.leaveCategoriesButton.tap()
+        settingsScreen.navBarBackButton.tap()
         XCTAssertTrue(settingsScreen.locateCategoryCell(renamedCategory).element.exists)
     }
     

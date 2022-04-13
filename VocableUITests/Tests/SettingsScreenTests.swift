@@ -20,7 +20,7 @@ class SettingsScreenTests: BaseTest {
         // Verify that when the category is hidden, up and down buttons are disabled.
         settingsScreen.openCategorySettings(category: category)
         settingsScreen.showCategoryButton.tap()
-        settingsScreen.leaveCategoryDetailButton.tap()
+        settingsScreen.navBarBackButton.tap()
         
         let hiddenCategory = settingsScreen.locateCategoryCell(category)
         XCTAssertFalse(hiddenCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
@@ -30,7 +30,7 @@ class SettingsScreenTests: BaseTest {
         // Verify that when the category is shown, up and down buttons are enabled.
         settingsScreen.openCategorySettings(category: category)
         settingsScreen.showCategoryButton.tap()
-        settingsScreen.leaveCategoryDetailButton.tap()
+        settingsScreen.navBarBackButton.tap()
         
         let shownCategory = settingsScreen.locateCategoryCell(category)
         XCTAssertTrue(shownCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
