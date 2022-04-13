@@ -190,7 +190,7 @@ class AudioEngineController: NSObject, AVAudioPlayerDelegate {
 
                     if self.audioSession.category != .playAndRecord {
                         print("AUDIO SESSION CATEGORY: playAndRecord")
-                        try self.audioSession.setCategory(.playAndRecord, mode: .voiceChat, options: [.defaultToSpeaker])
+                        try self.audioSession.setCategory(.playAndRecord, mode: .spokenAudio, options: [.defaultToSpeaker])
                         sessionNeedsActivation = true
                     }
 
