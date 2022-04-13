@@ -26,6 +26,8 @@ class AddPhraseCollectionViewCell: PresetItemCollectionViewCell {
     private func commonInit() {
         contentView.preservesSuperviewLayoutMargins = true
 
+        fillColor = .collectionViewBackgroundColor
+
         textLabel.numberOfLines = 1
         setup(title: NSLocalizedString("preset.category.add.phrase.title", comment: "Add phrase button title"),
               with: UIImage(systemName: "plus"))
@@ -38,31 +40,17 @@ class AddPhraseCollectionViewCell: PresetItemCollectionViewCell {
         if isHighlighted && !isSelected {
             borderedView.borderColor = .cellBorderHighlightColor
         } else if isSelected {
-            borderedView.borderColor = .collectionViewBackgroundColor
+            borderedView.borderColor = .cellSelectionColor
         } else {
             borderedView.borderColor = .categoryBackgroundColor
         }
 
         borderedView.backgroundColor = .collectionViewBackgroundColor
-        borderedView.fillColor = .collectionViewBackgroundColor
-        borderedView.borderWidth = borderWidth
+        borderedView.borderWidth = isSelected ? 0 : borderWidth
         borderedView.isOpaque = true
         borderedView.cornerRadius = cornerRadius
         borderedView.borderDashPattern = [6, 6]
 
         layoutMargins = .init(uniform: cornerRadius + borderWidth)
-    }
-}
-
-private extension NSAttributedString {
-    static var addPhraseTitle: NSAttributedString {
-        let text = NSLocalizedString("preset.category.add.phrase.title", comment: "Add phrase button title")
-        let image = UIImage(systemName: "plus")!
-        let font: UIFont = (UITraitCollection.current.horizontalSizeClass == .regular
-                            && UITraitCollection.current.verticalSizeClass == .regular)
-                            ? UIFont.systemFont(ofSize: 28, weight: .bold)
-                            : UIFont.systemFont(ofSize: 22, weight: .bold)
-        let attributes: [NSAttributedString.Key: Any] = [.font: font]
-        return NSAttributedString.imageAttachedString(for: text, with: image, attributes: attributes)
     }
 }

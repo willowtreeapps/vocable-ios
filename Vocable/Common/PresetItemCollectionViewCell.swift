@@ -26,7 +26,7 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
         }()
 
         textLabel.textColor = textColor
-        textLabel.backgroundColor = .clear
+        textLabel.backgroundColor = borderedView.fillColor
         textLabel.isOpaque = true
         textLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
     }
