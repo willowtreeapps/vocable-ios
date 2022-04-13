@@ -15,9 +15,8 @@ extension NSDiffableDataSourceSnapshot {
         updatedSnapshot.appendSections(sectionIdentifiers)
 
         for sectionId in sectionIdentifiers {
-            let categoryItems = itemIdentifiers(inSection: sectionId).map(transform)
-
-            updatedSnapshot.appendItems(categoryItems, toSection: sectionId)
+            let items = itemIdentifiers(inSection: sectionId).map(transform)
+            updatedSnapshot.appendItems(items, toSection: sectionId)
         }
 
         return updatedSnapshot
