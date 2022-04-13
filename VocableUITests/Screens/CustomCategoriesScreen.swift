@@ -33,13 +33,38 @@ class CustomCategoriesScreen: BaseScreen {
         return CategoryIdentifier(customCategoryIdentifier)
     }
     
-    func createCustomPhrases(numberOfPhrases: Int) {
+    func addPhrase(_ phrase: String) {
+        categoriesPageAddPhraseButton.tap()
+        keyboardScreen.typeText(phrase)
+        keyboardScreen.checkmarkAddButton.tap()
+    }
+    
+    func addRandomPhrases(numberOfPhrases: Int) {
         for _ in 1...numberOfPhrases {
             let randomPhrase = keyboardScreen.randomString(length: 2)
             categoriesPageAddPhraseButton.tap()
             keyboardScreen.typeText(randomPhrase)
             keyboardScreen.checkmarkAddButton.tap()
         }
+    }
+    
+    func returnToMainScreenFromCategoriesList() {
+        navBarBackButton.tap()
+        _ = navBarDismissButton.waitForExistence(timeout: 0.25)
+        navBarDismissButton.tap()
+        _ = mainScreen.settingsButton.waitForExistence(timeout: 0.25)
+    }
+    
+    func returnToMainScreenFromCategoryDetails() {
+        navBarBackButton.tap()
+        _ = navBarBackButton.waitForExistence(timeout: 0.25)
+        returnToMainScreenFromCategoriesList()
+    }
+    
+    func returnToMainScreenFromEditPhrases() {
+        navBarBackButton.tap()
+        _ = navBarBackButton.waitForExistence(timeout: 0.25)
+        returnToMainScreenFromCategoryDetails()
     }
     
 }

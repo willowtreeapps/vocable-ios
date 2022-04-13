@@ -12,10 +12,10 @@ class KeyboardScreen: BaseScreen {
     private let app = XCUIApplication()
     
     let keyboardTextView = XCUIApplication().textViews["keyboard.textView"]
-    let dismissKeyboardButton = XCUIApplication().buttons["keyboard.dismissButton"]
     let favoriteButton = XCUIApplication().buttons["keyboard.favoriteButton"]
     let checkmarkAddButton = XCUIApplication().buttons["keyboard.saveButton"]
     let createDuplicateButton = XCUIApplication().buttons["Create Duplicate"]
+    
     func typeText(_ textToType: String) {
         for char in textToType {
             app.collectionViews.staticTexts[String(char).uppercased()].tap()

@@ -14,9 +14,6 @@ class SettingsScreen: BaseScreen {
     let keyboardScreen = KeyboardScreen()
     
     let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
-    let leaveCategoryDetailButton = XCUIApplication().buttons["navigationBar.backButton"]
-    let leaveCategoriesButton = XCUIApplication().buttons["Left"]
-    let exitSettingsButton = XCUIApplication().buttons["settings.dismissButton"]
     let otherElements = XCUIApplication().collectionViews.cells.otherElements
     let cells = XCUIApplication().cells
     let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
@@ -120,23 +117,8 @@ class SettingsScreen: BaseScreen {
         categoriesButton.tap()
     }
     
-    func navigateToMainScreenFromSettings(from: String) {
-        switch from {
-        case "categoryDetails":
-            navBarBackButton.tap()
-            _ = navBarBackButton.waitForExistence(timeout: 0.25)
-            navBarBackButton.tap()
-            _ = leaveCategoriesButton.waitForExistence(timeout: 0.25)
-            leaveCategoriesButton.tap()
-            _ = exitSettingsButton.waitForExistence(timeout: 0.5)
-            exitSettingsButton.tap()
-        case "categories":
-            leaveCategoriesButton.tap()
-            exitSettingsButton.tap()
-        case "settings":
-            exitSettingsButton.tap()
-        default:
-            break
-        }
+    func returnToMainScreen() {
+        navBarDismissButton.tap()
     }
+    
 }
