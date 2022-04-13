@@ -30,7 +30,7 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">Annuler</target>
-        <note>Cancel exit editing alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -41,11 +41,6 @@
         <source>Cancel</source>
         <target state="translated">Annuler</target>
         <note>Delete phrase alert cancel button title</note>
-      </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
-        <source>Delete</source>
-        <target state="translated">Supprimer</target>
-        <note>Delete phrase alert action button title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -444,9 +439,9 @@
         <target state="translated">Conversation</target>
         <note/>
       </trans-unit>
-      <trans-unit id="preset_F6F03BBD-B9CD-41F5-B26A-FCC13CCBB199" xml:space="preserve">
+      <trans-unit id="preset_F6F03BBD-B9CD-41F5-B26A-FCC13CCBB199" xml:space="preserve" approved="yes">
         <source>I am tired</source>
-        <target state="translated">Je suis fatigué(e)</target>
+        <target state="final">Je suis fatigué(e)</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_F8F5D1C9-0AA6-4152-BF7C-0851ACD1406B" xml:space="preserve">

@@ -1,3 +1,6 @@
+/* No comment provided by engineer. */
+"%@. %@" = "%1$@. %2$@";
+
 /* Categories list editor screen header title */
 "categories_list_editor.header.title" = "Kategorien";
 
@@ -8,7 +11,7 @@
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Bestätigen";
 
 /* (No Comment) */
-"category_editor.alert.cancel_editing_confirmation.title" = "Wenn Sie dies schließen, ohne Ihre benutzerdefinierte Kategorie zu speichern, wird gelöscht.";
+"category_editor.alert.cancel_editing_confirmation.title" = "Wenn Sie dies schließen, ohne zu speichern, wird Ihre benutzerdefinierte Kategorie gelöscht.";
 
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "Abbrechen";
@@ -22,8 +25,23 @@
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Abbrechen";
 
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Löschen";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "Gelöschte Sätze können nicht wiederhergestellt werden.";
+
+/* Edit Phrases button label within the category detail screen */
+"category_editor.detail.button.edit_phrases.title" = "Sätze bearbeiten";
+
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "Kategorie entfernen";
+
+/* Rename Category button label within the category detail screen */
+"category_editor.detail.button.rename_category.title" = "Kategorie umbenennen";
+
+/* Show category button label within the category detail screen. */
+"category_editor.detail.button.show_category.title" = "Kategorie anzeigen";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "Änderungen gespeichert";
@@ -34,8 +52,20 @@
 /* Debugging error message for when preloaded content is not found */
 "debug.assertion.presets_file_not_found" = "No presets found";
 
+/* Empty state Add Phrase button title */
+"empty_state.button.title" = "Satz hinzufügen";
+
+/* Empty state title */
+"empty_state.header.title" = "Sie haben noch keinen Satz hinzugefügt.";
+
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Abbrechen";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Weiter";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "Wenn Sie die Steuerung per Kopfbewegung ausschalten, ist die App nur per Touch steuerbar. Möchten Sie fortfahren?";
 
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "Bitte näher ans Gerät kommen.";
@@ -52,6 +82,18 @@
 /* Discard changes alert action title */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Verwerfen";
 
+/* Exit edit sayings alert title */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Wenn Sie zurückgehen, ohne zu speichern, werden alle Änderungen gelöscht.";
+
+/* Phrase already exists alert cancel button */
+"phrase_editor.alert.phrase_name_exists.cancel.button" = "Abbrechen";
+
+/* Phrase already exists alert create button */
+"phrase_editor.alert.phrase_name_exists.create.button" = "Duplizieren";
+
+/* Phrase already exists alert title */
+"phrase_editor.alert.phrase_name_exists.title" = "Diesen Satz gibt es schon. Möchten Sie in duplizieren?";
+
 /* new entry saved to user favorites category
    Saved to user favorites category
    Saved to user favorites category toast title */
@@ -63,6 +105,12 @@
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "Ja";
 
+/* Recents empty state description */
+"recents_empty_state.body.title" = "Wenn Sie Vocable benutzt haben, erscheinen Ihre zuletzt genutzten Sätze hier.";
+
+/* Recents empty state title */
+"recents_empty_state.header.title" = "Es gibt keine zuletzt genutzten Sätze";
+
 /* Selection mode screen header title */
 "selection_mode.header.title" = "Steuerungsmodus";
 
@@ -71,6 +119,27 @@
 
 /* No email account configured error alert title */
 "settings.alert.no_email_configured.title" = "E-Mail ist nicht konfiguriert.";
+
+/* Reset app settings confirmation prompt */
+"settings.alert.reset_app_settings_confirmation.body" = "Sind Sie sicher, dass Sie Vocable auf Werkseinstellungen zurücksetzen möchten? Dies kann nicht rückgängig gemacht werden.";
+
+/* Button cancelling the action to reset Vocable's application settings */
+"settings.alert.reset_app_settings_confirmation.button.cancel.title" = "Abbrechen";
+
+/* Button confirming that the user would like to reset Vocable's application settings */
+"settings.alert.reset_app_settings_confirmation.button.confirm.title" = "Zurücksetzen";
+
+/* Reset app settings failure alert */
+"settings.alert.reset_app_settings_failure.body" = "Vocable konnte nicht zurückgesetzt werden. Bitte versuchen Sie es erneut oder installieren Sie Vocable neu, sollte der Fehler bestehen bleiben.";
+
+/* Button dismissing the alert informing the user that Vocable's application settings failed to reset */
+"settings.alert.reset_app_settings_failure.button.ok" = "OK";
+
+/* Reset app settings success alert */
+"settings.alert.reset_app_settings_success.body" = "Vocable wurde erfolgreich zurückgesetzt";
+
+/* Button dismissing the alert informing the user that Vocable's application settings were successfully reset */
+"settings.alert.reset_app_settings_success.button.ok" = "OK";
 
 /* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.body" = "Dieser link wir außerhalb der Vocable App geöffnet. Sie laufen möglicherweise Gefahr, nicht mehr per Kopfbewegung steuern zu können.";
@@ -116,6 +185,18 @@
 
 /* Discard changes alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Verwerfen";
+
+/* Exit edit sayings alert title */
+"text_editor.alert.cancel_editing_confirmation.title" = "Wenn Sie zurückgehen, ohne zu speichern, werden alle Änderungen gelöscht.";
+
+/* Category already exists alert cancel button */
+"text_editor.alert.category_name_exists.cancel.button" = "Abbrechen";
+
+/* Category already exists alert create button */
+"text_editor.alert.category_name_exists.create.button" = "Duplizieren";
+
+/* Category already exists alert title */
+"text_editor.alert.category_name_exists.title" = "Diese Kategorie gibt es bereits. Möchten Sie sie duplizieren?";
 
 /* High cursor sensitivity option button */
 "timing_and_sensitivity.button.high.title" = "Hoch";

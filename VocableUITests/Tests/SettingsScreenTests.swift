@@ -38,29 +38,42 @@ class SettingsScreenTests: BaseTest {
         XCTAssertTrue(shownCategory.element.isEnabled)
     }
 
-    // We are disabling this test for now, it will be updated after the issue is completed: https://github.com/willowtreeapps/vocable-ios/issues/492
     func testReorder() {
-        let generalCategoryText = "General"
-        let basicNeedsCategoryText = "Basic Needs"
-        
-        let expectedGeneralCategoryText = "General"
-        let expectedbasicNeedsCategoryText = "Basic Needs"
-
         settingsScreen.navigateToSettingsCategoryScreen()
         
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: basicNeedsCategoryText).element.exists)
-
-        settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).buttons[settingsScreen.categoryDownButton].tap()
+        // Define the query that gives us the first category listed
+        let currentFirstCategory = XCUIApplication().cells.allElementsBoundByIndex[0]
+        // Define the query that gives us the second category listed
+        let currentSecondCategory = XCUIApplication().cells.allElementsBoundByIndex[1]
+        let originalFirstCategoryName = currentFirstCategory.label
+        let originalSecondCategoryName = currentSecondCategory.label
         
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: expectedGeneralCategoryText).element.exists)
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: expectedbasicNeedsCategoryText).element.exists)
+        // Give me the first category, using our query, and confirm the state of the buttons
+        XCTAssertFalse(currentFirstCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
+        XCTAssertTrue(currentFirstCategory.buttons[settingsScreen.categoryDownButton].isEnabled)
         
-        settingsScreen.otherElements.containing(.staticText, identifier: expectedGeneralCategoryText).buttons[settingsScreen.categoryUpButton].tap()
+        // Give me the second category, using our query, and confirm the state of the buttons
+        XCTAssertTrue(currentSecondCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
+        XCTAssertTrue(currentSecondCategory.buttons[settingsScreen.categoryDownButton].isEnabled)
         
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: generalCategoryText).element.exists)
-        XCTAssert(settingsScreen.otherElements.containing(.staticText, identifier: basicNeedsCategoryText).element.exists)
-
+        // Move the first category down one
+        currentFirstCategory.buttons[settingsScreen.categoryDownButton].tap()
+        
+        // Using the query for the first category (i.e. top most cell in list) confirm the category name matches expectations
+        XCTAssertEqual(currentFirstCategory.label, originalSecondCategoryName)
+        
+        // Using the query for the second category (i.e. second most cell in list) confirm the category name matches expectations
+        XCTAssertEqual(currentSecondCategory.label, originalFirstCategoryName)
+        
+        // Move the second category back up
+        currentSecondCategory.buttons[settingsScreen.categoryUpButton].tap()
+        
+        // Using the query for the first category (i.e. top most cell in list) confirm the category name matches expectations
+        XCTAssertEqual(currentFirstCategory.label, originalFirstCategoryName)
+        
+        // Using the query for the second category (i.e. second most cell in list) confirm the category name matches expectations
+        XCTAssertEqual(currentSecondCategory.label, originalSecondCategoryName)
+        
     }
 
 }

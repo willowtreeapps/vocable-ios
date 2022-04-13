@@ -20,6 +20,16 @@
         <target state="final">Vocable benutzt ARKit um Kopfbewegungen mit der TrueDepth Kamera zu erkennen. Das ermöglicht das Steuern der App bei eingeschränkter Bewegungsfähigkeit. Die Kameradaten werden ausdrücklich nur zum Steuern des Navigationszeigers verwendet und nicht gespeichert oder übermittelt. Deshalb braucht Vocable die Erlaubnis zur Nutzung der Kamera.</target>
         <note>Camera usage description</note>
       </trans-unit>
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve" approved="yes">
+        <source>Vocable uses the microphone only when voice responses are enabled. Vocable does not store or transmit audio data beyond transcribing audio into words.</source>
+        <target state="final">Vocable benutzt das Mikrofon nur dann, wenn gesprochene Antworten aktiviert sind. Vocable speichert und übermittelt Audiodaten ausschließlich zur Umwandlung in Text.</target>
+        <note>Privacy - Microphone Usage Description</note>
+      </trans-unit>
+      <trans-unit id="NSSpeechRecognitionUsageDescription" xml:space="preserve" approved="yes">
+        <source>Vocable uses speech recognition to convert audio data into words when voice responses are enabled. Transcribed speech is not stored or transmitted.</source>
+        <target state="final">Vocable benutzt Spracherkennung, um Audiodaten in Text umzuwandeln, wenn gesprochene Antworten aktiviert sind. Umgewandelte Sprachdateien werden nicht gespeichert oder übermittelt.</target>
+        <note>Privacy - Speech Recognition Usage Description</note>
+      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="de" datatype="plaintext">
@@ -27,10 +37,10 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
     </header>
     <body>
-      <trans-unit id="Edit Phrases" xml:space="preserve" approved="yes">
-        <source>Edit Phrases</source>
-        <target state="final">Phrasen bearbeiten</target>
-        <note>Edit Phrases</note>
+      <trans-unit id="%@. %@" xml:space="preserve">
+        <source>%1$@. %2$@</source>
+        <target state="translated">%1$@. %2$@</target>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve" approved="yes">
         <source>Categories</source>
@@ -40,17 +50,17 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">Abbrechen</target>
-        <note>Cancel exit editing alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
         <target state="final">Bestätigen</target>
-        <note>Confirm exit category alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
         <source>If you close this without saving your custom category will be deleted.</source>
-        <target state="final">Wenn Sie dies schließen, ohne Ihre benutzerdefinierte Kategorie zu speichern, wird gelöscht.</target>
-        <note>Exit edit categories alert title</note>
+        <target state="final">Wenn Sie dies schließen, ohne zu speichern, wird Ihre benutzerdefinierte Kategorie gelöscht.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -72,20 +82,35 @@
         <target state="final">Abbrechen</target>
         <note>Delete phrase alert cancel button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve" approved="yes">
-        <source>Delete</source>
-        <target state="final">Löschen</target>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">Löschen</target>
         <note>Delete phrase alert action button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Are you sure you want to delete? Removed phrases cannot be restored.</source>
-        <target state="final">Gelöschte Sätze können nicht wiederhergestellt werden.</target>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
+        <source>Deleted phrases cannot be recovered.</source>
+        <target state="translated">Gelöschte Sätze können nicht wiederhergestellt werden.</target>
         <note>Delete phrase confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.edit_phrases.title" xml:space="preserve">
+        <source>Edit Phrases</source>
+        <target state="translated">Sätze bearbeiten</target>
+        <note>Edit Phrases button label within the category detail screen</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve" approved="yes">
         <source>Remove Category</source>
         <target state="final">Kategorie entfernen</target>
         <note>Remove category button label within the category detail screen.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.rename_category.title" xml:space="preserve">
+        <source>Rename Category</source>
+        <target state="translated">Kategorie umbenennen</target>
+        <note>Rename Category button label within the category detail screen</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
+        <source>Show Category</source>
+        <target state="translated">Kategorie anzeigen</target>
+        <note>Show category button label within the category detail screen.</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve" approved="yes">
         <source>Changes saved</source>
@@ -95,27 +120,36 @@
       <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve" approved="yes">
         <source>Changes Saved</source>
         <target state="final">Änderungen gespeichert</target>
-        <note>Saved to Categories
-   User edited name of the category and saved it successfully</note>
+        <note>Saved to Categories</note>
       </trans-unit>
       <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve" approved="yes">
         <source>No presets found</source>
         <target state="final">No presets found</target>
         <note>Debugging error message for when preloaded content is not found</note>
       </trans-unit>
+      <trans-unit id="empty_state.button.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target state="translated">Satz hinzufügen</target>
+        <note>Empty state Add Phrase button title</note>
+      </trans-unit>
+      <trans-unit id="empty_state.header.title" xml:space="preserve">
+        <source>You don't have any phrases saved yet.</source>
+        <target state="translated">Sie haben noch keinen Satz hinzugefügt.</target>
+        <note>Empty state title</note>
+      </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">Abbrechen</target>
         <note>Cancel alert action title</note>
       </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve" approved="yes">
-        <source>Confirm</source>
-        <target state="final">Bestätigen</target>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Continue</source>
+        <target state="translated">Weiter</target>
         <note>Confirm alert action title</note>
       </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Turn off head tracking?</source>
-        <target state="final">Steuerung per Kopfbewegung ausschalten?</target>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
+        <source>Turning off head tracking will make the app touch mode only. Would you like to continue?</source>
+        <target state="translated">Wenn Sie die Steuerung per Kopfbewegung ausschalten, ist die App nur per Touch steuerbar. Möchten Sie fortfahren?</target>
         <note>Disable head tracking confirmation alert title</note>
       </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve" approved="yes">
@@ -143,10 +177,25 @@
         <target state="final">Verwerfen</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
-      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Are you sure? Going back before saving will clear any edits made.</source>
-        <target state="final">Nicht gespeicherte Veränderungen werden beim Verlassen des Menüs verworfen.</target>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>Going back before saving will clear any edits made.</source>
+        <target state="translated">Wenn Sie zurückgehen, ohne zu speichern, werden alle Änderungen gelöscht.</target>
         <note>Exit edit sayings alert title</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Abbrechen</target>
+        <note>Phrase already exists alert cancel button</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target state="translated">Duplizieren</target>
+        <note>Phrase already exists alert create button</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.title" xml:space="preserve">
+        <source>This phrase already exists. Would you like to create a duplicate?</source>
+        <target state="translated">Diesen Satz gibt es schon. Möchten Sie in duplizieren?</target>
+        <note>Phrase already exists alert title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve" approved="yes">
         <source>Saved to %@</source>
@@ -165,6 +214,16 @@
         <target state="final">Ja</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
+      <trans-unit id="recents_empty_state.body.title" xml:space="preserve">
+        <source>Start using Vocable to see your most recently used phrases here.</source>
+        <target state="translated">Wenn Sie Vocable benutzt haben, erscheinen Ihre zuletzt genutzten Sätze hier.</target>
+        <note>Recents empty state description</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.header.title" xml:space="preserve">
+        <source>No recently used phrases</source>
+        <target state="translated">Es gibt keine zuletzt genutzten Sätze</target>
+        <note>Recents empty state title</note>
+      </trans-unit>
       <trans-unit id="selection_mode.header.title" xml:space="preserve" approved="yes">
         <source>Selection Mode</source>
         <target state="final">Steuerungsmodus</target>
@@ -179,6 +238,41 @@
         <source>Email not configured.</source>
         <target state="final">E-Mail ist nicht konfiguriert.</target>
         <note>No email account configured error alert title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve">
+        <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
+        <target state="translated">Sind Sie sicher, dass Sie Vocable auf Werkseinstellungen zurücksetzen möchten? Dies kann nicht rückgängig gemacht werden.</target>
+        <note>Reset app settings confirmation prompt</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Abbrechen</target>
+        <note>Button cancelling the action to reset Vocable's application settings</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Reset</source>
+        <target state="translated">Zurücksetzen</target>
+        <note>Button confirming that the user would like to reset Vocable's application settings</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve" approved="yes">
+        <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
+        <target state="final">Vocable konnte nicht zurückgesetzt werden. Bitte versuchen Sie es erneut oder installieren Sie Vocable neu, sollte der Fehler bestehen bleiben.</target>
+        <note>Reset app settings failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">OK</target>
+        <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve" approved="yes">
+        <source>Vocable has been reset successfully</source>
+        <target state="final">Vocable wurde erfolgreich zurückgesetzt</target>
+        <note>Reset app settings success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">OK</target>
+        <note>Button dismissing the alert informing the user that Vocable's application settings were successfully reset</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve" approved="yes">
         <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
@@ -255,10 +349,25 @@
         <target state="final">Verwerfen</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
-      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Are you sure? Going back before saving will clear any edits made.</source>
-        <target state="final">Nicht gespeicherte Veränderungen werden beim Verlassen des Menüs verworfen.</target>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>Going back before saving will clear any edits made.</source>
+        <target state="translated">Wenn Sie zurückgehen, ohne zu speichern, werden alle Änderungen gelöscht.</target>
         <note>Exit edit sayings alert title</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Abbrechen</target>
+        <note>Category already exists alert cancel button</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target state="translated">Duplizieren</target>
+        <note>Category already exists alert create button</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.title" xml:space="preserve">
+        <source>This category name already exists. Would you like to create a duplicate?</source>
+        <target state="translated">Diese Kategorie gibt es bereits. Möchten Sie sie duplizieren?</target>
+        <note>Category already exists alert title</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve" approved="yes">
         <source>High</source>
@@ -630,6 +739,11 @@
       <trans-unit id="preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" xml:space="preserve" approved="yes">
         <source>Please turn the TV on</source>
         <target state="final">Bitte den Fernseher anschalten</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_listening_mode" xml:space="preserve">
+        <source>Listen</source>
+        <target state="translated">Zuhören</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_user_favorites" xml:space="preserve" approved="yes">
