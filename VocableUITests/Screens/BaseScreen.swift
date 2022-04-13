@@ -13,12 +13,14 @@ import Foundation
 import XCTest
 
 class BaseScreen {
+    
     let navBarBackButton = XCUIApplication().buttons["navigationBar.backButton"]
     let paginationLabel = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
     let paginationLeftButton = XCUIApplication().buttons["bottomPagination.left_chevron"]
     let paginationRightButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
     let alertMessageLabel = XCUIApplication().staticTexts["alert_message"]
     let emptyStateAddPhraseButton = XCUIApplication().buttons["empty_state_addPhrase_button"]
+    let navBarDismissButton = XCUIApplication().buttons.containing(NSPredicate(format: "identifier CONTAINS 'dismissButton'")).element
     
     /// From Pagination: the current page (X) being viewed from the "Page X of Y" pagination label.
     var currentPageNumber: Int {
