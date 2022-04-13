@@ -151,7 +151,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
             context.perform { [weak self] in
                 guard
                     let self = self,
-                    let phrase = Phrase.fetchObject(in: self.frc.managedObjectContext, matching: objectId),
+                    let phrase = Phrase.fetchObject(in: context, matching: objectId),
                     let utterance = phrase.utterance
                 else {
                     self?.lastUtterance = nil
@@ -162,7 +162,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
                 if self.category.identifier != Category.Identifier.recents {
                     phrase.lastSpokenDate = Date()
-                    try? self.frc.managedObjectContext.save()
+                    try? context.save()
                 }
 
                 // Dispatch to get off the main queue for performance
