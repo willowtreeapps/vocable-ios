@@ -40,6 +40,11 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
         super.init(coder: coder)
         commonInit()
     }
+
+    override func layoutMarginsDidChange() {
+        super.layoutMarginsDidChange()
+        textLabel.preferredMaxLayoutWidth = layoutMarginsGuide.layoutFrame.width
+    }
     
     private func commonInit() {
         contentView.preservesSuperviewLayoutMargins = true
