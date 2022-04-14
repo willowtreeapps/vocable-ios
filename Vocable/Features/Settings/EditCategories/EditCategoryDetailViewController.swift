@@ -371,27 +371,10 @@ private extension GazeableAlertViewController {
 
 private extension NSAttributedString {
     static var removeCategoryTitle: NSAttributedString {
-        let isRightToLeftLayout = UITraitCollection.current.layoutDirection == .rightToLeft
-
-        let buttonText = NSLocalizedString("category_editor.detail.button.remove_category.title", comment: "Remove category button label within the category detail screen.")
-
-        let formatString: String  = isRightToLeftLayout ?
-            .localizedStringWithFormat("%@ ", buttonText) :
-            .localizedStringWithFormat(" %@", buttonText)
-
+        let text = NSLocalizedString("category_editor.detail.button.remove_category.title", comment: "Remove category button label within the category detail screen.")
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 22, weight: .bold)
         ]
-
-        let text = NSMutableAttributedString(string: formatString, attributes: attributes)
-        let attachment = NSMutableAttributedString(attachment: NSTextAttachment(image: UIImage(systemName: "trash")!))
-        attachment.addAttributes(attributes, range: .entireRange(of: attachment.string))
-
-        let textRange = NSRange(of: text.string)
-        let insertionIndex = isRightToLeftLayout ? textRange.upperBound : textRange.lowerBound
-
-        text.insert(attachment, at: insertionIndex)
-
-        return text
+       return NSAttributedString.imageAttachedString(for: text, with: UIImage(systemName: "trash")!, attributes: attributes)
     }
 }

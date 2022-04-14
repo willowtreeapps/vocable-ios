@@ -12,18 +12,35 @@ import CoreData
 import AVFoundation
 
 class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResultsControllerDelegate {
+    private typealias DataSource = CarouselCollectionViewDataSourceProxy<String, CategoryItem>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<String, CategoryItem>
 
     var category: Category!
     @PublishedValue private(set) var lastUtterance: String?
 
     private var disposables = Set<AnyCancellable>()
 
-    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID>(collectionView: collectionView) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
+    private enum CategoryItem: Hashable {
+        case persistedPhrase(NSManagedObjectID)
+        case addNewPhrase
+    }
+
+    private lazy var dataSourceProxy = DataSource(collectionView: collectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell? in
         guard let self = self else { return nil }
-        let phrase = self.frc.object(at: indexPath)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as! PresetItemCollectionViewCell
-        cell.textLabel.text = phrase.utterance
-        return cell
+
+        switch item {
+        case .persistedPhrase(let objectId):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as? PresetItemCollectionViewCell
+
+            guard let phrase = Phrase.fetchObject(in: self.frc.managedObjectContext, matching: objectId) else { return cell }
+            cell?.textLabel.text = phrase.utterance
+
+            return cell
+        case .addNewPhrase:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddPhraseCollectionViewCell.reuseIdentifier, for: indexPath) as? AddPhraseCollectionViewCell
+
+            return cell
+        }
     }
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
@@ -61,6 +78,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         assert(category != nil, "Category not assigned")
 
         collectionView.register(PresetItemCollectionViewCell.self, forCellWithReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier)
+        collectionView.register(AddPhraseCollectionViewCell.self, forCellWithReuseIdentifier: AddPhraseCollectionViewCell.reuseIdentifier)
         collectionView.delaysContentTouches = false
 
         updateLayoutForCurrentTraitCollection()
@@ -99,8 +117,11 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
 
         let pageCountBefore = collectionView.layout.pagesPerSection
-        let snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
-        dataSourceProxy.apply(snapshot, animatingDifferences: false)
+        let fetchedSnapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
+
+        let updatedSnapshot = makeSnapshot(from: fetchedSnapshot)
+
+        dataSourceProxy.apply(updatedSnapshot, animatingDifferences: false)
 
         let pageCountAfter = collectionView.layout.pagesPerSection
 
@@ -121,23 +142,48 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
             collectionView.deselectItem(at: indexPath, animated: true)
         }
 
-        let path = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        let phrase = frc.object(at: path)
-        guard let utterance = phrase.utterance else {
-            lastUtterance = nil
-            return
-        }
-        lastUtterance = utterance
+        guard let item = dataSourceProxy.itemIdentifier(for: indexPath) else { return }
 
-        if category.identifier != Category.Identifier.recents {
-            phrase.lastSpokenDate = Date()
-            try? frc.managedObjectContext.save()
+        switch item {
+        case .persistedPhrase(let objectId):
+            let context = NSPersistentContainer.shared.newBackgroundContext()
+
+            context.perform { [weak self] in
+                guard
+                    let self = self,
+                    let phrase = Phrase.fetchObject(in: context, matching: objectId),
+                    let utterance = phrase.utterance
+                else {
+                    self?.lastUtterance = nil
+                    return
+                }
+
+                self.lastUtterance = utterance
+
+                if self.category.identifier != Category.Identifier.recents {
+                    phrase.lastSpokenDate = Date()
+                    try? context.save()
+                }
+
+                // Dispatch to get off the main queue for performance
+                DispatchQueue.global(qos: .userInitiated).async {
+                    AVSpeechSynthesizer.shared.speak(utterance, language: AppConfig.activePreferredLanguageCode)
+                }
+            }
+        case .addNewPhrase:
+            addNewPhraseButtonSelected()
         }
 
-        // Dispatch to get off the main queue for performance
-        DispatchQueue.global(qos: .userInitiated).async {
-            AVSpeechSynthesizer.shared.speak(utterance, language: AppConfig.activePreferredLanguageCode)
+    }
+
+    private func makeSnapshot(from fetchedSnapshot: NSDiffableDataSourceSnapshot<String, NSManagedObjectID>) -> Snapshot {
+        var updatedSnapshot = fetchedSnapshot.mapItemIdentifier(CategoryItem.persistedPhrase)
+
+        if category.allowsCustomPhrases, updatedSnapshot.numberOfItems != 0 {
+            updatedSnapshot.appendItems([.addNewPhrase])
         }
+
+        return updatedSnapshot
     }
 
     private func installEmptyStateIfNeeded() {

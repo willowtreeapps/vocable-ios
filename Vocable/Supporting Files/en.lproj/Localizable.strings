@@ -51,6 +51,9 @@
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "Yes";
 
+/* Add phrase to category button title */
+"preset.category.add.phrase.title" = "Add Phrase";
+
 /* No email account configured error alert dismiss button title */
 "settings.alert.no_email_configured.button.dismiss.title" = "OK";
 

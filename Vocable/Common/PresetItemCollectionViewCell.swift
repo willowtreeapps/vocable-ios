@@ -9,6 +9,7 @@
 import UIKit
 
 class PresetItemCollectionViewCell: VocableCollectionViewCell {
+
     let textLabel = UILabel(frame: .zero)
     
     override func updateContentViews() {
@@ -25,7 +26,7 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
         }()
 
         textLabel.textColor = textColor
-        textLabel.backgroundColor = .clear
+        textLabel.backgroundColor = borderedView.fillColor
         textLabel.isOpaque = true
         textLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
     }
@@ -41,7 +42,6 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
     }
     
     private func commonInit() {
-
         contentView.preservesSuperviewLayoutMargins = true
 
         textLabel.textAlignment = .center
@@ -52,37 +52,24 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(textLabel)
 
-        // Needs a weak spot that can break while resizing to avoid
-        // constraint errors
-        let rightConstraint = textLabel.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor)
-        rightConstraint.priority = .init(999)
-
-        let bottomConstraint = textLabel.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
-        bottomConstraint.priority = .init(999)
+        let layoutGuide = contentView.layoutMarginsGuide
         NSLayoutConstraint.activate([
-            rightConstraint,
-            textLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
-            textLabel.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor),
-            bottomConstraint
+            textLabel.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor).withPriority(999),
+            textLabel.topAnchor.constraint(equalTo: layoutGuide.topAnchor),
+            textLabel.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
+            textLabel.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).withPriority(999)
         ])
 
         updateContentViews()
     }
 
-    func setup(title: String) {
-        textLabel.text = title
-        updateContentViews()
-    }
-    
-    func setup(with image: UIImage?) {
-        guard let image = image else {
-            return
+    func setup(title: String, with image: UIImage? = nil) {
+        if let image = image {
+            textLabel.attributedText = NSAttributedString.imageAttachedString(for: title, with: image)
+        } else {
+            textLabel.text = title
         }
-        
-        let systemImageAttachment = NSTextAttachment(image: image)
-        let attributedString = NSAttributedString(attachment: systemImageAttachment)
-        
-        textLabel.attributedText = attributedString
+
         updateContentViews()
     }
 }
