@@ -121,7 +121,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
         let updatedSnapshot = makeSnapshot(from: fetchedSnapshot)
 
-        dataSourceProxy.apply(updatedSnapshot, animatingDifferences: false)
+        dataSourceProxy.apply(updatedSnapshot, animatingDifferences: true)
 
         let pageCountAfter = collectionView.layout.pagesPerSection
 
