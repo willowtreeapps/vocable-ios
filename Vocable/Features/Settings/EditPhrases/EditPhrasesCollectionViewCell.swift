@@ -15,8 +15,8 @@ final class EditPhrasesCollectionViewCell: VocableCollectionViewCell {
     @IBOutlet var deleteButton: GazeableButton!
     @IBOutlet var editButton: GazeableButton!
     
-    override func updateContentViews() {
-        super.updateContentViews()
+    override func updateContent() {
+        super.updateContent()
 
         borderedView.fillColor = .defaultCellBackgroundColor
         deleteButton?.backgroundColor = .defaultCellBackgroundColor
