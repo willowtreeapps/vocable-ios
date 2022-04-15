@@ -88,21 +88,21 @@ class BorderedView: UIView {
         }
     }
 
-    @IBInspectable var shadowOpacity: CGFloat = 1.0 {
+    @IBInspectable var shadowOpacity: CGFloat = .zero {
         didSet {
             guard oldValue != shadowOpacity else { return }
             setNeedsShadowUpdate()
         }
     }
 
-    @IBInspectable var shadowRadius: CGFloat = 0.0 {
+    @IBInspectable var shadowRadius: CGFloat = .zero {
         didSet {
             guard oldValue != shadowRadius else { return }
             setNeedsShadowUpdate()
         }
     }
 
-    @IBInspectable var cornerRadius: CGFloat = 0 {
+    @IBInspectable var cornerRadius: CGFloat = .zero {
         didSet {
             guard oldValue != cornerRadius else { return }
             setNeedsShapeUpdate()
@@ -123,7 +123,7 @@ class BorderedView: UIView {
         }
     }
 
-    @IBInspectable var borderWidth: CGFloat = 0 {
+    @IBInspectable var borderWidth: CGFloat = .zero {
         didSet {
             guard oldValue != borderWidth else { return }
             setNeedsShapeUpdate()
