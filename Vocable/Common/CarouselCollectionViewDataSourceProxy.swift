@@ -11,7 +11,7 @@ import UIKit
 class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIdentifier: Hashable>: NSObject {
 
     private typealias Snapshot = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>
-    private typealias Impl = UICollectionViewDiffableDataSource<ContentWrapper<SectionIdentifier>, ContentWrapper<ItemIdentifier>>
+    private typealias DataSource = UICollectionViewDiffableDataSource<ContentWrapper<SectionIdentifier>, ContentWrapper<ItemIdentifier>>
 
     private struct ContentWrapper<Element: Hashable>: Hashable {
         let index: Int
@@ -22,15 +22,15 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
     private let repeatCount = 100
     private let collectionView: UICollectionView
     private let cellProvider: (UICollectionView, IndexPath, ItemIdentifier) -> UICollectionViewCell?
-    private var impl: Impl!
     private var lastSnapshot: Snapshot?
+    private var dataSource: DataSource!
 
     init(collectionView: UICollectionView, cellProvider: @escaping (UICollectionView, IndexPath, ItemIdentifier) -> UICollectionViewCell?) {
         self.cellProvider = cellProvider
         self.collectionView = collectionView
         super.init()
 
-        self.impl = Impl(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, item) in
+        self.dataSource = DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, item) in
             guard let self = self else { return nil }
             let mappedPath = self.indexPath(fromMappedIndexPath: indexPath)
             return self.cellProvider(collectionView, mappedPath, item.item)
@@ -59,7 +59,7 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
         if let lastSnapshot = lastSnapshot {
             return lastSnapshot
         }
-        let _snapshot = impl.snapshot()
+        let _snapshot = dataSource.snapshot()
         var snapshot = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>()
         if let firstSection = _snapshot.sectionIdentifiers.first {
             snapshot.appendSections([firstSection.item])
@@ -109,25 +109,25 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
                 }
             }
 
-            self.impl.apply(repeatedSnapshot, animatingDifferences: animatingDifferences, completion: completion)
+            self.dataSource.apply(repeatedSnapshot, animatingDifferences: animatingDifferences, completion: completion)
         }
     }
 
     private func mappedIndexPaths(`for` indexPath: IndexPath) -> [IndexPath] {
-        guard let identifier = impl.itemIdentifier(for: indexPath) else { return [] }
-        let snapshot = impl.snapshot()
+        guard let identifier = dataSource.itemIdentifier(for: indexPath) else { return [] }
+        let snapshot = dataSource.snapshot()
         let indexPaths = snapshot.sectionIdentifiers.compactMap { section -> IndexPath? in
-            return impl.indexPath(for: .init(index: section.index, item: identifier.item))
+            return dataSource.indexPath(for: .init(index: section.index, item: identifier.item))
         }
         return indexPaths
     }
 
     func itemIdentifier(for indexPath: IndexPath) -> ItemIdentifier? {
-        return impl.itemIdentifier(for: indexPath)?.item
+        return dataSource.itemIdentifier(for: indexPath)?.item
     }
 
     func indexPath(for itemIdentifier: ItemIdentifier) -> IndexPath? {
-        return impl.indexPath(for: .init(index: 0, item: itemIdentifier))
+        return dataSource.indexPath(for: .init(index: 0, item: itemIdentifier))
     }
 
     func indexPath(fromMappedIndexPath indexPath: IndexPath) -> IndexPath {
