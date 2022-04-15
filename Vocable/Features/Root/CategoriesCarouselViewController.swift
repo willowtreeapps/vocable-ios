@@ -193,7 +193,13 @@ import Combine
         }()
 
         let snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
-        dataSourceProxy.apply(snapshot, animatingDifferences: false, completion: {
+        let shouldAnimate: Bool
+        if #available(iOS 15, *) {
+            shouldAnimate = false
+        } else {
+            shouldAnimate = true
+        }
+        dataSourceProxy.apply(snapshot, animatingDifferences: shouldAnimate, completion: {
 
             guard let previous = previousItem else {
                 // No item was previous selected
