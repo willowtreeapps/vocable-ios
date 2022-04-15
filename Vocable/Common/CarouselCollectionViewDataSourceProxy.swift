@@ -34,26 +34,6 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
             let mappedPath = self.indexPath(fromMappedIndexPath: indexPath)
             return self.cellProvider(collectionView, mappedPath, item.item)
         })
-
-        if let collectionView = collectionView as? CarouselGridCollectionView {
-            collectionView.dataSourceProxyInvalidationCallback = { [weak self] in
-                self?.updateQueue.async { // Ensure any in-flight apply calls are able to complete before running
-                    DispatchQueue.main.async { // Ensure we're grabbing indexPathsForSelectedItems on main queue
-                        guard let self = self else { return }
-                        let selections = collectionView.indexPathsForSelectedItems
-                        let snapshot = self.snapshot()
-                        self.apply(snapshot, animatingDifferences: false) {
-                            let afterSnapshot = self.snapshot()
-                            if snapshot.numberOfItems == afterSnapshot.numberOfItems {
-                                for path in selections ?? [] {
-                                    collectionView.selectItem(at: path, animated: false, scrollPosition: [])
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 
     func snapshot() -> NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier> {

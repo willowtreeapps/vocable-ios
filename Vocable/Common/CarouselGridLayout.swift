@@ -167,7 +167,6 @@ final class CarouselGridLayout: UICollectionViewLayout {
         return size
     }
 
-    private var lastDataSourceProxyInvalidationCount = 0
     private var lastLayoutSize: CGSize = .zero
     override func prepare() {
         super.prepare()
@@ -177,13 +176,6 @@ final class CarouselGridLayout: UICollectionViewLayout {
         rowCount = computeRowCount()
 
         updatePagingProgress()
-
-        if lastDataSourceProxyInvalidationCount != itemsPerPage {
-            if let proxyAction = (collectionView as? CarouselGridCollectionView)?.dataSourceProxyInvalidationCallback {
-                proxyAction()
-            }
-            lastDataSourceProxyInvalidationCount = itemsPerPage
-        }
     }
 
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
