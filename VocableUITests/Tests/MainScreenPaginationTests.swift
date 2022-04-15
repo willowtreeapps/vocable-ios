@@ -13,8 +13,8 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
     // In order to ensure this test passes on both an iPhone and iPad device, we will add 16 phrase (2 pages on an iPad)
     // then remove 8 of them so that the pages reduce from 2 to 1 page.
     func testDeletingPhrasesAdjustsPagination() {
-        for phrase in listOfPhrases.startIndex..<listOfPhrases.endIndex {
-            customCategoriesScreen.addPhrase(listOfPhrases[phrase])
+        listOfPhrases.forEach{ phrase in
+            customCategoriesScreen.addPhrase(phrase)
         }
         
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 2"
@@ -50,9 +50,8 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         let firstSetOfPhrases = listOfPhrases[..<listMidpoint]
         let secondSetOfPhrases = listOfPhrases[listMidpoint...]
         
-        // Add the first 8 phrases
-        for phrase in firstSetOfPhrases.startIndex..<firstSetOfPhrases.endIndex {
-            customCategoriesScreen.addPhrase(firstSetOfPhrases[phrase])
+        firstSetOfPhrases.forEach{ phrase in
+            customCategoriesScreen.addPhrase(phrase)
         }
         
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 1"
@@ -67,8 +66,8 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         settingsScreen.navigateToSettingsCategoryScreen()
         settingsScreen.openCategorySettings(category: customCategoryName)
         customCategoriesScreen.editCategoryPhrasesButton.tap()
-        for phrase in secondSetOfPhrases.startIndex..<secondSetOfPhrases.endIndex {
-            customCategoriesScreen.addPhrase(secondSetOfPhrases[phrase])
+        secondSetOfPhrases.forEach{ phrase in
+            customCategoriesScreen.addPhrase(phrase)
         }
         
         customCategoriesScreen.returnToMainScreenFromEditPhrases()
@@ -81,8 +80,8 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
     
     func testCanScrollPagesWithPaginationArrows() {
         // Add enough phrases to push the total number of pages to at leaset 2 for iPad and iPhone (16).
-        for phrase in listOfPhrases.startIndex..<listOfPhrases.endIndex {
-            customCategoriesScreen.addPhrase(listOfPhrases[phrase])
+        listOfPhrases.forEach{ phrase in
+            customCategoriesScreen.addPhrase(phrase)
         }
         
         // Return to the Main Screen and navigate to the test category
