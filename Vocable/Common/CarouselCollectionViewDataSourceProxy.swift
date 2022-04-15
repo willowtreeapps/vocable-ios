@@ -22,7 +22,6 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
     private let repeatCount = 100
     private let collectionView: UICollectionView
     private let cellProvider: (UICollectionView, IndexPath, ItemIdentifier) -> UICollectionViewCell?
-    private var lastSnapshot: Snapshot?
     private var dataSource: DataSource!
 
     init(collectionView: UICollectionView, cellProvider: @escaping (UICollectionView, IndexPath, ItemIdentifier) -> UICollectionViewCell?) {
@@ -38,15 +37,17 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
 
         if let collectionView = collectionView as? CarouselGridCollectionView {
             collectionView.dataSourceProxyInvalidationCallback = { [weak self] in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    let selections = collectionView.indexPathsForSelectedItems
-                    let snapshot = self.snapshot()
-                    self.apply(snapshot, animatingDifferences: false) {
-                        let afterSnapshot = self.snapshot()
-                        if snapshot.numberOfItems == afterSnapshot.numberOfItems {
-                            for path in selections ?? [] {
-                                collectionView.selectItem(at: path, animated: false, scrollPosition: [])
+                self?.updateQueue.async { // Ensure any in-flight apply calls are able to complete before running
+                    DispatchQueue.main.async { // Ensure we're grabbing indexPathsForSelectedItems on main queue
+                        guard let self = self else { return }
+                        let selections = collectionView.indexPathsForSelectedItems
+                        let snapshot = self.snapshot()
+                        self.apply(snapshot, animatingDifferences: false) {
+                            let afterSnapshot = self.snapshot()
+                            if snapshot.numberOfItems == afterSnapshot.numberOfItems {
+                                for path in selections ?? [] {
+                                    collectionView.selectItem(at: path, animated: false, scrollPosition: [])
+                                }
                             }
                         }
                     }
@@ -56,9 +57,6 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
     }
 
     func snapshot() -> NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier> {
-        if let lastSnapshot = lastSnapshot {
-            return lastSnapshot
-        }
         let _snapshot = dataSource.snapshot()
         var snapshot = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>()
         if let firstSection = _snapshot.sectionIdentifiers.first {
@@ -78,8 +76,6 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
         } else {
             repeatCount = 1
         }
-
-        lastSnapshot = snapshot
 
         updateQueue.async { [weak self] in
             guard let self = self else { return }
