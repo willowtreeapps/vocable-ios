@@ -49,21 +49,21 @@ class CustomCategoriesScreen: BaseScreen {
     }
     
     func returnToMainScreenFromCategoriesList() {
-        navBarBackButton.tap()
-        _ = navBarDismissButton.waitForExistence(timeout: 0.25)
-        navBarDismissButton.tap()
-        _ = mainScreen.settingsButton.waitForExistence(timeout: 0.25)
+        // Exit the Edit Categories and Settings Screens
+        _ = navBarBackButton.waitForThenTap(timeout: 0.25)
+        _ = navBarDismissButton.waitForThenTap(timeout: 0.25)
+        
+        // Wait for the Main Screen to appear
+        XCTAssert(mainScreen.settingsButton.waitForExistence(timeout: 0.25), "Did not return to Main Screen as expected.")
     }
     
     func returnToMainScreenFromCategoryDetails() {
-        navBarBackButton.tap()
-        _ = navBarBackButton.waitForExistence(timeout: 0.25)
+        _ = navBarBackButton.waitForThenTap(timeout: 0.25)
         returnToMainScreenFromCategoriesList()
     }
     
     func returnToMainScreenFromEditPhrases() {
         navBarBackButton.tap()
-        _ = navBarBackButton.waitForExistence(timeout: 0.25)
         returnToMainScreenFromCategoryDetails()
     }
     
