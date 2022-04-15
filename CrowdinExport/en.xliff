@@ -219,6 +219,11 @@
    Saved to user favorites category
    Saved to user favorites category toast title</note>
       </trans-unit>
+      <trans-unit id="preset.category.add.phrase.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target>Add Phrase</target>
+        <note>Add phrase to category button title</note>
+      </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
         <source>No</source>
         <target>No</target>
