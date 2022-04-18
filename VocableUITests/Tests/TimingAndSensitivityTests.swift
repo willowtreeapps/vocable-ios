@@ -42,4 +42,27 @@ class TimingAndSensitivity: BaseTest {
  
         XCTAssertTrue(app.staticTexts[timingScreen.currentHoverTime].exists)
     }
+    
+    func testSensitivitySettings() {
+        settingsScreen.navigateToTimingAndSensitivityScreen()
+ 
+        // Verify default sensitivity setting.
+        XCTAssertTrue(timingScreen.cursorMediumButton.isSelected)
+        XCTAssertTrue(!timingScreen.cursorLowButton.isSelected)
+        XCTAssertTrue(!timingScreen.cursorHighButton.isSelected)
+        
+        timingScreen.cursorLowButton.tap()
+        XCTAssertTrue(timingScreen.cursorLowButton.isSelected)
+        XCTAssertTrue(!timingScreen.cursorMediumButton.isSelected)
+        XCTAssertTrue(!timingScreen.cursorHighButton.isSelected)
+        
+        timingScreen.cursorHighButton.tap()
+        XCTAssertTrue(timingScreen.cursorHighButton.isSelected)
+        XCTAssertTrue(!timingScreen.cursorLowButton.isSelected)
+        XCTAssertTrue(!timingScreen.cursorMediumButton.isSelected)
+        
+        settingsScreen.returnToMainScreenFromSettingsScreen()
+        settingsScreen.navigateToTimingAndSensitivityScreen()
+        XCTAssertTrue(timingScreen.cursorHighButton.isSelected)
+    }
 }

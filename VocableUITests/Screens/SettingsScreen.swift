@@ -126,6 +126,11 @@ class SettingsScreen: BaseScreen {
     }
     
     func returnToMainScreen() {
-        navBarDismissButton.tap()
+        _ = navBarDismissButton.waitForThenTap(timeout: 0.25)
+    }
+    
+    func returnToMainScreenFromSettingsScreen() {
+        _ = navBarBackButton.waitForThenTap(timeout: 0.25)
+        returnToMainScreen()
     }
 }

@@ -19,6 +19,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 2"
         customCategoriesScreen.returnToMainScreenFromEditPhrases()
+        XCTAssert(mainScreen.settingsButton.waitForExistence(timeout: 0.25), "Did not return to Main Screen as expected.")
         mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         VocableAssert().paginationEquals(1, of: 2)
         
@@ -33,6 +34,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         
         // Navigate back to the home screen to verify that the total pages reduced from 2 to 1.
         customCategoriesScreen.returnToMainScreenFromEditPhrases()
+        XCTAssert(mainScreen.settingsButton.waitForExistence(timeout: 0.25), "Did not return to Main Screen as expected.")
         mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         VocableAssert().paginationEquals(1, of: 1, leftArrowEnabled: false, rightArrowEnabled: false)
     }
@@ -50,6 +52,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 1"
         customCategoriesScreen.returnToMainScreenFromEditPhrases()
+        XCTAssert(mainScreen.settingsButton.waitForExistence(timeout: 0.25), "Did not return to Main Screen as expected.")
         mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         VocableAssert().paginationEquals(1, of: 1, leftArrowEnabled: false, rightArrowEnabled: false)
         
@@ -62,6 +65,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         }
         
         customCategoriesScreen.returnToMainScreenFromEditPhrases()
+        XCTAssert(mainScreen.settingsButton.waitForExistence(timeout: 0.25), "Did not return to Main Screen as expected.")
         mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         VocableAssert().paginationEquals(1, of: 2)
     }
@@ -74,6 +78,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         
         // Return to the Main Screen and navigate to the test category
         customCategoriesScreen.returnToMainScreenFromEditPhrases()
+        XCTAssert(mainScreen.settingsButton.waitForExistence(timeout: 0.25), "Did not return to Main Screen as expected.")
         mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         
         // Verify that the category's pagination is "Page 1 of 2"; page next buttons are enabled
@@ -106,6 +111,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         
         // Return to the Main Screen and navigate to the test category
         customCategoriesScreen.returnToMainScreenFromEditPhrases()
+        XCTAssert(mainScreen.settingsButton.waitForExistence(timeout: 0.25), "Did not return to Main Screen as expected.")
         mainScreen.locateAndSelectDestinationCategory(categoryTitleCell.categoryIdentifier)
         XCTAssertEqual(mainScreen.selectedCategoryCell.identifier, categoryTitleCell.identifier)
         
