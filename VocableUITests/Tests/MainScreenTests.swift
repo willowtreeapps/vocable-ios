@@ -30,8 +30,8 @@ class MainScreenTests: BaseTest {
                 continue;
             }
             mainScreen.locateAndSelectDestinationCategory(categoryName.categoryIdentifier)
-            firstPhrase = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
-            XCUIApplication().collectionViews.staticTexts[firstPhrase].tap()
+            firstPhrase = app.collectionViews.staticTexts.element(boundBy: 0).label
+            app.collectionViews.staticTexts[firstPhrase].tap()
             listOfSelectedPhrases.append(firstPhrase)
         }
         mainScreen.locateAndSelectDestinationCategory(.recents)
@@ -51,11 +51,11 @@ class MainScreenTests: BaseTest {
     func testSelectingCategoryChangesPhrases() {
         // Navigate to a category and grab it's first, top most, phrase
         mainScreen.locateAndSelectDestinationCategory(.environment)
-        let firstPhrase = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
+        let firstPhrase = app.collectionViews.staticTexts.element(boundBy: 0).label
         
         // Navigate to a different category and verify the top most phrase listed has changed
         mainScreen.locateAndSelectDestinationCategory(.basicNeeds)
-        let secondPhrase = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
+        let secondPhrase = app.collectionViews.staticTexts.element(boundBy: 0).label
         XCTAssertNotEqual(firstPhrase, secondPhrase, "The list of phrases did not change between selected categories.")
     }
     
@@ -65,17 +65,17 @@ class MainScreenTests: BaseTest {
                 continue;
             }
             mainScreen.locateAndSelectDestinationCategory(category.categoryIdentifier)
-            _ = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).waitForExistence(timeout: 0.5) // Wait for scrolling to stop
-            let firstPhraseInCategory = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
-            XCUIApplication().collectionViews.staticTexts[firstPhraseInCategory].tap()
+            _ = app.collectionViews.staticTexts.element(boundBy: 0).waitForExistence(timeout: 0.5) // Wait for scrolling to stop
+            let firstPhraseInCategory = app.collectionViews.staticTexts.element(boundBy: 0).label
+            app.collectionViews.staticTexts[firstPhraseInCategory].tap()
             XCTAssertEqual(mainScreen.outputLabel.label, firstPhraseInCategory)
         }
     }
     
     func testWhenTapping123Phrase_ThenThatPhraseDisplaysOnOutputLabel() {
         mainScreen.locateAndSelectDestinationCategory(.keyPad)
-        let firstKeypadNumber = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
-        XCUIApplication().collectionViews.staticTexts[firstKeypadNumber].tap()
+        let firstKeypadNumber = app.collectionViews.staticTexts.element(boundBy: 0).label
+        app.collectionViews.staticTexts[firstKeypadNumber].tap()
         XCTAssertEqual(mainScreen.outputLabel.label, firstKeypadNumber)
     }
     

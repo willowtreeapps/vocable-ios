@@ -42,9 +42,9 @@ class SettingsScreenTests: BaseTest {
         settingsScreen.navigateToSettingsCategoryScreen()
         
         // Define the query that gives us the first category listed
-        let currentFirstCategory = XCUIApplication().cells.allElementsBoundByIndex[0]
+        let currentFirstCategory = app.cells.allElementsBoundByIndex[0]
         // Define the query that gives us the second category listed
-        let currentSecondCategory = XCUIApplication().cells.allElementsBoundByIndex[1]
+        let currentSecondCategory = app.cells.allElementsBoundByIndex[1]
         let originalFirstCategoryName = currentFirstCategory.label
         let originalSecondCategoryName = currentSecondCategory.label
         

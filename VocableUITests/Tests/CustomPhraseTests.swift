@@ -44,7 +44,7 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         keyboardScreen.checkmarkAddButton.tap()
         
         // Edit the phrase
-        XCUIApplication().buttons[customPhrase].tap()
+        app.buttons[customPhrase].tap()
         keyboardScreen.typeText("test")
         keyboardScreen.checkmarkAddButton.tap()
         XCTAssert(mainScreen.isTextDisplayed(customPhrase+"test"), "Expected the phrase \(customPhrase+"test") to be displayed")
@@ -85,8 +85,8 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         
         // Assert that now we have two cells containing the same phrase
         let phrasePredicate = NSPredicate(format: "label MATCHES %@", testPhrase)
-        let phraseQuery = XCUIApplication().staticTexts.containing(phrasePredicate)
-        phraseQuery.element.waitForExistence(timeout: 2)
+        let phraseQuery = app.staticTexts.containing(phrasePredicate)
+        _ = phraseQuery.element.waitForExistence(timeout: 2)
         XCTAssertEqual(phraseQuery.count, 2, "Expected both phrases to be present")
     }
     

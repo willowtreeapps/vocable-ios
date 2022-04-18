@@ -14,6 +14,7 @@ class SettingsScreen: BaseScreen {
     let keyboardScreen = KeyboardScreen()
     
     let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
+    let timingAndSensitivityButton = XCUIApplication().collectionViews.staticTexts["Timing and Sensitivity"]
     let otherElements = XCUIApplication().collectionViews.cells.otherElements
     let cells = XCUIApplication().cells
     let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
@@ -117,8 +118,14 @@ class SettingsScreen: BaseScreen {
         categoriesButton.tap()
     }
     
+    func navigateToTimingAndSensitivityScreen() {
+        _ = mainScreen.settingsButton.waitForExistence(timeout: 2)
+        mainScreen.settingsButton.tap()
+        _ = timingAndSensitivityButton.waitForExistence(timeout: 2)
+        timingAndSensitivityButton.tap()
+    }
+    
     func returnToMainScreen() {
         navBarDismissButton.tap()
     }
-    
 }

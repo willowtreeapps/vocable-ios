@@ -10,13 +10,16 @@ import Foundation
 import XCTest
 
 class BaseTest: XCTestCase {
+    
+    let app = XCUIApplication()
+    
     let mainScreen = MainScreen()
     let keyboardScreen = KeyboardScreen()
     let settingsScreen = SettingsScreen()
     let customCategoriesScreen = CustomCategoriesScreen()
+    let timingScreen = TimingAndSensitivityScreen()
     
     override func setUp() {
-        let app = XCUIApplication()
         app.launchEnvironment["RefactoredInterfaceEnabled"] = "1"
         app.launchArguments.append("resetAppDataOnLaunch")
         continueAfterFailure = false
@@ -44,6 +47,5 @@ class BaseTest: XCTestCase {
     func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyz"
         return String((0..<length).map { _ in letters.randomElement()! })
-    }  
-    
+    }
 }

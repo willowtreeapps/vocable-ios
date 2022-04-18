@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E2E3DA1280DF6DE006E3669 /* TimingAndSensitivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2E3DA0280DF6DE006E3669 /* TimingAndSensitivityTests.swift */; };
+		0E2E3DA3280DF702006E3669 /* TimingAndSensitivityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2E3DA2280DF702006E3669 /* TimingAndSensitivityScreen.swift */; };
 		130C00B820D2AD2A007C3163 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130C00B720D2AD2A007C3163 /* AppDelegate.swift */; };
 		130C00C120D2AD2C007C3163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C020D2AD2C007C3163 /* Assets.xcassets */; };
 		130C00C420D2AD2C007C3163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 130C00C220D2AD2C007C3163 /* LaunchScreen.storyboard */; };
@@ -208,6 +210,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E2E3DA0280DF6DE006E3669 /* TimingAndSensitivityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingAndSensitivityTests.swift; sourceTree = "<group>"; };
+		0E2E3DA2280DF702006E3669 /* TimingAndSensitivityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingAndSensitivityScreen.swift; sourceTree = "<group>"; };
 		130C00B420D2AD2A007C3163 /* Vocable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vocable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		130C00B720D2AD2A007C3163 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		130C00C020D2AD2C007C3163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -526,6 +530,7 @@
 				17F29478247419DD00A05434 /* SettingsScreen.swift */,
 				CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */,
 				628B35C127DF9C6B00299312 /* BaseScreen.swift */,
+				0E2E3DA2280DF702006E3669 /* TimingAndSensitivityScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -544,6 +549,7 @@
 				DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */,
 				627B53632800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift */,
 				627B53652800D11100FEBF25 /* MainScreenPaginationTests.swift */,
+				0E2E3DA0280DF6DE006E3669 /* TimingAndSensitivityTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1282,7 +1288,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E2E3DA3280DF702006E3669 /* TimingAndSensitivityScreen.swift in Sources */,
 				CE12277824F58706008F7866 /* CustomCategoriesScreen.swift in Sources */,
+				0E2E3DA1280DF6DE006E3669 /* TimingAndSensitivityTests.swift in Sources */,
 				629B9B1F2809C99000EE6C19 /* XCUIElement.swift in Sources */,
 				628B35C227DF9C6B00299312 /* BaseScreen.swift in Sources */,
 				17D4162C245C6FE800FD81CD /* KeyboardScreenTests.swift in Sources */,
