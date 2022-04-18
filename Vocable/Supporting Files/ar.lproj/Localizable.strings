@@ -47,7 +47,7 @@
 "paging_progress_indicator_format" = "صفحه %1$d من %2$d";
 
 /* Continue editing alert action title */
-"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "الإستمرار في التعديل";
+"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "الاستمرار في التعديل";
 
 /* Discard changes alert action title */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "تجاهل";
@@ -103,7 +103,7 @@
 "settings.cell.selection_mode.title" = "وضع التحديد";
 
 /* edit cursor timing and sensititivy settings menu item */
-"settings.cell.timing_sensitivity.title" = "التوقيت و حساسيت الإستجابة";
+"settings.cell.timing_sensitivity.title" = "التوقيت و الحساسية";
 
 /* tune cursor debug settings menu item */
 "settings.cell.tune_cursor.title" = "ضبط المؤشر";
@@ -133,5 +133,5 @@
 "timing_and_sensitivity.cell.dwell_duration.title" = "الوقت تحوم";
 
 /* Timing and sensitivity header title */
-"timing_and_sensitivity.header.title" = "التوقيت و حساسيت الإستجابة";
+"timing_and_sensitivity.header.title" = "التوقيت و الحساسية";
 
