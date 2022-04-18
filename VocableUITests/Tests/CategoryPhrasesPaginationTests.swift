@@ -67,10 +67,7 @@ class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
         customCategoriesScreen.addRandomPhrases(numberOfPhrases: 1)
     
         // Verify the page counts and that buttons appear; buttons are disabled.
-        XCTAssertEqual(customCategoriesScreen.currentPageNumber, 1)
-        XCTAssertEqual(customCategoriesScreen.totalPageCount, 1)
-        XCTAssertFalse(customCategoriesScreen.paginationRightButton.isEnabled)
-        XCTAssertFalse(customCategoriesScreen.paginationLeftButton.isEnabled)
+        VocableAssert().paginationEquals(1, of: 1, leftArrowEnabled: false, rightArrowEnabled: false)
     }
     
 }

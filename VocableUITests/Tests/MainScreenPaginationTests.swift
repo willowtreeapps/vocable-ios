@@ -20,10 +20,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 2"
         customCategoriesScreen.returnToMainScreenFromEditPhrases()
         mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
-        XCTAssertEqual(mainScreen.currentPageNumber, 1)
-        XCTAssertEqual(mainScreen.totalPageCount, 2)
-        XCTAssertTrue(mainScreen.paginationRightButton.isEnabled)
-        XCTAssertTrue(mainScreen.paginationLeftButton.isEnabled)
+        VocableAssert().paginationEquals(1, of: 2)
         
         // Delete 8 of the phrases to reduce the total number of pages to 1.
         settingsScreen.navigateToSettingsCategoryScreen()
@@ -37,10 +34,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         // Navigate back to the home screen to verify that the total pages reduced from 2 to 1.
         customCategoriesScreen.returnToMainScreenFromEditPhrases()
         mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
-        XCTAssertEqual(mainScreen.currentPageNumber, 1)
-        XCTAssertEqual(mainScreen.totalPageCount, 1)
-        XCTAssertFalse(mainScreen.paginationRightButton.isEnabled)
-        XCTAssertFalse(mainScreen.paginationLeftButton.isEnabled)
+        VocableAssert().paginationEquals(1, of: 1, leftArrowEnabled: false, rightArrowEnabled: false)
     }
     
     // In order to ensure there are 2 pages on iPad devices, we'll need 16 total phrases.
@@ -57,10 +51,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 1"
         customCategoriesScreen.returnToMainScreenFromEditPhrases()
         mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
-        XCTAssertEqual(mainScreen.currentPageNumber, 1)
-        XCTAssertEqual(mainScreen.totalPageCount, 1)
-        XCTAssertFalse(mainScreen.paginationRightButton.isEnabled)
-        XCTAssertFalse(mainScreen.paginationLeftButton.isEnabled)
+        VocableAssert().paginationEquals(1, of: 1, leftArrowEnabled: false, rightArrowEnabled: false)
         
         // Add 8 more phrases to verify that the pagination adjusts as expected; "Page 1 of 2"
         settingsScreen.navigateToSettingsCategoryScreen()
@@ -72,10 +63,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         
         customCategoriesScreen.returnToMainScreenFromEditPhrases()
         mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
-        XCTAssertEqual(mainScreen.currentPageNumber, 1)
-        XCTAssertEqual(mainScreen.totalPageCount, 2)
-        XCTAssertTrue(mainScreen.paginationRightButton.isEnabled)
-        XCTAssertTrue(mainScreen.paginationLeftButton.isEnabled)
+        VocableAssert().paginationEquals(1, of: 2)
     }
     
     func testCanScrollPagesWithPaginationArrows() {
@@ -89,30 +77,23 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         
         // Verify that the category's pagination is "Page 1 of 2"; page next buttons are enabled
-        XCTAssertEqual(mainScreen.currentPageNumber, 1)
-        XCTAssertEqual(mainScreen.totalPageCount, 2)
-        XCTAssertTrue(mainScreen.paginationLeftButton.isEnabled)
-        XCTAssertTrue(mainScreen.paginationRightButton.isEnabled)
+        VocableAssert().paginationEquals(1, of: 2)
         
         // Tap right arrow; expected "Page 2 of 2"
         mainScreen.paginationRightButton.tap()
-        XCTAssertEqual(mainScreen.currentPageNumber, 2)
-        XCTAssertEqual(mainScreen.totalPageCount, 2)
+        VocableAssert().paginationEquals(2, of: 2)
         
         // Tap right arrow; expected "Page 1 of 2"
         mainScreen.paginationRightButton.tap()
-        XCTAssertEqual(mainScreen.currentPageNumber, 1)
-        XCTAssertEqual(mainScreen.totalPageCount, 2)
+        VocableAssert().paginationEquals(1, of: 2)
         
         // Tap left arrow; expected "Page 2 of 2"
         mainScreen.paginationLeftButton.tap()
-        XCTAssertEqual(mainScreen.currentPageNumber, 2)
-        XCTAssertEqual(mainScreen.totalPageCount, 2)
+        VocableAssert().paginationEquals(2, of: 2)
         
         // Tap left arrow; expected "Page 1 of 2"
         mainScreen.paginationLeftButton.tap()
-        XCTAssertEqual(mainScreen.currentPageNumber, 1)
-        XCTAssertEqual(mainScreen.totalPageCount, 2)
+        VocableAssert().paginationEquals(1, of: 2)
     }
     
     func testPaginationAdjustsToDeviceOrientation() {
