@@ -29,12 +29,12 @@ class CustomCategoriesScreen: BaseScreen {
     func createAndLocateCustomCategory(_ categoryName: String) -> CategoryIdentifier {
         createCustomCategory(categoryName: categoryName)
         let customCategoryIdentifier = settingsScreen.locateCategoryCell(categoryName).element.identifier
-        
         return CategoryIdentifier(customCategoryIdentifier)
     }
     
     func addPhrase(_ phrase: String) {
         categoriesPageAddPhraseButton.tap()
+        _ = keyboardScreen.checkmarkAddButton.waitForExistence(timeout: 0.5)
         keyboardScreen.typeText(phrase)
         keyboardScreen.checkmarkAddButton.tap()
     }

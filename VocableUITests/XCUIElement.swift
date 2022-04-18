@@ -15,7 +15,7 @@ extension XCUIElement {
     ///
     /// Returns false if the timeout expires without the element coming into existence. In this case, the `tap` action
     /// will not occur.
-    func waitForThenTap(timeout: TimeInterval) -> Bool {
+    func waitForThenTap(timeout: TimeInterval = 0.25) -> Bool {
         let elementDidAppear = self.waitForExistence(timeout: timeout)
         if (elementDidAppear) {
             self.tap()
