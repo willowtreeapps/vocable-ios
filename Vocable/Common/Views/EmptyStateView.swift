@@ -182,6 +182,7 @@ final class EmptyStateView: UIView {
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.widthAnchor.constraint(lessThanOrEqualTo: readableContentGuide.widthAnchor),
+            stackView.widthAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.widthAnchor),
             stackView.heightAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.heightAnchor)
         ])
 
