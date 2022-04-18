@@ -92,9 +92,9 @@
         <target state="translated">إلغاء</target>
         <note>Cancel alert action title</note>
       </trans-unit>
-      <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
+      <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve" approved="yes">
         <source>Please move closer to the device.</source>
-        <target state="translated">من فضلك إقترب أكثر من الجهاز.</target>
+        <target state="final">من فضلك إقترب أكثر من الجهاز.</target>
         <note>Warning message presented to the user when the head tracking system</note>
       </trans-unit>
       <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve">
@@ -109,7 +109,7 @@
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve" approved="yes">
         <source>Continue Editing</source>
-        <target state="final">الإستمرار في التعديل</target>
+        <target state="final">الاستمرار في التعديل</target>
         <note>Continue editing alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
@@ -199,9 +199,9 @@
         <target state="final">وضع التحديد</target>
         <note>edit cursor selection mode settings menu item</note>
       </trans-unit>
-      <trans-unit id="settings.cell.timing_sensitivity.title" xml:space="preserve">
+      <trans-unit id="settings.cell.timing_sensitivity.title" xml:space="preserve" approved="yes">
         <source>Timing and Sensitivity</source>
-        <target state="translated">التوقيت و حساسيت الإستجابة</target>
+        <target state="final">التوقيت و الحساسية</target>
         <note>edit cursor timing and sensititivy settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.tune_cursor.title" xml:space="preserve">
@@ -249,9 +249,9 @@
         <target state="translated">الوقت تحوم</target>
         <note>Dwell duration configuration option name</note>
       </trans-unit>
-      <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve">
+      <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve" approved="yes">
         <source>Timing and Sensitivity</source>
-        <target state="translated">التوقيت و حساسيت الإستجابة</target>
+        <target state="final">التوقيت و الحساسية</target>
         <note>Timing and sensitivity header title</note>
       </trans-unit>
     </body>
