@@ -30,6 +30,11 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
         handleDwellTimeButtonRange()
     }
 
+    override func viewLayoutMarginsDidChange() {
+        super.viewLayoutMarginsDidChange()
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     private func setupNavigationBar() {
         navigationBar.title = NSLocalizedString("timing_and_sensitivity.header.title", comment: "Timing and sensitivity header title")
     }

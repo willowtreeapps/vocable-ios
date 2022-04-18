@@ -45,6 +45,17 @@ final class ListeningModeViewController: VocableCollectionViewController {
     private func setupNavigationBar() {
         #warning("Needs localization")
         navigationBar.title = "Listening Mode"
+
+    override func viewLayoutMarginsDidChange() {
+        super.viewLayoutMarginsDidChange()
+        collectionView.collectionViewLayout.invalidateLayout()
+        updateBackgroundViewLayoutMargins()
+    }
+
+    private func updateBackgroundViewLayoutMargins() {
+        guard let backgroundView = collectionView.backgroundView else { return }
+        backgroundView.directionalLayoutMargins.leading = view.directionalLayoutMargins.leading
+        backgroundView.directionalLayoutMargins.trailing = view.directionalLayoutMargins.trailing
     }
 
     // MARK: UICollectionViewDataSource
@@ -53,6 +64,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Int, ContentItem>()
         if let state = authorizationController.state {
             collectionView.backgroundView = EmptyStateView.listening(state.state, action: state.action)
+            updateBackgroundViewLayoutMargins()
         } else {
             snapshot.appendSections([0])
             snapshot.appendItems([.listeningModeEnabled])
@@ -111,6 +123,7 @@ This shortcut makes it fast to kick off a conversation by saying something like 
         section.interGroupSpacing = 8
         section.contentInsets = sectionInsets(for: environment)
         section.contentInsets.top = 16
+        section.contentInsets.bottom = 32
         section.boundarySupplementaryItems = [footerItem]
         return section
     }
