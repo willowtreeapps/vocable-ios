@@ -17,7 +17,7 @@
 "category_editor.alert.delete_category_confirmation.button.remove.title" = "إزالة";
 
 /* Delete category confirmation alert title */
-"category_editor.alert.delete_category_confirmation.title" = "فالعبارات التي يتم مسحها لا يمكن إسترجاعها.";
+"category_editor.alert.delete_category_confirmation.title" = "الفئات المحذوفة لا يمكن استردادها.";
 
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "إلغاء";
@@ -41,13 +41,13 @@
 "gaze_tracking.error.excessive_head_distance.title" = "من فضلك إقترب أكثر من الجهاز.";
 
 /* Select something below to speak Hint Text */
-"main_screen.textfield_placeholder.default" = "إختر شيئ بالأسفل لتقوله";
+"main_screen.textfield_placeholder.default" = "حدد شيئا أدناه للتحدث";
 
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "صفحه %1$d من %2$d";
 
 /* Continue editing alert action title */
-"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "الإستمرار في التعديل";
+"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "الاستمرار في التعديل";
 
 /* Discard changes alert action title */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "تجاهل";
@@ -64,7 +64,7 @@
 "preset.category.numberpad.phrase.yes.title" = "نعم";
 
 /* Selection mode screen header title */
-"selection_mode.header.title" = "إختيار النمط";
+"selection_mode.header.title" = "وضع التحديد";
 
 /* No email account configured error alert dismiss button title */
 "settings.alert.no_email_configured.button.dismiss.title" = "حسنا";
@@ -100,10 +100,10 @@
 "settings.cell.reset_all.title" = "العودة إلي إعدادات التطبيق";
 
 /* edit cursor selection mode settings menu item */
-"settings.cell.selection_mode.title" = "إختيار النمط";
+"settings.cell.selection_mode.title" = "وضع التحديد";
 
 /* edit cursor timing and sensititivy settings menu item */
-"settings.cell.timing_sensitivity.title" = "التوقيت و حساسيت الإستجابة";
+"settings.cell.timing_sensitivity.title" = "التوقيت و الحساسية";
 
 /* tune cursor debug settings menu item */
 "settings.cell.tune_cursor.title" = "ضبط المؤشر";
@@ -133,5 +133,5 @@
 "timing_and_sensitivity.cell.dwell_duration.title" = "الوقت تحوم";
 
 /* Timing and sensitivity header title */
-"timing_and_sensitivity.header.title" = "التوقيت و حساسيت الإستجابة";
+"timing_and_sensitivity.header.title" = "التوقيت و الحساسية";
 
