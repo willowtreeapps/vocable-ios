@@ -8,6 +8,7 @@
 
 import Combine
 import UIKit
+import VocableListenCore
 
 final class ListeningResponseFeedbackViewController: UIViewController {
 
@@ -22,30 +23,23 @@ final class ListeningResponseFeedbackViewController: UIViewController {
     }()
 
     private let viewController: UIViewController
-    private let transcription: String
+    private let loggingContext: VLLoggingContext?
 
     private var contentDisposables = Set<AnyCancellable>()
 
     private let submitFeedbackView = ListeningFeedbackSubmitView()
     private let successFeedbackView = ListeningFeedbackSuccessView()
 
-    private lazy var contentViewLayoutGuide: UILayoutGuide = {
-        let guide = UILayoutGuide()
-        self.view.addLayoutGuide(guide)
-        NSLayoutConstraint.activate([
-            guide.topAnchor.constraint(equalTo: self.view.topAnchor),
-            guide.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            guide.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            guide.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        ])
-        return guide
-    }()
+    var feedbackViewHeightConstraint: NSLayoutConstraint?
+
+    let contentViewControllerLayoutGuide = UILayoutGuide()
+    let contentFeedbackLayoutGuide = UILayoutGuide()
 
     // MARK: Initializers
 
-    init(viewController: UIViewController, transcription: String) {
+    init(viewController: UIViewController, loggingContext: VLLoggingContext?) {
         self.viewController = viewController
-        self.transcription = transcription
+        self.loggingContext = loggingContext
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -55,8 +49,24 @@ final class ListeningResponseFeedbackViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setupLayoutGuides()
         setupResponseController()
         setupFeedbackView()
+    }
+
+    private func setupLayoutGuides() {
+        view.addLayoutGuide(contentViewControllerLayoutGuide)
+        view.addLayoutGuide(contentFeedbackLayoutGuide)
+        NSLayoutConstraint.activate([
+            contentViewControllerLayoutGuide.topAnchor.constraint(equalTo: view.topAnchor),
+            contentViewControllerLayoutGuide.bottomAnchor.constraint(equalTo: contentFeedbackLayoutGuide.topAnchor),
+            contentViewControllerLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentViewControllerLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentFeedbackLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            contentFeedbackLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentFeedbackLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
 
     private func setupResponseController() {
@@ -64,9 +74,10 @@ final class ListeningResponseFeedbackViewController: UIViewController {
 
         view.addSubview(viewController.view)
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
-        let viewControllerConstraints = [viewController.view.topAnchor.constraint(equalTo: contentViewLayoutGuide.topAnchor),
-                                     viewController.view.leadingAnchor.constraint(equalTo: contentViewLayoutGuide.leadingAnchor),
-                                     viewController.view.trailingAnchor.constraint(equalTo: contentViewLayoutGuide.trailingAnchor)]
+        let viewControllerConstraints = [viewController.view.topAnchor.constraint(equalTo: contentViewControllerLayoutGuide.topAnchor),
+                                         viewController.view.leadingAnchor.constraint(equalTo: contentViewControllerLayoutGuide.leadingAnchor),
+                                         viewController.view.trailingAnchor.constraint(equalTo: contentViewControllerLayoutGuide.trailingAnchor),
+                                         viewController.view.bottomAnchor.constraint(equalTo: contentViewControllerLayoutGuide.bottomAnchor)]
         NSLayoutConstraint.activate(viewControllerConstraints)
 
         viewController.didMove(toParent: self)
@@ -78,23 +89,21 @@ final class ListeningResponseFeedbackViewController: UIViewController {
 
         view.addSubview(feedbackStackView)
         feedbackStackView.translatesAutoresizingMaskIntoConstraints = false
-        let feedbackConstraints = [feedbackStackView.topAnchor.constraint(equalTo: viewController.view.bottomAnchor),
-                                   feedbackStackView.leadingAnchor.constraint(equalTo: contentViewLayoutGuide.leadingAnchor),
-                                   feedbackStackView.trailingAnchor.constraint(equalTo: contentViewLayoutGuide.trailingAnchor),
-                                   feedbackStackView.bottomAnchor.constraint(equalTo: contentViewLayoutGuide.bottomAnchor)]
+        feedbackViewHeightConstraint = contentFeedbackLayoutGuide.heightAnchor.constraint(equalToConstant: 0)
+        let feedbackConstraints = [feedbackStackView.topAnchor.constraint(equalTo: contentFeedbackLayoutGuide.topAnchor),
+                                   feedbackStackView.leadingAnchor.constraint(equalTo: contentFeedbackLayoutGuide.leadingAnchor),
+                                   feedbackStackView.trailingAnchor.constraint(equalTo: contentFeedbackLayoutGuide.trailingAnchor),
+                                   feedbackStackView.bottomAnchor.constraint(equalTo: contentFeedbackLayoutGuide.bottomAnchor)]
         NSLayoutConstraint.activate(feedbackConstraints)
     }
 
     @objc private func didTapSubmitButton() {
         submitFeedback()
-        UIView.transition(with: feedbackStackView, duration: 0.25, options: .transitionCrossDissolve) {
-            self.feedbackStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-            self.feedbackStackView.addArrangedSubview(self.successFeedbackView)
-        }
     }
 
     @objc private func didTapInfoButton() {
-        let alertViewController = GazeableAlertViewController(alertTitle: "Submitting text: \(transcription)")
+        // TODO: localize and finalize copy
+        let alertViewController = GazeableAlertViewController(alertTitle: "Text to be submitted:\n \(loggingContext?.input ?? "")")
 
         alertViewController.addAction(GazeableAlertAction(title: "OK"))
         alertViewController.addAction(GazeableAlertAction(title: "Submit", style: .bold, handler: { [weak self] in
@@ -104,7 +113,13 @@ final class ListeningResponseFeedbackViewController: UIViewController {
     }
 
     private func submitFeedback() {
-        // TODO: submit feedback to mixpanel
+        // TODO: submit feedback to mixpanel (use loggingContext.description)
+        UIView.transition(with: feedbackStackView, duration: 0.35, options: .transitionCrossDissolve) { [self] in
+            self.feedbackViewHeightConstraint?.constant = self.contentFeedbackLayoutGuide.layoutFrame.height
+            self.feedbackViewHeightConstraint?.isActive = true
+            self.feedbackStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            self.feedbackStackView.addArrangedSubview(self.successFeedbackView)
+        }
     }
 
 }

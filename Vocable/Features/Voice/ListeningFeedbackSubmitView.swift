@@ -36,6 +36,7 @@ final class ListeningFeedbackSubmitView: UIView {
         let font: UIFont = sizeClass == .hRegular_vRegular
                            ? .systemFont(ofSize: 34, weight: .bold)
                            : .systemFont(ofSize: 22, weight: .bold)
+        // TODO: localize and finalize copy
         submitButton.setTitle("Submit Review", for: .normal)
         submitButton.titleLabel?.font = font
         submitButton.contentEdgeInsets = .uniform(16)

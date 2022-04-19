@@ -135,6 +135,7 @@ final class ListeningResponseViewController: VocableViewController {
             incomingTransition = .none
         }
 
+        let currentContext = ListenModeDebugStorage.shared.contexts.first
         switch content {
         case .numerical:
             let numericContentController = NumericCategoryContentViewController()
@@ -143,7 +144,7 @@ final class ListeningResponseViewController: VocableViewController {
                     self?.lastUtterance = utterance
                 }
                 .store(in: &numericContentController.disposables)
-            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: numericContentController, transcription: lastTranscription ?? "")
+            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: numericContentController, loggingContext: currentContext)
             setContentViewController(wrapperViewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
 
         case .choices(let choices):
@@ -155,13 +156,13 @@ final class ListeningResponseViewController: VocableViewController {
                     self?.lastUtterance = utterance
                 }
                 .store(in: &reponseContentController.disposables)
-            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: reponseContentController, transcription: lastTranscription ?? "")
+            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: reponseContentController, loggingContext: currentContext)
             setContentViewController(wrapperViewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
 
         case .empty(let state, let action):
             switch state {
             case .listenModeFreeResponse:
-                let viewController = ListeningResponseFeedbackViewController(viewController: ListeningResponseEmptyStateViewController(state: state, action: action), transcription: lastTranscription ?? "")
+                let viewController = ListeningResponseFeedbackViewController(viewController: ListeningResponseEmptyStateViewController(state: state, action: action), loggingContext: currentContext)
                 setContentViewController(viewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
             default:
                 let viewController = ListeningResponseEmptyStateViewController(state: state, action: action)
