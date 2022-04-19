@@ -182,6 +182,7 @@ final class EmptyStateView: UIView {
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.widthAnchor.constraint(lessThanOrEqualTo: readableContentGuide.widthAnchor),
+            stackView.widthAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.widthAnchor),
             stackView.heightAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.heightAnchor)
         ])
 
@@ -196,6 +197,7 @@ final class EmptyStateView: UIView {
 
         updateContentForCurrentTraitCollection()
         updateStackView()
+        updatePreferredWidth()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -228,5 +230,16 @@ final class EmptyStateView: UIView {
     private func updateStackView() {
         imageView.isHidden = imageView.image == nil
         descriptionLabel.isHidden = descriptionLabel.text == nil && descriptionLabel.attributedText == nil
+    }
+
+    private func updatePreferredWidth() {
+        let value = min(layoutMarginsGuide.layoutFrame.width, readableContentGuide.layoutFrame.width)
+        titleLabel.preferredMaxLayoutWidth = value
+        descriptionLabel.preferredMaxLayoutWidth = value
+    }
+
+    override func layoutMarginsDidChange() {
+        super.layoutMarginsDidChange()
+        updatePreferredWidth()
     }
 }
