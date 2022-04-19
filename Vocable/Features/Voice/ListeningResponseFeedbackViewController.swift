@@ -58,6 +58,7 @@ final class ListeningResponseFeedbackViewController: UIViewController {
     private func setupLayoutGuides() {
         view.addLayoutGuide(contentViewControllerLayoutGuide)
         view.addLayoutGuide(contentFeedbackLayoutGuide)
+
         NSLayoutConstraint.activate([
             contentViewControllerLayoutGuide.topAnchor.constraint(equalTo: view.topAnchor),
             contentViewControllerLayoutGuide.bottomAnchor.constraint(equalTo: contentFeedbackLayoutGuide.topAnchor),
@@ -74,11 +75,10 @@ final class ListeningResponseFeedbackViewController: UIViewController {
 
         view.addSubview(viewController.view)
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
-        let viewControllerConstraints = [viewController.view.topAnchor.constraint(equalTo: contentViewControllerLayoutGuide.topAnchor),
-                                         viewController.view.leadingAnchor.constraint(equalTo: contentViewControllerLayoutGuide.leadingAnchor),
-                                         viewController.view.trailingAnchor.constraint(equalTo: contentViewControllerLayoutGuide.trailingAnchor),
-                                         viewController.view.bottomAnchor.constraint(equalTo: contentViewControllerLayoutGuide.bottomAnchor)]
-        NSLayoutConstraint.activate(viewControllerConstraints)
+        NSLayoutConstraint.activate([viewController.view.topAnchor.constraint(equalTo: contentViewControllerLayoutGuide.topAnchor),
+                                     viewController.view.leadingAnchor.constraint(equalTo: contentViewControllerLayoutGuide.leadingAnchor),
+                                     viewController.view.trailingAnchor.constraint(equalTo: contentViewControllerLayoutGuide.trailingAnchor),
+                                     viewController.view.bottomAnchor.constraint(equalTo: contentViewControllerLayoutGuide.bottomAnchor)])
 
         viewController.didMove(toParent: self)
     }
@@ -90,12 +90,13 @@ final class ListeningResponseFeedbackViewController: UIViewController {
         view.addSubview(feedbackStackView)
         feedbackStackView.translatesAutoresizingMaskIntoConstraints = false
         feedbackViewHeightConstraint = contentFeedbackLayoutGuide.heightAnchor.constraint(equalToConstant: 0)
-        let feedbackConstraints = [feedbackStackView.topAnchor.constraint(equalTo: contentFeedbackLayoutGuide.topAnchor),
-                                   feedbackStackView.leadingAnchor.constraint(equalTo: contentFeedbackLayoutGuide.leadingAnchor),
-                                   feedbackStackView.trailingAnchor.constraint(equalTo: contentFeedbackLayoutGuide.trailingAnchor),
-                                   feedbackStackView.bottomAnchor.constraint(equalTo: contentFeedbackLayoutGuide.bottomAnchor)]
-        NSLayoutConstraint.activate(feedbackConstraints)
+        NSLayoutConstraint.activate([feedbackStackView.topAnchor.constraint(equalTo: contentFeedbackLayoutGuide.topAnchor),
+                                     feedbackStackView.leadingAnchor.constraint(equalTo: contentFeedbackLayoutGuide.leadingAnchor),
+                                     feedbackStackView.trailingAnchor.constraint(equalTo: contentFeedbackLayoutGuide.trailingAnchor),
+                                     feedbackStackView.bottomAnchor.constraint(equalTo: contentFeedbackLayoutGuide.bottomAnchor)])
     }
+
+    // MARK: Actions
 
     @objc private func didTapSubmitButton() {
         submitFeedback()
@@ -112,6 +113,8 @@ final class ListeningResponseFeedbackViewController: UIViewController {
         present(alertViewController, animated: true)
     }
 
+    // MARK: Private Helpers
+
     private func submitFeedback() {
         // TODO: submit feedback to mixpanel (use loggingContext.description)
         UIView.transition(with: feedbackStackView, duration: 0.35, options: .transitionCrossDissolve) { [self] in
@@ -121,5 +124,4 @@ final class ListeningResponseFeedbackViewController: UIViewController {
             self.feedbackStackView.addArrangedSubview(self.successFeedbackView)
         }
     }
-
 }

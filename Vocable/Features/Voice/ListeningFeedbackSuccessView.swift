@@ -10,7 +10,11 @@ import UIKit
 
 final class ListeningFeedbackSuccessView: UIView {
 
+    // MARK: Properties
+
     private let label = UILabel()
+
+    // MARK: Initializers
 
     init() {
         super.init(frame: .zero)
@@ -35,9 +39,8 @@ final class ListeningFeedbackSuccessView: UIView {
 
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        let constraints = [label.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor),
-                           label.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-                           label.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)]
-        NSLayoutConstraint.activate(constraints)
+        NSLayoutConstraint.activate([label.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor),
+                                     label.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+                                     label.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)])
     }
 }

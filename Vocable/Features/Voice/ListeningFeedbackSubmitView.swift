@@ -10,6 +10,8 @@ import UIKit
 
 final class ListeningFeedbackSubmitView: UIView {
 
+    // MARK: Properties
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [submitButton, infoButton])
         stackView.axis = .horizontal
@@ -21,6 +23,8 @@ final class ListeningFeedbackSubmitView: UIView {
 
     let submitButton = GazeableButton()
     let infoButton = GazeableButton()
+
+    // MARK: Initializers
 
     init() {
         super.init(frame: .zero)
@@ -47,9 +51,8 @@ final class ListeningFeedbackSubmitView: UIView {
 
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        let constraints = [stackView.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor),
-                           stackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-                           stackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)]
-        NSLayoutConstraint.activate(constraints)
+        NSLayoutConstraint.activate([stackView.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor),
+                                     stackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+                                     stackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)])
     }
 }
