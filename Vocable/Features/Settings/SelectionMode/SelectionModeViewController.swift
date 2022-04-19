@@ -176,12 +176,11 @@ final class SelectionModeViewController: VocableCollectionViewController {
         let systemVersion = UIDevice.current.systemVersion
         let sensorName = "TrueDepth"
         let neuralEngineName = "Apple Neural Engine"
-        let supportedPlatformsiOS14 = "iOS 14 and iPadOS 14"
 
         let format = NSLocalizedString("settings.selection_mode.head_tracking_unsupported_footer",
-                                       comment: "Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices and operating system versions support head tracking")
+                                       comment: "Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking")
 
-        let text = String(format: format, model, systemName, systemVersion, sensorName, neuralEngineName, supportedPlatformsiOS14)
+        let text = String(format: format, model, systemName, systemVersion, sensorName, neuralEngineName)
         return text
     }
 
