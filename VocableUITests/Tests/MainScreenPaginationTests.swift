@@ -13,7 +13,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
     // In order to ensure this test passes on both an iPhone and iPad device, we will add 16 phrase (2 pages on an iPad)
     // then remove 8 of them so that the pages reduce from 2 to 1 page.
     func testDeletingPhrasesAdjustsPagination() {
-        listOfPhrases.forEach{ phrase in
+        listOfPhrases.forEach { phrase in
             customCategoriesScreen.addPhrase(phrase)
         }
         
@@ -44,7 +44,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         let firstSetOfPhrases = listOfPhrases[..<listMidpoint]
         let secondSetOfPhrases = listOfPhrases[listMidpoint...]
         
-        firstSetOfPhrases.forEach{ phrase in
+        firstSetOfPhrases.forEach { phrase in
             customCategoriesScreen.addPhrase(phrase)
         }
         
@@ -57,7 +57,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         settingsScreen.navigateToSettingsCategoryScreen()
         settingsScreen.openCategorySettings(category: customCategoryName)
         customCategoriesScreen.editCategoryPhrasesButton.tap()
-        secondSetOfPhrases.forEach{ phrase in
+        secondSetOfPhrases.forEach { phrase in
             customCategoriesScreen.addPhrase(phrase)
         }
         
@@ -68,7 +68,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
     
     func testCanScrollPagesWithPaginationArrows() {
         // Add enough phrases to push the total number of pages to at leaset 2 for iPad and iPhone (16).
-        listOfPhrases.forEach{ phrase in
+        listOfPhrases.forEach { phrase in
             customCategoriesScreen.addPhrase(phrase)
         }
         
