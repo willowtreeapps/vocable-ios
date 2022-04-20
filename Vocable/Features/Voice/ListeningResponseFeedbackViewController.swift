@@ -116,6 +116,7 @@ final class ListeningResponseFeedbackViewController: UIViewController {
     // MARK: Private Helpers
 
     private func submitFeedback() {
+        submitFeedbackView.hasSubmittedFeedback = true
         // TODO: submit feedback to mixpanel (use loggingContext.description)
         UIView.transition(with: feedbackStackView, duration: 0.35, options: .transitionCrossDissolve) { [self] in
             self.feedbackViewHeightConstraint?.constant = self.contentFeedbackLayoutGuide.layoutFrame.height

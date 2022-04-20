@@ -580,6 +580,7 @@
 				64599430258938F50010EEFF /* ListeningResponseViewController.swift */,
 				6B3FBBE725FBC72600B7D2CD /* ListeningResponseContentViewController.swift */,
 				6B3FBBEC25FBC79A00B7D2CD /* ListeningResponseEmptyStateViewController.swift */,
+				6B53B5DB28070F2D00569DAE /* ListenModeDebugOptionsView.swift */,
 				6BDE5D3C25C1DF1600F47066 /* TranscriptionOutputTextView.swift */,
 				64981DA1258A9BBE007EFA82 /* Supporting Resources */,
 			);
@@ -854,7 +855,6 @@
 				6BE7E9832459D328007B01F2 /* PagingCarouselViewController.swift */,
 				B879831323E0DA8300DC1A81 /* PresetItemCollectionViewCell.swift */,
 				A9FD68A428008AD3006ABA3F /* AddPhraseCollectionViewCell.swift */,
-				6B53B5DB28070F2D00569DAE /* ListenModeDebugOptionsView.swift */,
 				6BB56BA92422B40200EA787E /* PublishedDefault.swift */,
 				A9DFCC1F242D020100136136 /* PublishedValue.swift */,
 				7192E40A242E6562008E4A0A /* ToastContainerViewController.swift */,

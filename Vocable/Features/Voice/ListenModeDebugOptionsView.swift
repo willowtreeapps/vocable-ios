@@ -12,12 +12,16 @@ struct ListenModeDebugOptionsView: View {
 
     @AppStorage(ListeningFeedbackUserDefaultsKey.showsHintText) var showsHintText = false
     @AppStorage(ListeningFeedbackUserDefaultsKey.hidesHintTextAfterFirstSubmission) var hidesHintTextAfterFirstSubmission = false
+    @AppStorage(ListeningFeedbackUserDefaultsKey.disableShareUntilSubmitted) var disableShareUntilSubmitted = false
+
 
     var body: some View {
         Form {
             Section(header: Text("Hint Text")) {
                 Toggle("Show Hint Text", isOn: $showsHintText)
-                Toggle("Hide after first submission", isOn: $hidesHintTextAfterFirstSubmission)
+                Toggle("Hide hint text after first submission", isOn: $hidesHintTextAfterFirstSubmission)
+                    .disabled(!showsHintText)
+                Toggle("Disable share until first submission", isOn: $disableShareUntilSubmitted)
             }
         }
     }
