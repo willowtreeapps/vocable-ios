@@ -99,7 +99,7 @@ class MainScreenTests: BaseTest {
         for category in PresetCategories().list {
             // If we come across the category we expect to be hidden, fail the test. Otherwise the test will pass.
             MainScreen.locateAndSelectDestinationCategory(category.categoryIdentifier)
-            if (MainScreen.selectedCategoryCell.identifier == hiddenCategoryIdentifier) {
+            if MainScreen.selectedCategoryCell.identifier == hiddenCategoryIdentifier {
                 XCTFail("The category with identifier, '\(hiddenCategoryIdentifier)', was not hidden as expected.")
             }
         }
