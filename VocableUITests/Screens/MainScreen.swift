@@ -9,17 +9,18 @@
 import XCTest
 
 class MainScreen: BaseScreen {
-    private let app = XCUIApplication()
     
-    let settingsButton = XCUIApplication().buttons["root.settingsButton"]
-    let outputLabel = XCUIApplication().staticTexts["root.outputTextLabel"]
-    let keyboardNavButton = XCUIApplication().buttons["root.keyboardButton"]
-    let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
-    let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]
-    let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
+    private static let app = XCUIApplication()
+    
+    static let settingsButton = XCUIApplication().buttons["root.settingsButton"]
+    static let outputLabel = XCUIApplication().staticTexts["root.outputTextLabel"]
+    static let keyboardNavButton = XCUIApplication().buttons["root.keyboardButton"]
+    static let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
+    static let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]
+    static let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
     
     // Find the current selected category and return it as a CategoryTitleCellIdentifier
-    var selectedCategoryCell: CategoryTitleCellIdentifier {
+    static var selectedCategoryCell: CategoryTitleCellIdentifier {
         let identifierPrefix = CategoryTitleCellIdentifier.categoryTitleCellPrefix
         let identifierPredicate = NSPredicate(format: "identifier CONTAINS %@", identifierPrefix)
         let isSelectedPredicate = NSPredicate(format: "isSelected == true")
@@ -31,14 +32,14 @@ class MainScreen: BaseScreen {
         return CategoryTitleCellIdentifier(query.element.identifier)!
     }
     
-    func isTextDisplayed(_ text: String) -> Bool {
+    static func isTextDisplayed(_ text: String) -> Bool {
         return app.collectionViews.staticTexts[text].waitForExistence(timeout: 10)
     }
     
     /// Traverse the categories until the destination category is found, then tap on the category to ensure its phrases appear.
     ///
     ///  Categories are interacted with via their identifier, which we represent with the CategoryIdentifier type struct.
-    func locateAndSelectDestinationCategory(_ destinationCategory: CategoryIdentifier) {
+    static func locateAndSelectDestinationCategory(_ destinationCategory: CategoryIdentifier) {
         let titleCellIdentifier = CategoryTitleCellIdentifier(destinationCategory).identifier
         let destinationCell = app.cells[titleCellIdentifier]
         let selectedCell = app.cells[selectedCategoryCell.identifier]
@@ -56,7 +57,7 @@ class MainScreen: BaseScreen {
     }
     
     /// Assuming there is at least one page of phrases within a category, locate the cell containing the given phrase.
-    func locatePhraseCell(phrase: String) -> XCUIElement {
+    static func locatePhraseCell(phrase: String) -> XCUIElement {
         let predicate = NSPredicate(format: "label MATCHES %@", phrase)
         
         // Loop through each custom category page to find our phrase

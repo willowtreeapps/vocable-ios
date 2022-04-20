@@ -11,62 +11,62 @@ import XCTest
 class CustomCategoryTests: CustomCategoryBaseTest {
     
     func testAddCustomCategory() {
-        XCTAssertTrue(settingsScreen.locateCategoryCell(customCategoryName).element.isEnabled)
-        XCTAssertTrue(settingsScreen.locateCategoryCell(customCategoryName).element.exists)
+        XCTAssertTrue(SettingsScreen.locateCategoryCell(customCategoryName).element.isEnabled)
+        XCTAssertTrue(SettingsScreen.locateCategoryCell(customCategoryName).element.exists)
     }
     
     func testCanContinueEditingCategoryName() {
         let renamedCategory = customCategoryName + nameSuffix
         
-        settingsScreen.openCategorySettings(category: customCategoryName)
-        settingsScreen.renameCategoryButton.tap()
-        keyboardScreen.typeText(nameSuffix)
-        keyboardScreen.navBarDismissButton.tap()
-        XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
+        SettingsScreen.openCategorySettings(category: customCategoryName)
+        SettingsScreen.renameCategoryButton.tap()
+        KeyboardScreen.typeText(nameSuffix)
+        KeyboardScreen.navBarDismissButton.tap()
+        XCTAssertTrue(KeyboardScreen.alertMessageLabel.exists)
         
-        settingsScreen.alertContinueButton.tap()
-        XCTAssertTrue(keyboardScreen.keyboardTextView.staticTexts[renamedCategory].exists)
+        SettingsScreen.alertContinueButton.tap()
+        XCTAssertTrue(KeyboardScreen.keyboardTextView.staticTexts[renamedCategory].exists)
 
-        keyboardScreen.checkmarkAddButton.tap()
-        settingsScreen.navBarBackButton.tap()
-        XCTAssertTrue(settingsScreen.locateCategoryCell(renamedCategory).element.isEnabled)
-        XCTAssertTrue(settingsScreen.locateCategoryCell(renamedCategory).element.exists)
+        KeyboardScreen.checkmarkAddButton.tap()
+        SettingsScreen.navBarBackButton.tap()
+        XCTAssertTrue(SettingsScreen.locateCategoryCell(renamedCategory).element.isEnabled)
+        XCTAssertTrue(SettingsScreen.locateCategoryCell(renamedCategory).element.exists)
    }
     
     func testCanDiscardEditingCategoryName() {
-        settingsScreen.openCategorySettings(category: customCategoryName)
-        settingsScreen.renameCategoryButton.tap()
-        keyboardScreen.typeText(nameSuffix)
-        keyboardScreen.navBarDismissButton.tap()
-        XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
+        SettingsScreen.openCategorySettings(category: customCategoryName)
+        SettingsScreen.renameCategoryButton.tap()
+        KeyboardScreen.typeText(nameSuffix)
+        KeyboardScreen.navBarDismissButton.tap()
+        XCTAssertTrue(KeyboardScreen.alertMessageLabel.exists)
         
-        settingsScreen.alertDiscardButton.tap()
-        XCTAssertEqual(settingsScreen.categoryDetailsTitle.label, customCategoryName)
+        SettingsScreen.alertDiscardButton.tap()
+        XCTAssertEqual(SettingsScreen.categoryDetailsTitle.label, customCategoryName)
         
-        settingsScreen.navBarBackButton.tap()
-        XCTAssertTrue(settingsScreen.locateCategoryCell(customCategoryName).element.exists)
+        SettingsScreen.navBarBackButton.tap()
+        XCTAssertTrue(SettingsScreen.locateCategoryCell(customCategoryName).element.exists)
     }
     
     func testCanRenameCategory() {
         let renamedCategory = customCategoryName + nameSuffix
         
-        settingsScreen.openCategorySettings(category: customCategoryName)
-        settingsScreen.renameCategoryButton.tap()
-        keyboardScreen.typeText(nameSuffix)
-        keyboardScreen.checkmarkAddButton.tap()
-        XCTAssertEqual(settingsScreen.categoryDetailsTitle.label, renamedCategory)
+        SettingsScreen.openCategorySettings(category: customCategoryName)
+        SettingsScreen.renameCategoryButton.tap()
+        KeyboardScreen.typeText(nameSuffix)
+        KeyboardScreen.checkmarkAddButton.tap()
+        XCTAssertEqual(SettingsScreen.categoryDetailsTitle.label, renamedCategory)
         
-        settingsScreen.navBarBackButton.tap()
-        XCTAssertTrue(settingsScreen.locateCategoryCell(renamedCategory).element.exists)
+        SettingsScreen.navBarBackButton.tap()
+        XCTAssertTrue(SettingsScreen.locateCategoryCell(renamedCategory).element.exists)
     }
     
     func testCanRemoveCategory() {
-        XCTAssertTrue(settingsScreen.doesCategoryExist(customCategoryName))
+        XCTAssertTrue(SettingsScreen.doesCategoryExist(customCategoryName))
         
-        settingsScreen.openCategorySettings(category: customCategoryName)
-        settingsScreen.removeCategoryButton.tap()
-        settingsScreen.alertRemoveButton.tap()
-        XCTAssertFalse(settingsScreen.doesCategoryExist(customCategoryName))
+        SettingsScreen.openCategorySettings(category: customCategoryName)
+        SettingsScreen.removeCategoryButton.tap()
+        SettingsScreen.alertRemoveButton.tap()
+        XCTAssertFalse(SettingsScreen.doesCategoryExist(customCategoryName))
     }
   
 }

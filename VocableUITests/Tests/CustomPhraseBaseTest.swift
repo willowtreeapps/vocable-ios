@@ -20,10 +20,10 @@ class CustomPhraseBaseTest: BaseTest {
         super.setUp()
         
         // Create a custom category and view its phrases
-        settingsScreen.navigateToSettingsCategoryScreen()
-        self.customCategoryIdentifier = customCategoriesScreen.createAndLocateCustomCategory(customCategoryName)
-        settingsScreen.openCategorySettings(category: customCategoryName)
-        customCategoriesScreen.editCategoryPhrasesButton.tap()
+        SettingsScreen.navigateToSettingsCategoryScreen()
+        self.customCategoryIdentifier = CustomCategoriesScreen.createAndLocateCustomCategory(customCategoryName)
+        SettingsScreen.openCategorySettings(category: customCategoryName)
+        CustomCategoriesScreen.editCategoryPhrasesButton.tap()
     }
     
 }

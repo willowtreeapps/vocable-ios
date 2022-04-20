@@ -14,27 +14,27 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
     // then remove 8 of them so that the pages reduce from 2 to 1 page.
     func testDeletingPhrasesAdjustsPagination() {
         listOfPhrases.forEach { phrase in
-            customCategoriesScreen.addPhrase(phrase)
+            CustomCategoriesScreen.addPhrase(phrase)
         }
         
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 2"
-        customCategoriesScreen.returnToMainScreenFromEditPhrases()
-        mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
-        VocableAssert().paginationEquals(1, of: 2)
+        CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
+        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
+        VTAssertPaginationEquals(1, of: 2)
         
         // Delete 8 of the phrases to reduce the total number of pages to 1.
-        settingsScreen.navigateToSettingsCategoryScreen()
-        settingsScreen.openCategorySettings(category: customCategoryName)
-        customCategoriesScreen.editCategoryPhrasesButton.tap()
+        SettingsScreen.navigateToSettingsCategoryScreen()
+        SettingsScreen.openCategorySettings(category: customCategoryName)
+        CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         for _ in 1...8 {
-            customCategoriesScreen.categoriesPageDeletePhraseButton.firstMatch.tap()
-            settingsScreen.alertDeleteButton.tap()
+            CustomCategoriesScreen.categoriesPageDeletePhraseButton.firstMatch.tap()
+            SettingsScreen.alertDeleteButton.tap()
         }
         
         // Navigate back to the home screen to verify that the total pages reduced from 2 to 1.
-        customCategoriesScreen.returnToMainScreenFromEditPhrases()
-        mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
-        VocableAssert().paginationEquals(1, of: 1, leftArrowEnabled: false, rightArrowEnabled: false)
+        CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
+        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
+        VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)
     }
     
     // In order to ensure there are 2 pages on iPad devices, we'll need 16 total phrases.
@@ -45,55 +45,55 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         let secondSetOfPhrases = listOfPhrases[listMidpoint...]
         
         firstSetOfPhrases.forEach { phrase in
-            customCategoriesScreen.addPhrase(phrase)
+            CustomCategoriesScreen.addPhrase(phrase)
         }
         
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 1"
-        customCategoriesScreen.returnToMainScreenFromEditPhrases()
-        mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
-        VocableAssert().paginationEquals(1, of: 1, leftArrowEnabled: false, rightArrowEnabled: false)
+        CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
+        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
+        VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)
         
         // Add 8 more phrases to verify that the pagination adjusts as expected; "Page 1 of 2"
-        settingsScreen.navigateToSettingsCategoryScreen()
-        settingsScreen.openCategorySettings(category: customCategoryName)
-        customCategoriesScreen.editCategoryPhrasesButton.tap()
+        SettingsScreen.navigateToSettingsCategoryScreen()
+        SettingsScreen.openCategorySettings(category: customCategoryName)
+        CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         secondSetOfPhrases.forEach { phrase in
-            customCategoriesScreen.addPhrase(phrase)
+            CustomCategoriesScreen.addPhrase(phrase)
         }
         
-        customCategoriesScreen.returnToMainScreenFromEditPhrases()
-        mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
-        VocableAssert().paginationEquals(1, of: 2)
+        CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
+        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
+        VTAssertPaginationEquals(1, of: 2)
     }
     
     func testCanScrollPagesWithPaginationArrows() {
         // Add enough phrases to push the total number of pages to at leaset 2 for iPad and iPhone (16).
         listOfPhrases.forEach { phrase in
-            customCategoriesScreen.addPhrase(phrase)
+            CustomCategoriesScreen.addPhrase(phrase)
         }
         
         // Return to the Main Screen and navigate to the test category
-        customCategoriesScreen.returnToMainScreenFromEditPhrases()
-        mainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
+        CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
+        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         
         // Verify that the category's pagination is "Page 1 of 2"; page next buttons are enabled
-        VocableAssert().paginationEquals(1, of: 2)
+        VTAssertPaginationEquals(1, of: 2)
         
         // Tap right arrow; expected "Page 2 of 2"
-        mainScreen.paginationRightButton.tap()
-        VocableAssert().paginationEquals(2, of: 2)
+        MainScreen.paginationRightButton.tap()
+        VTAssertPaginationEquals(2, of: 2)
         
         // Tap right arrow; expected "Page 1 of 2"
-        mainScreen.paginationRightButton.tap()
-        VocableAssert().paginationEquals(1, of: 2)
+        MainScreen.paginationRightButton.tap()
+        VTAssertPaginationEquals(1, of: 2)
         
         // Tap left arrow; expected "Page 2 of 2"
-        mainScreen.paginationLeftButton.tap()
-        VocableAssert().paginationEquals(2, of: 2)
+        MainScreen.paginationLeftButton.tap()
+        VTAssertPaginationEquals(2, of: 2)
         
         // Tap left arrow; expected "Page 1 of 2"
-        mainScreen.paginationLeftButton.tap()
-        VocableAssert().paginationEquals(1, of: 2)
+        MainScreen.paginationLeftButton.tap()
+        VTAssertPaginationEquals(1, of: 2)
     }
     
     func testPaginationAdjustsToDeviceOrientation() {
@@ -101,36 +101,36 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
 
         // Add 13 phrases. This is the min num of phrases to ensure an additional page is needed after device rotation on an iPad.
         for phrase in listOfPhrases.startIndex..<13 {
-            customCategoriesScreen.addPhrase(listOfPhrases[phrase])
+            CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
         }
         
         // Return to the Main Screen and navigate to the test category
-        customCategoriesScreen.returnToMainScreenFromEditPhrases()
-        mainScreen.locateAndSelectDestinationCategory(categoryTitleCell.categoryIdentifier)
-        XCTAssertEqual(mainScreen.selectedCategoryCell.identifier, categoryTitleCell.identifier)
+        CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
+        MainScreen.locateAndSelectDestinationCategory(categoryTitleCell.categoryIdentifier)
+        XCTAssertEqual(MainScreen.selectedCategoryCell.identifier, categoryTitleCell.identifier)
         
         // Capture current total number of pages
-        let totalPagesInPortrait = mainScreen.totalPageCount
+        let totalPagesInPortrait = MainScreen.totalPageCount
         let expectedTotalPagesInLandscape = totalPagesInPortrait + 1
         
         // Verify we're on the first page
-        XCTAssertEqual(mainScreen.currentPageNumber, 1)
+        XCTAssertEqual(MainScreen.currentPageNumber, 1)
         
         // Rotate the device
         XCUIDevice.shared.orientation = .landscapeLeft
-        _ = mainScreen.settingsButton.waitForExistence(timeout: 1) // Wait for rotation to complete
+        _ = MainScreen.settingsButton.waitForExistence(timeout: 1) // Wait for rotation to complete
         
         // Ensure that the total number of pages increases and the current page stays the same
-        XCTAssertEqual(mainScreen.currentPageNumber, 1)
-        XCTAssertEqual(mainScreen.totalPageCount, expectedTotalPagesInLandscape)
+        XCTAssertEqual(MainScreen.currentPageNumber, 1)
+        XCTAssertEqual(MainScreen.totalPageCount, expectedTotalPagesInLandscape)
         
         // Rotate back to Portrait
         XCUIDevice.shared.orientation = .portrait
-        _ = mainScreen.settingsButton.waitForExistence(timeout: 1) // Wait for rotation to complete
+        _ = MainScreen.settingsButton.waitForExistence(timeout: 1) // Wait for rotation to complete
         
         // Verify that the pagination returns to initial state
-        XCTAssertEqual(mainScreen.currentPageNumber, 1)
-        XCTAssertEqual(mainScreen.totalPageCount, totalPagesInPortrait)
+        XCTAssertEqual(MainScreen.currentPageNumber, 1)
+        XCTAssertEqual(MainScreen.totalPageCount, totalPagesInPortrait)
     }
     
 }

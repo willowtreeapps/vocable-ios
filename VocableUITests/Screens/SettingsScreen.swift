@@ -10,34 +10,32 @@
 import XCTest
 
 class SettingsScreen: BaseScreen {
-    let mainScreen = MainScreen()
-    let keyboardScreen = KeyboardScreen()
     
-    let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
-    let otherElements = XCUIApplication().collectionViews.cells.otherElements
-    let cells = XCUIApplication().cells
-    let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
-    let categoryUpButton = "reorder.upButton"
-    let categoryDownButton = "reorder.downButton"
-    let categoryForwardButton = "Forward"
-    let hideCategorySwitch = "hide"
-    let categoryShowButton = "show"
-    let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
-    let alertContinueButton = XCUIApplication().buttons["alert.button.continue_editing"]
-    let alertDiscardButton = XCUIApplication().buttons["alert.button.discard_changes"]
-    let alertDeleteButton = XCUIApplication().buttons["alert.button.delete"]
-    let alertRemoveButton = XCUIApplication().buttons["Remove"]
-    let alertCancelButton = XCUIApplication().buttons["Cancel"]
-    let categoryDetailsTitle = XCUIApplication().staticTexts["category_title_label"]
-    let renameCategoryButton = XCUIApplication().buttons["rename_category_button"]
-    let showCategoryButton = XCUIApplication().buttons["show_category_toggle"]
-    let removeCategoryButton = XCUIApplication().buttons["remove_category_cell"]
+    static let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
+    static let otherElements = XCUIApplication().collectionViews.cells.otherElements
+    static let cells = XCUIApplication().cells
+    static let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
+    static let categoryUpButton = "reorder.upButton"
+    static let categoryDownButton = "reorder.downButton"
+    static let categoryForwardButton = "Forward"
+    static let hideCategorySwitch = "hide"
+    static let categoryShowButton = "show"
+    static let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
+    static let alertContinueButton = XCUIApplication().buttons["alert.button.continue_editing"]
+    static let alertDiscardButton = XCUIApplication().buttons["alert.button.discard_changes"]
+    static let alertDeleteButton = XCUIApplication().buttons["alert.button.delete"]
+    static let alertRemoveButton = XCUIApplication().buttons["Remove"]
+    static let alertCancelButton = XCUIApplication().buttons["Cancel"]
+    static let categoryDetailsTitle = XCUIApplication().staticTexts["category_title_label"]
+    static let renameCategoryButton = XCUIApplication().buttons["rename_category_button"]
+    static let showCategoryButton = XCUIApplication().buttons["show_category_toggle"]
+    static let removeCategoryButton = XCUIApplication().buttons["remove_category_cell"]
 
-    func openCategorySettings(category: String) {
+    static func openCategorySettings(category: String) {
         locateCategoryCell(category).staticTexts[category].tap()
     }
     
-    func locateCategoryCell(_ category: String) -> XCUIElementQuery {
+    static func locateCategoryCell(_ category: String) -> XCUIElementQuery {
         let predicate = NSPredicate(format: "label CONTAINS %@", category)
         // Loop through each page to find our category
         for _ in 1...totalPageCount {
@@ -51,14 +49,14 @@ class SettingsScreen: BaseScreen {
         return categoryCellQuery(category)
     }
     
-    private func categoryCellQuery(_ category: String) -> XCUIElementQuery {
+    private static func categoryCellQuery(_ category: String) -> XCUIElementQuery {
         let predicate = NSPredicate(format: "label CONTAINS %@", category)
         let cellLabel = cells.staticTexts.containing(predicate).element.label
         
         return XCUIApplication().cells.containing(.staticText, identifier: cellLabel)
     }
     
-    func doesCategoryExist(_ category: String) -> Bool {
+    static func doesCategoryExist(_ category: String) -> Bool {
         var flag = false
         let predicate = NSPredicate(format: "label CONTAINS %@", category)
         
@@ -68,14 +66,14 @@ class SettingsScreen: BaseScreen {
                 flag = true
                 break
             } else {
-                mainScreen.paginationRightButton.tap()
+                MainScreen.paginationRightButton.tap()
             }
         }
         
         return flag
     }
     
-    func toggleHideShowCategory(category: String, toggle: String) {
+    static func toggleHideShowCategory(category: String, toggle: String) {
         var toggleLabel = ""
         switch toggle {
         case "Hide":
@@ -94,30 +92,28 @@ class SettingsScreen: BaseScreen {
         }
     }
     
-    func navigateToCategory(category: String) {
+    static func navigateToCategory(category: String) {
         while !otherElements.containing(.staticText, identifier: category).element.exists {
             settingsPageNextButton.tap()
-            if mainScreen.pageNumber.label.contains("Page 1") {
+            if MainScreen.pageNumber.label.contains("Page 1") {
                 break
             }
         }
     }
     
-    func addCategory(categoryName: String) {
+    static func addCategory(categoryName: String) {
         settingsPageAddCategoryButton.tap()
-        let newCategory = keyboardScreen.randomString(length: 5)
-        keyboardScreen.typeText(newCategory)
-        keyboardScreen.checkmarkAddButton.tap()
+        let newCategory = KeyboardScreen.randomString(length: 5)
+        KeyboardScreen.typeText(newCategory)
+        KeyboardScreen.checkmarkAddButton.tap()
     }
     
-    func navigateToSettingsCategoryScreen() {
-        _ = mainScreen.settingsButton.waitForExistence(timeout: 2)
-        mainScreen.settingsButton.tap()
-        _ = categoriesButton.waitForExistence(timeout: 2)
-        categoriesButton.tap()
+    static func navigateToSettingsCategoryScreen() {
+        MainScreen.settingsButton.tap(afterWaitingForExistenceWithTimeout: 2)
+        categoriesButton.tap(afterWaitingForExistenceWithTimeout: 2)
     }
     
-    func returnToMainScreen() {
+    static func returnToMainScreen() {
         navBarDismissButton.tap()
     }
     

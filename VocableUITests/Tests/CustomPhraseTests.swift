@@ -14,74 +14,74 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         let customPhrase = "dd"
 
         // Verify Phrase is not added if edits are discarded
-        customCategoriesScreen.categoriesPageAddPhraseButton.tap()
-        keyboardScreen.typeText("A")
-        keyboardScreen.navBarDismissButton.tap()
-        XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
+        CustomCategoriesScreen.categoriesPageAddPhraseButton.tap()
+        KeyboardScreen.typeText("A")
+        KeyboardScreen.navBarDismissButton.tap()
+        XCTAssertTrue(KeyboardScreen.alertMessageLabel.exists)
 
-        settingsScreen.alertDiscardButton.tap()
-        XCTAssertTrue(customCategoriesScreen.emptyStateAddPhraseButton.exists)
+        SettingsScreen.alertDiscardButton.tap()
+        XCTAssertTrue(CustomCategoriesScreen.emptyStateAddPhraseButton.exists)
 
         // Verify Phrase can be added if continuing edit.
-        customCategoriesScreen.categoriesPageAddPhraseButton.tap()
-        keyboardScreen.typeText("A")
-        keyboardScreen.navBarDismissButton.tap()
-        XCTAssertTrue(keyboardScreen.alertMessageLabel.exists)
-        settingsScreen.alertContinueButton.tap()
+        CustomCategoriesScreen.categoriesPageAddPhraseButton.tap()
+        KeyboardScreen.typeText("A")
+        KeyboardScreen.navBarDismissButton.tap()
+        XCTAssertTrue(KeyboardScreen.alertMessageLabel.exists)
+        SettingsScreen.alertContinueButton.tap()
 
-        keyboardScreen.typeText(customPhrase)
-        keyboardScreen.checkmarkAddButton.tap()
+        KeyboardScreen.typeText(customPhrase)
+        KeyboardScreen.checkmarkAddButton.tap()
 
-        XCTAssert(mainScreen.isTextDisplayed("A"+customPhrase), "Expected the phrase \("A"+customPhrase) to be displayed")
+        XCTAssert(MainScreen.isTextDisplayed("A"+customPhrase), "Expected the phrase \("A"+customPhrase) to be displayed")
     }
 
     func testCustomPhraseEdit() {
         let customPhrase = "Add"
         
         // Add our test phrase
-        customCategoriesScreen.categoriesPageAddPhraseButton.tap()
-        keyboardScreen.typeText(customPhrase)
-        keyboardScreen.checkmarkAddButton.tap()
+        CustomCategoriesScreen.categoriesPageAddPhraseButton.tap()
+        KeyboardScreen.typeText(customPhrase)
+        KeyboardScreen.checkmarkAddButton.tap()
         
         // Edit the phrase
         XCUIApplication().buttons[customPhrase].tap()
-        keyboardScreen.typeText("test")
-        keyboardScreen.checkmarkAddButton.tap()
-        XCTAssert(mainScreen.isTextDisplayed(customPhrase+"test"), "Expected the phrase \(customPhrase+"test") to be displayed")
+        KeyboardScreen.typeText("test")
+        KeyboardScreen.checkmarkAddButton.tap()
+        XCTAssert(MainScreen.isTextDisplayed(customPhrase+"test"), "Expected the phrase \(customPhrase+"test") to be displayed")
     }
     
     func testDeleteCustomPhrase() {
         let customPhrase = "Test"
         
         // Add our test phrase
-        customCategoriesScreen.categoriesPageAddPhraseButton.tap()
-        keyboardScreen.typeText(customPhrase)
-        keyboardScreen.checkmarkAddButton.tap()
+        CustomCategoriesScreen.categoriesPageAddPhraseButton.tap()
+        KeyboardScreen.typeText(customPhrase)
+        KeyboardScreen.checkmarkAddButton.tap()
         
         // Confirm that our phrase to-be-deleted has been created
-        XCTAssert(mainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to be displayed")
+        XCTAssert(MainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to be displayed")
         
-        customCategoriesScreen.categoriesPageDeletePhraseButton.tap()
-        settingsScreen.alertDeleteButton.tap()
-        XCTAssertTrue(customCategoriesScreen.emptyStateAddPhraseButton.exists, "Expected the phrase \(customPhrase) to not be displayed")
+        CustomCategoriesScreen.categoriesPageDeletePhraseButton.tap()
+        SettingsScreen.alertDeleteButton.tap()
+        XCTAssertTrue(CustomCategoriesScreen.emptyStateAddPhraseButton.exists, "Expected the phrase \(customPhrase) to not be displayed")
     }
     
     func testCanAddDuplicatePhrasesToCategories() {
         let testPhrase = "Testa"
 
         // Add our first test phrase
-        customCategoriesScreen.categoriesPageAddPhraseButton.tap()
-        keyboardScreen.typeText(testPhrase)
-        keyboardScreen.checkmarkAddButton.tap()
+        CustomCategoriesScreen.categoriesPageAddPhraseButton.tap()
+        KeyboardScreen.typeText(testPhrase)
+        KeyboardScreen.checkmarkAddButton.tap()
         
         // Assert that our phrase was added
-        XCTAssertTrue(mainScreen.isTextDisplayed(testPhrase), "Expected our first phrase to be added to category.")
+        XCTAssertTrue(MainScreen.isTextDisplayed(testPhrase), "Expected our first phrase to be added to category.")
 
         // Add the same phrase again to the same category
-        customCategoriesScreen.categoriesPageAddPhraseButton.tap()
-        keyboardScreen.typeText(testPhrase)
-        keyboardScreen.checkmarkAddButton.tap()
-        keyboardScreen.createDuplicateButton.tap()
+        CustomCategoriesScreen.categoriesPageAddPhraseButton.tap()
+        KeyboardScreen.typeText(testPhrase)
+        KeyboardScreen.checkmarkAddButton.tap()
+        KeyboardScreen.createDuplicateButton.tap()
         
         // Assert that now we have two cells containing the same phrase
         let phrasePredicate = NSPredicate(format: "label MATCHES %@", testPhrase)

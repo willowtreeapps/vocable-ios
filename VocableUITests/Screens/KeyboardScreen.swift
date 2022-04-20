@@ -9,20 +9,20 @@
 import XCTest
 
 class KeyboardScreen: BaseScreen {
-    private let app = XCUIApplication()
+    private static let app = XCUIApplication()
     
-    let keyboardTextView = XCUIApplication().textViews["keyboard.textView"]
-    let favoriteButton = XCUIApplication().buttons["keyboard.favoriteButton"]
-    let checkmarkAddButton = XCUIApplication().buttons["keyboard.saveButton"]
-    let createDuplicateButton = XCUIApplication().buttons["Create Duplicate"]
+    static let keyboardTextView = XCUIApplication().textViews["keyboard.textView"]
+    static let favoriteButton = XCUIApplication().buttons["keyboard.favoriteButton"]
+    static let checkmarkAddButton = XCUIApplication().buttons["keyboard.saveButton"]
+    static let createDuplicateButton = XCUIApplication().buttons["Create Duplicate"]
     
-    func typeText(_ textToType: String) {
+    static func typeText(_ textToType: String) {
         for char in textToType {
             app.collectionViews.staticTexts[String(char).uppercased()].tap()
         }
     }
     
-    func randomString(length: Int) -> String {
+    static func randomString(length: Int) -> String {
         let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         return String((0..<length).map { _ in letters.randomElement()! })
     }
