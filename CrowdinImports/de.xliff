@@ -2,7 +2,7 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Vocable/Supporting Files/en.lproj/InfoPlist.strings" source-language="en" target-language="de" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
       <trans-unit id="CFBundleDisplayName" xml:space="preserve" approved="yes">
@@ -34,7 +34,7 @@
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="de" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
       <trans-unit id="%@. %@" xml:space="preserve">
@@ -214,9 +214,9 @@
         <target state="final">Ja</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
-      <trans-unit id="recents_empty_state.body.title" xml:space="preserve">
+      <trans-unit id="recents_empty_state.body.title" xml:space="preserve" approved="yes">
         <source>Start using Vocable to see your most recently used phrases here.</source>
-        <target state="translated">Wenn Sie Vocable benutzt haben, erscheinen Ihre zuletzt genutzten Sätze hier.</target>
+        <target state="final">Wenn Sie Vocable benutzt haben, erscheinen Ihre zuletzt genutzten Sätze hier.</target>
         <note>Recents empty state description</note>
       </trans-unit>
       <trans-unit id="recents_empty_state.header.title" xml:space="preserve">
@@ -239,9 +239,9 @@
         <target state="final">E-Mail ist nicht konfiguriert.</target>
         <note>No email account configured error alert title</note>
       </trans-unit>
-      <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve">
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve" approved="yes">
         <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
-        <target state="translated">Sind Sie sicher, dass Sie Vocable auf Werkseinstellungen zurücksetzen möchten? Dies kann nicht rückgängig gemacht werden.</target>
+        <target state="final">Sind Sie sicher, dass Sie Vocable auf Werkseinstellungen zurücksetzen möchten? Dies kann nicht rückgängig gemacht werden.</target>
         <note>Reset app settings confirmation prompt</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_confirmation.button.cancel.title" xml:space="preserve">
@@ -403,7 +403,7 @@
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Presets.strings" source-language="en" target-language="de" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
       <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve" approved="yes">
