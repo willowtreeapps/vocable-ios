@@ -59,6 +59,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
             let button = GazeableButton(frame: .zero)
             button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             button.addTarget(self, action: #selector(backToEditCategories), for: .primaryActionTriggered)
+            button.accessibilityIdentifier = "navigationBar.backButton"
             return button
         }()
 
@@ -91,7 +92,8 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
 
         var config = VocableListContentConfiguration(title: category.name ?? "",
                                                      actions: [upAction, downAction],
-                                                     accessory: .disclosureIndicator()) { [weak self] in
+                                                     accessory: .disclosureIndicator(),
+                                                     accessibilityIdentifier: "edit_category_button") { [weak self] in
             self?.showEditForCategory(withObjectID: categoryID)
         }
 
@@ -109,6 +111,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         }
 
         cell.contentConfiguration = config
+        cell.accessibilityIdentifier = category.identifier
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
