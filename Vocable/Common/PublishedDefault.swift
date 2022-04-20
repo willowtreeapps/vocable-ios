@@ -16,14 +16,14 @@ import Combine
 
     private let defaultsKey: String
     private let subject: CurrentValueSubject<T, Never>
+    private var defaultsCancellable: AnyCancellable?
 
     var wrappedValue: T {
-        didSet {
-            guard let encoded = try? JSONEncoder().encode(wrappedValue) else {
-                UserDefaults.standard.removeObject(forKey: defaultsKey)
-                return
-            }
-            UserDefaults.standard.set(encoded, forKey: defaultsKey)
+        get {
+            return subject.value
+        }
+        set {
+            PublishedDefault.encodeDefaultsValue(newValue, for: defaultsKey)
             subject.send(wrappedValue)
         }
     }
@@ -40,16 +40,51 @@ import Combine
     ///   - defaultValue: The value that should be provided when no value is stored in `UserDefaults`
     init(key: String, defaultValue: T) {
         self.defaultsKey = key
-        self.wrappedValue = PublishedDefault.currentDefaultsValue(for: key) ?? defaultValue
-        self.subject = CurrentValueSubject<T, Never>(self.wrappedValue)
+        let value = PublishedDefault.currentDefaultsValue(for: key) ?? defaultValue
+        let subject = CurrentValueSubject<T, Never>(value)
+        self.subject = subject
+        self.defaultsCancellable = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
+            .compactMap { _ in
+                PublishedDefault.currentDefaultsValue(for: key)
+            }.sink { value in
+                subject.send(value)
+            }
     }
 
     private static func currentDefaultsValue(for key: String) -> T? {
+
+        if let object = UserDefaults.standard.object(forKey: key) as? T {
+            return object
+        }
+
         if let data = UserDefaults.standard.data(forKey: key) {
             if let decoded = try? JSONDecoder().decode(T.self, from: data) {
                 return decoded
             }
         }
         return nil
+    }
+
+    private static func encodeDefaultsValue(_ value: T?, for key: String) {
+        guard let value = value else {
+            UserDefaults.standard.removeObject(forKey: key)
+            return
+        }
+
+        if let value = value as? Bool {
+            UserDefaults.standard.set(value, forKey: key)
+        } else if let value = value as? Int {
+            UserDefaults.standard.set(value, forKey: key)
+        } else if let value = value as? Double {
+            UserDefaults.standard.set(value, forKey: key)
+        } else if let value = value as? Float {
+            UserDefaults.standard.set(value, forKey: key)
+        } else {
+            guard let encoded = try? JSONEncoder().encode(value) else {
+                UserDefaults.standard.removeObject(forKey: key)
+                return
+            }
+            UserDefaults.standard.set(encoded, forKey: key)
+        }
     }
 }

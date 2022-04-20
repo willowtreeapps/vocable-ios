@@ -7,10 +7,26 @@
 //
 
 import UIKit
+import SwiftUI
 
-final class ListeningFeedbackSubmitView: UIView {
+enum ListeningFeedbackUserDefaultsKey {
+    static let showsHintText = "showsHintText"
+    static let hidesHintTextAfterFirstSubmission = "hidesHintTextAfterFirstSubmission"
+    static let hasSubmittedFeedback = "hasSubmittedFeedback"
+}
+
+final class ListeningFeedbackSubmitView: UIView, UIContextMenuInteractionDelegate {
 
     // MARK: Properties
+
+    @PublishedDefault(key: ListeningFeedbackUserDefaultsKey.showsHintText, defaultValue: false)
+    private var showsHintText
+
+    @PublishedDefault(key: ListeningFeedbackUserDefaultsKey.hidesHintTextAfterFirstSubmission, defaultValue: false)
+    private var hidesHintTextAfterFirstSubmission
+
+    @PublishedDefault(key: ListeningFeedbackUserDefaultsKey.hasSubmittedFeedback, defaultValue: false)
+    private var hasSubmittedFeedback
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [submitButton, infoButton])
@@ -45,14 +61,42 @@ final class ListeningFeedbackSubmitView: UIView {
         submitButton.titleLabel?.font = font
         submitButton.contentEdgeInsets = .uniform(16)
         submitButton.isUserInteractionEnabled = true
+        submitButton.addTarget(self, action: #selector(handleSubmitButton(_:)), for: .primaryActionTriggered)
 
         infoButton.setImage(UIImage(systemName: "info.circle"), for: .normal)
         infoButton.isUserInteractionEnabled = true
+
+        infoButton.addInteraction(UIContextMenuInteraction(delegate: self))
 
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([stackView.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor),
                                      stackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
                                      stackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)])
+    }
+
+    @objc
+    private func handleSubmitButton(_ sender: Any?) {
+        hasSubmittedFeedback = true
+    }
+
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
+            let adjustAction = UIAction(title: "Adjust...", image: nil) { _ in
+                if #available(iOS 15.0, *) {
+                    self.presentAdjustmentPopover()
+                }
+            }
+            return UIMenu(title: "", children: [adjustAction])
+        })
+    }
+
+    @available(iOS 15.0, *)
+    private func presentAdjustmentPopover() {
+        let vc = UIHostingController(rootView: ListenModeDebugOptionsView())
+        vc.modalPresentationStyle = .popover
+        vc.popoverPresentationController?.adaptiveSheetPresentationController.detents = [.medium()]
+        vc.popoverPresentationController?.sourceView = infoButton
+        self.window?.rootViewController?.present(vc, animated: true)
     }
 }
