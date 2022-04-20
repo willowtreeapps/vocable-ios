@@ -17,7 +17,8 @@ final class ListeningModeViewController: VocableCollectionViewController {
         case hotWordEnabled
     }
 
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, ContentItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, ContentItem> = .init(collectionView: collectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell in
+        guard let self = self else { return UICollectionViewCell() }
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
 
@@ -45,6 +46,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
     private func setupNavigationBar() {
         #warning("Needs localization")
         navigationBar.title = "Listening Mode"
+    }
 
     override func viewLayoutMarginsDidChange() {
         super.viewLayoutMarginsDidChange()
