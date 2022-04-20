@@ -91,8 +91,6 @@ final class ListeningResponseViewController: VocableViewController {
 
     @PublishedValue private(set) var lastUtterance: String?
 
-    private var lastTranscription: String?
-
     private var content: Content = .empty(.listeningResponse)
 
     override func viewDidLoad() {
@@ -222,10 +220,8 @@ final class ListeningResponseViewController: VocableViewController {
                 guard let self = self else { return }
                 switch newValue {
                 case .partialTranscription(let transcription):
-                    self.lastTranscription = transcription
                     self.delegate?.didUpdateSpeechResponse(transcription)
                 case .finalTranscription(let transcription):
-                    self.lastTranscription = transcription
                     self.delegate?.didUpdateSpeechResponse(transcription)
                     self.classifier.classify(transcription)
                 default:
