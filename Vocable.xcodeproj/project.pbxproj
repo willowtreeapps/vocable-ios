@@ -31,7 +31,7 @@
 		627B53662800D11200FEBF25 /* MainScreenPaginationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627B53652800D11100FEBF25 /* MainScreenPaginationTests.swift */; };
 		628B35C227DF9C6B00299312 /* BaseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628B35C127DF9C6B00299312 /* BaseScreen.swift */; };
 		629B9B1F2809C99000EE6C19 /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629B9B1E2809C99000EE6C19 /* XCUIElement.swift */; };
-		62E84887280DEF8600D42499 /* VocableAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E84886280DEF8600D42499 /* VocableAssert.swift */; };
+		62E84887280DEF8600D42499 /* VocableTestAsserts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E84886280DEF8600D42499 /* VocableTestAsserts.swift */; };
 		64599429258933370010EEFF /* VocableCore in Frameworks */ = {isa = PBXBuildFile; productRef = 64599428258933370010EEFF /* VocableCore */; settings = {ATTRIBUTES = (Required, ); }; };
 		64599431258938F50010EEFF /* ListeningResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64599430258938F50010EEFF /* ListeningResponseViewController.swift */; };
 		6459943E25895D9C0010EEFF /* SpeechRecognitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6459943D25895D9C0010EEFF /* SpeechRecognitionController.swift */; };
@@ -240,7 +240,7 @@
 		627B53652800D11100FEBF25 /* MainScreenPaginationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPaginationTests.swift; sourceTree = "<group>"; };
 		628B35C127DF9C6B00299312 /* BaseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScreen.swift; sourceTree = "<group>"; };
 		629B9B1E2809C99000EE6C19 /* XCUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIElement.swift; sourceTree = "<group>"; };
-		62E84886280DEF8600D42499 /* VocableAssert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableAssert.swift; sourceTree = "<group>"; };
+		62E84886280DEF8600D42499 /* VocableTestAsserts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTestAsserts.swift; sourceTree = "<group>"; };
 		64599430258938F50010EEFF /* ListeningResponseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningResponseViewController.swift; sourceTree = "<group>"; };
 		6459943D25895D9C0010EEFF /* SpeechRecognitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionController.swift; sourceTree = "<group>"; };
 		64981D7B258A8014007EFA82 /* VocableChoicesModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = VocableChoicesModel.mlmodel; sourceTree = "<group>"; };
@@ -513,7 +513,7 @@
 				17793C2924574B0B00758BC0 /* Screens */,
 				17191A33245089270079F9BE /* Info.plist */,
 				629B9B1E2809C99000EE6C19 /* XCUIElement.swift */,
-				62E84886280DEF8600D42499 /* VocableAssert.swift */,
+				62E84886280DEF8600D42499 /* VocableTestAsserts.swift */,
 			);
 			path = VocableUITests;
 			sourceTree = "<group>";
@@ -1289,7 +1289,7 @@
 				17D4162E245C6FF600FD81CD /* KeyboardScreen.swift in Sources */,
 				DC41F55427E4F5130099B7D5 /* CategoryIdentifier.swift in Sources */,
 				CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */,
-				62E84887280DEF8600D42499 /* VocableAssert.swift in Sources */,
+				62E84887280DEF8600D42499 /* VocableTestAsserts.swift in Sources */,
 				17793C2E24574CB500758BC0 /* MainScreenTests.swift in Sources */,
 				620DD31927DA90F1003B01A0 /* CustomPhraseBaseTest.swift in Sources */,
 				627B53642800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift in Sources */,
