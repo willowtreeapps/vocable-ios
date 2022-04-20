@@ -10,29 +10,62 @@ import Combine
 import UIKit
 import SwiftUI
 
-enum ListeningFeedbackUserDefaultsKey {
-    static let showsHintText = "showsHintText"
-    static let hidesHintTextAfterFirstSubmission = "hidesHintTextAfterFirstSubmission"
-    static let hasSubmittedFeedback = "hasSubmittedFeedback"
-    static let disableShareUntilSubmitted = "disableShareUntilSubmitted"
+enum ListeningFeedbackUserDefaults: String {
+    case showsHintText
+    case hidesHintTextAfterSubmission
+    case hasSubmittedFeedback
+    case disableShareUntilSubmitted
+    case hintText
+    case submitButtonText
+    case submitConfirmationText
+
+    var key: String {
+        return rawValue
+    }
+
+    var defaultBoolValue: Bool {
+        return false
+    }
+
+    var defaultStringValue: String {
+        switch self {
+        case .hintText:
+            return "To help improve listening mode, you can anonymously share the last spoken phrase."
+        case .submitButtonText:
+            return "Share"
+        case .submitConfirmationText:
+            return "Submitted for Review"
+        default:
+            return ""
+        }
+    }
 }
 
 final class ListeningFeedbackSubmitView: UIView, UIContextMenuInteractionDelegate {
 
+    typealias UserDefaults = ListeningFeedbackUserDefaults
+
     // MARK: Properties
+
     private var disposables = Set<AnyCancellable>()
 
-    @PublishedDefault(key: ListeningFeedbackUserDefaultsKey.showsHintText, defaultValue: false)
+    @PublishedDefault(key: UserDefaults.showsHintText.key, defaultValue: UserDefaults.showsHintText.defaultBoolValue)
     private var showsHintText
 
-    @PublishedDefault(key: ListeningFeedbackUserDefaultsKey.hidesHintTextAfterFirstSubmission, defaultValue: false)
+    @PublishedDefault(key: UserDefaults.hidesHintTextAfterSubmission.key, defaultValue: UserDefaults.hidesHintTextAfterSubmission.defaultBoolValue)
     private var hidesHintTextAfterFirstSubmission
 
-    @PublishedDefault(key: ListeningFeedbackUserDefaultsKey.hasSubmittedFeedback, defaultValue: false)
+    @PublishedDefault(key: UserDefaults.hasSubmittedFeedback.key, defaultValue: UserDefaults.hasSubmittedFeedback.defaultBoolValue)
     var hasSubmittedFeedback
 
-    @PublishedDefault(key: ListeningFeedbackUserDefaultsKey.disableShareUntilSubmitted, defaultValue: false)
+    @PublishedDefault(key: UserDefaults.disableShareUntilSubmitted.key, defaultValue: UserDefaults.disableShareUntilSubmitted.defaultBoolValue)
     private var disableShareUntilSubmitted
+
+    @PublishedDefault(key: UserDefaults.hintText.key, defaultValue: UserDefaults.hintText.defaultStringValue)
+    private var hintText
+
+    @PublishedDefault(key: UserDefaults.submitButtonText.key, defaultValue: UserDefaults.submitButtonText.defaultStringValue)
+    private var submitButtonText
 
     let hintLabel = UILabel()
 
@@ -75,22 +108,26 @@ final class ListeningFeedbackSubmitView: UIView, UIContextMenuInteractionDelegat
             .sink { [weak self] _ in
             self?.handleDebugOptionChanges()
         }.store(in: &disposables)
+
+        Publishers.MergeMany($hintText, $submitButtonText)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+            self?.handleDebugOptionChanges()
+        }.store(in: &disposables)
     }
 
     private func commonInit() {
         setupPublishers()
         handleDebugOptionChanges()
-        hintLabel.text = "To help improve listening mode, you can\nanonymously share the last spoken phrase."
+
         hintLabel.font = .systemFont(ofSize: 15)
         hintLabel.textColor = .gray
-        hintLabel.numberOfLines = 2
         hintLabel.textAlignment = .center
+        hintLabel.numberOfLines = 0
 
         let font: UIFont = sizeClass == .hRegular_vRegular
                            ? .systemFont(ofSize: 34, weight: .bold)
                            : .systemFont(ofSize: 22, weight: .bold)
-        // TODO: localize and finalize copy
-        submitButton.setTitle("Share", for: .normal)
         submitButton.titleLabel?.font = font
         submitButton.contentEdgeInsets = .uniform(16)
         submitButton.isUserInteractionEnabled = true
@@ -104,13 +141,16 @@ final class ListeningFeedbackSubmitView: UIView, UIContextMenuInteractionDelegat
         containerStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([containerStackView.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor),
                                      containerStackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-                                     containerStackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)])
+                                     containerStackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
+                                     hintLabel.widthAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.widthAnchor, multiplier: 0.8)])
     }
 
     private func handleDebugOptionChanges() {
         hintLabel.isVisible = showsHintText && (!hasSubmittedFeedback || !hidesHintTextAfterFirstSubmission)
         submitButton.isEnabled = hasSubmittedFeedback || !disableShareUntilSubmitted
-        layoutIfNeeded()
+
+        hintLabel.text = hintText
+        submitButton.setTitle(submitButtonText, for: .normal)
     }
 
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {

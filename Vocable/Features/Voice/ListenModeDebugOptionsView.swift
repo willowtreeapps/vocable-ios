@@ -10,18 +10,48 @@ import SwiftUI
 
 struct ListenModeDebugOptionsView: View {
 
-    @AppStorage(ListeningFeedbackUserDefaultsKey.showsHintText) var showsHintText = false
-    @AppStorage(ListeningFeedbackUserDefaultsKey.hidesHintTextAfterFirstSubmission) var hidesHintTextAfterFirstSubmission = false
-    @AppStorage(ListeningFeedbackUserDefaultsKey.disableShareUntilSubmitted) var disableShareUntilSubmitted = false
+    typealias UserDefaults = ListeningFeedbackUserDefaults
 
+    @AppStorage(UserDefaults.showsHintText.key)
+    var showsHintText = UserDefaults.showsHintText.defaultBoolValue
+    @AppStorage(UserDefaults.hidesHintTextAfterSubmission.key)
+    var hidesHintTextAfterFirstSubmission = UserDefaults.hidesHintTextAfterSubmission.defaultBoolValue
+    @AppStorage(UserDefaults.disableShareUntilSubmitted.key)
+    var disableShareUntilSubmitted = UserDefaults.disableShareUntilSubmitted.defaultBoolValue
+
+    @AppStorage(UserDefaults.hintText.key)
+    var hintText = UserDefaults.hintText.defaultStringValue
+    @AppStorage(UserDefaults.submitButtonText.key)
+    var submitButtonText = UserDefaults.submitButtonText.defaultStringValue
+    @AppStorage(UserDefaults.submitConfirmationText.key)
+    var submitConfirmationText = UserDefaults.submitConfirmationText.defaultStringValue
 
     var body: some View {
         Form {
             Section(header: Text("Hint Text")) {
                 Toggle("Show Hint Text", isOn: $showsHintText)
-                Toggle("Hide hint text after first submission", isOn: $hidesHintTextAfterFirstSubmission)
-                    .disabled(!showsHintText)
-                Toggle("Disable share until first submission", isOn: $disableShareUntilSubmitted)
+                if showsHintText {
+                    Toggle("Hide After First Submission", isOn: $hidesHintTextAfterFirstSubmission)
+                }
+            }
+            Section(header: Text("Disable Share Button")) {
+                Toggle("Enable Share Button After Submitting", isOn: $disableShareUntilSubmitted)
+            }
+            Section(header: Text("Customize Copy")) {
+                if showsHintText {
+                    HStack {
+                        Text("Hint Label").frame(width: 135, alignment: .leading)
+                        TextField("Hint Text", text: $hintText)
+                    }
+                }
+                HStack {
+                    Text("Submit Button").frame(width: 135, alignment: .leading)
+                    TextField("Submit Button Text", text: $submitButtonText)
+                }
+                HStack {
+                    Text("Confirmation Label").frame(width: 135, alignment: .leading)
+                    TextField("Submit Confirmation Text", text: $submitConfirmationText)
+                }
             }
         }
     }
