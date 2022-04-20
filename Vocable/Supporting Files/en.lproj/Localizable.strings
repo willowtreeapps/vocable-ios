@@ -181,3 +181,5 @@
 "settings.alert.reset_app_settings_failure.body" = "Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.";
 
 "settings.alert.reset_app_settings_failure.button.ok" = "OK";
+
+"settings.selection_mode.head_tracking_unsupported_footer" = "This %1$@ on %2$@ %3$@ does not support head tracking.\n\nHead tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.";
