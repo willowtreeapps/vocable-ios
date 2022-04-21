@@ -10,45 +10,34 @@ import UIKit
 
 class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIdentifier: Hashable>: NSObject {
 
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>
+    private typealias DataSource = UICollectionViewDiffableDataSource<ContentWrapper<SectionIdentifier>, ContentWrapper<ItemIdentifier>>
+
     private struct ContentWrapper<Element: Hashable>: Hashable {
         let index: Int
         let item: Element
     }
 
+    private let updateQueue = DispatchQueue(label: "carousel-update-queue")
     private let repeatCount = 100
     private let collectionView: UICollectionView
     private let cellProvider: (UICollectionView, IndexPath, ItemIdentifier) -> UICollectionViewCell?
-    private lazy var impl = UICollectionViewDiffableDataSource<ContentWrapper<SectionIdentifier>, ContentWrapper<ItemIdentifier>>(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, item) in
-        guard let self = self else { return nil }
-        let mappedPath = self.indexPath(fromMappedIndexPath: indexPath)
-        return self.cellProvider(collectionView, mappedPath, item.item)
-    })
+    private var dataSource: DataSource!
 
     init(collectionView: UICollectionView, cellProvider: @escaping (UICollectionView, IndexPath, ItemIdentifier) -> UICollectionViewCell?) {
         self.cellProvider = cellProvider
         self.collectionView = collectionView
         super.init()
 
-        if let collectionView = collectionView as? CarouselGridCollectionView {
-            collectionView.dataSourceProxyInvalidationCallback = { [weak self] in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    let selections = collectionView.indexPathsForSelectedItems
-                    let snapshot = self.snapshot()
-                    self.apply(snapshot, animatingDifferences: false)
-                    let afterSnapshot = self.snapshot()
-                    if snapshot.itemIdentifiers.count == afterSnapshot.itemIdentifiers.count {
-                        for path in selections ?? [] {
-                            collectionView.selectItem(at: path, animated: false, scrollPosition: [])
-                        }
-                    }
-                }
-            }
-        }
+        self.dataSource = DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, item) in
+            guard let self = self else { return nil }
+            let mappedPath = self.indexPath(fromMappedIndexPath: indexPath)
+            return self.cellProvider(collectionView, mappedPath, item.item)
+        })
     }
 
     func snapshot() -> NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier> {
-        let _snapshot = impl.snapshot()
+        let _snapshot = dataSource.snapshot()
         var snapshot = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>()
         if let firstSection = _snapshot.sectionIdentifiers.first {
             snapshot.appendSections([firstSection.item])
@@ -58,57 +47,63 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
     }
 
     func apply(_ snapshot: NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>, animatingDifferences: Bool = true, completion: (() -> Void)? = nil) {
-        var repeatedSnapshot = NSDiffableDataSourceSnapshot<ContentWrapper<SectionIdentifier>, ContentWrapper<ItemIdentifier>>()
-        if let firstSection = snapshot.sectionIdentifiers.first {
 
-            let carouselLayout = collectionView.collectionViewLayout as? CarouselGridLayout
+        let carouselLayout = self.collectionView.collectionViewLayout as? CarouselGridLayout
 
-            let repeatCount: Int
-            if let carouselLayout = carouselLayout, snapshot.itemIdentifiers.count > carouselLayout.itemsPerPage {
-                repeatCount = self.repeatCount
-            } else {
-                repeatCount = 1
-            }
-
-            for index in 0 ..< repeatCount {
-                let section = ContentWrapper(index: index, item: firstSection)
-                repeatedSnapshot.appendSections([section])
-                for originalItem in snapshot.itemIdentifiers {
-
-                    let item = ContentWrapper(index: index, item: originalItem)
-                    repeatedSnapshot.appendItems([item])
-
-                    if #available(iOS 15.0, *), snapshot.reconfiguredItemIdentifiers.contains(originalItem) {
-                        repeatedSnapshot.reconfigureItems([item])
-                    }
-                    if #available(iOS 15.0, *), snapshot.reloadedItemIdentifiers.contains(originalItem) {
-                        repeatedSnapshot.reloadItems([item])
-                    }
-                }
-
-                if #available(iOS 15.0, *), snapshot.reloadedSectionIdentifiers.contains(firstSection) {
-                    repeatedSnapshot.reloadSections([section])
-                }
-            }
+        let repeatCount: Int
+        if let carouselLayout = carouselLayout, snapshot.itemIdentifiers.count > carouselLayout.itemsPerPage {
+            repeatCount = self.repeatCount
+        } else {
+            repeatCount = 1
         }
-        impl.apply(repeatedSnapshot, animatingDifferences: animatingDifferences, completion: completion)
+
+        updateQueue.async { [weak self] in
+            guard let self = self else { return }
+            var repeatedSnapshot = NSDiffableDataSourceSnapshot<ContentWrapper<SectionIdentifier>, ContentWrapper<ItemIdentifier>>()
+
+            if let firstSection = snapshot.sectionIdentifiers.first {
+
+                for index in 0 ..< repeatCount {
+                    let section = ContentWrapper(index: index, item: firstSection)
+                    repeatedSnapshot.appendSections([section])
+                    for originalItem in snapshot.itemIdentifiers {
+
+                        let item = ContentWrapper(index: index, item: originalItem)
+                        repeatedSnapshot.appendItems([item])
+
+                        if #available(iOS 15.0, *), snapshot.reconfiguredItemIdentifiers.contains(originalItem) {
+                            repeatedSnapshot.reconfigureItems([item])
+                        }
+                        if #available(iOS 15.0, *), snapshot.reloadedItemIdentifiers.contains(originalItem) {
+                            repeatedSnapshot.reloadItems([item])
+                        }
+                    }
+
+                    if #available(iOS 15.0, *), snapshot.reloadedSectionIdentifiers.contains(firstSection) {
+                        repeatedSnapshot.reloadSections([section])
+                    }
+                }
+            }
+
+            self.dataSource.apply(repeatedSnapshot, animatingDifferences: animatingDifferences, completion: completion)
+        }
     }
 
     private func mappedIndexPaths(`for` indexPath: IndexPath) -> [IndexPath] {
-        guard let identifier = impl.itemIdentifier(for: indexPath) else { return [] }
-        let snapshot = impl.snapshot()
+        guard let identifier = dataSource.itemIdentifier(for: indexPath) else { return [] }
+        let snapshot = dataSource.snapshot()
         let indexPaths = snapshot.sectionIdentifiers.compactMap { section -> IndexPath? in
-            return impl.indexPath(for: .init(index: section.index, item: identifier.item))
+            return dataSource.indexPath(for: .init(index: section.index, item: identifier.item))
         }
         return indexPaths
     }
 
     func itemIdentifier(for indexPath: IndexPath) -> ItemIdentifier? {
-        return impl.itemIdentifier(for: indexPath)?.item
+        return dataSource.itemIdentifier(for: indexPath)?.item
     }
 
     func indexPath(for itemIdentifier: ItemIdentifier) -> IndexPath? {
-        return impl.indexPath(for: .init(index: 0, item: itemIdentifier))
+        return dataSource.indexPath(for: .init(index: 0, item: itemIdentifier))
     }
 
     func indexPath(fromMappedIndexPath indexPath: IndexPath) -> IndexPath {

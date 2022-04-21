@@ -17,13 +17,10 @@ class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
         
         borderedView.borderColor = .cellBorderHighlightColor
         borderedView.backgroundColor = .collectionViewBackgroundColor
-        
-        updateContentViews()
-        backgroundView = borderedView
     }
     
-    override func updateContentViews() {
-        super.updateContentViews()
+    override func updateContent() {
+        super.updateContent()
         
         guard let textLabel = textLabel else { return }
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
@@ -61,8 +58,8 @@ class SpeakFunctionKeyboardKeyCollectionViewCell: KeyboardKeyCollectionViewCell 
         fillColor = UIColor.highlightedTextColor!
     }
     
-    override func updateContentViews() {
-        super.updateContentViews()
+    override func updateContent() {
+        super.updateContent()
 
         textLabel?.textColor = isSelected ? .selectedTextColor : .collectionViewBackgroundColor
     }

@@ -25,23 +25,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         case addNewPhrase
     }
 
-    private lazy var dataSourceProxy = DataSource(collectionView: collectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell? in
-        guard let self = self else { return nil }
-
-        switch item {
-        case .persistedPhrase(let objectId):
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as? PresetItemCollectionViewCell
-
-            guard let phrase = Phrase.fetchObject(in: self.frc.managedObjectContext, matching: objectId) else { return cell }
-            cell?.textLabel.text = phrase.utterance
-
-            return cell
-        case .addNewPhrase:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddPhraseCollectionViewCell.reuseIdentifier, for: indexPath) as? AddPhraseCollectionViewCell
-
-            return cell
-        }
-    }
+    private var dataSourceProxy: DataSource!
 
     private lazy var fetchRequest: NSFetchRequest<Phrase> = {
         let request: NSFetchRequest<Phrase> = Phrase.fetchRequest()
@@ -72,6 +56,8 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        dataSourceProxy = makeDataSource()
+        
         edgesForExtendedLayout = UIRectEdge.all.subtracting(.top)
         view.layoutMargins.top = 4
 
@@ -114,6 +100,27 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         }
     }
 
+    private func makeDataSource() -> DataSource {
+        DataSource(collectionView: collectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell? in
+            guard let self = self else { return nil }
+
+            switch item {
+            case .persistedPhrase(let objectId):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as? PresetItemCollectionViewCell
+
+                guard let phrase = Phrase.fetchObject(in: self.frc.managedObjectContext, matching: objectId) else { return cell }
+                cell?.textLabel.text = phrase.utterance
+
+                return cell
+            case .addNewPhrase:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddPhraseCollectionViewCell.reuseIdentifier, for: indexPath) as? AddPhraseCollectionViewCell
+
+                return cell
+            }
+        }
+
+    }
+
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
 
         let pageCountBefore = collectionView.layout.pagesPerSection
@@ -121,8 +128,11 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
         let updatedSnapshot = makeSnapshot(from: fetchedSnapshot)
 
-        dataSourceProxy.apply(updatedSnapshot, animatingDifferences: false)
-
+        if #available(iOS 15, *) {
+            dataSourceProxy.apply(updatedSnapshot, animatingDifferences: false)
+        } else {
+            dataSourceProxy.apply(updatedSnapshot, animatingDifferences: true)
+        }
         let pageCountAfter = collectionView.layout.pagesPerSection
 
         if snapshot.itemIdentifiers.isEmpty {

@@ -12,35 +12,49 @@ import UIKit
 class VocableCollectionViewCell: UICollectionViewCell {
     
     let borderedView = BorderedView()
+
+    private var needsUpdateContent = false
+
+    func setNeedsUpdateContent() {
+        needsUpdateContent = true
+        setNeedsLayout()
+    }
+
     private(set) var isTrackingTouches: Bool = false {
         didSet {
+            guard oldValue != isTrackingTouches else { return }
             updateSelectionAppearance()
-            updateContentViews()
+            setNeedsUpdateContent()
         }
     }
 
     var fillColor: UIColor = .defaultCellBackgroundColor {
         didSet {
-            updateContentViews()
+            guard oldValue != fillColor else { return }
+            setNeedsUpdateContent()
         }
     }
     
     override var isHighlighted: Bool {
         didSet {
+            guard oldValue != isHighlighted else { return }
             updateSelectionAppearance()
-            updateContentViews()
+            setNeedsUpdateContent()
         }
     }
     
     override var isSelected: Bool {
         didSet {
-            updateContentViews()
+            guard oldValue != isSelected else { return }
+            updateSelectionAppearance()
+            setNeedsUpdateContent()
         }
     }
 
     var isEnabled: Bool = true {
         didSet {
-            updateContentViews()
+            guard oldValue != isEnabled else { return }
+            setNeedsUpdateContent()
         }
     }
     
@@ -62,11 +76,19 @@ class VocableCollectionViewCell: UICollectionViewCell {
     }
     
     private func commonInit() {
-        updateContentViews()
+        setNeedsUpdateContent()
         backgroundView = borderedView
     }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if needsUpdateContent {
+            updateContent()
+            needsUpdateContent = false
+        }
+    }
     
-    func updateContentViews() {
+    func updateContent() {
 
         let fillColor: UIColor = {
             var result: UIColor
@@ -94,10 +116,19 @@ class VocableCollectionViewCell: UICollectionViewCell {
         borderedView.isOpaque = true
     }
 
+    private var _isScaledDown = false
+
     private func updateSelectionAppearance() {
 
+        let shouldScaleDown = isHighlighted && isTrackingTouches
+
+        guard shouldScaleDown != _isScaledDown else {
+            return
+        }
+        _isScaledDown = shouldScaleDown
+
         func actions() {
-            let scale: CGFloat = (isHighlighted && isTrackingTouches) ? 0.97 : 1.0
+            let scale: CGFloat = shouldScaleDown ? 0.97 : 1.0
             transform = .init(scaleX: scale, y: scale)
         }
 

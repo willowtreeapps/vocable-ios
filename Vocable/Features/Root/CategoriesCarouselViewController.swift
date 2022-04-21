@@ -13,6 +13,8 @@ import Combine
 
 @IBDesignable class CategoriesCarouselViewController: UIViewController, NSFetchedResultsControllerDelegate, UICollectionViewDelegate {
 
+    private typealias DataSource = CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID>
+
     static func fetchInitialCategoryID() -> NSManagedObjectID {
         let ctx = NSPersistentContainer.shared.viewContext
         let predicate = !Predicate(\Category.isHidden) && !Predicate(\Category.isUserRemoved)
@@ -42,17 +44,14 @@ import Combine
 
     private var frc: NSFetchedResultsController<Category>!
 
-    private lazy var dataSourceProxy = CarouselCollectionViewDataSourceProxy<String, NSManagedObjectID>(collectionView: collectionView!) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
-        guard let self = self else { return nil }
-        let category = self.frc.object(at: indexPath)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
-        cell.setup(title: category.name!)
-        cell.accessibilityIdentifier = ["category_title_cell", category.identifier].compacted().joined(separator: "_")
-        return cell
-    }
+    private var dataSourceProxy: DataSource!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        collectionView.register(CategoryItemCollectionViewCell.self, forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
+
+        dataSourceProxy = makeDataSource()
 
         view.backgroundColor = .collectionViewBackgroundColor
 
@@ -62,8 +61,6 @@ import Combine
         collectionViewMask.fillColor = .black
         collectionViewMask.backgroundColor = .clear
         collectionViewContainer.mask = collectionViewMask
-
-        collectionView.register(CategoryItemCollectionViewCell.self, forCellWithReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier)
 
         collectionView.delaysContentTouches = true
         collectionView.delegate = self
@@ -107,6 +104,18 @@ import Combine
 
     private func updateCollectionViewMaskFrame() {
         self.collectionViewMask.frame = collectionViewContainer.layoutMarginsGuide.layoutFrame
+    }
+
+    private func makeDataSource() -> DataSource {
+        let dataSource = DataSource(collectionView: collectionView) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
+            guard let self = self else { return nil }
+            let category = self.frc.object(at: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
+            cell.setup(title: category.name!)
+            cell.accessibilityIdentifier = ["category_title_cell", category.identifier].compacted().joined(separator: "_")
+            return cell
+        }
+        return dataSource
     }
 
     private func updateSelectedIndexPathsInProxyDataSource() {
@@ -154,7 +163,7 @@ import Combine
         return request
     }
 
-    private func categoriesFetchedResultsController() -> NSFetchedResultsController<Category> {
+    private func makeFetchedResultsController() -> NSFetchedResultsController<Category> {
         return NSFetchedResultsController<Category>(fetchRequest: categoriesFetchRequest(),
                                                     managedObjectContext: NSPersistentContainer.shared.viewContext,
                                                     sectionNameKeyPath: nil,
@@ -164,7 +173,7 @@ import Combine
     private func updateFetchedResultsController() {
         frc?.delegate = nil
 
-        let controller = categoriesFetchedResultsController()
+        let controller = makeFetchedResultsController()
         controller.delegate = self
         frc = controller
         try? frc.performFetch()
@@ -184,7 +193,13 @@ import Combine
         }()
 
         let snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
-        dataSourceProxy.apply(snapshot, animatingDifferences: false, completion: {
+        let shouldAnimate: Bool
+        if #available(iOS 15, *) {
+            shouldAnimate = false
+        } else {
+            shouldAnimate = true
+        }
+        dataSourceProxy.apply(snapshot, animatingDifferences: shouldAnimate, completion: {
 
             guard let previous = previousItem else {
                 // No item was previous selected
