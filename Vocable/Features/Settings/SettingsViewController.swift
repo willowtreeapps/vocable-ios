@@ -144,6 +144,11 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         updateDataSource()
     }
 
+    override func viewLayoutMarginsDidChange() {
+        super.viewLayoutMarginsDidChange()
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+
     private func updateDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, SettingsItem>()
         snapshot.appendSections([.internalSettings])
