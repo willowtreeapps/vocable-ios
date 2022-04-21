@@ -38,8 +38,8 @@ import Combine
     /// - Parameters:
     ///   - key: The key with which the value should be stored in `UserDefaults`
     ///   - defaultValue: The value that should be provided when no value is stored in `UserDefaults`
-    init(key: String, defaultValue: T) {
-        self.defaultsKey = key
+    init(key: UserDefaultsKey, defaultValue: T) {
+        self.defaultsKey = key.value
         let value = PublishedDefault.currentDefaultsValue(for: key) ?? defaultValue
         let subject = CurrentValueSubject<T, Never>(value)
         self.subject = subject
@@ -51,13 +51,13 @@ import Combine
             }
     }
 
-    private static func currentDefaultsValue(for key: String) -> T? {
+    private static func currentDefaultsValue(for key: UserDefaultsKey) -> T? {
 
-        if let object = UserDefaults.standard.object(forKey: key) as? T {
+        if let object = UserDefaults.standard.object(forKey: key.value) as? T {
             return object
         }
 
-        if let data = UserDefaults.standard.data(forKey: key) {
+        if let data = UserDefaults.standard.data(forKey: key.value) {
             if let decoded = try? JSONDecoder().decode(T.self, from: data) {
                 return decoded
             }
@@ -87,4 +87,23 @@ import Combine
             UserDefaults.standard.set(encoded, forKey: key)
         }
     }
+}
+
+extension PublishedDefault {
+
+    typealias Key = UserDefaultsKey
+}
+
+struct UserDefaultsKey: ExpressibleByStringLiteral {
+
+    let value: String
+
+    init(stringLiteral value: StringLiteralType) {
+        self.value = value
+    }
+}
+
+extension UserDefaultsKey {
+
+    static let listeningModeFeatureFlagEnabled: UserDefaultsKey = "listeningModeFeatureFlagEnabled"
 }

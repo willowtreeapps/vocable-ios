@@ -145,11 +145,11 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     }
 
     private func listenToVoiceFeatureFlagChange() {
-        AppConfig.$listeningModeFeatureFlagEnabled.sink { isFeatureFlagEnabled in
+        AppConfig.$listeningModeFeatureFlagEnabled.sink { [weak self] isFeatureFlagEnabled in
             if isFeatureFlagEnabled {
-                self.startListening(mode: .hotWord)
+                self?.startListeningForHotWordOrDeactivate()
             } else {
-                self.stopListening()
+                self?.stopListening()
             }
         }.store(in: &disposables)
     }
