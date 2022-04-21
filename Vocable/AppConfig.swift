@@ -57,6 +57,5 @@ struct AppConfig {
         return Locale.preferredLanguages.first ?? defaultLanguageCode
     }
 
-    static let isVoiceExperimentEnabled = true
-
+    static let isListenModeEnabled = false
 }

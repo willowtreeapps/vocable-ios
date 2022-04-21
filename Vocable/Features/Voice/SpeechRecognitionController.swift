@@ -157,7 +157,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     }
 
     private func startListeningForHotWordOrDeactivate() {
-        guard isAvailable, AppConfig.isListeningModeEnabled, AppConfig.isHotWordPermitted, deviceSupportsSpeech, isAuthorizedToTranscribe else {
+        guard isAvailable, AppConfig.isListeningModeEnabled, AppConfig.isHotWordPermitted, deviceSupportsSpeech, isAuthorizedToTranscribe, AppConfig.isListenModeEnabled else {
             stopListening()
             return
         }
@@ -170,6 +170,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     }
 
     private func startListening(mode: ListeningMode, resumingFromPause: Bool = false, requestablePermission: AudioPermission? = nil) {
+        guard AppConfig.isListenModeEnabled else { return }
 
         guard !isPaused && ((mode != self.mode) || (resumingFromPause && isListening)) else {
             return
@@ -520,7 +521,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     @objc
     private func willResignActiveNotification(_ notification: Notification) {
-        if AppConfig.isVoiceExperimentEnabled {
+        if AppConfig.isListenModeEnabled {
             pauseListening()
         }
     }
@@ -528,7 +529,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     @objc
     private func didBecomeActiveNotification(_ notification: Notification) {
         updatePermissionStatuses()
-        if AppConfig.isVoiceExperimentEnabled {
+        if AppConfig.isListenModeEnabled {
             resumeListening()
         }
     }

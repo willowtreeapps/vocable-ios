@@ -151,7 +151,7 @@ import Combine
 
         let shouldRemoveListeningCategory = false
         || !AppConfig.isListeningModeSupported
-        || !AppConfig.isVoiceExperimentEnabled
+        || !AppConfig.isListenModeEnabled
         || !AppConfig.isListeningModeEnabled
         || !SpeechRecognitionController.shared.deviceSupportsSpeech
 
@@ -334,7 +334,7 @@ import Combine
 
     private func navigateToVoiceCategory() {
 
-        guard AppConfig.isVoiceExperimentEnabled else {
+        guard AppConfig.isListenModeEnabled else {
             return
         }
 
