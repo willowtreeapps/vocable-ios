@@ -57,5 +57,7 @@ struct AppConfig {
         return Locale.preferredLanguages.first ?? defaultLanguageCode
     }
 
-    static let isListenModeEnabled = false
+    @PublishedDefault(key: listeningModeFeatureFlagDefaultKey, defaultValue: false)
+    static var listeningModeFeatureFlagEnabled: Bool
+    static let listeningModeFeatureFlagDefaultKey = "listeningModeFeatureFlag"
 }

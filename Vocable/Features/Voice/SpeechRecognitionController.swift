@@ -21,6 +21,8 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     private let audioController = AudioEngineController.shared
 
+    private var disposables = Set<AnyCancellable>()
+
     @Published private(set) var isAvailable: Bool = true
 
     @Published private(set) var isPaused: Bool = false {
@@ -138,6 +140,18 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
             .sink { newValue in
                 self.audioController.playEffect(newValue, completion: {})
             }
+
+        listenToVoiceFeatureFlagChange()
+    }
+
+    private func listenToVoiceFeatureFlagChange() {
+        AppConfig.$listeningModeFeatureFlagEnabled.sink { isFeatureFlagEnabled in
+            if isFeatureFlagEnabled {
+                self.startListening(mode: .hotWord)
+            } else {
+                self.stopListening()
+            }
+        }.store(in: &disposables)
     }
 
     func startTranscribing(requestPermission: AudioPermission? = nil) {
@@ -157,7 +171,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     }
 
     private func startListeningForHotWordOrDeactivate() {
-        guard isAvailable, AppConfig.isListeningModeEnabled, AppConfig.isHotWordPermitted, deviceSupportsSpeech, isAuthorizedToTranscribe, AppConfig.isListenModeEnabled else {
+        guard isAvailable, AppConfig.isListeningModeEnabled, AppConfig.isHotWordPermitted, deviceSupportsSpeech, isAuthorizedToTranscribe, AppConfig.listeningModeFeatureFlagEnabled else {
             stopListening()
             return
         }
@@ -170,7 +184,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     }
 
     private func startListening(mode: ListeningMode, resumingFromPause: Bool = false, requestablePermission: AudioPermission? = nil) {
-        guard AppConfig.isListenModeEnabled else { return }
+        guard AppConfig.listeningModeFeatureFlagEnabled else { return }
 
         guard !isPaused && ((mode != self.mode) || (resumingFromPause && isListening)) else {
             return
@@ -521,7 +535,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     @objc
     private func willResignActiveNotification(_ notification: Notification) {
-        if AppConfig.isListenModeEnabled {
+        if AppConfig.listeningModeFeatureFlagEnabled {
             pauseListening()
         }
     }
@@ -529,7 +543,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     @objc
     private func didBecomeActiveNotification(_ notification: Notification) {
         updatePermissionStatuses()
-        if AppConfig.isListenModeEnabled {
+        if AppConfig.listeningModeFeatureFlagEnabled {
             resumeListening()
         }
     }

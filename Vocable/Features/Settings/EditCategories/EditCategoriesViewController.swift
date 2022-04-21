@@ -29,7 +29,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         request.predicate = {
             var predicate = !Predicate(\Category.isUserRemoved)
-            if !AppConfig.isListenModeEnabled {
+            if !AppConfig.listeningModeFeatureFlagEnabled {
                 predicate &= !Predicate(\Category.identifier, equalTo: Category.Identifier.listeningMode)
             }
             return predicate
