@@ -16,13 +16,15 @@ class BaseScreen {
     
     private init() {}
     
-    static let navBarBackButton = XCUIApplication().buttons["navigationBar.backButton"]
-    static let paginationLabel = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
-    static let paginationLeftButton = XCUIApplication().buttons["bottomPagination.left_chevron"]
-    static let paginationRightButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
-    static let alertMessageLabel = XCUIApplication().staticTexts["alert_message"]
-    static let emptyStateAddPhraseButton = XCUIApplication().buttons["empty_state_addPhrase_button"]
-    static let navBarDismissButton = XCUIApplication().buttons.containing(NSPredicate(format: "identifier CONTAINS 'dismissButton'")).element
+    private static let app = XCUIApplication()
+    
+    static let navBarBackButton = app.buttons["navigationBar.backButton"]
+    static let paginationLabel = app.staticTexts["bottomPagination.pageNumber"]
+    static let paginationLeftButton = app.buttons["bottomPagination.left_chevron"]
+    static let paginationRightButton = app.buttons["bottomPagination.right_chevron"]
+    static let alertMessageLabel = app.staticTexts["alert_message"]
+    static let emptyStateAddPhraseButton = app.buttons["empty_state_addPhrase_button"]
+    static let navBarDismissButton = app.buttons.containing(NSPredicate(format: "identifier CONTAINS 'dismissButton'")).element
     
     /// From Pagination: the current page (X) being viewed from the "Page X of Y" pagination label.
     static var currentPageNumber: Int {
@@ -68,5 +70,4 @@ class BaseScreen {
         
         return matchingText
     }
-    
 }

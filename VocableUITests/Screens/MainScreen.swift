@@ -12,12 +12,12 @@ class MainScreen: BaseScreen {
     
     private static let app = XCUIApplication()
     
-    static let settingsButton = XCUIApplication().buttons["root.settingsButton"]
-    static let outputLabel = XCUIApplication().staticTexts["root.outputTextLabel"]
-    static let keyboardNavButton = XCUIApplication().buttons["root.keyboardButton"]
-    static let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
-    static let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]
-    static let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
+    static let settingsButton = app.buttons["root.settingsButton"]
+    static let outputLabel = app.staticTexts["root.outputTextLabel"]
+    static let keyboardNavButton = app.buttons["root.keyboardButton"]
+    static let categoryLeftButton = app.buttons["root.categories_carousel.left_chevron"]
+    static let categoryRightButton = app.buttons["root.categories_carousel.right_chevron"]
+    static let pageNumber = app.staticTexts["bottomPagination.pageNumber"]
     
     // Find the current selected category and return it as a CategoryTitleCellIdentifier
     static var selectedCategoryCell: CategoryTitleCellIdentifier {
@@ -26,7 +26,7 @@ class MainScreen: BaseScreen {
         let isSelectedPredicate = NSPredicate(format: "isSelected == true")
         
         // Build our query that first finds all category title cells, then finds among those the one that is selected
-        let query = XCUIApplication().cells.containing(identifierPredicate).containing(isSelectedPredicate)
+        let query = app.cells.containing(identifierPredicate).containing(isSelectedPredicate)
         
         // Return the selected category's full identifier
         return CategoryTitleCellIdentifier(query.element.identifier)!

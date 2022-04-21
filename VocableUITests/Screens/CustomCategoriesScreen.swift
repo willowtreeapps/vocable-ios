@@ -11,10 +11,12 @@ import XCTest
 
 class CustomCategoriesScreen: BaseScreen {
     
-    static let categoriesPageAddPhraseButton = XCUIApplication().buttons["settingsCategory.addPhraseButton"]
-    static let editCategoryPhrasesButton = XCUIApplication().buttons["edit_phrases_cell"]
-    static let categoriesPageEditPhraseButton = XCUIApplication().buttons["categoryPhrase.editButton"]
-    static let categoriesPageDeletePhraseButton = XCUIApplication().buttons["deleteButton"]
+    private static let app = XCUIApplication()
+    
+    static let categoriesPageAddPhraseButton = app.buttons["settingsCategory.addPhraseButton"]
+    static let editCategoryPhrasesButton = app.buttons["edit_phrases_cell"]
+    static let categoriesPageEditPhraseButton = app.buttons["categoryPhrase.editButton"]
+    static let categoriesPageDeletePhraseButton = app.buttons["deleteButton"]
 
     static func createCustomCategory(categoryName: String) {
         SettingsScreen.settingsPageAddCategoryButton.tap()
@@ -62,5 +64,4 @@ class CustomCategoriesScreen: BaseScreen {
         navBarBackButton.tap()
         returnToMainScreenFromCategoryDetails()
     }
-    
 }

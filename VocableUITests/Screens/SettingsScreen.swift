@@ -11,25 +11,28 @@ import XCTest
 
 class SettingsScreen: BaseScreen {
     
-    static let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
-    static let otherElements = XCUIApplication().collectionViews.cells.otherElements
-    static let cells = XCUIApplication().cells
-    static let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
+    private static let app = XCUIApplication()
+    
+    static let categoriesButton = app.collectionViews.staticTexts["Categories and Phrases"]
+    static let timingAndSensitivityButton = app.collectionViews.staticTexts["Timing and Sensitivity"]
+    static let otherElements = app.collectionViews.cells.otherElements
+    static let cells = app.cells
+    static let settingsPageNextButton = app.buttons["bottomPagination.right_chevron"]
     static let categoryUpButton = "reorder.upButton"
     static let categoryDownButton = "reorder.downButton"
     static let categoryForwardButton = "Forward"
     static let hideCategorySwitch = "hide"
     static let categoryShowButton = "show"
-    static let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
-    static let alertContinueButton = XCUIApplication().buttons["alert.button.continue_editing"]
-    static let alertDiscardButton = XCUIApplication().buttons["alert.button.discard_changes"]
-    static let alertDeleteButton = XCUIApplication().buttons["alert.button.delete"]
-    static let alertRemoveButton = XCUIApplication().buttons["Remove"]
-    static let alertCancelButton = XCUIApplication().buttons["Cancel"]
-    static let categoryDetailsTitle = XCUIApplication().staticTexts["category_title_label"]
-    static let renameCategoryButton = XCUIApplication().buttons["rename_category_button"]
-    static let showCategoryButton = XCUIApplication().buttons["show_category_toggle"]
-    static let removeCategoryButton = XCUIApplication().buttons["remove_category_cell"]
+    static let settingsPageAddCategoryButton = app.buttons["settingsCategory.addCategoryButton"]
+    static let alertContinueButton = app.buttons["alert.button.continue_editing"]
+    static let alertDiscardButton = app.buttons["alert.button.discard_changes"]
+    static let alertDeleteButton = app.buttons["alert.button.delete"]
+    static let alertRemoveButton = app.buttons["Remove"]
+    static let alertCancelButton = app.buttons["Cancel"]
+    static let categoryDetailsTitle = app.staticTexts["category_title_label"]
+    static let renameCategoryButton = app.buttons["rename_category_button"]
+    static let showCategoryButton = app.buttons["show_category_toggle"]
+    static let removeCategoryButton = app.buttons["remove_category_cell"]
 
     static func openCategorySettings(category: String) {
         locateCategoryCell(category).staticTexts[category].tap()
@@ -53,7 +56,7 @@ class SettingsScreen: BaseScreen {
         let predicate = NSPredicate(format: "label CONTAINS %@", category)
         let cellLabel = cells.staticTexts.containing(predicate).element.label
         
-        return XCUIApplication().cells.containing(.staticText, identifier: cellLabel)
+        return app.cells.containing(.staticText, identifier: cellLabel)
     }
     
     static func doesCategoryExist(_ category: String) -> Bool {
@@ -117,4 +120,8 @@ class SettingsScreen: BaseScreen {
         navBarDismissButton.tap()
     }
     
+    static func navigateToTimingAndSensitivityScreen() {
+        MainScreen.settingsButton.tap(afterWaitingForExistenceWithTimeout: 2)
+        SettingsScreen.timingAndSensitivityButton.tap(afterWaitingForExistenceWithTimeout: 2)
+    }
 }

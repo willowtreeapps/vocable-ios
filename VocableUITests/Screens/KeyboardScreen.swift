@@ -11,10 +11,10 @@ import XCTest
 class KeyboardScreen: BaseScreen {
     private static let app = XCUIApplication()
     
-    static let keyboardTextView = XCUIApplication().textViews["keyboard.textView"]
-    static let favoriteButton = XCUIApplication().buttons["keyboard.favoriteButton"]
-    static let checkmarkAddButton = XCUIApplication().buttons["keyboard.saveButton"]
-    static let createDuplicateButton = XCUIApplication().buttons["Create Duplicate"]
+    static let keyboardTextView = app.textViews["keyboard.textView"]
+    static let favoriteButton = app.buttons["keyboard.favoriteButton"]
+    static let checkmarkAddButton = app.buttons["keyboard.saveButton"]
+    static let createDuplicateButton = app.buttons["Create Duplicate"]
     
     static func typeText(_ textToType: String) {
         for char in textToType {
