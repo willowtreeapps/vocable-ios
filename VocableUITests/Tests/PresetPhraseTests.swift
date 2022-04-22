@@ -91,3 +91,42 @@ class PresetPhraseTests: BaseTest {
     }
     
     func testEditPhrasesButtonIsDisabledForNumberPadCategory() {
+            let categoryName = "123"
+           
+            SettingsScreen.navigateToSettingsCategoryScreen()
+            SettingsScreen.openCategorySettings(category: categoryName)
+            XCTAssertFalse(CustomCategoriesScreen.editCategoryPhrasesButton.isEnabled)
+    }
+        
+    func testEditPhrasesButtonIsDisabledForRecentsCategory() {
+        let categoryName = "Recents"
+       
+        SettingsScreen.navigateToSettingsCategoryScreen()
+        SettingsScreen.openCategorySettings(category: categoryName)
+        XCTAssertFalse(CustomCategoriesScreen.editCategoryPhrasesButton.isEnabled)
+    }
+        
+    func testAddDuplicatePhrasesToMySayings() {
+        let testPhrase = "Test"
+        
+        MainScreen.keyboardNavButton.tap()
+        KeyboardScreen.typeText(testPhrase)
+        KeyboardScreen.favoriteButton.tap()
+        KeyboardScreen.navBarDismissButton.tap()
+       
+        MainScreen.locateAndSelectDestinationCategory(.mySayings)
+        XCTAssertTrue(MainScreen.doesPhraseExist(testPhrase), "Expected the first phrase \(testPhrase) to be added to and displayed in 'My Sayings'")
+        
+        // Add the same phrase again to the My Sayings
+        MainScreen.addPhraseLabel.tap()
+        KeyboardScreen.typeText(testPhrase)
+        KeyboardScreen.checkmarkAddButton.tap()
+        KeyboardScreen.createDuplicateButton.tap()
+        
+        // Assert that now we have two cells containing the same phrase
+        let phrasePredicate = NSPredicate(format: "label MATCHES %@", testPhrase)
+        let phraseQuery = XCUIApplication().staticTexts.containing(phrasePredicate)
+        _ = phraseQuery.element.waitForExistence(timeout: 1)
+        XCTAssertEqual(phraseQuery.count, 2, "Expected both phrases to be presentin 'My Sayings'")
+    }
+}
