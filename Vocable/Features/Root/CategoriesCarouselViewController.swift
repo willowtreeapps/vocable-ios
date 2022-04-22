@@ -31,8 +31,7 @@ import Combine
     }
 
     @PublishedValue private(set) var categoryObjectID = fetchInitialCategoryID()
-    private var hotWordCancellable: AnyCancellable?
-    private var listeningModeEnabledCancellable: AnyCancellable?
+    private var cancellables = Set<AnyCancellable>()
 
     @IBOutlet private weak var backChevron: GazeableButton!
     @IBOutlet private weak var forwardChevron: GazeableButton!
@@ -73,7 +72,7 @@ import Combine
 
         updateFetchedResultsController()
 
-        hotWordCancellable = SpeechRecognitionController.shared.$transcription
+        SpeechRecognitionController.shared.$transcription
             .filter { value in
                 if case .hotWord = value {
                     return true
@@ -82,14 +81,14 @@ import Combine
             }.receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.navigateToVoiceCategory()
-            }
+            }.store(in: &cancellables)
 
-        listeningModeEnabledCancellable = AppConfig.$isListeningModeEnabled
-            .dropFirst()
+        Publishers.CombineLatest(AppConfig.$isListeningModeEnabled, AppConfig.$listeningModeFeatureFlagEnabled)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] isEnabled in
+            .sink { [weak self] isListeningModeEnabled, listeningModeFeatureFlagEnabled in
+                let isEnabled = isListeningModeEnabled && listeningModeFeatureFlagEnabled
                 self?.listeningModeEnabledStateDidChange(isEnabled)
-            }
+            }.store(in: &cancellables)
     }
 
     override func viewDidAppear(_ animated: Bool) {
