@@ -105,5 +105,10 @@ struct UserDefaultsKey: ExpressibleByStringLiteral {
 
 extension UserDefaultsKey {
 
+    static let isListeningModeEnabled: UserDefaultsKey = "isListeningModeEnabled"
+    static let isHotWordPermitted: UserDefaultsKey = "isHotWordPermitted"
+    static let sensitivitySetting: UserDefaultsKey = "sensitivitySetting"
+    static let dwellDuration: UserDefaultsKey = "dwellDuration"
+    static let isHeadTrackingEnabled: UserDefaultsKey = "isHeadTrackingEnabled"
     static let listeningModeFeatureFlagEnabled: UserDefaultsKey = "listeningModeFeatureFlagEnabled"
 }

@@ -20,22 +20,22 @@ struct AppConfig {
         #endif
     }()
 
-    @PublishedDefault(key: "isHeadTrackingEnabled", defaultValue: AppConfig.isHeadTrackingSupported)
+    @PublishedDefault(key: .isHeadTrackingEnabled, defaultValue: AppConfig.isHeadTrackingSupported)
     static var isHeadTrackingEnabled: Bool
     static var isHeadTrackingSupported: Bool {
         return ARFaceTrackingConfiguration.isSupported
     }
 
-    @PublishedDefault(key: "dwellDuration", defaultValue: 1)
+    @PublishedDefault(key: .dwellDuration, defaultValue: 1)
     static var selectionHoldDuration: TimeInterval
 
-    @PublishedDefault(key: "sensitivitySetting", defaultValue: CursorSensitivity.medium)
+    @PublishedDefault(key: .sensitivitySetting, defaultValue: CursorSensitivity.medium)
     static var cursorSensitivity: CursorSensitivity
 
-    @PublishedDefault(key: "isHotWordPermitted", defaultValue: true)
+    @PublishedDefault(key: .isHotWordPermitted, defaultValue: true)
     static var isHotWordPermitted: Bool
 
-    @PublishedDefault(key: "isListeningModeEnabled", defaultValue: isListeningModeSupported)
+    @PublishedDefault(key: .isListeningModeEnabled, defaultValue: isListeningModeSupported)
     static var isListeningModeEnabled: Bool
 
     static var isListeningModeSupported: Bool {
