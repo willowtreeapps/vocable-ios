@@ -56,23 +56,6 @@ class SettingsScreen: BaseScreen {
         return XCUIApplication().cells.containing(.staticText, identifier: cellLabel)
     }
     
-    static func doesCategoryExist(_ category: String) -> Bool {
-        var flag = false
-        let predicate = NSPredicate(format: "label CONTAINS %@", category)
-        
-        // Loop through each custom category page to find our category
-        for _ in 1...totalPageCount {
-            if cells.staticTexts.containing(predicate).element.exists {
-                flag = true
-                break
-            } else {
-                MainScreen.paginationRightButton.tap()
-            }
-        }
-        
-        return flag
-    }
-    
     static func toggleHideShowCategory(category: String, toggle: String) {
         var toggleLabel = ""
         switch toggle {

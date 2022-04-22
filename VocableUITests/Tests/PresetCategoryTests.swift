@@ -24,40 +24,32 @@ class PresetCategoryTests: BaseTest {
         KeyboardScreen.checkmarkAddButton.tap()
         XCTAssertEqual(SettingsScreen.categoryDetailsTitle.label, renamedCategory)
         
+        // Confirm that the category is renamed from categories list
         SettingsScreen.navBarBackButton.tap()
         XCTAssertTrue(SettingsScreen.doesCategoryExist(renamedCategory))
         
-        // Return to the main screen
-        CustomCategoriesScreen.returnToMainScreenFromCategoriesList()
-        
         // Confirm that the category is renamed from main screen
+        CustomCategoriesScreen.returnToMainScreenFromCategoriesList()
         MainScreen.locateAndSelectDestinationCategory(.general)
         XCTAssertEqual(MainScreen.selectedCategoryCell.identifier, categoryIdentifier)
-        //XCUIApplication().cells.staticTexts["Generaltest"].label
+        XCTAssertTrue(MainScreen.doesCategoryExist(renamedCategory))
     }
     
     func testRemoveCategory() {
         let categoryName = "Environment"
-        let categoryIdentifier = CategoryTitleCellIdentifier(CategoryIdentifier.environment).identifier
 
         //Remove the preset category
         SettingsScreen.navigateToSettingsCategoryScreen()
         SettingsScreen.openCategorySettings(category: categoryName)
         SettingsScreen.removeCategoryButton.tap()
-        SettingsScreen.alertRemoveButton.tap()
+        SettingsScreen.alertRemoveButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
+        
+        // Confirm that the category is removed from categories list
         XCTAssertFalse(SettingsScreen.doesCategoryExist(categoryName))
         
-        // Return to the main screen
+        // Confirm that the category is removed from main screen
         CustomCategoriesScreen.returnToMainScreenFromCategoriesList()
-        
-        // Confirm that the category is no longer accessible from main screen
-        for category in PresetCategories().list {
-            // If we come across the category we expect to be removed, fail the test. Otherwise the test will pass
-            MainScreen.locateAndSelectDestinationCategory(category.categoryIdentifier)
-            if (MainScreen.selectedCategoryCell.identifier == categoryIdentifier) {
-                XCTFail("The category with identifier, '\(categoryIdentifier)', was not removed as expected.")
-            }
-        }
+        XCTAssertFalse(MainScreen.doesCategoryExist(categoryName))
     }
     
     func testShowHideButtonIsDisabledForMySayingsCategory() {
