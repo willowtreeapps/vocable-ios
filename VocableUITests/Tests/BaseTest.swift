@@ -13,7 +13,6 @@ class BaseTest: XCTestCase {
     
     override func setUp() {
         let app = XCUIApplication()
-        app.launchEnvironment["RefactoredInterfaceEnabled"] = "1"
         app.launchArguments = LaunchArguments[.resetAppDataOnLaunch, .enableListeningMode]
         continueAfterFailure = false
         app.launch()
