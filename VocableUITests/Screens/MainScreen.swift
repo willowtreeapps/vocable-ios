@@ -18,6 +18,7 @@ class MainScreen: BaseScreen {
     static let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
     static let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]
     static let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
+    static let addPhraseLabel = XCUIApplication().staticTexts["mainScreen.addPhrase"]
     
     // Find the current selected category and return it as a CategoryTitleCellIdentifier
     static var selectedCategoryCell: CategoryTitleCellIdentifier {
