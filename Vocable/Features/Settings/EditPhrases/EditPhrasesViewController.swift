@@ -43,6 +43,11 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         setupCollectionView()
     }
 
+    override func viewLayoutMarginsDidChange() {
+        super.viewLayoutMarginsDidChange()
+        updateBackgroundViewLayoutMargins()
+    }
+
     private func setupNavigationBar() {
         navigationBar.title = category.name
         navigationBar.rightButton = {
@@ -114,11 +119,18 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         guard collectionView.backgroundView == nil else { return }
         paginationView.isHidden = true
         collectionView.backgroundView = EmptyStateView(type: EmptyStateType.phraseCollection, action: addPhrasePressed)
+        updateBackgroundViewLayoutMargins()
     }
 
     private func removeEmptyStateIfNeeded() {
         paginationView.isHidden = false
         collectionView.backgroundView = nil
+    }
+
+    private func updateBackgroundViewLayoutMargins() {
+        guard let backgroundView = collectionView.backgroundView else { return }
+        backgroundView.directionalLayoutMargins.leading = view.directionalLayoutMargins.leading
+        backgroundView.directionalLayoutMargins.trailing = view.directionalLayoutMargins.trailing
     }
 
     // MARK: Actions
