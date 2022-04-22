@@ -37,10 +37,10 @@ import Combine
     /// Creates a new `PublishedDefault` for the given `UserDefaults` key and default value
     /// - Parameters:
     ///   - key: The key with which the value should be stored in `UserDefaults`
-    ///   - defaultValue: The value that should be provided when no value is stored in `UserDefaults`
-    init(key: UserDefaultsKey, defaultValue: T) {
+    ///   - wrappedValue: The value that should be provided when no value is stored in `UserDefaults`
+    init(wrappedValue: T, _ key: UserDefaultsKey) {
         self.defaultsKey = key.value
-        let value = PublishedDefault.currentDefaultsValue(for: key) ?? defaultValue
+        let value = PublishedDefault.currentDefaultsValue(for: key) ?? wrappedValue
         let subject = CurrentValueSubject<T, Never>(value)
         self.subject = subject
         self.defaultsCancellable = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
@@ -89,11 +89,6 @@ import Combine
     }
 }
 
-extension PublishedDefault {
-
-    typealias Key = UserDefaultsKey
-}
-
 struct UserDefaultsKey: ExpressibleByStringLiteral {
 
     let value: String
@@ -101,14 +96,4 @@ struct UserDefaultsKey: ExpressibleByStringLiteral {
     init(stringLiteral value: StringLiteralType) {
         self.value = value
     }
-}
-
-extension UserDefaultsKey {
-
-    static let isListeningModeEnabled: UserDefaultsKey = "isListeningModeEnabled"
-    static let isHotWordPermitted: UserDefaultsKey = "isHotWordPermitted"
-    static let sensitivitySetting: UserDefaultsKey = "sensitivitySetting"
-    static let dwellDuration: UserDefaultsKey = "dwellDuration"
-    static let isHeadTrackingEnabled: UserDefaultsKey = "isHeadTrackingEnabled"
-    static let listeningModeFeatureFlagEnabled: UserDefaultsKey = "listeningModeFeatureFlagEnabled"
 }
