@@ -61,19 +61,24 @@ final class FreeResponseTextEditorConfigurationProvider: TextEditorConfiguration
             return
         }
 
+        let context = NSPersistentContainer.shared.viewContext
         canFavoritePhrase = true
-        let userFavorites = Category.userFavoritesCategory()
+        do {
+            let userFavorites = try Category.fetch(.userFavorites, in: context)
 
-        var predicate = Predicate(\Phrase.category, equalTo: userFavorites)
-        predicate &= Predicate(\Phrase.isUserGenerated)
-        predicate &= Predicate(\Phrase.utterance, equalTo: text)
+            var predicate = Predicate(\Phrase.category, equalTo: userFavorites)
+            predicate &= Predicate(\Phrase.isUserGenerated)
+            predicate &= Predicate(\Phrase.utterance, equalTo: text)
 
-        let fetchRequest: NSFetchRequest<Phrase> = Phrase.fetchRequest()
-        fetchRequest.predicate = predicate
-        fetchRequest.fetchLimit = 1
-        let results = (try? NSPersistentContainer.shared.viewContext.fetch(fetchRequest)) ?? []
-        favoritedPhraseIdentifier = results.first?.objectID
-        needsUpdateFavoritesState = false
+            let fetchRequest: NSFetchRequest<Phrase> = Phrase.fetchRequest()
+            fetchRequest.predicate = predicate
+            fetchRequest.fetchLimit = 1
+            let results = try context.fetch(fetchRequest)
+            favoritedPhraseIdentifier = results.first?.objectID
+            needsUpdateFavoritesState = false
+        } catch {
+            print("Failed to update favorites state: \(error)")
+        }
     }
 
     // MARK: - Private Helpers
@@ -84,17 +89,18 @@ final class FreeResponseTextEditorConfigurationProvider: TextEditorConfiguration
         }
 
         context.performAndWait {
-            if let favoritedPhraseIdentifier = favoritedPhraseIdentifier,
-               let favoritedPhrase = Phrase.fetchObject(in: context, matching: favoritedPhraseIdentifier) {
-                context.delete(favoritedPhrase)
-            } else {
-                _ = Phrase.create(withUserEntry: utterance, in: context)
-            }
-
             do {
+
+                if let favoritedPhraseIdentifier = favoritedPhraseIdentifier,
+                   let favoritedPhrase = Phrase.fetchObject(in: context, matching: favoritedPhraseIdentifier) {
+                    context.delete(favoritedPhrase)
+                } else {
+                    _ = try Phrase.create(withUserEntry: utterance, in: context)
+                }
+
                 try context.save()
             } catch {
-                assertionFailure("Could not save: \(error)")
+                print("Could not save: \(error)")
             }
         }
         needsUpdateFavoritesState = true

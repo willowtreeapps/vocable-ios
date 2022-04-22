@@ -149,10 +149,14 @@ This shortcut makes it fast to kick off a conversation by saying something like 
             updateDataSource(animated: true)
             let context = NSPersistentContainer.shared.viewContext
             context.perform {
-                let listeningModeCategory = Category.fetch(.listeningMode, in: context)
-                listeningModeCategory.isHidden = !AppConfig.isListeningModeEnabled
-                try? Category.updateAllOrdinalValues(in: context)
-                try? context.save()
+                do {
+                    let listeningModeCategory = try Category.fetch(.listeningMode, in: context)
+                    listeningModeCategory.isHidden = !AppConfig.isListeningModeEnabled
+                    try Category.updateAllOrdinalValues(in: context)
+                    try context.save()
+                } catch {
+                    print("Failed to save: \(error)")
+                }
             }
 
         case .hotWordEnabled:

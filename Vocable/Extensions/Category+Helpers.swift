@@ -12,6 +12,10 @@ import Algorithms
 
 extension Category {
 
+    enum FetchError: Error {
+        case presetCategoryNotFound(String)
+    }
+
     // Category identifiers that are reserved for special
     // cases and *must* match the preset dataset
     enum Identifier: String {
@@ -62,9 +66,9 @@ extension Category {
         return true
     }
 
-    static func fetch(_ identifier: Identifier, in context: NSManagedObjectContext) -> Category {
+    static func fetch(_ identifier: Identifier, in context: NSManagedObjectContext) throws -> Category {
         guard let category = Category.fetchObject(in: context, matching: identifier.rawValue) else {
-            preconditionFailure("debug.assertion.user_favorites_category_not_found")
+            throw FetchError.presetCategoryNotFound(identifier.rawValue)
         }
         return category
     }
