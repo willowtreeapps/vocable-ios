@@ -98,7 +98,7 @@ public struct TextPresets {
     private static var _cachedOverride: PresetData?
 
     private static var overriddenPresets: PresetData? {
-        guard let overrideString = ProcessInfo.processInfo.environment["OverridePresets"] else {
+        guard let overrideString = LaunchEnvironment.value(for: .overriddenPresets) else {
             return nil
         }
         if let cached = _cachedOverride {

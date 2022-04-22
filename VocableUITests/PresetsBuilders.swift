@@ -71,7 +71,7 @@ struct Presets {
         return stringified
     }
 
-    func encoded(to app: XCUIApplication, environmentKey: String = "OverridePresets") {
-        app.launchEnvironment[environmentKey] = self.encoded()
+    func encoded(to app: XCUIApplication, environmentKey: LaunchEnvironment.Key = .overriddenPresets) {
+        app.launchEnvironment[environmentKey.rawValue] = self.encoded()
     }
 }
