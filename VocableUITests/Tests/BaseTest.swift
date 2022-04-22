@@ -14,7 +14,7 @@ class BaseTest: XCTestCase {
     override func setUp() {
         let app = XCUIApplication()
         app.launchEnvironment["RefactoredInterfaceEnabled"] = "1"
-        app.launchArguments.append("resetAppDataOnLaunch")
+        app.launchArguments = LaunchArguments[.resetAppDataOnLaunch, .enableListeningMode]
         continueAfterFailure = false
         app.launch()
 
@@ -40,6 +40,5 @@ class BaseTest: XCTestCase {
     func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyz"
         return String((0..<length).map { _ in letters.randomElement()! })
-    }  
-    
+    }
 }

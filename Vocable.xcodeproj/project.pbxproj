@@ -176,6 +176,9 @@
 		A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */; };
 		A9DFCC20242D020100136136 /* PublishedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DFCC1F242D020100136136 /* PublishedValue.swift */; };
 		A9E49E5E2811FE840088A344 /* AppStorage+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E49E5D2811FE840088A344 /* AppStorage+Init.swift */; };
+		A9E49E602812FD760088A344 /* LaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E49E5F2812FD760088A344 /* LaunchArguments.swift */; };
+		A9E49E6128130CAF0088A344 /* LaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E49E5F2812FD760088A344 /* LaunchArguments.swift */; };
+		A9E49E6428130D140088A344 /* LaunchArguments+StringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E49E6328130D140088A344 /* LaunchArguments+StringArray.swift */; };
 		A9E665A7241A785F00FE577A /* CarouselGridCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */; };
 		A9F56FC824365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9F56FC724365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib */; };
 		A9FD68A528008AD3006ABA3F /* AddPhraseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FD68A428008AD3006ABA3F /* AddPhraseCollectionViewCell.swift */; };
@@ -415,6 +418,8 @@
 		A9DF00F923E38DB00072C7E1 /* PageControlReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControlReusableView.swift; sourceTree = "<group>"; };
 		A9DFCC1F242D020100136136 /* PublishedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishedValue.swift; sourceTree = "<group>"; };
 		A9E49E5D2811FE840088A344 /* AppStorage+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStorage+Init.swift"; sourceTree = "<group>"; };
+		A9E49E5F2812FD760088A344 /* LaunchArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchArguments.swift; sourceTree = "<group>"; };
+		A9E49E6328130D140088A344 /* LaunchArguments+StringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LaunchArguments+StringArray.swift"; sourceTree = "<group>"; };
 		A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselGridCollectionViewController.swift; sourceTree = "<group>"; };
 		A9F56FC724365BE8008162B6 /* SpeakFunctionKeyboardKeyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeakFunctionKeyboardKeyCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9FD68A428008AD3006ABA3F /* AddPhraseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhraseCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -517,6 +522,7 @@
 		17191A30245089270079F9BE /* VocableUITests */ = {
 			isa = PBXGroup;
 			children = (
+				A9E49E6228130D080088A344 /* Common */,
 				17793C2C24574C9B00758BC0 /* Tests */,
 				17793C2924574B0B00758BC0 /* Screens */,
 				17191A33245089270079F9BE /* Info.plist */,
@@ -822,6 +828,14 @@
 			path = SelectionMode;
 			sourceTree = "<group>";
 		};
+		A9E49E6228130D080088A344 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A9E49E6328130D140088A344 /* LaunchArguments+StringArray.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		B838202723FC99AE005A79CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -870,6 +884,7 @@
 				6B05020527F3516F000CFE5A /* CategoryReordering */,
 				A9FD68A628009646006ABA3F /* NSAttributedString+Helpers.swift */,
 				A9E49E5D2811FE840088A344 /* AppStorage+Init.swift */,
+				A9E49E5F2812FD760088A344 /* LaunchArguments.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1214,6 +1229,7 @@
 				6B005AED245B25E9004919F4 /* VocableNavigationController.swift in Sources */,
 				64F8A5FA245CC9FA00B7C0F9 /* EditPhrasesViewController.swift in Sources */,
 				6B9DFA7623E8D59A0037673E /* UICollectionView+Gaze.swift in Sources */,
+				A9E49E602812FD760088A344 /* LaunchArguments.swift in Sources */,
 				6B9DFA7023E88A630037673E /* InterpolableValues.swift in Sources */,
 				A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */,
 				A91030B227E3BF6600281C97 /* VocableListCellContentView.swift in Sources */,
@@ -1311,10 +1327,12 @@
 				627B53642800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift in Sources */,
 				CE12277624F586CB008F7866 /* CustomPhraseTests.swift in Sources */,
 				62300C7E27F360930005CEF5 /* CustomCategoryTests.swift in Sources */,
+				A9E49E6428130D140088A344 /* LaunchArguments+StringArray.swift in Sources */,
 				17793C2B24574B2800758BC0 /* MainScreen.swift in Sources */,
 				627B53662800D11200FEBF25 /* MainScreenPaginationTests.swift in Sources */,
 				DC533C0127FCDF39005FEBBD /* CustomCategoryBaseTest.swift in Sources */,
 				17F29479247419DD00A05434 /* SettingsScreen.swift in Sources */,
+				A9E49E6128130CAF0088A344 /* LaunchArguments.swift in Sources */,
 				17D4162A2457659700FD81CD /* BaseTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
