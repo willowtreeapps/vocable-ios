@@ -11,15 +11,13 @@ import XCTest
 class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
     
     func testCanNavigatePages() {
-        // Add 11 phrases; this results in 3 total pages for an iPhone and 2 total pages for an iPad
-        for phrase in listOfPhrases.startIndex..<11 {
+        // Add enough phrases to have 2 pages.
+        for phrase in listOfPhrases.startIndex..<5 {
             CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
         }
         
         // Verify that the user is on the first page and the next page buttons are enabled.
-        XCTAssertEqual(CustomCategoriesScreen.currentPageNumber, 1)
-        XCTAssertTrue(CustomCategoriesScreen.paginationLeftButton.isEnabled)
-        XCTAssertTrue(CustomCategoriesScreen.paginationRightButton.isEnabled)
+        VTAssertPaginationEquals(1, of: 2, enabledArrows: .both)
         
         // Use the RIGHT pagination button to traverse the pages, ending back on "Page 1 of X"
         for pageNumber in 1...CustomCategoriesScreen.totalPageCount {
@@ -37,25 +35,23 @@ class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
     }
     
     func testPagesAdjustToNewPhrases() {
-        // Add 10 phrases; this results in 3 starting pages for an iPhone and 1 full page for an iPad
-        for phrase in listOfPhrases.startIndex..<10 {
+        // Add enough phrases (4) to fill one page.
+        for phrase in listOfPhrases.startIndex..<4 {
             CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
         }
         
         // Verify that the user is on the first page.
         XCTAssertEqual(CustomCategoriesScreen.currentPageNumber, 1)
         
-        // Add 3 more phrases to push the total number of pages from N to N+1.
+        // Add 1 more phrase to push the total number of pages to 2.
         let originalPageCount = CustomCategoriesScreen.totalPageCount
         let expectedPageCountAfterAddingPhrase = originalPageCount + 1
-        CustomCategoriesScreen.addRandomPhrases(numberOfPhrases: 3)
+        CustomCategoriesScreen.addRandomPhrases(numberOfPhrases: 1)
         XCTAssertEqual(CustomCategoriesScreen.totalPageCount, expectedPageCountAfterAddingPhrase)
         
-        // Remove 3 phrases and verify that the page count reduces, back to the original count
-        for _ in 1...3 {
-            CustomCategoriesScreen.categoriesPageDeletePhraseButton.firstMatch.tap()
-            SettingsScreen.alertDeleteButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
-        }
+        // Remove the additional phrase to verify that the page count reduces, back to the original count
+        CustomCategoriesScreen.categoriesPageDeletePhraseButton.firstMatch.tap()
+        SettingsScreen.alertDeleteButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
         XCTAssertEqual(CustomCategoriesScreen.totalPageCount, originalPageCount)
     }
     
