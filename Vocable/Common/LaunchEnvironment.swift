@@ -11,7 +11,7 @@ import Foundation
 enum LaunchEnvironment {
 
     public enum Key: String {
-        case overriddenPresets
+        case overridePresets
     }
 
     static func value(for key: Key) -> String? {

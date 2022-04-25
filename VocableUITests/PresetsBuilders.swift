@@ -24,17 +24,10 @@ struct Phrase {
 
 struct Category {
 
-    @resultBuilder
-    enum PhraseBuilder {
-        static func buildBlock(_ components: Phrase...) -> [Phrase] {
-            components
-        }
-    }
-
     let presetCategory: PresetCategory
     let presetPhrases: [PresetPhrase]
 
-    init(_ name: String, hidden: Bool = false, languageCode: String = "en", @PhraseBuilder _ phrasesBuilder: () -> [Phrase]) {
+    init(_ name: String, hidden: Bool = false, languageCode: String = "en", @ListBuilder<Phrase> _ phrasesBuilder: () -> [Phrase]) {
 
         let category = PresetCategory(id: UUID().uuidString, hidden: hidden, languageCode: languageCode, utterance: name)
         let phrases = phrasesBuilder().map { phrase in
@@ -47,18 +40,11 @@ struct Category {
 }
 
 
-struct Presets {
-
-    @resultBuilder
-    enum CategoryBuilder {
-        static func buildBlock(_ components: Category...) -> [Category] {
-            components
-        }
-    }
+struct Presets: LaunchEnvironmentEncodable {
 
     private let presetData: PresetData
 
-    init(schemaVersion: Int = 1, @CategoryBuilder _ categoriesBuilder: () -> [Category]) {
+    init(schemaVersion: Int = 1, @ListBuilder<Category> _ categoriesBuilder: () -> [Category]) {
         let categories = categoriesBuilder()
         self.presetData = .init(schemaVersion: schemaVersion,
                                 categories: categories.map(\.presetCategory),
@@ -71,7 +57,7 @@ struct Presets {
         return stringified
     }
 
-    func encoded(to app: XCUIApplication, environmentKey: LaunchEnvironment.Key = .overriddenPresets) {
-        app.launchEnvironment[environmentKey.rawValue] = self.encoded()
+    func launchEnvironmentValue() -> String {
+        return encoded()
     }
 }

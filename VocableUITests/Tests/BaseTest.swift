@@ -13,7 +13,9 @@ class BaseTest: XCTestCase {
     
     override func setUp() {
         let app = XCUIApplication()
-        app.launchArguments = LaunchArguments[.resetAppDataOnLaunch, .enableListeningMode]
+        app.configure {
+            Arguments(.resetAppDataOnLaunch, .enableListeningMode)
+        }
         continueAfterFailure = false
         app.launch()
 

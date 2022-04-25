@@ -14,19 +14,22 @@ class PresetsOverrideTestCase: XCTestCase {
         super.setUp()
 
         let app = XCUIApplication()
-        app.launchArguments = ["resetAppDataOnLaunch"]
-        Presets {
-            Category("Custom Basic Needs") {
-                Phrase("Test Phrase")
-                Phrase("Another Phrase")
-                Phrase(id: "specific_id", "With some text")
-                Phrase(id: "another_id", languageCode: "es", "No sé donde estoy")
+        app.configure {
+            Arguments(.resetAppDataOnLaunch)
+            Environment(.overridePresets) {
+                Presets {
+                    Category("Custom Basic Needs") {
+                        Phrase("Test Phrase")
+                        Phrase("Another Phrase")
+                        Phrase(id: "specific_id", "With some text")
+                        Phrase(id: "another_id", languageCode: "es", "No sé donde estoy")
+                    }
+                    Category("Another Category") {
+                        // Empty
+                    }
+                }
             }
-            Category("Another Category") {
-                // Empty
-            }
-        }.encoded(to: app)
-
+        }
         app.launch()
     }
 
