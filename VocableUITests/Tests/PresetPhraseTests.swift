@@ -13,20 +13,16 @@ class PresetPhraseTests: BaseTest {
         let customPhrase = "Add"
         let category = "Environment"
                 
-        // Navigate to our test category
+        // Navigate to our test category and Add a phrase
         SettingsScreen.navigateToSettingsCategoryScreen()
         SettingsScreen.openCategorySettings(category: category)
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
-        CustomCategoriesScreen.categoriesPageAddPhraseButton.tap()
+        CustomCategoriesScreen.addPhrase(customPhrase)
         
-        // Add a phrase
-        KeyboardScreen.typeText(customPhrase)
-        KeyboardScreen.checkmarkAddButton.tap()
-        
-        // Verify that phrase doesn't exist in Category Details Screen
+        // Verify that phrase does exist in Category Details Screen
         XCTAssertTrue(CustomCategoriesScreen.doesPhraseExist(customPhrase))
         
-        // Verify that phrase doesn't exist in Main Screen
+        // Verify that phrase doesn exist in Main Screen
         CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
         MainScreen.locateAndSelectDestinationCategory(.environment)
         XCTAssertTrue(MainScreen.doesPhraseExist(customPhrase))
@@ -42,27 +38,28 @@ class PresetPhraseTests: BaseTest {
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         
         // Define the query that gives us the first phrase listed
-        let firstPhraseId = XCUIApplication().cells.firstMatch.identifier
-        let firstPhraseCell = XCUIApplication().cells[firstPhraseId]
-        let firstPhrase = firstPhraseCell.staticTexts.firstMatch.label
+        let originalPhraseId = XCUIApplication().cells.firstMatch.identifier
+        let originalPhraseCell = XCUIApplication().cells[originalPhraseId]
+        let originalPhrase = originalPhraseCell.staticTexts.firstMatch.label
         
-        firstPhraseCell.tap()
+        //firstPhraseCell.tap()
+        originalPhraseCell.staticTexts[originalPhrase].tap()
         KeyboardScreen.typeText(customPhrase)
         KeyboardScreen.checkmarkAddButton.tap()
    
+        let updatedPhrase = originalPhrase + customPhrase
         // Verify that preset phrase doesn't exist in Category Details Screen
-        XCTAssertFalse(CustomCategoriesScreen.doesPhraseExist(firstPhrase))
+        XCTAssertFalse(CustomCategoriesScreen.doesPhraseExist(originalPhrase))
         
         // Verify that edited phrase exists in Category Details Screen
-        XCTAssertTrue(CustomCategoriesScreen.doesPhraseExist(firstPhrase+customPhrase))
+        XCTAssertTrue(CustomCategoriesScreen.doesPhraseExist(updatedPhrase))
         
         // Verify that preset phrase doesn't exist in Main Screen
         CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
         MainScreen.locateAndSelectDestinationCategory(.personalCare)
-        XCTAssertFalse(MainScreen.doesPhraseExist(firstPhrase))
         
         // Verify that edited phrase exists in Main Screen
-        XCTAssertTrue(MainScreen.doesPhraseExist(firstPhrase+customPhrase))
+        XCTAssertTrue(MainScreen.doesPhraseExist(updatedPhrase))
     }
     
     func testDeletePresetPhrase() {
@@ -121,12 +118,12 @@ class PresetPhraseTests: BaseTest {
         MainScreen.addPhraseLabel.tap()
         KeyboardScreen.typeText(testPhrase)
         KeyboardScreen.checkmarkAddButton.tap()
-        KeyboardScreen.createDuplicateButton.tap()
+        KeyboardScreen.createDuplicateButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
         
         // Assert that now we have two cells containing the same phrase
         let phrasePredicate = NSPredicate(format: "label MATCHES %@", testPhrase)
         let phraseQuery = XCUIApplication().staticTexts.containing(phrasePredicate)
         _ = phraseQuery.element.waitForExistence(timeout: 1)
-        XCTAssertEqual(phraseQuery.count, 2, "Expected both phrases to be presentin 'My Sayings'")
+        XCTAssertEqual(phraseQuery.count, 2, "Expected both phrases to be present in 'My Sayings'")
     }
 }
