@@ -47,11 +47,11 @@ class PresetPhraseTests: BaseTest {
         KeyboardScreen.typeText(customPhrase)
         KeyboardScreen.checkmarkAddButton.tap()
    
-        let updatedPhrase = originalPhrase + customPhrase
-        // Verify that preset phrase doesn't exist in Category Details Screen
+        // Verify that the original phrase doesn't exist in Category Details Screen
         XCTAssertFalse(CustomCategoriesScreen.doesPhraseExist(originalPhrase))
         
-        // Verify that edited phrase exists in Category Details Screen
+        // Verify that updated phrase exists in Category Details Screen
+        let updatedPhrase = originalPhrase + customPhrase
         XCTAssertTrue(CustomCategoriesScreen.doesPhraseExist(updatedPhrase))
         
         // Verify that updated phrase exists in Main Screen
