@@ -22,7 +22,7 @@ class PresetPhraseTests: BaseTest {
         // Verify that phrase does exist in Category Details Screen
         XCTAssertTrue(CustomCategoriesScreen.doesPhraseExist(customPhrase))
         
-        // Verify that phrase doesn exist in Main Screen
+        // Verify that phrase does exist in Main Screen
         CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
         MainScreen.locateAndSelectDestinationCategory(.environment)
         XCTAssertTrue(MainScreen.doesPhraseExist(customPhrase))
