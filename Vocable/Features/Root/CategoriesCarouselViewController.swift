@@ -86,8 +86,10 @@ import Combine
         Publishers.CombineLatest(AppConfig.$isListeningModeEnabled, AppConfig.$listeningModeFeatureFlagEnabled)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isListeningModeEnabled, listeningModeFeatureFlagEnabled in
-                let isEnabled = isListeningModeEnabled && listeningModeFeatureFlagEnabled
-                self?.listeningModeEnabledStateDidChange(isEnabled)
+                let isDisabled = !isListeningModeEnabled || !listeningModeFeatureFlagEnabled
+                if isDisabled {
+                    self?.listeningModeDidDisable()
+                }
             }.store(in: &cancellables)
     }
 
@@ -287,7 +289,7 @@ import Combine
         })
     }
 
-    private func listeningModeEnabledStateDidChange(_ isEnabled: Bool) {
+    private func listeningModeDidDisable() {
 
         let previousSelectedCategory = categoryObjectID
         updateFetchedResultsController()

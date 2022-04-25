@@ -12,7 +12,7 @@ import Combine
 /// Adds a `Publisher` and `UserDefaults` persistence to a `Codable` property.
 ///
 /// Properties annotated with `@PublishedDefault` contain both the persisted value corresponding to the provided `UserDefaults` key and a publisher which sends any changes to that value after the property value has been sent. New subscribers will receive the current value of the property first.
-@propertyWrapper struct PublishedDefault<T: Codable> {
+@propertyWrapper struct PublishedDefault<T: Codable & Equatable> {
 
     private let defaultsKey: String
     private let subject: CurrentValueSubject<T, Never>
@@ -24,7 +24,9 @@ import Combine
         }
         set {
             PublishedDefault.encodeDefaultsValue(newValue, for: defaultsKey)
-            subject.send(wrappedValue)
+            if newValue != subject.value {
+                subject.send(wrappedValue)
+            }
         }
     }
 
@@ -46,8 +48,11 @@ import Combine
         self.defaultsCancellable = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
             .compactMap { _ in
                 PublishedDefault.currentDefaultsValue(for: key)
-            }.sink { value in
-                subject.send(value)
+            }
+            .sink { value in
+                if subject.value != value {
+                    subject.send(value)
+                }
             }
     }
 

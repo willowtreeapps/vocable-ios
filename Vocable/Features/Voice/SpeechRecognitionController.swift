@@ -83,6 +83,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     private let hotWordIntendedPhrase = "hey vocable"
 
     private var hotWordEnabledCancellable: AnyCancellable?
+    private var listeningModeEnabledCancellable: AnyCancellable?
 
     private lazy var speechRecognizer: SFSpeechRecognizer? = {
         let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
@@ -128,7 +129,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
         isAvailable = speechRecognizer?.isAvailable ?? false
 
-        hotWordEnabledCancellable = Publishers.Merge(AppConfig.$isHotWordPermitted, AppConfig.$isListeningModeEnabled)
+        hotWordEnabledCancellable = Publishers.Merge(AppConfig.$isHotWordPermitted.dropFirst(), AppConfig.$isListeningModeEnabled.dropFirst())
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
@@ -146,6 +147,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     private func listenToVoiceFeatureFlagChange() {
         AppConfig.$listeningModeFeatureFlagEnabled
+            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isFeatureFlagEnabled in
             if isFeatureFlagEnabled {
