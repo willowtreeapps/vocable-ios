@@ -42,7 +42,6 @@ class PresetPhraseTests: BaseTest {
         let originalPhraseCell = XCUIApplication().cells[originalPhraseId]
         let originalPhrase = originalPhraseCell.staticTexts.firstMatch.label
         
-        //firstPhraseCell.tap()
         originalPhraseCell.staticTexts[originalPhrase].tap()
         KeyboardScreen.typeText(customPhrase)
         KeyboardScreen.checkmarkAddButton.tap()
