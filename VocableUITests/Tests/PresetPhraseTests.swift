@@ -54,11 +54,9 @@ class PresetPhraseTests: BaseTest {
         // Verify that edited phrase exists in Category Details Screen
         XCTAssertTrue(CustomCategoriesScreen.doesPhraseExist(updatedPhrase))
         
-        // Verify that preset phrase doesn't exist in Main Screen
+        // Verify that updated phrase exists in Main Screen
         CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
         MainScreen.locateAndSelectDestinationCategory(.personalCare)
-        
-        // Verify that edited phrase exists in Main Screen
         XCTAssertTrue(MainScreen.doesPhraseExist(updatedPhrase))
     }
     
