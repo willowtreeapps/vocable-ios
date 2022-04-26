@@ -62,7 +62,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         }
 
         var isFeatureEnabled: Bool {
-            let debugFeatures: [SettingsItem] = [.resetAppSettings, .pidTuner]
+            let debugFeatures: [SettingsItem] = [.pidTuner]
             if debugFeatures.contains(self) {
                 return AppConfig.showDebugOptions
             }
@@ -160,7 +160,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                               .pidTuner].filter(\.isFeatureEnabled))
         snapshot.appendSections([.externalURL])
         snapshot.appendItems([.privacyPolicy,
-                              .contactDevs].filter(\.isFeatureEnabled))
+                              .contactDevs])
         snapshot.appendSections([.version])
         snapshot.appendItems([.versionNum])
         dataSource.apply(snapshot, animatingDifferences: false)
