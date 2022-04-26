@@ -12,8 +12,8 @@ class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
     
     func testCanNavigatePages() {
         // Add enough phrases to have 2 pages.
-        listOfPhrases.forEach { phrase in
-            CustomCategoriesScreen.addPhrase(phrase)
+        for phrase in listOfPhrases.startIndex..<8 {
+            CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
         }
         
         // Verify that the user is on the first page and the next page buttons are enabled.
