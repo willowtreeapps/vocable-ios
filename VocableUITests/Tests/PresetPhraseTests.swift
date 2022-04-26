@@ -85,11 +85,11 @@ class PresetPhraseTests: BaseTest {
     }
     
     func testEditPhrasesButtonIsDisabledForNumberPadCategory() {
-            let categoryName = "123"
+        let categoryName = "123"
            
-            SettingsScreen.navigateToSettingsCategoryScreen()
-            SettingsScreen.openCategorySettings(category: categoryName)
-            XCTAssertFalse(CustomCategoriesScreen.editCategoryPhrasesButton.isEnabled)
+        SettingsScreen.navigateToSettingsCategoryScreen()
+        SettingsScreen.openCategorySettings(category: categoryName)
+        XCTAssertFalse(CustomCategoriesScreen.editCategoryPhrasesButton.isEnabled)
     }
         
     func testEditPhrasesButtonIsDisabledForRecentsCategory() {
