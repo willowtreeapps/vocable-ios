@@ -20,12 +20,12 @@ class PresetPhraseTests: BaseTest {
         CustomCategoriesScreen.addPhrase(customPhrase)
         
         // Verify that phrase does exist in Category Details Screen
-        XCTAssertTrue(CustomCategoriesScreen.doesPhraseExist(customPhrase))
+        XCTAssertTrue(CustomCategoriesScreen.phraseDoesExist(customPhrase))
         
         // Verify that phrase does exist in Main Screen
         CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
         MainScreen.locateAndSelectDestinationCategory(.environment)
-        XCTAssertTrue(MainScreen.doesPhraseExist(customPhrase))
+        XCTAssertTrue(MainScreen.phraseDoesExist(customPhrase))
     }
     
     func testEditPresetPhrase() {
@@ -38,25 +38,23 @@ class PresetPhraseTests: BaseTest {
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         
         // Define the query that gives us the first phrase listed
-        let originalPhraseId = XCUIApplication().cells.firstMatch.identifier
-        let originalPhraseCell = XCUIApplication().cells[originalPhraseId]
-        let originalPhrase = originalPhraseCell.staticTexts.firstMatch.label
+        let originalPhrase = CustomCategoriesScreen.firstPhraseCell.staticTexts.firstMatch.label
         
-        originalPhraseCell.staticTexts[originalPhrase].tap()
+        CustomCategoriesScreen.firstPhraseCell.staticTexts[originalPhrase].tap()
         KeyboardScreen.typeText(customPhrase)
         KeyboardScreen.checkmarkAddButton.tap()
    
         // Verify that the original phrase doesn't exist in Category Details Screen
-        XCTAssertFalse(CustomCategoriesScreen.doesPhraseExist(originalPhrase))
+        XCTAssertFalse(CustomCategoriesScreen.phraseDoesExist(originalPhrase))
         
         // Verify that updated phrase exists in Category Details Screen
         let updatedPhrase = originalPhrase + customPhrase
-        XCTAssertTrue(CustomCategoriesScreen.doesPhraseExist(updatedPhrase))
+        XCTAssertTrue(CustomCategoriesScreen.phraseDoesExist(updatedPhrase))
         
         // Verify that updated phrase exists in Main Screen
         CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
         MainScreen.locateAndSelectDestinationCategory(.personalCare)
-        XCTAssertTrue(MainScreen.doesPhraseExist(updatedPhrase))
+        XCTAssertTrue(MainScreen.phraseDoesExist(updatedPhrase))
     }
     
     func testDeletePresetPhrase() {
@@ -68,20 +66,18 @@ class PresetPhraseTests: BaseTest {
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         
         // Define the query that gives us the first phrase listed
-        let firstPhraseId = XCUIApplication().cells.firstMatch.identifier
-        let firstPhraseCell = XCUIApplication().cells[firstPhraseId]
-        let firstPhrase = firstPhraseCell.staticTexts.firstMatch.label
+        let firstPhrase = CustomCategoriesScreen.firstPhraseCell.staticTexts.firstMatch.label
         
-        firstPhraseCell.buttons["deleteButton"].tap()
+        CustomCategoriesScreen.firstPhraseCell.buttons["deleteButton"].tap()
         SettingsScreen.alertDeleteButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
         
         // Verify that phrase doesn't exist in Category Details Screen
-        XCTAssertFalse(CustomCategoriesScreen.doesPhraseExist(firstPhrase))
+        XCTAssertFalse(CustomCategoriesScreen.phraseDoesExist(firstPhrase))
         
         // Verify that phrase doesn't exist in Main Screen
         CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
         MainScreen.locateAndSelectDestinationCategory(.basicNeeds)
-        XCTAssertFalse(MainScreen.doesPhraseExist(firstPhrase))
+        XCTAssertFalse(MainScreen.phraseDoesExist(firstPhrase))
     }
     
     func testEditPhrasesButtonIsDisabledForNumberPadCategory() {
@@ -109,7 +105,7 @@ class PresetPhraseTests: BaseTest {
         KeyboardScreen.navBarDismissButton.tap()
        
         MainScreen.locateAndSelectDestinationCategory(.mySayings)
-        XCTAssertTrue(MainScreen.doesPhraseExist(testPhrase), "Expected the first phrase \(testPhrase) to be added to and displayed in 'My Sayings'")
+        XCTAssertTrue(MainScreen.phraseDoesExist(testPhrase), "Expected the first phrase \(testPhrase) to be added to and displayed in 'My Sayings'")
         
         // Add the same phrase again to the My Sayings
         MainScreen.addPhraseLabel.tap()

@@ -69,7 +69,7 @@ class BaseScreen {
         return matchingText
     }
     
-    static func doesPhraseExist(_ phrase: String) -> Bool {
+    static func phraseDoesExist(_ phrase: String) -> Bool {
         var flag = false
         let predicate = NSPredicate(format: "label MATCHES %@", phrase)
         
