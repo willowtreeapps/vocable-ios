@@ -29,7 +29,6 @@ class AddPhraseCollectionViewCell: PresetItemCollectionViewCell {
         fillColor = .collectionViewBackgroundColor
 
         textLabel.numberOfLines = 1
-        textLabel.accessibilityIdentifier = "mainScreen.addPhrase"
         setup(title: NSLocalizedString("preset.category.add.phrase.title", comment: "Add phrase button title"),
               with: UIImage(systemName: "plus"))
     }
