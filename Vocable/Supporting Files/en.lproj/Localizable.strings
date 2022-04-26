@@ -184,8 +184,8 @@
 
 /* Listening mode feedback */
 
-"listening_mode.feedback.submit.title" = "Share to Developers";
+"listening_mode.feedback.submit.title" = "Share with Developers";
 
-"listening_mode.feedback.hint.text" = " Anonymously sharing this question will help us improve listening mode.";
+"listening_mode.feedback.hint.text" = "Don’t like these responses? Anonymously share this question to help improve listening mode.";
 
 "listening_mode.feedback.confirmation.title" = "Thank You!";

@@ -33,7 +33,7 @@ final class ListeningFeedbackSuccessView: UIView {
         let symbol = UIImage(systemName: "checkmark.circle.fill")!.withTintColor(.cellSelectionColor)
 
         let text = NSLocalizedString("listening_mode.feedback.confirmation.title", comment: "Submit feedback confirmation text")
-        let attributes: [NSAttributedString.Key: Any] = [.font: font]
+        let attributes: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.defaultTextColor]
         label.attributedText = NSAttributedString.imageAttachedString(for: text, with: symbol, attributes: attributes)
 
         addSubview(label)
