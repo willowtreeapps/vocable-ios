@@ -31,11 +31,10 @@ class AddPhraseCollectionViewCell: PresetItemCollectionViewCell {
         textLabel.numberOfLines = 1
         setup(title: NSLocalizedString("preset.category.add.phrase.title", comment: "Add phrase button title"),
               with: UIImage(systemName: "plus"))
-        updateContentViews()
     }
 
-    override func updateContentViews() {
-        super.updateContentViews()
+    override func updateContent() {
+        super.updateContent()
 
         if isHighlighted && !isSelected {
             borderedView.borderColor = .cellBorderHighlightColor

@@ -12,8 +12,8 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
 
     let textLabel = UILabel(frame: .zero)
     
-    override func updateContentViews() {
-        super.updateContentViews()
+    override func updateContent() {
+        super.updateContent()
 
         let textColor: UIColor = {
             if isSelected {
@@ -40,6 +40,11 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
         super.init(coder: coder)
         commonInit()
     }
+
+    override func layoutMarginsDidChange() {
+        super.layoutMarginsDidChange()
+        textLabel.preferredMaxLayoutWidth = layoutMarginsGuide.layoutFrame.width
+    }
     
     private func commonInit() {
         contentView.preservesSuperviewLayoutMargins = true
@@ -59,8 +64,6 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
             textLabel.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
             textLabel.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).withPriority(999)
         ])
-
-        updateContentViews()
     }
 
     func setup(title: String, with image: UIImage? = nil) {
@@ -69,21 +72,22 @@ class PresetItemCollectionViewCell: VocableCollectionViewCell {
         } else {
             textLabel.text = title
         }
-
-        updateContentViews()
     }
 }
 
 class CategoryItemCollectionViewCell: PresetItemCollectionViewCell {
     
-    var roundedCorners: UIRectCorner = .allCorners {
-        didSet {
-            borderedView.roundedCorners = roundedCorners
+    var roundedCorners: UIRectCorner {
+        get {
+            borderedView.roundedCorners
+        }
+        set {
+            borderedView.roundedCorners = newValue
         }
     }
     
-    override func updateContentViews() {
-        super.updateContentViews()
+    override func updateContent() {
+        super.updateContent()
 
         borderedView.fillColor = {
             var result: UIColor

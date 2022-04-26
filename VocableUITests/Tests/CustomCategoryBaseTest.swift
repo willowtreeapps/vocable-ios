@@ -16,7 +16,7 @@ class CustomCategoryBaseTest: BaseTest {
     override func setUp() {
         super.setUp()
         
-        settingsScreen.navigateToSettingsCategoryScreen()
-        customCategoriesScreen.createCustomCategory(categoryName: customCategoryName)
+        SettingsScreen.navigateToSettingsCategoryScreen()
+        CustomCategoriesScreen.createCustomCategory(categoryName: customCategoryName)
     }
 }

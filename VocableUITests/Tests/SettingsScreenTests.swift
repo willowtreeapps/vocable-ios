@@ -14,32 +14,32 @@ class SettingsScreenTests: BaseTest {
     func testHideShowToggle() {
         let category = "Environment"
 
-        settingsScreen.navigateToSettingsCategoryScreen()
-        XCTAssertTrue(settingsScreen.locateCategoryCell(category).element.exists)
+        SettingsScreen.navigateToSettingsCategoryScreen()
+        XCTAssertTrue(SettingsScreen.locateCategoryCell(category).element.exists)
 
         // Verify that when the category is hidden, up and down buttons are disabled.
-        settingsScreen.openCategorySettings(category: category)
-        settingsScreen.showCategoryButton.tap()
-        settingsScreen.leaveCategoryDetailButton.tap()
+        SettingsScreen.openCategorySettings(category: category)
+        SettingsScreen.showCategoryButton.tap()
+        SettingsScreen.navBarBackButton.tap()
         
-        let hiddenCategory = settingsScreen.locateCategoryCell(category)
-        XCTAssertFalse(hiddenCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
-        XCTAssertFalse(hiddenCategory.buttons[settingsScreen.categoryDownButton].isEnabled)
+        let hiddenCategory = SettingsScreen.locateCategoryCell(category)
+        XCTAssertFalse(hiddenCategory.buttons[SettingsScreen.categoryUpButton].isEnabled)
+        XCTAssertFalse(hiddenCategory.buttons[SettingsScreen.categoryDownButton].isEnabled)
         XCTAssertTrue(hiddenCategory.element.isEnabled)
 
         // Verify that when the category is shown, up and down buttons are enabled.
-        settingsScreen.openCategorySettings(category: category)
-        settingsScreen.showCategoryButton.tap()
-        settingsScreen.leaveCategoryDetailButton.tap()
+        SettingsScreen.openCategorySettings(category: category)
+        SettingsScreen.showCategoryButton.tap()
+        SettingsScreen.navBarBackButton.tap()
         
-        let shownCategory = settingsScreen.locateCategoryCell(category)
-        XCTAssertTrue(shownCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
-        XCTAssertTrue(shownCategory.buttons[settingsScreen.categoryDownButton].isEnabled)
+        let shownCategory = SettingsScreen.locateCategoryCell(category)
+        XCTAssertTrue(shownCategory.buttons[SettingsScreen.categoryUpButton].isEnabled)
+        XCTAssertTrue(shownCategory.buttons[SettingsScreen.categoryDownButton].isEnabled)
         XCTAssertTrue(shownCategory.element.isEnabled)
     }
 
     func testReorder() {
-        settingsScreen.navigateToSettingsCategoryScreen()
+        SettingsScreen.navigateToSettingsCategoryScreen()
         
         // Define the query that gives us the first category listed
         let currentFirstCategory = XCUIApplication().cells.allElementsBoundByIndex[0]
@@ -49,15 +49,15 @@ class SettingsScreenTests: BaseTest {
         let originalSecondCategoryName = currentSecondCategory.label
         
         // Give me the first category, using our query, and confirm the state of the buttons
-        XCTAssertFalse(currentFirstCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
-        XCTAssertTrue(currentFirstCategory.buttons[settingsScreen.categoryDownButton].isEnabled)
+        XCTAssertFalse(currentFirstCategory.buttons[SettingsScreen.categoryUpButton].isEnabled)
+        XCTAssertTrue(currentFirstCategory.buttons[SettingsScreen.categoryDownButton].isEnabled)
         
         // Give me the second category, using our query, and confirm the state of the buttons
-        XCTAssertTrue(currentSecondCategory.buttons[settingsScreen.categoryUpButton].isEnabled)
-        XCTAssertTrue(currentSecondCategory.buttons[settingsScreen.categoryDownButton].isEnabled)
+        XCTAssertTrue(currentSecondCategory.buttons[SettingsScreen.categoryUpButton].isEnabled)
+        XCTAssertTrue(currentSecondCategory.buttons[SettingsScreen.categoryDownButton].isEnabled)
         
         // Move the first category down one
-        currentFirstCategory.buttons[settingsScreen.categoryDownButton].tap()
+        currentFirstCategory.buttons[SettingsScreen.categoryDownButton].tap()
         
         // Using the query for the first category (i.e. top most cell in list) confirm the category name matches expectations
         XCTAssertEqual(currentFirstCategory.label, originalSecondCategoryName)
@@ -66,7 +66,7 @@ class SettingsScreenTests: BaseTest {
         XCTAssertEqual(currentSecondCategory.label, originalFirstCategoryName)
         
         // Move the second category back up
-        currentSecondCategory.buttons[settingsScreen.categoryUpButton].tap()
+        currentSecondCategory.buttons[SettingsScreen.categoryUpButton].tap()
         
         // Using the query for the first category (i.e. top most cell in list) confirm the category name matches expectations
         XCTAssertEqual(currentFirstCategory.label, originalFirstCategoryName)

@@ -10,33 +10,57 @@
 import XCTest
 
 class CustomCategoriesScreen: BaseScreen {
-
-    let settingsScreen = SettingsScreen()
-    let keyboardScreen = KeyboardScreen()
-    let mainScreen = MainScreen()
     
-    let categoriesPageAddPhraseButton = XCUIApplication().buttons["settingsCategory.addPhraseButton"]
-    let editCategoryPhrasesButton = XCUIApplication().buttons["edit_phrases_cell"]
-    let categoriesPageEditPhraseButton = XCUIApplication().buttons["categoryPhrase.editButton"]
-    let categoriesPageDeletePhraseButton = XCUIApplication().buttons["deleteButton"]
+    static let categoriesPageAddPhraseButton = XCUIApplication().buttons["settingsCategory.addPhraseButton"]
+    static let editCategoryPhrasesButton = XCUIApplication().buttons["edit_phrases_cell"]
+    static let categoriesPageEditPhraseButton = XCUIApplication().buttons["categoryPhrase.editButton"]
+    static let categoriesPageDeletePhraseButton = XCUIApplication().buttons["deleteButton"]
 
-    func createCustomCategory(categoryName: String) {
-        settingsScreen.settingsPageAddCategoryButton.tap()
-        keyboardScreen.typeText(categoryName)
-        keyboardScreen.checkmarkAddButton.tap()
+    static func createCustomCategory(categoryName: String) {
+        SettingsScreen.settingsPageAddCategoryButton.tap()
+        KeyboardScreen.typeText(categoryName)
+        KeyboardScreen.checkmarkAddButton.tap()
     }
     
-    func addCustomPhrases(numberOfPhrases: Int) {
+    static func createAndLocateCustomCategory(_ categoryName: String) -> CategoryIdentifier {
+        createCustomCategory(categoryName: categoryName)
+        let customCategoryIdentifier = SettingsScreen.locateCategoryCell(categoryName).element.identifier
+        return CategoryIdentifier(customCategoryIdentifier)
+    }
+    
+    static func addPhrase(_ phrase: String) {
+        categoriesPageAddPhraseButton.tap()
+        _ = KeyboardScreen.checkmarkAddButton.waitForExistence(timeout: 0.5)
+        KeyboardScreen.typeText(phrase)
+        KeyboardScreen.checkmarkAddButton.tap()
+    }
+    
+    static func addRandomPhrases(numberOfPhrases: Int) {
         for _ in 1...numberOfPhrases {
-            let randomPhrase = keyboardScreen.randomString(length: 2)
+            let randomPhrase = KeyboardScreen.randomString(length: 2)
             categoriesPageAddPhraseButton.tap()
-            keyboardScreen.typeText(randomPhrase)
-            keyboardScreen.checkmarkAddButton.tap()
-
-            // Do this until accessibility identifiers are add and trash icon can be accessed.
-            // Not needed until when change the screen to stay.
-            //keyboardScreen.dismissKeyboardButton.tap()
+            KeyboardScreen.typeText(randomPhrase)
+            KeyboardScreen.checkmarkAddButton.tap()
         }
+    }
+    
+    static func returnToMainScreenFromCategoriesList() {
+        // Exit the Edit Categories and Settings Screens
+        navBarBackButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
+        navBarDismissButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
+        
+        // Wait for the Main Screen to appear
+        XCTAssert(MainScreen.settingsButton.waitForExistence(timeout: 0.25), "Did not return to Main Screen as expected.")
+    }
+    
+    static func returnToMainScreenFromCategoryDetails() {
+        navBarBackButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
+        returnToMainScreenFromCategoriesList()
+    }
+    
+    static func returnToMainScreenFromEditPhrases() {
+        navBarBackButton.tap()
+        returnToMainScreenFromCategoryDetails()
     }
     
 }

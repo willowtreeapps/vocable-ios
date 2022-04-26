@@ -67,7 +67,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 return AppConfig.showDebugOptions
             }
             if self == .listeningMode {
-                return AppConfig.isVoiceExperimentEnabled && SpeechRecognitionController.shared.deviceSupportsSpeech &&
+                return AppConfig.listeningModeFeatureFlagEnabled && SpeechRecognitionController.shared.deviceSupportsSpeech &&
                     AppConfig.isListeningModeSupported
             }
             return true
@@ -142,6 +142,11 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         }
 
         updateDataSource()
+    }
+
+    override func viewLayoutMarginsDidChange() {
+        super.viewLayoutMarginsDidChange()
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 
     private func updateDataSource() {

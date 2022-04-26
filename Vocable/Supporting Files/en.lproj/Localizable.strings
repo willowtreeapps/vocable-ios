@@ -182,6 +182,8 @@
 
 "settings.alert.reset_app_settings_failure.button.ok" = "OK";
 
+"settings.selection_mode.head_tracking_unsupported_footer" = "This %1$@ on %2$@ %3$@ does not support head tracking.\n\nHead tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.";
+
 /* Listening mode feedback */
 
 "listening_mode.feedback.submit.title" = "Share with Developers";
@@ -189,3 +191,4 @@
 "listening_mode.feedback.hint.text" = "Don’t like these responses? Anonymously share this question to help improve listening mode.";
 
 "listening_mode.feedback.confirmation.title" = "Thank You!";
+

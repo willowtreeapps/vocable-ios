@@ -14,6 +14,10 @@ final class SelectionModeViewController: VocableCollectionViewController {
         case headTrackingToggle
     }
 
+    private enum SupplementaryKind: String {
+        case headTrackingUnsupportedFooter
+    }
+
     private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SelectionModeItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
@@ -30,6 +34,11 @@ final class SelectionModeViewController: VocableCollectionViewController {
         navigationBar.title = NSLocalizedString("selection_mode.header.title", comment: "Selection mode screen header title")
     }
 
+    override func viewLayoutMarginsDidChange() {
+        super.viewLayoutMarginsDidChange()
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     // MARK: UICollectionViewDataSource
 
     private func updateDataSource() {
@@ -42,7 +51,21 @@ final class SelectionModeViewController: VocableCollectionViewController {
     private func setupCollectionView() {
         collectionView.backgroundColor = .collectionViewBackgroundColor
         collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: "SettingsFooterTextSupplementaryView", bundle: nil),
+                                forSupplementaryViewOfKind: SupplementaryKind.headTrackingUnsupportedFooter.rawValue,
+                                withReuseIdentifier: SupplementaryKind.headTrackingUnsupportedFooter.rawValue)
 
+        dataSource.supplementaryViewProvider = { (collectionView, elementKind, indexPath) in
+            switch SupplementaryKind(rawValue: elementKind) {
+            case .none:
+                return nil
+            case .headTrackingUnsupportedFooter:
+
+                let footer = collectionView.dequeueReusableSupplementaryView(ofKind: elementKind, withReuseIdentifier: elementKind, for: indexPath) as! SettingsFooterTextSupplementaryView
+                footer.textLabel.text = SelectionModeViewController.headTrackingUnsupportedLocalizedString
+                return footer
+            }
+        }
         collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (_, environment) -> NSCollectionLayoutSection? in
             return self?.layoutSection(environment: environment)
         })
@@ -52,10 +75,10 @@ final class SelectionModeViewController: VocableCollectionViewController {
 
         let itemHeightDimension: NSCollectionLayoutDimension
         if sizeClass.contains(.vCompact) {
-                itemHeightDimension = NSCollectionLayoutDimension.absolute(50)
-            } else {
-                itemHeightDimension = NSCollectionLayoutDimension.absolute(100)
-            }
+            itemHeightDimension = NSCollectionLayoutDimension.absolute(50)
+        } else {
+            itemHeightDimension = NSCollectionLayoutDimension.absolute(100)
+        }
 
         let itemWidthDimension = NSCollectionLayoutDimension.fractionalWidth(1.0)
         let columnCount = 1
@@ -70,6 +93,15 @@ final class SelectionModeViewController: VocableCollectionViewController {
         section.interGroupSpacing = 8
         section.contentInsets = sectionInsets(for: environment)
         section.contentInsets.top = 16
+        section.contentInsets.bottom = 32
+        if !AppConfig.isHeadTrackingSupported {
+
+            let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
+            let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize,
+                                                                     elementKind: SupplementaryKind.headTrackingUnsupportedFooter.rawValue,
+                                                                     alignment: .bottom)
+            section.boundarySupplementaryItems = [footer]
+        }
         return section
     }
 
@@ -133,6 +165,23 @@ final class SelectionModeViewController: VocableCollectionViewController {
 
     private func toggleHeadTracking() {
         AppConfig.isHeadTrackingEnabled.toggle()
+    }
+
+    private static var headTrackingUnsupportedLocalizedString: String {
+
+        // Attempting to follow these guidelines: https://developer.apple.com/app-store/marketing/guidelines/
+        // These trademarks should not be localized unless the system provides the localized string
+        let model = UIDevice.current.localizedModel
+        let systemName = UIDevice.current.systemName
+        let systemVersion = UIDevice.current.systemVersion
+        let sensorName = "TrueDepth"
+        let neuralEngineName = "Apple Neural Engine"
+
+        let format = NSLocalizedString("settings.selection_mode.head_tracking_unsupported_footer",
+                                       comment: "Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking")
+
+        let text = String(format: format, model, systemName, systemVersion, sensorName, neuralEngineName)
+        return text
     }
 
 }

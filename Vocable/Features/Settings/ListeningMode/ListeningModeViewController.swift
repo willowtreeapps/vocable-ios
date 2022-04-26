@@ -17,7 +17,8 @@ final class ListeningModeViewController: VocableCollectionViewController {
         case hotWordEnabled
     }
 
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, ContentItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, ContentItem> = .init(collectionView: collectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell in
+        guard let self = self else { return UICollectionViewCell() }
         return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
 
@@ -47,12 +48,25 @@ final class ListeningModeViewController: VocableCollectionViewController {
         navigationBar.title = "Listening Mode"
     }
 
+    override func viewLayoutMarginsDidChange() {
+        super.viewLayoutMarginsDidChange()
+        collectionView.collectionViewLayout.invalidateLayout()
+        updateBackgroundViewLayoutMargins()
+    }
+
+    private func updateBackgroundViewLayoutMargins() {
+        guard let backgroundView = collectionView.backgroundView else { return }
+        backgroundView.directionalLayoutMargins.leading = view.directionalLayoutMargins.leading
+        backgroundView.directionalLayoutMargins.trailing = view.directionalLayoutMargins.trailing
+    }
+
     // MARK: UICollectionViewDataSource
 
     private func updateDataSource(animated: Bool = false) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, ContentItem>()
         if let state = authorizationController.state {
             collectionView.backgroundView = EmptyStateView.listening(state.state, action: state.action)
+            updateBackgroundViewLayoutMargins()
         } else {
             snapshot.appendSections([0])
             snapshot.appendItems([.listeningModeEnabled])
@@ -111,6 +125,7 @@ This shortcut makes it fast to kick off a conversation by saying something like 
         section.interGroupSpacing = 8
         section.contentInsets = sectionInsets(for: environment)
         section.contentInsets.top = 16
+        section.contentInsets.bottom = 32
         section.boundarySupplementaryItems = [footerItem]
         return section
     }
@@ -151,7 +166,7 @@ This shortcut makes it fast to kick off a conversation by saying something like 
         case .listeningModeEnabled:
             return true
         case .hotWordEnabled:
-            return AppConfig.isListeningModeEnabled && AppConfig.isVoiceExperimentEnabled
+            return AppConfig.isListeningModeEnabled && AppConfig.listeningModeFeatureFlagEnabled
         }
     }
 
@@ -161,7 +176,7 @@ This shortcut makes it fast to kick off a conversation by saying something like 
         case .listeningModeEnabled:
             return true
         case .hotWordEnabled:
-            return AppConfig.isListeningModeEnabled && AppConfig.isVoiceExperimentEnabled
+            return AppConfig.isListeningModeEnabled && AppConfig.listeningModeFeatureFlagEnabled
         }
     }
 

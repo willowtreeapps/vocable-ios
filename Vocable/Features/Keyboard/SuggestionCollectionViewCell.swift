@@ -25,8 +25,8 @@ class SuggestionCollectionViewCell: VocableCollectionViewCell {
         adjustBackgroundColorForSizeClass()
     }
     
-    override func updateContentViews() {
-        super.updateContentViews()
+    override func updateContent() {
+        super.updateContent()
         borderedView.fillColor = isSelected ? .cellSelectionColor : .categoryBackgroundColor
         adjustBackgroundColorForSizeClass()
         

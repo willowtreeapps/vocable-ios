@@ -13,12 +13,19 @@ import Foundation
 import XCTest
 
 class BaseScreen {
-    let paginationLabel = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
-    let alertMessageLabel = XCUIApplication().staticTexts["alert_message"]
-    let emptyStateAddPhraseButton = XCUIApplication().buttons["empty_state_addPhrase_button"]
+    
+    private init() {}
+    
+    static let navBarBackButton = XCUIApplication().buttons["navigationBar.backButton"]
+    static let paginationLabel = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
+    static let paginationLeftButton = XCUIApplication().buttons["bottomPagination.left_chevron"]
+    static let paginationRightButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
+    static let alertMessageLabel = XCUIApplication().staticTexts["alert_message"]
+    static let emptyStateAddPhraseButton = XCUIApplication().buttons["empty_state_addPhrase_button"]
+    static let navBarDismissButton = XCUIApplication().buttons.containing(NSPredicate(format: "identifier CONTAINS 'dismissButton'")).element
     
     /// From Pagination: the current page (X) being viewed from the "Page X of Y" pagination label.
-    var currentPageNumber: Int {
+    static var currentPageNumber: Int {
         // Define a regex pattern with named matching group, 'current', for reference
         let pattern = #"(?<current>\d)+ .+ (\d)+"#
         
@@ -28,7 +35,7 @@ class BaseScreen {
     }
     
     /// From Pagination: the total number of pages (Y) from the "Page X of Y" pagination label.
-    var totalPageCount: Int {
+    static var totalPageCount: Int {
         // Define a regex pattern with named matching group, 'total', for reference
         let pattern = #"(\d)+ .+ (?<total>\d)+"#
         
@@ -45,7 +52,7 @@ class BaseScreen {
      
      Documentaion: https://nshipster.com/swift-regular-expressions/
     */
-    private func getNamedGroupInRegexPatternFromText(namedGroup: String, regexPattern: String, text: String) -> String {
+    static private func getNamedGroupInRegexPatternFromText(namedGroup: String, regexPattern: String, text: String) -> String {
         var matchingText = ""
         let regex = try! NSRegularExpression(pattern: regexPattern)
         let range = NSRange(text.startIndex..<text.endIndex, in: text) // Used for the NSRegularExpression
