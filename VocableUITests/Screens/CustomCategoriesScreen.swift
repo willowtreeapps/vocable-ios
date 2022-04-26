@@ -16,6 +16,11 @@ class CustomCategoriesScreen: BaseScreen {
     static let categoriesPageEditPhraseButton = XCUIApplication().buttons["categoryPhrase.editButton"]
     static let categoriesPageDeletePhraseButton = XCUIApplication().buttons["deleteButton"]
 
+    static var firstPhraseCell: XCUIElement {
+        let firstPhraseId = XCUIApplication().cells.firstMatch.identifier
+        return XCUIApplication().cells[firstPhraseId]
+    }
+    
     static func createCustomCategory(categoryName: String) {
         SettingsScreen.settingsPageAddCategoryButton.tap()
         KeyboardScreen.typeText(categoryName)

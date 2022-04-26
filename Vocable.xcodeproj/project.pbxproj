@@ -195,6 +195,7 @@
 		CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */; };
 		DC41F55427E4F5130099B7D5 /* CategoryIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */; };
 		DC533C0127FCDF39005FEBBD /* CustomCategoryBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */; };
+		DCF25CD52811AD2000DF766F /* PresetPhraseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -437,6 +438,7 @@
 		CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
 		DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIdentifier.swift; sourceTree = "<group>"; };
 		DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryBaseTest.swift; sourceTree = "<group>"; };
+		DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetPhraseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -558,6 +560,7 @@
 				DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */,
 				627B53632800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift */,
 				627B53652800D11100FEBF25 /* MainScreenPaginationTests.swift */,
+				DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1318,6 +1321,7 @@
 				629B9B1F2809C99000EE6C19 /* XCUIElement.swift in Sources */,
 				628B35C227DF9C6B00299312 /* BaseScreen.swift in Sources */,
 				17D4162C245C6FE800FD81CD /* KeyboardScreenTests.swift in Sources */,
+				DCF25CD52811AD2000DF766F /* PresetPhraseTests.swift in Sources */,
 				17D4162E245C6FF600FD81CD /* KeyboardScreen.swift in Sources */,
 				DC41F55427E4F5130099B7D5 /* CategoryIdentifier.swift in Sources */,
 				CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */,

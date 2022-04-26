@@ -239,6 +239,7 @@ private extension EditPhrasesViewController {
                                                                         accessory: .disclosureIndicator()) { [weak self] in
                 self?.presentEditorForPhrase(with: phraseIdentifier)
             }
+            cell.accessibilityIdentifier = phrase.identifier
         }
     }
 }

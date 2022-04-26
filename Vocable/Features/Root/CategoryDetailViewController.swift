@@ -114,7 +114,8 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
                 return cell
             case .addNewPhrase:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddPhraseCollectionViewCell.reuseIdentifier, for: indexPath) as? AddPhraseCollectionViewCell
-
+                cell?.accessibilityIdentifier = "add_new_phrase"
+                
                 return cell
             }
         }
