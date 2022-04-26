@@ -166,7 +166,7 @@ This shortcut makes it fast to kick off a conversation by saying something like 
         case .listeningModeEnabled:
             return true
         case .hotWordEnabled:
-            return AppConfig.isListeningModeEnabled && AppConfig.isVoiceExperimentEnabled
+            return AppConfig.isListeningModeEnabled && AppConfig.listeningModeFeatureFlagEnabled
         }
     }
 
@@ -176,7 +176,7 @@ This shortcut makes it fast to kick off a conversation by saying something like 
         case .listeningModeEnabled:
             return true
         case .hotWordEnabled:
-            return AppConfig.isListeningModeEnabled && AppConfig.isVoiceExperimentEnabled
+            return AppConfig.isListeningModeEnabled && AppConfig.listeningModeFeatureFlagEnabled
         }
     }
 

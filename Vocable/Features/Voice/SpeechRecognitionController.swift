@@ -21,6 +21,8 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     private let audioController = AudioEngineController.shared
 
+    private var disposables = Set<AnyCancellable>()
+
     @Published private(set) var isAvailable: Bool = true
 
     @Published private(set) var isPaused: Bool = false {
@@ -81,6 +83,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     private let hotWordIntendedPhrase = "hey vocable"
 
     private var hotWordEnabledCancellable: AnyCancellable?
+    private var listeningModeEnabledCancellable: AnyCancellable?
 
     private lazy var speechRecognizer: SFSpeechRecognizer? = {
         let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
@@ -126,7 +129,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
         isAvailable = speechRecognizer?.isAvailable ?? false
 
-        hotWordEnabledCancellable = Publishers.Merge(AppConfig.$isHotWordPermitted, AppConfig.$isListeningModeEnabled)
+        hotWordEnabledCancellable = Publishers.Merge(AppConfig.$isHotWordPermitted.dropFirst(), AppConfig.$isListeningModeEnabled.dropFirst())
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
@@ -138,6 +141,21 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
             .sink { newValue in
                 self.audioController.playEffect(newValue, completion: {})
             }
+
+        listenToVoiceFeatureFlagChange()
+    }
+
+    private func listenToVoiceFeatureFlagChange() {
+        AppConfig.$listeningModeFeatureFlagEnabled
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isFeatureFlagEnabled in
+            if isFeatureFlagEnabled {
+                self?.startListeningForHotWordOrDeactivate()
+            } else {
+                self?.stopListening()
+            }
+        }.store(in: &disposables)
     }
 
     func startTranscribing(requestPermission: AudioPermission? = nil) {
@@ -157,7 +175,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     }
 
     private func startListeningForHotWordOrDeactivate() {
-        guard isAvailable, AppConfig.isListeningModeEnabled, AppConfig.isHotWordPermitted, deviceSupportsSpeech, isAuthorizedToTranscribe else {
+        guard isAvailable, AppConfig.isListeningModeEnabled, AppConfig.isHotWordPermitted, deviceSupportsSpeech, isAuthorizedToTranscribe, AppConfig.listeningModeFeatureFlagEnabled else {
             stopListening()
             return
         }
@@ -170,6 +188,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     }
 
     private func startListening(mode: ListeningMode, resumingFromPause: Bool = false, requestablePermission: AudioPermission? = nil) {
+        guard AppConfig.listeningModeFeatureFlagEnabled else { return }
 
         guard !isPaused && ((mode != self.mode) || (resumingFromPause && isListening)) else {
             return
@@ -520,7 +539,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     @objc
     private func willResignActiveNotification(_ notification: Notification) {
-        if AppConfig.isVoiceExperimentEnabled {
+        if AppConfig.listeningModeFeatureFlagEnabled {
             pauseListening()
         }
     }
@@ -528,7 +547,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     @objc
     private func didBecomeActiveNotification(_ notification: Notification) {
         updatePermissionStatuses()
-        if AppConfig.isVoiceExperimentEnabled {
+        if AppConfig.listeningModeFeatureFlagEnabled {
             resumeListening()
         }
     }

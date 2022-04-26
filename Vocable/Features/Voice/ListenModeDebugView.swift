@@ -82,32 +82,41 @@ struct ListenModeDebugView: View {
 
     @ObservedObject private var storage = ListenModeDebugStorage.shared
 
+    @AppStorage(.listeningModeFeatureFlagEnabled)
+    var listeningModeFeatureFlagEnabled = false
+
     @ViewBuilder
     private var listView: some View {
-        if storage.contexts.isEmpty {
-            VStack(spacing: 24) {
-                Spacer()
-                Text("No Entries").font(.title).bold()
-                Text("The most recent listening sessions will be recorded here for easy debugging").font(.subheadline)
-                Spacer()
-            }.padding().padding()
-        } else {
-            List {
-                Section {
-                    ForEach(storage.contexts, id: \.self) {
-                        ListenModeDebugCell(context: $0)
-                    }.onDelete(perform: delete)
-                }
-                Section {
-                    Button(action: clearEntries) {
-                        HStack {
-                            Spacer()
-                            Text("Delete All").foregroundColor(.red).bold()
-                            Spacer()
+        VStack {
+            if storage.contexts.isEmpty {
+                VStack(spacing: 24) {
+                    Toggle("Enable Listen Mode", isOn: $listeningModeFeatureFlagEnabled)
+                    Spacer()
+                    Text("No Entries").font(.title).bold()
+                    Text("The most recent listening sessions will be recorded here for easy debugging").font(.subheadline)
+                    Spacer()
+                }.padding().padding()
+            } else {
+                List {
+                    Section {
+                        Toggle("Enable Listen Mode", isOn: $listeningModeFeatureFlagEnabled)
+                    }
+                    Section {
+                        ForEach(storage.contexts, id: \.self) {
+                            ListenModeDebugCell(context: $0)
+                        }.onDelete(perform: delete)
+                    }
+                    Section {
+                        Button(action: clearEntries) {
+                            HStack {
+                                Spacer()
+                                Text("Delete All").foregroundColor(.red).bold()
+                                Spacer()
+                            }
                         }
                     }
-                }
-            }.listStyle(InsetGroupedListStyle())
+                }.listStyle(InsetGroupedListStyle())
+            }
         }
     }
 

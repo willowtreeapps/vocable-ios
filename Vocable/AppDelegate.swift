@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppConfig.isHeadTrackingEnabled = false
         }
 
-        if ProcessInfo.processInfo.arguments.contains("resetAppDataOnLaunch") {
+        if LaunchArguments.contains(.resetAppDataOnLaunch) {
             print("-resetAppDataOnLaunch detected, resetting app data")
             let resetController = AppResetController()
             if resetController.performReset() {
@@ -52,6 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
                 print("\t...Reset failed")
             }
+        }
+
+        if LaunchArguments.contains(.enableListeningMode) {
+            AppConfig.listeningModeFeatureFlagEnabled = true
         }
 
         // Ensure that the persistent store has the current
