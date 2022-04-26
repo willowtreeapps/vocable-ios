@@ -160,7 +160,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                               .pidTuner].filter(\.isFeatureEnabled))
         snapshot.appendSections([.externalURL])
         snapshot.appendItems([.privacyPolicy,
-                              .contactDevs])
+                              .contactDevs].filter(\.isFeatureEnabled))
         snapshot.appendSections([.version])
         snapshot.appendItems([.versionNum])
         dataSource.apply(snapshot, animatingDifferences: false)
