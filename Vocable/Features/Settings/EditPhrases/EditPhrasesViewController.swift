@@ -73,16 +73,16 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
     private func updateLayoutForCurrentTraitCollection() {
         collectionView.layout.interItemSpacing = .init(interRowSpacing: 8, interColumnSpacing: 30)
 
-        switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
-        case (.regular, .regular):
+        switch sizeClass {
+        case .hRegular_vRegular:
             collectionView.layout.numberOfColumns = .fixedCount(2)
-            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(130))
-        case (.compact, .regular):
+            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(100))
+        case .hCompact_vRegular:
             collectionView.layout.numberOfColumns = .fixedCount(1)
-            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(130))
-        case (.compact, .compact), (.regular, .compact):
-            collectionView.layout.numberOfColumns = .fixedCount(1)
-            collectionView.layout.numberOfRows = .fixedCount(2)
+            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(64))
+        case .hCompact_vCompact, .hRegular_vCompact:
+            collectionView.layout.numberOfColumns = .fixedCount(2)
+            collectionView.layout.numberOfRows = .flexible(minHeight: .absolute(64))
         default:
             break
         }
