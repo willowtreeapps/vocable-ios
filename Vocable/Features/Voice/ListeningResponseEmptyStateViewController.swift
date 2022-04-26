@@ -25,50 +25,55 @@ enum ListeningEmptyState: EmptyStateRepresentable, Equatable {
     case listenModeFreeResponse
 
     var title: String {
-        #warning("Needs localization & Final copy")
         switch self {
-        case .microphonePermissionUndetermined, .microphonePermissionDenied:
-            return "Microphone Access"
-        case .speechPermissionDenied, .speechPermissionUndetermined:
-            return "Speech Recognition"
+        case .microphonePermissionDenied:
+            return String(localized: "listening_mode.empty_state.microphone_permission_denied.title")
+        case .microphonePermissionUndetermined:
+            return String(localized: "listening_mode.empty_state.microphone_permission_undetermined.title")
+        case .speechPermissionDenied:
+            return String(localized: "listening_mode.empty_state.speech_permission_denied.title")
+        case .speechPermissionUndetermined:
+            return String(localized: "listening_mode.empty_state.speech_permission_undetermined.title")
         case .listeningResponse:
-            return "Listening..."
+            return String(localized: "listening_mode.empty_state.actively_listening.title")
         case .listenModeFreeResponse:
-            return "Sounds complicated"
+            return String(localized: "listening_mode.empty_state.free_response.title")
         case .speechServiceUnavailable:
-            return "Speech services unavailable"
+            return String(localized: "listening_mode.empty_state.speech_unavailable.title")
         }
     }
 
     var description: String? {
-        #warning("Needs localization & Final copy")
         switch self {
         case .microphonePermissionUndetermined:
-            return "Vocable needs microphone access to enable Listening Mode. The button below presents an iOS permission dialog that Vocable's head tracking cannot interract with."
+            return String(localized: "listening_mode.empty_state.microphone_permission_undetermined.message")
         case .microphonePermissionDenied:
-            return "Vocable needs to use the microphone to enable Listening Mode. Please enable microphone access in the system Settings app.\n\nYou can also disable Listening Mode to hide this category in Vocable's settings."
+            return String(localized: "listening_mode.empty_state.microphone_permission_denied.message")
         case .speechPermissionUndetermined:
-            return "Vocable needs to request speech permissions to enable Listening Mode. This will present an iOS permission dialog that Vocable's head tracking cannot interract with."
+            return String(localized: "listening_mode.empty_state.speech_permission_undetermined.message")
         case .speechPermissionDenied:
-            return "Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in the system Settings app.\n\nYou can also disable Listening Mode to hide this category in Vocable's settings."
+            return String(localized: "listening_mode.empty_state.speech_permission_denied.message")
         case .listeningResponse:
-            return "When in listening mode, if someone starts speaking, Vocable will try to show quick responses."
+            return String(localized: "listening_mode.empty_state.actively_listening.message")
         case .listenModeFreeResponse:
-            return "Not sure what to suggest. Please repeat or use the rest of Vocable to respond."
+            return String(localized: "listening_mode.empty_state.free_response.message")
         case .speechServiceUnavailable:
-            return "Please try again later"
+            return String(localized: "listening_mode.empty_state.speech_unavailable.message")
         }
     }
 
     var buttonTitle: String? {
-        #warning("Needs localization & Final copy")
         switch self {
         case .listenModeFreeResponse, .listeningResponse, .speechServiceUnavailable:
             return nil
-        case .microphonePermissionUndetermined, .speechPermissionUndetermined:
-            return "Grant Access"
-        case .microphonePermissionDenied, .speechPermissionDenied:
-            return "Open Settings"
+        case .microphonePermissionUndetermined:
+            return String(localized: "listening_mode.empty_state.microphone_permission_undetermined.action")
+        case .speechPermissionUndetermined:
+            return String(localized: "listening_mode.empty_state.speech_permission_undetermined.action")
+        case .microphonePermissionDenied:
+            return String(localized: "listening_mode.empty_state.microphone_permission_denied.action")
+        case .speechPermissionDenied:
+            return String(localized: "listening_mode.empty_state.speech_permission_denied.action")
         }
     }
 
