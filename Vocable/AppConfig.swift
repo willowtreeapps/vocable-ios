@@ -10,6 +10,16 @@ import Foundation
 import Combine
 import ARKit
 
+extension UserDefaultsKey {
+
+    static let isListeningModeEnabled: UserDefaultsKey = "isListeningModeEnabled"
+    static let isHotWordPermitted: UserDefaultsKey = "isHotWordPermitted"
+    static let sensitivitySetting: UserDefaultsKey = "sensitivitySetting"
+    static let dwellDuration: UserDefaultsKey = "dwellDuration"
+    static let isHeadTrackingEnabled: UserDefaultsKey = "isHeadTrackingEnabled"
+    static let listeningModeFeatureFlagEnabled: UserDefaultsKey = "listeningModeFeatureFlagEnabled"
+}
+
 struct AppConfig {
 
     static let showDebugOptions: Bool = {
@@ -20,23 +30,23 @@ struct AppConfig {
         #endif
     }()
 
-    @PublishedDefault(key: "isHeadTrackingEnabled", defaultValue: AppConfig.isHeadTrackingSupported)
-    static var isHeadTrackingEnabled: Bool
+    @PublishedDefault(.isHeadTrackingEnabled)
+    static var isHeadTrackingEnabled: Bool = AppConfig.isHeadTrackingSupported
     static var isHeadTrackingSupported: Bool {
         return ARFaceTrackingConfiguration.isSupported
     }
 
-    @PublishedDefault(key: "dwellDuration", defaultValue: 1)
-    static var selectionHoldDuration: TimeInterval
+    @PublishedDefault(.dwellDuration)
+    static var selectionHoldDuration: TimeInterval = 1
 
-    @PublishedDefault(key: "sensitivitySetting", defaultValue: CursorSensitivity.medium)
-    static var cursorSensitivity: CursorSensitivity
+    @PublishedDefault(.sensitivitySetting)
+    static var cursorSensitivity: CursorSensitivity = CursorSensitivity.medium
 
-    @PublishedDefault(key: "isHotWordPermitted", defaultValue: true)
-    static var isHotWordPermitted: Bool
+    @PublishedDefault(.isHotWordPermitted)
+    static var isHotWordPermitted: Bool = true
 
-    @PublishedDefault(key: "isListeningModeEnabled", defaultValue: isListeningModeSupported)
-    static var isListeningModeEnabled: Bool
+    @PublishedDefault(.isListeningModeEnabled)
+    static var isListeningModeEnabled: Bool = isListeningModeSupported
 
     static var isListeningModeSupported: Bool {
 
@@ -57,6 +67,6 @@ struct AppConfig {
         return Locale.preferredLanguages.first ?? defaultLanguageCode
     }
 
-    static let isVoiceExperimentEnabled = true
-
+    @PublishedDefault(.listeningModeFeatureFlagEnabled)
+    static var listeningModeFeatureFlagEnabled: Bool = false
 }
