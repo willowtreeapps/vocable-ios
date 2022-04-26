@@ -85,7 +85,6 @@ final class ListeningResponseFeedbackViewController: UIViewController {
 
     private func setupFeedbackView() {
         submitFeedbackView.submitButton.addTarget(self, action: #selector(didTapSubmitButton), for: .primaryActionTriggered)
-        submitFeedbackView.infoButton.addTarget(self, action: #selector(didTapInfoButton), for: .primaryActionTriggered)
 
         view.addSubview(feedbackStackView)
         feedbackStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -102,21 +101,10 @@ final class ListeningResponseFeedbackViewController: UIViewController {
         submitFeedback()
     }
 
-    @objc private func didTapInfoButton() {
-        // TODO: localize and finalize copy
-        let alertViewController = GazeableAlertViewController(alertTitle: "Text to be submitted:\n \(loggingContext?.input ?? "")")
-
-        alertViewController.addAction(GazeableAlertAction(title: "OK"))
-        alertViewController.addAction(GazeableAlertAction(title: "Submit", style: .bold, handler: { [weak self] in
-            self?.submitFeedback()
-        }))
-        present(alertViewController, animated: true)
-    }
-
     // MARK: Private Helpers
 
     private func submitFeedback() {
-        // TODO: submit feedback to mixpanel (use loggingContext.description)
+        // TODO: submit feedback to mixpanel (use loggingContext)
         UIView.transition(with: feedbackStackView, duration: 0.35, options: .transitionCrossDissolve) { [self] in
             self.feedbackViewHeightConstraint?.constant = self.contentFeedbackLayoutGuide.layoutFrame.height
             self.feedbackViewHeightConstraint?.isActive = true

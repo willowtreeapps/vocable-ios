@@ -13,16 +13,16 @@ final class ListeningFeedbackSubmitView: UIView {
     // MARK: Properties
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [submitButton, infoButton])
-        stackView.axis = .horizontal
-        stackView.alignment = .center
+        let stackView = UIStackView(arrangedSubviews: [hintLabel, submitButton])
+        stackView.axis = .vertical
+        stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 8
         return stackView
     }()
 
+    let hintLabel = UILabel()
     let submitButton = GazeableButton()
-    let infoButton = GazeableButton()
 
     // MARK: Initializers
 
@@ -38,16 +38,20 @@ final class ListeningFeedbackSubmitView: UIView {
 
     private func commonInit() {
         let font: UIFont = sizeClass == .hRegular_vRegular
-                           ? .systemFont(ofSize: 34, weight: .bold)
-                           : .systemFont(ofSize: 22, weight: .bold)
-        // TODO: localize and finalize copy
-        submitButton.setTitle("Submit Review", for: .normal)
-        submitButton.titleLabel?.font = font
-        submitButton.contentEdgeInsets = .uniform(16)
-        submitButton.isUserInteractionEnabled = true
+                           ? .systemFont(ofSize: 26, weight: .bold)
+                           : .systemFont(ofSize: 15, weight: .bold)
 
-        infoButton.setImage(UIImage(systemName: "info.circle"), for: .normal)
-        infoButton.isUserInteractionEnabled = true
+        let hintText = NSLocalizedString("listening_mode.feedback.hint.text", comment: "Submit feedback hint text")
+        hintLabel.text = hintText
+        hintLabel.font = font
+        hintLabel.textColor = .defaultTextColor
+
+        let buttonTitle = NSLocalizedString("listening_mode.feedback.submit.title", comment: "Submit feedback button title")
+        submitButton.setTitle(buttonTitle, for: .normal)
+        submitButton.titleLabel?.font = font
+//        submitButton.contentEdgeInsets = .uniform(16)
+        submitButton.isUserInteractionEnabled = true
+        submitButton.titleLabel?.textColor = .defaultTextColor
 
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
