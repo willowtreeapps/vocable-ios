@@ -27,8 +27,8 @@ final class ListeningResponseFeedbackViewController: UIViewController {
 
     private var contentDisposables = Set<AnyCancellable>()
 
-    private let submitFeedbackView = ListeningFeedbackSubmitView()
-    private let successFeedbackView = ListeningFeedbackSuccessView()
+    private lazy var submitFeedbackView = ListeningFeedbackSubmitView()
+    private lazy var successFeedbackView = ListeningFeedbackSuccessView()
 
     var feedbackViewHeightConstraint: NSLayoutConstraint?
 
