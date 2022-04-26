@@ -38,7 +38,7 @@ final class ListeningFeedbackSubmitView: UIView {
 
     private func commonInit() {
         let hintFont: UIFont = sizeClass == .hRegular_vRegular
-                           ? .systemFont(ofSize: 24)
+                           ? .systemFont(ofSize: 22)
                            : .systemFont(ofSize: 15)
 
         let hintText = NSLocalizedString("listening_mode.feedback.hint.text", comment: "Submit feedback hint text")
@@ -60,10 +60,9 @@ final class ListeningFeedbackSubmitView: UIView {
 
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        let widthMultipler = sizeClass == .hRegular_vRegular ? 0.6 : 0.8
         NSLayoutConstraint.activate([stackView.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor),
                                      stackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
                                      stackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
-                                     hintLabel.widthAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.widthAnchor, multiplier: widthMultipler)])
+                                     hintLabel.widthAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.widthAnchor, multiplier: 0.9)])
     }
 }
