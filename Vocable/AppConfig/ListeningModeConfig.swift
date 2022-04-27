@@ -31,11 +31,11 @@ final class ListenModeFeatureConfiguration {
     private(set) var isHotWordEnabled: Bool = true
 
     // The user's preference for whether the overall listening mode feature is enabled
-    @PublishedDefault(.isListeningModeEnabled)
+    @PublishedDefault(.listeningModeEnabledPreference)
     var listeningModeEnabledPreference: Bool = ListenModeFeatureConfiguration.deviceSupportsListeningMode()
 
     // The user's preference for whether the hotword feature is enabled
-    @PublishedDefault(.isHotWordPermitted)
+    @PublishedDefault(.listeningModeHotWordEnabledPreference)
     var hotwordEnabledPreference: Bool = true
 
     private var cancellables = Set<AnyCancellable>()

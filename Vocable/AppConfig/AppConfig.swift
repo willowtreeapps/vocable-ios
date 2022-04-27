@@ -12,8 +12,8 @@ import ARKit
 
 extension UserDefaultsKey {
 
-    static let isListeningModeEnabled: UserDefaultsKey = "isListeningModeEnabled"
-    static let isHotWordPermitted: UserDefaultsKey = "isHotWordPermitted"
+    static let listeningModeEnabledPreference: UserDefaultsKey = "listeningModeEnabledPreference"
+    static let listeningModeHotWordEnabledPreference: UserDefaultsKey = "listeningModeHotWordEnabledPreference"
     static let sensitivitySetting: UserDefaultsKey = "sensitivitySetting"
     static let dwellDuration: UserDefaultsKey = "dwellDuration"
     static let isHeadTrackingEnabled: UserDefaultsKey = "isHeadTrackingEnabled"
