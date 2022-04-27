@@ -115,7 +115,9 @@ workflows:
       - buildanddeploytotestflight:
           filters:
             branches:
-              only: develop
+              only: 
+                - develop
+                - release/*
           requires:
             - export-localizations-for-crowdin
             - build-and-test
