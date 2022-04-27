@@ -82,6 +82,9 @@ extension Category {
     
     static func updateAllOrdinalValues(in context: NSManagedObjectContext) throws {
 
+        let listeningModeCategory = Category.fetch(.listeningMode, in: context)
+        listeningModeCategory.isHidden = !AppConfig.isListeningModeEnabled
+
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         request.predicate = !Predicate(\Category.isUserRemoved)
         request.sortDescriptors = [

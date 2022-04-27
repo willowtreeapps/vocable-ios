@@ -54,8 +54,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 return NSLocalizedString("settings.cell.tune_cursor.title",
                                          comment: "tune cursor debug settings menu item")
             case .listeningMode:
-                #warning("Needs localization")
-                return "Listening Mode"
+                return String(localized: "settings.cell.listening_mode.title")
             case .versionNum:
                 return ""
             }
