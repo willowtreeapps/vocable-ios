@@ -101,6 +101,10 @@
             argument = "resetAppDataOnLaunch"
             isEnabled = "NO">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "enableListeningMode"
+            isEnabled = "NO">
+         </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
    <ProfileAction

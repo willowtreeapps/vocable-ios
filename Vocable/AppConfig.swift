@@ -99,6 +99,10 @@ final class ListenModeFeatureConfiguration {
 
     fileprivate init() {
 
+        if LaunchArguments.contains(.enableListeningMode) {
+            isFeatureFlagEnabled = true
+        }
+        
         Publishers.CombineLatest3($isFeatureFlagEnabled, $listeningModeEnabledPreference, $hotwordEnabledPreference)
             .removeDuplicates { lhs, rhs in
                 lhs.0 == rhs.0 &&
@@ -118,10 +122,6 @@ final class ListenModeFeatureConfiguration {
             .sink { [weak self] _ in
                 self?.updateCategoryOrdinalsAfterVisibilityChange()
             }.store(in: &cancellables)
-    }
-
-    func setFeatureFlagEnabled(_ isEnabled: Bool) {
-        isFeatureFlagEnabled = isEnabled
     }
 
     private func updateCategoryOrdinalsAfterVisibilityChange() {

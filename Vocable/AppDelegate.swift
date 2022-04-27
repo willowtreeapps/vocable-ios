@@ -54,10 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        if LaunchArguments.contains(.enableListeningMode) {
-            AppConfig.listeningMode.setFeatureFlagEnabled(true)
-        }
-
         // Ensure that the persistent store has the current
         // default presets before presenting UI
         performPersistenceMigrationForCurrentLanguage()
