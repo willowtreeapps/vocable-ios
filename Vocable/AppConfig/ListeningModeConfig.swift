@@ -68,11 +68,11 @@ final class ListenModeFeatureConfiguration {
     }
 
     private func updateCategoryOrdinalsAfterVisibilityChange() {
-        let ctx = NSPersistentContainer.shared.newBackgroundContext()
-        ctx.perform {
+        let context = NSPersistentContainer.shared.newBackgroundContext()
+        context.perform {
             do {
-                try Category.updateAllOrdinalValues(in: ctx)
-                try ctx.save()
+                try Category.updateAllOrdinalValues(in: context)
+                try context.save()
             } catch {
                 print("Failed to update ordinals: \(error)")
             }
