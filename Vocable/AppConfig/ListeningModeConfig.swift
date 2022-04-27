@@ -1,57 +1,18 @@
 //
-//  AppConfig.swift
-//  Vocable AAC
+//  ListeningModeConfig.swift
+//  Vocable
 //
-//  Created by Patrick Gatewood on 2/7/20.
-//  Copyright © 2020 WillowTree. All rights reserved.
+//  Created by Chris Stroud on 4/27/22.
+//  Copyright © 2022 WillowTree. All rights reserved.
 //
 
 import Foundation
 import Combine
-import ARKit
 import CoreData
 
-extension UserDefaultsKey {
-
-    static let isListeningModeEnabled: UserDefaultsKey = "isListeningModeEnabled"
-    static let isHotWordPermitted: UserDefaultsKey = "isHotWordPermitted"
-    static let sensitivitySetting: UserDefaultsKey = "sensitivitySetting"
-    static let dwellDuration: UserDefaultsKey = "dwellDuration"
-    static let isHeadTrackingEnabled: UserDefaultsKey = "isHeadTrackingEnabled"
-    static let listeningModeFeatureFlagEnabled: UserDefaultsKey = "listeningModeFeatureFlagEnabled"
-}
-
-struct AppConfig {
-
-    static let showDebugOptions: Bool = {
-        #if DEBUG
-        return true
-        #else
-        return false
-        #endif
-    }()
-
-    @PublishedDefault(.isHeadTrackingEnabled)
-    static var isHeadTrackingEnabled: Bool = AppConfig.isHeadTrackingSupported
-    static var isHeadTrackingSupported: Bool {
-        return ARFaceTrackingConfiguration.isSupported
-    }
-
-    @PublishedDefault(.dwellDuration)
-    static var selectionHoldDuration: TimeInterval = 1
-
-    @PublishedDefault(.sensitivitySetting)
-    static var cursorSensitivity: CursorSensitivity = CursorSensitivity.medium
-
-    static let defaultLanguageCode = "en"
-    static var activePreferredLanguageCode: String {
-        return Locale.preferredLanguages.first ?? defaultLanguageCode
-    }
-
-    static let listeningMode = ListenModeFeatureConfiguration()
-}
-
 final class ListenModeFeatureConfiguration {
+    
+    static let shared = ListenModeFeatureConfiguration()
 
     // Whether the feature is active or not
     // Not exposed to consumers, but used for dynamically
@@ -71,38 +32,20 @@ final class ListenModeFeatureConfiguration {
 
     // The user's preference for whether the overall listening mode feature is enabled
     @PublishedDefault(.isListeningModeEnabled)
-    var listeningModeEnabledPreference: Bool = ListenModeFeatureConfiguration.deviceSupportsListeningMode
+    var listeningModeEnabledPreference: Bool = ListenModeFeatureConfiguration.deviceSupportsListeningMode()
 
     // The user's preference for whether the hotword feature is enabled
     @PublishedDefault(.isHotWordPermitted)
     var hotwordEnabledPreference: Bool = true
 
-    private static var deviceSupportsListeningMode: Bool {
-
-        guard SpeechRecognitionController.deviceSupportsSpeech else {
-            return false
-        }
-
-        // Listening mode is currently only supported for English
-        if Locale(identifier: AppConfig.activePreferredLanguageCode).languageCode != "en" {
-            return false
-        }
-
-        // ML models currently rely on CoreML features introduced in iOS 14
-        if #available(iOS 14.0, *) {
-            return true
-        }
-        return false
-    }
-
     private var cancellables = Set<AnyCancellable>()
 
-    fileprivate init() {
+    private init() {
 
         if LaunchArguments.contains(.enableListeningMode) {
             isFeatureFlagEnabled = true
         }
-        
+
         Publishers.CombineLatest3($isFeatureFlagEnabled, $listeningModeEnabledPreference, $hotwordEnabledPreference)
             .removeDuplicates { lhs, rhs in
                 lhs.0 == rhs.0 &&
@@ -110,7 +53,7 @@ final class ListenModeFeatureConfiguration {
                 lhs.2 == rhs.2
             }
             .sink { [weak self] (isFlagEnabled, isListeningModeEnabled, isHotWordEnabled) in
-                let modeEnabled = isFlagEnabled && isListeningModeEnabled && ListenModeFeatureConfiguration.deviceSupportsListeningMode
+                let modeEnabled = isFlagEnabled && isListeningModeEnabled && ListenModeFeatureConfiguration.deviceSupportsListeningMode()
                 let hotwordEnabled = modeEnabled && isHotWordEnabled
                 self?.isEnabled = modeEnabled
                 self?.isHotWordEnabled = hotwordEnabled
@@ -134,5 +77,23 @@ final class ListenModeFeatureConfiguration {
                 print("Failed to update ordinals: \(error)")
             }
         }
+    }
+
+    private static func deviceSupportsListeningMode() -> Bool {
+
+        guard SpeechRecognitionController.deviceSupportsSpeech else {
+            return false
+        }
+
+        // Listening mode is currently only supported for English
+        if Locale(identifier: AppConfig.activePreferredLanguageCode).languageCode != "en" {
+            return false
+        }
+
+        // ML models currently rely on CoreML features introduced in iOS 14
+        if #available(iOS 14.0, *) {
+            return true
+        }
+        return false
     }
 }
