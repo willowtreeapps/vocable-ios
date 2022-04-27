@@ -62,7 +62,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         }
 
         var isFeatureEnabled: Bool {
-            let debugFeatures: [SettingsItem] = [.resetAppSettings, .pidTuner]
+            let debugFeatures: [SettingsItem] = [.pidTuner]
             if debugFeatures.contains(self) {
                 return AppConfig.showDebugOptions
             }
