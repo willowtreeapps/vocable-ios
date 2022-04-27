@@ -83,10 +83,11 @@ import Combine
                 self?.navigateToVoiceCategory()
             }.store(in: &cancellables)
 
-        Publishers.CombineLatest(AppConfig.$isListeningModeEnabled, AppConfig.$listeningModeFeatureFlagEnabled)
+        AppConfig.listeningMode.$isEnabled
+            .dropFirst()
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] isListeningModeEnabled, listeningModeFeatureFlagEnabled in
-                let isEnabled = isListeningModeEnabled && listeningModeFeatureFlagEnabled
+            .sink { [weak self] isEnabled in
                 self?.listeningModeEnabledStateDidChange(isEnabled)
             }.store(in: &cancellables)
     }
@@ -146,18 +147,7 @@ import Combine
 
     private func categoriesFetchRequest() -> NSFetchRequest<Category> {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        var predicate = !Predicate(\Category.isHidden) && !Predicate(\Category.isUserRemoved)
-
-        let shouldRemoveListeningCategory = false
-        || !AppConfig.isListeningModeSupported
-        || !AppConfig.listeningModeFeatureFlagEnabled
-        || !AppConfig.isListeningModeEnabled
-        || !SpeechRecognitionController.shared.deviceSupportsSpeech
-
-        if shouldRemoveListeningCategory {
-            predicate &= Predicate(\Category.identifier, notEqualTo: Category.Identifier.listeningMode)
-        }
-        request.predicate = predicate
+        request.predicate = Category.visibleCategoriesPredicate(includeUserHidden: false)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.ordinal, ascending: true)]
         return request
     }
@@ -333,7 +323,7 @@ import Combine
 
     private func navigateToVoiceCategory() {
 
-        guard AppConfig.listeningModeFeatureFlagEnabled else {
+        guard AppConfig.listeningMode.isEnabled else {
             return
         }
 

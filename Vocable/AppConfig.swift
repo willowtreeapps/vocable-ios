@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import ARKit
+import CoreData
 
 extension UserDefaultsKey {
 
@@ -42,16 +43,48 @@ struct AppConfig {
     @PublishedDefault(.sensitivitySetting)
     static var cursorSensitivity: CursorSensitivity = CursorSensitivity.medium
 
-    @PublishedDefault(.isHotWordPermitted)
-    static var isHotWordPermitted: Bool = true
+    static let defaultLanguageCode = "en"
+    static var activePreferredLanguageCode: String {
+        return Locale.preferredLanguages.first ?? defaultLanguageCode
+    }
 
+    static let listeningMode = ListenModeFeatureConfiguration()
+}
+
+final class ListenModeFeatureConfiguration {
+
+    // Whether the feature is active or not
+    // Not exposed to consumers, but used for dynamically
+    // determining whether the feature is enabled
+    @PublishedDefault(.listeningModeFeatureFlagEnabled)
+    private(set) var isFeatureFlagEnabled: Bool = false
+
+    // Whether listening mode is allowed to function
+    // This can vary based on the feature flag AND the user preference
+    @PublishedValue
+    private(set) var isEnabled: Bool = true
+
+    // Whether the hotword feature is allowed to function
+    // This can vary based on the feature flag AND the user preference
+    @PublishedValue
+    private(set) var isHotWordEnabled: Bool = true
+
+    // The user's preference for whether the overall listening mode feature is enabled
     @PublishedDefault(.isListeningModeEnabled)
-    static var isListeningModeEnabled: Bool = isListeningModeSupported
+    var listeningModeEnabledPreference: Bool = ListenModeFeatureConfiguration.deviceSupportsListeningMode
 
-    static var isListeningModeSupported: Bool {
+    // The user's preference for whether the hotword feature is enabled
+    @PublishedDefault(.isHotWordPermitted)
+    var hotwordEnabledPreference: Bool = true
+
+    private static var deviceSupportsListeningMode: Bool {
+
+        guard SpeechRecognitionController.deviceSupportsSpeech else {
+            return false
+        }
 
         // Listening mode is currently only supported for English
-        if Locale(identifier: activePreferredLanguageCode).languageCode != "en" {
+        if Locale(identifier: AppConfig.activePreferredLanguageCode).languageCode != "en" {
             return false
         }
 
@@ -62,11 +95,44 @@ struct AppConfig {
         return false
     }
 
-    static let defaultLanguageCode = "en"
-    static var activePreferredLanguageCode: String {
-        return Locale.preferredLanguages.first ?? defaultLanguageCode
+    private var cancellables = Set<AnyCancellable>()
+
+    fileprivate init() {
+
+        Publishers.CombineLatest3($isFeatureFlagEnabled, $listeningModeEnabledPreference, $hotwordEnabledPreference)
+            .removeDuplicates { lhs, rhs in
+                lhs.0 == rhs.0 &&
+                lhs.1 == rhs.1 &&
+                lhs.2 == rhs.2
+            }
+            .sink { [weak self] (isFlagEnabled, isListeningModeEnabled, isHotWordEnabled) in
+                let modeEnabled = isFlagEnabled && isListeningModeEnabled && ListenModeFeatureConfiguration.deviceSupportsListeningMode
+                let hotwordEnabled = modeEnabled && isHotWordEnabled
+                self?.isEnabled = modeEnabled
+                self?.isHotWordEnabled = hotwordEnabled
+            }.store(in: &cancellables)
+
+        $isEnabled
+            .dropFirst()
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.updateCategoryOrdinalsAfterVisibilityChange()
+            }.store(in: &cancellables)
     }
 
-    @PublishedDefault(.listeningModeFeatureFlagEnabled)
-    static var listeningModeFeatureFlagEnabled: Bool = false
+    func setFeatureFlagEnabled(_ isEnabled: Bool) {
+        isFeatureFlagEnabled = isEnabled
+    }
+
+    private func updateCategoryOrdinalsAfterVisibilityChange() {
+        let ctx = NSPersistentContainer.shared.newBackgroundContext()
+        ctx.perform {
+            do {
+                try Category.updateAllOrdinalValues(in: ctx)
+                try ctx.save()
+            } catch {
+                print("Failed to update ordinals: \(error)")
+            }
+        }
+    }
 }
