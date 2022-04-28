@@ -212,38 +212,6 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         collectionView.backgroundView = nil
     }
 
-    @objc private func handleCellDeletionButton(_ sender: UIButton) {
-
-        func deleteAction() {
-            self.deletePhrase(sender)
-        }
-
-        let title = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.title",
-                                      comment: "Delete phrase confirmation alert title")
-        let deleteButtonTitle = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.button.delete.title",
-                                                  comment: "Delete phrase alert action button title")
-        let cancelButtonTitle = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.button.cancel.title",
-                                                  comment: "Delete phrase alert cancel button title")
-
-        let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(.cancel(withTitle: cancelButtonTitle))
-        alert.addAction(.delete(withTitle: deleteButtonTitle, handler: deleteAction))
-        self.present(alert, animated: true)
-    }
-
-    private func deletePhrase(_ sender: UIButton) {
-        guard let indexPath = collectionView.indexPath(containing: sender) else {
-            assertionFailure("Failed to obtain index path")
-            return
-        }
-
-        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        let phrase = frc.object(at: safeIndexPath)
-        let context = NSPersistentContainer.shared.viewContext
-        context.delete(phrase)
-        try? context.save()
-    }
-
     @IBAction func addNewPhraseButtonSelected() {
         let vc = TextEditorViewController()
         let context = NSPersistentContainer.shared.newBackgroundContext()
