@@ -22,8 +22,23 @@
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "取消";
 
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "删除";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "删除后的对话无法恢复。";
+
+/* Edit Phrases button label within the category detail screen */
+"category_editor.detail.button.edit_phrases.title" = "编辑对话";
+
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "移除类别";
+
+/* Rename Category button label within the category detail screen */
+"category_editor.detail.button.rename_category.title" = "重命名类别";
+
+/* Show category button label within the category detail screen. */
+"category_editor.detail.button.show_category.title" = "显示分类名称";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "已保存更改";
@@ -34,14 +49,29 @@
 /* Debugging error message for when preloaded content is not found */
 "debug.assertion.presets_file_not_found" = "找不到预设";
 
+/* No comment provided by engineer. */
+"Delete All" = "全部刪除";
+
+/* Empty state Add Phrase button title */
+"empty_state.button.title" = "添加短语";
+
+/* Empty state title */
+"empty_state.header.title" = "您还没有保存任何短语。";
+
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "取消";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "继续";
 
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "请靠近设备";
 
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "请选择下面要说的对话";
+
+/* No comment provided by engineer. */
+"No Entries" = "没有条目";
 
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "第 %1$d/%2$d 頁";
@@ -52,16 +82,37 @@
 /* Discard changes alert action title */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "舍弃";
 
+/* Exit edit sayings alert title */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "保存前返回将会清除任何编辑的东西。";
+
+/* Phrase already exists alert cancel button */
+"phrase_editor.alert.phrase_name_exists.cancel.button" = "取消";
+
+/* Phrase already exists alert create button */
+"phrase_editor.alert.phrase_name_exists.create.button" = "创建副本";
+
+/* Phrase already exists alert title */
+"phrase_editor.alert.phrase_name_exists.title" = "此短语已经存在。您想要创建重复吗？";
+
 /* new entry saved to user favorites category
    Saved to user favorites category
    Saved to user favorites category toast title */
 "phrase_editor.toast.successfully_saved_to_favorites.title_format" = "保存到 %@";
+
+/* Add phrase to category button title */
+"preset.category.add.phrase.title" = "添加短语";
 
 /* 'No' num pad response */
 "preset.category.numberpad.phrase.no.title" = "不是";
 
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "是";
+
+/* Recents empty state description */
+"recents_empty_state.body.title" = "开始使用 Vocable 在此处查看您最近使用的短语。";
+
+/* Recents empty state title */
+"recents_empty_state.header.title" = "没有最近使用的短语";
 
 /* Selection mode screen header title */
 "selection_mode.header.title" = "移动对象模式";
@@ -71,6 +122,27 @@
 
 /* No email account configured error alert title */
 "settings.alert.no_email_configured.title" = "电子邮件没有配置";
+
+/* Reset app settings confirmation prompt */
+"settings.alert.reset_app_settings_confirmation.body" = "您确定要将 Vocable 重置为默认设置吗？此操作无法撤消。";
+
+/* Button cancelling the action to reset Vocable's application settings */
+"settings.alert.reset_app_settings_confirmation.button.cancel.title" = "取消";
+
+/* Button confirming that the user would like to reset Vocable's application settings */
+"settings.alert.reset_app_settings_confirmation.button.confirm.title" = "重 置";
+
+/* Reset app settings failure alert */
+"settings.alert.reset_app_settings_failure.body" = "语音无法重置。如果问题仍然存在，请重试或重新安装 Vocable。";
+
+/* Button dismissing the alert informing the user that Vocable's application settings failed to reset */
+"settings.alert.reset_app_settings_failure.button.ok" = "确定";
+
+/* Reset app settings success alert */
+"settings.alert.reset_app_settings_success.body" = "已成功恢复默认设置";
+
+/* Button dismissing the alert informing the user that Vocable's application settings were successfully reset */
+"settings.alert.reset_app_settings_success.button.ok" = "好的";
 
 /* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.body" = "您即将被带到可说话之外。您可能会失去头部跟踪控制。";
@@ -116,6 +188,18 @@
 
 /* Discard changes alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "舍弃";
+
+/* Exit edit sayings alert title */
+"text_editor.alert.cancel_editing_confirmation.title" = "保存前返回将会清除任何编辑的东西。";
+
+/* Category already exists alert cancel button */
+"text_editor.alert.category_name_exists.cancel.button" = "取消";
+
+/* Category already exists alert create button */
+"text_editor.alert.category_name_exists.create.button" = "创建副本";
+
+/* Category already exists alert title */
+"text_editor.alert.category_name_exists.title" = "此类别名称已存在。您想创建一个副本吗？";
 
 /* High cursor sensitivity option button */
 "timing_and_sensitivity.button.high.title" = "高";

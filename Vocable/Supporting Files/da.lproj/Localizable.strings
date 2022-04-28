@@ -22,8 +22,23 @@
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Annuller";
 
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Fjern";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "Slettede sætninger kan ikke genskabes.";
+
+/* Edit Phrases button label within the category detail screen */
+"category_editor.detail.button.edit_phrases.title" = "Rediger Sætninger";
+
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "Fjern Kategori";
+
+/* Rename Category button label within the category detail screen */
+"category_editor.detail.button.rename_category.title" = "Omdøb kategori";
+
+/* Show category button label within the category detail screen. */
+"category_editor.detail.button.show_category.title" = "Vis kategori";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "Dine ændringer er gemt";
@@ -34,14 +49,29 @@
 /* Debugging error message for when preloaded content is not found */
 "debug.assertion.presets_file_not_found" = "Ingen forudstillinger fundet";
 
+/* No comment provided by engineer. */
+"Delete All" = "Slet Alle";
+
+/* Empty state Add Phrase button title */
+"empty_state.button.title" = "Tilføj sætning";
+
+/* Empty state title */
+"empty_state.header.title" = "Du har ingen sætninger gemt endnu.";
+
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Annuller";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Forsæt";
 
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "Kom nærmere din mobilenhed.";
 
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "Vælg noget nedenunder for at snakke";
+
+/* No comment provided by engineer. */
+"No Entries" = "Ingen poster";
 
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "Side %1$d af %2$d";
@@ -52,16 +82,37 @@
 /* Discard changes alert action title */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Slet";
 
+/* Exit edit sayings alert title */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Hvis du forlader uden at gemme vil dine ændringer blive slettet.";
+
+/* Phrase already exists alert cancel button */
+"phrase_editor.alert.phrase_name_exists.cancel.button" = "Annuller";
+
+/* Phrase already exists alert create button */
+"phrase_editor.alert.phrase_name_exists.create.button" = "Opret dublet";
+
+/* Phrase already exists alert title */
+"phrase_editor.alert.phrase_name_exists.title" = "Denne sætning findes allerede. Vil du oprette en dublet?";
+
 /* new entry saved to user favorites category
    Saved to user favorites category
    Saved to user favorites category toast title */
 "phrase_editor.toast.successfully_saved_to_favorites.title_format" = "Gemt til %@";
+
+/* Add phrase to category button title */
+"preset.category.add.phrase.title" = "Tilføj sætning";
 
 /* 'No' num pad response */
 "preset.category.numberpad.phrase.no.title" = "Nej";
 
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "Ja";
+
+/* Recents empty state description */
+"recents_empty_state.body.title" = "Begynd at bruge Vocable for at se dine senest brugte sætninger her.";
+
+/* Recents empty state title */
+"recents_empty_state.header.title" = "Ingen nyligt anvendte sætninger";
 
 /* Selection mode screen header title */
 "selection_mode.header.title" = "Markeringstilstand";
@@ -71,6 +122,27 @@
 
 /* No email account configured error alert title */
 "settings.alert.no_email_configured.title" = "E-mail er ikke konfigureret.";
+
+/* Reset app settings confirmation prompt */
+"settings.alert.reset_app_settings_confirmation.body" = "Er du sikker på, at du vil nulstille Vocable til standardindstillinger? Denne handling kan ikke fortrydes.";
+
+/* Button cancelling the action to reset Vocable's application settings */
+"settings.alert.reset_app_settings_confirmation.button.cancel.title" = "Annuller";
+
+/* Button confirming that the user would like to reset Vocable's application settings */
+"settings.alert.reset_app_settings_confirmation.button.confirm.title" = "Nulstil";
+
+/* Reset app settings failure alert */
+"settings.alert.reset_app_settings_failure.body" = "Vocable kunne ikke nulstilles. Prøv igen, eller geninstaller Vocable hvis problemet fortsætter.";
+
+/* Button dismissing the alert informing the user that Vocable's application settings failed to reset */
+"settings.alert.reset_app_settings_failure.button.ok" = "OK";
+
+/* Reset app settings success alert */
+"settings.alert.reset_app_settings_success.body" = "Vocable er blevet nulstillet";
+
+/* Button dismissing the alert informing the user that Vocable's application settings were successfully reset */
+"settings.alert.reset_app_settings_success.button.ok" = "OK";
 
 /* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.body" = "Du er ved at forlade Vocable. Du vil måske miste hovedsporingskontrol.";
@@ -116,6 +188,18 @@
 
 /* Discard changes alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Slet";
+
+/* Exit edit sayings alert title */
+"text_editor.alert.cancel_editing_confirmation.title" = "Hvis du forlader uden at gemme vil dine ændringer blive slettet.";
+
+/* Category already exists alert cancel button */
+"text_editor.alert.category_name_exists.cancel.button" = "Annuller";
+
+/* Category already exists alert create button */
+"text_editor.alert.category_name_exists.create.button" = "Opret dublet";
+
+/* Category already exists alert title */
+"text_editor.alert.category_name_exists.title" = "Dette kategorinavn findes allerede. Vil du oprette et duplikat?";
 
 /* High cursor sensitivity option button */
 "timing_and_sensitivity.button.high.title" = "Høj";
