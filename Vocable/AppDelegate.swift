@@ -54,10 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        if LaunchArguments.contains(.enableListeningMode) {
-            AppConfig.listeningModeFeatureFlagEnabled = true
-        }
-
         // Ensure that the persistent store has the current
         // default presets before presenting UI
         performPersistenceMigrationForCurrentLanguage()
@@ -85,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         _ = SpeechRecognitionController.shared
 
-        AppConfig.$isListeningModeEnabled
+        AppConfig.listeningMode.$isEnabled
             .removeDuplicates()
             .sink { isEnabled in
                 if #available(iOS 14.0, *), isEnabled {

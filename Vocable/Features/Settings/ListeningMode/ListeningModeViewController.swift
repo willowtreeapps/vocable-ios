@@ -42,9 +42,9 @@ final class ListeningModeViewController: VocableCollectionViewController {
         var accessory: VocableListCellAccessory {
             switch self {
             case .listeningModeEnabled:
-                return .toggle(isOn: AppConfig.isListeningModeEnabled)
+                return .toggle(isOn: AppConfig.listeningMode.listeningModeEnabledPreference)
             case .hotWordEnabled:
-                return .toggle(isOn: AppConfig.isHotWordPermitted)
+                return .toggle(isOn: AppConfig.listeningMode.hotwordEnabledPreference)
             }
         }
     }
@@ -102,7 +102,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
         } else {
             snapshot.appendSections([.listeningMode])
             snapshot.appendItems([.listeningModeEnabled])
-            if AppConfig.isListeningModeEnabled {
+            if AppConfig.listeningMode.listeningModeEnabledPreference {
                 snapshot.appendSections([.hotword])
                 snapshot.appendItems([.hotWordEnabled])
             }
@@ -220,7 +220,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         switch item {
         case .listeningModeEnabled:
-            AppConfig.isListeningModeEnabled.toggle()
+            AppConfig.listeningMode.listeningModeEnabledPreference.toggle()
 
             let context = NSPersistentContainer.shared.newBackgroundContext()
             context.perform {
@@ -229,7 +229,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
             }
 
         case .hotWordEnabled:
-            AppConfig.isHotWordPermitted.toggle()
+            AppConfig.listeningMode.hotwordEnabledPreference.toggle()
         }
 
         updateDataSource(animated: true)

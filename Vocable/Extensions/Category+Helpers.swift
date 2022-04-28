@@ -79,14 +79,25 @@ extension Category {
         category.identifier = newIdentifier
         return category
     }
+
+    static func visibleCategoriesPredicate(includeUserHidden: Bool = true) -> NSPredicate {
+        var predicate = !Predicate(\Category.isUserRemoved)
+        if !includeUserHidden {
+            predicate &= !Predicate(\Category.isHidden)
+        }
+        if !AppConfig.listeningMode.isEnabled {
+            predicate &= !Predicate(\Category.identifier, equalTo: Category.Identifier.listeningMode)
+        }
+        return predicate
+    }
     
     static func updateAllOrdinalValues(in context: NSManagedObjectContext) throws {
 
         let listeningModeCategory = Category.fetch(.listeningMode, in: context)
-        listeningModeCategory.isHidden = !AppConfig.isListeningModeEnabled
+        listeningModeCategory.isHidden = !AppConfig.listeningMode.isEnabled
 
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.predicate = !Predicate(\Category.isUserRemoved)
+        request.predicate = visibleCategoriesPredicate()
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \Category.ordinal, ascending: true),
             NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)

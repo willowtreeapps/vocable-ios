@@ -271,8 +271,8 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         try? Category.updateAllOrdinalValues(in: context)
         saveContext()
 
-        if category == Category.listeningModeCategory() {
-            AppConfig.isListeningModeEnabled = shouldShowCategory
+        if category.identifier == Category.Identifier.listeningMode {
+            AppConfig.listeningMode.listeningModeEnabledPreference = shouldShowCategory
         }
 
         // Update the cell's config
