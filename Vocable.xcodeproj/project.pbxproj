@@ -113,6 +113,7 @@
 		6BD84F9D2604F8F600D4CD3E /* ListenModeDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD84F9C2604F8F600D4CD3E /* ListenModeDebugView.swift */; };
 		6BD84FA22604FB1A00D4CD3E /* ListenModeDebugStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD84FA12604FB1A00D4CD3E /* ListenModeDebugStorage.swift */; };
 		6BDE5D3D25C1DF1600F47066 /* TranscriptionOutputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDE5D3C25C1DF1600F47066 /* TranscriptionOutputTextView.swift */; };
+		6BE02F7F28188CEB002CCCED /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE02F7E28188CEB002CCCED /* String+Localization.swift */; };
 		6BE23D562444DCBE0032CAE4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BE23D542444DCBE0032CAE4 /* Localizable.strings */; };
 		6BE2628B25BB376700281BB5 /* AudioPermissionPromptController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE2628A25BB376700281BB5 /* AudioPermissionPromptController.swift */; };
 		6BE7E9842459D328007B01F2 /* PagingCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E9832459D328007B01F2 /* PagingCarouselViewController.swift */; };
@@ -122,6 +123,7 @@
 		6BFB18C224002C7B002C3515 /* Phrases.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C024002C7B002C3515 /* Phrases.xcdatamodeld */; };
 		6BFB18C424004406002C3515 /* NSManagedObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */; };
 		6BFB18C624004711002C3515 /* ModelObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C524004711002C3515 /* ModelObjectExtensions.swift */; };
+		6BFB67BA2819C80900DB58BE /* ListeningModeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB67B92819C80900DB58BE /* ListeningModeConfig.swift */; };
 		714407ED243CEEA1009D077B /* Category+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714407EC243CEEA1009D077B /* Category+Helpers.swift */; };
 		718D7FAE2419546F00FDEF93 /* EditPhrasesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D7FAD2419546F00FDEF93 /* EditPhrasesCollectionViewCell.swift */; };
 		718D7FB0241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718D7FAF241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib */; };
@@ -328,6 +330,7 @@
 		6BD84F9C2604F8F600D4CD3E /* ListenModeDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenModeDebugView.swift; sourceTree = "<group>"; };
 		6BD84FA12604FB1A00D4CD3E /* ListenModeDebugStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenModeDebugStorage.swift; sourceTree = "<group>"; };
 		6BDE5D3C25C1DF1600F47066 /* TranscriptionOutputTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranscriptionOutputTextView.swift; sourceTree = "<group>"; };
+		6BE02F7E28188CEB002CCCED /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		6BE23D552444DCBE0032CAE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BE23D5724450FDA0032CAE4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BE2628A25BB376700281BB5 /* AudioPermissionPromptController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPermissionPromptController.swift; sourceTree = "<group>"; };
@@ -339,6 +342,7 @@
 		6BFB18C124002C7B002C3515 /* Phrases.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Phrases.xcdatamodel; sourceTree = "<group>"; };
 		6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Helpers.swift"; sourceTree = "<group>"; };
 		6BFB18C524004711002C3515 /* ModelObjectExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectExtensions.swift; sourceTree = "<group>"; };
+		6BFB67B92819C80900DB58BE /* ListeningModeConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningModeConfig.swift; sourceTree = "<group>"; };
 		714407EC243CEEA1009D077B /* Category+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+Helpers.swift"; sourceTree = "<group>"; };
 		718D7FAD2419546F00FDEF93 /* EditPhrasesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhrasesCollectionViewCell.swift; sourceTree = "<group>"; };
 		718D7FAF241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditPhrasesCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -499,7 +503,7 @@
 				B8DA9DF723F30D9900FEBE19 /* Extensions */,
 				B8DA9DF523F30C5E00FEBE19 /* Features */,
 				130C00B720D2AD2A007C3163 /* AppDelegate.swift */,
-				B8DA9DEF23EDECEE00FEBE19 /* AppConfig.swift */,
+				6BFB67B82819C7ED00DB58BE /* AppConfig */,
 				2631B365251181C400B94402 /* GoogleService-Info.plist */,
 				139EDEE921419C400009A99F /* Supporting Files */,
 			);
@@ -736,6 +740,15 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		6BFB67B82819C7ED00DB58BE /* AppConfig */ = {
+			isa = PBXGroup;
+			children = (
+				B8DA9DEF23EDECEE00FEBE19 /* AppConfig.swift */,
+				6BFB67B92819C80900DB58BE /* ListeningModeConfig.swift */,
+			);
+			path = AppConfig;
+			sourceTree = "<group>";
+		};
 		714EFD412419636500DC773C /* EditPhrases */ = {
 			isa = PBXGroup;
 			children = (
@@ -924,6 +937,7 @@
 				4E014DA927EA53BC00561FC8 /* NSRange+.swift */,
 				4E8A303B27EBB95C000177B1 /* BidirectionalCollection+.swift */,
 				A93E46F6280614670081D544 /* NSDiffableDataSourceSnapshot+Map.swift */,
+				6BE02F7E28188CEB002CCCED /* String+Localization.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1190,6 +1204,7 @@
 				6B823BD323F4AE250099F65E /* PIDInterpolator.swift in Sources */,
 				B8DA9DE823EB833200FEBE19 /* BorderedView.swift in Sources */,
 				6B3FBBE825FBC72600B7D2CD /* ListeningResponseContentViewController.swift in Sources */,
+				6BE02F7F28188CEB002CCCED /* String+Localization.swift in Sources */,
 				6B5C490F2460627B00A4433C /* NumericCategoryContentViewController.swift in Sources */,
 				6B9DFA6023E889DB0037673E /* Extensions.swift in Sources */,
 				6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */,
@@ -1216,6 +1231,7 @@
 				64981D7C258A8014007EFA82 /* VocableChoicesModel.mlmodel in Sources */,
 				64F49906245B40BC00348592 /* SettingsViewController.swift in Sources */,
 				6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */,
+				6BFB67BA2819C80900DB58BE /* ListeningModeConfig.swift in Sources */,
 				A96D61D524229F6400577144 /* SettingsCollectionViewCell.swift in Sources */,
 				A94C3FAE27F49CBC001D4F01 /* CategoryNameEditorConfigurationProvider.swift in Sources */,
 				A95D07BE24326475004ECE64 /* CursorSensitivity.swift in Sources */,

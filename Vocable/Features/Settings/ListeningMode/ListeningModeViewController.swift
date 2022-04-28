@@ -12,18 +12,51 @@ import Combine
 
 final class ListeningModeViewController: VocableCollectionViewController {
 
+    private enum Section: Int {
+        case listeningMode
+        case hotword
+    }
+
     private enum ContentItem: Int {
         case listeningModeEnabled
         case hotWordEnabled
+
+        var title: String {
+            switch self {
+            case .listeningModeEnabled:
+                return String(localized: "settings.listening_mode.listening_mode_toggle_cell.title")
+            case .hotWordEnabled:
+                return String(localized: "settings.listening_mode.hot_word_toggle_cell.title")
+            }
+        }
+
+        var accessibilityID: String {
+            switch self {
+            case .listeningModeEnabled:
+                return "listening_mode_toggle"
+            case .hotWordEnabled:
+                return "hot_word_toggle"
+            }
+        }
+
+        var accessory: VocableListCellAccessory {
+            switch self {
+            case .listeningModeEnabled:
+                return .toggle(isOn: AppConfig.listeningMode.listeningModeEnabledPreference)
+            case .hotWordEnabled:
+                return .toggle(isOn: AppConfig.listeningMode.hotwordEnabledPreference)
+            }
+        }
     }
 
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, ContentItem> = .init(collectionView: collectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell in
-        guard let self = self else { return UICollectionViewCell() }
-        return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
-    }
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, ContentItem>
+    private typealias Datasource = UICollectionViewDiffableDataSource<Section, ContentItem>
+
+    private var dataSource: Datasource!
 
     private var authorizationController = AudioPermissionPromptController()
     private var authorizationCancellable: AnyCancellable?
+    private var cellRegistration: UICollectionView.CellRegistration<VocableListCell, ContentItem>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +77,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
     }
 
     private func setupNavigationBar() {
-        #warning("Needs localization")
-        navigationBar.title = "Listening Mode"
+        navigationBar.title = String(localized: "settings.listening_mode.title")
     }
 
     override func viewLayoutMarginsDidChange() {
@@ -63,41 +95,84 @@ final class ListeningModeViewController: VocableCollectionViewController {
     // MARK: UICollectionViewDataSource
 
     private func updateDataSource(animated: Bool = false) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, ContentItem>()
+        var snapshot = Snapshot()
         if let state = authorizationController.state {
             collectionView.backgroundView = EmptyStateView.listening(state.state, action: state.action)
             updateBackgroundViewLayoutMargins()
         } else {
-            snapshot.appendSections([0])
+            snapshot.appendSections([.listeningMode])
             snapshot.appendItems([.listeningModeEnabled])
-            if AppConfig.isListeningModeEnabled {
+            if AppConfig.listeningMode.listeningModeEnabledPreference {
+                snapshot.appendSections([.hotword])
                 snapshot.appendItems([.hotWordEnabled])
             }
             collectionView.backgroundView = nil
         }
-        dataSource.apply(snapshot, animatingDifferences: animated)
+
+        if #available(iOS 15.0, *) {
+            let reconfigurableItems = [.hotWordEnabled, .listeningModeEnabled].filter(snapshot.itemIdentifiers.contains)
+            snapshot.reconfigureItems(reconfigurableItems)
+        }
+
+        dataSource.apply(snapshot, animatingDifferences: animated) { [weak self] in
+            // Workaround for diffable datasource not auto-reconfiguring on iOS 14
+            if #unavailable(iOS 15) {
+                self?.updateVisibleCellConfigurations()
+            }
+        }
     }
 
     private func setupCollectionView() {
+
+        collectionView.isScrollEnabled = false
         collectionView.backgroundColor = .collectionViewBackgroundColor
-        collectionView.register(UINib(nibName: "SettingsToggleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "SettingsFooterTextSupplementaryView", bundle: nil),
                                 forSupplementaryViewOfKind: "footerText",
                                 withReuseIdentifier: "footerText")
 
-        dataSource.supplementaryViewProvider = { (collectionView, elementKind, indexPath) in
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: elementKind, withReuseIdentifier: elementKind, for: indexPath) as! SettingsFooterTextSupplementaryView
-            footerView.textLabel.text = """
-When this shortcut is enabled, someone saying \"Hey Vocable\" aloud will automatically navigate to the listening mode screen.
+        let cellRegistration = UICollectionView.CellRegistration<VocableListCell, ContentItem>(handler: { [weak self] cell, indexPath, item in
+            self?.updateContentConfiguration(for: cell, at: indexPath, item: item)
+        })
 
-This shortcut makes it fast to kick off a conversation by saying something like \"Hey Vocable, are you feeling okay?\" and jumping straight to the suggested responses.
-"""
+        let dataSource = Datasource(collectionView: collectionView) { (collectionView, indexPath, item) in
+            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+        }
+
+        dataSource.supplementaryViewProvider = { [weak self] (collectionView, elementKind, indexPath) in
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: elementKind, withReuseIdentifier: elementKind, for: indexPath) as! SettingsFooterTextSupplementaryView
+            guard let self = self else { return footerView }
+
+            let text: String
+            let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+            switch section {
+            case .listeningMode:
+                text = String(localized: "settings.listening_mode.listening_mode_explanation_footer")
+            case .hotword:
+                text = String(localized: "settings.listening_mode.hotword_explanation_footer")
+            }
+            footerView.textLabel.text = text
             return footerView
         }
 
-        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (_, environment) -> NSCollectionLayoutSection? in
+        let configuration = UICollectionViewCompositionalLayoutConfiguration()
+        configuration.interSectionSpacing = 44
+        let layout = UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (_, environment) -> NSCollectionLayoutSection? in
             return self?.layoutSection(environment: environment)
-        })
+        }, configuration: configuration)
+        collectionView.collectionViewLayout = layout
+
+        self.cellRegistration = cellRegistration
+        self.dataSource = dataSource
+    }
+
+    private func updateContentConfiguration(for cell: VocableListCell, at indexPath: IndexPath, item: ContentItem) {
+        let config = VocableListContentConfiguration(title: item.title,
+                                                     accessory: item.accessory,
+                                                     accessibilityIdentifier: item.accessibilityID) { [weak self] in
+            guard let self = self, let indexPath = self.dataSource.indexPath(for: item) else { return }
+            self.collectionView(self.collectionView, didSelectItemAt: indexPath)
+        }
+        cell.contentConfiguration = config
     }
 
     private func layoutSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
@@ -118,7 +193,7 @@ This shortcut makes it fast to kick off a conversation by saying something like 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columnCount)
         group.interItemSpacing = .fixed(8)
 
-        let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(500))
+        let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1))
         let footerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: "footerText", alignment: .bottom)
 
         let section = NSCollectionLayoutSection(group: group)
@@ -145,55 +220,38 @@ This shortcut makes it fast to kick off a conversation by saying something like 
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         switch item {
         case .listeningModeEnabled:
-            AppConfig.isListeningModeEnabled.toggle()
-            updateDataSource(animated: true)
-            let context = NSPersistentContainer.shared.viewContext
+            AppConfig.listeningMode.listeningModeEnabledPreference.toggle()
+
+            let context = NSPersistentContainer.shared.newBackgroundContext()
             context.perform {
-                let listeningModeCategory = Category.fetch(.listeningMode, in: context)
-                listeningModeCategory.isHidden = !AppConfig.isListeningModeEnabled
                 try? Category.updateAllOrdinalValues(in: context)
                 try? context.save()
             }
 
         case .hotWordEnabled:
-            AppConfig.isHotWordPermitted.toggle()
+            AppConfig.listeningMode.hotwordEnabledPreference.toggle()
         }
-    }
 
-    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
-        switch item {
-        case .listeningModeEnabled:
-            return true
-        case .hotWordEnabled:
-            return AppConfig.isListeningModeEnabled && AppConfig.listeningModeFeatureFlagEnabled
-        }
+        updateDataSource(animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
-        switch item {
-        case .listeningModeEnabled:
-            return true
-        case .hotWordEnabled:
-            return AppConfig.isListeningModeEnabled && AppConfig.listeningModeFeatureFlagEnabled
-        }
+        return false
     }
 
-    private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, item: ContentItem) -> UICollectionViewCell {
-        switch item {
-        case .listeningModeEnabled:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsToggleCollectionViewCell
-            #warning("Needs localization")
-            let title = "Listening mode"
-            cell.setup(title: title, value: AppConfig.$isListeningModeEnabled)
-            return cell
-        case .hotWordEnabled:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsToggleCollectionViewCell
-            #warning("Needs localization")
-            let title = "\"Hey Vocable\" shortcut"
-            cell.setup(title: title, value: AppConfig.$isHotWordPermitted)
-            return cell
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    @available(iOS, obsoleted: 15, message: "Use snapshot-based reconfiguring instead")
+    private func updateVisibleCellConfigurations() {
+        for indexPath in self.collectionView.indexPathsForVisibleItems {
+            if let cell = self.collectionView.cellForItem(at: indexPath) as? VocableListCell {
+                guard let item = self.dataSource.itemIdentifier(for: indexPath) else {
+                    continue
+                }
+                self.updateContentConfiguration(for: cell, at: indexPath, item: item)
+            }
         }
     }
 }
