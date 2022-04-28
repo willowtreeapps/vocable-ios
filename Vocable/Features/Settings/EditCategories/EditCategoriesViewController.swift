@@ -181,7 +181,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         }
     }
 
-    private func mappedIndexPathForCategory(withObjectID objectID: NSManagedObjectID) -> IndexPath? {
+    private func indexPathForCategory(withObjectID objectID: NSManagedObjectID) -> IndexPath? {
         guard let category = fetchResultsController.managedObjectContext.object(with: objectID) as? Category else {
             return nil
         }
@@ -191,12 +191,12 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
             return nil
         }
 
-        return diffableDataSource.indexPath(fromMappedIndexPath: standardIndexPath)
+        return diffableDataSource.indexPath(fromVirtual: standardIndexPath)
     }
 
     private func handleMoveUpForCategory(withObjectID objectID: NSManagedObjectID) {
 
-        guard let fromIndexPath = mappedIndexPathForCategory(withObjectID: objectID) else {
+        guard let fromIndexPath = indexPathForCategory(withObjectID: objectID) else {
             return
         }
         guard let toIndexPath = collectionView.indexPath(before: fromIndexPath) else {
@@ -211,7 +211,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
 
     private func handleMoveDownForCategory(withObjectID objectID: NSManagedObjectID) {
 
-        guard let fromIndexPath = mappedIndexPathForCategory(withObjectID: objectID) else {
+        guard let fromIndexPath = indexPathForCategory(withObjectID: objectID) else {
             return
         }
         guard let toIndexPath = collectionView.indexPath(after: fromIndexPath) else {

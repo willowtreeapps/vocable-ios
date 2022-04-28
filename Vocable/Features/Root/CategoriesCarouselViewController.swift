@@ -107,12 +107,9 @@ import Combine
     }
 
     private func makeDataSource() -> DataSource {
-        let dataSource = DataSource(collectionView: collectionView) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
-            guard let self = self else { return nil }
-            let category = self.frc.object(at: indexPath)
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
-            cell.setup(title: category.name!)
-            cell.accessibilityIdentifier = ["category_title_cell", category.identifier].compacted().joined(separator: "_")
+        let dataSource = DataSource(collectionView: collectionView) { [weak self] (collectionView, indexPath, categoryObjectID) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath)
+            self?.configureCell(cell, for: categoryObjectID, at: indexPath)
             return cell
         }
         return dataSource
@@ -132,16 +129,16 @@ import Combine
         }
 
         let selectedIndexPaths = Set(collectionView.indexPathsForSelectedItems?.map {
-            dataSourceProxy.indexPath(fromMappedIndexPath: $0)
+            dataSourceProxy.indexPath(fromVirtual: $0)
             } ?? [])
         for path in selectedIndexPaths where path != indexPath {
-            dataSourceProxy.performActions(on: path) { (aPath) in
-                collectionView.deselectItem(at: aPath, animated: true)
+            dataSourceProxy.performActions(on: path) { elements in
+                collectionView.deselectItem(at: elements.virtualIndexPath, animated: true)
             }
         }
 
-        dataSourceProxy.performActions(on: indexPath) { (aPath) in
-            collectionView.selectItem(at: aPath, animated: true, scrollPosition: [])
+        dataSourceProxy.performActions(on: indexPath) { elements in
+            collectionView.selectItem(at: elements.virtualIndexPath, animated: true, scrollPosition: [])
         }
     }
 
@@ -168,13 +165,24 @@ import Combine
         try? frc.performFetch()
     }
 
+    private func configureCell(_ cell: UICollectionViewCell, for categoryObjectID: NSManagedObjectID, at indexPath: IndexPath) {
+        guard
+            let category = self.frc.managedObjectContext.object(with: categoryObjectID) as? Category,
+            let cell = cell as? CategoryItemCollectionViewCell
+        else {
+            return
+        }
+        cell.setup(title: category.name!)
+        cell.accessibilityIdentifier = ["category_title_cell", category.identifier].compacted().joined(separator: "_")
+    }
+
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
 
         let previousItem: (objectID: NSManagedObjectID, indexPath: IndexPath)? = {
-            guard let mapped = collectionView.indexPathsForSelectedItems?.first else {
+            guard let virtualIndexPath = collectionView.indexPathsForSelectedItems?.first else {
                 return nil
             }
-            let indexPath = dataSourceProxy.indexPath(fromMappedIndexPath: mapped)
+            let indexPath = dataSourceProxy.indexPath(fromVirtual: virtualIndexPath)
             guard let objectID = dataSourceProxy.itemIdentifier(for: indexPath) else {
                 return nil
             }
@@ -188,7 +196,13 @@ import Combine
         } else {
             shouldAnimate = true
         }
-        dataSourceProxy.apply(snapshot, animatingDifferences: shouldAnimate, completion: {
+        dataSourceProxy.apply(snapshot, animatingDifferences: shouldAnimate, completion: { [weak self] in
+
+            guard let self = self else { return }
+
+            if #unavailable(iOS 15) {
+                self.reconfigureVisibleCells()
+            }
 
             guard let previous = previousItem else {
                 // No item was previous selected
@@ -212,6 +226,17 @@ import Combine
             self.collectionView(self.collectionView, didSelectItemAt: newPath)
             self.collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary(animated: false)
         })
+    }
+    
+    @available(iOS, obsoleted: 15, message: "Use snapshot-based reconfiguring instead")
+    private func reconfigureVisibleCells() {
+        // This is effectively the same iOS 14 fix we have for
+        // screens that have been updated for VocableListCell
+        let visibleIndexPaths = self.collectionView.indexPathsForVisibleItems
+        self.dataSourceProxy.performActions(on: visibleIndexPaths) { elements in
+            guard let cell = self.collectionView.cellForItem(at: elements.virtualIndexPath) else { return }
+            self.configureCell(cell, for: elements.itemIdentifier, at: elements.virtualIndexPath)
+        }
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -297,8 +322,8 @@ import Combine
         for indexPath in collectionView.indexPathsForSelectedItems ?? [] {
             collectionView.deselectItem(at: indexPath, animated: false)
         }
-        dataSourceProxy.performActions(on: destinationIndexPath) { (aPath) in
-            collectionView.selectItem(at: aPath, animated: false, scrollPosition: [])
+        dataSourceProxy.performActions(on: destinationIndexPath) { elements in
+            collectionView.selectItem(at: elements.virtualIndexPath, animated: false, scrollPosition: [])
         }
 
         collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary()
@@ -311,13 +336,13 @@ import Combine
         updateSelectedItemForHorizontallyCompactLayout()
     }
 
-    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt virtualIndexPath: IndexPath) -> Bool {
         return false
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let mappedIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        categoryObjectID = frc.object(at: mappedIndexPath).objectID
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt virtualIndexPath: IndexPath) {
+        let indexPath = dataSourceProxy.indexPath(fromVirtual: virtualIndexPath)
+        categoryObjectID = frc.object(at: indexPath).objectID
         updateSelectedIndexPathsInProxyDataSource()
     }
 
@@ -339,8 +364,8 @@ import Combine
         for indexPath in collectionView.indexPathsForSelectedItems ?? [] {
             collectionView.deselectItem(at: indexPath, animated: false)
         }
-        dataSourceProxy.performActions(on: desiredIndexPath) { (aPath) in
-            collectionView.selectItem(at: aPath, animated: false, scrollPosition: [])
+        dataSourceProxy.performActions(on: desiredIndexPath) { elements in
+            collectionView.selectItem(at: elements.virtualIndexPath, animated: false, scrollPosition: [])
         }
 
         collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary()

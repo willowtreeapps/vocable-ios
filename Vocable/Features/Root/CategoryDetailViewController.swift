@@ -103,23 +103,30 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
     private func makeDataSource() -> DataSource {
         DataSource(collectionView: collectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell? in
             guard let self = self else { return nil }
-
+            let cell: UICollectionViewCell
             switch item {
-            case .persistedPhrase(let objectId):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath) as? PresetItemCollectionViewCell
-
-                guard let phrase = Phrase.fetchObject(in: self.frc.managedObjectContext, matching: objectId) else { return cell }
-                cell?.textLabel.text = phrase.utterance
-
-                return cell
+            case .persistedPhrase:
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: PresetItemCollectionViewCell.reuseIdentifier, for: indexPath)
             case .addNewPhrase:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddPhraseCollectionViewCell.reuseIdentifier, for: indexPath) as? AddPhraseCollectionViewCell
-                cell?.accessibilityIdentifier = "add_new_phrase"
-                
-                return cell
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddPhraseCollectionViewCell.reuseIdentifier, for: indexPath)
             }
+            self.configureCell(cell, for: item, at: indexPath)
+            return cell
         }
+    }
 
+    private func configureCell(_ cell: UICollectionViewCell, for item: CategoryItem, at indexPath: IndexPath) {
+        switch item {
+        case .persistedPhrase(let objectId):
+            let cell = cell as? PresetItemCollectionViewCell
+
+            guard let phrase = Phrase.fetchObject(in: self.frc.managedObjectContext, matching: objectId) else { return }
+            cell?.textLabel.text = phrase.utterance
+
+        case .addNewPhrase:
+            let cell = cell as? AddPhraseCollectionViewCell
+            cell?.accessibilityIdentifier = "add_new_phrase"
+        }
     }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
@@ -132,7 +139,17 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         if #available(iOS 15, *) {
             dataSourceProxy.apply(updatedSnapshot, animatingDifferences: false)
         } else {
-            dataSourceProxy.apply(updatedSnapshot, animatingDifferences: true)
+            dataSourceProxy.apply(updatedSnapshot, animatingDifferences: true) { [weak self] in
+                guard let self = self, #unavailable(iOS 15) else { return }
+
+                // This is effectively the same iOS 14 fix we have for
+                // screens that have been updated for VocableListCell
+                let visibleIndexPaths = self.collectionView.indexPathsForVisibleItems
+                self.dataSourceProxy.performActions(on: visibleIndexPaths) { elements in
+                    guard let cell = self.collectionView.cellForItem(at: elements.virtualIndexPath) else { return }
+                    self.configureCell(cell, for: elements.itemIdentifier, at: elements.virtualIndexPath)
+                }
+            }
         }
         let pageCountAfter = collectionView.layout.pagesPerSection
 
@@ -210,38 +227,6 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
     private func removeEmptyStateIfNeeded() {
         paginationView.isHidden = false
         collectionView.backgroundView = nil
-    }
-
-    @objc private func handleCellDeletionButton(_ sender: UIButton) {
-
-        func deleteAction() {
-            self.deletePhrase(sender)
-        }
-
-        let title = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.title",
-                                      comment: "Delete phrase confirmation alert title")
-        let deleteButtonTitle = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.button.delete.title",
-                                                  comment: "Delete phrase alert action button title")
-        let cancelButtonTitle = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.button.cancel.title",
-                                                  comment: "Delete phrase alert cancel button title")
-
-        let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(.cancel(withTitle: cancelButtonTitle))
-        alert.addAction(.delete(withTitle: deleteButtonTitle, handler: deleteAction))
-        self.present(alert, animated: true)
-    }
-
-    private func deletePhrase(_ sender: UIButton) {
-        guard let indexPath = collectionView.indexPath(containing: sender) else {
-            assertionFailure("Failed to obtain index path")
-            return
-        }
-
-        let safeIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        let phrase = frc.object(at: safeIndexPath)
-        let context = NSPersistentContainer.shared.viewContext
-        context.delete(phrase)
-        try? context.save()
     }
 
     @IBAction func addNewPhraseButtonSelected() {
