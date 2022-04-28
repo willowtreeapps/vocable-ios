@@ -106,12 +106,9 @@ import Combine
     }
 
     private func makeDataSource() -> DataSource {
-        let dataSource = DataSource(collectionView: collectionView) { [weak self] (collectionView, indexPath, _) -> UICollectionViewCell? in
-            guard let self = self else { return nil }
-            let category = self.frc.object(at: indexPath)
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath) as! CategoryItemCollectionViewCell
-            cell.setup(title: category.name!)
-            cell.accessibilityIdentifier = ["category_title_cell", category.identifier].compacted().joined(separator: "_")
+        let dataSource = DataSource(collectionView: collectionView) { [weak self] (collectionView, indexPath, categoryObjectID) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCollectionViewCell.reuseIdentifier, for: indexPath)
+            self?.configureCell(cell, for: categoryObjectID, at: indexPath)
             return cell
         }
         return dataSource
@@ -178,6 +175,17 @@ import Combine
         try? frc.performFetch()
     }
 
+    private func configureCell(_ cell: UICollectionViewCell, for categoryObjectID: NSManagedObjectID, at indexPath: IndexPath) {
+        guard
+            let category = self.frc.managedObjectContext.object(with: categoryObjectID) as? Category,
+            let cell = cell as? CategoryItemCollectionViewCell
+        else {
+            return
+        }
+        cell.setup(title: category.name!)
+        cell.accessibilityIdentifier = ["category_title_cell", category.identifier].compacted().joined(separator: "_")
+    }
+
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
 
         let previousItem: (objectID: NSManagedObjectID, indexPath: IndexPath)? = {
@@ -198,7 +206,13 @@ import Combine
         } else {
             shouldAnimate = true
         }
-        dataSourceProxy.apply(snapshot, animatingDifferences: shouldAnimate, completion: {
+        dataSourceProxy.apply(snapshot, animatingDifferences: shouldAnimate, completion: { [weak self] in
+
+            guard let self = self else { return }
+
+            if #unavailable(iOS 15) {
+                self.reconfigureVisibleCells()
+            }
 
             guard let previous = previousItem else {
                 // No item was previous selected
@@ -222,6 +236,17 @@ import Combine
             self.collectionView(self.collectionView, didSelectItemAt: newPath)
             self.collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary(animated: false)
         })
+    }
+    
+    @available(iOS, obsoleted: 15, message: "Use snapshot-based reconfiguring instead")
+    private func reconfigureVisibleCells() {
+        // This is effectively the same iOS 14 fix we have for
+        // screens that have been updated for VocableListCell
+        let visibleIndexPaths = self.collectionView.indexPathsForVisibleItems
+        self.dataSourceProxy.performActions(on: visibleIndexPaths) { elements in
+            guard let cell = self.collectionView.cellForItem(at: elements.virtualIndexPath) else { return }
+            self.configureCell(cell, for: elements.itemIdentifier, at: elements.virtualIndexPath)
+        }
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
