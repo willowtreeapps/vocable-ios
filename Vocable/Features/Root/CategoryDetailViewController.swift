@@ -220,7 +220,9 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
         if category.identifier == Category.Identifier.recents {
             collectionView.backgroundView = EmptyStateView(type: EmptyStateType.recents)
         } else {
-            collectionView.backgroundView = EmptyStateView(type: EmptyStateType.phraseCollection, action: addNewPhraseButtonSelected)
+            collectionView.backgroundView = EmptyStateView(type: EmptyStateType.phraseCollection, action: { [weak self] in
+                self?.addNewPhraseButtonSelected()
+            })
         }
     }
 
