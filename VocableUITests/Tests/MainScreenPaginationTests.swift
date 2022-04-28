@@ -11,8 +11,8 @@ import XCTest
 class MainScreenPaginationTests: CustomPhraseBaseTest {
     
     func testDeletingPhrasesAdjustsPagination() {
-        listOfPhrases.forEach { phrase in
-            CustomCategoriesScreen.addPhrase(phrase)
+        for phrase in listOfPhrases.startIndex..<8 {
+            CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
         }
         
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 2"
