@@ -57,7 +57,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <outletCollection property="gestureRecognizers" destination="0Xh-m3-nzP" appends="YES" id="Sj0-2A-xu0"/>
+                                            <outletCollection property="gestureRecognizers" destination="q2v-YF-3E0" appends="YES" id="Gc4-nh-qCg"/>
                                         </connections>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1OT-dF-ssX" userLabel="Navigation Buttons Stack View">
@@ -162,11 +162,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vf6-JT-R6r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer numberOfTapsRequired="4" id="0Xh-m3-nzP">
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="2" numberOfTapsRequired="2" id="q2v-YF-3E0">
                     <connections>
-                        <action selector="handleTranscriptionOutputDebugGesture:" destination="yUp-dU-mBF" id="lvs-fb-X12"/>
+                        <action selector="handleTranscriptionOutputDebugGesture:" destination="yUp-dU-mBF" id="aq1-gk-VuJ"/>
                     </connections>
-                </tapGestureRecognizer>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-202.40000000000001" y="133.74384236453201"/>
         </scene>
