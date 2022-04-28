@@ -86,7 +86,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             return cell
         case .versionNum:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
-            cell.setup(versionLabel: self.versionAndBuildNumber)
+            cell.setup(versionLabel: SettingsViewController.versionAndBuildNumber)
             return cell
         case .pidTuner:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
@@ -95,7 +95,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         }
     }
 
-    private var versionAndBuildNumber: String {
+    static private var versionAndBuildNumber: String {
         let versionNumber = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
         return "Version \(versionNumber)-\(buildNumber)"
@@ -127,7 +127,10 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         collectionView.register(UINib(nibName: "SettingsFooterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "SettingsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier)
 
-        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout { (sectionIndex, environment) -> NSCollectionLayoutSection? in
+        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout { [weak self] (sectionIndex, environment) -> NSCollectionLayoutSection? in
+            guard let self = self else {
+                return nil
+            }
             let section = self.dataSource.snapshot().sectionIdentifiers[sectionIndex]
             switch section {
             case .internalSettings:
@@ -338,7 +341,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
         composeVC.setToRecipients(["vocable@willowtreeapps.com"])
-        composeVC.setSubject("Feedback for iOS Vocable \(versionAndBuildNumber)")
+        composeVC.setSubject("Feedback for iOS Vocable \(SettingsViewController.versionAndBuildNumber)")
         self.composeVC = composeVC
 
         self.present(composeVC, animated: true)
