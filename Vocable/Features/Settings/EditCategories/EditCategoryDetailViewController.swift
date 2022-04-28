@@ -108,6 +108,14 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
 
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
     // MARK: Cell Registrations
 
     private func makeRenameCategoryCellRegistration() -> CellRegistration {
