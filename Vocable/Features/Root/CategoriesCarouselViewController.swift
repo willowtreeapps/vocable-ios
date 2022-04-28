@@ -131,16 +131,16 @@ import Combine
         }
 
         let selectedIndexPaths = Set(collectionView.indexPathsForSelectedItems?.map {
-            dataSourceProxy.indexPath(fromMappedIndexPath: $0)
+            dataSourceProxy.indexPath(fromVirtual: $0)
             } ?? [])
         for path in selectedIndexPaths where path != indexPath {
-            dataSourceProxy.performActions(on: path) { (aPath) in
-                collectionView.deselectItem(at: aPath, animated: true)
+            dataSourceProxy.performActions(on: path) { elements in
+                collectionView.deselectItem(at: elements.virtualIndexPath, animated: true)
             }
         }
 
-        dataSourceProxy.performActions(on: indexPath) { (aPath) in
-            collectionView.selectItem(at: aPath, animated: true, scrollPosition: [])
+        dataSourceProxy.performActions(on: indexPath) { elements in
+            collectionView.selectItem(at: elements.virtualIndexPath, animated: true, scrollPosition: [])
         }
     }
 
@@ -181,10 +181,10 @@ import Combine
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
 
         let previousItem: (objectID: NSManagedObjectID, indexPath: IndexPath)? = {
-            guard let mapped = collectionView.indexPathsForSelectedItems?.first else {
+            guard let virtualIndexPath = collectionView.indexPathsForSelectedItems?.first else {
                 return nil
             }
-            let indexPath = dataSourceProxy.indexPath(fromMappedIndexPath: mapped)
+            let indexPath = dataSourceProxy.indexPath(fromVirtual: virtualIndexPath)
             guard let objectID = dataSourceProxy.itemIdentifier(for: indexPath) else {
                 return nil
             }
@@ -307,8 +307,8 @@ import Combine
         for indexPath in collectionView.indexPathsForSelectedItems ?? [] {
             collectionView.deselectItem(at: indexPath, animated: false)
         }
-        dataSourceProxy.performActions(on: destinationIndexPath) { (aPath) in
-            collectionView.selectItem(at: aPath, animated: false, scrollPosition: [])
+        dataSourceProxy.performActions(on: destinationIndexPath) { elements in
+            collectionView.selectItem(at: elements.virtualIndexPath, animated: false, scrollPosition: [])
         }
 
         collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary()
@@ -321,13 +321,13 @@ import Combine
         updateSelectedItemForHorizontallyCompactLayout()
     }
 
-    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt virtualIndexPath: IndexPath) -> Bool {
         return false
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let mappedIndexPath = dataSourceProxy.indexPath(fromMappedIndexPath: indexPath)
-        categoryObjectID = frc.object(at: mappedIndexPath).objectID
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt virtualIndexPath: IndexPath) {
+        let indexPath = dataSourceProxy.indexPath(fromVirtual: virtualIndexPath)
+        categoryObjectID = frc.object(at: indexPath).objectID
         updateSelectedIndexPathsInProxyDataSource()
     }
 
@@ -349,8 +349,8 @@ import Combine
         for indexPath in collectionView.indexPathsForSelectedItems ?? [] {
             collectionView.deselectItem(at: indexPath, animated: false)
         }
-        dataSourceProxy.performActions(on: desiredIndexPath) { (aPath) in
-            collectionView.selectItem(at: aPath, animated: false, scrollPosition: [])
+        dataSourceProxy.performActions(on: desiredIndexPath) { elements in
+            collectionView.selectItem(at: elements.virtualIndexPath, animated: false, scrollPosition: [])
         }
 
         collectionView.scrollToNearestSelectedIndexPathOrCurrentPageBoundary()
