@@ -1,5 +1,5 @@
 /* Categories list editor screen header title */
-"categories_list_editor.header.title" = "Categorias";
+"categories_list_editor.header.title" = "Categorías";
 
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Cancelar";
@@ -22,8 +22,23 @@
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Cancelar";
 
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Eliminar";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "Las frases eliminadas son irrecuperables.";
+
+/* Edit Phrases button label within the category detail screen */
+"category_editor.detail.button.edit_phrases.title" = "Editar expresiones";
+
 /* Remove category button label within the category detail screen. */
 "category_editor.detail.button.remove_category.title" = "Eliminar Categoría";
+
+/* Rename Category button label within the category detail screen */
+"category_editor.detail.button.rename_category.title" = "Renombrar Categoría";
+
+/* Show category button label within the category detail screen. */
+"category_editor.detail.button.show_category.title" = "Mostrar categoría";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "Cambios guardados";
@@ -34,14 +49,29 @@
 /* Debugging error message for when preloaded content is not found */
 "debug.assertion.presets_file_not_found" = "No hay presets disponibles";
 
+/* No comment provided by engineer. */
+"Delete All" = "Eliminar todo";
+
+/* Empty state Add Phrase button title */
+"empty_state.button.title" = "Agregar Phrase";
+
+/* Empty state title */
+"empty_state.header.title" = "Aún no tienes ninguna frase guardada.";
+
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Cancelar";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Continuar";
 
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "Acérquese al dispositivo.";
 
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "Selecciona algo a continuación para hablar";
+
+/* No comment provided by engineer. */
+"No Entries" = "Sin elementos";
 
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "Página %1$d de %2$d";
@@ -52,16 +82,37 @@
 /* Discard changes alert action title */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Descartar";
 
+/* Exit edit sayings alert title */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Volver atrás antes de guardar eliminará cualquier edición hecha.";
+
+/* Phrase already exists alert cancel button */
+"phrase_editor.alert.phrase_name_exists.cancel.button" = "Cancelar";
+
+/* Phrase already exists alert create button */
+"phrase_editor.alert.phrase_name_exists.create.button" = "Crear duplicado";
+
+/* Phrase already exists alert title */
+"phrase_editor.alert.phrase_name_exists.title" = "Esta frase ya existe. ¿Le gustaría crear un duplicado?";
+
 /* new entry saved to user favorites category
    Saved to user favorites category
    Saved to user favorites category toast title */
 "phrase_editor.toast.successfully_saved_to_favorites.title_format" = "Guardado en %@";
+
+/* Add phrase to category button title */
+"preset.category.add.phrase.title" = "Agregar frase";
 
 /* 'No' num pad response */
 "preset.category.numberpad.phrase.no.title" = "No";
 
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "Sí";
+
+/* Recents empty state description */
+"recents_empty_state.body.title" = "Empieza a usar Vocable para ver tus frases usadas más recientemente aquí.";
+
+/* Recents empty state title */
+"recents_empty_state.header.title" = "No hay frases usadas recientemente";
 
 /* Selection mode screen header title */
 "selection_mode.header.title" = "Modo de selección";
@@ -71,6 +122,27 @@
 
 /* No email account configured error alert title */
 "settings.alert.no_email_configured.title" = "Email no configurado.";
+
+/* Reset app settings confirmation prompt */
+"settings.alert.reset_app_settings_confirmation.body" = "¿Está seguro de que desea restablecer Vocable a la configuración predeterminada? Esta acción no se puede deshacer.";
+
+/* Button cancelling the action to reset Vocable's application settings */
+"settings.alert.reset_app_settings_confirmation.button.cancel.title" = "Cancelar";
+
+/* Button confirming that the user would like to reset Vocable's application settings */
+"settings.alert.reset_app_settings_confirmation.button.confirm.title" = "Reiniciar";
+
+/* Reset app settings failure alert */
+"settings.alert.reset_app_settings_failure.body" = "Vocable no se pudo restablecer. Por favor, inténtelo de nuevo o reinstale Vocable si el problema persiste.";
+
+/* Button dismissing the alert informing the user that Vocable's application settings failed to reset */
+"settings.alert.reset_app_settings_failure.button.ok" = "OK";
+
+/* Reset app settings success alert */
+"settings.alert.reset_app_settings_success.body" = "Vocable se ha restablecido correctamente";
+
+/* Button dismissing the alert informing the user that Vocable's application settings were successfully reset */
+"settings.alert.reset_app_settings_success.button.ok" = "OK";
 
 /* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.body" = "Vas a salir de Vocable, podrías perder el seguimiento de la cabeza.";
@@ -82,7 +154,7 @@
 "settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Aceptar";
 
 /* edit categories settings menu item */
-"settings.cell.categories.title" = "Categorías";
+"settings.cell.categories.title" = "Categorías y frases";
 
 /* contact developers settings menu item */
 "settings.cell.contact_developers.title" = "Contactar desarrolladores";
@@ -116,6 +188,18 @@
 
 /* Discard changes alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Descartar";
+
+/* Exit edit sayings alert title */
+"text_editor.alert.cancel_editing_confirmation.title" = "Volver antes de guardar borrará todas las ediciones realizadas.";
+
+/* Category already exists alert cancel button */
+"text_editor.alert.category_name_exists.cancel.button" = "Cancelar";
+
+/* Category already exists alert create button */
+"text_editor.alert.category_name_exists.create.button" = "Crear duplicado";
+
+/* Category already exists alert title */
+"text_editor.alert.category_name_exists.title" = "El nombre de esta categoría ya existe. ¿Desea crear un duplicado?";
 
 /* High cursor sensitivity option button */
 "timing_and_sensitivity.button.high.title" = "Alta";

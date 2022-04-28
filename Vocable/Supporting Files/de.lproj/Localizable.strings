@@ -52,6 +52,9 @@
 /* Debugging error message for when preloaded content is not found */
 "debug.assertion.presets_file_not_found" = "No presets found";
 
+/* No comment provided by engineer. */
+"Delete All" = "Alle löschen";
+
 /* Empty state Add Phrase button title */
 "empty_state.button.title" = "Satz hinzufügen";
 
@@ -70,8 +73,14 @@
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "Bitte näher ans Gerät kommen.";
 
+/* Listen mode error state message for when Apple's speech to text service is unavailable */
+"listening_mode.empty_state.speech_unavailable.message" = "Bitte versuchen Sie es später erneut";
+
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "Wähle unten etwas aus, um zu sprechen";
+
+/* No comment provided by engineer. */
+"No Entries" = "Keine Einträge";
 
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "Seite %1$d von %2$d";
@@ -98,6 +107,9 @@
    Saved to user favorites category
    Saved to user favorites category toast title */
 "phrase_editor.toast.successfully_saved_to_favorites.title_format" = "In %@ gespeichert";
+
+/* Add phrase to category button title */
+"preset.category.add.phrase.title" = "Satz hinzufügen";
 
 /* 'No' num pad response */
 "preset.category.numberpad.phrase.no.title" = "Nein";
@@ -179,6 +191,9 @@
 
 /* Settings screen header title */
 "settings.header.title" = "Einstellungen";
+
+/* Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking */
+"settings.selection_mode.head_tracking_unsupported_footer" = "Diese %1$@ auf %2$@ %3$@ unterstützt keine Head-Tracking.\n\nHead-Tracking wird auf allen Geräten mit einer %4$@ Kamera und auf den meisten Geräten mit %6$@ unterstützt.";
 
 /* Continue editing alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Weiter editieren";
