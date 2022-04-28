@@ -58,6 +58,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "CategoryPhrasesPaginationTests/testCanNavigatePages()">
+               </Test>
+               <Test
                   Identifier = "CustomCategoriesTest">
                </Test>
                <Test
