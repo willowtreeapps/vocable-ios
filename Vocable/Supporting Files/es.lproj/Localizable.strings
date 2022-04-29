@@ -183,6 +183,9 @@
 /* Settings screen header title */
 "settings.header.title" = "Ajustes";
 
+/* Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking */
+"settings.selection_mode.head_tracking_unsupported_footer" = "Este %1$@ en %2$@ %3$@ no es compatible con el seguimiento de cabeza.\n\nEl seguimiento de cabeceras es compatible con todos los dispositivos con una cámara %4$@ , y en la mayoría de dispositivos con %6$@.";
+
 /* Continue editing alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continuar Edición";
 

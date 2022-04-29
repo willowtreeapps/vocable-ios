@@ -183,6 +183,9 @@
 /* Settings screen header title */
 "settings.header.title" = "Indstillinger";
 
+/* Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking */
+"settings.selection_mode.head_tracking_unsupported_footer" = "Dette %1$@ på %2$@ %3$@ understøtter ikke hovedsporing.\n\nHovedsporing understøttes på alle enheder med et %4$@ -kamera og på de fleste enheder med %6$@.";
+
 /* Continue editing alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Fortsæt Redigering";
 

@@ -183,6 +183,9 @@
 /* Settings screen header title */
 "settings.header.title" = "设置";
 
+/* Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking */
+"settings.selection_mode.head_tracking_unsupported_footer" = "此 %1$@ 在 %2$@ %3$@ 上不支持头跟踪。\n\n所有设备都支持头部跟踪，所有设备都有 %4$@ 相机，在大多数设备上有 %6$@。";
+
 /* Continue editing alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "继续编辑";
 

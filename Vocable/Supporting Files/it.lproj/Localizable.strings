@@ -180,6 +180,9 @@
 /* Settings screen header title */
 "settings.header.title" = "Impostazioni";
 
+/* Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking */
+"settings.selection_mode.head_tracking_unsupported_footer" = "Questo %1$@ su %2$@ %3$@ non supporta il head tracking.\n\nIl tracking della testa è supportato su tutti i dispositivi con una fotocamera %4$@ e sulla maggior parte dei dispositivi con %6$@.";
+
 /* Continue editing alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continua la modifica";
 
