@@ -324,6 +324,15 @@
         <target state="final">设置</target>
         <note>Settings screen header title</note>
       </trans-unit>
+      <trans-unit id="settings.selection_mode.head_tracking_unsupported_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support head tracking.
+
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.</source>
+        <target state="translated">此 %1$@ 在 %2$@ %3$@ 上不支持头跟踪。
+
+所有设备都支持头部跟踪，所有设备都有 %4$@ 相机，在大多数设备上有 %6$@。</target>
+        <note>Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking</note>
+      </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve" approved="yes">
         <source>Continue Editing</source>
         <target state="final">继续编辑</target>
