@@ -15,7 +15,7 @@ class PresetsOverrideTestCase: XCTestCase {
 
         let app = XCUIApplication()
         app.configure {
-            Arguments(.resetAppDataOnLaunch)
+            Arguments(.resetAppDataOnLaunch, .enableListeningMode)
             Environment(.overridePresets) {
                 Presets {
                     Category("Custom Basic Needs") {
@@ -26,6 +26,9 @@ class PresetsOverrideTestCase: XCTestCase {
                     }
                     Category("Another Category") {
                         // Empty
+                    }
+                    Category(id: "custom-identifier", "Category Name Here") {
+                        // Also Empty
                     }
                 }
             }
