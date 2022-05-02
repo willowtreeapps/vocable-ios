@@ -105,6 +105,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "disableAnimations"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "enableListeningMode"
             isEnabled = "NO">
          </CommandLineArgument>
