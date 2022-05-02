@@ -22,12 +22,37 @@ public struct PresetCategory: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case hidden
+        case languageCode
+        case utterance
     }
 
     public let id: String
     public let hidden: Bool
     public var languageCode: String = ""
     public var utterance: String = ""
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.hidden = try container.decode(Bool.self, forKey: .hidden)
+        if let utterance = try? container.decode(String.self, forKey: .utterance) {
+            self.utterance = utterance
+        }
+        if let languageCode = try? container.decode(String.self, forKey: .languageCode) {
+            self.languageCode = languageCode
+        }
+    }
+
+    init(id: String, hidden: Bool, languageCode: String? = nil, utterance: String? = nil) {
+        self.id = id
+        self.hidden = hidden
+        if let languageCode = languageCode {
+            self.languageCode = languageCode
+        }
+        if let utterance = utterance {
+            self.utterance = utterance
+        }
+    }
 }
 
 public struct PresetPhrase: Codable {
@@ -35,6 +60,8 @@ public struct PresetPhrase: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case categoryIds
+        case languageCode
+        case utterance
     }
 
     public let id: String
@@ -42,11 +69,56 @@ public struct PresetPhrase: Codable {
     public var languageCode: String = ""
     public var utterance: String = ""
 
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.categoryIds = try container.decode([String].self, forKey: .categoryIds)
+        if let utterance = try? container.decode(String.self, forKey: .utterance) {
+            self.utterance = utterance
+        }
+        if let languageCode = try? container.decode(String.self, forKey: .languageCode) {
+            self.languageCode = languageCode
+        }
+    }
+
+    init(id: String, categoryIds: [String], languageCode: String? = nil, utterance: String? = nil) {
+        self.id = id
+        self.categoryIds = categoryIds
+        if let languageCode = languageCode {
+            self.languageCode = languageCode
+        }
+        if let utterance = utterance {
+            self.utterance = utterance
+        }
+    }
 }
 
 public struct TextPresets {
 
+    private static var _cachedOverride: PresetData?
+
+    private static var overriddenPresets: PresetData? {
+        guard let overrideString = LaunchEnvironment.value(for: .overridePresets) else {
+            return nil
+        }
+        if let cached = _cachedOverride {
+            return cached
+        }
+        if let data = overrideString.data(using: .utf8) {
+            if let decoded = try? JSONDecoder().decode(PresetData.self, from: data) {
+                _cachedOverride = decoded
+                return decoded
+            }
+        }
+        return nil
+    }
+
     public static var presets: PresetData? {
+
+        if let overriddenPresets = overriddenPresets {
+            return overriddenPresets
+        }
+
         if let json = dataFromBundle() {
             do {
 

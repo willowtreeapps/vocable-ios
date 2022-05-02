@@ -11,8 +11,8 @@ import CoreData
 
 extension Phrase {
 
-    static func create(withUserEntry text: String, in context: NSManagedObjectContext) -> Phrase {
-        let userFavorites = Category.fetch(.userFavorites, in: context)
+    static func create(withUserEntry text: String, in context: NSManagedObjectContext) throws -> Phrase {
+        let userFavorites = try Category.fetch(.userFavorites, in: context)
         return create(withUserEntry: text, category: userFavorites, in: context)
     }
 

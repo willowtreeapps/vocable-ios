@@ -19,24 +19,6 @@ extension Category: NSManagedObjectIdentifiable {
         setPrimitiveValue(false, forKey: #keyPath(isUserRemoved))
         setPrimitiveValue(false, forKey: #keyPath(isUserRenamed))
     }
-
-    static func userFavoritesCategoryName() -> String {
-        let context = NSPersistentContainer.shared.viewContext
-        let category = Category.fetch(.userFavorites, in: context)
-        return category.name ?? ""
-    }
-
-    static func userFavoritesCategory() -> Category {
-        let context = NSPersistentContainer.shared.viewContext
-        let category = Category.fetch(.userFavorites, in: context)
-        return category
-    }
-
-    static func listeningModeCategory() -> Category {
-        let context = NSPersistentContainer.shared.viewContext
-        let category = Category.fetch(.listeningMode, in: context)
-        return category
-    }
 }
 
 extension Phrase: NSManagedObjectIdentifiable {

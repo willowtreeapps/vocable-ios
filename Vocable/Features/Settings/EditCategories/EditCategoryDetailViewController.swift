@@ -273,14 +273,33 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     }
     
     private func handleToggle(at indexPath: IndexPath) {
-        let shouldShowCategory = !category.isHidden
-        category.setValue(!category.isHidden, forKey: "isHidden")
 
-        try? Category.updateAllOrdinalValues(in: context)
-        saveContext()
+        let categoryID = category.objectID
+        let newHiddenState = !category.isHidden
+        let context = NSPersistentContainer.shared.newBackgroundContext()
+        context.perform { [weak self] in
+            guard let category = Category.fetchObject(in: context, matching: categoryID) else {
+                return
+            }
+            category.isHidden = newHiddenState
+            do {
+                try Category.updateAllOrdinalValues(in: context)
+                try context.save()
+                DispatchQueue.main.async {
+                    self?.categoryVisibilityDidChange(to: newHiddenState)
+                }
+            } catch {
+                print("Failed to update category hidden state: \(error)")
+            }
+        }
+    }
+
+    private func categoryVisibilityDidChange(to isHidden: Bool) {
+
+        guard let indexPath = dataSource?.indexPath(for: .showCategoryToggle) else { return }
 
         if category.identifier == Category.Identifier.listeningMode {
-            AppConfig.listeningMode.listeningModeEnabledPreference = shouldShowCategory
+            AppConfig.listeningMode.listeningModeEnabledPreference = !isHidden
         }
 
         // Update the cell's config
@@ -313,34 +332,40 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
     
     private func removeCategory() {
 
-        if category.isUserGenerated {
-            context.delete(category)
-        } else {
-            category.isUserRemoved = true
-        }
+        let categoryID = category.objectID
+        let context = NSPersistentContainer.shared.newBackgroundContext()
+        context.perform { [weak self] in
 
-        try? Category.updateAllOrdinalValues(in: context)
+            guard let category = Category.fetchObject(in: context, matching: categoryID) else {
+                return
+            }
 
-        if saveContext() {
-            self.navigationController?.popViewController(animated: true)
+            if category.isUserGenerated {
+                context.delete(category)
+            } else {
+                category.isUserRemoved = true
+            }
+
+            do {
+                try Category.updateAllOrdinalValues(in: context)
+                try context.save()
+                DispatchQueue.main.async {
+                    self?.didRemoveCategory()
+                }
+            } catch {
+                print("Failed to remove category: \(error)")
+            }
         }
+    }
+
+    private func didRemoveCategory() {
+        navigationController?.popViewController(animated: true)
     }
     
     private func deselectCell() {
         for path in collectionView.indexPathsForSelectedItems ?? [] {
             collectionView.deselectItem(at: path, animated: true)
         }
-    }
-
-    @discardableResult
-    private func saveContext() -> Bool {
-        do {
-            try context.save()
-            return true
-        } catch {
-            assertionFailure("Failed to unsave user generated phrase: \(error)")
-        }
-        return false
     }
 
     private func reloadData() {
