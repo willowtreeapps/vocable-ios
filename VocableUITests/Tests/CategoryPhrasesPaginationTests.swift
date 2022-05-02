@@ -12,7 +12,7 @@ class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
     
     func testCanNavigatePages() {
         // Add enough phrases to have 2 pages.
-        for phrase in listOfPhrases.startIndex..<5 {
+        for phrase in listOfPhrases.startIndex..<9 {
             CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
         }
         
@@ -36,7 +36,7 @@ class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
     
     func testPagesAdjustToNewPhrases() {
         // Add enough phrases (4) to fill one page.
-        for phrase in listOfPhrases.startIndex..<4 {
+        for phrase in listOfPhrases.startIndex..<8 {
             CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
         }
         

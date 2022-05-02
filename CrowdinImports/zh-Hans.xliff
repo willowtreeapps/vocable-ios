@@ -2,7 +2,7 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Vocable/Supporting Files/en.lproj/InfoPlist.strings" source-language="en" target-language="zh-Hans" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
       <trans-unit id="NSCameraUsageDescription" xml:space="preserve" approved="yes">
@@ -14,13 +14,18 @@
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="zh-Hans" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
-      <trans-unit id="Edit Phrases" xml:space="preserve" approved="yes">
-        <source>Edit Phrases</source>
-        <target state="final">编辑对话</target>
-        <note>Edit Phrases</note>
+      <trans-unit id="Delete All" xml:space="preserve">
+        <source>Delete All</source>
+        <target state="translated">全部刪除</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No Entries" xml:space="preserve">
+        <source>No Entries</source>
+        <target state="translated">没有条目</target>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve" approved="yes">
         <source>Categories</source>
@@ -30,17 +35,17 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">取消</target>
-        <note>Cancel exit editing alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
         <target state="final">确认</target>
-        <note>Confirm exit category alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
         <source>If you close this without saving your custom category will be deleted.</source>
         <target state="final">如果您关闭了，则您的自定类别将被删除。</target>
-        <note>Exit edit categories alert title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -62,20 +67,35 @@
         <target state="final">取消</target>
         <note>Delete phrase alert cancel button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve" approved="yes">
-        <source>Delete</source>
-        <target state="final">删除</target>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">删除</target>
         <note>Delete phrase alert action button title</note>
       </trans-unit>
-      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Are you sure you want to delete? Removed phrases cannot be restored.</source>
-        <target state="final">删除后的对话无法恢复。</target>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
+        <source>Deleted phrases cannot be recovered.</source>
+        <target state="translated">删除后的对话无法恢复。</target>
         <note>Delete phrase confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.edit_phrases.title" xml:space="preserve">
+        <source>Edit Phrases</source>
+        <target state="translated">编辑对话</target>
+        <note>Edit Phrases button label within the category detail screen</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve" approved="yes">
         <source>Remove Category</source>
         <target state="final">移除类别</target>
         <note>Remove category button label within the category detail screen.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.rename_category.title" xml:space="preserve">
+        <source>Rename Category</source>
+        <target state="translated">重命名类别</target>
+        <note>Rename Category button label within the category detail screen</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
+        <source>Show Category</source>
+        <target state="translated">显示分类名称</target>
+        <note>Show category button label within the category detail screen.</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve" approved="yes">
         <source>Changes saved</source>
@@ -85,28 +105,32 @@
       <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve" approved="yes">
         <source>Changes Saved</source>
         <target state="final">已保存更改</target>
-        <note>Saved to Categories
-   User edited name of the category and saved it successfully</note>
+        <note>Saved to Categories</note>
       </trans-unit>
       <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve" approved="yes">
         <source>No presets found</source>
         <target state="final">找不到预设</target>
         <note>Debugging error message for when preloaded content is not found</note>
       </trans-unit>
+      <trans-unit id="empty_state.button.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target state="translated">添加短语</target>
+        <note>Empty state Add Phrase button title</note>
+      </trans-unit>
+      <trans-unit id="empty_state.header.title" xml:space="preserve">
+        <source>You don't have any phrases saved yet.</source>
+        <target state="translated">您还没有保存任何短语。</target>
+        <note>Empty state title</note>
+      </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">取消</target>
         <note>Cancel alert action title</note>
       </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve" approved="yes">
-        <source>Confirm</source>
-        <target state="final">确认</target>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Continue</source>
+        <target state="translated">继续</target>
         <note>Confirm alert action title</note>
-      </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Turn off head tracking?</source>
-        <target state="final">关闭头部跟踪？</target>
-        <note>Disable head tracking confirmation alert title</note>
       </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve" approved="yes">
         <source>Please move closer to the device.</source>
@@ -133,10 +157,25 @@
         <target state="final">舍弃</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
-      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Are you sure? Going back before saving will clear any edits made.</source>
-        <target state="final">保存前返回将会清除任何编辑的东西。</target>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>Going back before saving will clear any edits made.</source>
+        <target state="translated">保存前返回将会清除任何编辑的东西。</target>
         <note>Exit edit sayings alert title</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">取消</target>
+        <note>Phrase already exists alert cancel button</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target state="translated">创建副本</target>
+        <note>Phrase already exists alert create button</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.title" xml:space="preserve">
+        <source>This phrase already exists. Would you like to create a duplicate?</source>
+        <target state="translated">此短语已经存在。您想要创建重复吗？</target>
+        <note>Phrase already exists alert title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve" approved="yes">
         <source>Saved to %@</source>
@@ -144,6 +183,11 @@
         <note>new entry saved to user favorites category
    Saved to user favorites category
    Saved to user favorites category toast title</note>
+      </trans-unit>
+      <trans-unit id="preset.category.add.phrase.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target state="translated">添加短语</target>
+        <note>Add phrase to category button title</note>
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve" approved="yes">
         <source>No</source>
@@ -154,6 +198,16 @@
         <source>Yes</source>
         <target state="final">是</target>
         <note>'Yes' num pad response</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.body.title" xml:space="preserve">
+        <source>Start using Vocable to see your most recently used phrases here.</source>
+        <target state="translated">开始使用 Vocable 在此处查看您最近使用的短语。</target>
+        <note>Recents empty state description</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.header.title" xml:space="preserve">
+        <source>No recently used phrases</source>
+        <target state="translated">没有最近使用的短语</target>
+        <note>Recents empty state title</note>
       </trans-unit>
       <trans-unit id="selection_mode.header.title" xml:space="preserve" approved="yes">
         <source>Selection Mode</source>
@@ -169,6 +223,41 @@
         <source>Email not configured.</source>
         <target state="final">电子邮件没有配置</target>
         <note>No email account configured error alert title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve">
+        <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
+        <target state="translated">您确定要将 Vocable 重置为默认设置吗？此操作无法撤消。</target>
+        <note>Reset app settings confirmation prompt</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">取消</target>
+        <note>Button cancelling the action to reset Vocable's application settings</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Reset</source>
+        <target state="translated">重 置</target>
+        <note>Button confirming that the user would like to reset Vocable's application settings</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve">
+        <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
+        <target state="translated">语音无法重置。如果问题仍然存在，请重试或重新安装 Vocable。</target>
+        <note>Reset app settings failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">确定</target>
+        <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
+        <source>Vocable has been reset successfully</source>
+        <target state="translated">已成功恢复默认设置</target>
+        <note>Reset app settings success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">好的</target>
+        <note>Button dismissing the alert informing the user that Vocable's application settings were successfully reset</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve" approved="yes">
         <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
@@ -235,6 +324,15 @@
         <target state="final">设置</target>
         <note>Settings screen header title</note>
       </trans-unit>
+      <trans-unit id="settings.selection_mode.head_tracking_unsupported_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support head tracking.
+
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.</source>
+        <target state="translated">此 %1$@ 在 %2$@ %3$@ 上不支持头跟踪。
+
+所有设备都支持头部跟踪，所有设备都有 %4$@ 相机，在大多数设备上有 %6$@。</target>
+        <note>Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking</note>
+      </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve" approved="yes">
         <source>Continue Editing</source>
         <target state="final">继续编辑</target>
@@ -245,10 +343,25 @@
         <target state="final">舍弃</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
-      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Are you sure? Going back before saving will clear any edits made.</source>
-        <target state="final">保存前返回将会清除任何编辑的东西。</target>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>Going back before saving will clear any edits made.</source>
+        <target state="translated">保存前返回将会清除任何编辑的东西。</target>
         <note>Exit edit sayings alert title</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">取消</target>
+        <note>Category already exists alert cancel button</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target state="translated">创建副本</target>
+        <note>Category already exists alert create button</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.title" xml:space="preserve">
+        <source>This category name already exists. Would you like to create a duplicate?</source>
+        <target state="translated">此类别名称已存在。您想创建一个副本吗？</target>
+        <note>Category already exists alert title</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve" approved="yes">
         <source>High</source>
@@ -284,7 +397,7 @@
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Presets.strings" source-language="en" target-language="zh-Hans" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
       <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve" approved="yes">
@@ -622,6 +735,11 @@
         <target state="final">请打开电视机</target>
         <note/>
       </trans-unit>
+      <trans-unit id="preset_listening_mode" xml:space="preserve">
+        <source>Listen</source>
+        <target state="translated">聆听</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="preset_user_favorites" xml:space="preserve" approved="yes">
         <source>My Sayings</source>
         <target state="final">我的对话</target>
@@ -630,6 +748,11 @@
       <trans-unit id="preset_user_keypad" xml:space="preserve" approved="yes">
         <source>123</source>
         <target state="final">数字</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_user_recents" xml:space="preserve">
+        <source>Recents</source>
+        <target state="translated">最近使用</target>
         <note/>
       </trans-unit>
     </body>

@@ -83,6 +83,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     private let hotWordIntendedPhrase = "hey vocable"
 
     private var hotWordEnabledCancellable: AnyCancellable?
+    private var listeningModeEnabledCancellable: AnyCancellable?
 
     private lazy var speechRecognizer: SFSpeechRecognizer? = {
         let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
@@ -109,8 +110,8 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     @Published private(set) var isHearingWords = false
 
-    var deviceSupportsSpeech: Bool {
-        return speechPermissionStatus != .restricted
+    static var deviceSupportsSpeech: Bool {
+        return SFSpeechRecognizer.authorizationStatus() != .restricted
     }
 
     private var isAuthorizedToTranscribe: Bool {
@@ -128,8 +129,11 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
         isAvailable = speechRecognizer?.isAvailable ?? false
 
-        hotWordEnabledCancellable = Publishers.Merge(AppConfig.$isHotWordPermitted, AppConfig.$isListeningModeEnabled)
-            .removeDuplicates()
+        hotWordEnabledCancellable = Publishers.CombineLatest(AppConfig.listeningMode.$isHotWordEnabled.dropFirst(), AppConfig.listeningMode.$isEnabled.dropFirst())
+            .removeDuplicates { lhs, rhs in
+                lhs.0 == rhs.0 &&
+                lhs.1 == rhs.1
+            }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.startListeningForHotWordOrDeactivate()
@@ -140,20 +144,6 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
             .sink { newValue in
                 self.audioController.playEffect(newValue, completion: {})
             }
-
-        listenToVoiceFeatureFlagChange()
-    }
-
-    private func listenToVoiceFeatureFlagChange() {
-        AppConfig.$listeningModeFeatureFlagEnabled
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] isFeatureFlagEnabled in
-            if isFeatureFlagEnabled {
-                self?.startListeningForHotWordOrDeactivate()
-            } else {
-                self?.stopListening()
-            }
-        }.store(in: &disposables)
     }
 
     func startTranscribing(requestPermission: AudioPermission? = nil) {
@@ -173,7 +163,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     }
 
     private func startListeningForHotWordOrDeactivate() {
-        guard isAvailable, AppConfig.isListeningModeEnabled, AppConfig.isHotWordPermitted, deviceSupportsSpeech, isAuthorizedToTranscribe, AppConfig.listeningModeFeatureFlagEnabled else {
+        guard isAvailable, AppConfig.listeningMode.isHotWordEnabled, isAuthorizedToTranscribe else {
             stopListening()
             return
         }
@@ -186,7 +176,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     }
 
     private func startListening(mode: ListeningMode, resumingFromPause: Bool = false, requestablePermission: AudioPermission? = nil) {
-        guard AppConfig.listeningModeFeatureFlagEnabled else { return }
+        guard AppConfig.listeningMode.isEnabled else { return }
 
         guard !isPaused && ((mode != self.mode) || (resumingFromPause && isListening)) else {
             return
@@ -537,7 +527,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
 
     @objc
     private func willResignActiveNotification(_ notification: Notification) {
-        if AppConfig.listeningModeFeatureFlagEnabled {
+        if AppConfig.listeningMode.isEnabled {
             pauseListening()
         }
     }
@@ -545,7 +535,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     @objc
     private func didBecomeActiveNotification(_ notification: Notification) {
         updatePermissionStatuses()
-        if AppConfig.listeningModeFeatureFlagEnabled {
+        if AppConfig.listeningMode.isEnabled {
             resumeListening()
         }
     }

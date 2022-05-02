@@ -200,8 +200,14 @@
 "preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" = "请打开电视机";
 
 /* (No Comment) */
+"preset_listening_mode" = "聆听";
+
+/* (No Comment) */
 "preset_user_favorites" = "我的对话";
 
 /* (No Comment) */
 "preset_user_keypad" = "数字";
+
+/* (No Comment) */
+"preset_user_recents" = "最近使用";
 

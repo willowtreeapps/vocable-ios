@@ -18,8 +18,8 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
     private let maxDwellTimeDuration = 5.0
     private let minDwellTimeDuration = 0.5
 
-    private lazy var dataSource = UICollectionViewDiffableDataSource<Int, SelectionModeItem>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
-        return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
+    private lazy var dataSource = UICollectionViewDiffableDataSource<Int, SelectionModeItem>(collectionView: collectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell? in
+        return self?.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
 
     override func viewDidLoad() {
@@ -45,8 +45,8 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
         collectionView.register(UINib(nibName: "DwellTimeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: DwellTimeCollectionViewCell.reuseIdentifier)
         collectionView.register(UINib(nibName: "SensitivityCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SensitivityCollectionViewCell.reuseIdentifier)
 
-        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout { (_, environment) -> NSCollectionLayoutSection? in
-            self.section(environment: environment)
+        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout { [weak self] (_, environment) -> NSCollectionLayoutSection? in
+            self?.section(environment: environment)
         }
 
         updateDataSource()

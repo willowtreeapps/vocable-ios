@@ -10,6 +10,15 @@ import UIKit
 
 class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIdentifier: Hashable>: NSObject {
 
+    struct ApplyHandlerArguments {
+        let indexPath: IndexPath
+        let virtualIndexPath: IndexPath
+        let sectionIdentifier: SectionIdentifier
+        let itemIdentifier: ItemIdentifier
+    }
+
+    typealias ApplyHandler = (ApplyHandlerArguments) -> Void
+
     private typealias Snapshot = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>
     private typealias DataSource = UICollectionViewDiffableDataSource<ContentWrapper<SectionIdentifier>, ContentWrapper<ItemIdentifier>>
 
@@ -31,8 +40,8 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
 
         self.dataSource = DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, item) in
             guard let self = self else { return nil }
-            let mappedPath = self.indexPath(fromMappedIndexPath: indexPath)
-            return self.cellProvider(collectionView, mappedPath, item.item)
+            let indexPath = self.indexPath(fromVirtual: indexPath)
+            return self.cellProvider(collectionView, indexPath, item.item)
         })
     }
 
@@ -89,7 +98,7 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
         }
     }
 
-    private func mappedIndexPaths(`for` indexPath: IndexPath) -> [IndexPath] {
+    private func virtualIndexPaths(`for` indexPath: IndexPath) -> [IndexPath] {
         guard let identifier = dataSource.itemIdentifier(for: indexPath) else { return [] }
         let snapshot = dataSource.snapshot()
         let indexPaths = snapshot.sectionIdentifiers.compactMap { section -> IndexPath? in
@@ -99,20 +108,36 @@ class CarouselCollectionViewDataSourceProxy<SectionIdentifier: Hashable, ItemIde
     }
 
     func itemIdentifier(for indexPath: IndexPath) -> ItemIdentifier? {
-        return dataSource.itemIdentifier(for: indexPath)?.item
+        let virtualPath = self.indexPath(fromVirtual: indexPath)
+        return dataSource.itemIdentifier(for: virtualPath)?.item
     }
 
     func indexPath(for itemIdentifier: ItemIdentifier) -> IndexPath? {
         return dataSource.indexPath(for: .init(index: 0, item: itemIdentifier))
     }
 
-    func indexPath(fromMappedIndexPath indexPath: IndexPath) -> IndexPath {
+    func indexPath(fromVirtual indexPath: IndexPath) -> IndexPath {
         return IndexPath(item: indexPath.item, section: 0)
     }
 
-    func performActions(on indexPath: IndexPath, actions: (IndexPath) -> Void) {
-        for indexPath in mappedIndexPaths(for: indexPath) {
-            actions(indexPath)
+    func performActions(on indexPath: IndexPath, actions: ApplyHandler) {
+
+        let snapshot = snapshot()
+        for virtualIndexPath in virtualIndexPaths(for: indexPath) {
+            let indexPath = self.indexPath(fromVirtual: virtualIndexPath)
+            let sectionIdentifier = snapshot.sectionIdentifiers[indexPath.section]
+            let itemIdentifier = snapshot.itemIdentifiers(inSection: sectionIdentifier)[indexPath.item]
+            let arguments = ApplyHandlerArguments(indexPath: indexPath,
+                                                  virtualIndexPath: virtualIndexPath,
+                                                  sectionIdentifier: sectionIdentifier,
+                                                  itemIdentifier: itemIdentifier)
+            actions(arguments)
+        }
+    }
+
+    func performActions(on indexPaths: [IndexPath], actions: ApplyHandler) {
+        indexPaths.forEach {
+            performActions(on: $0, actions: actions)
         }
     }
 

@@ -108,6 +108,14 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
 
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
     // MARK: Cell Registrations
 
     private func makeRenameCategoryCellRegistration() -> CellRegistration {
@@ -272,7 +280,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
         saveContext()
 
         if category.identifier == Category.Identifier.listeningMode {
-            AppConfig.isListeningModeEnabled = shouldShowCategory
+            AppConfig.listeningMode.listeningModeEnabledPreference = shouldShowCategory
         }
 
         // Update the cell's config

@@ -2,7 +2,7 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Vocable/Supporting Files/en.lproj/InfoPlist.strings" source-language="en" target-language="da" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
       <trans-unit id="CFBundleDisplayName" xml:space="preserve" approved="yes">
@@ -24,13 +24,18 @@
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="da" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
-      <trans-unit id="Edit Phrases" xml:space="preserve" approved="yes">
-        <source>Edit Phrases</source>
-        <target state="final">Rediger Sætninger</target>
-        <note>Edit Phrases</note>
+      <trans-unit id="Delete All" xml:space="preserve" approved="yes">
+        <source>Delete All</source>
+        <target state="final">Slet Alle</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No Entries" xml:space="preserve" approved="yes">
+        <source>No Entries</source>
+        <target state="final">Ingen poster</target>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve" approved="yes">
         <source>Categories</source>
@@ -40,17 +45,17 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">Annuller</target>
-        <note>Cancel exit editing alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
         <target state="final">Bekræft</target>
-        <note>Confirm exit category alert action title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
         <source>If you close this without saving your custom category will be deleted.</source>
         <target state="final">Hvis du lukker dette uden at gemme, vil din brugerdefinerede kategori blive slettet.</target>
-        <note>Exit edit categories alert title</note>
+        <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -73,19 +78,34 @@
         <note>Delete phrase alert cancel button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve" approved="yes">
-        <source>Delete</source>
-        <target state="final">Slet</target>
+        <source>Remove</source>
+        <target state="final">Fjern</target>
         <note>Delete phrase alert action button title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Are you sure you want to delete? Removed phrases cannot be restored.</source>
-        <target state="final">Er du sikker? Slettede sætninger kan ikke gendannes.</target>
+        <source>Deleted phrases cannot be recovered.</source>
+        <target state="final">Slettede sætninger kan ikke genskabes.</target>
         <note>Delete phrase confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.edit_phrases.title" xml:space="preserve" approved="yes">
+        <source>Edit Phrases</source>
+        <target state="final">Rediger Sætninger</target>
+        <note>Edit Phrases button label within the category detail screen</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve" approved="yes">
         <source>Remove Category</source>
         <target state="final">Fjern Kategori</target>
         <note>Remove category button label within the category detail screen.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.rename_category.title" xml:space="preserve" approved="yes">
+        <source>Rename Category</source>
+        <target state="final">Omdøb kategori</target>
+        <note>Rename Category button label within the category detail screen</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve" approved="yes">
+        <source>Show Category</source>
+        <target state="final">Vis kategori</target>
+        <note>Show category button label within the category detail screen.</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve" approved="yes">
         <source>Changes saved</source>
@@ -95,13 +115,22 @@
       <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve" approved="yes">
         <source>Changes Saved</source>
         <target state="final">Dine ændringer er gemt</target>
-        <note>Saved to Categories
-   User edited name of the category and saved it successfully</note>
+        <note>Saved to Categories</note>
       </trans-unit>
       <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve" approved="yes">
         <source>No presets found</source>
         <target state="final">Ingen forudstillinger fundet</target>
         <note>Debugging error message for when preloaded content is not found</note>
+      </trans-unit>
+      <trans-unit id="empty_state.button.title" xml:space="preserve" approved="yes">
+        <source>Add Phrase</source>
+        <target state="final">Tilføj sætning</target>
+        <note>Empty state Add Phrase button title</note>
+      </trans-unit>
+      <trans-unit id="empty_state.header.title" xml:space="preserve" approved="yes">
+        <source>You don't have any phrases saved yet.</source>
+        <target state="final">Du har ingen sætninger gemt endnu.</target>
+        <note>Empty state title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -109,14 +138,9 @@
         <note>Cancel alert action title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve" approved="yes">
-        <source>Confirm</source>
-        <target state="final">Bekræft</target>
+        <source>Continue</source>
+        <target state="final">Forsæt</target>
         <note>Confirm alert action title</note>
-      </trans-unit>
-      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Turn off head tracking?</source>
-        <target state="final">Deaktiver hovedsporing?</target>
-        <note>Disable head tracking confirmation alert title</note>
       </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve" approved="yes">
         <source>Please move closer to the device.</source>
@@ -144,9 +168,24 @@
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Are you sure? Going back before saving will clear any edits made.</source>
+        <source>Going back before saving will clear any edits made.</source>
         <target state="final">Hvis du forlader uden at gemme vil dine ændringer blive slettet.</target>
         <note>Exit edit sayings alert title</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve" approved="yes">
+        <source>Cancel</source>
+        <target state="final">Annuller</target>
+        <note>Phrase already exists alert cancel button</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.create.button" xml:space="preserve" approved="yes">
+        <source>Create Duplicate</source>
+        <target state="final">Opret dublet</target>
+        <note>Phrase already exists alert create button</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.title" xml:space="preserve" approved="yes">
+        <source>This phrase already exists. Would you like to create a duplicate?</source>
+        <target state="final">Denne sætning findes allerede. Vil du oprette en dublet?</target>
+        <note>Phrase already exists alert title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve" approved="yes">
         <source>Saved to %@</source>
@@ -154,6 +193,11 @@
         <note>new entry saved to user favorites category
    Saved to user favorites category
    Saved to user favorites category toast title</note>
+      </trans-unit>
+      <trans-unit id="preset.category.add.phrase.title" xml:space="preserve" approved="yes">
+        <source>Add Phrase</source>
+        <target state="final">Tilføj sætning</target>
+        <note>Add phrase to category button title</note>
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve" approved="yes">
         <source>No</source>
@@ -164,6 +208,16 @@
         <source>Yes</source>
         <target state="final">Ja</target>
         <note>'Yes' num pad response</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.body.title" xml:space="preserve" approved="yes">
+        <source>Start using Vocable to see your most recently used phrases here.</source>
+        <target state="final">Begynd at bruge Vocable for at se dine senest brugte sætninger her.</target>
+        <note>Recents empty state description</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.header.title" xml:space="preserve" approved="yes">
+        <source>No recently used phrases</source>
+        <target state="final">Ingen nyligt anvendte sætninger</target>
+        <note>Recents empty state title</note>
       </trans-unit>
       <trans-unit id="selection_mode.header.title" xml:space="preserve" approved="yes">
         <source>Selection Mode</source>
@@ -179,6 +233,41 @@
         <source>Email not configured.</source>
         <target state="final">E-mail er ikke konfigureret.</target>
         <note>No email account configured error alert title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve" approved="yes">
+        <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
+        <target state="final">Er du sikker på, at du vil nulstille Vocable til standardindstillinger? Denne handling kan ikke fortrydes.</target>
+        <note>Reset app settings confirmation prompt</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
+        <source>Cancel</source>
+        <target state="final">Annuller</target>
+        <note>Button cancelling the action to reset Vocable's application settings</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.confirm.title" xml:space="preserve" approved="yes">
+        <source>Reset</source>
+        <target state="final">Nulstil</target>
+        <note>Button confirming that the user would like to reset Vocable's application settings</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve" approved="yes">
+        <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
+        <target state="final">Vocable kunne ikke nulstilles. Prøv igen, eller geninstaller Vocable hvis problemet fortsætter.</target>
+        <note>Reset app settings failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.button.ok" xml:space="preserve" approved="yes">
+        <source>OK</source>
+        <target state="final">OK</target>
+        <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve" approved="yes">
+        <source>Vocable has been reset successfully</source>
+        <target state="final">Vocable er blevet nulstillet</target>
+        <note>Reset app settings success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve" approved="yes">
+        <source>OK</source>
+        <target state="final">OK</target>
+        <note>Button dismissing the alert informing the user that Vocable's application settings were successfully reset</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve" approved="yes">
         <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
@@ -245,6 +334,15 @@
         <target state="final">Indstillinger</target>
         <note>Settings screen header title</note>
       </trans-unit>
+      <trans-unit id="settings.selection_mode.head_tracking_unsupported_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support head tracking.
+
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.</source>
+        <target state="translated">Dette %1$@ på %2$@ %3$@ understøtter ikke hovedsporing.
+
+Hovedsporing understøttes på alle enheder med et %4$@ -kamera og på de fleste enheder med %6$@.</target>
+        <note>Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking</note>
+      </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve" approved="yes">
         <source>Continue Editing</source>
         <target state="final">Fortsæt Redigering</target>
@@ -256,9 +354,24 @@
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Are you sure? Going back before saving will clear any edits made.</source>
+        <source>Going back before saving will clear any edits made.</source>
         <target state="final">Hvis du forlader uden at gemme vil dine ændringer blive slettet.</target>
         <note>Exit edit sayings alert title</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve" approved="yes">
+        <source>Cancel</source>
+        <target state="final">Annuller</target>
+        <note>Category already exists alert cancel button</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.create.button" xml:space="preserve" approved="yes">
+        <source>Create Duplicate</source>
+        <target state="final">Opret dublet</target>
+        <note>Category already exists alert create button</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.title" xml:space="preserve" approved="yes">
+        <source>This category name already exists. Would you like to create a duplicate?</source>
+        <target state="final">Dette kategorinavn findes allerede. Vil du oprette et duplikat?</target>
+        <note>Category already exists alert title</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve" approved="yes">
         <source>High</source>
@@ -294,7 +407,7 @@
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Presets.strings" source-language="en" target-language="da" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3" build-num="13E113"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
       <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve" approved="yes">
@@ -632,6 +745,11 @@
         <target state="final">Tænd fjernsynet</target>
         <note/>
       </trans-unit>
+      <trans-unit id="preset_listening_mode" xml:space="preserve" approved="yes">
+        <source>Listen</source>
+        <target state="final">Lyt</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="preset_user_favorites" xml:space="preserve" approved="yes">
         <source>My Sayings</source>
         <target state="final">Mine Sætninger</target>
@@ -640,6 +758,11 @@
       <trans-unit id="preset_user_keypad" xml:space="preserve" approved="yes">
         <source>123</source>
         <target state="final">123</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_user_recents" xml:space="preserve" approved="yes">
+        <source>Recents</source>
+        <target state="final">Foregående</target>
         <note/>
       </trans-unit>
     </body>
