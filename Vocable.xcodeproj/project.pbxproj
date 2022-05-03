@@ -122,13 +122,13 @@
 		6BE02F6928133FDB002CCCED /* LaunchEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE02F6628133E00002CCCED /* LaunchEnvironment.swift */; };
 		6BE02F6D2816EF88002CCCED /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE02F6C2816EF88002CCCED /* Environment.swift */; };
 		6BE02F6E2816EF88002CCCED /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE02F6C2816EF88002CCCED /* Environment.swift */; };
-		6BE02F7F28188CEB002CCCED /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE02F7E28188CEB002CCCED /* String+Localization.swift */; };
 		6BE02F732816F504002CCCED /* XCUIApplication+LaunchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE02F722816F504002CCCED /* XCUIApplication+LaunchConfiguration.swift */; };
 		6BE02F742816F504002CCCED /* XCUIApplication+LaunchConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE02F722816F504002CCCED /* XCUIApplication+LaunchConfiguration.swift */; };
 		6BE02F792816F96D002CCCED /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E49E6328130D140088A344 /* Arguments.swift */; };
 		6BE02F7A2816F984002CCCED /* LaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E49E5F2812FD760088A344 /* LaunchArguments.swift */; };
 		6BE02F7C28172A7B002CCCED /* ResultBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE02F7B28172A7B002CCCED /* ResultBuilders.swift */; };
 		6BE02F7D28172A7B002CCCED /* ResultBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE02F7B28172A7B002CCCED /* ResultBuilders.swift */; };
+		6BE02F7F28188CEB002CCCED /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE02F7E28188CEB002CCCED /* String+Localization.swift */; };
 		6BE23D562444DCBE0032CAE4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BE23D542444DCBE0032CAE4 /* Localizable.strings */; };
 		6BE2628B25BB376700281BB5 /* AudioPermissionPromptController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE2628A25BB376700281BB5 /* AudioPermissionPromptController.swift */; };
 		6BE7E9842459D328007B01F2 /* PagingCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7E9832459D328007B01F2 /* PagingCarouselViewController.swift */; };
@@ -349,9 +349,9 @@
 		6BDE5D3C25C1DF1600F47066 /* TranscriptionOutputTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranscriptionOutputTextView.swift; sourceTree = "<group>"; };
 		6BE02F6628133E00002CCCED /* LaunchEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchEnvironment.swift; sourceTree = "<group>"; };
 		6BE02F6C2816EF88002CCCED /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		6BE02F7E28188CEB002CCCED /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		6BE02F722816F504002CCCED /* XCUIApplication+LaunchConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+LaunchConfiguration.swift"; sourceTree = "<group>"; };
 		6BE02F7B28172A7B002CCCED /* ResultBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultBuilders.swift; sourceTree = "<group>"; };
+		6BE02F7E28188CEB002CCCED /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		6BE23D552444DCBE0032CAE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BE23D5724450FDA0032CAE4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BE2628A25BB376700281BB5 /* AudioPermissionPromptController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPermissionPromptController.swift; sourceTree = "<group>"; };
