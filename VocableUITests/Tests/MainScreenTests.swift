@@ -11,10 +11,10 @@ import XCTest
 
 class MainScreenTests: BaseTest {
     
-    private let listOfCategoriesToSkip = [CategoryTitleCellIdentifier(CategoryIdentifier.keyPad).identifier,
-                                          CategoryTitleCellIdentifier(CategoryIdentifier.mySayings).identifier,
-                                          CategoryTitleCellIdentifier(CategoryIdentifier.listen).identifier,
-                                          CategoryTitleCellIdentifier(CategoryIdentifier.recents).identifier]
+    private let listOfCategoriesToSkip = [CategoryIdentifier.keyPad.identifier,
+                                          CategoryIdentifier.mySayings.identifier,
+                                          CategoryIdentifier.listen.identifier,
+                                          CategoryIdentifier.recents.identifier]
     
      // For each preset category (the first 5 categories), tap() the top left
      // phrase, then verify that all selected phrases appear in "Recents"
@@ -81,7 +81,7 @@ class MainScreenTests: BaseTest {
     
     func testDisablingCategory() {
         let hiddenCategoryName = "General"
-        let hiddenCategoryIdentifier = CategoryTitleCellIdentifier(CategoryIdentifier.general).identifier
+        let hiddenCategoryIdentifier = CategoryIdentifier.general.identifier
         
         SettingsScreen.navigateToSettingsCategoryScreen()
         XCTAssertTrue(SettingsScreen.locateCategoryCell(hiddenCategoryName).element.exists)

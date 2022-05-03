@@ -27,27 +27,6 @@ struct CategoryIdentifier {
     
 }
 
-struct CategoryTitleCellIdentifier {
-
-    let categoryIdentifier: CategoryIdentifier
-    static let categoryTitleCellPrefix: String = ""
-    var identifier: String {
-        CategoryTitleCellIdentifier.categoryTitleCellPrefix + categoryIdentifier.identifier
-    }
-    
-    init?(_ identifier: String){
-        if identifier.isEmpty{
-            return nil
-        }
-        self.categoryIdentifier = CategoryIdentifier(identifier.replacingOccurrences(of: CategoryTitleCellIdentifier.categoryTitleCellPrefix, with: ""))
-    }
-    
-    init(_ identifier: CategoryIdentifier) {
-        self.categoryIdentifier = identifier
-    }
-    
-}
-
 struct PresetCategories {
     
     var list: [CategoryIdentifier]
