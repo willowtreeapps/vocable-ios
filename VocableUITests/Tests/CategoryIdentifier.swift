@@ -30,7 +30,7 @@ struct CategoryIdentifier {
 struct CategoryTitleCellIdentifier {
 
     let categoryIdentifier: CategoryIdentifier
-    static let categoryTitleCellPrefix: String = "category_title_cell_"
+    static let categoryTitleCellPrefix: String = ""
     var identifier: String {
         CategoryTitleCellIdentifier.categoryTitleCellPrefix + categoryIdentifier.identifier
     }
