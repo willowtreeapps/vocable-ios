@@ -58,7 +58,7 @@
 "settings.alert.no_email_configured.button.dismiss.title" = "OK";
 
 /* No email account configured error alert title */
-"settings.alert.no_email_configured.title" = "Please sign into an account using the %1$@ Mail app.";
+"settings.alert.no_email_configured.title" = "Please sign into an account with Mail for %1$@.";
 
 /* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.body" = "You're about to leave the Vocable app. You may lose head tracking control.";
