@@ -173,7 +173,7 @@ import Combine
             return
         }
         cell.setup(title: category.name!)
-        cell.accessibilityIdentifier = ["category_title_cell", category.identifier].compacted().joined(separator: "_")
+        cell.accessibilityIdentifier = category.identifier
     }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
