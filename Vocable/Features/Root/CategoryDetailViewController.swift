@@ -122,7 +122,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
             guard let phrase = Phrase.fetchObject(in: self.frc.managedObjectContext, matching: objectId) else { return }
             cell?.textLabel.text = phrase.utterance
-
+            cell?.accessibilityIdentifier = phrase.identifier
         case .addNewPhrase:
             let cell = cell as? AddPhraseCollectionViewCell
             cell?.accessibilityIdentifier = "add_new_phrase"
