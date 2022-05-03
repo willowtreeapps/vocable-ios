@@ -324,11 +324,13 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         if MFMailComposeViewController.canSendMail() {
             presentLeavingHeadTrackableDomainAlert(withConfirmation: presentEmail)
         } else {
+            let model = UIDevice.current.localizedModel
             let alertString = NSLocalizedString("settings.alert.no_email_configured.title",
                                                 comment: "No email account configured error alert title")
+            let formattedAlertString = String(format: alertString, model)
             let dismissalTitle = NSLocalizedString("settings.alert.no_email_configured.button.dismiss.title",
                                                    comment: "No email account configured error alert dismiss button title")
-            let alertViewController = GazeableAlertViewController(alertTitle: alertString)
+            let alertViewController = GazeableAlertViewController(alertTitle: formattedAlertString)
             alertViewController.addAction(GazeableAlertAction(title: dismissalTitle))
             present(alertViewController, animated: true)
             return
