@@ -58,7 +58,7 @@
 "settings.alert.no_email_configured.button.dismiss.title" = "OK";
 
 /* No email account configured error alert title */
-"settings.alert.no_email_configured.title" = "Please add an email account to the %1$@ OS Mail app.";
+"settings.alert.no_email_configured.title" = "Please sign into an account using the %1$@ Mail app.";
 
 /* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.body" = "You're about to leave the Vocable app. You may lose head tracking control.";
@@ -112,7 +112,7 @@
 
 "category_editor.toast.successfully_saved.title" = "Changes Saved";
 
-"text_editor.alert.cancel_editing_confirmation.title" = "If you exit now, your changes will not be saved.";
+"text_editor.alert.cancel_editing_confirmation.title" = "If you close without saving, your changes will be lost.";
 
 "text_editor.alert.category_name_exists.title" = "This category name already exists. Would you like to create a duplicate?";
 
@@ -124,13 +124,13 @@
 
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
 
-"category_editor.alert.cancel_editing_confirmation.title" = "If you close this without saving, your custom category will be deleted.";
+"category_editor.alert.cancel_editing_confirmation.title" = "If you close without saving, your changes will be lost.";
 
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Confirm";
 
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Cancel";
 
-"phrase_editor.alert.cancel_editing_confirmation.title" = "If you exit now, your changes will not be saved.";
+"phrase_editor.alert.cancel_editing_confirmation.title" = "If you close without saving, your changes will be lost.";
 
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
 
@@ -244,10 +244,10 @@
 "listening_mode.empty_state.speech_permission_undetermined.message" = "Vocable needs to request speech permissions to enable Listening Mode. This will present an iOS permission dialog that Vocable's head tracking cannot interract with.";
 
 /* Listening mode empty state message for when listening has began but no responses have been displayed yet */
-"listening_mode.empty_state.actively_listening.message" = "You are in listening mode. When someone asks a question out loud, Vocable will offer quick response options.";
+"listening_mode.empty_state.actively_listening.message" = "When someone asks a question out loud, Vocable will offer quick response options.";
 
 /* Listen mode empty state message for when no responses could be generated */
-"listening_mode.empty_state.free_response.message" = "Not sure what to suggest. Please repeat or use the Vocable keyboard or the phrases in categories to respond.";
+"listening_mode.empty_state.free_response.message" = "Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.";
 
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "Please try again later";
