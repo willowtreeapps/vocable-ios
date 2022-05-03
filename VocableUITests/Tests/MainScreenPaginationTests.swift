@@ -61,7 +61,7 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         VTAssertPaginationEquals(1, of: 2)
     }
     
-    /* TODO: There is an existing bug(s) that cause this test to fail with
+    /* TODO: There is an existing bug(s) that causes this test to fail with
      animations turned off. We will re-enable this test once they're fixed.
      https://github.com/willowtreeapps/vocable-ios/issues/597
      https://github.com/willowtreeapps/vocable-ios/issues/594

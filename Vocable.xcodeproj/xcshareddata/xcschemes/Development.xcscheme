@@ -70,6 +70,9 @@
                   Identifier = "CustomPhraseTests/testPagination()">
                </Test>
                <Test
+                  Identifier = "MainScreenPaginationTests/testCanScrollPagesWithPaginationArrows()">
+               </Test>
+               <Test
                   Identifier = "MainScreenTests/testCustonCategoryPagination()">
                </Test>
                <Test
@@ -102,10 +105,6 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "resetAppDataOnLaunch"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "disableAnimations"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
