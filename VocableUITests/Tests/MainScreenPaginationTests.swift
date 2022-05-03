@@ -97,8 +97,6 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
     }
     
     func testPaginationAdjustsToDeviceOrientation() {
-        let categoryTitleCell = CategoryTitleCellIdentifier(customCategoryIdentifier!)
-
         // Add enough phrases to ensure that rotating the device will add a page; 7 phrases
         for phrase in listOfPhrases.startIndex..<7 {
             CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
@@ -106,8 +104,8 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         
         // Return to the Main Screen and navigate to the test category
         CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
-        MainScreen.locateAndSelectDestinationCategory(categoryTitleCell.categoryIdentifier)
-        XCTAssertEqual(MainScreen.selectedCategoryCell.identifier, categoryTitleCell.identifier)
+        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
+        XCTAssertEqual(MainScreen.selectedCategoryCell.identifier, customCategoryIdentifier?.identifier)
         
         // Verify we're on the first page
         VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)

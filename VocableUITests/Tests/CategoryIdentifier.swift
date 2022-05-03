@@ -50,19 +50,19 @@ struct CategoryTitleCellIdentifier {
 
 struct PresetCategories {
     
-    var list: [CategoryTitleCellIdentifier]
+    var list: [CategoryIdentifier]
     
     init() {
         self.list = [
-            CategoryTitleCellIdentifier(CategoryIdentifier.general),
-            CategoryTitleCellIdentifier(CategoryIdentifier.basicNeeds),
-            CategoryTitleCellIdentifier(CategoryIdentifier.personalCare),
-            CategoryTitleCellIdentifier(CategoryIdentifier.conversation),
-            CategoryTitleCellIdentifier(CategoryIdentifier.environment),
-            CategoryTitleCellIdentifier(CategoryIdentifier.keyPad),
-            CategoryTitleCellIdentifier(CategoryIdentifier.mySayings),
-            CategoryTitleCellIdentifier(CategoryIdentifier.recents),
-            CategoryTitleCellIdentifier(CategoryIdentifier.listen)
+            CategoryIdentifier.general,
+            CategoryIdentifier.basicNeeds,
+            CategoryIdentifier.personalCare,
+            CategoryIdentifier.conversation,
+            CategoryIdentifier.environment,
+            CategoryIdentifier.keyPad,
+            CategoryIdentifier.mySayings,
+            CategoryIdentifier.recents,
+            CategoryIdentifier.listen
         ]
     }
     
