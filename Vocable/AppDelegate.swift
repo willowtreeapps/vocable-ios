@@ -54,6 +54,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        if LaunchArguments.contains(.disableAnimations) {
+            print("-disableAnimations detected")
+            UIView.setAnimationsEnabled(false)
+        }
+
         // Ensure that the persistent store has the current
         // default presets before presenting UI
         performPersistenceMigrationForCurrentLanguage()

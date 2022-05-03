@@ -13,6 +13,7 @@ public struct LaunchArguments {
     public enum Key: String {
         case resetAppDataOnLaunch
         case enableListeningMode
+        case disableAnimations
     }
 
     static func contains(_ key: Key) -> Bool {

@@ -111,7 +111,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         }
 
         if pageCountBefore < 2, pageCountAfter > 1 {
-            collectionView.scrollToMiddleSection(animated: true)
+            collectionView.scrollToMiddleSection(animated: UIView.areAnimationsEnabled)
         }
     }
 
