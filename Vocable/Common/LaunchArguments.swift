@@ -8,21 +8,24 @@
 
 import Foundation
 
-public enum LaunchArguments {
+public struct LaunchArguments {
 
     public enum Key: String {
         case resetAppDataOnLaunch
         case enableListeningMode
+        case disableAnimations
     }
 
     static func contains(_ key: Key) -> Bool {
-        CommandLine.customArguments.contains(key)
+        CommandLine
+            .arguments
+            .compactMap(LaunchArguments.Key.init)
+            .contains(key)
     }
-}
 
-fileprivate extension CommandLine {
+    let keys: [Key]
 
-    static var customArguments: [LaunchArguments.Key] {
-        arguments.compactMap(LaunchArguments.Key.init)
+    private init() {
+        keys = []
     }
 }

@@ -107,7 +107,8 @@ class CarouselGridCollectionView: UICollectionView {
             needsInitialScrollToMiddle = false
         }
         if let offset = layout.scrollOffsetForPageWithOffsetFromCurrentPage(offset: 1) {
-            scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: true)
+            let shouldAnimate = UIView.areAnimationsEnabled
+            scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: shouldAnimate)
         }
     }
 
@@ -117,7 +118,8 @@ class CarouselGridCollectionView: UICollectionView {
             needsInitialScrollToMiddle = false
         }
         if let offset = layout.scrollOffsetForPageWithOffsetFromCurrentPage(offset: -1) {
-            scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: true)
+            let shouldAnimate = UIView.areAnimationsEnabled
+            scrollRectToVisible(CGRect(origin: offset, size: bounds.size), animated: shouldAnimate)
         }
     }
 

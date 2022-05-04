@@ -69,4 +69,20 @@ class BaseScreen {
         return matchingText
     }
     
+    static func phraseDoesExist(_ phrase: String) -> Bool {
+        var flag = false
+        let predicate = NSPredicate(format: "label MATCHES %@", phrase)
+        
+        // Loop through each custom category page to find our phrase
+        for _ in 1...totalPageCount {
+            // We make sure to wait, accounting for adding/deleting a phrase
+            if XCUIApplication().cells.staticTexts.containing(predicate).element.waitForExistence(timeout: 0.5) {
+                flag = true
+                break
+            } else {
+                paginationRightButton.tap()
+            }
+        }
+        return flag
+    }
 }

@@ -18,8 +18,8 @@ final class SelectionModeViewController: VocableCollectionViewController {
         case headTrackingUnsupportedFooter
     }
 
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SelectionModeItem> = .init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
-        return self.collectionView(collectionView, cellForItemAt: indexPath, item: item)
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, SelectionModeItem> = .init(collectionView: collectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell? in
+        return self?.collectionView(collectionView, cellForItemAt: indexPath, item: item)
     }
 
     override func viewDidLoad() {

@@ -10,10 +10,15 @@ import XCTest
 
 class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
     
+    /* TODO: There is an existing bug(s) that causes this test to fail with
+     animations turned off. We will re-enable this test once they're fixed.
+     https://github.com/willowtreeapps/vocable-ios/issues/597
+     https://github.com/willowtreeapps/vocable-ios/issues/594
+     */
     func testCanNavigatePages() {
         // Add enough phrases to have 2 pages.
-        for phrase in listOfPhrases.startIndex..<5 {
-            CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
+        listOfPhrases.forEach { phrase in
+            CustomCategoriesScreen.addPhrase(phrase)
         }
         
         // Verify that the user is on the first page and the next page buttons are enabled.
@@ -35,8 +40,8 @@ class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
     }
     
     func testPagesAdjustToNewPhrases() {
-        // Add enough phrases (4) to fill one page.
-        for phrase in listOfPhrases.startIndex..<4 {
+        // Add enough phrases (7) to fill one page.
+        for phrase in listOfPhrases.startIndex..<8 {
             CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
         }
         

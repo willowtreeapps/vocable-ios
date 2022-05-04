@@ -58,6 +58,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "CategoryPhrasesPaginationTests/testCanNavigatePages()">
+               </Test>
+               <Test
                   Identifier = "CustomCategoriesTest">
                </Test>
                <Test
@@ -65,6 +68,9 @@
                </Test>
                <Test
                   Identifier = "CustomPhraseTests/testPagination()">
+               </Test>
+               <Test
+                  Identifier = "MainScreenPaginationTests/testCanScrollPagesWithPaginationArrows()">
                </Test>
                <Test
                   Identifier = "MainScreenTests/testCustonCategoryPagination()">
@@ -99,6 +105,10 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "resetAppDataOnLaunch"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "enableListeningMode"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>

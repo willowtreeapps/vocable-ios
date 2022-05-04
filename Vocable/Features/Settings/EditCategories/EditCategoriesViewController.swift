@@ -27,13 +27,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
 
     private lazy var fetchRequest: NSFetchRequest<Category> = {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.predicate = {
-            var predicate = !Predicate(\Category.isUserRemoved)
-            if !AppConfig.listeningModeFeatureFlagEnabled {
-                predicate &= !Predicate(\Category.identifier, equalTo: Category.Identifier.listeningMode)
-            }
-            return predicate
-        }()
+        request.predicate = Category.visibleCategoriesPredicate()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.isHidden, ascending: true),
         NSSortDescriptor(keyPath: \Category.ordinal, ascending: true),
         NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)]
@@ -187,7 +181,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         }
     }
 
-    private func mappedIndexPathForCategory(withObjectID objectID: NSManagedObjectID) -> IndexPath? {
+    private func indexPathForCategory(withObjectID objectID: NSManagedObjectID) -> IndexPath? {
         guard let category = fetchResultsController.managedObjectContext.object(with: objectID) as? Category else {
             return nil
         }
@@ -197,12 +191,12 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
             return nil
         }
 
-        return diffableDataSource.indexPath(fromMappedIndexPath: standardIndexPath)
+        return diffableDataSource.indexPath(fromVirtual: standardIndexPath)
     }
 
     private func handleMoveUpForCategory(withObjectID objectID: NSManagedObjectID) {
 
-        guard let fromIndexPath = mappedIndexPathForCategory(withObjectID: objectID) else {
+        guard let fromIndexPath = indexPathForCategory(withObjectID: objectID) else {
             return
         }
         guard let toIndexPath = collectionView.indexPath(before: fromIndexPath) else {
@@ -217,7 +211,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
 
     private func handleMoveDownForCategory(withObjectID objectID: NSManagedObjectID) {
 
-        guard let fromIndexPath = mappedIndexPathForCategory(withObjectID: objectID) else {
+        guard let fromIndexPath = indexPathForCategory(withObjectID: objectID) else {
             return
         }
         guard let toIndexPath = collectionView.indexPath(after: fromIndexPath) else {
@@ -236,7 +230,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         }
 
         let destination: UIViewController
-        if category == Category.listeningModeCategory() {
+        if category.identifier == Category.Identifier.listeningMode.rawValue {
             destination = ListeningModeViewController()
         } else {
             destination = EditCategoryDetailViewController(category)

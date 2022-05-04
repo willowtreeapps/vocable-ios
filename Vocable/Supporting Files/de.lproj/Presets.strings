@@ -208,3 +208,6 @@
 /* (No Comment) */
 "preset_user_keypad" = "123";
 
+/* (No Comment) */
+"preset_user_recents" = "Anwendungsverlauf";
+

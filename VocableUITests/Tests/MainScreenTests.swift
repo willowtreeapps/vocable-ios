@@ -11,10 +11,10 @@ import XCTest
 
 class MainScreenTests: BaseTest {
     
-    private let listOfCategoriesToSkip = [CategoryTitleCellIdentifier(CategoryIdentifier.keyPad).identifier,
-                                          CategoryTitleCellIdentifier(CategoryIdentifier.mySayings).identifier,
-                                          CategoryTitleCellIdentifier(CategoryIdentifier.listen).identifier,
-                                          CategoryTitleCellIdentifier(CategoryIdentifier.recents).identifier]
+    private let listOfCategoriesToSkip = [CategoryIdentifier.keyPad.identifier,
+                                          CategoryIdentifier.mySayings.identifier,
+                                          CategoryIdentifier.listen.identifier,
+                                          CategoryIdentifier.recents.identifier]
     
      // For each preset category (the first 5 categories), tap() the top left
      // phrase, then verify that all selected phrases appear in "Recents"
@@ -29,7 +29,7 @@ class MainScreenTests: BaseTest {
             if listOfCategoriesToSkip.contains(categoryName.identifier) {
                 continue;
             }
-            MainScreen.locateAndSelectDestinationCategory(categoryName.categoryIdentifier)
+            MainScreen.locateAndSelectDestinationCategory(categoryName)
             firstPhrase = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
             XCUIApplication().collectionViews.staticTexts[firstPhrase].tap()
             listOfSelectedPhrases.append(firstPhrase)
@@ -43,7 +43,7 @@ class MainScreenTests: BaseTest {
     
     func testDefaultCategoriesExist() {
         for categoryName in PresetCategories().list {
-            MainScreen.locateAndSelectDestinationCategory(categoryName.categoryIdentifier)
+            MainScreen.locateAndSelectDestinationCategory(categoryName)
             XCTAssertEqual(MainScreen.selectedCategoryCell.identifier, categoryName.identifier, "Preset category with ID '\(categoryName.identifier)' was not found")
         }
     }
@@ -64,7 +64,7 @@ class MainScreenTests: BaseTest {
             if listOfCategoriesToSkip.contains(category.identifier) {
                 continue;
             }
-            MainScreen.locateAndSelectDestinationCategory(category.categoryIdentifier)
+            MainScreen.locateAndSelectDestinationCategory(category)
             _ = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).waitForExistence(timeout: 0.5) // Wait for scrolling to stop
             let firstPhraseInCategory = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
             XCUIApplication().collectionViews.staticTexts[firstPhraseInCategory].tap()
@@ -81,7 +81,7 @@ class MainScreenTests: BaseTest {
     
     func testDisablingCategory() {
         let hiddenCategoryName = "General"
-        let hiddenCategoryIdentifier = CategoryTitleCellIdentifier(CategoryIdentifier.general).identifier
+        let hiddenCategoryIdentifier = CategoryIdentifier.general.identifier
         
         SettingsScreen.navigateToSettingsCategoryScreen()
         XCTAssertTrue(SettingsScreen.locateCategoryCell(hiddenCategoryName).element.exists)
@@ -98,7 +98,7 @@ class MainScreenTests: BaseTest {
         // Confirm that the category is no longer accessible.
         for category in PresetCategories().list {
             // If we come across the category we expect to be hidden, fail the test. Otherwise the test will pass.
-            MainScreen.locateAndSelectDestinationCategory(category.categoryIdentifier)
+            MainScreen.locateAndSelectDestinationCategory(category)
             if MainScreen.selectedCategoryCell.identifier == hiddenCategoryIdentifier {
                 XCTFail("The category with identifier, '\(hiddenCategoryIdentifier)', was not hidden as expected.")
             }

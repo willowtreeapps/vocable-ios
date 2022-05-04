@@ -18,18 +18,17 @@ class MainScreen: BaseScreen {
     static let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
     static let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]
     static let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
+    static let addPhraseLabel = XCUIApplication().cells["add_new_phrase"]
     
-    // Find the current selected category and return it as a CategoryTitleCellIdentifier
-    static var selectedCategoryCell: CategoryTitleCellIdentifier {
-        let identifierPrefix = CategoryTitleCellIdentifier.categoryTitleCellPrefix
-        let identifierPredicate = NSPredicate(format: "identifier CONTAINS %@", identifierPrefix)
+    // Find the current selected category and return it as a CategoryIdentifier
+    static var selectedCategoryCell: CategoryIdentifier {
         let isSelectedPredicate = NSPredicate(format: "isSelected == true")
         
         // Build our query that first finds all category title cells, then finds among those the one that is selected
-        let query = XCUIApplication().cells.containing(identifierPredicate).containing(isSelectedPredicate)
+        let query = XCUIApplication().cells.containing(isSelectedPredicate)
         
         // Return the selected category's full identifier
-        return CategoryTitleCellIdentifier(query.element.identifier)!
+        return CategoryIdentifier(query.element.identifier)
     }
     
     static func isTextDisplayed(_ text: String) -> Bool {
@@ -40,8 +39,7 @@ class MainScreen: BaseScreen {
     ///
     ///  Categories are interacted with via their identifier, which we represent with the CategoryIdentifier type struct.
     static func locateAndSelectDestinationCategory(_ destinationCategory: CategoryIdentifier) {
-        let titleCellIdentifier = CategoryTitleCellIdentifier(destinationCategory).identifier
-        let destinationCell = app.cells[titleCellIdentifier]
+        let destinationCell = app.cells[destinationCategory.identifier]
         let selectedCell = app.cells[selectedCategoryCell.identifier]
         
         repeat {

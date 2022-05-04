@@ -12,6 +12,10 @@ import Algorithms
 
 extension Category {
 
+    enum FetchError: Error {
+        case presetCategoryNotFound(String)
+    }
+
     // Category identifiers that are reserved for special
     // cases and *must* match the preset dataset
     enum Identifier: String {
@@ -62,9 +66,9 @@ extension Category {
         return true
     }
 
-    static func fetch(_ identifier: Identifier, in context: NSManagedObjectContext) -> Category {
+    static func fetch(_ identifier: Identifier, in context: NSManagedObjectContext) throws -> Category {
         guard let category = Category.fetchObject(in: context, matching: identifier.rawValue) else {
-            preconditionFailure("debug.assertion.user_favorites_category_not_found")
+            throw FetchError.presetCategoryNotFound(identifier.rawValue)
         }
         return category
     }
@@ -79,11 +83,26 @@ extension Category {
         category.identifier = newIdentifier
         return category
     }
+
+    static func visibleCategoriesPredicate(includeUserHidden: Bool = true) -> NSPredicate {
+        var predicate = !Predicate(\Category.isUserRemoved)
+        if !includeUserHidden {
+            predicate &= !Predicate(\Category.isHidden)
+        }
+        if !AppConfig.listeningMode.isEnabled {
+            predicate &= !Predicate(\Category.identifier, equalTo: Category.Identifier.listeningMode)
+        }
+        return predicate
+    }
     
     static func updateAllOrdinalValues(in context: NSManagedObjectContext) throws {
 
+        if let listeningModeCategory = try? Category.fetch(.listeningMode, in: context) {
+            listeningModeCategory.isHidden = !AppConfig.listeningMode.isEnabled
+        }
+        
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-        request.predicate = !Predicate(\Category.isUserRemoved)
+        request.predicate = visibleCategoriesPredicate()
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \Category.ordinal, ascending: true),
             NSSortDescriptor(keyPath: \Category.creationDate, ascending: true)

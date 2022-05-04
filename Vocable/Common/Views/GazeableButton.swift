@@ -277,10 +277,12 @@ class GazeableButton: UIButton {
         
         let timeElapsed = Date().timeIntervalSince(beganDate)
         if timeElapsed >= AppConfig.selectionHoldDuration {
-            isSelected = true
-            sendActions(for: .primaryActionTriggered)
+            if isEnabled {
+                isSelected = true
+                sendActions(for: .primaryActionTriggered)
+                (self.window as? HeadGazeWindow)?.animateCursorSelection()
+            }
             gazeBeganDate = nil
-            (self.window as? HeadGazeWindow)?.animateCursorSelection()
         }
     }
 
