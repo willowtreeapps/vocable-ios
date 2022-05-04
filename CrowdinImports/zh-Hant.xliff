@@ -37,11 +37,6 @@
         <target state="final">確認</target>
         <note/>
       </trans-unit>
-      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>If you close this without saving your custom category will be deleted.</source>
-        <target state="final">如果你關閉類別，就會清除了。</target>
-        <note/>
-      </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">取消</target>

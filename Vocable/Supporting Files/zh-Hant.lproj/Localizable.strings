@@ -7,9 +7,6 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "確認";
 
-/* (No Comment) */
-"category_editor.alert.cancel_editing_confirmation.title" = "如果你關閉類別，就會清除了。";
-
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "取消";
 
