@@ -58,10 +58,10 @@
 "settings.alert.no_email_configured.button.dismiss.title" = "OK";
 
 /* No email account configured error alert title */
-"settings.alert.no_email_configured.title" = "Email not configured.";
+"settings.alert.no_email_configured.title" = "Please sign into an account with Mail for %1$@.";
 
 /* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
-"settings.alert.surrender_gaze_confirmation.body" = "You're about to be taken outside of the Vocable app. You may lose head tracking control.";
+"settings.alert.surrender_gaze_confirmation.body" = "You're about to leave the Vocable app. You may lose head tracking control.";
 
 /* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.cancel.title" = "Cancel";
@@ -127,6 +127,7 @@
 
 /* Category close confirmation text.  This text appears in an alert when there are edits made to the Category title that have not been saved. */
 "text_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
+"text_editor.alert.cancel_editing_confirmation.title" = "If you close without saving, your changes will be lost.";
 
 /* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title that have not been saved.  Pressing the button will allow editing the category title. */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
@@ -143,13 +144,13 @@
 /* Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
 "text_editor.alert.category_name_exists.create.button" = "Create Duplicate";
 
-"category_editor.alert.cancel_editing_confirmation.title" = "If you close this without saving your custom category will be deleted.";
+"category_editor.alert.cancel_editing_confirmation.title" = "If you close without saving, your changes will be lost.";
 
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Confirm";
 
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Cancel";
 
-"phrase_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
+"phrase_editor.alert.cancel_editing_confirmation.title" = "If you close without saving, your changes will be lost.";
 
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
 
@@ -194,7 +195,7 @@
 
 /* Reset app settings success alert */
 
-"settings.alert.reset_app_settings_success.body" = "Vocable has been reset successfully";
+"settings.alert.reset_app_settings_success.body" = "Vocable has been reset successfully.";
 
 "settings.alert.reset_app_settings_success.button.ok" = "OK";
 
@@ -263,10 +264,10 @@
 "listening_mode.empty_state.speech_permission_undetermined.message" = "Vocable needs to request speech permissions to enable Listening Mode. This will present an iOS permission dialog that Vocable's head tracking cannot interract with.";
 
 /* Listening mode empty state message for when listening has began but no responses have been displayed yet */
-"listening_mode.empty_state.actively_listening.message" = "When in listening mode, if someone starts speaking, Vocable will try to show quick responses.";
+"listening_mode.empty_state.actively_listening.message" = "When someone asks a question out loud, Vocable will offer quick response options.";
 
 /* Listen mode empty state message for when no responses could be generated */
-"listening_mode.empty_state.free_response.message" = "Not sure what to suggest. Please repeat or use the rest of Vocable to respond.";
+"listening_mode.empty_state.free_response.message" = "Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.";
 
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "Please try again later";

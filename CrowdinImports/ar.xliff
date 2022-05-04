@@ -15,11 +15,6 @@
         <target state="translated">Vocable</target>
         <note>Bundle name</note>
       </trans-unit>
-      <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
-        <source>Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
-        <target state="translated">Vocable يستخدم تعقب الرأس بتقنية ال ARKit لتحديد حركت رأس المستخدم كما يرى في الكمرات الأماميه حقيقية العمق للأجهزة لهدف التحكم من مأشر الشاشه، للسماح من المستخدمين ذو القدره الحركية المحدوده من إستخدام التطبيق. موقع الرأس و تدويره بيانات تستخدم مباشرة في التحم بمأشر الشاشة. بيانات تعقب الرأس لا تخزن و لا يتم إرسالها بأي شكل. Vocable يحتاج الإذن لإستخدام الكاميرا لهذه الأسباب.</target>
-        <note>Camera usage description</note>
-      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="ar" datatype="plaintext">
@@ -40,11 +35,6 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
         <source>Confirm</source>
         <target state="translated">تأكيد</target>
-        <note/>
-      </trans-unit>
-      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>If you close this without saving your custom category will be deleted.</source>
-        <target state="translated">إذا أغلقت هذا دون حفظ التصنيف المخصص الخاص بك سيتم حذفه.</target>
         <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
@@ -143,16 +133,6 @@
         <source>OK</source>
         <target state="translated">حسنا</target>
         <note>No email account configured error alert dismiss button title</note>
-      </trans-unit>
-      <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve">
-        <source>Email not configured.</source>
-        <target state="translated">لم يتم تكوين البريد الإلكتروني.</target>
-        <note>No email account configured error alert title</note>
-      </trans-unit>
-      <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
-        <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
-        <target state="translated">أنت على وشك إخراجك من التطبيق القابل للتقييم. قد تفقد السيطرة على تتبع الرأس.</target>
-        <note>body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
