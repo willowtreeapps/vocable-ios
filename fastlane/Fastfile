@@ -99,7 +99,7 @@ platform :ios do
 
   desc "Integrate latest XLIFF files with project"
   lane :xliffimport do
-    sh "git pull --no-commit -q origin develop"
+    sh "git pull --no-commit -q origin develop --no-rebase"
     Dir.glob('./../CrowdinImports/*.xliff') do |xliff|
       sh "xcodebuild -importLocalizations -localizationPath #{xliff} -project ./../Vocable.xcodeproj"
     end
