@@ -15,11 +15,6 @@
         <target state="final">Vocable</target>
         <note>Bundle name</note>
       </trans-unit>
-      <trans-unit id="NSCameraUsageDescription" xml:space="preserve" approved="yes">
-        <source>Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
-        <target state="final">Vocable bruger ARKit-hovedsporing til at registrere brugerens ansigt, som det ses i enhedens TrueDepth-frontkamera til det formål at kontrollere en markør på skærmen, så brugere med begrænset mobilitet kan interagere med appen. Hovedorientering og positionsdata bruges udtrykkeligt til styring af markøren på skærmen. Disse hovedsporingsdata gemmes eller transmitteres ikke på nogen måde. Vocable har brug for tilladelse til at bruge kameraet til dette formål.</target>
-        <note>Camera usage description</note>
-      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="da" datatype="plaintext">
@@ -50,11 +45,6 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
         <target state="final">Bekræft</target>
-        <note/>
-      </trans-unit>
-      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>If you close this without saving your custom category will be deleted.</source>
-        <target state="final">Hvis du lukker dette uden at gemme, vil din brugerdefinerede kategori blive slettet.</target>
         <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
@@ -167,11 +157,6 @@
         <target state="final">Slet</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
-      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Going back before saving will clear any edits made.</source>
-        <target state="final">Hvis du forlader uden at gemme vil dine ændringer blive slettet.</target>
-        <note>Exit edit sayings alert title</note>
-      </trans-unit>
       <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">Annuller</target>
@@ -229,11 +214,6 @@
         <target state="final">OK</target>
         <note>No email account configured error alert dismiss button title</note>
       </trans-unit>
-      <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve" approved="yes">
-        <source>Email not configured.</source>
-        <target state="final">E-mail er ikke konfigureret.</target>
-        <note>No email account configured error alert title</note>
-      </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve" approved="yes">
         <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
         <target state="final">Er du sikker på, at du vil nulstille Vocable til standardindstillinger? Denne handling kan ikke fortrydes.</target>
@@ -259,20 +239,10 @@
         <target state="final">OK</target>
         <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset</note>
       </trans-unit>
-      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve" approved="yes">
-        <source>Vocable has been reset successfully</source>
-        <target state="final">Vocable er blevet nulstillet</target>
-        <note>Reset app settings success alert</note>
-      </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve" approved="yes">
         <source>OK</source>
         <target state="final">OK</target>
         <note>Button dismissing the alert informing the user that Vocable's application settings were successfully reset</note>
-      </trans-unit>
-      <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve" approved="yes">
-        <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
-        <target state="final">Du er ved at forlade Vocable. Du vil måske miste hovedsporingskontrol.</target>
-        <note>body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -352,11 +322,6 @@ Hovedsporing understøttes på alle enheder med et %4$@ -kamera og på de fleste
         <source>Discard</source>
         <target state="final">Slet</target>
         <note>Discard changes alert action title</note>
-      </trans-unit>
-      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>Going back before saving will clear any edits made.</source>
-        <target state="final">Hvis du forlader uden at gemme vil dine ændringer blive slettet.</target>
-        <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve" approved="yes">
         <source>Cancel</source>
