@@ -102,27 +102,46 @@
 /* Settings screen header title */
 "settings.header.title" = "Settings";
 
+
+
+// MARK: Category specific Settings
+
+/* Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name. */
 "category_editor.detail.button.rename_category.title" = "Rename Category";
 
+/* Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list. */
 "category_editor.detail.button.show_category.title" = "Show Category";
 
+/* Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited. */
 "category_editor.detail.button.edit_phrases.title" = "Edit Phrases";
 
+/* Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation. */
 "category_editor.detail.button.remove_category.title" = "Remove Category";
 
+
+
+// MARK: Category and Phrases editing alerts
+
+/* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "Changes Saved";
 
+/* Category close confirmation text.  This text appears in an alert when there are edits made to the Category title that have not been saved. */
 "text_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
 
-"text_editor.alert.category_name_exists.title" = "This category name already exists. Would you like to create a duplicate?";
-
-"text_editor.alert.category_name_exists.cancel.button" = "Cancel";
-
-"text_editor.alert.category_name_exists.create.button" = "Create Duplicate";
-
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title that have not been saved.  Pressing the button will allow editing the category title. */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
 
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title that have not been saved.  Pressing the button will not save any changes and close the keyboard view. */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
+
+/* Duplicate Alert text.  This text appears in an alert when a category is created with the same title as an existing category. */
+"text_editor.alert.category_name_exists.title" = "This category name already exists. Would you like to create a duplicate?";
+
+/* Duplicate Alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.  Pressing the button will allow continuing to edit category title */
+"text_editor.alert.category_name_exists.cancel.button" = "Cancel";
+
+/* Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
+"text_editor.alert.category_name_exists.create.button" = "Create Duplicate";
 
 "category_editor.alert.cancel_editing_confirmation.title" = "If you close this without saving your custom category will be deleted.";
 
