@@ -16,18 +16,18 @@
         <note>Bundle name</note>
       </trans-unit>
       <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
-        <source>Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
-        <target>Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</target>
+        <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
+        <target>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</target>
         <note>Camera usage description</note>
       </trans-unit>
       <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
-        <source>Vocable uses the microphone only when voice responses are enabled. Vocable does not store or transmit audio data beyond transcribing audio into words.</source>
-        <target>Vocable uses the microphone only when voice responses are enabled. Vocable does not store or transmit audio data beyond transcribing audio into words.</target>
+        <source>Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target>Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</target>
         <note>Privacy - Microphone Usage Description</note>
       </trans-unit>
       <trans-unit id="NSSpeechRecognitionUsageDescription" xml:space="preserve">
-        <source>Vocable uses speech recognition to convert audio data into words when voice responses are enabled. Transcribed speech is not stored or transmitted.</source>
-        <target>Vocable uses speech recognition to convert audio data into words when voice responses are enabled. Transcribed speech is not stored or transmitted.</target>
+        <source>When listening mode is enabled, Vocable uses speech recognition to convert audio data into text. Transcribed speech is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target>When listening mode is enabled, Vocable uses speech recognition to convert audio data into text. Transcribed speech is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</target>
         <note>Privacy - Speech Recognition Usage Description</note>
       </trans-unit>
     </body>
@@ -73,8 +73,8 @@
         <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>If you close this without saving your custom category will be deleted.</source>
-        <target>If you close this without saving your custom category will be deleted.</target>
+        <source>If you close without saving, your changes will be lost.</source>
+        <target>If you close without saving, your changes will be lost.</target>
         <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
@@ -173,8 +173,8 @@
         <note>Warning message presented to the user when the head tracking system</note>
       </trans-unit>
       <trans-unit id="listening_mode.empty_state.actively_listening.message" xml:space="preserve">
-        <source>When in listening mode, if someone starts speaking, Vocable will try to show quick responses.</source>
-        <target>When in listening mode, if someone starts speaking, Vocable will try to show quick responses.</target>
+        <source>When someone asks a question out loud, Vocable will offer quick response options.</source>
+        <target>When someone asks a question out loud, Vocable will offer quick response options.</target>
         <note>Listening mode empty state message for when listening has began but no responses have been displayed yet</note>
       </trans-unit>
       <trans-unit id="listening_mode.empty_state.actively_listening.title" xml:space="preserve">
@@ -183,8 +183,8 @@
         <note>Listening mode empty state title for when listening has began but no responses have been displayed yet</note>
       </trans-unit>
       <trans-unit id="listening_mode.empty_state.free_response.message" xml:space="preserve">
-        <source>Not sure what to suggest. Please repeat or use the rest of Vocable to respond.</source>
-        <target>Not sure what to suggest. Please repeat or use the rest of Vocable to respond.</target>
+        <source>Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.</source>
+        <target>Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.</target>
         <note>Listen mode empty state message for when no responses could be generated</note>
       </trans-unit>
       <trans-unit id="listening_mode.empty_state.free_response.title" xml:space="preserve">
@@ -291,8 +291,8 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>Going back before saving will clear any edits made.</source>
-        <target>Going back before saving will clear any edits made.</target>
+        <source>If you close without saving, your changes will be lost.</source>
+        <target>If you close without saving, your changes will be lost.</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve">
@@ -353,8 +353,8 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
         <note>No email account configured error alert dismiss button title</note>
       </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve">
-        <source>Email not configured.</source>
-        <target>Email not configured.</target>
+        <source>Please sign into an account with Mail for %1$@.</source>
+        <target>Please sign into an account with Mail for %1$@.</target>
         <note>No email account configured error alert title</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve">
@@ -383,8 +383,8 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
         <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
-        <source>Vocable has been reset successfully</source>
-        <target>Vocable has been reset successfully</target>
+        <source>Vocable has been reset successfully.</source>
+        <target>Vocable has been reset successfully.</target>
         <note>Reset app settings success alert</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
@@ -393,8 +393,8 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
         <note>Button dismissing the alert informing the user that Vocable's application settings were successfully reset</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
-        <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
-        <target>You're about to be taken outside of the Vocable app. You may lose head tracking control.</target>
+        <source>You're about to leave the Vocable app. You may lose head tracking control.</source>
+        <target>You're about to leave the Vocable app. You may lose head tracking control.</target>
         <note>body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve">
@@ -507,8 +507,8 @@ Head tracking is supported on all devices with a %4$@ camera, and on most device
         <note>Discard changes alert action title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>Going back before saving will clear any edits made.</source>
-        <target>Going back before saving will clear any edits made.</target>
+        <source>If you close without saving, your changes will be lost.</source>
+        <target>If you close without saving, your changes will be lost.</target>
         <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve">
