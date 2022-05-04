@@ -7,9 +7,6 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "تأكيد";
 
-/* (No Comment) */
-"category_editor.alert.cancel_editing_confirmation.title" = "إذا أغلقت هذا دون حفظ التصنيف المخصص الخاص بك سيتم حذفه.";
-
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "إلغاء";
 
@@ -68,12 +65,6 @@
 
 /* No email account configured error alert dismiss button title */
 "settings.alert.no_email_configured.button.dismiss.title" = "حسنا";
-
-/* No email account configured error alert title */
-"settings.alert.no_email_configured.title" = "لم يتم تكوين البريد الإلكتروني.";
-
-/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
-"settings.alert.surrender_gaze_confirmation.body" = "أنت على وشك إخراجك من التطبيق القابل للتقييم. قد تفقد السيطرة على تتبع الرأس.";
 
 /* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.cancel.title" = "إلغاء";

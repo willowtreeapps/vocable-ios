@@ -7,9 +7,6 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Confermare";
 
-/* (No Comment) */
-"category_editor.alert.cancel_editing_confirmation.title" = "Se chiudi questo senza salvare la tua categoria personalizzata verrà eliminata.";
-
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "Annulla";
 
@@ -82,9 +79,6 @@
 /* Discard changes alert action title */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Scartare";
 
-/* Exit edit sayings alert title */
-"phrase_editor.alert.cancel_editing_confirmation.title" = "Tornare indietro prima di salvare cancellerà tutte le modifiche apportate.";
-
 /* Phrase already exists alert cancel button */
 "phrase_editor.alert.phrase_name_exists.cancel.button" = "Annulla";
 
@@ -120,9 +114,6 @@
 /* No email account configured error alert dismiss button title */
 "settings.alert.no_email_configured.button.dismiss.title" = "OK";
 
-/* No email account configured error alert title */
-"settings.alert.no_email_configured.title" = "Email non configurata.";
-
 /* Reset app settings confirmation prompt */
 "settings.alert.reset_app_settings_confirmation.body" = "Sei sicuro di voler reimpostare Vocable alle impostazioni predefinite? Questa azione non può essere annullata.";
 
@@ -135,14 +126,8 @@
 /* Button dismissing the alert informing the user that Vocable's application settings failed to reset */
 "settings.alert.reset_app_settings_failure.button.ok" = "OK";
 
-/* Reset app settings success alert */
-"settings.alert.reset_app_settings_success.body" = "Vocable è stato resettato con successo";
-
 /* Button dismissing the alert informing the user that Vocable's application settings were successfully reset */
 "settings.alert.reset_app_settings_success.button.ok" = "OK";
-
-/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
-"settings.alert.surrender_gaze_confirmation.body" = "Stai per essere portato fuori dall'app Varabile. Potresti perdere il controllo del tracciamento della testa.";
 
 /* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.cancel.title" = "Annulla";
@@ -188,9 +173,6 @@
 
 /* Discard changes alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Scartare";
-
-/* Exit edit sayings alert title */
-"text_editor.alert.cancel_editing_confirmation.title" = "Tornare indietro prima di salvare cancellerà tutte le modifiche apportate.";
 
 /* Category already exists alert cancel button */
 "text_editor.alert.category_name_exists.cancel.button" = "Annulla";

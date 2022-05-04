@@ -35,9 +35,10 @@ class CustomCategoriesScreen: BaseScreen {
     
     static func addPhrase(_ phrase: String) {
         categoriesPageAddPhraseButton.tap()
-        _ = KeyboardScreen.checkmarkAddButton.waitForExistence(timeout: 0.5)
+        _ = KeyboardScreen.checkmarkAddButton.waitForExistence(timeout: 0.75)
         KeyboardScreen.typeText(phrase)
         KeyboardScreen.checkmarkAddButton.tap()
+        _ = categoriesPageAddPhraseButton.waitForExistence(timeout: 0.5)
     }
     
     static func addRandomPhrases(numberOfPhrases: Int) {
@@ -47,6 +48,7 @@ class CustomCategoriesScreen: BaseScreen {
             KeyboardScreen.typeText(randomPhrase)
             KeyboardScreen.checkmarkAddButton.tap()
         }
+        _ = categoriesPageAddPhraseButton.waitForExistence(timeout: 0.5)
     }
     
     static func returnToMainScreenFromCategoriesList() {

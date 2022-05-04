@@ -27,42 +27,21 @@ struct CategoryIdentifier {
     
 }
 
-struct CategoryTitleCellIdentifier {
-
-    let categoryIdentifier: CategoryIdentifier
-    static let categoryTitleCellPrefix: String = "category_title_cell_"
-    var identifier: String {
-        CategoryTitleCellIdentifier.categoryTitleCellPrefix + categoryIdentifier.identifier
-    }
-    
-    init?(_ identifier: String){
-        if identifier.isEmpty{
-            return nil
-        }
-        self.categoryIdentifier = CategoryIdentifier(identifier.replacingOccurrences(of: CategoryTitleCellIdentifier.categoryTitleCellPrefix, with: ""))
-    }
-    
-    init(_ identifier: CategoryIdentifier) {
-        self.categoryIdentifier = identifier
-    }
-    
-}
-
 struct PresetCategories {
     
-    var list: [CategoryTitleCellIdentifier]
+    var list: [CategoryIdentifier]
     
     init() {
         self.list = [
-            CategoryTitleCellIdentifier(CategoryIdentifier.general),
-            CategoryTitleCellIdentifier(CategoryIdentifier.basicNeeds),
-            CategoryTitleCellIdentifier(CategoryIdentifier.personalCare),
-            CategoryTitleCellIdentifier(CategoryIdentifier.conversation),
-            CategoryTitleCellIdentifier(CategoryIdentifier.environment),
-            CategoryTitleCellIdentifier(CategoryIdentifier.keyPad),
-            CategoryTitleCellIdentifier(CategoryIdentifier.mySayings),
-            CategoryTitleCellIdentifier(CategoryIdentifier.recents),
-            CategoryTitleCellIdentifier(CategoryIdentifier.listen)
+            CategoryIdentifier.general,
+            CategoryIdentifier.basicNeeds,
+            CategoryIdentifier.personalCare,
+            CategoryIdentifier.conversation,
+            CategoryIdentifier.environment,
+            CategoryIdentifier.keyPad,
+            CategoryIdentifier.mySayings,
+            CategoryIdentifier.recents,
+            CategoryIdentifier.listen
         ]
     }
     

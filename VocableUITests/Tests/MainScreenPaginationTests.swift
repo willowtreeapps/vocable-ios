@@ -61,6 +61,11 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         VTAssertPaginationEquals(1, of: 2)
     }
     
+    /* TODO: There is an existing bug(s) that causes this test to fail with
+     animations turned off. We will re-enable this test once they're fixed.
+     https://github.com/willowtreeapps/vocable-ios/issues/597
+     https://github.com/willowtreeapps/vocable-ios/issues/594
+     */
     func testCanScrollPagesWithPaginationArrows() {
         // Add enough phrases to push the total number of pages to 2
         listOfPhrases.forEach { phrase in
@@ -92,8 +97,6 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
     }
     
     func testPaginationAdjustsToDeviceOrientation() {
-        let categoryTitleCell = CategoryTitleCellIdentifier(customCategoryIdentifier!)
-
         // Add enough phrases to ensure that rotating the device will add a page; 7 phrases
         for phrase in listOfPhrases.startIndex..<7 {
             CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
@@ -101,8 +104,8 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         
         // Return to the Main Screen and navigate to the test category
         CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
-        MainScreen.locateAndSelectDestinationCategory(categoryTitleCell.categoryIdentifier)
-        XCTAssertEqual(MainScreen.selectedCategoryCell.identifier, categoryTitleCell.identifier)
+        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
+        XCTAssertEqual(MainScreen.selectedCategoryCell.identifier, customCategoryIdentifier?.identifier)
         
         // Verify we're on the first page
         VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)

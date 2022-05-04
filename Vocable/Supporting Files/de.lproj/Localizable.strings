@@ -10,9 +10,6 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Bestätigen";
 
-/* (No Comment) */
-"category_editor.alert.cancel_editing_confirmation.title" = "Wenn Sie dies schließen, ohne zu speichern, wird Ihre benutzerdefinierte Kategorie gelöscht.";
-
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "Abbrechen";
 
@@ -91,9 +88,6 @@
 /* Discard changes alert action title */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Verwerfen";
 
-/* Exit edit sayings alert title */
-"phrase_editor.alert.cancel_editing_confirmation.title" = "Wenn Sie zurückgehen, ohne zu speichern, werden alle Änderungen gelöscht.";
-
 /* Phrase already exists alert cancel button */
 "phrase_editor.alert.phrase_name_exists.cancel.button" = "Abbrechen";
 
@@ -129,9 +123,6 @@
 /* No email account configured error alert dismiss button title */
 "settings.alert.no_email_configured.button.dismiss.title" = "OK";
 
-/* No email account configured error alert title */
-"settings.alert.no_email_configured.title" = "E-Mail ist nicht konfiguriert.";
-
 /* Reset app settings confirmation prompt */
 "settings.alert.reset_app_settings_confirmation.body" = "Sind Sie sicher, dass Sie Vocable auf Werkseinstellungen zurücksetzen möchten? Dies kann nicht rückgängig gemacht werden.";
 
@@ -147,14 +138,8 @@
 /* Button dismissing the alert informing the user that Vocable's application settings failed to reset */
 "settings.alert.reset_app_settings_failure.button.ok" = "OK";
 
-/* Reset app settings success alert */
-"settings.alert.reset_app_settings_success.body" = "Vocable wurde erfolgreich zurückgesetzt";
-
 /* Button dismissing the alert informing the user that Vocable's application settings were successfully reset */
 "settings.alert.reset_app_settings_success.button.ok" = "OK";
-
-/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
-"settings.alert.surrender_gaze_confirmation.body" = "Dieser link wir außerhalb der Vocable App geöffnet. Sie laufen möglicherweise Gefahr, nicht mehr per Kopfbewegung steuern zu können.";
 
 /* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.cancel.title" = "Abbrechen";
@@ -200,9 +185,6 @@
 
 /* Discard changes alert action title */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Verwerfen";
-
-/* Exit edit sayings alert title */
-"text_editor.alert.cancel_editing_confirmation.title" = "Wenn Sie zurückgehen, ohne zu speichern, werden alle Änderungen gelöscht.";
 
 /* Category already exists alert cancel button */
 "text_editor.alert.category_name_exists.cancel.button" = "Abbrechen";

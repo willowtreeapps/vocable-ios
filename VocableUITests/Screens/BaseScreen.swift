@@ -75,7 +75,8 @@ class BaseScreen {
         
         // Loop through each custom category page to find our phrase
         for _ in 1...totalPageCount {
-            if XCUIApplication().cells.staticTexts.containing(predicate).element.exists {
+            // We make sure to wait, accounting for adding/deleting a phrase
+            if XCUIApplication().cells.staticTexts.containing(predicate).element.waitForExistence(timeout: 0.5) {
                 flag = true
                 break
             } else {
