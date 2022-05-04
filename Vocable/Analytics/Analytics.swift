@@ -63,6 +63,7 @@ class Analytics {
 
         guard let token = Analytics.token else {
             print("No Mixpanel token found. Analytics will not be reported.")
+            Mixpanel.initialize(token: "", trackAutomaticEvents: false)
             return
         }
 
