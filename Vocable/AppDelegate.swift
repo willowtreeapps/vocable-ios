@@ -59,6 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIView.setAnimationsEnabled(false)
         }
 
+        #warning("Switch to something purposeful. Using now to verify tokens are loading.")
+        _ = Analytics.shared
+
         // Ensure that the persistent store has the current
         // default presets before presenting UI
         performPersistenceMigrationForCurrentLanguage()

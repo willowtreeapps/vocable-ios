@@ -100,6 +100,7 @@
 		6B8A6E3124533789004B5220 /* UIHeadGazeTrackingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8A6E3024533789004B5220 /* UIHeadGazeTrackingWindow.swift */; };
 		6B8A6E3324536085004B5220 /* UIHeadGazeCursorWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8A6E3224536085004B5220 /* UIHeadGazeCursorWindow.swift */; };
 		6B8D3B732821C09200DDB9B7 /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 6B8D3B722821C09200DDB9B7 /* Mixpanel */; };
+		6B8D3B752821C0EB00DDB9B7 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8D3B742821C0EB00DDB9B7 /* Analytics.swift */; };
 		6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */; };
 		6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */; };
 		6B9DFA5D23E889DB0037673E /* UIHeadGaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */; };
@@ -330,6 +331,7 @@
 		6B8440E7244A9557007A4DC6 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		6B8A6E3024533789004B5220 /* UIHeadGazeTrackingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHeadGazeTrackingWindow.swift; sourceTree = "<group>"; };
 		6B8A6E3224536085004B5220 /* UIHeadGazeCursorWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHeadGazeCursorWindow.swift; sourceTree = "<group>"; };
+		6B8D3B742821C0EB00DDB9B7 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGazeViewController.swift; sourceTree = "<group>"; };
 		6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadGazeWindow.swift; sourceTree = "<group>"; };
 		6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHeadGaze.swift; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 		130C00B620D2AD2A007C3163 /* Vocable */ = {
 			isa = PBXGroup;
 			children = (
+				6B8D3B762821C0F700DDB9B7 /* Analytics */,
 				B879831223E0DA5800DC1A81 /* Common */,
 				6B9DFA4B23E889DB0037673E /* HeadTracking */,
 				6BFB18BF24002C55002C3515 /* CoreData */,
@@ -708,6 +711,14 @@
 				6B823BBE23F4ADE30099F65E /* TunningViewController.swift */,
 			);
 			path = PulseController;
+			sourceTree = "<group>";
+		};
+		6B8D3B762821C0F700DDB9B7 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				6B8D3B742821C0EB00DDB9B7 /* Analytics.swift */,
+			);
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		6B9DFA4B23E889DB0037673E /* HeadTracking */ = {
@@ -1308,6 +1319,7 @@
 				A99AF23123FC8BF700BE1184 /* TextTransaction.swift in Sources */,
 				6B5C744127E8CC0000004713 /* VocableListCellAccessory.swift in Sources */,
 				6B8440E3244A1007007A4DC6 /* CarouselGridLayout.swift in Sources */,
+				6B8D3B752821C0EB00DDB9B7 /* Analytics.swift in Sources */,
 				A91030B627E3C31700281C97 /* VocableListCell.swift in Sources */,
 				6B05020727F351A1000CFE5A /* CategoryReordering.swift in Sources */,
 				A91030B427E3BF9300281C97 /* VocableListContentConfiguration.swift in Sources */,
