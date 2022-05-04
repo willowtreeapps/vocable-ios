@@ -5,11 +5,11 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
-      <trans-unit id="NSCameraUsageDescription" xml:space="preserve" approved="yes">
-        <source>Vocable uses ARKit head tracking to detect the user's face as seen in the device's TrueDepth front camera feed for the purpose of controlling an on-screen pointer, allowing users with limited mobility to interact with the app. Head orientation and position data is used expressly for controlling the on-screen pointer. That head tracking data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
-        <target state="final">可说话是用ARKit跟踪头部的科技来检测使用者的脸部。设备上的TrueDepth前部相机供稿为了控制屏幕指针和允许行动不便的使用者能够与应用互动。头部方位和位置数据是用来控制屏幕指针。跟踪头部数据不会储存或传送的。可说话需要您允许才可以用相机是为了这个目的。</target>
-        <note>Camera usage description</note>
-      </trans-unit>
+      
+      
+      
+      
+      
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="zh-Hans" datatype="plaintext">
@@ -40,11 +40,6 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve" approved="yes">
         <source>Confirm</source>
         <target state="final">确认</target>
-        <note/>
-      </trans-unit>
-      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve" approved="yes">
-        <source>If you close this without saving your custom category will be deleted.</source>
-        <target state="final">如果您关闭了，则您的自定类别将被删除。</target>
         <note/>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
@@ -157,11 +152,6 @@
         <target state="final">舍弃</target>
         <note>Discard changes alert action title</note>
       </trans-unit>
-      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>Going back before saving will clear any edits made.</source>
-        <target state="translated">保存前返回将会清除任何编辑的东西。</target>
-        <note>Exit edit sayings alert title</note>
-      </trans-unit>
       <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">取消</target>
@@ -219,11 +209,6 @@
         <target state="final">确定</target>
         <note>No email account configured error alert dismiss button title</note>
       </trans-unit>
-      <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve" approved="yes">
-        <source>Email not configured.</source>
-        <target state="final">电子邮件没有配置</target>
-        <note>No email account configured error alert title</note>
-      </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve">
         <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
         <target state="translated">您确定要将 Vocable 重置为默认设置吗？此操作无法撤消。</target>
@@ -249,20 +234,10 @@
         <target state="translated">确定</target>
         <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset</note>
       </trans-unit>
-      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
-        <source>Vocable has been reset successfully</source>
-        <target state="translated">已成功恢复默认设置</target>
-        <note>Reset app settings success alert</note>
-      </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
         <source>OK</source>
         <target state="translated">好的</target>
         <note>Button dismissing the alert informing the user that Vocable's application settings were successfully reset</note>
-      </trans-unit>
-      <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve" approved="yes">
-        <source>You're about to be taken outside of the Vocable app. You may lose head tracking control.</source>
-        <target state="final">您即将被带到可说话之外。您可能会失去头部跟踪控制。</target>
-        <note>body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -342,11 +317,6 @@ Head tracking is supported on all devices with a %4$@ camera, and on most device
         <source>Discard</source>
         <target state="final">舍弃</target>
         <note>Discard changes alert action title</note>
-      </trans-unit>
-      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
-        <source>Going back before saving will clear any edits made.</source>
-        <target state="translated">保存前返回将会清除任何编辑的东西。</target>
-        <note>Exit edit sayings alert title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve">
         <source>Cancel</source>
