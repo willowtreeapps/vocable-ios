@@ -12,6 +12,7 @@ enum LaunchEnvironment {
 
     public enum Key: String {
         case overridePresets
+        case mixpanelToken
     }
 
     static func value(for key: Key) -> String? {
