@@ -62,8 +62,16 @@ platform :ios do
       build_number: ENV['CIRCLE_BUILD_NUM'],
     )
 
-    build_app(scheme: "AppStore")
+     if ENV["MIXPANEL_TOKEN_STAGING"]
+       set_info_plist_value(path: "./Vocable/Supporting Files/Info.plist", key: "MIXPANEL_TOKEN_STAGING", value: ENV["MIXPANEL_TOKEN_STAGING"])
+     end 
+
+     if ENV["MIXPANEL_TOKEN_PRODUCTION"]
+       set_info_plist_value(path: "./Vocable/Supporting Files/Info.plist", key: "MIXPANEL_TOKEN_PRODUCTION", value: ENV["MIXPANEL_TOKEN_PRODUCTION"])
+     end 
     
+     build_app(scheme: "AppStore")
+
      upload_to_testflight(
        skip_waiting_for_build_processing: true
      )
