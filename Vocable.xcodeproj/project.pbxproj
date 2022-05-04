@@ -99,6 +99,7 @@
 		6B8440E8244A9557007A4DC6 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8440E7244A9557007A4DC6 /* EmptyStateView.swift */; };
 		6B8A6E3124533789004B5220 /* UIHeadGazeTrackingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8A6E3024533789004B5220 /* UIHeadGazeTrackingWindow.swift */; };
 		6B8A6E3324536085004B5220 /* UIHeadGazeCursorWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8A6E3224536085004B5220 /* UIHeadGazeCursorWindow.swift */; };
+		6B8D3B732821C09200DDB9B7 /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 6B8D3B722821C09200DDB9B7 /* Mixpanel */; };
 		6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4C23E889DB0037673E /* UIHeadGazeViewController.swift */; };
 		6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4D23E889DB0037673E /* HeadGazeWindow.swift */; };
 		6B9DFA5D23E889DB0037673E /* UIHeadGaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DFA4E23E889DB0037673E /* UIHeadGaze.swift */; };
@@ -480,6 +481,7 @@
 			files = (
 				6B05020427F3489D000CFE5A /* Collections in Frameworks */,
 				6B05020127F3487E000CFE5A /* Algorithms in Frameworks */,
+				6B8D3B732821C09200DDB9B7 /* Mixpanel in Frameworks */,
 				64599429258933370010EEFF /* VocableCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1017,6 +1019,7 @@
 				64599428258933370010EEFF /* VocableCore */,
 				6B05020027F3487E000CFE5A /* Algorithms */,
 				6B05020327F3489D000CFE5A /* Collections */,
+				6B8D3B722821C09200DDB9B7 /* Mixpanel */,
 			);
 			productName = EyeTrackingTest;
 			productReference = 130C00B420D2AD2A007C3163 /* Vocable.app */;
@@ -1106,6 +1109,7 @@
 				64599427258933370010EEFF /* XCRemoteSwiftPackageReference "vocable-ios-spm" */,
 				6B0501FF27F3487E000CFE5A /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				6B05020227F3489C000CFE5A /* XCRemoteSwiftPackageReference "swift-collections" */,
+				6B8D3B712821C09200DDB9B7 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
 			);
 			productRefGroup = 130C00B520D2AD2A007C3163 /* Products */;
 			projectDirPath = "";
@@ -1975,6 +1979,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		6B8D3B712821C09200DDB9B7 /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1992,6 +2004,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6B05020227F3489C000CFE5A /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
+		};
+		6B8D3B722821C09200DDB9B7 /* Mixpanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B8D3B712821C09200DDB9B7 /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
 		};
 /* End XCSwiftPackageProductDependency section */
 
