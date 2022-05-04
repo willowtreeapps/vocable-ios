@@ -126,7 +126,6 @@
 "category_editor.toast.successfully_saved.title" = "Changes Saved";
 
 /* Category close confirmation text.  This text appears in an alert when there are edits made to the Category title that have not been saved. */
-"text_editor.alert.cancel_editing_confirmation.title" = "Going back before saving will clear any edits made.";
 "text_editor.alert.cancel_editing_confirmation.title" = "If you close without saving, your changes will be lost.";
 
 /* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title that have not been saved.  Pressing the button will allow editing the category title. */
