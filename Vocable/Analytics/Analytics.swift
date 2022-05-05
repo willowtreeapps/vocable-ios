@@ -32,6 +32,11 @@ private struct EnvironmentTokens {
 
 class Analytics {
 
+    struct Event {
+        let name: String
+        var properties: Properties? = nil
+    }
+
     private static let token: String? = {
 
         if let token = LaunchEnvironment.value(for: .mixpanelToken) {
@@ -61,6 +66,8 @@ class Analytics {
 
     private let mixPanel: MixpanelInstance
 
+    private let listeningMode = AppConfig.listeningMode
+
     private init() {
 
         guard let token = Analytics.token else {
@@ -75,22 +82,47 @@ class Analytics {
 
         mixPanel = Mixpanel.mainInstance()
         registerSuperProperties()
+        listenForSettingsChanges()
     }
 
     // MARK: - Super Properties
 
     private func registerSuperProperties() {
-        let listeningMode = AppConfig.listeningMode
         cancellables = [mixPanel.registerSuperProperty("Listening Mode Enabled", using: listeningMode.$listeningModeEnabledPreference, on: queue),
                         mixPanel.registerSuperProperty("'Hey Vocable' Enabled", using: listeningMode.$hotwordEnabledPreference, on: queue),
                         mixPanel.registerSuperProperty("Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue)]
     }
 
+    private func listenForSettingsChanges() {
+        track(.listeningModeChanged, onUpdateOf: listeningMode.$listeningModeEnabledPreference)
+        track(.heyVocableModeChanged, onUpdateOf: listeningMode.$hotwordEnabledPreference)
+        track(.headingTrackingChanged, onUpdateOf: AppConfig.$isHeadTrackingEnabled)
+    }
+
     // MARK: - Events
 
-    func appDidLaunch() {
-        Mixpanel.mainInstance().track(event: "App Open")
+    func track(_ event: Event) {
+        queue.async { [weak self] in
+            self?.mixPanel.track(event: event.name, properties: event.properties)
+        }
     }
+
+    private func track<P: Publisher>(_ event: Event, onUpdateOf publisher: P) where P.Failure == Never {
+        publisher
+            .receive(on: queue)
+            .sink { [weak self] _ in
+                self?.track(event)
+            }.store(in: &cancellables)
+    }
+}
+
+extension Analytics.Event {
+
+    static let appOpen = Self(name: "App Open")
+
+    static let headingTrackingChanged = Self(name: "Head Tracking Settings Changed")
+    static let listeningModeChanged = Self(name: "Listening Mode Settings Changed")
+    static let heyVocableModeChanged = Self(name: "'Hey Vocable' Settings Changed")
 }
 
 private extension MixpanelInstance {
