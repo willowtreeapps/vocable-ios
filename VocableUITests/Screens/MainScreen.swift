@@ -36,9 +36,11 @@ class MainScreen: BaseScreen {
     }
     
     /// Traverse the categories until the destination category is found, then tap on the category to ensure its phrases appear.
+    /// The function returns true if the category is found, false if it is not.
     ///
     ///  Categories are interacted with via their identifier, which we represent with the CategoryIdentifier type struct.
-    static func locateAndSelectDestinationCategory(_ destinationCategory: CategoryIdentifier) {
+    @discardableResult
+    static func locateAndSelectDestinationCategory(_ destinationCategory: CategoryIdentifier) -> Bool {
         let destinationCell = app.cells[destinationCategory.identifier]
         let selectedCell = app.cells[selectedCategoryCell.identifier]
         
@@ -46,12 +48,14 @@ class MainScreen: BaseScreen {
             
             if (destinationCell.exists) {
                 destinationCell.tap()
-                break
+                return true
             }
             categoryRightButton.tap()
            
             // We break the loop when we return to our original starting point
         } while (!selectedCell.waitForExistence(timeout: 0.5))
+        
+        return false
     }
     
     /// Assuming there is at least one page of phrases within a category, locate the cell containing the given phrase.
