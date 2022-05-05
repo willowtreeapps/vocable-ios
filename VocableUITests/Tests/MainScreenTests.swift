@@ -34,7 +34,6 @@ class MainScreenTests: XCTestCase {
     }
     
     override func setUp() {
-        
         let app = XCUIApplication()
         app.configure {
             Arguments(.resetAppDataOnLaunch, .enableListeningMode, .disableAnimations)
