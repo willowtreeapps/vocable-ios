@@ -8,7 +8,12 @@
 
 import UIKit
 
-class AddPhraseCollectionViewCell: PresetItemCollectionViewCell {
+protocol Localizable {
+    associatedtype LocalizedStrings
+}
+
+class AddPhraseCollectionViewCell: PresetItemCollectionViewCell, Localizable {
+    typealias LocalizedStrings = Localization.Preset.Category.Add.Phrase
 
     private let borderWidth = 6.0
     private let cornerRadius = 8.0
@@ -29,7 +34,7 @@ class AddPhraseCollectionViewCell: PresetItemCollectionViewCell {
         fillColor = .collectionViewBackgroundColor
 
         textLabel.numberOfLines = 1
-        setup(title: NSLocalizedString("preset.category.add.phrase.title", comment: "Add phrase button title"),
+        setup(title: LocalizedStrings.title,
               with: UIImage(systemName: "plus"))
     }
 

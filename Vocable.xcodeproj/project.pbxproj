@@ -24,6 +24,7 @@
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		4E014DAA27EA53BC00561FC8 /* NSRange+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E014DA927EA53BC00561FC8 /* NSRange+.swift */; };
 		4E8A303C27EBB95C000177B1 /* BidirectionalCollection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A303B27EBB95C000177B1 /* BidirectionalCollection+.swift */; };
+		4EF9342E282303A700F0A74A /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF9342C282303A700F0A74A /* Strings+Generated.swift */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
 		620DD31927DA90F1003B01A0 /* CustomPhraseBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620DD31827DA90F1003B01A0 /* CustomPhraseBaseTest.swift */; };
 		62300C7E27F360930005CEF5 /* CustomCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62300C7D27F360930005CEF5 /* CustomCategoryTests.swift */; };
@@ -256,6 +257,7 @@
 		30B979BB2425584300309D7C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4E014DA927EA53BC00561FC8 /* NSRange+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRange+.swift"; sourceTree = "<group>"; };
 		4E8A303B27EBB95C000177B1 /* BidirectionalCollection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BidirectionalCollection+.swift"; sourceTree = "<group>"; };
+		4EF9342C282303A700F0A74A /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 		54D3C41423E37CD40061EF47 /* VocableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -599,6 +601,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4EF9342B282303A700F0A74A /* SwiftGen */ = {
+			isa = PBXGroup;
+			children = (
+				4EF9342C282303A700F0A74A /* Strings+Generated.swift */,
+			);
+			path = SwiftGen;
+			sourceTree = "<group>";
+		};
 		54D3C41523E37CD40061EF47 /* VocableTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -904,6 +914,7 @@
 		B879831223E0DA5800DC1A81 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4EF9342B282303A700F0A74A /* SwiftGen */,
 				B838202723FC99AE005A79CD /* Views */,
 				6B8440D82448B3FC007A4DC6 /* CarouselCollectionViewDataSourceProxy.swift */,
 				A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */,
@@ -1249,6 +1260,7 @@
 				64A220BB2452171C0014EA80 /* RootViewController.swift in Sources */,
 				A961605027F6383B00CE2F72 /* FreeResponseTextEditorConfigurationProvider.swift in Sources */,
 				A93E46F7280614680081D544 /* NSDiffableDataSourceSnapshot+Map.swift in Sources */,
+				4EF9342E282303A700F0A74A /* Strings+Generated.swift in Sources */,
 				6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */,
 				B8DA9DF223F30BAF00FEBE19 /* Cell+NibLoading.swift in Sources */,
 				6BB56BA82422AC2500EA787E /* ToastView.swift in Sources */,

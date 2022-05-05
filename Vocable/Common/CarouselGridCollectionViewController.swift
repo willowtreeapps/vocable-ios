@@ -15,8 +15,7 @@ struct CarouselGridPagingProgress {
     var localizedString: String {
         let pageIndex = max(self.pageIndex + 1, 1)
         let pageCount = max(self.pageCount, 1)
-        let format = NSLocalizedString("paging_progress_indicator_format",
-                                       comment: "Page indicator progress format. \"Page x of n\"")
+        let format = Localization.pagingProgressIndicatorFormat(pageIndex, pageCount)
         let formattedProgress = String.localizedStringWithFormat(format, pageIndex, pageCount)
         return formattedProgress
     }
