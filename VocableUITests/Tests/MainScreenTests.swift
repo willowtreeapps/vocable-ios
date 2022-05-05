@@ -9,68 +9,126 @@
 
 import XCTest
 
-class MainScreenTests: BaseTest {
+class MainScreenTests: XCTestCase {
     
-    private let listOfCategoriesToSkip = [CategoryIdentifier.keyPad.identifier,
-                                          CategoryIdentifier.mySayings.identifier,
-                                          CategoryIdentifier.listen.identifier,
-                                          CategoryIdentifier.recents.identifier]
+    let firstPhrase = Phrase(id: "phrase_one", "Please help")
+    let secondPhrase = Phrase(id: "phrase_two", "Hello")
+    let thirdPhrase = Phrase(id: "phrase_three", "I need a blanket")
     
-     // For each preset category (the first 5 categories), tap() the top left
-     // phrase, then verify that all selected phrases appear in "Recents"
-    func testRecentScreen_ShowsPressedButtons(){
-        var listOfSelectedPhrases: [String] = []
-        var firstPhrase = ""
-        
-        for categoryName in PresetCategories().list {
-            
-            // Skip the 123 (keypad), My Sayings, Recents, and Listen categories because their entries do
-            // not get added to 'Recents'
-            if listOfCategoriesToSkip.contains(categoryName.identifier) {
-                continue;
-            }
-            MainScreen.locateAndSelectDestinationCategory(categoryName)
-            firstPhrase = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
-            XCUIApplication().collectionViews.staticTexts[firstPhrase].tap()
-            listOfSelectedPhrases.append(firstPhrase)
-        }
-        MainScreen.locateAndSelectDestinationCategory(.recents)
-        
-        for phrase in listOfSelectedPhrases {
-            XCTAssertTrue(MainScreen.locatePhraseCell(phrase: phrase).exists, "Expected \(phrase) to appear in Recents category")
+    var firstTestCategory: Category {
+        Category(id: "first_category", "First") {
+            firstPhrase
         }
     }
     
-    func testDefaultCategoriesExist() {
-        for categoryName in PresetCategories().list {
-            MainScreen.locateAndSelectDestinationCategory(categoryName)
-            XCTAssertEqual(MainScreen.selectedCategoryCell.identifier, categoryName.identifier, "Preset category with ID '\(categoryName.identifier)' was not found")
+    var secondTestCategory: Category {
+        Category(id: "second_category", "To Be Hidden") {
+            secondPhrase
         }
+    }
+    
+    var thirdTestCategory: Category {
+        Category(id: "thrid_category", "Third") {
+            thirdPhrase
+        }
+    }
+    
+    override func setUp() {
+        
+        let app = XCUIApplication()
+        app.configure {
+            Arguments(.resetAppDataOnLaunch, .enableListeningMode, .disableAnimations)
+            Environment(.overridePresets) {
+                Presets {
+                    firstTestCategory
+                    secondTestCategory
+                    thirdTestCategory
+                }
+            }
+        }
+        app.launch()
     }
     
     func testSelectingCategoryChangesPhrases() {
-        // Navigate to a category and grab it's first, top most, phrase
-        MainScreen.locateAndSelectDestinationCategory(.environment)
-        let firstPhrase = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
+        let firstCategory = CategoryIdentifier(firstTestCategory.presetCategory.id)
+        let secondCategory = CategoryIdentifier(secondTestCategory.presetCategory.id)
         
-        // Navigate to a different category and verify the top most phrase listed has changed
-        MainScreen.locateAndSelectDestinationCategory(.basicNeeds)
-        let secondPhrase = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
-        XCTAssertNotEqual(firstPhrase, secondPhrase, "The list of phrases did not change between selected categories.")
+        // Navigate to a category and grab it's first, top most, phrase.
+        MainScreen.locateAndSelectDestinationCategory(firstCategory)
+        let phraseOne = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
+        XCTAssertEqual(phraseOne, firstPhrase.utterance)
+        
+        // Navigate to a different category and verify the top most phrase listed has changed.
+        MainScreen.locateAndSelectDestinationCategory(secondCategory)
+        let phraseTwo = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
+        XCTAssertEqual(phraseTwo, secondPhrase.utterance)
     }
     
     func testWhenTappingPhrase_ThenThatPhraseDisplaysOnOutputLabel() {
-        for category in PresetCategories().list {
-            if listOfCategoriesToSkip.contains(category.identifier) {
-                continue;
-            }
-            MainScreen.locateAndSelectDestinationCategory(category)
-            _ = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).waitForExistence(timeout: 0.5) // Wait for scrolling to stop
-            let firstPhraseInCategory = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
-            XCUIApplication().collectionViews.staticTexts[firstPhraseInCategory].tap()
-            XCTAssertEqual(MainScreen.outputLabel.label, firstPhraseInCategory)
+        let customTestCategories = [firstTestCategory,
+                                    secondTestCategory,
+                                    thirdTestCategory]
+        for category in customTestCategories {
+            let phrase = category.presetPhrases[0]
+            MainScreen.locateAndSelectDestinationCategory(CategoryIdentifier(category.presetCategory.id))
+            _ = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).waitForExistence(timeout: 0.5)
+            XCUIApplication().cells[phrase.id].tap()
+            XCTAssertEqual(MainScreen.outputLabel.label, phrase.utterance)
         }
     }
+    
+    func testDisablingCategory() {
+        let hiddenCategory = secondTestCategory
+        SettingsScreen.navigateToSettingsCategoryScreen()
+        XCTAssertTrue(SettingsScreen.locateCategoryCell(hiddenCategory.presetCategory.id).element.exists)
+
+        // Navigate to the category and hide it.
+        SettingsScreen.openCategorySettings(category: hiddenCategory)
+        SettingsScreen.showCategoryButton.tap()
+        
+        // Return to the main screen
+        CustomCategoriesScreen.returnToMainScreenFromCategoryDetails()
+        
+        // Confirm that the category is no longer accessible.
+        let isVisible = MainScreen.locateAndSelectDestinationCategory(CategoryIdentifier(hiddenCategory.presetCategory.id))
+        XCTAssertFalse(isVisible)
+    }
+    
+    // TODO: The following tests will be covered in a separate suite: PresetCategoryTests
+    /*
+     
+    // For each preset category (the first 5 categories), tap() the top left
+    // phrase, then verify that all selected phrases appear in "Recents"
+   func testRecentScreen_ShowsPressedButtons(){
+       var listOfSelectedPhrases: [String] = []
+       var firstPhrase = ""
+       
+       for categoryName in PresetCategories().list {
+           
+           // Skip the 123 (keypad), My Sayings, Recents, and Listen categories because their entries do
+           // not get added to 'Recents'
+           if listOfCategoriesToSkip.contains(categoryName.id) {
+               continue;
+           }
+           MainScreen.locateAndSelectDestinationCategory(categoryName)
+           firstPhrase = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
+           XCUIApplication().collectionViews.staticTexts[firstPhrase].tap()
+           listOfSelectedPhrases.append(firstPhrase)
+       }
+       MainScreen.locateAndSelectDestinationCategory(.recents)
+       
+       for phrase in listOfSelectedPhrases {
+           XCTAssertTrue(MainScreen.locatePhraseCell(phrase: phrase).exists, "Expected \(phrase) to appear in Recents category")
+       }
+   }
+   
+   
+   func testDefaultCategoriesExist() {
+       for categoryName in PresetCategories().list {
+           MainScreen.locateAndSelectDestinationCategory(categoryName)
+           XCTAssertEqual(MainScreen.selectedCategoryCell.id, categoryName.id, "Preset category with ID '\(categoryName.id)' was not found")
+       }
+   }
     
     func testWhenTapping123Phrase_ThenThatPhraseDisplaysOnOutputLabel() {
         MainScreen.locateAndSelectDestinationCategory(.keyPad)
@@ -78,31 +136,6 @@ class MainScreenTests: BaseTest {
         XCUIApplication().collectionViews.staticTexts[firstKeypadNumber].tap()
         XCTAssertEqual(MainScreen.outputLabel.label, firstKeypadNumber)
     }
-    
-    func testDisablingCategory() {
-        let hiddenCategoryName = "General"
-        let hiddenCategoryIdentifier = CategoryIdentifier.general.identifier
-        
-        SettingsScreen.navigateToSettingsCategoryScreen()
-        XCTAssertTrue(SettingsScreen.locateCategoryCell(hiddenCategoryName).element.exists)
-
-        // Navigate to the category and hide it.
-        SettingsScreen.openCategorySettings(category: hiddenCategoryName)
-        SettingsScreen.showCategoryButton.tap()
-        SettingsScreen.navBarBackButton.tap()
-        
-        // Return to the main screen
-        SettingsScreen.navBarBackButton.tap()
-        SettingsScreen.navBarDismissButton.tap()
-        
-        // Confirm that the category is no longer accessible.
-        for category in PresetCategories().list {
-            // If we come across the category we expect to be hidden, fail the test. Otherwise the test will pass.
-            MainScreen.locateAndSelectDestinationCategory(category)
-            if MainScreen.selectedCategoryCell.identifier == hiddenCategoryIdentifier {
-                XCTFail("The category with identifier, '\(hiddenCategoryIdentifier)', was not hidden as expected.")
-            }
-        }
-    }
+   */
     
 }
