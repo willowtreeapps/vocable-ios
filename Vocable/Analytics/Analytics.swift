@@ -118,11 +118,22 @@ class Analytics {
 
 extension Analytics.Event {
 
+    enum ListeningPhraseResult: String {
+        case successful = "Successful Result"
+        case soundsComplicated = "Sounds Complicated"
+
+        var description: String { rawValue }
+    }
+
     static let appOpen = Self(name: "App Open")
 
-    static let headingTrackingChanged = Self(name: "Head Tracking Settings Changed")
-    static let listeningModeChanged = Self(name: "Listening Mode Settings Changed")
-    static let heyVocableModeChanged = Self(name: "'Hey Vocable' Settings Changed")
+    static let headingTrackingChanged = Self(name: "Head Tracking Setting")
+    static let listeningModeChanged = Self(name: "Listening Mode Setting")
+    static let heyVocableModeChanged = Self(name: "'Hey Vocable' Setting")
+
+    static func phraseProcessed(result: ListeningPhraseResult) -> Self {
+        Self(name: "Listen Mode Phrase Processed", properties: ["Result Type": result.description])
+    }
 }
 
 private extension MixpanelInstance {
