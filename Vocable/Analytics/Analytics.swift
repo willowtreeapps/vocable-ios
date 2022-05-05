@@ -59,19 +59,21 @@ class Analytics {
     private var cancellables = Set<AnyCancellable>()
     private let queue = DispatchQueue(label: "Analytics-Processing")
 
-    private let mixPanel = Mixpanel.mainInstance()
+    private let mixPanel: MixpanelInstance
 
     private init() {
 
         guard let token = Analytics.token else {
             print("No Mixpanel token found. Analytics will not be reported.")
             Mixpanel.initialize(token: "", trackAutomaticEvents: false)
+            mixPanel = Mixpanel.mainInstance()
             return
         }
 
         Mixpanel.initialize(token: token, trackAutomaticEvents: false)
         print("Mixpanel initialized with token: \(token)")
 
+        mixPanel = Mixpanel.mainInstance()
         registerSuperProperties()
     }
 
@@ -79,9 +81,9 @@ class Analytics {
 
     private func registerSuperProperties() {
         let listeningMode = AppConfig.listeningMode
-        cancellables = [mixPanel.registerSuperProperty( "Listening Mode Enabled", using: listeningMode.$listeningModeEnabledPreference, on: queue),
-                        mixPanel.registerSuperProperty( "'Hey Vocable' Enabled", using: listeningMode.$hotwordEnabledPreference, on: queue),
-                        mixPanel.registerSuperProperty( "Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue)]
+        cancellables = [mixPanel.registerSuperProperty("Listening Mode Enabled", using: listeningMode.$listeningModeEnabledPreference, on: queue),
+                        mixPanel.registerSuperProperty("'Hey Vocable' Enabled", using: listeningMode.$hotwordEnabledPreference, on: queue),
+                        mixPanel.registerSuperProperty("Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue)]
     }
 
     // MARK: - Events
