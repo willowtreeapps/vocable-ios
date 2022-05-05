@@ -337,3 +337,11 @@
 /* Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert. */
 "listening_mode.empty_state.speech_permission_undetermined.action" = "Grant Access";
 
+
+// MARK: Listening Mode Empty State Titles
+
+"listening_mode.feedback.submit.title" = "Share with Developers";
+
+"listening_mode.feedback.hint.text" = "Don’t like these responses? Anonymously share this question to help improve listening mode.";
+
+"listening_mode.feedback.confirmation.title" = "Thank You!";
