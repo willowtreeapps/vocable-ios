@@ -107,7 +107,7 @@ struct CategoryNameEditorConfigurationProvider: TextEditorConfigurationProviding
                 try context.save()
 
                 DispatchQueue.main.async {
-                    let alertMessage = NSLocalizedString("category_editor.toast.successfully_saved.title", comment: "Saved to Categories")
+                    let alertMessage = String(localized: "category_editor.toast.successfully_saved.title")
                     ToastWindow.shared.presentEphemeralToast(withTitle: alertMessage)
                     if let didSaveCategory = didSaveCategory {
                         didSaveCategory()
@@ -122,12 +122,9 @@ struct CategoryNameEditorConfigurationProvider: TextEditorConfigurationProviding
     }
 
     private func presentExistingCategoryAlert(for viewController: UIViewController, confirmationHandler: @escaping () -> Void) {
-        let title = NSLocalizedString("text_editor.alert.category_name_exists.title",
-                                      comment: "Category already exists alert title")
-        let cancelButtonTitle = NSLocalizedString("text_editor.alert.category_name_exists.cancel.button",
-                                                   comment: "Category already exists alert cancel button")
-        let createButtonTitle = NSLocalizedString("text_editor.alert.category_name_exists.create.button",
-                                                   comment: "Category already exists alert create button")
+        let title = String(localized: "text_editor.alert.category_name_exists.title")
+        let cancelButtonTitle = String(localized: "text_editor.alert.category_name_exists.cancel.button")
+        let createButtonTitle = String(localized: "text_editor.alert.category_name_exists.create.button")
 
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(.cancel(withTitle: cancelButtonTitle))

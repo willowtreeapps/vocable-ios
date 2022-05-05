@@ -54,16 +54,16 @@ enum EmptyStateType: EmptyStateRepresentable {
     var title: String {
         switch self {
         case.recents:
-            return NSLocalizedString("recents_empty_state.header.title", comment: "Recents empty state title")
+            return String(localized: "recents_empty_state.header.title")
         case .phraseCollection:
-            return NSLocalizedString("empty_state.header.title", comment: "Empty state title")
+            return String(localized: "empty_state.header.title")
         }
     }
 
     var description: String? {
         switch self {
         case .recents:
-            return NSLocalizedString("recents_empty_state.body.title", comment: "Recents empty state description")
+            return String(localized: "recents_empty_state.body.title")
         default:
             return nil
         }
@@ -74,7 +74,7 @@ enum EmptyStateType: EmptyStateRepresentable {
         case .recents:
             return nil
         default:
-            return NSLocalizedString("empty_state.button.title", comment: "Empty state Add Phrase button title")
+            return String(localized: "empty_state.button.title")
         }
     }
 

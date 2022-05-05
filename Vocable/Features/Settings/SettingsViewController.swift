@@ -33,26 +33,19 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         var title: String {
             switch self {
             case .categories:
-                return NSLocalizedString("settings.cell.categories.title",
-                                         comment: "edit categories settings menu item")
+                return String(localized: "settings.cell.categories.title")
             case .timingSensitivity:
-                return NSLocalizedString("settings.cell.timing_sensitivity.title",
-                                         comment: "edit cursor timing and sensititivy settings menu item")
+                return String(localized: "settings.cell.timing_sensitivity.title")
             case .resetAppSettings:
-                return NSLocalizedString("settings.cell.reset_all.title",
-                                         comment: "reset all settings menu item")
+                return String(localized: "settings.cell.reset_all.title")
             case .selectionMode:
-                return NSLocalizedString("settings.cell.selection_mode.title",
-                                         comment: "edit cursor selection mode settings menu item")
+                return String(localized: "settings.cell.selection_mode.title")
             case .privacyPolicy:
-                return NSLocalizedString("settings.cell.privacy_policy.title",
-                                         comment: "view privacy policy settings menu item")
+                return String(localized: "settings.cell.privacy_policy.title")
             case .contactDevs:
-                return NSLocalizedString("settings.cell.contact_developers.title",
-                                         comment: "contact developers settings menu item")
+                return String(localized: "settings.cell.contact_developers.title")
             case .pidTuner:
-                return NSLocalizedString("settings.cell.tune_cursor.title",
-                                         comment: "tune cursor debug settings menu item")
+                return String(localized: "settings.cell.tune_cursor.title")
             case .listeningMode:
                 return String(localized: "settings.cell.listening_mode.title")
             case .versionNum:
@@ -109,7 +102,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     }
 
     private func setupNavigationBar() {
-        navigationBar.title = NSLocalizedString("settings.header.title", comment: "Settings screen header title")
+        navigationBar.title = String(localized: "settings.header.title")
         navigationBar.leftButton = {
             let button = GazeableButton()
             button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
@@ -306,12 +299,9 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     }
 
     private func presentLeavingHeadTrackableDomainAlert(withConfirmation confirmationAction: @escaping () -> Void) {
-        let alertString = NSLocalizedString("settings.alert.surrender_gaze_confirmation.body",
-                                            comment: "body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app")
-        let cancelTitle = NSLocalizedString("settings.alert.surrender_gaze_confirmation.button.cancel.title",
-        comment: "Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app")
-        let confirmationTitle = NSLocalizedString("settings.alert.surrender_gaze_confirmation.button.confirm.title",
-        comment: "Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app")
+        let alertString = String(localized: "settings.alert.surrender_gaze_confirmation.body")
+        let cancelTitle = String(localized: "settings.alert.surrender_gaze_confirmation.button.cancel.title")
+        let confirmationTitle = String(localized: "settings.alert.surrender_gaze_confirmation.button.confirm.title")
 
         let alertViewController = GazeableAlertViewController(alertTitle: alertString)
 
@@ -325,11 +315,9 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             presentLeavingHeadTrackableDomainAlert(withConfirmation: presentEmail)
         } else {
             let model = UIDevice.current.systemName
-            let alertString = NSLocalizedString("settings.alert.no_email_configured.title",
-                                                comment: "No email account configured error alert title")
+            let alertString = String(localized: "settings.alert.no_email_configured.title")
             let formattedAlertString = String(format: alertString, model)
-            let dismissalTitle = NSLocalizedString("settings.alert.no_email_configured.button.dismiss.title",
-                                                   comment: "No email account configured error alert dismiss button title")
+            let dismissalTitle = String(localized: "settings.alert.no_email_configured.button.dismiss.title")
             let alertViewController = GazeableAlertViewController(alertTitle: formattedAlertString)
             alertViewController.addAction(GazeableAlertAction(title: dismissalTitle))
             present(alertViewController, animated: true)
@@ -362,12 +350,9 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     // MARK: Reset App Data
 
     private func presentAppResetPrompt() {
-        let alertString = NSLocalizedString("settings.alert.reset_app_settings_confirmation.body",
-                                            comment: "body of alert presented when user attempts to reset Vocable's application settings")
-        let cancelTitle = NSLocalizedString("settings.alert.reset_app_settings_confirmation.button.cancel.title",
-        comment: "Button cancelling the action to reset Vocable's application settings")
-        let confirmationTitle = NSLocalizedString("settings.alert.reset_app_settings_confirmation.button.confirm.title",
-        comment: "Button confirming that the user would like to reset Vocable's application settings")
+        let alertString = String(localized: "settings.alert.reset_app_settings_confirmation.body")
+        let cancelTitle = String(localized: "settings.alert.reset_app_settings_confirmation.button.cancel.title")
+        let confirmationTitle = String(localized: "settings.alert.reset_app_settings_confirmation.button.confirm.title")
 
         let alertViewController = GazeableAlertViewController(alertTitle: alertString)
 
@@ -386,10 +371,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     }
 
     private func presentResetSuccessAlert() {
-        let alertString = NSLocalizedString("settings.alert.reset_app_settings_success.body",
-                                            comment: "body of alert presented when the user successfully resets Vocable's application settings")
-        let dismissTitle = NSLocalizedString("settings.alert.reset_app_settings_success.button.ok",
-        comment: "Button dismissing the alert informing the user that Vocable's application settings were successfully reset")
+        let alertString = String(localized: "settings.alert.reset_app_settings_success.body")
+        let dismissTitle = String(localized: "settings.alert.reset_app_settings_success.button.ok")
 
         let alertViewController = GazeableAlertViewController(alertTitle: alertString)
         alertViewController.addAction(GazeableAlertAction(title: dismissTitle))
@@ -397,10 +380,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
     }
 
     private func presentResetFailureAlert() {
-        let alertString = NSLocalizedString("settings.alert.reset_app_settings_failure.body",
-                                            comment: "body of alert presented when Vocable's application settings failed to reset")
-        let dismissTitle = NSLocalizedString("settings.alert.reset_app_settings_failure.button.ok",
-        comment: "Button dismissing the alert informing the user that Vocable's application settings failed to reset")
+        let alertString = String(localized: "settings.alert.reset_app_settings_failure.body")
+        let dismissTitle = String(localized: "settings.alert.reset_app_settings_failure.button.ok")
 
         let alertViewController = GazeableAlertViewController(alertTitle: alertString)
         alertViewController.addAction(GazeableAlertAction(title: dismissTitle))

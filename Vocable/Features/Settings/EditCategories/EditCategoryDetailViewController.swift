@@ -125,9 +125,8 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
 
             var config: VocableListContentConfiguration = .disclosureCellConfiguration(
-                withTitle: NSLocalizedString(
-                    "category_editor.detail.button.rename_category.title",
-                    comment: "Rename Category button label within the category detail screen")
+                withTitle: String(localized:
+                    "category_editor.detail.button.rename_category.title")
             ) { [weak self] in
                 self?.handleRenameCategory()
             }
@@ -145,9 +144,8 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
 
             var config: VocableListContentConfiguration = .toggleCellConfiguration(
-                withTitle: NSLocalizedString(
-                    "category_editor.detail.button.show_category.title",
-                    comment: "Show category button label within the category detail screen."),
+                withTitle: String(localized:
+                    "category_editor.detail.button.show_category.title"),
                 isOn: !category.isHidden
             ) { [weak self] in
                 self?.handleToggle(at: indexPath)
@@ -167,9 +165,8 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
 
             var config: VocableListContentConfiguration = .disclosureCellConfiguration(
-                withTitle: NSLocalizedString(
-                    "category_editor.detail.button.edit_phrases.title",
-                    comment: "Edit Phrases button label within the category detail screen")
+                withTitle: String(localized:
+                    "category_editor.detail.button.edit_phrases.title")
             ) { [weak self] in
                 self?.displayEditPhrasesViewController()
             }
@@ -390,9 +387,9 @@ private extension GazeableAlertViewController {
         removeAction: @escaping () -> Void,
         cancelAction: @escaping () -> Void
     ) -> GazeableAlertViewController {
-        let title = NSLocalizedString("category_editor.alert.delete_category_confirmation.title", comment: "Remove category alert title")
-        let removeButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.remove.title", comment: "Remove category alert action title")
-        let cancelButtonTitle = NSLocalizedString("category_editor.alert.delete_category_confirmation.button.cancel.title", comment: "Cancel alert action title")
+        let title = String(localized: "category_editor.alert.delete_category_confirmation.title")
+        let removeButtonTitle = String(localized: "category_editor.alert.delete_category_confirmation.button.remove.title")
+        let cancelButtonTitle = String(localized: "category_editor.alert.delete_category_confirmation.button.cancel.title")
 
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(.cancel(withTitle: cancelButtonTitle, handler: cancelAction))
@@ -404,7 +401,7 @@ private extension GazeableAlertViewController {
 
 private extension NSAttributedString {
     static var removeCategoryTitle: NSAttributedString {
-        let text = NSLocalizedString("category_editor.detail.button.remove_category.title", comment: "Remove category button label within the category detail screen.")
+        let text = String(localized: "category_editor.detail.button.remove_category.title")
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 22, weight: .bold)
         ]

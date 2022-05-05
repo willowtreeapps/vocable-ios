@@ -67,8 +67,7 @@ class HeadGazeWindow: UIWindow {
         guard !UIApplication.shared.isGazeTrackingActive, AppConfig.isHeadTrackingEnabled, !trackingDisabledByTouch else {
             return
         }
-        let title = NSLocalizedString("gaze_tracking.error.excessive_head_distance.title",
-                                      comment: "Warning message presented to the user when the head tracking system")
+        let title = String(localized: "gaze_tracking.error.excessive_head_distance.title")
         ToastWindow.shared.presentPersistentWarning(with: title)
     }
     
