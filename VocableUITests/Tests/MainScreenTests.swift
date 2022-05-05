@@ -80,10 +80,10 @@ class MainScreenTests: XCTestCase {
     func testDisablingCategory() {
         let hiddenCategory = secondTestCategory
         SettingsScreen.navigateToSettingsCategoryScreen()
-        XCTAssertTrue(SettingsScreen.locateCategoryCell(hiddenCategory.presetCategory.id).element.exists)
+        XCTAssertTrue(SettingsScreen.locateCategoryCell(hiddenCategory.presetCategory.utterance).element.exists)
 
         // Navigate to the category and hide it.
-        SettingsScreen.openCategorySettings(category: hiddenCategory)
+        SettingsScreen.openCategorySettings(category: hiddenCategory.presetCategory.utterance)
         SettingsScreen.showCategoryButton.tap()
         
         // Return to the main screen
