@@ -59,6 +59,8 @@ class Analytics {
     private var cancellables = Set<AnyCancellable>()
     private let queue = DispatchQueue(label: "Analytics-Processing")
 
+    private let mixPanel = Mixpanel.mainInstance()
+
     private init() {
 
         guard let token = Analytics.token else {
@@ -77,26 +79,28 @@ class Analytics {
 
     private func registerSuperProperties() {
         let listeningMode = AppConfig.listeningMode
-        register(superProperty: "Listening Mode Enabled", using: listeningMode.$listeningModeEnabledPreference)
-        register(superProperty: "'Hey Vocable' Enabled", using: listeningMode.$hotwordEnabledPreference)
-        register(superProperty: "Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled)
-    }
-
-    private func register(superProperty: String, using publisher: CurrentValueSubject<Bool, Never>) {
-        register(superProperty: superProperty, using: publisher.eraseToAnyPublisher())
-    }
-
-    private func register(superProperty: String, using publisher: AnyPublisher<Bool, Never>) {
-        publisher
-            .receive(on: queue)
-            .sink { newValue in
-                Mixpanel.mainInstance().registerSuperProperties([superProperty: newValue])
-            }.store(in: &cancellables)
+        cancellables = [mixPanel.registerSuperProperty( "Listening Mode Enabled", using: listeningMode.$listeningModeEnabledPreference, on: queue),
+                        mixPanel.registerSuperProperty( "'Hey Vocable' Enabled", using: listeningMode.$hotwordEnabledPreference, on: queue),
+                        mixPanel.registerSuperProperty( "Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue)]
     }
 
     // MARK: - Events
 
     func appDidLaunch() {
         Mixpanel.mainInstance().track(event: "App Open")
+    }
+}
+
+private extension MixpanelInstance {
+    func registerSuperProperty<P: Publisher>(
+        _ name: String,
+        using publisher: P,
+        on queue: DispatchQueue
+    ) -> AnyCancellable where P.Output: MixpanelType, P.Failure == Never {
+        publisher
+            .receive(on: queue)
+            .sink { [weak self] value in
+                self?.registerSuperProperties([name: value])
+            }
     }
 }
