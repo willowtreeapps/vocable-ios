@@ -270,6 +270,21 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
         <target>Speech services unavailable</target>
         <note>Listen mode error state title for when Apple's speech to text service is unavailable</note>
       </trans-unit>
+      <trans-unit id="listening_mode.feedback.confirmation.title" xml:space="preserve">
+        <source>Thank You!</source>
+        <target>Thank You!</target>
+        <note>Submit feedback confirmation text</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.hint.text" xml:space="preserve">
+        <source>Don’t like these responses? Anonymously share this question to help improve listening mode.</source>
+        <target>Don’t like these responses? Anonymously share this question to help improve listening mode.</target>
+        <note>Submit feedback hint text</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.submit.title" xml:space="preserve">
+        <source>Share with Developers</source>
+        <target>Share with Developers</target>
+        <note>MARK: Listening Mode Empty State Titles</note>
+      </trans-unit>
       <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve">
         <source>Select something below to speak</source>
         <target>Select something below to speak</target>
