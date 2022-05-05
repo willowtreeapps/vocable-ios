@@ -18,7 +18,7 @@ protocol ListeningResponseViewControllerDelegate: AnyObject {
 @available(iOS 14.0, *)
 final class ListeningResponseViewController: VocableViewController {
 
-    private enum Content: Equatable {
+    enum Content: Equatable {
         case numerical
         case choices([String])
         case empty(ListeningEmptyState, action: EmptyStateView.ButtonConfiguration = nil)
@@ -133,30 +133,39 @@ final class ListeningResponseViewController: VocableViewController {
             incomingTransition = .none
         }
 
+        let currentContext = ListenModeDebugStorage.shared.contexts.first
         switch content {
         case .numerical:
-            let viewController = NumericCategoryContentViewController()
-            viewController.$lastUtterance
+            let numericContentController = NumericCategoryContentViewController()
+            numericContentController.$lastUtterance
                 .sink { [weak self] utterance in
                     self?.lastUtterance = utterance
                 }
-                .store(in: &viewController.disposables)
-            setContentViewController(viewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
+                .store(in: &numericContentController.disposables)
+            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: numericContentController, loggingContext: currentContext)
+            setContentViewController(wrapperViewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
 
         case .choices(let choices):
-            let viewController = ListeningResponseContentViewController()
-            viewController.content = choices
-            viewController.synthesizedSpeechQueue = synthesizedSpeechQueue
-            viewController.$lastUtterance
+            let reponseContentController = ListeningResponseContentViewController()
+            reponseContentController.content = choices
+            reponseContentController.synthesizedSpeechQueue = synthesizedSpeechQueue
+            reponseContentController.$lastUtterance
                 .sink { [weak self] utterance in
                     self?.lastUtterance = utterance
                 }
-                .store(in: &viewController.disposables)
-            setContentViewController(viewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
+                .store(in: &reponseContentController.disposables)
+            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: reponseContentController, loggingContext: currentContext)
+            setContentViewController(wrapperViewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
 
         case .empty(let state, let action):
-            let viewController = ListeningResponseEmptyStateViewController(state: state, action: action)
-            setContentViewController(viewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
+            switch state {
+            case .listenModeFreeResponse:
+                let viewController = ListeningResponseFeedbackViewController(viewController: ListeningResponseEmptyStateViewController(state: state, action: action), loggingContext: currentContext)
+                setContentViewController(viewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
+            default:
+                let viewController = ListeningResponseEmptyStateViewController(state: state, action: action)
+                setContentViewController(viewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
+            }
         }
     }
 
