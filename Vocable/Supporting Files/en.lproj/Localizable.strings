@@ -69,42 +69,44 @@
 /* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Confirm";
 
-/* edit categories settings menu item */
-"settings.cell.categories.title" = "Categories and Phrases";
-
-/* contact developers settings menu item */
-"settings.cell.contact_developers.title" = "Contact Developers";
-
 /* edit user's favorite phrases category settings menu item */
 "settings.cell.edit_user_favorites.title_format" = "Edit %@";
 
-/* Settings head tracking cell title */
-"settings.cell.head_tracking.title" = "Head Tracking";
 
-/* view privacy policy settings menu item */
-"settings.cell.privacy_policy.title" = "Privacy Policy";
-
-/* reset all settings menu item */
-"settings.cell.reset_all.title" = "Reset App Settings";
-
-/* edit cursor selection mode settings menu item */
-"settings.cell.selection_mode.title" = "Selection Mode";
-
-/* edit cursor timing and sensititivy settings menu item */
-"settings.cell.timing_sensitivity.title" = "Timing and Sensitivity";
-
-/* tune cursor debug settings menu item */
-"settings.cell.tune_cursor.title" = "Tune Cursor";
-
-/* Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode. */
-"settings.cell.listening_mode.title" = "Listening Mode";
+// MARK: Settings Screen Options strings
 
 /* Settings screen header title */
 "settings.header.title" = "Settings";
 
+/* edit categories settings menu item */
+"settings.cell.categories.title" = "Categories and Phrases";
+
+/* edit cursor timing and sensititivy settings menu item */
+"settings.cell.timing_sensitivity.title" = "Timing and Sensitivity";
+
+/* reset all settings menu item */
+"settings.cell.reset_all.title" = "Reset App Settings";
+
+/* Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode. */
+"settings.cell.listening_mode.title" = "Listening Mode";
+
+/* edit cursor selection mode settings menu item */
+"settings.cell.selection_mode.title" = "Selection Mode";
+
+/* tune cursor debug settings menu item */
+"settings.cell.tune_cursor.title" = "Tune Cursor";
+
+/* view privacy policy settings menu item */
+"settings.cell.privacy_policy.title" = "Privacy Policy";
+
+/* contact developers settings menu item */
+"settings.cell.contact_developers.title" = "Contact Developers";
 
 
-// MARK: Category specific Settings
+// MARK: Category Settings Strings
+
+/* Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories*/
+"categories_list_editor.header.title" = "Categories";
 
 /* Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name. */
 "category_editor.detail.button.rename_category.title" = "Rename Category";
@@ -119,29 +121,35 @@
 "category_editor.detail.button.remove_category.title" = "Remove Category";
 
 
-
-// MARK: Category and Phrases editing alerts
+// MARK: Edit Category and Phrases Alerts
 
 /* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "Changes Saved";
 
-/* Category close confirmation text.  This text appears in an alert when there are edits made to the Category title that have not been saved. */
+/* Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. */
 "text_editor.alert.cancel_editing_confirmation.title" = "If you close without saving, your changes will be lost.";
 
-/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title that have not been saved.  Pressing the button will allow editing the category title. */
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
 
-/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title that have not been saved.  Pressing the button will not save any changes and close the keyboard view. */
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
 
-/* Duplicate Alert text.  This text appears in an alert when a category is created with the same title as an existing category. */
+/* Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category. */
 "text_editor.alert.category_name_exists.title" = "This category name already exists. Would you like to create a duplicate?";
 
-/* Duplicate Alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.  Pressing the button will allow continuing to edit category title */
+/* Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title */
 "text_editor.alert.category_name_exists.cancel.button" = "Cancel";
 
 /* Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
 "text_editor.alert.category_name_exists.create.button" = "Create Duplicate";
+
+
+
+// MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere.
 
 "category_editor.alert.cancel_editing_confirmation.title" = "If you close without saving, your changes will be lost.";
 
@@ -149,62 +157,103 @@
 
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Cancel";
 
+
+// MARK: Edit Phrase Strings
+
+/* Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes. */
 "phrase_editor.alert.cancel_editing_confirmation.title" = "If you close without saving, your changes will be lost.";
 
+/* Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Discard";
 
+/* Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
 "phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Continue Editing";
 
+/* Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category. */
 "phrase_editor.alert.phrase_name_exists.title" = "This phrase already exists. Would you like to create a duplicate?";
 
+/* Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title */
 "phrase_editor.alert.phrase_name_exists.cancel.button" = "Cancel";
 
+/* Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
 "phrase_editor.alert.phrase_name_exists.create.button" = "Create Duplicate";
 
-"categories_list_editor.header.title" = "Categories";
 
+// MARK: Timing and Sensitivity Settings Strings
+
+/* Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting*/
 "timing_and_sensitivity.header.title" = "Timing and Sensitivity";
 
+/* Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5 */
 "timing_and_sensitivity.cell.dwell_duration.title" = "Hover Time";
 
+/* Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor. */
 "timing_and_sensitivity.cell.cursor_sensitivity.title" = "Cursor Sensitivity";
 
+/* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.low.title" = "Low";
 
+/* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.medium.title" = "Medium";
 
+/* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.high.title" = "High";
 
+
+// MARK: Selection Mode Settings Strings
+
+/* Selection mode setting header title*/
 "selection_mode.header.title" = "Selection Mode";
 
+/* Additonal footer text noting heading tracking compatibility */
+"settings.selection_mode.head_tracking_unsupported_footer" = "This %1$@ on %2$@ %3$@ does not support head tracking.\n\nHead tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.";
+
+/* Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle. */
+"settings.cell.head_tracking.title" = "Head Tracking";
+
+
+// MARK: Category Empty State Strings
+
+/* Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet. */
 "recents_empty_state.header.title" = "No recently used phrases";
 
+/* Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet. */
 "recents_empty_state.body.title" = "Start using Vocable to see your most recently used phrases here.";
 
+/* Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen. */
 "empty_state.header.title" = "You don't have any phrases saved yet.";
 
+/* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
 "empty_state.button.title" = "Add Phrase";
 
-/* Reset app settings confirmation prompt */
+
+// MARK: Reset app settings strings
+
+/* Reset setting alert confirmation prompt */
 "settings.alert.reset_app_settings_confirmation.body" = "Are you sure you want to reset Vocable to default settings? This action cannot be undone.";
 
+/* Reset setting alert Cancel button.  This will cancel the reset operation. */
 "settings.alert.reset_app_settings_confirmation.button.cancel.title" = "Cancel";
 
+/* Reset setting alert settings Reset button.  This will continue with the reset operation. */
 "settings.alert.reset_app_settings_confirmation.button.confirm.title" = "Reset";
 
 /* Reset app settings success alert */
-
 "settings.alert.reset_app_settings_success.body" = "Vocable has been reset successfully.";
 
+/* Button to dismiss the Reset app success alert */
 "settings.alert.reset_app_settings_success.button.ok" = "OK";
 
 /* Reset app settings failure alert */
-
 "settings.alert.reset_app_settings_failure.body" = "Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.";
 
+/* Button to dismiss the Reset app failure alert */
 "settings.alert.reset_app_settings_failure.button.ok" = "OK";
 
-"settings.selection_mode.head_tracking_unsupported_footer" = "This %1$@ on %2$@ %3$@ does not support head tracking.\n\nHead tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.";
 
 /* Listening Mode preferences screen title */
 "settings.listening_mode.title" = "Listening Mode";
