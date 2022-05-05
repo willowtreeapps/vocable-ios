@@ -41,7 +41,7 @@ final class ListeningFeedbackSubmitView: UIView {
                            ? .systemFont(ofSize: 22)
                            : .systemFont(ofSize: 15)
 
-        let hintText = NSLocalizedString("listening_mode.feedback.hint.text", comment: "Submit feedback hint text")
+        let hintText = String(localized: "listening_mode.feedback.hint.text")
         hintLabel.text = hintText
         hintLabel.font = hintFont
         hintLabel.textColor = .defaultTextColor
@@ -52,7 +52,7 @@ final class ListeningFeedbackSubmitView: UIView {
                            ? .systemFont(ofSize: 26, weight: .bold)
                            : .systemFont(ofSize: 15, weight: .bold)
 
-        let buttonTitle = NSLocalizedString("listening_mode.feedback.submit.title", comment: "Submit feedback button title")
+        let buttonTitle = String(localized: "listening_mode.feedback.submit.title")
         submitButton.setTitle(buttonTitle, for: .normal)
         submitButton.contentEdgeInsets = .init(top: 10, left: 16, bottom: 10, right: 16)
         submitButton.titleLabel?.font = buttonFont
