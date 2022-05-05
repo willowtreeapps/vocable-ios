@@ -340,8 +340,11 @@
 
 // MARK: Listening Mode Empty State Titles
 
+/* Share with Developer button.  The button appears if Listen mode could not generate a reponese. */
 "listening_mode.feedback.submit.title" = "Share with Developers";
 
+/* Information text around what the Share with Deeveloper button does.*/
 "listening_mode.feedback.hint.text" = "Don’t like these responses? Anonymously share this question to help improve listening mode.";
 
+/* Thank you confirmation.  This text appears after sharing with developer*/
 "listening_mode.feedback.confirmation.title" = "Thank You!";
