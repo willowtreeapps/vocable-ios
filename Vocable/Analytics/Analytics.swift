@@ -145,9 +145,9 @@ extension Analytics.Event {
 
     static let appOpen = Self(name: "App Open")
 
-    static let headingTrackingChanged = Self(name: "Head Tracking Setting")
-    static let listeningModeChanged = Self(name: "Listening Mode Setting")
-    static let heyVocableModeChanged = Self(name: "'Hey Vocable' Setting")
+    static let headingTrackingChanged = Self(name: "Head Tracking Settings Changed")
+    static let listeningModeChanged = Self(name: "Listening Mode Settings Changed")
+    static let heyVocableModeChanged = Self(name: "'Hey Vocable' Settings Changed")
 
     static func transcriptionProcessed(result: TranscriptionResult) -> Self {
         Self(name: "Listen Mode Phrase Processed", properties: ["Result Type": result.description])
