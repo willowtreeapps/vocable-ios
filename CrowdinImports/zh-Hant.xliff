@@ -25,7 +25,7 @@
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve" approved="yes">
         <source>Categories</source>
         <target state="final">目录</target>
-        <note>Categories list editor screen header title</note>
+        <note>Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -60,7 +60,7 @@
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve" approved="yes">
         <source>Remove Category</source>
         <target state="final">刪除類別?</target>
-        <note>Remove category button label within the category detail screen.</note>
+        <note>Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation.</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve" approved="yes">
         <source>Changes saved</source>
@@ -70,12 +70,12 @@
       <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve" approved="yes">
         <source>Changes Saved</source>
         <target state="final">更改已儲存</target>
-        <note>Saved to Categories</note>
+        <note>Toast message that appears after saving edits made to the Category title</note>
       </trans-unit>
       <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve" approved="yes">
         <source>No presets found</source>
         <target state="final">找不到預設</target>
-        <note>Debugging error message for when preloaded content is not found</note>
+        <note>This seems to not be used currently</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>

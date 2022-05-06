@@ -1,4 +1,4 @@
-/* Categories list editor screen header title */
+/* Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories */
 "categories_list_editor.header.title" = "目录";
 
 /* (No Comment) */
@@ -19,16 +19,16 @@
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "取消";
 
-/* Remove category button label within the category detail screen. */
+/* Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation. */
 "category_editor.detail.button.remove_category.title" = "刪除類別?";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "更改已儲存";
 
-/* Saved to Categories */
+/* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "更改已儲存";
 
-/* Debugging error message for when preloaded content is not found */
+/* This seems to not be used currently */
 "debug.assertion.presets_file_not_found" = "找不到預設";
 
 /* Cancel alert action title */

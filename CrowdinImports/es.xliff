@@ -35,7 +35,7 @@
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve" approved="yes">
         <source>Categories</source>
         <target state="final">Categorías</target>
-        <note>Categories list editor screen header title</note>
+        <note>Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -80,22 +80,22 @@
       <trans-unit id="category_editor.detail.button.edit_phrases.title" xml:space="preserve" approved="yes">
         <source>Edit Phrases</source>
         <target state="final">Editar expresiones</target>
-        <note>Edit Phrases button label within the category detail screen</note>
+        <note>Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited.</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve" approved="yes">
         <source>Remove Category</source>
         <target state="final">Eliminar Categoría</target>
-        <note>Remove category button label within the category detail screen.</note>
+        <note>Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation.</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.rename_category.title" xml:space="preserve" approved="yes">
         <source>Rename Category</source>
         <target state="final">Renombrar Categoría</target>
-        <note>Rename Category button label within the category detail screen</note>
+        <note>Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name.</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve" approved="yes">
         <source>Show Category</source>
         <target state="final">Mostrar categoría</target>
-        <note>Show category button label within the category detail screen.</note>
+        <note>Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list.</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve" approved="yes">
         <source>Changes saved</source>
@@ -105,22 +105,22 @@
       <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve" approved="yes">
         <source>Changes Saved</source>
         <target state="final">Cambios guardados</target>
-        <note>Saved to Categories</note>
+        <note>Toast message that appears after saving edits made to the Category title</note>
       </trans-unit>
       <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve" approved="yes">
         <source>No presets found</source>
         <target state="final">No hay presets disponibles</target>
-        <note>Debugging error message for when preloaded content is not found</note>
+        <note>This seems to not be used currently</note>
       </trans-unit>
       <trans-unit id="empty_state.button.title" xml:space="preserve" approved="yes">
         <source>Add Phrase</source>
         <target state="final">Agregar Phrase</target>
-        <note>Empty state Add Phrase button title</note>
+        <note>Category empty state button.  This button appears with the empty state to allow the user to add a phrase</note>
       </trans-unit>
       <trans-unit id="empty_state.header.title" xml:space="preserve" approved="yes">
         <source>You don't have any phrases saved yet.</source>
         <target state="final">Aún no tienes ninguna frase guardada.</target>
-        <note>Empty state title</note>
+        <note>Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen.</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -150,27 +150,30 @@
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve" approved="yes">
         <source>Continue Editing</source>
         <target state="final">Seguir editando</target>
-        <note>Continue editing alert action title</note>
+        <note>Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve" approved="yes">
         <source>Discard</source>
         <target state="final">Descartar</target>
-        <note>Discard changes alert action title</note>
+        <note>Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">Cancelar</target>
-        <note>Phrase already exists alert cancel button</note>
+        <note>Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.phrase_name_exists.create.button" xml:space="preserve" approved="yes">
         <source>Create Duplicate</source>
         <target state="final">Crear duplicado</target>
-        <note>Phrase already exists alert create button</note>
+        <note>Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.phrase_name_exists.title" xml:space="preserve" approved="yes">
         <source>This phrase already exists. Would you like to create a duplicate?</source>
         <target state="final">Esta frase ya existe. ¿Le gustaría crear un duplicado?</target>
-        <note>Phrase already exists alert title</note>
+        <note>Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve" approved="yes">
         <source>Saved to %@</source>
@@ -197,17 +200,17 @@
       <trans-unit id="recents_empty_state.body.title" xml:space="preserve" approved="yes">
         <source>Start using Vocable to see your most recently used phrases here.</source>
         <target state="final">Empieza a usar Vocable para ver tus frases usadas más recientemente aquí.</target>
-        <note>Recents empty state description</note>
+        <note>Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet.</note>
       </trans-unit>
       <trans-unit id="recents_empty_state.header.title" xml:space="preserve" approved="yes">
         <source>No recently used phrases</source>
         <target state="final">No hay frases usadas recientemente</target>
-        <note>Recents empty state title</note>
+        <note>Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet.</note>
       </trans-unit>
       <trans-unit id="selection_mode.header.title" xml:space="preserve" approved="yes">
         <source>Selection Mode</source>
         <target state="final">Modo de selección</target>
-        <note>Selection mode screen header title</note>
+        <note>Selection mode setting header title</note>
       </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve" approved="yes">
         <source>OK</source>
@@ -217,17 +220,17 @@
       <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve" approved="yes">
         <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
         <target state="final">¿Está seguro de que desea restablecer Vocable a la configuración predeterminada? Esta acción no se puede deshacer.</target>
-        <note>Reset app settings confirmation prompt</note>
+        <note>Reset setting alert confirmation prompt</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">Cancelar</target>
-        <note>Button cancelling the action to reset Vocable's application settings</note>
+        <note>Reset setting alert Cancel button.  This will cancel the reset operation.</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_confirmation.button.confirm.title" xml:space="preserve" approved="yes">
         <source>Reset</source>
         <target state="final">Reiniciar</target>
-        <note>Button confirming that the user would like to reset Vocable's application settings</note>
+        <note>Reset setting alert settings Reset button.  This will continue with the reset operation.</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve" approved="yes">
         <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
@@ -237,12 +240,12 @@
       <trans-unit id="settings.alert.reset_app_settings_failure.button.ok" xml:space="preserve" approved="yes">
         <source>OK</source>
         <target state="final">OK</target>
-        <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset</note>
+        <note>Button to dismiss the Reset app failure alert</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve" approved="yes">
         <source>OK</source>
         <target state="final">OK</target>
-        <note>Button dismissing the alert informing the user that Vocable's application settings were successfully reset</note>
+        <note>Button to dismiss the Reset app success alert</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -272,7 +275,7 @@
       <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve" approved="yes">
         <source>Head Tracking</source>
         <target state="final">Seguimiento de la cabeza</target>
-        <note>Settings head tracking cell title</note>
+        <note>Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</note>
       </trans-unit>
       <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve" approved="yes">
         <source>Privacy Policy</source>
@@ -311,62 +314,66 @@ Head tracking is supported on all devices with a %4$@ camera, and on most device
         <target state="translated">Este %1$@ en %2$@ %3$@ no es compatible con el seguimiento de cabeza.
 
 El seguimiento de cabeceras es compatible con todos los dispositivos con una cámara %4$@ , y en la mayoría de dispositivos con %6$@.</target>
-        <note>Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking</note>
+        <note>Additonal footer text noting heading tracking compatibility</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve" approved="yes">
         <source>Continue Editing</source>
         <target state="final">Continuar Edición</target>
-        <note>Continue editing alert action title</note>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve" approved="yes">
         <source>Discard</source>
         <target state="final">Descartar</target>
-        <note>Discard changes alert action title</note>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">Cancelar</target>
-        <note>Category already exists alert cancel button</note>
+        <note>Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.category_name_exists.create.button" xml:space="preserve" approved="yes">
         <source>Create Duplicate</source>
         <target state="final">Crear duplicado</target>
-        <note>Category already exists alert create button</note>
+        <note>Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.category_name_exists.title" xml:space="preserve" approved="yes">
         <source>This category name already exists. Would you like to create a duplicate?</source>
         <target state="final">El nombre de esta categoría ya existe. ¿Desea crear un duplicado?</target>
-        <note>Category already exists alert title</note>
+        <note>Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve" approved="yes">
         <source>High</source>
         <target state="final">Alta</target>
-        <note>High cursor sensitivity option button</note>
+        <note>Button option for the Curson Sensitivity setting.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve" approved="yes">
         <source>Low</source>
         <target state="final">Baja</target>
-        <note>Low cursor sensitivity option button</note>
+        <note>Button option for the Curson Sensitivity setting.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve" approved="yes">
         <source>Medium</source>
         <target state="final">Media</target>
-        <note>Medium cursor sensitivity option button</note>
+        <note>Button option for the Curson Sensitivity setting.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve" approved="yes">
         <source>Cursor Sensitivity</source>
         <target state="final">Sensibilidad del cursor</target>
-        <note>Cursor sensitivity configuration option name</note>
+        <note>Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve" approved="yes">
         <source>Hover Time</source>
         <target state="final">Hover Tme</target>
-        <note>Dwell duration configuration option name</note>
+        <note>Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve" approved="yes">
         <source>Timing and Sensitivity</source>
         <target state="final">Tiempo y sensibilidad</target>
-        <note>Timing and sensitivity header title</note>
+        <note>Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting</note>
       </trans-unit>
     </body>
   </file>
