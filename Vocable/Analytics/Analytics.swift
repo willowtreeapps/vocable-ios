@@ -116,25 +116,7 @@ class Analytics {
     }
 }
 
-extension Analytics.Event {
-
-    enum ListeningPhraseResult: String {
-        case successful = "Successful Result"
-        case soundsComplicated = "Sounds Complicated"
-
-        var description: String { rawValue }
-    }
-
-    static let appOpen = Self(name: "App Open")
-
-    static let headingTrackingChanged = Self(name: "Head Tracking Setting")
-    static let listeningModeChanged = Self(name: "Listening Mode Setting")
-    static let heyVocableModeChanged = Self(name: "'Hey Vocable' Setting")
-
-    static func phraseProcessed(result: ListeningPhraseResult) -> Self {
-        Self(name: "Listen Mode Phrase Processed", properties: ["Result Type": result.description])
-    }
-}
+// MARK: MixpanelInstance
 
 private extension MixpanelInstance {
     func registerSuperProperty<P: Publisher>(
@@ -147,5 +129,37 @@ private extension MixpanelInstance {
             .sink { [weak self] value in
                 self?.registerSuperProperties([name: value])
             }
+    }
+}
+
+// MARK: Analytics Events
+
+extension Analytics.Event {
+
+    enum TranscriptionResult: String {
+        case successful = "Successful Result"
+        case soundsComplicated = "Sounds Complicated"
+
+        var description: String { rawValue }
+    }
+
+    static let appOpen = Self(name: "App Open")
+
+    static let headingTrackingChanged = Self(name: "Head Tracking Setting")
+    static let listeningModeChanged = Self(name: "Listening Mode Setting")
+    static let heyVocableModeChanged = Self(name: "'Hey Vocable' Setting")
+
+    static func transcriptionProcessed(result: TranscriptionResult) -> Self {
+        Self(name: "Listen Mode Phrase Processed", properties: ["Result Type": result.description])
+    }
+
+    static func transcriptionSubmitted(_ transcription: String, result: [String]?) -> Self {
+        let formattedResult = result?.joined(separator: ", ")
+        return Self(name: "Phrase Submitted for Review",
+             properties: [
+                "Transcription": transcription,
+                "Result": formattedResult ?? "Sounds Complicated",
+                "Transcription Character Count": transcription.count
+             ])
     }
 }

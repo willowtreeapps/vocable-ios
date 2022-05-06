@@ -142,7 +142,7 @@ final class ListeningResponseViewController: VocableViewController {
                     self?.lastUtterance = utterance
                 }
                 .store(in: &numericContentController.disposables)
-            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: numericContentController, loggingContext: currentContext)
+            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: numericContentController, loggingContext: currentContext, choices: numericContentController.contentItems())
             setContentViewController(wrapperViewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
 
         case .choices(let choices):
@@ -154,7 +154,7 @@ final class ListeningResponseViewController: VocableViewController {
                     self?.lastUtterance = utterance
                 }
                 .store(in: &reponseContentController.disposables)
-            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: reponseContentController, loggingContext: currentContext)
+            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: reponseContentController, loggingContext: currentContext, choices: choices)
             setContentViewController(wrapperViewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
 
         case .empty(let state, let action):
@@ -304,12 +304,12 @@ final class ListeningResponseViewController: VocableViewController {
         ListenModeDebugStorage.shared.append(result.context)
 
         guard let responses = result.responses, !responses.isEmpty else {
-            Analytics.shared.track(.phraseProcessed(result: .soundsComplicated))
+            Analytics.shared.track(.transcriptionProcessed(result: .soundsComplicated))
             content = .empty(.listenModeFreeResponse)
             return
         }
 
-        Analytics.shared.track(.phraseProcessed(result: .successful))
+        Analytics.shared.track(.transcriptionProcessed(result: .successful))
         if case .numerical = result.classification {
             content = .numerical
         } else {

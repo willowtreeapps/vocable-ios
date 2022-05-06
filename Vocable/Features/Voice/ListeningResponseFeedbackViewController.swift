@@ -24,6 +24,7 @@ final class ListeningResponseFeedbackViewController: UIViewController {
 
     private let viewController: UIViewController
     private let loggingContext: VLLoggingContext?
+    private let choices: [String]?
 
     private var contentDisposables = Set<AnyCancellable>()
 
@@ -37,9 +38,10 @@ final class ListeningResponseFeedbackViewController: UIViewController {
 
     // MARK: Initializers
 
-    init(viewController: UIViewController, loggingContext: VLLoggingContext?) {
+    init(viewController: UIViewController, loggingContext: VLLoggingContext?, choices: [String]? = nil) {
         self.viewController = viewController
         self.loggingContext = loggingContext
+        self.choices = choices
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -104,7 +106,10 @@ final class ListeningResponseFeedbackViewController: UIViewController {
     // MARK: Private Helpers
 
     private func submitFeedback() {
-        // TODO: submit feedback to mixpanel (use loggingContext)
+        if let loggingContext = loggingContext {
+            Analytics.shared.track(.transcriptionSubmitted(loggingContext.input, result: choices))
+        }
+
         UIView.transition(with: feedbackStackView, duration: 0.35, options: .transitionCrossDissolve) { [self] in
             self.feedbackViewHeightConstraint?.constant = self.contentFeedbackLayoutGuide.layoutFrame.height
             self.feedbackViewHeightConstraint?.isActive = true
