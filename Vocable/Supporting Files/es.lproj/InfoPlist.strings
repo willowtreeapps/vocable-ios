@@ -10,3 +10,6 @@
 /* Privacy - Microphone Usage Description */
 "NSMicrophoneUsageDescription" = "Vocable usa el micrófono solo cuando el modo de escucha está habilitado. Vocable transcribe audio en texto; no se almacena ni transmite, excepto cuando el usuario elige compartir esta información de forma anónima con los desarrolladores para ayudar a mejorar el modo de escucha.";
 
+/* Privacy - Speech Recognition Usage Description */
+"NSSpeechRecognitionUsageDescription" = "Cuando el modo de escucha está habilitado, Vocable utiliza el reconocimiento de voz para convertir los datos de audio en texto. El habla transcrita no se almacena ni transmite, excepto cuando el usuario elige compartir esta información de forma anónima con los desarrolladores para ayudar a mejorar el modo de escucha.";
+
