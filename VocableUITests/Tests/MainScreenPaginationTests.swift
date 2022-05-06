@@ -8,73 +8,40 @@
 
 import XCTest
 
-class MainScreenPaginationTests: CustomPhraseBaseTest {
+class MainScreenPaginationTests: PaginationBaseTest {
     
     func testDeletingPhrasesAdjustsPagination() {
-        for phrase in listOfPhrases.startIndex..<8 {
-            CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
-        }
-        
         // Navigate to main screen to verify page numbers; expected to be "Page 1 of 2"
-        CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
-        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         VTAssertPaginationEquals(1, of: 2)
         
         // Delete one of the phrases to reduce the total number of pages to 1.
-        SettingsScreen.navigateToSettingsCategoryScreen()
-        SettingsScreen.openCategorySettings(category: customCategoryName)
+        MainScreen.navigateToSettingsAndOpenCategory(name: categoryOne.presetCategory.utterance)
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         CustomCategoriesScreen.categoriesPageDeletePhraseButton.firstMatch.tap()
-        SettingsScreen.alertDeleteButton.tap()
+        SettingsScreen.alertDeleteButton.tap(afterWaitingForExistenceWithTimeout: 0.5)
         
         // Navigate back to the home screen to verify that the total pages reduced from 2 to 1.
         CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
-        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
         VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)
     }
     
     func testAddingPhrasesAdjustsPagination() {
-        // Use array slices to split the phrase bank into two sets of 8 phrases
-        let listMidpoint = listOfPhrases.count / 2
-        let firstSetOfPhrases = listOfPhrases[..<listMidpoint]
-        let secondSetOfPhrases = listOfPhrases[listMidpoint...]
-        
-        firstSetOfPhrases.forEach { phrase in
-            CustomCategoriesScreen.addPhrase(phrase)
-        }
-        
-        // Navigate to main screen to verify page numbers; expected to be "Page 1 of 1"
-        CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
-        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
+        // Navigate to our test category to verify initial page numbers; expected to be "Page 1 of 1"
+        MainScreen.locateAndSelectDestinationCategory(CategoryIdentifier(categoryThree.presetCategory.id))
         VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)
         
-        // Add 8 more phrases to verify that the pagination adjusts as expected; "Page 1 of 2"
-        SettingsScreen.navigateToSettingsCategoryScreen()
-        SettingsScreen.openCategorySettings(category: customCategoryName)
-        CustomCategoriesScreen.editCategoryPhrasesButton.tap()
-        secondSetOfPhrases.forEach { phrase in
-            CustomCategoriesScreen.addPhrase(phrase)
-        }
+        // Use the '+ Add Phrase' button to add a new phrase
+        MainScreen.addPhraseLabel.tap()
+        KeyboardScreen.typeText("A")
+        KeyboardScreen.checkmarkAddButton.tap()
         
-        CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
-        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
-        VTAssertPaginationEquals(1, of: 2)
+        // Verify that the pagination adjusts as expected
+        VTAssertPaginationEquals(1, of: 2, enabledArrows: .both)
     }
     
-    /* TODO: There is an existing bug(s) that causes this test to fail with
-     animations turned off. We will re-enable this test once they're fixed.
-     https://github.com/willowtreeapps/vocable-ios/issues/597
-     https://github.com/willowtreeapps/vocable-ios/issues/594
-     */
     func testCanScrollPagesWithPaginationArrows() {
-        // Add enough phrases to push the total number of pages to 2
-        listOfPhrases.forEach { phrase in
-            CustomCategoriesScreen.addPhrase(phrase)
-        }
-        
-        // Return to the Main Screen and navigate to the test category
-        CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
-        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
+        // Navigate to the test category
+        MainScreen.locateAndSelectDestinationCategory(CategoryIdentifier(categoryTwo.presetCategory.id))
         
         // Verify that the category's pagination is "Page 1 of 2"; page next buttons are enabled
         VTAssertPaginationEquals(1, of: 2)
@@ -96,18 +63,9 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         VTAssertPaginationEquals(1, of: 2)
     }
     
-    func testPaginationAdjustsToDeviceOrientation() {
-        // Add enough phrases to ensure that rotating the device will add a page; 7 phrases
-        for phrase in listOfPhrases.startIndex..<7 {
-            CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
-        }
-        
-        // Return to the Main Screen and navigate to the test category
-        CustomCategoriesScreen.returnToMainScreenFromEditPhrases()
-        MainScreen.locateAndSelectDestinationCategory(customCategoryIdentifier!)
-        XCTAssertEqual(MainScreen.selectedCategoryCell.identifier, customCategoryIdentifier?.identifier)
-        
+    func testPaginationAdjustsToDeviceOrientation() {        
         // Verify we're on the first page
+        MainScreen.locateAndSelectDestinationCategory(CategoryIdentifier(categoryThree.presetCategory.id))
         VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)
         
         // Rotate the device

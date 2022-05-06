@@ -8,18 +8,12 @@
 
 import XCTest
 
-class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
+class CategoryPhrasesPaginationTests: PaginationBaseTest {
     
-    /* TODO: There is an existing bug(s) that causes this test to fail with
-     animations turned off. We will re-enable this test once they're fixed.
-     https://github.com/willowtreeapps/vocable-ios/issues/597
-     https://github.com/willowtreeapps/vocable-ios/issues/594
-     */
     func testCanNavigatePages() {
-        // Add enough phrases to have 2 pages.
-        listOfPhrases.forEach { phrase in
-            CustomCategoriesScreen.addPhrase(phrase)
-        }
+        // Navigate to our test category
+        MainScreen.navigateToSettingsAndOpenCategory(name: categoryTwo.presetCategory.utterance)
+        CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         
         // Verify that the user is on the first page and the next page buttons are enabled.
         VTAssertPaginationEquals(1, of: 2, enabledArrows: .both)
@@ -36,36 +30,29 @@ class CategoryPhrasesPaginationTests: CustomPhraseBaseTest {
             CustomCategoriesScreen.paginationLeftButton.tap()
             XCTAssertEqual(CustomCategoriesScreen.currentPageNumber, pageNumber)
         }
-        
     }
     
     func testPagesAdjustToNewPhrases() {
-        // Add enough phrases (7) to fill one page.
-        for phrase in listOfPhrases.startIndex..<8 {
-            CustomCategoriesScreen.addPhrase(listOfPhrases[phrase])
-        }
-        
         // Verify that the user is on the first page.
-        XCTAssertEqual(CustomCategoriesScreen.currentPageNumber, 1)
+        MainScreen.navigateToSettingsAndOpenCategory(name: categoryOne.presetCategory.utterance)
+        CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         
         // Add 1 more phrase to push the total number of pages to 2.
-        let originalPageCount = CustomCategoriesScreen.totalPageCount
-        let expectedPageCountAfterAddingPhrase = originalPageCount + 1
         CustomCategoriesScreen.addRandomPhrases(numberOfPhrases: 1)
-        XCTAssertEqual(CustomCategoriesScreen.totalPageCount, expectedPageCountAfterAddingPhrase)
+        VTAssertPaginationEquals(1, of: 2, enabledArrows: .both)
         
         // Remove the additional phrase to verify that the page count reduces, back to the original count
         CustomCategoriesScreen.categoriesPageDeletePhraseButton.firstMatch.tap()
         SettingsScreen.alertDeleteButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
-        XCTAssertEqual(CustomCategoriesScreen.totalPageCount, originalPageCount)
+        VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)
     }
     
     // It is expected that the pagination left and right arrows are disabled when there is only 1 total page
     func testNextPageButtonsDisabled() {
-        // Add 1 phrase so that the pagination buttons appear
-        XCTAssertTrue(CustomCategoriesScreen.emptyStateAddPhraseButton.exists, "Expected a new category to be in empty state.")
-        CustomCategoriesScreen.addRandomPhrases(numberOfPhrases: 1)
-    
+        // Navigate to our test category and open the 'Edit Phrases' screen
+        MainScreen.navigateToSettingsAndOpenCategory(name: categoryOne.presetCategory.utterance)
+        CustomCategoriesScreen.editCategoryPhrasesButton.tap()
+        
         // Verify the page counts and that buttons appear; both buttons are disabled.
         VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)
     }
