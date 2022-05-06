@@ -435,6 +435,11 @@ Du kan også deaktivere Lyttetilstand for at skjule denne kategori i Vocable's i
         <target state="final">Hovedsporing</target>
         <note>Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</note>
       </trans-unit>
+      <trans-unit id="settings.cell.listening_mode.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">Lyttefunktion</target>
+        <note>Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode.</note>
+      </trans-unit>
       <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve" approved="yes">
         <source>Privacy Policy</source>
         <target state="final">Privatlivspolitik</target>
@@ -465,6 +470,31 @@ Du kan også deaktivere Lyttetilstand for at skjule denne kategori i Vocable's i
         <target state="final">Indstillinger</target>
         <note>Settings screen header title</note>
       </trans-unit>
+      <trans-unit id="settings.listening_mode.hot_word_toggle_cell.title" xml:space="preserve">
+        <source>"Hey Vocable" shortcut</source>
+        <target state="translated">"Hey Vocable" genvej</target>
+        <note>Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.hotword_explanation_footer" xml:space="preserve">
+        <source>When this shortcut is enabled, anyone can say "Hey, Vocable" to prompt the app to navigate to the listening mode screen.</source>
+        <target state="translated">Når denne genvej er aktiveret, kan alle sige "Hey, Vocable" at bede app til at navigere til skærmen lyttetilstand.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.listening_mode_explanation_footer" xml:space="preserve">
+        <source>When listening mode is enabled, anyone can ask a question out loud and Vocable will offer a selection of responses. Vocable supports either/or questions and questions that can be answered with yes, no, or a number.</source>
+        <target state="translated">Når lyttetilstand er aktiveret, kan alle stille et spørgsmål højt og Vocable vil tilbyde et udvalg af svar. Vocable understøtter enten/eller spørgsmål og spørgsmål, der kan besvares med ja, nej eller et nummer.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.listening_mode_toggle_cell.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">Lyttefunktion</target>
+        <note>Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">Lyttefunktion</target>
+        <note>Listening Mode preferences screen title</note>
+      </trans-unit>
       <trans-unit id="settings.selection_mode.head_tracking_unsupported_footer" xml:space="preserve">
         <source>This %1$@ on %2$@ %3$@ does not support head tracking.
 
@@ -485,6 +515,11 @@ Hovedsporing understøttes på alle enheder med et %4$@ -kamera og på de fleste
         <target state="final">Slet</target>
         <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
    Pressing the button will not save any changes and close the keyboard view.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">Hvis du lukker uden at gemme, vil dine ændringer gå tabt.</target>
+        <note>Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve" approved="yes">
         <source>Cancel</source>
