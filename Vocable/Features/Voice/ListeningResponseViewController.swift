@@ -304,12 +304,10 @@ final class ListeningResponseViewController: VocableViewController {
         ListenModeDebugStorage.shared.append(result.context)
 
         guard let responses = result.responses, !responses.isEmpty else {
-            Analytics.shared.track(.transcriptionProcessed(result: .soundsComplicated))
             content = .empty(.listenModeFreeResponse)
             return
         }
 
-        Analytics.shared.track(.transcriptionProcessed(result: .successful))
         if case .numerical = result.classification {
             content = .numerical
         } else {

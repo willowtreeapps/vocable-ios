@@ -149,10 +149,6 @@ extension Analytics.Event {
     static let listeningModeChanged = Self(name: "Listening Mode Settings Changed")
     static let heyVocableModeChanged = Self(name: "'Hey Vocable' Settings Changed")
 
-    static func transcriptionProcessed(result: TranscriptionResult) -> Self {
-        Self(name: "Listen Mode Phrase Processed", properties: ["Result Type": result.description])
-    }
-
     static func transcriptionSubmitted(_ transcription: String, result: [String]?) -> Self {
         let formattedResult = result?.joined(separator: ", ")
         return Self(name: "Phrase Submitted for Review",
