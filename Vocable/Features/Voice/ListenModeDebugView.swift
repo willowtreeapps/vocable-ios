@@ -83,7 +83,7 @@ struct ListenModeDebugView: View {
     @ObservedObject private var storage = ListenModeDebugStorage.shared
 
     @AppStorage(.listeningModeFeatureFlagEnabled)
-    var listeningModeFeatureFlagEnabled = false
+    var listeningModeFeatureFlagEnabled = true
 
     @ViewBuilder
     private var listView: some View {

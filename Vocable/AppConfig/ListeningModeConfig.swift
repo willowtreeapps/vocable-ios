@@ -18,7 +18,7 @@ final class ListenModeFeatureConfiguration {
     // Not exposed to consumers, but used for dynamically
     // determining whether the feature is enabled
     @PublishedDefault(.listeningModeFeatureFlagEnabled)
-    private(set) var isFeatureFlagEnabled: Bool = false
+    private(set) var isFeatureFlagEnabled: Bool = true
 
     // Whether listening mode is allowed to function
     // This can vary based on the feature flag AND the user preference
