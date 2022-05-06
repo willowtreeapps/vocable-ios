@@ -1,3 +1,9 @@
 /* Camera usage description */
-"NSCameraUsageDescription" = "可说话是用ARKit跟踪头部的科技来检测使用者的脸部。设备上的TrueDepth前部相机供稿为了控制屏幕指针和允许行动不便的使用者能够与应用互动。头部方位和位置数据是用来控制屏幕指针。跟踪头部数据不会储存或传送的。可说话需要您允许才可以用相机是为了这个目的。";
+"NSCameraUsageDescription" = "Vocable 使用设备的前置摄像头来检测头部方向和位置的最小变化。这使行动不便的用户能够控制屏幕指针与应用程序交互。相机数据明确用于控制屏幕指针。这些数据不会以任何方式存储或传输。为此，您需要获得使用相机的权限。";
+
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "仅当启用聆听模式时，Vocable 才会使用麦克风。 Vocable 将音频转录为文本；除非用户选择与开发人员匿名共享此信息以帮助改进收听模式，否则它不会存储或传输。";
+
+/* Privacy - Speech Recognition Usage Description */
+"NSSpeechRecognitionUsageDescription" = "启用聆听模式后，Vocable 使用语音识别将音频数据转换为文本。除非用户选择与开发人员匿名共享此信息以帮助改进聆听模式，否则不会存储或传输转录的语音。";
 

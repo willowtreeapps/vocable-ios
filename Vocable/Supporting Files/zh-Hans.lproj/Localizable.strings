@@ -7,6 +7,9 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "确认";
 
+/* MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere. */
+"category_editor.alert.cancel_editing_confirmation.title" = "如果您关闭而不保存，您的更改将丢失。";
+
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "取消";
 
@@ -61,8 +64,47 @@
 /* Confirm alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "继续";
 
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "关闭头跟踪将仅使应用触摸模式。您想要继续吗？";
+
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "请靠近设备";
+
+/* Listening mode empty state message for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.message" = "当有人大声提出问题时，Vocable 将提供快速响应选项。";
+
+/* Listening mode empty state title for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.title" = "正在聆听…";
+
+/* Listen mode empty state message for when no responses could be generated */
+"listening_mode.empty_state.free_response.message" = "不知道要建议什么。请使用键盘或选择一个现有的短语来回复。";
+
+/* Listen mode empty state title for when no responses could be generated */
+"listening_mode.empty_state.free_response.title" = "听起来很复杂";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions. */
+"listening_mode.empty_state.microphone_permission_denied.action" = "打开设置";
+
+/* Listening mode empty state message for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.message" = "Vocable 需要使用麦克风来启用聆听模式。请在系统设置应用程序中启用麦克风访问。\n\n您还可以禁用聆听模式以在 Vocable 的设置中隐藏此类别。";
+
+/* Listening mode empty state title for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.title" = "麦克风访问权限";
+
+/* Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert. */
+"listening_mode.empty_state.microphone_permission_undetermined.action" = "授予访问权限";
+
+/* Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.message" = "Vocable 需要麦克风访问权限才能启用聆听模式。下面的按钮显示了一个 iOS 权限对话框，Vocable 的头部跟踪无法与之交互。";
+
+/* Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.title" = "麦克风访问权限";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions. */
+"listening_mode.empty_state.speech_permission_denied.action" = "打开设置";
+
+/* Listening mode empty state message for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.message" = "Vocable 需要语音识别才能启用聆听模式。请在系统设置应用程序中启用语音识别。\n\n您还可以禁用聆听模式以在 Vocable 的设置中隐藏此类别。";
 
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "请选择下面要说的对话";
