@@ -15,6 +15,21 @@
         <target state="final">Vocable</target>
         <note>Bundle name</note>
       </trans-unit>
+      <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
+        <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
+        <target state="translated">Vocable bruger din enheds frontkamera til at registrere minimale ændringer i hovedretning og position. Dette giver brugere med begrænset mobilitet mulighed for at styre en markør på skærmen for at interagere med appen. Kameradata bruges udtrykkeligt til at styre markøren på skærmen. Disse data gemmes eller overføres ikke på nogen måde. Vocable skal have tilladelse til at bruge kameraet til dette formål.</target>
+        <note>Camera usage description</note>
+      </trans-unit>
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
+        <source>Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Vocable bruger kun mikrofonen, når lyttetilstand er aktiveret. Vocable transcribes audio til tekst det er ikke gemt eller overført, undtagen når brugeren vælger at dele disse oplysninger anonymt med udviklere for at hjælpe med at forbedre lyttetilstand.</target>
+        <note>Privacy - Microphone Usage Description</note>
+      </trans-unit>
+      <trans-unit id="NSSpeechRecognitionUsageDescription" xml:space="preserve">
+        <source>When listening mode is enabled, Vocable uses speech recognition to convert audio data into text. Transcribed speech is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Når lyttetilstand er aktiveret, bruger Vocable talegenkendelse til at konvertere lyddata til tekst. Transskriberet tale gemmes eller transmitteres ikke, undtagen når brugeren vælger at dele disse oplysninger anonymt med udviklere for at hjælpe med at forbedre lyttetilstanden.</target>
+        <note>Privacy - Speech Recognition Usage Description</note>
+      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="da" datatype="plaintext">
@@ -46,6 +61,11 @@
         <source>Confirm</source>
         <target state="final">Bekræft</target>
         <note/>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">Hvis du lukker uden at gemme, vil dine ændringer gå tabt.</target>
+        <note>MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere.</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -132,10 +152,128 @@
         <target state="final">Forsæt</target>
         <note>Confirm alert action title</note>
       </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
+        <source>Turning off head tracking will make the app touch mode only. Would you like to continue?</source>
+        <target state="translated">Deaktivering af hovedsporing vil kun gøre appen til berøringstilstand. Vil du fortsætte?</target>
+        <note>Disable head tracking confirmation alert title</note>
+      </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve" approved="yes">
         <source>Please move closer to the device.</source>
         <target state="final">Kom nærmere din mobilenhed.</target>
         <note>Warning message presented to the user when the head tracking system</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.actively_listening.message" xml:space="preserve">
+        <source>When someone asks a question out loud, Vocable will offer quick response options.</source>
+        <target state="translated">Når nogen stiller et spørgsmål højt, vil Vocable tilbyde hurtige svarmuligheder.</target>
+        <note>Listening mode empty state message for when listening has began but no responses have been displayed yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.actively_listening.title" xml:space="preserve">
+        <source>Listening...</source>
+        <target state="translated">Lytter...</target>
+        <note>Listening mode empty state title for when listening has began but no responses have been displayed yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.free_response.message" xml:space="preserve">
+        <source>Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.</source>
+        <target state="translated">Ikke sikker på hvad du skal foreslå. Brug tastaturet eller vælg en eksisterende sætning for at svare.</target>
+        <note>Listen mode empty state message for when no responses could be generated</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.free_response.title" xml:space="preserve">
+        <source>Sounds complicated</source>
+        <target state="translated">Lyde kompliceret</target>
+        <note>Listen mode empty state title for when no responses could be generated</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.action" xml:space="preserve">
+        <source>Open Settings</source>
+        <target state="translated">Åbn Indstillinger</target>
+        <note>Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.message" xml:space="preserve">
+        <source>Vocable needs to use the microphone to enable Listening Mode. Please enable microphone access in the system Settings app.
+
+You can also disable Listening Mode to hide this category in Vocable's settings.</source>
+        <target state="translated">Vocable skal bruge mikrofonen for at aktivere Lytningstilstand. Aktivér venligst mikrofonadgang i systemindstillinger-app'en.
+
+Du kan også deaktivere Lytningstilstand for at skjule denne kategori i Vocable's indstillinger.</target>
+        <note>Listening mode empty state message for when microphone permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.title" xml:space="preserve">
+        <source>Microphone Access</source>
+        <target state="translated">Mikrofon Adgang</target>
+        <note>Listening mode empty state title for when microphone permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.action" xml:space="preserve">
+        <source>Grant Access</source>
+        <target state="translated">Tildel adgang</target>
+        <note>Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.message" xml:space="preserve">
+        <source>Vocable needs microphone access to enable Listening Mode. The button below presents an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="translated">Vocable behøver mikrofonadgang for at aktivere Lytningstilstand. Knappen nedenfor viser en iOS-tilladelsesdialog, som Vocable's hovedsporing ikke kan interragere med.</target>
+        <note>Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.title" xml:space="preserve">
+        <source>Microphone Access</source>
+        <target state="translated">Mikrofon Adgang</target>
+        <note>Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.action" xml:space="preserve">
+        <source>Open Settings</source>
+        <target state="translated">Åbn Indstillinger</target>
+        <note>Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.message" xml:space="preserve">
+        <source>Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in the system Settings app.
+
+You can also disable Listening Mode to hide this category in Vocable's settings.</source>
+        <target state="translated">Vocable har brug for talegenkendelse for at aktivere Lytningstilstand. Aktiver venligst talegenkendelse i systemets indstillinger app.
+
+Du kan også deaktivere Lyttetilstand for at skjule denne kategori i Vocable's indstillinger.</target>
+        <note>Listening mode empty state message for when speech recognition permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.title" xml:space="preserve">
+        <source>Speech Recognition</source>
+        <target state="translated">Talegenkendelse Software</target>
+        <note>Listening mode empty state title for when speech recognition permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.action" xml:space="preserve">
+        <source>Grant Access</source>
+        <target state="translated">Tildel adgang</target>
+        <note>Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.message" xml:space="preserve">
+        <source>Vocable needs to request speech permissions to enable Listening Mode. This will present an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="translated">Vocable skal anmode om taletilladelser for at aktivere lyttetilstand. Dette vil præsentere en iOS-tilladelsesdialog, som Vocables hovedsporing ikke kan interagere med.</target>
+        <note>Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.title" xml:space="preserve">
+        <source>Speech Recognition</source>
+        <target state="translated">Talegenkendelse Software</target>
+        <note>Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_unavailable.message" xml:space="preserve">
+        <source>Please try again later</source>
+        <target state="translated">Forsøg igen senere</target>
+        <note>Listen mode error state message for when Apple's speech to text service is unavailable</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_unavailable.title" xml:space="preserve">
+        <source>Speech services unavailable</source>
+        <target state="translated">Taletjenester er ikke tilgængelige</target>
+        <note>Listen mode error state title for when Apple's speech to text service is unavailable</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.confirmation.title" xml:space="preserve">
+        <source>Thank You!</source>
+        <target state="translated">Tak!</target>
+        <note>Thank you confirmation.  This text appears after sharing with developer</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.hint.text" xml:space="preserve">
+        <source>Don’t like these responses? Anonymously share this question to help improve listening mode.</source>
+        <target state="translated">Kan du ikke lide disse svar? Anonymt dele dette spørgsmål for at hjælpe med at forbedre lyttetilstand.</target>
+        <note>Information text around what the Share with Deeveloper button does.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.submit.title" xml:space="preserve">
+        <source>Share with Developers</source>
+        <target state="translated">Del med udviklere</target>
+        <note>Share with Developer button.  The button appears if Listen mode could not generate a reponese.</note>
       </trans-unit>
       <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve" approved="yes">
         <source>Select something below to speak</source>
@@ -158,6 +296,11 @@
         <target state="final">Slet</target>
         <note>Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
    Pressing the button will not save any changes and close the keyboard view.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">Hvis du lukker uden at gemme, vil dine ændringer gå tabt.</target>
+        <note>Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve" approved="yes">
         <source>Cancel</source>
@@ -217,6 +360,11 @@
         <target state="final">OK</target>
         <note>No email account configured error alert dismiss button title</note>
       </trans-unit>
+      <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve">
+        <source>Please sign into an account with Mail for %1$@.</source>
+        <target state="translated">Log venligst på en konto med Mail for %1$@.</target>
+        <note>No email account configured error alert title</note>
+      </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve" approved="yes">
         <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
         <target state="final">Er du sikker på, at du vil nulstille Vocable til standardindstillinger? Denne handling kan ikke fortrydes.</target>
@@ -242,10 +390,20 @@
         <target state="final">OK</target>
         <note>Button to dismiss the Reset app failure alert</note>
       </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
+        <source>Vocable has been reset successfully.</source>
+        <target state="translated">Vocable er blevet nulstillet med succes.</target>
+        <note>Reset app settings success alert</note>
+      </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve" approved="yes">
         <source>OK</source>
         <target state="final">OK</target>
         <note>Button to dismiss the Reset app success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
+        <source>You're about to leave the Vocable app. You may lose head tracking control.</source>
+        <target state="translated">Du er ved at forlade Vocable. Du vil måske miste hovedsporingskontrol.</target>
+        <note>body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
