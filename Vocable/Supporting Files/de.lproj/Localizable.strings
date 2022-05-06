@@ -10,6 +10,9 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Bestätigen";
 
+/* MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere. */
+"category_editor.alert.cancel_editing_confirmation.title" = "Wenn Sie ohne Speichern schließen, gehen Ihre Änderungen verloren.";
+
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "Abbrechen";
 
@@ -70,8 +73,68 @@
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "Bitte näher ans Gerät kommen.";
 
+/* Listening mode empty state message for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.message" = "Wenn jemand eine Frage laut stellt, bietet Vocable schnelle Antwortmöglichkeiten.";
+
+/* Listening mode empty state title for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.title" = "Zuhören ...";
+
+/* Listen mode empty state message for when no responses could be generated */
+"listening_mode.empty_state.free_response.message" = "Nicht sicher, was Sie vorschlagen sollen. Bitte verwenden Sie die Tastatur oder wählen Sie eine bestehende Phrase, um zu antworten.";
+
+/* Listen mode empty state title for when no responses could be generated */
+"listening_mode.empty_state.free_response.title" = "Klingt kompliziert";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions. */
+"listening_mode.empty_state.microphone_permission_denied.action" = "Einstellungen öffnen";
+
+/* Listening mode empty state message for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.message" = "Vocable muss das Mikrofon verwenden, um den Hörmodus zu aktivieren. Bitte aktivieren Sie den Mikrofonzugriff in der Systemeinstellungs-App.\n\nSie können den Hörmodus auch deaktivieren, um diese Kategorie in den Vokabeleinstellungen auszublenden.";
+
+/* Listening mode empty state title for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.title" = "Mikrofonzugriff";
+
+/* Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert. */
+"listening_mode.empty_state.microphone_permission_undetermined.action" = "Zugriff gewähren";
+
+/* Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.message" = "Zum Aktivieren des Hörmodus benötigen Sie Zugriff auf das Mikrofon. Der unten stehende Button zeigt einen Dialog mit iOS-Berechtigungen, mit dem die Head-Tracking von Vocable nicht interrazieren kann.";
+
+/* Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.title" = "Mikrofonzugriff";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions. */
+"listening_mode.empty_state.speech_permission_denied.action" = "Einstellungen öffnen";
+
+/* Listening mode empty state message for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.message" = "Vokabel benötigt Spracherkennung, um den Hörmodus zu aktivieren. Bitte aktivieren Sie die Spracherkennung in der Systemeinstellungs-App.\n\nSie können den Hörmodus auch deaktivieren, um diese Kategorie in den Vokabeleinstellungen auszublenden.";
+
+/* Listening mode empty state title for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.title" = "Spracherkennung";
+
+/* Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert. */
+"listening_mode.empty_state.speech_permission_undetermined.action" = "Zugriff gewähren";
+
+/* Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.speech_permission_undetermined.message" = "Vocable muss Sprachberechtigungen anfordern, um den Hörmodus zu aktivieren. Dadurch wird ein iOS-Berechtigungsdialog angezeigt, mit dem die Kopfverfolgung von Vocable nicht interagieren kann.";
+
+/* Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.speech_permission_undetermined.title" = "Spracherkennung";
+
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "Bitte versuchen Sie es später erneut";
+
+/* Listen mode error state title for when Apple's speech to text service is unavailable */
+"listening_mode.empty_state.speech_unavailable.title" = "Sprachdienste nicht verfügbar";
+
+/* Thank you confirmation.  This text appears after sharing with developer */
+"listening_mode.feedback.confirmation.title" = "Vielen Dank!";
+
+/* Information text around what the Share with Deeveloper button does. */
+"listening_mode.feedback.hint.text" = "Gefallen Ihnen diese Antworten nicht? Teilen Sie diese Frage anonym, um den Hörmodus zu verbessern.";
+
+/* Share with Developer button.  The button appears if Listen mode could not generate a reponese. */
+"listening_mode.feedback.submit.title" = "Mit Entwicklern teilen";
 
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "Wähle unten etwas aus, um zu sprechen";
@@ -89,6 +152,9 @@
 /* Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
    Pressing the button will not save any changes and close the keyboard view. */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Verwerfen";
+
+/* Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes. */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Wenn Sie ohne Speichern schließen, gehen Ihre Änderungen verloren.";
 
 /* Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
    Pressing the button will allow continuing to edit category title */
@@ -126,6 +192,9 @@
 /* No email account configured error alert dismiss button title */
 "settings.alert.no_email_configured.button.dismiss.title" = "OK";
 
+/* No email account configured error alert title */
+"settings.alert.no_email_configured.title" = "Bitte melden Sie sich bei einem Konto mit Mail für %1$@ an.";
+
 /* Reset setting alert confirmation prompt */
 "settings.alert.reset_app_settings_confirmation.body" = "Sind Sie sicher, dass Sie Vocable auf Werkseinstellungen zurücksetzen möchten? Dies kann nicht rückgängig gemacht werden.";
 
@@ -141,8 +210,14 @@
 /* Button to dismiss the Reset app failure alert */
 "settings.alert.reset_app_settings_failure.button.ok" = "OK";
 
+/* Reset app settings success alert */
+"settings.alert.reset_app_settings_success.body" = "Vocable wurde erfolgreich zurückgesetzt.";
+
 /* Button to dismiss the Reset app success alert */
 "settings.alert.reset_app_settings_success.button.ok" = "OK";
+
+/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.body" = "Du bist dabei die Vocable App zu verlassen. Du kannst die Kopfverfolgungskontrolle verlieren.";
 
 /* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.cancel.title" = "Abbrechen";
@@ -162,6 +237,9 @@
 /* Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle. */
 "settings.cell.head_tracking.title" = "Per Kopfbewegung";
 
+/* Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode. */
+"settings.cell.listening_mode.title" = "Hörmodus";
+
 /* view privacy policy settings menu item */
 "settings.cell.privacy_policy.title" = "Datenschutz";
 
@@ -180,6 +258,21 @@
 /* Settings screen header title */
 "settings.header.title" = "Einstellungen";
 
+/* Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected */
+"settings.listening_mode.hot_word_toggle_cell.title" = "\"Hallo Vocable\" Verknüpfung";
+
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen. */
+"settings.listening_mode.hotword_explanation_footer" = "Wenn diese Verknüpfung aktiviert ist, kann jeder \"Hey, Vocable\" sagen, um die App zum Hörmodus zu bewegen.";
+
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user. */
+"settings.listening_mode.listening_mode_explanation_footer" = "Wenn der Hörmodus aktiviert ist, kann jeder laut eine Frage stellen und Vocable bietet eine Auswahl an Antworten. Vocable unterstützt entweder Fragen oder Fragen, die mit Ja oder Nein oder einer Zahl beantwortet werden können.";
+
+/* Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected */
+"settings.listening_mode.listening_mode_toggle_cell.title" = "Hörmodus";
+
+/* Listening Mode preferences screen title */
+"settings.listening_mode.title" = "Hörmodus";
+
 /* Additonal footer text noting heading tracking compatibility */
 "settings.selection_mode.head_tracking_unsupported_footer" = "Diese %1$@ auf %2$@ %3$@ unterstützt keine Head-Tracking.\n\nHead-Tracking wird auf allen Geräten mit einer %4$@ Kamera und auf den meisten Geräten mit %6$@ unterstützt.";
 
@@ -190,6 +283,9 @@
 /* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
    Pressing the button will not save any changes and close the keyboard view. */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Verwerfen";
+
+/* Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. */
+"text_editor.alert.cancel_editing_confirmation.title" = "Wenn Sie ohne Speichern schließen, gehen Ihre Änderungen verloren.";
 
 /* Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
    Pressing the button will allow continuing to edit category title */
