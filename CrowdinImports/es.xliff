@@ -15,6 +15,16 @@
         <target state="translated">Vocable</target>
         <note>Bundle name</note>
       </trans-unit>
+      <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
+        <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
+        <target state="translated">Vocable utiliza la cámara frontal de su dispositivo para detectar cambios mínimos en la orientación y posición de la cabeza. Esto permite a los usuarios con movilidad limitada controlar un puntero en pantalla para interactuar con la aplicación. Los datos de la cámara se utilizan expresamente para controlar el puntero en pantalla. Estos datos no se almacenan ni transmiten de ninguna manera. Vocable necesita permiso para usar la cámara para este propósito.</target>
+        <note>Camera usage description</note>
+      </trans-unit>
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
+        <source>Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Vocable usa el micrófono solo cuando el modo de escucha está habilitado. Vocable transcribe audio en texto; no se almacena ni transmite, excepto cuando el usuario elige compartir esta información de forma anónima con los desarrolladores para ayudar a mejorar el modo de escucha.</target>
+        <note>Privacy - Microphone Usage Description</note>
+      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="es" datatype="plaintext">
