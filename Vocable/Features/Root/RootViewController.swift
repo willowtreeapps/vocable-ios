@@ -248,8 +248,7 @@ import SwiftUI
         setIsTranscriptionOutputHidden(!isDictated, animated: true)
 
         func outputLabelPlaceholder() -> String {
-            return NSLocalizedString("main_screen.textfield_placeholder.default",
-                                     comment: "Select something below to speak Hint Text")
+            return String(localized: "main_screen.textfield_placeholder.default")
         }
 
         if isDictated {

@@ -150,12 +150,9 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
             self.deletePhrase(with: id)
         }
 
-        let title = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.title",
-                                      comment: "Delete phrase confirmation alert title")
-        let deleteButtonTitle = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.button.delete.title",
-                                                  comment: "Delete phrase alert action button title")
-        let cancelButtonTitle = NSLocalizedString("category_editor.alert.delete_phrase_confirmation.button.cancel.title",
-                                                  comment: "Delete phrase alert cancel button title")
+        let title = String(localized: "category_editor.alert.delete_phrase_confirmation.title")
+        let deleteButtonTitle = String(localized: "category_editor.alert.delete_phrase_confirmation.button.delete.title")
+        let cancelButtonTitle = String(localized: "category_editor.alert.delete_phrase_confirmation.button.cancel.title")
 
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(.cancel(withTitle: cancelButtonTitle))
@@ -196,12 +193,9 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
             self.navigationController?.popViewController(animated: true)
         }
 
-        let title = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.title",
-                                      comment: "Exit edit sayings alert title")
-        let discardButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.discard.title",
-                                                   comment: "Discard changes alert action title")
-        let continueButtonTitle = NSLocalizedString("phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
-                                                    comment: "Continue editing alert action title")
+        let title = String(localized: "phrase_editor.alert.cancel_editing_confirmation.title")
+        let discardButtonTitle = String(localized: "phrase_editor.alert.cancel_editing_confirmation.button.discard.title")
+        let continueButtonTitle = String(localized: "phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title")
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(.continueEditing(withTitle: continueButtonTitle))
         alert.addAction(.discardChanges(withTitle: discardButtonTitle, handler: discardChangesAction))

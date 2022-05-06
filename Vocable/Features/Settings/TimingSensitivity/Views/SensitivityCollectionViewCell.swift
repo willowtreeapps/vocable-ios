@@ -24,17 +24,13 @@ final class SensitivityCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        titleLabel.text = NSLocalizedString("timing_and_sensitivity.cell.cursor_sensitivity.title",
-                                            comment: "Cursor sensitivity configuration option name")
+        titleLabel.text = String(localized: "timing_and_sensitivity.cell.cursor_sensitivity.title")
 
-        let lowTitle = NSLocalizedString("timing_and_sensitivity.button.low.title",
-                                         comment: "Low cursor sensitivity option button")
+        let lowTitle = String(localized: "timing_and_sensitivity.button.low.title")
 
-        let mediumTitle = NSLocalizedString("timing_and_sensitivity.button.medium.title",
-                                            comment: "Medium cursor sensitivity option button")
+        let mediumTitle = String(localized: "timing_and_sensitivity.button.medium.title")
 
-        let highTitle = NSLocalizedString("timing_and_sensitivity.button.high.title",
-                                          comment: "High cursor sensitivity option button")
+        let highTitle = String(localized: "timing_and_sensitivity.button.high.title")
 
         lowSensitivityButton.setTitle(lowTitle, for: .normal)
         mediumSensitivityButton.setTitle(mediumTitle, for: .normal)
