@@ -98,8 +98,12 @@ struct CategoryNameEditorConfigurationProvider: TextEditorConfigurationProviding
                 let textDidChange = (name != initialName)
                 category.name = name
                 category.isUserRenamed = category.isUserRenamed || textDidChange
+                if category.isUserRenamed {
+                    Analytics.shared.track(.categoryRenamed(category))
+                }
             } else {
                 _ = Category.create(withUserEntry: name, in: context)
+                Analytics.shared.track(.customCategoryAdded())
             }
 
             do {

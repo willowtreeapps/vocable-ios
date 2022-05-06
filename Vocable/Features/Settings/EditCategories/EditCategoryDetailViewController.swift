@@ -280,6 +280,9 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
             category.isHidden = newHiddenState
             do {
+                if newHiddenState == true {
+                    Analytics.shared.track(.categoryHidden(category))
+                }
                 try Category.updateAllOrdinalValues(in: context)
                 try context.save()
                 DispatchQueue.main.async {
@@ -345,6 +348,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
 
             do {
+                Analytics.shared.track(.categoryRemoved(category))
                 try Category.updateAllOrdinalValues(in: context)
                 try context.save()
                 DispatchQueue.main.async {

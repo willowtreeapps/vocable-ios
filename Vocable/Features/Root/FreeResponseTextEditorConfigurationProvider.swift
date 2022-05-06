@@ -96,6 +96,7 @@ final class FreeResponseTextEditorConfigurationProvider: TextEditorConfiguration
                     context.delete(favoritedPhrase)
                 } else {
                     _ = try Phrase.create(withUserEntry: utterance, in: context)
+                    Analytics.shared.track(.phraseFavorited())
                 }
 
                 try context.save()

@@ -143,4 +143,28 @@ extension Analytics.Event {
                 "Transcription Character Count": transcription.count
              ])
     }
+
+    static func customCategoryAdded() -> Self {
+        Self(name: "Category Added", properties: ["Category": "Custom Category"])
+    }
+
+    static func categoryRemoved(_ category: Category) -> Self {
+        Self(name: "Category Removed", properties: ["Category": category.analyticsName])
+    }
+
+    static func categoryRenamed(_ category: Category) -> Self {
+        Self(name: "Category Renamed", properties: ["Category": category.analyticsName])
+    }
+
+    static func categoryHidden(_ category: Category) -> Self {
+        Self(name: "Category Hidden", properties: ["Category": category.analyticsName])
+    }
+
+    static func phraseFavorited() -> Self {
+        Self(name: "Phrase Favorited")
+    }
+
+    static func phraseSaved() -> Self {
+        Self(name: "Phrase Saved")
+    }
 }

@@ -107,6 +107,7 @@ struct PhraseEditorConfigurationProvider: TextEditorConfigurationProviding {
                     let format = String(localized: "phrase_editor.toast.successfully_saved_to_favorites.title_format")
                     return String.localizedStringWithFormat(format, category.name ?? "")
                 }()
+                Analytics.shared.track(.phraseSaved())
             }
 
             do {
