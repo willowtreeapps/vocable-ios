@@ -25,7 +25,7 @@
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
         <source>Categories</source>
         <target state="translated">تصنيف</target>
-        <note>Categories list editor screen header title</note>
+        <note>Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -60,7 +60,7 @@
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
         <source>Remove Category</source>
         <target state="translated">إزالة فئة</target>
-        <note>Remove category button label within the category detail screen.</note>
+        <note>Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation.</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
         <source>Changes saved</source>
@@ -70,12 +70,12 @@
       <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve">
         <source>Changes Saved</source>
         <target state="translated">تم حفظ التغييرات</target>
-        <note>Saved to Categories</note>
+        <note>Toast message that appears after saving edits made to the Category title</note>
       </trans-unit>
       <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve">
         <source>No presets found</source>
         <target state="translated">لم يتم العثور على إعدادات مسبقة</target>
-        <note>Debugging error message for when preloaded content is not found</note>
+        <note>This seems to not be used currently</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -100,12 +100,14 @@
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve" approved="yes">
         <source>Continue Editing</source>
         <target state="final">الاستمرار في التعديل</target>
-        <note>Continue editing alert action title</note>
+        <note>Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
         <target state="translated">تجاهل</target>
-        <note>Discard changes alert action title</note>
+        <note>Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
         <source>Saved to %@</source>
@@ -127,7 +129,7 @@
       <trans-unit id="selection_mode.header.title" xml:space="preserve" approved="yes">
         <source>Selection Mode</source>
         <target state="final">وضع التحديد</target>
-        <note>Selection mode screen header title</note>
+        <note>Selection mode setting header title</note>
       </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
         <source>OK</source>
@@ -162,7 +164,7 @@
       <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve">
         <source>Head Tracking</source>
         <target state="translated">تعقب الرأس</target>
-        <note>Settings head tracking cell title</note>
+        <note>Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</note>
       </trans-unit>
       <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
         <source>Privacy Policy</source>
@@ -197,42 +199,45 @@
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve" approved="yes">
         <source>Continue Editing</source>
         <target state="final">الإستمرار في التعديل</target>
-        <note>Continue editing alert action title</note>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
         <target state="translated">تجاهل</target>
-        <note>Discard changes alert action title</note>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve">
         <source>High</source>
         <target state="translated">مرتفع</target>
-        <note>High cursor sensitivity option button</note>
+        <note>Button option for the Curson Sensitivity setting.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve">
         <source>Low</source>
         <target state="translated">أدنى</target>
-        <note>Low cursor sensitivity option button</note>
+        <note>Button option for the Curson Sensitivity setting.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve">
         <source>Medium</source>
         <target state="translated">متوسط</target>
-        <note>Medium cursor sensitivity option button</note>
+        <note>Button option for the Curson Sensitivity setting.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve">
         <source>Cursor Sensitivity</source>
         <target state="translated">حساسية المؤشر</target>
-        <note>Cursor sensitivity configuration option name</note>
+        <note>Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve">
         <source>Hover Time</source>
         <target state="translated">الوقت تحوم</target>
-        <note>Dwell duration configuration option name</note>
+        <note>Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve" approved="yes">
         <source>Timing and Sensitivity</source>
         <target state="final">التوقيت و الحساسية</target>
-        <note>Timing and sensitivity header title</note>
+        <note>Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting</note>
       </trans-unit>
     </body>
   </file>

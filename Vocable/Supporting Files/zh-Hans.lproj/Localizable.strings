@@ -1,4 +1,4 @@
-/* Categories list editor screen header title */
+/* Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories */
 "categories_list_editor.header.title" = "类别";
 
 /* (No Comment) */
@@ -25,34 +25,34 @@
 /* Delete phrase confirmation alert title */
 "category_editor.alert.delete_phrase_confirmation.title" = "删除后的对话无法恢复。";
 
-/* Edit Phrases button label within the category detail screen */
+/* Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited. */
 "category_editor.detail.button.edit_phrases.title" = "编辑对话";
 
-/* Remove category button label within the category detail screen. */
+/* Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation. */
 "category_editor.detail.button.remove_category.title" = "移除类别";
 
-/* Rename Category button label within the category detail screen */
+/* Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name. */
 "category_editor.detail.button.rename_category.title" = "重命名类别";
 
-/* Show category button label within the category detail screen. */
+/* Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list. */
 "category_editor.detail.button.show_category.title" = "显示分类名称";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "已保存更改";
 
-/* Saved to Categories */
+/* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "已保存更改";
 
-/* Debugging error message for when preloaded content is not found */
+/* This seems to not be used currently */
 "debug.assertion.presets_file_not_found" = "找不到预设";
 
 /* No comment provided by engineer. */
 "Delete All" = "全部刪除";
 
-/* Empty state Add Phrase button title */
+/* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
 "empty_state.button.title" = "添加短语";
 
-/* Empty state title */
+/* Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen. */
 "empty_state.header.title" = "您还没有保存任何短语。";
 
 /* Cancel alert action title */
@@ -73,19 +73,22 @@
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "第 %1$d/%2$d 頁";
 
-/* Continue editing alert action title */
+/* Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
 "phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "继续编辑";
 
-/* Discard changes alert action title */
+/* Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "舍弃";
 
-/* Phrase already exists alert cancel button */
+/* Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title */
 "phrase_editor.alert.phrase_name_exists.cancel.button" = "取消";
 
-/* Phrase already exists alert create button */
+/* Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
 "phrase_editor.alert.phrase_name_exists.create.button" = "创建副本";
 
-/* Phrase already exists alert title */
+/* Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category. */
 "phrase_editor.alert.phrase_name_exists.title" = "此短语已经存在。您想要创建重复吗？";
 
 /* new entry saved to user favorites category
@@ -102,34 +105,34 @@
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "是";
 
-/* Recents empty state description */
+/* Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet. */
 "recents_empty_state.body.title" = "开始使用 Vocable 在此处查看您最近使用的短语。";
 
-/* Recents empty state title */
+/* Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet. */
 "recents_empty_state.header.title" = "没有最近使用的短语";
 
-/* Selection mode screen header title */
+/* Selection mode setting header title */
 "selection_mode.header.title" = "移动对象模式";
 
 /* No email account configured error alert dismiss button title */
 "settings.alert.no_email_configured.button.dismiss.title" = "确定";
 
-/* Reset app settings confirmation prompt */
+/* Reset setting alert confirmation prompt */
 "settings.alert.reset_app_settings_confirmation.body" = "您确定要将 Vocable 重置为默认设置吗？此操作无法撤消。";
 
-/* Button cancelling the action to reset Vocable's application settings */
+/* Reset setting alert Cancel button.  This will cancel the reset operation. */
 "settings.alert.reset_app_settings_confirmation.button.cancel.title" = "取消";
 
-/* Button confirming that the user would like to reset Vocable's application settings */
+/* Reset setting alert settings Reset button.  This will continue with the reset operation. */
 "settings.alert.reset_app_settings_confirmation.button.confirm.title" = "重 置";
 
 /* Reset app settings failure alert */
 "settings.alert.reset_app_settings_failure.body" = "语音无法重置。如果问题仍然存在，请重试或重新安装 Vocable。";
 
-/* Button dismissing the alert informing the user that Vocable's application settings failed to reset */
+/* Button to dismiss the Reset app failure alert */
 "settings.alert.reset_app_settings_failure.button.ok" = "确定";
 
-/* Button dismissing the alert informing the user that Vocable's application settings were successfully reset */
+/* Button to dismiss the Reset app success alert */
 "settings.alert.reset_app_settings_success.button.ok" = "好的";
 
 /* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
@@ -147,7 +150,7 @@
 /* edit user's favorite phrases category settings menu item */
 "settings.cell.edit_user_favorites.title_format" = "编辑 %@";
 
-/* Settings head tracking cell title */
+/* Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle. */
 "settings.cell.head_tracking.title" = "头部跟踪";
 
 /* view privacy policy settings menu item */
@@ -168,39 +171,43 @@
 /* Settings screen header title */
 "settings.header.title" = "设置";
 
-/* Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking */
+/* Additonal footer text noting heading tracking compatibility */
 "settings.selection_mode.head_tracking_unsupported_footer" = "此 %1$@ 在 %2$@ %3$@ 上不支持头跟踪。\n\n所有设备都支持头部跟踪，所有设备都有 %4$@ 相机，在大多数设备上有 %6$@。";
 
-/* Continue editing alert action title */
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "继续编辑";
 
-/* Discard changes alert action title */
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "舍弃";
 
-/* Category already exists alert cancel button */
+/* Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title */
 "text_editor.alert.category_name_exists.cancel.button" = "取消";
 
-/* Category already exists alert create button */
+/* Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
 "text_editor.alert.category_name_exists.create.button" = "创建副本";
 
-/* Category already exists alert title */
+/* Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category. */
 "text_editor.alert.category_name_exists.title" = "此类别名称已存在。您想创建一个副本吗？";
 
-/* High cursor sensitivity option button */
+/* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.high.title" = "高";
 
-/* Low cursor sensitivity option button */
+/* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.low.title" = "低";
 
-/* Medium cursor sensitivity option button */
+/* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.medium.title" = "中";
 
-/* Cursor sensitivity configuration option name */
+/* Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor. */
 "timing_and_sensitivity.cell.cursor_sensitivity.title" = "指针敏度";
 
-/* Dwell duration configuration option name */
+/* Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5 */
 "timing_and_sensitivity.cell.dwell_duration.title" = "徘徊时间";
 
-/* Timing and sensitivity header title */
+/* Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting */
 "timing_and_sensitivity.header.title" = "时间和灵敏度";
 

@@ -10,12 +10,9 @@ import UIKit
 
 private extension GazeableAlertViewController {
     static func discardChangesAlert(onDiscardCompletion: @escaping () -> Void) -> GazeableAlertViewController {
-        let title = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.title",
-                                      comment: "Exit edit sayings alert title")
-        let discardButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.discard.title",
-                                                   comment: "Discard changes alert action title")
-        let continueButtonTitle = NSLocalizedString("text_editor.alert.cancel_editing_confirmation.button.continue_editing.title",
-                                                    comment: "Continue editing alert action title")
+        let title = String(localized: "text_editor.alert.cancel_editing_confirmation.title")
+        let discardButtonTitle = String(localized: "text_editor.alert.cancel_editing_confirmation.button.discard.title")
+        let continueButtonTitle = String(localized: "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title")
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(.continueEditing(withTitle: continueButtonTitle))
         alert.addAction(.discardChanges(withTitle: discardButtonTitle, handler: onDiscardCompletion))

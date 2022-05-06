@@ -25,7 +25,7 @@
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
         <source>Categories</source>
         <target state="translated">Catégories</target>
-        <note>Categories list editor screen header title</note>
+        <note>Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -65,7 +65,8 @@
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
         <target state="translated">Jeter</target>
-        <note>Discard changes alert action title</note>
+        <note>Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
         <source>No</source>
@@ -80,7 +81,7 @@
       <trans-unit id="selection_mode.header.title" xml:space="preserve">
         <source>Selection Mode</source>
         <target state="translated">Mode de sélection</target>
-        <note>Selection mode screen header title</note>
+        <note>Selection mode setting header title</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -95,7 +96,7 @@
       <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve">
         <source>Head Tracking</source>
         <target state="translated">Head Tracking</target>
-        <note>Settings head tracking cell title</note>
+        <note>Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</note>
       </trans-unit>
       <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
         <source>Privacy Policy</source>
@@ -120,7 +121,8 @@
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
         <target state="translated">Jeter</target>
-        <note>Discard changes alert action title</note>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
       </trans-unit>
     </body>
   </file>

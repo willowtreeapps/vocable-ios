@@ -100,13 +100,11 @@ struct PhraseEditorConfigurationProvider: TextEditorConfigurationProviding {
             let alertMessage: String
             if let phraseIdentifier = phraseIdentifier, let phrase = Phrase.fetchObject(in: context, matching: phraseIdentifier) {
                 editExistingPhrase(phrase, with: utterance)
-                alertMessage = NSLocalizedString("category_editor.toast.changes_saved.title",
-                                                 comment: "changes to an existing phrase were saved successfully")
+                alertMessage = String(localized: "category_editor.toast.changes_saved.title")
             } else {
                 _ = Phrase.create(withUserEntry: utterance, category: category, in: context)
                 alertMessage = {
-                    let format = NSLocalizedString("phrase_editor.toast.successfully_saved_to_favorites.title_format",
-                                                   comment: "Saved to user favorites category toast title")
+                    let format = String(localized: "phrase_editor.toast.successfully_saved_to_favorites.title_format")
                     return String.localizedStringWithFormat(format, category.name ?? "")
                 }()
             }
@@ -135,12 +133,9 @@ struct PhraseEditorConfigurationProvider: TextEditorConfigurationProviding {
     }
 
     private func presentExistingPhraseAlert(for viewController: UIViewController, confirmationHandler: @escaping () -> Void) {
-        let title = NSLocalizedString("phrase_editor.alert.phrase_name_exists.title",
-                                      comment: "Phrase already exists alert title")
-        let cancelButtonTitle = NSLocalizedString("phrase_editor.alert.phrase_name_exists.cancel.button",
-                                                   comment: "Phrase already exists alert cancel button")
-        let createButtonTitle = NSLocalizedString("phrase_editor.alert.phrase_name_exists.create.button",
-                                                   comment: "Phrase already exists alert create button")
+        let title = String(localized: "phrase_editor.alert.phrase_name_exists.title")
+        let cancelButtonTitle = String(localized: "phrase_editor.alert.phrase_name_exists.cancel.button")
+        let createButtonTitle = String(localized: "phrase_editor.alert.phrase_name_exists.create.button")
 
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(GazeableAlertAction(title: cancelButtonTitle))

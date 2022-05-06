@@ -1,4 +1,4 @@
-/* Categories list editor screen header title */
+/* Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories */
 "categories_list_editor.header.title" = "Kategorier";
 
 /* (No Comment) */
@@ -25,34 +25,34 @@
 /* Delete phrase confirmation alert title */
 "category_editor.alert.delete_phrase_confirmation.title" = "Slettede sætninger kan ikke genskabes.";
 
-/* Edit Phrases button label within the category detail screen */
+/* Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited. */
 "category_editor.detail.button.edit_phrases.title" = "Rediger Sætninger";
 
-/* Remove category button label within the category detail screen. */
+/* Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation. */
 "category_editor.detail.button.remove_category.title" = "Fjern Kategori";
 
-/* Rename Category button label within the category detail screen */
+/* Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name. */
 "category_editor.detail.button.rename_category.title" = "Omdøb kategori";
 
-/* Show category button label within the category detail screen. */
+/* Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list. */
 "category_editor.detail.button.show_category.title" = "Vis kategori";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "Dine ændringer er gemt";
 
-/* Saved to Categories */
+/* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "Dine ændringer er gemt";
 
-/* Debugging error message for when preloaded content is not found */
+/* This seems to not be used currently */
 "debug.assertion.presets_file_not_found" = "Ingen forudstillinger fundet";
 
 /* No comment provided by engineer. */
 "Delete All" = "Slet Alle";
 
-/* Empty state Add Phrase button title */
+/* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
 "empty_state.button.title" = "Tilføj sætning";
 
-/* Empty state title */
+/* Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen. */
 "empty_state.header.title" = "Du har ingen sætninger gemt endnu.";
 
 /* Cancel alert action title */
@@ -73,19 +73,22 @@
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "Side %1$d af %2$d";
 
-/* Continue editing alert action title */
+/* Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
 "phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Fortsæt redigering";
 
-/* Discard changes alert action title */
+/* Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Slet";
 
-/* Phrase already exists alert cancel button */
+/* Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title */
 "phrase_editor.alert.phrase_name_exists.cancel.button" = "Annuller";
 
-/* Phrase already exists alert create button */
+/* Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
 "phrase_editor.alert.phrase_name_exists.create.button" = "Opret dublet";
 
-/* Phrase already exists alert title */
+/* Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category. */
 "phrase_editor.alert.phrase_name_exists.title" = "Denne sætning findes allerede. Vil du oprette en dublet?";
 
 /* new entry saved to user favorites category
@@ -102,34 +105,34 @@
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "Ja";
 
-/* Recents empty state description */
+/* Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet. */
 "recents_empty_state.body.title" = "Begynd at bruge Vocable for at se dine senest brugte sætninger her.";
 
-/* Recents empty state title */
+/* Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet. */
 "recents_empty_state.header.title" = "Ingen nyligt anvendte sætninger";
 
-/* Selection mode screen header title */
+/* Selection mode setting header title */
 "selection_mode.header.title" = "Markeringstilstand";
 
 /* No email account configured error alert dismiss button title */
 "settings.alert.no_email_configured.button.dismiss.title" = "OK";
 
-/* Reset app settings confirmation prompt */
+/* Reset setting alert confirmation prompt */
 "settings.alert.reset_app_settings_confirmation.body" = "Er du sikker på, at du vil nulstille Vocable til standardindstillinger? Denne handling kan ikke fortrydes.";
 
-/* Button cancelling the action to reset Vocable's application settings */
+/* Reset setting alert Cancel button.  This will cancel the reset operation. */
 "settings.alert.reset_app_settings_confirmation.button.cancel.title" = "Annuller";
 
-/* Button confirming that the user would like to reset Vocable's application settings */
+/* Reset setting alert settings Reset button.  This will continue with the reset operation. */
 "settings.alert.reset_app_settings_confirmation.button.confirm.title" = "Nulstil";
 
 /* Reset app settings failure alert */
 "settings.alert.reset_app_settings_failure.body" = "Vocable kunne ikke nulstilles. Prøv igen, eller geninstaller Vocable hvis problemet fortsætter.";
 
-/* Button dismissing the alert informing the user that Vocable's application settings failed to reset */
+/* Button to dismiss the Reset app failure alert */
 "settings.alert.reset_app_settings_failure.button.ok" = "OK";
 
-/* Button dismissing the alert informing the user that Vocable's application settings were successfully reset */
+/* Button to dismiss the Reset app success alert */
 "settings.alert.reset_app_settings_success.button.ok" = "OK";
 
 /* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
@@ -147,7 +150,7 @@
 /* edit user's favorite phrases category settings menu item */
 "settings.cell.edit_user_favorites.title_format" = "Rediger %@";
 
-/* Settings head tracking cell title */
+/* Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle. */
 "settings.cell.head_tracking.title" = "Hovedsporing";
 
 /* view privacy policy settings menu item */
@@ -168,39 +171,43 @@
 /* Settings screen header title */
 "settings.header.title" = "Indstillinger";
 
-/* Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking */
+/* Additonal footer text noting heading tracking compatibility */
 "settings.selection_mode.head_tracking_unsupported_footer" = "Dette %1$@ på %2$@ %3$@ understøtter ikke hovedsporing.\n\nHovedsporing understøttes på alle enheder med et %4$@ -kamera og på de fleste enheder med %6$@.";
 
-/* Continue editing alert action title */
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Fortsæt Redigering";
 
-/* Discard changes alert action title */
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Slet";
 
-/* Category already exists alert cancel button */
+/* Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title */
 "text_editor.alert.category_name_exists.cancel.button" = "Annuller";
 
-/* Category already exists alert create button */
+/* Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
 "text_editor.alert.category_name_exists.create.button" = "Opret dublet";
 
-/* Category already exists alert title */
+/* Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category. */
 "text_editor.alert.category_name_exists.title" = "Dette kategorinavn findes allerede. Vil du oprette et duplikat?";
 
-/* High cursor sensitivity option button */
+/* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.high.title" = "Høj";
 
-/* Low cursor sensitivity option button */
+/* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.low.title" = "Lav";
 
-/* Medium cursor sensitivity option button */
+/* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.medium.title" = "Mellem";
 
-/* Cursor sensitivity configuration option name */
+/* Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor. */
 "timing_and_sensitivity.cell.cursor_sensitivity.title" = "Markørfølsomhed";
 
-/* Dwell duration configuration option name */
+/* Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5 */
 "timing_and_sensitivity.cell.dwell_duration.title" = "Pegetid";
 
-/* Timing and sensitivity header title */
+/* Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting */
 "timing_and_sensitivity.header.title" = "Timing og Følsomhed";
 

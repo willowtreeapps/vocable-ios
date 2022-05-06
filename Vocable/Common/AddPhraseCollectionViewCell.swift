@@ -29,7 +29,7 @@ class AddPhraseCollectionViewCell: PresetItemCollectionViewCell {
         fillColor = .collectionViewBackgroundColor
 
         textLabel.numberOfLines = 1
-        setup(title: NSLocalizedString("preset.category.add.phrase.title", comment: "Add phrase button title"),
+        setup(title: String(localized: "preset.category.add.phrase.title"),
               with: UIImage(systemName: "plus"))
     }
 
