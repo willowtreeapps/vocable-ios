@@ -1,4 +1,4 @@
-/* Categories list editor screen header title */
+/* Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories */
 "categories_list_editor.header.title" = "تصنيف";
 
 /* (No Comment) */
@@ -19,16 +19,16 @@
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "إلغاء";
 
-/* Remove category button label within the category detail screen. */
+/* Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation. */
 "category_editor.detail.button.remove_category.title" = "إزالة فئة";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "تم حفظ التغييرات";
 
-/* Saved to Categories */
+/* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "تم حفظ التغييرات";
 
-/* Debugging error message for when preloaded content is not found */
+/* This seems to not be used currently */
 "debug.assertion.presets_file_not_found" = "لم يتم العثور على إعدادات مسبقة";
 
 /* Cancel alert action title */
@@ -43,10 +43,12 @@
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "صفحه %1$d من %2$d";
 
-/* Continue editing alert action title */
+/* Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
 "phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "الاستمرار في التعديل";
 
-/* Discard changes alert action title */
+/* Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "تجاهل";
 
 /* new entry saved to user favorites category
@@ -60,7 +62,7 @@
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "نعم";
 
-/* Selection mode screen header title */
+/* Selection mode setting header title */
 "selection_mode.header.title" = "وضع التحديد";
 
 /* No email account configured error alert dismiss button title */
@@ -81,7 +83,7 @@
 /* edit user's favorite phrases category settings menu item */
 "settings.cell.edit_user_favorites.title_format" = "تعديل %@";
 
-/* Settings head tracking cell title */
+/* Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle. */
 "settings.cell.head_tracking.title" = "تعقب الرأس";
 
 /* view privacy policy settings menu item */
@@ -102,27 +104,30 @@
 /* Settings screen header title */
 "settings.header.title" = "الإعدادات";
 
-/* Continue editing alert action title */
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "الإستمرار في التعديل";
 
-/* Discard changes alert action title */
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "تجاهل";
 
-/* High cursor sensitivity option button */
+/* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.high.title" = "مرتفع";
 
-/* Low cursor sensitivity option button */
+/* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.low.title" = "أدنى";
 
-/* Medium cursor sensitivity option button */
+/* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.medium.title" = "متوسط";
 
-/* Cursor sensitivity configuration option name */
+/* Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor. */
 "timing_and_sensitivity.cell.cursor_sensitivity.title" = "حساسية المؤشر";
 
-/* Dwell duration configuration option name */
+/* Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5 */
 "timing_and_sensitivity.cell.dwell_duration.title" = "الوقت تحوم";
 
-/* Timing and sensitivity header title */
+/* Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting */
 "timing_and_sensitivity.header.title" = "التوقيت و الحساسية";
 

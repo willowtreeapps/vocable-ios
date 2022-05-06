@@ -59,6 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIView.setAnimationsEnabled(false)
         }
 
+        Analytics.shared.appDidLaunch()
+
         // Ensure that the persistent store has the current
         // default presets before presenting UI
         performPersistenceMigrationForCurrentLanguage()

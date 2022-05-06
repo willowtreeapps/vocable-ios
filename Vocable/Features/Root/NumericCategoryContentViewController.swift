@@ -78,10 +78,8 @@ class NumericCategoryContentViewController: PagingCarouselViewController {
     }
 
     private func contentItems() -> [String] {
-        let phraseNoTitle = NSLocalizedString("preset.category.numberpad.phrase.no.title",
-                                              comment: "'No' num pad response")
-        let phraseYesTitle = NSLocalizedString("preset.category.numberpad.phrase.yes.title",
-                                               comment: "'Yes' num pad response")
+        let phraseNoTitle = String(localized: "preset.category.numberpad.phrase.no.title")
+        let phraseYesTitle = String(localized: "preset.category.numberpad.phrase.yes.title")
 
         // For this keypad layout, the 0 comes after the rest of the numbers
         let formattedNumbers = (Array(1...9) + [0]).map { intValue -> String in

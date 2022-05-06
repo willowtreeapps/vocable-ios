@@ -36,7 +36,7 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
     }
     
     private func setupNavigationBar() {
-        navigationBar.title = NSLocalizedString("timing_and_sensitivity.header.title", comment: "Timing and sensitivity header title")
+        navigationBar.title = String(localized: "timing_and_sensitivity.header.title")
     }
 
     private func setupCollectionView() {

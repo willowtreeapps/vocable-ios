@@ -31,7 +31,7 @@ final class SelectionModeViewController: VocableCollectionViewController {
     }
 
     private func setupNavigationBar() {
-        navigationBar.title = NSLocalizedString("selection_mode.header.title", comment: "Selection mode screen header title")
+        navigationBar.title = String(localized: "selection_mode.header.title")
     }
 
     override func viewLayoutMarginsDidChange() {
@@ -119,12 +119,9 @@ final class SelectionModeViewController: VocableCollectionViewController {
         }
 
         if AppConfig.isHeadTrackingEnabled {
-            let title = NSLocalizedString("gaze_settings.alert.disable_head_tracking_confirmation.title",
-                                          comment: "Disable head tracking confirmation alert title")
-            let cancelButtonTitle = NSLocalizedString("gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title",
-                                                      comment: "Cancel alert action title")
-            let confirmButtonTitle = NSLocalizedString("gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title",
-                                                       comment: "Confirm alert action title")
+            let title = String(localized: "gaze_settings.alert.disable_head_tracking_confirmation.title")
+            let cancelButtonTitle = String(localized: "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title")
+            let confirmButtonTitle = String(localized: "gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title")
             let alertViewController = GazeableAlertViewController.init(alertTitle: title)
             alertViewController.addAction(GazeableAlertAction(title: cancelButtonTitle))
             alertViewController.addAction(GazeableAlertAction(title: confirmButtonTitle, style: .bold, handler: self.toggleHeadTracking))
@@ -154,8 +151,7 @@ final class SelectionModeViewController: VocableCollectionViewController {
         switch item {
         case .headTrackingToggle:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsToggleCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsToggleCollectionViewCell
-            let title = NSLocalizedString("settings.cell.head_tracking.title",
-                                          comment: "Settings head tracking cell title")
+            let title = String(localized: "settings.cell.head_tracking.title")
             cell.setup(title: title, value: AppConfig.$isHeadTrackingEnabled)
             return cell
         }
@@ -177,8 +173,7 @@ final class SelectionModeViewController: VocableCollectionViewController {
         let sensorName = "TrueDepth"
         let neuralEngineName = "Apple Neural Engine"
 
-        let format = NSLocalizedString("settings.selection_mode.head_tracking_unsupported_footer",
-                                       comment: "Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking")
+        let format = String(localized: "settings.selection_mode.head_tracking_unsupported_footer")
 
         let text = String(format: format, model, systemName, systemVersion, sensorName, neuralEngineName)
         return text

@@ -1,4 +1,4 @@
-/* Categories list editor screen header title */
+/* Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories */
 "categories_list_editor.header.title" = "श्रेणियाँ";
 
 /* (No Comment) */
@@ -19,10 +19,12 @@
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "रद्द करें";
 
-/* Continue editing alert action title */
+/* Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
 "phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "संपादन जारी रखें";
 
-/* Discard changes alert action title */
+/* Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "छोड़ें";
 
 /* 'No' num pad response */
@@ -52,9 +54,11 @@
 /* Settings screen header title */
 "settings.header.title" = "सेटिंग्स";
 
-/* Continue editing alert action title */
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "संपादन जारी रखें";
 
-/* Discard changes alert action title */
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "छोड़ें";
 

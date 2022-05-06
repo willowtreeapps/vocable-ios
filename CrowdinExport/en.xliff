@@ -60,7 +60,7 @@
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
         <source>Categories</source>
         <target>Categories</target>
-        <note>Categories list editor screen header title</note>
+        <note>Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -75,7 +75,7 @@
       <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
         <source>If you close without saving, your changes will be lost.</source>
         <target>If you close without saving, your changes will be lost.</target>
-        <note/>
+        <note>MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere.</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -110,22 +110,22 @@
       <trans-unit id="category_editor.detail.button.edit_phrases.title" xml:space="preserve">
         <source>Edit Phrases</source>
         <target>Edit Phrases</target>
-        <note>Edit Phrases button label within the category detail screen</note>
+        <note>Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited.</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
         <source>Remove Category</source>
         <target>Remove Category</target>
-        <note>Remove category button label within the category detail screen.</note>
+        <note>Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation.</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.rename_category.title" xml:space="preserve">
         <source>Rename Category</source>
         <target>Rename Category</target>
-        <note>Rename Category button label within the category detail screen</note>
+        <note>Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name.</note>
       </trans-unit>
       <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
         <source>Show Category</source>
         <target>Show Category</target>
-        <note>Show category button label within the category detail screen.</note>
+        <note>Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list.</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
         <source>Changes saved</source>
@@ -135,22 +135,22 @@
       <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve">
         <source>Changes Saved</source>
         <target>Changes Saved</target>
-        <note>Saved to Categories</note>
+        <note>Toast message that appears after saving edits made to the Category title</note>
       </trans-unit>
       <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve">
         <source>No presets found</source>
         <target>No presets found</target>
-        <note>Debugging error message for when preloaded content is not found</note>
+        <note>This seems to not be used currently</note>
       </trans-unit>
       <trans-unit id="empty_state.button.title" xml:space="preserve">
         <source>Add Phrase</source>
         <target>Add Phrase</target>
-        <note>Empty state Add Phrase button title</note>
+        <note>Category empty state button.  This button appears with the empty state to allow the user to add a phrase</note>
       </trans-unit>
       <trans-unit id="empty_state.header.title" xml:space="preserve">
         <source>You don't have any phrases saved yet.</source>
         <target>You don't have any phrases saved yet.</target>
-        <note>Empty state title</note>
+        <note>Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen.</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
@@ -273,17 +273,17 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
       <trans-unit id="listening_mode.feedback.confirmation.title" xml:space="preserve">
         <source>Thank You!</source>
         <target>Thank You!</target>
-        <note>Submit feedback confirmation text</note>
+        <note>Thank you confirmation.  This text appears after sharing with developer</note>
       </trans-unit>
       <trans-unit id="listening_mode.feedback.hint.text" xml:space="preserve">
         <source>Don’t like these responses? Anonymously share this question to help improve listening mode.</source>
         <target>Don’t like these responses? Anonymously share this question to help improve listening mode.</target>
-        <note>Submit feedback hint text</note>
+        <note>Information text around what the Share with Deeveloper button does.</note>
       </trans-unit>
       <trans-unit id="listening_mode.feedback.submit.title" xml:space="preserve">
         <source>Share with Developers</source>
         <target>Share with Developers</target>
-        <note>MARK: Listening Mode Empty State Titles</note>
+        <note>Share with Developer button.  The button appears if Listen mode could not generate a reponese.</note>
       </trans-unit>
       <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve">
         <source>Select something below to speak</source>
@@ -298,32 +298,35 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
         <target>Continue Editing</target>
-        <note>Continue editing alert action title</note>
+        <note>Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
         <target>Discard</target>
-        <note>Discard changes alert action title</note>
+        <note>Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
         <source>If you close without saving, your changes will be lost.</source>
         <target>If you close without saving, your changes will be lost.</target>
-        <note>Exit edit sayings alert title</note>
+        <note>Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve">
         <source>Cancel</source>
         <target>Cancel</target>
-        <note>Phrase already exists alert cancel button</note>
+        <note>Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.phrase_name_exists.create.button" xml:space="preserve">
         <source>Create Duplicate</source>
         <target>Create Duplicate</target>
-        <note>Phrase already exists alert create button</note>
+        <note>Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.phrase_name_exists.title" xml:space="preserve">
         <source>This phrase already exists. Would you like to create a duplicate?</source>
         <target>This phrase already exists. Would you like to create a duplicate?</target>
-        <note>Phrase already exists alert title</note>
+        <note>Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
         <source>Saved to %@</source>
@@ -350,17 +353,17 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
       <trans-unit id="recents_empty_state.body.title" xml:space="preserve">
         <source>Start using Vocable to see your most recently used phrases here.</source>
         <target>Start using Vocable to see your most recently used phrases here.</target>
-        <note>Recents empty state description</note>
+        <note>Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet.</note>
       </trans-unit>
       <trans-unit id="recents_empty_state.header.title" xml:space="preserve">
         <source>No recently used phrases</source>
         <target>No recently used phrases</target>
-        <note>Recents empty state title</note>
+        <note>Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet.</note>
       </trans-unit>
       <trans-unit id="selection_mode.header.title" xml:space="preserve">
         <source>Selection Mode</source>
         <target>Selection Mode</target>
-        <note>Selection mode screen header title</note>
+        <note>Selection mode setting header title</note>
       </trans-unit>
       <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
         <source>OK</source>
@@ -375,17 +378,17 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
       <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve">
         <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
         <target>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</target>
-        <note>Reset app settings confirmation prompt</note>
+        <note>Reset setting alert confirmation prompt</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target>Cancel</target>
-        <note>Button cancelling the action to reset Vocable's application settings</note>
+        <note>Reset setting alert Cancel button.  This will cancel the reset operation.</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_confirmation.button.confirm.title" xml:space="preserve">
         <source>Reset</source>
         <target>Reset</target>
-        <note>Button confirming that the user would like to reset Vocable's application settings</note>
+        <note>Reset setting alert settings Reset button.  This will continue with the reset operation.</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve">
         <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
@@ -395,7 +398,7 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
       <trans-unit id="settings.alert.reset_app_settings_failure.button.ok" xml:space="preserve">
         <source>OK</source>
         <target>OK</target>
-        <note>Button dismissing the alert informing the user that Vocable's application settings failed to reset</note>
+        <note>Button to dismiss the Reset app failure alert</note>
       </trans-unit>
       <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
         <source>Vocable has been reset successfully.</source>
@@ -405,7 +408,7 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
       <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
         <source>OK</source>
         <target>OK</target>
-        <note>Button dismissing the alert informing the user that Vocable's application settings were successfully reset</note>
+        <note>Button to dismiss the Reset app success alert</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
         <source>You're about to leave the Vocable app. You may lose head tracking control.</source>
@@ -440,7 +443,7 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
       <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve">
         <source>Head Tracking</source>
         <target>Head Tracking</target>
-        <note>Settings head tracking cell title</note>
+        <note>Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</note>
       </trans-unit>
       <trans-unit id="settings.cell.listening_mode.title" xml:space="preserve">
         <source>Listening Mode</source>
@@ -509,67 +512,71 @@ Head tracking is supported on all devices with a %4$@ camera, and on most device
         <target>This %1$@ on %2$@ %3$@ does not support head tracking.
 
 Head tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.</target>
-        <note>Footer text explaining that the user's device and/or operating system version is incompatible with head tracking and which devices do support head tracking</note>
+        <note>Additonal footer text noting heading tracking compatibility</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
         <target>Continue Editing</target>
-        <note>Continue editing alert action title</note>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
         <target>Discard</target>
-        <note>Discard changes alert action title</note>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
         <source>If you close without saving, your changes will be lost.</source>
         <target>If you close without saving, your changes will be lost.</target>
-        <note>Exit edit sayings alert title</note>
+        <note>Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve">
         <source>Cancel</source>
         <target>Cancel</target>
-        <note>Category already exists alert cancel button</note>
+        <note>Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.category_name_exists.create.button" xml:space="preserve">
         <source>Create Duplicate</source>
         <target>Create Duplicate</target>
-        <note>Category already exists alert create button</note>
+        <note>Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.category_name_exists.title" xml:space="preserve">
         <source>This category name already exists. Would you like to create a duplicate?</source>
         <target>This category name already exists. Would you like to create a duplicate?</target>
-        <note>Category already exists alert title</note>
+        <note>Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve">
         <source>High</source>
         <target>High</target>
-        <note>High cursor sensitivity option button</note>
+        <note>Button option for the Curson Sensitivity setting.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve">
         <source>Low</source>
         <target>Low</target>
-        <note>Low cursor sensitivity option button</note>
+        <note>Button option for the Curson Sensitivity setting.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve">
         <source>Medium</source>
         <target>Medium</target>
-        <note>Medium cursor sensitivity option button</note>
+        <note>Button option for the Curson Sensitivity setting.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve">
         <source>Cursor Sensitivity</source>
         <target>Cursor Sensitivity</target>
-        <note>Cursor sensitivity configuration option name</note>
+        <note>Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve">
         <source>Hover Time</source>
         <target>Hover Time</target>
-        <note>Dwell duration configuration option name</note>
+        <note>Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve">
         <source>Timing and Sensitivity</source>
         <target>Timing and Sensitivity</target>
-        <note>Timing and sensitivity header title</note>
+        <note>Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting</note>
       </trans-unit>
     </body>
   </file>
