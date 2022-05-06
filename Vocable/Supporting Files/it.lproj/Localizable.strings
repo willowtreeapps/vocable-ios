@@ -7,6 +7,9 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Confermare";
 
+/* MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere. */
+"category_editor.alert.cancel_editing_confirmation.title" = "Se si chiude senza salvare, le modifiche andranno perse.";
+
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "Annulla";
 
@@ -61,8 +64,35 @@
 /* Confirm alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Continua";
 
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "La disattivazione del rilevamento della testa renderà solo la modalità touch dell'app. Vuoi continuare?";
+
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "Avvicinati al dispositivo per favore.";
+
+/* Listening mode empty state message for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.message" = "Quando qualcuno fa una domanda ad alta voce, Vocable offrirà opzioni di risposta rapida.";
+
+/* Listening mode empty state title for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.title" = "In ascolto...";
+
+/* Listen mode empty state message for when no responses could be generated */
+"listening_mode.empty_state.free_response.message" = "Non è sicuro di cosa suggerire. Si prega di utilizzare la tastiera o selezionare una frase esistente per rispondere.";
+
+/* Listen mode empty state title for when no responses could be generated */
+"listening_mode.empty_state.free_response.title" = "Suoni complicati";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions. */
+"listening_mode.empty_state.microphone_permission_denied.action" = "Apri Impostazioni";
+
+/* Listening mode empty state message for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.message" = "Vocable deve utilizzare il microfono per abilitare la modalità di ascolto. Si prega di abilitare l'accesso al microfono nell'app Impostazioni di sistema.\n\nPuoi anche disabilitare la modalità di ascolto per nascondere questa categoria nelle impostazioni di Vocable.";
+
+/* Listening mode empty state title for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.title" = "Accesso al microfono";
+
+/* Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert. */
+"listening_mode.empty_state.microphone_permission_undetermined.action" = "Concedi l'accesso";
 
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "Seleziona qualcosa qui sotto per parlare";
