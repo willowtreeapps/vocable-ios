@@ -128,7 +128,7 @@ extension Analytics.Event {
         var description: String { rawValue }
     }
 
-    static let appOpen = Self(name: "App Open")
+    static let appOpen = Self(name: "$app_open")
 
     static let headingTrackingChanged = Self(name: "Head Tracking Settings Changed")
     static let listeningModeChanged = Self(name: "Listening Mode Settings Changed")
