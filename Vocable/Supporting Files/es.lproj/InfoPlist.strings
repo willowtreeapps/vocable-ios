@@ -4,3 +4,12 @@
 /* Bundle name */
 "CFBundleName" = "Vocable";
 
+/* Camera usage description */
+"NSCameraUsageDescription" = "Vocable utiliza la cámara frontal de su dispositivo para detectar cambios mínimos en la orientación y posición de la cabeza. Esto permite a los usuarios con movilidad limitada controlar un puntero en pantalla para interactuar con la aplicación. Los datos de la cámara se utilizan expresamente para controlar el puntero en pantalla. Estos datos no se almacenan ni transmiten de ninguna manera. Vocable necesita permiso para usar la cámara para este propósito.";
+
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "Vocable usa el micrófono solo cuando el modo de escucha está habilitado. Vocable transcribe audio en texto; no se almacena ni transmite, excepto cuando el usuario elige compartir esta información de forma anónima con los desarrolladores para ayudar a mejorar el modo de escucha.";
+
+/* Privacy - Speech Recognition Usage Description */
+"NSSpeechRecognitionUsageDescription" = "Cuando el modo de escucha está habilitado, Vocable utiliza el reconocimiento de voz para convertir los datos de audio en texto. El habla transcrita no se almacena ni transmite, excepto cuando el usuario elige compartir esta información de forma anónima con los desarrolladores para ayudar a mejorar el modo de escucha.";
+
