@@ -11,26 +11,16 @@ import XCTest
 
 class MainScreenTests: XCTestCase {
     
-    let firstPhrase = Phrase(id: "phrase_one", "Please help")
-    let secondPhrase = Phrase(id: "phrase_two", "Hello")
-    let thirdPhrase = Phrase(id: "phrase_three", "I need a blanket")
-    
-    var firstTestCategory: Category {
-        Category(id: "first_category", "First") {
-            firstPhrase
-        }
+    let firstTestCategory = Category(id: "first_category", "First") {
+        Phrase(id: "phrase_one", "Please help")
     }
     
-    var secondTestCategory: Category {
-        Category(id: "second_category", "To Be Hidden") {
-            secondPhrase
-        }
+    let secondTestCategory = Category(id: "second_category", "To Be Hidden") {
+        Phrase(id: "phrase_two", "Hello")
     }
     
-    var thirdTestCategory: Category {
-        Category(id: "thrid_category", "Third") {
-            thirdPhrase
-        }
+    let thirdTestCategory = Category(id: "third_category", "Third") {
+        Phrase(id: "phrase_three", "I need a blanket")
     }
     
     override func setUp() {
@@ -55,12 +45,12 @@ class MainScreenTests: XCTestCase {
         // Navigate to a category and grab it's first, top most, phrase.
         MainScreen.locateAndSelectDestinationCategory(firstCategory)
         let phraseOne = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
-        XCTAssertEqual(phraseOne, firstPhrase.utterance)
+        XCTAssertEqual(phraseOne, firstTestCategory.presetPhrases[0].utterance)
         
         // Navigate to a different category and verify the top most phrase listed has changed.
         MainScreen.locateAndSelectDestinationCategory(secondCategory)
         let phraseTwo = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
-        XCTAssertEqual(phraseTwo, secondPhrase.utterance)
+        XCTAssertEqual(phraseTwo, secondTestCategory.presetPhrases[0].utterance)
     }
     
     func testWhenTappingPhrase_ThenThatPhraseDisplaysOnOutputLabel() {
