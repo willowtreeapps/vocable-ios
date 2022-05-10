@@ -10,43 +10,37 @@ import XCTest
 
 class PaginationBaseTest: XCTestCase {
     
-    var categoryOne: Category {
-        Category(id: "first_category", "Category 1") {
-            Phrase("Please help")
-            Phrase("Hello")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-        }
+    let categoryOne = Category(id: "first_category", "Category 1") {
+        Phrase("Please help")
+        Phrase("Hello")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
     }
     
-    var categoryTwo: Category {
-        Category(id: "second_category", "Category 2") {
-            Phrase("Please help")
-            Phrase("Hello")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-        }
+    let categoryTwo = Category(id: "second_category", "Category 2") {
+        Phrase("Please help")
+        Phrase("Hello")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
     }
     
-    var categoryThree: Category {
-        Category(id: "third_category", "Category 3") {
-            Phrase("Please help")
-            Phrase("Hello")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-            Phrase("I need a blanket")
-        }
+    let categoryThree = Category(id: "third_category", "Category 3") {
+        Phrase("Please help")
+        Phrase("Hello")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
+        Phrase("I need a blanket")
     }
     
     override func setUp() {
