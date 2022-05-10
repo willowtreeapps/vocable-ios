@@ -58,6 +58,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "CategoryPhrasesPaginationTests">
+               </Test>
+               <Test
                   Identifier = "CategoryPhrasesPaginationTests/testCanNavigatePages()">
                </Test>
                <Test
@@ -67,13 +70,34 @@
                   Identifier = "CustomCategoriesTests/testPagination()">
                </Test>
                <Test
+                  Identifier = "CustomCategoryTests">
+               </Test>
+               <Test
+                  Identifier = "CustomPhraseTests">
+               </Test>
+               <Test
                   Identifier = "CustomPhraseTests/testPagination()">
+               </Test>
+               <Test
+                  Identifier = "KeyboardScreenTests">
+               </Test>
+               <Test
+                  Identifier = "MainScreenPaginationTests">
                </Test>
                <Test
                   Identifier = "MainScreenPaginationTests/testCanScrollPagesWithPaginationArrows()">
                </Test>
                <Test
                   Identifier = "MainScreenTests/testCustonCategoryPagination()">
+               </Test>
+               <Test
+                  Identifier = "PresetPhraseTests">
+               </Test>
+               <Test
+                  Identifier = "PresetsOverrideTestCase">
+               </Test>
+               <Test
+                  Identifier = "SettingsScreenTests">
                </Test>
                <Test
                   Identifier = "SettingsScreenTests/testAddCustomCategory()">
