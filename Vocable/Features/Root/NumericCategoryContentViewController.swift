@@ -77,7 +77,7 @@ class NumericCategoryContentViewController: PagingCarouselViewController {
         }
     }
 
-    private func contentItems() -> [String] {
+    func contentItems() -> [String] {
         let phraseNoTitle = String(localized: "preset.category.numberpad.phrase.no.title")
         let phraseYesTitle = String(localized: "preset.category.numberpad.phrase.yes.title")
 
