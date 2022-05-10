@@ -115,8 +115,8 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "mixpanelToken"
-            value = "31741f16f3c1fd4bd609523fbe6da152"
-            isEnabled = "YES">
+            value = "Do not commit a real token"
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
