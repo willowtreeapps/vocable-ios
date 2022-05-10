@@ -128,6 +128,7 @@ final class SelectionModeViewController: VocableCollectionViewController {
             present(alertViewController, animated: true)
         } else {
             AppConfig.isHeadTrackingEnabled.toggle()
+            Analytics.shared.track(.headingTrackingChanged)
         }
     }
 

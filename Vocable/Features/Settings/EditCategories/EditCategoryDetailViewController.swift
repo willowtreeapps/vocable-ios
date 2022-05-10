@@ -297,6 +297,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
 
         if category.identifier == Category.Identifier.listeningMode {
             AppConfig.listeningMode.listeningModeEnabledPreference = !isHidden
+            Analytics.shared.track(.listeningModeChanged)
         }
 
         // Update the cell's config

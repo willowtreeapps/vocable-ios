@@ -147,4 +147,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc private func headTrackingDisabled(_ sender: Any?) {
         ToastWindow.shared.dismissPersistentWarning()
     }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        Analytics.shared.track(.appOpen)
+    }
 }

@@ -221,6 +221,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
         switch item {
         case .listeningModeEnabled:
             AppConfig.listeningMode.listeningModeEnabledPreference.toggle()
+            Analytics.shared.track(.listeningModeChanged)
 
             let context = NSPersistentContainer.shared.newBackgroundContext()
             context.perform {
@@ -230,6 +231,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
 
         case .hotWordEnabled:
             AppConfig.listeningMode.hotwordEnabledPreference.toggle()
+            Analytics.shared.track(.heyVocableModeChanged)
         }
 
         updateDataSource(animated: true)

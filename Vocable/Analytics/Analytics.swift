@@ -82,7 +82,6 @@ class Analytics {
 
         mixPanel = Mixpanel.mainInstance()
         registerSuperProperties()
-        listenForSettingsChanges()
     }
 
     // MARK: - Super Properties
@@ -93,26 +92,12 @@ class Analytics {
                         mixPanel.registerSuperProperty("Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue)]
     }
 
-    private func listenForSettingsChanges() {
-        track(.listeningModeChanged, onUpdateOf: listeningMode.$listeningModeEnabledPreference)
-        track(.heyVocableModeChanged, onUpdateOf: listeningMode.$hotwordEnabledPreference)
-        track(.headingTrackingChanged, onUpdateOf: AppConfig.$isHeadTrackingEnabled)
-    }
-
     // MARK: - Events
 
     func track(_ event: Event) {
         queue.async { [weak self] in
             self?.mixPanel.track(event: event.name, properties: event.properties)
         }
-    }
-
-    private func track<P: Publisher>(_ event: Event, onUpdateOf publisher: P) where P.Failure == Never {
-        publisher
-            .receive(on: queue)
-            .sink { [weak self] _ in
-                self?.track(event)
-            }.store(in: &cancellables)
     }
 }
 
