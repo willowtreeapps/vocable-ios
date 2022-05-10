@@ -90,13 +90,12 @@ final class FreeResponseTextEditorConfigurationProvider: TextEditorConfiguration
 
         context.performAndWait {
             do {
-
                 if let favoritedPhraseIdentifier = favoritedPhraseIdentifier,
                    let favoritedPhrase = Phrase.fetchObject(in: context, matching: favoritedPhraseIdentifier) {
                     context.delete(favoritedPhrase)
                 } else {
                     _ = try Phrase.create(withUserEntry: utterance, in: context)
-                    Analytics.shared.track(.phraseFavorited())
+                    Analytics.shared.track(.phraseFavorited)
                 }
 
                 try context.save()
