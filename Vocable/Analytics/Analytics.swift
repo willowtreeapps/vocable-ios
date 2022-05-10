@@ -147,15 +147,15 @@ extension Analytics.Event {
     static let newCategoryCreated = Self(name: "New Category Created")
 
     static func categoryRemoved(_ category: Category) -> Self {
-        Self(name: "Category Removed", properties: ["Category": category.analyticsName])
+        Self(name: "Category Removed", properties: ["Category": category.name])
     }
 
     static func presetCategoryEdited(_ category: Category) -> Self {
-        Self(name: "Category Renamed", properties: ["Category": category.analyticsName])
+        Self(name: "Category Renamed", properties: ["Category": category.name])
     }
 
     static func categoryHidden(_ category: Category) -> Self {
-        Self(name: "Category Hidden", properties: ["Category": category.analyticsName])
+        Self(name: "Category Hidden", properties: ["Category": category.name])
     }
 
     static let phraseFavorited = Self(name: "Phrase Favorited")

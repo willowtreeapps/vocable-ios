@@ -66,8 +66,6 @@ extension Category {
         return true
     }
 
-    var analyticsName: String { isUserGenerated ? "Custom Category" : name ?? "" }
-
     static func fetch(_ identifier: Identifier, in context: NSManagedObjectContext) throws -> Category {
         guard let category = Category.fetchObject(in: context, matching: identifier.rawValue) else {
             throw FetchError.presetCategoryNotFound(identifier.rawValue)
