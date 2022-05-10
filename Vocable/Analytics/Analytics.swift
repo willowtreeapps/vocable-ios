@@ -144,15 +144,13 @@ extension Analytics.Event {
              ])
     }
 
-    static func customCategoryAdded() -> Self {
-        Self(name: "Category Added", properties: ["Category": "Custom Category"])
-    }
+    static let newCategoryCreated = Self(name: "New Category Created")
 
     static func categoryRemoved(_ category: Category) -> Self {
         Self(name: "Category Removed", properties: ["Category": category.analyticsName])
     }
 
-    static func categoryRenamed(_ category: Category) -> Self {
+    static func presetCategoryEdited(_ category: Category) -> Self {
         Self(name: "Category Renamed", properties: ["Category": category.analyticsName])
     }
 
@@ -160,11 +158,11 @@ extension Analytics.Event {
         Self(name: "Category Hidden", properties: ["Category": category.analyticsName])
     }
 
-    static func phraseFavorited() -> Self {
-        Self(name: "Phrase Favorited")
-    }
+    static let phraseFavorited = Self(name: "Phrase Favorited")
 
-    static func phraseSaved() -> Self {
-        Self(name: "Phrase Saved")
+    static let phraseCreated = Self(name: "New Phrase Created")
+
+    static func presetPhraseEdited(_ utterance: String) -> Self {
+        Self(name: "Preset Phrase Edited", properties: ["Phrase": utterance])
     }
 }
