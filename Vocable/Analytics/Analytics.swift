@@ -128,7 +128,7 @@ extension Analytics.Event {
         var description: String { rawValue }
     }
 
-    static let appOpen = Self(name: "$app_open")
+    static let appOpen = Self(name: "App Open")
 
     static let headingTrackingChanged = Self(name: "Head Tracking Settings Changed")
     static let listeningModeChanged = Self(name: "Listening Mode Settings Changed")
@@ -147,15 +147,15 @@ extension Analytics.Event {
     static let newCategoryCreated = Self(name: "New Category Created")
 
     static func categoryRemoved(_ category: Category) -> Self {
-        Self(name: "Category Removed", properties: ["Category": category.name])
+        Self(name: "Preset Category Removed", properties: ["Category": category.name])
     }
 
     static func presetCategoryEdited(_ category: Category) -> Self {
-        Self(name: "Category Renamed", properties: ["Category": category.name])
+        Self(name: "Preset Category Edited", properties: ["Category": category.name])
     }
 
     static func categoryHidden(_ category: Category) -> Self {
-        Self(name: "Category Hidden", properties: ["Category": category.name])
+        Self(name: "Preset Category Hidden", properties: ["Category": category.name])
     }
 
     static let phraseFavorited = Self(name: "Phrase Favorited")
