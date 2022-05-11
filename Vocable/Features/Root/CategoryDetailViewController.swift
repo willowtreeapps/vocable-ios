@@ -188,7 +188,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
                 self.lastUtterance = utterance
 
-                if !phrase.isUserGenerated, !phrase.isUserRenamed {
+                if phrase.isAnalyticsReportable {
                     Analytics.shared.track(.presetPhraseSelected(utterance))
                 }
 

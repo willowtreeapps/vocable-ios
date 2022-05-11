@@ -8,8 +8,7 @@
 
 import UIKit
 
-enum CursorSensitivity: Int, Codable {
-
+enum CursorSensitivity: Int, Codable, AnalyticsReportable {
 
     case low
     case medium
@@ -26,8 +25,8 @@ enum CursorSensitivity: Int, Codable {
             return (4.0 ... 6.5)
         }
     }
-    
-    var description: String {
+
+    var analyticsDescription: String {
         switch self {
         case .low:
             return "low"

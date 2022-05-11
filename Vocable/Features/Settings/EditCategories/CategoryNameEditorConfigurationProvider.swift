@@ -95,7 +95,7 @@ struct CategoryNameEditorConfigurationProvider: TextEditorConfigurationProviding
             if let categoryIdentifier = categoryIdentifier {
                 guard let category = Category.fetchObject(in: context, matching: categoryIdentifier) else { return }
 
-                if !category.isUserRenamed, !category.isUserGenerated {
+                if category.isAnalyticsReportable {
                     Analytics.shared.track(.presetCategoryEdited(category))
                 }
 

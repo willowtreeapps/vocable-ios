@@ -94,13 +94,13 @@ class Analytics {
         AppConfig.$cursorSensitivity
             .receive(on: queue)
             .sink { [weak self] sensitivity in
-                self?.mixPanel.registerSuperProperties(["Cursor Sensitivity": sensitivity.description])
+                self?.mixPanel.registerSuperProperties(["Cursor Sensitivity": sensitivity.analyticsDescription])
             }.store(in: &cancellables)
 
         AppConfig.$selectionHoldDuration
             .receive(on: queue)
             .sink { [weak self] hoverTime in
-                self?.mixPanel.registerSuperProperties(["Hover Time": "\(hoverTime)s"])
+                self?.mixPanel.registerSuperProperties(["Hover Time": hoverTime.analyticsDescription])
             }.store(in: &cancellables)
     }
 
