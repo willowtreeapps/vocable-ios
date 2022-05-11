@@ -90,8 +90,6 @@ class Analytics {
         cancellables = [mixPanel.registerSuperProperty("Listening Mode Enabled", using: listeningMode.$listeningModeEnabledPreference, on: queue),
                         mixPanel.registerSuperProperty("'Hey Vocable' Enabled", using: listeningMode.$hotwordEnabledPreference, on: queue),
                         mixPanel.registerSuperProperty("Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue)]
-
-        mixPanel
     }
 
     // MARK: - Events
