@@ -132,7 +132,7 @@ import SwiftUI
 
         // https://github.com/willowtreeapps/vocable-ios/issues/598
         // Deactivate any living instances of ListeningResponseViewController
-        // so the will immediately stop attempting to interact with the SpeechRecognitionController
+        // so they will immediately stop attempting to interact with the SpeechRecognitionController
         childrenToDisposeOf
             .compactMap { $0 as? ListeningResponseViewController }
             .forEach { $0.deactivate() }
