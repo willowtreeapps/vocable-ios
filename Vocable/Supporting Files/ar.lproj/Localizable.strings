@@ -28,9 +28,6 @@
 /* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "تم حفظ التغييرات";
 
-/* This seems to not be used currently */
-"debug.assertion.presets_file_not_found" = "لم يتم العثور على إعدادات مسبقة";
-
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "إلغاء";
 

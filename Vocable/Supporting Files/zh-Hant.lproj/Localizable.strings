@@ -28,9 +28,6 @@
 /* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "更改已儲存";
 
-/* This seems to not be used currently */
-"debug.assertion.presets_file_not_found" = "找不到預設";
-
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "取消";
 
