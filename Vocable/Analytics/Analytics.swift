@@ -146,7 +146,7 @@ extension Analytics.Event {
 
     static let newCategoryCreated = Self(name: "New Category Created")
 
-    static func categoryRemoved(_ category: Category) -> Self {
+    static func presetCategoryRemoved(_ category: Category) -> Self {
         Self(name: "Preset Category Removed", properties: ["Category": category.name])
     }
 
@@ -154,7 +154,7 @@ extension Analytics.Event {
         Self(name: "Preset Category Edited", properties: ["Category": category.name])
     }
 
-    static func categoryHidden(_ category: Category) -> Self {
+    static func presetCategoryHidden(_ category: Category) -> Self {
         Self(name: "Preset Category Hidden", properties: ["Category": category.name])
     }
 
