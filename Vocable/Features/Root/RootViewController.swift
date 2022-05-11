@@ -264,9 +264,9 @@ import SwiftUI
     }
 
     func setAccessibilityIdentifiers() {
-        outputLabel.accessibilityIdentifier = AccessibilityIdentifiers.Root.OutputText.id
-        keyboardButton.accessibilityIdentifier = AccessibilityIdentifiers.Shared.KeyboardButton.id
-        settingsButton.accessibilityIdentifier = AccessibilityIdentifiers.Shared.SettingsButton.id
+        outputLabel.accessibilityID = .root.outputText
+        keyboardButton.accessibilityID = .shared.keyboardButton
+        settingsButton.accessibilityID = .shared.settingsButton
     }
     
     // MARK: Transcription Output Debug Gesture Handling

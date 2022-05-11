@@ -12,8 +12,6 @@ class MainScreen: BaseScreen {
     
     // MARK: Home screen elements
 
-    typealias Root = AccessibilityIdentifiers.Root
-
     enum Accessibility: String {
         case outputText
         case keyboardButton
@@ -22,15 +20,19 @@ class MainScreen: BaseScreen {
         var element: XCUIElement {
             switch self {
             case .outputText:
-                return app.staticTexts[AccessibilityIdentifiers.Root.OutputText.id]
+                return app.staticTexts[.root.outputText]
             case .keyboardButton:
-                return app.buttons[AccessibilityIdentifiers.Shared.KeyboardButton.id]
+                return app.buttons[.shared.keyboardButton]
             case .settingsButton:
-                return app.buttons[AccessibilityIdentifiers.Shared.SettingsButton.id]
+                return app.buttons[.shared.settingsButton]
             }
         }
     }
-    
+
+    // TODO: Try this out instead of Accessibility enum
+    //
+    // static let outputText = XCUIApplication().staticTexts[.root.outputText]
+
     static let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
     static let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]
     static let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
