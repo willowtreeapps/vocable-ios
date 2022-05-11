@@ -89,19 +89,9 @@ class Analytics {
     private func registerSuperProperties() {
         cancellables = [mixPanel.registerSuperProperty("Listening Mode Enabled", using: listeningMode.$listeningModeEnabledPreference, on: queue),
                         mixPanel.registerSuperProperty("'Hey Vocable' Enabled", using: listeningMode.$hotwordEnabledPreference, on: queue),
-                        mixPanel.registerSuperProperty("Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue)]
-
-        AppConfig.$cursorSensitivity
-            .receive(on: queue)
-            .sink { [weak self] sensitivity in
-                self?.mixPanel.registerSuperProperties(["Cursor Sensitivity": sensitivity.analyticsDescription])
-            }.store(in: &cancellables)
-
-        AppConfig.$selectionHoldDuration
-            .receive(on: queue)
-            .sink { [weak self] hoverTime in
-                self?.mixPanel.registerSuperProperties(["Hover Time": hoverTime.analyticsDescription])
-            }.store(in: &cancellables)
+                        mixPanel.registerSuperProperty("Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue),
+                        mixPanel.registerSuperProperty("Cursor Sensitivity", using: AppConfig.$cursorSensitivity.map(\.analyticsDescription), on: queue),
+                        mixPanel.registerSuperProperty("Hover Time", using: AppConfig.$selectionHoldDuration.map(\.analyticsDescription), on: queue)]
     }
 
     // MARK: - Events
