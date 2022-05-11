@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIView.setAnimationsEnabled(false)
         }
 
-        Analytics.shared.appDidLaunch()
+        Analytics.shared.track(.appOpen)
 
         // Ensure that the persistent store has the current
         // default presets before presenting UI
@@ -146,5 +146,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc private func headTrackingDisabled(_ sender: Any?) {
         ToastWindow.shared.dismissPersistentWarning()
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        Analytics.shared.track(.appOpen)
     }
 }

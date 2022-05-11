@@ -82,15 +82,14 @@ struct ListenModeDebugView: View {
 
     @ObservedObject private var storage = ListenModeDebugStorage.shared
 
-    @AppStorage(.listeningModeFeatureFlagEnabled)
-    var listeningModeFeatureFlagEnabled = false
+    @ObservedObject private var config = ListenModeFeatureConfiguration.shared
 
     @ViewBuilder
     private var listView: some View {
         VStack {
             if storage.contexts.isEmpty {
                 VStack(spacing: 24) {
-                    Toggle("Enable Listen Mode", isOn: $listeningModeFeatureFlagEnabled)
+                    Toggle("Enable Listen Mode", isOn: $config.isFeatureFlagEnabled)
                     Spacer()
                     Text("No Entries").font(.title).bold()
                     Text("The most recent listening sessions will be recorded here for easy debugging").font(.subheadline)
@@ -99,7 +98,7 @@ struct ListenModeDebugView: View {
             } else {
                 List {
                     Section {
-                        Toggle("Enable Listen Mode", isOn: $listeningModeFeatureFlagEnabled)
+                        Toggle("Enable Listen Mode", isOn: $config.isFeatureFlagEnabled)
                     }
                     Section {
                         ForEach(storage.contexts, id: \.self) {

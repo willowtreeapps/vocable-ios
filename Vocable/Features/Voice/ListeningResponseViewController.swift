@@ -142,7 +142,7 @@ final class ListeningResponseViewController: VocableViewController {
                     self?.lastUtterance = utterance
                 }
                 .store(in: &numericContentController.disposables)
-            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: numericContentController, loggingContext: currentContext)
+            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: numericContentController, loggingContext: currentContext, choices: numericContentController.contentItems())
             setContentViewController(wrapperViewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
 
         case .choices(let choices):
@@ -154,7 +154,7 @@ final class ListeningResponseViewController: VocableViewController {
                     self?.lastUtterance = utterance
                 }
                 .store(in: &reponseContentController.disposables)
-            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: reponseContentController, loggingContext: currentContext)
+            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: reponseContentController, loggingContext: currentContext, choices: choices)
             setContentViewController(wrapperViewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
 
         case .empty(let state, let action):

@@ -46,9 +46,6 @@
 /* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "Modifiche salvate";
 
-/* This seems to not be used currently */
-"debug.assertion.presets_file_not_found" = "Nessun preset trovato";
-
 /* No comment provided by engineer. */
 "Delete All" = "Elimina tutto";
 

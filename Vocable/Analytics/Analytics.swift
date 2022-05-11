@@ -32,6 +32,11 @@ private struct EnvironmentTokens {
 
 class Analytics {
 
+    struct Event {
+        let name: String
+        var properties: Properties? = nil
+    }
+
     private static let token: String? = {
 
         if let token = LaunchEnvironment.value(for: .mixpanelToken) {
@@ -61,6 +66,8 @@ class Analytics {
 
     private let mixPanel: MixpanelInstance
 
+    private let listeningMode = AppConfig.listeningMode
+
     private init() {
 
         guard let token = Analytics.token else {
@@ -80,7 +87,6 @@ class Analytics {
     // MARK: - Super Properties
 
     private func registerSuperProperties() {
-        let listeningMode = AppConfig.listeningMode
         cancellables = [mixPanel.registerSuperProperty("Listening Mode Enabled", using: listeningMode.$listeningModeEnabledPreference, on: queue),
                         mixPanel.registerSuperProperty("'Hey Vocable' Enabled", using: listeningMode.$hotwordEnabledPreference, on: queue),
                         mixPanel.registerSuperProperty("Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue)]
@@ -88,10 +94,14 @@ class Analytics {
 
     // MARK: - Events
 
-    func appDidLaunch() {
-        Mixpanel.mainInstance().track(event: "App Open")
+    func track(_ event: Event) {
+        queue.async { [weak self] in
+            self?.mixPanel.track(event: event.name, properties: event.properties)
+        }
     }
 }
+
+// MARK: MixpanelInstance
 
 private extension MixpanelInstance {
     func registerSuperProperty<P: Publisher>(
@@ -104,5 +114,33 @@ private extension MixpanelInstance {
             .sink { [weak self] value in
                 self?.registerSuperProperties([name: value])
             }
+    }
+}
+
+// MARK: Analytics Events
+
+extension Analytics.Event {
+
+    enum TranscriptionResult: String {
+        case successful = "Successful Result"
+        case soundsComplicated = "Sounds Complicated"
+
+        var description: String { rawValue }
+    }
+
+    static let appOpen = Self(name: "App Open")
+
+    static let headingTrackingChanged = Self(name: "Head Tracking Settings Changed")
+    static let listeningModeChanged = Self(name: "Listening Mode Settings Changed")
+    static let heyVocableModeChanged = Self(name: "'Hey Vocable' Settings Changed")
+
+    static func transcriptionSubmitted(_ transcription: String, result: [String]?) -> Self {
+        let formattedResult = result?.joined(separator: ", ")
+        return Self(name: "Phrase Submitted to Developers",
+             properties: [
+                "Transcription": transcription,
+                "Result": formattedResult ?? "Sounds Complicated",
+                "Transcription Character Count": transcription.count
+             ])
     }
 }

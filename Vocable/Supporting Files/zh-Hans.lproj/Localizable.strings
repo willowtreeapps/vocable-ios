@@ -46,9 +46,6 @@
 /* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "已保存更改";
 
-/* This seems to not be used currently */
-"debug.assertion.presets_file_not_found" = "找不到预设";
-
 /* No comment provided by engineer. */
 "Delete All" = "全部刪除";
 
