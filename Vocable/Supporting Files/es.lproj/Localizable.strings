@@ -46,6 +46,9 @@
 /* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "Cambios guardados";
 
+/* No comment provided by engineer. */
+"Delete All" = "Eliminar todo";
+
 /* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
 "empty_state.button.title" = "Agregar Phrase";
 
@@ -129,6 +132,9 @@
 
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "Selecciona algo a continuación para hablar";
+
+/* No comment provided by engineer. */
+"No Entries" = "Sin elementos";
 
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "Página %1$d de %2$d";

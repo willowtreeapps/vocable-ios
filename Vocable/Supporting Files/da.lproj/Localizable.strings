@@ -46,6 +46,9 @@
 /* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "Dine ændringer er gemt";
 
+/* No comment provided by engineer. */
+"Delete All" = "Slet Alle";
+
 /* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
 "empty_state.button.title" = "Tilføj sætning";
 
@@ -129,6 +132,9 @@
 
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "Vælg noget nedenunder for at snakke";
+
+/* No comment provided by engineer. */
+"No Entries" = "Ingen poster";
 
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "Side %1$d af %2$d";

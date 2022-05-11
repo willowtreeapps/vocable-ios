@@ -46,6 +46,9 @@
 /* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "已保存更改";
 
+/* No comment provided by engineer. */
+"Delete All" = "全部刪除";
+
 /* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
 "empty_state.button.title" = "添加短语";
 
@@ -129,6 +132,9 @@
 
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "请选择下面要说的对话";
+
+/* No comment provided by engineer. */
+"No Entries" = "没有条目";
 
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "第 %1$d/%2$d 頁";

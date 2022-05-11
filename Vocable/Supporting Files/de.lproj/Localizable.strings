@@ -1,3 +1,6 @@
+/* No comment provided by engineer. */
+"%@. %@" = "%1$@. %2$@";
+
 /* Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories */
 "categories_list_editor.header.title" = "Kategorien";
 
@@ -45,6 +48,9 @@
 
 /* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "Änderungen gespeichert";
+
+/* No comment provided by engineer. */
+"Delete All" = "Alle löschen";
 
 /* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
 "empty_state.button.title" = "Satz hinzufügen";
@@ -129,6 +135,9 @@
 
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "Wähle unten etwas aus, um zu sprechen";
+
+/* No comment provided by engineer. */
+"No Entries" = "Keine Einträge";
 
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "Seite %1$d von %2$d";

@@ -132,11 +132,6 @@
         <target state="final">Änderungen gespeichert</target>
         <note>Toast message that appears after saving edits made to the Category title</note>
       </trans-unit>
-      <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve" approved="yes">
-        <source>No presets found</source>
-        <target state="final">No presets found</target>
-        <note>This seems to not be used currently</note>
-      </trans-unit>
       <trans-unit id="empty_state.button.title" xml:space="preserve" approved="yes">
         <source>Add Phrase</source>
         <target state="final">Satz hinzufügen</target>
