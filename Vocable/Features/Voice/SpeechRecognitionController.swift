@@ -264,6 +264,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
         guard isPaused else {
             return
         }
+        print("RESUME LISTENING...")
         isPaused = false
         startListening(mode: mode, resumingFromPause: true)
     }

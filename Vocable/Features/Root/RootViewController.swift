@@ -96,6 +96,7 @@ import SwiftUI
         } else if #available(iOS 14.0, *), destinationIsListeningMode {
             let vc = ListeningResponseViewController()
             vc.delegate = self
+            vc.activate(withSpeechRecognizer: .shared)
             utterancePublisher = vc.$lastUtterance
             viewController = vc
         } else {
@@ -129,6 +130,13 @@ import SwiftUI
             ![categoryCarousel, viewController].contains($0)
         }
 
+        // https://github.com/willowtreeapps/vocable-ios/issues/598
+        // Deactivate any living instances of ListeningResponseViewController
+        // so the will immediately stop attempting to interact with the SpeechRecognitionController
+        childrenToDisposeOf
+            .compactMap { $0 as? ListeningResponseViewController }
+            .forEach { $0.deactivate() }
+
         let contentTransform = CGAffineTransform.identity
         let transitionTransform = CGAffineTransform(translationX: 0,
                                                     y: contentLayoutGuide.layoutFrame.height)
@@ -158,9 +166,15 @@ import SwiftUI
 
         func finalize(_ didFinish: Bool) {
             for inactiveViewController in childrenToDisposeOf {
-                inactiveViewController.removeFromParent()
+                guard inactiveViewController.parent != nil else {
+                    continue
+                }
+
+                inactiveViewController.willMove(toParent: nil)
                 inactiveViewController.view.removeFromSuperview()
+                inactiveViewController.removeFromParent()
             }
+
             self.contentViewController = viewController
         }
 
