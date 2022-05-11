@@ -31,9 +31,6 @@ import SwiftUI
         super.viewDidLoad()
         view.addLayoutGuide(contentLayoutGuide)
 
-//        outputLabel.accessibilityIdentifier = "root.outputTextLabel"
-//        keyboardButton.accessibilityIdentifier = "root.keyboardButton"
-//        settingsButton.accessibilityIdentifier = "root.settingsButton"
         setAccessibilityIdentifiers()
         
         // Content layout guide
