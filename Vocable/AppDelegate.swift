@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIView.setAnimationsEnabled(false)
         }
 
-        Analytics.shared.track(.appOpen)
+        Analytics.shared.track(.appOpened)
 
         // Ensure that the persistent store has the current
         // default presets before presenting UI
@@ -149,6 +149,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        Analytics.shared.track(.appOpen)
+        Analytics.shared.track(.appOpened)
+    }
+
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        Analytics.shared.track(.appBackgrounded)
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        Analytics.shared.track(.appClosed)
     }
 }
