@@ -30,9 +30,7 @@ class MainScreen: BaseScreen {
             }
         }
     }
-//    static let settingsButton = XCUIApplication().buttons["root.settingsButton"]
-//    static let outputLabel = XCUIApplication().staticTexts["root.outputTextLabel"]
-//    static let keyboardNavButton = XCUIApplication().buttons["root.keyboardButton"]
+    
     static let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
     static let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]
     static let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
