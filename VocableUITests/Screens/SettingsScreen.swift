@@ -109,7 +109,7 @@ class SettingsScreen: BaseScreen {
     }
     
     static func navigateToSettingsCategoryScreen() {
-        MainScreen.settingsButton.tap(afterWaitingForExistenceWithTimeout: 2)
+        MainScreen.Accessibility.settingsButton.element.tap(afterWaitingForExistenceWithTimeout: 2)
         categoriesButton.tap(afterWaitingForExistenceWithTimeout: 2)
         _ = settingsPageAddCategoryButton.waitForExistence(timeout: 0.5)
     }

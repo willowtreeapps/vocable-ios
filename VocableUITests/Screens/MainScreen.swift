@@ -10,11 +10,29 @@ import XCTest
 
 class MainScreen: BaseScreen {
     
-    private static let app = XCUIApplication()
-    
-    static let settingsButton = XCUIApplication().buttons["root.settingsButton"]
-    static let outputLabel = XCUIApplication().staticTexts["root.outputTextLabel"]
-    static let keyboardNavButton = XCUIApplication().buttons["root.keyboardButton"]
+    // MARK: Home screen elements
+
+    typealias Root = AccessibilityIdentifiers.Root
+
+    enum Accessibility: String {
+        case outputText
+        case keyboardButton
+        case settingsButton
+
+        var element: XCUIElement {
+            switch self {
+            case .outputText:
+                return app.staticTexts[AccessibilityIdentifiers.Root.OutputText.id]
+            case .keyboardButton:
+                return app.buttons[AccessibilityIdentifiers.Shared.KeyboardButton.id]
+            case .settingsButton:
+                return app.buttons[AccessibilityIdentifiers.Shared.SettingsButton.id]
+            }
+        }
+    }
+//    static let settingsButton = XCUIApplication().buttons["root.settingsButton"]
+//    static let outputLabel = XCUIApplication().staticTexts["root.outputTextLabel"]
+//    static let keyboardNavButton = XCUIApplication().buttons["root.keyboardButton"]
     static let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
     static let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]
     static let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
@@ -72,5 +90,4 @@ class MainScreen: BaseScreen {
         }
         return app.cells.staticTexts.containing(predicate).element
     }
-    
 }

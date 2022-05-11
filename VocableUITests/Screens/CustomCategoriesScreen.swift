@@ -57,7 +57,7 @@ class CustomCategoriesScreen: BaseScreen {
         navBarDismissButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
         
         // Wait for the Main Screen to appear
-        XCTAssert(MainScreen.settingsButton.waitForExistence(timeout: 0.25), "Did not return to Main Screen as expected.")
+        XCTAssert(MainScreen.Accessibility.settingsButton.element.waitForExistence(timeout: 0.25), "Did not return to Main Screen as expected.")
     }
     
     static func returnToMainScreenFromCategoryDetails() {

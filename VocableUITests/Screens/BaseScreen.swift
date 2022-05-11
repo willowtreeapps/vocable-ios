@@ -14,8 +14,6 @@ import XCTest
 
 class BaseScreen {
     
-    private init() {}
-    
     static let navBarBackButton = XCUIApplication().buttons["navigationBar.backButton"]
     static let paginationLabel = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
     static let paginationLeftButton = XCUIApplication().buttons["bottomPagination.left_chevron"]

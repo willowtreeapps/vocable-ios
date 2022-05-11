@@ -31,9 +31,10 @@ import SwiftUI
         super.viewDidLoad()
         view.addLayoutGuide(contentLayoutGuide)
 
-        outputLabel.accessibilityIdentifier = "root.outputTextLabel"
-        keyboardButton.accessibilityIdentifier = "root.keyboardButton"
-        settingsButton.accessibilityIdentifier = "root.settingsButton"
+//        outputLabel.accessibilityIdentifier = "root.outputTextLabel"
+//        keyboardButton.accessibilityIdentifier = "root.keyboardButton"
+//        settingsButton.accessibilityIdentifier = "root.settingsButton"
+        setAccessibilityIdentifiers()
         
         // Content layout guide
         NSLayoutConstraint.activate([
@@ -265,6 +266,12 @@ import SwiftUI
         }
     }
 
+    func setAccessibilityIdentifiers() {
+        outputLabel.accessibilityIdentifier = AccessibilityIdentifiers.Root.OutputText.id
+        keyboardButton.accessibilityIdentifier = AccessibilityIdentifiers.Shared.KeyboardButton.id
+        settingsButton.accessibilityIdentifier = AccessibilityIdentifiers.Shared.SettingsButton.id
+    }
+    
     // MARK: Transcription Output Debug Gesture Handling
 
     @IBAction private func handleTranscriptionOutputDebugGesture(_ recognizer: UIGestureRecognizer?) {

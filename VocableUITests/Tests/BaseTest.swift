@@ -9,10 +9,12 @@
 import Foundation
 import XCTest
 
+let app = XCUIApplication()
+
 class BaseTest: XCTestCase {
     
     override func setUp() {
-        let app = XCUIApplication()
+        
         app.configure {
             Arguments(.resetAppDataOnLaunch, .enableListeningMode, .disableAnimations)
         }

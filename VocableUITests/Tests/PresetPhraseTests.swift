@@ -99,7 +99,7 @@ class PresetPhraseTests: BaseTest {
     func testAddDuplicatePhrasesToMySayings() {
         let testPhrase = "Test"
         
-        MainScreen.keyboardNavButton.tap()
+        MainScreen.Accessibility.keyboardButton.element.tap()
         KeyboardScreen.typeText(testPhrase)
         KeyboardScreen.favoriteButton.tap()
         KeyboardScreen.navBarDismissButton.tap()
