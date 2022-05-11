@@ -12,7 +12,7 @@ class CategoryPhrasesPaginationTests: PaginationBaseTest {
     
     func testCanNavigatePages() {
         // Navigate to our test category
-        MainScreen.navigateToSettingsAndOpenCategory(name: categoryTwo.presetCategory.utterance)
+        MainScreen.navigateToSettingsAndOpenCategory(name: ninePhrasesCategory.presetCategory.utterance)
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         
         // Verify that the user is on the first page and the next page buttons are enabled.
@@ -34,7 +34,7 @@ class CategoryPhrasesPaginationTests: PaginationBaseTest {
     
     func testPagesAdjustToNewPhrases() {
         // Verify that the user is on the first page.
-        MainScreen.navigateToSettingsAndOpenCategory(name: categoryOne.presetCategory.utterance)
+        MainScreen.navigateToSettingsAndOpenCategory(name: eightPhrasesCategory.presetCategory.utterance)
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         
         // Add 1 more phrase to push the total number of pages to 2.
@@ -50,7 +50,7 @@ class CategoryPhrasesPaginationTests: PaginationBaseTest {
     // It is expected that the pagination left and right arrows are disabled when there is only 1 total page
     func testNextPageButtonsDisabled() {
         // Navigate to our test category and open the 'Edit Phrases' screen
-        MainScreen.navigateToSettingsAndOpenCategory(name: categoryOne.presetCategory.utterance)
+        MainScreen.navigateToSettingsAndOpenCategory(name: eightPhrasesCategory.presetCategory.utterance)
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         
         // Verify the page counts and that buttons appear; both buttons are disabled.

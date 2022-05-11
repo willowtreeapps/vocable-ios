@@ -15,7 +15,7 @@ class MainScreenPaginationTests: PaginationBaseTest {
         VTAssertPaginationEquals(1, of: 2)
         
         // Delete one of the phrases to reduce the total number of pages to 1.
-        MainScreen.navigateToSettingsAndOpenCategory(name: categoryOne.presetCategory.utterance)
+        MainScreen.navigateToSettingsAndOpenCategory(name: eightPhrasesCategory.presetCategory.utterance)
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         CustomCategoriesScreen.categoriesPageDeletePhraseButton.firstMatch.tap()
         SettingsScreen.alertDeleteButton.tap(afterWaitingForExistenceWithTimeout: 0.5)
@@ -27,7 +27,7 @@ class MainScreenPaginationTests: PaginationBaseTest {
     
     func testAddingPhrasesAdjustsPagination() {
         // Navigate to our test category to verify initial page numbers; expected to be "Page 1 of 1"
-        MainScreen.locateAndSelectDestinationCategory(CategoryIdentifier(categoryThree.presetCategory.id))
+        MainScreen.locateAndSelectDestinationCategory(CategoryIdentifier(sevenPhrasesCategory.presetCategory.id))
         VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)
         
         // Use the '+ Add Phrase' button to add a new phrase
@@ -41,7 +41,7 @@ class MainScreenPaginationTests: PaginationBaseTest {
     
     func testCanScrollPagesWithPaginationArrows() {
         // Navigate to the test category
-        MainScreen.locateAndSelectDestinationCategory(CategoryIdentifier(categoryTwo.presetCategory.id))
+        MainScreen.locateAndSelectDestinationCategory(CategoryIdentifier(ninePhrasesCategory.presetCategory.id))
         
         // Verify that the category's pagination is "Page 1 of 2"; page next buttons are enabled
         VTAssertPaginationEquals(1, of: 2)
@@ -65,7 +65,7 @@ class MainScreenPaginationTests: PaginationBaseTest {
     
     func testPaginationAdjustsToDeviceOrientation() {        
         // Verify we're on the first page
-        MainScreen.locateAndSelectDestinationCategory(CategoryIdentifier(categoryThree.presetCategory.id))
+        MainScreen.locateAndSelectDestinationCategory(CategoryIdentifier(sevenPhrasesCategory.presetCategory.id))
         VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)
         
         // Rotate the device
