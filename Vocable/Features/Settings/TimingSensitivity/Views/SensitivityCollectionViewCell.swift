@@ -38,6 +38,7 @@ final class SensitivityCollectionViewCell: UICollectionViewCell {
 
         AppConfig.$cursorSensitivity.sink { [weak self] (sensitivity) in
             guard let self = self else { return }
+            Analytics.shared.track(.cursorSensitivityChanged(sensitivity))
             self.lowSensitivityButton.isSelected = false
             self.mediumSensitivityButton.isSelected = false
             self.highSensitivityButton.isSelected = false

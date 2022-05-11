@@ -9,6 +9,11 @@
 import UIKit
 
 enum CursorSensitivity: Int, Codable {
+
+
+    case low
+    case medium
+    case high
     
     // The minimum/maximum values to scale how quickly the cursor moves around the screen
     var range: ClosedRange<Double> {
@@ -22,7 +27,14 @@ enum CursorSensitivity: Int, Codable {
         }
     }
     
-    case low
-    case medium
-    case high
+    var description: String {
+        switch self {
+        case .low:
+            return "low"
+        case .medium:
+            return "medium"
+        case .high:
+            return "high"
+        }
+    }
 }

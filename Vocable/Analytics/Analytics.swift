@@ -90,6 +90,8 @@ class Analytics {
         cancellables = [mixPanel.registerSuperProperty("Listening Mode Enabled", using: listeningMode.$listeningModeEnabledPreference, on: queue),
                         mixPanel.registerSuperProperty("'Hey Vocable' Enabled", using: listeningMode.$hotwordEnabledPreference, on: queue),
                         mixPanel.registerSuperProperty("Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue)]
+
+        mixPanel
     }
 
     // MARK: - Events
@@ -158,11 +160,27 @@ extension Analytics.Event {
         Self(name: "Preset Category Hidden", properties: ["Category": category.name])
     }
 
-    static let phraseFavorited = Self(name: "Phrase Favorited")
-
     static let phraseCreated = Self(name: "New Phrase Created")
 
     static func presetPhraseEdited(_ utterance: String) -> Self {
         Self(name: "Preset Phrase Edited", properties: ["Phrase": utterance])
+    }
+
+    static func presetPhraseSelected(_ utterance: String) -> Self {
+        Self(name: "Preset Phrase Selected", properties: ["Phrase": utterance])
+    }
+
+    static let keyboardOpened = Self(name: "Keyboard Opened")
+
+    static let keyboardPhraseSpoken = Self(name: "Keyboard Phrase Spoken")
+
+    static let phraseFavorited = Self(name: "Keyboard Phrase Favorited")
+
+    static func hoverTimeChanged(_ value: Double) -> Self {
+        Self(name: "Hover Time Settings Changed", properties: ["Hover Time Setting": "\(value)s"])
+    }
+
+    static func cursorSensitivityChanged(_ sensitivity: CursorSensitivity) -> Self {
+        Self(name: "Cursor Sensitivity Changed", properties: ["Cursor Sensitivity Changed": sensitivity.description])
     }
 }

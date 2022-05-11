@@ -70,6 +70,7 @@ final class DwellTimeCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         titleLabel.text = String(localized: "timing_and_sensitivity.cell.dwell_duration.title")
         AppConfig.$selectionHoldDuration.sink(receiveValue: { [weak self] duration in
+            Analytics.shared.track(.hoverTimeChanged(duration))
             self?.timeLabel.text = DwellTimeCollectionViewCell.formattedString(forDuration: duration)
         }).store(in: &disposables)
     }
