@@ -65,7 +65,7 @@ final class ListeningResponseViewController: VocableViewController {
     weak var delegate: ListeningResponseViewControllerDelegate?
 
     private let permissionsController = AudioPermissionPromptController()
-    private var speechRecognizerController: SpeechRecognitionController?
+    private let speechRecognizerController = SpeechRecognitionController.shared
     private var transcriptionCancellable: AnyCancellable?
     private var permissionsCancellable: AnyCancellable?
     private var classificationCancellable: AnyCancellable?
@@ -176,7 +176,7 @@ final class ListeningResponseViewController: VocableViewController {
             if let status = permissionsController.state {
                 return .empty(status.state, action: status.action)
             }
-            if !(speechRecognizerController?.isAvailable ?? false) {
+            if !speechRecognizerController.isAvailable {
                 return .empty(.speechServiceUnavailable)
             }
             return .empty(.listeningResponse)
@@ -189,13 +189,6 @@ final class ListeningResponseViewController: VocableViewController {
         observeTranscription()
         observeClassification()
         observeAvailability()
-        speechRecognizerController?.startTranscribing()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
-        speechRecognizerController?.stopTranscribing()
     }
 
     private func observeClassification() {
@@ -212,7 +205,7 @@ final class ListeningResponseViewController: VocableViewController {
     private func observeTranscription() {
         guard transcriptionCancellable == nil else { return }
 
-        transcriptionCancellable = speechRecognizerController?.$transcription
+        transcriptionCancellable = speechRecognizerController.$transcription
             .dropFirst()
             .debounce(for: .seconds(0.08), scheduler: DispatchQueue.main)
             .removeDuplicates()
@@ -226,7 +219,7 @@ final class ListeningResponseViewController: VocableViewController {
                     self.delegate?.didUpdateSpeechResponse(transcription)
                     self.classifier.classify(transcription)
                 default:
-                    if self.speechRecognizerController?.isListening ?? false {
+                    if self.speechRecognizerController.isListening {
                         self.setContent(.empty(.listeningResponse), animated: true)
                     }
                 }
@@ -236,7 +229,7 @@ final class ListeningResponseViewController: VocableViewController {
     private func observeAvailability() {
         guard availabilityCancellable == nil else { return }
 
-        availabilityCancellable = speechRecognizerController?.$isAvailable
+        availabilityCancellable = speechRecognizerController.$isAvailable
             .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isAvailable in
@@ -283,29 +276,6 @@ final class ListeningResponseViewController: VocableViewController {
                     self?.setContent(.empty(.listeningResponse), animated: true)
                 }
             }
-    }
-
-    /// Activates this instance with a Speech Recognizer
-    ///
-    /// - Parameter speechRecognizer: The `SpeechRecognitionController` for transcriptions
-    func activate(withSpeechRecognizer speechRecognizer: SpeechRecognitionController) {
-        speechRecognizerController = speechRecognizer
-    }
-
-    /// Deactivates this instance by removing the speech recognizer and cancelling
-    /// any active subscriptions to the speech recognizer.
-    func deactivate() {
-        speechRecognizerController = nil
-
-        transcriptionCancellable?.cancel()
-        availabilityCancellable?.cancel()
-        permissionsCancellable?.cancel()
-        classificationCancellable?.cancel()
-
-        transcriptionCancellable = nil
-        availabilityCancellable = nil
-        permissionsCancellable = nil
-        classificationCancellable = nil
     }
 
     // MARK: ML Stubs

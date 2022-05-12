@@ -96,7 +96,6 @@ import SwiftUI
         } else if #available(iOS 14.0, *), destinationIsListeningMode {
             let vc = ListeningResponseViewController()
             vc.delegate = self
-            vc.activate(withSpeechRecognizer: .shared)
             utterancePublisher = vc.$lastUtterance
             viewController = vc
         } else {
@@ -114,6 +113,10 @@ import SwiftUI
                     updateOutputLabelText(nil, isDictated: false)
                 }
             }
+
+            SpeechRecognitionController.shared.stopTranscribing()
+        } else {
+            SpeechRecognitionController.shared.startTranscribing()
         }
 
         utteranceCancellable = utterancePublisher.receive(on: DispatchQueue.main)
@@ -129,13 +132,6 @@ import SwiftUI
         let childrenToDisposeOf = children.filter {
             ![categoryCarousel, viewController].contains($0)
         }
-
-        // https://github.com/willowtreeapps/vocable-ios/issues/598
-        // Deactivate any living instances of ListeningResponseViewController
-        // so they will immediately stop attempting to interact with the SpeechRecognitionController
-        childrenToDisposeOf
-            .compactMap { $0 as? ListeningResponseViewController }
-            .forEach { $0.deactivate() }
 
         let contentTransform = CGAffineTransform.identity
         let transitionTransform = CGAffineTransform(translationX: 0,
