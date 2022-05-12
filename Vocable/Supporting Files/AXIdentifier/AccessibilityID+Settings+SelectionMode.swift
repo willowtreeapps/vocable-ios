@@ -10,7 +10,7 @@ import Foundation
 
 extension AccessibilityID.settings {
     public struct selectionMode {
-        public static let headTrackingToggle: AccessibilityID = "settings-selection-mode-head-tracking-toggle"
+        public static let headTrackingToggle: AccessibilityID = "selection-mode-head-tracking-toggle"
         private init() {}
     }
 }

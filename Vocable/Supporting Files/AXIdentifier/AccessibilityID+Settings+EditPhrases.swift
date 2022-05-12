@@ -10,7 +10,7 @@ import Foundation
 
 extension AccessibilityID.settings {
     public struct editPhrases {
-        public static let addLocationButton: AccessibilityID = "settings-edit-phrases-"
+        public static let addPhraseButton: AccessibilityID = "edit-phrases-add-phrase-button"
         private init() {}
     }
 }

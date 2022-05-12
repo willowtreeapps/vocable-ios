@@ -10,11 +10,11 @@ import Foundation
 
 extension AccessibilityID.settings {
     public struct timingAndSensitivity {
-        public static let decreaseHoverTimeButton: AccessibilityID = "settings-timing-and-sensitivity-decrease-hover-time-button"
-        public static let increaseHoverTimeButton: AccessibilityID = "settings-timing-and-sensitivity-increase-hover-time-button"
-        public static let lowSensitivityButton: AccessibilityID = "settings-timing-and-sensitivity-low-sensitivity-button"
-        public static let mediumSensitivityButton: AccessibilityID = "settings-timing-and-sensitivity-medium-sensitivity-button"
-        public static let highSensitivityButton: AccessibilityID = "settings-timing-and-sensitivity-high-sensitivity-button"
+        public static let decreaseHoverTimeButton: AccessibilityID = "timing-and-sensitivity-decrease-hover-time-button"
+        public static let increaseHoverTimeButton: AccessibilityID = "timing-and-sensitivity-increase-hover-time-button"
+        public static let lowSensitivityButton: AccessibilityID = "timing-and-sensitivity-low-sensitivity-button"
+        public static let mediumSensitivityButton: AccessibilityID = "timing-and-sensitivity-medium-sensitivity-button"
+        public static let highSensitivityButton: AccessibilityID = "timing-and-sensitivity-high-sensitivity-button"
         private init() {}
     }
 }
