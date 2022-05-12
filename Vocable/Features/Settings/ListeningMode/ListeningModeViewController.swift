@@ -124,7 +124,6 @@ final class ListeningModeViewController: VocableCollectionViewController {
 
     private func setupCollectionView() {
 
-        collectionView.isScrollEnabled = false
         collectionView.backgroundColor = .collectionViewBackgroundColor
         collectionView.register(UINib(nibName: "SettingsFooterTextSupplementaryView", bundle: nil),
                                 forSupplementaryViewOfKind: "footerText",
