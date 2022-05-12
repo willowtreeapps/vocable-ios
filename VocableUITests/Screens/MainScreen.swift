@@ -73,4 +73,10 @@ class MainScreen: BaseScreen {
         return app.cells.staticTexts.containing(predicate).element
     }
     
+    static func navigateToSettingsAndOpenCategory(name: String) {
+        MainScreen.settingsButton.tap()
+        SettingsScreen.categoriesButton.tap()
+        SettingsScreen.openCategorySettings(category: name)
+    }
+    
 }
