@@ -261,6 +261,9 @@
 /* Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen. */
 "settings.listening_mode.hotword_explanation_footer" = "When this shortcut is enabled, anyone can say \"Hey, Vocable\" to prompt the app to navigate to the listening mode screen.";
 
+/* Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine. */
+"settings.listening_mode.device_unsupported_explanation_footer" = "Your device does not currently support Listening Mode. Either your language is not supported or your device lacks machine learning capabilities.";
+
 /* Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected */
 "settings.listening_mode.listening_mode_toggle_cell.title" = "Listening Mode";
 

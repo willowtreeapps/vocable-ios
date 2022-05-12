@@ -42,7 +42,8 @@ final class ListeningModeViewController: VocableCollectionViewController {
         var accessory: VocableListCellAccessory {
             switch self {
             case .listeningModeEnabled:
-                return .toggle(isOn: AppConfig.listeningMode.listeningModeEnabledPreference)
+                return .toggle(isOn: AppConfig.listeningMode.listeningModeEnabledPreference
+                              && ListenModeFeatureConfiguration.deviceSupportsListeningMode)
             case .hotWordEnabled:
                 return .toggle(isOn: AppConfig.listeningMode.hotwordEnabledPreference)
             }
@@ -102,7 +103,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
         } else {
             snapshot.appendSections([.listeningMode])
             snapshot.appendItems([.listeningModeEnabled])
-            if AppConfig.listeningMode.listeningModeEnabledPreference {
+            if AppConfig.listeningMode.listeningModeEnabledPreference, ListenModeFeatureConfiguration.deviceSupportsListeningMode {
                 snapshot.appendSections([.hotword])
                 snapshot.appendItems([.hotWordEnabled])
             }
@@ -142,13 +143,18 @@ final class ListeningModeViewController: VocableCollectionViewController {
             guard let self = self else { return footerView }
 
             let text: String
-            let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
-            switch section {
-            case .listeningMode:
-                text = String(localized: "settings.listening_mode.listening_mode_explanation_footer")
-            case .hotword:
-                text = String(localized: "settings.listening_mode.hotword_explanation_footer")
+            if ListenModeFeatureConfiguration.deviceSupportsListeningMode {
+                let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+                switch section {
+                case .listeningMode:
+                    text = String(localized: "settings.listening_mode.listening_mode_explanation_footer")
+                case .hotword:
+                    text = String(localized: "settings.listening_mode.hotword_explanation_footer")
+                }
+            } else {
+                text = String(localized: "settings.listening_mode.device_unsupported_explanation_footer")
             }
+            
             let fontSize: CGFloat = self.sizeClass.contains(any: .compact) ? 18 : 26
             footerView.textLabel.font = .systemFont(ofSize: fontSize)
             footerView.textLabel.text = text
@@ -170,6 +176,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
     private func updateContentConfiguration(for cell: VocableListCell, at indexPath: IndexPath, item: ContentItem) {
         let config = VocableListContentConfiguration(title: item.title,
                                                      accessory: item.accessory,
+                                                     isPrimaryActionEnabled: ListenModeFeatureConfiguration.deviceSupportsListeningMode,
                                                      accessibilityIdentifier: item.accessibilityID) { [weak self] in
             guard let self = self, let indexPath = self.dataSource.indexPath(for: item) else { return }
             self.collectionView(self.collectionView, didSelectItemAt: indexPath)
