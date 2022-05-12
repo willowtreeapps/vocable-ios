@@ -31,7 +31,9 @@ import SwiftUI
         super.viewDidLoad()
         view.addLayoutGuide(contentLayoutGuide)
 
-        setAccessibilityIdentifiers()
+        outputLabel.accessibilityID = .root.outputText
+        keyboardButton.accessibilityID = .shared.keyboardButton
+        settingsButton.accessibilityID = .shared.settingsButton
         
         // Content layout guide
         NSLayoutConstraint.activate([
@@ -261,12 +263,6 @@ import SwiftUI
             transcriptionOutputView.text = "\n\n\n"
             outputLabel.text = text ?? outputLabelPlaceholder()
         }
-    }
-
-    func setAccessibilityIdentifiers() {
-        outputLabel.accessibilityID = .root.outputText
-        keyboardButton.accessibilityID = .shared.keyboardButton
-        settingsButton.accessibilityID = .shared.settingsButton
     }
     
     // MARK: Transcription Output Debug Gesture Handling
