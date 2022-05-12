@@ -12,26 +12,9 @@ class MainScreen: BaseScreen {
     
     // MARK: Home screen elements
 
-    enum Accessibility: String {
-        case outputText
-        case keyboardButton
-        case settingsButton
-
-        var element: XCUIElement {
-            switch self {
-            case .outputText:
-                return app.staticTexts[.root.outputText]
-            case .keyboardButton:
-                return app.buttons[.shared.keyboardButton]
-            case .settingsButton:
-                return app.buttons[.shared.settingsButton]
-            }
-        }
-    }
-
-    // TODO: Try this out instead of Accessibility enum
-    //
-    // static let outputText = XCUIApplication().staticTexts[.root.outputText]
+    static let outputText = XCUIApplication().staticTexts[.root.outputText]
+    static let keyboardButton = XCUIApplication().buttons[.shared.keyboardButton]
+    static let settingsButton = XCUIApplication().buttons[.shared.settingsButton]
 
     static let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
     static let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]

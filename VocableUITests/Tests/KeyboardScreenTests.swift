@@ -14,7 +14,7 @@ class KeyboardScreenTests: BaseTest {
     func testKeyboardOutputIsDisplayed() {
         let testPhrase = "Test"
         
-        MainScreen.Accessibility.keyboardButton.element.tap()
+        MainScreen.keyboardButton.tap()
         KeyboardScreen.typeText(testPhrase)
        
         XCTAssertTrue(KeyboardScreen.keyboardTextView.staticTexts[testPhrase].exists, "Expected the text \(testPhrase) to be displayed")
@@ -23,7 +23,7 @@ class KeyboardScreenTests: BaseTest {
     func testAddPhraseToMySayingsFromKeyboard() {
         let testPhrase = "Test"
         
-        MainScreen.Accessibility.keyboardButton.element.tap()
+        MainScreen.keyboardButton.tap()
         KeyboardScreen.typeText(testPhrase)
         KeyboardScreen.favoriteButton.tap()
         KeyboardScreen.navBarDismissButton.tap()
@@ -36,7 +36,7 @@ class KeyboardScreenTests: BaseTest {
     func testRemovePhraseFromMySayingsFromKeyboard() {
        let testPhrase = "Test"
        
-        MainScreen.Accessibility.keyboardButton.element.tap()
+        MainScreen.keyboardButton.tap()
         KeyboardScreen.typeText(testPhrase)
         KeyboardScreen.favoriteButton.tap()
         KeyboardScreen.navBarDismissButton.tap()
@@ -45,7 +45,7 @@ class KeyboardScreenTests: BaseTest {
        
         XCTAssertTrue(MainScreen.locatePhraseCell(phrase: testPhrase).exists, "Expected the phrase \(testPhrase) to be added to and displayed in 'My Sayings'")
         
-        MainScreen.Accessibility.keyboardButton.element.tap()
+        MainScreen.keyboardButton.tap()
         KeyboardScreen.typeText(testPhrase)
         KeyboardScreen.favoriteButton.tap()
         KeyboardScreen.navBarDismissButton.tap()

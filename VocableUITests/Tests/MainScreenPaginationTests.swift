@@ -112,14 +112,14 @@ class MainScreenPaginationTests: CustomPhraseBaseTest {
         
         // Rotate the device
         XCUIDevice.shared.orientation = .landscapeLeft
-        _ = MainScreen.Accessibility.settingsButton.element.waitForExistence(timeout: 1) // Wait for rotation to complete
+        _ = MainScreen.settingsButton.waitForExistence(timeout: 1) // Wait for rotation to complete
         
         // Ensure that the total number of pages increases and the current page stays the same
         VTAssertPaginationEquals(1, of: 2, enabledArrows: .both)
         
         // Rotate back to Portrait
         XCUIDevice.shared.orientation = .portrait
-        _ = MainScreen.Accessibility.settingsButton.element.waitForExistence(timeout: 1) // Wait for rotation to complete
+        _ = MainScreen.settingsButton.waitForExistence(timeout: 1) // Wait for rotation to complete
         
         // Verify that the pagination returns to initial state
         VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)
