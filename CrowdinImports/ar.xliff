@@ -72,11 +72,6 @@
         <target state="translated">تم حفظ التغييرات</target>
         <note>Toast message that appears after saving edits made to the Category title</note>
       </trans-unit>
-      <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve">
-        <source>No presets found</source>
-        <target state="translated">لم يتم العثور على إعدادات مسبقة</target>
-        <note>This seems to not be used currently</note>
-      </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">إلغاء</target>

@@ -72,11 +72,6 @@
         <target state="final">更改已儲存</target>
         <note>Toast message that appears after saving edits made to the Category title</note>
       </trans-unit>
-      <trans-unit id="debug.assertion.presets_file_not_found" xml:space="preserve" approved="yes">
-        <source>No presets found</source>
-        <target state="final">找不到預設</target>
-        <note>This seems to not be used currently</note>
-      </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">取消</target>

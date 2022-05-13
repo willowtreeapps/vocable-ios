@@ -113,6 +113,10 @@ import SwiftUI
                     updateOutputLabelText(nil, isDictated: false)
                 }
             }
+
+            SpeechRecognitionController.shared.stopTranscribing()
+        } else {
+            SpeechRecognitionController.shared.startTranscribing()
         }
 
         utteranceCancellable = utterancePublisher.receive(on: DispatchQueue.main)
@@ -158,9 +162,15 @@ import SwiftUI
 
         func finalize(_ didFinish: Bool) {
             for inactiveViewController in childrenToDisposeOf {
-                inactiveViewController.removeFromParent()
+                guard inactiveViewController.parent != nil else {
+                    continue
+                }
+
+                inactiveViewController.willMove(toParent: nil)
                 inactiveViewController.view.removeFromSuperview()
+                inactiveViewController.removeFromParent()
             }
+
             self.contentViewController = viewController
         }
 

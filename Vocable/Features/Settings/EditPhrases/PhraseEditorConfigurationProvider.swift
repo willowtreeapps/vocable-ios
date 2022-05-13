@@ -107,6 +107,7 @@ struct PhraseEditorConfigurationProvider: TextEditorConfigurationProviding {
                     let format = String(localized: "phrase_editor.toast.successfully_saved_to_favorites.title_format")
                     return String.localizedStringWithFormat(format, category.name ?? "")
                 }()
+                Analytics.shared.track(.phraseCreated)
             }
 
             do {
@@ -126,6 +127,9 @@ struct PhraseEditorConfigurationProvider: TextEditorConfigurationProviding {
         if phrase.isUserGenerated {
             phrase.utterance = utterance
         } else {
+            if let utterance = phrase.utterance, !phrase.isUserRenamed {
+                Analytics.shared.track(.presetPhraseEdited(utterance))
+            }
             let textDidChange = utterance != initialUtterance
             phrase.utterance = utterance
             phrase.isUserRenamed = phrase.isUserRenamed || textDidChange
