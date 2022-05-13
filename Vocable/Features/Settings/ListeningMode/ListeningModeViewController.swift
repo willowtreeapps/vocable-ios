@@ -149,14 +149,15 @@ final class ListeningModeViewController: VocableCollectionViewController {
             case .hotword:
                 text = String(localized: "settings.listening_mode.hotword_explanation_footer")
             }
-            let fontSize = sizeClass.contains(any: .compact) ? 18 : 26
+            let fontSize: CGFloat = self.sizeClass.contains(any: .compact) ? 18 : 26
             footerView.textLabel.font = .systemFont(ofSize: fontSize)
             footerView.textLabel.text = text
             return footerView
         }
 
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
-        configuration.interSectionSpacing = 16
+        let interSectionSpacing: CGFloat = self.sizeClass.contains(any: .compact) ? 16 : 44
+        configuration.interSectionSpacing = interSectionSpacing
         let layout = UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (_, environment) -> NSCollectionLayoutSection? in
             return self?.layoutSection(environment: environment)
         }, configuration: configuration)
