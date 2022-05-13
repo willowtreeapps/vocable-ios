@@ -40,7 +40,7 @@ private struct ListenModeContextDetail: View {
                 VStack(alignment: .leading, spacing: 32) {
                     ForEach(context.entries.indices) { index in
                         VStack(alignment: .leading) {
-                            Text("\(index + 1). \(context.entries[index].title)").bold().padding(.leading)
+                            Text(verbatim: "\(index + 1). \(context.entries[index].title)").bold().padding(.leading)
                             ScrollView(.horizontal, showsIndicators: false) {
                                 context.entries[index].body.padding([.leading, .trailing])
                             }.frame(width: geo.frame(in: .global).width)
@@ -91,8 +91,8 @@ struct ListenModeDebugView: View {
                 VStack(spacing: 24) {
                     Toggle("Enable Listen Mode", isOn: $config.isFeatureFlagEnabled)
                     Spacer()
-                    Text("No Entries").font(.title).bold()
-                    Text("The most recent listening sessions will be recorded here for easy debugging").font(.subheadline)
+                    Text(verbatim: "No Entries").font(.title).bold()
+                    Text(verbatim: "The most recent listening sessions will be recorded here for easy debugging").font(.subheadline)
                     Spacer()
                 }.padding().padding()
             } else {
@@ -109,7 +109,7 @@ struct ListenModeDebugView: View {
                         Button(action: clearEntries) {
                             HStack {
                                 Spacer()
-                                Text("Delete All").foregroundColor(.red).bold()
+                                Text(verbatim: "Delete All").foregroundColor(.red).bold()
                                 Spacer()
                             }
                         }
