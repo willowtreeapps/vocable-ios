@@ -47,6 +47,23 @@ struct Category {
         self.presetCategory = category
         self.presetPhrases = phrases
     }
+    
+    init(
+        id: String = UUID().uuidString,
+        _ name: String,
+        hidden: Bool = false,
+        languageCode: String = "en",
+        phrases: [Phrase]
+    ) {
+
+        let category = PresetCategory(id: id, hidden: hidden, languageCode: languageCode, utterance: name)
+        let phrases = phrases.map { phrase in
+            PresetPhrase(id: phrase.id, categoryIds: [category.id], languageCode: phrase.languageCode, utterance: phrase.utterance)
+        }
+
+        self.presetCategory = category
+        self.presetPhrases = phrases
+    }
 }
 
 

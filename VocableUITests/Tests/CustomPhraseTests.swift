@@ -62,7 +62,7 @@ class CustomPhraseTests: CustomPhraseBaseTest {
         XCTAssert(MainScreen.isTextDisplayed(customPhrase), "Expected the phrase \(customPhrase) to be displayed")
         
         CustomCategoriesScreen.categoriesPageDeletePhraseButton.tap()
-        SettingsScreen.alertDeleteButton.tap()
+        SettingsScreen.alertDeleteButton.tap(afterWaitingForExistenceWithTimeout: 0.5)
         XCTAssertTrue(CustomCategoriesScreen.emptyStateAddPhraseButton.exists, "Expected the phrase \(customPhrase) to not be displayed")
     }
     
