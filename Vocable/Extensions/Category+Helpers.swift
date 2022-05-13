@@ -86,12 +86,15 @@ extension Category {
 
     static func visibleCategoriesPredicate(includeUserHidden: Bool = true) -> NSPredicate {
         var predicate = !Predicate(\Category.isUserRemoved)
+
         if !includeUserHidden {
             predicate &= !Predicate(\Category.isHidden)
+
+            if !AppConfig.listeningMode.isEnabled {
+                predicate &= !Predicate(\Category.identifier, equalTo: Category.Identifier.listeningMode)
+            }
         }
-        if !AppConfig.listeningMode.isEnabled {
-            predicate &= !Predicate(\Category.identifier, equalTo: Category.Identifier.listeningMode)
-        }
+
         return predicate
     }
     
