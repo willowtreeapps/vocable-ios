@@ -74,6 +74,7 @@ import SwiftUI
         let vc = TextEditorViewController()
         let context = NSPersistentContainer.shared.newBackgroundContext()
         vc.delegate = FreeResponseTextEditorConfigurationProvider(context: context)
+        Analytics.shared.track(.keyboardOpened)
         present(vc, animated: true)
     }
 

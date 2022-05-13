@@ -342,7 +342,8 @@ import Combine
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt virtualIndexPath: IndexPath) {
         let indexPath = dataSourceProxy.indexPath(fromVirtual: virtualIndexPath)
-        categoryObjectID = frc.object(at: indexPath).objectID
+        let category = frc.object(at: indexPath)
+        categoryObjectID = category.objectID
         updateSelectedIndexPathsInProxyDataSource()
     }
 

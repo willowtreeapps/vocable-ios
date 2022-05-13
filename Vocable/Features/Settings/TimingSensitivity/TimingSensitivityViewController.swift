@@ -139,6 +139,7 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
         }
 
         handleDwellTimeButtonRange()
+        Analytics.shared.track(.hoverTimeChanged)
     }
 
     @objc private func handleIncreasingDwellTime(_ sender: UIButton) {
@@ -147,6 +148,7 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
         }
 
         handleDwellTimeButtonRange()
+        Analytics.shared.track(.hoverTimeChanged)
     }
 
     private func handleDwellTimeButtonRange() {

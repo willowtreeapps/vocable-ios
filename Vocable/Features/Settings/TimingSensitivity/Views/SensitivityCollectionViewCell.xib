@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cursor Sensitivity" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="PJa-d1-ik7">
-                        <rect key="frame" x="20" y="56" width="233" height="33.5"/>
+                        <rect key="frame" x="20" y="56" width="233.5" height="33.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                         <color key="textColor" name="DefaultFontColor"/>
                         <nil key="highlightedColor"/>
@@ -56,7 +57,6 @@
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="handleLowSensitivity:" destination="ogd-WG-kCh" eventType="touchUpInside" id="8tI-X2-Fox"/>
                                     <action selector="handleLowSensitivity:" destination="ogd-WG-kCh" eventType="primaryActionTriggered" id="zSN-xf-d9O"/>
                                 </connections>
                             </button>
@@ -77,7 +77,6 @@
                                 </state>
                                 <connections>
                                     <action selector="handleMediumSensitivity:" destination="ogd-WG-kCh" eventType="primaryActionTriggered" id="40F-0E-g0k"/>
-                                    <action selector="handleMediumSensitivity:" destination="ogd-WG-kCh" eventType="touchUpInside" id="vcJ-HP-s9x"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4K-JS-vwn" customClass="GazeableSegmentedButton" customModule="Vocable" customModuleProvider="target">
@@ -96,7 +95,6 @@
                                     <color key="titleColor" name="DefaultFontColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="handleHighSensitivity:" destination="ogd-WG-kCh" eventType="touchUpInside" id="I2G-jc-d7h"/>
                                     <action selector="handleHighSensitivity:" destination="ogd-WG-kCh" eventType="primaryActionTriggered" id="flW-Do-JJ4"/>
                                 </connections>
                             </button>
@@ -131,6 +129,17 @@
             <point key="canvasLocation" x="494.20289855072468" y="139.28571428571428"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="J4K-JS-vwn">
+            <size key="intrinsicContentSize" width="65" height="43"/>
+        </designable>
+        <designable name="PDi-eA-7a0">
+            <size key="intrinsicContentSize" width="99" height="43"/>
+        </designable>
+        <designable name="Ph1-lE-gZj">
+            <size key="intrinsicContentSize" width="59" height="43"/>
+        </designable>
+    </designables>
     <resources>
         <namedColor name="Background">
             <color red="0.12800000607967377" green="0.10899999737739563" blue="0.3580000102519989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

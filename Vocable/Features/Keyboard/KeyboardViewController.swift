@@ -183,6 +183,7 @@ class KeyboardViewController: UICollectionViewController {
                     break
                 }
 
+                Analytics.shared.track(.keyboardPhraseSpoken)
                 let utterance = textTransaction.text
                 DispatchQueue.global(qos: .userInitiated).async {
                     AVSpeechSynthesizer.shared.speak(utterance, language: AppConfig.activePreferredLanguageCode)
