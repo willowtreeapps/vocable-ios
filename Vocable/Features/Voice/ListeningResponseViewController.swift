@@ -189,12 +189,6 @@ final class ListeningResponseViewController: VocableViewController {
         observeTranscription()
         observeClassification()
         observeAvailability()
-        speechRecognizerController.startTranscribing()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        speechRecognizerController.stopTranscribing()
     }
 
     private func observeClassification() {
@@ -233,7 +227,6 @@ final class ListeningResponseViewController: VocableViewController {
     }
 
     private func observeAvailability() {
-
         guard availabilityCancellable == nil else { return }
 
         availabilityCancellable = speechRecognizerController.$isAvailable
