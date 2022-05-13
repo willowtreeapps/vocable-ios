@@ -143,10 +143,6 @@ extension Analytics.Event {
 
     // MARK: Categories
 
-    static func categorySelected(_ category: Category) -> Self {
-        Self(name: "Category Selected", properties: ["Category": category.analyticsName])
-    }
-
     static let newCategoryCreated = Self(name: "New Category Created")
 
     static func presetCategoryRemoved(_ category: Category) -> Self {
@@ -169,8 +165,9 @@ extension Analytics.Event {
         Self(name: "Preset Phrase Edited", properties: ["Phrase": utterance])
     }
 
-    static func phraseSelected(_ phrase: Phrase) -> Self {
-        Self(name: "Phrase Selected", properties: ["Phrase": phrase.analyticsName])
+    static func phraseSelected(_ phrase: Phrase, of category: Category) -> Self {
+        Self(name: "Phrase Selected", properties: ["Phrase": phrase.analyticsName,
+                                                   "Category": category.analyticsName])
     }
 
     // MARK: Listening Mode
