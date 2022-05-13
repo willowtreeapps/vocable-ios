@@ -37,16 +37,6 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
-      <trans-unit id="Delete All" xml:space="preserve" approved="yes">
-        <source>Delete All</source>
-        <target state="final">Slet Alle</target>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="No Entries" xml:space="preserve" approved="yes">
-        <source>No Entries</source>
-        <target state="final">Ingen poster</target>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve" approved="yes">
         <source>Categories</source>
         <target state="final">Kategorier</target>
