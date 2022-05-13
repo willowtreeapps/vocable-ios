@@ -149,7 +149,8 @@ final class ListeningModeViewController: VocableCollectionViewController {
             case .hotword:
                 text = String(localized: "settings.listening_mode.hotword_explanation_footer")
             }
-            footerView.textLabel.font = self.sizeClass.contains(any: .compact) ? .systemFont(ofSize: 18) : .systemFont(ofSize: 26)
+            let fontSize = sizeClass.contains(any: .compact) ? 18 : 26
+            footerView.textLabel.font = .systemFont(ofSize: fontSize)
             footerView.textLabel.text = text
             return footerView
         }
