@@ -155,8 +155,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         Analytics.shared.track(.appBackgrounded)
     }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        Analytics.shared.track(.appClosed)
-    }
 }

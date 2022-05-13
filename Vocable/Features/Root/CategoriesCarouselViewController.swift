@@ -342,7 +342,9 @@ import Combine
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt virtualIndexPath: IndexPath) {
         let indexPath = dataSourceProxy.indexPath(fromVirtual: virtualIndexPath)
-        categoryObjectID = frc.object(at: indexPath).objectID
+        let category = frc.object(at: indexPath)
+        Analytics.shared.track(.categorySelected(category))
+        categoryObjectID = category.objectID
         updateSelectedIndexPathsInProxyDataSource()
     }
 

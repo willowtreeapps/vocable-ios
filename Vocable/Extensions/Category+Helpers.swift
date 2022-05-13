@@ -55,6 +55,10 @@ extension Category {
         }
     }
 
+    var analyticsName: String? {
+        isUserGenerated ? "Custom Category" : name
+    }
+
     var isAnalyticsReportable: Bool {
         !isUserRenamed && !isUserGenerated
     }

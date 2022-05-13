@@ -188,9 +188,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
 
                 self.lastUtterance = utterance
 
-                if phrase.isAnalyticsReportable {
-                    Analytics.shared.track(.presetPhraseSelected(utterance))
-                }
+                Analytics.shared.track(.phraseSelected(phrase))
 
                 if self.category.identifier != Category.Identifier.recents {
                     phrase.lastSpokenDate = Date()

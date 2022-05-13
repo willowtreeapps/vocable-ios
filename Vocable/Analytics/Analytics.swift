@@ -64,7 +64,7 @@ class Analytics {
     private var cancellables = Set<AnyCancellable>()
     private let queue = DispatchQueue(label: "Analytics-Processing")
 
-    private let mixPanel: MixpanelInstance
+    let mixPanel: MixpanelInstance
 
     private let listeningMode = AppConfig.listeningMode
 
@@ -134,7 +134,6 @@ extension Analytics.Event {
 
     static let appOpened = Self(name: "App Opened")
     static let appBackgrounded = Self(name: "App Backgrounded")
-    static let appClosed = Self(name: "App Closed")
 
     // MARK: Keyboard Phrase
 
@@ -143,6 +142,10 @@ extension Analytics.Event {
     static let phraseFavorited = Self(name: "Keyboard Phrase Favorited")
 
     // MARK: Categories
+
+    static func categorySelected(_ category: Category) -> Self {
+        Self(name: "Category Selected", properties: ["Category": category.analyticsName])
+    }
 
     static let newCategoryCreated = Self(name: "New Category Created")
 
@@ -166,8 +169,8 @@ extension Analytics.Event {
         Self(name: "Preset Phrase Edited", properties: ["Phrase": utterance])
     }
 
-    static func presetPhraseSelected(_ utterance: String) -> Self {
-        Self(name: "Preset Phrase Selected", properties: ["Phrase": utterance])
+    static func phraseSelected(_ phrase: Phrase) -> Self {
+        Self(name: "Phrase Selected", properties: ["Phrase": phrase.analyticsName])
     }
 
     // MARK: Listening Mode

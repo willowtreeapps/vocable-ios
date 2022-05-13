@@ -11,6 +11,10 @@ import CoreData
 
 extension Phrase {
 
+    var analyticsName: String? {
+        isUserGenerated ? "Custom Category" : utterance
+    }
+
     var isAnalyticsReportable: Bool {
         !isUserRenamed && !isUserGenerated
     }
