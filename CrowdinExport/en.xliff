@@ -37,26 +37,6 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
-      <trans-unit id="%@. %@" xml:space="preserve">
-        <source>%1$@. %2$@</source>
-        <target>%1$@. %2$@</target>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Delete All" xml:space="preserve">
-        <source>Delete All</source>
-        <target>Delete All</target>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="No Entries" xml:space="preserve">
-        <source>No Entries</source>
-        <target>No Entries</target>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="The most recent listening sessions will be recorded here for easy debugging" xml:space="preserve">
-        <source>The most recent listening sessions will be recorded here for easy debugging</source>
-        <target>The most recent listening sessions will be recorded here for easy debugging</target>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
         <source>Categories</source>
         <target>Categories</target>
