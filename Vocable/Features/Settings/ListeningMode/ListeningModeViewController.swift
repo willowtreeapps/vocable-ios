@@ -152,7 +152,14 @@ final class ListeningModeViewController: VocableCollectionViewController {
                     text = String(localized: "settings.listening_mode.hotword_explanation_footer")
                 }
             } else {
-                text = String(localized: "settings.listening_mode.device_unsupported_explanation_footer")
+                let model = UIDevice.current.localizedModel
+                let systemName = UIDevice.current.systemName
+                let systemVersion = UIDevice.current.systemVersion
+                let siriName = "Siri"
+
+                let format = String(localized: "settings.listening_mode.device_unsupported_explanation_footer")
+
+                text = String(format: format, model, systemName, systemVersion, siriName)
             }
             
             let fontSize: CGFloat = self.sizeClass.contains(any: .compact) ? 18 : 26
