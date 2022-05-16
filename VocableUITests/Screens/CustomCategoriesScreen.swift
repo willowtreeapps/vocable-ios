@@ -21,6 +21,10 @@ class CustomCategoriesScreen: BaseScreen {
         return XCUIApplication().cells[firstPhraseId]
     }
     
+    static func phraseCell(_ phraseId: String) -> XCUIElementQuery {
+        return XCUIApplication().cells.matching(identifier: phraseId)
+    }
+    
     static func createCustomCategory(categoryName: String) {
         SettingsScreen.settingsPageAddCategoryButton.tap()
         KeyboardScreen.typeText(categoryName)
