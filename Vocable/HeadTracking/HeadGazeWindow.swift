@@ -249,16 +249,19 @@ class HeadGazeWindow: UIWindow {
     }
 
     func gazeableHitTest(_ point: CGPoint, with event: UIHeadGazeEvent?) -> UIView? {
-        guard !isHidden else { return nil }
+        guard !isHidden, isUserInteractionEnabled else { return nil }
+
         for view in subviews.reversed() {
             let point = view.convert(point, from: self)
             if let result = view.gazeableHitTest(point, with: event) {
                 return result
             }
         }
+
         if self.point(inside: point, with: event) && canReceiveGaze {
             return self
         }
+
         return nil
     }
 

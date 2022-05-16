@@ -9,22 +9,6 @@
 import CoreData
 import SwiftUI
 
-struct GazeableAlert: UIViewControllerRepresentable {
-    let title: String
-    let actions: [GazeableAlertAction]
-
-    func makeUIViewController(context: Context) -> GazeableAlertViewController {
-        let alertViewController = GazeableAlertViewController(alertTitle: title)
-        actions.forEach {
-            alertViewController.addAction($0, withAutomaticDismissal: false)
-        }
-
-        return alertViewController
-    }
-
-    func updateUIViewController(_ uiViewController: GazeableAlertViewController, context: Context) { /* No op */ }
-}
-
 private func makeFetchRequest(_ categoryId: NSManagedObjectID) -> NSFetchRequest<Category> {
     let request = Category.fetchRequest()
 
@@ -114,42 +98,23 @@ struct EditCategoryDetail: View {
         .gazeButtonStyle(.vocable)
         .navigationBarHidden(true)
         .background(Color(UIColor.primaryBackgroundColor).ignoresSafeArea())
-        .overlay {
-            if showingDeleteAlert { deleteAlert }
-        }
-    }
+        .gazeableAlert(
+            NSLocalizedString("category_editor.alert.delete_category_confirmation.title", comment: "Remove category alert title"),
+            isPresented: $showingDeleteAlert,
+            actions: [
+                .cancel(withTitle: NSLocalizedString("category_editor.alert.delete_category_confirmation.button.cancel.title", comment: "Cancel alert action title")
+                ) {
+                    withAnimation { showingDeleteAlert = false }
+                },
+                .delete(withTitle: NSLocalizedString("category_editor.alert.delete_category_confirmation.button.remove.title", comment: "Remove category alert action title")
+                ) {
+                    removeCategory()
+                    withAnimation { showingDeleteAlert = false }
+                    dismiss()
+                }
+            ]
+        )
 
-    // MARK: Alert View
-
-    @ViewBuilder private var deleteAlert: some View {
-        ZStack {
-            Color.black.opacity(0.4)
-                .ignoresSafeArea()
-
-            GazeableAlert(
-                title: NSLocalizedString(
-                    "category_editor.alert.delete_category_confirmation.title",
-                    comment: "Remove category alert title"),
-                actions: [
-                    .cancel(
-                        withTitle: NSLocalizedString(
-                            "category_editor.alert.delete_category_confirmation.button.cancel.title",
-                            comment: "Cancel alert action title")
-                    ) {
-                        showingDeleteAlert = false
-                    },
-                    .delete(
-                        withTitle: NSLocalizedString(
-                            "category_editor.alert.delete_category_confirmation.button.remove.title",
-                            comment: "Remove category alert action title")
-                    ) {
-                        removeCategory()
-                        showingDeleteAlert = false
-                        dismiss()
-                    }
-                ]
-            )
-        }
     }
 
     // MARK: Action handlers
