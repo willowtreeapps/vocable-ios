@@ -10,11 +10,12 @@ import XCTest
 
 class MainScreen: BaseScreen {
     
-    private static let app = XCUIApplication()
-    
-    static let settingsButton = XCUIApplication().buttons["root.settingsButton"]
-    static let outputLabel = XCUIApplication().staticTexts["root.outputTextLabel"]
-    static let keyboardNavButton = XCUIApplication().buttons["root.keyboardButton"]
+    // MARK: Home screen elements
+
+    static let outputText = XCUIApplication().staticTexts[.root.outputText]
+    static let keyboardButton = XCUIApplication().buttons[.shared.keyboardButton]
+    static let settingsButton = XCUIApplication().buttons[.shared.settingsButton]
+
     static let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
     static let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]
     static let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
@@ -78,5 +79,5 @@ class MainScreen: BaseScreen {
         SettingsScreen.categoriesButton.tap()
         SettingsScreen.openCategorySettings(category: name)
     }
-    
+
 }
