@@ -64,22 +64,10 @@
                   Identifier = "CustomCategoriesTests/testPagination()">
                </Test>
                <Test
-                  Identifier = "CustomCategoryTests">
-               </Test>
-               <Test
-                  Identifier = "CustomPhraseTests">
-               </Test>
-               <Test
                   Identifier = "CustomPhraseTests/testPagination()">
                </Test>
                <Test
-                  Identifier = "KeyboardScreenTests">
-               </Test>
-               <Test
                   Identifier = "MainScreenTests/testCustonCategoryPagination()">
-               </Test>
-               <Test
-                  Identifier = "PresetPhraseTests">
                </Test>
                <Test
                   Identifier = "PresetsOverrideTestCase">
