@@ -47,6 +47,7 @@ class PresetCategoryTests: BaseTest {
         SettingsScreen.alertRemoveButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
         
         // Confirm that the category is removed from categories list
+        _ = SettingsScreen.settingsPageAddCategoryButton.waitForExistence(timeout: 0.5)
         XCTAssertFalse(SettingsScreen.doesCategoryExist(categoryName))
         
         // Confirm that the category is removed from main screen
