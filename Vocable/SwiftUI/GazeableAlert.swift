@@ -68,9 +68,13 @@ private struct GazeableAlertRepresentable: UIViewControllerRepresentable {
 
 struct GazeableAlert_Previews: PreviewProvider {
     static var previews: some View {
-        GazeableAlert(title: "This is an alert!", isPresented: .constant(true), actions: [
-            .cancel(withTitle: "Cancel"),
-            .delete(withTitle: "Delete")
-        ])
+        GazeableAlert(
+            title: "This is an alert!",
+            isPresented: .constant(true),
+            actions: [
+                .cancel(withTitle: "Cancel"),
+                .delete(withTitle: "Delete")
+            ]
+        )
     }
 }
