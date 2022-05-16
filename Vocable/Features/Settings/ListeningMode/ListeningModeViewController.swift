@@ -124,7 +124,6 @@ final class ListeningModeViewController: VocableCollectionViewController {
 
     private func setupCollectionView() {
 
-        collectionView.isScrollEnabled = false
         collectionView.backgroundColor = .collectionViewBackgroundColor
         collectionView.register(UINib(nibName: "SettingsFooterTextSupplementaryView", bundle: nil),
                                 forSupplementaryViewOfKind: "footerText",
@@ -150,12 +149,15 @@ final class ListeningModeViewController: VocableCollectionViewController {
             case .hotword:
                 text = String(localized: "settings.listening_mode.hotword_explanation_footer")
             }
+            let fontSize: CGFloat = self.sizeClass.contains(any: .compact) ? 18 : 26
+            footerView.textLabel.font = .systemFont(ofSize: fontSize)
             footerView.textLabel.text = text
             return footerView
         }
 
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
-        configuration.interSectionSpacing = 44
+        let interSectionSpacing: CGFloat = self.sizeClass.contains(any: .compact) ? 16 : 44
+        configuration.interSectionSpacing = interSectionSpacing
         let layout = UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (_, environment) -> NSCollectionLayoutSection? in
             return self?.layoutSection(environment: environment)
         }, configuration: configuration)
@@ -178,7 +180,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
     private func layoutSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
         let itemHeightDimension: NSCollectionLayoutDimension
-        if sizeClass.contains(.vCompact) {
+        if sizeClass.contains(any: .compact) {
             itemHeightDimension = NSCollectionLayoutDimension.absolute(50)
         } else {
             itemHeightDimension = NSCollectionLayoutDimension.absolute(100)
@@ -200,7 +202,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
         section.interGroupSpacing = 8
         section.contentInsets = sectionInsets(for: environment)
         section.contentInsets.top = 16
-        section.contentInsets.bottom = 32
+        section.contentInsets.bottom = sizeClass.contains(any: .compact) ? 16 : 32
         section.boundarySupplementaryItems = [footerItem]
         return section
     }

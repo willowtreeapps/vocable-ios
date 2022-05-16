@@ -280,7 +280,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
             category.isHidden = newHiddenState
             do {
-                if newHiddenState == true, !category.isUserGenerated, !category.isUserRenamed {
+                if newHiddenState == true, category.isAnalyticsReportable {
                     Analytics.shared.track(.presetCategoryHidden(category))
                 }
                 try Category.updateAllOrdinalValues(in: context)
@@ -348,7 +348,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
 
             do {
-                if !category.isUserGenerated, !category.isUserRenamed {
+                if category.isAnalyticsReportable {
                     Analytics.shared.track(.presetCategoryRemoved(category))
                 }
 

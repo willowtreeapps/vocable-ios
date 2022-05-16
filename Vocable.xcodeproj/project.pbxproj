@@ -183,6 +183,8 @@
 		A99AF23123FC8BF700BE1184 /* TextTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99AF23023FC8BF700BE1184 /* TextTransaction.swift */; };
 		A99AF23323FDA8B600BE1184 /* SuggestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */; };
 		A99AF23523FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */; };
+		A99B5324282C0D5D004FEFDA /* AnalyticsReportable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B5323282C0D5D004FEFDA /* AnalyticsReportable.swift */; };
+		A99B5326282C0E9D004FEFDA /* TimeInterval+AnalyticsReportable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B5325282C0E9D004FEFDA /* TimeInterval+AnalyticsReportable.swift */; };
 		A9B32C8C240EB6250084E151 /* KeyboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B32C8B240EB6250084E151 /* KeyboardModel.swift */; };
 		A9B696112433CF31004E6960 /* EditCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */; };
 		A9C32CFF242271F3000EC6F7 /* Phrase+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */; };
@@ -438,6 +440,8 @@
 		A99AF23023FC8BF700BE1184 /* TextTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTransaction.swift; sourceTree = "<group>"; };
 		A99AF23223FDA8B600BE1184 /* SuggestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		A99AF23423FDA8DC00BE1184 /* SuggestionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionCollectionViewCell.xib; sourceTree = "<group>"; };
+		A99B5323282C0D5D004FEFDA /* AnalyticsReportable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReportable.swift; sourceTree = "<group>"; };
+		A99B5325282C0E9D004FEFDA /* TimeInterval+AnalyticsReportable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+AnalyticsReportable.swift"; sourceTree = "<group>"; };
 		A9B32C8B240EB6250084E151 /* KeyboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardModel.swift; sourceTree = "<group>"; };
 		A9B696102433CF31004E6960 /* EditCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoriesViewController.swift; sourceTree = "<group>"; };
 		A9C32CFE242271F3000EC6F7 /* Phrase+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Phrase+Helpers.swift"; sourceTree = "<group>"; };
@@ -950,6 +954,8 @@
 				A9E49E5D2811FE840088A344 /* AppStorage+Init.swift */,
 				A9E49E5F2812FD760088A344 /* LaunchArguments.swift */,
 				6BE02F6628133E00002CCCED /* LaunchEnvironment.swift */,
+				A99B5323282C0D5D004FEFDA /* AnalyticsReportable.swift */,
+				A99B5325282C0E9D004FEFDA /* TimeInterval+AnalyticsReportable.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1328,6 +1334,7 @@
 				A93E9403244E00A6008B61D2 /* UICollectionView+Helpers.swift in Sources */,
 				A9DF00FA23E38DB00072C7E1 /* PageControlReusableView.swift in Sources */,
 				A99AF23123FC8BF700BE1184 /* TextTransaction.swift in Sources */,
+				A99B5326282C0E9D004FEFDA /* TimeInterval+AnalyticsReportable.swift in Sources */,
 				6B5C744127E8CC0000004713 /* VocableListCellAccessory.swift in Sources */,
 				6B8440E3244A1007007A4DC6 /* CarouselGridLayout.swift in Sources */,
 				6B8D3B752821C0EB00DDB9B7 /* Analytics.swift in Sources */,
@@ -1380,6 +1387,7 @@
 				6B1086732463662C00E729A8 /* v2_to_v3.xcmappingmodel in Sources */,
 				6B823BC223F4ADE30099F65E /* PIDControlConstants.swift in Sources */,
 				A9CF2AF7242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift in Sources */,
+				A99B5324282C0D5D004FEFDA /* AnalyticsReportable.swift in Sources */,
 				714407ED243CEEA1009D077B /* Category+Helpers.swift in Sources */,
 				30B979A524254CBC00309D7C /* WarningView.swift in Sources */,
 			);
