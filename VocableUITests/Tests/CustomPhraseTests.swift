@@ -90,30 +90,24 @@ class CustomPhraseTests: XCTestCase {
     }
     
     func testCanAddDuplicatePhrasesToCategories() {
-        // Navigate to our test category
+        // Navigate to our test category.
         MainScreen.navigateToSettingsAndOpenCategory(name: editableCategory.presetCategory.utterance)
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
 
-        // Duplicate the phrase in this category
+        // Duplicate the phrase in this category.
         let originalPhraseId = editableCategory.presetPhrases[0].id
-        let duplicatePhrase = editableCategory.presetPhrases[0].utterance
-        CustomCategoriesScreen.addPhrase(duplicatePhrase)
+        let duplicatedPhrase = editableCategory.presetPhrases[0].utterance
+        CustomCategoriesScreen.addPhrase(duplicatedPhrase)
         KeyboardScreen.createDuplicateButton.tap(afterWaitingForExistenceWithTimeout: 0.5)
         
-        // Wait for the keyboard to dismiss
+        // Wait for the keyboard to dismiss.
         _ = CustomCategoriesScreen.navBarBackButton.waitForExistence(timeout: 0.5)
         
-        // We have 2 phrase cells now
-        let allPhraseCells = XCUIApplication().cells.allElementsBoundByIndex
+        // Verify we now have 2 phrases, with matching labels, but unique identifiers.
+        let allPhraseCells = XCUIApplication().cells
         XCTAssertEqual(allPhraseCells.count, 2)
-        XCTAssertNotEqual(allPhraseCells[0].identifier, originalPhraseId)
-        XCTAssertEqual(allPhraseCells[1].identifier, originalPhraseId)
-        // TODO: Re-visit this idea, creating a new VT assertion that tests these conditions. VTAssertDuplicatePhrases?
-        // there are now 2 cells
-        // one of the cells is the original...proven by the identifier
-        // one of the cells is the duplicate:
-            // it matches the label (both have the same utterance)
-            // it has its own ID
+        XCTAssertEqual(allPhraseCells.matching(identifier: originalPhraseId).count, 1)
+        XCTAssertEqual(allPhraseCells.staticTexts.matching(identifier: duplicatedPhrase).count, 2)
     }
     
 }

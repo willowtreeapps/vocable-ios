@@ -62,11 +62,14 @@ class PresetCategoryTests: BaseTest {
         XCTAssertFalse(SettingsScreen.showCategoryButton.isEnabled)
     }
     
-    // For each preset category (the first 5 categories), tap() the top left phrase, then verify that all selected phrases appear in "Recents"
+    // For the first 5 preset categories, tap() the top left phrase, then verify that all selected phrases appear in "Recents"
     func testRecentScreen_ShowsPressedButtons(){
         var listOfSelectedPhrases: [String] = []
         var firstPhrase = ""
-        let listOfCategoriesToSkip: [String] = [CategoryIdentifier.keyPad.identifier, CategoryIdentifier.mySayings.identifier, CategoryIdentifier.recents.identifier, CategoryIdentifier.listen.identifier]
+        let listOfCategoriesToSkip: [String] = [CategoryIdentifier.keyPad.identifier,
+                                                CategoryIdentifier.mySayings.identifier,
+                                                CategoryIdentifier.recents.identifier,
+                                                CategoryIdentifier.listen.identifier]
         
         for categoryName in PresetCategories().list {
             
