@@ -60,7 +60,7 @@ class CarouselGridCollectionView: UICollectionView {
     override var contentSize: CGSize {
         didSet {
             defer {
-                if !needsInitialScrollToMiddle {
+                if needsInitialScrollToMiddle {
                     lastInvalidatedContentSize = contentSize
                 }
             }
