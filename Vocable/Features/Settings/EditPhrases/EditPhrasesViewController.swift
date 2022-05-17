@@ -227,11 +227,11 @@ private extension EditPhrasesViewController {
             let deleteAction = VocableListCellAction.delete { [weak self] in
                 self?.presentDeletionPromptForPhrase(with: phraseIdentifier)
             }
-            
+            let editButtonId = AccessibilityID.settings.editPhrases.editPhraseButton.id
             cell.contentConfiguration = VocableListContentConfiguration(title: phrase.utterance ?? "",
                                                                         actions: [deleteAction],
                                                                         accessory: .disclosureIndicator(),
-                                                                        accessibilityIdentifier: "editButton") { [weak self] in
+                                                                        accessibilityIdentifier: editButtonId) { [weak self] in
                 self?.presentEditorForPhrase(with: phraseIdentifier)
             }
             cell.accessibilityIdentifier = phrase.identifier

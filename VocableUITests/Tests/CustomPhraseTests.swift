@@ -72,7 +72,7 @@ class CustomPhraseTests: XCTestCase {
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         
         // Edit an existing phrase
-        CustomCategoriesScreen.phraseCell(phraseId).buttons["editButton"].tap()
+        CustomCategoriesScreen.phraseCell(phraseId).buttons[.settings.editPhrases.editPhraseButton].tap()
         KeyboardScreen.typeText("test")
         KeyboardScreen.checkmarkAddButton.tap()
         
