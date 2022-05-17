@@ -54,8 +54,8 @@ import Combine
 
         view.backgroundColor = .collectionViewBackgroundColor
 
-        backChevron.accessibilityIdentifier = "root.categories_carousel.left_chevron"
-        forwardChevron.accessibilityIdentifier = "root.categories_carousel.right_chevron"
+        backChevron.accessibilityID = .root.categoryBackButton
+        forwardChevron.accessibilityID = .root.categoryForwardButton
 
         collectionViewMask.fillColor = .black
         collectionViewMask.backgroundColor = .clear
