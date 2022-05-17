@@ -58,7 +58,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             let button = GazeableButton()
             button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             button.addTarget(self, action: #selector(handleBackButton), for: .primaryActionTriggered)
-            button.accessibilityIdentifier = "navigationBar.backButton"
+            button.accessibilityID = .shared.backButton
             return button
         }()
     }
