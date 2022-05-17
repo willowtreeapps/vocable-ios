@@ -175,7 +175,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
         self.microphonePermissionStatus = AVAudioSession.sharedInstance().recordPermission
     }
 
-    private func startListening(mode: ListeningMode, resumingFromPause: Bool = false, requestablePermission: AudioPermission? = nil) {
+    func startListening(mode: ListeningMode, resumingFromPause: Bool = false, requestablePermission: AudioPermission? = nil) {
         guard AppConfig.listeningMode.isEnabled else { return }
 
         guard !isPaused && ((mode != self.mode) || (resumingFromPause && isListening)) else {

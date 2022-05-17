@@ -21,8 +21,11 @@ final class AudioPermissionPromptController {
     @Published private(set) var state: AudioPermissionEmptyState? = .none
 
     private var cancellables = Set<AnyCancellable>()
+    private let desiredListeningMode: SpeechRecognitionController.ListeningMode
 
-    init() {
+    init(mode: SpeechRecognitionController.ListeningMode) {
+        print("**** Desired listening mode: \(mode)")
+        self.desiredListeningMode = mode
         let controller = SpeechRecognitionController.shared
         self.authorizationStatusDidChange(controller.microphonePermissionStatus, controller.speechPermissionStatus)
         let micStatusPublisher = controller.$microphonePermissionStatus.dropFirst().removeDuplicates()
@@ -51,9 +54,11 @@ final class AudioPermissionPromptController {
                 }
             })
         case .notDetermined: // Need to present alert
-            return .init(state: .speechPermissionUndetermined, action: {
-                SpeechRecognitionController.shared.startTranscribing(requestPermission: .speech)
-            })
+            return .init(state: .speechPermissionUndetermined) { [desiredListeningMode] in
+                SpeechRecognitionController.shared.startListening(
+                    mode: desiredListeningMode,
+                    requestablePermission: .speech)
+            }
         default:
             assertionFailure("Unsupported speech status: \(speechStatus)")
             return nil
@@ -73,9 +78,11 @@ final class AudioPermissionPromptController {
                 }
             })
         case .undetermined: // Need to present alert
-            return .init(state: .microphonePermissionUndetermined, action: {
-                SpeechRecognitionController.shared.startTranscribing(requestPermission: .microphone)
-            })
+            return .init(state: .microphonePermissionUndetermined) { [desiredListeningMode] in
+                SpeechRecognitionController.shared.startListening(
+                    mode: desiredListeningMode,
+                    requestablePermission: .microphone)
+            }
         default:
             assertionFailure("Unknown recording status: \(recordingStatus)")
             return nil
