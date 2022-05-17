@@ -18,7 +18,7 @@ class MainScreen: BaseScreen {
     static let categoryBackButton = XCUIApplication().buttons[.root.categoryBackButton]
     static let categoryForwardButton = XCUIApplication().buttons[.root.categoryForwardButton]
     static let pageNumberText = XCUIApplication().staticTexts[.shared.pagination.pageLabel]
-    static let addPhraseLabel = XCUIApplication().cells[.settings.editCategories.addCategoryButton]
+    static let addPhraseButton = XCUIApplication().cells[.root.addPhraseButton]
     
     // Find the current selected category and return it as a CategoryIdentifier
     static var selectedCategoryCell: CategoryIdentifier {
