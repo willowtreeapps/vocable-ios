@@ -14,7 +14,7 @@ class SettingsScreen: BaseScreen {
     static let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
     static let otherElements = XCUIApplication().collectionViews.cells.otherElements
     static let cells = XCUIApplication().cells
-    static let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
+    static let settingsPageNextButton = XCUIApplication().buttons[.shared.pagination.nextButton]
     static let categoryUpButton = "reorder.upButton"
     static let categoryDownButton = "reorder.downButton"
     static let categoryForwardButton = "Forward"
