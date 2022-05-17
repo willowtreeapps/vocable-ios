@@ -62,7 +62,7 @@ class MainScreenTests: XCTestCase {
             MainScreen.locateAndSelectDestinationCategory(CategoryIdentifier(category.presetCategory.id))
             _ = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).waitForExistence(timeout: 0.5)
             XCUIApplication().cells[phrase.id].tap()
-            XCTAssertEqual(MainScreen.outputLabel.label, phrase.utterance)
+            XCTAssertEqual(MainScreen.outputText.label, phrase.utterance)
         }
     }
     

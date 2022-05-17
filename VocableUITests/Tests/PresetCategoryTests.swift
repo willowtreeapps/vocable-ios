@@ -101,7 +101,7 @@ class PresetCategoryTests: BaseTest {
         MainScreen.locateAndSelectDestinationCategory(.keyPad)
         let firstKeypadNumber = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
         XCUIApplication().collectionViews.staticTexts[firstKeypadNumber].tap()
-        XCTAssertEqual(MainScreen.outputLabel.label, firstKeypadNumber)
+        XCTAssertEqual(MainScreen.outputText.label, firstKeypadNumber)
     }
     
 }
