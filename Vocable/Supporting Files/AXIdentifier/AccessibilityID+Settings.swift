@@ -11,7 +11,6 @@ import Foundation
 extension AccessibilityID {
     public struct settings {
         public static let closeSettingsButton: AccessibilityID = "settings-close-settings-button"
-        public static let navBarBackButton: AccessibilityID = "settings-nav-bar-back-button"
         public static let categoriesAndPhrasesButton: AccessibilityID = "settings-categories-and-phrases-button"
         public static let timingAndSensitivityButton: AccessibilityID = "settings-timing-and-sensitivity-button"
         public static let resetAppSettingsButton: AccessibilityID = "settings-reset-app-settings-button"

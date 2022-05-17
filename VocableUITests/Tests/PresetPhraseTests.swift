@@ -108,7 +108,7 @@ class PresetPhraseTests: BaseTest {
         XCTAssertTrue(MainScreen.phraseDoesExist(testPhrase), "Expected the first phrase \(testPhrase) to be added to and displayed in 'My Sayings'")
         
         // Add the same phrase again to the My Sayings
-        MainScreen.addPhraseLabel.tap()
+        MainScreen.addPhraseButton.tap()
         KeyboardScreen.typeText(testPhrase)
         KeyboardScreen.checkmarkAddButton.tap()
         KeyboardScreen.createDuplicateButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
