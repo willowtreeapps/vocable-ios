@@ -628,11 +628,11 @@
 		17793C2924574B0B00758BC0 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				17793C2A24574B2800758BC0 /* MainScreen.swift */,
-				17D4162D245C6FF600FD81CD /* KeyboardScreen.swift */,
-				17F29478247419DD00A05434 /* SettingsScreen.swift */,
-				CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */,
 				628B35C127DF9C6B00299312 /* BaseScreen.swift */,
+				CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */,
+				17D4162D245C6FF600FD81CD /* KeyboardScreen.swift */,
+				17793C2A24574B2800758BC0 /* MainScreen.swift */,
+				17F29478247419DD00A05434 /* SettingsScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -640,20 +640,20 @@
 		17793C2C24574C9B00758BC0 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */,
 				17D416292457659700FD81CD /* BaseTest.swift */,
-				17793C2D24574CB500758BC0 /* MainScreenTests.swift */,
-				17D4162B245C6FE800FD81CD /* KeyboardScreenTests.swift */,
-				CE12277524F586CB008F7866 /* CustomPhraseTests.swift */,
-				CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */,
-				620DD31827DA90F1003B01A0 /* CustomPhraseBaseTest.swift */,
-				62300C7D27F360930005CEF5 /* CustomCategoryTests.swift */,
-				DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */,
+				DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */,
 				627B53632800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift */,
+				DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */,
+				62300C7D27F360930005CEF5 /* CustomCategoryTests.swift */,
+				620DD31827DA90F1003B01A0 /* CustomPhraseBaseTest.swift */,
+				CE12277524F586CB008F7866 /* CustomPhraseTests.swift */,
+				17D4162B245C6FE800FD81CD /* KeyboardScreenTests.swift */,
 				627B53652800D11100FEBF25 /* MainScreenPaginationTests.swift */,
+				17793C2D24574CB500758BC0 /* MainScreenTests.swift */,
+				62AE92562825C6CB004247EC /* PaginationBaseTest.swift */,
 				DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */,
 				6B2551822813288E0046C2EC /* PresetsOverrideTestCase.swift */,
-				62AE92562825C6CB004247EC /* PaginationBaseTest.swift */,
+				CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
