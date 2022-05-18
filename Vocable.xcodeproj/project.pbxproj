@@ -27,7 +27,6 @@
 		4E014DAA27EA53BC00561FC8 /* NSRange+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E014DA927EA53BC00561FC8 /* NSRange+.swift */; };
 		4E8A303C27EBB95C000177B1 /* BidirectionalCollection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A303B27EBB95C000177B1 /* BidirectionalCollection+.swift */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
-		620DD31927DA90F1003B01A0 /* CustomPhraseBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620DD31827DA90F1003B01A0 /* CustomPhraseBaseTest.swift */; };
 		62300C7E27F360930005CEF5 /* CustomCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62300C7D27F360930005CEF5 /* CustomCategoryTests.swift */; };
 		627B53642800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627B53632800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift */; };
 		627B53662800D11200FEBF25 /* MainScreenPaginationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627B53652800D11100FEBF25 /* MainScreenPaginationTests.swift */; };
@@ -255,6 +254,7 @@
 		CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */; };
 		DC41F55427E4F5130099B7D5 /* CategoryIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */; };
 		DC533C0127FCDF39005FEBBD /* CustomCategoryBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */; };
+		DCDF7E132832A3190009E75E /* PresetCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF7E122832A3190009E75E /* PresetCategoryTests.swift */; };
 		DCF25CD52811AD2000DF766F /* PresetPhraseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -303,7 +303,6 @@
 		54D3C41423E37CD40061EF47 /* VocableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		620DD31827DA90F1003B01A0 /* CustomPhraseBaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhraseBaseTest.swift; sourceTree = "<group>"; };
 		62300C7D27F360930005CEF5 /* CustomCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryTests.swift; sourceTree = "<group>"; };
 		627B53632800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPhrasesPaginationTests.swift; sourceTree = "<group>"; };
 		627B53652800D11100FEBF25 /* MainScreenPaginationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPaginationTests.swift; sourceTree = "<group>"; };
@@ -525,6 +524,7 @@
 		CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
 		DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIdentifier.swift; sourceTree = "<group>"; };
 		DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryBaseTest.swift; sourceTree = "<group>"; };
+		DCDF7E122832A3190009E75E /* PresetCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetCategoryTests.swift; sourceTree = "<group>"; };
 		DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetPhraseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -646,7 +646,6 @@
 				17D4162B245C6FE800FD81CD /* KeyboardScreenTests.swift */,
 				CE12277524F586CB008F7866 /* CustomPhraseTests.swift */,
 				CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */,
-				620DD31827DA90F1003B01A0 /* CustomPhraseBaseTest.swift */,
 				62300C7D27F360930005CEF5 /* CustomCategoryTests.swift */,
 				DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */,
 				627B53632800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift */,
@@ -654,6 +653,7 @@
 				DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */,
 				6B2551822813288E0046C2EC /* PresetsOverrideTestCase.swift */,
 				62AE92562825C6CB004247EC /* PaginationBaseTest.swift */,
+				DCDF7E122832A3190009E75E /* PresetCategoryTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1502,6 +1502,7 @@
 				62E84887280DEF8600D42499 /* VocableTestAsserts.swift in Sources */,
 				6B255181281328370046C2EC /* PresetsBuilders.swift in Sources */,
 				17793C2E24574CB500758BC0 /* MainScreenTests.swift in Sources */,
+				DCDF7E132832A3190009E75E /* PresetCategoryTests.swift in Sources */,
 				6B8D3C23282C288D00DDB9B7 /* AccessibilityID+Root+Categories.swift in Sources */,
 				6B8D3C21282C288D00DDB9B7 /* AccessibilityID+Shared+Pagination.swift in Sources */,
 				6B8D3C27282C288D00DDB9B7 /* UIAccessibilityIdentification+AccessibilityID.swift in Sources */,
@@ -1509,7 +1510,6 @@
 				0E969129281C5F520097A3CC /* AccessibilityID.swift in Sources */,
 				6B255184281329560046C2EC /* Presets.swift in Sources */,
 				6B8D3C22282C288D00DDB9B7 /* AccessibilityID+Settings+EditCategories.swift in Sources */,
-				620DD31927DA90F1003B01A0 /* CustomPhraseBaseTest.swift in Sources */,
 				627B53642800D0DE00FEBF25 /* CategoryPhrasesPaginationTests.swift in Sources */,
 				CE12277624F586CB008F7866 /* CustomPhraseTests.swift in Sources */,
 				62300C7E27F360930005CEF5 /* CustomCategoryTests.swift in Sources */,
