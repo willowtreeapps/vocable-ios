@@ -83,48 +83,4 @@ class MainScreenTests: XCTestCase {
         XCTAssertFalse(isVisible)
     }
     
-    // TODO: The following tests will be covered in a separate suite: PresetCategoryTests
-    /*
-     
-    // For each preset category (the first 5 categories), tap() the top left
-    // phrase, then verify that all selected phrases appear in "Recents"
-   func testRecentScreen_ShowsPressedButtons(){
-       var listOfSelectedPhrases: [String] = []
-       var firstPhrase = ""
-       
-       for categoryName in PresetCategories().list {
-           
-           // Skip the 123 (keypad), My Sayings, Recents, and Listen categories because their entries do
-           // not get added to 'Recents'
-           if listOfCategoriesToSkip.contains(categoryName.id) {
-               continue;
-           }
-           MainScreen.locateAndSelectDestinationCategory(categoryName)
-           firstPhrase = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
-           XCUIApplication().collectionViews.staticTexts[firstPhrase].tap()
-           listOfSelectedPhrases.append(firstPhrase)
-       }
-       MainScreen.locateAndSelectDestinationCategory(.recents)
-       
-       for phrase in listOfSelectedPhrases {
-           XCTAssertTrue(MainScreen.locatePhraseCell(phrase: phrase).exists, "Expected \(phrase) to appear in Recents category")
-       }
-   }
-   
-   
-   func testDefaultCategoriesExist() {
-       for categoryName in PresetCategories().list {
-           MainScreen.locateAndSelectDestinationCategory(categoryName)
-           XCTAssertEqual(MainScreen.selectedCategoryCell.id, categoryName.id, "Preset category with ID '\(categoryName.id)' was not found")
-       }
-   }
-    
-    func testWhenTapping123Phrase_ThenThatPhraseDisplaysOnOutputLabel() {
-        MainScreen.locateAndSelectDestinationCategory(.keyPad)
-        let firstKeypadNumber = XCUIApplication().collectionViews.staticTexts.element(boundBy: 0).label
-        XCUIApplication().collectionViews.staticTexts[firstKeypadNumber].tap()
-        XCTAssertEqual(MainScreen.outputLabel.label, firstKeypadNumber)
-    }
-   */
-    
 }

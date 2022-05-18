@@ -54,7 +54,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
 
     private var dataSource: Datasource!
 
-    private var authorizationController = AudioPermissionPromptController()
+    private var authorizationController = AudioPermissionPromptController(mode: .hotWord)
     private var authorizationCancellable: AnyCancellable?
     private var cellRegistration: UICollectionView.CellRegistration<VocableListCell, ContentItem>!
 
