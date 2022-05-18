@@ -11,9 +11,9 @@ import XCTest
 class KeyboardScreen: BaseScreen {
     private static let app = XCUIApplication()
     
-    static let keyboardTextView = XCUIApplication().textViews["keyboard.textView"]
-    static let favoriteButton = XCUIApplication().buttons["keyboard.favoriteButton"]
-    static let checkmarkAddButton = XCUIApplication().buttons["keyboard.saveButton"]
+    static let keyboardTextView = XCUIApplication().textViews[.shared.keyboard.outputTextView]
+    static let favoriteButton = XCUIApplication().buttons[.shared.keyboard.favoriteButton]
+    static let checkmarkAddButton = XCUIApplication().buttons[.shared.keyboard.saveButton]
     static let createDuplicateButton = XCUIApplication().buttons["Create Duplicate"]
     
     static func typeText(_ textToType: String) {
