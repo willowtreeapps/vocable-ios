@@ -27,10 +27,10 @@ final class TextEditorNavigationButton: GazeableButton {
     struct Configuration {
         let image: UIImage
         var isEnabled: Bool
-        let accessibilityIdentifier: String?
+        let accessibilityIdentifier: AccessibilityID?
         var action: Action?
 
-        static func dismissal(for viewController: UIViewController, isEnabled: Bool = true, textDidChange: Bool = false, accessibilityIdentifier: String = "keyboard.dismissButton") -> Self {
+        static func dismissal(for viewController: UIViewController, isEnabled: Bool = true, textDidChange: Bool = false, accessibilityIdentifier: AccessibilityID = .shared.dismissButton) -> Self {
             Configuration(image: UIImage(systemName: "xmark.circle")!, isEnabled: isEnabled, accessibilityIdentifier: accessibilityIdentifier) { [weak viewController] in
                 guard let viewController = viewController else { return }
                 if textDidChange {
@@ -44,14 +44,14 @@ final class TextEditorNavigationButton: GazeableButton {
             }
         }
 
-        static func save(isEnabled: Bool = false, accessibilityIdentifier: String = "keyboard.saveButton", action: @escaping Action) -> Self {
+        static func save(isEnabled: Bool = false, accessibilityIdentifier: AccessibilityID = .shared.keyboard.saveButton, action: @escaping Action) -> Self {
             Configuration(image: UIImage(systemName: "checkmark")!,
                           isEnabled: isEnabled,
                           accessibilityIdentifier: accessibilityIdentifier,
                           action: action)
         }
 
-        static func favorite(isFavorited: Bool, isEnabled: Bool = false, accessibilityIdentifier: String = "keyboard.favoriteButton", action: @escaping Action) -> Self {
+        static func favorite(isFavorited: Bool, isEnabled: Bool = false, accessibilityIdentifier: AccessibilityID = .shared.keyboard.favoriteButton, action: @escaping Action) -> Self {
             Configuration(image: isFavorited ? UIImage(systemName: "star.fill")! : UIImage(systemName: "star")!,
                           isEnabled: isEnabled,
                           accessibilityIdentifier: accessibilityIdentifier,
@@ -63,7 +63,7 @@ final class TextEditorNavigationButton: GazeableButton {
         guard let configuration = configuration else { return }
         setImage(configuration.image, for: .normal)
         isEnabled = configuration.isEnabled
-        accessibilityIdentifier = configuration.accessibilityIdentifier
+        accessibilityIdentifier = configuration.accessibilityIdentifier?.id
 
         enumerateEventHandlers { action, _, event, _ in
             if let action = action {
