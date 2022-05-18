@@ -15,11 +15,10 @@ class MainScreen: BaseScreen {
     static let outputText = XCUIApplication().staticTexts[.root.outputText]
     static let keyboardButton = XCUIApplication().buttons[.shared.keyboardButton]
     static let settingsButton = XCUIApplication().buttons[.shared.settingsButton]
-
-    static let categoryLeftButton = XCUIApplication().buttons["root.categories_carousel.left_chevron"]
-    static let categoryRightButton = XCUIApplication().buttons["root.categories_carousel.right_chevron"]
-    static let pageNumber = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
-    static let addPhraseLabel = XCUIApplication().cells["add_new_phrase"]
+    static let categoryBackButton = XCUIApplication().buttons[.root.categoryBackButton]
+    static let categoryForwardButton = XCUIApplication().buttons[.root.categoryForwardButton]
+    static let pageNumberText = XCUIApplication().staticTexts[.shared.pagination.pageLabel]
+    static let addPhraseButton = XCUIApplication().cells[.root.addPhraseButton]
     
     // Find the current selected category and return it as a CategoryIdentifier
     static var selectedCategoryCell: CategoryIdentifier {
@@ -51,7 +50,7 @@ class MainScreen: BaseScreen {
                 destinationCell.tap()
                 return true
             }
-            categoryRightButton.tap()
+            categoryForwardButton.tap()
            
             // We break the loop when we return to our original starting point
         } while (!selectedCell.waitForExistence(timeout: 0.5))

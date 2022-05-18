@@ -11,6 +11,9 @@ import Foundation
 extension AccessibilityID {
     public struct root {
         public static let outputText: AccessibilityID = "root-output-text"
+        public static let categoryBackButton: AccessibilityID = "root-category-back-button"
+        public static let categoryForwardButton: AccessibilityID = "root-category-forward-button"
+        public static let addPhraseButton: AccessibilityID = "root-add-phrase-button"
         private init() {}
     }
 }
