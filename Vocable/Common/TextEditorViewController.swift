@@ -72,7 +72,7 @@ class TextEditorViewController: VocableViewController, UICollectionViewDelegate 
         keyboardViewController.attributedText = initialAttributedText
 
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.accessibilityIdentifier = "keyboard.textView"
+        textView.accessibilityID = .shared.keyboard.outputTextView
         textView.textAlignment = .natural
 
         navigationBar.leftButton = leftButton
