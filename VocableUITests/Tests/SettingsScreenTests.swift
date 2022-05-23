@@ -73,7 +73,5 @@ class SettingsScreenTests: BaseTest {
         
         // Using the query for the second category (i.e. second most cell in list) confirm the category name matches expectations
         XCTAssertEqual(currentSecondCategory.label, originalSecondCategoryName)
-        
     }
-
 }

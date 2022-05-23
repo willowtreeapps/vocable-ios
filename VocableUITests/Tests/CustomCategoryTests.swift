@@ -66,7 +66,7 @@ class CustomCategoryTests: CustomCategoryBaseTest {
         SettingsScreen.openCategorySettings(category: customCategoryName)
         SettingsScreen.removeCategoryButton.tap()
         SettingsScreen.alertRemoveButton.tap()
-        _ = SettingsScreen.settingsPageAddCategoryButton.waitForExistence(timeout: 0.5)
+        _ = SettingsScreen.addCategoryButton.waitForExistence(timeout: 0.5)
         XCTAssertFalse(SettingsScreen.doesCategoryExist(customCategoryName))
     }
   

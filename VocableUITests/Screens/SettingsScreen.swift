@@ -11,26 +11,41 @@ import XCTest
 
 class SettingsScreen: BaseScreen {
     
-    static let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
+    // MARK: Screen elements
     static let otherElements = XCUIApplication().collectionViews.cells.otherElements
     static let cells = XCUIApplication().cells
-    static let settingsPageNextButton = XCUIApplication().buttons[.shared.pagination.nextButton]
+    
+    // Settings Screen
+    static let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
+    
+    // Categories and Phrases
+    static let addCategoryButton = XCUIApplication().buttons[.settings.editCategories.addCategoryButton]
     static let categoryUpButton = "reorder.upButton"
     static let categoryDownButton = "reorder.downButton"
     static let categoryForwardButton = "Forward"
     static let hideCategorySwitch = "hide"
     static let categoryShowButton = "show"
-    static let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
+    static let settingsPageNextButton = XCUIApplication().buttons[.shared.pagination.nextButton]
+    static let categoryDetailsTitle = XCUIApplication().staticTexts["category_title_label"]
+    static let renameCategoryButton = XCUIApplication().buttons["rename_category_button"]
+    static let showCategoryButton = XCUIApplication().buttons["show_category_toggle"]
+    static let removeCategoryButton = XCUIApplication().buttons["remove_category_cell"]
+    
+    // Timing and Sensitivity
+    
+    // Reset app
+    
+    // Selection Mode
+
+    // Alerts
     static let alertContinueButton = XCUIApplication().buttons["alert.button.continue_editing"]
     static let alertDiscardButton = XCUIApplication().buttons["alert.button.discard_changes"]
     static let alertDeleteButton = XCUIApplication().buttons["alert.button.delete"]
     static let alertRemoveButton = XCUIApplication().buttons["Remove"]
     static let alertCancelButton = XCUIApplication().buttons["Cancel"]
-    static let categoryDetailsTitle = XCUIApplication().staticTexts["category_title_label"]
-    static let renameCategoryButton = XCUIApplication().buttons["rename_category_button"]
-    static let showCategoryButton = XCUIApplication().buttons["show_category_toggle"]
-    static let removeCategoryButton = XCUIApplication().buttons["remove_category_cell"]
 
+    // MARK: Helpers
+    
     static func openCategorySettings(category: String) {
         locateCategoryCell(category).staticTexts[category].tap()
     }
@@ -101,17 +116,17 @@ class SettingsScreen: BaseScreen {
         }
     }
     
-    static func addCategory(categoryName: String) {
-        settingsPageAddCategoryButton.tap()
-        let newCategory = KeyboardScreen.randomString(length: 5)
-        KeyboardScreen.typeText(newCategory)
-        KeyboardScreen.checkmarkAddButton.tap()
-    }
+//    static func addCategory(categoryName: String) {
+//        addCategoryButton.tap()
+//        let newCategory = KeyboardScreen.randomString(length: 5)
+//        KeyboardScreen.typeText(newCategory)
+//        KeyboardScreen.checkmarkAddButton.tap()
+//    }
     
     static func navigateToSettingsCategoryScreen() {
         MainScreen.settingsButton.tap(afterWaitingForExistenceWithTimeout: 2)
         categoriesButton.tap(afterWaitingForExistenceWithTimeout: 2)
-        _ = settingsPageAddCategoryButton.waitForExistence(timeout: 0.5)
+        _ = addCategoryButton.waitForExistence(timeout: 0.5)
     }
     
     static func returnToMainScreen() {
