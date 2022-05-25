@@ -68,7 +68,7 @@ class PresetPhraseTests: BaseTest {
         // Define the query that gives us the first phrase listed
         let firstPhrase = CustomCategoriesScreen.firstPhraseCell.staticTexts.firstMatch.label
         
-        CustomCategoriesScreen.firstPhraseCell.buttons["deleteButton"].tap()
+        CustomCategoriesScreen.firstPhraseCell.buttons[.settings.editPhrases.deletePhraseButton].tap()
         SettingsScreen.alertDeleteButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
         
         // Verify that phrase doesn't exist in Category Details Screen
