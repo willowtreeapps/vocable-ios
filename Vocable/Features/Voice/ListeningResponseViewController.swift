@@ -189,7 +189,6 @@ final class ListeningResponseViewController: VocableViewController {
         guard classificationCancellable == nil else { return }
         classificationCancellable = classifier.classificationPublisher
             .dropFirst()
-            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newValue in
                 self?.updateResponses(for: newValue)
