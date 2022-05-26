@@ -55,8 +55,10 @@ struct VocableListCellAction: Equatable {
         UIImage.SymbolConfiguration(pointSize: 28, weight: .bold)
     }
 
-    static let deleteButtonAccessibilityID = AccessibilityID.settings.editPhrases.deletePhraseButton.id
-    static func delete(isEnabled: Bool = true, accessibilityIdentifier: String = deleteButtonAccessibilityID, accessibilityLabel: String = "delete", action: Action?) -> VocableListCellAction {
+    static func delete(isEnabled: Bool = true,
+                       accessibilityIdentifier: String = AccessibilityID.settings.editPhrases.deletePhraseButton.id,
+                       accessibilityLabel: String = "delete",
+                       action: Action?) -> VocableListCellAction {
         VocableListCellAction(systemImage: "trash",
                               isEnabled: isEnabled,
                               accessibilityIdentifier: accessibilityIdentifier,
