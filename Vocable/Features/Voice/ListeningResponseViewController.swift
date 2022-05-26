@@ -103,12 +103,6 @@ final class ListeningResponseViewController: VocableViewController {
     }
 
     private func setContent(_ content: Content, animated: Bool = true) {
-
-        if self.contentViewController != nil {
-            guard content != self.content else {
-                return
-            }
-        }
         let previousContent = self.content
         self.content = content
         let outgoingTransition: TransitionStyle
@@ -195,7 +189,6 @@ final class ListeningResponseViewController: VocableViewController {
         guard classificationCancellable == nil else { return }
         classificationCancellable = classifier.classificationPublisher
             .dropFirst()
-            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newValue in
                 self?.updateResponses(for: newValue)

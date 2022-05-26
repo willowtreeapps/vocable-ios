@@ -11,10 +11,9 @@ import XCTest
 
 class CustomCategoriesScreen: BaseScreen {
     
-    static let categoriesPageAddPhraseButton = XCUIApplication().buttons["settingsCategory.addPhraseButton"]
-    static let editCategoryPhrasesButton = XCUIApplication().buttons["edit_phrases_cell"]
-    static let categoriesPageEditPhraseButton = XCUIApplication().buttons["categoryPhrase.editButton"]
-    static let categoriesPageDeletePhraseButton = XCUIApplication().buttons["deleteButton"]
+    static let categoriesPageAddPhraseButton = XCUIApplication().buttons[.settings.editPhrases.addPhraseButton]
+    static let editCategoryPhrasesButton = XCUIApplication().buttons[.settings.editCategoryDetails.editPhrasesButton]
+    static let categoriesPageDeletePhraseButton = XCUIApplication().buttons[.settings.editPhrases.deletePhraseButton]
 
     static var firstPhraseCell: XCUIElement {
         let firstPhraseId = XCUIApplication().cells.firstMatch.identifier
