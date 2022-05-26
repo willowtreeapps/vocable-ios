@@ -178,7 +178,7 @@
 		6BFB18C224002C7B002C3515 /* Phrases.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C024002C7B002C3515 /* Phrases.xcdatamodeld */; };
 		6BFB18C424004406002C3515 /* NSManagedObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */; };
 		6BFB18C624004711002C3515 /* ModelObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB18C524004711002C3515 /* ModelObjectExtensions.swift */; };
-		6BFB67BA2819C80900DB58BE /* ListeningModeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB67B92819C80900DB58BE /* ListeningModeConfig.swift */; };
+		6BFB67BA2819C80900DB58BE /* ListenModeFeatureConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFB67B92819C80900DB58BE /* ListenModeFeatureConfiguration.swift */; };
 		714407ED243CEEA1009D077B /* Category+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714407EC243CEEA1009D077B /* Category+Helpers.swift */; };
 		718D7FAE2419546F00FDEF93 /* EditPhrasesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D7FAD2419546F00FDEF93 /* EditPhrasesCollectionViewCell.swift */; };
 		718D7FB0241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718D7FAF241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib */; };
@@ -423,7 +423,7 @@
 		6BFB18C124002C7B002C3515 /* Phrases.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Phrases.xcdatamodel; sourceTree = "<group>"; };
 		6BFB18C324004406002C3515 /* NSManagedObject+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Helpers.swift"; sourceTree = "<group>"; };
 		6BFB18C524004711002C3515 /* ModelObjectExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectExtensions.swift; sourceTree = "<group>"; };
-		6BFB67B92819C80900DB58BE /* ListeningModeConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningModeConfig.swift; sourceTree = "<group>"; };
+		6BFB67B92819C80900DB58BE /* ListenModeFeatureConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenModeFeatureConfiguration.swift; sourceTree = "<group>"; };
 		714407EC243CEEA1009D077B /* Category+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+Helpers.swift"; sourceTree = "<group>"; };
 		718D7FAD2419546F00FDEF93 /* EditPhrasesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhrasesCollectionViewCell.swift; sourceTree = "<group>"; };
 		718D7FAF241954C400FDEF93 /* EditPhrasesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditPhrasesCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -884,7 +884,7 @@
 			isa = PBXGroup;
 			children = (
 				B8DA9DEF23EDECEE00FEBE19 /* AppConfig.swift */,
-				6BFB67B92819C80900DB58BE /* ListeningModeConfig.swift */,
+				6BFB67B92819C80900DB58BE /* ListenModeFeatureConfiguration.swift */,
 			);
 			path = AppConfig;
 			sourceTree = "<group>";
@@ -1385,7 +1385,7 @@
 				64F49906245B40BC00348592 /* SettingsViewController.swift in Sources */,
 				6B8D3C12282C23AB00DDB9B7 /* AccessibilityID+Settings+TimingSensitivity.swift in Sources */,
 				6B9DFA6E23E88A5F0037673E /* LowPassInterpolator.swift in Sources */,
-				6BFB67BA2819C80900DB58BE /* ListeningModeConfig.swift in Sources */,
+				6BFB67BA2819C80900DB58BE /* ListenModeFeatureConfiguration.swift in Sources */,
 				A96D61D524229F6400577144 /* SettingsCollectionViewCell.swift in Sources */,
 				A94C3FAE27F49CBC001D4F01 /* CategoryNameEditorConfigurationProvider.swift in Sources */,
 				A95D07BE24326475004ECE64 /* CursorSensitivity.swift in Sources */,

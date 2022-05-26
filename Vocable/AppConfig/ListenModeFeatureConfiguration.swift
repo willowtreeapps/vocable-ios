@@ -1,5 +1,5 @@
 //
-//  ListeningModeConfig.swift
+//  ListenModeFeatureConfiguration.swift
 //  Vocable
 //
 //  Created by Chris Stroud on 4/27/22.
@@ -36,7 +36,7 @@ final class ListenModeFeatureConfiguration: ObservableObject {
 
     // The user's preference for whether the overall listening mode feature is enabled
     @PublishedDefault(.listeningModeEnabledPreference)
-    var listeningModeEnabledPreference: Bool = ListenModeFeatureConfiguration.deviceSupportsListeningMode()
+    var listeningModeEnabledPreference: Bool = ListenModeFeatureConfiguration.deviceSupportsListeningMode
 
     // The user's preference for whether the hotword feature is enabled
     @PublishedDefault(.listeningModeHotWordEnabledPreference)
@@ -57,7 +57,7 @@ final class ListenModeFeatureConfiguration: ObservableObject {
                 lhs.2 == rhs.2
             }
             .sink { [weak self] (isFlagEnabled, isListeningModeEnabled, isHotWordEnabled) in
-                let modeEnabled = isFlagEnabled && isListeningModeEnabled && ListenModeFeatureConfiguration.deviceSupportsListeningMode()
+                let modeEnabled = isFlagEnabled && isListeningModeEnabled && ListenModeFeatureConfiguration.deviceSupportsListeningMode
                 let hotwordEnabled = modeEnabled && isHotWordEnabled
                 self?.isEnabled = modeEnabled
                 self?.isHotWordEnabled = hotwordEnabled
@@ -83,7 +83,7 @@ final class ListenModeFeatureConfiguration: ObservableObject {
         }
     }
 
-    private static func deviceSupportsListeningMode() -> Bool {
+    static var deviceSupportsListeningMode: Bool {
 
         guard SpeechRecognitionController.deviceSupportsSpeech else {
             return false
