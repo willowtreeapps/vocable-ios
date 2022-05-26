@@ -172,7 +172,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
 
             config.isPrimaryActionEnabled = category.allowsCustomPhrases
-            config.accessibilityIdentifier = "edit_phrases_cell"
+            config.accessibilityIdentifier = AccessibilityID.settings.editCategoryDetails.editPhrasesButton.id
 
             cell.contentConfiguration = config
         }
