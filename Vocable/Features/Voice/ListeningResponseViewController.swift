@@ -103,12 +103,6 @@ final class ListeningResponseViewController: VocableViewController {
     }
 
     private func setContent(_ content: Content, animated: Bool = true) {
-
-        if self.contentViewController != nil {
-            guard content != self.content else {
-                return
-            }
-        }
         let previousContent = self.content
         self.content = content
         let outgoingTransition: TransitionStyle
