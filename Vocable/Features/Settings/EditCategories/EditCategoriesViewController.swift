@@ -233,14 +233,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         if category.identifier == Category.Identifier.listeningMode.rawValue {
             destination = ListeningModeViewController()
         } else {
-            if #available(iOS 15, *) {
-                destination = UIHostingController(
-                    rootView: EditCategoryDetail(objectId: objectID)
-                        .environment(\.managedObjectContext, NSPersistentContainer.shared.viewContext)
-                )
-            } else {
-                destination = EditCategoryDetailViewController(category)
-            }
+            destination = EditCategoryDetailViewController(category)
         }
         show(destination, sender: nil)
     }

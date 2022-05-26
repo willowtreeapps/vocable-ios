@@ -55,7 +55,9 @@ struct EditCategoryDetail: View {
                 .foregroundColor(.white)
 
             LazyVGrid(columns: [.init(.flexible()), .init(.flexible())]) {
-                GazeButton(action: { }) {
+                GazeButton {
+                    // TODO: Handle this action
+                } label: {
                     HStack {
                         Text("Rename Category")
                         Spacer()
@@ -73,7 +75,9 @@ struct EditCategoryDetail: View {
                     Toggle("Show Category", isOn: binding)
                 }
 
-                GazeButton(action: { }) {
+                GazeButton {
+                    // TODO: Handle this action
+                } label: {
                     HStack {
                         Text("Edit Phrases")
                         Spacer()

@@ -9,8 +9,6 @@
 import Combine
 import SwiftUI
 
-private let defaultMinimumGazeDuration: TimeInterval = 1
-
 // MARK: - GazeButton
 
 struct GazeButton<Label>: UIViewRepresentable where Label: View {
@@ -46,7 +44,7 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
     // MARK: Initializer
 
     init(
-        minimumGazeDuration: TimeInterval = defaultMinimumGazeDuration,
+        minimumGazeDuration: TimeInterval = AppConfig.selectionHoldDuration,
         role: ButtonRole? = nil,
         action: @escaping () -> Void,
         @ViewBuilder label: () -> Label
@@ -131,7 +129,7 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
 extension GazeButton {
     init(
         _ titleKey: LocalizedStringKey,
-        minimumGazeDuration: TimeInterval = defaultMinimumGazeDuration,
+        minimumGazeDuration: TimeInterval = AppConfig.selectionHoldDuration,
         role: ButtonRole? = nil,
         action: @escaping () -> Void
     ) where Label == Text {
@@ -142,7 +140,7 @@ extension GazeButton {
 
     init<S: StringProtocol>(
         _ title: S,
-        minimumGazeDuration: TimeInterval = defaultMinimumGazeDuration,
+        minimumGazeDuration: TimeInterval = AppConfig.selectionHoldDuration,
         role: ButtonRole? = nil,
         action: @escaping () -> Void
     ) where Label == Text {
