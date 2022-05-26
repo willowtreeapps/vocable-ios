@@ -455,6 +455,15 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
         <target>Settings</target>
         <note>Settings screen header title</note>
       </trans-unit>
+      <trans-unit id="settings.listening_mode.device_unsupported_explanation_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</source>
+        <target>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine.</note>
+      </trans-unit>
       <trans-unit id="settings.listening_mode.hot_word_toggle_cell.title" xml:space="preserve">
         <source>"Hey Vocable" shortcut</source>
         <target>"Hey Vocable" shortcut</target>
