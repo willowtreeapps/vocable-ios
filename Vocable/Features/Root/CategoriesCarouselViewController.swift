@@ -54,8 +54,8 @@ import Combine
 
         view.backgroundColor = .collectionViewBackgroundColor
 
-        backChevron.accessibilityIdentifier = "root.categories_carousel.left_chevron"
-        forwardChevron.accessibilityIdentifier = "root.categories_carousel.right_chevron"
+        backChevron.accessibilityID = .root.categoryBackButton
+        forwardChevron.accessibilityID = .root.categoryForwardButton
 
         collectionViewMask.fillColor = .black
         collectionViewMask.backgroundColor = .clear
@@ -342,7 +342,8 @@ import Combine
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt virtualIndexPath: IndexPath) {
         let indexPath = dataSourceProxy.indexPath(fromVirtual: virtualIndexPath)
-        categoryObjectID = frc.object(at: indexPath).objectID
+        let category = frc.object(at: indexPath)
+        categoryObjectID = category.objectID
         updateSelectedIndexPathsInProxyDataSource()
     }
 

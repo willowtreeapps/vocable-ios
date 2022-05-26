@@ -14,7 +14,7 @@ class SettingsScreen: BaseScreen {
     static let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
     static let otherElements = XCUIApplication().collectionViews.cells.otherElements
     static let cells = XCUIApplication().cells
-    static let settingsPageNextButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
+    static let settingsPageNextButton = XCUIApplication().buttons[.shared.pagination.nextButton]
     static let categoryUpButton = "reorder.upButton"
     static let categoryDownButton = "reorder.downButton"
     static let categoryForwardButton = "Forward"
@@ -95,7 +95,7 @@ class SettingsScreen: BaseScreen {
     static func navigateToCategory(category: String) {
         while !otherElements.containing(.staticText, identifier: category).element.exists {
             settingsPageNextButton.tap()
-            if MainScreen.pageNumber.label.contains("Page 1") {
+            if MainScreen.pageNumberText.label.contains("Page 1") {
                 break
             }
         }

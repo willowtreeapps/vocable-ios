@@ -55,6 +55,14 @@ extension Category {
         }
     }
 
+    var analyticsName: String? {
+        isUserGenerated ? "Custom Category" : name
+    }
+
+    var isAnalyticsReportable: Bool {
+        !isUserRenamed && !isUserGenerated
+    }
+
     var allowsCustomPhrases: Bool {
         guard let categoryID = self.identifier else {
             assertionFailure("No identifier present")

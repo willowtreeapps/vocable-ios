@@ -30,7 +30,7 @@ final class TextEditorNavigationButton: GazeableButton {
         let accessibilityIdentifier: String?
         var action: Action?
 
-        static func dismissal(for viewController: UIViewController, isEnabled: Bool = true, textDidChange: Bool = false, accessibilityIdentifier: String = "keyboard.dismissButton") -> Self {
+        static func dismissal(for viewController: UIViewController, isEnabled: Bool = true, textDidChange: Bool = false, accessibilityIdentifier: String = AccessibilityID.shared.dismissButton.id) -> Self {
             Configuration(image: UIImage(systemName: "xmark.circle")!, isEnabled: isEnabled, accessibilityIdentifier: accessibilityIdentifier) { [weak viewController] in
                 guard let viewController = viewController else { return }
                 if textDidChange {
@@ -44,14 +44,14 @@ final class TextEditorNavigationButton: GazeableButton {
             }
         }
 
-        static func save(isEnabled: Bool = false, accessibilityIdentifier: String = "keyboard.saveButton", action: @escaping Action) -> Self {
+        static func save(isEnabled: Bool = false, accessibilityIdentifier: String = AccessibilityID.shared.keyboard.saveButton.id, action: @escaping Action) -> Self {
             Configuration(image: UIImage(systemName: "checkmark")!,
                           isEnabled: isEnabled,
                           accessibilityIdentifier: accessibilityIdentifier,
                           action: action)
         }
 
-        static func favorite(isFavorited: Bool, isEnabled: Bool = false, accessibilityIdentifier: String = "keyboard.favoriteButton", action: @escaping Action) -> Self {
+        static func favorite(isFavorited: Bool, isEnabled: Bool = false, accessibilityIdentifier: String = AccessibilityID.shared.keyboard.favoriteButton.id, action: @escaping Action) -> Self {
             Configuration(image: isFavorited ? UIImage(systemName: "star.fill")! : UIImage(systemName: "star")!,
                           isEnabled: isEnabled,
                           accessibilityIdentifier: accessibilityIdentifier,

@@ -14,23 +14,22 @@ import XCTest
 
 class BaseScreen {
     
-    private init() {}
+    static let navBarBackButton = XCUIApplication().buttons[.shared.backButton]
+    static let paginationLabel = XCUIApplication().staticTexts[.shared.pagination.pageLabel]
+    static let paginationLeftButton = XCUIApplication().buttons[.shared.pagination.previousButton]
+    static let paginationRightButton = XCUIApplication().buttons[.shared.pagination.nextButton]
     
-    static let navBarBackButton = XCUIApplication().buttons["navigationBar.backButton"]
-    static let paginationLabel = XCUIApplication().staticTexts["bottomPagination.pageNumber"]
-    static let paginationLeftButton = XCUIApplication().buttons["bottomPagination.left_chevron"]
-    static let paginationRightButton = XCUIApplication().buttons["bottomPagination.right_chevron"]
     static let alertMessageLabel = XCUIApplication().staticTexts["alert_message"]
     static let emptyStateAddPhraseButton = XCUIApplication().buttons["empty_state_addPhrase_button"]
-    static let navBarDismissButton = XCUIApplication().buttons.containing(NSPredicate(format: "identifier CONTAINS 'dismissButton'")).element
+    static let navBarDismissButton = XCUIApplication().buttons[.shared.dismissButton]
     
     /// From Pagination: the current page (X) being viewed from the "Page X of Y" pagination label.
     static var currentPageNumber: Int {
         // Define a regex pattern with named matching group, 'current', for reference
         let pattern = #"(?<current>\d)+ .+ (\d)+"#
-        
+
         let pageNumber = getNamedGroupInRegexPatternFromText(namedGroup: "current", regexPattern: pattern, text: paginationLabel.label)
-        
+
         return Int(pageNumber)!
     }
     

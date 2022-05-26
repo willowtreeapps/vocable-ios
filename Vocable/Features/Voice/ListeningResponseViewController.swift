@@ -64,7 +64,7 @@ final class ListeningResponseViewController: VocableViewController {
 
     weak var delegate: ListeningResponseViewControllerDelegate?
 
-    private let permissionsController = AudioPermissionPromptController()
+    private let permissionsController = AudioPermissionPromptController(mode: .transcribing)
     private let speechRecognizerController = SpeechRecognitionController.shared
     private var transcriptionCancellable: AnyCancellable?
     private var permissionsCancellable: AnyCancellable?

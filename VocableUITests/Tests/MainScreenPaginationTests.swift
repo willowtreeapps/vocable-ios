@@ -31,7 +31,7 @@ class MainScreenPaginationTests: PaginationBaseTest {
         VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)
         
         // Use the '+ Add Phrase' button to add a new phrase
-        MainScreen.addPhraseLabel.tap()
+        MainScreen.addPhraseButton.tap()
         KeyboardScreen.typeText("A")
         KeyboardScreen.checkmarkAddButton.tap()
         

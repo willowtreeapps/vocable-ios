@@ -11,6 +11,14 @@ import CoreData
 
 extension Phrase {
 
+    var analyticsName: String? {
+        isUserGenerated ? "Custom Phrase" : utterance
+    }
+
+    var isAnalyticsReportable: Bool {
+        !isUserRenamed && !isUserGenerated
+    }
+
     static func create(withUserEntry text: String, in context: NSManagedObjectContext) throws -> Phrase {
         let userFavorites = try Category.fetch(.userFavorites, in: context)
         return create(withUserEntry: text, category: userFavorites, in: context)

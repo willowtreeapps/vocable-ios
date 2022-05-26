@@ -58,7 +58,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             let button = GazeableButton()
             button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             button.addTarget(self, action: #selector(handleBackButton), for: .primaryActionTriggered)
-            button.accessibilityIdentifier = "navigationBar.backButton"
+            button.accessibilityID = .shared.backButton
             return button
         }()
     }
@@ -172,7 +172,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
 
             config.isPrimaryActionEnabled = category.allowsCustomPhrases
-            config.accessibilityIdentifier = "edit_phrases_cell"
+            config.accessibilityIdentifier = AccessibilityID.settings.editCategoryDetails.editPhrasesButton.id
 
             cell.contentConfiguration = config
         }
@@ -280,7 +280,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
             category.isHidden = newHiddenState
             do {
-                if newHiddenState == true, !category.isUserGenerated, !category.isUserRenamed {
+                if newHiddenState == true, category.isAnalyticsReportable {
                     Analytics.shared.track(.presetCategoryHidden(category))
                 }
                 try Category.updateAllOrdinalValues(in: context)
@@ -348,7 +348,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
 
             do {
-                if !category.isUserGenerated, !category.isUserRenamed {
+                if category.isAnalyticsReportable {
                     Analytics.shared.track(.presetCategoryRemoved(category))
                 }
 

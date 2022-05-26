@@ -42,7 +42,8 @@ final class ListeningModeViewController: VocableCollectionViewController {
         var accessory: VocableListCellAccessory {
             switch self {
             case .listeningModeEnabled:
-                return .toggle(isOn: AppConfig.listeningMode.listeningModeEnabledPreference)
+                return .toggle(isOn: AppConfig.listeningMode.listeningModeEnabledPreference
+                              && ListenModeFeatureConfiguration.deviceSupportsListeningMode)
             case .hotWordEnabled:
                 return .toggle(isOn: AppConfig.listeningMode.hotwordEnabledPreference)
             }
@@ -54,7 +55,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
 
     private var dataSource: Datasource!
 
-    private var authorizationController = AudioPermissionPromptController()
+    private var authorizationController = AudioPermissionPromptController(mode: .hotWord)
     private var authorizationCancellable: AnyCancellable?
     private var cellRegistration: UICollectionView.CellRegistration<VocableListCell, ContentItem>!
 
@@ -102,7 +103,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
         } else {
             snapshot.appendSections([.listeningMode])
             snapshot.appendItems([.listeningModeEnabled])
-            if AppConfig.listeningMode.listeningModeEnabledPreference {
+            if AppConfig.listeningMode.listeningModeEnabledPreference, ListenModeFeatureConfiguration.deviceSupportsListeningMode {
                 snapshot.appendSections([.hotword])
                 snapshot.appendItems([.hotWordEnabled])
             }
@@ -124,7 +125,6 @@ final class ListeningModeViewController: VocableCollectionViewController {
 
     private func setupCollectionView() {
 
-        collectionView.isScrollEnabled = false
         collectionView.backgroundColor = .collectionViewBackgroundColor
         collectionView.register(UINib(nibName: "SettingsFooterTextSupplementaryView", bundle: nil),
                                 forSupplementaryViewOfKind: "footerText",
@@ -143,19 +143,34 @@ final class ListeningModeViewController: VocableCollectionViewController {
             guard let self = self else { return footerView }
 
             let text: String
-            let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
-            switch section {
-            case .listeningMode:
-                text = String(localized: "settings.listening_mode.listening_mode_explanation_footer")
-            case .hotword:
-                text = String(localized: "settings.listening_mode.hotword_explanation_footer")
+            if ListenModeFeatureConfiguration.deviceSupportsListeningMode {
+                let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+                switch section {
+                case .listeningMode:
+                    text = String(localized: "settings.listening_mode.listening_mode_explanation_footer")
+                case .hotword:
+                    text = String(localized: "settings.listening_mode.hotword_explanation_footer")
+                }
+            } else {
+                let model = UIDevice.current.localizedModel
+                let systemName = UIDevice.current.systemName
+                let systemVersion = UIDevice.current.systemVersion
+                let siriName = "Siri"
+
+                let format = String(localized: "settings.listening_mode.device_unsupported_explanation_footer")
+
+                text = String(format: format, model, systemName, systemVersion, siriName)
             }
+            
+            let fontSize: CGFloat = self.sizeClass.contains(any: .compact) ? 18 : 26
+            footerView.textLabel.font = .systemFont(ofSize: fontSize)
             footerView.textLabel.text = text
             return footerView
         }
 
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
-        configuration.interSectionSpacing = 44
+        let interSectionSpacing: CGFloat = self.sizeClass.contains(any: .compact) ? 16 : 44
+        configuration.interSectionSpacing = interSectionSpacing
         let layout = UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (_, environment) -> NSCollectionLayoutSection? in
             return self?.layoutSection(environment: environment)
         }, configuration: configuration)
@@ -168,6 +183,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
     private func updateContentConfiguration(for cell: VocableListCell, at indexPath: IndexPath, item: ContentItem) {
         let config = VocableListContentConfiguration(title: item.title,
                                                      accessory: item.accessory,
+                                                     isPrimaryActionEnabled: ListenModeFeatureConfiguration.deviceSupportsListeningMode,
                                                      accessibilityIdentifier: item.accessibilityID) { [weak self] in
             guard let self = self, let indexPath = self.dataSource.indexPath(for: item) else { return }
             self.collectionView(self.collectionView, didSelectItemAt: indexPath)
@@ -178,7 +194,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
     private func layoutSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
 
         let itemHeightDimension: NSCollectionLayoutDimension
-        if sizeClass.contains(.vCompact) {
+        if sizeClass.contains(any: .compact) {
             itemHeightDimension = NSCollectionLayoutDimension.absolute(50)
         } else {
             itemHeightDimension = NSCollectionLayoutDimension.absolute(100)
@@ -200,7 +216,7 @@ final class ListeningModeViewController: VocableCollectionViewController {
         section.interGroupSpacing = 8
         section.contentInsets = sectionInsets(for: environment)
         section.contentInsets.top = 16
-        section.contentInsets.bottom = 32
+        section.contentInsets.bottom = sizeClass.contains(any: .compact) ? 16 : 32
         section.boundarySupplementaryItems = [footerItem]
         return section
     }

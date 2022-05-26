@@ -55,13 +55,16 @@ final class SensitivityCollectionViewCell: UICollectionViewCell {
     
     @IBAction private func handleLowSensitivity(_ sender: Any) {
         AppConfig.cursorSensitivity = .low
+        Analytics.shared.track(.cursorSensitivityChanged)
     }
     
     @IBAction private func handleMediumSensitivity(_ sender: Any) {
         AppConfig.cursorSensitivity = .medium
+        Analytics.shared.track(.cursorSensitivityChanged)
     }
     
     @IBAction private func handleHighSensitivity(_ sender: Any) {
         AppConfig.cursorSensitivity = .high
+        Analytics.shared.track(.cursorSensitivityChanged)
     }
 }

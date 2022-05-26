@@ -125,7 +125,7 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
             cell?.accessibilityIdentifier = phrase.identifier
         case .addNewPhrase:
             let cell = cell as? AddPhraseCollectionViewCell
-            cell?.accessibilityIdentifier = "add_new_phrase"
+                cell?.accessibilityID = .root.addPhraseButton
         }
     }
 
@@ -187,6 +187,8 @@ class CategoryDetailViewController: PagingCarouselViewController, NSFetchedResul
                 }
 
                 self.lastUtterance = utterance
+
+                Analytics.shared.track(.phraseSelected(phrase, of: self.category))
 
                 if self.category.identifier != Category.Identifier.recents {
                     phrase.lastSpokenDate = Date()

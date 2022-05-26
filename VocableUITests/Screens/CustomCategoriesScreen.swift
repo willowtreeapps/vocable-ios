@@ -11,14 +11,17 @@ import XCTest
 
 class CustomCategoriesScreen: BaseScreen {
     
-    static let categoriesPageAddPhraseButton = XCUIApplication().buttons["settingsCategory.addPhraseButton"]
-    static let editCategoryPhrasesButton = XCUIApplication().buttons["edit_phrases_cell"]
-    static let categoriesPageEditPhraseButton = XCUIApplication().buttons["categoryPhrase.editButton"]
-    static let categoriesPageDeletePhraseButton = XCUIApplication().buttons["deleteButton"]
+    static let categoriesPageAddPhraseButton = XCUIApplication().buttons[.settings.editPhrases.addPhraseButton]
+    static let editCategoryPhrasesButton = XCUIApplication().buttons[.settings.editCategoryDetails.editPhrasesButton]
+    static let categoriesPageDeletePhraseButton = XCUIApplication().buttons[.settings.editPhrases.deletePhraseButton]
 
     static var firstPhraseCell: XCUIElement {
         let firstPhraseId = XCUIApplication().cells.firstMatch.identifier
         return XCUIApplication().cells[firstPhraseId]
+    }
+    
+    static func phraseCell(_ phraseId: String) -> XCUIElementQuery {
+        return XCUIApplication().cells.matching(identifier: phraseId)
     }
     
     static func createCustomCategory(categoryName: String) {
@@ -53,15 +56,15 @@ class CustomCategoriesScreen: BaseScreen {
     
     static func returnToMainScreenFromCategoriesList() {
         // Exit the Edit Categories and Settings Screens
-        navBarBackButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
-        navBarDismissButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
+        navBarBackButton.tap(afterWaitingForExistenceWithTimeout: 0.5)
+        navBarDismissButton.tap(afterWaitingForExistenceWithTimeout: 0.5)
         
         // Wait for the Main Screen to appear
-        XCTAssert(MainScreen.settingsButton.waitForExistence(timeout: 0.25), "Did not return to Main Screen as expected.")
+        XCTAssert(MainScreen.settingsButton.waitForExistence(timeout: 0.5), "Did not return to Main Screen as expected.")
     }
     
     static func returnToMainScreenFromCategoryDetails() {
-        navBarBackButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
+        navBarBackButton.tap(afterWaitingForExistenceWithTimeout: 0.5)
         returnToMainScreenFromCategoriesList()
     }
     

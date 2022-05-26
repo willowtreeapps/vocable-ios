@@ -64,11 +64,11 @@ final class PaginationView: UIView {
         textLabel.minimumScaleFactor = 0.8
         textLabel.numberOfLines = 2
         textLabel.setContentCompressionResistancePriority(.init(999), for: .horizontal)
-        textLabel.accessibilityIdentifier = "bottomPagination.pageNumber"
+        textLabel.accessibilityID = .shared.pagination.pageLabel
 
         nextPageButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         nextPageButton.tintColor = .defaultTextColor
-        nextPageButton.accessibilityIdentifier = "bottomPagination.right_chevron"
+        nextPageButton.accessibilityID = .shared.pagination.nextButton
         nextPageButton.backgroundColor = backgroundColor
         nextPageButton.isOpaque = true
         nextPageButton.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -76,7 +76,7 @@ final class PaginationView: UIView {
 
         previousPageButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         previousPageButton.tintColor = .defaultTextColor
-        previousPageButton.accessibilityIdentifier = "bottomPagination.left_chevron"
+        previousPageButton.accessibilityID = .shared.pagination.previousButton
         previousPageButton.backgroundColor = backgroundColor
         previousPageButton.isOpaque = true
         previousPageButton.setContentCompressionResistancePriority(.required, for: .horizontal)

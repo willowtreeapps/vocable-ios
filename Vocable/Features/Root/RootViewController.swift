@@ -31,9 +31,9 @@ import SwiftUI
         super.viewDidLoad()
         view.addLayoutGuide(contentLayoutGuide)
 
-        outputLabel.accessibilityIdentifier = "root.outputTextLabel"
-        keyboardButton.accessibilityIdentifier = "root.keyboardButton"
-        settingsButton.accessibilityIdentifier = "root.settingsButton"
+        outputLabel.accessibilityID = .root.outputText
+        keyboardButton.accessibilityID = .shared.keyboardButton
+        settingsButton.accessibilityID = .shared.settingsButton
         
         // Content layout guide
         NSLayoutConstraint.activate([
@@ -74,6 +74,7 @@ import SwiftUI
         let vc = TextEditorViewController()
         let context = NSPersistentContainer.shared.newBackgroundContext()
         vc.delegate = FreeResponseTextEditorConfigurationProvider(context: context)
+        Analytics.shared.track(.keyboardOpened)
         present(vc, animated: true)
     }
 
@@ -274,7 +275,7 @@ import SwiftUI
             outputLabel.text = text ?? outputLabelPlaceholder()
         }
     }
-
+    
     // MARK: Transcription Output Debug Gesture Handling
 
     @IBAction private func handleTranscriptionOutputDebugGesture(_ recognizer: UIGestureRecognizer?) {

@@ -53,7 +53,7 @@ final class EditPhrasesViewController: PagingCarouselViewController, NSFetchedRe
         navigationBar.rightButton = {
             let button = GazeableButton(frame: .zero)
             button.setImage(UIImage(systemName: "plus"), for: .normal)
-            button.accessibilityIdentifier = "settingsCategory.addPhraseButton"
+            button.accessibilityID = .settings.editPhrases.addPhraseButton
             button.addTarget(self, action: #selector(addPhrasePressed), for: .primaryActionTriggered)
             return button
         }()
@@ -223,14 +223,15 @@ private extension EditPhrasesViewController {
     UICollectionView.CellRegistration<VocableListCell, Phrase> {
         return .init { cell, _, phrase in
             let phraseIdentifier = phrase.objectID
-
+            
             let deleteAction = VocableListCellAction.delete { [weak self] in
                 self?.presentDeletionPromptForPhrase(with: phraseIdentifier)
             }
-
+            let editButtonId = AccessibilityID.settings.editPhrases.editPhraseButton.id
             cell.contentConfiguration = VocableListContentConfiguration(title: phrase.utterance ?? "",
                                                                         actions: [deleteAction],
-                                                                        accessory: .disclosureIndicator()) { [weak self] in
+                                                                        accessory: .disclosureIndicator(),
+                                                                        accessibilityIdentifier: editButtonId) { [weak self] in
                 self?.presentEditorForPhrase(with: phraseIdentifier)
             }
             cell.accessibilityIdentifier = phrase.identifier

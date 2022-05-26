@@ -68,7 +68,7 @@ class PresetPhraseTests: BaseTest {
         // Define the query that gives us the first phrase listed
         let firstPhrase = CustomCategoriesScreen.firstPhraseCell.staticTexts.firstMatch.label
         
-        CustomCategoriesScreen.firstPhraseCell.buttons["deleteButton"].tap()
+        CustomCategoriesScreen.firstPhraseCell.buttons[.settings.editPhrases.deletePhraseButton].tap()
         SettingsScreen.alertDeleteButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
         
         // Verify that phrase doesn't exist in Category Details Screen
@@ -99,7 +99,7 @@ class PresetPhraseTests: BaseTest {
     func testAddDuplicatePhrasesToMySayings() {
         let testPhrase = "Test"
         
-        MainScreen.keyboardNavButton.tap()
+        MainScreen.keyboardButton.tap()
         KeyboardScreen.typeText(testPhrase)
         KeyboardScreen.favoriteButton.tap()
         KeyboardScreen.navBarDismissButton.tap()
@@ -108,7 +108,7 @@ class PresetPhraseTests: BaseTest {
         XCTAssertTrue(MainScreen.phraseDoesExist(testPhrase), "Expected the first phrase \(testPhrase) to be added to and displayed in 'My Sayings'")
         
         // Add the same phrase again to the My Sayings
-        MainScreen.addPhraseLabel.tap()
+        MainScreen.addPhraseButton.tap()
         KeyboardScreen.typeText(testPhrase)
         KeyboardScreen.checkmarkAddButton.tap()
         KeyboardScreen.createDuplicateButton.tap(afterWaitingForExistenceWithTimeout: 0.25)

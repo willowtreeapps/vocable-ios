@@ -64,7 +64,7 @@ class Analytics {
     private var cancellables = Set<AnyCancellable>()
     private let queue = DispatchQueue(label: "Analytics-Processing")
 
-    private let mixPanel: MixpanelInstance
+    let mixPanel: MixpanelInstance
 
     private let listeningMode = AppConfig.listeningMode
 
@@ -89,7 +89,9 @@ class Analytics {
     private func registerSuperProperties() {
         cancellables = [mixPanel.registerSuperProperty("Listening Mode Enabled", using: listeningMode.$listeningModeEnabledPreference, on: queue),
                         mixPanel.registerSuperProperty("'Hey Vocable' Enabled", using: listeningMode.$hotwordEnabledPreference, on: queue),
-                        mixPanel.registerSuperProperty("Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue)]
+                        mixPanel.registerSuperProperty("Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue),
+                        mixPanel.registerSuperProperty("Cursor Sensitivity", using: AppConfig.$cursorSensitivity.map(\.analyticsDescription), on: queue),
+                        mixPanel.registerSuperProperty("Hover Time", using: AppConfig.$selectionHoldDuration.map(\.analyticsDescription), on: queue)]
     }
 
     // MARK: - Events
@@ -128,21 +130,18 @@ extension Analytics.Event {
         var description: String { rawValue }
     }
 
-    static let appOpen = Self(name: "App Open")
+    // MARK: App Lifecycle
 
-    static let headingTrackingChanged = Self(name: "Head Tracking Settings Changed")
-    static let listeningModeChanged = Self(name: "Listening Mode Settings Changed")
-    static let heyVocableModeChanged = Self(name: "'Hey Vocable' Settings Changed")
+    static let appOpened = Self(name: "App Opened")
+    static let appBackgrounded = Self(name: "App Backgrounded")
 
-    static func transcriptionSubmitted(_ transcription: String, result: [String]?) -> Self {
-        let formattedResult = result?.joined(separator: ", ")
-        return Self(name: "Phrase Submitted to Developers",
-             properties: [
-                "Transcription": transcription,
-                "Result": formattedResult ?? "Sounds Complicated",
-                "Transcription Character Count": transcription.count
-             ])
-    }
+    // MARK: Keyboard Phrase
+
+    static let keyboardOpened = Self(name: "Keyboard Opened")
+    static let keyboardPhraseSpoken = Self(name: "Keyboard Phrase Spoken")
+    static let phraseFavorited = Self(name: "Keyboard Phrase Favorited")
+
+    // MARK: Categories
 
     static let newCategoryCreated = Self(name: "New Category Created")
 
@@ -158,11 +157,38 @@ extension Analytics.Event {
         Self(name: "Preset Category Hidden", properties: ["Category": category.name])
     }
 
-    static let phraseFavorited = Self(name: "Phrase Favorited")
+    // MARK: Phrases
 
     static let phraseCreated = Self(name: "New Phrase Created")
 
     static func presetPhraseEdited(_ utterance: String) -> Self {
         Self(name: "Preset Phrase Edited", properties: ["Phrase": utterance])
     }
+
+    static func phraseSelected(_ phrase: Phrase, of category: Category) -> Self {
+        Self(name: "Phrase Selected", properties: ["Phrase": phrase.analyticsName,
+                                                   "Category": category.analyticsName])
+    }
+
+    // MARK: Listening Mode
+
+    static func transcriptionSubmitted(_ transcription: String, result: [String]?) -> Self {
+        let formattedResult = result?.joined(separator: ", ")
+        return Self(name: "Phrase Submitted to Developers",
+             properties: [
+                "Transcription": transcription,
+                "Result": formattedResult ?? "Sounds Complicated",
+                "Transcription Character Count": transcription.count
+             ])
+    }
+
+    // MARK: Settings
+
+    static let hoverTimeChanged = Self(name: "Hover Time Settings Changed")
+    static let cursorSensitivityChanged = Self(name: "Cursor Sensitivity Changed")
+
+    static let listeningModeChanged = Self(name: "Listening Mode Settings Changed")
+    static let heyVocableModeChanged = Self(name: "'Hey Vocable' Settings Changed")
+
+    static let headingTrackingChanged = Self(name: "Head Tracking Settings Changed")
 }
