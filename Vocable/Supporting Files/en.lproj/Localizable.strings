@@ -274,6 +274,9 @@
 
 // MARK: Listening Mode Empty State Titles
 
+/* Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.title" = "Listening Mode Unsupported";
+
 /* Listening mode empty state title for when microphone permissions are required, but the user has denied them */
 "listening_mode.empty_state.microphone_permission_denied.title" = "Microphone Access";
 
@@ -298,6 +301,9 @@
 
 
 // MARK: Listening Mode Empty State Messages
+
+/* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.message" = "This %1$@ on %2$@ %3$@ does not support Listening Mode.\n\nListening Mode is currently only available in English and requires %5$@ to be enabled.";
 
 /* Listening mode empty state message for when microphone permissions are required, but the user has denied them */
 "listening_mode.empty_state.microphone_permission_denied.message" = "Vocable needs to use the microphone to enable Listening Mode. Please enable microphone access in the system Settings app.\n\nYou can also disable Listening Mode to hide this category in Vocable's settings.";

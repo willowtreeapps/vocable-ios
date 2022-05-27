@@ -98,7 +98,12 @@ final class ListeningModeViewController: VocableCollectionViewController {
     private func updateDataSource(animated: Bool = false) {
         var snapshot = Snapshot()
         if let state = authorizationController.state {
-            collectionView.backgroundView = EmptyStateView.listening(state.state, action: state.action)
+            if !ListenModeFeatureConfiguration.deviceSupportsListeningMode {
+                collectionView.backgroundView  = EmptyStateView(type: ListeningEmptyState.listeningModeUnsupported)
+            } else {
+                collectionView.backgroundView = EmptyStateView.listening(state.state, action: state.action)
+            }
+
             updateBackgroundViewLayoutMargins()
         } else {
             snapshot.appendSections([.listeningMode])

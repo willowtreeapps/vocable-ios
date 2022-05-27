@@ -16,6 +16,7 @@ extension EmptyStateView {
 
 enum ListeningEmptyState: EmptyStateRepresentable, Equatable {
 
+    case listeningModeUnsupported
     case listeningResponse
     case speechServiceUnavailable
     case speechPermissionDenied
@@ -26,6 +27,8 @@ enum ListeningEmptyState: EmptyStateRepresentable, Equatable {
 
     var title: String {
         switch self {
+        case .listeningModeUnsupported:
+            return String(localized: "listening_mode.empty_state.unsupported.title")
         case .microphonePermissionDenied:
             return String(localized: "listening_mode.empty_state.microphone_permission_denied.title")
         case .microphonePermissionUndetermined:
@@ -45,6 +48,15 @@ enum ListeningEmptyState: EmptyStateRepresentable, Equatable {
 
     var description: String? {
         switch self {
+        case .listeningModeUnsupported:
+            let model = UIDevice.current.localizedModel
+            let systemName = UIDevice.current.systemName
+            let systemVersion = UIDevice.current.systemVersion
+            let siriName = "Siri"
+
+            let format = String(localized: "listening_mode.empty_state.unsupported.message")
+
+            return String(format: format, model, systemName, systemVersion, siriName)
         case .microphonePermissionUndetermined:
             return String(localized: "listening_mode.empty_state.microphone_permission_undetermined.message")
         case .microphonePermissionDenied:
@@ -64,7 +76,7 @@ enum ListeningEmptyState: EmptyStateRepresentable, Equatable {
 
     var buttonTitle: String? {
         switch self {
-        case .listenModeFreeResponse, .listeningResponse, .speechServiceUnavailable:
+        case .listenModeFreeResponse, .listeningResponse, .speechServiceUnavailable, .listeningModeUnsupported:
             return nil
         case .microphonePermissionUndetermined:
             return String(localized: "listening_mode.empty_state.microphone_permission_undetermined.action")
@@ -79,6 +91,15 @@ enum ListeningEmptyState: EmptyStateRepresentable, Equatable {
 
     var image: UIImage? {
         return nil
+    }
+
+    var yOffset: CGFloat? {
+        switch self {
+        case .listeningModeUnsupported:
+            return -64
+        default:
+            return nil
+        }
     }
 }
 

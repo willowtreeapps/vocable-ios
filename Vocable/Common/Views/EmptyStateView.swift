@@ -44,6 +44,7 @@ protocol EmptyStateRepresentable {
     var description: String? { get }
     var buttonTitle: String? { get }
     var image: UIImage? { get }
+    var yOffset: CGFloat? { get }
 }
 
 enum EmptyStateType: EmptyStateRepresentable {
@@ -86,6 +87,8 @@ enum EmptyStateType: EmptyStateRepresentable {
             return nil
         }
     }
+
+    var yOffset: CGFloat? { nil }
 }
 
 final class EmptyStateView: UIView {
@@ -126,6 +129,7 @@ final class EmptyStateView: UIView {
     private let descriptionLabel = UILabel(frame: .zero)
     private let button = EmptyStateButton(frame: .zero)
     private var action: ButtonConfiguration
+    private var yOffset: CGFloat = 0
 
     private lazy var stackView = UIStackView(arrangedSubviews: [self.imageView, self.titleLabel, self.descriptionLabel])
 
@@ -145,6 +149,10 @@ final class EmptyStateView: UIView {
         }
         button.setTitle(type.buttonTitle, for: .normal)
         button.accessibilityIdentifier = "empty_state_addPhrase_button"
+
+        if let yOffset = type.yOffset {
+            self.yOffset = yOffset
+        }
 
         commonInit()
     }
@@ -179,7 +187,7 @@ final class EmptyStateView: UIView {
         addSubview(stackView)
 
         NSLayoutConstraint.activate([
-            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: yOffset),
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.widthAnchor.constraint(lessThanOrEqualTo: readableContentGuide.widthAnchor),
             stackView.widthAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.widthAnchor),
