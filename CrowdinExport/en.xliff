@@ -245,6 +245,20 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
         <target>Speech services unavailable</target>
         <note>Listen mode error state title for when Apple's speech to text service is unavailable</note>
       </trans-unit>
+      <trans-unit id="listening_mode.empty_state.unsupported.message" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</source>
+        <target>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</target>
+        <note>Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.unsupported.title" xml:space="preserve">
+        <source>Listening Mode Unsupported</source>
+        <target>Listening Mode Unsupported</target>
+        <note>Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported</note>
+      </trans-unit>
       <trans-unit id="listening_mode.feedback.confirmation.title" xml:space="preserve">
         <source>Thank You!</source>
         <target>Thank You!</target>
