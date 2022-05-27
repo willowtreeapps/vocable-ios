@@ -52,6 +52,29 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 return ""
             }
         }
+        
+        var accessibiltyId: AccessibilityID {
+            switch self {
+            case .categories:
+                return .settings.categoriesAndPhrasesCell
+            case .timingSensitivity:
+                return .settings.timingAndSensitivityCell
+            case .resetAppSettings:
+                return .settings.resetAppSettingsCell
+            case .selectionMode:
+                return .settings.selectionModeCell
+            case .privacyPolicy:
+                return .settings.privacyPolicyCell
+            case .contactDevs:
+                return .settings.contactDevelopersCell
+            case .listeningMode:
+                return .settings.listeningModeCell
+            case .pidTuner:
+                return ""
+            case .versionNum:
+                return ""
+            }
+        }
 
         var isFeatureEnabled: Bool {
             let debugFeatures: [SettingsItem] = [.pidTuner]
@@ -69,40 +92,15 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         .init(collectionView: collectionView) {(collectionView, indexPath, item) -> UICollectionViewCell in
 
         switch item {
-        case .categories:
+        case .categories, .timingSensitivity, .resetAppSettings, .selectionMode, .listeningMode:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
             cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
-            cell.accessibilityID = .settings.categoriesAndPhrasesCell
+            cell.accessibilityID = item.accessibiltyId
             return cell
-        case .timingSensitivity:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
-            cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
-            cell.accessibilityID = .settings.timingAndSensitivityCell
-            return cell
-        case .resetAppSettings:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
-            cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
-            cell.accessibilityID = .settings.resetAppSettingsCell
-            return cell
-        case .selectionMode:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
-            cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
-            cell.accessibilityID = .settings.selectionModeCell
-            return cell
-        case .listeningMode:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
-            cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
-            cell.accessibilityID = .settings.listeningModeCell
-            return cell
-        case .privacyPolicy:
+        case .privacyPolicy, .contactDevs:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
             cell.setup(title: item.title, image: UIImage(systemName: "arrow.up.right"))
-            cell.accessibilityID = .settings.privacyPolicyCell
-            return cell
-        case .contactDevs:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
-            cell.setup(title: item.title, image: UIImage(systemName: "arrow.up.right"))
-            cell.accessibilityID = .settings.contactDevelopersCell
+            cell.accessibilityID = item.accessibiltyId
             return cell
         case .versionNum:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell
