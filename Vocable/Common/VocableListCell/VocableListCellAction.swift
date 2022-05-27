@@ -66,15 +66,19 @@ struct VocableListCellAction: Equatable {
                               action: action)
     }
 
-    static func reorderUp(isEnabled: Bool = true, accessibilityIdentifier: String = "reorder.upButton", accessibilityLabel: String = "reorder up", action: Action?) -> VocableListCellAction {
+    static func reorderUp(isEnabled: Bool = true,
+                          accessibilityIdentifier: String = AccessibilityID.settings.editCategories.moveUpButton.id,
+                          accessibilityLabel: String = "reorder up", action: Action?) -> VocableListCellAction {
         VocableListCellAction(systemImage: "chevron.up",
                               isEnabled: isEnabled,
                               accessibilityIdentifier: accessibilityIdentifier,
                               accessibilityLabel: accessibilityLabel,
                               action: action)
     }
-
-    static func reorderDown(isEnabled: Bool = true, accessibilityIdentifier: String = "reorder.downButton", accessibilityLabel: String = "reorder down", action: Action?) -> VocableListCellAction {
+    
+    static func reorderDown(isEnabled: Bool = true,
+                            accessibilityIdentifier: String = AccessibilityID.settings.editCategories.moveDownButton.id,
+                            accessibilityLabel: String = "reorder down", action: Action?) -> VocableListCellAction {
         VocableListCellAction(systemImage: "chevron.down",
                               isEnabled: isEnabled,
                               accessibilityIdentifier: accessibilityIdentifier,

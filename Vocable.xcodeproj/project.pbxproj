@@ -260,6 +260,9 @@
 		CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */; };
 		DC41F55427E4F5130099B7D5 /* CategoryIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */; };
 		DC533C0127FCDF39005FEBBD /* CustomCategoryBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */; };
+		DC753162284143C200A84989 /* AccessibilityID+Shared+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */; };
+		DC75316328414A6600A84989 /* AccessibilityID+Shared+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */; };
+		DC75316428414A6600A84989 /* AccessibilityID+Shared+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */; };
 		DCDF7E132832A3190009E75E /* PresetCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF7E122832A3190009E75E /* PresetCategoryTests.swift */; };
 		DCF25CD52811AD2000DF766F /* PresetPhraseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */; };
 /* End PBXBuildFile section */
@@ -532,6 +535,7 @@
 		CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
 		DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIdentifier.swift; sourceTree = "<group>"; };
 		DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryBaseTest.swift; sourceTree = "<group>"; };
+		DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccessibilityID+Shared+Alert.swift"; sourceTree = "<group>"; };
 		DCDF7E122832A3190009E75E /* PresetCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetCategoryTests.swift; sourceTree = "<group>"; };
 		DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetPhraseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -796,15 +800,16 @@
 		6B8D3C00282C103200DDB9B7 /* AXIdentifier */ = {
 			isa = PBXGroup;
 			children = (
-				622A6BFD283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift */,
 				0E969127281C5F520097A3CC /* AccessibilityID.swift */,
 				6B8D3C03282C229300DDB9B7 /* AccessibilityID+Shared.swift */,
+				DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */,
 				62A16C0F28354BE10015A755 /* AccessibilityID+Shared+Keyboard.swift */,
 				6B8D3C05282C22B800DDB9B7 /* AccessibilityID+Shared+Pagination.swift */,
 				6B8D3C07282C230B00DDB9B7 /* AccessibilityID+Root.swift */,
 				6B8D3C09282C233300DDB9B7 /* AccessibilityID+Root+Categories.swift */,
 				6B8D3C0B282C234700DDB9B7 /* AccessibilityID+Settings.swift */,
 				6B8D3C0D282C236200DDB9B7 /* AccessibilityID+Settings+EditCategories.swift */,
+				622A6BFD283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift */,
 				6B8D3C0F282C238000DDB9B7 /* AccessibilityID+Settings+EditPhrases.swift */,
 				6B8D3C11282C23AB00DDB9B7 /* AccessibilityID+Settings+TimingSensitivity.swift */,
 				6B8D3C13282C23CA00DDB9B7 /* AccessibilityID+Settings+SelectionMode.swift */,
@@ -1483,6 +1488,7 @@
 				0E969128281C5F520097A3CC /* AccessibilityID.swift in Sources */,
 				6BE7E9842459D328007B01F2 /* PagingCarouselViewController.swift in Sources */,
 				6B9DFA6223E889DB0037673E /* UIVirtualCursorView.swift in Sources */,
+				DC753162284143C200A84989 /* AccessibilityID+Shared+Alert.swift in Sources */,
 				7192E409242BC58F008E4A0A /* ToastWindow.swift in Sources */,
 				6B1086732463662C00E729A8 /* v2_to_v3.xcmappingmodel in Sources */,
 				6B823BC223F4ADE30099F65E /* PIDControlConstants.swift in Sources */,
@@ -1533,6 +1539,7 @@
 				17793C2B24574B2800758BC0 /* MainScreen.swift in Sources */,
 				627B53662800D11200FEBF25 /* MainScreenPaginationTests.swift in Sources */,
 				6BE02F6E2816EF88002CCCED /* Environment.swift in Sources */,
+				DC75316428414A6600A84989 /* AccessibilityID+Shared+Alert.swift in Sources */,
 				6B8D3C26282C288D00DDB9B7 /* AccessibilityID+Shared.swift in Sources */,
 				6244DFA428356E8B00B2C519 /* AccessibilityID+Shared+Keyboard.swift in Sources */,
 				DC533C0127FCDF39005FEBBD /* CustomCategoryBaseTest.swift in Sources */,
@@ -1551,6 +1558,7 @@
 				6B8D3C1D282C288C00DDB9B7 /* UIAccessibilityIdentification+AccessibilityID.swift in Sources */,
 				6B8D3C1C282C288C00DDB9B7 /* AccessibilityID+Shared.swift in Sources */,
 				6BE02F792816F96D002CCCED /* Arguments.swift in Sources */,
+				DC75316328414A6600A84989 /* AccessibilityID+Shared+Alert.swift in Sources */,
 				6B8D3C18282C288C00DDB9B7 /* AccessibilityID+Settings+EditCategories.swift in Sources */,
 				6B8D3C1E282C288C00DDB9B7 /* AccessibilityID+Settings.swift in Sources */,
 				54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */,

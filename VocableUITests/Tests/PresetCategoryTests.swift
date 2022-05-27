@@ -22,7 +22,7 @@ class PresetCategoryTests: BaseTest {
         SettingsScreen.renameCategoryButton.tap()
         KeyboardScreen.typeText(nameSuffix)
         KeyboardScreen.checkmarkAddButton.tap()
-        XCTAssertEqual(SettingsScreen.categoryDetailsTitle.label, renamedCategory)
+        XCTAssertEqual(SettingsScreen.title.label, renamedCategory)
         
         // Confirm that the category is renamed from categories list
         SettingsScreen.navBarBackButton.tap()

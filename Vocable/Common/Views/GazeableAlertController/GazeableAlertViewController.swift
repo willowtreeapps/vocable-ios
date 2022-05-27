@@ -37,7 +37,7 @@ final class GazeableAlertAction: NSObject {
     static func cancel(withTitle title: String, handler: (() -> Void)? = nil) -> GazeableAlertAction {
         GazeableAlertAction(
             title: title,
-            accessibilityIdentifier: "alert.button.cancel",
+            accessibilityIdentifier: AccessibilityID.shared.alert.cancelButton.id,
             handler: handler
         )
     }
@@ -45,7 +45,7 @@ final class GazeableAlertAction: NSObject {
     static func delete(withTitle title: String, handler: (() -> Void)? = nil) -> GazeableAlertAction {
         GazeableAlertAction(
             title: title,
-            accessibilityIdentifier: "alert.button.delete",
+            accessibilityIdentifier: AccessibilityID.shared.alert.deleteButton.id,
             style: .destructive,
             handler: handler
         )
@@ -54,7 +54,7 @@ final class GazeableAlertAction: NSObject {
     static func continueEditing(withTitle title: String, handler: (() -> Void)? = nil) -> GazeableAlertAction {
         GazeableAlertAction(
             title: title,
-            accessibilityIdentifier: "alert.button.continue_editing",
+            accessibilityIdentifier: AccessibilityID.shared.alert.continueButton.id,
             handler: handler
         )
     }
@@ -62,7 +62,7 @@ final class GazeableAlertAction: NSObject {
     static func discardChanges(withTitle title: String, handler: (() -> Void)? = nil) -> GazeableAlertAction {
         GazeableAlertAction(
             title: title,
-            accessibilityIdentifier: "alert.button.discard_changes",
+            accessibilityIdentifier: AccessibilityID.shared.alert.discardButton.id,
             style: .destructive,
             handler: handler
         )

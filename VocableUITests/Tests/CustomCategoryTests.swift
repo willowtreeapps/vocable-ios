@@ -41,7 +41,7 @@ class CustomCategoryTests: CustomCategoryBaseTest {
         XCTAssertTrue(KeyboardScreen.alertMessageLabel.exists)
         
         SettingsScreen.alertDiscardButton.tap()
-        XCTAssertEqual(SettingsScreen.categoryDetailsTitle.label, customCategoryName)
+        XCTAssertEqual(SettingsScreen.title.label, customCategoryName)
         
         SettingsScreen.navBarBackButton.tap()
         XCTAssertTrue(SettingsScreen.locateCategoryCell(customCategoryName).element.exists)
@@ -54,7 +54,7 @@ class CustomCategoryTests: CustomCategoryBaseTest {
         SettingsScreen.renameCategoryButton.tap()
         KeyboardScreen.typeText(nameSuffix)
         KeyboardScreen.checkmarkAddButton.tap()
-        XCTAssertEqual(SettingsScreen.categoryDetailsTitle.label, renamedCategory)
+        XCTAssertEqual(SettingsScreen.title.label, renamedCategory)
         
         SettingsScreen.navBarBackButton.tap()
         XCTAssertTrue(SettingsScreen.locateCategoryCell(renamedCategory).element.exists)
