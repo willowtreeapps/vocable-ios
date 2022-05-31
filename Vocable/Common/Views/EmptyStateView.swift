@@ -148,7 +148,7 @@ final class EmptyStateView: UIView {
             descriptionAttributedText = nil
         }
         button.setTitle(type.buttonTitle, for: .normal)
-        button.accessibilityIdentifier = "empty_state_addPhrase_button"
+        button.accessibilityIdentifier = AccessibilityID.shared.emptyStateAddPhraseButton.id
 
         if let yOffset = type.yOffset {
             self.yOffset = yOffset
