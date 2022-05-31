@@ -245,6 +245,20 @@ Puoi anche disabilitare la modalità di ascolto per nascondere questa categoria 
         <target state="translated">Servizi vocali non disponibili</target>
         <note>Listen mode error state title for when Apple's speech to text service is unavailable</note>
       </trans-unit>
+      <trans-unit id="listening_mode.empty_state.unsupported.message" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</source>
+        <target state="translated">Questo %1$@ su %2$@ %3$@ non supporta la modalità di ascolto.
+
+La modalità di ascolto è attualmente disponibile solo in inglese e richiede %5$@ per essere abilitata.</target>
+        <note>Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.unsupported.title" xml:space="preserve">
+        <source>Listening Mode Unsupported</source>
+        <target state="translated">Modalità Di Ascolto Non Supportata</target>
+        <note>Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported</note>
+      </trans-unit>
       <trans-unit id="listening_mode.feedback.confirmation.title" xml:space="preserve">
         <source>Thank You!</source>
         <target state="translated">Grazie!</target>
@@ -454,6 +468,15 @@ Puoi anche disabilitare la modalità di ascolto per nascondere questa categoria 
         <source>Settings</source>
         <target state="final">Impostazioni</target>
         <note>Settings screen header title</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.device_unsupported_explanation_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</source>
+        <target state="translated">Questo %1$@ su %2$@ %3$@ non supporta la modalità di ascolto.
+
+La modalità di ascolto è attualmente disponibile solo in inglese e richiede %5$@ per essere abilitata.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine.</note>
       </trans-unit>
       <trans-unit id="settings.listening_mode.hot_word_toggle_cell.title" xml:space="preserve">
         <source>"Hey Vocable" shortcut</source>
