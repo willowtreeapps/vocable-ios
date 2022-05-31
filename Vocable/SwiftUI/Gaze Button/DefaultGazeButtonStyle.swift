@@ -8,7 +8,14 @@
 
 import SwiftUI
 
+/// The default button style.
+///
+/// You can also use ``GazeButtonStyle/automatic`` to construct this style.
 struct DefaultGazeButtonStyle: GazeButtonStyle {
+    func makeBody(_ configuration: Configuration) -> some View {
+        _Body(configuration)
+    }
+
     private struct _Body<Label: View>: View {
         @Environment(\.isEnabled)
         private var isEnabled
@@ -18,6 +25,12 @@ struct DefaultGazeButtonStyle: GazeButtonStyle {
         var label: Label
         var buttonRole: ButtonRole?
 
+        init(_ configuration: Configuration) where Configuration.Label == Label {
+            self._state = configuration.state
+            self.label = configuration.label
+            self.buttonRole = configuration.role
+        }
+
         var body: some View {
             label
                 .foregroundColor(buttonRole == .destructive ? .red : .accentColor)
@@ -26,12 +39,9 @@ struct DefaultGazeButtonStyle: GazeButtonStyle {
                 )
         }
     }
-
-    func makeBody(_ configuration: Configuration) -> some View {
-        _Body(state: configuration.state, label: configuration.label, buttonRole: configuration.role)
-    }
 }
 
 extension GazeButtonStyle where Self == DefaultGazeButtonStyle {
+    /// The default button style
     static var automatic: DefaultGazeButtonStyle { .init() }
 }

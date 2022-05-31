@@ -47,7 +47,7 @@ public class Pulse: NSObject {
     
     /// Reference to window with tunning controls
     ///
-    /// @discussion:  It's used when you want to use tunning feature. If you want to use this class stand alone - you can remove it
+    /// It's used when you want to use tunning feature. If you want to use this class stand alone - you can remove it
     var tunningWindow: UIWindow?
     public var isHorizontal = false
     public var label: String = ""

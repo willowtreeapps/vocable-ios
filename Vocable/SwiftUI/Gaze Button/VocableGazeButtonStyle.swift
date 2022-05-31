@@ -8,6 +8,9 @@
 
 import SwiftUI
 
+/// A style that matches the design system for buttons in the Vocable app.
+///
+/// You can also use ``GazeButtonStyle/vocable`` to construct this style.
 struct VocableGazeButtonStyle: GazeButtonStyle {
     func makeBody(_ configuration: Configuration) -> some View {
         _Body(configuration)
@@ -73,5 +76,6 @@ struct VocableGazeButtonStyle: GazeButtonStyle {
 }
 
 extension GazeButtonStyle where Self == VocableGazeButtonStyle {
+    /// A style that matches the design system for buttons in the Vocable app.
     static var vocable: VocableGazeButtonStyle { .init() }
 }

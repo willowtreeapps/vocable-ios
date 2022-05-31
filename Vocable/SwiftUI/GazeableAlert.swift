@@ -9,14 +9,20 @@
 import SwiftUI
 
 extension View {
+    /// Presents a gazeable alert with a message and a set of actions
+    ///
+    /// - Parameters:
+    ///   - message: The message to be displayed in the alert
+    ///   - isPresented: A binding to the presented state of the alert
+    ///   - actions: The list of actions the user can take
     func gazeableAlert(
-        _ title: String,
+        _ message: String,
         isPresented: Binding<Bool>,
         actions: [GazeableAlertAction]
     ) -> some View {
         overlay(
             GazeableAlert(
-                title: title,
+                message: message,
                 isPresented: isPresented,
                 actions: actions
             )
@@ -25,7 +31,7 @@ extension View {
 }
 
 struct GazeableAlert: View {
-    let title: String
+    let message: String
     @Binding var isPresented: Bool
     let actions: [GazeableAlertAction]
 
@@ -37,7 +43,7 @@ struct GazeableAlert: View {
                     .transition(.opacity)
 
                 GazeableAlertRepresentable(
-                    title: title,
+                    message: message,
                     actions: actions
                 )
                 .edgesIgnoringSafeArea([])
@@ -51,11 +57,11 @@ struct GazeableAlert: View {
 // MARK: - Supporting Views
 
 private struct GazeableAlertRepresentable: UIViewControllerRepresentable {
-    let title: String
+    let message: String
     let actions: [GazeableAlertAction]
 
     func makeUIViewController(context: Context) -> GazeableAlertViewController {
-        let alertViewController = GazeableAlertViewController(alertTitle: title)
+        let alertViewController = GazeableAlertViewController(alertTitle: message)
         actions.forEach {
             alertViewController.addAction($0, withAutomaticDismissal: false)
         }
@@ -63,13 +69,16 @@ private struct GazeableAlertRepresentable: UIViewControllerRepresentable {
         return alertViewController
     }
 
-    func updateUIViewController(_ uiViewController: GazeableAlertViewController, context: Context) { /* No op */ }
+    func updateUIViewController(
+        _ uiViewController: GazeableAlertViewController,
+        context: Context
+    ) { /* No op */ }
 }
 
 struct GazeableAlert_Previews: PreviewProvider {
     static var previews: some View {
         GazeableAlert(
-            title: "This is an alert!",
+            message: "This is an alert!",
             isPresented: .constant(true),
             actions: [
                 .cancel(withTitle: "Cancel"),
