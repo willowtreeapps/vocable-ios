@@ -69,9 +69,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 return .settings.contactDevelopersCell
             case .listeningMode:
                 return .settings.listeningModeCell
-            case .pidTuner:
-                return ""
-            case .versionNum:
+            default:
                 return ""
             }
         }

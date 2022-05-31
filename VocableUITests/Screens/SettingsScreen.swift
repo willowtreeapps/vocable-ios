@@ -14,31 +14,25 @@ class SettingsScreen: BaseScreen {
     // MARK: Screen elements
     static let otherElements = XCUIApplication().collectionViews.cells.otherElements
     static let cells = XCUIApplication().cells
-    static let title = XCUIApplication().staticTexts[.shared.titleLabel]
     
     // Settings Screen
     static let categoriesAndPhrasesCell = XCUIApplication().cells[.settings.categoriesAndPhrasesCell]
     static let timingAndSensitivityCell = XCUIApplication().cells[.settings.timingAndSensitivityCell]
     static let resetAppSettingsCell = XCUIApplication().cells[.settings.resetAppSettingsCell]
+    static let listeningModeCell = XCUIApplication().cells[.settings.listeningModeCell]
     static let selectionModeCell = XCUIApplication().cells[.settings.selectionModeCell]
     static let privacyPolicyCell = XCUIApplication().cells[.settings.privacyPolicyCell]
     static let contactDevelopersCell = XCUIApplication().cells[.settings.contactDevelopersCell]
     
     // Categories and Phrases
     static let addCategoryButton = XCUIApplication().buttons[.settings.editCategories.addCategoryButton]
-    static let settingsPageNextButton = XCUIApplication().buttons[.shared.pagination.nextButton]
-    
+
     // Category Details
     static let renameCategoryButton = XCUIApplication().buttons[.settings.editCategoryDetails.renameCategoryButton]
     static let showCategoryButton = XCUIApplication().buttons[.settings.editCategoryDetails.showCategoryToggle]
     static let removeCategoryButton = XCUIApplication().buttons[.settings.editCategoryDetails.removeCategoryButton]
                  
-    // Alerts
-    static let alertContinueButton = XCUIApplication().buttons[.shared.alert.continueButton]
-    static let alertDiscardButton = XCUIApplication().buttons[.shared.alert.discardButton]
-    static let alertDeleteButton = XCUIApplication().buttons[.shared.alert.deleteButton]
-    static let alertRemoveButton = XCUIApplication().buttons[.shared.alert.deleteButton]
-    static let alertCancelButton = XCUIApplication().buttons[.shared.alert.cancelButton]
+    
 
     // MARK: Helpers
     
@@ -53,7 +47,7 @@ class SettingsScreen: BaseScreen {
             if cells.staticTexts.containing(predicate).element.exists{
                 break
             } else {
-                settingsPageNextButton.tap()
+                paginationRightButton.tap()
             }
         }
         
@@ -86,7 +80,7 @@ class SettingsScreen: BaseScreen {
     
     static func navigateToCategory(category: String) {
         while !otherElements.containing(.staticText, identifier: category).element.exists {
-            settingsPageNextButton.tap()
+            paginationRightButton.tap()
             if MainScreen.pageNumberText.label.contains("Page 1") {
                 break
             }
