@@ -118,6 +118,12 @@
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "Sprachdienste nicht verfügbar";
 
+/* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.message" = "Dieses %1$@ auf %2$@ %3$@ unterstützt den Zuhörmodus nicht.\n\nDer Hörmodus ist derzeit nur auf Englisch verfügbar und erfordert die Aktivierung von %5$@.";
+
+/* Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.title" = "Hörmodus nicht unterstützt";
+
 /* Thank you confirmation.  This text appears after sharing with developer */
 "listening_mode.feedback.confirmation.title" = "Vielen Dank!";
 
@@ -245,6 +251,9 @@
 
 /* Settings screen header title */
 "settings.header.title" = "Einstellungen";
+
+/* Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine. */
+"settings.listening_mode.device_unsupported_explanation_footer" = "Dieses %1$@ auf %2$@ %3$@ unterstützt den Zuhörmodus nicht.\n\nDer Hörmodus ist derzeit nur auf Englisch verfügbar und erfordert die Aktivierung von %5$@.";
 
 /* Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected */
 "settings.listening_mode.hot_word_toggle_cell.title" = "\"Hallo Vocable\" Verknüpfung";
