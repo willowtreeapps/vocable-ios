@@ -118,6 +118,12 @@
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "语音服务不可用";
 
+/* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.message" = "此 %1$@ 在 %2$@ %3$@ 不支持侦听模式。\n\n侦听模式目前仅有英文可用，需要启用 %5$@。";
+
+/* Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.title" = "监听模式不受支持";
+
 /* Thank you confirmation.  This text appears after sharing with developer */
 "listening_mode.feedback.confirmation.title" = "谢谢！";
 
@@ -245,6 +251,9 @@
 
 /* Settings screen header title */
 "settings.header.title" = "设置";
+
+/* Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine. */
+"settings.listening_mode.device_unsupported_explanation_footer" = "此 %1$@ 在 %2$@ %3$@ 不支持侦听模式。\n\n侦听模式目前仅有英文可用，需要启用 %5$@。";
 
 /* Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected */
 "settings.listening_mode.hot_word_toggle_cell.title" = "“嘿Vocable”快捷方式";
