@@ -22,6 +22,14 @@ class BaseScreen {
     static let alertMessageLabel = XCUIApplication().staticTexts["alert_message"]
     static let emptyStateAddPhraseButton = XCUIApplication().buttons["empty_state_addPhrase_button"]
     static let navBarDismissButton = XCUIApplication().buttons[.shared.dismissButton]
+    static let title = XCUIApplication().staticTexts[.shared.titleLabel]
+    
+    // Alerts
+    static let alertContinueButton = XCUIApplication().buttons[.shared.alert.continueButton]
+    static let alertDiscardButton = XCUIApplication().buttons[.shared.alert.discardButton]
+    static let alertDeleteButton = XCUIApplication().buttons[.shared.alert.deleteButton]
+    static let alertRemoveButton = XCUIApplication().buttons[.shared.alert.deleteButton]
+    static let alertCancelButton = XCUIApplication().buttons[.shared.alert.cancelButton]
     
     /// From Pagination: the current page (X) being viewed from the "Page X of Y" pagination label.
     static var currentPageNumber: Int {

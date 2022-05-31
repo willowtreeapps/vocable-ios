@@ -25,7 +25,7 @@ class CustomCategoriesScreen: BaseScreen {
     }
     
     static func createCustomCategory(categoryName: String) {
-        SettingsScreen.settingsPageAddCategoryButton.tap()
+        SettingsScreen.addCategoryButton.tap()
         KeyboardScreen.typeText(categoryName)
         KeyboardScreen.checkmarkAddButton.tap()
     }

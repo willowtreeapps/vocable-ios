@@ -131,7 +131,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
                 self?.handleRenameCategory()
             }
 
-            config.accessibilityIdentifier = "rename_category_button"
+            config.accessibilityIdentifier = AccessibilityID.settings.editCategoryDetails.renameCategoryButton.id
 
             cell.contentConfiguration = config
         }
@@ -152,7 +152,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
 
             config.isPrimaryActionEnabled = category.identifier != .userFavorites
-            config.accessibilityIdentifier = "show_category_toggle"
+            config.accessibilityIdentifier = AccessibilityID.settings.editCategoryDetails.showCategoryToggle.id
 
             cell.contentConfiguration = config
         }
@@ -189,7 +189,7 @@ final class EditCategoryDetailViewController: VocableCollectionViewController {
             }
 
             config.isPrimaryActionEnabled = category.identifier != .userFavorites
-            config.accessibilityIdentifier = "remove_category_cell"
+            config.accessibilityIdentifier = AccessibilityID.settings.editCategoryDetails.removeCategoryButton.id
             config.primaryBackgroundColor = .errorRed
             config.primaryContentHorizontalAlignment = .center
             config.traitCollectionChangeHandler = { _, updatedConfig in

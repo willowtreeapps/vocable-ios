@@ -65,7 +65,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         navigationBar.rightButton = {
             let button = GazeableButton(frame: .zero)
             button.setImage(UIImage(systemName: "plus"), for: .normal)
-            button.accessibilityIdentifier = "settingsCategory.addCategoryButton"
+            button.accessibilityID = .settings.editCategories.addCategoryButton
             button.addTarget(self, action: #selector(addButtonPressed), for: .primaryActionTriggered)
             return button
         }()
@@ -92,7 +92,7 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
         var config = VocableListContentConfiguration(title: category.name ?? "",
                                                      actions: [upAction, downAction],
                                                      accessory: .disclosureIndicator(),
-                                                     accessibilityIdentifier: "edit_category_button") { [weak self] in
+                                                     accessibilityIdentifier: AccessibilityID.settings.editCategories.categoryButton.id) { [weak self] in
             self?.showEditForCategory(withObjectID: categoryID)
         }
 

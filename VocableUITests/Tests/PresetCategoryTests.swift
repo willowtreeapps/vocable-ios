@@ -22,7 +22,7 @@ class PresetCategoryTests: BaseTest {
         SettingsScreen.renameCategoryButton.tap()
         KeyboardScreen.typeText(nameSuffix)
         KeyboardScreen.checkmarkAddButton.tap()
-        XCTAssertEqual(SettingsScreen.categoryDetailsTitle.label, renamedCategory)
+        XCTAssertEqual(SettingsScreen.title.label, renamedCategory)
         
         // Confirm that the category is renamed from categories list
         SettingsScreen.navBarBackButton.tap()
@@ -47,7 +47,7 @@ class PresetCategoryTests: BaseTest {
         SettingsScreen.alertRemoveButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
         
         // Confirm that the category is removed from categories list
-        _ = SettingsScreen.settingsPageAddCategoryButton.waitForExistence(timeout: 0.5)
+        _ = SettingsScreen.addCategoryButton.waitForExistence(timeout: 0.5)
         XCTAssertFalse(SettingsScreen.doesCategoryExist(categoryName))
         
         // Confirm that the category is removed from main screen

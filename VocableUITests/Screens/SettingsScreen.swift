@@ -3,7 +3,7 @@
 //  VocableUITests
 //
 //  Created by Kevin Stechler on 5/19/20.
-//  Updated by Canan Arikan and Rudy Salas on 03/28/22.
+//  Updated by Canan Arikan and Rudy Salas on 05/27/22.
 //  Copyright © 2022 WillowTree. All rights reserved.
 //
 
@@ -11,26 +11,29 @@ import XCTest
 
 class SettingsScreen: BaseScreen {
     
-    static let categoriesButton = XCUIApplication().collectionViews.staticTexts["Categories and Phrases"]
+    // MARK: Screen elements
     static let otherElements = XCUIApplication().collectionViews.cells.otherElements
     static let cells = XCUIApplication().cells
-    static let settingsPageNextButton = XCUIApplication().buttons[.shared.pagination.nextButton]
-    static let categoryUpButton = "reorder.upButton"
-    static let categoryDownButton = "reorder.downButton"
-    static let categoryForwardButton = "Forward"
-    static let hideCategorySwitch = "hide"
-    static let categoryShowButton = "show"
-    static let settingsPageAddCategoryButton = XCUIApplication().buttons["settingsCategory.addCategoryButton"]
-    static let alertContinueButton = XCUIApplication().buttons["alert.button.continue_editing"]
-    static let alertDiscardButton = XCUIApplication().buttons["alert.button.discard_changes"]
-    static let alertDeleteButton = XCUIApplication().buttons["alert.button.delete"]
-    static let alertRemoveButton = XCUIApplication().buttons["Remove"]
-    static let alertCancelButton = XCUIApplication().buttons["Cancel"]
-    static let categoryDetailsTitle = XCUIApplication().staticTexts["category_title_label"]
-    static let renameCategoryButton = XCUIApplication().buttons["rename_category_button"]
-    static let showCategoryButton = XCUIApplication().buttons["show_category_toggle"]
-    static let removeCategoryButton = XCUIApplication().buttons["remove_category_cell"]
+    
+    // Settings Screen
+    static let categoriesAndPhrasesCell = XCUIApplication().cells[.settings.categoriesAndPhrasesCell]
+    static let timingAndSensitivityCell = XCUIApplication().cells[.settings.timingAndSensitivityCell]
+    static let resetAppSettingsCell = XCUIApplication().cells[.settings.resetAppSettingsCell]
+    static let listeningModeCell = XCUIApplication().cells[.settings.listeningModeCell]
+    static let selectionModeCell = XCUIApplication().cells[.settings.selectionModeCell]
+    static let privacyPolicyCell = XCUIApplication().cells[.settings.privacyPolicyCell]
+    static let contactDevelopersCell = XCUIApplication().cells[.settings.contactDevelopersCell]
+    
+    // Categories and Phrases
+    static let addCategoryButton = XCUIApplication().buttons[.settings.editCategories.addCategoryButton]
 
+    // Category Details
+    static let renameCategoryButton = XCUIApplication().buttons[.settings.editCategoryDetails.renameCategoryButton]
+    static let showCategoryButton = XCUIApplication().buttons[.settings.editCategoryDetails.showCategoryToggle]
+    static let removeCategoryButton = XCUIApplication().buttons[.settings.editCategoryDetails.removeCategoryButton]
+
+    // MARK: Helpers
+    
     static func openCategorySettings(category: String) {
         locateCategoryCell(category).staticTexts[category].tap()
     }
@@ -42,7 +45,7 @@ class SettingsScreen: BaseScreen {
             if cells.staticTexts.containing(predicate).element.exists{
                 break
             } else {
-                settingsPageNextButton.tap()
+                paginationRightButton.tap()
             }
         }
         
@@ -73,45 +76,19 @@ class SettingsScreen: BaseScreen {
         return flag
     }
     
-    static func toggleHideShowCategory(category: String, toggle: String) {
-        var toggleLabel = ""
-        switch toggle {
-        case "Hide":
-            toggleLabel = hideCategorySwitch
-        case "Show":
-            toggleLabel = categoryShowButton
-        default:
-            break
-        }
-
-        if otherElements.containing(.staticText, identifier: category).element.exists {
-            otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
-        } else {
-            settingsPageNextButton.tap()
-            otherElements.containing(.staticText, identifier: category).buttons[toggleLabel].tap()
-        }
-    }
-    
     static func navigateToCategory(category: String) {
         while !otherElements.containing(.staticText, identifier: category).element.exists {
-            settingsPageNextButton.tap()
+            paginationRightButton.tap()
             if MainScreen.pageNumberText.label.contains("Page 1") {
                 break
             }
         }
     }
     
-    static func addCategory(categoryName: String) {
-        settingsPageAddCategoryButton.tap()
-        let newCategory = KeyboardScreen.randomString(length: 5)
-        KeyboardScreen.typeText(newCategory)
-        KeyboardScreen.checkmarkAddButton.tap()
-    }
-    
     static func navigateToSettingsCategoryScreen() {
         MainScreen.settingsButton.tap(afterWaitingForExistenceWithTimeout: 2)
-        categoriesButton.tap(afterWaitingForExistenceWithTimeout: 2)
-        _ = settingsPageAddCategoryButton.waitForExistence(timeout: 0.5)
+        categoriesAndPhrasesCell.tap(afterWaitingForExistenceWithTimeout: 2)
+        _ = addCategoryButton.waitForExistence(timeout: 0.5)
     }
     
     static func returnToMainScreen() {

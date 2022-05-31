@@ -149,7 +149,7 @@ class VocableNavigationBar: UIView {
         let label = UILabel(frame: .zero)
         label.textAlignment = .center
         label.textColor = .defaultTextColor
-        label.accessibilityIdentifier = "category_title_label"
+        label.accessibilityID = .shared.titleLabel
         return label
     }()
 
