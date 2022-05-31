@@ -31,8 +31,6 @@ class SettingsScreen: BaseScreen {
     static let renameCategoryButton = XCUIApplication().buttons[.settings.editCategoryDetails.renameCategoryButton]
     static let showCategoryButton = XCUIApplication().buttons[.settings.editCategoryDetails.showCategoryToggle]
     static let removeCategoryButton = XCUIApplication().buttons[.settings.editCategoryDetails.removeCategoryButton]
-                 
-    
 
     // MARK: Helpers
     
