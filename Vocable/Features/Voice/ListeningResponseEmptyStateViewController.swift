@@ -76,13 +76,13 @@ enum ListeningEmptyState: EmptyStateRepresentable, Equatable {
 
     var buttonTitle: String? {
         switch self {
-        case .listenModeFreeResponse, .listeningResponse, .speechServiceUnavailable, .listeningModeUnsupported:
+        case .listenModeFreeResponse, .listeningResponse, .listeningModeUnsupported:
             return nil
         case .microphonePermissionUndetermined:
             return String(localized: "listening_mode.empty_state.microphone_permission_undetermined.action")
         case .speechPermissionUndetermined:
             return String(localized: "listening_mode.empty_state.speech_permission_undetermined.action")
-        case .microphonePermissionDenied:
+        case .microphonePermissionDenied, .speechServiceUnavailable:
             return String(localized: "listening_mode.empty_state.microphone_permission_denied.action")
         case .speechPermissionDenied:
             return String(localized: "listening_mode.empty_state.speech_permission_denied.action")

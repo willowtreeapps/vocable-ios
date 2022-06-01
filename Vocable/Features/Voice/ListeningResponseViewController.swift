@@ -171,7 +171,13 @@ final class ListeningResponseViewController: VocableViewController {
                 return .empty(status.state, action: status.action)
             }
             if !speechRecognizerController.isAvailable {
-                return .empty(.speechServiceUnavailable)
+                return .empty(.speechServiceUnavailable) {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        if UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        }
+                    }
+                }
             }
             return .empty(.listeningResponse)
         }()
@@ -250,7 +256,13 @@ final class ListeningResponseViewController: VocableViewController {
                             break
                         }
                     }
-                    self.setContent(.empty(.speechServiceUnavailable), animated: true)
+                    self.setContent(.empty(.speechServiceUnavailable, action: {
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            if UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            }
+                        }
+                    }), animated: true)
                 }
             }
     }
