@@ -293,7 +293,7 @@ final class GazeableAlertViewController: UIViewController, UIViewControllerTrans
         containerStackView.addArrangedSubview(actionButtonStackView)
 
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        messageLabel.accessibilityIdentifier = AccessibilityID.shared.alert.messageLabel.id
+        messageLabel.accessibilityID = .shared.alert.messageLabel
         titleContainerView.addSubview(messageLabel)
 
         NSLayoutConstraint.activate([
