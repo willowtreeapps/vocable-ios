@@ -15,6 +15,7 @@ extension AccessibilityID {
         public static let backButton: AccessibilityID = "shared-back-button"
         public static let dismissButton: AccessibilityID = "shared-dismiss-button"
         public static let titleLabel: AccessibilityID = "shared-title-label"
+        public static let emptyStateAddPhraseButton: AccessibilityID = "empty-state-addPhrase-button"
         private init() {}
     }
 }

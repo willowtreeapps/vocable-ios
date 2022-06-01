@@ -14,7 +14,7 @@ class KeyboardScreen: BaseScreen {
     static let keyboardTextView = XCUIApplication().textViews[.shared.keyboard.outputTextView]
     static let favoriteButton = XCUIApplication().buttons[.shared.keyboard.favoriteButton]
     static let checkmarkAddButton = XCUIApplication().buttons[.shared.keyboard.saveButton]
-    static let createDuplicateButton = XCUIApplication().buttons["Create Duplicate"]
+    static let createDuplicateButton = XCUIApplication().buttons[.shared.alert.createDuplicateButton]
     
     static func typeText(_ textToType: String) {
         for char in textToType {

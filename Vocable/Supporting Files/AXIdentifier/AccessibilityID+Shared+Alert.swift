@@ -14,6 +14,8 @@ extension AccessibilityID.shared {
         public static let discardButton: AccessibilityID = "alert-button-discard-changes"
         public static let deleteButton: AccessibilityID = "alert-button-delete"
         public static let cancelButton: AccessibilityID = "alert-button-cancel"
+        public static let createDuplicateButton: AccessibilityID = "alert-button-create-duplicate"
+        public static let messageLabel: AccessibilityID = "alert-message"
         private init() {}
     }
 }

@@ -142,8 +142,8 @@ struct PhraseEditorConfigurationProvider: TextEditorConfigurationProviding {
         let createButtonTitle = String(localized: "phrase_editor.alert.phrase_name_exists.create.button")
 
         let alert = GazeableAlertViewController(alertTitle: title)
-        alert.addAction(GazeableAlertAction(title: cancelButtonTitle))
-        alert.addAction(GazeableAlertAction(title: createButtonTitle, style: .destructive, handler: confirmationHandler))
+        alert.addAction(.cancel(withTitle: cancelButtonTitle))
+        alert.addAction(GazeableAlertAction(title: createButtonTitle, accessibilityIdentifier: AccessibilityID.shared.alert.createDuplicateButton.id, style: .destructive, handler: confirmationHandler))
         viewController.present(alert, animated: true)
     }
 }
