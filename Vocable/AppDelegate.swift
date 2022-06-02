@@ -11,7 +11,6 @@ import CoreData
 import Combine
 import AVFoundation
 import VocableListenCore
-import SwiftUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

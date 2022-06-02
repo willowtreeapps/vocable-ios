@@ -71,14 +71,16 @@ class BridgedGazeableButton: UIButton {
     override func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
         guard isEnabled else { return }
 
-        gazeStartDate = nil
-        isSelected = false
-        isHighlighted = false
+        resetState()
     }
 
     override func gazeCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
         guard isEnabled else { return }
 
+        resetState()
+    }
+
+    private func resetState() {
         gazeStartDate = nil
         isSelected = false
         isHighlighted = false

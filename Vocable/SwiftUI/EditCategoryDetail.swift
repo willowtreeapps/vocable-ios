@@ -1,5 +1,5 @@
 //
-//  ExampleVocableView.swift
+//  EditCategoryDetail.swift
 //  Vocable
 //
 //  Created by Robert Moyer on 4/4/22.
@@ -19,6 +19,11 @@ private func makeFetchRequest(_ categoryId: NSManagedObjectID) -> NSFetchRequest
     return request
 }
 
+
+/// A SwiftUI version of the Edit Category Detail screen
+///
+/// **WARNING** - This view is meant to be used as an example only, it should
+/// not be used in production.
 @available(iOS 15, *)
 struct EditCategoryDetail: View {
     @Environment(\.managedObjectContext) private var context

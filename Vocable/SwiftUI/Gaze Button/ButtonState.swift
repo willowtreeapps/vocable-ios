@@ -22,5 +22,10 @@ struct ButtonState: OptionSet {
     static let highlighted  = Self(rawValue: 1 << 0)
 
     /// Selected state of a button
+    ///
+    /// A button becomes selected when a gaze event remains within
+    /// the button's bounds for the supplied `minimumGazeDuration`.
+    /// It loses its selection when the gaze eventis cancelled, ended,
+    /// or when the gaze exits the button's bounds.
     static let selected     = Self(rawValue: 1 << 1)
 }

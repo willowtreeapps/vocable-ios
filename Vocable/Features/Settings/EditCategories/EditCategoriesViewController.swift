@@ -8,7 +8,6 @@
 
 import Combine
 import CoreData
-import SwiftUI
 import UIKit
 
 final class EditCategoriesViewController: PagingCarouselViewController, NSFetchedResultsControllerDelegate {
