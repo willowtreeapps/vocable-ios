@@ -103,14 +103,14 @@ struct EditCategoryDetail: View {
         .navigationBarHidden(true)
         .background(Color(UIColor.primaryBackgroundColor).ignoresSafeArea())
         .gazeableAlert(
-            NSLocalizedString("category_editor.alert.delete_category_confirmation.title", comment: "Remove category alert title"),
+            String(localized: "category_editor.alert.delete_category_confirmation.title"),
             isPresented: $showingDeleteAlert,
             actions: [
-                .cancel(withTitle: NSLocalizedString("category_editor.alert.delete_category_confirmation.button.cancel.title", comment: "Cancel alert action title")
+                .cancel(withTitle: String(localized: "category_editor.alert.delete_category_confirmation.button.cancel.title")
                 ) {
                     withAnimation { showingDeleteAlert = false }
                 },
-                .delete(withTitle: NSLocalizedString("category_editor.alert.delete_category_confirmation.button.remove.title", comment: "Remove category alert action title")
+                .delete(withTitle: String(localized: "category_editor.alert.delete_category_confirmation.button.remove.title")
                 ) {
                     removeCategory()
                     withAnimation { showingDeleteAlert = false }
