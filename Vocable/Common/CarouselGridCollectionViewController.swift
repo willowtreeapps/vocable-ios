@@ -57,20 +57,10 @@ class CarouselGridCollectionView: UICollectionView {
     }
 
     private var lastInvalidatedContentSize: CGSize = .zero
+
     override var contentSize: CGSize {
         didSet {
-            defer {
-                if !needsInitialScrollToMiddle {
-                    lastInvalidatedContentSize = contentSize
-                }
-            }
-            guard contentSize != lastInvalidatedContentSize else { return }
-            if needsInitialScrollToMiddle {
-                layoutIfNeeded()
-                needsInitialScrollToMiddle = !scrollToMiddleSection(animated: false)
-            } else {
-                snapToBoundaryIfNeeded()
-            }
+            adjustScrollPositionIfNeeded()
         }
     }
 
@@ -98,6 +88,19 @@ class CarouselGridCollectionView: UICollectionView {
         delaysContentTouches = false
         allowsMultipleSelection = true
         backgroundColor = .collectionViewBackgroundColor
+    }
+
+    private func adjustScrollPositionIfNeeded() {
+        defer { lastInvalidatedContentSize = contentSize }
+
+        guard contentSize != lastInvalidatedContentSize else { return }
+
+        if needsInitialScrollToMiddle {
+            layoutIfNeeded()
+            needsInitialScrollToMiddle = !scrollToMiddleSection(animated: false)
+        } else {
+            snapToBoundaryIfNeeded()
+        }
     }
 
     @objc func scrollToNextPage() {
