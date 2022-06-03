@@ -235,11 +235,6 @@ Du kan også deaktivere Lyttetilstand for at skjule denne kategori i Vocable's i
         <target state="translated">Talegenkendelse Software</target>
         <note>Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
       </trans-unit>
-      <trans-unit id="listening_mode.empty_state.speech_unavailable.message" xml:space="preserve">
-        <source>Please try again later</source>
-        <target state="translated">Forsøg igen senere</target>
-        <note>Listen mode error state message for when Apple's speech to text service is unavailable</note>
-      </trans-unit>
       <trans-unit id="listening_mode.empty_state.speech_unavailable.title" xml:space="preserve">
         <source>Speech services unavailable</source>
         <target state="translated">Taletjenester er ikke tilgængelige</target>
