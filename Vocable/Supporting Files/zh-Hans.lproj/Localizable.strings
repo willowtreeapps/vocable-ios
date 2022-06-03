@@ -112,9 +112,6 @@
 /* Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
 "listening_mode.empty_state.speech_permission_undetermined.title" = "语音识别";
 
-/* Listen mode error state message for when Apple's speech to text service is unavailable */
-"listening_mode.empty_state.speech_unavailable.message" = "请稍后再试";
-
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "语音服务不可用";
 

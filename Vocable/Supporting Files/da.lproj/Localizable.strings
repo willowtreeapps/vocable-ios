@@ -112,9 +112,6 @@
 /* Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
 "listening_mode.empty_state.speech_permission_undetermined.title" = "Talegenkendelse Software";
 
-/* Listen mode error state message for when Apple's speech to text service is unavailable */
-"listening_mode.empty_state.speech_unavailable.message" = "Forsøg igen senere";
-
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "Taletjenester er ikke tilgængelige";
 

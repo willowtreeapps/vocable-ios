@@ -10,14 +10,13 @@ import Foundation
 
 extension AccessibilityID {
     public struct settings {
-        public static let closeSettingsButton: AccessibilityID = "settings-close-settings-button"
-        public static let categoriesAndPhrasesButton: AccessibilityID = "settings-categories-and-phrases-button"
-        public static let timingAndSensitivityButton: AccessibilityID = "settings-timing-and-sensitivity-button"
-        public static let resetAppSettingsButton: AccessibilityID = "settings-reset-app-settings-button"
-        public static let selectionModeButton: AccessibilityID = "settings-selection-mode-button"
-        public static let tuneCursorButton: AccessibilityID = "settings-tune-cursor-button"
-        public static let privacyPolicyButton: AccessibilityID = "settings-privacy-policy-button"
-        public static let contactDevelopersButton: AccessibilityID = "settings-contact-developers-button"
+        public static let categoriesAndPhrasesCell: AccessibilityID = "settings-categories-and-phrases-cell"
+        public static let timingAndSensitivityCell: AccessibilityID = "settings-timing-and-sensitivity-cell"
+        public static let resetAppSettingsCell: AccessibilityID = "settings-reset-app-settings-cell"
+        public static let listeningModeCell: AccessibilityID = "settings-listening-mode-cell"
+        public static let selectionModeCell: AccessibilityID = "settings-selection-mode-cell"
+        public static let privacyPolicyCell: AccessibilityID = "settings-privacy-policy-cell"
+        public static let contactDevelopersCell: AccessibilityID = "settings-contact-developers-cell"
         private init() {}
     }
 }

@@ -75,7 +75,7 @@ class MainScreen: BaseScreen {
     
     static func navigateToSettingsAndOpenCategory(name: String) {
         MainScreen.settingsButton.tap()
-        SettingsScreen.categoriesButton.tap()
+        SettingsScreen.categoriesAndPhrasesCell.tap()
         SettingsScreen.openCategorySettings(category: name)
     }
 

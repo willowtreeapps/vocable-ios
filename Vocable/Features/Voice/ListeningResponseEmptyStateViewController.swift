@@ -76,7 +76,7 @@ enum ListeningEmptyState: EmptyStateRepresentable, Equatable {
 
     var buttonTitle: String? {
         switch self {
-        case .listenModeFreeResponse, .listeningResponse, .speechServiceUnavailable, .listeningModeUnsupported:
+        case .listenModeFreeResponse, .listeningResponse, .listeningModeUnsupported, .speechServiceUnavailable:
             return nil
         case .microphonePermissionUndetermined:
             return String(localized: "listening_mode.empty_state.microphone_permission_undetermined.action")

@@ -133,7 +133,7 @@ struct CategoryNameEditorConfigurationProvider: TextEditorConfigurationProviding
 
         let alert = GazeableAlertViewController(alertTitle: title)
         alert.addAction(.cancel(withTitle: cancelButtonTitle))
-        alert.addAction(GazeableAlertAction(title: createButtonTitle, accessibilityIdentifier: "alert.button.create_duplicate", style: .destructive, handler: confirmationHandler))
+        alert.addAction(GazeableAlertAction(title: createButtonTitle, accessibilityIdentifier: AccessibilityID.shared.alert.createDuplicateButton.id, style: .destructive, handler: confirmationHandler))
         viewController.present(alert, animated: true)
     }
 }

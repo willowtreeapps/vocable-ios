@@ -52,6 +52,27 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 return ""
             }
         }
+        
+        var accessibiltyId: AccessibilityID {
+            switch self {
+            case .categories:
+                return .settings.categoriesAndPhrasesCell
+            case .timingSensitivity:
+                return .settings.timingAndSensitivityCell
+            case .resetAppSettings:
+                return .settings.resetAppSettingsCell
+            case .selectionMode:
+                return .settings.selectionModeCell
+            case .privacyPolicy:
+                return .settings.privacyPolicyCell
+            case .contactDevs:
+                return .settings.contactDevelopersCell
+            case .listeningMode:
+                return .settings.listeningModeCell
+            default:
+                return ""
+            }
+        }
 
         var isFeatureEnabled: Bool {
             let debugFeatures: [SettingsItem] = [.pidTuner]
@@ -72,10 +93,12 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         case .categories, .timingSensitivity, .resetAppSettings, .selectionMode, .listeningMode:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
             cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
+            cell.accessibilityID = item.accessibiltyId
             return cell
         case .privacyPolicy, .contactDevs:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
             cell.setup(title: item.title, image: UIImage(systemName: "arrow.up.right"))
+            cell.accessibilityID = item.accessibiltyId
             return cell
         case .versionNum:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsFooterCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsFooterCollectionViewCell

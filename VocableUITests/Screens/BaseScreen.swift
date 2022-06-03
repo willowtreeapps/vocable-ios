@@ -15,13 +15,20 @@ import XCTest
 class BaseScreen {
     
     static let navBarBackButton = XCUIApplication().buttons[.shared.backButton]
+    static let navBarDismissButton = XCUIApplication().buttons[.shared.dismissButton]
+    static let title = XCUIApplication().staticTexts[.shared.titleLabel]
+    static let emptyStateAddPhraseButton = XCUIApplication().buttons[.shared.emptyStateAddPhraseButton]
     static let paginationLabel = XCUIApplication().staticTexts[.shared.pagination.pageLabel]
     static let paginationLeftButton = XCUIApplication().buttons[.shared.pagination.previousButton]
     static let paginationRightButton = XCUIApplication().buttons[.shared.pagination.nextButton]
     
-    static let alertMessageLabel = XCUIApplication().staticTexts["alert_message"]
-    static let emptyStateAddPhraseButton = XCUIApplication().buttons["empty_state_addPhrase_button"]
-    static let navBarDismissButton = XCUIApplication().buttons[.shared.dismissButton]
+    // Alerts
+    static let alertContinueButton = XCUIApplication().buttons[.shared.alert.continueButton]
+    static let alertDiscardButton = XCUIApplication().buttons[.shared.alert.discardButton]
+    static let alertDeleteButton = XCUIApplication().buttons[.shared.alert.deleteButton]
+    static let alertRemoveButton = XCUIApplication().buttons[.shared.alert.deleteButton]
+    static let alertCancelButton = XCUIApplication().buttons[.shared.alert.cancelButton]
+    static let alertMessageLabel = XCUIApplication().staticTexts[.shared.alert.messageLabel]
     
     /// From Pagination: the current page (X) being viewed from the "Page X of Y" pagination label.
     static var currentPageNumber: Int {
