@@ -13,7 +13,7 @@ import VocableListenCore
 
 protocol ListeningResponseViewControllerDelegate: AnyObject {
     func didUpdateSpeechResponse(_ text: String?)
-    func shouldResetOutputText()
+    func resetOutputText()
 }
 
 @available(iOS 14.0, *)
@@ -160,7 +160,7 @@ final class ListeningResponseViewController: VocableViewController {
             default:
                 let viewController = ListeningResponseEmptyStateViewController(state: state, action: action)
                 setContentViewController(viewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
-                delegate?.shouldResetOutputText()
+                delegate?.resetOutputText()
             }
         }
     }
