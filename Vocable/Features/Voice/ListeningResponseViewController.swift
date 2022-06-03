@@ -230,6 +230,8 @@ final class ListeningResponseViewController: VocableViewController {
                 if isAvailable {
                     if case .choices = self.content {
                         // no-op
+                    } else if case .empty(let state, action: _) = self.content {
+                        self.setContent(.empty(state), animated: true)
                     } else {
                         self.setContent(.empty(.listeningResponse), animated: true)
                     }
