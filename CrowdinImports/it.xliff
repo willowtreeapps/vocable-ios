@@ -235,11 +235,6 @@ Puoi anche disabilitare la modalità di ascolto per nascondere questa categoria 
         <target state="translated">Riconoscimento vocale</target>
         <note>Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
       </trans-unit>
-      <trans-unit id="listening_mode.empty_state.speech_unavailable.message" xml:space="preserve">
-        <source>Please try again later</source>
-        <target state="translated">Sei pregato di riprovare più tardi</target>
-        <note>Listen mode error state message for when Apple's speech to text service is unavailable</note>
-      </trans-unit>
       <trans-unit id="listening_mode.empty_state.speech_unavailable.title" xml:space="preserve">
         <source>Speech services unavailable</source>
         <target state="translated">Servizi vocali non disponibili</target>
