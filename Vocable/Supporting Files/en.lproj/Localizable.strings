@@ -324,7 +324,7 @@
 "listening_mode.empty_state.free_response.message" = "Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.";
 
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
-"listening_mode.empty_state.speech_unavailable.message" = "Speech services require one of the following features to be enabled on your device: Siri or Dictation. Please check your device settings since one or all of these may be disabled.";
+"listening_mode.empty_state.speech_unavailable.message" = "Speech services require one of the following features to be enabled on your device: Siri or Dictation. Please check your device settings and enable Siri or Dictation.";
 
 
 
