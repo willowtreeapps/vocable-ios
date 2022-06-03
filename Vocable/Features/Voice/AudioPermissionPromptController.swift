@@ -47,7 +47,7 @@ final class AudioPermissionPromptController {
             return nil
         case .denied: // Need to go to settings
             return .init(state: .speechPermissionDenied, action: {
-                URL.openSettingsURL()
+                UIApplication.openSettingsURL()
             })
         case .notDetermined: // Need to present alert
             return .init(state: .speechPermissionUndetermined) { [desiredListeningMode] in
@@ -67,7 +67,7 @@ final class AudioPermissionPromptController {
             return nil
         case .denied: // Need to go to settings
             return .init(state: .microphonePermissionDenied, action: {
-                URL.openSettingsURL()
+                UIApplication.openSettingsURL()
             })
         case .undetermined: // Need to present alert
             return .init(state: .microphonePermissionUndetermined) { [desiredListeningMode] in

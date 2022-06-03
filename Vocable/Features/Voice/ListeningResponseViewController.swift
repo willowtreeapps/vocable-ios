@@ -172,7 +172,7 @@ final class ListeningResponseViewController: VocableViewController {
             }
             if !speechRecognizerController.isAvailable {
                 return .empty(.speechServiceUnavailable) {
-                    URL.openSettingsURL()
+                    UIApplication.openSettingsURL()
                 }
             }
             return .empty(.listeningResponse)
@@ -253,7 +253,7 @@ final class ListeningResponseViewController: VocableViewController {
                         }
                     }
                     self.setContent(.empty(.speechServiceUnavailable, action: {
-                        URL.openSettingsURL()
+                        UIApplication.openSettingsURL()
                     }), animated: true)
                 }
             }
