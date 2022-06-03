@@ -225,11 +225,6 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
         <target state="translated">语音识别</target>
         <note>Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
       </trans-unit>
-      <trans-unit id="listening_mode.empty_state.speech_unavailable.message" xml:space="preserve">
-        <source>Please try again later</source>
-        <target state="translated">请稍后再试</target>
-        <note>Listen mode error state message for when Apple's speech to text service is unavailable</note>
-      </trans-unit>
       <trans-unit id="listening_mode.empty_state.speech_unavailable.title" xml:space="preserve">
         <source>Speech services unavailable</source>
         <target state="translated">语音服务不可用</target>
