@@ -291,4 +291,8 @@ import SwiftUI
         updateOutputLabelText(text, isDictated: (text != nil))
     }
 
+    func shouldResetOutputText() {
+        updateOutputLabelText(nil, isDictated: false)
+    }
+
 }
