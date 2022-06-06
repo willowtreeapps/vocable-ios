@@ -25,6 +25,7 @@
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		4E014DAA27EA53BC00561FC8 /* NSRange+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E014DA927EA53BC00561FC8 /* NSRange+.swift */; };
+		4E095237284E67770079381D /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E095236284E67770079381D /* View+.swift */; };
 		4E18DBF027FF49420043A019 /* DefaultGazeButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18DBEF27FF49420043A019 /* DefaultGazeButtonStyle.swift */; };
 		4E18DBF227FF49FA0043A019 /* GazeButtonStyleConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18DBF127FF49FA0043A019 /* GazeButtonStyleConfiguration.swift */; };
 		4E18DBF427FF4AAA0043A019 /* ButtonRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18DBF327FF4AAA0043A019 /* ButtonRole.swift */; };
@@ -323,6 +324,7 @@
 		30B979B92425583E00309D7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30B979BB2425584300309D7C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4E014DA927EA53BC00561FC8 /* NSRange+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRange+.swift"; sourceTree = "<group>"; };
+		4E095236284E67770079381D /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		4E18DBEF27FF49420043A019 /* DefaultGazeButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGazeButtonStyle.swift; sourceTree = "<group>"; };
 		4E18DBF127FF49FA0043A019 /* GazeButtonStyleConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeButtonStyleConfiguration.swift; sourceTree = "<group>"; };
 		4E18DBF327FF4AAA0043A019 /* ButtonRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRole.swift; sourceTree = "<group>"; };
@@ -715,6 +717,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4E095235284E67560079381D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4E095236284E67770079381D /* View+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		4E56054427FB863A00719C23 /* UIKit Bridge */ = {
 			isa = PBXGroup;
 			children = (
@@ -728,6 +738,7 @@
 		4EA3D1CD27F772EA00FE6457 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				4E095235284E67560079381D /* Extensions */,
 				4E56054727FB8C7300719C23 /* EditCategoryDetail.swift */,
 				4E296C7B2832E00600B6062B /* GazeableAlert.swift */,
 				4E296C7D2832E77600B6062B /* GazeBlocking.swift */,
@@ -1582,6 +1593,7 @@
 				DC753162284143C200A84989 /* AccessibilityID+Shared+Alert.swift in Sources */,
 				7192E409242BC58F008E4A0A /* ToastWindow.swift in Sources */,
 				6B1086732463662C00E729A8 /* v2_to_v3.xcmappingmodel in Sources */,
+				4E095237284E67770079381D /* View+.swift in Sources */,
 				6B823BC223F4ADE30099F65E /* PIDControlConstants.swift in Sources */,
 				4EA3D1CC27F772E400FE6457 /* GazeButton.swift in Sources */,
 				A9CF2AF7242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift in Sources */,

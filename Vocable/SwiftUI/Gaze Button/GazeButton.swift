@@ -98,6 +98,15 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
 
     // MARK: Initializer
 
+    /// Creates a button with a specified role that displays a custom label.
+    ///
+    /// - Parameters:
+    ///   - minimumGazeDuration: The time interval (in seconds) the user must hold a
+    ///     gaze within the button's bounds before the `action` is triggered.
+    ///   - role: An optional semantic role describing the button. A value of `nil`
+    ///     means that the button doesn’t have an assigned role.
+    ///   - action: The action to perform when the user interacts with the button.
+    ///   - label: A view that describes the purpose of the button’s `action`.
     init(
         minimumGazeDuration: TimeInterval = AppConfig.selectionHoldDuration,
         role: ButtonRole? = nil,
@@ -108,6 +117,47 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
         self.role = role
         self.action = action
         self.label = label()
+    }
+
+    /// Creates a button with a specified role that generates its label from a localized string key.
+    ///
+    /// - Parameters:
+    ///   - titleKey: The key for the button’s localized title, that describes the
+    ///     purpose of the button’s `action`.
+    ///   - minimumGazeDuration: The time interval (in seconds) the user must hold a
+    ///     gaze within the button's bounds before the `action` is triggered.
+    ///   - role: An optional semantic role describing the button. A value of `nil`
+    ///     means that the button doesn’t have an assigned role.
+    ///   - action: The action to perform when the user interacts with the button.
+    init(
+        _ titleKey: LocalizedStringKey,
+        minimumGazeDuration: TimeInterval = AppConfig.selectionHoldDuration,
+        role: ButtonRole? = nil,
+        action: @escaping () -> Void
+    ) where Label == Text {
+        self.init(minimumGazeDuration: minimumGazeDuration, role: role, action: action) {
+            Text(titleKey)
+        }
+    }
+
+    /// Creates a button with a specified role that generates its label from a string.
+    ///
+    /// - Parameters:
+    ///   - title: A string that describes the purpose of the button’s `action`.
+    ///   - minimumGazeDuration: The time interval (in seconds) the user must hold a
+    ///     gaze within the button's bounds before the `action` is triggered.
+    ///   - role: An optional semantic role describing the button. A value of `nil`
+    ///     means that the button doesn’t have an assigned role.
+    ///   - action: The action to perform when the user interacts with the button.
+    init<S: StringProtocol>(
+        _ title: S,
+        minimumGazeDuration: TimeInterval = AppConfig.selectionHoldDuration,
+        role: ButtonRole? = nil,
+        action: @escaping () -> Void
+    ) where Label == Text {
+        self.init(minimumGazeDuration: minimumGazeDuration, role: role, action: action) {
+            Text(title)
+        }
     }
 
     // MARK: UIViewRepresentable
@@ -176,31 +226,5 @@ struct GazeButton<Label>: UIViewRepresentable where Label: View {
             context.environment.verticalContentHuggingPriority,
             for: .vertical
         )
-    }
-}
-
-// MARK: Convenience Inits
-
-extension GazeButton {
-    init(
-        _ titleKey: LocalizedStringKey,
-        minimumGazeDuration: TimeInterval = AppConfig.selectionHoldDuration,
-        role: ButtonRole? = nil,
-        action: @escaping () -> Void
-    ) where Label == Text {
-        self.init(minimumGazeDuration: minimumGazeDuration, role: role, action: action) {
-            Text(titleKey)
-        }
-    }
-
-    init<S: StringProtocol>(
-        _ title: S,
-        minimumGazeDuration: TimeInterval = AppConfig.selectionHoldDuration,
-        role: ButtonRole? = nil,
-        action: @escaping () -> Void
-    ) where Label == Text {
-        self.init(minimumGazeDuration: minimumGazeDuration, role: role, action: action) {
-            Text(title)
-        }
     }
 }

@@ -20,7 +20,7 @@ import SwiftUI
 /// button's content, which might be the value that you supply to the
 /// `label` parameter of the ``GazeButton/init(minimumGazeDuration:role:action:label:)`` initializer.
 /// Alternatively, it could be another view that SwiftUI builds from an
-/// initializer that takes a string input, like ``GazeButton/init(_:minimumGazeDuration:role:action:)``.
+/// initializer that takes a string input, like ``GazeButton/init(_:minimumGazeDuration:role:action:)-9hl39``.
 /// In either case, incorporate the label into the button's view to help
 /// the user understand that the view is interactive.
 ///

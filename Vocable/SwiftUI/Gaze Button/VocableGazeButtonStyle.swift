@@ -52,25 +52,21 @@ struct VocableGazeButtonStyle: GazeButtonStyle {
                     Color(UIColor.errorRed) :
                     Color(UIColor.defaultCellBackgroundColor)
 
-            if #available(iOS 15.0, *) {
-                label
-                    .padding(.horizontal)
-                    .frame(minHeight: isCompact ? 60 : 100)
-                    .font(.system(size: 22, weight: .bold))
-                    .foregroundColor(textColor)
-                    .background(fillColor)
-                    .opacity(shouldHighlight || isDisabled ? 0.5 : 1)
-                    .cornerRadius(8)
-                    .overlay {
-                        if shouldHighlight {
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color(UIColor.cellBorderHighlightColor), lineWidth: 4)
-                        }
+            label
+                .padding(.horizontal)
+                .frame(minHeight: isCompact ? 60 : 100)
+                .font(.system(size: 22, weight: .bold))
+                .foregroundColor(textColor)
+                .background(fillColor)
+                .opacity(shouldHighlight || isDisabled ? 0.5 : 1)
+                .cornerRadius(8)
+                .overlay {
+                    if shouldHighlight {
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color(UIColor.cellBorderHighlightColor), lineWidth: 4)
                     }
-                    .scaleEffect(shouldHighlight ? 0.95 : 1)
-            } else {
-                // Fallback on earlier versions
-            }
+                }
+                .scaleEffect(shouldHighlight ? 0.95 : 1)
         }
     }
 }

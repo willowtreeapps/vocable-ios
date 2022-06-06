@@ -10,7 +10,7 @@ import Combine
 import UIKit
 
 class BridgedGazeableButton: UIButton {
-    var minimumGazeDuration: TimeInterval = 2
+    var minimumGazeDuration: TimeInterval = AppConfig.selectionHoldDuration
 
     private var gazeStartDate: Date?
 
@@ -48,6 +48,8 @@ class BridgedGazeableButton: UIButton {
     // MARK: Gaze Overrides
 
     override func gazeBegan(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        super.gazeBegan(gaze, with: event)
+
         guard isEnabled else { return }
 
         gazeStartDate = Date()
@@ -55,6 +57,8 @@ class BridgedGazeableButton: UIButton {
     }
 
     override func gazeMoved(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        super.gazeMoved(gaze, with: event)
+
         guard isEnabled else { return }
         guard let gazeStartDate = gazeStartDate else { return }
 
@@ -69,12 +73,16 @@ class BridgedGazeableButton: UIButton {
     }
 
     override func gazeEnded(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        super.gazeEnded(gaze, with: event)
+
         guard isEnabled else { return }
 
         resetState()
     }
 
     override func gazeCancelled(_ gaze: UIHeadGaze, with event: UIHeadGazeEvent?) {
+        super.gazeCancelled(gaze, with: event)
+        
         guard isEnabled else { return }
 
         resetState()
