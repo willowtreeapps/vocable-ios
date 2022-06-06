@@ -113,7 +113,7 @@
 "listening_mode.empty_state.speech_permission_undetermined.title" = "Riconoscimento vocale";
 
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
-"listening_mode.empty_state.speech_unavailable.message" = "Sei pregato di riprovare più tardi";
+"listening_mode.empty_state.speech_unavailable.message" = "I servizi vocali richiedono che una delle seguenti funzioni sia abilitata sul dispositivo: Siri o Dettatura. Controlla le impostazioni del tuo dispositivo e abilita Siri o Dettatura.";
 
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "Servizi vocali non disponibili";

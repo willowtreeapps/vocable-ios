@@ -226,8 +226,8 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
         <note>Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
       </trans-unit>
       <trans-unit id="listening_mode.empty_state.speech_unavailable.message" xml:space="preserve">
-        <source>Please try again later</source>
-        <target state="translated">请稍后再试</target>
+        <source>Speech services require one of the following features to be enabled on your device: Siri or Dictation. Please check your device settings and enable Siri or Dictation.</source>
+        <target state="translated">语音服务需要在您的设备上启用以下功能之一：Siri 或听写。请检查您的设备设置并启用 Siri 或听写。</target>
         <note>Listen mode error state message for when Apple's speech to text service is unavailable</note>
       </trans-unit>
       <trans-unit id="listening_mode.empty_state.speech_unavailable.title" xml:space="preserve">
