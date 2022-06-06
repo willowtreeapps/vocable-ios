@@ -235,6 +235,11 @@ Du kan også deaktivere Lyttetilstand for at skjule denne kategori i Vocable's i
         <target state="translated">Talegenkendelse Software</target>
         <note>Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
       </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_unavailable.message" xml:space="preserve">
+        <source>Speech services require one of the following features to be enabled on your device: Siri or Dictation. Please check your device settings and enable Siri or Dictation.</source>
+        <target state="translated">Taletjenester kræver, at en af følgende funktioner er aktiveret på din enhed: Siri eller Diktering. Tjek venligst dine enhedsindstillinger og aktivér Siri eller Diktering.</target>
+        <note>Listen mode error state message for when Apple's speech to text service is unavailable</note>
+      </trans-unit>
       <trans-unit id="listening_mode.empty_state.speech_unavailable.title" xml:space="preserve">
         <source>Speech services unavailable</source>
         <target state="translated">Taletjenester er ikke tilgængelige</target>
