@@ -200,8 +200,14 @@
 "preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" = "يرجى تشغيل التلفزيون";
 
 /* (No Comment) */
+"preset_listening_mode" = "استمع";
+
+/* (No Comment) */
 "preset_user_favorites" = "عباراتي";
 
 /* (No Comment) */
 "preset_user_keypad" = "123";
+
+/* (No Comment) */
+"preset_user_recents" = "حديث";
 

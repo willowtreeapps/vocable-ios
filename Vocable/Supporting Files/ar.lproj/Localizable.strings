@@ -7,6 +7,9 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "تأكيد";
 
+/* MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere. */
+"category_editor.alert.cancel_editing_confirmation.title" = "إذا أغلقت بدون حفظ ، فستفقد التغييرات.";
+
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "إلغاء";
 
@@ -19,8 +22,23 @@
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "إلغاء";
 
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "أزِل";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "فالعبارات التي يتم مسحها لا يمكن إسترجاعها.";
+
+/* Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited. */
+"category_editor.detail.button.edit_phrases.title" = "تحرير العبارات";
+
 /* Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation. */
 "category_editor.detail.button.remove_category.title" = "إزالة فئة";
+
+/* Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name. */
+"category_editor.detail.button.rename_category.title" = "إعادة تسمية فئة";
+
+/* Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list. */
+"category_editor.detail.button.show_category.title" = "إظهار الفئة";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "تم حفظ التغييرات";
@@ -28,11 +46,92 @@
 /* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "تم حفظ التغييرات";
 
+/* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
+"empty_state.button.title" = "أضف عبارة";
+
+/* Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen. */
+"empty_state.header.title" = "ليس لديك أي عبارات محفوظة حتى الآن.";
+
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "إلغاء";
 
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "استمر";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "سيؤدي إيقاف تشغيل تتبع الرأس إلى جعل التطبيق يعمل باللمس فقط. هل ترغب في الاستمرار؟";
+
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "من فضلك إقترب أكثر من الجهاز.";
+
+/* Listening mode empty state message for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.message" = "عندما يسأل شخص ما سؤالاً بصوت عالٍ ، سيقدم Vocable خيارات استجابة سريعة.";
+
+/* Listening mode empty state title for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.title" = "جار الاستماع...";
+
+/* Listen mode empty state message for when no responses could be generated */
+"listening_mode.empty_state.free_response.message" = "لست متأكدا ما أقترحه. يرجى استخدام لوحة المفاتيح أو تحديد عبارة موجودة للرد عليها.";
+
+/* Listen mode empty state title for when no responses could be generated */
+"listening_mode.empty_state.free_response.title" = "تبدو معقدة";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions. */
+"listening_mode.empty_state.microphone_permission_denied.action" = "فتح الإعدادات";
+
+/* Listening mode empty state message for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.message" = "يحتاج Vocable إلى استخدام الميكروفون لتمكين وضع الاستماع. يرجى تمكين الوصول إلى الميكروفون في تطبيق إعدادات النظام.\n\nيمكنك أيضًا تعطيل وضع الاستماع لإخفاء هذه الفئة في إعدادات Vocable.";
+
+/* Listening mode empty state title for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.title" = "الوصول إلى الميكروفون";
+
+/* Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert. */
+"listening_mode.empty_state.microphone_permission_undetermined.action" = "منح صلاحية الوصول";
+
+/* Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.message" = "يحتاج Vocable إلى الوصول إلى الميكروفون لتمكين وضع الاستماع. يعرض الزر أدناه مربع حوار إذن iOS الذي لا يمكن لتتبع رأس Vocable التدخل فيه.";
+
+/* Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.title" = "الوصول إلى الميكروفون";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions. */
+"listening_mode.empty_state.speech_permission_denied.action" = "فتح الإعدادات";
+
+/* Listening mode empty state message for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.message" = "يحتاج Vocable إلى التعرف على الكلام لتمكين وضع الاستماع. يرجى تمكين التعرف على الكلام في تطبيق إعدادات النظام.\n\nيمكنك أيضًا تعطيل وضع الاستماع لإخفاء هذه الفئة في إعدادات Vocable.";
+
+/* Listening mode empty state title for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.title" = "التعرف على الكلام";
+
+/* Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert. */
+"listening_mode.empty_state.speech_permission_undetermined.action" = "منح صلاحية الوصول";
+
+/* Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.speech_permission_undetermined.message" = "يحتاج Vocable إلى طلب أذونات الكلام لتمكين وضع الاستماع. سيقدم هذا مربع حوار إذن iOS لا يمكن أن يتداخل معه تتبع رأس Vocable.";
+
+/* Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.speech_permission_undetermined.title" = "التعرف على الكلام";
+
+/* Listen mode error state message for when Apple's speech to text service is unavailable */
+"listening_mode.empty_state.speech_unavailable.message" = "تتطلب خدمات الكلام تفعيل إحدى الميزات التالية على جهازك: Siri أو Dictation. يرجى التحقق من إعدادات جهازك وتمكين Siri أو Dictation.";
+
+/* Listen mode error state title for when Apple's speech to text service is unavailable */
+"listening_mode.empty_state.speech_unavailable.title" = "خدمات الكلام غير متوفرة";
+
+/* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.message" = "هذا %1$@ في %2$@ %3$@ لا يدعم وضع الاستماع.\n\nوضع الاستماع متاح حاليا باللغة الإنجليزية فقط ويتطلب تمكين %5$@.";
+
+/* Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.title" = "وضع الاستماع غير مدعوم";
+
+/* Thank you confirmation.  This text appears after sharing with developer */
+"listening_mode.feedback.confirmation.title" = "شكرا لك!";
+
+/* Information text around what the Share with Deeveloper button does. */
+"listening_mode.feedback.hint.text" = "لا تحب هذه الردود؟ شارك هذا السؤال دون الكشف عن هويتك للمساعدة في تحسين وضع الاستماع.";
+
+/* Share with Developer button.  The button appears if Listen mode could not generate a reponese. */
+"listening_mode.feedback.submit.title" = "شارك مع المطورين";
 
 /* Select something below to speak Hint Text */
 "main_screen.textfield_placeholder.default" = "حدد شيئا أدناه للتحدث";
@@ -48,10 +147,26 @@
    Pressing the button will not save any changes and close the keyboard view. */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "تجاهل";
 
+/* Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes. */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "إذا أغلقت بدون حفظ ، فستفقد التغييرات.";
+
+/* Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title */
+"phrase_editor.alert.phrase_name_exists.cancel.button" = "يلغي";
+
+/* Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
+"phrase_editor.alert.phrase_name_exists.create.button" = "إنشاء نسخة مكررة";
+
+/* Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category. */
+"phrase_editor.alert.phrase_name_exists.title" = "هذه العبارة موجودة بالفعل. هل ترغب في إنشاء نسخة مكررة؟";
+
 /* new entry saved to user favorites category
    Saved to user favorites category
    Saved to user favorites category toast title */
 "phrase_editor.toast.successfully_saved_to_favorites.title_format" = "تم الحفظ إلى %@";
+
+/* Add phrase to category button title */
+"preset.category.add.phrase.title" = "أضف عبارة";
 
 /* 'No' num pad response */
 "preset.category.numberpad.phrase.no.title" = "لا";
@@ -59,11 +174,44 @@
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "نعم";
 
+/* Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet. */
+"recents_empty_state.body.title" = "ابدأ في استخدام Vocable لرؤية أحدث العبارات المستخدمة هنا.";
+
+/* Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet. */
+"recents_empty_state.header.title" = "لا توجد عبارات مستخدمة مؤخرًا";
+
 /* Selection mode setting header title */
 "selection_mode.header.title" = "وضع التحديد";
 
 /* No email account configured error alert dismiss button title */
 "settings.alert.no_email_configured.button.dismiss.title" = "حسنا";
+
+/* No email account configured error alert title */
+"settings.alert.no_email_configured.title" = "الرجاء تسجيل الدخول إلى حساب بالبريد لـ %1$@.";
+
+/* Reset setting alert confirmation prompt */
+"settings.alert.reset_app_settings_confirmation.body" = "هل أنت متأكد من أنك تريد إعادة تعيين Vocable إلى الإعدادات لافتراضية؟ لا يمكن التراجع عن هذا الإجراء.";
+
+/* Reset setting alert Cancel button.  This will cancel the reset operation. */
+"settings.alert.reset_app_settings_confirmation.button.cancel.title" = "يلغي";
+
+/* Reset setting alert settings Reset button.  This will continue with the reset operation. */
+"settings.alert.reset_app_settings_confirmation.button.confirm.title" = "إعادة تعيين";
+
+/* Reset app settings failure alert */
+"settings.alert.reset_app_settings_failure.body" = "فشل إعادة تعيين Vocable. يرجى المحاولة مرة أخرى أو إعادة تثبيت Vocable إذا استمرت المشكلة.";
+
+/* Button to dismiss the Reset app failure alert */
+"settings.alert.reset_app_settings_failure.button.ok" = "موافق";
+
+/* Reset app settings success alert */
+"settings.alert.reset_app_settings_success.body" = "تمت إعادة تعيين Vocable بنجاح.";
+
+/* Button to dismiss the Reset app success alert */
+"settings.alert.reset_app_settings_success.button.ok" = "موافق";
+
+/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.body" = "أنت على وشك مغادرة تطبيق Vocable. قد تفقد التحكم في تتبع الرأس.";
 
 /* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.cancel.title" = "إلغاء";
@@ -83,6 +231,9 @@
 /* Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle. */
 "settings.cell.head_tracking.title" = "تعقب الرأس";
 
+/* Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode. */
+"settings.cell.listening_mode.title" = "وضع الاستماع";
+
 /* view privacy policy settings menu item */
 "settings.cell.privacy_policy.title" = "حقوق الخصوصية";
 
@@ -101,6 +252,27 @@
 /* Settings screen header title */
 "settings.header.title" = "الإعدادات";
 
+/* Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine. */
+"settings.listening_mode.device_unsupported_explanation_footer" = "هذا %1$@ في %2$@ %3$@ لا يدعم وضع الاستماع.\n\nوضع الاستماع متاح حاليا باللغة الإنجليزية فقط ويتطلب تمكين %5$@.";
+
+/* Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected */
+"settings.listening_mode.hot_word_toggle_cell.title" = "اختصار \"Hey Vocable\"";
+
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen. */
+"settings.listening_mode.hotword_explanation_footer" = "عند تمكين هذا الاختصار ، يمكن لأي شخص أن يقول \"مرحبًا ، Vocable\" مطالبة التطبيق بالانتقال إلى شاشة وضع الاستماع.";
+
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user. */
+"settings.listening_mode.listening_mode_explanation_footer" = "عند تمكين وضع الاستماع ، يمكن لأي شخص طرح سؤال بصوت عالٍ وسيقدم Vocable مجموعة مختارة من الردود. يدعم Vocable الأسئلة والأسئلة التي يمكن الإجابة عليها بنعم أو لا أو برقم.";
+
+/* Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected */
+"settings.listening_mode.listening_mode_toggle_cell.title" = "وضع الاستماع";
+
+/* Listening Mode preferences screen title */
+"settings.listening_mode.title" = "وضع الاستماع";
+
+/* Additonal footer text noting heading tracking compatibility */
+"settings.selection_mode.head_tracking_unsupported_footer" = "هذا %1$@ على %2$@ %3$@ لا يدعم تتبع الرؤية.\n\nتتبع الرأس مدعوم على جميع الأجهزة مع كاميرا %4$@ ، وعلى معظم الأجهزة مع %6$@.";
+
 /* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
    Pressing the button will allow editing the category title. */
 "text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "الإستمرار في التعديل";
@@ -108,6 +280,19 @@
 /* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
    Pressing the button will not save any changes and close the keyboard view. */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "تجاهل";
+
+/* Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. */
+"text_editor.alert.cancel_editing_confirmation.title" = "إذا أغلقت بدون حفظ ، فستفقد التغييرات.";
+
+/* Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title */
+"text_editor.alert.category_name_exists.cancel.button" = "يلغي";
+
+/* Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
+"text_editor.alert.category_name_exists.create.button" = "إنشاء نسخة مكررة";
+
+/* Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category. */
+"text_editor.alert.category_name_exists.title" = "اسم الفئة هذا موجود بالفعل. هل ترغب في إنشاء نسخة مكررة؟";
 
 /* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.high.title" = "مرتفع";
