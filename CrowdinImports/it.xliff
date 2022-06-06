@@ -235,6 +235,11 @@ Puoi anche disabilitare la modalità di ascolto per nascondere questa categoria 
         <target state="translated">Riconoscimento vocale</target>
         <note>Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
       </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_unavailable.message" xml:space="preserve">
+        <source>Speech services require one of the following features to be enabled on your device: Siri or Dictation. Please check your device settings and enable Siri or Dictation.</source>
+        <target state="translated">I servizi vocali richiedono che una delle seguenti funzioni sia abilitata sul dispositivo: Siri o Dettatura. Controlla le impostazioni del tuo dispositivo e abilita Siri o Dettatura.</target>
+        <note>Listen mode error state message for when Apple's speech to text service is unavailable</note>
+      </trans-unit>
       <trans-unit id="listening_mode.empty_state.speech_unavailable.title" xml:space="preserve">
         <source>Speech services unavailable</source>
         <target state="translated">Servizi vocali non disponibili</target>
