@@ -128,6 +128,9 @@
 "preset_1244394F-2793-47EF-BCAC-DB8BBDAB78C6" = "Il me faut mes médicaments";
 
 /* (No Comment) */
+"preset_30474911-619F-4FBF-B7DA-F64039F556F2" = "S'il vous plaît soyez silencieux";
+
+/* (No Comment) */
 "preset_A02D6604-5C7C-4BB0-8C4A-E1C5E0D1A869" = "Veuillez arrêter";
 
 /* (No Comment) */
@@ -197,8 +200,14 @@
 "preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" = "Veuillez allumer la TV";
 
 /* (No Comment) */
+"preset_listening_mode" = "Écouter";
+
+/* (No Comment) */
 "preset_user_favorites" = "Mes paroles";
 
 /* (No Comment) */
 "preset_user_keypad" = "123";
+
+/* (No Comment) */
+"preset_user_recents" = "Récents";
 
