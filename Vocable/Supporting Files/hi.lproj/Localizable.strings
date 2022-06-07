@@ -7,17 +7,77 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "पुष्टि करें";
 
+/* MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere. */
+"category_editor.alert.cancel_editing_confirmation.title" = "यदि आप सहेजे बिना बंद कर देते हैं, तो आपके परिवर्तन खो जाएंगे।";
+
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "रद्द करें";
+
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "हटाना";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "हटाई गई श्रेणियां पुनर्प्राप्त नहीं की जा सकतीं।";
 
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "रद्द करें";
 
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "हटाना";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "हटाए गए वाक्यांशों को पुनर्प्राप्त नहीं किया जा सकता है।";
+
+/* Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited. */
+"category_editor.detail.button.edit_phrases.title" = "वाक्यांश संपादित करें";
+
+/* Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation. */
+"category_editor.detail.button.remove_category.title" = "श्रेणी हटाएं";
+
+/* Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name. */
+"category_editor.detail.button.rename_category.title" = "श्रेणी का नाम बदलें";
+
+/* Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list. */
+"category_editor.detail.button.show_category.title" = "श्रेणी दिखाएँ";
+
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "परिवर्तन सहेजा गया!";
 
+/* Toast message that appears after saving edits made to the Category title */
+"category_editor.toast.successfully_saved.title" = "बदलाव सुरक्षित किया गया";
+
+/* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
+"empty_state.button.title" = "वाक्यांश जोड़ें";
+
+/* Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen. */
+"empty_state.header.title" = "आपके पास अभी तक कोई वाक्यांश सहेजा नहीं गया है।";
+
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "रद्द करें";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "जारी रखना";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "हेड ट्रैकिंग को बंद करने से ऐप टच मोड ही बन जाएगा। आप जारी रखना चाहेंगे?";
+
+/* Warning message presented to the user when the head tracking system */
+"gaze_tracking.error.excessive_head_distance.title" = "कृपया डिवाइस के करीब जाएं।";
+
+/* Listening mode empty state message for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.message" = "जब कोई ज़ोर से कोई प्रश्न पूछता है, तो वोकेबल त्वरित प्रतिक्रिया विकल्प प्रदान करेगा।";
+
+/* Listening mode empty state title for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.title" = "सुन रहें है...";
+
+/* Listen mode empty state message for when no responses could be generated */
+"listening_mode.empty_state.free_response.message" = "सुनिश्चित नहीं है कि क्या सुझाव देना है। कृपया कीबोर्ड का उपयोग करें या उत्तर देने के लिए किसी मौजूदा वाक्यांश का चयन करें।";
+
+/* Listen mode empty state title for when no responses could be generated */
+"listening_mode.empty_state.free_response.title" = "जटिल लगता है";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions. */
+"listening_mode.empty_state.microphone_permission_denied.action" = "सेटिंग्स खोलें";
 
 /* Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
    Pressing the button will allow editing the category title. */
