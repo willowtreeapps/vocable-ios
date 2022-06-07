@@ -4,11 +4,29 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Annuler";
 
+/* (No Comment) */
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Confirmer";
+
+/* MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere. */
+"category_editor.alert.cancel_editing_confirmation.title" = "Si vous fermez sans enregistrer, vos modifications seront perdues.";
+
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "Annuler";
 
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "Retirer";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "Les catégories supprimées ne peuvent pas être récupérées.";
+
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Annuler";
+
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Retirer";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "Les phrases supprimées ne peuvent pas être récupérées.";
 
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Annuler";
