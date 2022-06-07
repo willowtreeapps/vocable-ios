@@ -5,11 +5,21 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
-      
-      
-      
-      
-      
+      <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
+        <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
+        <target state="translated">Vocable हेड ओरिएंटेशन और पोजीशन में कम से कम बदलाव का पता लगाने के लिए आपके डिवाइस के फ्रंट कैमरे का उपयोग करता है। यह सीमित गतिशीलता वाले उपयोगकर्ताओं को ऐप के साथ इंटरैक्ट करने के लिए ऑन-स्क्रीन पॉइंटर को नियंत्रित करने की अनुमति देता है। ऑन-स्क्रीन पॉइंटर को नियंत्रित करने के लिए कैमरा डेटा का स्पष्ट रूप से उपयोग किया जाता है। यह डेटा किसी भी तरह से संग्रहीत या प्रसारित नहीं होता है। Vocable को इस उद्देश्य के लिए कैमरे का उपयोग करने के लिए अनुमति की आवश्यकता होती है।</target>
+        <note>Camera usage description</note>
+      </trans-unit>
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
+        <source>Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Vocable माइक्रोफ़ोन का उपयोग केवल तभी करता है जब लिसनिंग मोड सक्षम हो। Vocable ऑडियो को टेक्स्ट में ट्रांसक्रिप्ट करता है; जब उपयोगकर्ता इस जानकारी को गुमनाम रूप से डेवलपर्स के साथ साझा करने का विकल्प चुनता है, तो इसे संग्रहीत या प्रसारित नहीं किया जाता है ताकि सुनने के तरीके को बेहतर बनाने में मदद मिल सके।</target>
+        <note>Privacy - Microphone Usage Description</note>
+      </trans-unit>
+      <trans-unit id="NSSpeechRecognitionUsageDescription" xml:space="preserve">
+        <source>When listening mode is enabled, Vocable uses speech recognition to convert audio data into text. Transcribed speech is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">जब लिसनिंग मोड सक्षम होता है, तो Vocable ऑडियो डेटा को टेक्स्ट में बदलने के लिए वाक् पहचान का उपयोग करता है। लिखित भाषण संग्रहीत या प्रसारित नहीं किया जाता है, सिवाय इसके कि जब उपयोगकर्ता इस जानकारी को गुमनाम रूप से डेवलपर्स के साथ साझा करना चुनता है ताकि सुनने के तरीके को बेहतर बनाने में मदद मिल सके।</target>
+        <note>Privacy - Speech Recognition Usage Description</note>
+      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="hi" datatype="plaintext">
@@ -32,25 +42,125 @@
         <target state="translated">पुष्टि करें</target>
         <note/>
       </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">यदि आप सहेजे बिना बंद कर देते हैं, तो आपके परिवर्तन खो जाएंगे।</target>
+        <note>MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere.</note>
+      </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">रद्द करें</target>
         <note>Delete category alert cancel button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">हटाना</target>
+        <note>Delete category alert action button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve">
+        <source>Deleted categories cannot be recovered.</source>
+        <target state="translated">हटाई गई श्रेणियां पुनर्प्राप्त नहीं की जा सकतीं।</target>
+        <note>Delete category confirmation alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">रद्द करें</target>
         <note>Delete phrase alert cancel button title</note>
       </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">हटाना</target>
+        <note>Delete phrase alert action button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
+        <source>Deleted phrases cannot be recovered.</source>
+        <target state="translated">हटाए गए वाक्यांशों को पुनर्प्राप्त नहीं किया जा सकता है।</target>
+        <note>Delete phrase confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.edit_phrases.title" xml:space="preserve">
+        <source>Edit Phrases</source>
+        <target state="translated">वाक्यांश संपादित करें</target>
+        <note>Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
+        <source>Remove Category</source>
+        <target state="translated">श्रेणी हटाएं</target>
+        <note>Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.rename_category.title" xml:space="preserve">
+        <source>Rename Category</source>
+        <target state="translated">श्रेणी का नाम बदलें</target>
+        <note>Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
+        <source>Show Category</source>
+        <target state="translated">श्रेणी दिखाएँ</target>
+        <note>Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list.</note>
+      </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
         <source>Changes saved</source>
         <target state="translated">परिवर्तन सहेजा गया!</target>
         <note>changes to an existing phrase were saved successfully</note>
       </trans-unit>
+      <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve">
+        <source>Changes Saved</source>
+        <target state="translated">बदलाव सुरक्षित किया गया</target>
+        <note>Toast message that appears after saving edits made to the Category title</note>
+      </trans-unit>
+      <trans-unit id="empty_state.button.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target state="translated">वाक्यांश जोड़ें</target>
+        <note>Category empty state button.  This button appears with the empty state to allow the user to add a phrase</note>
+      </trans-unit>
+      <trans-unit id="empty_state.header.title" xml:space="preserve">
+        <source>You don't have any phrases saved yet.</source>
+        <target state="translated">आपके पास अभी तक कोई वाक्यांश सहेजा नहीं गया है।</target>
+        <note>Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen.</note>
+      </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">रद्द करें</target>
         <note>Cancel alert action title</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Continue</source>
+        <target state="translated">जारी रखना</target>
+        <note>Confirm alert action title</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
+        <source>Turning off head tracking will make the app touch mode only. Would you like to continue?</source>
+        <target state="translated">हेड ट्रैकिंग को बंद करने से ऐप टच मोड ही बन जाएगा। आप जारी रखना चाहेंगे?</target>
+        <note>Disable head tracking confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
+        <source>Please move closer to the device.</source>
+        <target state="translated">कृपया डिवाइस के करीब जाएं।</target>
+        <note>Warning message presented to the user when the head tracking system</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.actively_listening.message" xml:space="preserve">
+        <source>When someone asks a question out loud, Vocable will offer quick response options.</source>
+        <target state="translated">जब कोई ज़ोर से कोई प्रश्न पूछता है, तो वोकेबल त्वरित प्रतिक्रिया विकल्प प्रदान करेगा।</target>
+        <note>Listening mode empty state message for when listening has began but no responses have been displayed yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.actively_listening.title" xml:space="preserve">
+        <source>Listening...</source>
+        <target state="translated">सुन रहें है...</target>
+        <note>Listening mode empty state title for when listening has began but no responses have been displayed yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.free_response.message" xml:space="preserve">
+        <source>Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.</source>
+        <target state="translated">सुनिश्चित नहीं है कि क्या सुझाव देना है। कृपया कीबोर्ड का उपयोग करें या उत्तर देने के लिए किसी मौजूदा वाक्यांश का चयन करें।</target>
+        <note>Listen mode empty state message for when no responses could be generated</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.free_response.title" xml:space="preserve">
+        <source>Sounds complicated</source>
+        <target state="translated">जटिल लगता है</target>
+        <note>Listen mode empty state title for when no responses could be generated</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.action" xml:space="preserve">
+        <source>Open Settings</source>
+        <target state="translated">सेटिंग्स खोलें</target>
+        <note>Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions.</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
