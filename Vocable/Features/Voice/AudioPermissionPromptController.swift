@@ -31,6 +31,7 @@ final class AudioPermissionPromptController {
         let micStatusPublisher = controller.$microphonePermissionStatus.dropFirst().removeDuplicates()
         let speechStatusPublisher = controller.$speechPermissionStatus.dropFirst().removeDuplicates()
         Publishers.CombineLatest(micStatusPublisher, speechStatusPublisher)
+            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] (micStatus, speechStatus) in
                 self?.authorizationStatusDidChange(micStatus, speechStatus)
