@@ -15,6 +15,21 @@
         <target state="translated">Vocable</target>
         <note>Bundle name</note>
       </trans-unit>
+      <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
+        <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
+        <target state="translated">Vocable utilise la caméra frontale de votre appareil pour détecter des changements minimes dans l'orientation et la position de la tête. Cela permet aux utilisateurs à mobilité réduite de contrôler un pointeur à l'écran pour interagir avec l'application. Les données de la caméra sont utilisées expressément pour contrôler le pointeur à l'écran. Ces données ne sont en aucun cas stockées ou transmises. Vocable a besoin d'une autorisation pour utiliser l'appareil photo à cette fin.</target>
+        <note>Camera usage description</note>
+      </trans-unit>
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
+        <source>Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Vocable utilise le microphone uniquement lorsque le mode d'écoute est activé. Vocable transcrit l'audio en texte ; elles ne sont ni stockées ni transmises sauf lorsque l'utilisateur choisit de partager ces informations de manière anonyme avec les développeurs pour aider à améliorer le mode d'écoute.</target>
+        <note>Privacy - Microphone Usage Description</note>
+      </trans-unit>
+      <trans-unit id="NSSpeechRecognitionUsageDescription" xml:space="preserve">
+        <source>When listening mode is enabled, Vocable uses speech recognition to convert audio data into text. Transcribed speech is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Lorsque le mode d'écoute est activé, Vocable utilise la reconnaissance vocale pour convertir les données audio en texte. La parole transcrite n'est ni stockée ni transmise, sauf lorsque l'utilisateur choisit de partager ces informations de manière anonyme avec les développeurs pour aider à améliorer le mode d'écoute.</target>
+        <note>Privacy - Speech Recognition Usage Description</note>
+      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="fr" datatype="plaintext">
@@ -32,15 +47,45 @@
         <target state="translated">Annuler</target>
         <note/>
       </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
+        <source>Confirm</source>
+        <target state="translated">Confirmer</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">Si vous fermez sans enregistrer, vos modifications seront perdues.</target>
+        <note>MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere.</note>
+      </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">Annuler</target>
         <note>Delete category alert cancel button title</note>
       </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">Retirer</target>
+        <note>Delete category alert action button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve">
+        <source>Deleted categories cannot be recovered.</source>
+        <target state="translated">Les catégories supprimées ne peuvent pas être récupérées.</target>
+        <note>Delete category confirmation alert title</note>
+      </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">Annuler</target>
         <note>Delete phrase alert cancel button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">Retirer</target>
+        <note>Delete phrase alert action button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
+        <source>Deleted phrases cannot be recovered.</source>
+        <target state="translated">Les phrases supprimées ne peuvent pas être récupérées.</target>
+        <note>Delete phrase confirmation alert title</note>
       </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
