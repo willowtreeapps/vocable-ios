@@ -87,10 +87,25 @@
         <target state="translated">已刪除的類別無法恢復</target>
         <note>Delete phrase confirmation alert title</note>
       </trans-unit>
+      <trans-unit id="category_editor.detail.button.edit_phrases.title" xml:space="preserve">
+        <source>Edit Phrases</source>
+        <target state="translated">編輯短語</target>
+        <note>Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited.</note>
+      </trans-unit>
       <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve" approved="yes">
         <source>Remove Category</source>
         <target state="final">刪除類別?</target>
         <note>Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.rename_category.title" xml:space="preserve">
+        <source>Rename Category</source>
+        <target state="translated">重命名類別</target>
+        <note>Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
+        <source>Show Category</source>
+        <target state="translated">顯示類別</target>
+        <note>Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list.</note>
       </trans-unit>
       <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve" approved="yes">
         <source>Changes saved</source>
@@ -102,10 +117,217 @@
         <target state="final">更改已儲存</target>
         <note>Toast message that appears after saving edits made to the Category title</note>
       </trans-unit>
+      <trans-unit id="empty_state.button.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target state="translated">添加短語</target>
+        <note>Category empty state button.  This button appears with the empty state to allow the user to add a phrase</note>
+      </trans-unit>
+      <trans-unit id="empty_state.header.title" xml:space="preserve">
+        <source>You don't have any phrases saved yet.</source>
+        <target state="translated">您還沒有保存任何短語。</target>
+        <note>Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen.</note>
+      </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">取消</target>
         <note>Cancel alert action title</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Continue</source>
+        <target state="translated">繼續</target>
+        <note>Confirm alert action title</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
+        <source>Turning off head tracking will make the app touch mode only. Would you like to continue?</source>
+        <target state="translated">關閉頭部跟踪將使應用程序僅處於觸摸模式。你想繼續嗎？</target>
+        <note>Disable head tracking confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
+        <source>Please move closer to the device.</source>
+        <target state="translated">請靠近設備。</target>
+        <note>Warning message presented to the user when the head tracking system</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.actively_listening.message" xml:space="preserve">
+        <source>When someone asks a question out loud, Vocable will offer quick response options.</source>
+        <target state="translated">當有人大聲提出問題時，Vocable 將提供快速響應選項。</target>
+        <note>Listening mode empty state message for when listening has began but no responses have been displayed yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.actively_listening.title" xml:space="preserve">
+        <source>Listening...</source>
+        <target state="translated">正在聆聽...</target>
+        <note>Listening mode empty state title for when listening has began but no responses have been displayed yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.free_response.message" xml:space="preserve">
+        <source>Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.</source>
+        <target state="translated">不知道該建議什麼。請使用鍵盤或選擇現有短語進行回复。</target>
+        <note>Listen mode empty state message for when no responses could be generated</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.free_response.title" xml:space="preserve">
+        <source>Sounds complicated</source>
+        <target state="translated">聽起來很複雜</target>
+        <note>Listen mode empty state title for when no responses could be generated</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.action" xml:space="preserve">
+        <source>Open Settings</source>
+        <target state="translated">打開設置</target>
+        <note>Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.message" xml:space="preserve">
+        <source>Vocable needs to use the microphone to enable Listening Mode. Please enable microphone access in the system Settings app.
+
+You can also disable Listening Mode to hide this category in Vocable's settings.</source>
+        <target state="translated">Vocable 需要使用麥克風來啟用聆聽模式。請在系統設置應用程序中啟用麥克風訪問。
+
+您還可以禁用聆聽模式以在 Vocable 的設置中隱藏此類別。</target>
+        <note>Listening mode empty state message for when microphone permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.title" xml:space="preserve">
+        <source>Microphone Access</source>
+        <target state="translated">麥克風訪問</target>
+        <note>Listening mode empty state title for when microphone permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.action" xml:space="preserve">
+        <source>Grant Access</source>
+        <target state="translated">授予訪問權限</target>
+        <note>Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.message" xml:space="preserve">
+        <source>Vocable needs microphone access to enable Listening Mode. The button below presents an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="translated">Vocable 需要麥克風訪問權限才能啟用聆聽模式。下面的按鈕顯示了一個 iOS 權限對話框，Vocable 的頭部跟踪無法與之交互。</target>
+        <note>Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.title" xml:space="preserve">
+        <source>Microphone Access</source>
+        <target state="translated">麥克風訪問</target>
+        <note>Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.action" xml:space="preserve">
+        <source>Open Settings</source>
+        <target state="translated">打開設置</target>
+        <note>Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.message" xml:space="preserve">
+        <source>Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in the system Settings app.
+
+You can also disable Listening Mode to hide this category in Vocable's settings.</source>
+        <target state="translated">Vocable 需要語音識別才能啟用聆聽模式。請在系統設置應用程序中啟用語音識別。
+
+您還可以禁用聆聽模式以在 Vocable 的設置中隱藏此類別。</target>
+        <note>Listening mode empty state message for when speech recognition permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.title" xml:space="preserve">
+        <source>Speech Recognition</source>
+        <target state="translated">語音識別</target>
+        <note>Listening mode empty state title for when speech recognition permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.action" xml:space="preserve">
+        <source>Grant Access</source>
+        <target state="translated">授予訪問權限</target>
+        <note>Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.message" xml:space="preserve">
+        <source>Vocable needs to request speech permissions to enable Listening Mode. This will present an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="translated">Vocable 需要請求語音權限才能啟用聆聽模式。這將顯示一個 iOS 權限對話框，Vocable 的頭部跟踪無法與之交互。</target>
+        <note>Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.title" xml:space="preserve">
+        <source>Speech Recognition</source>
+        <target state="translated">語音識別</target>
+        <note>Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_unavailable.message" xml:space="preserve">
+        <source>Speech services require one of the following features to be enabled on your device: Siri or Dictation. Please check your device settings and enable Siri or Dictation.</source>
+        <target state="translated">語音服務需要在您的設備上啟用以下功能之一：Siri 或聽寫。請檢查您的設備設置並啟用 Siri 或聽寫。</target>
+        <note>Listen mode error state message for when Apple's speech to text service is unavailable</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_unavailable.title" xml:space="preserve">
+        <source>Speech services unavailable</source>
+        <target state="translated">語音服務不可用</target>
+        <note>Listen mode error state title for when Apple's speech to text service is unavailable</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.unsupported.message" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</source>
+        <target state="translated">%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。
+
+聆聽模式目前僅提供英文版本，需要啟用 %5$@。</target>
+        <note>Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.unsupported.title" xml:space="preserve">
+        <source>Listening Mode Unsupported</source>
+        <target state="translated">聆聽模式不支持</target>
+        <note>Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.confirmation.title" xml:space="preserve">
+        <source>Thank You!</source>
+        <target state="translated">謝謝您！</target>
+        <note>Thank you confirmation.  This text appears after sharing with developer</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.hint.text" xml:space="preserve">
+        <source>Don’t like these responses? Anonymously share this question to help improve listening mode.</source>
+        <target state="translated">不喜歡這些回复？匿名分享此問題以幫助改善聆聽模式。</target>
+        <note>Information text around what the Share with Deeveloper button does.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.submit.title" xml:space="preserve">
+        <source>Share with Developers</source>
+        <target state="translated">與開發者分享</target>
+        <note>Share with Developer button.  The button appears if Listen mode could not generate a reponese.</note>
+      </trans-unit>
+      <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve">
+        <source>Select something below to speak</source>
+        <target state="translated">選擇以下內容進行發言</target>
+        <note>Select something below to speak Hint Text</note>
+      </trans-unit>
+      <trans-unit id="paging_progress_indicator_format" xml:space="preserve">
+        <source>Page %1$d of %2$d</source>
+        <target state="translated">第 %1$d 頁，共 %2$d 頁</target>
+        <note>Page indicator progress format. \"Page x of n\"</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+        <source>Continue Editing</source>
+        <target state="translated">繼續編輯</target>
+        <note>Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
+        <source>Discard</source>
+        <target state="translated">丟棄</target>
+        <note>Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">如果您關閉而不保存，您的更改將會丟失。</target>
+        <note>Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">取消</target>
+        <note>Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target state="translated">創建副本</target>
+        <note>Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.title" xml:space="preserve">
+        <source>This phrase already exists. Would you like to create a duplicate?</source>
+        <target state="translated">這句話已經存在。您想創建一個副本嗎？</target>
+        <note>Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
+        <source>Saved to %@</source>
+        <target state="translated">已保存到 %@</target>
+        <note>new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title</note>
+      </trans-unit>
+      <trans-unit id="preset.category.add.phrase.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target state="translated">添加短語</target>
+        <note>Add phrase to category button title</note>
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve" approved="yes">
         <source>No</source>
@@ -117,6 +339,71 @@
         <target state="final">是</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
+      <trans-unit id="recents_empty_state.body.title" xml:space="preserve">
+        <source>Start using Vocable to see your most recently used phrases here.</source>
+        <target state="translated">開始使用 Vocable 在此處查看您最近使用的短語。</target>
+        <note>Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet.</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.header.title" xml:space="preserve">
+        <source>No recently used phrases</source>
+        <target state="translated">沒有最近使用的短語</target>
+        <note>Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet.</note>
+      </trans-unit>
+      <trans-unit id="selection_mode.header.title" xml:space="preserve">
+        <source>Selection Mode</source>
+        <target state="translated">選擇模式</target>
+        <note>Selection mode setting header title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">好的</target>
+        <note>No email account configured error alert dismiss button title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve">
+        <source>Please sign into an account with Mail for %1$@.</source>
+        <target state="translated">請使用 Mail 登錄 %1$@ 的帳戶。</target>
+        <note>No email account configured error alert title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve">
+        <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
+        <target state="translated">您確定要將 Voable 重置為默認設置嗎？此操作無法撤消。</target>
+        <note>Reset setting alert confirmation prompt</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">取消</target>
+        <note>Reset setting alert Cancel button.  This will cancel the reset operation.</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Reset</source>
+        <target state="translated">重置</target>
+        <note>Reset setting alert settings Reset button.  This will continue with the reset operation.</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve">
+        <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
+        <target state="translated">語音無法重置。如果問題仍然存在，請重試或重新安裝 Vocable。</target>
+        <note>Reset app settings failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">好的</target>
+        <note>Button to dismiss the Reset app failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
+        <source>Vocable has been reset successfully.</source>
+        <target state="translated">詞彙已成功重置。</target>
+        <note>Reset app settings success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">好的</target>
+        <note>Button to dismiss the Reset app success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
+        <source>You're about to leave the Vocable app. You may lose head tracking control.</source>
+        <target state="translated">您即將離開 Vocable 應用程序。您可能會失去頭部跟踪控制。</target>
+        <note>body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app</note>
+      </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve" approved="yes">
         <source>Cancel</source>
         <target state="final">取消</target>
@@ -126,6 +413,168 @@
         <source>Confirm</source>
         <target state="final">確認</target>
         <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.categories.title" xml:space="preserve">
+        <source>Categories and Phrases</source>
+        <target state="translated">類別和短語</target>
+        <note>edit categories settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve">
+        <source>Contact Developers</source>
+        <target state="translated">聯繫開發者</target>
+        <note>contact developers settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.edit_user_favorites.title_format" xml:space="preserve">
+        <source>Edit %@</source>
+        <target state="translated">編輯 %@</target>
+        <note>edit user's favorite phrases category settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve">
+        <source>Head Tracking</source>
+        <target state="translated">頭部追踪</target>
+        <note>Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.listening_mode.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">聆聽模式</target>
+        <note>Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode.</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
+        <source>Privacy Policy</source>
+        <target state="translated">隱私政策</target>
+        <note>view privacy policy settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.reset_all.title" xml:space="preserve">
+        <source>Reset App Settings</source>
+        <target state="translated">重置應用設置</target>
+        <note>reset all settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.selection_mode.title" xml:space="preserve">
+        <source>Selection Mode</source>
+        <target state="translated">選擇模式</target>
+        <note>edit cursor selection mode settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.timing_sensitivity.title" xml:space="preserve">
+        <source>Timing and Sensitivity</source>
+        <target state="translated">時間和靈敏度</target>
+        <note>edit cursor timing and sensititivy settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.tune_cursor.title" xml:space="preserve">
+        <source>Tune Cursor</source>
+        <target state="translated">調諧光標</target>
+        <note>tune cursor debug settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.header.title" xml:space="preserve">
+        <source>Settings</source>
+        <target state="translated">設置</target>
+        <note>Settings screen header title</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.device_unsupported_explanation_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</source>
+        <target state="translated">%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。
+
+聆聽模式目前僅提供英文版本，需要啟用 %5$@。</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.hot_word_toggle_cell.title" xml:space="preserve">
+        <source>"Hey Vocable" shortcut</source>
+        <target state="translated">“Hey Vocable”快捷方式</target>
+        <note>Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.hotword_explanation_footer" xml:space="preserve">
+        <source>When this shortcut is enabled, anyone can say "Hey, Vocable" to prompt the app to navigate to the listening mode screen.</source>
+        <target state="translated">啟用此快捷方式後，任何人都可以說“嘿，Vocable”以提示應用導航到聆聽模式屏幕。</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.listening_mode_explanation_footer" xml:space="preserve">
+        <source>When listening mode is enabled, anyone can ask a question out loud and Vocable will offer a selection of responses. Vocable supports either/or questions and questions that can be answered with yes, no, or a number.</source>
+        <target state="translated">啟用聆聽模式後，任何人都可以大聲提問，Vocable 將提供一系列回答。 Vocable 支持非此即彼的問題以及可以用“是”、“否”或數字來回答的問題。</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.listening_mode_toggle_cell.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">聆聽模式</target>
+        <note>Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">聆聽模式</target>
+        <note>Listening Mode preferences screen title</note>
+      </trans-unit>
+      <trans-unit id="settings.selection_mode.head_tracking_unsupported_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support head tracking.
+
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.</source>
+        <target state="translated">%2$@ %3$@ 上的這個 %1$@ 不支持頭部跟踪。
+
+配備 %4$@ 攝像頭的所有設備以及配備 %6$@ 的大多數設備都支持頭部跟踪。</target>
+        <note>Additonal footer text noting heading tracking compatibility</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+        <source>Continue Editing</source>
+        <target state="translated">繼續編輯</target>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
+        <source>Discard</source>
+        <target state="translated">丟棄</target>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">如果您關閉而不保存，您的更改將會丟失。</target>
+        <note>Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">取消</target>
+        <note>Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target state="translated">創建副本</target>
+        <note>Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.title" xml:space="preserve">
+        <source>This category name already exists. Would you like to create a duplicate?</source>
+        <target state="translated">此類別名稱已存在。您想創建一個副本嗎？</target>
+        <note>Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve">
+        <source>High</source>
+        <target state="translated">高</target>
+        <note>Button option for the Curson Sensitivity setting.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve">
+        <source>Low</source>
+        <target state="translated">低</target>
+        <note>Button option for the Curson Sensitivity setting.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve">
+        <source>Medium</source>
+        <target state="translated">中等</target>
+        <note>Button option for the Curson Sensitivity setting.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve">
+        <source>Cursor Sensitivity</source>
+        <target state="translated">光標靈敏度</target>
+        <note>Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve">
+        <source>Hover Time</source>
+        <target state="translated">懸停時間</target>
+        <note>Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve">
+        <source>Timing and Sensitivity</source>
+        <target state="translated">時間和靈敏度</target>
+        <note>Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting</note>
       </trans-unit>
     </body>
   </file>
@@ -469,6 +918,11 @@
         <target state="final">請打開電視</target>
         <note/>
       </trans-unit>
+      <trans-unit id="preset_listening_mode" xml:space="preserve">
+        <source>Listen</source>
+        <target state="translated">聽</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="preset_user_favorites" xml:space="preserve" approved="yes">
         <source>My Sayings</source>
         <target state="final">我的對話</target>
@@ -477,6 +931,11 @@
       <trans-unit id="preset_user_keypad" xml:space="preserve" approved="yes">
         <source>123</source>
         <target state="final">數字</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_user_recents" xml:space="preserve">
+        <source>Recents</source>
+        <target state="translated">最近的</target>
         <note/>
       </trans-unit>
     </body>
