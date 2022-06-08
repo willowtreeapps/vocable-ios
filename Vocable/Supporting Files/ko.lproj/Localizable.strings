@@ -1,3 +1,9 @@
+/* Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories */
+"categories_list_editor.header.title" = "카테고리";
+
+/* (No Comment) */
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "취소";
+
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "기기에 가까이 오세요";
 
