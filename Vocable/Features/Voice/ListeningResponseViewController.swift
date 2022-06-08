@@ -265,8 +265,15 @@ final class ListeningResponseViewController: VocableViewController {
             .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newValue in
+                guard let self = self else { return }
                 if let newValue = newValue {
-                    self?.setContent(.empty(newValue.state, action: newValue.action), animated: true)
+                    self.setContent(.empty(newValue.state, action: newValue.action), animated: true)
+                } else {
+                    if self.speechRecognizerController.isAvailable {
+                        self.setContent(.empty(.listeningResponse), animated: true)
+                    } else {
+                        self.setContent(.empty(.speechServiceUnavailable), animated: true)
+                    }
                 }
             }
     }
