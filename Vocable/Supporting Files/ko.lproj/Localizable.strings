@@ -4,8 +4,119 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "취소";
 
+/* (No Comment) */
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "확인하다";
+
+/* MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere. */
+"category_editor.alert.cancel_editing_confirmation.title" = "저장하지 않고 닫으면 변경 사항이 손실됩니다.";
+
+/* Delete category alert cancel button title */
+"category_editor.alert.delete_category_confirmation.button.cancel.title" = "취소";
+
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "제거하다";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "삭제된 카테고리는 복구할 수 없습니다.";
+
+/* Delete phrase alert cancel button title */
+"category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "취소";
+
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "제거하다";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "삭제된 문구는 복구할 수 없습니다.";
+
+/* Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited. */
+"category_editor.detail.button.edit_phrases.title" = "문구 편집";
+
+/* Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation. */
+"category_editor.detail.button.remove_category.title" = "카테고리 제거";
+
+/* Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name. */
+"category_editor.detail.button.rename_category.title" = "범주 이름 바꾸기";
+
+/* Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list. */
+"category_editor.detail.button.show_category.title" = "카테고리 표시";
+
+/* changes to an existing phrase were saved successfully */
+"category_editor.toast.changes_saved.title" = "변경사항이 저장됨";
+
+/* Toast message that appears after saving edits made to the Category title */
+"category_editor.toast.successfully_saved.title" = "변경 사항 저장";
+
+/* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
+"empty_state.button.title" = "구문 추가";
+
+/* Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen. */
+"empty_state.header.title" = "아직 저장된 문구가 없습니다.";
+
+/* Cancel alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "취소";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "계속하다";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "헤드 트래킹을 끄면 앱 터치 모드만 됩니다. 계속하시겠습니까?";
+
 /* Warning message presented to the user when the head tracking system */
 "gaze_tracking.error.excessive_head_distance.title" = "기기에 가까이 오세요";
+
+/* Listening mode empty state message for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.message" = "누군가 큰 소리로 질문하면 Vocable은 빠른 응답 옵션을 제공합니다.";
+
+/* Listening mode empty state title for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.title" = "청취...";
+
+/* Listen mode empty state message for when no responses could be generated */
+"listening_mode.empty_state.free_response.message" = "무엇을 제안해야 할지 잘 모르겠습니다. 키보드를 사용하거나 기존 문구를 선택하여 답장을 보내주세요.";
+
+/* Listen mode empty state title for when no responses could be generated */
+"listening_mode.empty_state.free_response.title" = "복잡하게 들린다";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions. */
+"listening_mode.empty_state.microphone_permission_denied.action" = "설정 열기";
+
+/* Listening mode empty state message for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.message" = "Vocable은 듣기 모드를 활성화하기 위해 마이크를 사용해야 합니다. 시스템 설정 앱에서 마이크 액세스를 활성화하십시오.\n\nVocable 설정에서 이 카테고리를 숨기기 위해 듣기 모드를 비활성화할 수도 있습니다.";
+
+/* Listening mode empty state title for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.title" = "마이크 액세스";
+
+/* Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert. */
+"listening_mode.empty_state.microphone_permission_undetermined.action" = "액세스 권한 부여";
+
+/* Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.message" = "Vocable은 듣기 모드를 활성화하기 위해 마이크 액세스가 필요합니다. 아래 버튼은 Vocable의 헤드 트래킹이 상호 작용할 수 없는 iOS 권한 대화 상자를 나타냅니다.";
+
+/* Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.title" = "마이크 액세스";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions. */
+"listening_mode.empty_state.speech_permission_denied.action" = "설정 열기";
+
+/* Listening mode empty state message for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.message" = "Vocable은 듣기 모드를 활성화하기 위해 음성 인식이 필요합니다. 시스템 설정 앱에서 음성 인식을 활성화하십시오.\n\nVocable 설정에서 이 카테고리를 숨기기 위해 듣기 모드를 비활성화할 수도 있습니다.";
+
+/* Listening mode empty state title for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.title" = "음성 인식";
+
+/* Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert. */
+"listening_mode.empty_state.speech_permission_undetermined.action" = "액세스 권한 부여";
+
+/* Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.speech_permission_undetermined.message" = "Vocable은 듣기 모드를 활성화하기 위해 음성 권한을 요청해야 합니다. 이것은 Vocable의 헤드 트래킹이 상호 작용할 수 없는 iOS 권한 대화 상자를 표시합니다.";
+
+/* Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.speech_permission_undetermined.title" = "음성 인식";
+
+/* Listen mode error state message for when Apple's speech to text service is unavailable */
+"listening_mode.empty_state.speech_unavailable.message" = "음성 서비스를 사용하려면 장치에서 Siri 또는 받아쓰기 기능 중 하나를 활성화해야 합니다. 장치 설정을 확인하고 Siri 또는 받아쓰기를 활성화하십시오.";
+
+/* Listen mode error state title for when Apple's speech to text service is unavailable */
+"listening_mode.empty_state.speech_unavailable.title" = "음성 서비스 이용 불가";
 
 /* view privacy policy settings menu item */
 "settings.cell.privacy_policy.title" = "개인정보 취급 약관";
