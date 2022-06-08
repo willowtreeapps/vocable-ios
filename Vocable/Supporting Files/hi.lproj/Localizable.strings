@@ -7,17 +7,137 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "पुष्टि करें";
 
+/* MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere. */
+"category_editor.alert.cancel_editing_confirmation.title" = "यदि आप सहेजे बिना बंद कर देते हैं, तो आपके परिवर्तन खो जाएंगे।";
+
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "रद्द करें";
+
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "हटाना";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "हटाई गई श्रेणियां पुनर्प्राप्त नहीं की जा सकतीं।";
 
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "रद्द करें";
 
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "हटाना";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "हटाए गए वाक्यांशों को पुनर्प्राप्त नहीं किया जा सकता है।";
+
+/* Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited. */
+"category_editor.detail.button.edit_phrases.title" = "वाक्यांश संपादित करें";
+
+/* Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation. */
+"category_editor.detail.button.remove_category.title" = "श्रेणी हटाएं";
+
+/* Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name. */
+"category_editor.detail.button.rename_category.title" = "श्रेणी का नाम बदलें";
+
+/* Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list. */
+"category_editor.detail.button.show_category.title" = "श्रेणी दिखाएँ";
+
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "परिवर्तन सहेजा गया!";
 
+/* Toast message that appears after saving edits made to the Category title */
+"category_editor.toast.successfully_saved.title" = "बदलाव सुरक्षित किया गया";
+
+/* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
+"empty_state.button.title" = "वाक्यांश जोड़ें";
+
+/* Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen. */
+"empty_state.header.title" = "आपके पास अभी तक कोई वाक्यांश सहेजा नहीं गया है।";
+
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "रद्द करें";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "जारी रखना";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "हेड ट्रैकिंग को बंद करने से ऐप टच मोड ही बन जाएगा। आप जारी रखना चाहेंगे?";
+
+/* Warning message presented to the user when the head tracking system */
+"gaze_tracking.error.excessive_head_distance.title" = "कृपया डिवाइस के करीब जाएं।";
+
+/* Listening mode empty state message for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.message" = "जब कोई ज़ोर से कोई प्रश्न पूछता है, तो वोकेबल त्वरित प्रतिक्रिया विकल्प प्रदान करेगा।";
+
+/* Listening mode empty state title for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.title" = "सुन रहें है...";
+
+/* Listen mode empty state message for when no responses could be generated */
+"listening_mode.empty_state.free_response.message" = "सुनिश्चित नहीं है कि क्या सुझाव देना है। कृपया कीबोर्ड का उपयोग करें या उत्तर देने के लिए किसी मौजूदा वाक्यांश का चयन करें।";
+
+/* Listen mode empty state title for when no responses could be generated */
+"listening_mode.empty_state.free_response.title" = "जटिल लगता है";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions. */
+"listening_mode.empty_state.microphone_permission_denied.action" = "सेटिंग्स खोलें";
+
+/* Listening mode empty state message for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.message" = "Vocable को लिसनिंग मोड को सक्षम करने के लिए माइक्रोफ़ोन का उपयोग करने की आवश्यकता होती है। कृपया सिस्टम सेटिंग्स ऐप में माइक्रोफ़ोन एक्सेस सक्षम करें।\n\nइस श्रेणी को Vocable की सेटिंग में छिपाने के लिए आप लिसनिंग मोड को डिसेबल भी कर सकते हैं।";
+
+/* Listening mode empty state title for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.title" = "माइक्रोफ़ोन का ऐक्सेस";
+
+/* Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert. */
+"listening_mode.empty_state.microphone_permission_undetermined.action" = "पहुँच प्रदान करें";
+
+/* Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.message" = "लिसनिंग मोड को सक्षम करने के लिए Vocable को माइक्रोफ़ोन एक्सेस की आवश्यकता होती है। नीचे दिया गया बटन एक आईओएस अनुमति संवाद प्रस्तुत करता है जिसमें Vocable की हेड ट्रैकिंग इंटरैक्ट नहीं कर सकती है।";
+
+/* Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.title" = "माइक्रोफ़ोन का ऐक्सेस";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions. */
+"listening_mode.empty_state.speech_permission_denied.action" = "सेटिंग्स खोलें";
+
+/* Listening mode empty state message for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.message" = "Vocable को लिसनिंग मोड को सक्षम करने के लिए वाक् पहचान की आवश्यकता होती है। कृपया सिस्टम सेटिंग्स ऐप में वाक् पहचान सक्षम करें।\n\nइस श्रेणी को Vocable की सेटिंग में छिपाने के लिए आप लिसनिंग मोड को डिसेबल भी कर सकते हैं।";
+
+/* Listening mode empty state title for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.title" = "वाक् पहचान";
+
+/* Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert. */
+"listening_mode.empty_state.speech_permission_undetermined.action" = "पहुँच प्रदान करें";
+
+/* Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.speech_permission_undetermined.message" = "Vocable को लिसनिंग मोड को सक्षम करने के लिए वाक् अनुमतियों का अनुरोध करना होगा। यह एक iOS अनुमति संवाद प्रस्तुत करेगा जिसके साथ Vocable की हेड ट्रैकिंग इंटरैक्ट नहीं कर सकती है।";
+
+/* Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.speech_permission_undetermined.title" = "वाक् पहचान";
+
+/* Listen mode error state message for when Apple's speech to text service is unavailable */
+"listening_mode.empty_state.speech_unavailable.message" = "वाक् सेवाओं के लिए आपके डिवाइस पर निम्नलिखित सुविधाओं में से एक को सक्षम करने की आवश्यकता होती है: सिरी या डिक्टेशन। कृपया अपनी डिवाइस सेटिंग जांचें और सिरी या डिक्टेशन सक्षम करें।";
+
+/* Listen mode error state title for when Apple's speech to text service is unavailable */
+"listening_mode.empty_state.speech_unavailable.title" = "भाषण सेवाएं अनुपलब्ध";
+
+/* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.message" = "%2$@ %3$@ पर यह %1$@ श्रवण मोड का समर्थन नहीं करता है।\n\nलिसनिंग मोड वर्तमान में केवल अंग्रेज़ी में उपलब्ध है और %5$@ को सक्षम करने की आवश्यकता है।";
+
+/* Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.title" = "श्रवण मोड असमर्थित";
+
+/* Thank you confirmation.  This text appears after sharing with developer */
+"listening_mode.feedback.confirmation.title" = "धन्यवाद!";
+
+/* Information text around what the Share with Deeveloper button does. */
+"listening_mode.feedback.hint.text" = "ये प्रतिक्रियाएं पसंद नहीं हैं? सुनने के तरीके को बेहतर बनाने में सहायता के लिए इस प्रश्न को गुमनाम रूप से साझा करें।";
+
+/* Share with Developer button.  The button appears if Listen mode could not generate a reponese. */
+"listening_mode.feedback.submit.title" = "डेवलपर्स के साथ साझा करें";
+
+/* Select something below to speak Hint Text */
+"main_screen.textfield_placeholder.default" = "बोलने के लिए नीचे कुछ चुनें";
+
+/* Page indicator progress format. \"Page x of n\" */
+"paging_progress_indicator_format" = "पेज क्रमांक %1$d कुल %2$d पेजों में से";
 
 /* Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
    Pressing the button will allow editing the category title. */
@@ -27,14 +147,71 @@
    Pressing the button will not save any changes and close the keyboard view. */
 "phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "छोड़ें";
 
+/* Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes. */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "यदि आप सहेजे बिना बंद कर देते हैं, तो आपके परिवर्तन खो जाएंगे।";
+
+/* Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title */
+"phrase_editor.alert.phrase_name_exists.cancel.button" = "रद्द करना";
+
+/* Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
+"phrase_editor.alert.phrase_name_exists.create.button" = "डुप्लिकेट बनाएं";
+
+/* Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category. */
+"phrase_editor.alert.phrase_name_exists.title" = "यह वाक्यांश पहले से मौजूद है। क्या आप डुप्लीकेट बनाना चाहेंगे?";
+
+/* new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title */
+"phrase_editor.toast.successfully_saved_to_favorites.title_format" = "%@ में सहेजा गया";
+
+/* Add phrase to category button title */
+"preset.category.add.phrase.title" = "वाक्यांश जोड़ें";
+
 /* 'No' num pad response */
 "preset.category.numberpad.phrase.no.title" = "नहीं";
 
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "हाँ";
 
+/* Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet. */
+"recents_empty_state.body.title" = "अपने सबसे हाल ही में उपयोग किए गए वाक्यांशों को यहां देखने के लिए वोकेबल का उपयोग करना प्रारंभ करें।";
+
+/* Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet. */
+"recents_empty_state.header.title" = "हाल ही में प्रयुक्त वाक्यांश नहीं";
+
+/* Selection mode setting header title */
+"selection_mode.header.title" = "चयन मोड";
+
 /* No email account configured error alert dismiss button title */
 "settings.alert.no_email_configured.button.dismiss.title" = "ठीक है";
+
+/* No email account configured error alert title */
+"settings.alert.no_email_configured.title" = "कृपया %1$@ के लिए मेल के साथ एक खाते में साइन इन करें";
+
+/* Reset setting alert confirmation prompt */
+"settings.alert.reset_app_settings_confirmation.body" = "क्या आप वाकई वोकेबल को डिफ़ॉल्ट सेटिंग्स पर रीसेट करना चाहते हैं? इस क्रिया को पूर्ववत नहीं किया जा सकता है।";
+
+/* Reset setting alert Cancel button.  This will cancel the reset operation. */
+"settings.alert.reset_app_settings_confirmation.button.cancel.title" = "रद्द करना";
+
+/* Reset setting alert settings Reset button.  This will continue with the reset operation. */
+"settings.alert.reset_app_settings_confirmation.button.confirm.title" = "रीसेट";
+
+/* Reset app settings failure alert */
+"settings.alert.reset_app_settings_failure.body" = "Vocable रीसेट करने में विफल रहा। कृपया पुन: प्रयास करें या यदि समस्या बनी रहती है तो Vocable को पुन: स्थापित करें।";
+
+/* Button to dismiss the Reset app failure alert */
+"settings.alert.reset_app_settings_failure.button.ok" = "ठीक है";
+
+/* Reset app settings success alert */
+"settings.alert.reset_app_settings_success.body" = "Vocable को सफलतापूर्वक रीसेट कर दिया गया है।";
+
+/* Button to dismiss the Reset app success alert */
+"settings.alert.reset_app_settings_success.button.ok" = "ठीक है";
+
+/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.body" = "आप वोकेबल ऐप छोड़ने वाले हैं। आप हेड ट्रैकिंग नियंत्रण खो सकते हैं।";
 
 /* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.cancel.title" = "रद्द करें";
@@ -42,8 +219,20 @@
 /* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.confirm.title" = "पुष्टि करें";
 
+/* edit categories settings menu item */
+"settings.cell.categories.title" = "श्रेणियाँ और वाक्यांश";
+
 /* contact developers settings menu item */
 "settings.cell.contact_developers.title" = "डेवलपर से संपर्क करें";
+
+/* edit user's favorite phrases category settings menu item */
+"settings.cell.edit_user_favorites.title_format" = "संपादन करना %@";
+
+/* Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle. */
+"settings.cell.head_tracking.title" = "हेड ट्रैकिंग";
+
+/* Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode. */
+"settings.cell.listening_mode.title" = "सुनने का तरीका";
 
 /* view privacy policy settings menu item */
 "settings.cell.privacy_policy.title" = "गोपनीयता नीति";
@@ -51,8 +240,38 @@
 /* reset all settings menu item */
 "settings.cell.reset_all.title" = "सेटिंग्स रीसेट करें";
 
+/* edit cursor selection mode settings menu item */
+"settings.cell.selection_mode.title" = "चयन मोड";
+
+/* edit cursor timing and sensititivy settings menu item */
+"settings.cell.timing_sensitivity.title" = "समय और संवेदनशीलता";
+
+/* tune cursor debug settings menu item */
+"settings.cell.tune_cursor.title" = "ट्यून कर्सर";
+
 /* Settings screen header title */
 "settings.header.title" = "सेटिंग्स";
+
+/* Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine. */
+"settings.listening_mode.device_unsupported_explanation_footer" = "%2$@ %3$@ पर यह %1$@ श्रवण मोड का समर्थन नहीं करता है।\n\nलिसनिंग मोड वर्तमान में केवल अंग्रेज़ी में उपलब्ध है और %5$@ को सक्षम करने की आवश्यकता है।";
+
+/* Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected */
+"settings.listening_mode.hot_word_toggle_cell.title" = "\"Hey Vocable\" शॉर्टकट";
+
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen. */
+"settings.listening_mode.hotword_explanation_footer" = "जब यह शॉर्टकट सक्षम होता है, तो कोई भी ऐप को सुनने के मोड स्क्रीन पर नेविगेट करने के लिए संकेत देने के लिए \"Hey Vocable\" कह सकता है।";
+
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user. */
+"settings.listening_mode.listening_mode_explanation_footer" = "जब लिसनिंग मोड सक्षम होता है, तो कोई भी जोर से सवाल पूछ सकता है और Vocable प्रतिक्रियाओं का चयन पेश करेगा। Vocable या तो/या प्रश्नों और प्रश्नों का समर्थन करता है जिनका उत्तर हां, नहीं, या एक संख्या के साथ दिया जा सकता है।";
+
+/* Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected */
+"settings.listening_mode.listening_mode_toggle_cell.title" = "सुनने का तरीका";
+
+/* Listening Mode preferences screen title */
+"settings.listening_mode.title" = "सुनने का तरीका";
+
+/* Additonal footer text noting heading tracking compatibility */
+"settings.selection_mode.head_tracking_unsupported_footer" = "%2$@ %3$@ पर यह %1$@ हेड ट्रैकिंग का समर्थन नहीं करता है।\n\n%4$@ कैमरे वाले सभी उपकरणों पर और %6$@ वाले अधिकांश उपकरणों पर हेड ट्रैकिंग समर्थित है।";
 
 /* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
    Pressing the button will allow editing the category title. */
@@ -61,4 +280,36 @@
 /* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
    Pressing the button will not save any changes and close the keyboard view. */
 "text_editor.alert.cancel_editing_confirmation.button.discard.title" = "छोड़ें";
+
+/* Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. */
+"text_editor.alert.cancel_editing_confirmation.title" = "यदि आप सहेजे बिना बंद कर देते हैं, तो आपके परिवर्तन खो जाएंगे।";
+
+/* Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title */
+"text_editor.alert.category_name_exists.cancel.button" = "रद्द करना";
+
+/* Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
+"text_editor.alert.category_name_exists.create.button" = "डुप्लिकेट बनाएं";
+
+/* Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category. */
+"text_editor.alert.category_name_exists.title" = "इस श्रेणी का नाम पहले से मौजूद है। क्या आप डुप्लीकेट बनाना चाहेंगे?";
+
+/* Button option for the Curson Sensitivity setting. */
+"timing_and_sensitivity.button.high.title" = "उच्च";
+
+/* Button option for the Curson Sensitivity setting. */
+"timing_and_sensitivity.button.low.title" = "कम";
+
+/* Button option for the Curson Sensitivity setting. */
+"timing_and_sensitivity.button.medium.title" = "मध्यम";
+
+/* Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor. */
+"timing_and_sensitivity.cell.cursor_sensitivity.title" = "कर्सर संवेदनशीलता";
+
+/* Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5 */
+"timing_and_sensitivity.cell.dwell_duration.title" = "होवर टाइम";
+
+/* Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting */
+"timing_and_sensitivity.header.title" = "समय और संवेदनशीलता";
 

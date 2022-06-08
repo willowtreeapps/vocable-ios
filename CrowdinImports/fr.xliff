@@ -15,6 +15,21 @@
         <target state="translated">Vocable</target>
         <note>Bundle name</note>
       </trans-unit>
+      <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
+        <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
+        <target state="translated">Vocable utilise la caméra frontale de votre appareil pour détecter des changements minimes dans l'orientation et la position de la tête. Cela permet aux utilisateurs à mobilité réduite de contrôler un pointeur à l'écran pour interagir avec l'application. Les données de la caméra sont utilisées expressément pour contrôler le pointeur à l'écran. Ces données ne sont en aucun cas stockées ou transmises. Vocable a besoin d'une autorisation pour utiliser l'appareil photo à cette fin.</target>
+        <note>Camera usage description</note>
+      </trans-unit>
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
+        <source>Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Vocable utilise le microphone uniquement lorsque le mode d'écoute est activé. Vocable transcrit l'audio en texte ; elles ne sont ni stockées ni transmises sauf lorsque l'utilisateur choisit de partager ces informations de manière anonyme avec les développeurs pour aider à améliorer le mode d'écoute.</target>
+        <note>Privacy - Microphone Usage Description</note>
+      </trans-unit>
+      <trans-unit id="NSSpeechRecognitionUsageDescription" xml:space="preserve">
+        <source>When listening mode is enabled, Vocable uses speech recognition to convert audio data into text. Transcribed speech is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Lorsque le mode d'écoute est activé, Vocable utilise la reconnaissance vocale pour convertir les données audio en texte. La parole transcrite n'est ni stockée ni transmise, sauf lorsque l'utilisateur choisit de partager ces informations de manière anonyme avec les développeurs pour aider à améliorer le mode d'écoute.</target>
+        <note>Privacy - Speech Recognition Usage Description</note>
+      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="fr" datatype="plaintext">
@@ -32,25 +47,232 @@
         <target state="translated">Annuler</target>
         <note/>
       </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
+        <source>Confirm</source>
+        <target state="translated">Confirmer</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">Si vous fermez sans enregistrer, vos modifications seront perdues.</target>
+        <note>MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere.</note>
+      </trans-unit>
       <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">Annuler</target>
         <note>Delete category alert cancel button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">Retirer</target>
+        <note>Delete category alert action button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve">
+        <source>Deleted categories cannot be recovered.</source>
+        <target state="translated">Les catégories supprimées ne peuvent pas être récupérées.</target>
+        <note>Delete category confirmation alert title</note>
       </trans-unit>
       <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">Annuler</target>
         <note>Delete phrase alert cancel button title</note>
       </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">Retirer</target>
+        <note>Delete phrase alert action button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
+        <source>Deleted phrases cannot be recovered.</source>
+        <target state="translated">Les phrases supprimées ne peuvent pas être récupérées.</target>
+        <note>Delete phrase confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.edit_phrases.title" xml:space="preserve">
+        <source>Edit Phrases</source>
+        <target state="translated">Modifier les phrases</target>
+        <note>Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
+        <source>Remove Category</source>
+        <target state="translated">Supprimer la catégorie</target>
+        <note>Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.rename_category.title" xml:space="preserve">
+        <source>Rename Category</source>
+        <target state="translated">Renommer la catégorie</target>
+        <note>Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
+        <source>Show Category</source>
+        <target state="translated">Montrer la catégorie</target>
+        <note>Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
+        <source>Changes saved</source>
+        <target state="translated">Changements sauvegardés</target>
+        <note>changes to an existing phrase were saved successfully</note>
+      </trans-unit>
+      <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve">
+        <source>Changes Saved</source>
+        <target state="translated">Changements sauvegardés</target>
+        <note>Toast message that appears after saving edits made to the Category title</note>
+      </trans-unit>
+      <trans-unit id="empty_state.button.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target state="translated">Ajouter une expression</target>
+        <note>Category empty state button.  This button appears with the empty state to allow the user to add a phrase</note>
+      </trans-unit>
+      <trans-unit id="empty_state.header.title" xml:space="preserve">
+        <source>You don't have any phrases saved yet.</source>
+        <target state="translated">Vous n'avez pas encore enregistré de phrases.</target>
+        <note>Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen.</note>
+      </trans-unit>
       <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">Annuler</target>
         <note>Cancel alert action title</note>
       </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Continue</source>
+        <target state="translated">Continuer</target>
+        <note>Confirm alert action title</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
+        <source>Turning off head tracking will make the app touch mode only. Would you like to continue?</source>
+        <target state="translated">La désactivation du suivi de la tête rendra l'application en mode tactile uniquement. Voulez-vous continuer?</target>
+        <note>Disable head tracking confirmation alert title</note>
+      </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
         <source>Please move closer to the device.</source>
         <target state="translated">Veuillez vous rapprocher du périphérique.</target>
         <note>Warning message presented to the user when the head tracking system</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.actively_listening.message" xml:space="preserve">
+        <source>When someone asks a question out loud, Vocable will offer quick response options.</source>
+        <target state="translated">Lorsque quelqu'un pose une question à voix haute, Vocable offre des options de réponse rapide.</target>
+        <note>Listening mode empty state message for when listening has began but no responses have been displayed yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.actively_listening.title" xml:space="preserve">
+        <source>Listening...</source>
+        <target state="translated">En écoute...</target>
+        <note>Listening mode empty state title for when listening has began but no responses have been displayed yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.free_response.message" xml:space="preserve">
+        <source>Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.</source>
+        <target state="translated">Je ne sais pas quoi suggérer. Veuillez utiliser le clavier ou sélectionner une phrase existante pour répondre.</target>
+        <note>Listen mode empty state message for when no responses could be generated</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.free_response.title" xml:space="preserve">
+        <source>Sounds complicated</source>
+        <target state="translated">Cela semble compliqué</target>
+        <note>Listen mode empty state title for when no responses could be generated</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.action" xml:space="preserve">
+        <source>Open Settings</source>
+        <target state="translated">Ouvrir les paramètres</target>
+        <note>Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.message" xml:space="preserve">
+        <source>Vocable needs to use the microphone to enable Listening Mode. Please enable microphone access in the system Settings app.
+
+You can also disable Listening Mode to hide this category in Vocable's settings.</source>
+        <target state="translated">Vocable doit utiliser le microphone pour activer le mode d'écoute. Veuillez activer l'accès au microphone dans l'application Paramètres du système.
+
+Vous pouvez également désactiver le mode d'écoute pour masquer cette catégorie dans les paramètres de Vocable.</target>
+        <note>Listening mode empty state message for when microphone permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.title" xml:space="preserve">
+        <source>Microphone Access</source>
+        <target state="translated">Accès au microphone</target>
+        <note>Listening mode empty state title for when microphone permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.action" xml:space="preserve">
+        <source>Grant Access</source>
+        <target state="translated">Accorder l’accès</target>
+        <note>Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.message" xml:space="preserve">
+        <source>Vocable needs microphone access to enable Listening Mode. The button below presents an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="translated">Vocable a besoin d'un accès au microphone pour activer le mode d'écoute. Le bouton ci-dessous présente une boîte de dialogue d'autorisation iOS avec laquelle le suivi de la tête de Vocable ne peut pas interagir.</target>
+        <note>Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.title" xml:space="preserve">
+        <source>Microphone Access</source>
+        <target state="translated">Accès au microphone</target>
+        <note>Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.action" xml:space="preserve">
+        <source>Open Settings</source>
+        <target state="translated">Ouvrir les paramètres</target>
+        <note>Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.message" xml:space="preserve">
+        <source>Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in the system Settings app.
+
+You can also disable Listening Mode to hide this category in Vocable's settings.</source>
+        <target state="translated">Vocable a besoin de la reconnaissance vocale pour activer le mode d'écoute. Veuillez activer la reconnaissance vocale dans l'application Paramètres du système.
+
+Vous pouvez également désactiver le mode d'écoute pour masquer cette catégorie dans les paramètres de Vocable.</target>
+        <note>Listening mode empty state message for when speech recognition permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.title" xml:space="preserve">
+        <source>Speech Recognition</source>
+        <target state="translated">Reconnaissance vocale</target>
+        <note>Listening mode empty state title for when speech recognition permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.action" xml:space="preserve">
+        <source>Grant Access</source>
+        <target state="translated">Accorder l’accès</target>
+        <note>Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.message" xml:space="preserve">
+        <source>Vocable needs to request speech permissions to enable Listening Mode. This will present an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="translated">Vocable doit demander des autorisations vocales pour activer le mode d'écoute. Cela présentera une boîte de dialogue d'autorisation iOS avec laquelle le suivi de la tête de Vocable ne peut pas interagir.</target>
+        <note>Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.title" xml:space="preserve">
+        <source>Speech Recognition</source>
+        <target state="translated">Reconnaissance vocale</target>
+        <note>Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_unavailable.message" xml:space="preserve">
+        <source>Speech services require one of the following features to be enabled on your device: Siri or Dictation. Please check your device settings and enable Siri or Dictation.</source>
+        <target state="translated">Les services vocaux nécessitent l'activation de l'une des fonctionnalités suivantes sur votre appareil : Siri ou Dictée. Veuillez vérifier les paramètres de votre appareil et activer Siri ou Dictée.</target>
+        <note>Listen mode error state message for when Apple's speech to text service is unavailable</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_unavailable.title" xml:space="preserve">
+        <source>Speech services unavailable</source>
+        <target state="translated">Services vocaux indisponibles</target>
+        <note>Listen mode error state title for when Apple's speech to text service is unavailable</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.unsupported.message" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</source>
+        <target state="translated">Ce %1$@ sur %2$@ %3$@ ne prend pas en charge le mode d'écoute.
+
+Le mode d'écoute n'est actuellement disponible qu'en anglais et nécessite l'activation de %5$@.</target>
+        <note>Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.unsupported.title" xml:space="preserve">
+        <source>Listening Mode Unsupported</source>
+        <target state="translated">Mode d'écoute non pris en charge</target>
+        <note>Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.confirmation.title" xml:space="preserve">
+        <source>Thank You!</source>
+        <target state="translated">Merci !</target>
+        <note>Thank you confirmation.  This text appears after sharing with developer</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.hint.text" xml:space="preserve">
+        <source>Don’t like these responses? Anonymously share this question to help improve listening mode.</source>
+        <target state="translated">Vous n'aimez pas ces réponses ? Partagez anonymement cette question pour aider à améliorer le mode d'écoute.</target>
+        <note>Information text around what the Share with Deeveloper button does.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.submit.title" xml:space="preserve">
+        <source>Share with Developers</source>
+        <target state="translated">Partager avec les développeurs</target>
+        <note>Share with Developer button.  The button appears if Listen mode could not generate a reponese.</note>
       </trans-unit>
       <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve">
         <source>Select something below to speak</source>
@@ -62,11 +284,50 @@
         <target state="translated">Page %1$d sur %2$d</target>
         <note>Page indicator progress format. \"Page x of n\"</note>
       </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+        <source>Continue Editing</source>
+        <target state="translated">Continuer l'édition</target>
+        <note>Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
+      </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
         <target state="translated">Jeter</target>
         <note>Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
    Pressing the button will not save any changes and close the keyboard view.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">Si vous fermez sans enregistrer, vos modifications seront perdues.</target>
+        <note>Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Annuler</target>
+        <note>Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target state="translated">Créer un doublon</target>
+        <note>Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.title" xml:space="preserve">
+        <source>This phrase already exists. Would you like to create a duplicate?</source>
+        <target state="translated">Cette expression existe déjà. Souhaitez-vous créer un doublon ?</target>
+        <note>Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
+        <source>Saved to %@</source>
+        <target state="translated">Enregistré dans %@</target>
+        <note>new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title</note>
+      </trans-unit>
+      <trans-unit id="preset.category.add.phrase.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target state="translated">Ajouter une expression</target>
+        <note>Add phrase to category button title</note>
       </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
         <source>No</source>
@@ -78,25 +339,105 @@
         <target state="translated">Oui</target>
         <note>'Yes' num pad response</note>
       </trans-unit>
+      <trans-unit id="recents_empty_state.body.title" xml:space="preserve">
+        <source>Start using Vocable to see your most recently used phrases here.</source>
+        <target state="translated">Commencez à utiliser Vocable pour voir vos phrases les plus récemment utilisées ici.</target>
+        <note>Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet.</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.header.title" xml:space="preserve">
+        <source>No recently used phrases</source>
+        <target state="translated">Aucune expression récemment utilisée</target>
+        <note>Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet.</note>
+      </trans-unit>
       <trans-unit id="selection_mode.header.title" xml:space="preserve">
         <source>Selection Mode</source>
         <target state="translated">Mode de sélection</target>
         <note>Selection mode setting header title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">OK</target>
+        <note>No email account configured error alert dismiss button title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve">
+        <source>Please sign into an account with Mail for %1$@.</source>
+        <target state="translated">Veuillez vous connecter à un compte avec Mail pour %1$@.</target>
+        <note>No email account configured error alert title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve">
+        <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
+        <target state="translated">Voulez-vous vraiment réinitialiser Vocable aux paramètres par défaut ? Cette action ne peut pas être annulée.</target>
+        <note>Reset setting alert confirmation prompt</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Annuler</target>
+        <note>Reset setting alert Cancel button.  This will cancel the reset operation.</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Reset</source>
+        <target state="translated">Réinitialiser</target>
+        <note>Reset setting alert settings Reset button.  This will continue with the reset operation.</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve">
+        <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
+        <target state="translated">Vocable n'a pas pu être réinitialisé. Veuillez réessayer ou réinstaller Vocable si le problème persiste.</target>
+        <note>Reset app settings failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">OK</target>
+        <note>Button to dismiss the Reset app failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
+        <source>Vocable has been reset successfully.</source>
+        <target state="translated">Vocable a été réinitialisé avec succès.</target>
+        <note>Reset app settings success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">OK</target>
+        <note>Button to dismiss the Reset app success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
+        <source>You're about to leave the Vocable app. You may lose head tracking control.</source>
+        <target state="translated">Vous êtes sur le point de quitter l'application Vocable. Vous risquez de perdre le contrôle du suivi de la tête.</target>
+        <note>body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app</note>
       </trans-unit>
       <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">Annuler</target>
         <note>Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app</note>
       </trans-unit>
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Confirm</source>
+        <target state="translated">Confirmer</target>
+        <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.categories.title" xml:space="preserve">
+        <source>Categories and Phrases</source>
+        <target state="translated">Catégories et phrases</target>
+        <note>edit categories settings menu item</note>
+      </trans-unit>
       <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve">
         <source>Contact Developers</source>
         <target state="translated">Contacter les développeurs</target>
         <note>contact developers settings menu item</note>
       </trans-unit>
+      <trans-unit id="settings.cell.edit_user_favorites.title_format" xml:space="preserve">
+        <source>Edit %@</source>
+        <target state="translated">Modifier %@</target>
+        <note>edit user's favorite phrases category settings menu item</note>
+      </trans-unit>
       <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve">
         <source>Head Tracking</source>
         <target state="translated">Head Tracking</target>
         <note>Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.listening_mode.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">Mode d'écoute</target>
+        <note>Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode.</note>
       </trans-unit>
       <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
         <source>Privacy Policy</source>
@@ -113,16 +454,127 @@
         <target state="translated">Mode de sélection</target>
         <note>edit cursor selection mode settings menu item</note>
       </trans-unit>
+      <trans-unit id="settings.cell.timing_sensitivity.title" xml:space="preserve">
+        <source>Timing and Sensitivity</source>
+        <target state="translated">Timing et Sensibilité</target>
+        <note>edit cursor timing and sensititivy settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.tune_cursor.title" xml:space="preserve">
+        <source>Tune Cursor</source>
+        <target state="translated">Curseur de syntonisation</target>
+        <note>tune cursor debug settings menu item</note>
+      </trans-unit>
       <trans-unit id="settings.header.title" xml:space="preserve">
         <source>Settings</source>
         <target state="translated">Paramètres</target>
         <note>Settings screen header title</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.device_unsupported_explanation_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</source>
+        <target state="translated">Ce %1$@ sur %2$@ %3$@ ne prend pas en charge le mode d'écoute.
+
+Le mode d'écoute n'est actuellement disponible qu'en anglais et nécessite l'activation de %5$@.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.hot_word_toggle_cell.title" xml:space="preserve">
+        <source>"Hey Vocable" shortcut</source>
+        <target state="translated">Raccourci "Hey Vocable"</target>
+        <note>Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.hotword_explanation_footer" xml:space="preserve">
+        <source>When this shortcut is enabled, anyone can say "Hey, Vocable" to prompt the app to navigate to the listening mode screen.</source>
+        <target state="translated">Lorsque ce raccourci est activé, n'importe qui peut dire "Hey, Vocable" pour inviter l'application à accéder à l'écran du mode d'écoute.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.listening_mode_explanation_footer" xml:space="preserve">
+        <source>When listening mode is enabled, anyone can ask a question out loud and Vocable will offer a selection of responses. Vocable supports either/or questions and questions that can be answered with yes, no, or a number.</source>
+        <target state="translated">Lorsque le mode d'écoute est activé, n'importe qui peut poser une question à haute voix et Vocable proposera une sélection de réponses. Vocable prend en charge les questions et les questions auxquelles on peut répondre par oui, non ou un nombre.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.listening_mode_toggle_cell.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">Mode d'écoute</target>
+        <note>Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">Mode d'écoute</target>
+        <note>Listening Mode preferences screen title</note>
+      </trans-unit>
+      <trans-unit id="settings.selection_mode.head_tracking_unsupported_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support head tracking.
+
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.</source>
+        <target state="translated">Ce %1$@ sur %2$@ %3$@ ne prend pas en charge le suivi de la tête.
+
+Le suivi de la tête est pris en charge sur tous les appareils équipés d'une caméra %4$@ et sur la plupart des appareils équipés de %6$@.</target>
+        <note>Additonal footer text noting heading tracking compatibility</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+        <source>Continue Editing</source>
+        <target state="translated">Continuer l'édition</target>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
         <source>Discard</source>
         <target state="translated">Jeter</target>
         <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
    Pressing the button will not save any changes and close the keyboard view.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">Si vous fermez sans enregistrer, vos modifications seront perdues.</target>
+        <note>Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Annuler</target>
+        <note>Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target state="translated">Créer un doublon</target>
+        <note>Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.title" xml:space="preserve">
+        <source>This category name already exists. Would you like to create a duplicate?</source>
+        <target state="translated">Ce nom de catégorie existe déjà. Souhaitez-vous créer un doublon ?</target>
+        <note>Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve">
+        <source>High</source>
+        <target state="translated">Élevée</target>
+        <note>Button option for the Curson Sensitivity setting.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve">
+        <source>Low</source>
+        <target state="translated">Faible</target>
+        <note>Button option for the Curson Sensitivity setting.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve">
+        <source>Medium</source>
+        <target state="translated">Moyen</target>
+        <note>Button option for the Curson Sensitivity setting.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve">
+        <source>Cursor Sensitivity</source>
+        <target state="translated">Sensibilité du curseur</target>
+        <note>Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve">
+        <source>Hover Time</source>
+        <target state="translated">Temps de survol</target>
+        <note>Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve">
+        <source>Timing and Sensitivity</source>
+        <target state="translated">Timing et Sensibilité</target>
+        <note>Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting</note>
       </trans-unit>
     </body>
   </file>
@@ -346,6 +798,11 @@
         <target state="translated">Il me faut mes médicaments</target>
         <note/>
       </trans-unit>
+      <trans-unit id="preset_30474911-619F-4FBF-B7DA-F64039F556F2" xml:space="preserve">
+        <source>Please be quiet</source>
+        <target state="translated">S'il vous plaît soyez silencieux</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="preset_A02D6604-5C7C-4BB0-8C4A-E1C5E0D1A869" xml:space="preserve">
         <source>Please stop</source>
         <target state="translated">Veuillez arrêter</target>
@@ -461,6 +918,11 @@
         <target state="translated">Veuillez allumer la TV</target>
         <note/>
       </trans-unit>
+      <trans-unit id="preset_listening_mode" xml:space="preserve">
+        <source>Listen</source>
+        <target state="translated">Écouter</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="preset_user_favorites" xml:space="preserve">
         <source>My Sayings</source>
         <target state="translated">Mes paroles</target>
@@ -469,6 +931,11 @@
       <trans-unit id="preset_user_keypad" xml:space="preserve">
         <source>123</source>
         <target state="translated">123</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_user_recents" xml:space="preserve">
+        <source>Recents</source>
+        <target state="translated">Récents</target>
         <note/>
       </trans-unit>
     </body>

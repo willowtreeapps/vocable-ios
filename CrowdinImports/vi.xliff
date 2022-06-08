@@ -5,11 +5,21 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
-      
-      
-      
-      
-      
+      <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
+        <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
+        <target state="translated">Vocable sử dụng camera trước của thiết bị để phát hiện những thay đổi tối thiểu về hướng và vị trí của đầu. Điều này cho phép người dùng có khả năng di chuyển hạn chế điều khiển con trỏ trên màn hình để tương tác với ứng dụng. Dữ liệu máy ảnh được sử dụng rõ ràng để điều khiển con trỏ trên màn hình. Dữ liệu này không được lưu trữ hoặc truyền đi dưới bất kỳ hình thức nào. Vocable cần được phép sử dụng máy ảnh cho mục đích này.</target>
+        <note>Camera usage description</note>
+      </trans-unit>
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
+        <source>Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Vocable chỉ sử dụng micrô khi chế độ nghe được bật. Vocable chuyển âm thanh thành văn bản; nó không được lưu trữ hoặc truyền đi ngoại trừ khi người dùng chọn chia sẻ ẩn danh thông tin này với các nhà phát triển để giúp cải thiện chế độ lắng nghe.</target>
+        <note>Privacy - Microphone Usage Description</note>
+      </trans-unit>
+      <trans-unit id="NSSpeechRecognitionUsageDescription" xml:space="preserve">
+        <source>When listening mode is enabled, Vocable uses speech recognition to convert audio data into text. Transcribed speech is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Khi bật chế độ nghe, Vocable sử dụng tính năng nhận dạng giọng nói để chuyển đổi dữ liệu âm thanh thành văn bản. Giọng nói đã chép sẽ không được lưu trữ hoặc truyền đi ngoại trừ khi người dùng chọn chia sẻ ẩn danh thông tin này với các nhà phát triển để giúp cải thiện chế độ nghe.</target>
+        <note>Privacy - Speech Recognition Usage Description</note>
+      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="vi" datatype="plaintext">
@@ -17,108 +27,545 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+      <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
+        <source>Categories</source>
+        <target state="translated">Thể loại</target>
+        <note>Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Hủy bỏ</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
+        <source>Confirm</source>
+        <target state="translated">Xác nhận</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">Nếu bạn đóng mà không lưu, các thay đổi của bạn sẽ bị mất.</target>
+        <note>MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Hủy bỏ</target>
+        <note>Delete category alert cancel button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">Loại bỏ</target>
+        <note>Delete category alert action button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve">
+        <source>Deleted categories cannot be recovered.</source>
+        <target state="translated">Không thể phục hồi các danh mục đã xóa.</target>
+        <note>Delete category confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Hủy bỏ</target>
+        <note>Delete phrase alert cancel button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">Loại bỏ</target>
+        <note>Delete phrase alert action button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
+        <source>Deleted phrases cannot be recovered.</source>
+        <target state="translated">Không thể khôi phục các cụm từ đã xóa.</target>
+        <note>Delete phrase confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.edit_phrases.title" xml:space="preserve">
+        <source>Edit Phrases</source>
+        <target state="translated">Chỉnh sửa cụm từ</target>
+        <note>Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
+        <source>Remove Category</source>
+        <target state="translated">Xóa danh mục</target>
+        <note>Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.rename_category.title" xml:space="preserve">
+        <source>Rename Category</source>
+        <target state="translated">Đổi tên danh mục</target>
+        <note>Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
+        <source>Show Category</source>
+        <target state="translated">Hiển thị danh mục</target>
+        <note>Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
+        <source>Changes saved</source>
+        <target state="translated">Các thay đổi đã được lưu</target>
+        <note>changes to an existing phrase were saved successfully</note>
+      </trans-unit>
+      <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve">
+        <source>Changes Saved</source>
+        <target state="translated">Các thay đổi đã được lưu</target>
+        <note>Toast message that appears after saving edits made to the Category title</note>
+      </trans-unit>
+      <trans-unit id="empty_state.button.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target state="translated">Thêm cụm từ</target>
+        <note>Category empty state button.  This button appears with the empty state to allow the user to add a phrase</note>
+      </trans-unit>
+      <trans-unit id="empty_state.header.title" xml:space="preserve">
+        <source>You don't have any phrases saved yet.</source>
+        <target state="translated">Bạn chưa lưu bất kỳ cụm từ nào.</target>
+        <note>Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen.</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Hủy bỏ</target>
+        <note>Cancel alert action title</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Continue</source>
+        <target state="translated">Tiếp tục</target>
+        <note>Confirm alert action title</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
+        <source>Turning off head tracking will make the app touch mode only. Would you like to continue?</source>
+        <target state="translated">Tắt theo dõi phần đầu sẽ chỉ làm cho ứng dụng ở chế độ cảm ứng. Bạn có muốn tiếp tục không?</target>
+        <note>Disable head tracking confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
+        <source>Please move closer to the device.</source>
+        <target state="translated">Vui lòng di chuyển đến gần thiết bị hơn.</target>
+        <note>Warning message presented to the user when the head tracking system</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.actively_listening.message" xml:space="preserve">
+        <source>When someone asks a question out loud, Vocable will offer quick response options.</source>
+        <target state="translated">Khi ai đó hỏi to một câu hỏi, Vocable sẽ cung cấp các tùy chọn trả lời nhanh.</target>
+        <note>Listening mode empty state message for when listening has began but no responses have been displayed yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.actively_listening.title" xml:space="preserve">
+        <source>Listening...</source>
+        <target state="translated">Đang nghe...</target>
+        <note>Listening mode empty state title for when listening has began but no responses have been displayed yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.free_response.message" xml:space="preserve">
+        <source>Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.</source>
+        <target state="translated">Không chắc chắn những gì để đề xuất. Vui lòng sử dụng bàn phím hoặc chọn một cụm từ hiện có để trả lời.</target>
+        <note>Listen mode empty state message for when no responses could be generated</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.free_response.title" xml:space="preserve">
+        <source>Sounds complicated</source>
+        <target state="translated">Nghe có vẻ phức tạp</target>
+        <note>Listen mode empty state title for when no responses could be generated</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.action" xml:space="preserve">
+        <source>Open Settings</source>
+        <target state="translated">Mở cài đặt</target>
+        <note>Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.message" xml:space="preserve">
+        <source>Vocable needs to use the microphone to enable Listening Mode. Please enable microphone access in the system Settings app.
+
+You can also disable Listening Mode to hide this category in Vocable's settings.</source>
+        <target state="translated">Vocable cần sử dụng micrô để bật Chế độ nghe. Vui lòng bật quyền truy cập micrô trong ứng dụng Cài đặt hệ thống.
+
+Bạn cũng có thể tắt Chế độ nghe để ẩn danh mục này trong cài đặt của Vocable.</target>
+        <note>Listening mode empty state message for when microphone permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.title" xml:space="preserve">
+        <source>Microphone Access</source>
+        <target state="translated">Quyền truy cập vào micrô</target>
+        <note>Listening mode empty state title for when microphone permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.action" xml:space="preserve">
+        <source>Grant Access</source>
+        <target state="translated">Cấp phép truy cập</target>
+        <note>Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.message" xml:space="preserve">
+        <source>Vocable needs microphone access to enable Listening Mode. The button below presents an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="translated">Vocable cần quyền truy cập micrô để bật Chế độ nghe. Nút bên dưới trình bày hộp thoại quyền của iOS mà tính năng theo dõi đầu của Vocable không thể can thiệp vào.</target>
+        <note>Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.title" xml:space="preserve">
+        <source>Microphone Access</source>
+        <target state="translated">Quyền truy cập vào micrô</target>
+        <note>Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.action" xml:space="preserve">
+        <source>Open Settings</source>
+        <target state="translated">Mở cài đặt</target>
+        <note>Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.message" xml:space="preserve">
+        <source>Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in the system Settings app.
+
+You can also disable Listening Mode to hide this category in Vocable's settings.</source>
+        <target state="translated">Vocable cần nhận dạng giọng nói để bật Chế độ nghe. Vui lòng bật nhận dạng giọng nói trong ứng dụng Cài đặt hệ thống.
+
+Bạn cũng có thể tắt Chế độ nghe để ẩn danh mục này trong cài đặt của Vocable.</target>
+        <note>Listening mode empty state message for when speech recognition permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.title" xml:space="preserve">
+        <source>Speech Recognition</source>
+        <target state="translated">Nhận dạng giọng nói</target>
+        <note>Listening mode empty state title for when speech recognition permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.action" xml:space="preserve">
+        <source>Grant Access</source>
+        <target state="translated">Cấp phép truy cập</target>
+        <note>Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.message" xml:space="preserve">
+        <source>Vocable needs to request speech permissions to enable Listening Mode. This will present an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="translated">Vocable cần yêu cầu quyền lời nói để bật Chế độ nghe. Thao tác này sẽ hiển thị hộp thoại quyền của iOS mà tính năng theo dõi đầu của Vocable không thể can thiệp vào.</target>
+        <note>Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.title" xml:space="preserve">
+        <source>Speech Recognition</source>
+        <target state="translated">Nhận dạng giọng nói</target>
+        <note>Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_unavailable.message" xml:space="preserve">
+        <source>Speech services require one of the following features to be enabled on your device: Siri or Dictation. Please check your device settings and enable Siri or Dictation.</source>
+        <target state="translated">Dịch vụ giọng nói yêu cầu bật một trong các tính năng sau trên thiết bị của bạn: Siri hoặc Đọc chính tả. Vui lòng kiểm tra cài đặt thiết bị của bạn và bật Siri hoặc Đọc chính tả.</target>
+        <note>Listen mode error state message for when Apple's speech to text service is unavailable</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_unavailable.title" xml:space="preserve">
+        <source>Speech services unavailable</source>
+        <target state="translated">Dịch vụ lời nói không khả dụng</target>
+        <note>Listen mode error state title for when Apple's speech to text service is unavailable</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.unsupported.message" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</source>
+        <target state="translated">%1$@ trên %2$@ %3$@ này không hỗ trợ Chế độ nghe.
+
+Chế độ nghe hiện chỉ khả dụng bằng tiếng Anh và yêu cầu bật %5$@.</target>
+        <note>Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.unsupported.title" xml:space="preserve">
+        <source>Listening Mode Unsupported</source>
+        <target state="translated">Chế độ nghe không được hỗ trợ</target>
+        <note>Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.confirmation.title" xml:space="preserve">
+        <source>Thank You!</source>
+        <target state="translated">Cảm ơn!</target>
+        <note>Thank you confirmation.  This text appears after sharing with developer</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.hint.text" xml:space="preserve">
+        <source>Don’t like these responses? Anonymously share this question to help improve listening mode.</source>
+        <target state="translated">Bạn không thích những câu trả lời này? Chia sẻ ẩn danh câu hỏi này để giúp cải thiện chế độ nghe.</target>
+        <note>Information text around what the Share with Deeveloper button does.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.feedback.submit.title" xml:space="preserve">
+        <source>Share with Developers</source>
+        <target state="translated">Chia sẻ với các nhà phát triển</target>
+        <note>Share with Developer button.  The button appears if Listen mode could not generate a reponese.</note>
+      </trans-unit>
+      <trans-unit id="main_screen.textfield_placeholder.default" xml:space="preserve">
+        <source>Select something below to speak</source>
+        <target state="translated">Chọn một cái gì đó bên dưới để nói</target>
+        <note>Select something below to speak Hint Text</note>
+      </trans-unit>
+      <trans-unit id="paging_progress_indicator_format" xml:space="preserve">
+        <source>Page %1$d of %2$d</source>
+        <target state="translated">Trang %1$d / %2$d</target>
+        <note>Page indicator progress format. \"Page x of n\"</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+        <source>Continue Editing</source>
+        <target state="translated">Tiếp tục chỉnh sửa</target>
+        <note>Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
+        <source>Discard</source>
+        <target state="translated">Bỏ đi</target>
+        <note>Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">Nếu bạn đóng mà không lưu, các thay đổi của bạn sẽ bị mất.</target>
+        <note>Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Hủy bỏ</target>
+        <note>Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target state="translated">Tạo bản sao</target>
+        <note>Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.title" xml:space="preserve">
+        <source>This phrase already exists. Would you like to create a duplicate?</source>
+        <target state="translated">Cụm từ này đã tồn tại. Bạn có muốn tạo một bản sao không?</target>
+        <note>Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
+        <source>Saved to %@</source>
+        <target state="translated">Đã lưu vào %@</target>
+        <note>new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title</note>
+      </trans-unit>
+      <trans-unit id="preset.category.add.phrase.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target state="translated">Thêm cụm từ</target>
+        <note>Add phrase to category button title</note>
+      </trans-unit>
+      <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
+        <source>No</source>
+        <target state="translated">Không</target>
+        <note>'No' num pad response</note>
+      </trans-unit>
+      <trans-unit id="preset.category.numberpad.phrase.yes.title" xml:space="preserve">
+        <source>Yes</source>
+        <target state="translated">Đúng</target>
+        <note>'Yes' num pad response</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.body.title" xml:space="preserve">
+        <source>Start using Vocable to see your most recently used phrases here.</source>
+        <target state="translated">Bắt đầu sử dụng Vocable để xem các cụm từ được sử dụng gần đây nhất của bạn tại đây.</target>
+        <note>Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet.</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.header.title" xml:space="preserve">
+        <source>No recently used phrases</source>
+        <target state="translated">Không có cụm từ được sử dụng gần đây</target>
+        <note>Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet.</note>
+      </trans-unit>
+      <trans-unit id="selection_mode.header.title" xml:space="preserve">
+        <source>Selection Mode</source>
+        <target state="translated">Chế độ Lựa chọn</target>
+        <note>Selection mode setting header title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">OK</target>
+        <note>No email account configured error alert dismiss button title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve">
+        <source>Please sign into an account with Mail for %1$@.</source>
+        <target state="translated">Please sign into an account with Mail for %1$@.</target>
+        <note>No email account configured error alert title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve">
+        <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
+        <target state="translated">Bạn có chắc chắn muốn đặt lại Vocable về cài đặt mặc định không? Hành động này không thể được hoàn tác.</target>
+        <note>Reset setting alert confirmation prompt</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Hủy bỏ</target>
+        <note>Reset setting alert Cancel button.  This will cancel the reset operation.</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Reset</source>
+        <target state="translated">Cài lại</target>
+        <note>Reset setting alert settings Reset button.  This will continue with the reset operation.</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve">
+        <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
+        <target state="translated">Không thể đặt lại Vocable. Vui lòng thử lại hoặc cài đặt lại Vocable nếu sự cố vẫn tiếp diễn.</target>
+        <note>Reset app settings failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">OK</target>
+        <note>Button to dismiss the Reset app failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
+        <source>Vocable has been reset successfully.</source>
+        <target state="translated">Vocable đã được đặt lại thành công.</target>
+        <note>Reset app settings success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">OK</target>
+        <note>Button to dismiss the Reset app success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
+        <source>You're about to leave the Vocable app. You may lose head tracking control.</source>
+        <target state="translated">Bạn sắp rời khỏi ứng dụng Vocable. Bạn có thể mất kiểm soát theo dõi đầu.</target>
+        <note>body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Hủy bỏ</target>
+        <note>Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Confirm</source>
+        <target state="translated">Xác nhận</target>
+        <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.categories.title" xml:space="preserve">
+        <source>Categories and Phrases</source>
+        <target state="translated">Danh mục và Cụm từ</target>
+        <note>edit categories settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve">
+        <source>Contact Developers</source>
+        <target state="translated">Danh mục và Cụm từ</target>
+        <note>contact developers settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.edit_user_favorites.title_format" xml:space="preserve">
+        <source>Edit %@</source>
+        <target state="translated">Chỉnh sửa %@</target>
+        <note>edit user's favorite phrases category settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve">
+        <source>Head Tracking</source>
+        <target state="translated">Theo dõi đầu</target>
+        <note>Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.listening_mode.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">Chế độ nghe</target>
+        <note>Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode.</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
+        <source>Privacy Policy</source>
+        <target state="translated">Chính sách bảo mật</target>
+        <note>view privacy policy settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.reset_all.title" xml:space="preserve">
+        <source>Reset App Settings</source>
+        <target state="translated">Đặt lại cài đặt ứng dụng</target>
+        <note>reset all settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.selection_mode.title" xml:space="preserve">
+        <source>Selection Mode</source>
+        <target state="translated">Chế độ Lựa chọn</target>
+        <note>edit cursor selection mode settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.timing_sensitivity.title" xml:space="preserve">
+        <source>Timing and Sensitivity</source>
+        <target state="translated">Thời gian và độ nhạy</target>
+        <note>edit cursor timing and sensititivy settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.tune_cursor.title" xml:space="preserve">
+        <source>Tune Cursor</source>
+        <target state="translated">Điều chỉnh con trỏ</target>
+        <note>tune cursor debug settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.header.title" xml:space="preserve">
+        <source>Settings</source>
+        <target state="translated">Cài đặt</target>
+        <note>Settings screen header title</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.device_unsupported_explanation_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</source>
+        <target state="translated">%1$@ trên %2$@ %3$@ này không hỗ trợ Chế độ nghe.
+
+Chế độ nghe hiện chỉ khả dụng bằng tiếng Anh và yêu cầu bật %5$@.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.hot_word_toggle_cell.title" xml:space="preserve">
+        <source>"Hey Vocable" shortcut</source>
+        <target state="translated">Phím tắt "Hey Vocable"</target>
+        <note>Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.hotword_explanation_footer" xml:space="preserve">
+        <source>When this shortcut is enabled, anyone can say "Hey, Vocable" to prompt the app to navigate to the listening mode screen.</source>
+        <target state="translated">Khi phím tắt này được bật, bất kỳ ai cũng có thể nói "Hey, Vocable" để nhắc ứng dụng điều hướng đến màn hình chế độ nghe.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.listening_mode_explanation_footer" xml:space="preserve">
+        <source>When listening mode is enabled, anyone can ask a question out loud and Vocable will offer a selection of responses. Vocable supports either/or questions and questions that can be answered with yes, no, or a number.</source>
+        <target state="translated">Khi chế độ nghe được bật, bất kỳ ai cũng có thể đặt câu hỏi thành tiếng và Vocable sẽ đưa ra lựa chọn câu trả lời. Vocable hỗ trợ hoặc / hoặc các câu hỏi và câu hỏi có thể được trả lời bằng có, không hoặc một số.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.listening_mode_toggle_cell.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">Chế độ nghe</target>
+        <note>Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">Chế độ nghe</target>
+        <note>Listening Mode preferences screen title</note>
+      </trans-unit>
+      <trans-unit id="settings.selection_mode.head_tracking_unsupported_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support head tracking.
+
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.</source>
+        <target state="translated">%1$@ trên %2$@ %3$@ này không hỗ trợ theo dõi phần đầu.
+
+Theo dõi đầu được hỗ trợ trên tất cả các thiết bị có camera %4$@ và trên hầu hết các thiết bị có %6$@.</target>
+        <note>Additonal footer text noting heading tracking compatibility</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+        <source>Continue Editing</source>
+        <target state="translated">Tiếp tục chỉnh sửa</target>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
+        <source>Discard</source>
+        <target state="translated">Bỏ đi</target>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">Nếu bạn đóng mà không lưu, các thay đổi của bạn sẽ bị mất.</target>
+        <note>Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Hủy bỏ</target>
+        <note>Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target state="translated">Tạo bản sao</target>
+        <note>Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.title" xml:space="preserve">
+        <source>This category name already exists. Would you like to create a duplicate?</source>
+        <target state="translated">Tên thể loại này đã tồn tại. Bạn có muốn tạo một bản sao không?</target>
+        <note>Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve">
+        <source>High</source>
+        <target state="translated">Cao</target>
+        <note>Button option for the Curson Sensitivity setting.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve">
+        <source>Low</source>
+        <target state="translated">Thấp</target>
+        <note>Button option for the Curson Sensitivity setting.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve">
+        <source>Medium</source>
+        <target state="translated">Vừa phải</target>
+        <note>Button option for the Curson Sensitivity setting.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve">
+        <source>Cursor Sensitivity</source>
+        <target state="translated">Độ nhạy con trỏ</target>
+        <note>Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve">
+        <source>Hover Time</source>
+        <target state="translated">Thời gian di chuột</target>
+        <note>Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.header.title" xml:space="preserve">
+        <source>Timing and Sensitivity</source>
+        <target state="translated">Thời gian và độ nhạy</target>
+        <note>Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting</note>
+      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Presets.strings" source-language="en" target-language="vi" datatype="plaintext">
@@ -126,77 +573,361 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+      <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve">
+        <source>I want to lie down</source>
+        <target state="translated">Tôi muốn nằm xuống</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_0EE14D06-92D7-4A26-A15F-253528F14A69" xml:space="preserve">
+        <source>Pleased to meet you</source>
+        <target state="translated">Hân hạnh được gặp bạn</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_0EF33A3F-41E8-4E47-9B2C-69FC86B957FC" xml:space="preserve">
+        <source>How is your day?</source>
+        <target state="translated">Ngày của bạn thế nào?</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_1B634A96-563E-4275-875A-2B705A5D1178" xml:space="preserve">
+        <source>How are you?</source>
+        <target state="translated">Bạn khỏe không?</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_1BAD392A-C26C-4080-B0F2-FC544E08349C" xml:space="preserve">
+        <source>I need to brush my hair</source>
+        <target state="translated">Tôi cần chải tóc</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_2BF1A363-CE24-4F26-9727-C5EAD1FEC27C" xml:space="preserve">
+        <source>Please open the window</source>
+        <target state="translated">Vui lòng mở cửa sổ</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_3EF1FBFA-E07A-47B5-BDF6-3AE7A684B834" xml:space="preserve">
+        <source>Hello</source>
+        <target state="translated">Xin chào</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_4F776A4A-4154-4DFE-89AC-E603C2A578EE" xml:space="preserve">
+        <source>Please fix my pillow</source>
+        <target state="translated">Làm ơn sửa lại cái gối của tôi</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_6AD93FB9-437C-455F-A4AF-C96033BCBCAE" xml:space="preserve">
+        <source>I am hot</source>
+        <target state="translated">Tôi nóng</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_6B463AF1-C884-45CD-9194-90806E75FD70" xml:space="preserve">
+        <source>That makes sense</source>
+        <target state="translated">Điều đó có ý nghĩa</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_6CBD6D3E-42A7-435C-B661-2ABD669DC6BE" xml:space="preserve">
+        <source>I don't know</source>
+        <target state="translated">Tôi không biết</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_7ACA0926-DB7F-4B9E-872C-AE9690AD79E7" xml:space="preserve">
+        <source>I need to go to the restroom</source>
+        <target state="translated">Tôi cần đi vào nhà vệ sinh</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_7FF4503F-F838-48BE-B529-758B3531093C" xml:space="preserve">
+        <source>Please wait</source>
+        <target state="translated">Vui lòng chờ</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_8BCBACFB-D5ED-46CB-B3E2-21FB31D8D6AD" xml:space="preserve">
+        <source>Yes</source>
+        <target state="translated">Đúng</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_8C4D0099-9BA8-4914-A6B5-730FFDC8C499" xml:space="preserve">
+        <source>I am cold</source>
+        <target state="translated">Toi lanh</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_9A808275-0D67-49E4-8BF8-6F22A0C7E169" xml:space="preserve">
+        <source>No visitors please</source>
+        <target state="translated">Xin vui lòng không có khách truy cập</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_9DEB32B5-8606-4689-8F6A-0B251F4DB377" xml:space="preserve">
+        <source>I am thirsty</source>
+        <target state="translated">Tôi khát</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_9E3230D7-1172-491A-8A00-E734B1661DC1" xml:space="preserve">
+        <source>Please turn the lights on</source>
+        <target state="translated">Vui lòng bật đèn lên</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_9EE3A781-E84E-4728-976F-8EF993B8174C" xml:space="preserve">
+        <source>Please turn the TV off</source>
+        <target state="translated">Vui lòng bật đèn lên</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_24B48F19-EA3A-49A1-88C1-AACB67FE7278" xml:space="preserve">
+        <source>How was your weekend?</source>
+        <target state="translated">Cuối tuần của bạn như thế nào?</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_28A8F6B6-E196-4981-B762-652C288A0C29" xml:space="preserve">
+        <source>I am finished</source>
+        <target state="translated">Tôi đã hoàn thành</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_31E8760F-E728-4261-A82E-B50AB40C73FF" xml:space="preserve">
+        <source>How's it going?</source>
+        <target state="translated">Thế nào rồi?</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_33B3F4B7-2438-439B-A21B-46D2599C8840" xml:space="preserve">
+        <source>Please</source>
+        <target state="translated">Xin vui lòng</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_42DC7273-92F9-4149-8166-966C3C201862" xml:space="preserve">
+        <source>Please open the blinds</source>
+        <target state="translated">Vui lòng mở rèm</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_045EF309-3EB7-46B9-8AB7-31BC8482E3DC" xml:space="preserve">
+        <source>Okay</source>
+        <target state="translated">Được chứ</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_46EF7041-50F7-4B64-A0F6-879A8A3D7532" xml:space="preserve">
+        <source>Please turn the lights off</source>
+        <target state="translated">Vui lòng tắt đèn</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_52CA4E71-4A8C-4EA8-8EA8-C4B18AA16EC8" xml:space="preserve">
+        <source>Environment</source>
+        <target state="translated">Môi trường</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_73B654AA-C999-4864-BF5A-77379DAA991C" xml:space="preserve">
+        <source>I need to wash my face</source>
+        <target state="translated">Tôi cần rửa mặt</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_81B473E3-2FC9-40F0-AE59-3C658EC6CD91" xml:space="preserve">
+        <source>I need a shower</source>
+        <target state="translated">Tôi cần tắm</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_0167AA43-587D-436F-91A9-9CEEAF1CCCF1" xml:space="preserve">
+        <source>I would like to talk</source>
+        <target state="translated">Tôi muốn nói chuyện</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_573DD827-7201-49F1-8BE8-0BC18028A8CB" xml:space="preserve">
+        <source>Bad</source>
+        <target state="translated">Xấu</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_702D3BAD-6C56-4DC6-8290-8E0693B63152" xml:space="preserve">
+        <source>Please turn the volume down</source>
+        <target state="translated">Vui lòng giảm âm lượng</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_939B4829-D8B4-42F1-B8A2-0E956AAE1FEE" xml:space="preserve">
+        <source>I am having trouble breathing</source>
+        <target state="translated">Tôi khó thở</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_5542BE2F-419E-41A5-BBF2-5B82E0A49834" xml:space="preserve">
+        <source>I am in pain</source>
+        <target state="translated">Tôi đang trong cơn đau</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_05754D0C-962D-48C3-8554-E4F7D5E86D93" xml:space="preserve">
+        <source>I need a jacket</source>
+        <target state="translated">Tôi cần một chiếc áo khoác</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_8359B09D-7259-40CC-B258-02895ECC4DB7" xml:space="preserve">
+        <source>I need to spit</source>
+        <target state="translated">Tôi cần phải nhổ</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_9929E83B-997D-40AA-841C-130709F5115B" xml:space="preserve">
+        <source>Good morning</source>
+        <target state="translated">Buổi sáng tốt lành</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_30153E11-D48C-47C8-9186-47988D0A5B7A" xml:space="preserve">
+        <source>I do not agree</source>
+        <target state="translated">Tôi không đồng ý</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_63980C93-EE77-40DE-BDE7-BF8F97EC0304" xml:space="preserve">
+        <source>Please be patient</source>
+        <target state="translated">Xin hãy kiên nhẫn</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_64348AD1-9F63-4ADA-B391-E1742913C0E6" xml:space="preserve">
+        <source>I need a bath</source>
+        <target state="translated">Tôi cần tắm</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_72633C5C-47A2-4D5E-9615-E1408234478F" xml:space="preserve">
+        <source>Thank you</source>
+        <target state="translated">Cảm ơn bạn</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_88556B8E-FE61-401D-888C-0D79568715A0" xml:space="preserve">
+        <source>Please close the blinds</source>
+        <target state="translated">Hãy đóng rèm lại</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_1244394F-2793-47EF-BCAC-DB8BBDAB78C6" xml:space="preserve">
+        <source>I need my medication</source>
+        <target state="translated">Tôi cần thuốc của tôi</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_30474911-619F-4FBF-B7DA-F64039F556F2" xml:space="preserve">
+        <source>Please be quiet</source>
+        <target state="translated">Hãy im lặng</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_A02D6604-5C7C-4BB0-8C4A-E1C5E0D1A869" xml:space="preserve">
+        <source>Please stop</source>
+        <target state="translated">Làm ơn dừng lại</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_A436EAAF-BD8A-4D8D-81EA-DC6D3C849D4A" xml:space="preserve">
+        <source>I like it</source>
+        <target state="translated">Tôi thích nó</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_A74483A8-4069-40D7-992C-01295934E97C" xml:space="preserve">
+        <source>Please repeat what you said</source>
+        <target state="translated">Vui lòng lặp lại những gì bạn đã nói</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_ADDD57C6-D11E-4B32-A2B3-05AA43D9AC8C" xml:space="preserve">
+        <source>I am fine</source>
+        <target state="translated">Tôi ổn</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_B2442AA0-6004-4636-9B39-2DB97ADD1DA1" xml:space="preserve">
+        <source>Goodbye</source>
+        <target state="translated">Tạm biệt</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_BBE8BABC-CCBF-49BF-87D4-057016AADBC5" xml:space="preserve">
+        <source>I want to sit up</source>
+        <target state="translated">Tôi muốn ngồi dậy</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_BEE6FF86-CE30-4096-9E37-C469F63630B7" xml:space="preserve">
+        <source>I didn't mean to say that</source>
+        <target state="translated">I didn't mean to say that</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_C0B2A1A8-8333-4121-B4A8-FFFA185EB5D2" xml:space="preserve">
+        <source>General</source>
+        <target state="translated">Chung</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_C6C14627-E48E-4EF3-B81D-64C191F2EC75" xml:space="preserve">
+        <source>I am good</source>
+        <target state="translated">Tôi tốt</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_C6E6B6E7-BEB6-466D-822A-F8CE2D092B9E" xml:space="preserve">
+        <source>I am uncomfortable</source>
+        <target state="translated">Tôi đang cảm thấy không thoải mái</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_C865BE96-40B5-406C-9BAA-0A0D3280E377" xml:space="preserve">
+        <source>Please close the window</source>
+        <target state="translated">Làm ơn đóng cửa sổ</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_D6A67E02-3D07-4D44-8B04-2C1B9B8B167E" xml:space="preserve">
+        <source>Good evening</source>
+        <target state="translated">Chào buổi tối</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_D64EE532-14D3-4434-B671-8F4368EC0A8D" xml:space="preserve">
+        <source>Good</source>
+        <target state="translated">Tốt</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_DC942BB6-B2BF-4ABB-8931-719BD2A504E6" xml:space="preserve">
+        <source>Please turn the volume up</source>
+        <target state="translated">Vui lòng tăng âm lượng</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_DFB79E0D-CF93-4744-B9EE-12738E1864E2" xml:space="preserve">
+        <source>Maybe</source>
+        <target state="translated">Có thể</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_E7ADBE88-2722-4DE7-BDC1-994F07EA294B" xml:space="preserve">
+        <source>Personal Care</source>
+        <target state="translated">Chăm sóc cá nhân</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_E7D11E13-BC4F-4FE5-9C8A-BE2DE31AEE7F" xml:space="preserve">
+        <source>I would like visitors</source>
+        <target state="translated">Tôi muốn du khách</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_E012D902-E8BA-4BEA-92C7-7107ECF8051C" xml:space="preserve">
+        <source>I am hungry</source>
+        <target state="translated">Tôi đói</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_EB7A9732-E28E-4440-A88B-BA2A1ACFBD76" xml:space="preserve">
+        <source>Conversation</source>
+        <target state="translated">Cuộc hội thoại</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_F6F03BBD-B9CD-41F5-B26A-FCC13CCBB199" xml:space="preserve">
+        <source>I am tired</source>
+        <target state="translated">Tôi mệt</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_F8F5D1C9-0AA6-4152-BF7C-0851ACD1406B" xml:space="preserve">
+        <source>Basic Needs</source>
+        <target state="translated">Các nhu cầu cơ bản</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_FABE749C-B54D-4031-B8E7-62777B34D273" xml:space="preserve">
+        <source>No</source>
+        <target state="translated">Không</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" xml:space="preserve">
+        <source>Please turn the TV on</source>
+        <target state="translated">Vui lòng bật TV lên</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_listening_mode" xml:space="preserve">
+        <source>Listen</source>
+        <target state="translated">Nghe</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_user_favorites" xml:space="preserve">
+        <source>My Sayings</source>
+        <target state="translated">Câu nói của tôi</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_user_keypad" xml:space="preserve">
+        <source>123</source>
+        <target state="translated">123</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="preset_user_recents" xml:space="preserve">
+        <source>Recents</source>
+        <target state="translated">Gần đây</target>
+        <note/>
+      </trans-unit>
     </body>
   </file>
 </xliff>

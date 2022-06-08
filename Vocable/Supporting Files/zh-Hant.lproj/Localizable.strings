@@ -7,6 +7,9 @@
 /* (No Comment) */
 "category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "確認";
 
+/* MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere. */
+"category_editor.alert.cancel_editing_confirmation.title" = "如果您關閉而不保存，您的更改將會丟失。";
+
 /* Delete category alert cancel button title */
 "category_editor.alert.delete_category_confirmation.button.cancel.title" = "取消";
 
@@ -19,8 +22,23 @@
 /* Delete phrase alert cancel button title */
 "category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "取消";
 
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "消除";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "已刪除的類別無法恢復";
+
+/* Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited. */
+"category_editor.detail.button.edit_phrases.title" = "編輯短語";
+
 /* Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation. */
 "category_editor.detail.button.remove_category.title" = "刪除類別?";
+
+/* Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name. */
+"category_editor.detail.button.rename_category.title" = "重命名類別";
+
+/* Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list. */
+"category_editor.detail.button.show_category.title" = "顯示類別";
 
 /* changes to an existing phrase were saved successfully */
 "category_editor.toast.changes_saved.title" = "更改已儲存";
@@ -28,8 +46,127 @@
 /* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "更改已儲存";
 
+/* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
+"empty_state.button.title" = "添加短語";
+
+/* Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen. */
+"empty_state.header.title" = "您還沒有保存任何短語。";
+
 /* Cancel alert action title */
 "gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "取消";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "繼續";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "關閉頭部跟踪將使應用程序僅處於觸摸模式。你想繼續嗎？";
+
+/* Warning message presented to the user when the head tracking system */
+"gaze_tracking.error.excessive_head_distance.title" = "請靠近設備。";
+
+/* Listening mode empty state message for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.message" = "當有人大聲提出問題時，Vocable 將提供快速響應選項。";
+
+/* Listening mode empty state title for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.title" = "正在聆聽...";
+
+/* Listen mode empty state message for when no responses could be generated */
+"listening_mode.empty_state.free_response.message" = "不知道該建議什麼。請使用鍵盤或選擇現有短語進行回复。";
+
+/* Listen mode empty state title for when no responses could be generated */
+"listening_mode.empty_state.free_response.title" = "聽起來很複雜";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions. */
+"listening_mode.empty_state.microphone_permission_denied.action" = "打開設置";
+
+/* Listening mode empty state message for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.message" = "Vocable 需要使用麥克風來啟用聆聽模式。請在系統設置應用程序中啟用麥克風訪問。\n\n您還可以禁用聆聽模式以在 Vocable 的設置中隱藏此類別。";
+
+/* Listening mode empty state title for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.title" = "麥克風訪問";
+
+/* Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert. */
+"listening_mode.empty_state.microphone_permission_undetermined.action" = "授予訪問權限";
+
+/* Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.message" = "Vocable 需要麥克風訪問權限才能啟用聆聽模式。下面的按鈕顯示了一個 iOS 權限對話框，Vocable 的頭部跟踪無法與之交互。";
+
+/* Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.title" = "麥克風訪問";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions. */
+"listening_mode.empty_state.speech_permission_denied.action" = "打開設置";
+
+/* Listening mode empty state message for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.message" = "Vocable 需要語音識別才能啟用聆聽模式。請在系統設置應用程序中啟用語音識別。\n\n您還可以禁用聆聽模式以在 Vocable 的設置中隱藏此類別。";
+
+/* Listening mode empty state title for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.title" = "語音識別";
+
+/* Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert. */
+"listening_mode.empty_state.speech_permission_undetermined.action" = "授予訪問權限";
+
+/* Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.speech_permission_undetermined.message" = "Vocable 需要請求語音權限才能啟用聆聽模式。這將顯示一個 iOS 權限對話框，Vocable 的頭部跟踪無法與之交互。";
+
+/* Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.speech_permission_undetermined.title" = "語音識別";
+
+/* Listen mode error state message for when Apple's speech to text service is unavailable */
+"listening_mode.empty_state.speech_unavailable.message" = "語音服務需要在您的設備上啟用以下功能之一：Siri 或聽寫。請檢查您的設備設置並啟用 Siri 或聽寫。";
+
+/* Listen mode error state title for when Apple's speech to text service is unavailable */
+"listening_mode.empty_state.speech_unavailable.title" = "語音服務不可用";
+
+/* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.message" = "%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。\n\n聆聽模式目前僅提供英文版本，需要啟用 %5$@。";
+
+/* Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.title" = "聆聽模式不支持";
+
+/* Thank you confirmation.  This text appears after sharing with developer */
+"listening_mode.feedback.confirmation.title" = "謝謝您！";
+
+/* Information text around what the Share with Deeveloper button does. */
+"listening_mode.feedback.hint.text" = "不喜歡這些回复？匿名分享此問題以幫助改善聆聽模式。";
+
+/* Share with Developer button.  The button appears if Listen mode could not generate a reponese. */
+"listening_mode.feedback.submit.title" = "與開發者分享";
+
+/* Select something below to speak Hint Text */
+"main_screen.textfield_placeholder.default" = "選擇以下內容進行發言";
+
+/* Page indicator progress format. \"Page x of n\" */
+"paging_progress_indicator_format" = "第 %1$d 頁，共 %2$d 頁";
+
+/* Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
+"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "繼續編輯";
+
+/* Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
+"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "丟棄";
+
+/* Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes. */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "如果您關閉而不保存，您的更改將會丟失。";
+
+/* Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title */
+"phrase_editor.alert.phrase_name_exists.cancel.button" = "取消";
+
+/* Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
+"phrase_editor.alert.phrase_name_exists.create.button" = "創建副本";
+
+/* Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category. */
+"phrase_editor.alert.phrase_name_exists.title" = "這句話已經存在。您想創建一個副本嗎？";
+
+/* new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title */
+"phrase_editor.toast.successfully_saved_to_favorites.title_format" = "已保存到 %@";
+
+/* Add phrase to category button title */
+"preset.category.add.phrase.title" = "添加短語";
 
 /* 'No' num pad response */
 "preset.category.numberpad.phrase.no.title" = "不";
@@ -37,9 +174,142 @@
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "是";
 
+/* Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet. */
+"recents_empty_state.body.title" = "開始使用 Vocable 在此處查看您最近使用的短語。";
+
+/* Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet. */
+"recents_empty_state.header.title" = "沒有最近使用的短語";
+
+/* Selection mode setting header title */
+"selection_mode.header.title" = "選擇模式";
+
+/* No email account configured error alert dismiss button title */
+"settings.alert.no_email_configured.button.dismiss.title" = "好的";
+
+/* No email account configured error alert title */
+"settings.alert.no_email_configured.title" = "請使用 Mail 登錄 %1$@ 的帳戶。";
+
+/* Reset setting alert confirmation prompt */
+"settings.alert.reset_app_settings_confirmation.body" = "您確定要將 Voable 重置為默認設置嗎？此操作無法撤消。";
+
+/* Reset setting alert Cancel button.  This will cancel the reset operation. */
+"settings.alert.reset_app_settings_confirmation.button.cancel.title" = "取消";
+
+/* Reset setting alert settings Reset button.  This will continue with the reset operation. */
+"settings.alert.reset_app_settings_confirmation.button.confirm.title" = "重置";
+
+/* Reset app settings failure alert */
+"settings.alert.reset_app_settings_failure.body" = "語音無法重置。如果問題仍然存在，請重試或重新安裝 Vocable。";
+
+/* Button to dismiss the Reset app failure alert */
+"settings.alert.reset_app_settings_failure.button.ok" = "好的";
+
+/* Reset app settings success alert */
+"settings.alert.reset_app_settings_success.body" = "詞彙已成功重置。";
+
+/* Button to dismiss the Reset app success alert */
+"settings.alert.reset_app_settings_success.button.ok" = "好的";
+
+/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.body" = "您即將離開 Vocable 應用程序。您可能會失去頭部跟踪控制。";
+
 /* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.cancel.title" = "取消";
 
 /* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
 "settings.alert.surrender_gaze_confirmation.button.confirm.title" = "確認";
+
+/* edit categories settings menu item */
+"settings.cell.categories.title" = "類別和短語";
+
+/* contact developers settings menu item */
+"settings.cell.contact_developers.title" = "聯繫開發者";
+
+/* edit user's favorite phrases category settings menu item */
+"settings.cell.edit_user_favorites.title_format" = "編輯 %@";
+
+/* Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle. */
+"settings.cell.head_tracking.title" = "頭部追踪";
+
+/* Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode. */
+"settings.cell.listening_mode.title" = "聆聽模式";
+
+/* view privacy policy settings menu item */
+"settings.cell.privacy_policy.title" = "隱私政策";
+
+/* reset all settings menu item */
+"settings.cell.reset_all.title" = "重置應用設置";
+
+/* edit cursor selection mode settings menu item */
+"settings.cell.selection_mode.title" = "選擇模式";
+
+/* edit cursor timing and sensititivy settings menu item */
+"settings.cell.timing_sensitivity.title" = "時間和靈敏度";
+
+/* tune cursor debug settings menu item */
+"settings.cell.tune_cursor.title" = "調諧光標";
+
+/* Settings screen header title */
+"settings.header.title" = "設置";
+
+/* Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine. */
+"settings.listening_mode.device_unsupported_explanation_footer" = "%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。\n\n聆聽模式目前僅提供英文版本，需要啟用 %5$@。";
+
+/* Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected */
+"settings.listening_mode.hot_word_toggle_cell.title" = "“Hey Vocable”快捷方式";
+
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen. */
+"settings.listening_mode.hotword_explanation_footer" = "啟用此快捷方式後，任何人都可以說“嘿，Vocable”以提示應用導航到聆聽模式屏幕。";
+
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user. */
+"settings.listening_mode.listening_mode_explanation_footer" = "啟用聆聽模式後，任何人都可以大聲提問，Vocable 將提供一系列回答。 Vocable 支持非此即彼的問題以及可以用“是”、“否”或數字來回答的問題。";
+
+/* Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected */
+"settings.listening_mode.listening_mode_toggle_cell.title" = "聆聽模式";
+
+/* Listening Mode preferences screen title */
+"settings.listening_mode.title" = "聆聽模式";
+
+/* Additonal footer text noting heading tracking compatibility */
+"settings.selection_mode.head_tracking_unsupported_footer" = "%2$@ %3$@ 上的這個 %1$@ 不支持頭部跟踪。\n\n配備 %4$@ 攝像頭的所有設備以及配備 %6$@ 的大多數設備都支持頭部跟踪。";
+
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
+"text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "繼續編輯";
+
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
+"text_editor.alert.cancel_editing_confirmation.button.discard.title" = "丟棄";
+
+/* Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. */
+"text_editor.alert.cancel_editing_confirmation.title" = "如果您關閉而不保存，您的更改將會丟失。";
+
+/* Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title */
+"text_editor.alert.category_name_exists.cancel.button" = "取消";
+
+/* Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
+"text_editor.alert.category_name_exists.create.button" = "創建副本";
+
+/* Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category. */
+"text_editor.alert.category_name_exists.title" = "此類別名稱已存在。您想創建一個副本嗎？";
+
+/* Button option for the Curson Sensitivity setting. */
+"timing_and_sensitivity.button.high.title" = "高";
+
+/* Button option for the Curson Sensitivity setting. */
+"timing_and_sensitivity.button.low.title" = "低";
+
+/* Button option for the Curson Sensitivity setting. */
+"timing_and_sensitivity.button.medium.title" = "中等";
+
+/* Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor. */
+"timing_and_sensitivity.cell.cursor_sensitivity.title" = "光標靈敏度";
+
+/* Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5 */
+"timing_and_sensitivity.cell.dwell_duration.title" = "懸停時間";
+
+/* Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting */
+"timing_and_sensitivity.header.title" = "時間和靈敏度";
 

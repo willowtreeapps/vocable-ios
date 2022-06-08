@@ -1,6 +1,315 @@
+/* Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories */
+"categories_list_editor.header.title" = "Категории";
+
+/* (No Comment) */
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Отмена";
+
+/* (No Comment) */
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Подтвердить";
+
+/* MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere. */
+"category_editor.alert.cancel_editing_confirmation.title" = "Если вы закроете без сохранения, ваши изменения будут потеряны.";
+
+/* Delete category alert cancel button title */
+"category_editor.alert.delete_category_confirmation.button.cancel.title" = "Отмена";
+
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "Удалить";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "Удаленные категории не могут быть восстановлены.";
+
+/* Delete phrase alert cancel button title */
+"category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Отмена";
+
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Удалить";
+
+/* Delete phrase confirmation alert title */
+"category_editor.alert.delete_phrase_confirmation.title" = "Удаленные фразы не могут быть восстановлены.";
+
+/* Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited. */
+"category_editor.detail.button.edit_phrases.title" = "Редактировать фразы";
+
+/* Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation. */
+"category_editor.detail.button.remove_category.title" = "Удалить категорию";
+
+/* Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name. */
+"category_editor.detail.button.rename_category.title" = "Переименовать категорию";
+
+/* Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list. */
+"category_editor.detail.button.show_category.title" = "Показать категорию";
+
+/* changes to an existing phrase were saved successfully */
+"category_editor.toast.changes_saved.title" = "Изменения сохранены";
+
+/* Toast message that appears after saving edits made to the Category title */
+"category_editor.toast.successfully_saved.title" = "Изменения сохранены";
+
+/* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
+"empty_state.button.title" = "Добавить фразу";
+
+/* Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen. */
+"empty_state.header.title" = "У вас пока нет сохраненных фраз.";
+
+/* Cancel alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" = "Отмена";
+
+/* Confirm alert action title */
+"gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" = "Продолжить";
+
+/* Disable head tracking confirmation alert title */
+"gaze_settings.alert.disable_head_tracking_confirmation.title" = "Отключение отслеживания головы сделает приложение только сенсорным. Желаете ли вы продолжить?";
+
+/* Warning message presented to the user when the head tracking system */
+"gaze_tracking.error.excessive_head_distance.title" = "Пожалуйста, подойдите ближе к устройству.";
+
+/* Listening mode empty state message for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.message" = "Когда кто-то задает вопрос вслух, Vocable предложит варианты быстрого ответа.";
+
+/* Listening mode empty state title for when listening has began but no responses have been displayed yet */
+"listening_mode.empty_state.actively_listening.title" = "Слушаю...";
+
+/* Listen mode empty state message for when no responses could be generated */
+"listening_mode.empty_state.free_response.message" = "Не уверен, что предложить. Пожалуйста, используйте клавиатуру или выберите существующую фразу, чтобы ответить.";
+
+/* Listen mode empty state title for when no responses could be generated */
+"listening_mode.empty_state.free_response.title" = "Звучит сложно";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions. */
+"listening_mode.empty_state.microphone_permission_denied.action" = "Открыть настройки";
+
+/* Listening mode empty state message for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.message" = "Vocable должен использовать микрофон, чтобы включить режим прослушивания. Включите доступ к микрофону в системном приложении «Настройки».\n\nВы также можете отключить режим прослушивания, чтобы скрыть эту категорию в настройках Vocable.";
+
+/* Listening mode empty state title for when microphone permissions are required, but the user has denied them */
+"listening_mode.empty_state.microphone_permission_denied.title" = "Доступ к микрофону";
+
+/* Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert. */
+"listening_mode.empty_state.microphone_permission_undetermined.action" = "Предоставить доступ";
+
+/* Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.message" = "Vocable требуется доступ к микрофону, чтобы включить режим прослушивания. Кнопка ниже представляет диалоговое окно разрешений iOS, с которым не может взаимодействовать отслеживание головы Vocable.";
+
+/* Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.microphone_permission_undetermined.title" = "Доступ к микрофону";
+
+/* Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions. */
+"listening_mode.empty_state.speech_permission_denied.action" = "Открыть настройки";
+
+/* Listening mode empty state message for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.message" = "Vocable требуется распознавание речи, чтобы включить режим прослушивания. Включите распознавание речи в системном приложении «Настройки».\n\nВы также можете отключить режим прослушивания, чтобы скрыть эту категорию в настройках Vocable.";
+
+/* Listening mode empty state title for when speech recognition permissions are required, but the user has denied them */
+"listening_mode.empty_state.speech_permission_denied.title" = "Распознавание речи";
+
+/* Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert. */
+"listening_mode.empty_state.speech_permission_undetermined.action" = "Предоставить доступ";
+
+/* Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.speech_permission_undetermined.message" = "Vocable необходимо запросить разрешения на речь, чтобы включить режим прослушивания. Откроется диалоговое окно разрешений iOS, с которым не может взаимодействовать отслеживание головы Vocable.";
+
+/* Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet */
+"listening_mode.empty_state.speech_permission_undetermined.title" = "Распознавание речи";
+
+/* Listen mode error state message for when Apple's speech to text service is unavailable */
+"listening_mode.empty_state.speech_unavailable.message" = "Речевые службы требуют, чтобы на вашем устройстве была включена одна из следующих функций: Siri или Диктовка. Пожалуйста, проверьте настройки вашего устройства и включите Siri или Диктовку.";
+
+/* Listen mode error state title for when Apple's speech to text service is unavailable */
+"listening_mode.empty_state.speech_unavailable.title" = "Голосовые сервисы недоступны";
+
+/* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.message" = "Этот %1$@ на %2$@ %3$@ не поддерживает режим прослушивания.\n\nРежим прослушивания в настоящее время доступен только на английском языке и требует включения %5$@.";
+
+/* Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported */
+"listening_mode.empty_state.unsupported.title" = "Режим прослушивания не поддерживается";
+
+/* Thank you confirmation.  This text appears after sharing with developer */
+"listening_mode.feedback.confirmation.title" = "Спасибо!";
+
+/* Information text around what the Share with Deeveloper button does. */
+"listening_mode.feedback.hint.text" = "Не нравятся эти ответы? Анонимно поделитесь этим вопросом, чтобы улучшить режим прослушивания.";
+
+/* Share with Developer button.  The button appears if Listen mode could not generate a reponese. */
+"listening_mode.feedback.submit.title" = "Поделиться с разработчиками";
+
+/* Select something below to speak Hint Text */
+"main_screen.textfield_placeholder.default" = "Выберите что-нибудь ниже, чтобы говорить";
+
+/* Page indicator progress format. \"Page x of n\" */
+"paging_progress_indicator_format" = "Страница %1$d из %2$d";
+
+/* Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
+"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Продолжить редактирование";
+
+/* Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
+"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Отказаться";
+
+/* Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes. */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Если вы закроете без сохранения, ваши изменения будут потеряны.";
+
+/* Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title */
+"phrase_editor.alert.phrase_name_exists.cancel.button" = "Отмена";
+
+/* Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
+"phrase_editor.alert.phrase_name_exists.create.button" = "Создать дубликат";
+
+/* Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category. */
+"phrase_editor.alert.phrase_name_exists.title" = "Эта фраза уже существует. Хотите создать дубликат?";
+
+/* new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title */
+"phrase_editor.toast.successfully_saved_to_favorites.title_format" = "Сохранено в %@";
+
+/* Add phrase to category button title */
+"preset.category.add.phrase.title" = "Добавить фразу";
+
 /* 'No' num pad response */
 "preset.category.numberpad.phrase.no.title" = "Нет";
 
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "Да";
+
+/* Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet. */
+"recents_empty_state.body.title" = "Начните использовать Vocable, чтобы увидеть здесь свои последние использованные фразы.";
+
+/* Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet. */
+"recents_empty_state.header.title" = "Нет недавно использованных фраз";
+
+/* Selection mode setting header title */
+"selection_mode.header.title" = "Режим выбора";
+
+/* No email account configured error alert dismiss button title */
+"settings.alert.no_email_configured.button.dismiss.title" = "Хорошо";
+
+/* No email account configured error alert title */
+"settings.alert.no_email_configured.title" = "Пожалуйста, войдите в аккаунт Mail для %1$@.";
+
+/* Reset setting alert confirmation prompt */
+"settings.alert.reset_app_settings_confirmation.body" = "Вы уверены, что хотите сбросить Vocable до настроек по умолчанию? Это действие не может быть отменено.";
+
+/* Reset setting alert Cancel button.  This will cancel the reset operation. */
+"settings.alert.reset_app_settings_confirmation.button.cancel.title" = "Отмена";
+
+/* Reset setting alert settings Reset button.  This will continue with the reset operation. */
+"settings.alert.reset_app_settings_confirmation.button.confirm.title" = "Перезагрузить";
+
+/* Reset app settings failure alert */
+"settings.alert.reset_app_settings_failure.body" = "Vocable не удалось сбросить. Повторите попытку или переустановите Vocable, если проблема не устранена.";
+
+/* Button to dismiss the Reset app failure alert */
+"settings.alert.reset_app_settings_failure.button.ok" = "Хорошо";
+
+/* Reset app settings success alert */
+"settings.alert.reset_app_settings_success.body" = "Vocable успешно сброшен.";
+
+/* Button to dismiss the Reset app success alert */
+"settings.alert.reset_app_settings_success.button.ok" = "Хорошо";
+
+/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.body" = "Вы собираетесь покинуть приложение Vocable. Вы можете потерять контроль над отслеживанием головы.";
+
+/* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.cancel.title" = "Отмена";
+
+/* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Подтвердить";
+
+/* edit categories settings menu item */
+"settings.cell.categories.title" = "Категории и фразы";
+
+/* contact developers settings menu item */
+"settings.cell.contact_developers.title" = "Связаться с разработчиками";
+
+/* edit user's favorite phrases category settings menu item */
+"settings.cell.edit_user_favorites.title_format" = "Редактировать %@";
+
+/* Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle. */
+"settings.cell.head_tracking.title" = "Отслеживание головы";
+
+/* Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode. */
+"settings.cell.listening_mode.title" = "Режим прослушивания";
+
+/* view privacy policy settings menu item */
+"settings.cell.privacy_policy.title" = "Политика конфиденциальности";
+
+/* reset all settings menu item */
+"settings.cell.reset_all.title" = "Сбросить настройки приложения";
+
+/* edit cursor selection mode settings menu item */
+"settings.cell.selection_mode.title" = "Режим выбора";
+
+/* edit cursor timing and sensititivy settings menu item */
+"settings.cell.timing_sensitivity.title" = "Время и чувствительность";
+
+/* tune cursor debug settings menu item */
+"settings.cell.tune_cursor.title" = "Курсор настройки";
+
+/* Settings screen header title */
+"settings.header.title" = "Настройки";
+
+/* Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine. */
+"settings.listening_mode.device_unsupported_explanation_footer" = "Этот %1$@ на %2$@ %3$@ не поддерживает режим прослушивания.\n\nРежим прослушивания в настоящее время доступен только на английском языке и требует включения %5$@.";
+
+/* Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected */
+"settings.listening_mode.hot_word_toggle_cell.title" = "Ярлык \"Hey Vocable\"";
+
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen. */
+"settings.listening_mode.hotword_explanation_footer" = "Когда этот ярлык включен, любой может сказать «Привет, Vocable», чтобы приложение перешло к экрану режима прослушивания.";
+
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user. */
+"settings.listening_mode.listening_mode_explanation_footer" = "Когда режим прослушивания включен, любой может задать вопрос вслух, и Vocable предложит выбор ответов. Vocable поддерживает либо/или вопросы и вопросы, на которые можно ответить да, нет или число.";
+
+/* Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected */
+"settings.listening_mode.listening_mode_toggle_cell.title" = "Режим прослушивания";
+
+/* Listening Mode preferences screen title */
+"settings.listening_mode.title" = "Режим прослушивания";
+
+/* Additonal footer text noting heading tracking compatibility */
+"settings.selection_mode.head_tracking_unsupported_footer" = "Этот %1$@ на %2$@ %3$@ не поддерживает отслеживание головы.\n\nОтслеживание головы поддерживается на всех устройствах с камерой %4$@ и на большинстве устройств с %6$@.";
+
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
+"text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Продолжить редактирование";
+
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
+"text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Отказаться";
+
+/* Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. */
+"text_editor.alert.cancel_editing_confirmation.title" = "Если вы закроете без сохранения, ваши изменения будут потеряны.";
+
+/* Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title */
+"text_editor.alert.category_name_exists.cancel.button" = "Отмена";
+
+/* Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
+"text_editor.alert.category_name_exists.create.button" = "Создать дубликат";
+
+/* Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category. */
+"text_editor.alert.category_name_exists.title" = "Это название категории уже существует. Хотите создать дубликат?";
+
+/* Button option for the Curson Sensitivity setting. */
+"timing_and_sensitivity.button.high.title" = "Высокая";
+
+/* Button option for the Curson Sensitivity setting. */
+"timing_and_sensitivity.button.low.title" = "Низкий";
+
+/* Button option for the Curson Sensitivity setting. */
+"timing_and_sensitivity.button.medium.title" = "Середина";
+
+/* Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor. */
+"timing_and_sensitivity.cell.cursor_sensitivity.title" = "Чувствительность курсора";
+
+/* Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5 */
+"timing_and_sensitivity.cell.dwell_duration.title" = "Время наведения";
+
+/* Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting */
+"timing_and_sensitivity.header.title" = "Время и чувствительность";
 

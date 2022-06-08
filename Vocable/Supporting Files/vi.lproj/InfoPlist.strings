@@ -1,0 +1,9 @@
+/* Camera usage description */
+"NSCameraUsageDescription" = "Vocable sử dụng camera trước của thiết bị để phát hiện những thay đổi tối thiểu về hướng và vị trí của đầu. Điều này cho phép người dùng có khả năng di chuyển hạn chế điều khiển con trỏ trên màn hình để tương tác với ứng dụng. Dữ liệu máy ảnh được sử dụng rõ ràng để điều khiển con trỏ trên màn hình. Dữ liệu này không được lưu trữ hoặc truyền đi dưới bất kỳ hình thức nào. Vocable cần được phép sử dụng máy ảnh cho mục đích này.";
+
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "Vocable chỉ sử dụng micrô khi chế độ nghe được bật. Vocable chuyển âm thanh thành văn bản; nó không được lưu trữ hoặc truyền đi ngoại trừ khi người dùng chọn chia sẻ ẩn danh thông tin này với các nhà phát triển để giúp cải thiện chế độ lắng nghe.";
+
+/* Privacy - Speech Recognition Usage Description */
+"NSSpeechRecognitionUsageDescription" = "Khi bật chế độ nghe, Vocable sử dụng tính năng nhận dạng giọng nói để chuyển đổi dữ liệu âm thanh thành văn bản. Giọng nói đã chép sẽ không được lưu trữ hoặc truyền đi ngoại trừ khi người dùng chọn chia sẻ ẩn danh thông tin này với các nhà phát triển để giúp cải thiện chế độ nghe.";
+
