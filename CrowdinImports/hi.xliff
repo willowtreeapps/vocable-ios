@@ -186,6 +186,44 @@ You can also disable Listening Mode to hide this category in Vocable's settings.
         <target state="translated">लिसनिंग मोड को सक्षम करने के लिए Vocable को माइक्रोफ़ोन एक्सेस की आवश्यकता होती है। नीचे दिया गया बटन एक आईओएस अनुमति संवाद प्रस्तुत करता है जिसमें Vocable की हेड ट्रैकिंग इंटरैक्ट नहीं कर सकती है।</target>
         <note>Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet</note>
       </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.title" xml:space="preserve">
+        <source>Microphone Access</source>
+        <target state="translated">माइक्रोफ़ोन का ऐक्सेस</target>
+        <note>Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.action" xml:space="preserve">
+        <source>Open Settings</source>
+        <target state="translated">सेटिंग्स खोलें</target>
+        <note>Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.message" xml:space="preserve">
+        <source>Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in the system Settings app.
+
+You can also disable Listening Mode to hide this category in Vocable's settings.</source>
+        <target state="translated">Vocable को लिसनिंग मोड को सक्षम करने के लिए वाक् पहचान की आवश्यकता होती है। कृपया सिस्टम सेटिंग्स ऐप में वाक् पहचान सक्षम करें।
+
+इस श्रेणी को Vocable की सेटिंग में छिपाने के लिए आप लिसनिंग मोड को डिसेबल भी कर सकते हैं।</target>
+        <note>Listening mode empty state message for when speech recognition permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.title" xml:space="preserve">
+        <source>Speech Recognition</source>
+        <target state="translated">वाक् पहचान</target>
+        <note>Listening mode empty state title for when speech recognition permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.action" xml:space="preserve">
+        <source>Grant Access</source>
+        <target state="translated">पहुँच प्रदान करें</target>
+        <note>Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.unsupported.message" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</source>
+        <target state="translated">%2$@ %3$@ पर यह %1$@ श्रवण मोड का समर्थन नहीं करता है।
+
+लिसनिंग मोड वर्तमान में केवल अंग्रेज़ी में उपलब्ध है और %5$@ को सक्षम करने की आवश्यकता है।</target>
+        <note>Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported</note>
+      </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
         <target state="translated">संपादन जारी रखें</target>
