@@ -267,8 +267,6 @@ final class ListeningResponseViewController: VocableViewController {
             .sink { [weak self] newValue in
                 if let newValue = newValue {
                     self?.setContent(.empty(newValue.state, action: newValue.action), animated: true)
-                } else {
-                    self?.setContent(.empty(.speechServiceUnavailable), animated: true)
                 }
             }
     }
