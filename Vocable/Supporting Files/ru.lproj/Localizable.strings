@@ -1,6 +1,36 @@
+/* Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories */
+"categories_list_editor.header.title" = "Категории";
+
+/* (No Comment) */
+"category_editor.alert.cancel_editing_confirmation.button.cancel.title" = "Отмена";
+
+/* (No Comment) */
+"category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" = "Подтвердить";
+
+/* MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere. */
+"category_editor.alert.cancel_editing_confirmation.title" = "Если вы закроете без сохранения, ваши изменения будут потеряны.";
+
+/* Delete category alert cancel button title */
+"category_editor.alert.delete_category_confirmation.button.cancel.title" = "Отмена";
+
+/* Delete category alert action button title */
+"category_editor.alert.delete_category_confirmation.button.remove.title" = "Удалить";
+
+/* Delete category confirmation alert title */
+"category_editor.alert.delete_category_confirmation.title" = "Удаленные категории не могут быть восстановлены.";
+
+/* Delete phrase alert cancel button title */
+"category_editor.alert.delete_phrase_confirmation.button.cancel.title" = "Отмена";
+
+/* Delete phrase alert action button title */
+"category_editor.alert.delete_phrase_confirmation.button.delete.title" = "Удалить";
+
 /* 'No' num pad response */
 "preset.category.numberpad.phrase.no.title" = "Нет";
 
 /* 'Yes' num pad response */
 "preset.category.numberpad.phrase.yes.title" = "Да";
+
+/* Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor. */
+"timing_and_sensitivity.cell.cursor_sensitivity.title" = "Чувствительность курсора";
 
