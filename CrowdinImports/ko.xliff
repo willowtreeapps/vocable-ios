@@ -37,10 +37,203 @@
         <target state="translated">취소</target>
         <note/>
       </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
+        <source>Confirm</source>
+        <target state="translated">확인하다</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">저장하지 않고 닫으면 변경 사항이 손실됩니다.</target>
+        <note>MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">취소</target>
+        <note>Delete category alert cancel button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">제거하다</target>
+        <note>Delete category alert action button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve">
+        <source>Deleted categories cannot be recovered.</source>
+        <target state="translated">삭제된 카테고리는 복구할 수 없습니다.</target>
+        <note>Delete category confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">취소</target>
+        <note>Delete phrase alert cancel button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">제거하다</target>
+        <note>Delete phrase alert action button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.title" xml:space="preserve">
+        <source>Deleted phrases cannot be recovered.</source>
+        <target state="translated">삭제된 문구는 복구할 수 없습니다.</target>
+        <note>Delete phrase confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.edit_phrases.title" xml:space="preserve">
+        <source>Edit Phrases</source>
+        <target state="translated">문구 편집</target>
+        <note>Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.remove_category.title" xml:space="preserve">
+        <source>Remove Category</source>
+        <target state="translated">카테고리 제거</target>
+        <note>Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.rename_category.title" xml:space="preserve">
+        <source>Rename Category</source>
+        <target state="translated">범주 이름 바꾸기</target>
+        <note>Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.detail.button.show_category.title" xml:space="preserve">
+        <source>Show Category</source>
+        <target state="translated">카테고리 표시</target>
+        <note>Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.toast.changes_saved.title" xml:space="preserve">
+        <source>Changes saved</source>
+        <target state="translated">변경사항이 저장됨</target>
+        <note>changes to an existing phrase were saved successfully</note>
+      </trans-unit>
+      <trans-unit id="category_editor.toast.successfully_saved.title" xml:space="preserve">
+        <source>Changes Saved</source>
+        <target state="translated">변경 사항 저장</target>
+        <note>Toast message that appears after saving edits made to the Category title</note>
+      </trans-unit>
+      <trans-unit id="empty_state.button.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target state="translated">구문 추가</target>
+        <note>Category empty state button.  This button appears with the empty state to allow the user to add a phrase</note>
+      </trans-unit>
+      <trans-unit id="empty_state.header.title" xml:space="preserve">
+        <source>You don't have any phrases saved yet.</source>
+        <target state="translated">아직 저장된 문구가 없습니다.</target>
+        <note>Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen.</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">취소</target>
+        <note>Cancel alert action title</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Continue</source>
+        <target state="translated">계속하다</target>
+        <note>Confirm alert action title</note>
+      </trans-unit>
+      <trans-unit id="gaze_settings.alert.disable_head_tracking_confirmation.title" xml:space="preserve">
+        <source>Turning off head tracking will make the app touch mode only. Would you like to continue?</source>
+        <target state="translated">헤드 트래킹을 끄면 앱 터치 모드만 됩니다. 계속하시겠습니까?</target>
+        <note>Disable head tracking confirmation alert title</note>
+      </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
         <source>Please move closer to the device.</source>
         <target state="translated">기기에 가까이 오세요</target>
         <note>Warning message presented to the user when the head tracking system</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.actively_listening.message" xml:space="preserve">
+        <source>When someone asks a question out loud, Vocable will offer quick response options.</source>
+        <target state="translated">누군가 큰 소리로 질문하면 Vocable은 빠른 응답 옵션을 제공합니다.</target>
+        <note>Listening mode empty state message for when listening has began but no responses have been displayed yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.actively_listening.title" xml:space="preserve">
+        <source>Listening...</source>
+        <target state="translated">청취...</target>
+        <note>Listening mode empty state title for when listening has began but no responses have been displayed yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.free_response.message" xml:space="preserve">
+        <source>Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.</source>
+        <target state="translated">무엇을 제안해야 할지 잘 모르겠습니다. 키보드를 사용하거나 기존 문구를 선택하여 답장을 보내주세요.</target>
+        <note>Listen mode empty state message for when no responses could be generated</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.free_response.title" xml:space="preserve">
+        <source>Sounds complicated</source>
+        <target state="translated">복잡하게 들린다</target>
+        <note>Listen mode empty state title for when no responses could be generated</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.action" xml:space="preserve">
+        <source>Open Settings</source>
+        <target state="translated">설정 열기</target>
+        <note>Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.message" xml:space="preserve">
+        <source>Vocable needs to use the microphone to enable Listening Mode. Please enable microphone access in the system Settings app.
+
+You can also disable Listening Mode to hide this category in Vocable's settings.</source>
+        <target state="translated">Vocable은 듣기 모드를 활성화하기 위해 마이크를 사용해야 합니다. 시스템 설정 앱에서 마이크 액세스를 활성화하십시오.
+
+Vocable 설정에서 이 카테고리를 숨기기 위해 듣기 모드를 비활성화할 수도 있습니다.</target>
+        <note>Listening mode empty state message for when microphone permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_denied.title" xml:space="preserve">
+        <source>Microphone Access</source>
+        <target state="translated">마이크 액세스</target>
+        <note>Listening mode empty state title for when microphone permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.action" xml:space="preserve">
+        <source>Grant Access</source>
+        <target state="translated">액세스 권한 부여</target>
+        <note>Listen mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.message" xml:space="preserve">
+        <source>Vocable needs microphone access to enable Listening Mode. The button below presents an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="translated">Vocable은 듣기 모드를 활성화하기 위해 마이크 액세스가 필요합니다. 아래 버튼은 Vocable의 헤드 트래킹이 상호 작용할 수 없는 iOS 권한 대화 상자를 나타냅니다.</target>
+        <note>Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.microphone_permission_undetermined.title" xml:space="preserve">
+        <source>Microphone Access</source>
+        <target state="translated">마이크 액세스</target>
+        <note>Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.action" xml:space="preserve">
+        <source>Open Settings</source>
+        <target state="translated">설정 열기</target>
+        <note>Listen mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.message" xml:space="preserve">
+        <source>Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in the system Settings app.
+
+You can also disable Listening Mode to hide this category in Vocable's settings.</source>
+        <target state="translated">Vocable은 듣기 모드를 활성화하기 위해 음성 인식이 필요합니다. 시스템 설정 앱에서 음성 인식을 활성화하십시오.
+
+Vocable 설정에서 이 카테고리를 숨기기 위해 듣기 모드를 비활성화할 수도 있습니다.</target>
+        <note>Listening mode empty state message for when speech recognition permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_denied.title" xml:space="preserve">
+        <source>Speech Recognition</source>
+        <target state="translated">음성 인식</target>
+        <note>Listening mode empty state title for when speech recognition permissions are required, but the user has denied them</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.action" xml:space="preserve">
+        <source>Grant Access</source>
+        <target state="translated">액세스 권한 부여</target>
+        <note>Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert.</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.message" xml:space="preserve">
+        <source>Vocable needs to request speech permissions to enable Listening Mode. This will present an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="translated">Vocable은 듣기 모드를 활성화하기 위해 음성 권한을 요청해야 합니다. 이것은 Vocable의 헤드 트래킹이 상호 작용할 수 없는 iOS 권한 대화 상자를 표시합니다.</target>
+        <note>Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_permission_undetermined.title" xml:space="preserve">
+        <source>Speech Recognition</source>
+        <target state="translated">음성 인식</target>
+        <note>Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_unavailable.message" xml:space="preserve">
+        <source>Speech services require one of the following features to be enabled on your device: Siri or Dictation. Please check your device settings and enable Siri or Dictation.</source>
+        <target state="translated">음성 서비스를 사용하려면 장치에서 Siri 또는 받아쓰기 기능 중 하나를 활성화해야 합니다. 장치 설정을 확인하고 Siri 또는 받아쓰기를 활성화하십시오.</target>
+        <note>Listen mode error state message for when Apple's speech to text service is unavailable</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.speech_unavailable.title" xml:space="preserve">
+        <source>Speech services unavailable</source>
+        <target state="translated">음성 서비스 이용 불가</target>
+        <note>Listen mode error state title for when Apple's speech to text service is unavailable</note>
       </trans-unit>
       <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
         <source>Privacy Policy</source>
