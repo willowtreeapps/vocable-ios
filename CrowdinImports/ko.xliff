@@ -280,15 +280,280 @@ Listening Mode is currently only available in English and requires %5$@ to be en
         <note>Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
    Pressing the button will allow editing the category title.</note>
       </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
+        <source>Discard</source>
+        <target state="translated">버리다</target>
+        <note>Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">저장하지 않고 닫으면 변경 사항이 손실됩니다.</target>
+        <note>Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">취소</target>
+        <note>Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target state="translated">중복 생성</target>
+        <note>Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.alert.phrase_name_exists.title" xml:space="preserve">
+        <source>This phrase already exists. Would you like to create a duplicate?</source>
+        <target state="translated">이 문구는 이미 존재합니다. 복제본을 생성하시겠습니까?</target>
+        <note>Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category.</note>
+      </trans-unit>
+      <trans-unit id="phrase_editor.toast.successfully_saved_to_favorites.title_format" xml:space="preserve">
+        <source>Saved to %@</source>
+        <target state="translated">%@에 저장됨</target>
+        <note>new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title</note>
+      </trans-unit>
+      <trans-unit id="preset.category.add.phrase.title" xml:space="preserve">
+        <source>Add Phrase</source>
+        <target state="translated">구문 추가</target>
+        <note>Add phrase to category button title</note>
+      </trans-unit>
+      <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
+        <source>No</source>
+        <target state="translated">아니오</target>
+        <note>'No' num pad response</note>
+      </trans-unit>
+      <trans-unit id="preset.category.numberpad.phrase.yes.title" xml:space="preserve">
+        <source>Yes</source>
+        <target state="translated">예</target>
+        <note>'Yes' num pad response</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.body.title" xml:space="preserve">
+        <source>Start using Vocable to see your most recently used phrases here.</source>
+        <target state="translated">여기에서 가장 최근에 사용한 문구를 보려면 Vocable을 사용하세요.</target>
+        <note>Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet.</note>
+      </trans-unit>
+      <trans-unit id="recents_empty_state.header.title" xml:space="preserve">
+        <source>No recently used phrases</source>
+        <target state="translated">최근에 사용한 문구가 없습니다</target>
+        <note>Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet.</note>
+      </trans-unit>
+      <trans-unit id="selection_mode.header.title" xml:space="preserve">
+        <source>Selection Mode</source>
+        <target state="translated">선택 모드</target>
+        <note>Selection mode setting header title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.no_email_configured.button.dismiss.title" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">확인</target>
+        <note>No email account configured error alert dismiss button title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.no_email_configured.title" xml:space="preserve">
+        <source>Please sign into an account with Mail for %1$@.</source>
+        <target state="translated">%1$@의 Mail 계정에 로그인하십시오.</target>
+        <note>No email account configured error alert title</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.body" xml:space="preserve">
+        <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
+        <target state="translated">Vocable을 기본 설정으로 재설정하시겠습니까? 이 작업은 취소할 수 없습니다.</target>
+        <note>Reset setting alert confirmation prompt</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">취소</target>
+        <note>Reset setting alert Cancel button.  This will cancel the reset operation.</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Reset</source>
+        <target state="translated">초기화</target>
+        <note>Reset setting alert settings Reset button.  This will continue with the reset operation.</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.body" xml:space="preserve">
+        <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
+        <target state="translated">음성을 재설정하지 못했습니다. 다시 시도하거나 문제가 지속되면 Vocable을 다시 설치하십시오.</target>
+        <note>Reset app settings failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_failure.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">확인</target>
+        <note>Button to dismiss the Reset app failure alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.body" xml:space="preserve">
+        <source>Vocable has been reset successfully.</source>
+        <target state="translated">음성이 성공적으로 재설정되었습니다.</target>
+        <note>Reset app settings success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.reset_app_settings_success.button.ok" xml:space="preserve">
+        <source>OK</source>
+        <target state="translated">확인</target>
+        <note>Button to dismiss the Reset app success alert</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.body" xml:space="preserve">
+        <source>You're about to leave the Vocable app. You may lose head tracking control.</source>
+        <target state="translated">Vocable 앱을 종료하려고 합니다. 머리 추적 제어를 잃을 수 있습니다.</target>
+        <note>body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">취소</target>
+        <note>Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app</note>
+      </trans-unit>
+      <trans-unit id="settings.alert.surrender_gaze_confirmation.button.confirm.title" xml:space="preserve">
+        <source>Confirm</source>
+        <target state="translated">확인하다</target>
+        <note>Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.categories.title" xml:space="preserve">
+        <source>Categories and Phrases</source>
+        <target state="translated">카테고리 및 구문</target>
+        <note>edit categories settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.contact_developers.title" xml:space="preserve">
+        <source>Contact Developers</source>
+        <target state="translated">개발자에게 문의</target>
+        <note>contact developers settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.edit_user_favorites.title_format" xml:space="preserve">
+        <source>Edit %@</source>
+        <target state="translated">편집하다 %@</target>
+        <note>edit user's favorite phrases category settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve">
+        <source>Head Tracking</source>
+        <target state="translated">헤드 트래킹</target>
+        <note>Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.listening_mode.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">듣기 모드</target>
+        <note>Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode.</note>
+      </trans-unit>
       <trans-unit id="settings.cell.privacy_policy.title" xml:space="preserve">
         <source>Privacy Policy</source>
         <target state="translated">개인정보 취급 약관</target>
         <note>view privacy policy settings menu item</note>
       </trans-unit>
+      <trans-unit id="settings.cell.reset_all.title" xml:space="preserve">
+        <source>Reset App Settings</source>
+        <target state="translated">앱 설정 재설정</target>
+        <note>reset all settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.selection_mode.title" xml:space="preserve">
+        <source>Selection Mode</source>
+        <target state="translated">선택 모드</target>
+        <note>edit cursor selection mode settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.timing_sensitivity.title" xml:space="preserve">
+        <source>Timing and Sensitivity</source>
+        <target state="translated">타이밍과 감도</target>
+        <note>edit cursor timing and sensititivy settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.tune_cursor.title" xml:space="preserve">
+        <source>Tune Cursor</source>
+        <target state="translated">커서 조정</target>
+        <note>tune cursor debug settings menu item</note>
+      </trans-unit>
       <trans-unit id="settings.header.title" xml:space="preserve">
         <source>Settings</source>
         <target state="translated">설정</target>
         <note>Settings screen header title</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.device_unsupported_explanation_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %5$@ to be enabled.</source>
+        <target state="translated">%2$@ %3$@의 이 %1$@은(는) 듣기 모드를 지원하지 않습니다.
+
+듣기 모드는 현재 영어로만 제공되며 %5$@를 활성화해야 합니다.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.hot_word_toggle_cell.title" xml:space="preserve">
+        <source>"Hey Vocable" shortcut</source>
+        <target state="translated">"Hey Vocable" 단축키</target>
+        <note>Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.hotword_explanation_footer" xml:space="preserve">
+        <source>When this shortcut is enabled, anyone can say "Hey, Vocable" to prompt the app to navigate to the listening mode screen.</source>
+        <target state="translated">이 바로 가기가 활성화되면 누구나 "Hey, Vocable"이라고 말하여 앱이 청취 모드 화면으로 이동하도록 요청할 수 있습니다.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.listening_mode_explanation_footer" xml:space="preserve">
+        <source>When listening mode is enabled, anyone can ask a question out loud and Vocable will offer a selection of responses. Vocable supports either/or questions and questions that can be answered with yes, no, or a number.</source>
+        <target state="translated">듣기 모드가 활성화되면 누구든지 큰 소리로 질문할 수 있으며 Vocable은 선택한 응답을 제공합니다. Vocable은 예, 아니오 또는 숫자로 대답할 수 있는 질문 및 질문 중 하나를 지원합니다.</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.listening_mode_toggle_cell.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">듣기 모드</target>
+        <note>Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.title" xml:space="preserve">
+        <source>Listening Mode</source>
+        <target state="translated">듣기 모드</target>
+        <note>Listening Mode preferences screen title</note>
+      </trans-unit>
+      <trans-unit id="settings.selection_mode.head_tracking_unsupported_footer" xml:space="preserve">
+        <source>This %1$@ on %2$@ %3$@ does not support head tracking.
+
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.</source>
+        <target state="translated">%2$@ %3$@의 이 %1$@은(는) 머리 추적을 지원하지 않습니다.
+
+머리 추적은 %4$@ 카메라가 있는 모든 장치와 %6$@가 있는 대부분의 장치에서 지원됩니다.</target>
+        <note>Additonal footer text noting heading tracking compatibility</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
+        <source>Continue Editing</source>
+        <target state="translated">계속 편집</target>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.discard.title" xml:space="preserve">
+        <source>Discard</source>
+        <target state="translated">버리다</target>
+        <note>Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">저장하지 않고 닫으면 변경 사항이 손실됩니다.</target>
+        <note>Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.cancel.button" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">취소</target>
+        <note>Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.create.button" xml:space="preserve">
+        <source>Create Duplicate</source>
+        <target state="translated">중복 생성</target>
+        <note>Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</note>
+      </trans-unit>
+      <trans-unit id="text_editor.alert.category_name_exists.title" xml:space="preserve">
+        <source>This category name already exists. Would you like to create a duplicate?</source>
+        <target state="translated">이 카테고리 이름은 이미 존재합니다. 복제본을 생성하시겠습니까?</target>
+        <note>Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.high.title" xml:space="preserve">
+        <source>High</source>
+        <target state="translated">높은</target>
+        <note>Button option for the Curson Sensitivity setting.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.low.title" xml:space="preserve">
+        <source>Low</source>
+        <target state="translated">낮음</target>
+        <note>Button option for the Curson Sensitivity setting.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.button.medium.title" xml:space="preserve">
+        <source>Medium</source>
+        <target state="translated">중간 서체</target>
+        <note>Button option for the Curson Sensitivity setting.</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve">
+        <source>Cursor Sensitivity</source>
+        <target state="translated">커서 감도</target>
+        <note>Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor.</note>
       </trans-unit>
       <trans-unit id="timing_and_sensitivity.cell.dwell_duration.title" xml:space="preserve">
         <source>Hover Time</source>
