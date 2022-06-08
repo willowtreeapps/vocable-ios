@@ -139,6 +139,164 @@
 /* Page indicator progress format. \"Page x of n\" */
 "paging_progress_indicator_format" = "Trang %1$d / %2$d";
 
+/* Button in the Phrase close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
+"phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Tiếp tục chỉnh sửa";
+
+/* Button in the edit Phrase close confirmation.  This buton appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
+"phrase_editor.alert.cancel_editing_confirmation.button.discard.title" = "Bỏ đi";
+
+/* Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes. */
+"phrase_editor.alert.cancel_editing_confirmation.title" = "Nếu bạn đóng mà không lưu, các thay đổi của bạn sẽ bị mất.";
+
+/* Duplicate Phrase alert cancel button.  Text on this button appears on an alert where a duplicate phrase is being created.
+   Pressing the button will allow continuing to edit category title */
+"phrase_editor.alert.phrase_name_exists.cancel.button" = "Hủy bỏ";
+
+/* Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
+"phrase_editor.alert.phrase_name_exists.create.button" = "Tạo bản sao";
+
+/* Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category. */
+"phrase_editor.alert.phrase_name_exists.title" = "Cụm từ này đã tồn tại. Bạn có muốn tạo một bản sao không?";
+
+/* new entry saved to user favorites category
+   Saved to user favorites category
+   Saved to user favorites category toast title */
+"phrase_editor.toast.successfully_saved_to_favorites.title_format" = "Đã lưu vào %@";
+
+/* Add phrase to category button title */
+"preset.category.add.phrase.title" = "Thêm cụm từ";
+
+/* 'No' num pad response */
+"preset.category.numberpad.phrase.no.title" = "Không";
+
+/* 'Yes' num pad response */
+"preset.category.numberpad.phrase.yes.title" = "Đúng";
+
+/* Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet. */
+"recents_empty_state.body.title" = "Bắt đầu sử dụng Vocable để xem các cụm từ được sử dụng gần đây nhất của bạn tại đây.";
+
+/* Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet. */
+"recents_empty_state.header.title" = "Không có cụm từ được sử dụng gần đây";
+
+/* Selection mode setting header title */
+"selection_mode.header.title" = "Chế độ Lựa chọn";
+
+/* No email account configured error alert dismiss button title */
+"settings.alert.no_email_configured.button.dismiss.title" = "OK";
+
+/* No email account configured error alert title */
+"settings.alert.no_email_configured.title" = "Please sign into an account with Mail for %1$@.";
+
+/* Reset setting alert confirmation prompt */
+"settings.alert.reset_app_settings_confirmation.body" = "Bạn có chắc chắn muốn đặt lại Vocable về cài đặt mặc định không? Hành động này không thể được hoàn tác.";
+
+/* Reset setting alert Cancel button.  This will cancel the reset operation. */
+"settings.alert.reset_app_settings_confirmation.button.cancel.title" = "Hủy bỏ";
+
+/* Reset setting alert settings Reset button.  This will continue with the reset operation. */
+"settings.alert.reset_app_settings_confirmation.button.confirm.title" = "Cài lại";
+
+/* Reset app settings failure alert */
+"settings.alert.reset_app_settings_failure.body" = "Không thể đặt lại Vocable. Vui lòng thử lại hoặc cài đặt lại Vocable nếu sự cố vẫn tiếp diễn.";
+
+/* Button to dismiss the Reset app failure alert */
+"settings.alert.reset_app_settings_failure.button.ok" = "OK";
+
+/* Reset app settings success alert */
+"settings.alert.reset_app_settings_success.body" = "Vocable đã được đặt lại thành công.";
+
+/* Button to dismiss the Reset app success alert */
+"settings.alert.reset_app_settings_success.button.ok" = "OK";
+
+/* body of alert presented when user is about to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.body" = "Bạn sắp rời khỏi ứng dụng Vocable. Bạn có thể mất kiểm soát theo dõi đầu.";
+
+/* Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.cancel.title" = "Hủy bỏ";
+
+/* Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app */
+"settings.alert.surrender_gaze_confirmation.button.confirm.title" = "Xác nhận";
+
+/* edit categories settings menu item */
+"settings.cell.categories.title" = "Danh mục và Cụm từ";
+
+/* contact developers settings menu item */
+"settings.cell.contact_developers.title" = "Danh mục và Cụm từ";
+
+/* edit user's favorite phrases category settings menu item */
+"settings.cell.edit_user_favorites.title_format" = "Chỉnh sửa %@";
+
+/* Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle. */
+"settings.cell.head_tracking.title" = "Theo dõi đầu";
+
+/* Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode. */
+"settings.cell.listening_mode.title" = "Chế độ nghe";
+
+/* view privacy policy settings menu item */
+"settings.cell.privacy_policy.title" = "Chính sách bảo mật";
+
+/* reset all settings menu item */
+"settings.cell.reset_all.title" = "Đặt lại cài đặt ứng dụng";
+
+/* edit cursor selection mode settings menu item */
+"settings.cell.selection_mode.title" = "Chế độ Lựa chọn";
+
+/* edit cursor timing and sensititivy settings menu item */
+"settings.cell.timing_sensitivity.title" = "Thời gian và độ nhạy";
+
+/* tune cursor debug settings menu item */
+"settings.cell.tune_cursor.title" = "Điều chỉnh con trỏ";
+
+/* Settings screen header title */
+"settings.header.title" = "Cài đặt";
+
+/* Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine. */
+"settings.listening_mode.device_unsupported_explanation_footer" = "%1$@ trên %2$@ %3$@ này không hỗ trợ Chế độ nghe.\n\nChế độ nghe hiện chỉ khả dụng bằng tiếng Anh và yêu cầu bật %5$@.";
+
+/* Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected */
+"settings.listening_mode.hot_word_toggle_cell.title" = "Phím tắt \"Hey Vocable\"";
+
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen. */
+"settings.listening_mode.hotword_explanation_footer" = "Khi phím tắt này được bật, bất kỳ ai cũng có thể nói \"Hey, Vocable\" để nhắc ứng dụng điều hướng đến màn hình chế độ nghe.";
+
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user. */
+"settings.listening_mode.listening_mode_explanation_footer" = "Khi chế độ nghe được bật, bất kỳ ai cũng có thể đặt câu hỏi thành tiếng và Vocable sẽ đưa ra lựa chọn câu trả lời. Vocable hỗ trợ hoặc / hoặc các câu hỏi và câu hỏi có thể được trả lời bằng có, không hoặc một số.";
+
+/* Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected */
+"settings.listening_mode.listening_mode_toggle_cell.title" = "Chế độ nghe";
+
+/* Listening Mode preferences screen title */
+"settings.listening_mode.title" = "Chế độ nghe";
+
+/* Additonal footer text noting heading tracking compatibility */
+"settings.selection_mode.head_tracking_unsupported_footer" = "%1$@ trên %2$@ %3$@ này không hỗ trợ theo dõi phần đầu.\n\nTheo dõi đầu được hỗ trợ trên tất cả các thiết bị có camera %4$@ và trên hầu hết các thiết bị có %6$@.";
+
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will allow editing the category title. */
+"text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" = "Tiếp tục chỉnh sửa";
+
+/* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
+   Pressing the button will not save any changes and close the keyboard view. */
+"text_editor.alert.cancel_editing_confirmation.button.discard.title" = "Bỏ đi";
+
+/* Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. */
+"text_editor.alert.cancel_editing_confirmation.title" = "Nếu bạn đóng mà không lưu, các thay đổi của bạn sẽ bị mất.";
+
+/* Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title */
+"text_editor.alert.category_name_exists.cancel.button" = "Hủy bỏ";
+
+/* Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title. */
+"text_editor.alert.category_name_exists.create.button" = "Tạo bản sao";
+
+/* Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category. */
+"text_editor.alert.category_name_exists.title" = "Tên thể loại này đã tồn tại. Bạn có muốn tạo một bản sao không?";
+
+/* Button option for the Curson Sensitivity setting. */
+"timing_and_sensitivity.button.high.title" = "Cao";
+
 /* Button option for the Curson Sensitivity setting. */
 "timing_and_sensitivity.button.low.title" = "Thấp";
 
