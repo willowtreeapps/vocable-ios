@@ -5,11 +5,21 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
-      
-      
-      
-      
-      
+      <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
+        <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
+        <target state="translated">Vocable은 장치의 전면 카메라를 사용하여 머리 방향 및 위치의 최소한의 변경을 감지합니다. 이를 통해 거동이 불편한 사용자가 화면 포인터를 제어하여 앱과 상호 작용할 수 있습니다. 카메라 데이터는 화면 포인터를 제어하는 ​​데 명시적으로 사용됩니다. 이 데이터는 어떤 방식으로도 저장되거나 전송되지 않습니다. Vocable은 이 용도로 카메라를 사용하기 위해 권한이 필요합니다.</target>
+        <note>Camera usage description</note>
+      </trans-unit>
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
+        <source>Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Vocable은 듣기 모드가 활성화된 경우에만 마이크를 사용합니다. Vocable은 오디오를 텍스트로 변환합니다. 사용자가 청취 모드를 개선하는 데 도움이 되도록 이 정보를 개발자와 익명으로 공유하기로 선택한 경우를 제외하고는 저장되거나 전송되지 않습니다.</target>
+        <note>Privacy - Microphone Usage Description</note>
+      </trans-unit>
+      <trans-unit id="NSSpeechRecognitionUsageDescription" xml:space="preserve">
+        <source>When listening mode is enabled, Vocable uses speech recognition to convert audio data into text. Transcribed speech is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">듣기 모드가 활성화되면 Vocable은 음성 인식을 사용하여 오디오 데이터를 텍스트로 변환합니다. 녹음된 음성은 사용자가 듣기 모드를 개선하기 위해 개발자와 익명으로 이 정보를 공유하기로 선택한 경우를 제외하고는 저장되거나 전송되지 않습니다.</target>
+        <note>Privacy - Speech Recognition Usage Description</note>
+      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="ko" datatype="plaintext">
@@ -17,6 +27,16 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
+      <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
+        <source>Categories</source>
+        <target state="translated">카테고리</target>
+        <note>Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">취소</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="gaze_tracking.error.excessive_head_distance.title" xml:space="preserve">
         <source>Please move closer to the device.</source>
         <target state="translated">기기에 가까이 오세요</target>
