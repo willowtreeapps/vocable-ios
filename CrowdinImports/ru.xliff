@@ -5,11 +5,21 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
-      
-      
-      
-      
-      
+      <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
+        <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
+        <target state="translated">Vocable использует переднюю камеру вашего устройства для обнаружения минимальных изменений в ориентации и положении головы. Это позволяет пользователям с ограниченной подвижностью управлять указателем на экране для взаимодействия с приложением. Данные камеры используются специально для управления указателем на экране. Эти данные никак не хранятся и не передаются. Vocable требуется разрешение на использование камеры для этой цели.</target>
+        <note>Camera usage description</note>
+      </trans-unit>
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
+        <source>Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Vocable использует микрофон только при включенном режиме прослушивания. Vocable транскрибирует звук в текст; она не сохраняется и не передается, за исключением случаев, когда пользователь решает анонимно поделиться этой информацией с разработчиками, чтобы помочь улучшить режим прослушивания.</target>
+        <note>Privacy - Microphone Usage Description</note>
+      </trans-unit>
+      <trans-unit id="NSSpeechRecognitionUsageDescription" xml:space="preserve">
+        <source>When listening mode is enabled, Vocable uses speech recognition to convert audio data into text. Transcribed speech is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="translated">Когда режим прослушивания включен, Vocable использует распознавание речи для преобразования аудиоданных в текст. Записанная речь не сохраняется и не передается, за исключением случаев, когда пользователь решает анонимно поделиться этой информацией с разработчиками, чтобы помочь улучшить режим прослушивания.</target>
+        <note>Privacy - Speech Recognition Usage Description</note>
+      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="ru" datatype="plaintext">
@@ -17,6 +27,51 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
+      <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
+        <source>Categories</source>
+        <target state="translated">Категории</target>
+        <note>Categories Header title.  This text appears in the Settings flow when navigating to the list of Categories</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Отмена</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.button.confirm_exit.title" xml:space="preserve">
+        <source>Confirm</source>
+        <target state="translated">Подтвердить</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.cancel_editing_confirmation.title" xml:space="preserve">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="translated">Если вы закроете без сохранения, ваши изменения будут потеряны.</target>
+        <note>MARK: Category_editor.alert.cancel... doesn't seem to be used anywhere.</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Отмена</target>
+        <note>Delete category alert cancel button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.button.remove.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">Удалить</target>
+        <note>Delete category alert action button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_category_confirmation.title" xml:space="preserve">
+        <source>Deleted categories cannot be recovered.</source>
+        <target state="translated">Удаленные категории не могут быть восстановлены.</target>
+        <note>Delete category confirmation alert title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.cancel.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Отмена</target>
+        <note>Delete phrase alert cancel button title</note>
+      </trans-unit>
+      <trans-unit id="category_editor.alert.delete_phrase_confirmation.button.delete.title" xml:space="preserve">
+        <source>Remove</source>
+        <target state="translated">Удалить</target>
+        <note>Delete phrase alert action button title</note>
+      </trans-unit>
       <trans-unit id="preset.category.numberpad.phrase.no.title" xml:space="preserve">
         <source>No</source>
         <target state="translated">Нет</target>
@@ -26,6 +81,11 @@
         <source>Yes</source>
         <target state="translated">Да</target>
         <note>'Yes' num pad response</note>
+      </trans-unit>
+      <trans-unit id="timing_and_sensitivity.cell.cursor_sensitivity.title" xml:space="preserve">
+        <source>Cursor Sensitivity</source>
+        <target state="translated">Чувствительность курсора</target>
+        <note>Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor.</note>
       </trans-unit>
     </body>
   </file>
