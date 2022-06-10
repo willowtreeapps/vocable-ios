@@ -1,3 +1,9 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "Vocable";
+
+/* Bundle name */
+"CFBundleName" = "Vocable";
+
 /* Camera usage description */
 "NSCameraUsageDescription" = "Vocable은 장치의 전면 카메라를 사용하여 머리 방향 및 위치의 최소한의 변경을 감지합니다. 이를 통해 거동이 불편한 사용자가 화면 포인터를 제어하여 앱과 상호 작용할 수 있습니다. 카메라 데이터는 화면 포인터를 제어하는 ​​데 명시적으로 사용됩니다. 이 데이터는 어떤 방식으로도 저장되거나 전송되지 않습니다. Vocable은 이 용도로 카메라를 사용하기 위해 권한이 필요합니다.";
 
