@@ -5,6 +5,16 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
+      <trans-unit id="CFBundleDisplayName" xml:space="preserve">
+        <source>Vocable</source>
+        <target state="translated">Vocable</target>
+        <note>Bundle display name</note>
+      </trans-unit>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>Vocable</source>
+        <target state="translated">Vocable</target>
+        <note>Bundle name</note>
+      </trans-unit>
       <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
         <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
         <target state="translated">Vocable은 장치의 전면 카메라를 사용하여 머리 방향 및 위치의 최소한의 변경을 감지합니다. 이를 통해 거동이 불편한 사용자가 화면 포인터를 제어하여 앱과 상호 작용할 수 있습니다. 카메라 데이터는 화면 포인터를 제어하는 ​​데 명시적으로 사용됩니다. 이 데이터는 어떤 방식으로도 저장되거나 전송되지 않습니다. Vocable은 이 용도로 카메라를 사용하기 위해 권한이 필요합니다.</target>

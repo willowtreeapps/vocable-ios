@@ -1,3 +1,9 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "Vocable";
+
+/* Bundle name */
+"CFBundleName" = "Vocable";
+
 /* Camera usage description */
 "NSCameraUsageDescription" = "Vocable sử dụng camera trước của thiết bị để phát hiện những thay đổi tối thiểu về hướng và vị trí của đầu. Điều này cho phép người dùng có khả năng di chuyển hạn chế điều khiển con trỏ trên màn hình để tương tác với ứng dụng. Dữ liệu máy ảnh được sử dụng rõ ràng để điều khiển con trỏ trên màn hình. Dữ liệu này không được lưu trữ hoặc truyền đi dưới bất kỳ hình thức nào. Vocable cần được phép sử dụng máy ảnh cho mục đích này.";
 

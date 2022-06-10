@@ -1,3 +1,9 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "Vocable";
+
+/* Bundle name */
+"CFBundleName" = "Vocable";
+
 /* Camera usage description */
 "NSCameraUsageDescription" = "Vocable 使用设备的前置摄像头来检测头部方向和位置的最小变化。这使行动不便的用户能够控制屏幕指针与应用程序交互。相机数据明确用于控制屏幕指针。这些数据不会以任何方式存储或传输。为此，您需要获得使用相机的权限。";
 
