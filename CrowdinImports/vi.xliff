@@ -5,6 +5,16 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
     </header>
     <body>
+      <trans-unit id="CFBundleDisplayName" xml:space="preserve">
+        <source>Vocable</source>
+        <target state="translated">Vocable</target>
+        <note>Bundle display name</note>
+      </trans-unit>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>Vocable</source>
+        <target state="translated">Vocable</target>
+        <note>Bundle name</note>
+      </trans-unit>
       <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
         <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
         <target state="translated">Vocable sử dụng camera trước của thiết bị để phát hiện những thay đổi tối thiểu về hướng và vị trí của đầu. Điều này cho phép người dùng có khả năng di chuyển hạn chế điều khiển con trỏ trên màn hình để tương tác với ứng dụng. Dữ liệu máy ảnh được sử dụng rõ ràng để điều khiển con trỏ trên màn hình. Dữ liệu này không được lưu trữ hoặc truyền đi dưới bất kỳ hình thức nào. Vocable cần được phép sử dụng máy ảnh cho mục đích này.</target>
@@ -825,7 +835,7 @@ Theo dõi đầu được hỗ trợ trên tất cả các thiết bị có came
       </trans-unit>
       <trans-unit id="preset_BEE6FF86-CE30-4096-9E37-C469F63630B7" xml:space="preserve">
         <source>I didn't mean to say that</source>
-        <target state="translated">I didn't mean to say that</target>
+        <target state="translated">Tôi không cố ý nói điều đó</target>
         <note/>
       </trans-unit>
       <trans-unit id="preset_C0B2A1A8-8333-4121-B4A8-FFFA185EB5D2" xml:space="preserve">
