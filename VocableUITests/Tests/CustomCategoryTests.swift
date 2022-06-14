@@ -70,4 +70,40 @@ class CustomCategoryTests: CustomCategoryBaseTest {
         XCTAssertFalse(SettingsScreen.doesCategoryExist(customCategoryName))
     }
   
+    func testCanHideCategory() {
+        // Verify that custom category is created
+        XCTAssertTrue(SettingsScreen.doesCategoryExist(customCategoryName))
+        
+        // Verify that custom category appears on the main screen
+        CustomCategoriesScreen.returnToMainScreenFromCategoriesList()
+        XCTAssertTrue(MainScreen.locateAndSelectCustomCategory(customCategoryName))
+        
+        // Hide the custom category
+        SettingsScreen.navigateToSettingsCategoryScreen()
+        SettingsScreen.openCategorySettings(category: customCategoryName)
+        SettingsScreen.showCategoryButton.tap()
+        SettingsScreen.navBarBackButton.tap()
+        
+        // Verify that when the category is hidden, up and down buttons are disabled.
+        let hiddenCategory = SettingsScreen.locateCategoryCell(customCategoryName)
+        XCTAssertFalse(hiddenCategory.buttons[.settings.editCategories.moveUpButton].isEnabled)
+        XCTAssertFalse(hiddenCategory.buttons[.settings.editCategories.moveDownButton].isEnabled)
+        XCTAssertTrue(hiddenCategory.element.isEnabled)
+
+        // Verify that custom category doesn't appear on the main screen
+        CustomCategoriesScreen.returnToMainScreenFromCategoriesList()
+        XCTAssertFalse(MainScreen.locateAndSelectCustomCategory(customCategoryName))
+        
+        // Show the custom category
+        SettingsScreen.navigateToSettingsCategoryScreen()
+        SettingsScreen.openCategorySettings(category: customCategoryName)
+        SettingsScreen.showCategoryButton.tap()
+        SettingsScreen.navBarBackButton.tap()
+        
+        // Verify that when the category is shown, up button is enabled and down button is disabled.
+        let shownCategory = SettingsScreen.locateCategoryCell(customCategoryName)
+        XCTAssertTrue(shownCategory.buttons[.settings.editCategories.moveUpButton].isEnabled)
+        XCTAssertFalse(shownCategory.buttons[.settings.editCategories.moveDownButton].isEnabled)
+        XCTAssertTrue(shownCategory.element.isEnabled)
+    }
 }

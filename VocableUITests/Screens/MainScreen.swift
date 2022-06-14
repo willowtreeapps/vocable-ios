@@ -58,6 +58,29 @@ class MainScreen: BaseScreen {
         return false
     }
     
+    @discardableResult
+    static func locateAndSelectCustomCategory(_ destinationCategory: String) -> Bool {
+        let destinationCell = app.cells.staticTexts[destinationCategory]
+        let isSelectedPredicate = NSPredicate(format: "isSelected == true")
+        
+        // Return the selected category's full identifier
+        let query = XCUIApplication().cells.containing(isSelectedPredicate)
+        let selectedCell = app.cells[query.element.identifier]
+        
+        repeat {
+            
+            if (destinationCell.exists) {
+                destinationCell.tap()
+                return true
+            }
+            categoryForwardButton.tap()
+           
+            // We break the loop when we return to our original starting point
+        } while (!selectedCell.waitForExistence(timeout: 0.5))
+        
+        return false
+    }
+    
     /// Assuming there is at least one page of phrases within a category, locate the cell containing the given phrase.
     static func locatePhraseCell(phrase: String) -> XCUIElement {
         let predicate = NSPredicate(format: "label MATCHES %@", phrase)
