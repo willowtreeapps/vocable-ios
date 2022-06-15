@@ -87,7 +87,7 @@ class SettingsScreen: BaseScreen {
     
     static func navigateToSettingsCategoryScreen() {
         MainScreen.settingsButton.tap(afterWaitingForExistenceWithTimeout: 2)
-        categoriesAndPhrasesCell.tap(afterWaitingForExistenceWithTimeout: 2)
+        categoriesAndPhrasesCell.tap(afterWaitingForExistenceWithTimeout: 3)
         _ = addCategoryButton.waitForExistence(timeout: 0.5)
     }
     
