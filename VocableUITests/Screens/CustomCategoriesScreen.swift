@@ -25,7 +25,7 @@ class CustomCategoriesScreen: BaseScreen {
     }
     
     static func createCustomCategory(categoryName: String) {
-        SettingsScreen.addCategoryButton.tap()
+        SettingsScreen.addCategoryButton.tap(afterWaitingForExistenceWithTimeout: 0.5)
         KeyboardScreen.typeText(categoryName)
         KeyboardScreen.checkmarkAddButton.tap()
     }
@@ -71,6 +71,15 @@ class CustomCategoriesScreen: BaseScreen {
     static func returnToMainScreenFromEditPhrases() {
         navBarBackButton.tap()
         returnToMainScreenFromCategoryDetails()
+    }
+    
+    static func navigateToSettingsCategoryScreenFromCategoryEditPhrases() {
+        // Exit the Edit Phrases and Category Detail Screens
+        navBarBackButton.tap(afterWaitingForExistenceWithTimeout: 0.5)
+        navBarBackButton.tap(afterWaitingForExistenceWithTimeout: 0.5)
+        
+        // Wait for the Categories Screen to appear
+        XCTAssert(SettingsScreen.addCategoryButton.waitForExistence(timeout: 0.5), "Did not return to Settings Categories Screen as expected.")
     }
     
 }

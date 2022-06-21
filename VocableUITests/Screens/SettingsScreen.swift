@@ -38,6 +38,7 @@ class SettingsScreen: BaseScreen {
         locateCategoryCell(category).staticTexts[category].tap()
     }
     
+    @discardableResult
     static func locateCategoryCell(_ category: String) -> XCUIElementQuery {
         let predicate = NSPredicate(format: "label CONTAINS %@", category)
         // Loop through each page to find our category
