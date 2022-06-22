@@ -92,6 +92,7 @@ class CustomCategoryAppRestartTests: XCTestCase {
         
         // Create second custom category and verify that it exists
         CustomCategoriesScreen.createCustomCategory(categoryName: secondCustomCategory)
+        sleep(1)
         XCTAssertTrue(SettingsScreen.doesCategoryExist(secondCustomCategory))
         
         // Verify that first custom category's up and down buttons are enabled
@@ -106,7 +107,8 @@ class CustomCategoryAppRestartTests: XCTestCase {
         
         // Reorder custom categories, move first custom category to the end of the list
         SettingsScreen.locateCategoryCell(firstCustomCategory)
-        firstCategory.buttons[.settings.editCategories.moveDownButton].tap(afterWaitingForExistenceWithTimeout: 1)
+        firstCategory.buttons[.settings.editCategories.moveDownButton].tap()
+        sleep(2)
         
         // Verify that first custom category's (last in the list), up button is enabled and down button is disabled
         XCTAssertTrue(firstCategory.buttons[.settings.editCategories.moveUpButton].isEnabled)
