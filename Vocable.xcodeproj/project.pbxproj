@@ -274,6 +274,7 @@
 		CE12277624F586CB008F7866 /* CustomPhraseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12277524F586CB008F7866 /* CustomPhraseTests.swift */; };
 		CE12277824F58706008F7866 /* CustomCategoriesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */; };
 		CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */; };
+		DC301F01285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC301F00285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift */; };
 		DC41F55427E4F5130099B7D5 /* CategoryIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */; };
 		DC533C0127FCDF39005FEBBD /* CustomCategoryBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */; };
 		DC753162284143C200A84989 /* AccessibilityID+Shared+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */; };
@@ -572,6 +573,7 @@
 		CE12277524F586CB008F7866 /* CustomPhraseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhraseTests.swift; sourceTree = "<group>"; };
 		CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoriesScreen.swift; sourceTree = "<group>"; };
 		CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
+		DC301F00285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryAppRestartTests.swift; sourceTree = "<group>"; };
 		DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIdentifier.swift; sourceTree = "<group>"; };
 		DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryBaseTest.swift; sourceTree = "<group>"; };
 		DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccessibilityID+Shared+Alert.swift"; sourceTree = "<group>"; };
@@ -698,13 +700,14 @@
 				DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */,
 				62300C7D27F360930005CEF5 /* CustomCategoryTests.swift */,
 				CE12277524F586CB008F7866 /* CustomPhraseTests.swift */,
+				DC301F00285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift */,
 				17D4162B245C6FE800FD81CD /* KeyboardScreenTests.swift */,
 				627B53652800D11100FEBF25 /* MainScreenPaginationTests.swift */,
 				17793C2D24574CB500758BC0 /* MainScreenTests.swift */,
+				DCDF7E122832A3190009E75E /* PresetCategoryTests.swift */,
 				DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */,
 				6B2551822813288E0046C2EC /* PresetsOverrideTestCase.swift */,
 				62AE92562825C6CB004247EC /* PaginationBaseTest.swift */,
-				DCDF7E122832A3190009E75E /* PresetCategoryTests.swift */,
 				CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */,
 			);
 			path = Tests;
@@ -1629,6 +1632,7 @@
 				6B8D3C23282C288D00DDB9B7 /* AccessibilityID+Root+Categories.swift in Sources */,
 				6B8D3C21282C288D00DDB9B7 /* AccessibilityID+Shared+Pagination.swift in Sources */,
 				6B8D3C27282C288D00DDB9B7 /* UIAccessibilityIdentification+AccessibilityID.swift in Sources */,
+				DC301F01285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift in Sources */,
 				6BE02F6828133FDB002CCCED /* LaunchEnvironment.swift in Sources */,
 				0E969129281C5F520097A3CC /* AccessibilityID.swift in Sources */,
 				6B255184281329560046C2EC /* Presets.swift in Sources */,
