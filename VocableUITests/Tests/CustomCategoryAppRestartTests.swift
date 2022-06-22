@@ -53,7 +53,6 @@ class CustomCategoryAppRestartTests: XCTestCase {
         XCTAssertTrue(CustomCategoriesScreen.phraseDoesExist(phrase))
     }
     
-    // 16 seconds
     func testHideCategoryPersists() {
         // Verify that custom category exists
         XCTAssertTrue(SettingsScreen.doesCategoryExist(firstCustomCategory))
@@ -107,7 +106,7 @@ class CustomCategoryAppRestartTests: XCTestCase {
         
         // Reorder custom categories, move first custom category to the end of the list
         SettingsScreen.locateCategoryCell(firstCustomCategory)
-        firstCategory.buttons[.settings.editCategories.moveDownButton].tap()
+        firstCategory.buttons[.settings.editCategories.moveDownButton].tap(afterWaitingForExistenceWithTimeout: 1)
         
         // Verify that first custom category's (last in the list), up button is enabled and down button is disabled
         XCTAssertTrue(firstCategory.buttons[.settings.editCategories.moveUpButton].isEnabled)
