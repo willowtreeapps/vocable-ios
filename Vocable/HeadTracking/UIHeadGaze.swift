@@ -37,10 +37,9 @@ class UIHeadGaze: UITouch {
         self._timestamp = Date().timeIntervalSince1970
     }
 
-    /**
-     @Returns: 1. Position of gaze projected on the screen measured in the coordinates of given view
-              2. or position in NDC coordinates if view is nil
-    */
+
+    /// - Returns:  1. Position of gaze projected on the screen measured in the coordinates of given view
+    ///             2. or position in NDC coordinates if view is nil
     override func location(in view: UIView?) -> CGPoint {
         guard let point = transformNDCPoint(_position, in: view) else {
             return _position
@@ -48,10 +47,8 @@ class UIHeadGaze: UITouch {
         return point
     }
 
-    /**
-     @Returns: 1. Previous position of gaze projected on the screen measured in the coordinates of given view
-               2. or position in NDC coordinates if view is nil
-     */
+    /// - Returns:  1. Previous position of gaze projected on the screen measured in the coordinates of given view
+    ///             2. or position in NDC coordinates if view is nil
     override func previousLocation(in view: UIView?) -> CGPoint {
         guard let point = transformNDCPoint(_previousPosition, in: view) else {
             return _previousPosition

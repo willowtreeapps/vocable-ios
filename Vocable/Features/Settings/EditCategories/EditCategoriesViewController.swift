@@ -6,9 +6,9 @@
 //  Copyright © 2020 WillowTree. All rights reserved.
 //
 
-import UIKit
 import Combine
 import CoreData
+import UIKit
 
 final class EditCategoriesViewController: PagingCarouselViewController, NSFetchedResultsControllerDelegate {
 

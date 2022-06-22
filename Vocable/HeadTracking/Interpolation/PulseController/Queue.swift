@@ -9,7 +9,7 @@ import UIKit
 
 /// Provides FILO queue in fixed size
 ///
-/// @discussion: This is "ring" type of queue - older values will be overwritten with new ones
+/// This is "ring" type of queue - older values will be overwritten with new ones
 struct Queue<T> {
     
     /// Current index of cell to store new value
