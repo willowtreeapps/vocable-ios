@@ -55,8 +55,7 @@ class Analytics {
         return tokens.staging
         #endif
 
-        #warning("Change token selection to prod once everything is validated")
-        return tokens.staging
+        return tokens.production
     }()
 
     static let shared = Analytics()

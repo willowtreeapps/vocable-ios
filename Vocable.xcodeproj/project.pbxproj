@@ -25,7 +25,22 @@
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
 		30B979B82425583E00309D7C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30B979BA2425583E00309D7C /* InfoPlist.strings */; };
 		4E014DAA27EA53BC00561FC8 /* NSRange+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E014DA927EA53BC00561FC8 /* NSRange+.swift */; };
+		4E095237284E67770079381D /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E095236284E67770079381D /* View+.swift */; };
+		4E18DBF027FF49420043A019 /* DefaultGazeButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18DBEF27FF49420043A019 /* DefaultGazeButtonStyle.swift */; };
+		4E18DBF227FF49FA0043A019 /* GazeButtonStyleConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18DBF127FF49FA0043A019 /* GazeButtonStyleConfiguration.swift */; };
+		4E18DBF427FF4AAA0043A019 /* ButtonRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18DBF327FF4AAA0043A019 /* ButtonRole.swift */; };
+		4E18DBF627FF4EED0043A019 /* ButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18DBF527FF4EED0043A019 /* ButtonState.swift */; };
+		4E296C7C2832E00600B6062B /* GazeableAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E296C7B2832E00600B6062B /* GazeableAlert.swift */; };
+		4E296C7E2832E77600B6062B /* GazeBlocking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E296C7D2832E77600B6062B /* GazeBlocking.swift */; };
+		4E56054627FB864E00719C23 /* GazeButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56054527FB864E00719C23 /* GazeButtonStyle.swift */; };
+		4E56054827FB8C7300719C23 /* EditCategoryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56054727FB8C7300719C23 /* EditCategoryDetail.swift */; };
+		4E70DA6A27FE859F0027B40B /* ContentHuggingPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E70DA6927FE859F0027B40B /* ContentHuggingPriority.swift */; };
 		4E8A303C27EBB95C000177B1 /* BidirectionalCollection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A303B27EBB95C000177B1 /* BidirectionalCollection+.swift */; };
+		4EA3D1CC27F772E400FE6457 /* GazeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D1CB27F772E400FE6457 /* GazeButton.swift */; };
+		4EA3D1CF27F7773300FE6457 /* BridgedGazeableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D1CE27F7773300FE6457 /* BridgedGazeableButton.swift */; };
+		4EB382A0284160AB00320E10 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = 4EB3829F284160AB00320E10 /* Documentation.docc */; };
+		4EB6A59427FBF84B00F2BFB3 /* VocableGazeButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6A59327FBF84B00F2BFB3 /* VocableGazeButtonStyle.swift */; };
+		4EE2D2EC27FE2FCA00299A1A /* ContentHuggingHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE2D2EB27FE2FCA00299A1A /* ContentHuggingHostingController.swift */; };
 		54D3C41723E37CD40061EF47 /* VocableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3C41623E37CD40061EF47 /* VocableTests.swift */; };
 		622A6BFE283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622A6BFD283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift */; };
 		622A6BFF283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622A6BFD283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift */; };
@@ -259,6 +274,7 @@
 		CE12277624F586CB008F7866 /* CustomPhraseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12277524F586CB008F7866 /* CustomPhraseTests.swift */; };
 		CE12277824F58706008F7866 /* CustomCategoriesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */; };
 		CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */; };
+		DC301F01285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC301F00285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift */; };
 		DC41F55427E4F5130099B7D5 /* CategoryIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */; };
 		DC533C0127FCDF39005FEBBD /* CustomCategoryBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */; };
 		DC753162284143C200A84989 /* AccessibilityID+Shared+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */; };
@@ -309,7 +325,22 @@
 		30B979B92425583E00309D7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30B979BB2425584300309D7C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4E014DA927EA53BC00561FC8 /* NSRange+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRange+.swift"; sourceTree = "<group>"; };
+		4E095236284E67770079381D /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		4E18DBEF27FF49420043A019 /* DefaultGazeButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGazeButtonStyle.swift; sourceTree = "<group>"; };
+		4E18DBF127FF49FA0043A019 /* GazeButtonStyleConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeButtonStyleConfiguration.swift; sourceTree = "<group>"; };
+		4E18DBF327FF4AAA0043A019 /* ButtonRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRole.swift; sourceTree = "<group>"; };
+		4E18DBF527FF4EED0043A019 /* ButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonState.swift; sourceTree = "<group>"; };
+		4E296C7B2832E00600B6062B /* GazeableAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeableAlert.swift; sourceTree = "<group>"; };
+		4E296C7D2832E77600B6062B /* GazeBlocking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeBlocking.swift; sourceTree = "<group>"; };
+		4E56054527FB864E00719C23 /* GazeButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeButtonStyle.swift; sourceTree = "<group>"; };
+		4E56054727FB8C7300719C23 /* EditCategoryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryDetail.swift; sourceTree = "<group>"; };
+		4E70DA6927FE859F0027B40B /* ContentHuggingPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentHuggingPriority.swift; sourceTree = "<group>"; };
 		4E8A303B27EBB95C000177B1 /* BidirectionalCollection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BidirectionalCollection+.swift"; sourceTree = "<group>"; };
+		4EA3D1CB27F772E400FE6457 /* GazeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazeButton.swift; sourceTree = "<group>"; };
+		4EA3D1CE27F7773300FE6457 /* BridgedGazeableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgedGazeableButton.swift; sourceTree = "<group>"; };
+		4EB3829F284160AB00320E10 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
+		4EB6A59327FBF84B00F2BFB3 /* VocableGazeButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableGazeButtonStyle.swift; sourceTree = "<group>"; };
+		4EE2D2EB27FE2FCA00299A1A /* ContentHuggingHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentHuggingHostingController.swift; sourceTree = "<group>"; };
 		54D3C41423E37CD40061EF47 /* VocableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VocableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D3C41623E37CD40061EF47 /* VocableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableTests.swift; sourceTree = "<group>"; };
 		54D3C41823E37CD40061EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -542,6 +573,7 @@
 		CE12277524F586CB008F7866 /* CustomPhraseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhraseTests.swift; sourceTree = "<group>"; };
 		CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoriesScreen.swift; sourceTree = "<group>"; };
 		CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTests.swift; sourceTree = "<group>"; };
+		DC301F00285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryAppRestartTests.swift; sourceTree = "<group>"; };
 		DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIdentifier.swift; sourceTree = "<group>"; };
 		DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryBaseTest.swift; sourceTree = "<group>"; };
 		DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccessibilityID+Shared+Alert.swift"; sourceTree = "<group>"; };
@@ -612,6 +644,7 @@
 				6BFB67B82819C7ED00DB58BE /* AppConfig */,
 				2631B365251181C400B94402 /* GoogleService-Info.plist */,
 				139EDEE921419C400009A99F /* Supporting Files */,
+				4EA3D1CD27F772EA00FE6457 /* SwiftUI */,
 			);
 			path = Vocable;
 			sourceTree = "<group>";
@@ -667,13 +700,14 @@
 				DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */,
 				62300C7D27F360930005CEF5 /* CustomCategoryTests.swift */,
 				CE12277524F586CB008F7866 /* CustomPhraseTests.swift */,
+				DC301F00285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift */,
 				17D4162B245C6FE800FD81CD /* KeyboardScreenTests.swift */,
 				627B53652800D11100FEBF25 /* MainScreenPaginationTests.swift */,
 				17793C2D24574CB500758BC0 /* MainScreenTests.swift */,
+				DCDF7E122832A3190009E75E /* PresetCategoryTests.swift */,
 				DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */,
 				6B2551822813288E0046C2EC /* PresetsOverrideTestCase.swift */,
 				62AE92562825C6CB004247EC /* PaginationBaseTest.swift */,
-				DCDF7E122832A3190009E75E /* PresetCategoryTests.swift */,
 				CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */,
 			);
 			path = Tests;
@@ -684,6 +718,52 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4E095235284E67560079381D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4E095236284E67770079381D /* View+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4E56054427FB863A00719C23 /* UIKit Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				4EA3D1CE27F7773300FE6457 /* BridgedGazeableButton.swift */,
+				4EE2D2EB27FE2FCA00299A1A /* ContentHuggingHostingController.swift */,
+				4E70DA6927FE859F0027B40B /* ContentHuggingPriority.swift */,
+			);
+			path = "UIKit Bridge";
+			sourceTree = "<group>";
+		};
+		4EA3D1CD27F772EA00FE6457 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				4E095235284E67560079381D /* Extensions */,
+				4E56054727FB8C7300719C23 /* EditCategoryDetail.swift */,
+				4E296C7B2832E00600B6062B /* GazeableAlert.swift */,
+				4E296C7D2832E77600B6062B /* GazeBlocking.swift */,
+				4EB38278283FF82400320E10 /* Gaze Button */,
+				4E56054427FB863A00719C23 /* UIKit Bridge */,
+				4EB3829F284160AB00320E10 /* Documentation.docc */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		4EB38278283FF82400320E10 /* Gaze Button */ = {
+			isa = PBXGroup;
+			children = (
+				4E18DBF327FF4AAA0043A019 /* ButtonRole.swift */,
+				4E18DBF527FF4EED0043A019 /* ButtonState.swift */,
+				4E18DBEF27FF49420043A019 /* DefaultGazeButtonStyle.swift */,
+				4EA3D1CB27F772E400FE6457 /* GazeButton.swift */,
+				4E56054527FB864E00719C23 /* GazeButtonStyle.swift */,
+				4E18DBF127FF49FA0043A019 /* GazeButtonStyleConfiguration.swift */,
+				4EB6A59327FBF84B00F2BFB3 /* VocableGazeButtonStyle.swift */,
+			);
+			path = "Gaze Button";
 			sourceTree = "<group>";
 		};
 		54D3C41523E37CD40061EF47 /* VocableTests */ = {
@@ -1347,6 +1427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A944D0092406D54400F3863E /* SettingsToggleCollectionViewCell.swift in Sources */,
+				4E70DA6A27FE859F0027B40B /* ContentHuggingPriority.swift in Sources */,
 				64A54545242A490700218BE8 /* GazeEatingView.swift in Sources */,
 				2745402B2460DD490056EF98 /* Presets.swift in Sources */,
 				A94C3FB027F4A5DC001D4F01 /* PhraseEditorConfigurationProvider.swift in Sources */,
@@ -1359,6 +1440,7 @@
 				6B8440DF2448C391007A4DC6 /* CGSize+Helpers.swift in Sources */,
 				A987416C280DADA40011C359 /* ListeningResponseFeedbackViewController.swift in Sources */,
 				6B823BC623F4ADE30099F65E /* FormatterExtensions.swift in Sources */,
+				4E296C7C2832E00600B6062B /* GazeableAlert.swift in Sources */,
 				A97814FA23FF3B1200ECC609 /* CategorySectionBackground.swift in Sources */,
 				A91525422447541200B9B815 /* TextEditorViewController.swift in Sources */,
 				A920A4AF23EA1BD300CF5B08 /* LegacyLayoutSupport.swift in Sources */,
@@ -1367,15 +1449,18 @@
 				6B823BD323F4AE250099F65E /* PIDInterpolator.swift in Sources */,
 				B8DA9DE823EB833200FEBE19 /* BorderedView.swift in Sources */,
 				A9874170280DFD0B0011C359 /* ListeningFeedbackSuccessView.swift in Sources */,
+				4E56054827FB8C7300719C23 /* EditCategoryDetail.swift in Sources */,
 				6B3FBBE825FBC72600B7D2CD /* ListeningResponseContentViewController.swift in Sources */,
 				6B8D3C08282C230B00DDB9B7 /* AccessibilityID+Root.swift in Sources */,
 				6BE02F7F28188CEB002CCCED /* String+Localization.swift in Sources */,
+				4EB6A59427FBF84B00F2BFB3 /* VocableGazeButtonStyle.swift in Sources */,
 				6B5C490F2460627B00A4433C /* NumericCategoryContentViewController.swift in Sources */,
 				6B9DFA6023E889DB0037673E /* Extensions.swift in Sources */,
 				6B17CD7C23E9DFD50050BCB8 /* AVSpeechSynthesizer+Shared.swift in Sources */,
 				9D15E0552271F0DC0058DF57 /* CursorView.swift in Sources */,
 				6B9DFA5C23E889DB0037673E /* HeadGazeWindow.swift in Sources */,
 				6B6A4D9125B7609900A7F489 /* ListeningModeViewController.swift in Sources */,
+				4E18DBF027FF49420043A019 /* DefaultGazeButtonStyle.swift in Sources */,
 				6B823BCF23F4ADE30099F65E /* TunningViewController.swift in Sources */,
 				7192E40B242E6562008E4A0A /* ToastContainerViewController.swift in Sources */,
 				6B724A4D25E046BA0033891F /* SettingsFooterTextSupplementaryView.swift in Sources */,
@@ -1384,11 +1469,13 @@
 				A944D0052405AE8C00F3863E /* GazeableButton.swift in Sources */,
 				6B5C743E27E3CE3900004713 /* PersistenceMigrationController.swift in Sources */,
 				6B9DFA6423E889DB0037673E /* UIHeadGazeRecognizer.swift in Sources */,
+				4EB382A0284160AB00320E10 /* Documentation.docc in Sources */,
 				64A220BB2452171C0014EA80 /* RootViewController.swift in Sources */,
 				6B8D3C0C282C234700DDB9B7 /* AccessibilityID+Settings.swift in Sources */,
 				A961605027F6383B00CE2F72 /* FreeResponseTextEditorConfigurationProvider.swift in Sources */,
 				A93E46F7280614680081D544 /* NSDiffableDataSourceSnapshot+Map.swift in Sources */,
 				6B17CD8023EA045D0050BCB8 /* ViewControllerWrapperView.swift in Sources */,
+				4E56054627FB864E00719C23 /* GazeButtonStyle.swift in Sources */,
 				B8DA9DF223F30BAF00FEBE19 /* Cell+NibLoading.swift in Sources */,
 				6BB56BA82422AC2500EA787E /* ToastView.swift in Sources */,
 				A9DFCC20242D020100136136 /* PublishedValue.swift in Sources */,
@@ -1409,6 +1496,7 @@
 				6BFB18BE24002BFE002C3515 /* NSPersistentContainer+Shared.swift in Sources */,
 				6B8D3C06282C22B800DDB9B7 /* AccessibilityID+Shared+Pagination.swift in Sources */,
 				A9DE170623F4C0AF0094DB64 /* TextSuggestion.swift in Sources */,
+				4E296C7E2832E77600B6062B /* GazeBlocking.swift in Sources */,
 				6BFB18C624004711002C3515 /* ModelObjectExtensions.swift in Sources */,
 				A9B696112433CF31004E6960 /* EditCategoriesViewController.swift in Sources */,
 				6B8440E6244A535A007A4DC6 /* CarouselGridLayout+Masks.swift in Sources */,
@@ -1416,6 +1504,7 @@
 				B8DA9DF023EDECEE00FEBE19 /* AppConfig.swift in Sources */,
 				6BE02F6728133E00002CCCED /* LaunchEnvironment.swift in Sources */,
 				6B005AED245B25E9004919F4 /* VocableNavigationController.swift in Sources */,
+				4E18DBF627FF4EED0043A019 /* ButtonState.swift in Sources */,
 				64F8A5FA245CC9FA00B7C0F9 /* EditPhrasesViewController.swift in Sources */,
 				6B9DFA7623E8D59A0037673E /* UICollectionView+Gaze.swift in Sources */,
 				A9E49E602812FD760088A344 /* LaunchArguments.swift in Sources */,
@@ -1453,6 +1542,7 @@
 				6B8D3B752821C0EB00DDB9B7 /* Analytics.swift in Sources */,
 				A91030B627E3C31700281C97 /* VocableListCell.swift in Sources */,
 				6B05020727F351A1000CFE5A /* CategoryReordering.swift in Sources */,
+				4E18DBF227FF49FA0043A019 /* GazeButtonStyleConfiguration.swift in Sources */,
 				A91030B427E3BF9300281C97 /* VocableListContentConfiguration.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
 				6B823BCB23F4ADE30099F65E /* Pulse.swift in Sources */,
@@ -1480,6 +1570,7 @@
 				A9299C7523F5FBEE00903AB6 /* KeyboardKeyCollectionViewCell.swift in Sources */,
 				6B5C73A927DFE63600004713 /* NSPredicate+Operators.swift in Sources */,
 				6B9DFA5B23E889DB0037673E /* UIHeadGazeViewController.swift in Sources */,
+				4EE2D2EC27FE2FCA00299A1A /* ContentHuggingHostingController.swift in Sources */,
 				6BB56BAA2422B40300EA787E /* PublishedDefault.swift in Sources */,
 				6B823BCD23F4ADE30099F65E /* TunningWindow.swift in Sources */,
 				6B8D3C02282C227500DDB9B7 /* UIAccessibilityIdentification+AccessibilityID.swift in Sources */,
@@ -1488,11 +1579,13 @@
 				B838200F23F4B011005A79CD /* VocableCollectionViewCell.swift in Sources */,
 				6B2E78A0258BE6A400A3DC82 /* AudioEngineController.swift in Sources */,
 				B8EB51D12409860A00F425A6 /* GazeableAlertViewController.swift in Sources */,
+				4E18DBF427FF4AAA0043A019 /* ButtonRole.swift in Sources */,
 				A99AF23323FDA8B600BE1184 /* SuggestionCollectionViewCell.swift in Sources */,
 				6BFB18C224002C7B002C3515 /* Phrases.xcdatamodeld in Sources */,
 				6B5C490B245B73F700A4433C /* CategoriesCarouselViewController.swift in Sources */,
 				6B8D3C0E282C236200DDB9B7 /* AccessibilityID+Settings+EditCategories.swift in Sources */,
 				A90D790527F205E90032254E /* VocableListCellPrimaryButton.swift in Sources */,
+				4EA3D1CF27F7773300FE6457 /* BridgedGazeableButton.swift in Sources */,
 				A98E8A2323F1DBDF00BF1F22 /* SettingsFooterCollectionViewCell.swift in Sources */,
 				62A16C1028354BE10015A755 /* AccessibilityID+Shared+Keyboard.swift in Sources */,
 				A9FD68A528008AD3006ABA3F /* AddPhraseCollectionViewCell.swift in Sources */,
@@ -1503,7 +1596,9 @@
 				DC753162284143C200A84989 /* AccessibilityID+Shared+Alert.swift in Sources */,
 				7192E409242BC58F008E4A0A /* ToastWindow.swift in Sources */,
 				6B1086732463662C00E729A8 /* v2_to_v3.xcmappingmodel in Sources */,
+				4E095237284E67770079381D /* View+.swift in Sources */,
 				6B823BC223F4ADE30099F65E /* PIDControlConstants.swift in Sources */,
+				4EA3D1CC27F772E400FE6457 /* GazeButton.swift in Sources */,
 				A9CF2AF7242D4EFD005633A7 /* DwellTimeCollectionViewCell.swift in Sources */,
 				A99B5324282C0D5D004FEFDA /* AnalyticsReportable.swift in Sources */,
 				714407ED243CEEA1009D077B /* Category+Helpers.swift in Sources */,
@@ -1537,6 +1632,7 @@
 				6B8D3C23282C288D00DDB9B7 /* AccessibilityID+Root+Categories.swift in Sources */,
 				6B8D3C21282C288D00DDB9B7 /* AccessibilityID+Shared+Pagination.swift in Sources */,
 				6B8D3C27282C288D00DDB9B7 /* UIAccessibilityIdentification+AccessibilityID.swift in Sources */,
+				DC301F01285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift in Sources */,
 				6BE02F6828133FDB002CCCED /* LaunchEnvironment.swift in Sources */,
 				0E969129281C5F520097A3CC /* AccessibilityID.swift in Sources */,
 				6B255184281329560046C2EC /* Presets.swift in Sources */,
@@ -1828,7 +1924,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-w",
@@ -1836,6 +1932,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.willowtreeapps.eyespeakaac";
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1861,7 +1958,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-w",
@@ -1869,6 +1966,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.willowtreeapps.eyespeakaac";
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2062,7 +2160,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-w",
@@ -2070,6 +2168,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.eyespeakaac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.willowtreeapps.eyespeakaac";
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

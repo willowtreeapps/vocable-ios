@@ -38,6 +38,7 @@ class SettingsScreen: BaseScreen {
         locateCategoryCell(category).staticTexts[category].tap()
     }
     
+    @discardableResult
     static func locateCategoryCell(_ category: String) -> XCUIElementQuery {
         let predicate = NSPredicate(format: "label CONTAINS %@", category)
         // Loop through each page to find our category
@@ -87,7 +88,7 @@ class SettingsScreen: BaseScreen {
     
     static func navigateToSettingsCategoryScreen() {
         MainScreen.settingsButton.tap(afterWaitingForExistenceWithTimeout: 2)
-        categoriesAndPhrasesCell.tap(afterWaitingForExistenceWithTimeout: 2)
+        categoriesAndPhrasesCell.tap(afterWaitingForExistenceWithTimeout: 3)
         _ = addCategoryButton.waitForExistence(timeout: 0.5)
     }
     
