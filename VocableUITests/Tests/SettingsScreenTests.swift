@@ -22,20 +22,14 @@ class SettingsScreenTests: BaseTest {
         SettingsScreen.showCategoryButton.tap()
         SettingsScreen.navBarBackButton.tap()
         
-        let hiddenCategory = SettingsScreen.locateCategoryCell(category)
-        XCTAssertFalse(hiddenCategory.buttons[.settings.editCategories.moveUpButton].isEnabled)
-        XCTAssertFalse(hiddenCategory.buttons[.settings.editCategories.moveDownButton].isEnabled)
-        XCTAssertTrue(hiddenCategory.element.isEnabled)
+        VTAssertReorderButtonsEquals(category, reorderArrows: .none)
 
         // Verify that when the category is shown, up and down buttons are enabled.
         SettingsScreen.openCategorySettings(category: category)
         SettingsScreen.showCategoryButton.tap()
         SettingsScreen.navBarBackButton.tap()
         
-        let shownCategory = SettingsScreen.locateCategoryCell(category)
-        XCTAssertTrue(shownCategory.buttons[.settings.editCategories.moveUpButton].isEnabled)
-        XCTAssertTrue(shownCategory.buttons[.settings.editCategories.moveDownButton].isEnabled)
-        XCTAssertTrue(shownCategory.element.isEnabled)
+        VTAssertReorderButtonsEquals(category, reorderArrows: .both)
     }
 
     func testReorder() {
