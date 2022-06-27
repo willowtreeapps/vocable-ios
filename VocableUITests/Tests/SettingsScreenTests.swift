@@ -22,14 +22,14 @@ class SettingsScreenTests: BaseTest {
         SettingsScreen.showCategoryButton.tap()
         SettingsScreen.navBarBackButton.tap()
         
-        VTAssertReorderButtonsEquals(category, reorderArrows: .none)
+        VTAssertReorderArrowsEqual(.none, for: category)
 
         // Verify that when the category is shown, up and down buttons are enabled.
         SettingsScreen.openCategorySettings(category: category)
         SettingsScreen.showCategoryButton.tap()
         SettingsScreen.navBarBackButton.tap()
         
-        VTAssertReorderButtonsEquals(category, reorderArrows: .both)
+        VTAssertReorderArrowsEqual(.both, for: category)
     }
 
     func testReorder() {

@@ -51,14 +51,12 @@ func VTAssertPaginationEquals(_ expectedCurrentPageNumber: Int,
 }
 
 /// This assertion function confirms the expected state of the reorder arrows.
-///
-/// By default this function expects the state of the up reorder arrow and the down reorder arrow to be isEnabled == true.
-func VTAssertReorderButtonsEquals(_ categoryName: String,
-                              reorderArrows: ReorderArrows,
-                              file: StaticString = #file,
-                              line: UInt = #line)
+func VTAssertReorderArrowsEqual(_ enabledArrows: ReorderArrows,
+                                for categoryName: String,
+                                file: StaticString = #file,
+                                line: UInt = #line)
 {
     let categoryCell = SettingsScreen.locateCategoryCell(categoryName)
-    XCTAssertEqual(categoryCell.buttons[.settings.editCategories.moveUpButton].isEnabled, reorderArrows.contains(.up), file: file, line: line)
-    XCTAssertEqual(categoryCell.buttons[.settings.editCategories.moveDownButton].isEnabled, reorderArrows.contains(.down), file: file, line: line)
+    XCTAssertEqual(categoryCell.buttons[.settings.editCategories.moveUpButton].isEnabled, enabledArrows.contains(.up), file: file, line: line)
+    XCTAssertEqual(categoryCell.buttons[.settings.editCategories.moveDownButton].isEnabled, enabledArrows.contains(.down), file: file, line: line)
 }
