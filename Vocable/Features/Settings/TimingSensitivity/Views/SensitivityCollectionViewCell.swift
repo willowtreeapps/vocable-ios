@@ -35,6 +35,10 @@ final class SensitivityCollectionViewCell: UICollectionViewCell {
         lowSensitivityButton.setTitle(lowTitle, for: .normal)
         mediumSensitivityButton.setTitle(mediumTitle, for: .normal)
         highSensitivityButton.setTitle(highTitle, for: .normal)
+        
+        lowSensitivityButton.accessibilityID = .settings.timingAndSensitivity.lowSensitivityButton
+        mediumSensitivityButton.accessibilityID = .settings.timingAndSensitivity.mediumSensitivityButton
+        highSensitivityButton.accessibilityID = .settings.timingAndSensitivity.highSensitivityButton
 
         AppConfig.$cursorSensitivity.sink { [weak self] (sensitivity) in
             guard let self = self else { return }
