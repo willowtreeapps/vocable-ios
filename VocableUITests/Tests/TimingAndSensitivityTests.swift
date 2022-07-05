@@ -52,5 +52,4 @@ class TimingAndSensitivityTests: BaseTest {
         XCTAssertFalse(TimingAndSensitivityScreen.increaseHoverTimeButton.isEnabled)
     }
     
-    
 }
