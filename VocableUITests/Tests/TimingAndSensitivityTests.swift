@@ -27,4 +27,30 @@ class TimingAndSensitivityTests: BaseTest {
         XCTAssertTrue(TimingAndSensitivityScreen.highButton.isSelected)
         XCTAssertFalse(TimingAndSensitivityScreen.lowButton.isSelected)
     }
+    
+    func testHoverTimeButtons() {
+        //navigate to timing and sensitivity screen and check hover time is 1.0
+        MainScreen.settingsButton.tap()
+        SettingsScreen.timingAndSensitivityCell.tap()
+        XCTAssertEqual(TimingAndSensitivityScreen.hoverTimeLabel.label, "1.0s")
+        XCTAssertTrue(TimingAndSensitivityScreen.increaseHoverTimeButton.isEnabled)
+        XCTAssertTrue(TimingAndSensitivityScreen.reduceHoverTimeButton.isEnabled)
+        
+        //decrease hover time and check minus icon is disabled
+        TimingAndSensitivityScreen.reduceHoverTimeButton.tap()
+        XCTAssertFalse(TimingAndSensitivityScreen.reduceHoverTimeButton.isEnabled)
+        
+        //increase hover time and ensure decrease button becomes enabled
+        TimingAndSensitivityScreen.increaseHoverTimeButton.tap()
+        TimingAndSensitivityScreen.increaseHoverTimeButton.tap()
+        XCTAssertTrue(TimingAndSensitivityScreen.reduceHoverTimeButton.isEnabled)
+        
+        //increase hover time to max 5.0s and check that increase button disabled
+        while TimingAndSensitivityScreen.hoverTimeLabel.label != "5.0s" {
+            TimingAndSensitivityScreen.increaseHoverTimeButton.tap()
+        }
+        XCTAssertFalse(TimingAndSensitivityScreen.increaseHoverTimeButton.isEnabled)
+    }
+    
+    
 }
