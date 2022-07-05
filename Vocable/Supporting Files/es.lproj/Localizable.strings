@@ -46,6 +46,9 @@
 /* Toast message that appears after saving edits made to the Category title */
 "category_editor.toast.successfully_saved.title" = "Cambios guardados";
 
+/* No comment provided by engineer. */
+"Edit Phrases" = "Editar Frases";
+
 /* Category empty state button.  This button appears with the empty state to allow the user to add a phrase */
 "empty_state.button.title" = "Agregar Phrase";
 
@@ -180,6 +183,9 @@
 /* Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet. */
 "recents_empty_state.header.title" = "No hay frases usadas recientemente";
 
+/* No comment provided by engineer. */
+"Rename Category" = "Cambiar Nombre de Categoría";
+
 /* Selection mode setting header title */
 "selection_mode.header.title" = "Modo de selección";
 
@@ -272,6 +278,9 @@
 
 /* Additonal footer text noting heading tracking compatibility */
 "settings.selection_mode.head_tracking_unsupported_footer" = "Este %1$@ en %2$@ %3$@ no es compatible con el seguimiento de cabeza.\n\nEl seguimiento de cabeceras es compatible con todos los dispositivos con una cámara %4$@ , y en la mayoría de dispositivos con %6$@.";
+
+/* No comment provided by engineer. */
+"Sign In" = "Iniciar Sesión";
 
 /* Button in the edit category title close confirmation.  This buton appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.
    Pressing the button will allow editing the category title. */
