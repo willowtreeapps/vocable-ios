@@ -42,7 +42,6 @@ class TimingAndSensitivityTests: BaseTest {
         
         //increase hover time and ensure decrease button becomes enabled
         TimingAndSensitivityScreen.increaseHoverTimeButton.tap()
-        TimingAndSensitivityScreen.increaseHoverTimeButton.tap()
         XCTAssertTrue(TimingAndSensitivityScreen.reduceHoverTimeButton.isEnabled)
         
         //increase hover time to max 5.0s and check that increase button disabled
