@@ -15,6 +15,7 @@ extension AccessibilityID.settings {
         public static let lowSensitivityButton: AccessibilityID = "timing-and-sensitivity-low-sensitivity-button"
         public static let mediumSensitivityButton: AccessibilityID = "timing-and-sensitivity-medium-sensitivity-button"
         public static let highSensitivityButton: AccessibilityID = "timing-and-sensitivity-high-sensitivity-button"
+        public static let hoverTimeLabel: AccessibilityID = "timing-and-sensitivity-hover-time-label"
         private init() {}
     }
 }

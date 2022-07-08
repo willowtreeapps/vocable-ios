@@ -119,6 +119,8 @@ final class TimingSensitivityViewController: VocableCollectionViewController {
             cell.increaseTimeButton.addTarget(self,
                                               action: #selector(self.handleIncreasingDwellTime(_:)),
                                               for: .primaryActionTriggered)
+            cell.decreaseTimeButton.accessibilityID = .settings.timingAndSensitivity.decreaseHoverTimeButton
+            cell.increaseTimeButton.accessibilityID = .settings.timingAndSensitivity.increaseHoverTimeButton
             return cell
         case .sensitivity:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SensitivityCollectionViewCell.reuseIdentifier, for: indexPath) as! SensitivityCollectionViewCell
