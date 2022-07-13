@@ -277,6 +277,7 @@
 		DC301F01285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC301F00285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift */; };
 		DC41F55427E4F5130099B7D5 /* CategoryIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */; };
 		DC533C0127FCDF39005FEBBD /* CustomCategoryBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */; };
+		DC62389628788FDA00C943E5 /* PresetCategoryAppRestartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC62389528788FDA00C943E5 /* PresetCategoryAppRestartTests.swift */; };
 		DC753162284143C200A84989 /* AccessibilityID+Shared+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */; };
 		DC75316328414A6600A84989 /* AccessibilityID+Shared+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */; };
 		DC75316428414A6600A84989 /* AccessibilityID+Shared+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */; };
@@ -577,6 +578,7 @@
 		DC301F00285A58CE00D5FCBE /* CustomCategoryAppRestartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryAppRestartTests.swift; sourceTree = "<group>"; };
 		DC41F55227E4F35C0099B7D5 /* CategoryIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIdentifier.swift; sourceTree = "<group>"; };
 		DC533C0027FCDF39005FEBBD /* CustomCategoryBaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryBaseTest.swift; sourceTree = "<group>"; };
+		DC62389528788FDA00C943E5 /* PresetCategoryAppRestartTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetCategoryAppRestartTests.swift; sourceTree = "<group>"; };
 		DC753161284143C200A84989 /* AccessibilityID+Shared+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AccessibilityID+Shared+Alert.swift"; sourceTree = "<group>"; };
 		DCAF41472864B6F400502D7D /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		DCDF7E122832A3190009E75E /* PresetCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetCategoryTests.swift; sourceTree = "<group>"; };
@@ -710,6 +712,7 @@
 				DCDF7E122832A3190009E75E /* PresetCategoryTests.swift */,
 				DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */,
 				6B2551822813288E0046C2EC /* PresetsOverrideTestCase.swift */,
+				DC62389528788FDA00C943E5 /* PresetCategoryAppRestartTests.swift */,
 				62AE92562825C6CB004247EC /* PaginationBaseTest.swift */,
 				CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */,
 			);
@@ -1624,6 +1627,7 @@
 				DCF25CD52811AD2000DF766F /* PresetPhraseTests.swift in Sources */,
 				17D4162E245C6FF600FD81CD /* KeyboardScreen.swift in Sources */,
 				6B8D3C29282C288D00DDB9B7 /* AccessibilityID+Settings+EditPhrases.swift in Sources */,
+				DC62389628788FDA00C943E5 /* PresetCategoryAppRestartTests.swift in Sources */,
 				DC41F55427E4F5130099B7D5 /* CategoryIdentifier.swift in Sources */,
 				6B8D3C2D282C2B5E00DDB9B7 /* XCUIElementQuery+AccessibilityID.swift in Sources */,
 				DCAF41482864B6F400502D7D /* Utilities.swift in Sources */,
