@@ -15,5 +15,14 @@ class Utilities {
         XCUIApplication().terminate()
         XCUIApplication().activate()
     }
+    
+    static func restartApp(withLaunchArguments launchArguments: Arguments) {
+        let app = XCUIApplication()
+        app.configure {
+            launchArguments
+        }
+        app.terminate()
+        app.activate()
+    }
    
 }

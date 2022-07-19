@@ -9,15 +9,17 @@
 import XCTest
 import Foundation
 
-
 class PresetCategoryAppRestartTests: XCTestCase {
     
     let category = "General"
     let secondCategory = "Basic Needs"
     let phrase = "Test"
-    let app = XCUIApplication()
+    
+    // To avoid resetting the app on restart, we'll need to pass in new launch arguments
+    let disableAnimationsOnly = Arguments(.disableAnimations)
     
     override func setUp() {
+        let app = XCUIApplication()
         app.configure {
             Arguments(.resetAppDataOnLaunch, .disableAnimations)
         }
@@ -41,7 +43,7 @@ class PresetCategoryAppRestartTests: XCTestCase {
         XCTAssertTrue(MainScreen.phraseDoesExist(phrase))
         
         // Restart the app
-        Utilities.restartApp()
+        Utilities.restartApp(withLaunchArguments: disableAnimationsOnly)
         
         // Verify that the added phrase persists after restarting
         MainScreen.locateAndSelectDestinationCategory(.general)
@@ -65,7 +67,7 @@ class PresetCategoryAppRestartTests: XCTestCase {
         XCTAssertTrue(MainScreen.phraseDoesExist(phrase))
         
         // Restart the app
-        Utilities.restartApp()
+        Utilities.restartApp(withLaunchArguments: disableAnimationsOnly)
         
         // Verify that the added phrase persists after restarting
         MainScreen.locateAndSelectDestinationCategory(.mySayings)
@@ -83,7 +85,7 @@ class PresetCategoryAppRestartTests: XCTestCase {
         XCTAssertTrue(MainScreen.phraseDoesExist(firstPhrase))
         
         // Restart the app
-        Utilities.restartApp()
+        Utilities.restartApp(withLaunchArguments: disableAnimationsOnly)
         
         // Verify that the tapped phrase persists after restarting
         MainScreen.locateAndSelectDestinationCategory(.recents)
@@ -106,7 +108,7 @@ class PresetCategoryAppRestartTests: XCTestCase {
         VTAssertReorderArrowsEqual(.none, for: category)
         
         // Restart the app
-        Utilities.restartApp()
+        Utilities.restartApp(withLaunchArguments: disableAnimationsOnly)
         
         // Verify that after restart, hidden category's up and down buttons are disabled
         SettingsScreen.navigateToSettingsCategoryScreen()
@@ -135,7 +137,7 @@ class PresetCategoryAppRestartTests: XCTestCase {
         VTAssertReorderArrowsEqual(.downEnabledOnly, for: secondCategory)
         
         // Restart the app and navigate to Settings Category Screen
-        Utilities.restartApp()
+        Utilities.restartApp(withLaunchArguments: disableAnimationsOnly)
         SettingsScreen.navigateToSettingsCategoryScreen()
         
         // Verify that first preset category's (now second in the list) up and down buttons are enabled
@@ -172,7 +174,7 @@ class PresetCategoryAppRestartTests: XCTestCase {
         XCTAssertEqual(MainScreen.selectedCategoryCell.identifier, categoryIdentifier)
         
         // Restart the app and navigate to Settings Category Screen
-        Utilities.restartApp()
+        Utilities.restartApp(withLaunchArguments: disableAnimationsOnly)
         SettingsScreen.navigateToSettingsCategoryScreen()
         
         // Confirm that the renamed category name persists
