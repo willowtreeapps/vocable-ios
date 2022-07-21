@@ -7,12 +7,22 @@
 //
 
 import Foundation
+import XCTest
 
 class Utilities {
     
     static func restartApp() {
+        XCUIApplication().terminate()
+        XCUIApplication().activate()
+    }
+    
+    static func restartApp(withLaunchArguments launchArguments: Arguments) {
+        let app = XCUIApplication()
+        app.configure {
+            launchArguments
+        }
         app.terminate()
         app.activate()
     }
-    
+   
 }
