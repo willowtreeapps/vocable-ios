@@ -18,7 +18,7 @@ class KeyboardScreen: BaseScreen {
     
     static func typeText(_ textToType: String) {
         for char in textToType {
-            app.collectionViews.staticTexts[String(char).uppercased()].tap()
+            app.collectionViews.staticTexts[String(char).uppercased()].tap(afterWaitingForExistenceWithTimeout: 0.5)
         }
     }
     
