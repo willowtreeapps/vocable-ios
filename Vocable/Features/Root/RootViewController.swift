@@ -34,6 +34,8 @@ import SwiftUI
         outputLabel.accessibilityID = .root.outputText
         keyboardButton.accessibilityID = .shared.keyboardButton
         settingsButton.accessibilityID = .shared.settingsButton
+
+        self.prepareForAutomation(with: RootScreen.self)
         
         // Content layout guide
         NSLayoutConstraint.activate([

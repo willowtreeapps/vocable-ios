@@ -13,3 +13,6 @@ public struct AccessibilityID: ExpressibleByStringLiteral {
         self.id = value
     }
 }
+
+// Still ironing out naming and types here
+public typealias AXElement = AccessibilityID

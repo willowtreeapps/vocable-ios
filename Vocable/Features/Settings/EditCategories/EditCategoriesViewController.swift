@@ -49,6 +49,8 @@ final class EditCategoriesViewController: PagingCarouselViewController, NSFetche
 
         fetchResultsController.delegate = self
         try? fetchResultsController.performFetch()
+
+        prepareForAutomation(with: CategoriesAndPhrasesScreen.self)
     }
 
     private func setupNavigationBar() {

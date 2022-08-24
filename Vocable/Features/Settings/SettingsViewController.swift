@@ -122,6 +122,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
 
         setupNavigationBar()
         setupCollectionView()
+
+        prepareForAutomation(with: SettingsPage.self)
     }
 
     private func setupNavigationBar() {
