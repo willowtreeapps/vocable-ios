@@ -13,6 +13,10 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
     // Dimensions of the product designs.
     // Intended for use in computing the fractional-size dimensions of collection layout items rather than hard-coding width/height values
     private static let totalSize = CGSize(width: 1130, height: 834)
+
+    private static var compactHeight: CGFloat {
+        AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 0.375 : 0.6
+    }
     
     // MARK: - Section Layouts
     
@@ -326,12 +330,24 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
     
     static func mainKeyboardLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let dimensions = computeDimensions(for: environment.traitCollection)
-        return NSCollectionLayoutSection(group: keyboardGroupLayout(environment: environment, dimensions: dimensions, fractionalHeights: (compactHeight: 0.6, defaultHeight: 0.675)))
+        return NSCollectionLayoutSection(
+            group: keyboardGroupLayout(
+                environment: environment,
+                dimensions: dimensions,
+                fractionalHeights: (compactHeight: compactHeight, defaultHeight: 0.65)
+            )
+        )
     }
     
     static func editTextKeyboardLayout(with environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let dimensions = computeDimensions(for: environment.traitCollection)
-        return NSCollectionLayoutSection(group: keyboardGroupLayout(environment: environment, dimensions: dimensions, fractionalHeights: (compactHeight: 0.8, defaultHeight: 0.825)))
+        return NSCollectionLayoutSection(
+            group: keyboardGroupLayout(
+                environment: environment,
+                dimensions: dimensions,
+                fractionalHeights: (compactHeight: compactHeight, defaultHeight: 0.8)
+            )
+        )
     }
     
     static private func computeDimensions(for traitCollection: UITraitCollection) -> (rows: Int, columns: Int) {
@@ -342,7 +358,7 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
         let code = KeyboardLocale.current.languageCode
         switch code {
         case .en:
-            if isCompactPortrait {
+            if isCompactPortrait && !AppConfig.isCompactPortraitQWERTYKeyboardEnabled {
                 dimensions = (rows: 5, columns: 6)
             } else {
                 dimensions = (rows: 3, columns: 10)
@@ -370,22 +386,30 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
         
         // Character key group (Top 3 rows)
         let characterKeyGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)), subitem: keyItem, count: dimensions.columns)
-        
-        let characterKeyFractionalHeight = CGFloat((traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular)
-            ? 5.0 / 6.0 : 3.0 / 4.0)
+
+        let characterKeyFractionalHeight: CGFloat
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            characterKeyFractionalHeight = AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 4.7 / 6 : 5.0 / 6
+        } else {
+            characterKeyFractionalHeight = 3.0 / 4.0
+        }
+
         let characterKeyContainerGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(characterKeyFractionalHeight)),
             subitem: characterKeyGroup, count: dimensions.rows)
         
         // Function Key Group (bottom row)
+        let leadingKeyFractionalWidth = AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 2.0 : 1.0
         let leadingKeyItem = PresetCollectionViewCompositionalLayout.keyboardCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)))
-        
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(leadingKeyFractionalWidth / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)))
+
+        let spaceKeyFractionalWidth = AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 4.0 : 3.0
         let spaceKeyItem = PresetCollectionViewCompositionalLayout.keyboardCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(3.0 / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)))
-        
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(spaceKeyFractionalWidth / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)))
+
+        let trailingKeyFractionalWidth = AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 2.0 : 1.0
         let trailingKeyItem = PresetCollectionViewCompositionalLayout.keyboardCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)))
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(trailingKeyFractionalWidth / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)))
         
         var defaultFunctionKeyGroup: NSCollectionLayoutGroup {
             let flexibleSpacing = (environment.container.contentSize.width / CGFloat(dimensions.columns)) * 2.0
@@ -398,9 +422,10 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
         }
         
         var compactPortraitFunctionKeyGroup: NSCollectionLayoutGroup {
+            let fractionalHeight = AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 0.215 : 0.15
             let compactFunctionKeyGroup = NSCollectionLayoutGroup.horizontal(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.15)),
-                subitems: [leadingKeyItem, spaceKeyItem, keyItem, trailingKeyItem])
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(fractionalHeight)),
+                subitems: [leadingKeyItem, spaceKeyItem, trailingKeyItem, trailingKeyItem])
             
             return compactFunctionKeyGroup
         }
@@ -409,7 +434,7 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
             let overallContainerGroup = NSCollectionLayoutGroup.vertical(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(fractionalHeights.compactHeight)),
                 subitems: [characterKeyContainerGroup, compactPortraitFunctionKeyGroup])
-            
+
             return overallContainerGroup
         }
         

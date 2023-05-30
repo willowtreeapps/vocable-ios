@@ -11,6 +11,25 @@ import AVFoundation
 
 class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
     @IBOutlet fileprivate weak var textLabel: UILabel!
+
+    var font: UIFont {
+        switch sizeClass {
+        case .hCompact_vCompact, .hRegular_vCompact:
+            return .boldSystemFont(ofSize: 28)
+        case .hCompact_vRegular:
+            if AppConfig.isCompactPortraitQWERTYKeyboardEnabled {
+                return .boldSystemFont(ofSize: 13)
+            }
+            return .boldSystemFont(ofSize: 28)
+        default:
+            return .boldSystemFont(ofSize: 48)
+        }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateContent()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +45,7 @@ class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
         textLabel.textColor = isSelected ? .selectedTextColor : .defaultTextColor
         textLabel.backgroundColor = borderedView.fillColor
         textLabel.isOpaque = true
+        textLabel.font = font
     }
 
     func setup(title: String) {
@@ -33,7 +53,7 @@ class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
     }
     
     func setup(with image: UIImage?) {
-        guard let image = image, let font = textLabel.font else {
+        guard let image = image else {
             return
         }
         

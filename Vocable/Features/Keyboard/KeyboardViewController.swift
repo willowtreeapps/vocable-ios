@@ -152,7 +152,7 @@ class KeyboardViewController: UICollectionViewController {
         }
         
         snapshot.appendSections([.keyboard])
-        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular && !AppConfig.isCompactPortraitQWERTYKeyboardEnabled {
             snapshot.appendItems(KeyboardLocale.current.compactPortraitKeyMapping.map { ItemWrapper.key("\($0)") })
         } else {
             snapshot.appendItems(KeyboardLocale.current.landscapeKeyMapping.map { ItemWrapper.key("\($0)") })
