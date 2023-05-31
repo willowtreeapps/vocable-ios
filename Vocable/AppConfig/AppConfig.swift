@@ -50,5 +50,5 @@ struct AppConfig {
     static let listeningMode = ListenModeFeatureConfiguration.shared
 
     @PublishedDefault(.isCompactPortraitQWERTYKeyboardEnabled)
-    static var isCompactPortraitQWERTYKeyboardEnabled: Bool = true
+    static var isCompactPortraitQWERTYKeyboardEnabled: Bool = false
 }

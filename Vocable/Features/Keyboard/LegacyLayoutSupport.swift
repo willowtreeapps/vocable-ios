@@ -15,7 +15,7 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
     private static let totalSize = CGSize(width: 1130, height: 834)
 
     private static var compactHeight: CGFloat {
-        AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 0.375 : 0.6
+        AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 0.375 : 0.8
     }
     
     // MARK: - Section Layouts

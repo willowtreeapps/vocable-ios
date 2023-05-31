@@ -234,6 +234,7 @@
 		A96D61D524229F6400577144 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96D61D424229F6400577144 /* SettingsCollectionViewCell.swift */; };
 		A96D61D724229F7400577144 /* SettingsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A96D61D624229F7400577144 /* SettingsCollectionViewCell.xib */; };
 		A97814FA23FF3B1200ECC609 /* CategorySectionBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97814F923FF3B1200ECC609 /* CategorySectionBackground.swift */; };
+		A982D11E2A2690B5004190D8 /* KeyboardLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A982D11D2A2690B5004190D8 /* KeyboardLayoutViewController.swift */; };
 		A987416C280DADA40011C359 /* ListeningResponseFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A987416B280DADA40011C359 /* ListeningResponseFeedbackViewController.swift */; };
 		A987416E280DB20A0011C359 /* ListeningFeedbackSubmitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A987416D280DB20A0011C359 /* ListeningFeedbackSubmitView.swift */; };
 		A9874170280DFD0B0011C359 /* ListeningFeedbackSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A987416F280DFD0B0011C359 /* ListeningFeedbackSuccessView.swift */; };
@@ -537,6 +538,7 @@
 		A96D61D424229F6400577144 /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		A96D61D624229F7400577144 /* SettingsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCollectionViewCell.xib; sourceTree = "<group>"; };
 		A97814F923FF3B1200ECC609 /* CategorySectionBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionBackground.swift; sourceTree = "<group>"; };
+		A982D11D2A2690B5004190D8 /* KeyboardLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutViewController.swift; sourceTree = "<group>"; };
 		A987416B280DADA40011C359 /* ListeningResponseFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningResponseFeedbackViewController.swift; sourceTree = "<group>"; };
 		A987416D280DB20A0011C359 /* ListeningFeedbackSubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningFeedbackSubmitView.swift; sourceTree = "<group>"; };
 		A987416F280DFD0B0011C359 /* ListeningFeedbackSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningFeedbackSuccessView.swift; sourceTree = "<group>"; };
@@ -1010,6 +1012,7 @@
 				714EFD412419636500DC773C /* EditPhrases */,
 				A9B696002433C33F004E6960 /* EditCategories */,
 				6B6A4D8F25B7607800A7F489 /* ListeningMode */,
+				A982D11C2A269092004190D8 /* KeyboardLayout */,
 				A9DFCC21242D3A5000136136 /* TimingSensitivity */,
 				A9DFCC22242D3CF500136136 /* SelectionMode */,
 			);
@@ -1045,6 +1048,14 @@
 				A944D00A2406D55F00F3863E /* SettingsToggleCollectionViewCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A982D11C2A269092004190D8 /* KeyboardLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A982D11D2A2690B5004190D8 /* KeyboardLayoutViewController.swift */,
+			);
+			path = KeyboardLayout;
 			sourceTree = "<group>";
 		};
 		A9B696002433C33F004E6960 /* EditCategories */ = {
@@ -1603,6 +1614,7 @@
 				A9FD68A528008AD3006ABA3F /* AddPhraseCollectionViewCell.swift in Sources */,
 				A9CF2AF9242D4F0A005633A7 /* SensitivityCollectionViewCell.swift in Sources */,
 				0E969128281C5F520097A3CC /* AccessibilityID.swift in Sources */,
+				A982D11E2A2690B5004190D8 /* KeyboardLayoutViewController.swift in Sources */,
 				6BE7E9842459D328007B01F2 /* PagingCarouselViewController.swift in Sources */,
 				6B9DFA6223E889DB0037673E /* UIVirtualCursorView.swift in Sources */,
 				DC753162284143C200A84989 /* AccessibilityID+Shared+Alert.swift in Sources */,

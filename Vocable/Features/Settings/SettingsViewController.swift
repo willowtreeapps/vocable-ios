@@ -24,6 +24,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         case timingSensitivity
         case resetAppSettings
         case selectionMode
+        case keyboardLayout
         case privacyPolicy
         case contactDevs
         case pidTuner
@@ -36,6 +37,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 return String(localized: "settings.cell.categories.title")
             case .timingSensitivity:
                 return String(localized: "settings.cell.timing_sensitivity.title")
+            case .keyboardLayout:
+                return String(localized: "settings.cell.keyboard_layout.title")
             case .resetAppSettings:
                 return String(localized: "settings.cell.reset_all.title")
             case .selectionMode:
@@ -90,7 +93,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         .init(collectionView: collectionView) {(collectionView, indexPath, item) -> UICollectionViewCell in
 
         switch item {
-        case .categories, .timingSensitivity, .resetAppSettings, .selectionMode, .listeningMode:
+        case .categories, .timingSensitivity, .resetAppSettings, .selectionMode, .listeningMode, .keyboardLayout:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.reuseIdentifier, for: indexPath) as! SettingsCollectionViewCell
             cell.setup(title: item.title, image: UIImage(systemName: "chevron.right"))
             cell.accessibilityID = item.accessibiltyId
@@ -171,10 +174,10 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         snapshot.appendSections([.internalSettings])
         snapshot.appendItems([.categories,
                               .timingSensitivity,
+                              .keyboardLayout,
                               .resetAppSettings,
                               .listeningMode,
-                              .selectionMode,
-                              .pidTuner].filter(\.isFeatureEnabled))
+                              .selectionMode].filter(\.isFeatureEnabled))
         snapshot.appendSections([.externalURL])
         snapshot.appendItems([.privacyPolicy,
                               .contactDevs].filter(\.isFeatureEnabled))
@@ -281,6 +284,10 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             presentPidTuner()
         case .resetAppSettings:
             presentAppResetPrompt()
+
+        case .keyboardLayout:
+            let viewController = KeyboardLayoutViewController()
+            show(viewController, sender: nil)
         default:
             break
         }
