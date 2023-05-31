@@ -34,7 +34,7 @@ final class KeyboardLayoutViewController: VocableCollectionViewController {
         var accessory: VocableListCellAccessory {
             switch self {
             case .compactQWERTY:
-                return .toggle(isOn: AppConfig.isCompactPortraitQWERTYKeyboardEnabled)
+                return .toggle(isOn: AppConfig.isCompactQWERTYKeyboardEnabled)
             }
         }
     }
@@ -196,7 +196,7 @@ final class KeyboardLayoutViewController: VocableCollectionViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         switch item {
         case .compactQWERTY:
-            AppConfig.isCompactPortraitQWERTYKeyboardEnabled.toggle()
+            AppConfig.isCompactQWERTYKeyboardEnabled.toggle()
             Analytics.shared.track(.compactQWERTYKeyboardChanged)
         }
 

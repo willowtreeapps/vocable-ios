@@ -15,7 +15,7 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
     private static let totalSize = CGSize(width: 1130, height: 834)
 
     private static var compactHeight: CGFloat {
-        AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 0.375 : 0.8
+        AppConfig.isCompactQWERTYKeyboardEnabled ? 0.375 : 0.8
     }
     
     // MARK: - Section Layouts
@@ -358,7 +358,7 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
         let code = KeyboardLocale.current.languageCode
         switch code {
         case .en:
-            if isCompactPortrait && !AppConfig.isCompactPortraitQWERTYKeyboardEnabled {
+            if isCompactPortrait && !AppConfig.isCompactQWERTYKeyboardEnabled {
                 dimensions = (rows: 5, columns: 6)
             } else {
                 dimensions = (rows: 3, columns: 10)
@@ -389,7 +389,7 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
 
         let characterKeyFractionalHeight: CGFloat
         if sizeClass == .hCompact_vRegular {
-            characterKeyFractionalHeight = AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 4.7 / 6 : 5.0 / 6
+            characterKeyFractionalHeight = AppConfig.isCompactQWERTYKeyboardEnabled ? 4.7 / 6 : 5.0 / 6
         } else {
             characterKeyFractionalHeight = 3.0 / 4.0
         }
@@ -399,15 +399,15 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
             subitem: characterKeyGroup, count: dimensions.rows)
         
         // Function Key Group (bottom row)
-        let leadingKeyFractionalWidth = sizeClass == .hCompact_vRegular && AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 2.0 : 1.0
+        let leadingKeyFractionalWidth = sizeClass == .hCompact_vRegular && AppConfig.isCompactQWERTYKeyboardEnabled ? 2.0 : 1.0
         let leadingKeyItem = PresetCollectionViewCompositionalLayout.keyboardCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(leadingKeyFractionalWidth / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)), sizeClass: sizeClass)
 
-        let spaceKeyFractionalWidth = sizeClass == .hCompact_vRegular && AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 4.0 : 3.0
+        let spaceKeyFractionalWidth = sizeClass == .hCompact_vRegular && AppConfig.isCompactQWERTYKeyboardEnabled ? 4.0 : 3.0
         let spaceKeyItem = PresetCollectionViewCompositionalLayout.keyboardCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(spaceKeyFractionalWidth / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)), sizeClass: sizeClass)
 
-        let trailingKeyFractionalWidth = sizeClass == .hCompact_vRegular && AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 2.0 : 1.0
+        let trailingKeyFractionalWidth = sizeClass == .hCompact_vRegular && AppConfig.isCompactQWERTYKeyboardEnabled ? 2.0 : 1.0
         let trailingKeyItem = PresetCollectionViewCompositionalLayout.keyboardCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(trailingKeyFractionalWidth / CGFloat(dimensions.columns)), heightDimension: .fractionalHeight(1)), sizeClass: sizeClass)
         
@@ -422,7 +422,7 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
         }
         
         var compactPortraitFunctionKeyGroup: NSCollectionLayoutGroup {
-            let fractionalHeight = AppConfig.isCompactPortraitQWERTYKeyboardEnabled ? 0.215 : 0.15
+            let fractionalHeight = AppConfig.isCompactQWERTYKeyboardEnabled ? 0.215 : 0.15
             let compactFunctionKeyGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(fractionalHeight)),
                 subitems: [leadingKeyItem, spaceKeyItem, trailingKeyItem, trailingKeyItem])
@@ -448,7 +448,7 @@ class PresetCollectionViewCompositionalLayout: UICollectionViewCompositionalLayo
     private static func keyboardCollectionLayoutItem(layoutSize: NSCollectionLayoutSize, sizeClass: SizeClass) -> NSCollectionLayoutItem {
         let item = NSCollectionLayoutItem(layoutSize: layoutSize)
         let contentInset: CGFloat
-        if sizeClass == .hCompact_vRegular && AppConfig.isCompactPortraitQWERTYKeyboardEnabled {
+        if sizeClass == .hCompact_vRegular && AppConfig.isCompactQWERTYKeyboardEnabled {
             contentInset = 2
         } else {
             contentInset = 4

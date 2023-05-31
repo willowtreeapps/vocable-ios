@@ -17,7 +17,7 @@ class KeyboardKeyCollectionViewCell: VocableCollectionViewCell {
         case .hCompact_vCompact, .hRegular_vCompact:
             return .boldSystemFont(ofSize: 28)
         case .hCompact_vRegular:
-            if AppConfig.isCompactPortraitQWERTYKeyboardEnabled {
+            if AppConfig.isCompactQWERTYKeyboardEnabled {
                 return .boldSystemFont(ofSize: 16)
             }
             return .boldSystemFont(ofSize: 28)
