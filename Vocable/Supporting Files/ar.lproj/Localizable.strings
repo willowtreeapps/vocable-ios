@@ -115,8 +115,14 @@
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "تتطلب خدمات الكلام تفعيل إحدى الميزات التالية على جهازك: Siri أو Dictation. يرجى التحقق من إعدادات جهازك وتمكين Siri أو Dictation.";
 
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.message" = "يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى في وقت لاحق.";
+
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "خدمات الكلام غير متوفرة";
+
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.title" = "فشل الشبكة";
 
 /* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
 "listening_mode.empty_state.unsupported.message" = "هذا %1$@ في %2$@ %3$@ لا يدعم وضع الاستماع.\n\nوضع الاستماع متاح حاليا باللغة الإنجليزية فقط ويتطلب تمكين %5$@.";

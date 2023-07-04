@@ -115,8 +115,14 @@
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "Dịch vụ giọng nói yêu cầu bật một trong các tính năng sau trên thiết bị của bạn: Siri hoặc Đọc chính tả. Vui lòng kiểm tra cài đặt thiết bị của bạn và bật Siri hoặc Đọc chính tả.";
 
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.message" = "Vui lòng kiểm tra kết nối internet của bạn và thử lại sau.";
+
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "Dịch vụ lời nói không khả dụng";
+
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.title" = "Lỗi mạng";
 
 /* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
 "listening_mode.empty_state.unsupported.message" = "%1$@ trên %2$@ %3$@ này không hỗ trợ Chế độ nghe.\n\nChế độ nghe hiện chỉ khả dụng bằng tiếng Anh và yêu cầu bật %5$@.";

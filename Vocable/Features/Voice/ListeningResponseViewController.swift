@@ -89,6 +89,7 @@ final class ListeningResponseViewController: VocableViewController {
 
     private let synthesizedSpeechQueue = DispatchQueue(label: "speech_synthesis_queue", qos: .userInitiated)
     let classifier = VLClassifier()
+    let apiClient = APIClient()
 
     @PublishedValue private(set) var lastUtterance: String?
 
@@ -103,7 +104,17 @@ final class ListeningResponseViewController: VocableViewController {
         view.layoutMargins.top = 4
     }
 
-    private func setContent(_ content: Content, animated: Bool = true) {
+    /// Sets the content controller to be a controller configured for the given content
+    ///
+    /// If listening mode was used to obtain the `Content` passed into `content`, make sure to pass
+    /// the prompt that was used to generate that `Content` into `trackingPrompt`. The `APIClient` needs
+    /// to be informed when the user "responds" to that `Content` so that it can track history of the conversation.
+    ///
+    /// - Parameters:
+    ///   - content: `Content` to display.
+    ///   - trackingPrompt: If listening mode is being used  `trackingPrompt` should be set to the prompt that resulted in the `Content`.
+    ///   - animated: Wether or not to animate the transition to the new `Content`.
+    private func setContent(_ content: Content, trackingPrompt: String? = nil, animated: Bool = true) {
         let previousContent = self.content
         self.content = content
         let outgoingTransition: TransitionStyle
@@ -141,15 +152,17 @@ final class ListeningResponseViewController: VocableViewController {
             setContentViewController(wrapperViewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
 
         case .choices(let choices):
-            let reponseContentController = ListeningResponseContentViewController()
-            reponseContentController.content = choices
-            reponseContentController.synthesizedSpeechQueue = synthesizedSpeechQueue
-            reponseContentController.$lastUtterance
+            let responseContentController = ListeningResponseContentViewController()
+            responseContentController.apiClient = apiClient
+            responseContentController.content = choices
+            responseContentController.trackingPrompt = trackingPrompt
+            responseContentController.synthesizedSpeechQueue = synthesizedSpeechQueue
+            responseContentController.$lastUtterance
                 .sink { [weak self] utterance in
                     self?.lastUtterance = utterance
                 }
-                .store(in: &reponseContentController.disposables)
-            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: reponseContentController, loggingContext: currentContext, choices: choices)
+                .store(in: &responseContentController.disposables)
+            let wrapperViewController = ListeningResponseFeedbackViewController(viewController: responseContentController, loggingContext: currentContext, choices: choices)
             setContentViewController(wrapperViewController, outgoingTransition: outgoingTransition, incomingTransition: incomingTransition)
 
         case .empty(let state, let action):
@@ -212,13 +225,38 @@ final class ListeningResponseViewController: VocableViewController {
                     self.delegate?.didUpdateSpeechResponse(transcription)
                 case .finalTranscription(let transcription):
                     self.delegate?.didUpdateSpeechResponse(transcription)
-                    self.classifier.classify(transcription)
+                    
+                    guard apiClient.isAvailable != false else {
+                        self.classifier.classify(transcription)
+                        return
+                    }
+                    
+                    Task {
+                        let isAvailable = await self.apiClient.isAvailable()
+                        if isAvailable {
+                            self.fetchResponses(for: transcription)
+                        } else {
+                            self.classifier.classify(transcription)
+                        }
+                    }
+                    
                 default:
                     if self.speechRecognizerController.isListening {
                         self.setContent(.empty(.listeningResponse), animated: true)
                     }
                 }
             }
+    }
+    
+    private func fetchResponses(for prompt: String) {
+        Task { @MainActor in
+            do {
+                let responses = try await apiClient.query(prompt)
+                self.setContent(.choices(responses), trackingPrompt: prompt)
+            } catch {
+                self.setContent(.empty(.vocableAPIFailure ,action: .none))
+            }
+        }
     }
 
     private func observeAvailability() {

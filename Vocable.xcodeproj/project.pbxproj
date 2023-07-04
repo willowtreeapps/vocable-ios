@@ -20,6 +20,10 @@
 		17F29479247419DD00A05434 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F29478247419DD00A05434 /* SettingsScreen.swift */; };
 		1B545E44286F6CCB00187CD1 /* TimingAndSensitivityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B545E43286F6CCB00187CD1 /* TimingAndSensitivityScreen.swift */; };
 		1B545E46286F6D5900187CD1 /* TimingAndSensitivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B545E45286F6D5900187CD1 /* TimingAndSensitivityTests.swift */; };
+		220A558B2A8DD8E600612581 /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220A558A2A8DD8E600612581 /* Reply.swift */; };
+		220A558D2A8DD90900612581 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220A558C2A8DD90900612581 /* Query.swift */; };
+		220A558F2A8DDA2100612581 /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220A558E2A8DDA2100612581 /* Exchange.swift */; };
+		220DDD612A53CAC30058C7A9 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DDD542A53CAC30058C7A9 /* APIClient.swift */; };
 		2631B366251181C400B94402 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2631B365251181C400B94402 /* GoogleService-Info.plist */; };
 		274540282460DD0F0056EF98 /* Presets.strings in Resources */ = {isa = PBXBuildFile; fileRef = 274540262460DD0F0056EF98 /* Presets.strings */; };
 		2745402B2460DD490056EF98 /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2745402A2460DD490056EF98 /* Presets.swift */; };
@@ -323,6 +327,10 @@
 		17F29478247419DD00A05434 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		1B545E43286F6CCB00187CD1 /* TimingAndSensitivityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingAndSensitivityScreen.swift; sourceTree = "<group>"; };
 		1B545E45286F6D5900187CD1 /* TimingAndSensitivityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingAndSensitivityTests.swift; sourceTree = "<group>"; };
+		220A558A2A8DD8E600612581 /* Reply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reply.swift; sourceTree = "<group>"; };
+		220A558C2A8DD90900612581 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		220A558E2A8DDA2100612581 /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
+		220DDD542A53CAC30058C7A9 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		2631B365251181C400B94402 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		274540272460DD0F0056EF98 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Presets.strings; sourceTree = "<group>"; };
 		274540292460DD170056EF98 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Presets.strings; sourceTree = "<group>"; };
@@ -644,6 +652,7 @@
 		130C00B620D2AD2A007C3163 /* Vocable */ = {
 			isa = PBXGroup;
 			children = (
+				220DDD492A53CAC30058C7A9 /* APIClient */,
 				6B8D3B762821C0F700DDB9B7 /* Analytics */,
 				B879831223E0DA5800DC1A81 /* Common */,
 				6B9DFA4B23E889DB0037673E /* HeadTracking */,
@@ -725,6 +734,25 @@
 				1B545E45286F6D5900187CD1 /* TimingAndSensitivityTests.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		220DDD492A53CAC30058C7A9 /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				220DDD4A2A53CAC30058C7A9 /* Models */,
+				220DDD542A53CAC30058C7A9 /* APIClient.swift */,
+			);
+			path = APIClient;
+			sourceTree = "<group>";
+		};
+		220DDD4A2A53CAC30058C7A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				220A558A2A8DD8E600612581 /* Reply.swift */,
+				220A558C2A8DD90900612581 /* Query.swift */,
+				220A558E2A8DDA2100612581 /* Exchange.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		2631B400251191D500B94402 /* Frameworks */ = {
@@ -1492,6 +1520,7 @@
 				A94C3FAE27F49CBC001D4F01 /* CategoryNameEditorConfigurationProvider.swift in Sources */,
 				A95D07BE24326475004ECE64 /* CursorSensitivity.swift in Sources */,
 				6B9DFA7423E8D1270037673E /* TrackingContainerViewController.swift in Sources */,
+				220A558B2A8DD8E600612581 /* Reply.swift in Sources */,
 				A93E94052450EEC8008B61D2 /* KeyboardViewController.swift in Sources */,
 				A90D794727F399760032254E /* TextEditorNavigationButton.swift in Sources */,
 				6B8D3C10282C238000DDB9B7 /* AccessibilityID+Settings+EditPhrases.swift in Sources */,
@@ -1514,6 +1543,7 @@
 				A916F33E28490B2E00557CA2 /* UIApplication+Helpers.swift in Sources */,
 				A9DE16FE23F48FD30094DB64 /* TextSuggestionController.swift in Sources */,
 				A91030B227E3BF6600281C97 /* VocableListCellContentView.swift in Sources */,
+				220DDD612A53CAC30058C7A9 /* APIClient.swift in Sources */,
 				6BE7E9882459DFD5007B01F2 /* VocableNavigationBar.swift in Sources */,
 				6B5C490D245CB92700A4433C /* CategoryDetailViewController.swift in Sources */,
 				6B3DCC2124101FA80039E45E /* TrackingDebugOverlayViewController.swift in Sources */,
@@ -1544,6 +1574,7 @@
 				6B8D3B752821C0EB00DDB9B7 /* Analytics.swift in Sources */,
 				A91030B627E3C31700281C97 /* VocableListCell.swift in Sources */,
 				6B05020727F351A1000CFE5A /* CategoryReordering.swift in Sources */,
+				220A558D2A8DD90900612581 /* Query.swift in Sources */,
 				4E18DBF227FF49FA0043A019 /* GazeButtonStyleConfiguration.swift in Sources */,
 				A91030B427E3BF9300281C97 /* VocableListContentConfiguration.swift in Sources */,
 				9DB58D4922666BC200E99C3B /* UIColor+AppExtensions.swift in Sources */,
@@ -1585,6 +1616,7 @@
 				A99AF23323FDA8B600BE1184 /* SuggestionCollectionViewCell.swift in Sources */,
 				6BFB18C224002C7B002C3515 /* Phrases.xcdatamodeld in Sources */,
 				6B5C490B245B73F700A4433C /* CategoriesCarouselViewController.swift in Sources */,
+				220A558F2A8DDA2100612581 /* Exchange.swift in Sources */,
 				6B8D3C0E282C236200DDB9B7 /* AccessibilityID+Settings+EditCategories.swift in Sources */,
 				A90D790527F205E90032254E /* VocableListCellPrimaryButton.swift in Sources */,
 				4EA3D1CF27F7773300FE6457 /* BridgedGazeableButton.swift in Sources */,

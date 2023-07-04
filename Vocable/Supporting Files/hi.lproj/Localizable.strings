@@ -115,8 +115,14 @@
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "वाक् सेवाओं के लिए आपके डिवाइस पर निम्नलिखित सुविधाओं में से एक को सक्षम करने की आवश्यकता होती है: सिरी या डिक्टेशन। कृपया अपनी डिवाइस सेटिंग जांचें और सिरी या डिक्टेशन सक्षम करें।";
 
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.message" = "कृपया अपने इंटरनेट संबंध की जांच करें और बाद में पुनः प्रयास करें।";
+
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "भाषण सेवाएं अनुपलब्ध";
+
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.title" = "नेटवर्क विफलता";
 
 /* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
 "listening_mode.empty_state.unsupported.message" = "%2$@ %3$@ पर यह %1$@ श्रवण मोड का समर्थन नहीं करता है।\n\nलिसनिंग मोड वर्तमान में केवल अंग्रेज़ी में उपलब्ध है और %5$@ को सक्षम करने की आवश्यकता है।";

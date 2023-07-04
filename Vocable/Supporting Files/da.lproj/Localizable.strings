@@ -115,8 +115,14 @@
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "Taletjenester kræver, at en af følgende funktioner er aktiveret på din enhed: Siri eller Diktering. Tjek venligst dine enhedsindstillinger og aktivér Siri eller Diktering.";
 
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.message" = "Tjek venligst din internetforbindelse og prøv igen senere.";
+
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "Taletjenester er ikke tilgængelige";
+
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.title" = "Netværksfejl";
 
 /* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
 "listening_mode.empty_state.unsupported.message" = "Dette %1$@ på %2$@ %3$@ understøtter ikke Lyttetilstand.\n\nLyttetilstand er i øjeblikket kun tilgængelig på engelsk og kræver %5$@ for at være aktiveret.";

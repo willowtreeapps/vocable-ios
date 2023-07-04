@@ -115,8 +115,14 @@
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "Los servicios de voz requieren que una de las siguientes funciones esté habilitada en su dispositivo: Siri o Dictado. Verifique la configuración de su dispositivo y habilite Siri o Dictado.";
 
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.message" = "Por favor, comprueba tu conexión a Internet e intenta nuevamente más tarde.";
+
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "Servicios de voz no disponibles";
+
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.title" = "Fallo de red";
 
 /* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
 "listening_mode.empty_state.unsupported.message" = "Este %1$@ en %2$@ %3$@ no soporta el modo de escucha.\n\nEl modo de escucha solo está disponible actualmente en inglés y requiere que %5$@ esté habilitado.";

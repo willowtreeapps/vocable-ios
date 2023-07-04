@@ -115,8 +115,14 @@
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "語音服務需要在您的設備上啟用以下功能之一：Siri 或聽寫。請檢查您的設備設置並啟用 Siri 或聽寫。";
 
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.message" = "請檢查您的網路連接並稍後再試。";
+
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "語音服務不可用";
+
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.title" = "網路故障";
 
 /* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
 "listening_mode.empty_state.unsupported.message" = "%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。\n\n聆聽模式目前僅提供英文版本，需要啟用 %5$@。";

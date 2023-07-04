@@ -24,6 +24,7 @@ enum ListeningEmptyState: EmptyStateRepresentable, Equatable {
     case microphonePermissionDenied
     case microphonePermissionUndetermined
     case listenModeFreeResponse
+    case vocableAPIFailure
 
     var title: String {
         switch self {
@@ -43,6 +44,8 @@ enum ListeningEmptyState: EmptyStateRepresentable, Equatable {
             return String(localized: "listening_mode.empty_state.free_response.title")
         case .speechServiceUnavailable:
             return String(localized: "listening_mode.empty_state.speech_unavailable.title")
+        case .vocableAPIFailure:
+            return String(localized: "listening_mode.empty_state.vocableAPIFailure.title")
         }
     }
 
@@ -71,12 +74,14 @@ enum ListeningEmptyState: EmptyStateRepresentable, Equatable {
             return String(localized: "listening_mode.empty_state.free_response.message")
         case .speechServiceUnavailable:
             return String(localized: "listening_mode.empty_state.speech_unavailable.message")
+        case .vocableAPIFailure:
+            return String(localized: "listening_mode.empty_state.vocableAPIFailure.message")
         }
     }
 
     var buttonTitle: String? {
         switch self {
-        case .listenModeFreeResponse, .listeningResponse, .listeningModeUnsupported, .speechServiceUnavailable:
+        case .listenModeFreeResponse, .listeningResponse, .listeningModeUnsupported, .speechServiceUnavailable, .vocableAPIFailure:
             return nil
         case .microphonePermissionUndetermined:
             return String(localized: "listening_mode.empty_state.microphone_permission_undetermined.action")
