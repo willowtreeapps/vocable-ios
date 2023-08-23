@@ -34,23 +34,25 @@ class CategoryPhrasesPaginationTests: PaginationBaseTest {
     
     func testPagesAdjustToNewPhrases() {
         // Verify that the user is on the first page.
-        MainScreen.navigateToSettingsAndOpenCategory(name: eightPhrasesCategory.presetCategory.utterance)
+        MainScreen.navigateToSettingsAndOpenCategory(name: twoPhrasesCategory.presetCategory.utterance)
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         
         // Add 1 more phrase to push the total number of pages to 2.
-        CustomCategoriesScreen.addRandomPhrases(numberOfPhrases: 1)
+        CustomCategoriesScreen.addRandomPhrases(numberOfPhrases: 10)
         VTAssertPaginationEquals(1, of: 2, enabledArrows: .both)
         
         // Remove the additional phrase to verify that the page count reduces, back to the original count
-        CustomCategoriesScreen.categoriesPageDeletePhraseButton.firstMatch.tap()
-        SettingsScreen.alertDeleteButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
+        for _ in 1...10 {
+            CustomCategoriesScreen.categoriesPageDeletePhraseButton.firstMatch.tap()
+            SettingsScreen.alertDeleteButton.tap(afterWaitingForExistenceWithTimeout: 0.25)
+        }
         VTAssertPaginationEquals(1, of: 1, enabledArrows: .none)
     }
     
     // It is expected that the pagination left and right arrows are disabled when there is only 1 total page
     func testNextPageButtonsDisabled() {
         // Navigate to our test category and open the 'Edit Phrases' screen
-        MainScreen.navigateToSettingsAndOpenCategory(name: eightPhrasesCategory.presetCategory.utterance)
+        MainScreen.navigateToSettingsAndOpenCategory(name: twoPhrasesCategory.presetCategory.utterance)
         CustomCategoriesScreen.editCategoryPhrasesButton.tap()
         
         // Verify the page counts and that buttons appear; both buttons are disabled.
