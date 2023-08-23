@@ -1,5 +1,5 @@
 //
-//  GPTResponsesService.swift
+//  ListenAPIClient.swift
 //  Vocable
 //
 //  Created by Andrew Carter on 7/2/23.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum APIClientError: Error {
+enum ListenAPIClientError: Error {
     /// Occurs when we're unable to form a URL for the API
     case failedToMakeURLRequest
     
@@ -32,7 +32,7 @@ enum APIClientError: Error {
     case unavailable
 }
 
-class APIClient {
+class ListenAPIClient {
     
     // MARK: - Properties
     
@@ -73,7 +73,7 @@ class APIClient {
     
     private func makeQueryAPIAvailableRequest() throws -> URLRequest {
         guard let url = makeQueryAPIAvailableURL() else {
-            throw APIClientError.failedToMakeURLRequest
+            throw ListenAPIClientError.failedToMakeURLRequest
         }
         
         var request = URLRequest(url: url)
@@ -83,7 +83,7 @@ class APIClient {
     
     private func makeRequest(for query: Query) throws -> URLRequest {
         guard let url = makeQueryAPIURL() else {
-            throw APIClientError.failedToMakeURLRequest
+            throw ListenAPIClientError.failedToMakeURLRequest
         }
         
         var request = URLRequest(url: url)
@@ -125,7 +125,7 @@ class APIClient {
     
     func query(_ prompt: String) async throws -> [String] {
         guard await isAvailable() else {
-            throw APIClientError.unavailable
+            throw ListenAPIClientError.unavailable
         }
         
         let query = Query(prompt: prompt, history: history)
@@ -142,21 +142,21 @@ class APIClient {
             return reply.responses
             
         case 400:
-            throw APIClientError.invalidRequest
+            throw ListenAPIClientError.invalidRequest
             
         case 405:
-            throw APIClientError.methodNotAllowed
+            throw ListenAPIClientError.methodNotAllowed
             
         case 500:
-            throw APIClientError.internalServerError
+            throw ListenAPIClientError.internalServerError
             
         case 503:
             isAvailable = false
             
-            throw APIClientError.unavailable
+            throw ListenAPIClientError.unavailable
             
         default:
-            throw APIClientError.invalidResponse
+            throw ListenAPIClientError.invalidResponse
         }
     }
     

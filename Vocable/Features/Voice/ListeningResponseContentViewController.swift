@@ -30,7 +30,7 @@ final class ListeningResponseContentViewController: PagingCarouselViewController
 
     var disposables = Set<AnyCancellable>()
     var synthesizedSpeechQueue: DispatchQueue!
-    var apiClient: APIClient?
+    var apiClient: ListenAPIClient?
     
     /// When listening mode was used to generate the `Content` displayed, set this to the prompt used to querty the API.
     ///

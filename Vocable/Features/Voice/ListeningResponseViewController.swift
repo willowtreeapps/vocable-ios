@@ -89,7 +89,7 @@ final class ListeningResponseViewController: VocableViewController {
 
     private let synthesizedSpeechQueue = DispatchQueue(label: "speech_synthesis_queue", qos: .userInitiated)
     let classifier = VLClassifier()
-    let apiClient = APIClient()
+    let apiClient = ListenAPIClient()
 
     @PublishedValue private(set) var lastUtterance: String?
 
