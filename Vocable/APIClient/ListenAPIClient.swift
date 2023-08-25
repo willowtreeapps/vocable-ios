@@ -60,14 +60,14 @@ class ListenAPIClient {
     private func makeQueryAPIURL() -> URL? {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "query-n3mfzay2fq-uc.a.run.app"
+        components.host = "query-ya3wxdzzgq-uc.a.run.app"
         return components.url
     }
     
     private func makeQueryAPIAvailableURL() -> URL? {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "query-api-enabled-n3mfzay2fq-uc.a.run.app"
+        components.host = "query-api-enabled-ya3wxdzzgq-uc.a.run.app"
         return components.url
     }
     
