@@ -19,6 +19,7 @@ class PaginationBaseTest: XCTestCase {
     let eightPhrasesCategory = Category(id: "first_category", "Category 1", phrases: PaginationBaseTest.phrases(count: 8))
     let ninePhrasesCategory = Category(id: "second_category", "Category 2", phrases: PaginationBaseTest.phrases(count: 9))
     let sevenPhrasesCategory = Category(id: "third_category", "Category 3", phrases: PaginationBaseTest.phrases(count: 7))
+    let twoPhrasesCategory = Category(id: "fourth_category", "Category 4", phrases: PaginationBaseTest.phrases(count: 2))
     
     override func setUp() {
         let app = XCUIApplication()
@@ -29,6 +30,7 @@ class PaginationBaseTest: XCTestCase {
                     eightPhrasesCategory
                     ninePhrasesCategory
                     sevenPhrasesCategory
+                    twoPhrasesCategory
                 }
             }
         }

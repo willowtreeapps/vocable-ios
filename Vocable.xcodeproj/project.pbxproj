@@ -1229,7 +1229,6 @@
 				2631B3FF251191C500B94402 /* Frameworks */,
 				130C00B220D2AD2A007C3163 /* Resources */,
 				54481D4823E9CBF000ECF249 /* Swift Lint */,
-				2631B40F2511939600B94402 /* Initialize Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -1393,26 +1392,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2631B40F2511939600B94402 /* Initialize Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}\n",
-				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			name = "Initialize Crashlytics";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# This locates the crashlytics framework downloaded by the SPM in order to execute the included script\n\n\"${PROJECT_DIR}/scripts/run\"\n";
-		};
 		54481D4823E9CBF000ECF249 /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
