@@ -190,4 +190,5 @@ extension Analytics.Event {
     static let heyVocableModeChanged = Self(name: "'Hey Vocable' Settings Changed")
 
     static let headingTrackingChanged = Self(name: "Head Tracking Settings Changed")
+    static let compactQWERTYKeyboardChanged = Self(name: "Compact QWERTY Keyboard Changed")
 }

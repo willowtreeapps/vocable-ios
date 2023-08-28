@@ -17,6 +17,7 @@ extension UserDefaultsKey {
     static let sensitivitySetting: UserDefaultsKey = "sensitivitySetting"
     static let dwellDuration: UserDefaultsKey = "dwellDuration"
     static let isHeadTrackingEnabled: UserDefaultsKey = "isHeadTrackingEnabled"
+    static let isCompactQWERTYKeyboardEnabled: UserDefaultsKey = "isCompactQWERTYKeyboardEnabled"
 }
 
 struct AppConfig {
@@ -47,4 +48,7 @@ struct AppConfig {
     }
 
     static let listeningMode = ListenModeFeatureConfiguration.shared
+
+    @PublishedDefault(.isCompactQWERTYKeyboardEnabled)
+    static var isCompactQWERTYKeyboardEnabled: Bool = false
 }

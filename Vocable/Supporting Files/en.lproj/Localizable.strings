@@ -81,6 +81,9 @@
 /* edit cursor timing and sensititivy settings menu item */
 "settings.cell.timing_sensitivity.title" = "Timing and Sensitivity";
 
+/* edit keyboard layout settings menu item */
+"settings.cell.keyboard_layout.title" = "Keyboard Layout";
+
 /* reset all settings menu item */
 "settings.cell.reset_all.title" = "Reset App Settings";
 
@@ -211,6 +214,17 @@
 
 /* Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle. */
 "settings.cell.head_tracking.title" = "Head Tracking";
+
+// MARK: Keyboard Layout Settings Strings
+
+/* Keyboard Layout setting header title*/
+"settings.keyboard_layout.header.title" = "Keyboard Layout";
+
+/* Option within Keyboard Layout. This option is to enable or disable QWERTY keyboard on portrait iPhone. */
+"settings.cell.qwerty_layout.title" = "Compact QWERTY";
+
+/* Option within Keyboard Layout. This option is to enable or disable QWERTY keyboard on portrait iPhone. */
+"settings.keyboard_layout.qwerty_layout.explanation_footer" = "Enabling this will show a QWERTY keyboard layout for portrait mode on %@. This keyboard layout may cause issues with head tracking due to small key size.";
 
 
 // MARK: Category Empty State Strings
