@@ -24,10 +24,16 @@ extension AVSpeechSynthesizer {
         let utterance = AVSpeechUtterance(string: string)
         utterance.voice = AVSpeechSynthesisVoice(language: language)
         
-        if isSpeaking {
-            stopSpeaking(at: .immediate)
+        if #available(iOS 17.0, *),
+           let voice = AVSpeechSynthesisVoice.speechVoices().first(where: { $0.voiceTraits.contains(.isPersonalVoice) }) {
+            utterance.voice = voice
         }
-        speak(utterance)
+        
+    
+    if isSpeaking {
+        stopSpeaking(at: .immediate)
     }
+    speak(utterance)
+}
 
 }

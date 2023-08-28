@@ -96,6 +96,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }.store(in: &disposables)
 
+        Task {
+            if #available(iOS 17.0, *) {
+                let _ = await AVSpeechSynthesizer.requestPersonalVoiceAuthorization()
+            } else {
+                // Fallback on earlier versions
+            }
+        }
+        
         return true
     }
 
