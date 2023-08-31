@@ -13,6 +13,7 @@ import ARKit
 extension UserDefaultsKey {
 
     static let listeningModeEnabledPreference: UserDefaultsKey = "listeningModeEnabledPreference"
+    static let listeningModeSmartAssistEnabledPreference: UserDefaultsKey = "listeningModeSmartAssistEnabledPreference"
     static let listeningModeHotWordEnabledPreference: UserDefaultsKey = "listeningModeHotWordEnabledPreference"
     static let sensitivitySetting: UserDefaultsKey = "sensitivitySetting"
     static let dwellDuration: UserDefaultsKey = "dwellDuration"

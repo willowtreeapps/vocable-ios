@@ -56,7 +56,7 @@ jobs:
       - store_artifacts:
           path: output
   export-localizations-for-crowdin:
-    macos: 
+    macos:
       xcode: 14.3.1
     resource_class: macos.m1.medium.gen1
     steps:
@@ -77,9 +77,9 @@ jobs:
             git add -A
             git diff-index --quiet HEAD || git commit -m "Updated app localizations for Crowdin Export [ci skip]"
             git push -q git@github.com:willowtreeapps/vocable-ios.git ${CIRCLE_BRANCH}
-            
+
   update-localizations-test-deploy:
-    macos: 
+    macos:
       xcode: 14.3.1
     resource_class: macos.m1.medium.gen1
     steps:
@@ -103,14 +103,15 @@ jobs:
             git add -A
             git diff-index --quiet HEAD || git commit -m "Updated localizations [ci skip]"
             git push -q git@github.com:willowtreeapps/vocable-ios.git ${CIRCLE_BRANCH}
-    
+
 workflows:
   build-test-adhoc-testflight:
     jobs:
       - build-and-test:
           filters:
             branches:
-              ignore: /crowdin.*/ 
+              ignore:
+                - /crowdin.*/
       - export-localizations-for-crowdin:
           filters:
             branches:
@@ -120,15 +121,17 @@ workflows:
       - buildanddeploytotestflight:
           filters:
             branches:
-              only: 
+              only:
                 - develop
                 - release/*
           requires:
-            - export-localizations-for-crowdin
+            # - export-localizations-for-crowdin TODO the repo this attempts to push to is now protected - how do we resolve?
             - build-and-test
   localize-build-test:
     jobs:
       - update-localizations-test-deploy:
           filters:
             branches:
-              only: /crowdin.*/           
+              ignore:
+                - feature/chatgpt-recommendations
+              only: /crowdin.*/

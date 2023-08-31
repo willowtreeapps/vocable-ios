@@ -115,8 +115,14 @@
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "음성 서비스를 사용하려면 장치에서 Siri 또는 받아쓰기 기능 중 하나를 활성화해야 합니다. 장치 설정을 확인하고 Siri 또는 받아쓰기를 활성화하십시오.";
 
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.message" = "인터넷 연결을 확인하고 나중에 다시 시도해주세요.";
+
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "음성 서비스 이용 불가";
+
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.title" = "네트워크 실패";
 
 /* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
 "listening_mode.empty_state.unsupported.message" = "%2$@ %3$@의 이 %1$@은(는) 듣기 모드를 지원하지 않습니다.\n\n듣기 모드는 현재 영어로만 제공되며 %5$@를 활성화해야 합니다.";

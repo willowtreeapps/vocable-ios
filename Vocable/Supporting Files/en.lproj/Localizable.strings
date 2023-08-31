@@ -275,6 +275,9 @@
 /* Footer text displayed in the Listening Mode preferences screen. This text describes the \"Hey Vocable\" feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen. */
 "settings.listening_mode.hotword_explanation_footer" = "When this shortcut is enabled, anyone can say \"Hey, Vocable\" to prompt the app to navigate to the listening mode screen.";
 
+/* Footer text displayed in the Listening Mode preferences screen. This text describes the Smart Assist feature and how it works. */
+"settings.listening_mode.smart_assist_explanation_footer" = "Vocable's Smart Assist setting will give the user more response options while using Listening Mode. Smart Assist is powered by an Azure based GPT engine. This particular GPT engine will return options based off of generative natural language models but will not store any interactions and responses given by the user. For more information, see https://www.vocable.app";
+
 /* Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine. */
 "settings.listening_mode.device_unsupported_explanation_footer" = "This %1$@ on %2$@ %3$@ does not support Listening Mode.\n\nListening Mode is currently only available in English and requires %5$@ to be enabled.";
 
@@ -284,7 +287,8 @@
 /* Title of Listening Mode preferences cell that toggles \"Hey Vocable\" shortcut feature on or off when selected */
 "settings.listening_mode.hot_word_toggle_cell.title" = "\"Hey Vocable\" shortcut";
 
-
+/* Title of Smart Assist preferences cell that toggles the Smart Assist feature on or off when selected */
+"settings.listening_mode.smart_assist_toggle_cell.title" = "Smart Assist";
 
 // MARK: Listening Mode Empty State Titles
 
@@ -312,7 +316,8 @@
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "Speech services unavailable";
 
-
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.title" = "Network failure";
 
 // MARK: Listening Mode Empty State Messages
 
@@ -340,6 +345,8 @@
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "Speech services require one of the following features to be enabled on your device: Siri or Dictation. Please check your device settings and enable Siri or Dictation.";
 
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.message" = "Please check your internet connection and try again later.";
 
 
 // MARK: Listening Mode Empty State Button Titles

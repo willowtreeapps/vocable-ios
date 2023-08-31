@@ -30,6 +30,14 @@ final class ListeningResponseContentViewController: PagingCarouselViewController
 
     var disposables = Set<AnyCancellable>()
     var synthesizedSpeechQueue: DispatchQueue!
+    var apiClient: ListenAPIClient?
+    
+    /// When listening mode was used to generate the `Content` displayed, set this to the prompt used to query the API.
+    ///
+    /// `ListeningResponseContentViewController` will inform the `apiClient` when a choice is selected so that
+    /// the conversation history can be added to the context of the query API. When multiple options are selected, the most recent option
+    /// is tracked.
+    var trackingPrompt: String?
 
     private lazy var diffableDataSource = UICollectionViewDiffableDataSource<Int, String>(collectionView: self.collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
         let cell = collectionView.dequeueCell(type: PresetItemCollectionViewCell.self, for: indexPath)
@@ -72,6 +80,11 @@ final class ListeningResponseContentViewController: PagingCarouselViewController
         guard let utterance = diffableDataSource.itemIdentifier(for: indexPath) else { return }
         lastUtterance = utterance
 
+        if let apiClient,
+           let trackingPrompt {
+            apiClient.userResponded(to: trackingPrompt, with: utterance)
+        }
+        
         synthesizedSpeechQueue.async {
             AVSpeechSynthesizer.shared.speak(utterance, language: AppConfig.activePreferredLanguageCode)
         }

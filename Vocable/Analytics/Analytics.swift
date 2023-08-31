@@ -88,6 +88,7 @@ class Analytics {
     private func registerSuperProperties() {
         cancellables = [mixPanel.registerSuperProperty("Listening Mode Enabled", using: listeningMode.$listeningModeEnabledPreference, on: queue),
                         mixPanel.registerSuperProperty("'Hey Vocable' Enabled", using: listeningMode.$hotwordEnabledPreference, on: queue),
+                        mixPanel.registerSuperProperty("Smart Assist Enabled", using: listeningMode.$smartAssistEnabledPreference, on: queue),
                         mixPanel.registerSuperProperty("Head Tracking Enabled", using: AppConfig.$isHeadTrackingEnabled, on: queue),
                         mixPanel.registerSuperProperty("Cursor Sensitivity", using: AppConfig.$cursorSensitivity.map(\.analyticsDescription), on: queue),
                         mixPanel.registerSuperProperty("Hover Time", using: AppConfig.$selectionHoldDuration.map(\.analyticsDescription), on: queue)]
@@ -188,6 +189,7 @@ extension Analytics.Event {
 
     static let listeningModeChanged = Self(name: "Listening Mode Settings Changed")
     static let heyVocableModeChanged = Self(name: "'Hey Vocable' Settings Changed")
+    static let smartAssistModeChanged = Self(name: "Smart Assist Settings Changed")
 
     static let headingTrackingChanged = Self(name: "Head Tracking Settings Changed")
     static let compactQWERTYKeyboardChanged = Self(name: "Compact QWERTY Keyboard Changed")

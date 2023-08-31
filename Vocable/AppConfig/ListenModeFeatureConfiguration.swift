@@ -42,6 +42,10 @@ final class ListenModeFeatureConfiguration: ObservableObject {
     @PublishedDefault(.listeningModeHotWordEnabledPreference)
     var hotwordEnabledPreference: Bool = true
 
+    // The user's preference for wether the listening mode should use GPT
+    @PublishedDefault(.listeningModeSmartAssistEnabledPreference)
+    var smartAssistEnabledPreference: Bool = false
+    
     private var cancellables = Set<AnyCancellable>()
 
     private init() {

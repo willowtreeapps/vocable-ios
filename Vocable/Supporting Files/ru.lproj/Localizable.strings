@@ -115,8 +115,14 @@
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "Речевые службы требуют, чтобы на вашем устройстве была включена одна из следующих функций: Siri или Диктовка. Пожалуйста, проверьте настройки вашего устройства и включите Siri или Диктовку.";
 
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.message" = "Пожалуйста, проверьте ваше интернет-соединение и попробуйте снова позже.";
+
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "Голосовые сервисы недоступны";
+
+/* Listen mode error state message for when the vocable API fails */
+"listening_mode.empty_state.vocableAPIFailure.title" = "Сбой сети";
 
 /* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
 "listening_mode.empty_state.unsupported.message" = "Этот %1$@ на %2$@ %3$@ не поддерживает режим прослушивания.\n\nРежим прослушивания в настоящее время доступен только на английском языке и требует включения %5$@.";
