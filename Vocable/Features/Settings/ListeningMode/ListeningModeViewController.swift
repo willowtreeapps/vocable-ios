@@ -14,11 +14,13 @@ final class ListeningModeViewController: VocableCollectionViewController {
 
     private enum Section: Int {
         case listeningMode
+        case smartAssist
         case hotword
     }
 
     private enum ContentItem: Int {
         case listeningModeEnabled
+        case smartAssistEnabled
         case hotWordEnabled
 
         var title: String {
@@ -27,6 +29,8 @@ final class ListeningModeViewController: VocableCollectionViewController {
                 return String(localized: "settings.listening_mode.listening_mode_toggle_cell.title")
             case .hotWordEnabled:
                 return String(localized: "settings.listening_mode.hot_word_toggle_cell.title")
+            case .smartAssistEnabled:
+                return String(localized: "settings.listening_mode.smart_assist_toggle_cell.title")
             }
         }
 
@@ -36,6 +40,8 @@ final class ListeningModeViewController: VocableCollectionViewController {
                 return "listening_mode_toggle"
             case .hotWordEnabled:
                 return "hot_word_toggle"
+            case .smartAssistEnabled:
+                return "use_gpt_toggle"
             }
         }
 
@@ -46,6 +52,8 @@ final class ListeningModeViewController: VocableCollectionViewController {
                               && ListenModeFeatureConfiguration.deviceSupportsListeningMode)
             case .hotWordEnabled:
                 return .toggle(isOn: AppConfig.listeningMode.hotwordEnabledPreference)
+            case .smartAssistEnabled:
+                return .toggle(isOn: AppConfig.listeningMode.smartAssistEnabledPreference)
             }
         }
     }
@@ -111,12 +119,15 @@ final class ListeningModeViewController: VocableCollectionViewController {
             if AppConfig.listeningMode.listeningModeEnabledPreference, ListenModeFeatureConfiguration.deviceSupportsListeningMode {
                 snapshot.appendSections([.hotword])
                 snapshot.appendItems([.hotWordEnabled])
+                
+                snapshot.appendSections([.smartAssist])
+                snapshot.appendItems([.smartAssistEnabled])
             }
             collectionView.backgroundView = nil
         }
 
         if #available(iOS 15.0, *) {
-            let reconfigurableItems = [.hotWordEnabled, .listeningModeEnabled].filter(snapshot.itemIdentifiers.contains)
+            let reconfigurableItems = [.smartAssistEnabled, .hotWordEnabled, .listeningModeEnabled].filter(snapshot.itemIdentifiers.contains)
             snapshot.reconfigureItems(reconfigurableItems)
         }
 
@@ -155,6 +166,8 @@ final class ListeningModeViewController: VocableCollectionViewController {
                     text = String(localized: "settings.listening_mode.listening_mode_explanation_footer")
                 case .hotword:
                     text = String(localized: "settings.listening_mode.hotword_explanation_footer")
+                case .smartAssist:
+                    text = String(localized: "settings.listening_mode.smart_assist_explanation_footer")
                 }
             } else {
                 let model = UIDevice.current.localizedModel
@@ -253,6 +266,10 @@ final class ListeningModeViewController: VocableCollectionViewController {
         case .hotWordEnabled:
             AppConfig.listeningMode.hotwordEnabledPreference.toggle()
             Analytics.shared.track(.heyVocableModeChanged)
+            
+        case .smartAssistEnabled:
+            AppConfig.listeningMode.smartAssistEnabledPreference.toggle()
+            Analytics.shared.track(.smartAssistModeChanged)
         }
 
         updateDataSource(animated: true)
