@@ -32,7 +32,7 @@ final class ListeningResponseContentViewController: PagingCarouselViewController
     var synthesizedSpeechQueue: DispatchQueue!
     var apiClient: ListenAPIClient?
     
-    /// When listening mode was used to generate the `Content` displayed, set this to the prompt used to querty the API.
+    /// When listening mode was used to generate the `Content` displayed, set this to the prompt used to query the API.
     ///
     /// `ListeningResponseContentViewController` will inform the `apiClient` when a choice is selected so that
     /// the conversation history can be added to the context of the query API. When multiple options are selected, the most recent option
