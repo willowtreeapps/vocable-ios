@@ -125,7 +125,7 @@ workflows:
                 - develop
                 - release/*
           requires:
-            # - export-localizations-for-crowdin TODO the repo this attempts to push to is now protected, how do we resolve?
+            # - export-localizations-for-crowdin TODO the repo this attempts to push to is now protected - how do we resolve?
             - build-and-test
   localize-build-test:
     jobs:
