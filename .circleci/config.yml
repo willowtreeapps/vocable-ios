@@ -122,8 +122,7 @@ workflows:
           filters:
             branches:
               only:
-                - develop
-                - release/*
+                - /release.*/
           requires:
             # - export-localizations-for-crowdin TODO the repo this attempts to push to is now protected - how do we resolve?
             - build-and-test
