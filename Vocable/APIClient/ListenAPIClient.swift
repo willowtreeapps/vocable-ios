@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 enum ListenAPIClientError: Error {
     /// Occurs when we're unable to form a URL for the API
@@ -71,17 +72,19 @@ class ListenAPIClient {
         return components.url
     }
     
-    private func makeQueryAPIAvailableRequest() throws -> URLRequest {
+    private func makeQueryAPIAvailableRequest() async throws -> URLRequest {
         guard let url = makeQueryAPIAvailableURL() else {
             throw ListenAPIClientError.failedToMakeURLRequest
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        return request
+        
+        let authorizedRequest = try await addAuthorization(to: request)
+        return authorizedRequest
     }
     
-    private func makeRequest(for query: Query) throws -> URLRequest {
+    private func makeRequest(for query: Query) async throws -> URLRequest {
         guard let url = makeQueryAPIURL() else {
             throw ListenAPIClientError.failedToMakeURLRequest
         }
@@ -90,7 +93,19 @@ class ListenAPIClient {
         request.httpBody = try JSONEncoder().encode(query)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        return request
+        
+        let authorizedRequest = try await addAuthorization(to: request)
+        return authorizedRequest
+    }
+    
+    private func addAuthorization(to request: URLRequest) async throws -> URLRequest {
+        let result = try await Auth.auth().signInAnonymously()
+        let user = result.user
+        let token = try await user.getIDToken()
+        
+        var newRequest = request
+        newRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        return newRequest
     }
     
     // MARK: - Public Methods
@@ -110,7 +125,7 @@ class ListenAPIClient {
         }
         
         do {
-            let request = try makeQueryAPIAvailableRequest()
+            let request = try await makeQueryAPIAvailableRequest()
             let (_, response) = try await session.data(for: request)
             let httpResponse = response as? HTTPURLResponse
             let available = httpResponse.map({ $0.statusCode == 200 }) ?? false
@@ -129,7 +144,7 @@ class ListenAPIClient {
         }
         
         let query = Query(prompt: prompt, history: history)
-        let request = try makeRequest(for: query)
+        let request = try await makeRequest(for: query)
         let (data, response) = try await session.data(for: request)
         let httpResponse = response as? HTTPURLResponse
         

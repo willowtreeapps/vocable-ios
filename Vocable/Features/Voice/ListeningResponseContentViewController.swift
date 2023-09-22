@@ -10,19 +10,31 @@ import UIKit
 import AVFoundation
 import Speech
 import Combine
+import OrderedCollections
 
 @available(iOS 14.0, *)
 final class ListeningResponseContentViewController: PagingCarouselViewController {
 
-    var content: [String] = [] {
-        didSet {
+    private var _content: [String] = []
+    
+    var content: [String] {
+        set {
+            var uniqueContent = OrderedSet<String>()
+            uniqueContent.append(contentsOf: newValue)
+            let newContent = uniqueContent.elements
+            _content = newContent
+            
             var newSnapshot = NSDiffableDataSourceSnapshot<Int, String>()
             newSnapshot.appendSections([0])
-            newSnapshot.appendItems(content)
+            newSnapshot.appendItems(newContent)
 
             self.diffableDataSource.apply(newSnapshot, animatingDifferences: false)
 
             self.collectionView.backgroundView = nil
+        }
+        
+        get {
+            _content
         }
     }
 

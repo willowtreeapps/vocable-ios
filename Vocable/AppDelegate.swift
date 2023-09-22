@@ -11,6 +11,7 @@ import CoreData
 import Combine
 import AVFoundation
 import VocableListenCore
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        FirebaseApp.configure()
+        
         if !AppConfig.isHeadTrackingSupported {
             AppConfig.isHeadTrackingEnabled = false
         }
@@ -85,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.removeTrackingWindowsIfNeeded()
             }
         }.store(in: &disposables)
-
+        
         _ = SpeechRecognitionController.shared
 
         AppConfig.listeningMode.$isEnabled
