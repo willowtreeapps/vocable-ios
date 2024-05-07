@@ -115,14 +115,8 @@
 /* Listen mode error state message for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.message" = "Les services vocaux nécessitent l'activation de l'une des fonctionnalités suivantes sur votre appareil : Siri ou Dictée. Veuillez vérifier les paramètres de votre appareil et activer Siri ou Dictée.";
 
-/* Listen mode error state message for when the vocable API fails */
-"listening_mode.empty_state.vocableAPIFailure.message" = "Veuillez vérifier votre connexion internet et réessayer plus tard.";
-
 /* Listen mode error state title for when Apple's speech to text service is unavailable */
 "listening_mode.empty_state.speech_unavailable.title" = "Services vocaux indisponibles";
-
-/* Listen mode error state message for when the vocable API fails */
-"listening_mode.empty_state.vocableAPIFailure.title" = "Échec du réseau";
 
 /* Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported */
 "listening_mode.empty_state.unsupported.message" = "Ce %1$@ sur %2$@ %3$@ ne prend pas en charge le mode d'écoute.\n\nLe mode d'écoute n'est actuellement disponible qu'en anglais et nécessite l'activation de %5$@.";
@@ -231,7 +225,7 @@
 /* contact developers settings menu item */
 "settings.cell.contact_developers.title" = "Contacter les développeurs";
 
-/* edit user's favorite phrases category settings menu item */
+/* Edit user's favorite phrases category settings menu item */
 "settings.cell.edit_user_favorites.title_format" = "Modifier %@";
 
 /* Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle. */
