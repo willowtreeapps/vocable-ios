@@ -2,7 +2,7 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Vocable/Supporting Files/en.lproj/InfoPlist.strings" source-language="en" target-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.2" build-num="15C500b"/>
     </header>
     <body>
       <trans-unit id="CFBundleDisplayName" xml:space="preserve">
@@ -34,24 +34,9 @@
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Localizable.strings" source-language="en" target-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.2" build-num="15C500b"/>
     </header>
     <body>
-      <trans-unit id="Edit Phrases" xml:space="preserve">
-        <source>Edit Phrases</source>
-        <target>Edit Phrases</target>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Rename Category" xml:space="preserve">
-        <source>Rename Category</source>
-        <target>Rename Category</target>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Sign In" xml:space="preserve">
-        <source>Sign In</source>
-        <target>Sign In</target>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
       <trans-unit id="categories_list_editor.header.title" xml:space="preserve">
         <source>Categories</source>
         <target>Categories</target>
@@ -274,6 +259,16 @@ Listening Mode is currently only available in English and requires %5$@ to be en
         <target>Listening Mode Unsupported</target>
         <note>Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported</note>
       </trans-unit>
+      <trans-unit id="listening_mode.empty_state.vocableAPIFailure.message" xml:space="preserve">
+        <source>Please check your internet connection and try again later.</source>
+        <target>Please check your internet connection and try again later.</target>
+        <note>Listen mode error state message for when the vocable API fails</note>
+      </trans-unit>
+      <trans-unit id="listening_mode.empty_state.vocableAPIFailure.title" xml:space="preserve">
+        <source>Network failure</source>
+        <target>Network failure</target>
+        <note>Listen mode error state message for when the vocable API fails</note>
+      </trans-unit>
       <trans-unit id="listening_mode.feedback.confirmation.title" xml:space="preserve">
         <source>Thank You!</source>
         <target>Thank You!</target>
@@ -298,6 +293,55 @@ Listening Mode is currently only available in English and requires %5$@ to be en
         <source>Page %1$d of %2$d</source>
         <target>Page %1$d of %2$d</target>
         <note>Page indicator progress format. \"Page x of n\"</note>
+      </trans-unit>
+      <trans-unit id="personal_voices.empty_state.denied.button.title" xml:space="preserve">
+        <source>Open Settings</source>
+        <target>Open Settings</target>
+        <note>Action button for the personal voices screen allowing the user to open the system settings app to resolve an error.</note>
+      </trans-unit>
+      <trans-unit id="personal_voices.empty_state.denied.description" xml:space="preserve">
+        <source>Vocable needs permission to access Personal Voices on this device.
+
+You can enable access in %1$@ Settings.</source>
+        <target>Vocable needs permission to access Personal Voices on this device.
+
+You can enable access in %1$@ Settings.</target>
+        <note>Empty state description for when Personal Voice access has been denied by the user. It informs the user how to re-enable access by navigating to system settings. The placeholder is the device model (e.g. "iPhone" or "iPad")</note>
+      </trans-unit>
+      <trans-unit id="personal_voices.empty_state.denied.title" xml:space="preserve">
+        <source>Personal Voice Access</source>
+        <target>Personal Voice Access</target>
+        <note>Title of the Personal Voices screen empty state when a user must grant access to the app.</note>
+      </trans-unit>
+      <trans-unit id="personal_voices.empty_state.no_content.description" xml:space="preserve">
+        <source>You can create a new Personal Voice in %1$@ Settings. Once created, you can set your Personal Voice as Vocable's voice.</source>
+        <target>You can create a new Personal Voice in %1$@ Settings. Once created, you can set your Personal Voice as Vocable's voice.</target>
+        <note>Empty state description for when there are not personal voices to display. This is typically because the user has not created any yet. The placeholder is the device model (e.g. "iPhone" or "iPad").</note>
+      </trans-unit>
+      <trans-unit id="personal_voices.empty_state.no_content.title" xml:space="preserve">
+        <source>No Personal Voices</source>
+        <target>No Personal Voices</target>
+        <note>Title of the Personal Voices screen empty state when there are no voices available on the device.</note>
+      </trans-unit>
+      <trans-unit id="personal_voices.empty_state.not_authorized.button.title" xml:space="preserve">
+        <source>Grant Access</source>
+        <target>Grant Access</target>
+        <note>Action button for the personal voices screen that will display a system prompt allowing access to their Personal Voice profiles stored on their device.</note>
+      </trans-unit>
+      <trans-unit id="personal_voices.empty_state.not_authorized.description" xml:space="preserve">
+        <source>Allow Vocable to access Personal Voices stored on this device.</source>
+        <target>Allow Vocable to access Personal Voices stored on this device.</target>
+        <note>Empty state description for when Personal Voice access has not yet been prompted to the user. Below this text will be a button that will prompt the user for access.</note>
+      </trans-unit>
+      <trans-unit id="personal_voices.empty_state.not_authorized.title" xml:space="preserve">
+        <source>Personal Voice Access</source>
+        <target>Personal Voice Access</target>
+        <note>Title of the Personal Voices screen empty state when a user has denied access to the app.</note>
+      </trans-unit>
+      <trans-unit id="personal_voices.title" xml:space="preserve">
+        <source>Personal Voices</source>
+        <target>Personal Voices</target>
+        <note>Title of the Personal Voices screen</note>
       </trans-unit>
       <trans-unit id="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
@@ -442,12 +486,17 @@ Listening Mode is currently only available in English and requires %5$@ to be en
       <trans-unit id="settings.cell.edit_user_favorites.title_format" xml:space="preserve">
         <source>Edit %@</source>
         <target>Edit %@</target>
-        <note>edit user's favorite phrases category settings menu item</note>
+        <note>Edit user's favorite phrases category settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.head_tracking.title" xml:space="preserve">
         <source>Head Tracking</source>
         <target>Head Tracking</target>
         <note>Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.keyboard_layout.title" xml:space="preserve">
+        <source>Keyboard Layout</source>
+        <target>Keyboard Layout</target>
+        <note>edit keyboard layout settings menu item</note>
       </trans-unit>
       <trans-unit id="settings.cell.listening_mode.title" xml:space="preserve">
         <source>Listening Mode</source>
@@ -458,6 +507,11 @@ Listening Mode is currently only available in English and requires %5$@ to be en
         <source>Privacy Policy</source>
         <target>Privacy Policy</target>
         <note>view privacy policy settings menu item</note>
+      </trans-unit>
+      <trans-unit id="settings.cell.qwerty_layout.title" xml:space="preserve">
+        <source>Compact QWERTY</source>
+        <target>Compact QWERTY</target>
+        <note>Option within Keyboard Layout. This option is to enable or disable QWERTY keyboard on portrait iPhone.</note>
       </trans-unit>
       <trans-unit id="settings.cell.reset_all.title" xml:space="preserve">
         <source>Reset App Settings</source>
@@ -479,10 +533,25 @@ Listening Mode is currently only available in English and requires %5$@ to be en
         <target>Tune Cursor</target>
         <note>tune cursor debug settings menu item</note>
       </trans-unit>
+      <trans-unit id="settings.cell.voice_configuration.title" xml:space="preserve">
+        <source>Voice</source>
+        <target>Voice</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="settings.header.title" xml:space="preserve">
         <source>Settings</source>
         <target>Settings</target>
         <note>Settings screen header title</note>
+      </trans-unit>
+      <trans-unit id="settings.keyboard_layout.header.title" xml:space="preserve">
+        <source>Keyboard Layout</source>
+        <target>Keyboard Layout</target>
+        <note>Keyboard Layout setting header title</note>
+      </trans-unit>
+      <trans-unit id="settings.keyboard_layout.qwerty_layout.explanation_footer" xml:space="preserve">
+        <source>Enabling this will show a QWERTY keyboard layout for portrait mode on %@. This keyboard layout may cause issues with head tracking due to small key size.</source>
+        <target>Enabling this will show a QWERTY keyboard layout for portrait mode on %@. This keyboard layout may cause issues with head tracking due to small key size.</target>
+        <note>Option within Keyboard Layout. This option is to enable or disable QWERTY keyboard on portrait iPhone.</note>
       </trans-unit>
       <trans-unit id="settings.listening_mode.device_unsupported_explanation_footer" xml:space="preserve">
         <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
@@ -512,6 +581,16 @@ Listening Mode is currently only available in English and requires %5$@ to be en
         <source>Listening Mode</source>
         <target>Listening Mode</target>
         <note>Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.smart_assist_explanation_footer" xml:space="preserve">
+        <source>Vocable's Smart Assist setting will give the user more response options while using Listening Mode. Smart Assist is powered by an Azure based GPT engine. This particular GPT engine will return options based off of generative natural language models but will not store any interactions and responses given by the user. For more information, see https://www.vocable.app</source>
+        <target>Vocable's Smart Assist setting will give the user more response options while using Listening Mode. Smart Assist is powered by an Azure based GPT engine. This particular GPT engine will return options based off of generative natural language models but will not store any interactions and responses given by the user. For more information, see https://www.vocable.app</target>
+        <note>Footer text displayed in the Listening Mode preferences screen. This text describes the Smart Assist feature and how it works.</note>
+      </trans-unit>
+      <trans-unit id="settings.listening_mode.smart_assist_toggle_cell.title" xml:space="preserve">
+        <source>Smart Assist</source>
+        <target>Smart Assist</target>
+        <note>Title of Smart Assist preferences cell that toggles the Smart Assist feature on or off when selected</note>
       </trans-unit>
       <trans-unit id="settings.listening_mode.title" xml:space="preserve">
         <source>Listening Mode</source>
@@ -591,11 +670,52 @@ Head tracking is supported on all devices with a %4$@ camera, and on most device
         <target>Timing and Sensitivity</target>
         <note>Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting</note>
       </trans-unit>
+      <trans-unit id="voice_picker.empty_state.description" xml:space="preserve">
+        <source>No voices are installed that match your language and region settings.</source>
+        <target>No voices are installed that match your language and region settings.</target>
+        <note>Voice picker empty state body. Shown when the user attempts to change their voice settings and the operating system
+fails to return any viable voice profiles that the user could select from.</note>
+      </trans-unit>
+      <trans-unit id="voice_picker.empty_state.title" xml:space="preserve">
+        <source>No Voices</source>
+        <target>No Voices</target>
+        <note>Voice picker empty state title.</note>
+      </trans-unit>
+      <trans-unit id="voice_picker.title" xml:space="preserve">
+        <source>Change Voice</source>
+        <target>Change Voice</target>
+        <note>Voice Picker title</note>
+      </trans-unit>
+      <trans-unit id="voice_preview.sample_audio.introducion_format" xml:space="preserve">
+        <source>Hello, this is %1$@</source>
+        <target>Hello, this is %1$@</target>
+        <note>In the voice configuration screen within the app's settings, this format is used to construct the phrase read aloud when the user selects a button to preview a voice profile. Each voice profile has a name provided by the operating system, so the phrase is currently structured as if the voice profile is introducing itself.</note>
+      </trans-unit>
+      <trans-unit id="voice_settings.cell.change_voice.title" xml:space="preserve">
+        <source>Change Voice</source>
+        <target>Change Voice</target>
+        <note>Button in the Voice Settings screen that will navigate the user to the voice picker/Change Voice screen</note>
+      </trans-unit>
+      <trans-unit id="voice_settings.cell.personal_voice.title" xml:space="preserve">
+        <source>Personal Voices</source>
+        <target>Personal Voices</target>
+        <note>Button in the Voice Settings screen that will navigate the user to the Personal Voice screen</note>
+      </trans-unit>
+      <trans-unit id="voice_settings.title" xml:space="preserve">
+        <source>Voice</source>
+        <target>Voice</target>
+        <note>Voice Configuration title</note>
+      </trans-unit>
+      <trans-unit id="voice_settings.voice_picker_footer.title" xml:space="preserve">
+        <source>Additional voices and voice quality enhancements may be available for download in %1$@ Settings.</source>
+        <target>Additional voices and voice quality enhancements may be available for download in %1$@ Settings.</target>
+        <note>Footer title that accompanies the button that will present the voice picker. This is meant to inform the user that additional voices can be downloaded from the system settings app. The parameter variable is substituted with the device model e.g. "iPad" or "iPhone".</note>
+      </trans-unit>
     </body>
   </file>
   <file original="Vocable/Supporting Files/en.lproj/Presets.strings" source-language="en" target-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.3.1" build-num="13E500a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.2" build-num="15C500b"/>
     </header>
     <body>
       <trans-unit id="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" xml:space="preserve">
