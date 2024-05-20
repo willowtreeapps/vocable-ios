@@ -299,8 +299,12 @@ Vous pouvez activer l'accès dans les paramètres de %1$@.</target>
         <note>Title of the Personal Voices screen empty state when a user must grant access to the app.</note>
       </trans-unit>
       <trans-unit id="personal_voices.empty_state.no_content.description" xml:space="preserve">
-        <source>You can create a new Personal Voice in %1$@ Settings. Once created, you can set your Personal Voice as Vocable's voice.</source>
-        <target state="translated">Vous pouvez créer une nouvelle voix personnelle dans les paramètres %1$@ . Une fois créé, vous pouvez définir votre voix personnelle comme voix Vocable.</target>
+        <source>You can create a new Personal Voice in %1$@ Settings. Once created, you can set your Personal Voice as Vocable's voice.
+
+If a Personal Voice has been created and does not appear in Vocable, try restarting %1$@.</source>
+        <target state="translated">Vous pouvez créer une nouvelle voix personnelle dans %1$@ Paramètres. Une fois créé, vous pouvez définir votre voix personnelle comme voix de Vocable.
+
+Si une voix personnelle a été créée et n'apparaît pas dans Vocable, essayez de redémarrer %1$@.</target>
         <note>Empty state description for when there are not personal voices to display. This is typically because the user has not created any yet. The placeholder is the device model (e.g. "iPhone" or "iPad").</note>
       </trans-unit>
       <trans-unit id="personal_voices.empty_state.no_content.title" xml:space="preserve">
@@ -570,11 +574,16 @@ Le mode d'écoute n'est actuellement disponible qu'en anglais et nécessite l'ac
       <trans-unit id="settings.selection_mode.head_tracking_unsupported_footer" xml:space="preserve">
         <source>This %1$@ on %2$@ %3$@ does not support head tracking.
 
-Head tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.</source>
-        <target state="needs-review-translation" state-qualifier="leveraged-tm">Ce %1$@ sur %2$@ %3$@ ne prend pas en charge le suivi de la tête.
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %5$@.</source>
+        <target state="translated">Ce %1$@ sur %2$@ %3$@ ne prend pas en charge le suivi de la tête.
 
-Le suivi de la tête est pris en charge sur tous les appareils équipés d'une caméra %4$@ et sur la plupart des appareils équipés de %6$@.</target>
+Le suivi de la tête est pris en charge sur tous les appareils équipés d'une caméra %4$@ et sur la plupart des appareils dotés de %5$@.</target>
         <note>Additonal footer text noting heading tracking compatibility</note>
+      </trans-unit>
+      <trans-unit id="settings.version_format" xml:space="preserve">
+        <source>Version %1$@</source>
+        <target state="translated">Version %1$@</target>
+        <note>Version information displayed at the bottom of the Settings screen. Argument is the application version.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
