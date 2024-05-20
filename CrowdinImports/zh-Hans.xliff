@@ -299,8 +299,12 @@ You can enable access in %1$@ Settings.</source>
         <note>Title of the Personal Voices screen empty state when a user must grant access to the app.</note>
       </trans-unit>
       <trans-unit id="personal_voices.empty_state.no_content.description" xml:space="preserve">
-        <source>You can create a new Personal Voice in %1$@ Settings. Once created, you can set your Personal Voice as Vocable's voice.</source>
-        <target state="translated">您可以在%1$@ 设置中创建新的个人语音。 创建后，您可以将您的个人语音设置为 Vocable 的语音。</target>
+        <source>You can create a new Personal Voice in %1$@ Settings. Once created, you can set your Personal Voice as Vocable's voice.
+
+If a Personal Voice has been created and does not appear in Vocable, try restarting %1$@.</source>
+        <target state="translated">您可以在 %1$@ 设置中创建一个新的个人语音。一旦创建，您可以将您的个人语音设置为词汇。
+
+如果个人语音已被创建并且没有出现在词汇中，请尝试重启 %1$@。</target>
         <note>Empty state description for when there are not personal voices to display. This is typically because the user has not created any yet. The placeholder is the device model (e.g. "iPhone" or "iPad").</note>
       </trans-unit>
       <trans-unit id="personal_voices.empty_state.no_content.title" xml:space="preserve">
@@ -570,11 +574,16 @@ Listening Mode is currently only available in English and requires %5$@ to be en
       <trans-unit id="settings.selection_mode.head_tracking_unsupported_footer" xml:space="preserve">
         <source>This %1$@ on %2$@ %3$@ does not support head tracking.
 
-Head tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.</source>
-        <target state="needs-review-translation" state-qualifier="leveraged-tm">此 %1$@ 在 %2$@ %3$@ 上不支持头跟踪。
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %5$@.</source>
+        <target state="translated">此 %1$@ 在 %2$@ %3$@ 不支持头条跟踪。
 
-所有设备都支持头部跟踪，所有设备都有 %4$@ 相机，在大多数设备上有 %6$@。</target>
+在所有带有 %4$@ 相机的设备以及大多数带有 %5$@的设备上支持头部跟踪。</target>
         <note>Additonal footer text noting heading tracking compatibility</note>
+      </trans-unit>
+      <trans-unit id="settings.version_format" xml:space="preserve">
+        <source>Version %1$@</source>
+        <target state="translated">版本 %1$@</target>
+        <note>Version information displayed at the bottom of the Settings screen. Argument is the application version.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
