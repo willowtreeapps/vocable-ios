@@ -299,8 +299,12 @@ You can enable access in %1$@ Settings.</source>
         <note>Title of the Personal Voices screen empty state when a user must grant access to the app.</note>
       </trans-unit>
       <trans-unit id="personal_voices.empty_state.no_content.description" xml:space="preserve">
-        <source>You can create a new Personal Voice in %1$@ Settings. Once created, you can set your Personal Voice as Vocable's voice.</source>
-        <target state="translated">Вы можете создать новый личный голос в настройках %1$@. После создания вы можете установить свой личный голос в качестве голоса Vocable.</target>
+        <source>You can create a new Personal Voice in %1$@ Settings. Once created, you can set your Personal Voice as Vocable's voice.
+
+If a Personal Voice has been created and does not appear in Vocable, try restarting %1$@.</source>
+        <target state="translated">Вы можете создать новый личный голос в настройках %1$@. После создания вы можете задать свой голос как голос для вокала.
+
+Если персональный голос был создан и не отображается в разделе "Словарь", попробуйте перезапустить %1$@.</target>
         <note>Empty state description for when there are not personal voices to display. This is typically because the user has not created any yet. The placeholder is the device model (e.g. "iPhone" or "iPad").</note>
       </trans-unit>
       <trans-unit id="personal_voices.empty_state.no_content.title" xml:space="preserve">
@@ -570,11 +574,16 @@ Listening Mode is currently only available in English and requires %5$@ to be en
       <trans-unit id="settings.selection_mode.head_tracking_unsupported_footer" xml:space="preserve">
         <source>This %1$@ on %2$@ %3$@ does not support head tracking.
 
-Head tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.</source>
-        <target state="needs-review-translation" state-qualifier="leveraged-tm">Этот %1$@ на %2$@ %3$@ не поддерживает отслеживание головы.
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %5$@.</source>
+        <target state="translated">Этот %1$@ на %2$@ %3$@ не поддерживает отслеживание головы.
 
-Отслеживание головы поддерживается на всех устройствах с камерой %4$@ и на большинстве устройств с %6$@.</target>
+Отслеживание Head поддерживается на всех устройствах с помощью %4$@ камеры, а также на большинстве устройств с помощью %5$@.</target>
         <note>Additonal footer text noting heading tracking compatibility</note>
+      </trans-unit>
+      <trans-unit id="settings.version_format" xml:space="preserve">
+        <source>Version %1$@</source>
+        <target state="translated">Версия %1$@</target>
+        <note>Version information displayed at the bottom of the Settings screen. Argument is the application version.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
