@@ -299,8 +299,12 @@ You can enable access in %1$@ Settings.</source>
         <note>Title of the Personal Voices screen empty state when a user must grant access to the app.</note>
       </trans-unit>
       <trans-unit id="personal_voices.empty_state.no_content.description" xml:space="preserve">
-        <source>You can create a new Personal Voice in %1$@ Settings. Once created, you can set your Personal Voice as Vocable's voice.</source>
-        <target state="translated">%1$@ 설정에서 새 개인 음성을 만들 수 있습니다. 생성된 후에는 개인 음성을 Vocable의 음성으로 설정할 수 있습니다.</target>
+        <source>You can create a new Personal Voice in %1$@ Settings. Once created, you can set your Personal Voice as Vocable's voice.
+
+If a Personal Voice has been created and does not appear in Vocable, try restarting %1$@.</source>
+        <target state="translated">%1$@ 설정에서 새 개인 음성을 만들 수 있습니다. 생성된 후에는 개인 음성을 Vocable의 음성으로 설정할 수 있습니다.
+
+개인 음성이 생성되었지만 Vocable에 표시되지 않는 경우 %1$@을(를) 다시 시작해 보세요.</target>
         <note>Empty state description for when there are not personal voices to display. This is typically because the user has not created any yet. The placeholder is the device model (e.g. "iPhone" or "iPad").</note>
       </trans-unit>
       <trans-unit id="personal_voices.empty_state.no_content.title" xml:space="preserve">
@@ -570,11 +574,16 @@ Listening Mode is currently only available in English and requires %5$@ to be en
       <trans-unit id="settings.selection_mode.head_tracking_unsupported_footer" xml:space="preserve">
         <source>This %1$@ on %2$@ %3$@ does not support head tracking.
 
-Head tracking is supported on all devices with a %4$@ camera, and on most devices with %6$@.</source>
-        <target state="needs-review-translation" state-qualifier="leveraged-tm">%2$@ %3$@의 이 %1$@은(는) 머리 추적을 지원하지 않습니다.
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %5$@.</source>
+        <target state="translated">이 %1$@ on %2$@ %3$@는 헤드 추적을 지원하지 않습니다.
 
-머리 추적은 %4$@ 카메라가 있는 모든 장치와 %6$@가 있는 대부분의 장치에서 지원됩니다.</target>
+헤드 추적은 %4$@ 카메라가있는 모든 장치와 %5$@ 의 대부분의 장치에서 지원됩니다.</target>
         <note>Additonal footer text noting heading tracking compatibility</note>
+      </trans-unit>
+      <trans-unit id="settings.version_format" xml:space="preserve">
+        <source>Version %1$@</source>
+        <target state="translated">버전 %1$@</target>
+        <note>Version information displayed at the bottom of the Settings screen. Argument is the application version.</note>
       </trans-unit>
       <trans-unit id="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" xml:space="preserve">
         <source>Continue Editing</source>
