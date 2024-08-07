@@ -1,0 +1,422 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "CFBundleDisplayName" : {
+      "comment" : "Bundle display name",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        }
+      }
+    },
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Vocable"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable"
+          }
+        }
+      }
+    },
+    "NSCameraUsageDescription" : {
+      "comment" : "Camera usage description",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الأمامية لجهازك لاكتشاف الحد الأدنى من التغييرات في اتجاه الرأس وموضعه. يتيح ذلك للمستخدمين محدودي الحركة التحكم في مؤشر على الشاشة للتفاعل مع التطبيق. تُستخدم بيانات الكاميرا بشكل صريح للتحكم في المؤشر على الشاشة. لا يتم تخزين هذه البيانات أو نقلها بأي شكل من الأشكال. يحتاج Vocable إذنًا لاستخدام الكاميرا لهذا الغرض."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable bruger din enheds frontkamera til at registrere minimale ændringer i hovedretning og position. Dette giver brugere med begrænset mobilitet mulighed for at styre en markør på skærmen for at interagere med appen. Kameradata bruges udtrykkeligt til at styre markøren på skærmen. Disse data gemmes eller overføres ikke på nogen måde. Vocable skal have tilladelse til at bruge kameraet til dette formål."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable verwendet die Frontkamera Ihres Geräts, um minimale Änderungen der Kopfausrichtung und -position zu erkennen. Dadurch können Benutzer mit eingeschränkter Mobilität einen Bildschirmzeiger steuern, um mit der App zu interagieren. Kameradaten werden ausdrücklich zur Steuerung des Bildschirmzeigers verwendet. Diese Daten werden in keiner Weise gespeichert oder übermittelt. Vocable benötigt die Erlaubnis, die Kamera zu diesem Zweck zu verwenden."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable utiliza la cámara frontal de su dispositivo para detectar cambios mínimos en la orientación y posición de la cabeza. Esto permite a los usuarios con movilidad limitada controlar un puntero en pantalla para interactuar con la aplicación. Los datos de la cámara se utilizan expresamente para controlar el puntero en pantalla. Estos datos no se almacenan ni transmiten de ninguna manera. Vocable necesita permiso para usar la cámara para este propósito."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable utilise la caméra frontale de votre appareil pour détecter des changements minimes dans l'orientation et la position de la tête. Cela permet aux utilisateurs à mobilité réduite de contrôler un pointeur à l'écran pour interagir avec l'application. Les données de la caméra sont utilisées expressément pour contrôler le pointeur à l'écran. Ces données ne sont en aucun cas stockées ou transmises. Vocable a besoin d'une autorisation pour utiliser l'appareil photo à cette fin."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable हेड ओरिएंटेशन और पोजीशन में कम से कम बदलाव का पता लगाने के लिए आपके डिवाइस के फ्रंट कैमरे का उपयोग करता है। यह सीमित गतिशीलता वाले उपयोगकर्ताओं को ऐप के साथ इंटरैक्ट करने के लिए ऑन-स्क्रीन पॉइंटर को नियंत्रित करने की अनुमति देता है। ऑन-स्क्रीन पॉइंटर को नियंत्रित करने के लिए कैमरा डेटा का स्पष्ट रूप से उपयोग किया जाता है। यह डेटा किसी भी तरह से संग्रहीत या प्रसारित नहीं होता है। Vocable को इस उद्देश्य के लिए कैमरे का उपयोग करने के लिए अनुमति की आवश्यकता होती है।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable utilizza la fotocamera frontale del tuo dispositivo per rilevare cambiamenti minimi nell'orientamento e nella posizione della testa. Ciò consente agli utenti con mobilità ridotta di controllare un puntatore sullo schermo per interagire con l'app. I dati della fotocamera vengono utilizzati espressamente per controllare il puntatore sullo schermo. Questi dati non vengono memorizzati o trasmessi in alcun modo. Vocable ha bisogno dell'autorizzazione per utilizzare la fotocamera per questo scopo."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable은 장치의 전면 카메라를 사용하여 머리 방향 및 위치의 최소한의 변경을 감지합니다. 이를 통해 거동이 불편한 사용자가 화면 포인터를 제어하여 앱과 상호 작용할 수 있습니다. 카메라 데이터는 화면 포인터를 제어하는 ​​데 명시적으로 사용됩니다. 이 데이터는 어떤 방식으로도 저장되거나 전송되지 않습니다. Vocable은 이 용도로 카메라를 사용하기 위해 권한이 필요합니다."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable использует переднюю камеру вашего устройства для обнаружения минимальных изменений в ориентации и положении головы. Это позволяет пользователям с ограниченной подвижностью управлять указателем на экране для взаимодействия с приложением. Данные камеры используются специально для управления указателем на экране. Эти данные никак не хранятся и не передаются. Vocable требуется разрешение на использование камеры для этой цели."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable sử dụng camera trước của thiết bị để phát hiện những thay đổi tối thiểu về hướng và vị trí của đầu. Điều này cho phép người dùng có khả năng di chuyển hạn chế điều khiển con trỏ trên màn hình để tương tác với ứng dụng. Dữ liệu máy ảnh được sử dụng rõ ràng để điều khiển con trỏ trên màn hình. Dữ liệu này không được lưu trữ hoặc truyền đi dưới bất kỳ hình thức nào. Vocable cần được phép sử dụng máy ảnh cho mục đích này."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable 使用设备的前置摄像头来检测头部方向和位置的最小变化。这使行动不便的用户能够控制屏幕指针与应用程序交互。相机数据明确用于控制屏幕指针。这些数据不会以任何方式存储或传输。为此，您需要获得使用相机的权限。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable 使用您設備的前置攝像頭來檢測頭部方向和位置的最小變化。這允許行動不便的用戶控制屏幕上的指針與應用程序交互。相機數據專門用於控制屏幕指針。該數據不會以任何方式存儲或傳輸。 Vocable 需要獲得許可才能為此目的使用相機。"
+          }
+        }
+      }
+    },
+    "NSMicrophoneUsageDescription" : {
+      "comment" : "Privacy - Microphone Usage Description",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يستخدم Vocable الميكروفون فقط عند تمكين وضع الاستماع. Vocable ينقل الصوت إلى نص ؛ لا يتم تخزينها أو نقلها إلا عندما يختار المستخدم مشاركة هذه المعلومات بشكل مجهول مع المطورين للمساعدة في تحسين وضع الاستماع."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable bruger kun mikrofonen, når lyttetilstand er aktiveret. Vocable transcribes audio til tekst det er ikke gemt eller overført, undtagen når brugeren vælger at dele disse oplysninger anonymt med udviklere for at hjælpe med at forbedre lyttetilstand."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable verwendet das Mikrofon nur, wenn der Zuhörmodus aktiviert ist. Vocable transkribiert audio in text; Sie werden nicht gespeichert oder übertragen, es sei denn, der Benutzer teilt diese Informationen anonym mit Entwicklern, um den Hörmodus zu verbessern."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable usa el micrófono solo cuando el modo de escucha está habilitado. Vocable transcribe audio en texto; no se almacena ni transmite, excepto cuando el usuario elige compartir esta información de forma anónima con los desarrolladores para ayudar a mejorar el modo de escucha."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable utilise le microphone uniquement lorsque le mode d'écoute est activé. Vocable transcrit l'audio en texte ; elles ne sont ni stockées ni transmises sauf lorsque l'utilisateur choisit de partager ces informations de manière anonyme avec les développeurs pour aider à améliorer le mode d'écoute."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable माइक्रोफ़ोन का उपयोग केवल तभी करता है जब लिसनिंग मोड सक्षम हो। Vocable ऑडियो को टेक्स्ट में ट्रांसक्रिप्ट करता है; जब उपयोगकर्ता इस जानकारी को गुमनाम रूप से डेवलपर्स के साथ साझा करने का विकल्प चुनता है, तो इसे संग्रहीत या प्रसारित नहीं किया जाता है ताकि सुनने के तरीके को बेहतर बनाने में मदद मिल सके।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable utilizza il microfono solo quando la modalità di ascolto è abilitata. Vocabile trascrive audio in testo; non viene memorizzato o trasmesso tranne quando l'utente sceglie di condividere queste informazioni in modo anonimo con gli sviluppatori per contribuire a migliorare la modalità di ascolto."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable은 듣기 모드가 활성화된 경우에만 마이크를 사용합니다. Vocable은 오디오를 텍스트로 변환합니다. 사용자가 청취 모드를 개선하는 데 도움이 되도록 이 정보를 개발자와 익명으로 공유하기로 선택한 경우를 제외하고는 저장되거나 전송되지 않습니다."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable использует микрофон только при включенном режиме прослушивания. Vocable транскрибирует звук в текст; она не сохраняется и не передается, за исключением случаев, когда пользователь решает анонимно поделиться этой информацией с разработчиками, чтобы помочь улучшить режим прослушивания."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vocable chỉ sử dụng micrô khi chế độ nghe được bật. Vocable chuyển âm thanh thành văn bản; nó không được lưu trữ hoặc truyền đi ngoại trừ khi người dùng chọn chia sẻ ẩn danh thông tin này với các nhà phát triển để giúp cải thiện chế độ lắng nghe."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "仅当启用聆听模式时，Vocable 才会使用麦克风。 Vocable 将音频转录为文本；除非用户选择与开发人员匿名共享此信息以帮助改进收听模式，否则它不会存储或传输。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "僅當啟用聆聽模式時，Vocable 才會使用麥克風。 Vocable 將音頻轉錄為文本；除非用戶選擇與開發人員匿名共享此信息以幫助改進收聽模式，否則它不會存儲或傳輸。"
+          }
+        }
+      }
+    },
+    "NSSpeechRecognitionUsageDescription" : {
+      "comment" : "Privacy - Speech Recognition Usage Description",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عند تمكين وضع الاستماع ، يستخدم Vocable التعرف على الكلام لتحويل البيانات الصوتية إلى نص. لا يتم تخزين الكلام المكتوب أو نقله إلا عندما يختار المستخدم مشاركة هذه المعلومات بشكل مجهول مع المطورين للمساعدة في تحسين وضع الاستماع."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Når lyttetilstand er aktiveret, bruger Vocable talegenkendelse til at konvertere lyddata til tekst. Transskriberet tale gemmes eller transmitteres ikke, undtagen når brugeren vælger at dele disse oplysninger anonymt med udviklere for at hjælpe med at forbedre lyttetilstanden."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wenn der Zuhörmodus aktiviert ist, verwendet Vocable die Spracherkennung, um Audiodaten in Text umzuwandeln. Transkribierte Sprache wird nicht gespeichert oder übertragen, es sei denn, der Benutzer teilt diese Informationen anonym mit Entwicklern, um den Hörmodus zu verbessern."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When listening mode is enabled, Vocable uses speech recognition to convert audio data into text. Transcribed speech is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando el modo de escucha está habilitado, Vocable utiliza el reconocimiento de voz para convertir los datos de audio en texto. El habla transcrita no se almacena ni transmite, excepto cuando el usuario elige compartir esta información de forma anónima con los desarrolladores para ayudar a mejorar el modo de escucha."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lorsque le mode d'écoute est activé, Vocable utilise la reconnaissance vocale pour convertir les données audio en texte. La parole transcrite n'est ni stockée ni transmise, sauf lorsque l'utilisateur choisit de partager ces informations de manière anonyme avec les développeurs pour aider à améliorer le mode d'écoute."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जब लिसनिंग मोड सक्षम होता है, तो Vocable ऑडियो डेटा को टेक्स्ट में बदलने के लिए वाक् पहचान का उपयोग करता है। लिखित भाषण संग्रहीत या प्रसारित नहीं किया जाता है, सिवाय इसके कि जब उपयोगकर्ता इस जानकारी को गुमनाम रूप से डेवलपर्स के साथ साझा करना चुनता है ताकि सुनने के तरीके को बेहतर बनाने में मदद मिल सके।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quando la modalità di ascolto è abilitata, Vocable utilizza il riconoscimento vocale per convertire i dati audio in testo. Il parlato trascritto non viene archiviato o trasmesso, tranne quando l'utente sceglie di condividere queste informazioni in modo anonimo con gli sviluppatori per migliorare la modalità di ascolto."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "듣기 모드가 활성화되면 Vocable은 음성 인식을 사용하여 오디오 데이터를 텍스트로 변환합니다. 녹음된 음성은 사용자가 듣기 모드를 개선하기 위해 개발자와 익명으로 이 정보를 공유하기로 선택한 경우를 제외하고는 저장되거나 전송되지 않습니다."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Когда режим прослушивания включен, Vocable использует распознавание речи для преобразования аудиоданных в текст. Записанная речь не сохраняется и не передается, за исключением случаев, когда пользователь решает анонимно поделиться этой информацией с разработчиками, чтобы помочь улучшить режим прослушивания."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Khi bật chế độ nghe, Vocable sử dụng tính năng nhận dạng giọng nói để chuyển đổi dữ liệu âm thanh thành văn bản. Giọng nói đã chép sẽ không được lưu trữ hoặc truyền đi ngoại trừ khi người dùng chọn chia sẻ ẩn danh thông tin này với các nhà phát triển để giúp cải thiện chế độ nghe."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用聆听模式后，Vocable 使用语音识别将音频数据转换为文本。除非用户选择与开发人员匿名共享此信息以帮助改进聆听模式，否则不会存储或传输转录的语音。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "啟用聆聽模式後，Vocable 使用語音識別將音頻數據轉換為文本。除非用戶選擇與開發人員匿名共享此信息以幫助改進聆聽模式，否則不會存儲或傳輸轉錄的語音。"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
