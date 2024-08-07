@@ -3074,82 +3074,83 @@
     },
     "listening_mode.empty_state.unsupported.message" : {
       "comment" : "Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported",
+      "extractionState" : "manual",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "هذا %1$@ في %2$@ %3$@ لا يدعم وضع الاستماع.\n\nوضع الاستماع متاح حاليا باللغة الإنجليزية فقط ويتطلب تمكين %5$@."
           }
         },
         "da" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Dette %1$@ på %2$@ %3$@ understøtter ikke Lyttetilstand.\n\nLyttetilstand er i øjeblikket kun tilgængelig på engelsk og kræver %5$@ for at være aktiveret."
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Dieses %1$@ auf %2$@ %3$@ unterstützt den Zuhörmodus nicht.\n\nDer Hörmodus ist derzeit nur auf Englisch verfügbar und erfordert die Aktivierung von %5$@."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This %1$@ on %2$@ %3$@ does not support Listening Mode.\n\nListening Mode is currently only available in English and requires %5$@ to be enabled."
+            "value" : "This %1$@ on %2$@ %3$@ does not support Listening Mode.\n\nListening Mode is currently only available in English and requires %4$@ to be enabled."
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Este %1$@ en %2$@ %3$@ no soporta el modo de escucha.\n\nEl modo de escucha solo está disponible actualmente en inglés y requiere que %5$@ esté habilitado."
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Ce %1$@ sur %2$@ %3$@ ne prend pas en charge le mode d'écoute.\n\nLe mode d'écoute n'est actuellement disponible qu'en anglais et nécessite l'activation de %5$@."
           }
         },
         "hi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "%2$@ %3$@ पर यह %1$@ श्रवण मोड का समर्थन नहीं करता है।\n\nलिसनिंग मोड वर्तमान में केवल अंग्रेज़ी में उपलब्ध है और %5$@ को सक्षम करने की आवश्यकता है।"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Questo %1$@ su %2$@ %3$@ non supporta la modalità di ascolto.\n\nLa modalità di ascolto è attualmente disponibile solo in inglese e richiede %5$@ per essere abilitata."
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "%2$@ %3$@의 이 %1$@은(는) 듣기 모드를 지원하지 않습니다.\n\n듣기 모드는 현재 영어로만 제공되며 %5$@를 활성화해야 합니다."
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Этот %1$@ на %2$@ %3$@ не поддерживает режим прослушивания.\n\nРежим прослушивания в настоящее время доступен только на английском языке и требует включения %5$@."
           }
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "%1$@ trên %2$@ %3$@ này không hỗ trợ Chế độ nghe.\n\nChế độ nghe hiện chỉ khả dụng bằng tiếng Anh và yêu cầu bật %5$@."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "此 %1$@ 在 %2$@ %3$@ 不支持侦听模式。\n\n侦听模式目前仅有英文可用，需要启用 %5$@。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。\n\n聆聽模式目前僅提供英文版本，需要啟用 %5$@。"
           }
         }
@@ -7661,82 +7662,83 @@
     },
     "settings.listening_mode.device_unsupported_explanation_footer" : {
       "comment" : "Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine.",
+      "extractionState" : "manual",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "هذا %1$@ في %2$@ %3$@ لا يدعم وضع الاستماع.\n\nوضع الاستماع متاح حاليا باللغة الإنجليزية فقط ويتطلب تمكين %5$@."
           }
         },
         "da" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Dette %1$@ på %2$@ %3$@ understøtter ikke Lyttetilstand.\n\nLyttetilstand er i øjeblikket kun tilgængelig på engelsk og kræver %5$@ for at være aktiveret."
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Dieses %1$@ auf %2$@ %3$@ unterstützt den Zuhörmodus nicht.\n\nDer Hörmodus ist derzeit nur auf Englisch verfügbar und erfordert die Aktivierung von %5$@."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This %1$@ on %2$@ %3$@ does not support Listening Mode.\n\nListening Mode is currently only available in English and requires %5$@ to be enabled."
+            "value" : "This %1$@ on %2$@ %3$@ does not support Listening Mode.\n\nListening Mode is currently only available in English and requires %4$@ to be enabled."
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Este %1$@ en %2$@ %3$@ no soporta el modo de escucha.\n\nEl modo de escucha solo está disponible actualmente en inglés y requiere que %5$@ esté habilitado."
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Ce %1$@ sur %2$@ %3$@ ne prend pas en charge le mode d'écoute.\n\nLe mode d'écoute n'est actuellement disponible qu'en anglais et nécessite l'activation de %5$@."
           }
         },
         "hi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "%2$@ %3$@ पर यह %1$@ श्रवण मोड का समर्थन नहीं करता है।\n\nलिसनिंग मोड वर्तमान में केवल अंग्रेज़ी में उपलब्ध है और %5$@ को सक्षम करने की आवश्यकता है।"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Questo %1$@ su %2$@ %3$@ non supporta la modalità di ascolto.\n\nLa modalità di ascolto è attualmente disponibile solo in inglese e richiede %5$@ per essere abilitata."
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "%2$@ %3$@의 이 %1$@은(는) 듣기 모드를 지원하지 않습니다.\n\n듣기 모드는 현재 영어로만 제공되며 %5$@를 활성화해야 합니다."
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Этот %1$@ на %2$@ %3$@ не поддерживает режим прослушивания.\n\nРежим прослушивания в настоящее время доступен только на английском языке и требует включения %5$@."
           }
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "%1$@ trên %2$@ %3$@ này không hỗ trợ Chế độ nghe.\n\nChế độ nghe hiện chỉ khả dụng bằng tiếng Anh và yêu cầu bật %5$@."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "此 %1$@ 在 %2$@ %3$@ 不支持侦听模式。\n\n侦听模式目前仅有英文可用，需要启用 %5$@。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。\n\n聆聽模式目前僅提供英文版本，需要啟用 %5$@。"
           }
         }
@@ -8408,7 +8410,7 @@
     },
     "settings.version_format" : {
       "comment" : "Version information displayed at the bottom of the Settings screen. Argument is the application version.",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
