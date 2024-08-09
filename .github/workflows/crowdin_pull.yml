@@ -22,7 +22,7 @@ jobs:
         
       - name: Download Translations
         run: >
-            crowdin download sources
+            crowdin download
             --skip-untranslated-strings
             --export-only-approved
             --dryrun
