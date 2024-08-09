@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file id="582" original="/[willowtreeapps.vocable-ios] develop/Vocable/Supporting Files/Presets.xcstrings" source-language="en" target-language="ru" datatype="plaintext" project-id="397168" tool-id="crowdin">
+    <header>
+      <tool tool-id="crowdin" tool-name="Crowdin" tool-version="1.1"/>
+    </header>
+    <body>
+      <trans-unit id="12620" resname="preset_0B491C3E-1A7F-4A94-A523-6DE329BF9E72" approved="yes">
+        <source>I want to lie down</source>
+        <target state="final">Я хочу лечь</target>
+      </trans-unit>
+      <trans-unit id="12622" resname="preset_0EE14D06-92D7-4A26-A15F-253528F14A69" approved="yes">
+        <source>Pleased to meet you</source>
+        <target state="final">Приятно познакомиться!</target>
+      </trans-unit>
+      <trans-unit id="12624" resname="preset_0EF33A3F-41E8-4E47-9B2C-69FC86B957FC" approved="yes">
+        <source>How is your day?</source>
+        <target state="final">Как твой день?</target>
+      </trans-unit>
+      <trans-unit id="12626" resname="preset_1B634A96-563E-4275-875A-2B705A5D1178" approved="yes">
+        <source>How are you?</source>
+        <target state="final">Как дела?</target>
+      </trans-unit>
+      <trans-unit id="12628" resname="preset_1BAD392A-C26C-4080-B0F2-FC544E08349C" approved="yes">
+        <source>I need to brush my hair</source>
+        <target state="final">Мне нужно причесаться</target>
+      </trans-unit>
+      <trans-unit id="12630" resname="preset_2BF1A363-CE24-4F26-9727-C5EAD1FEC27C" approved="yes">
+        <source>Please open the window</source>
+        <target state="final">Открой(те) окно, пожалуйста</target>
+      </trans-unit>
+      <trans-unit id="12632" resname="preset_3EF1FBFA-E07A-47B5-BDF6-3AE7A684B834" approved="yes">
+        <source>Hello</source>
+        <target state="final">Здравствуйте</target>
+      </trans-unit>
+      <trans-unit id="12634" resname="preset_4F776A4A-4154-4DFE-89AC-E603C2A578EE" approved="yes">
+        <source>Please fix my pillow</source>
+        <target state="final">Пожалуйста, поправь(те) мою подушку</target>
+      </trans-unit>
+      <trans-unit id="12636" resname="preset_6AD93FB9-437C-455F-A4AF-C96033BCBCAE" approved="yes">
+        <source>I am hot</source>
+        <target state="final">Мне жарко</target>
+      </trans-unit>
+      <trans-unit id="12638" resname="preset_6B463AF1-C884-45CD-9194-90806E75FD70" approved="yes">
+        <source>That makes sense</source>
+        <target state="final">Это имеет смысл</target>
+      </trans-unit>
+      <trans-unit id="12640" resname="preset_6CBD6D3E-42A7-435C-B661-2ABD669DC6BE" approved="yes">
+        <source>I don't know</source>
+        <target state="final">Я не знаю</target>
+      </trans-unit>
+      <trans-unit id="12642" resname="preset_7ACA0926-DB7F-4B9E-872C-AE9690AD79E7" approved="yes">
+        <source>I need to go to the restroom</source>
+        <target state="final">Мне нужно пойти в туалет</target>
+      </trans-unit>
+      <trans-unit id="12644" resname="preset_7FF4503F-F838-48BE-B529-758B3531093C" approved="yes">
+        <source>Please wait</source>
+        <target state="final">Пожалуйста подожди(те)</target>
+      </trans-unit>
+      <trans-unit id="12646" resname="preset_8BCBACFB-D5ED-46CB-B3E2-21FB31D8D6AD" approved="yes">
+        <source>Yes</source>
+        <target state="final">Да</target>
+      </trans-unit>
+      <trans-unit id="12648" resname="preset_8C4D0099-9BA8-4914-A6B5-730FFDC8C499" approved="yes">
+        <source>I am cold</source>
+        <target state="final">Мне холодно</target>
+      </trans-unit>
+      <trans-unit id="12650" resname="preset_9A808275-0D67-49E4-8BF8-6F22A0C7E169" approved="yes">
+        <source>No visitors please</source>
+        <target state="final">Я не хочу посетителей</target>
+      </trans-unit>
+      <trans-unit id="12652" resname="preset_9DEB32B5-8606-4689-8F6A-0B251F4DB377" approved="yes">
+        <source>I am thirsty</source>
+        <target state="final">Я хочу пить</target>
+      </trans-unit>
+      <trans-unit id="12654" resname="preset_9E3230D7-1172-491A-8A00-E734B1661DC1" approved="yes">
+        <source>Please turn the lights on</source>
+        <target state="final">Включи(те) свет, пожалуйста</target>
+      </trans-unit>
+      <trans-unit id="12656" resname="preset_9EE3A781-E84E-4728-976F-8EF993B8174C" approved="yes">
+        <source>Please turn the TV off</source>
+        <target state="final">Выключите телевизор</target>
+      </trans-unit>
+      <trans-unit id="12658" resname="preset_24B48F19-EA3A-49A1-88C1-AACB67FE7278" approved="yes">
+        <source>How was your weekend?</source>
+        <target state="final">Как прошли твои выходные?</target>
+      </trans-unit>
+      <trans-unit id="12660" resname="preset_28A8F6B6-E196-4981-B762-652C288A0C29" approved="yes">
+        <source>I am finished</source>
+        <target state="final">Я закончил(а)</target>
+      </trans-unit>
+      <trans-unit id="12662" resname="preset_31E8760F-E728-4261-A82E-B50AB40C73FF" approved="yes">
+        <source>How's it going?</source>
+        <target state="final">Как жизнь?</target>
+      </trans-unit>
+      <trans-unit id="12664" resname="preset_33B3F4B7-2438-439B-A21B-46D2599C8840" approved="yes">
+        <source>Please</source>
+        <target state="final">Пожалуйста</target>
+      </trans-unit>
+      <trans-unit id="12666" resname="preset_42DC7273-92F9-4149-8166-966C3C201862" approved="yes">
+        <source>Please open the blinds</source>
+        <target state="final">Открой(те) шторы</target>
+      </trans-unit>
+      <trans-unit id="12668" resname="preset_045EF309-3EB7-46B9-8AB7-31BC8482E3DC" approved="yes">
+        <source>Okay</source>
+        <target state="final">Окей</target>
+      </trans-unit>
+      <trans-unit id="12670" resname="preset_46EF7041-50F7-4B64-A0F6-879A8A3D7532" approved="yes">
+        <source>Please turn the lights off</source>
+        <target state="final">Выключи(те) свет, пожалуйста</target>
+      </trans-unit>
+      <trans-unit id="12672" resname="preset_52CA4E71-4A8C-4EA8-8EA8-C4B18AA16EC8" approved="yes">
+        <source>Environment</source>
+        <target state="final">Окружающая обстановка</target>
+      </trans-unit>
+      <trans-unit id="12674" resname="preset_73B654AA-C999-4864-BF5A-77379DAA991C" approved="yes">
+        <source>I need to wash my face</source>
+        <target state="final">Мне нужно умыться</target>
+      </trans-unit>
+      <trans-unit id="12676" resname="preset_81B473E3-2FC9-40F0-AE59-3C658EC6CD91" approved="yes">
+        <source>I need a shower</source>
+        <target state="final">Мне нужно принять душ</target>
+      </trans-unit>
+      <trans-unit id="12678" resname="preset_0167AA43-587D-436F-91A9-9CEEAF1CCCF1" approved="yes">
+        <source>I would like to talk</source>
+        <target state="final">Я хочу поговорить</target>
+      </trans-unit>
+      <trans-unit id="12680" resname="preset_573DD827-7201-49F1-8BE8-0BC18028A8CB" approved="yes">
+        <source>Bad</source>
+        <target state="final">Плохо</target>
+      </trans-unit>
+      <trans-unit id="12682" resname="preset_702D3BAD-6C56-4DC6-8290-8E0693B63152" approved="yes">
+        <source>Please turn the volume down</source>
+        <target state="final">Сделай(те) потише</target>
+      </trans-unit>
+      <trans-unit id="12684" resname="preset_939B4829-D8B4-42F1-B8A2-0E956AAE1FEE" approved="yes">
+        <source>I am having trouble breathing</source>
+        <target state="final">Мне тяжело дышать</target>
+      </trans-unit>
+      <trans-unit id="12686" resname="preset_5542BE2F-419E-41A5-BBF2-5B82E0A49834" approved="yes">
+        <source>I am in pain</source>
+        <target state="final">Мне больно</target>
+      </trans-unit>
+      <trans-unit id="12688" resname="preset_05754D0C-962D-48C3-8554-E4F7D5E86D93" approved="yes">
+        <source>I need a jacket</source>
+        <target state="final">Мне нужна куртка</target>
+      </trans-unit>
+      <trans-unit id="12690" resname="preset_8359B09D-7259-40CC-B258-02895ECC4DB7" approved="yes">
+        <source>I need to spit</source>
+        <target state="final">Мне нужно сплюнуть</target>
+      </trans-unit>
+      <trans-unit id="12692" resname="preset_9929E83B-997D-40AA-841C-130709F5115B" approved="yes">
+        <source>Good morning</source>
+        <target state="final">Доброе утро</target>
+      </trans-unit>
+      <trans-unit id="12694" resname="preset_30153E11-D48C-47C8-9186-47988D0A5B7A" approved="yes">
+        <source>I do not agree</source>
+        <target state="final">Я не согласен(-на)</target>
+      </trans-unit>
+      <trans-unit id="12696" resname="preset_63980C93-EE77-40DE-BDE7-BF8F97EC0304" approved="yes">
+        <source>Please be patient</source>
+        <target state="final">Пожалуйста, будьте терпеливы</target>
+      </trans-unit>
+      <trans-unit id="12698" resname="preset_64348AD1-9F63-4ADA-B391-E1742913C0E6" approved="yes">
+        <source>I need a bath</source>
+        <target state="final">Мне нужно принять ванну</target>
+      </trans-unit>
+      <trans-unit id="12700" resname="preset_72633C5C-47A2-4D5E-9615-E1408234478F" approved="yes">
+        <source>Thank you</source>
+        <target state="final">Спасибо</target>
+      </trans-unit>
+      <trans-unit id="12702" resname="preset_88556B8E-FE61-401D-888C-0D79568715A0" approved="yes">
+        <source>Please close the blinds</source>
+        <target state="final">Закрой(те) шторы</target>
+      </trans-unit>
+      <trans-unit id="12704" resname="preset_1244394F-2793-47EF-BCAC-DB8BBDAB78C6" approved="yes">
+        <source>I need my medication</source>
+        <target state="final">Мне нужно принять мое лекарство</target>
+      </trans-unit>
+      <trans-unit id="12706" resname="preset_30474911-619F-4FBF-B7DA-F64039F556F2" approved="yes">
+        <source>Please be quiet</source>
+        <target state="final">Потише, пожалуйста</target>
+      </trans-unit>
+      <trans-unit id="12708" resname="preset_A02D6604-5C7C-4BB0-8C4A-E1C5E0D1A869" approved="yes">
+        <source>Please stop</source>
+        <target state="final">Прекрати(те), пожалуйста</target>
+      </trans-unit>
+      <trans-unit id="12710" resname="preset_A436EAAF-BD8A-4D8D-81EA-DC6D3C849D4A" approved="yes">
+        <source>I like it</source>
+        <target state="final">Мне это нравится</target>
+      </trans-unit>
+      <trans-unit id="12712" resname="preset_A74483A8-4069-40D7-992C-01295934E97C" approved="yes">
+        <source>Please repeat what you said</source>
+        <target state="final">Повтори(те) еще раз, пожалуйста</target>
+      </trans-unit>
+      <trans-unit id="12714" resname="preset_ADDD57C6-D11E-4B32-A2B3-05AA43D9AC8C" approved="yes">
+        <source>I am fine</source>
+        <target state="final">Я в порядке</target>
+      </trans-unit>
+      <trans-unit id="12716" resname="preset_B2442AA0-6004-4636-9B39-2DB97ADD1DA1" approved="yes">
+        <source>Goodbye</source>
+        <target state="final">Пока</target>
+      </trans-unit>
+      <trans-unit id="12718" resname="preset_BBE8BABC-CCBF-49BF-87D4-057016AADBC5" approved="yes">
+        <source>I want to sit up</source>
+        <target state="final">Я хочу сесть</target>
+      </trans-unit>
+      <trans-unit id="12720" resname="preset_BEE6FF86-CE30-4096-9E37-C469F63630B7" approved="yes">
+        <source>I didn't mean to say that</source>
+        <target state="final">Это не то, что я имел(а) ввиду </target>
+      </trans-unit>
+      <trans-unit id="12722" resname="preset_C0B2A1A8-8333-4121-B4A8-FFFA185EB5D2" approved="yes">
+        <source>General</source>
+        <target state="final">Общие фразы</target>
+      </trans-unit>
+      <trans-unit id="12724" resname="preset_C6C14627-E48E-4EF3-B81D-64C191F2EC75" approved="yes">
+        <source>I am good</source>
+        <target state="final">У меня все хорошо</target>
+      </trans-unit>
+      <trans-unit id="12726" resname="preset_C6E6B6E7-BEB6-466D-822A-F8CE2D092B9E" approved="yes">
+        <source>I am uncomfortable</source>
+        <target state="final">Мне неудобно</target>
+      </trans-unit>
+      <trans-unit id="12728" resname="preset_C865BE96-40B5-406C-9BAA-0A0D3280E377" approved="yes">
+        <source>Please close the window</source>
+        <target state="final">Закрой(те) окно, пожалуйста</target>
+      </trans-unit>
+      <trans-unit id="12730" resname="preset_D6A67E02-3D07-4D44-8B04-2C1B9B8B167E" approved="yes">
+        <source>Good evening</source>
+        <target state="final">Добрый вечер</target>
+      </trans-unit>
+      <trans-unit id="12732" resname="preset_D64EE532-14D3-4434-B671-8F4368EC0A8D" approved="yes">
+        <source>Good</source>
+        <target state="final">Хорошо</target>
+      </trans-unit>
+      <trans-unit id="12734" resname="preset_DC942BB6-B2BF-4ABB-8931-719BD2A504E6" approved="yes">
+        <source>Please turn the volume up</source>
+        <target state="final">Сделай(те) погромче</target>
+      </trans-unit>
+      <trans-unit id="12736" resname="preset_DFB79E0D-CF93-4744-B9EE-12738E1864E2" approved="yes">
+        <source>Maybe</source>
+        <target state="final">Может быть</target>
+      </trans-unit>
+      <trans-unit id="12738" resname="preset_E7ADBE88-2722-4DE7-BDC1-994F07EA294B" approved="yes">
+        <source>Personal Care</source>
+        <target state="final">Личная гигиена</target>
+      </trans-unit>
+      <trans-unit id="12740" resname="preset_E7D11E13-BC4F-4FE5-9C8A-BE2DE31AEE7F" approved="yes">
+        <source>I would like visitors</source>
+        <target state="final">Я хотел(а) бы видеть посетителей</target>
+      </trans-unit>
+      <trans-unit id="12742" resname="preset_E012D902-E8BA-4BEA-92C7-7107ECF8051C" approved="yes">
+        <source>I am hungry</source>
+        <target state="final">Я хочу есть</target>
+      </trans-unit>
+      <trans-unit id="12744" resname="preset_EB7A9732-E28E-4440-A88B-BA2A1ACFBD76" approved="yes">
+        <source>Conversation</source>
+        <target state="final">Беседа</target>
+      </trans-unit>
+      <trans-unit id="12746" resname="preset_F6F03BBD-B9CD-41F5-B26A-FCC13CCBB199" approved="yes">
+        <source>I am tired</source>
+        <target state="final">Я устал(а)</target>
+      </trans-unit>
+      <trans-unit id="12748" resname="preset_F8F5D1C9-0AA6-4152-BF7C-0851ACD1406B" approved="yes">
+        <source>Basic Needs</source>
+        <target state="final">Основные нужды</target>
+      </trans-unit>
+      <trans-unit id="12750" resname="preset_FABE749C-B54D-4031-B8E7-62777B34D273" approved="yes">
+        <source>No</source>
+        <target state="final">Нет</target>
+      </trans-unit>
+      <trans-unit id="12752" resname="preset_FB19C160-BC96-4580-9542-6F54AA1B2D70" approved="yes">
+        <source>Please turn the TV on</source>
+        <target state="final">Включите телевизор</target>
+      </trans-unit>
+      <trans-unit id="12754" resname="preset_listening_mode" approved="yes">
+        <source>Listen</source>
+        <target state="final">Слушать</target>
+      </trans-unit>
+      <trans-unit id="12756" resname="preset_user_favorites" approved="yes">
+        <source>My Sayings</source>
+        <target state="final">Мои выражения</target>
+      </trans-unit>
+      <trans-unit id="12758" resname="preset_user_keypad" approved="yes">
+        <source>123</source>
+        <target state="final">123</target>
+      </trans-unit>
+      <trans-unit id="12760" resname="preset_user_recents" approved="yes">
+        <source>Recents</source>
+        <target state="final">Недавние</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
