@@ -1,3 +1,5 @@
+require 'fileutils'
+
 default_platform :ios
 
 platform :ios do
@@ -107,8 +109,12 @@ platform :ios do
 
   desc "Integrate latest XLIFF files with project"
   lane :xliff_import do
-    Dir.glob('./../CrowdinImports/*.xliff') do |xliff|
-      sh "xcodebuild -importLocalizations -localizationPath #{xliff} -project ./../Vocable.xcodeproj"
+    Dir.glob('./../CrowdinExport/**/*.xliff') do |xliff|
+      text = File.read(xliff)
+      text = text.gsub('original="/[willowtreeapps.vocable-ios] develop/Vocable/', 'original="Vocable/')
+      text = text.gsub(/<trans-unit id=".*?" resname="(.*?)"/, '<trans-unit id="\1"')
+      File.open(xliff, "w") {|file| file.puts text }
+      run_with_retries(3, "xcodebuild -importLocalizations -localizationPath '#{xliff}' -project ./../Vocable.xcodeproj")
     end
   end
   
@@ -120,4 +126,20 @@ platform :ios do
     sh "rm -rf ./../CrowdinExport/*.xcloc"
   end
   
+end
+
+def run_with_retries(retry_limit = 3, command)
+  retries = 0
+  begin
+    sh command
+  rescue
+    retries += 1
+    if retries <= retry_limit
+      puts "Command failed, retrying... (##{retries})"
+      retry
+    else
+      puts "Command failed after #{retry_limit} attempts"
+      raise
+    end
+  end
 end
