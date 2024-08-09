@@ -1,0 +1,34 @@
+name: Pull Translations From Crowdin
+
+on:
+  push:
+    branches: [ develop, task/732-migrate-to-gh-actions-crowdin-action ] #remove this line after testing
+  workflow_dispatch:
+    inputs:
+      test:
+        description: Just to force the manual trigger 
+        required: false
+        default: 'trigger'
+jobs:
+  synchronize-with-crowdin:
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Install Crowdin CLI
+        run: brew install crowdin
+        shell: sh
+        
+      - name: Download Translations
+        run: >
+            crowdin download sources
+            --skip-untranslated-strings
+            --export-only-approved
+            --dryrun
+            --tree
+        shell: sh
+        env:
+            GITHUB_TOKEN: ${{ secrets.CROWDIN_GITHUB_TOKEN }}
+            CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+            CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
