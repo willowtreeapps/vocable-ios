@@ -1,0 +1,909 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file id="580" original="/[willowtreeapps.vocable-ios] develop/Vocable/Supporting Files/Localizable.xcstrings" source-language="en" target-language="ru" datatype="plaintext" project-id="397168" tool-id="crowdin">
+    <header>
+      <tool tool-id="crowdin" tool-name="Crowdin" tool-version="1.1"/>
+    </header>
+    <body>
+      <trans-unit id="12372" resname="categories_list_editor.header.title" approved="yes">
+        <source>Categories</source>
+        <target state="final">Категории</target>
+        <context-group purpose="information">
+          <context context-type="source">Categories Header title.  This appears in the Settings flow when navigating to the list of Categories</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12374" resname="category_editor.alert.delete_category_confirmation.button.cancel.title" approved="yes">
+        <source>Cancel</source>
+        <target state="final">Отмена</target>
+        <context-group purpose="information">
+          <context context-type="source">Delete category alert cancel button title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12376" resname="category_editor.alert.delete_category_confirmation.button.remove.title" approved="yes">
+        <source>Remove</source>
+        <target state="final">Удалить</target>
+        <context-group purpose="information">
+          <context context-type="source">Delete category alert action button title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12378" resname="category_editor.alert.delete_category_confirmation.title" approved="yes">
+        <source>Deleted categories cannot be recovered.</source>
+        <target state="final">Удаленные категории не могут быть восстановлены.</target>
+        <context-group purpose="information">
+          <context context-type="source">Delete category confirmation alert title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12380" resname="category_editor.alert.delete_phrase_confirmation.button.cancel.title" approved="yes">
+        <source>Cancel</source>
+        <target state="final">Отмена</target>
+        <context-group purpose="information">
+          <context context-type="source">Delete phrase alert cancel button title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12382" resname="category_editor.alert.delete_phrase_confirmation.button.delete.title" approved="yes">
+        <source>Remove</source>
+        <target state="final">Удалить</target>
+        <context-group purpose="information">
+          <context context-type="source">Delete phrase alert action button title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12384" resname="category_editor.alert.delete_phrase_confirmation.title" approved="yes">
+        <source>Deleted phrases cannot be recovered.</source>
+        <target state="final">Удаленные фразы не могут быть восстановлены.</target>
+        <context-group purpose="information">
+          <context context-type="source">Delete phrase confirmation alert title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12386" resname="category_editor.detail.button.edit_phrases.title" approved="yes">
+        <source>Edit Phrases</source>
+        <target state="final">Редактировать фразы</target>
+        <context-group purpose="information">
+          <context context-type="source">Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12388" resname="category_editor.detail.button.remove_category.title" approved="yes">
+        <source>Remove Category</source>
+        <target state="final">Удалить категорию</target>
+        <context-group purpose="information">
+          <context context-type="source">Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12390" resname="category_editor.detail.button.rename_category.title" approved="yes">
+        <source>Rename Category</source>
+        <target state="final">Переименовать категорию</target>
+        <context-group purpose="information">
+          <context context-type="source">Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12392" resname="category_editor.detail.button.show_category.title" approved="yes">
+        <source>Show Category</source>
+        <target state="final">Показать категорию</target>
+        <context-group purpose="information">
+          <context context-type="source">Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12394" resname="category_editor.toast.changes_saved.title" approved="yes">
+        <source>Changes saved</source>
+        <target state="final">Изменения сохранены</target>
+        <context-group purpose="information">
+          <context context-type="source">changes to an existing phrase were saved successfully</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12396" resname="category_editor.toast.successfully_saved.title" approved="yes">
+        <source>Changes Saved</source>
+        <target state="final">Изменения сохранены</target>
+        <context-group purpose="information">
+          <context context-type="source">Toast message that appears after saving edits made to the Category title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12398" resname="empty_state.button.title" approved="yes">
+        <source>Add Phrase</source>
+        <target state="final">Добавить фразу</target>
+        <context-group purpose="information">
+          <context context-type="source">Category empty state button.  This button appears with the empty state to allow the user to add a phrase</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12400" resname="empty_state.header.title" approved="yes">
+        <source>No phrases have been saved yet.</source>
+        <target state="final">Ни одна фраза еще не сохранена.</target>
+        <context-group purpose="information">
+          <context context-type="source">Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12402" resname="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" approved="yes">
+        <source>Cancel</source>
+        <target state="final">Отмена</target>
+        <context-group purpose="information">
+          <context context-type="source">Cancel alert action title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12404" resname="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" approved="yes">
+        <source>Continue</source>
+        <target state="final">Продолжить</target>
+        <context-group purpose="information">
+          <context context-type="source">Confirm alert action title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12406" resname="gaze_settings.alert.disable_head_tracking_confirmation.title" approved="yes">
+        <source>Turning off head tracking will make Vocable touch-only. Would you like to continue?</source>
+        <target state="final">Отключение отслеживания головы сделает Vocable доступным только для сенсорного управления. Желаете ли вы продолжить?</target>
+        <context-group purpose="information">
+          <context context-type="source">Disable head tracking confirmation alert title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12408" resname="gaze_tracking.error.excessive_head_distance.title" approved="yes">
+        <source>Please move closer to the device.</source>
+        <target state="final">Пожалуйста, подойдите ближе к устройству.</target>
+        <context-group purpose="information">
+          <context context-type="source">Warning message presented to the user when the head tracking system</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12410" resname="listening_mode.empty_state.actively_listening.message" approved="yes">
+        <source>When someone asks a question out loud, Vocable will offer quick response options.</source>
+        <target state="final">Когда кто-то задает вопрос вслух, Vocable предложит варианты быстрого ответа.</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state message for when listening has began but no responses have been displayed yet</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12412" resname="listening_mode.empty_state.actively_listening.title" approved="yes">
+        <source>Listening...</source>
+        <target state="final">Слушаю...</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state title for when listening has began but no responses have been displayed yet</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12414" resname="listening_mode.empty_state.free_response.message" approved="yes">
+        <source>Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.</source>
+        <target state="final">Не уверен, что предложить. Пожалуйста, используйте клавиатуру или выберите существующую фразу, чтобы ответить.</target>
+        <context-group purpose="information">
+          <context context-type="source">Listen mode empty state message for when no responses could be generated</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12416" resname="listening_mode.empty_state.free_response.title" approved="yes">
+        <source>Sounds complicated</source>
+        <target state="final">Звучит сложно</target>
+        <context-group purpose="information">
+          <context context-type="source">Listen mode empty state title for when no responses could be generated</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12418" resname="listening_mode.empty_state.microphone_permission_denied.action" approved="yes">
+        <source>Open Settings</source>
+        <target state="final">Открыть настройки</target>
+        <context-group purpose="information">
+          <context context-type="source">Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12420" resname="listening_mode.empty_state.microphone_permission_denied.message" approved="yes">
+        <source>Vocable needs to use the microphone to enable Listening Mode. Please allow microphone access in %1$@ Settings.
+
+You can also disable Listening Mode to hide this category.</source>
+        <target state="final">Vocable необходимо использовать микрофон, чтобы включить режим прослушивания. Разрешите доступ к микрофону в настройках %1$@.
+
+Вы также можете отключить режим прослушивания, чтобы скрыть эту категорию.</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state message for when microphone permissions are required, but the user has denied them</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12422" resname="listening_mode.empty_state.microphone_permission_denied.title" approved="yes">
+        <source>Microphone Access</source>
+        <target state="final">Доступ к микрофону</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state title for when microphone permissions are required, but the user has denied them</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12424" resname="listening_mode.empty_state.microphone_permission_undetermined.action" approved="yes">
+        <source>Grant Access</source>
+        <target state="final">Предоставить доступ</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12426" resname="listening_mode.empty_state.microphone_permission_undetermined.message" approved="yes">
+        <source>Vocable needs microphone access to enable Listening Mode. The button below presents an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="final">Vocable требуется доступ к микрофону, чтобы включить режим прослушивания. Кнопка ниже представляет диалоговое окно разрешений iOS, с которым не может взаимодействовать отслеживание головы Vocable.</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12428" resname="listening_mode.empty_state.microphone_permission_undetermined.title" approved="yes">
+        <source>Microphone Access</source>
+        <target state="final">Доступ к микрофону</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12430" resname="listening_mode.empty_state.speech_permission_denied.action" approved="yes">
+        <source>Open Settings</source>
+        <target state="final">Открыть настройки</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12432" resname="listening_mode.empty_state.speech_permission_denied.message" approved="yes">
+        <source>Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in %1$@ Settings.
+
+You can also disable Listening Mode to hide this category.</source>
+        <target state="final">Vocable требует распознавания речи, чтобы включить режим прослушивания. Пожалуйста, включите распознавание речи в настройках %1$@.
+
+Вы также можете отключить режим прослушивания, чтобы скрыть эту категорию.</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state message for when speech recognition permissions are required, but the user has denied them</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12434" resname="listening_mode.empty_state.speech_permission_denied.title" approved="yes">
+        <source>Speech Recognition</source>
+        <target state="final">Распознавание речи</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state title for when speech recognition permissions are required, but the user has denied them</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12436" resname="listening_mode.empty_state.speech_permission_undetermined.action" approved="yes">
+        <source>Grant Access</source>
+        <target state="final">Предоставить доступ</target>
+        <context-group purpose="information">
+          <context context-type="source">Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12438" resname="listening_mode.empty_state.speech_permission_undetermined.message" approved="yes">
+        <source>Vocable needs to request speech permissions to enable Listening Mode. This will present an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="final">Vocable необходимо запросить разрешения на речь, чтобы включить режим прослушивания. Откроется диалоговое окно разрешений iOS, с которым не может взаимодействовать отслеживание головы Vocable.</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12440" resname="listening_mode.empty_state.speech_permission_undetermined.title" approved="yes">
+        <source>Speech Recognition</source>
+        <target state="final">Распознавание речи</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12442" resname="listening_mode.empty_state.speech_unavailable.message" approved="yes">
+        <source>Speech services require one of the following features to be enabled on your device: Siri or Dictation. Please check your device settings and enable Siri or Dictation.</source>
+        <target state="final">Речевые службы требуют, чтобы на вашем устройстве была включена одна из следующих функций: Siri или Диктовка. Пожалуйста, проверьте настройки вашего устройства и включите Siri или Диктовку.</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode error state message for when Apple's speech to text service is unavailable</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12444" resname="listening_mode.empty_state.speech_unavailable.title" approved="yes">
+        <source>Speech services unavailable</source>
+        <target state="final">Голосовые сервисы недоступны</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode error state title for when Apple's speech to text service is unavailable</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12446" resname="listening_mode.empty_state.unsupported.message" approved="yes">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %4$@ to be enabled.</source>
+        <target state="final">Этот %1$@ на %2$@ %3$@ не поддерживает режим прослушивания.
+
+Режим прослушивания в настоящее время доступен только на английском языке и требует включения %4$@.</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12448" resname="listening_mode.empty_state.unsupported.title" approved="yes">
+        <source>Listening Mode Unsupported</source>
+        <target state="final">Режим прослушивания не поддерживается</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12450" resname="listening_mode.empty_state.vocableAPIFailure.message" approved="yes">
+        <source>Please check your internet connection and try again later.</source>
+        <target state="final">Пожалуйста, проверьте ваше соединение и повторите попытку.</target>
+        <context-group purpose="information">
+          <context context-type="source">Listen mode error state message for when the vocable API fails</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12452" resname="listening_mode.empty_state.vocableAPIFailure.title" approved="yes">
+        <source>Network failure</source>
+        <target state="final">Сбой сети</target>
+        <context-group purpose="information">
+          <context context-type="source">Listen mode error state message for when the vocable API fails</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12454" resname="listening_mode.feedback.confirmation.title" approved="yes">
+        <source>Thank You!</source>
+        <target state="final">Спасибо!</target>
+        <context-group purpose="information">
+          <context context-type="source">Thank you confirmation.  This text appears after sharing with developer</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12456" resname="listening_mode.feedback.hint.text" approved="yes">
+        <source>Don’t like these responses? Anonymously share this question to help improve listening mode.</source>
+        <target state="final">Не нравятся эти ответы? Анонимно поделитесь этим вопросом, чтобы улучшить режим прослушивания.</target>
+        <context-group purpose="information">
+          <context context-type="source">Information text around what the Share with Deeveloper button does.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12458" resname="listening_mode.feedback.submit.title" approved="yes">
+        <source>Share with Developers</source>
+        <target state="final">Поделиться с разработчиками</target>
+        <context-group purpose="information">
+          <context context-type="source">Share with Developer button.  The button appears if Listen mode could not generate a reponese.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12460" resname="main_screen.textfield_placeholder.default" approved="yes">
+        <source>Select something below to speak</source>
+        <target state="final">Выберите что-нибудь ниже, чтобы говорить</target>
+        <context-group purpose="information">
+          <context context-type="source">Select something below to speak Hint Text</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12462" resname="paging_progress_indicator_format" approved="yes">
+        <source>Page %1$d of %2$d</source>
+        <target state="final">Страница %1$d из %2$d</target>
+        <context-group purpose="information">
+          <context context-type="source">Page indicator progress format. \&quot;Page x of n\&quot;</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12464" resname="personal_voices.empty_state.denied.button.title" approved="yes">
+        <source>Open Settings</source>
+        <target state="final">Открыть настройки</target>
+        <context-group purpose="information">
+          <context context-type="source">Action button for the personal voices screen allowing the user to open the system settings app to resolve an error.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12466" resname="personal_voices.empty_state.denied.description" approved="yes">
+        <source>Vocable needs permission to access Personal Voices on this device.
+
+You can enable access in %1$@ Settings.</source>
+        <target state="final">Vocable требуется разрешение на доступ к Personal Voices на этом устройстве.
+
+Вы можете включить доступ в настройках %1$@.</target>
+        <context-group purpose="information">
+          <context context-type="source">Empty state description for when Personal Voice access has been denied by the user. It informs the user how to re-enable access by navigating to system settings. The placeholder is the device model (e.g. &quot;iPhone&quot; or &quot;iPad&quot;)</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12468" resname="personal_voices.empty_state.denied.title" approved="yes">
+        <source>Personal Voice Access</source>
+        <target state="final">Личный доступ к голосу</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of the Personal Voices screen empty state when a user must grant access to the app.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12470" resname="personal_voices.empty_state.no_content.description" approved="yes">
+        <source>You can create a new Personal Voice in %1$@ Settings. Once created, you can set your Personal Voice as Vocable's voice.
+
+If a Personal Voice has been created and does not appear in Vocable, try restarting %1$@.</source>
+        <target state="final">Вы можете создать новый личный голос в настройках %1$@. После создания вы можете задать свой голос как голос для вокала.
+
+Если персональный голос был создан и не отображается в разделе &quot;Словарь&quot;, попробуйте перезапустить %1$@.</target>
+        <context-group purpose="information">
+          <context context-type="source">Empty state description for when there are not personal voices to display. This is typically because the user has not created any yet. The placeholder is the device model (e.g. &quot;iPhone&quot; or &quot;iPad&quot;).</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12472" resname="personal_voices.empty_state.no_content.title" approved="yes">
+        <source>No Personal Voices</source>
+        <target state="final">Никаких личных голосов</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of the Personal Voices screen empty state when there are no voices available on the device.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12474" resname="personal_voices.empty_state.not_authorized.button.title" approved="yes">
+        <source>Grant Access</source>
+        <target state="final">Предоставить доступ</target>
+        <context-group purpose="information">
+          <context context-type="source">Action button for the personal voices screen that will display a system prompt allowing access to their Personal Voice profiles stored on their device.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12476" resname="personal_voices.empty_state.not_authorized.description" approved="yes">
+        <source>Allow Vocable to access Personal Voices stored on this device.</source>
+        <target state="final">Разрешить доступ к личным голосам, хранящимся на этом устройстве.</target>
+        <context-group purpose="information">
+          <context context-type="source">Empty state description for when Personal Voice access has not yet been prompted to the user. Below this text will be a button that will prompt the user for access.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12478" resname="personal_voices.empty_state.not_authorized.title" approved="yes">
+        <source>Personal Voice Access</source>
+        <target state="final">Личный доступ к голосу</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of the Personal Voices screen empty state when a user has denied access to the app.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12480" resname="personal_voices.title" approved="yes">
+        <source>Personal Voices</source>
+        <target state="final">Личные голоса</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of the Personal Voices screen</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12482" resname="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" approved="yes">
+        <source>Continue Editing</source>
+        <target state="final">Продолжить редактирование</target>
+        <context-group purpose="information">
+          <context context-type="source">Button in the Phrase close confirmation. This button appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. Pressing the button will allow editing the category title.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12484" resname="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" approved="yes">
+        <source>Discard</source>
+        <target state="final">Отказаться</target>
+        <context-group purpose="information">
+          <context context-type="source">Button in the edit Phrase close confirmation.  This button appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes. Pressing the button will not save any changes and close the keyboard view.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12486" resname="phrase_editor.alert.cancel_editing_confirmation.title" approved="yes">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="final">Если вы закроете без сохранения, ваши изменения будут потеряны.</target>
+        <context-group purpose="information">
+          <context context-type="source">Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12488" resname="phrase_editor.alert.phrase_name_exists.cancel.button" approved="yes">
+        <source>Cancel</source>
+        <target state="final">Отмена</target>
+        <context-group purpose="information">
+          <context context-type="source">Duplicate Phrase alert cancel button. Text on this button appears on an alert where a duplicate phrase is being created. Pressing the button allows the user to continue editing the category title.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12490" resname="phrase_editor.alert.phrase_name_exists.create.button" approved="yes">
+        <source>Create Duplicate</source>
+        <target state="final">Создать дубликат</target>
+        <context-group purpose="information">
+          <context context-type="source">Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12492" resname="phrase_editor.alert.phrase_name_exists.title" approved="yes">
+        <source>This phrase already exists. Would you like to create a duplicate?</source>
+        <target state="final">Эта фраза уже существует. Хотите создать дубликат?</target>
+        <context-group purpose="information">
+          <context context-type="source">Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12494" resname="phrase_editor.toast.successfully_saved_to_favorites.title_format" approved="yes">
+        <source>Saved to %@</source>
+        <target state="final">Сохранено в %@</target>
+        <context-group purpose="information">
+          <context context-type="source">Informs the user that their newly-created phrase was successfully saved. The variable parameter is the name of the category that the phrase was saved to.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12496" resname="preset.category.add.phrase.title" approved="yes">
+        <source>Add Phrase</source>
+        <target state="final">Добавить фразу</target>
+        <context-group purpose="information">
+          <context context-type="source">Add phrase to category button title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12498" resname="preset.category.numberpad.phrase.no.title" approved="yes">
+        <source>No</source>
+        <target state="final">Нет</target>
+        <context-group purpose="information">
+          <context context-type="source">'No' num pad response</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12500" resname="preset.category.numberpad.phrase.yes.title" approved="yes">
+        <source>Yes</source>
+        <target state="final">Да</target>
+        <context-group purpose="information">
+          <context context-type="source">'Yes' num pad response</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12502" resname="recents_empty_state.body.title" approved="yes">
+        <source>Start using Vocable to see your most recently used phrases here.</source>
+        <target state="final">Начните использовать Vocable, чтобы увидеть здесь свои последние использованные фразы.</target>
+        <context-group purpose="information">
+          <context context-type="source">Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12504" resname="recents_empty_state.header.title" approved="yes">
+        <source>No recently used phrases</source>
+        <target state="final">Нет недавно использованных фраз</target>
+        <context-group purpose="information">
+          <context context-type="source">Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12506" resname="selection_mode.header.title" approved="yes">
+        <source>Selection Mode</source>
+        <target state="final">Режим выбора</target>
+        <context-group purpose="information">
+          <context context-type="source">Selection mode setting header title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12508" resname="settings.alert.no_email_configured.button.dismiss.title" approved="yes">
+        <source>OK</source>
+        <target state="final">Хорошо</target>
+        <context-group purpose="information">
+          <context context-type="source">No email account configured error alert dismiss button title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12510" resname="settings.alert.no_email_configured.title" approved="yes">
+        <source>Please sign into an account with Mail for %1$@.</source>
+        <target state="final">Пожалуйста, войдите в аккаунт Mail для %1$@.</target>
+        <context-group purpose="information">
+          <context context-type="source">No email account configured error alert title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12512" resname="settings.alert.reset_app_settings_confirmation.body" approved="yes">
+        <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
+        <target state="final">Вы уверены, что хотите сбросить Vocable до настроек по умолчанию? Это действие не может быть отменено.</target>
+        <context-group purpose="information">
+          <context context-type="source">Reset setting alert confirmation prompt</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12514" resname="settings.alert.reset_app_settings_confirmation.button.cancel.title" approved="yes">
+        <source>Cancel</source>
+        <target state="final">Отмена</target>
+        <context-group purpose="information">
+          <context context-type="source">Reset setting alert Cancel button.  This will cancel the reset operation.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12516" resname="settings.alert.reset_app_settings_confirmation.button.confirm.title" approved="yes">
+        <source>Reset</source>
+        <target state="final">Перезагрузить</target>
+        <context-group purpose="information">
+          <context context-type="source">Reset setting alert settings Reset button.  This will continue with the reset operation.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12518" resname="settings.alert.reset_app_settings_failure.body" approved="yes">
+        <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
+        <target state="final">Vocable не удалось сбросить. Повторите попытку или переустановите Vocable, если проблема не устранена.</target>
+        <context-group purpose="information">
+          <context context-type="source">Reset app settings failure alert</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12520" resname="settings.alert.reset_app_settings_failure.button.ok" approved="yes">
+        <source>OK</source>
+        <target state="final">Хорошо</target>
+        <context-group purpose="information">
+          <context context-type="source">Button to dismiss the Reset app failure alert</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12522" resname="settings.alert.reset_app_settings_success.body" approved="yes">
+        <source>Vocable has been reset successfully.</source>
+        <target state="final">Vocable успешно сброшен.</target>
+        <context-group purpose="information">
+          <context context-type="source">Reset app settings success alert</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12524" resname="settings.alert.reset_app_settings_success.button.ok" approved="yes">
+        <source>OK</source>
+        <target state="final">Хорошо</target>
+        <context-group purpose="information">
+          <context context-type="source">Button to dismiss the Reset app success alert</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12526" resname="settings.alert.surrender_gaze_confirmation.body" approved="yes">
+        <source>You're about to leave the Vocable app. You may lose head tracking control.</source>
+        <target state="final">Вы собираетесь покинуть приложение Vocable. Вы можете потерять контроль над отслеживанием головы.</target>
+        <context-group purpose="information">
+          <context context-type="source">Body of confirmation alert shown when user is about to navigate to a destination where Vocable's head tracking will not be available.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12528" resname="settings.alert.surrender_gaze_confirmation.button.cancel.title" approved="yes">
+        <source>Cancel</source>
+        <target state="final">Отмена</target>
+        <context-group purpose="information">
+          <context context-type="source">Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12530" resname="settings.alert.surrender_gaze_confirmation.button.confirm.title" approved="yes">
+        <source>Confirm</source>
+        <target state="final">Подтвердить</target>
+        <context-group purpose="information">
+          <context context-type="source">Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12532" resname="settings.cell.categories.title" approved="yes">
+        <source>Categories and Phrases</source>
+        <target state="final">Категории и фразы</target>
+        <context-group purpose="information">
+          <context context-type="source">edit categories settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12534" resname="settings.cell.contact_developers.title" approved="yes">
+        <source>Contact Developers</source>
+        <target state="final">Связаться с разработчиками</target>
+        <context-group purpose="information">
+          <context context-type="source">contact developers settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12536" resname="settings.cell.head_tracking.title" approved="yes">
+        <source>Head Tracking</source>
+        <target state="final">Отслеживание головы</target>
+        <context-group purpose="information">
+          <context context-type="source">Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12538" resname="settings.cell.keyboard_layout.title" approved="yes">
+        <source>Keyboard Layout</source>
+        <target state="final">Раскладка клавиатуры</target>
+        <context-group purpose="information">
+          <context context-type="source">edit keyboard layout settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12540" resname="settings.cell.listening_mode.title" approved="yes">
+        <source>Listening Mode</source>
+        <target state="final">Режим прослушивания</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12542" resname="settings.cell.privacy_policy.title" approved="yes">
+        <source>Privacy Policy</source>
+        <target state="final">Политика конфиденциальности</target>
+        <context-group purpose="information">
+          <context context-type="source">view privacy policy settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12544" resname="settings.cell.qwerty_layout.title" approved="yes">
+        <source>Compact QWERTY</source>
+        <target state="final">Компактный QWERTY</target>
+        <context-group purpose="information">
+          <context context-type="source">Option within Keyboard Layout. This option is to enable or disable QWERTY keyboard on portrait iPhone.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12546" resname="settings.cell.reset_all.title" approved="yes">
+        <source>Reset App Settings</source>
+        <target state="final">Сбросить настройки приложения</target>
+        <context-group purpose="information">
+          <context context-type="source">reset all settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12548" resname="settings.cell.selection_mode.title" approved="yes">
+        <source>Selection Mode</source>
+        <target state="final">Режим выбора</target>
+        <context-group purpose="information">
+          <context context-type="source">edit cursor selection mode settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12550" resname="settings.cell.timing_sensitivity.title" approved="yes">
+        <source>Timing and Sensitivity</source>
+        <target state="final">Время и чувствительность</target>
+        <context-group purpose="information">
+          <context context-type="source">edit cursor timing and sensititivy settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12552" resname="settings.cell.voice_configuration.title" approved="yes">
+        <source>Voice</source>
+        <target state="final">Разговор</target>
+        <context-group purpose="information">
+          <context context-type="source">Settings option title for row that navigates to the Voice settings screen</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12554" resname="settings.header.title" approved="yes">
+        <source>Settings</source>
+        <target state="final">Настройки</target>
+        <context-group purpose="information">
+          <context context-type="source">Settings screen header title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12556" resname="settings.keyboard_layout.header.title" approved="yes">
+        <source>Keyboard Layout</source>
+        <target state="final">Раскладка клавиатуры</target>
+        <context-group purpose="information">
+          <context context-type="source">Keyboard Layout setting header title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12558" resname="settings.keyboard_layout.qwerty_layout.explanation_footer" approved="yes">
+        <source>Use QWERTY keyboard layout in all orientations. Keys may be smaller, making typing more difficult.</source>
+        <target state="final">Используйте раскладку клавиатуры QWERTY во всех ориентациях. Клавиши могут быть меньше, что затрудняет набор текста.</target>
+        <context-group purpose="information">
+          <context context-type="source">Option within Keyboard Layout. This option is to enable or disable QWERTY keyboard on portrait iPhone.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12560" resname="settings.listening_mode.device_unsupported_explanation_footer" approved="yes">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %4$@ to be enabled.</source>
+        <target state="final">Этот %1$@ на %2$@ %3$@ не поддерживает режим прослушивания.
+
+Режим прослушивания в настоящее время доступен только на английском языке и требует включения %4$@.</target>
+        <context-group purpose="information">
+          <context context-type="source">Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12562" resname="settings.listening_mode.hot_word_toggle_cell.title" approved="yes">
+        <source>&quot;Hey Vocable&quot; shortcut</source>
+        <target state="final">Ярлык &quot;Hey Vocable&quot;</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of Listening Mode preferences cell that toggles &quot;Hey Vocable&quot; shortcut feature on or off when selected</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12564" resname="settings.listening_mode.hotword_explanation_footer" approved="yes">
+        <source>Automatically navigate to the Listening Mode category when Vocable hears someone say &quot;Hey, Vocable&quot;</source>
+        <target state="final">Автоматически переходить в категорию «Режим прослушивания», когда Vocable слышит, как кто-то говорит «Эй, Vocable»</target>
+        <context-group purpose="information">
+          <context context-type="source">Footer text displayed in the Listening Mode preferences screen. This text describes the &quot;Hey Vocable&quot; feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12566" resname="settings.listening_mode.listening_mode_explanation_footer" approved="yes">
+        <source>This is a conversational category that listens for someone to ask questions, then offers a selection of responses. Either/or questions and questions that can be answered with yes, no, or a number are currently supported.</source>
+        <target state="final">Это разговорная категория, которая слушает, когда кто-то задает вопросы, а затем предлагает выбор ответов. В настоящее время поддерживаются вопросы «или/или», а также вопросы, на которые можно ответить «да», «нет» или число.</target>
+        <context-group purpose="information">
+          <context context-type="source">Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12568" resname="settings.listening_mode.listening_mode_toggle_cell.title" approved="yes">
+        <source>Listening Mode</source>
+        <target state="final">Режим прослушивания</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12570" resname="settings.listening_mode.smart_assist_explanation_footer" approved="yes">
+        <source>Smart Assist uses AI to provide higher-quality suggestions for Listening Mode. An Internet connection is required, but no conversation history is ever stored, just like in regular Listening Mode.</source>
+        <target state="final">Smart Assist использует искусственный интеллект для предоставления более качественных предложений для режима прослушивания. Требуется подключение к Интернету, но история разговоров не сохраняется, как и в обычном режиме прослушивания.</target>
+        <context-group purpose="information">
+          <context context-type="source">Footer text displayed in the Listening Mode preferences screen. This text describes the Smart Assist feature and how it works.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12572" resname="settings.listening_mode.smart_assist_toggle_cell.title" approved="yes">
+        <source>Smart Assist</source>
+        <target state="final">Умный помощник</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of Smart Assist preferences cell that toggles the Smart Assist feature on or off when selected</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12574" resname="settings.listening_mode.title" approved="yes">
+        <source>Listening Mode</source>
+        <target state="final">Режим прослушивания</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening Mode preferences screen title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12576" resname="settings.selection_mode.head_tracking_unsupported_footer" approved="yes">
+        <source>This %1$@ on %2$@ %3$@ does not support head tracking.
+
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %5$@.</source>
+        <target state="final">Этот %1$@ на %2$@ %3$@ не поддерживает отслеживание головы.
+
+Отслеживание Head поддерживается на всех устройствах с помощью %4$@ камеры, а также на большинстве устройств с помощью %5$@.</target>
+        <context-group purpose="information">
+          <context context-type="source">Additonal footer text noting heading tracking compatibility</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12578" resname="settings.version_format" approved="yes">
+        <source>Version %1$@</source>
+        <target state="final">Версия %1$@</target>
+        <context-group purpose="information">
+          <context context-type="source">Version information displayed at the bottom of the Settings screen. Argument is the application version.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12580" resname="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" approved="yes">
+        <source>Continue Editing</source>
+        <target state="final">Продолжить редактирование</target>
+        <context-group purpose="information">
+          <context context-type="source">Button in the edit category title close confirmation. This button appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. Pressing the button will allow editing the category title.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12582" resname="text_editor.alert.cancel_editing_confirmation.button.discard.title" approved="yes">
+        <source>Discard</source>
+        <target state="final">Отказаться</target>
+        <context-group purpose="information">
+          <context context-type="source">Button in the edit category title close confirmation. This button appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. Pressing the button will not save any changes and close the keyboard view.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12584" resname="text_editor.alert.cancel_editing_confirmation.title" approved="yes">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="final">Если вы закроете без сохранения, ваши изменения будут потеряны.</target>
+        <context-group purpose="information">
+          <context context-type="source">Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12586" resname="text_editor.alert.category_name_exists.cancel.button" approved="yes">
+        <source>Cancel</source>
+        <target state="final">Отмена</target>
+        <context-group purpose="information">
+          <context context-type="source">Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12588" resname="text_editor.alert.category_name_exists.create.button" approved="yes">
+        <source>Create Duplicate</source>
+        <target state="final">Создать дубликат</target>
+        <context-group purpose="information">
+          <context context-type="source">Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12590" resname="text_editor.alert.category_name_exists.title" approved="yes">
+        <source>This category name already exists. Would you like to create a duplicate?</source>
+        <target state="final">Это название категории уже существует. Хотите создать дубликат?</target>
+        <context-group purpose="information">
+          <context context-type="source">Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12592" resname="timing_and_sensitivity.button.high.title" approved="yes">
+        <source>High</source>
+        <target state="final">Высокая</target>
+        <context-group purpose="information">
+          <context context-type="source">Button option for the Curson Sensitivity setting.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12594" resname="timing_and_sensitivity.button.low.title" approved="yes">
+        <source>Low</source>
+        <target state="final">Низкий</target>
+        <context-group purpose="information">
+          <context context-type="source">Button option for the Curson Sensitivity setting.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12596" resname="timing_and_sensitivity.button.medium.title" approved="yes">
+        <source>Medium</source>
+        <target state="final">Середина</target>
+        <context-group purpose="information">
+          <context context-type="source">Button option for the Curson Sensitivity setting.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12598" resname="timing_and_sensitivity.cell.cursor_sensitivity.title" approved="yes">
+        <source>Cursor Sensitivity</source>
+        <target state="final">Чувствительность курсора</target>
+        <context-group purpose="information">
+          <context context-type="source">Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12600" resname="timing_and_sensitivity.cell.dwell_duration.title" approved="yes">
+        <source>Hover Time</source>
+        <target state="final">Время наведения</target>
+        <context-group purpose="information">
+          <context context-type="source">Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12602" resname="timing_and_sensitivity.header.title" approved="yes">
+        <source>Timing and Sensitivity</source>
+        <target state="final">Время и чувствительность</target>
+        <context-group purpose="information">
+          <context context-type="source">Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12604" resname="voice_picker.empty_state.description" approved="yes">
+        <source>No voices that match your language and region settings are installed.</source>
+        <target state="final">Голоса, соответствующие настройкам вашего языка и региона, не установлены.</target>
+        <context-group purpose="information">
+          <context context-type="source">Voice picker empty state body. Shown when the user attempts to change their voice settings and the operating system
+fails to return any viable voice profiles that the user could select from.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12606" resname="voice_picker.empty_state.title" approved="yes">
+        <source>No Voices</source>
+        <target state="final">Нет голосов</target>
+        <context-group purpose="information">
+          <context context-type="source">Voice picker empty state title.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12608" resname="voice_picker.title" approved="yes">
+        <source>Change Voice</source>
+        <target state="final">Изменить голос</target>
+        <context-group purpose="information">
+          <context context-type="source">Voice Picker title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12610" resname="voice_preview.sample_audio.introducion_format" approved="yes">
+        <source>Hello, this is %1$@</source>
+        <target state="final">Привет, это %1$@</target>
+        <context-group purpose="information">
+          <context context-type="source">In the voice configuration screen within the app's settings, this format is used to construct the phrase read aloud when the user selects a button to preview a voice profile. Each voice profile has a name provided by the operating system, so the phrase is currently structured as if the voice profile is introducing itself.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12612" resname="voice_settings.cell.change_voice.title" approved="yes">
+        <source>Change Voice</source>
+        <target state="final">Изменить голос</target>
+        <context-group purpose="information">
+          <context context-type="source">Button in the Voice Settings screen that will navigate the user to the voice picker/Change Voice screen</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12614" resname="voice_settings.cell.personal_voice.title" approved="yes">
+        <source>Personal Voices</source>
+        <target state="final">Личные голоса</target>
+        <context-group purpose="information">
+          <context context-type="source">Button in the Voice Settings screen that will navigate the user to the Personal Voice screen</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12616" resname="voice_settings.title" approved="yes">
+        <source>Voice</source>
+        <target state="final">Разговор</target>
+        <context-group purpose="information">
+          <context context-type="source">Voice Configuration title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12618" resname="voice_settings.voice_picker_footer.title" approved="yes">
+        <source>Additional voices and voice quality enhancements may be available for download in %1$@ Settings.</source>
+        <target state="final">Дополнительные улучшения качества голоса и голоса могут быть доступны для загрузки в Настройках %1$@.</target>
+        <context-group purpose="information">
+          <context context-type="source">Footer title that accompanies the button that will present the voice picker. This is meant to inform the user that additional voices can be downloaded from the system settings app. The parameter variable is substituted with the device model e.g. &quot;iPad&quot; or &quot;iPhone&quot;.</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
