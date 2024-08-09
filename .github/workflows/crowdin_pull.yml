@@ -53,7 +53,7 @@ jobs:
           lane: xliff_import
 
       - name: Delete Temporary Files
-        run: rm -rf ./CrowdinImports; rm-rf ./CrowdinExports
+        run: rm -rf ./CrowdinImports; rm -rf ./CrowdinExports
         shell: sh
 
       - name: Create Pull Request
