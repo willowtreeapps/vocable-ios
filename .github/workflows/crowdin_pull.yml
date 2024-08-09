@@ -32,3 +32,22 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.CROWDIN_GITHUB_TOKEN }}
             CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
             CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Set up Ruby environment
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+          
+      - name: Install bundler
+        run: gem install bundler
+            
+      - name: Install dependencies
+        run: bundle install
+    
+      - name: Install SwiftLint
+        run: brew install swiftlint
+
+      - name: Import XLIFFs to project
+        uses: ./.github/workflows/actions/run_lane
+        with:
+          lane: xliff_import
