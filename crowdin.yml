@@ -1,3 +1,7 @@
 files:
-  - source: /CrowdinExport/en.xliff
-    translation: /CrowdinImports/%osx_locale%.xliff
+  - source: /Vocable/**/*.xcstrings
+    ignore:
+      - CrowdinExport
+    translation: /CrowdinExport/%osx_locale%/%file_name%.xliff
+bundles:
+  - 6
