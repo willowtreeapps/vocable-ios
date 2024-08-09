@@ -51,3 +51,25 @@ jobs:
         uses: ./.github/workflows/actions/run_lane
         with:
           lane: xliff_import
+
+      - name: Delete Temporary Files
+        run: rm -rf ./CrowdinImports; rm-rf ./CrowdinExports
+        shell: sh
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.CROWDIN_PR_BOT_TOKEN }}
+          commit-message: Update Localizations
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: crowdin/update-translations-bot
+          delete-branch: true
+          title: '[CI] Update Localizations'
+          body: |
+            Automated localization update from Crowdin.
+          labels: |
+            localization
+            automated
+          draft: false
