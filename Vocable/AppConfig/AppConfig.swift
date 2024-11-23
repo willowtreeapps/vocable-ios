@@ -1,11 +1,3 @@
-//
-//  AppConfig.swift
-//  Vocable AAC
-//
-//  Created by Patrick Gatewood on 2/7/20.
-//  Copyright © 2020 WillowTree. All rights reserved.
-//
-
 import Foundation
 import Combine
 import ARKit
@@ -21,6 +13,7 @@ extension UserDefaultsKey {
     static let isHeadTrackingEnabled: UserDefaultsKey = "isHeadTrackingEnabled"
     static let isCompactQWERTYKeyboardEnabled: UserDefaultsKey = "isCompactQWERTYKeyboardEnabled"
     static let selectedVoiceIdentifier: UserDefaultsKey = "selectedVoiceIdentifier"
+    static let isHotdogModeEnabled: UserDefaultsKey = "isHotdogModeEnabled"
 }
 
 struct AppConfig {
@@ -57,4 +50,7 @@ struct AppConfig {
     
     @PublishedDefault(.selectedVoiceIdentifier)
     static var selectedVoiceIdentifier: String? = .none
+
+    @PublishedDefault(.isHotdogModeEnabled)
+    static var isHotdogModeEnabled: Bool = false
 }
