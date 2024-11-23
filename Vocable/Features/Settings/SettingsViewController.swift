@@ -1,11 +1,3 @@
-//
-//  SettingsViewController.swift
-//  Vocable AAC
-//
-//  Created by Jesse Morgan on 2/6/20.
-//  Copyright © 2020 WillowTree. All rights reserved.
-//
-
 import UIKit
 import MessageUI
 
@@ -34,6 +26,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         case pidTuner
         case listeningMode
         case voiceConfiguration
+        case hotdogMode
 
         var title: String {
             switch self {
@@ -55,6 +48,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 return String(localized: "settings.cell.listening_mode.title")
             case .voiceConfiguration:
                 return String(localized: "settings.cell.voice_configuration.title")
+            case .hotdogMode:
+                return "Hotdog Mode"
             }
         }
         
@@ -78,6 +73,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 return .settings.voiceSettingsCell
             case .pidTuner:
                 return ""
+            case .hotdogMode:
+                return .settings.hotdogModeCell
             }
         }
 
@@ -198,7 +195,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                               .timingSensitivity,
                               .listeningMode,
                               .selectionMode,
-                              .resetAppSettings].filter(\.isFeatureEnabled))
+                              .resetAppSettings,
+                              .hotdogMode].filter(\.isFeatureEnabled))
         snapshot.appendSections([.externalURL])
         snapshot.appendItems([.privacyPolicy,
                               .contactDevs].filter(\.isFeatureEnabled))
@@ -295,6 +293,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             presentPidTuner()
         case .resetAppSettings:
             presentAppResetPrompt()
+        case .hotdogMode:
+            toggleHotdogMode()
         }
     }
     
@@ -382,6 +382,11 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 gazeWindow.cursorView?.isDebugCursorHidden = false
             }
         }
+    }
+
+    private func toggleHotdogMode() {
+        AppConfig.isHotdogModeEnabled.toggle()
+        updateDataSource()
     }
 
     // MARK: Reset App Data

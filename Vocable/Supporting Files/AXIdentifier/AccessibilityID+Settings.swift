@@ -1,11 +1,3 @@
-//
-//  AccessibilityID+Settings.swift
-//  Vocable
-//
-//  Created by Chris Stroud on 5/11/22.
-//  Copyright © 2022 WillowTree. All rights reserved.
-//
-
 import Foundation
 
 extension AccessibilityID {
@@ -19,6 +11,7 @@ extension AccessibilityID {
         public static let contactDevelopersCell: AccessibilityID = "settings-contact-developers-cell"
         public static let voiceSettingsCell: AccessibilityID = "settings-voice-settings-cell"
         public static let keyboardLayoutCell: AccessibilityID = "settings-keyboard-layout-cell"
+        public static let hotdogModeCell: AccessibilityID = "settings-hotdog-mode-cell"
         private init() {}
     }
 }
