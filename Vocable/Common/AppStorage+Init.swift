@@ -1,11 +1,3 @@
-//
-//  AppStorage+Init.swift
-//  Vocable
-//
-//  Created by Jesse Morgan on 4/21/22.
-//  Copyright © 2022 WillowTree. All rights reserved.
-//
-
 import Foundation
 import SwiftUI
 
@@ -38,4 +30,12 @@ extension AppStorage {
     init(wrappedValue: Value, _ key: UserDefaultsKey, store: UserDefaults? = nil) where Value: RawRepresentable, Value.RawValue == Int {
         self.init(wrappedValue: wrappedValue, key.value, store: store)
     }
+}
+
+extension UserDefaultsKey {
+    static let darkModeEnabled = UserDefaultsKey("darkModeEnabled")
+}
+
+struct AppSettings {
+    @AppStorage(.darkModeEnabled) var darkModeEnabled: Bool = false
 }

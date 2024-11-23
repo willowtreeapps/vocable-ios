@@ -1,11 +1,3 @@
-//
-//  SettingsViewController.swift
-//  Vocable AAC
-//
-//  Created by Jesse Morgan on 2/6/20.
-//  Copyright © 2020 WillowTree. All rights reserved.
-//
-
 import UIKit
 import MessageUI
 
@@ -34,6 +26,7 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
         case pidTuner
         case listeningMode
         case voiceConfiguration
+        case darkMode // P5161
 
         var title: String {
             switch self {
@@ -55,6 +48,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 return String(localized: "settings.cell.listening_mode.title")
             case .voiceConfiguration:
                 return String(localized: "settings.cell.voice_configuration.title")
+            case .darkMode:
+                return String(localized: "settings.cell.dark_mode.title") // Pb4e7
             }
         }
         
@@ -78,6 +73,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                 return .settings.voiceSettingsCell
             case .pidTuner:
                 return ""
+            case .darkMode:
+                return .settings.darkModeCell // Pb4e7
             }
         }
 
@@ -198,7 +195,8 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
                               .timingSensitivity,
                               .listeningMode,
                               .selectionMode,
-                              .resetAppSettings].filter(\.isFeatureEnabled))
+                              .resetAppSettings,
+                              .darkMode].filter(\.isFeatureEnabled)) // P83a5
         snapshot.appendSections([.externalURL])
         snapshot.appendItems([.privacyPolicy,
                               .contactDevs].filter(\.isFeatureEnabled))
@@ -295,7 +293,19 @@ final class SettingsViewController: VocableCollectionViewController, MFMailCompo
             presentPidTuner()
         case .resetAppSettings:
             presentAppResetPrompt()
+        case .darkMode:
+            toggleDarkMode() // P83a5
         }
+    }
+    
+    private func toggleDarkMode() {
+        AppSettings().darkModeEnabled.toggle()
+        updateAppearance()
+    }
+
+    private func updateAppearance() {
+        let window = UIApplication.shared.windows.first
+        window?.overrideUserInterfaceStyle = AppSettings().darkModeEnabled ? .dark : .light
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -1,11 +1,3 @@
-//
-//  UIColor+AppExtensions.swift
-//  Vocable AAC
-//
-//  Created by Kyle Ohanian on 4/16/19.
-//  Copyright © 2019 WillowTree. All rights reserved.
-//
-
 import UIKit
 
 extension UIColor {
@@ -72,4 +64,29 @@ extension UIColor {
     static let cellBorderHighlightColor = UIColor(safelyNamed: "BorderHighlight")!
     static let alertBackgroundColor = UIColor(safelyNamed: "AlertBackground")!
     static let alertNormalText = UIColor(safelyNamed: "CategoryBackground")!
+
+    // Dark Mode Colors
+    static let darkModeBackgroundColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
+        return traitCollection.userInterfaceStyle == .dark ? UIColor.black : UIColor.white
+    }
+
+    static let darkModeTextColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
+        return traitCollection.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
+    }
+
+    static let darkModeSelectionColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
+        return traitCollection.userInterfaceStyle == .dark ? UIColor.darkGray : UIColor.lightGray
+    }
+
+    static let darkModeCategoryBackgroundColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
+        return traitCollection.userInterfaceStyle == .dark ? UIColor.darkGray : UIColor.lightGray
+    }
+
+    static let darkModeBorderHighlightColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
+        return traitCollection.userInterfaceStyle == .dark ? UIColor.lightGray : UIColor.darkGray
+    }
+
+    static let darkModeAlertBackgroundColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
+        return traitCollection.userInterfaceStyle == .dark ? UIColor.darkGray : UIColor.lightGray
+    }
 }
