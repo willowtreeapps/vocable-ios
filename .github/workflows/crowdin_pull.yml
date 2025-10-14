@@ -1,12 +1,20 @@
 name: Pull Translations From Crowdin
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 */3 * * *" # Run every 3 hours
+    inputs:
+      runner:
+        description: 'Runner to use'
+        required: false
+        default: 'macos-latest'
+        type: choice
+        options:
+          - macos-latest
+          - self-hosted
 
 jobs:
   synchronize-with-crowdin:
-    runs-on: macos-14
+    runs-on: ${{ inputs.runner || vars.RUNNER_TYPE || 'macos-latest' }}
+    environment: Staging
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -14,19 +22,19 @@ jobs:
       - name: Install Crowdin CLI
         run: brew install crowdin
         shell: sh
-        
+
       - name: Download Translations
-        run: crowdin bundle download 6
-        shell: sh
+        run: |
+          crowdin bundle download ${{ vars.CROWDIN_BUNDLE_ID }}
         env:
-            GITHUB_TOKEN: ${{ secrets.CROWDIN_GITHUB_TOKEN }}
-            CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
-            CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ vars.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
       - name: Set up Ruby environment
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0
+          ruby-version: 3.3.1
           
       - name: Install bundler
         run: gem install bundler
@@ -37,10 +45,11 @@ jobs:
       - name: Install SwiftLint
         run: brew install swiftlint
 
-      - name: Import XLIFFs to project
-        uses: ./.github/workflows/actions/run_lane
+      - name: Import translations to project
+        uses: ./.github/actions/run_lane
         with:
-          lane: xliff_import
+          # Use xcstrings_import for xcstrings bundles, xliff_import for XLIFF bundles
+          lane: xcstrings_import
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
