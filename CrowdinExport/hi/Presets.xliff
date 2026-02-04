@@ -9,9 +9,13 @@
         <source>I want to lie down</source>
         <target state="final">मैं लेटना चाहता हूँ</target>
       </trans-unit>
-      <trans-unit id="12622" resname="preset_0EE14D06-92D7-4A26-A15F-253528F14A69" approved="yes">
-        <source>Pleased to meet you</source>
-        <target state="final">आपसे मिलकर खुशी हुई</target>
+      <trans-unit id="12634" resname="preset_4F776A4A-4154-4DFE-89AC-E603C2A578EE" approved="yes">
+        <source>Please fix my pillow</source>
+        <target state="final">कृपया मेरा तकिया ठीक करें</target>
+      </trans-unit>
+      <trans-unit id="12652" resname="preset_9DEB32B5-8606-4689-8F6A-0B251F4DB377" approved="yes">
+        <source>I am thirsty</source>
+        <target state="final">मैं प्यासा हूँ</target>
       </trans-unit>
       <trans-unit id="12624" resname="preset_0EF33A3F-41E8-4E47-9B2C-69FC86B957FC" approved="yes">
         <source>How is your day?</source>
@@ -33,17 +37,17 @@
         <source>Hello</source>
         <target state="final">नमस्ते</target>
       </trans-unit>
-      <trans-unit id="12634" resname="preset_4F776A4A-4154-4DFE-89AC-E603C2A578EE" approved="yes">
-        <source>Please fix my pillow</source>
-        <target state="final">कृपया मेरा तकिया ठीक करें</target>
+      <trans-unit id="12654" resname="preset_9E3230D7-1172-491A-8A00-E734B1661DC1" approved="yes">
+        <source>Please turn the lights on</source>
+        <target state="final">कृपया लाइट चालू करें</target>
+      </trans-unit>
+      <trans-unit id="12688" resname="preset_05754D0C-962D-48C3-8554-E4F7D5E86D93" approved="yes">
+        <source>I need a jacket</source>
+        <target state="final">मुझे जैकेट चाहिए</target>
       </trans-unit>
       <trans-unit id="12636" resname="preset_6AD93FB9-437C-455F-A4AF-C96033BCBCAE" approved="yes">
         <source>I am hot</source>
         <target state="final">में गर्म हूँ</target>
-      </trans-unit>
-      <trans-unit id="12638" resname="preset_6B463AF1-C884-45CD-9194-90806E75FD70" approved="yes">
-        <source>That makes sense</source>
-        <target state="final">यह समझ आता है</target>
       </trans-unit>
       <trans-unit id="12640" resname="preset_6CBD6D3E-42A7-435C-B661-2ABD669DC6BE" approved="yes">
         <source>I don't know</source>
@@ -65,25 +69,25 @@
         <source>I am cold</source>
         <target state="final">मुझे ठंड लग रही है</target>
       </trans-unit>
-      <trans-unit id="12650" resname="preset_9A808275-0D67-49E4-8BF8-6F22A0C7E169" approved="yes">
-        <source>No visitors please</source>
-        <target state="final">कृपया कोई आगंतुक नहीं</target>
-      </trans-unit>
-      <trans-unit id="12652" resname="preset_9DEB32B5-8606-4689-8F6A-0B251F4DB377" approved="yes">
-        <source>I am thirsty</source>
-        <target state="final">मैं प्यासा हूँ</target>
-      </trans-unit>
-      <trans-unit id="12654" resname="preset_9E3230D7-1172-491A-8A00-E734B1661DC1" approved="yes">
-        <source>Please turn the lights on</source>
-        <target state="final">कृपया लाइट चालू करें</target>
-      </trans-unit>
       <trans-unit id="12656" resname="preset_9EE3A781-E84E-4728-976F-8EF993B8174C" approved="yes">
         <source>Please turn the TV off</source>
         <target state="final">कृपया टीवी बंद कर दें</target>
       </trans-unit>
-      <trans-unit id="12658" resname="preset_24B48F19-EA3A-49A1-88C1-AACB67FE7278" approved="yes">
-        <source>How was your weekend?</source>
-        <target state="final">आपका सप्ताहांत कैसा था?</target>
+      <trans-unit id="12674" resname="preset_73B654AA-C999-4864-BF5A-77379DAA991C" approved="yes">
+        <source>I need to wash my face</source>
+        <target state="final">मुझे अपना चेहरा धोना है</target>
+      </trans-unit>
+      <trans-unit id="12638" resname="preset_6B463AF1-C884-45CD-9194-90806E75FD70" approved="yes">
+        <source>That makes sense</source>
+        <target state="final">यह समझ आता है</target>
+      </trans-unit>
+      <trans-unit id="12670" resname="preset_46EF7041-50F7-4B64-A0F6-879A8A3D7532" approved="yes">
+        <source>Please turn the lights off</source>
+        <target state="final">कृपया लाइट बंद कर दें</target>
+      </trans-unit>
+      <trans-unit id="12760" resname="preset_user_recents" approved="yes">
+        <source>Recents</source>
+        <target state="final">हाल ही</target>
       </trans-unit>
       <trans-unit id="12660" resname="preset_28A8F6B6-E196-4981-B762-652C288A0C29" approved="yes">
         <source>I am finished</source>
@@ -105,17 +109,17 @@
         <source>Okay</source>
         <target state="final">ठीक</target>
       </trans-unit>
-      <trans-unit id="12670" resname="preset_46EF7041-50F7-4B64-A0F6-879A8A3D7532" approved="yes">
-        <source>Please turn the lights off</source>
-        <target state="final">कृपया लाइट बंद कर दें</target>
+      <trans-unit id="12658" resname="preset_24B48F19-EA3A-49A1-88C1-AACB67FE7278" approved="yes">
+        <source>How was your weekend?</source>
+        <target state="final">आपका सप्ताहांत कैसा था?</target>
+      </trans-unit>
+      <trans-unit id="12686" resname="preset_5542BE2F-419E-41A5-BBF2-5B82E0A49834" approved="yes">
+        <source>I am in pain</source>
+        <target state="final">मुझे दर्द हो रहा है</target>
       </trans-unit>
       <trans-unit id="12672" resname="preset_52CA4E71-4A8C-4EA8-8EA8-C4B18AA16EC8" approved="yes">
         <source>Environment</source>
         <target state="final">पर्यावरण</target>
-      </trans-unit>
-      <trans-unit id="12674" resname="preset_73B654AA-C999-4864-BF5A-77379DAA991C" approved="yes">
-        <source>I need to wash my face</source>
-        <target state="final">मुझे अपना चेहरा धोना है</target>
       </trans-unit>
       <trans-unit id="12676" resname="preset_81B473E3-2FC9-40F0-AE59-3C658EC6CD91" approved="yes">
         <source>I need a shower</source>
@@ -137,25 +141,21 @@
         <source>I am having trouble breathing</source>
         <target state="final">मुझे सांस लेने में परेशानी हो रही है</target>
       </trans-unit>
-      <trans-unit id="12686" resname="preset_5542BE2F-419E-41A5-BBF2-5B82E0A49834" approved="yes">
-        <source>I am in pain</source>
-        <target state="final">मुझे दर्द हो रहा है</target>
+      <trans-unit id="12650" resname="preset_9A808275-0D67-49E4-8BF8-6F22A0C7E169" approved="yes">
+        <source>No visitors please</source>
+        <target state="final">कृपया कोई आगंतुक नहीं</target>
       </trans-unit>
-      <trans-unit id="12688" resname="preset_05754D0C-962D-48C3-8554-E4F7D5E86D93" approved="yes">
-        <source>I need a jacket</source>
-        <target state="final">मुझे जैकेट चाहिए</target>
+      <trans-unit id="12622" resname="preset_0EE14D06-92D7-4A26-A15F-253528F14A69" approved="yes">
+        <source>Pleased to meet you</source>
+        <target state="final">आपसे मिलकर खुशी हुई</target>
       </trans-unit>
-      <trans-unit id="12690" resname="preset_8359B09D-7259-40CC-B258-02895ECC4DB7" approved="yes">
-        <source>I need to spit</source>
-        <target state="final">मुझे थूकना है</target>
+      <trans-unit id="12710" resname="preset_A436EAAF-BD8A-4D8D-81EA-DC6D3C849D4A" approved="yes">
+        <source>I like it</source>
+        <target state="final">मुझें यह पसंद है</target>
       </trans-unit>
-      <trans-unit id="12692" resname="preset_9929E83B-997D-40AA-841C-130709F5115B" approved="yes">
-        <source>Good morning</source>
-        <target state="final">सुबह बख़ैर</target>
-      </trans-unit>
-      <trans-unit id="12694" resname="preset_30153E11-D48C-47C8-9186-47988D0A5B7A" approved="yes">
-        <source>I do not agree</source>
-        <target state="final">मैं इससे सहमत नहीं हूँ</target>
+      <trans-unit id="12726" resname="preset_C6E6B6E7-BEB6-466D-822A-F8CE2D092B9E" approved="yes">
+        <source>I am uncomfortable</source>
+        <target state="final">मैं असहज हूँ</target>
       </trans-unit>
       <trans-unit id="12696" resname="preset_63980C93-EE77-40DE-BDE7-BF8F97EC0304" approved="yes">
         <source>Please be patient</source>
@@ -185,9 +185,9 @@
         <source>Please stop</source>
         <target state="final">बंद करो</target>
       </trans-unit>
-      <trans-unit id="12710" resname="preset_A436EAAF-BD8A-4D8D-81EA-DC6D3C849D4A" approved="yes">
-        <source>I like it</source>
-        <target state="final">मुझें यह पसंद है</target>
+      <trans-unit id="12728" resname="preset_C865BE96-40B5-406C-9BAA-0A0D3280E377" approved="yes">
+        <source>Please close the window</source>
+        <target state="final">कृपया विंडो बंद करें</target>
       </trans-unit>
       <trans-unit id="12712" resname="preset_A74483A8-4069-40D7-992C-01295934E97C" approved="yes">
         <source>Please repeat what you said</source>
@@ -217,17 +217,21 @@
         <source>I am good</source>
         <target state="final">मैं अच्छा हूँ</target>
       </trans-unit>
-      <trans-unit id="12726" resname="preset_C6E6B6E7-BEB6-466D-822A-F8CE2D092B9E" approved="yes">
-        <source>I am uncomfortable</source>
-        <target state="final">मैं असहज हूँ</target>
+      <trans-unit id="12692" resname="preset_9929E83B-997D-40AA-841C-130709F5115B" approved="yes">
+        <source>Good morning</source>
+        <target state="final">सुबह बख़ैर</target>
       </trans-unit>
-      <trans-unit id="12728" resname="preset_C865BE96-40B5-406C-9BAA-0A0D3280E377" approved="yes">
-        <source>Please close the window</source>
-        <target state="final">कृपया विंडो बंद करें</target>
+      <trans-unit id="12690" resname="preset_8359B09D-7259-40CC-B258-02895ECC4DB7" approved="yes">
+        <source>I need to spit</source>
+        <target state="final">मुझे थूकना है</target>
       </trans-unit>
-      <trans-unit id="12730" resname="preset_D6A67E02-3D07-4D44-8B04-2C1B9B8B167E" approved="yes">
-        <source>Good evening</source>
-        <target state="final">सुसंध्या</target>
+      <trans-unit id="12742" resname="preset_E012D902-E8BA-4BEA-92C7-7107ECF8051C" approved="yes">
+        <source>I am hungry</source>
+        <target state="final">मैं भूखा हूँ</target>
+      </trans-unit>
+      <trans-unit id="12694" resname="preset_30153E11-D48C-47C8-9186-47988D0A5B7A" approved="yes">
+        <source>I do not agree</source>
+        <target state="final">मैं इससे सहमत नहीं हूँ</target>
       </trans-unit>
       <trans-unit id="12732" resname="preset_D64EE532-14D3-4434-B671-8F4368EC0A8D" approved="yes">
         <source>Good</source>
@@ -249,17 +253,17 @@
         <source>I would like visitors</source>
         <target state="final">मुझे आगंतुक चाहिए</target>
       </trans-unit>
-      <trans-unit id="12742" resname="preset_E012D902-E8BA-4BEA-92C7-7107ECF8051C" approved="yes">
-        <source>I am hungry</source>
-        <target state="final">मैं भूखा हूँ</target>
-      </trans-unit>
-      <trans-unit id="12744" resname="preset_EB7A9732-E28E-4440-A88B-BA2A1ACFBD76" approved="yes">
-        <source>Conversation</source>
-        <target state="final">बातचीत</target>
+      <trans-unit id="12730" resname="preset_D6A67E02-3D07-4D44-8B04-2C1B9B8B167E" approved="yes">
+        <source>Good evening</source>
+        <target state="final">सुसंध्या</target>
       </trans-unit>
       <trans-unit id="12746" resname="preset_F6F03BBD-B9CD-41F5-B26A-FCC13CCBB199" approved="yes">
         <source>I am tired</source>
         <target state="final">मैं थक गया</target>
+      </trans-unit>
+      <trans-unit id="12744" resname="preset_EB7A9732-E28E-4440-A88B-BA2A1ACFBD76" approved="yes">
+        <source>Conversation</source>
+        <target state="final">बातचीत</target>
       </trans-unit>
       <trans-unit id="12748" resname="preset_F8F5D1C9-0AA6-4152-BF7C-0851ACD1406B" approved="yes">
         <source>Basic Needs</source>
@@ -284,10 +288,6 @@
       <trans-unit id="12758" resname="preset_user_keypad" approved="yes">
         <source>123</source>
         <target state="final">123</target>
-      </trans-unit>
-      <trans-unit id="12760" resname="preset_user_recents" approved="yes">
-        <source>Recents</source>
-        <target state="final">हाल ही</target>
       </trans-unit>
     </body>
   </file>
