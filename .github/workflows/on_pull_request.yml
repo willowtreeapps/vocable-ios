@@ -34,7 +34,7 @@ jobs:
         run: brew install swiftlint
         
       - name: Run Unit and UI tests
-        uses: ./.github/workflows/actions/run_lane
+        uses: ./.github/actions/run_lane
         with:
           lane: test_unit_ui
           match_password: ${{ secrets.MATCH_PASSWORD }}
