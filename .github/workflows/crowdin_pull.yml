@@ -1,8 +1,7 @@
 name: Pull Translations From Crowdin
 on:
   workflow_dispatch:
-  schedule:
-     inputs:
+    inputs:
       runner:
         description: 'Runner to use'
         required: false
@@ -14,8 +13,7 @@ on:
 
 jobs:
   synchronize-with-crowdin:
-     runs-on: ${{ inputs.runner || vars.RUNNER_TYPE || 'macos-latest' }}
-    environment: Staging
+    runs-on: ${{ inputs.runner || vars.RUNNER_TYPE || 'macos-latest' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
