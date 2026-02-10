@@ -1,9 +1,43 @@
 require 'fileutils'
 
+def match_api_key_from_env
+  ensure_env_vars(
+    env_vars: [
+      'APP_STORE_CONNECT_API_KEY_KEY_ID',
+      'APP_STORE_CONNECT_API_KEY_ISSUER_ID',
+      'APP_STORE_CONNECT_TEAM_ID'
+    ]
+  )
+  key_id = ENV['APP_STORE_CONNECT_API_KEY_KEY_ID']
+  issuer_id = ENV['APP_STORE_CONNECT_API_KEY_ISSUER_ID']
+
+  if ENV['APP_STORE_CONNECT_API_KEY_KEY_BASE64']
+    app_store_connect_api_key(
+      key_id: key_id,
+      issuer_id: issuer_id,
+      key_content: ENV['APP_STORE_CONNECT_API_KEY_KEY_BASE64'],
+      is_key_content_base64: true,
+      in_house: false,
+    )
+  elsif ENV['APP_STORE_CONNECT_API_KEY_KEY_FILEPATH']
+    key_filepath = File.expand_path(ENV['APP_STORE_CONNECT_API_KEY_KEY_FILEPATH'])
+    UI.user_error!("Key file not found: #{key_filepath}") unless File.exist?(key_filepath)
+    app_store_connect_api_key(
+      key_id: key_id,
+      issuer_id: issuer_id,
+      key_filepath: key_filepath,
+      in_house: false,
+    )
+  else
+    UI.user_error!("Set APP_STORE_CONNECT_API_KEY_KEY_BASE64 or APP_STORE_CONNECT_API_KEY_KEY_FILEPATH")
+  end
+end
+
 default_platform :ios
 
 platform :ios do
   before_all do
+    skip_docs
     ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "60"
     if is_ci
       ENV["MATCH_GIT_PRIVATE_KEY"] = "/Users/runner/.ssh/id_rsa_match"
@@ -107,6 +141,18 @@ platform :ios do
     match(type:"development", readonly: true)
   end
 
+  desc "Renew development certificates using App Store Connect API key (use when behind SSO)"
+  lane :match_development do
+    api_key = match_api_key_from_env
+    match(type: "development", api_key: api_key, team_id: ENV['APP_STORE_CONNECT_TEAM_ID'])
+  end
+
+  desc "Renew App Store / deployment certificates using App Store Connect API key (use when behind SSO)"
+  lane :match_appstore do
+    api_key = match_api_key_from_env
+    match(type: "appstore", api_key: api_key, team_id: ENV['APP_STORE_CONNECT_TEAM_ID'])
+  end
+
   desc "Integrate latest XLIFF files with project"
   lane :xliff_import do
     Dir.glob('./../CrowdinExport/**/*.xliff') do |xliff|
@@ -117,7 +163,27 @@ platform :ios do
       run_with_retries(3, "xcodebuild -importLocalizations -localizationPath '#{xliff}' -project ./../Vocable.xcodeproj")
     end
   end
-  
+  desc "Integrate latest xcstrings files from Crowdin"
+  lane :xcstrings_import do
+    # Define the expected xcstrings files
+    xcstrings_files = ['InfoPlist.xcstrings', 'Localizable.xcstrings', 'Presets.xcstrings']
+    
+    xcstrings_files.each do |filename|
+      # Look for the file in CrowdinExport (could be in any language subdirectory)
+      source_files = Dir.glob("./../CrowdinExport/**/#{filename}")
+      
+      if source_files.empty?
+        next
+      end
+
+      source_file = source_files.first
+      destination = "./../Vocable/Supporting Files/#{filename}"
+
+      if File.exist?(destination)
+        FileUtils.cp(source_file, destination)
+      end
+    end
+  end
   desc "Export current XLIFF file from project"
   lane :xliff_export do
     sh "rm -rf ./../CrowdinExport/*"
@@ -134,12 +200,6 @@ def run_with_retries(retry_limit = 3, command)
     sh command
   rescue
     retries += 1
-    if retries <= retry_limit
-      puts "Command failed, retrying... (##{retries})"
-      retry
-    else
-      puts "Command failed after #{retry_limit} attempts"
-      raise
-    end
+    retries <= retry_limit ? retry : raise
   end
 end

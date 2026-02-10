@@ -55,6 +55,37 @@ Add devices via the command line to the device portal and regenerate the develop
 
 Setup local development environment (WillowTree Internal)
 
+Renew development certificates using App Store Connect API key (use when behind SSO)
+
+### ios match_development
+In your terminal, navigate to the vocable-ios project folder.  Run the following commands:
+
+Values can be found in 1password in "Fastlane Match + CircleCI Secrets" in the Vocable vault.
+
+```sh
+export APP_STORE_CONNECT_API_KEY_KEY_ID="..."
+export APP_STORE_CONNECT_API_KEY_ISSUER_ID="..."
+export APP_STORE_CONNECT_API_KEY_KEY_BASE64="..."   # base64 string
+export APP_STORE_CONNECT_TEAM_ID="..."
+[bundle exec] fastlane ios match_development
+```
+
+
+
+### ios match_appstore
+Renew App Store / deployment certificates using App Store Connect API key (use when behind SSO)
+In your terminal, navigate to the vocable-ios project folder.  Run the following commands:
+
+Values can be found in 1password in "Fastlane Match + CircleCI Secrets" in the Vocable vault.
+
+```sh
+export APP_STORE_CONNECT_API_KEY_KEY_ID="..."
+export APP_STORE_CONNECT_API_KEY_ISSUER_ID="..."
+export APP_STORE_CONNECT_API_KEY_KEY_BASE64="..."   # base64 string
+export APP_STORE_CONNECT_TEAM_ID="..."
+[bundle exec] fastlane ios match_appstore
+```
+
 ### ios xliff_import
 
 ```sh
@@ -62,6 +93,14 @@ Setup local development environment (WillowTree Internal)
 ```
 
 Integrate latest XLIFF files with project
+
+### ios xcstrings_import
+
+```sh
+[bundle exec] fastlane ios xcstrings_import
+```
+
+Integrate latest xcstrings files from Crowdin
 
 ### ios xliff_export
 
@@ -78,3 +117,5 @@ This README.md is auto-generated and will be re-generated every time [_fastlane_
 More information about _fastlane_ can be found on [fastlane.tools](https://fastlane.tools).
 
 The documentation of _fastlane_ can be found on [docs.fastlane.tools](https://docs.fastlane.tools).
+
+
