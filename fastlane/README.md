@@ -101,9 +101,14 @@ Integrate latest xcstrings files from Crowdin
 
 Export current XLIFF file from project
 
+# Troubleshooting
+- Since fastlane is using the api key, it should not prompt for a username when trying to renew the certs.  This will not work because the company changed to use a managed apple account via SSO.  Fastlane was updated to use the App Store Connect API key, so if you are prompted for a username:
+        - Cancel the process
+        - run the following command: rm -rf ~/.fastlane/spaceship.  This removes any existing sessions.
+        - Ensure the keys are setup using the export commands noted above.
+        - Rerun the renew command.
+
 ----
 More information about _fastlane_ can be found on [fastlane.tools](https://fastlane.tools).
 
 The documentation of _fastlane_ can be found on [docs.fastlane.tools](https://docs.fastlane.tools).
-
-
