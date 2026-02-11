@@ -126,16 +126,21 @@ platform :ios do
     match(type:"development", readonly: true)
   end
 
-  desc "Renew development certificates using App Store Connect API key (use when behind SSO)"
-  lane :match_development do
-    api_key = match_api_key_from_env
-    match(type: "development", api_key: api_key, team_id: ENV['APP_STORE_CONNECT_TEAM_ID'])
-  end
-
-  desc "Renew App Store / deployment certificates using App Store Connect API key (use when behind SSO)"
-  lane :match_appstore do
-    api_key = match_api_key_from_env
-    match(type: "appstore", api_key: api_key, team_id: ENV['APP_STORE_CONNECT_TEAM_ID'])
+  # Renew Match certificates and provisioning profiles (e.g. when expired or match repo is empty).
+  # Uses match_api_key_from_env (APP_STORE_CONNECT_API_KEY_*, APP_STORE_CONNECT_TEAM_ID).
+  # Usage: fastlane match_renew type:development   OR   fastlane match_renew type:appstore   OR   fastlane match_renew type:adhoc
+  desc "Renew Match certs by type (development, appstore, or adhoc)"
+  lane :match_renew do |options|
+    type = (options[:type] || "appstore").to_s
+    unless ["development", "appstore", "adhoc"].include?(type)
+      UI.user_error!("type must be one of: development, appstore, adhoc (got: #{type})")
+    end
+    match_api_key_from_env
+    match(
+      type: type,
+      team_id: ENV['APP_STORE_CONNECT_TEAM_ID'],
+      force_for_new_certificates: true,
+    )
   end
 
   desc "Integrate latest XLIFF files with project"
