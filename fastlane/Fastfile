@@ -5,32 +5,17 @@ def match_api_key_from_env
     env_vars: [
       'APP_STORE_CONNECT_API_KEY_KEY_ID',
       'APP_STORE_CONNECT_API_KEY_ISSUER_ID',
+      'APP_STORE_CONNECT_API_KEY_KEY_BASE64',
       'APP_STORE_CONNECT_TEAM_ID'
     ]
   )
-  key_id = ENV['APP_STORE_CONNECT_API_KEY_KEY_ID']
-  issuer_id = ENV['APP_STORE_CONNECT_API_KEY_ISSUER_ID']
-
-  if ENV['APP_STORE_CONNECT_API_KEY_KEY_BASE64']
-    app_store_connect_api_key(
-      key_id: key_id,
-      issuer_id: issuer_id,
-      key_content: ENV['APP_STORE_CONNECT_API_KEY_KEY_BASE64'],
-      is_key_content_base64: true,
-      in_house: false,
-    )
-  elsif ENV['APP_STORE_CONNECT_API_KEY_KEY_FILEPATH']
-    key_filepath = File.expand_path(ENV['APP_STORE_CONNECT_API_KEY_KEY_FILEPATH'])
-    UI.user_error!("Key file not found: #{key_filepath}") unless File.exist?(key_filepath)
-    app_store_connect_api_key(
-      key_id: key_id,
-      issuer_id: issuer_id,
-      key_filepath: key_filepath,
-      in_house: false,
-    )
-  else
-    UI.user_error!("Set APP_STORE_CONNECT_API_KEY_KEY_BASE64 or APP_STORE_CONNECT_API_KEY_KEY_FILEPATH")
-  end
+  app_store_connect_api_key(
+    key_id: ENV['APP_STORE_CONNECT_API_KEY_KEY_ID'],
+    issuer_id: ENV['APP_STORE_CONNECT_API_KEY_ISSUER_ID'],
+    key_content: ENV['APP_STORE_CONNECT_API_KEY_KEY_BASE64'],
+    is_key_content_base64: true,
+    in_house: false,
+  )
 end
 
 default_platform :ios
