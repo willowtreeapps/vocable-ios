@@ -12,6 +12,7 @@ on:
 jobs:
   synchronize-with-crowdin:
     runs-on: macos-14
+    environment: Staging
     steps:
       - name: Checkout
         uses: actions/checkout@v4

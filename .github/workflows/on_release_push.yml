@@ -10,16 +10,16 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run Unit and UI tests
-        uses: ./.github/workflows/actions/run_lane
+        uses: ./.github/actions/run_lane
         with:
           lane: test_unit_ui
           match_password: ${{ secrets.MATCH_PASSWORD }}
 
       - name: Commit translation file if changed
-        uses: ./.github/workflows/actions/xliff_export
+        uses: ./.github/actions/xliff_export
 
       - name: Build and deploy to TestFlight
-        uses: ./.github/workflows/actions/run_lane
+        uses: ./.github/actions/run_lane
         with:
           lane: build_deploy_testflight
           match_password: ${{ secrets.MATCH_PASSWORD }}
