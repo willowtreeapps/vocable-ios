@@ -152,6 +152,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
     }
 
     func stopTranscribing() {
+        isPaused = false
         transcription = .none
         startListeningForHotWordOrDeactivate()
     }
@@ -252,7 +253,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
         unscheduleListeners()
     }
 
-    private func pauseListening() {
+    func pauseListening() {
         print("PAUSE LISTENING...")
         isPaused = true
         if isListening {
@@ -260,7 +261,7 @@ class SpeechRecognitionController: NSObject, SFSpeechRecognitionTaskDelegate, SF
         }
     }
 
-    private func resumeListening() {
+    func resumeListening() {
         guard isPaused else {
             return
         }

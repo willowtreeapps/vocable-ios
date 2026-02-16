@@ -4446,6 +4446,28 @@
         }
       }
     },
+    "listening_mode.pause_button.title" : {
+      "comment" : "Title for the Pause button in listening mode.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause listening"
+          }
+        }
+      }
+    },
+    "listening_mode.resume_button.title" : {
+      "comment" : "Title for the Resume button in listening mode.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resume listening"
+          }
+        }
+      }
+    },
     "main_screen.textfield_placeholder.default" : {
       "comment" : "Select something below to speak Hint Text",
       "localizations" : {

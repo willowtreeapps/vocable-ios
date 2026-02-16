@@ -71,13 +71,60 @@ final class ListeningResponseViewController: VocableViewController {
     private var permissionsCancellable: AnyCancellable?
     private var classificationCancellable: AnyCancellable?
     private var availabilityCancellable: AnyCancellable?
+    private var isPausedCancellable: AnyCancellable?
 
     private var contentViewController: UIViewController?
+
+    private lazy var pauseBarView: UIView = {
+        let bar = UIView()
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.backgroundColor = .collectionViewBackgroundColor
+        self.view.addSubview(bar)
+
+        let button = GazeableButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityID = .settings.listeningMode.pauseListeningButton
+        let pointSize: CGFloat = sizeClass == .hRegular_vRegular ? 22 : 15
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
+        button.setImage(UIImage(systemName: "pause.circle.fill", withConfiguration: symbolConfig), for: .normal)
+        button.configuration?.imagePlacement = .leading
+        button.configuration?.imagePadding = 8
+        button.configurationUpdateHandler = { configButton in
+            guard let button = configButton as? GazeableButton else { return }
+            button.configuration?.contentInsets = .init(top: 10, leading: 16, bottom: 10, trailing: 16)
+            button.configuration?.titleTextAttributesTransformer = .init { attributes in
+                var attributes = attributes
+                let font: UIFont = button.sizeClass == .hRegular_vRegular
+                    ? .systemFont(ofSize: 22, weight: .semibold)
+                    : .systemFont(ofSize: 15, weight: .semibold)
+                attributes.font = font
+                attributes.foregroundColor = button.configuration?.baseForegroundColor ?? .defaultTextColor
+                return attributes
+            }
+        }
+        button.addTarget(self, action: #selector(pauseResumeButtonTapped), for: .primaryActionTriggered)
+        bar.addSubview(button)
+
+        NSLayoutConstraint.activate([
+            bar.topAnchor.constraint(equalTo: self.view.topAnchor),
+            bar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            bar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            button.centerXAnchor.constraint(equalTo: bar.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: bar.centerYAnchor),
+            button.topAnchor.constraint(equalTo: bar.topAnchor, constant: 8),
+            button.bottomAnchor.constraint(equalTo: bar.bottomAnchor, constant: -8)
+        ])
+        pauseResumeButton = button
+        return bar
+    }()
+
+    private var pauseResumeButton: GazeableButton?
+
     private lazy var contentViewLayoutGuide: UILayoutGuide = {
         let guide = UILayoutGuide()
         self.view.addLayoutGuide(guide)
         NSLayoutConstraint.activate([
-            guide.topAnchor.constraint(equalTo: self.view.topAnchor),
+            guide.topAnchor.constraint(equalTo: self.pauseBarView.bottomAnchor),
             guide.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             guide.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             guide.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
@@ -102,6 +149,35 @@ final class ListeningResponseViewController: VocableViewController {
         
         edgesForExtendedLayout = UIRectEdge.all.subtracting(.top)
         view.layoutMargins.top = 4
+
+        _ = pauseBarView
+        observePausedState()
+    }
+
+    @objc private func pauseResumeButtonTapped() {
+        if speechRecognizerController.isPaused {
+            speechRecognizerController.resumeListening()
+        } else {
+            speechRecognizerController.pauseListening()
+        }
+    }
+
+    private func observePausedState() {
+        guard isPausedCancellable == nil else { return }
+        isPausedCancellable = speechRecognizerController.$isPaused
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isPaused in
+                guard let self = self, let button = self.pauseResumeButton else { return }
+                let title = isPaused
+                    ? String(localized: "listening_mode.resume_button.title")
+                    : String(localized: "listening_mode.pause_button.title")
+                button.setTitle(title, for: .normal)
+                button.accessibilityLabel = isPaused ? "Resume listening" : "Pause listening"
+                let pointSize: CGFloat = button.sizeClass == .hRegular_vRegular ? 22 : 15
+                let symbolConfig = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .semibold)
+                let imageName = isPaused ? "play.circle.fill" : "pause.circle.fill"
+                button.setImage(UIImage(systemName: imageName, withConfiguration: symbolConfig), for: .normal)
+            }
     }
 
     /// Sets the content controller to be a controller configured for the given content
@@ -244,7 +320,7 @@ final class ListeningResponseViewController: VocableViewController {
                     }
                     
                 default:
-                    if self.speechRecognizerController.isListening {
+                    if self.speechRecognizerController.isListening, !self.speechRecognizerController.isPaused {
                         self.setContent(.empty(.listeningResponse), animated: true)
                     }
                 }
@@ -273,7 +349,7 @@ final class ListeningResponseViewController: VocableViewController {
                 if isAvailable {
                     if case .choices = self.content {
                         // no-op
-                    } else {
+                    } else if !self.speechRecognizerController.isPaused {
                         self.setContent(.empty(.listeningResponse), animated: true)
                     }
                 } else {
@@ -293,7 +369,9 @@ final class ListeningResponseViewController: VocableViewController {
                             break
                         }
                     }
-                    self.setContent(.empty(.speechServiceUnavailable), animated: true)
+                    if !self.speechRecognizerController.isPaused {
+                        self.setContent(.empty(.speechServiceUnavailable), animated: true)
+                    }
                 }
             }
     }
@@ -309,7 +387,7 @@ final class ListeningResponseViewController: VocableViewController {
                 guard let self = self else { return }
                 if let newValue = newValue {
                     self.setContent(.empty(newValue.state, action: newValue.action), animated: true)
-                } else {
+                } else if !self.speechRecognizerController.isPaused {
                     if self.speechRecognizerController.isAvailable {
                         self.setContent(.empty(.listeningResponse), animated: true)
                     } else {

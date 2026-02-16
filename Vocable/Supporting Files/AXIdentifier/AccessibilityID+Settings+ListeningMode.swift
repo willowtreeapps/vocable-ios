@@ -13,6 +13,7 @@ extension AccessibilityID.settings {
         public static let listeningModeToggle: AccessibilityID = "listening_mode_toggle"
         public static let hotWordEnabledToggle: AccessibilityID = "hot_word_toggle"
         public static let smartAssistEnabledToggle: AccessibilityID = "use_gpt_toggle"
+        public static let pauseListeningButton: AccessibilityID = "listening_mode_pause_button"
         private init() {}
     }
 }
