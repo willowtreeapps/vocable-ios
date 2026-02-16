@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.CROWDIN_PR_BOT_TOKEN }}
         
       - name: Install Crowdin CLI
         run: brew install crowdin
