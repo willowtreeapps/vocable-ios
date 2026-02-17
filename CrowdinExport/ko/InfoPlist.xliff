@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file id="578" original="/[willowtreeapps.vocable-ios] develop/Vocable/Supporting Files/InfoPlist.xcstrings" source-language="en" target-language="ko" datatype="plaintext" project-id="397168" tool-id="crowdin">
+    <header>
+      <tool tool-id="crowdin" tool-name="Crowdin" tool-version="1.1"/>
+    </header>
+    <body>
+      <trans-unit id="12362" resname="CFBundleDisplayName" approved="yes">
+        <source>Vocable</source>
+        <target state="final">Vocable</target>
+        <context-group purpose="information">
+          <context context-type="source">Bundle display name</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12364" resname="CFBundleName" approved="yes">
+        <source>Vocable</source>
+        <target state="final">Vocable</target>
+        <context-group purpose="information">
+          <context context-type="source">Bundle name</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12366" resname="NSCameraUsageDescription" approved="yes">
+        <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
+        <target state="final">Vocable은 장치의 전면 카메라를 사용하여 머리 방향 및 위치의 최소한의 변경을 감지합니다. 이를 통해 거동이 불편한 사용자가 화면 포인터를 제어하여 앱과 상호 작용할 수 있습니다. 카메라 데이터는 화면 포인터를 제어하는 ​​데 명시적으로 사용됩니다. 이 데이터는 어떤 방식으로도 저장되거나 전송되지 않습니다. Vocable은 이 용도로 카메라를 사용하기 위해 권한이 필요합니다.</target>
+        <context-group purpose="information">
+          <context context-type="source">Camera usage description</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12368" resname="NSMicrophoneUsageDescription" approved="yes">
+        <source>Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="final">Vocable은 듣기 모드가 활성화된 경우에만 마이크를 사용합니다. Vocable은 오디오를 텍스트로 변환합니다. 사용자가 청취 모드를 개선하는 데 도움이 되도록 이 정보를 개발자와 익명으로 공유하기로 선택한 경우를 제외하고는 저장되거나 전송되지 않습니다.</target>
+        <context-group purpose="information">
+          <context context-type="source">Privacy - Microphone Usage Description</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12370" resname="NSSpeechRecognitionUsageDescription" approved="yes">
+        <source>When listening mode is enabled, Vocable uses speech recognition to convert audio data into text. Transcribed speech is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="final">듣기 모드가 활성화되면 Vocable은 음성 인식을 사용하여 오디오 데이터를 텍스트로 변환합니다. 녹음된 음성은 사용자가 듣기 모드를 개선하기 위해 개발자와 익명으로 이 정보를 공유하기로 선택한 경우를 제외하고는 저장되거나 전송되지 않습니다.</target>
+        <context-group purpose="information">
+          <context context-type="source">Privacy - Speech Recognition Usage Description</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

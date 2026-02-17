@@ -1,0 +1,909 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file id="580" original="/[willowtreeapps.vocable-ios] develop/Vocable/Supporting Files/Localizable.xcstrings" source-language="en" target-language="zh-TW" datatype="plaintext" project-id="397168" tool-id="crowdin">
+    <header>
+      <tool tool-id="crowdin" tool-name="Crowdin" tool-version="1.1"/>
+    </header>
+    <body>
+      <trans-unit id="12372" resname="categories_list_editor.header.title" approved="yes">
+        <source>Categories</source>
+        <target state="final">目录</target>
+        <context-group purpose="information">
+          <context context-type="source">Categories Header title.  This appears in the Settings flow when navigating to the list of Categories</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12374" resname="category_editor.alert.delete_category_confirmation.button.cancel.title" approved="yes">
+        <source>Cancel</source>
+        <target state="final">取消</target>
+        <context-group purpose="information">
+          <context context-type="source">Delete category alert cancel button title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12376" resname="category_editor.alert.delete_category_confirmation.button.remove.title" approved="yes">
+        <source>Remove</source>
+        <target state="final">消除</target>
+        <context-group purpose="information">
+          <context context-type="source">Delete category alert action button title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12378" resname="category_editor.alert.delete_category_confirmation.title" approved="yes">
+        <source>Deleted categories cannot be recovered.</source>
+        <target state="final">清除了的類別不可以恢復的</target>
+        <context-group purpose="information">
+          <context context-type="source">Delete category confirmation alert title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12380" resname="category_editor.alert.delete_phrase_confirmation.button.cancel.title" approved="yes">
+        <source>Cancel</source>
+        <target state="final">取消</target>
+        <context-group purpose="information">
+          <context context-type="source">Delete phrase alert cancel button title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12382" resname="category_editor.alert.delete_phrase_confirmation.button.delete.title" approved="yes">
+        <source>Remove</source>
+        <target state="final">消除</target>
+        <context-group purpose="information">
+          <context context-type="source">Delete phrase alert action button title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12384" resname="category_editor.alert.delete_phrase_confirmation.title" approved="yes">
+        <source>Deleted phrases cannot be recovered.</source>
+        <target state="final">已刪除的類別無法恢復</target>
+        <context-group purpose="information">
+          <context context-type="source">Delete phrase confirmation alert title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12386" resname="category_editor.detail.button.edit_phrases.title" approved="yes">
+        <source>Edit Phrases</source>
+        <target state="final">編輯短語</target>
+        <context-group purpose="information">
+          <context context-type="source">Setting option for a category.  Navigates the user to a list of phrases within the category where the phrases can be deleted or edited.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12388" resname="category_editor.detail.button.remove_category.title" approved="yes">
+        <source>Remove Category</source>
+        <target state="final">刪除類別?</target>
+        <context-group purpose="information">
+          <context context-type="source">Setting option for a category.  Button that will delete the category.  Tapping the button will display an alert confirmation.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12390" resname="category_editor.detail.button.rename_category.title" approved="yes">
+        <source>Rename Category</source>
+        <target state="final">重命名類別</target>
+        <context-group purpose="information">
+          <context context-type="source">Setting option for a category.  Navigates the user to a keyboard view where they can edit the Category name.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12392" resname="category_editor.detail.button.show_category.title" approved="yes">
+        <source>Show Category</source>
+        <target state="final">顯示類別</target>
+        <context-group purpose="information">
+          <context context-type="source">Toggle option for a category within settings.  Can be toggled on or off to hide or show the category in the main view.  Hiding the category will also move the category in settings to the end of the list.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12394" resname="category_editor.toast.changes_saved.title" approved="yes">
+        <source>Changes saved</source>
+        <target state="final">更改已儲存</target>
+        <context-group purpose="information">
+          <context context-type="source">changes to an existing phrase were saved successfully</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12396" resname="category_editor.toast.successfully_saved.title" approved="yes">
+        <source>Changes Saved</source>
+        <target state="final">更改已儲存</target>
+        <context-group purpose="information">
+          <context context-type="source">Toast message that appears after saving edits made to the Category title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12398" resname="empty_state.button.title" approved="yes">
+        <source>Add Phrase</source>
+        <target state="final">添加短語</target>
+        <context-group purpose="information">
+          <context context-type="source">Category empty state button.  This button appears with the empty state to allow the user to add a phrase</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12400" resname="empty_state.header.title" approved="yes">
+        <source>No phrases have been saved yet.</source>
+        <target state="final">尚未儲存任何短語。</target>
+        <context-group purpose="information">
+          <context context-type="source">Category empty state.  This empty state appears when there are no phrases in the category in both the main screen and settings screen.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12402" resname="gaze_settings.alert.disable_head_tracking_confirmation.button.cancel.title" approved="yes">
+        <source>Cancel</source>
+        <target state="final">取消</target>
+        <context-group purpose="information">
+          <context context-type="source">Cancel alert action title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12404" resname="gaze_settings.alert.disable_head_tracking_confirmation.button.confirm.title" approved="yes">
+        <source>Continue</source>
+        <target state="final">繼續</target>
+        <context-group purpose="information">
+          <context context-type="source">Confirm alert action title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12406" resname="gaze_settings.alert.disable_head_tracking_confirmation.title" approved="yes">
+        <source>Turning off head tracking will make Vocable touch-only. Would you like to continue?</source>
+        <target state="final">關閉頭部追蹤將使 Vocable 只能進行觸控操作。 你想繼續嗎？</target>
+        <context-group purpose="information">
+          <context context-type="source">Disable head tracking confirmation alert title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12408" resname="gaze_tracking.error.excessive_head_distance.title" approved="yes">
+        <source>Please move closer to the device.</source>
+        <target state="final">請靠近設備。</target>
+        <context-group purpose="information">
+          <context context-type="source">Warning message presented to the user when the head tracking system</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12410" resname="listening_mode.empty_state.actively_listening.message" approved="yes">
+        <source>When someone asks a question out loud, Vocable will offer quick response options.</source>
+        <target state="final">當有人大聲提出問題時，Vocable 將提供快速響應選項。</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state message for when listening has began but no responses have been displayed yet</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12412" resname="listening_mode.empty_state.actively_listening.title" approved="yes">
+        <source>Listening...</source>
+        <target state="final">正在聆聽...</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state title for when listening has began but no responses have been displayed yet</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12414" resname="listening_mode.empty_state.free_response.message" approved="yes">
+        <source>Not sure what to suggest. Please use the keyboard or select an existing phrase to reply.</source>
+        <target state="final">不知道該建議什麼。請使用鍵盤或選擇現有短語進行回复。</target>
+        <context-group purpose="information">
+          <context context-type="source">Listen mode empty state message for when no responses could be generated</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12416" resname="listening_mode.empty_state.free_response.title" approved="yes">
+        <source>Sounds complicated</source>
+        <target state="final">聽起來很複雜</target>
+        <context-group purpose="information">
+          <context context-type="source">Listen mode empty state title for when no responses could be generated</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12418" resname="listening_mode.empty_state.microphone_permission_denied.action" approved="yes">
+        <source>Open Settings</source>
+        <target state="final">打開設置</target>
+        <context-group purpose="information">
+          <context context-type="source">Listen mode empty state action that will allow the user to open the Settings app in order to grant microphone permissions.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12420" resname="listening_mode.empty_state.microphone_permission_denied.message" approved="yes">
+        <source>Vocable needs to use the microphone to enable Listening Mode. Please allow microphone access in %1$@ Settings.
+
+You can also disable Listening Mode to hide this category.</source>
+        <target state="final">Vocable 需要使用麥克風來啟用聆聽模式。 請在%1$@ 設定中允許麥克風存取。
+
+您也可以停用聆聽模式來隱藏此類別。</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state message for when microphone permissions are required, but the user has denied them</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12422" resname="listening_mode.empty_state.microphone_permission_denied.title" approved="yes">
+        <source>Microphone Access</source>
+        <target state="final">麥克風訪問</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state title for when microphone permissions are required, but the user has denied them</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12424" resname="listening_mode.empty_state.microphone_permission_undetermined.action" approved="yes">
+        <source>Grant Access</source>
+        <target state="final">授予訪問權限</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state action that will allow the user to grant access to microphone permissions via the system permissions alert.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12426" resname="listening_mode.empty_state.microphone_permission_undetermined.message" approved="yes">
+        <source>Vocable needs microphone access to enable Listening Mode. The button below presents an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="final">Vocable 需要麥克風訪問權限才能啟用聆聽模式。下面的按鈕顯示了一個 iOS 權限對話框，Vocable 的頭部跟踪無法與之交互。</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state message for when microphone permissions are required and the user has not been shown the system permissions prompt yet</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12428" resname="listening_mode.empty_state.microphone_permission_undetermined.title" approved="yes">
+        <source>Microphone Access</source>
+        <target state="final">麥克風訪問</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state title for when microphone permissions are required and the user has not been shown the system permissions prompt yet</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12430" resname="listening_mode.empty_state.speech_permission_denied.action" approved="yes">
+        <source>Open Settings</source>
+        <target state="final">打開設置</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state action that will allow the user to open the Settings app in order to grant speech recognition permissions.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12432" resname="listening_mode.empty_state.speech_permission_denied.message" approved="yes">
+        <source>Vocable needs speech recognition to enable Listening Mode. Please enable speech recognition in %1$@ Settings.
+
+You can also disable Listening Mode to hide this category.</source>
+        <target state="final">Vocable 需要語音辨識才能啟用聆聽模式。 請在 %1$@ 設定中啟用語音辨識。
+
+您也可以停用聆聽模式來隱藏此類別。</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state message for when speech recognition permissions are required, but the user has denied them</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12434" resname="listening_mode.empty_state.speech_permission_denied.title" approved="yes">
+        <source>Speech Recognition</source>
+        <target state="final">語音識別</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state title for when speech recognition permissions are required, but the user has denied them</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12436" resname="listening_mode.empty_state.speech_permission_undetermined.action" approved="yes">
+        <source>Grant Access</source>
+        <target state="final">授予訪問權限</target>
+        <context-group purpose="information">
+          <context context-type="source">Listen mode empty state action that will allow the user to grant access to speech recognition permissions via the system permissions alert.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12438" resname="listening_mode.empty_state.speech_permission_undetermined.message" approved="yes">
+        <source>Vocable needs to request speech permissions to enable Listening Mode. This will present an iOS permission dialog that Vocable's head tracking cannot interract with.</source>
+        <target state="final">Vocable 需要請求語音權限才能啟用聆聽模式。這將顯示一個 iOS 權限對話框，Vocable 的頭部跟踪無法與之交互。</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state message for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12440" resname="listening_mode.empty_state.speech_permission_undetermined.title" approved="yes">
+        <source>Speech Recognition</source>
+        <target state="final">語音識別</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state title for when speech recognition permissions are required and the user has not been shown the system permissions prompt yet</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12442" resname="listening_mode.empty_state.speech_unavailable.message" approved="yes">
+        <source>Speech services require one of the following features to be enabled on your device: Siri or Dictation. Please check your device settings and enable Siri or Dictation.</source>
+        <target state="final">語音服務需要在您的設備上啟用以下功能之一：Siri 或聽寫。請檢查您的設備設置並啟用 Siri 或聽寫。</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode error state message for when Apple's speech to text service is unavailable</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12444" resname="listening_mode.empty_state.speech_unavailable.title" approved="yes">
+        <source>Speech services unavailable</source>
+        <target state="final">語音服務不可用</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode error state title for when Apple's speech to text service is unavailable</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12446" resname="listening_mode.empty_state.unsupported.message" approved="yes">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %4$@ to be enabled.</source>
+        <target state="final">%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。
+
+聆聽模式目前僅提供英文版本，需要啟用 %4$@。</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12448" resname="listening_mode.empty_state.unsupported.title" approved="yes">
+        <source>Listening Mode Unsupported</source>
+        <target state="final">聆聽模式不支持</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening mode empty state title for for when microphone permissions are required, but listening mode is unsupported</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12450" resname="listening_mode.empty_state.vocableAPIFailure.message" approved="yes">
+        <source>Please check your internet connection and try again later.</source>
+        <target state="final">請檢查您的網路連線並稍後重試。</target>
+        <context-group purpose="information">
+          <context context-type="source">Listen mode error state message for when the vocable API fails</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12452" resname="listening_mode.empty_state.vocableAPIFailure.title" approved="yes">
+        <source>Network failure</source>
+        <target state="final">網路故障</target>
+        <context-group purpose="information">
+          <context context-type="source">Listen mode error state message for when the vocable API fails</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12454" resname="listening_mode.feedback.confirmation.title" approved="yes">
+        <source>Thank You!</source>
+        <target state="final">謝謝您！</target>
+        <context-group purpose="information">
+          <context context-type="source">Thank you confirmation.  This text appears after sharing with developer</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12456" resname="listening_mode.feedback.hint.text" approved="yes">
+        <source>Don’t like these responses? Anonymously share this question to help improve listening mode.</source>
+        <target state="final">不喜歡這些回复？匿名分享此問題以幫助改善聆聽模式。</target>
+        <context-group purpose="information">
+          <context context-type="source">Information text around what the Share with Deeveloper button does.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12458" resname="listening_mode.feedback.submit.title" approved="yes">
+        <source>Share with Developers</source>
+        <target state="final">與開發者分享</target>
+        <context-group purpose="information">
+          <context context-type="source">Share with Developer button.  The button appears if Listen mode could not generate a reponese.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12460" resname="main_screen.textfield_placeholder.default" approved="yes">
+        <source>Select something below to speak</source>
+        <target state="final">選擇以下內容進行發言</target>
+        <context-group purpose="information">
+          <context context-type="source">Select something below to speak Hint Text</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12462" resname="paging_progress_indicator_format" approved="yes">
+        <source>Page %1$d of %2$d</source>
+        <target state="final">第 %1$d 頁，共 %2$d 頁</target>
+        <context-group purpose="information">
+          <context context-type="source">Page indicator progress format. \&quot;Page x of n\&quot;</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12464" resname="personal_voices.empty_state.denied.button.title" approved="yes">
+        <source>Open Settings</source>
+        <target state="final">打開設置</target>
+        <context-group purpose="information">
+          <context context-type="source">Action button for the personal voices screen allowing the user to open the system settings app to resolve an error.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12466" resname="personal_voices.empty_state.denied.description" approved="yes">
+        <source>Vocable needs permission to access Personal Voices on this device.
+
+You can enable access in %1$@ Settings.</source>
+        <target state="final">Vocable 需要獲得存取此裝置上的個人語音的權限。
+
+您可以在%1$@ 設定中啟用存取。</target>
+        <context-group purpose="information">
+          <context context-type="source">Empty state description for when Personal Voice access has been denied by the user. It informs the user how to re-enable access by navigating to system settings. The placeholder is the device model (e.g. &quot;iPhone&quot; or &quot;iPad&quot;)</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12468" resname="personal_voices.empty_state.denied.title" approved="yes">
+        <source>Personal Voice Access</source>
+        <target state="final">個人語音訪問</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of the Personal Voices screen empty state when a user must grant access to the app.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12470" resname="personal_voices.empty_state.no_content.description" approved="yes">
+        <source>You can create a new Personal Voice in %1$@ Settings. Once created, you can set your Personal Voice as Vocable's voice.
+
+If a Personal Voice has been created and does not appear in Vocable, try restarting %1$@.</source>
+        <target state="final">您可以在%1$@ 設定中建立新的個人語音。 建立後，您可以將您的個人語音設定為 Vocable 的語音。
+
+如果個人語音已建立但未出現在 Vocable 中，請嘗試重新啟動 %1$@。</target>
+        <context-group purpose="information">
+          <context context-type="source">Empty state description for when there are not personal voices to display. This is typically because the user has not created any yet. The placeholder is the device model (e.g. &quot;iPhone&quot; or &quot;iPad&quot;).</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12472" resname="personal_voices.empty_state.no_content.title" approved="yes">
+        <source>No Personal Voices</source>
+        <target state="final">沒有個人聲音</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of the Personal Voices screen empty state when there are no voices available on the device.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12474" resname="personal_voices.empty_state.not_authorized.button.title" approved="yes">
+        <source>Grant Access</source>
+        <target state="final">授予訪問權限</target>
+        <context-group purpose="information">
+          <context context-type="source">Action button for the personal voices screen that will display a system prompt allowing access to their Personal Voice profiles stored on their device.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12476" resname="personal_voices.empty_state.not_authorized.description" approved="yes">
+        <source>Allow Vocable to access Personal Voices stored on this device.</source>
+        <target state="final">允許 Vocable 存取此裝置上儲存的個人語音。</target>
+        <context-group purpose="information">
+          <context context-type="source">Empty state description for when Personal Voice access has not yet been prompted to the user. Below this text will be a button that will prompt the user for access.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12478" resname="personal_voices.empty_state.not_authorized.title" approved="yes">
+        <source>Personal Voice Access</source>
+        <target state="final">個人語音訪問</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of the Personal Voices screen empty state when a user has denied access to the app.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12480" resname="personal_voices.title" approved="yes">
+        <source>Personal Voices</source>
+        <target state="final">個人聲音</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of the Personal Voices screen</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12482" resname="phrase_editor.alert.cancel_editing_confirmation.button.continue_editing.title" approved="yes">
+        <source>Continue Editing</source>
+        <target state="final">繼續編輯</target>
+        <context-group purpose="information">
+          <context context-type="source">Button in the Phrase close confirmation. This button appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. Pressing the button will allow editing the category title.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12484" resname="phrase_editor.alert.cancel_editing_confirmation.button.discard.title" approved="yes">
+        <source>Discard</source>
+        <target state="final">丟棄</target>
+        <context-group purpose="information">
+          <context context-type="source">Button in the edit Phrase close confirmation.  This button appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes. Pressing the button will not save any changes and close the keyboard view.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12486" resname="phrase_editor.alert.cancel_editing_confirmation.title" approved="yes">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="final">如果您關閉而不保存，您的更改將會丟失。</target>
+        <context-group purpose="information">
+          <context context-type="source">Phrase editor close confirmation text.  This text appears in an alert when there are edits made to the Phrase and the user tries to close the keyboard without saving the changes.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12488" resname="phrase_editor.alert.phrase_name_exists.cancel.button" approved="yes">
+        <source>Cancel</source>
+        <target state="final">取消</target>
+        <context-group purpose="information">
+          <context context-type="source">Duplicate Phrase alert cancel button. Text on this button appears on an alert where a duplicate phrase is being created. Pressing the button allows the user to continue editing the category title.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12490" resname="phrase_editor.alert.phrase_name_exists.create.button" approved="yes">
+        <source>Create Duplicate</source>
+        <target state="final">創建副本</target>
+        <context-group purpose="information">
+          <context context-type="source">Duplicate Phrase alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12492" resname="phrase_editor.alert.phrase_name_exists.title" approved="yes">
+        <source>This phrase already exists. Would you like to create a duplicate?</source>
+        <target state="final">這句話已經存在。您想創建一個副本嗎？</target>
+        <context-group purpose="information">
+          <context context-type="source">Duplicate Phrase alert text.  This text appears in an alert when a phrase is created with the same text as an existing phrase within the same category.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12494" resname="phrase_editor.toast.successfully_saved_to_favorites.title_format" approved="yes">
+        <source>Saved to %@</source>
+        <target state="final">已保存到 %@</target>
+        <context-group purpose="information">
+          <context context-type="source">Informs the user that their newly-created phrase was successfully saved. The variable parameter is the name of the category that the phrase was saved to.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12496" resname="preset.category.add.phrase.title" approved="yes">
+        <source>Add Phrase</source>
+        <target state="final">添加短語</target>
+        <context-group purpose="information">
+          <context context-type="source">Add phrase to category button title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12498" resname="preset.category.numberpad.phrase.no.title" approved="yes">
+        <source>No</source>
+        <target state="final">不</target>
+        <context-group purpose="information">
+          <context context-type="source">'No' num pad response</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12500" resname="preset.category.numberpad.phrase.yes.title" approved="yes">
+        <source>Yes</source>
+        <target state="final">是</target>
+        <context-group purpose="information">
+          <context context-type="source">'Yes' num pad response</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12502" resname="recents_empty_state.body.title" approved="yes">
+        <source>Start using Vocable to see your most recently used phrases here.</source>
+        <target state="final">開始使用 Vocable 在此處查看您最近使用的短語。</target>
+        <context-group purpose="information">
+          <context context-type="source">Recents empty state body string.  This will appear in the Recents Category if no phrases have been used yet.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12504" resname="recents_empty_state.header.title" approved="yes">
+        <source>No recently used phrases</source>
+        <target state="final">沒有最近使用的短語</target>
+        <context-group purpose="information">
+          <context context-type="source">Recents empty state title string.  This will appear in the Recents Category if no phrases have been used yet.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12506" resname="selection_mode.header.title" approved="yes">
+        <source>Selection Mode</source>
+        <target state="final">選擇模式</target>
+        <context-group purpose="information">
+          <context context-type="source">Selection mode setting header title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12508" resname="settings.alert.no_email_configured.button.dismiss.title" approved="yes">
+        <source>OK</source>
+        <target state="final">好的</target>
+        <context-group purpose="information">
+          <context context-type="source">No email account configured error alert dismiss button title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12510" resname="settings.alert.no_email_configured.title" approved="yes">
+        <source>Please sign into an account with Mail for %1$@.</source>
+        <target state="final">請使用 Mail 登錄 %1$@ 的帳戶。</target>
+        <context-group purpose="information">
+          <context context-type="source">No email account configured error alert title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12512" resname="settings.alert.reset_app_settings_confirmation.body" approved="yes">
+        <source>Are you sure you want to reset Vocable to default settings? This action cannot be undone.</source>
+        <target state="final">您確定要將 Voable 重置為默認設置嗎？此操作無法撤消。</target>
+        <context-group purpose="information">
+          <context context-type="source">Reset setting alert confirmation prompt</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12514" resname="settings.alert.reset_app_settings_confirmation.button.cancel.title" approved="yes">
+        <source>Cancel</source>
+        <target state="final">取消</target>
+        <context-group purpose="information">
+          <context context-type="source">Reset setting alert Cancel button.  This will cancel the reset operation.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12516" resname="settings.alert.reset_app_settings_confirmation.button.confirm.title" approved="yes">
+        <source>Reset</source>
+        <target state="final">重置</target>
+        <context-group purpose="information">
+          <context context-type="source">Reset setting alert settings Reset button.  This will continue with the reset operation.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12518" resname="settings.alert.reset_app_settings_failure.body" approved="yes">
+        <source>Vocable failed to reset. Please try again or reinstall Vocable if the issue persists.</source>
+        <target state="final">語音無法重置。如果問題仍然存在，請重試或重新安裝 Vocable。</target>
+        <context-group purpose="information">
+          <context context-type="source">Reset app settings failure alert</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12520" resname="settings.alert.reset_app_settings_failure.button.ok" approved="yes">
+        <source>OK</source>
+        <target state="final">好的</target>
+        <context-group purpose="information">
+          <context context-type="source">Button to dismiss the Reset app failure alert</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12522" resname="settings.alert.reset_app_settings_success.body" approved="yes">
+        <source>Vocable has been reset successfully.</source>
+        <target state="final">詞彙已成功重置。</target>
+        <context-group purpose="information">
+          <context context-type="source">Reset app settings success alert</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12524" resname="settings.alert.reset_app_settings_success.button.ok" approved="yes">
+        <source>OK</source>
+        <target state="final">好的</target>
+        <context-group purpose="information">
+          <context context-type="source">Button to dismiss the Reset app success alert</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12526" resname="settings.alert.surrender_gaze_confirmation.body" approved="yes">
+        <source>You're about to leave the Vocable app. You may lose head tracking control.</source>
+        <target state="final">您即將離開 Vocable 應用程序。您可能會失去頭部跟踪控制。</target>
+        <context-group purpose="information">
+          <context context-type="source">Body of confirmation alert shown when user is about to navigate to a destination where Vocable's head tracking will not be available.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12528" resname="settings.alert.surrender_gaze_confirmation.button.cancel.title" approved="yes">
+        <source>Cancel</source>
+        <target state="final">取消</target>
+        <context-group purpose="information">
+          <context context-type="source">Button cancelling the action that would have taken them away from the head tracking-navigable portion of the app</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12530" resname="settings.alert.surrender_gaze_confirmation.button.confirm.title" approved="yes">
+        <source>Confirm</source>
+        <target state="final">確認</target>
+        <context-group purpose="information">
+          <context context-type="source">Button confirming that the user would like to navigate away from the head tracking-navigable portion of the app</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12532" resname="settings.cell.categories.title" approved="yes">
+        <source>Categories and Phrases</source>
+        <target state="final">類別和短語</target>
+        <context-group purpose="information">
+          <context context-type="source">edit categories settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12534" resname="settings.cell.contact_developers.title" approved="yes">
+        <source>Contact Developers</source>
+        <target state="final">聯繫開發者</target>
+        <context-group purpose="information">
+          <context context-type="source">contact developers settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12536" resname="settings.cell.head_tracking.title" approved="yes">
+        <source>Head Tracking</source>
+        <target state="final">頭部追踪</target>
+        <context-group purpose="information">
+          <context context-type="source">Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12538" resname="settings.cell.keyboard_layout.title" approved="yes">
+        <source>Keyboard Layout</source>
+        <target state="final">鍵盤佈局</target>
+        <context-group purpose="information">
+          <context context-type="source">edit keyboard layout settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12540" resname="settings.cell.listening_mode.title" approved="yes">
+        <source>Listening Mode</source>
+        <target state="final">聆聽模式</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening Mode root settings menu item. Navigates the user to the Listening Mode settings screen where they can configure their preferences for listening mode.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12542" resname="settings.cell.privacy_policy.title" approved="yes">
+        <source>Privacy Policy</source>
+        <target state="final">隱私政策</target>
+        <context-group purpose="information">
+          <context context-type="source">view privacy policy settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12544" resname="settings.cell.qwerty_layout.title" approved="yes">
+        <source>Compact QWERTY</source>
+        <target state="final">緊湊型全鍵盤</target>
+        <context-group purpose="information">
+          <context context-type="source">Option within Keyboard Layout. This option is to enable or disable QWERTY keyboard on portrait iPhone.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12546" resname="settings.cell.reset_all.title" approved="yes">
+        <source>Reset App Settings</source>
+        <target state="final">重置應用設置</target>
+        <context-group purpose="information">
+          <context context-type="source">reset all settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12548" resname="settings.cell.selection_mode.title" approved="yes">
+        <source>Selection Mode</source>
+        <target state="final">選擇模式</target>
+        <context-group purpose="information">
+          <context context-type="source">edit cursor selection mode settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12550" resname="settings.cell.timing_sensitivity.title" approved="yes">
+        <source>Timing and Sensitivity</source>
+        <target state="final">時間和靈敏度</target>
+        <context-group purpose="information">
+          <context context-type="source">edit cursor timing and sensititivy settings menu item</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12552" resname="settings.cell.voice_configuration.title" approved="yes">
+        <source>Voice</source>
+        <target state="final">嗓音</target>
+        <context-group purpose="information">
+          <context context-type="source">Settings option title for row that navigates to the Voice settings screen</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12554" resname="settings.header.title" approved="yes">
+        <source>Settings</source>
+        <target state="final">設置</target>
+        <context-group purpose="information">
+          <context context-type="source">Settings screen header title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12556" resname="settings.keyboard_layout.header.title" approved="yes">
+        <source>Keyboard Layout</source>
+        <target state="final">鍵盤佈局</target>
+        <context-group purpose="information">
+          <context context-type="source">Keyboard Layout setting header title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12558" resname="settings.keyboard_layout.qwerty_layout.explanation_footer" approved="yes">
+        <source>Use QWERTY keyboard layout in all orientations. Keys may be smaller, making typing more difficult.</source>
+        <target state="final">在所有方向上使用 QWERTY 鍵盤佈局。 按鍵可能更小，使打字更加困難。</target>
+        <context-group purpose="information">
+          <context context-type="source">Option within Keyboard Layout. This option is to enable or disable QWERTY keyboard on portrait iPhone.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12560" resname="settings.listening_mode.device_unsupported_explanation_footer" approved="yes">
+        <source>This %1$@ on %2$@ %3$@ does not support Listening Mode.
+
+Listening Mode is currently only available in English and requires %4$@ to be enabled.</source>
+        <target state="final">%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。
+
+聆聽模式目前僅提供英文版本，需要啟用 %4$@。</target>
+        <context-group purpose="information">
+          <context context-type="source">Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12562" resname="settings.listening_mode.hot_word_toggle_cell.title" approved="yes">
+        <source>&quot;Hey Vocable&quot; shortcut</source>
+        <target state="final">“Hey Vocable”快捷方式</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of Listening Mode preferences cell that toggles &quot;Hey Vocable&quot; shortcut feature on or off when selected</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12564" resname="settings.listening_mode.hotword_explanation_footer" approved="yes">
+        <source>Automatically navigate to the Listening Mode category when Vocable hears someone say &quot;Hey, Vocable&quot;</source>
+        <target state="final">當 Vocable 聽到有人說「嘿，Vocable」時自動導航到聆聽模式類別</target>
+        <context-group purpose="information">
+          <context context-type="source">Footer text displayed in the Listening Mode preferences screen. This text describes the &quot;Hey Vocable&quot; feature, how it is activated, and how it automatically navigates the user to the Listening Mode screen.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12566" resname="settings.listening_mode.listening_mode_explanation_footer" approved="yes">
+        <source>This is a conversational category that listens for someone to ask questions, then offers a selection of responses. Either/or questions and questions that can be answered with yes, no, or a number are currently supported.</source>
+        <target state="final">這是一個對話類別，聆聽某人提出問題，然後提供一系列答案。 目前支援非此即彼的問題以及可以用是、否或數字回答的問題。</target>
+        <context-group purpose="information">
+          <context context-type="source">Footer text displayed in the Listening Mode preferences screen. This text describes the overall Listening Mode feature as well as the kinds of responses it can generate for the user.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12568" resname="settings.listening_mode.listening_mode_toggle_cell.title" approved="yes">
+        <source>Listening Mode</source>
+        <target state="final">聆聽模式</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of Listening Mode preferences cell that toggles Listening Mode on or off when selected</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12570" resname="settings.listening_mode.smart_assist_explanation_footer" approved="yes">
+        <source>Smart Assist uses AI to provide higher-quality suggestions for Listening Mode. An Internet connection is required, but no conversation history is ever stored, just like in regular Listening Mode.</source>
+        <target state="final">智慧輔助使用人工智慧為聆聽模式提供更高品質的建議。 需要網路連接，但不會儲存任何對話歷史記錄，就像常規聆聽模式一樣。</target>
+        <context-group purpose="information">
+          <context context-type="source">Footer text displayed in the Listening Mode preferences screen. This text describes the Smart Assist feature and how it works.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12572" resname="settings.listening_mode.smart_assist_toggle_cell.title" approved="yes">
+        <source>Smart Assist</source>
+        <target state="final">智慧輔助</target>
+        <context-group purpose="information">
+          <context context-type="source">Title of Smart Assist preferences cell that toggles the Smart Assist feature on or off when selected</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12574" resname="settings.listening_mode.title" approved="yes">
+        <source>Listening Mode</source>
+        <target state="final">聆聽模式</target>
+        <context-group purpose="information">
+          <context context-type="source">Listening Mode preferences screen title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12576" resname="settings.selection_mode.head_tracking_unsupported_footer" approved="yes">
+        <source>This %1$@ on %2$@ %3$@ does not support head tracking.
+
+Head tracking is supported on all devices with a %4$@ camera, and on most devices with %5$@.</source>
+        <target state="final">%2$@ %3$@ 上的此 %1$@ 不支援頭部追蹤。
+
+所有配備 %4$@ 攝影機的設備以及大多數配備 %5$@ 的設備均支援頭部追蹤。</target>
+        <context-group purpose="information">
+          <context context-type="source">Additonal footer text noting heading tracking compatibility</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12578" resname="settings.version_format" approved="yes">
+        <source>Version %1$@</source>
+        <target state="final">版本%1$@</target>
+        <context-group purpose="information">
+          <context context-type="source">Version information displayed at the bottom of the Settings screen. Argument is the application version.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12580" resname="text_editor.alert.cancel_editing_confirmation.button.continue_editing.title" approved="yes">
+        <source>Continue Editing</source>
+        <target state="final">繼續編輯</target>
+        <context-group purpose="information">
+          <context context-type="source">Button in the edit category title close confirmation. This button appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. Pressing the button will allow editing the category title.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12582" resname="text_editor.alert.cancel_editing_confirmation.button.discard.title" approved="yes">
+        <source>Discard</source>
+        <target state="final">丟棄</target>
+        <context-group purpose="information">
+          <context context-type="source">Button in the edit category title close confirmation. This button appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes. Pressing the button will not save any changes and close the keyboard view.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12584" resname="text_editor.alert.cancel_editing_confirmation.title" approved="yes">
+        <source>If you close without saving, your changes will be lost.</source>
+        <target state="final">如果您關閉而不保存，您的更改將會丟失。</target>
+        <context-group purpose="information">
+          <context context-type="source">Category close confirmation text.  This text appears in an alert when there are edits made to the Category title and the user tries to close the keyboard without saving the changes.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12586" resname="text_editor.alert.category_name_exists.cancel.button" approved="yes">
+        <source>Cancel</source>
+        <target state="final">取消</target>
+        <context-group purpose="information">
+          <context context-type="source">Duplicate Category alert cancel button.  Text on this button appears on an alert where a duplicate category title is being created.
+   Pressing the button will allow continuing to edit category title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12588" resname="text_editor.alert.category_name_exists.create.button" approved="yes">
+        <source>Create Duplicate</source>
+        <target state="final">創建副本</target>
+        <context-group purpose="information">
+          <context context-type="source">Duplicate Alert create duplicate button.  Pressing this button will allow for multiple categories with the same title.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12590" resname="text_editor.alert.category_name_exists.title" approved="yes">
+        <source>This category name already exists. Would you like to create a duplicate?</source>
+        <target state="final">此類別名稱已存在。您想創建一個副本嗎？</target>
+        <context-group purpose="information">
+          <context context-type="source">Duplicate Category alert text.  This text appears in an alert when a category is created with the same title as an existing category.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12592" resname="timing_and_sensitivity.button.high.title" approved="yes">
+        <source>High</source>
+        <target state="final">高</target>
+        <context-group purpose="information">
+          <context context-type="source">Button option for the Curson Sensitivity setting.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12594" resname="timing_and_sensitivity.button.low.title" approved="yes">
+        <source>Low</source>
+        <target state="final">低</target>
+        <context-group purpose="information">
+          <context context-type="source">Button option for the Curson Sensitivity setting.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12596" resname="timing_and_sensitivity.button.medium.title" approved="yes">
+        <source>Medium</source>
+        <target state="final">中等</target>
+        <context-group purpose="information">
+          <context context-type="source">Button option for the Curson Sensitivity setting.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12598" resname="timing_and_sensitivity.cell.cursor_sensitivity.title" approved="yes">
+        <source>Cursor Sensitivity</source>
+        <target state="final">光標靈敏度</target>
+        <context-group purpose="information">
+          <context context-type="source">Text for a Timing and sensitivity setting.  This setting is the sensitivity for the head tracking cursor.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12600" resname="timing_and_sensitivity.cell.dwell_duration.title" approved="yes">
+        <source>Hover Time</source>
+        <target state="final">懸停時間</target>
+        <context-group purpose="information">
+          <context context-type="source">Text for a Timing and sensitivity setting.  This setting is the amount of time the head tracking cursor needs to stay on a button before it triggers it.
+   Hove time can be adjusted in .5 sec increments from .5 to 5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12602" resname="timing_and_sensitivity.header.title" approved="yes">
+        <source>Timing and Sensitivity</source>
+        <target state="final">時間和靈敏度</target>
+        <context-group purpose="information">
+          <context context-type="source">Timing and sensitivity Header title.  This text appears in the Settings flow when navigating into the Timing and Sensitivity setting</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12604" resname="voice_picker.empty_state.description" approved="yes">
+        <source>No voices that match your language and region settings are installed.</source>
+        <target state="final">未安裝與您的語言和區域設定相符的語音。</target>
+        <context-group purpose="information">
+          <context context-type="source">Voice picker empty state body. Shown when the user attempts to change their voice settings and the operating system
+fails to return any viable voice profiles that the user could select from.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12606" resname="voice_picker.empty_state.title" approved="yes">
+        <source>No Voices</source>
+        <target state="final">沒有聲音</target>
+        <context-group purpose="information">
+          <context context-type="source">Voice picker empty state title.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12608" resname="voice_picker.title" approved="yes">
+        <source>Change Voice</source>
+        <target state="final">改變聲音</target>
+        <context-group purpose="information">
+          <context context-type="source">Voice Picker title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12610" resname="voice_preview.sample_audio.introducion_format" approved="yes">
+        <source>Hello, this is %1$@</source>
+        <target state="final">您好，我是%1$@</target>
+        <context-group purpose="information">
+          <context context-type="source">In the voice configuration screen within the app's settings, this format is used to construct the phrase read aloud when the user selects a button to preview a voice profile. Each voice profile has a name provided by the operating system, so the phrase is currently structured as if the voice profile is introducing itself.</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12612" resname="voice_settings.cell.change_voice.title" approved="yes">
+        <source>Change Voice</source>
+        <target state="final">改變聲音</target>
+        <context-group purpose="information">
+          <context context-type="source">Button in the Voice Settings screen that will navigate the user to the voice picker/Change Voice screen</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12614" resname="voice_settings.cell.personal_voice.title" approved="yes">
+        <source>Personal Voices</source>
+        <target state="final">個人聲音</target>
+        <context-group purpose="information">
+          <context context-type="source">Button in the Voice Settings screen that will navigate the user to the Personal Voice screen</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12616" resname="voice_settings.title" approved="yes">
+        <source>Voice</source>
+        <target state="final">嗓音</target>
+        <context-group purpose="information">
+          <context context-type="source">Voice Configuration title</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12618" resname="voice_settings.voice_picker_footer.title" approved="yes">
+        <source>Additional voices and voice quality enhancements may be available for download in %1$@ Settings.</source>
+        <target state="final">其他語音和語音品質增強功能可在%1$@ 設定中下載。</target>
+        <context-group purpose="information">
+          <context context-type="source">Footer title that accompanies the button that will present the voice picker. This is meant to inform the user that additional voices can be downloaded from the system settings app. The parameter variable is substituted with the device model e.g. &quot;iPad&quot; or &quot;iPhone&quot;.</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
