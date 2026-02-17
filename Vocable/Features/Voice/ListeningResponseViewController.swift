@@ -74,12 +74,37 @@ final class ListeningResponseViewController: VocableViewController {
     private var isPausedCancellable: AnyCancellable?
 
     private var contentViewController: UIViewController?
+    private var pauseBarView: UIView!
+    private var pauseResumeButton: GazeableButton?
+    private let contentViewLayoutGuide = UILayoutGuide()
 
-    private lazy var pauseBarView: UIView = {
+    private var emptyState: ListeningEmptyState?
+
+    private let synthesizedSpeechQueue = DispatchQueue(label: "speech_synthesis_queue", qos: .userInitiated)
+    let classifier = VLClassifier()
+    let apiClient = ListenAPIClient()
+
+    @PublishedValue private(set) var lastUtterance: String?
+
+    private var content: Content = .empty(.listeningResponse)
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.clipsToBounds = true
+        edgesForExtendedLayout = UIRectEdge.all.subtracting(.top)
+        view.layoutMargins.top = 4
+
+        setupPauseBar()
+        setupContentViewLayoutGuide()
+        observePausedState()
+    }
+
+    private func setupPauseBar() {
         let bar = UIView()
         bar.translatesAutoresizingMaskIntoConstraints = false
         bar.backgroundColor = .collectionViewBackgroundColor
-        self.view.addSubview(bar)
+        view.addSubview(bar)
 
         let button = GazeableButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -106,52 +131,26 @@ final class ListeningResponseViewController: VocableViewController {
         bar.addSubview(button)
 
         NSLayoutConstraint.activate([
-            bar.topAnchor.constraint(equalTo: self.view.topAnchor),
-            bar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            bar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            bar.topAnchor.constraint(equalTo: view.topAnchor),
+            bar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             button.centerXAnchor.constraint(equalTo: bar.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: bar.centerYAnchor),
             button.topAnchor.constraint(equalTo: bar.topAnchor, constant: 8),
             button.bottomAnchor.constraint(equalTo: bar.bottomAnchor, constant: -8)
         ])
+        pauseBarView = bar
         pauseResumeButton = button
-        return bar
-    }()
+    }
 
-    private var pauseResumeButton: GazeableButton?
-
-    private lazy var contentViewLayoutGuide: UILayoutGuide = {
-        let guide = UILayoutGuide()
-        self.view.addLayoutGuide(guide)
+    private func setupContentViewLayoutGuide() {
+        view.addLayoutGuide(contentViewLayoutGuide)
         NSLayoutConstraint.activate([
-            guide.topAnchor.constraint(equalTo: self.pauseBarView.bottomAnchor),
-            guide.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            guide.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            guide.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            contentViewLayoutGuide.topAnchor.constraint(equalTo: pauseBarView.bottomAnchor),
+            contentViewLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            contentViewLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentViewLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        return guide
-    }()
-
-    private var emptyState: ListeningEmptyState?
-
-    private let synthesizedSpeechQueue = DispatchQueue(label: "speech_synthesis_queue", qos: .userInitiated)
-    let classifier = VLClassifier()
-    let apiClient = ListenAPIClient()
-
-    @PublishedValue private(set) var lastUtterance: String?
-
-    private var content: Content = .empty(.listeningResponse)
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.clipsToBounds = true
-        
-        edgesForExtendedLayout = UIRectEdge.all.subtracting(.top)
-        view.layoutMargins.top = 4
-
-        _ = pauseBarView
-        observePausedState()
     }
 
     @objc private func pauseResumeButtonTapped() {
