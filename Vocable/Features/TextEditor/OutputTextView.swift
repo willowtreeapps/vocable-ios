@@ -33,6 +33,13 @@ class OutputTextView: UITextView {
         }
     }
 
+    /// Insertion point for the caret; clamped to 0...text length. When not set, caret stays at end.
+    var cursorIndex: Int = -1 {
+        didSet {
+            updateCursorPosition()
+        }
+    }
+
     private let beamView = TextCursorBeamView(frame: .zero)
 
     override var frame: CGRect {
@@ -103,7 +110,15 @@ class OutputTextView: UITextView {
     }
 
     private func updateCursorPosition() {
-        let rect = caretRect(for: endOfDocument)
+        let length = attributedText?.length ?? 0
+        let index: Int
+        if cursorIndex >= 0 {
+            index = min(max(0, cursorIndex), length)
+        } else {
+            index = length
+        }
+        let position = position(from: beginningOfDocument, offset: index) ?? endOfDocument
+        let rect = caretRect(for: position)
         beamView.frame = rect
     }
     

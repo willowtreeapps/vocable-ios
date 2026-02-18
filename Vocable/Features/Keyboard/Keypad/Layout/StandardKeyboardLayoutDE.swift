@@ -109,8 +109,12 @@ struct StandardKeyboardLayoutDE: KeyboardLayout {
         KeyboardLayoutRow {
             KeyboardLayoutKey(configuration.mode == .alphabetical ? .numberPad : .alphabet)
                 .keyWidth(span: 10)
+            KeyboardLayoutKey(.moveCursorLeft)
+                .keyWidth(span: 4)
             KeyboardLayoutKey(.space)
-                .keyWidth(span: 20)
+                .keyWidth(span: 12)
+            KeyboardLayoutKey(.moveCursorRight)
+                .keyWidth(span: 4)
             KeyboardLayoutKey(.speak)
                 .keyWidth(span: 10)
         }

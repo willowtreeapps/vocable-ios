@@ -39,6 +39,10 @@ extension AccessibilityID.shared {
                 AccessibilityID(stringLiteral: "keyboard_function_begin_modifier_\(mod)")
             case .endModifier(let mod):
                 AccessibilityID(stringLiteral: "keyboard_function_end_modifier_\(mod)")
+            case .moveCursorLeft:
+                AccessibilityID(stringLiteral: "keyboard_function_move_cursor_left")
+            case .moveCursorRight:
+                AccessibilityID(stringLiteral: "keyboard_function_move_cursor_right")
             }
         }
         

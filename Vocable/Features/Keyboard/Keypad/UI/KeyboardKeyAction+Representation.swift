@@ -36,6 +36,10 @@ extension KeyboardKeyAction {
             .image(UIImage(systemName: "ellipsis")!)
         case .beginModifier(let value), .endModifier(let value):
             .string("\u{25CC}\(value)")
+        case .moveCursorLeft:
+            .image(UIImage(systemName: "arrow.left")!)
+        case .moveCursorRight:
+            .image(UIImage(systemName: "arrow.right")!)
         }
     }
 }

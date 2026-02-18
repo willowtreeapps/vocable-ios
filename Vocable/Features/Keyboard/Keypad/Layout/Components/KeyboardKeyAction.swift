@@ -20,6 +20,8 @@ public enum KeyboardKeyAction: Hashable {
     case beginModifier(Character)
     case endModifier(Character)
     case insertCharacter(Character)
+    case moveCursorLeft
+    case moveCursorRight
 
     var isStandardKey: Bool {
         if case .insertCharacter = self {

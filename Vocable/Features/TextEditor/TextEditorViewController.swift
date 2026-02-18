@@ -44,6 +44,7 @@ class TextEditorViewController: VocableViewController, UICollectionViewDelegate,
     private var textTransaction = TextTransaction(text: "") {
         didSet {
             textView.attributedText = textTransaction.attributedText
+            textView.cursorIndex = textTransaction.cursorIndex
             updateSuggestions(textTransaction)
             delegate?.textEditorViewController(self, textDidChange: self.text)
         }
@@ -123,7 +124,8 @@ class TextEditorViewController: VocableViewController, UICollectionViewDelegate,
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        textTransaction = TextTransaction(text: delegate?.textEditorViewControllerInitialValue(self) ?? "", intent: .lastCharacter)
+        let initialText = delegate?.textEditorViewControllerInitialValue(self) ?? ""
+        textTransaction = TextTransaction(text: initialText, intent: .lastCharacter, cursorIndex: initialText.count)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -249,6 +251,10 @@ class TextEditorViewController: VocableViewController, UICollectionViewDelegate,
             Task { [weak self] in
                 await self?.speechSynthesizer.speak(utterance)
             }
+        case .moveCursorLeft:
+            textTransaction.moveCursorLeft()
+        case .moveCursorRight:
+            textTransaction.moveCursorRight()
         case .numberPad, .alphabet, .openModifierPicker, .closeModifierPicker, .beginModifier, .endModifier:
             break
         }

@@ -61,8 +61,12 @@ struct CompactKeyboardLayoutEN: KeyboardLayout {
                 configuration.mode == .alphabetical ? .numberPad : .alphabet
             )
             .keyWidth(span: 3)
+            KeyboardLayoutKey(.moveCursorLeft)
+                .keyWidth(span: 2)
             KeyboardLayoutKey(.space)
-                .keyWidth(span: 6)
+                .keyWidth(span: 4)
+            KeyboardLayoutKey(.moveCursorRight)
+                .keyWidth(span: 2)
             KeyboardLayoutKey(.speak)
                 .keyWidth(span: 3)
         }

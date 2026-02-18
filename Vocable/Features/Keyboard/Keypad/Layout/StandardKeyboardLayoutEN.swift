@@ -76,8 +76,10 @@ struct StandardKeyboardLayoutEN: KeyboardLayout {
         }
         KeyboardLayoutRow(debugID: "function bottom") {
             KeyboardLayoutKey(configuration.mode == .alphabetical ? .numberPad : .alphabet)
+            KeyboardLayoutKey(.moveCursorLeft)
             KeyboardLayoutKey(.space)
                 .keyWidth(count: 4, span: 2)
+            KeyboardLayoutKey(.moveCursorRight)
             KeyboardLayoutKey(.speak)
         }
         .keyWidth(count: 4)
