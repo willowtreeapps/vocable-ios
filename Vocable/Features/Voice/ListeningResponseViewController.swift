@@ -75,6 +75,7 @@ final class ListeningResponseViewController: VocableViewController {
 
     private var contentViewController: UIViewController?
     private var pauseBarView: UIView!
+    private var pauseBarHeightConstraint: NSLayoutConstraint?
     private var pauseResumeButton: GazeableButton?
     private let contentViewLayoutGuide = UILayoutGuide()
 
@@ -130,17 +131,28 @@ final class ListeningResponseViewController: VocableViewController {
         button.addTarget(self, action: #selector(pauseResumeButtonTapped), for: .primaryActionTriggered)
         bar.addSubview(button)
 
+        let barHeight: CGFloat = sizeClass == .hRegular_vRegular ? 56 : 44
+        let heightConstraint = bar.heightAnchor.constraint(equalToConstant: barHeight)
         NSLayoutConstraint.activate([
             bar.topAnchor.constraint(equalTo: view.topAnchor),
             bar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            heightConstraint,
             button.centerXAnchor.constraint(equalTo: bar.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: bar.centerYAnchor),
             button.topAnchor.constraint(equalTo: bar.topAnchor, constant: 8),
             button.bottomAnchor.constraint(equalTo: bar.bottomAnchor, constant: -8)
         ])
         pauseBarView = bar
+        pauseBarHeightConstraint = heightConstraint
         pauseResumeButton = button
+        updatePauseBarVisibility()
+    }
+
+    private func updatePauseBarVisibility() {
+        let hasPermissions = permissionsController.state == nil
+        pauseBarView?.isHidden = !hasPermissions
+        pauseBarHeightConstraint?.constant = hasPermissions ? (sizeClass == .hRegular_vRegular ? 56 : 44) : 0
     }
 
     private func setupContentViewLayoutGuide() {
@@ -380,13 +392,14 @@ final class ListeningResponseViewController: VocableViewController {
             return
         }
         permissionsCancellable = permissionsController.$state
-            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newValue in
                 guard let self = self else { return }
+                self.updatePauseBarVisibility()
                 if let newValue = newValue {
                     self.setContent(.empty(newValue.state, action: newValue.action), animated: true)
-                } else if !self.speechRecognizerController.isPaused {
+                } else {
+                    // Permissions granted: show listening or unavailable (even if paused, e.g. after returning from system permission dialog)
                     if self.speechRecognizerController.isAvailable {
                         self.setContent(.empty(.listeningResponse), animated: true)
                     } else {
