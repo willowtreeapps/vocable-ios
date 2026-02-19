@@ -60,7 +60,9 @@ final class PersonalVoicePermissionPromptController {
                     self?.authorizationStatusDidChange(status)
                 }
             }
-        default:
+        case .unsupported: // Device or OS does not support Personal Voice
+            self.state = .init(state: .unsupported) { }
+        @unknown default:
             self.state = nil
         }
     }

@@ -146,19 +146,21 @@ final class PersonalVoiceViewController: PagingCarouselViewController {
 }
 
 enum PersonalVoiceEmptyState: EmptyStateRepresentable {
-    
+
     case denied
     case notAuthorized
     case noContent
-    
+    case unsupported
+
     var title: String {
         return switch self {
         case .denied: String(localized: "personal_voices.empty_state.denied.title")
         case .notAuthorized: String(localized: "personal_voices.empty_state.not_authorized.title")
         case .noContent: String(localized: "personal_voices.empty_state.no_content.title")
+        case .unsupported: String(localized: "personal_voices.empty_state.unsupported.title")
         }
     }
-    
+
     var description: String? {
         switch self {
         case .denied:
@@ -169,14 +171,20 @@ enum PersonalVoiceEmptyState: EmptyStateRepresentable {
             return String(format: format, UIDevice.current.model)
         case .notAuthorized:
             return String(localized: "personal_voices.empty_state.not_authorized.description")
+        case .unsupported:
+            let model = UIDevice.current.localizedModel
+            let systemName = UIDevice.current.systemName
+            let systemVersion = UIDevice.current.systemVersion
+            let format = String(localized: "personal_voices.empty_state.unsupported.description")
+            return String(format: format, model, systemName, systemVersion)
         }
     }
-    
+
     var buttonTitle: String? {
         return switch self {
         case .denied: String(localized: "personal_voices.empty_state.denied.button.title")
         case .notAuthorized: String(localized: "personal_voices.empty_state.not_authorized.button.title")
-        case .noContent: nil
+        case .noContent, .unsupported: nil
         }
     }
 }
