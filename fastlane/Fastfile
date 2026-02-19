@@ -1,9 +1,28 @@
 require 'fileutils'
 
+def match_api_key_from_env
+  ensure_env_vars(
+    env_vars: [
+      'APP_STORE_CONNECT_API_KEY_KEY_ID',
+      'APP_STORE_CONNECT_API_KEY_ISSUER_ID',
+      'APP_STORE_CONNECT_API_KEY_KEY_BASE64',
+      'APP_STORE_CONNECT_TEAM_ID'
+    ]
+  )
+  app_store_connect_api_key(
+    key_id: ENV['APP_STORE_CONNECT_API_KEY_KEY_ID'],
+    issuer_id: ENV['APP_STORE_CONNECT_API_KEY_ISSUER_ID'],
+    key_content: ENV['APP_STORE_CONNECT_API_KEY_KEY_BASE64'],
+    is_key_content_base64: true,
+    in_house: false,
+  )
+end
+
 default_platform :ios
 
 platform :ios do
   before_all do
+    skip_docs
     ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "60"
     if is_ci
       ENV["MATCH_GIT_PRIVATE_KEY"] = "/Users/runner/.ssh/id_rsa_match"
@@ -46,11 +65,10 @@ platform :ios do
 
   desc "AppStore build and upload to TestFlight"
   lane :build_deploy_testflight do
-    
     app_store_connect_api_key(
-      key_id: ENV['APP_STORE_KEY_ID'],
-      issuer_id: ENV['APP_STORE_ISSUER_ID'],
-      key_content: ENV['APP_STORE_KEY_BASE64'],
+      key_id: ENV['APP_STORE_CONNECT_API_KEY_KEY_ID'],
+      issuer_id: ENV['APP_STORE_CONNECT_API_KEY_ISSUER_ID'],
+      key_content: ENV['APP_STORE_CONNECT_API_KEY_KEY_BASE64'],
       is_key_content_base64: true,
       in_house: false,
     )
@@ -81,15 +99,17 @@ platform :ios do
 
   desc "Add devices via the command line to the device portal and regenerate the development provisioning profile with the device"
   lane :wt_register_new_device do
-    
     ensure_env_vars(
-      env_vars: ['APP_STORE_KEY_ID', 'APP_STORE_ISSUER_ID', 'APP_STORE_KEY_BASE64']
+      env_vars: [
+        'APP_STORE_CONNECT_API_KEY_KEY_ID',
+        'APP_STORE_CONNECT_API_KEY_ISSUER_ID',
+        'APP_STORE_CONNECT_API_KEY_KEY_BASE64',
+      ]
     )
-    
     app_store_connect_api_key(
-      key_id: ENV['APP_STORE_KEY_ID'],
-      issuer_id: ENV['APP_STORE_ISSUER_ID'],
-      key_content: ENV['APP_STORE_KEY_BASE64'],
+      key_id: ENV['APP_STORE_CONNECT_API_KEY_KEY_ID'],
+      issuer_id: ENV['APP_STORE_CONNECT_API_KEY_ISSUER_ID'],
+      key_content: ENV['APP_STORE_CONNECT_API_KEY_KEY_BASE64'],
       is_key_content_base64: true,
       in_house: false,
     )
@@ -107,6 +127,23 @@ platform :ios do
     match(type:"development", readonly: true)
   end
 
+  # Renew Match certificates and provisioning profiles (e.g. when expired or match repo is empty).
+  # Uses match_api_key_from_env (APP_STORE_CONNECT_API_KEY_*, APP_STORE_CONNECT_TEAM_ID).
+  # Usage: fastlane match_renew type:development   OR   fastlane match_renew type:appstore   OR   fastlane match_renew type:adhoc
+  desc "Renew Match certs by type (development, appstore, or adhoc)"
+  lane :match_renew do |options|
+    type = (options[:type] || "appstore").to_s
+    unless ["development", "appstore", "adhoc"].include?(type)
+      UI.user_error!("type must be one of: development, appstore, adhoc (got: #{type})")
+    end
+    match_api_key_from_env
+    match(
+      type: type,
+      team_id: ENV['APP_STORE_CONNECT_TEAM_ID'],
+      force_for_new_certificates: true,
+    )
+  end
+
   desc "Integrate latest XLIFF files with project"
   lane :xliff_import do
     Dir.glob('./../CrowdinExport/**/*.xliff') do |xliff|
@@ -117,7 +154,27 @@ platform :ios do
       run_with_retries(3, "xcodebuild -importLocalizations -localizationPath '#{xliff}' -project ./../Vocable.xcodeproj")
     end
   end
-  
+  desc "Integrate latest xcstrings files from Crowdin"
+  lane :xcstrings_import do
+    # Define the expected xcstrings files
+    xcstrings_files = ['InfoPlist.xcstrings', 'Localizable.xcstrings', 'Presets.xcstrings']
+    
+    xcstrings_files.each do |filename|
+      # Look for the file in CrowdinExport (could be in any language subdirectory)
+      source_files = Dir.glob("./../CrowdinExport/**/#{filename}")
+      
+      if source_files.empty?
+        next
+      end
+
+      source_file = source_files.first
+      destination = "./../Vocable/Supporting Files/#{filename}"
+
+      if File.exist?(destination)
+        FileUtils.cp(source_file, destination)
+      end
+    end
+  end
   desc "Export current XLIFF file from project"
   lane :xliff_export do
     sh "rm -rf ./../CrowdinExport/*"
@@ -134,12 +191,6 @@ def run_with_retries(retry_limit = 3, command)
     sh command
   rescue
     retries += 1
-    if retries <= retry_limit
-      puts "Command failed, retrying... (##{retries})"
-      retry
-    else
-      puts "Command failed after #{retry_limit} attempts"
-      raise
-    end
+    retries <= retry_limit ? retry : raise
   end
 end
