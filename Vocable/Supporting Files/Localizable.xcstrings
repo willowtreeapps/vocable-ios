@@ -34,12 +34,6 @@
             "value" : "Categorías"
           }
         },
-        "es-ES" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Categorías"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -76,12 +70,6 @@
             "value" : "Thể loại"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "类别"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -89,12 +77,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "目录"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "目录"
@@ -130,12 +112,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -177,12 +153,6 @@
             "value" : "Hủy bỏ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -190,12 +160,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "取消"
@@ -231,12 +195,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eliminar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eliminar"
@@ -278,12 +236,6 @@
             "value" : "Loại bỏ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "删除"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -291,12 +243,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "刪除"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "消除"
@@ -332,12 +278,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Las categorías eliminadas son irrecuperables."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Las categorías eliminadas son irrecuperables."
@@ -379,12 +319,6 @@
             "value" : "Không thể phục hồi các danh mục đã xóa."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "删除后的对话无法恢复。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -392,12 +326,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清除了的類別不可以恢復的"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "清除了的類別不可以恢復的"
@@ -433,12 +361,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -480,12 +402,6 @@
             "value" : "Hủy bỏ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -493,12 +409,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "取消"
@@ -534,12 +444,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eliminar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eliminar"
@@ -581,12 +485,6 @@
             "value" : "Loại bỏ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "删除"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -594,12 +492,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "消除"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "消除"
@@ -635,12 +527,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Las frases eliminadas son irrecuperables."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Las frases eliminadas son irrecuperables."
@@ -682,12 +568,6 @@
             "value" : "Không thể khôi phục các cụm từ đã xóa."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "删除后的对话无法恢复。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -695,12 +575,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已刪除的類別無法恢復"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "已刪除的類別無法恢復"
@@ -736,12 +610,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Editar expresiones"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Editar Frases"
@@ -783,12 +651,6 @@
             "value" : "Chỉnh sửa cụm từ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "编辑对话"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -796,12 +658,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "編輯短語"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "編輯短語"
@@ -837,12 +693,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eliminar Categoría"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eliminar Categoría"
@@ -884,25 +734,13 @@
             "value" : "Xóa danh mục"
           }
         },
-        "zh-CN" : {
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "删除类别"
           }
         },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移除类别"
-          }
-        },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "刪除類別?"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "刪除類別?"
@@ -938,12 +776,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Renombrar Categoría"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cambiar Nombre de Categoría"
@@ -985,12 +817,6 @@
             "value" : "Đổi tên danh mục"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重命名类别"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -998,12 +824,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重命名類別"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "重命名類別"
@@ -1039,12 +859,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar categoría"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar categoría"
@@ -1086,12 +900,6 @@
             "value" : "Hiển thị danh mục"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "显示分类名称"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1099,12 +907,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "顯示類別"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "顯示類別"
@@ -1140,12 +942,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cambios guardados"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cambios guardados"
@@ -1187,12 +983,6 @@
             "value" : "Các thay đổi đã được lưu"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已保存更改"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1200,12 +990,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "更改已儲存"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "更改已儲存"
@@ -1241,12 +1025,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cambios guardados"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cambios guardados"
@@ -1288,25 +1066,13 @@
             "value" : "Các thay đổi đã được lưu"
           }
         },
-        "zh-CN" : {
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "更改已保存"
           }
         },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已保存更改"
-          }
-        },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "更改已儲存"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "更改已儲存"
@@ -1342,12 +1108,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Agregar Phrase"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agregar frase"
@@ -1389,12 +1149,6 @@
             "value" : "Thêm cụm từ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加短语"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1402,12 +1156,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加短語"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "添加短語"
@@ -1443,12 +1191,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aún no se han guardado frases."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aún no se han guardado frases."
@@ -1490,12 +1232,6 @@
             "value" : "Chưa có cụm từ nào được lưu."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "尚未保存任何短语。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1503,12 +1239,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "尚未儲存任何短語。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "尚未儲存任何短語。"
@@ -1544,12 +1274,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -1591,12 +1315,6 @@
             "value" : "Hủy bỏ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1604,12 +1322,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "取消"
@@ -1645,12 +1357,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Continuar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuar"
@@ -1692,12 +1398,6 @@
             "value" : "Tiếp tục"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "继续"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1705,12 +1405,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "繼續"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "繼續"
@@ -1746,12 +1440,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desactivar el seguimiento de la cabeza hará que Vocable sea solo táctil. ¿Te gustaria continuar?"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Desactivar el seguimiento de la cabeza hará que Vocable sea solo táctil. ¿Te gustaria continuar?"
@@ -1793,12 +1481,6 @@
             "value" : "Tắt tính năng theo dõi đầu sẽ khiến Vocable chỉ có cảm ứng. Bạn có muốn tiếp tục không?"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "关闭头部追踪将使 Vocable 只能进行触摸操作。 你想继续吗？"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1806,12 +1488,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "關閉頭部追蹤將使 Vocable 只能進行觸控操作。 你想繼續嗎？"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "關閉頭部追蹤將使 Vocable 只能進行觸控操作。 你想繼續嗎？"
@@ -1847,12 +1523,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acérquese al dispositivo."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Acérquese al dispositivo."
@@ -1894,12 +1564,6 @@
             "value" : "Vui lòng di chuyển đến gần thiết bị hơn."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请靠近设备"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1907,12 +1571,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請靠近設備。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請靠近設備。"
@@ -1948,12 +1606,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cuando alguien hace una pregunta en voz alta, Vocable ofrecerá opciones de respuesta rápidas."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cuando alguien hace una pregunta en voz alta, Vocable ofrecerá opciones de respuesta rápidas."
@@ -1995,12 +1647,6 @@
             "value" : "Khi ai đó hỏi to một câu hỏi, Vocable sẽ cung cấp các tùy chọn trả lời nhanh."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "当有人大声提出问题时，Vocable 将提供快速响应选项。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2008,12 +1654,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "當有人大聲提出問題時，Vocable 將提供快速響應選項。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "當有人大聲提出問題時，Vocable 將提供快速響應選項。"
@@ -2049,12 +1689,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escuchando..."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escuchando..."
@@ -2096,12 +1730,6 @@
             "value" : "Đang nghe..."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在聆听…"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2109,12 +1737,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在聆聽..."
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "正在聆聽..."
@@ -2150,12 +1772,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No está seguro de qué sugerir. Utilice el teclado o seleccione una frase existente para responder."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No está seguro de qué sugerir. Utilice el teclado o seleccione una frase existente para responder."
@@ -2197,12 +1813,6 @@
             "value" : "Không chắc chắn những gì để đề xuất. Vui lòng sử dụng bàn phím hoặc chọn một cụm từ hiện có để trả lời."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "不知道要建议什么。请使用键盘或选择一个现有的短语来回复。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2210,12 +1820,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "不知道該建議什麼。請使用鍵盤或選擇現有短語進行回复。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "不知道該建議什麼。請使用鍵盤或選擇現有短語進行回复。"
@@ -2251,12 +1855,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suena complicado"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suena complicado"
@@ -2298,12 +1896,6 @@
             "value" : "Nghe có vẻ phức tạp"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "听起来很复杂"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2311,12 +1903,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "聽起來很複雜"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "聽起來很複雜"
@@ -2352,12 +1938,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir configuración"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir configuración"
@@ -2399,12 +1979,6 @@
             "value" : "Mở cài đặt"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "打开设置"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2412,12 +1986,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "打開設置"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "打開設置"
@@ -2453,12 +2021,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable necesita usar el micrófono para habilitar el modo de escucha. Permita el acceso al micrófono en %1$@ Configuración.\n\nTambién puedes desactivar el modo de escucha para ocultar esta categoría."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vocable necesita usar el micrófono para habilitar el modo de escucha. Permita el acceso al micrófono en %1$@ Configuración.\n\nTambién puedes desactivar el modo de escucha para ocultar esta categoría."
@@ -2500,12 +2062,6 @@
             "value" : "Vocable cần sử dụng micrô để bật Chế độ nghe. Vui lòng cho phép truy cập micrô trong Cài đặt %1$@.\n\nBạn cũng có thể tắt Chế độ nghe để ẩn danh mục này."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable 需要使用麦克风来启用聆听模式。 请在%1$@ 设置中允许麦克风访问。\n\n您还可以禁用聆听模式来隐藏此类别。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2513,12 +2069,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable 需要使用麥克風來啟用聆聽模式。 請在%1$@ 設定中允許麥克風存取。\n\n您也可以停用聆聽模式來隱藏此類別。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vocable 需要使用麥克風來啟用聆聽模式。 請在%1$@ 設定中允許麥克風存取。\n\n您也可以停用聆聽模式來隱藏此類別。"
@@ -2554,12 +2104,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acceso al micrófono"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Acceso al micrófono"
@@ -2601,12 +2145,6 @@
             "value" : "Quyền truy cập vào micrô"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "麦克风访问权限"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2614,12 +2152,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "麥克風訪問"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "麥克風訪問"
@@ -2655,12 +2187,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dar acceso"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dar acceso"
@@ -2702,12 +2228,6 @@
             "value" : "Cấp phép truy cập"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "授予访问权限"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2715,12 +2235,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "授予訪問權限"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "授予訪問權限"
@@ -2756,12 +2270,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable necesita acceso al micrófono para habilitar el modo de escucha. El botón a continuación presenta un cuadro de diálogo de permiso de iOS con el que el seguimiento de la cabeza de Vocable no puede interactuar."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vocable necesita acceso al micrófono para habilitar el modo de escucha. El botón a continuación presenta un cuadro de diálogo de permiso de iOS con el que el seguimiento de la cabeza de Vocable no puede interactuar."
@@ -2803,12 +2311,6 @@
             "value" : "Vocable cần quyền truy cập micrô để bật Chế độ nghe. Nút bên dưới trình bày hộp thoại quyền của iOS mà tính năng theo dõi đầu của Vocable không thể can thiệp vào."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable 需要麦克风访问权限才能启用聆听模式。下面的按钮显示了一个 iOS 权限对话框，Vocable 的头部跟踪无法与之交互。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2816,12 +2318,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable 需要麥克風訪問權限才能啟用聆聽模式。下面的按鈕顯示了一個 iOS 權限對話框，Vocable 的頭部跟踪無法與之交互。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vocable 需要麥克風訪問權限才能啟用聆聽模式。下面的按鈕顯示了一個 iOS 權限對話框，Vocable 的頭部跟踪無法與之交互。"
@@ -2857,12 +2353,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acceso al micrófono"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Acceso al micrófono"
@@ -2904,12 +2394,6 @@
             "value" : "Quyền truy cập vào micrô"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "麦克风访问权限"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2917,12 +2401,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "麥克風訪問"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "麥克風訪問"
@@ -2958,12 +2436,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir configuración"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir configuración"
@@ -3005,12 +2477,6 @@
             "value" : "Mở cài đặt"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "打开设置"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3018,12 +2484,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "打開設置"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "打開設置"
@@ -3059,12 +2519,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable necesita reconocimiento de voz para habilitar el modo de escucha. Habilite el reconocimiento de voz en %1$@ Configuración.\n\nTambién puedes desactivar el modo de escucha para ocultar esta categoría."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vocable necesita reconocimiento de voz para habilitar el modo de escucha. Habilite el reconocimiento de voz en %1$@ Configuración.\n\nTambién puedes desactivar el modo de escucha para ocultar esta categoría."
@@ -3106,12 +2560,6 @@
             "value" : "Vocable cần nhận dạng giọng nói để bật Chế độ nghe. Vui lòng bật nhận dạng giọng nói trong Cài đặt %1$@.\n\nBạn cũng có thể tắt Chế độ nghe để ẩn danh mục này."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable 需要语音识别才能启用聆听模式。 请在 %1$@ 设置中启用语音识别。\n\n您还可以禁用聆听模式来隐藏此类别。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3119,12 +2567,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable 需要語音辨識才能啟用聆聽模式。 請在 %1$@ 設定中啟用語音辨識。\n\n您也可以停用聆聽模式來隱藏此類別。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vocable 需要語音辨識才能啟用聆聽模式。 請在 %1$@ 設定中啟用語音辨識。\n\n您也可以停用聆聽模式來隱藏此類別。"
@@ -3160,12 +2602,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reconocimiento de voz"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reconocimiento de voz"
@@ -3207,12 +2643,6 @@
             "value" : "Nhận dạng giọng nói"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "语音识别"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3220,12 +2650,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "語音識別"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "語音識別"
@@ -3261,12 +2685,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dar acceso"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dar acceso"
@@ -3308,12 +2726,6 @@
             "value" : "Cấp phép truy cập"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "授予访问权限"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3321,12 +2733,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "授予訪問權限"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "授予訪問權限"
@@ -3362,12 +2768,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable necesita solicitar permisos de voz para habilitar el modo de escucha. Esto presentará un cuadro de diálogo de permiso de iOS con el que el seguimiento de la cabeza de Vocable no puede interactuar."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vocable necesita solicitar permisos de voz para habilitar el modo de escucha. Esto presentará un cuadro de diálogo de permiso de iOS con el que el seguimiento de la cabeza de Vocable no puede interactuar."
@@ -3409,12 +2809,6 @@
             "value" : "Vocable cần yêu cầu quyền lời nói để bật Chế độ nghe. Thao tác này sẽ hiển thị hộp thoại quyền của iOS mà tính năng theo dõi đầu của Vocable không thể can thiệp vào."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable 需要请求语音权限才能启用聆听模式。这将显示一个 iOS 权限对话框，Vocable 的头部跟踪无法与之交互。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3422,12 +2816,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable 需要請求語音權限才能啟用聆聽模式。這將顯示一個 iOS 權限對話框，Vocable 的頭部跟踪無法與之交互。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vocable 需要請求語音權限才能啟用聆聽模式。這將顯示一個 iOS 權限對話框，Vocable 的頭部跟踪無法與之交互。"
@@ -3463,12 +2851,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reconocimiento de voz"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reconocimiento de voz"
@@ -3510,12 +2892,6 @@
             "value" : "Nhận dạng giọng nói"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "语音识别"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3523,12 +2899,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "語音識別"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "語音識別"
@@ -3564,12 +2934,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Los servicios de voz requieren que una de las siguientes funciones esté habilitada en su dispositivo: Siri o Dictado. Verifique la configuración de su dispositivo y habilite Siri o Dictado."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Los servicios de voz requieren que una de las siguientes funciones esté habilitada en su dispositivo: Siri o Dictado. Verifique la configuración de su dispositivo y habilite Siri o Dictado."
@@ -3611,12 +2975,6 @@
             "value" : "Dịch vụ giọng nói yêu cầu bật một trong các tính năng sau trên thiết bị của bạn: Siri hoặc Đọc chính tả. Vui lòng kiểm tra cài đặt thiết bị của bạn và bật Siri hoặc Đọc chính tả."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "语音服务需要在您的设备上启用以下功能之一：Siri 或听写。请检查您的设备设置并启用 Siri 或听写。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3624,12 +2982,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "語音服務需要在您的設備上啟用以下功能之一：Siri 或聽寫。請檢查您的設備設置並啟用 Siri 或聽寫。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "語音服務需要在您的設備上啟用以下功能之一：Siri 或聽寫。請檢查您的設備設置並啟用 Siri 或聽寫。"
@@ -3665,12 +3017,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Servicios de voz no disponibles"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Servicios de voz no disponibles"
@@ -3712,12 +3058,6 @@
             "value" : "Dịch vụ lời nói không khả dụng"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "语音服务不可用"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3729,18 +3069,11 @@
             "state" : "translated",
             "value" : "語音服務不可用"
           }
-        },
-        "zh-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "語音服務不可用"
-          }
         }
       }
     },
     "listening_mode.empty_state.unsupported.message" : {
       "comment" : "Listening mode empty state message for when microphone permissions are required, but listening mode is unsupported",
-      "extractionState" : "manual",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -3767,12 +3100,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Este %1$@ en %2$@ %3$@ no soporta el modo de escucha.\n\nEl modo de escucha solo está disponible actualmente en inglés y requiere que %5$@ esté habilitado."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Este %1$@ en %2$@ %3$@ no soporta el modo de escucha.\n\nEl modo de escucha solo está disponible actualmente en inglés y requiere que %4$@ esté habilitado."
@@ -3814,25 +3141,13 @@
             "value" : "%1$@ trên %2$@ %3$@ này không hỗ trợ Chế độ nghe.\n\nChế độ nghe hiện chỉ khả dụng bằng tiếng Anh và yêu cầu bật %4$@."
           }
         },
-        "zh-CN" : {
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "此 %1$@ 在 %2$@ %3$@ 不支持侦听模式。\n\n侦听模式目前仅有英文可用，需要启用 %4$@。"
           }
         },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "此 %1$@ 在 %2$@ %3$@ 不支持侦听模式。\n\n侦听模式目前仅有英文可用，需要启用 %5$@。"
-          }
-        },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。\n\n聆聽模式目前僅提供英文版本，需要啟用 %5$@。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。\n\n聆聽模式目前僅提供英文版本，需要啟用 %4$@。"
@@ -3868,12 +3183,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modo de escucha no soportado"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modo de escucha no soportado"
@@ -3915,12 +3224,6 @@
             "value" : "Chế độ nghe không được hỗ trợ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "监听模式不受支持"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3928,12 +3231,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "聆聽模式不支持"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "聆聽模式不支持"
@@ -3969,12 +3266,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Por favor, comprueba tu conexión de internet e inténtalo más tarde."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Por favor, comprueba tu conexión de internet e inténtalo más tarde."
@@ -4016,12 +3307,6 @@
             "value" : "Vui lòng kiểm tra kết nối internet của bạn và thử lại sau."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请检查您的互联网连接并稍后重试。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4029,12 +3314,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請檢查您的網路連線並稍後重試。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請檢查您的網路連線並稍後重試。"
@@ -4070,12 +3349,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallo de red"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fallo de red"
@@ -4117,12 +3390,6 @@
             "value" : "Lỗi mạng"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "网络故障"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4130,12 +3397,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "網路故障"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "網路故障"
@@ -4171,12 +3432,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¡Gracias!"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¡Gracias!"
@@ -4218,12 +3473,6 @@
             "value" : "Cảm ơn!"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "谢谢！"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4231,12 +3480,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "謝謝您！"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "謝謝您！"
@@ -4272,12 +3515,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿No te gustan estas respuestas? Comparta anónimamente esta pregunta para ayudar a mejorar el modo de escucha."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿No te gustan estas respuestas? Comparta anónimamente esta pregunta para ayudar a mejorar el modo de escucha."
@@ -4319,12 +3556,6 @@
             "value" : "Bạn không thích những câu trả lời này? Chia sẻ ẩn danh câu hỏi này để giúp cải thiện chế độ nghe."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "不喜欢这些响应？匿名分享这个问题以帮助改善监听模式。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4332,12 +3563,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "不喜歡這些回复？匿名分享此問題以幫助改善聆聽模式。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "不喜歡這些回复？匿名分享此問題以幫助改善聆聽模式。"
@@ -4373,12 +3598,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compartir con desarrolladores"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compartir con desarrolladores"
@@ -4420,12 +3639,6 @@
             "value" : "Chia sẻ với các nhà phát triển"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "与开发者分享"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4433,12 +3646,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "與開發者分享"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "與開發者分享"
@@ -4474,12 +3681,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Selecciona algo a continuación para hablar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Selecciona algo a continuación para hablar"
@@ -4521,12 +3722,6 @@
             "value" : "Chọn một cái gì đó bên dưới để nói"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请选择下面要说的对话"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4534,12 +3729,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "選擇以下內容進行發言"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "選擇以下內容進行發言"
@@ -4575,12 +3764,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Página %1$d de %2$d"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Página %1$d de %2$d"
@@ -4622,12 +3805,6 @@
             "value" : "Trang %1$d / %2$d"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "第 %1$d/%2$d 頁"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4635,12 +3812,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "第 %1$d 頁，共 %2$d 頁"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "第 %1$d 頁，共 %2$d 頁"
@@ -4675,7 +3846,7 @@
             "value" : "Open Settings"
           }
         },
-        "es-ES" : {
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir configuración"
@@ -4717,13 +3888,13 @@
             "value" : "Mở cài đặt"
           }
         },
-        "zh-CN" : {
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "打开设置"
           }
         },
-        "zh-TW" : {
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "打開設置"
@@ -4759,12 +3930,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable necesita permiso para acceder a Voces Personales en este dispositivo.\n\nPuede habilitar el acceso en Ajustes %1$@."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vocable necesita permiso para acceder a Voces Personales en este dispositivo.\n\nPuede habilitar el acceso en Ajustes %1$@."
@@ -4806,12 +3971,6 @@
             "value" : "Vocable cần có quyền truy cập Giọng nói cá nhân trên thiết bị này.\n\nBạn có thể kích hoạt quyền truy cập trong Cài đặt %1$@."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable 需要获得访问此设备上的个人语音的权限。\n\n您可以在%1$@ 设置中启用访问。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4819,12 +3978,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable 需要獲得存取此裝置上的個人語音的權限。\n\n您可以在%1$@ 設定中啟用存取。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vocable 需要獲得存取此裝置上的個人語音的權限。\n\n您可以在%1$@ 設定中啟用存取。"
@@ -4860,12 +4013,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acceso a Voz Personal"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Acceso a Voz Personal"
@@ -4907,12 +4054,6 @@
             "value" : "Truy cập bằng giọng nói cá nhân"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "个人语音访问"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4920,12 +4061,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人語音訪問"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "個人語音訪問"
@@ -4961,12 +4096,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Puedes crear una nueva voz personal en %1$@ Configuración. Una vez creada, puede configurar su Voz personal como la voz de Vocable.\n\nSi se creó una voz personal y no aparece en Vocable, intente reiniciar %1$@."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Puedes crear una nueva voz personal en %1$@ Configuración. Una vez creada, puede configurar su Voz personal como la voz de Vocable.\n\nSi se creó una voz personal y no aparece en Vocable, intente reiniciar %1$@."
@@ -5008,12 +4137,6 @@
             "value" : "Bạn có thể tạo Giọng nói cá nhân mới trong Cài đặt %1$@. Sau khi tạo, bạn có thể đặt Giọng nói cá nhân của mình làm giọng nói của Vocable.\n\nNếu Giọng nói Cá nhân đã được tạo và không xuất hiện trong Từ vựng, hãy thử khởi động lại %1$@."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您可以在 %1$@ 设置中创建一个新的个人语音。一旦创建，您可以将您的个人语音设置为词汇。\n\n如果个人语音已被创建并且没有出现在词汇中，请尝试重启 %1$@。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5021,12 +4144,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您可以在%1$@ 設定中建立新的個人語音。 建立後，您可以將您的個人語音設定為 Vocable 的語音。\n\n如果個人語音已建立但未出現在 Vocable 中，請嘗試重新啟動 %1$@。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "您可以在%1$@ 設定中建立新的個人語音。 建立後，您可以將您的個人語音設定為 Vocable 的語音。\n\n如果個人語音已建立但未出現在 Vocable 中，請嘗試重新啟動 %1$@。"
@@ -5062,12 +4179,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sin Voces Personales"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sin Voces Personales"
@@ -5109,12 +4220,6 @@
             "value" : "Không có tiếng nói cá nhân"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "没有个人声音"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5122,12 +4227,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "沒有個人聲音"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "沒有個人聲音"
@@ -5162,7 +4261,7 @@
             "value" : "Grant Access"
           }
         },
-        "es-ES" : {
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dar acceso"
@@ -5204,13 +4303,13 @@
             "value" : "Cấp phép truy cập"
           }
         },
-        "zh-CN" : {
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "授予访问权限"
           }
         },
-        "zh-TW" : {
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "授予訪問權限"
@@ -5246,12 +4345,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permitir el acceso a Voces Personales almacenados en este dispositivo."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Permitir el acceso a Voces Personales almacenados en este dispositivo."
@@ -5293,12 +4386,6 @@
             "value" : "Cho phép Vocable truy cập Giọng nói cá nhân được lưu trữ trên thiết bị này."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "允许 Vocable 访问此设备上存储的个人语音。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5306,12 +4393,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "允許 Vocable 存取此裝置上儲存的個人語音。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "允許 Vocable 存取此裝置上儲存的個人語音。"
@@ -5347,12 +4428,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acceso a Voz Personal"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Acceso a Voz Personal"
@@ -5394,12 +4469,6 @@
             "value" : "Truy cập bằng giọng nói cá nhân"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "个人语音访问"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5407,12 +4476,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人語音訪問"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "個人語音訪問"
@@ -5448,12 +4511,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voces Personales"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voces Personales"
@@ -5495,12 +4552,6 @@
             "value" : "Tiếng nói cá nhân"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "个人语音"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5508,12 +4559,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人聲音"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "個人聲音"
@@ -5549,12 +4594,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seguir editando"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuar Edición"
@@ -5596,12 +4635,6 @@
             "value" : "Tiếp tục chỉnh sửa"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "继续编辑"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5609,12 +4642,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "繼續編輯"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "繼續編輯"
@@ -5650,12 +4677,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Descartar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descartar"
@@ -5697,12 +4718,6 @@
             "value" : "Bỏ đi"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "舍弃"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5710,12 +4725,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "丟棄"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "丟棄"
@@ -5751,12 +4760,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Si cierra sin guardar, sus cambios se perderán."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Si cierra sin guardar, sus cambios se perderán."
@@ -5798,12 +4801,6 @@
             "value" : "Nếu bạn đóng mà không lưu, các thay đổi của bạn sẽ bị mất."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "如果您关闭而不保存，您的更改将丢失。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5811,12 +4808,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "如果您關閉而不保存，您的更改將會丟失。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "如果您關閉而不保存，您的更改將會丟失。"
@@ -5852,12 +4843,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -5899,12 +4884,6 @@
             "value" : "Hủy bỏ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5912,12 +4891,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "取消"
@@ -5953,12 +4926,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Crear duplicado"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Crear duplicado"
@@ -6000,12 +4967,6 @@
             "value" : "Tạo bản sao"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "创建副本"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6013,12 +4974,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "創建副本"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "創建副本"
@@ -6054,12 +5009,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Esta frase ya existe. ¿Le gustaría crear un duplicado?"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Esta frase ya existe. ¿Le gustaría crear un duplicado?"
@@ -6101,12 +5050,6 @@
             "value" : "Cụm từ này đã tồn tại. Bạn có muốn tạo một bản sao không?"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "此短语已经存在。您想要创建重复吗？"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6114,12 +5057,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "這句話已經存在。您想創建一個副本嗎？"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "這句話已經存在。您想創建一個副本嗎？"
@@ -6155,12 +5092,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Guardado en %@"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Guardado en %@"
@@ -6202,12 +5133,6 @@
             "value" : "Đã lưu vào %@"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保存到 %@"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6215,12 +5140,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已保存到 %@"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "已保存到 %@"
@@ -6256,12 +5175,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Agregar frase"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agregar frase"
@@ -6303,12 +5216,6 @@
             "value" : "Thêm cụm từ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加短语"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6316,12 +5223,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加短語"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "添加短語"
@@ -6357,12 +5258,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No"
@@ -6404,12 +5299,6 @@
             "value" : "Không"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "不是"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6417,12 +5306,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "不"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "不"
@@ -6458,12 +5341,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sí"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sí"
@@ -6505,12 +5382,6 @@
             "value" : "Đúng"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "是"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6518,12 +5389,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "是"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "是"
@@ -6559,12 +5424,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Empieza a usar Vocable para ver tus frases usadas más recientemente aquí."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Empieza a usar Vocable para ver tus frases usadas más recientemente aquí."
@@ -6606,12 +5465,6 @@
             "value" : "Bắt đầu sử dụng Vocable để xem các cụm từ được sử dụng gần đây nhất của bạn tại đây."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "开始使用 Vocable 在此处查看您最近使用的短语。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6619,12 +5472,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "開始使用 Vocable 在此處查看您最近使用的短語。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "開始使用 Vocable 在此處查看您最近使用的短語。"
@@ -6660,12 +5507,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No hay frases usadas recientemente"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No hay frases usadas recientemente"
@@ -6707,12 +5548,6 @@
             "value" : "Không có cụm từ được sử dụng gần đây"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "没有最近使用的短语"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6720,12 +5555,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "沒有最近使用的短語"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "沒有最近使用的短語"
@@ -6761,12 +5590,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modo de selección"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modo de selección"
@@ -6808,12 +5631,6 @@
             "value" : "Chế độ Lựa chọn"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移动对象模式"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6821,12 +5638,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "選擇模式"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "選擇模式"
@@ -6862,12 +5673,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -6909,25 +5714,13 @@
             "value" : "OK"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "好的"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "确定"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "好的"
           }
         },
-        "zh-TW" : {
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "好的"
@@ -6963,12 +5756,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Por favor, inicia sesión en una cuenta con Mail para %1$@."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Por favor, inicia sesión en una cuenta con Mail para %1$@."
@@ -7010,12 +5797,6 @@
             "value" : "Please sign into an account with Mail for %1$@."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请使用 %1$@ 邮件应用程序登录您的电子邮件帐户"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7023,12 +5804,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請使用 Mail 登錄 %1$@ 的帳戶。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請使用 Mail 登錄 %1$@ 的帳戶。"
@@ -7064,12 +5839,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Está seguro de que desea restablecer Vocable a la configuración predeterminada? Esta acción no se puede deshacer."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Está seguro de que desea restablecer Vocable a la configuración predeterminada? Esta acción no se puede deshacer."
@@ -7111,12 +5880,6 @@
             "value" : "Bạn có chắc chắn muốn đặt lại Vocable về cài đặt mặc định không? Hành động này không thể được hoàn tác."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您确定要将 Vocable 重置为默认设置吗？此操作无法撤消。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7124,12 +5887,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您確定要將 Voable 重置為默認設置嗎？此操作無法撤消。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "您確定要將 Voable 重置為默認設置嗎？此操作無法撤消。"
@@ -7165,12 +5922,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -7212,12 +5963,6 @@
             "value" : "Hủy bỏ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7225,12 +5970,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "取消"
@@ -7266,12 +6005,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reiniciar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reiniciar"
@@ -7313,12 +6046,6 @@
             "value" : "Cài lại"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重 置"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7326,12 +6053,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重置"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "重置"
@@ -7367,12 +6088,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable no se pudo restablecer. Por favor, inténtelo de nuevo o reinstale Vocable si el problema persiste."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vocable no se pudo restablecer. Por favor, inténtelo de nuevo o reinstale Vocable si el problema persiste."
@@ -7414,12 +6129,6 @@
             "value" : "Không thể đặt lại Vocable. Vui lòng thử lại hoặc cài đặt lại Vocable nếu sự cố vẫn tiếp diễn."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "语音无法重置。如果问题仍然存在，请重试或重新安装 Vocable。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7427,12 +6136,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "語音無法重置。如果問題仍然存在，請重試或重新安裝 Vocable。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "語音無法重置。如果問題仍然存在，請重試或重新安裝 Vocable。"
@@ -7468,12 +6171,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -7515,25 +6212,13 @@
             "value" : "OK"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "好的"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "确定"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "好的"
           }
         },
-        "zh-TW" : {
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "好的"
@@ -7569,12 +6254,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vocable se ha restablecido correctamente."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vocable se ha restablecido correctamente."
@@ -7616,12 +6295,6 @@
             "value" : "Vocable đã được đặt lại thành công."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已成功恢复默认设置."
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7629,12 +6302,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "詞彙已成功重置。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "詞彙已成功重置。"
@@ -7670,12 +6337,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -7717,12 +6378,6 @@
             "value" : "OK"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "好的"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7730,12 +6385,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "好的"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "好的"
@@ -7771,12 +6420,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estás a punto de salir de la aplicación Vocable. Puede perder el control de seguimiento de la cabeza."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estás a punto de salir de la aplicación Vocable. Puede perder el control de seguimiento de la cabeza."
@@ -7818,12 +6461,6 @@
             "value" : "Bạn sắp rời khỏi ứng dụng Vocable. Bạn có thể mất kiểm soát theo dõi đầu."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您即将被带到可说话之外。您可能会失去头部跟踪控制。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7831,12 +6468,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您即將離開 Vocable 應用程序。您可能會失去頭部跟踪控制。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "您即將離開 Vocable 應用程序。您可能會失去頭部跟踪控制。"
@@ -7872,12 +6503,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -7919,12 +6544,6 @@
             "value" : "Hủy bỏ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7932,12 +6551,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "取消"
@@ -7973,12 +6586,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aceptar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aceptar"
@@ -8020,12 +6627,6 @@
             "value" : "Xác nhận"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "确认"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8033,12 +6634,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "確認"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "確認"
@@ -8074,12 +6669,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Categorías y frases"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Categorías y frases"
@@ -8121,25 +6710,13 @@
             "value" : "Danh mục và Cụm từ"
           }
         },
-        "zh-CN" : {
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "类别和词组"
           }
         },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "类别"
-          }
-        },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "類別和短語"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "類別和短語"
@@ -8175,12 +6752,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Contactar desarrolladores"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contactar desarrolladores"
@@ -8222,12 +6793,6 @@
             "value" : "Danh mục và Cụm từ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "联系开发者"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8235,12 +6800,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "聯繫開發者"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "聯繫開發者"
@@ -8276,12 +6835,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seguimiento de la cabeza"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seguimiento de la cabeza"
@@ -8323,12 +6876,6 @@
             "value" : "Theo dõi đầu"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "头部跟踪"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8340,11 +6887,89 @@
             "state" : "translated",
             "value" : "頭部追踪"
           }
-        },
-        "zh-TW" : {
+        }
+      }
+    },
+    "settings.cell.keyboard_layout.title" : {
+      "comment" : "edit keyboard layout settings menu item",
+      "extractionState" : "stale",
+      "localizations" : {
+        "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "頭部追踪"
+            "value" : "ﻡ/ﻝ ﻂﻴﻄﺨﺗ"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tastaturlayout"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tastaturlayout"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keyboard Layout"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diseño del Teclado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disposition Clavier"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कुंजीपटल अभिन्यास"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Layout tastiera"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "키보드 자판의 키 배열"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Раскладка клавиатуры"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bố trí bàn phím"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "键盘布局"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鍵盤佈局"
           }
         }
       }
@@ -8377,12 +7002,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modo de escucha"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modo de escucha"
@@ -8424,12 +7043,6 @@
             "value" : "Chế độ nghe"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在侦听模式"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8437,12 +7050,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "聆聽模式"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "聆聽模式"
@@ -8478,12 +7085,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Política de privacidad"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Política de privacidad"
@@ -8525,12 +7126,6 @@
             "value" : "Chính sách bảo mật"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "隐私政策"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8538,12 +7133,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "隱私政策"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "隱私政策"
@@ -8579,12 +7168,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "QWERTY de Compacto"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "QWERTY de Compacto"
@@ -8626,12 +7209,6 @@
             "value" : "QWERTY nhỏ gọn"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "简洁的QWERTY"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8639,12 +7216,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "緊湊型全鍵盤"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "緊湊型全鍵盤"
@@ -8680,12 +7251,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restablecer configuración"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Restablecer configuración"
@@ -8727,12 +7292,6 @@
             "value" : "Đặt lại cài đặt ứng dụng"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重置应用设置"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8740,12 +7299,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重置應用設置"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "重置應用設置"
@@ -8781,12 +7334,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modo de selección"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modo de selección"
@@ -8828,12 +7375,6 @@
             "value" : "Chế độ Lựa chọn"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移动对象模式"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8841,12 +7382,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "選擇模式"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "選擇模式"
@@ -8882,12 +7417,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tiempo y sensibilidad"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tiempo y sensibilidad"
@@ -8929,12 +7458,6 @@
             "value" : "Thời gian và độ nhạy"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "时间和灵敏度"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8942,12 +7465,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "時間和靈敏度"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "時間和靈敏度"
@@ -8983,12 +7500,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voz"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voz"
@@ -9030,12 +7541,6 @@
             "value" : "Tiếng nói"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "声音"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9043,12 +7548,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "嗓音"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "嗓音"
@@ -9084,12 +7583,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajustes"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajustes"
@@ -9131,12 +7624,6 @@
             "value" : "Cài đặt"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "设置"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9148,11 +7635,89 @@
             "state" : "translated",
             "value" : "設置"
           }
-        },
-        "zh-TW" : {
+        }
+      }
+    },
+    "settings.keyboard_layout.header.title" : {
+      "comment" : "Keyboard Layout setting header title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設置"
+            "value" : "ﻡ/ﻝ ﻂﻴﻄﺨﺗ"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tastaturlayout"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tastaturlayout"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keyboard Layout"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diseño del Teclado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disposition Clavier"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कुंजीपटल अभिन्यास"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Layout tastiera"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "키보드 자판의 키 배열"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Раскладка клавиатуры"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bố trí bàn phím"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "键盘布局"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鍵盤佈局"
           }
         }
       }
@@ -9185,12 +7750,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utilice la distribución del teclado QWERTY en todas las orientaciones. Las teclas pueden ser más pequeñas, lo que dificulta la escritura."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Utilice la distribución del teclado QWERTY en todas las orientaciones. Las teclas pueden ser más pequeñas, lo que dificulta la escritura."
@@ -9232,12 +7791,6 @@
             "value" : "Sử dụng bố cục bàn phím QWERTY ở mọi hướng. Các phím có thể nhỏ hơn, khiến việc gõ phím trở nên khó khăn hơn."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在所有方向使用 QWERTY 键盘布局。键盘可能较小，更难打字。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9249,18 +7802,11 @@
             "state" : "translated",
             "value" : "在所有方向上使用 QWERTY 鍵盤佈局。 按鍵可能更小，使打字更加困難。"
           }
-        },
-        "zh-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在所有方向上使用 QWERTY 鍵盤佈局。 按鍵可能更小，使打字更加困難。"
-          }
         }
       }
     },
     "settings.listening_mode.device_unsupported_explanation_footer" : {
       "comment" : "Footer text displayed in the Listening Mode preferences screen. This is only displayed if the user's device does not support Listening Mode because of it's language or lack of neural engine.",
-      "extractionState" : "manual",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -9287,12 +7833,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Este %1$@ en %2$@ %3$@ no soporta el modo de escucha.\n\nEl modo de escucha solo está disponible actualmente en inglés y requiere que %5$@ esté habilitado."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Este %1$@ en %2$@ %3$@ no soporta el modo de escucha.\n\nEl modo de escucha solo está disponible actualmente en inglés y requiere que %4$@ esté habilitado."
@@ -9334,25 +7874,13 @@
             "value" : "%1$@ trên %2$@ %3$@ này không hỗ trợ Chế độ nghe.\n\nChế độ nghe hiện chỉ khả dụng bằng tiếng Anh và yêu cầu bật %4$@."
           }
         },
-        "zh-CN" : {
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "此 %1$@ 在 %2$@ %3$@ 不支持侦听模式。\n\n侦听模式目前仅有英文可用，需要启用 %4$@。"
           }
         },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "此 %1$@ 在 %2$@ %3$@ 不支持侦听模式。\n\n侦听模式目前仅有英文可用，需要启用 %5$@。"
-          }
-        },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。\n\n聆聽模式目前僅提供英文版本，需要啟用 %5$@。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%2$@ %3$@ 上的這個 %1$@ 不支持聆聽模式。\n\n聆聽模式目前僅提供英文版本，需要啟用 %4$@。"
@@ -9388,12 +7916,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acceso directo \"Hey Vocable\""
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Acceso directo \"Hey Vocable\""
@@ -9435,12 +7957,6 @@
             "value" : "Phím tắt \"Hey Vocable\""
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“嘿Vocable”快捷方式"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9448,12 +7964,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“Hey Vocable”快捷方式"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "“Hey Vocable”快捷方式"
@@ -9489,12 +7999,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navegue automáticamente a la categoría Modo de escucha cuando Vocable escuche a alguien decir \"Hey, Vocable\""
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Navegue automáticamente a la categoría Modo de escucha cuando Vocable escuche a alguien decir \"Hey, Vocable\""
@@ -9536,12 +8040,6 @@
             "value" : "Tự động điều hướng đến danh mục Chế độ nghe khi Vocable nghe thấy ai đó nói \"Hey, Vocable\""
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "自动导航到侦听模式类别，当有人听到有人说\"嘿，词汇\""
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9549,12 +8047,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "當 Vocable 聽到有人說「嘿，Vocable」時自動導航到聆聽模式類別"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "當 Vocable 聽到有人說「嘿，Vocable」時自動導航到聆聽模式類別"
@@ -9590,12 +8082,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Esta es una categoría conversacional que escucha las preguntas de alguien y luego ofrece una selección de respuestas. Actualmente se admiten preguntas o preguntas que se pueden responder con sí, no o un número."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Esta es una categoría conversacional que escucha las preguntas de alguien y luego ofrece una selección de respuestas. Actualmente se admiten preguntas o preguntas que se pueden responder con sí, no o un número."
@@ -9637,12 +8123,6 @@
             "value" : "Đây là thể loại đàm thoại lắng nghe người khác đặt câu hỏi, sau đó đưa ra các câu trả lời chọn lọc. Hiện tại, các câu hỏi và câu hỏi có thể được trả lời bằng có, không hoặc một số đều được hỗ trợ."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "这是一个对话类别，听取某人提问，然后提供一系列答复。 目前支持可用回答、否或数字回答的问题和问题。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9650,12 +8130,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "這是一個對話類別，聆聽某人提出問題，然後提供一系列答案。 目前支援非此即彼的問題以及可以用是、否或數字回答的問題。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "這是一個對話類別，聆聽某人提出問題，然後提供一系列答案。 目前支援非此即彼的問題以及可以用是、否或數字回答的問題。"
@@ -9691,12 +8165,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modo de escucha"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modo de escucha"
@@ -9738,12 +8206,6 @@
             "value" : "Chế độ nghe"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在侦听模式"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9751,12 +8213,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "聆聽模式"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "聆聽模式"
@@ -9792,12 +8248,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Smart Assist utiliza IA para brindar sugerencias de mayor calidad para el modo de escucha. Se requiere una conexión a Internet, pero nunca se almacena el historial de conversaciones, como en el modo de escucha normal."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Smart Assist utiliza IA para brindar sugerencias de mayor calidad para el modo de escucha. Se requiere una conexión a Internet, pero nunca se almacena el historial de conversaciones, como en el modo de escucha normal."
@@ -9839,12 +8289,6 @@
             "value" : "Hỗ trợ thông minh sử dụng AI để đưa ra đề xuất chất lượng cao hơn cho Chế độ nghe. Cần có kết nối Internet nhưng không có lịch sử hội thoại nào được lưu trữ, giống như ở Chế độ Nghe thông thường."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "智能助手使用 AI 提供更高质量的侦听模式建议。 需要互联网连接，但是不会像常规侦听模式一样存储任何对话历史。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9852,12 +8296,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "智慧輔助使用人工智慧為聆聽模式提供更高品質的建議。 需要網路連接，但不會儲存任何對話歷史記錄，就像常規聆聽模式一樣。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "智慧輔助使用人工智慧為聆聽模式提供更高品質的建議。 需要網路連接，但不會儲存任何對話歷史記錄，就像常規聆聽模式一樣。"
@@ -9893,12 +8331,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Asistente Inteligente"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Asistente Inteligente"
@@ -9940,12 +8372,6 @@
             "value" : "Trợ lý thông minh"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "智能助手"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9953,12 +8379,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "智慧輔助"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "智慧輔助"
@@ -9994,12 +8414,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modo de escucha"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modo de escucha"
@@ -10041,12 +8455,6 @@
             "value" : "Chế độ nghe"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在侦听模式"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10054,12 +8462,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "聆聽模式"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "聆聽模式"
@@ -10095,12 +8497,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Este %1$@ con %2$@ %3$@ no admite el seguimiento de la cabeza.\n\nEl seguimiento de la cabeza es compatible con todos los dispositivos con una cámara %4$@ y en la mayoría de los dispositivos con %5$@."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Este %1$@ con %2$@ %3$@ no admite el seguimiento de la cabeza.\n\nEl seguimiento de la cabeza es compatible con todos los dispositivos con una cámara %4$@ y en la mayoría de los dispositivos con %5$@."
@@ -10142,12 +8538,6 @@
             "value" : "%1$@ này trên %2$@ %3$@ này không hỗ trợ theo dõi đầu.\n\nTheo dõi đầu được hỗ trợ trên tất cả các thiết bị có camera %4$@ và trên hầu hết các thiết bị có %5$@."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "此 %1$@ 在 %2$@ %3$@ 不支持头条跟踪。\n\n在所有带有 %4$@ 相机的设备以及大多数带有 %5$@的设备上支持头部跟踪。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10159,18 +8549,11 @@
             "state" : "translated",
             "value" : "%2$@ %3$@ 上的此 %1$@ 不支援頭部追蹤。\n\n所有配備 %4$@ 攝影機的設備以及大多數配備 %5$@ 的設備均支援頭部追蹤。"
           }
-        },
-        "zh-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%2$@ %3$@ 上的此 %1$@ 不支援頭部追蹤。\n\n所有配備 %4$@ 攝影機的設備以及大多數配備 %5$@ 的設備均支援頭部追蹤。"
-          }
         }
       }
     },
     "settings.version_format" : {
       "comment" : "Version information displayed at the bottom of the Settings screen. Argument is the application version.",
-      "extractionState" : "extracted_with_value",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -10192,17 +8575,11 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "Version %1$@"
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Versión %1$@"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Versión %1$@"
@@ -10244,12 +8621,6 @@
             "value" : "Phiên bản %1$@"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "版本 %1$@"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10257,12 +8628,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "版本%1$@"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "版本%1$@"
@@ -10298,12 +8663,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Continuar Edición"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuar Edición"
@@ -10345,12 +8704,6 @@
             "value" : "Tiếp tục chỉnh sửa"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "继续编辑"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10358,12 +8711,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "繼續編輯"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "繼續編輯"
@@ -10399,12 +8746,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Descartar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descartar"
@@ -10446,12 +8787,6 @@
             "value" : "Bỏ đi"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "舍弃"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10459,12 +8794,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "丟棄"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "丟棄"
@@ -10500,12 +8829,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Si cierra sin guardar, sus cambios se perderán."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Si cierra sin guardar, sus cambios se perderán."
@@ -10547,12 +8870,6 @@
             "value" : "Nếu bạn đóng mà không lưu, các thay đổi của bạn sẽ bị mất."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "如果您关闭而不保存，您的更改将丢失。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10560,12 +8877,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "如果您關閉而不保存，您的更改將會丟失。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "如果您關閉而不保存，您的更改將會丟失。"
@@ -10601,12 +8912,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -10648,12 +8953,6 @@
             "value" : "Hủy bỏ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10661,12 +8960,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "取消"
@@ -10702,12 +8995,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Crear duplicado"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Crear duplicado"
@@ -10749,12 +9036,6 @@
             "value" : "Tạo bản sao"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "创建副本"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10762,12 +9043,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "創建副本"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "創建副本"
@@ -10803,12 +9078,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El nombre de esta categoría ya existe. ¿Desea crear un duplicado?"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "El nombre de esta categoría ya existe. ¿Desea crear un duplicado?"
@@ -10850,12 +9119,6 @@
             "value" : "Tên thể loại này đã tồn tại. Bạn có muốn tạo một bản sao không?"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "此类别名称已存在。您想创建一个副本吗？"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10863,12 +9126,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "此類別名稱已存在。您想創建一個副本嗎？"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "此類別名稱已存在。您想創建一個副本嗎？"
@@ -10904,12 +9161,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alta"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alta"
@@ -10951,12 +9202,6 @@
             "value" : "Cao"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "高"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10964,12 +9209,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "高"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "高"
@@ -11005,12 +9244,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Baja"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Baja"
@@ -11052,12 +9285,6 @@
             "value" : "Thấp"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "低"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11065,12 +9292,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "低"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "低"
@@ -11106,12 +9327,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Media"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Media"
@@ -11153,12 +9368,6 @@
             "value" : "Vừa phải"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "中"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11166,12 +9375,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "中等"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "中等"
@@ -11207,12 +9410,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sensibilidad del cursor"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sensibilidad del cursor"
@@ -11254,12 +9451,6 @@
             "value" : "Độ nhạy con trỏ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "指针敏度"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11267,12 +9458,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "光標靈敏度"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "光標靈敏度"
@@ -11308,12 +9493,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hover Tme"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hover Tme"
@@ -11355,12 +9534,6 @@
             "value" : "Thời gian di chuột"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "徘徊时间"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11368,12 +9541,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "懸停時間"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "懸停時間"
@@ -11409,12 +9576,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tiempo y sensibilidad"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tiempo y sensibilidad"
@@ -11456,12 +9617,6 @@
             "value" : "Thời gian và độ nhạy"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "时间和灵敏度"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11469,12 +9624,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "時間和靈敏度"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "時間和靈敏度"
@@ -11510,12 +9659,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No se instalan voces que coincidan con la configuración de idioma y región."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se instalan voces que coincidan con la configuración de idioma y región."
@@ -11557,12 +9700,6 @@
             "value" : "Không có giọng nói nào phù hợp với cài đặt ngôn ngữ và khu vực của bạn được cài đặt."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "没有安装与您的语言和区域设置匹配的声音。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11570,12 +9707,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "未安裝與您的語言和區域設定相符的語音。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "未安裝與您的語言和區域設定相符的語音。"
@@ -11611,12 +9742,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sin Voces"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sin Voces"
@@ -11658,12 +9783,6 @@
             "value" : "Không có tiếng nói"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "没有声音"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11671,12 +9790,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "沒有聲音"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "沒有聲音"
@@ -11712,12 +9825,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cambiar Voz"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cambiar Voz"
@@ -11759,12 +9866,6 @@
             "value" : "Thay đổi giọng nói"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "更改声音"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11772,12 +9873,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "改變聲音"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "改變聲音"
@@ -11813,12 +9908,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hola, esto es %1$@"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hola, esto es %1$@"
@@ -11860,12 +9949,6 @@
             "value" : "Xin chào, đây là %1$@"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您好，这是 %1$@"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11873,12 +9956,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您好，我是%1$@"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "您好，我是%1$@"
@@ -11914,12 +9991,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cambiar Voz"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cambiar Voz"
@@ -11961,12 +10032,6 @@
             "value" : "Thay đổi giọng nói"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "更改声音"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11974,12 +10039,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "改變聲音"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "改變聲音"
@@ -12015,12 +10074,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voces Personales"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voces Personales"
@@ -12062,12 +10115,6 @@
             "value" : "Tiếng nói cá nhân"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "个人语音"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12075,12 +10122,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人聲音"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "個人聲音"
@@ -12116,12 +10157,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voz"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voz"
@@ -12163,12 +10198,6 @@
             "value" : "Tiếng nói"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "声音"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12176,12 +10205,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "嗓音"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "嗓音"
@@ -12217,12 +10240,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Es posible que haya voces adicionales y mejoras de calidad de voz disponibles para su descarga en la configuración de %1$@."
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Es posible que haya voces adicionales y mejoras de calidad de voz disponibles para su descarga en la configuración de %1$@."
@@ -12264,12 +10281,6 @@
             "value" : "Các giọng nói bổ sung và cải tiến chất lượng giọng nói có thể có sẵn để tải xuống trong Cài đặt %1$@."
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ 设置中可以下载更多声音和语音质量增强功能。"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12277,12 +10288,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "其他語音和語音品質增強功能可在%1$@ 設定中下載。"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "其他語音和語音品質增強功能可在%1$@ 設定中下載。"

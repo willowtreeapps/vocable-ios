@@ -34,12 +34,6 @@
             "value" : "Quiero acostarme"
           }
         },
-        "es-ES" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quiero acostarme"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -76,12 +70,6 @@
             "value" : "Tôi muốn nằm xuống"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我想躺下"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -89,12 +77,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我想躺下"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我想躺下"
@@ -130,12 +112,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un placer conocerle"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Un placer conocerle"
@@ -177,12 +153,6 @@
             "value" : "Hân hạnh được gặp bạn"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "很高兴认识你"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -190,12 +160,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "很高興認識你"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "很高興認識你"
@@ -231,12 +195,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Como está su día?"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Como está su día?"
@@ -278,12 +236,6 @@
             "value" : "Ngày của bạn thế nào?"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您今天过得怎么样？"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -291,12 +243,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "你今天過得好嗎？"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "你今天過得好嗎？"
@@ -332,12 +278,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Como estás?"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Como estás?"
@@ -379,12 +319,6 @@
             "value" : "Bạn khỏe không?"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您好吗？"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -392,12 +326,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "你好嗎？"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "你好嗎？"
@@ -433,12 +361,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesito peinarme"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Necesito peinarme"
@@ -480,12 +402,6 @@
             "value" : "Tôi cần chải tóc"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要梳头"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -493,12 +409,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要梳頭"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我需要梳頭"
@@ -534,12 +444,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abre la ventana"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abre la ventana"
@@ -581,12 +485,6 @@
             "value" : "Vui lòng mở cửa sổ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请打开窗口"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -594,12 +492,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請打開窗口"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請打開窗口"
@@ -635,12 +527,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hola"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hola"
@@ -682,12 +568,6 @@
             "value" : "Xin chào"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您好"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -695,12 +575,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "你好"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "你好"
@@ -736,12 +610,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajusta mi almohada, por favor"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Por favor arregla mi almohada"
@@ -783,12 +651,6 @@
             "value" : "Làm ơn sửa lại cái gối của tôi"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请安好我的枕头"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -796,12 +658,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請安好我的枕頭"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請安好我的枕頭"
@@ -837,12 +693,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tengo calor"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tengo calor"
@@ -884,12 +734,6 @@
             "value" : "Tôi nóng"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我热"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -897,12 +741,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我熱"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我熱"
@@ -938,12 +776,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tiene sentido"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tiene sentido"
@@ -985,12 +817,6 @@
             "value" : "Điều đó có ý nghĩa"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "有道理"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -998,12 +824,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我覺得合理的"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我覺得合理的"
@@ -1039,12 +859,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No lo sé"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No lo sé"
@@ -1086,12 +900,6 @@
             "value" : "Tôi không biết"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我不知道"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1099,12 +907,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我不知道"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我不知道"
@@ -1140,12 +942,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesito ir al baño"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Necesito ir al baño"
@@ -1187,12 +983,6 @@
             "value" : "Tôi cần đi vào nhà vệ sinh"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我要去洗手间"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1200,12 +990,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要去洗手間"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我需要去洗手間"
@@ -1246,12 +1030,6 @@
             "value" : "Espera, por favor"
           }
         },
-        "es-ES" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Espera, por favor"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1273,7 +1051,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please wait"
+            "value" : "기다리세요"
           }
         },
         "ru" : {
@@ -1288,12 +1066,6 @@
             "value" : "Vui lòng chờ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请稍等"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1301,12 +1073,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請等待"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請等待"
@@ -1342,12 +1108,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sí"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sí"
@@ -1389,12 +1149,6 @@
             "value" : "Đúng"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "是"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1402,12 +1156,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "是"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "是"
@@ -1443,12 +1191,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yo estoy frío"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yo estoy frío"
@@ -1490,12 +1232,6 @@
             "value" : "Toi lanh"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我冷"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1503,12 +1239,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我冷"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我冷"
@@ -1544,12 +1274,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No hay visitantes, por favor"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No hay visitantes, por favor"
@@ -1591,12 +1315,6 @@
             "value" : "Xin vui lòng không có khách truy cập"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请拒绝访客"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1604,12 +1322,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請拒絕訪客"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請拒絕訪客"
@@ -1645,12 +1357,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yo tengo sed"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yo tengo sed"
@@ -1692,12 +1398,6 @@
             "value" : "Tôi khát"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我口渴"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1705,12 +1405,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我口喝"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我口喝"
@@ -1746,12 +1440,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enciende las luces"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enciende las luces"
@@ -1793,12 +1481,6 @@
             "value" : "Vui lòng bật đèn lên"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请开灯"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1806,12 +1488,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請開燈"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請開燈"
@@ -1847,12 +1523,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apaga la tele"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apaga la tele"
@@ -1894,12 +1564,6 @@
             "value" : "Vui lòng bật đèn lên"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请关闭电视机"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1907,12 +1571,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請關閉電視"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請關閉電視"
@@ -1948,12 +1606,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Que tal su fin de semana?"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Cómo fue tu fin de semana?"
@@ -1995,12 +1647,6 @@
             "value" : "Cuối tuần của bạn như thế nào?"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您的周末如何？"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2008,12 +1654,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "你週末過得如何？"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "你週末過得如何？"
@@ -2049,12 +1689,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estoy acabado"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estoy acabado"
@@ -2096,12 +1730,6 @@
             "value" : "Tôi đã hoàn thành"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我已完成"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2109,12 +1737,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我已完成"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我已完成"
@@ -2150,12 +1772,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Cómo va?"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Cómo va?"
@@ -2197,12 +1813,6 @@
             "value" : "Thế nào rồi?"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "您最近怎么样了？"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2210,12 +1820,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "你好嗎？"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "你好嗎？"
@@ -2251,12 +1855,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Por favor"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Por favor"
@@ -2298,12 +1896,6 @@
             "value" : "Xin vui lòng"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2311,12 +1903,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請"
@@ -2352,12 +1938,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abre las persianas, por favor"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abre las persianas, por favor"
@@ -2399,12 +1979,6 @@
             "value" : "Vui lòng mở rèm"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请打开百叶窗"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2412,12 +1986,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請打開百葉窗"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請打開百葉窗"
@@ -2453,12 +2021,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Okay"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Okay"
@@ -2500,12 +2062,6 @@
             "value" : "Được chứ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "对"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2513,12 +2069,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "好"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "好"
@@ -2554,12 +2104,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apaga las luces"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apaga las luces"
@@ -2601,12 +2145,6 @@
             "value" : "Vui lòng tắt đèn"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请关灯"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2614,12 +2152,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請關燈"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請關燈"
@@ -2655,12 +2187,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ambiente"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ambiente"
@@ -2702,12 +2228,6 @@
             "value" : "Môi trường"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "环境"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2715,12 +2235,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "環境"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "環境"
@@ -2756,12 +2270,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesito lavarme la cara"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Necesito lavarme la cara"
@@ -2803,12 +2311,6 @@
             "value" : "Tôi cần rửa mặt"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要洗脸"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2816,12 +2318,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要洗臉"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我需要洗臉"
@@ -2857,12 +2353,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesito ducharme"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Necesito ducharme"
@@ -2904,12 +2394,6 @@
             "value" : "Tôi cần tắm"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要冲凉"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2917,12 +2401,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要沖涼"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我需要沖涼"
@@ -2958,12 +2436,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quisiera hablar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quisiera hablar"
@@ -3005,12 +2477,6 @@
             "value" : "Tôi muốn nói chuyện"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我想说几句话"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3018,12 +2484,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我想說幾句"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我想說幾句"
@@ -3059,12 +2519,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mal"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mal"
@@ -3106,12 +2560,6 @@
             "value" : "Xấu"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "差"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3119,12 +2567,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "差"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "差"
@@ -3160,12 +2602,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Baje el volumen"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Baje el volumen"
@@ -3207,12 +2643,6 @@
             "value" : "Vui lòng giảm âm lượng"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请调低音量"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3220,12 +2650,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請較低音量"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請較低音量"
@@ -3261,12 +2685,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tengo problemas para respirar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tengo problemas para respirar"
@@ -3308,12 +2726,6 @@
             "value" : "Tôi khó thở"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我呼吸困难"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3321,12 +2733,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我呼吸困難"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我呼吸困難"
@@ -3362,12 +2768,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tengo dolor"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yo tengo dolor"
@@ -3409,12 +2809,6 @@
             "value" : "Tôi đang trong cơn đau"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我疼了"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3422,12 +2816,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我疼"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我疼"
@@ -3463,12 +2851,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesito una chaqueta"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Necesito una chaqueta"
@@ -3510,12 +2892,6 @@
             "value" : "Tôi cần một chiếc áo khoác"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要外套"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3523,12 +2899,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要外套"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我需要外套"
@@ -3564,12 +2934,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesito escupir"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Necesito escupir"
@@ -3611,12 +2975,6 @@
             "value" : "Tôi cần phải nhổ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我要吐痰"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3624,12 +2982,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我要吐"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我要吐"
@@ -3665,12 +3017,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Buenos días"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Buenos días"
@@ -3712,12 +3058,6 @@
             "value" : "Buổi sáng tốt lành"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "早上好"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3725,12 +3065,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "早安"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "早安"
@@ -3766,12 +3100,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No estoy de acuerdo"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No estoy de acuerdo"
@@ -3813,12 +3141,6 @@
             "value" : "Tôi không đồng ý"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我不同意"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3826,12 +3148,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我不同意"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我不同意"
@@ -3867,12 +3183,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten paciencia, por favor"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ten paciencia, por favor"
@@ -3914,12 +3224,6 @@
             "value" : "Xin hãy kiên nhẫn"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请耐心等待"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3927,12 +3231,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請耐心等待"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請耐心等待"
@@ -3968,12 +3266,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesito bañarme"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Necesito bañarme"
@@ -4015,12 +3307,6 @@
             "value" : "Tôi cần tắm"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要洗澡"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4028,12 +3314,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要洗澡"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我需要洗澡"
@@ -4069,12 +3349,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gracias"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gracias"
@@ -4116,12 +3390,6 @@
             "value" : "Cảm ơn bạn"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "谢谢"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4129,12 +3397,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "謝謝"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "謝謝"
@@ -4170,12 +3432,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cierra las persianas, por favor"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cierra las persianas, por favor"
@@ -4217,12 +3473,6 @@
             "value" : "Hãy đóng rèm lại"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请关闭百叶窗"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4230,12 +3480,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請關閉百葉窗"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請關閉百葉窗"
@@ -4271,12 +3515,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesito mi medicación"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Necesito mi medicación"
@@ -4318,12 +3556,6 @@
             "value" : "Tôi cần thuốc của tôi"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要我的药物"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4331,12 +3563,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我需要我的藥物"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我需要我的藥物"
@@ -4372,12 +3598,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Silencio, por favor"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Silencio, por favor"
@@ -4419,12 +3639,6 @@
             "value" : "Hãy im lặng"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请保持静音"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4432,12 +3646,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請安靜"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請安靜"
@@ -4473,12 +3681,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Para, por favor"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Para, por favor"
@@ -4520,12 +3722,6 @@
             "value" : "Làm ơn dừng lại"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请停止"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4533,12 +3729,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請停止"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請停止"
@@ -4574,12 +3764,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Me gusta"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Me gusta"
@@ -4621,12 +3805,6 @@
             "value" : "Tôi thích nó"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我喜欢"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4634,12 +3812,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我喜歡"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我喜歡"
@@ -4675,12 +3847,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Puedes repetir, por favor?"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Por favor repite lo que dijiste"
@@ -4722,12 +3888,6 @@
             "value" : "Vui lòng lặp lại những gì bạn đã nói"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请重复你说过的话"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4735,12 +3895,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請再重複講一次"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請再重複講一次"
@@ -4776,12 +3930,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estoy bien"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estoy bien"
@@ -4823,12 +3971,6 @@
             "value" : "Tôi ổn"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我还可以"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4836,12 +3978,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我好"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我好"
@@ -4877,12 +4013,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adiós"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Adiós"
@@ -4924,12 +4054,6 @@
             "value" : "Tạm biệt"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "再見"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4937,12 +4061,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "再見"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "再見"
@@ -4978,12 +4096,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quiero sentarme"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quiero sentarme"
@@ -5025,12 +4137,6 @@
             "value" : "Tôi muốn ngồi dậy"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我想坐起来"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5038,12 +4144,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我想坐起"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我想坐起"
@@ -5079,12 +4179,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No quería decir eso"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No quería decir eso"
@@ -5126,12 +4220,6 @@
             "value" : "Tôi không cố ý nói điều đó"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我不是那个意思"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5139,12 +4227,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我不想說這句"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我不想說這句"
@@ -5180,12 +4262,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "General"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "General"
@@ -5227,12 +4303,6 @@
             "value" : "Chung"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "常用"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5240,12 +4310,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "一般"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "一般"
@@ -5281,12 +4345,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estoy bien"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estoy bien"
@@ -5328,12 +4386,6 @@
             "value" : "Tôi tốt"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我感觉不错"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5341,12 +4393,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我好"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我好"
@@ -5382,12 +4428,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estoy incómodo"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estoy incómodo"
@@ -5429,12 +4469,6 @@
             "value" : "Tôi đang cảm thấy không thoải mái"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我不舒服"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5442,12 +4476,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我不舒服"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我不舒服"
@@ -5483,12 +4511,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cierra la ventana"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cierra la ventana"
@@ -5530,12 +4552,6 @@
             "value" : "Làm ơn đóng cửa sổ"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请关闭窗口"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5543,12 +4559,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請關閉窗口"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請關閉窗口"
@@ -5584,12 +4594,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Buenas noches"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Buenas noches"
@@ -5631,12 +4635,6 @@
             "value" : "Chào buổi tối"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "晚安"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5644,12 +4642,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "晚安"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "晚安"
@@ -5685,12 +4677,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bien"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bien"
@@ -5732,12 +4718,6 @@
             "value" : "Tốt"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "很好"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5745,12 +4725,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "好"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "好"
@@ -5786,12 +4760,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sube el volumen"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sube el volumen"
@@ -5833,12 +4801,6 @@
             "value" : "Vui lòng tăng âm lượng"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请调高音量"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5846,12 +4808,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請較高音量"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請較高音量"
@@ -5887,12 +4843,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quizás"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quizás"
@@ -5934,12 +4884,6 @@
             "value" : "Có thể"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "可能"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5947,12 +4891,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "可能"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "可能"
@@ -5988,12 +4926,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cuidado Personal"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cuidado Personal"
@@ -6035,12 +4967,6 @@
             "value" : "Chăm sóc cá nhân"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "个人护理"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6048,12 +4974,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人護理"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "個人護理"
@@ -6089,12 +5009,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Me gustaría que los visitantes"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Me gustaría que los visitantes"
@@ -6136,12 +5050,6 @@
             "value" : "Tôi muốn du khách"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我想要访客"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6149,12 +5057,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我想要訪客"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我想要訪客"
@@ -6190,12 +5092,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yo tengo hambre"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yo tengo hambre"
@@ -6237,12 +5133,6 @@
             "value" : "Tôi đói"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我饿了"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6250,12 +5140,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我餓了"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我餓了"
@@ -6291,12 +5175,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conversación"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Conversación"
@@ -6338,12 +5216,6 @@
             "value" : "Cuộc hội thoại"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "对话"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6351,12 +5223,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "對話"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "對話"
@@ -6392,12 +5258,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estoy cansada"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estoy cansada"
@@ -6439,12 +5299,6 @@
             "value" : "Tôi mệt"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我累了"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6452,12 +5306,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我累了"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我累了"
@@ -6493,12 +5341,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesidades Básicas"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Necesidades Básicas"
@@ -6540,12 +5382,6 @@
             "value" : "Các nhu cầu cơ bản"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "基本需要"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6553,12 +5389,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "基本需要"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "基本需要"
@@ -6594,12 +5424,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No"
@@ -6641,12 +5465,6 @@
             "value" : "Không"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "不是"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6654,12 +5472,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "不"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "不"
@@ -6695,12 +5507,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enciende la tele"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enciende la tele"
@@ -6742,12 +5548,6 @@
             "value" : "Vui lòng bật TV lên"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请打开电视机"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6755,12 +5555,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "請打開電視"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "請打開電視"
@@ -6796,12 +5590,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escuchar"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escuchar"
@@ -6843,12 +5631,6 @@
             "value" : "Nghe"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "聆听"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6856,12 +5638,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "聽"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "聽"
@@ -6897,12 +5673,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mis frases"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mis frases"
@@ -6944,12 +5714,6 @@
             "value" : "Câu nói của tôi"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我的对话"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6957,12 +5721,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我的對話"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "我的對話"
@@ -6998,12 +5756,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "123"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "123"
@@ -7045,12 +5797,6 @@
             "value" : "123"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "数字"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7058,12 +5804,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "數字"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "數字"
@@ -7099,12 +5839,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recentes"
-          }
-        },
-        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recentes"
@@ -7146,12 +5880,6 @@
             "value" : "Gần đây"
           }
         },
-        "zh-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最近使用"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7159,12 +5887,6 @@
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最近的"
-          }
-        },
-        "zh-TW" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "最近的"
