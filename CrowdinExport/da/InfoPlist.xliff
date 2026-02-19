@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file id="578" original="/[willowtreeapps.vocable-ios] develop/Vocable/Supporting Files/InfoPlist.xcstrings" source-language="en" target-language="da" datatype="plaintext" project-id="397168" tool-id="crowdin">
+    <header>
+      <tool tool-id="crowdin" tool-name="Crowdin" tool-version="1.1"/>
+    </header>
+    <body>
+      <trans-unit id="12362" resname="CFBundleDisplayName" approved="yes">
+        <source>Vocable</source>
+        <target state="final">Vocable</target>
+        <context-group purpose="information">
+          <context context-type="source">Bundle display name</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12364" resname="CFBundleName" approved="yes">
+        <source>Vocable</source>
+        <target state="final">Vocable</target>
+        <context-group purpose="information">
+          <context context-type="source">Bundle name</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12366" resname="NSCameraUsageDescription" approved="yes">
+        <source>Vocable uses your device's front camera to detect minimal changes in head orientation and position. This allows users with limited mobility to control an on-screen pointer to interact with the app. Camera data is used expressly for controlling the on-screen pointer. This data is not stored or transmitted in any way. Vocable needs permission to use the camera for this purpose.</source>
+        <target state="final">Vocable bruger din enheds frontkamera til at registrere minimale ændringer i hovedretning og position. Dette giver brugere med begrænset mobilitet mulighed for at styre en markør på skærmen for at interagere med appen. Kameradata bruges udtrykkeligt til at styre markøren på skærmen. Disse data gemmes eller overføres ikke på nogen måde. Vocable skal have tilladelse til at bruge kameraet til dette formål.</target>
+        <context-group purpose="information">
+          <context context-type="source">Camera usage description</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12368" resname="NSMicrophoneUsageDescription" approved="yes">
+        <source>Vocable uses the microphone only when listening mode is enabled. Vocable transcribes audio into text; it is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="final">Vocable bruger kun mikrofonen, når lyttetilstand er aktiveret. Vocable transcribes audio til tekst det er ikke gemt eller overført, undtagen når brugeren vælger at dele disse oplysninger anonymt med udviklere for at hjælpe med at forbedre lyttetilstand.</target>
+        <context-group purpose="information">
+          <context context-type="source">Privacy - Microphone Usage Description</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12370" resname="NSSpeechRecognitionUsageDescription" approved="yes">
+        <source>When listening mode is enabled, Vocable uses speech recognition to convert audio data into text. Transcribed speech is not stored or transmitted except when the user chooses to share this information anonymously with developers to help improve listening mode.</source>
+        <target state="final">Når lyttetilstand er aktiveret, bruger Vocable talegenkendelse til at konvertere lyddata til tekst. Transskriberet tale gemmes eller transmitteres ikke, undtagen når brugeren vælger at dele disse oplysninger anonymt med udviklere for at hjælpe med at forbedre lyttetilstanden.</target>
+        <context-group purpose="information">
+          <context context-type="source">Privacy - Speech Recognition Usage Description</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
