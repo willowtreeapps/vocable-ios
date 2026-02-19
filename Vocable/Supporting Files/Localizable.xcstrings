@@ -6749,6 +6749,7 @@
     },
     "settings.cell.keyboard_layout.title" : {
       "comment" : "edit keyboard layout settings menu item",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -7496,6 +7497,7 @@
     },
     "settings.keyboard_layout.header.title" : {
       "comment" : "Keyboard Layout setting header title",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -8410,7 +8412,7 @@
     },
     "settings.version_format" : {
       "comment" : "Version information displayed at the bottom of the Settings screen. Argument is the application version.",
-      "extractionState" : "stale",
+      "extractionState" : "extracted_with_value",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
