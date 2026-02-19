@@ -606,13 +606,6 @@ Nếu Giọng nói Cá nhân đã được tạo và không xuất hiện trong 
           <context context-type="source">Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="12538" resname="settings.cell.keyboard_layout.title" approved="yes">
-        <source>Keyboard Layout</source>
-        <target state="final">Bố trí bàn phím</target>
-        <context-group purpose="information">
-          <context context-type="source">edit keyboard layout settings menu item</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="12540" resname="settings.cell.listening_mode.title" approved="yes">
         <source>Listening Mode</source>
         <target state="final">Chế độ nghe</target>
@@ -667,13 +660,6 @@ Nếu Giọng nói Cá nhân đã được tạo và không xuất hiện trong 
         <target state="final">Cài đặt</target>
         <context-group purpose="information">
           <context context-type="source">Settings screen header title</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="12556" resname="settings.keyboard_layout.header.title" approved="yes">
-        <source>Keyboard Layout</source>
-        <target state="final">Bố trí bàn phím</target>
-        <context-group purpose="information">
-          <context context-type="source">Keyboard Layout setting header title</context>
         </context-group>
       </trans-unit>
       <trans-unit id="12558" resname="settings.keyboard_layout.qwerty_layout.explanation_footer" approved="yes">
