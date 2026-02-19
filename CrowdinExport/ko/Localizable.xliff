@@ -606,13 +606,6 @@ If a Personal Voice has been created and does not appear in Vocable, try restart
           <context context-type="source">Option within Selectin Mode.  This option is to enable to disable head tracking via a toggle.</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="12538" resname="settings.cell.keyboard_layout.title" approved="yes">
-        <source>Keyboard Layout</source>
-        <target state="final">키보드 자판의 키 배열</target>
-        <context-group purpose="information">
-          <context context-type="source">edit keyboard layout settings menu item</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="12540" resname="settings.cell.listening_mode.title" approved="yes">
         <source>Listening Mode</source>
         <target state="final">듣기 모드</target>
@@ -667,13 +660,6 @@ If a Personal Voice has been created and does not appear in Vocable, try restart
         <target state="final">설정</target>
         <context-group purpose="information">
           <context context-type="source">Settings screen header title</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="12556" resname="settings.keyboard_layout.header.title" approved="yes">
-        <source>Keyboard Layout</source>
-        <target state="final">키보드 자판의 키 배열</target>
-        <context-group purpose="information">
-          <context context-type="source">Keyboard Layout setting header title</context>
         </context-group>
       </trans-unit>
       <trans-unit id="12558" resname="settings.keyboard_layout.qwerty_layout.explanation_footer" approved="yes">
