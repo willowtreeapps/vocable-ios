@@ -69,11 +69,9 @@ final class VoiceSettingsViewController: VocableCollectionViewController {
         snapshot.appendItems(items.map { .selectedProfile($0) })
         snapshot.appendItems([.voicePicker])
         if #available(iOS 17.0, *) {
-            // Don't show the row if the device doesn't support the feature
-            if AVSpeechSynthesizer.personalVoiceAuthorizationStatus != .unsupported {
-                snapshot.appendSections([.personalVoice])
-                snapshot.appendItems([.personalVoice])
-            }
+            // Always show the row on iOS 17+ so users can open the screen and see the compatibility message when unsupported (same pattern as Listening Mode)
+            snapshot.appendSections([.personalVoice])
+            snapshot.appendItems([.personalVoice])
         }
         dataSource.apply(snapshot, animatingDifferences: false)
     }

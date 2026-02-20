@@ -39,6 +39,39 @@ struct AppConfig {
         return ARFaceTrackingConfiguration.isSupported
     }
 
+    /// Personal Voice is supported when the device and OS support it (e.g. iPhone 12+, iOS 17+).
+    /// Note: `personalVoiceAuthorizationStatus` only returns `.unsupported` in the Simulator or on
+    /// non-iPhone platforms — NOT on older iPhones (e.g. iPhone 11) running iOS 17. Hardware support
+    /// is detected separately via the device model identifier.
+    static var isPersonalVoiceSupported: Bool {
+        if #available(iOS 17.0, *) {
+            let status = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
+            if status == .unsupported {
+                return false
+            }
+            return isPersonalVoiceHardwareSupported
+        }
+        return false
+    }
+
+    /// Returns `true` if the device hardware supports Personal Voice (iPhone 12 or later).
+    /// Personal Voice model identifiers start at "iPhone13,x" (iPhone 12). The Simulator and
+    /// non-iPhone platforms are already handled by the `.unsupported` auth status check above.
+    private static var isPersonalVoiceHardwareSupported: Bool {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machine = withUnsafePointer(to: &systemInfo.machine) {
+            $0.withMemoryRebound(to: CChar.self, capacity: 1) {
+                String(cString: $0)
+            }
+        }
+        guard machine.hasPrefix("iPhone") else { return true }
+        let version = machine.dropFirst("iPhone".count)
+        guard let major = version.split(separator: ",").first.flatMap({ Int($0) }) else { return true }
+        // iPhone 12 starts at "iPhone13,x"; iPhone 11 Pro Max is "iPhone12,5"
+        return major >= 13
+    }
+
     @PublishedDefault(.dwellDuration)
     static var selectionHoldDuration: TimeInterval = 1
 

@@ -40,7 +40,13 @@ final class PersonalVoiceViewController: PagingCarouselViewController {
             }
             .store(in: &cancellables)
     }
-        
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Re-evaluate status when the screen appears (e.g. after returning from Settings or when API state updates)
+        updateDataSource()
+    }
+
     override func viewLayoutMarginsDidChange() {
         super.viewLayoutMarginsDidChange()
         updateBackgroundViewLayoutMargins()
@@ -87,7 +93,16 @@ final class PersonalVoiceViewController: PagingCarouselViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(items)
         dataSource.apply(snapshot, animatingDifferences: false)
-        
+
+        // Show device/OS incompatibility when Personal Voice is not supported (same pattern as Listening Mode / head tracking)
+        if !AppConfig.isPersonalVoiceSupported {
+            isPaginationViewHidden = true
+            setBackgroundView(EmptyStateView(type: PersonalVoiceEmptyState.unsupported))
+            return
+        }
+
+        isPaginationViewHidden = false
+
         if let authorizationState {
             setBackgroundView(EmptyStateView(type: authorizationState.state, action: authorizationState.action))
         } else if snapshot.itemIdentifiers.isEmpty {
