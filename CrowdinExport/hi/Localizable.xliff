@@ -346,13 +346,13 @@ Listening Mode is currently only available in English and requires %4$@ to be en
           <context context-type="source">Action button for the personal voices screen allowing the user to open the system settings app to resolve an error.</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="13182" resname="personal_voices.empty_state.denied.description">
+      <trans-unit id="13182" resname="personal_voices.empty_state.denied.description" approved="yes">
         <source>Vocable needs permission to access Personal Voices on this device.
 
 You can enable access in %1$@ Settings. 
 
 Personal Voice is only available on iOS 17+ on iPhone 12+ or iPad (M1 or later)</source>
-        <target state="translated">वोकेबल को इस डिवाइस पर व्यक्तिगत आवाज़ों तक पहुंचने के लिए अनुमति की आवश्यकता है।
+        <target state="final">वोकेबल को इस डिवाइस पर व्यक्तिगत आवाज़ों तक पहुंचने के लिए अनुमति की आवश्यकता है।
 
 आप %1$@ सेटिंग्स में पहुंच सक्षम कर सकते हैं।
 
