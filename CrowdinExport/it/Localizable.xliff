@@ -346,13 +346,17 @@ La modalità di ascolto è attualmente disponibile solo in inglese e richiede %4
           <context context-type="source">Action button for the personal voices screen allowing the user to open the system settings app to resolve an error.</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="12466" resname="personal_voices.empty_state.denied.description" approved="yes">
+      <trans-unit id="13182" resname="personal_voices.empty_state.denied.description">
         <source>Vocable needs permission to access Personal Voices on this device.
 
-You can enable access in %1$@ Settings.</source>
-        <target state="final">Vocable ha bisogno di permessi per accedere alle Voci Personali su questo dispositivo.
+You can enable access in %1$@ Settings. 
 
-Puoi abilitare l'accesso nelle Impostazioni di %1$@.</target>
+Personal Voice is only available on iOS 17+ on iPhone 12+ or iPad (M1 or later)</source>
+        <target state="translated">Vocable ha bisogno di permessi per accedere alle Voci Personali su questo dispositivo.
+
+Puoi abilitare l'accesso nelle Impostazioni di %1$@. 
+
+Voce personale è disponibile solo su iOS 17+ su iPhone 12+ o iPad (M1 o successivo)</target>
         <context-group purpose="information">
           <context context-type="source">Empty state description for when Personal Voice access has been denied by the user. It informs the user how to re-enable access by navigating to system settings. The placeholder is the device model (e.g. &quot;iPhone&quot; or &quot;iPad&quot;)</context>
         </context-group>
