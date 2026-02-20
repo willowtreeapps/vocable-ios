@@ -4234,28 +4234,6 @@
         }
       }
     },
-    "personal_voices.empty_state.unsupported.description" : {
-      "comment" : "Empty state description when the device or OS does not support Personal Voice. Placeholders: device model (e.g. iPhone), system name (e.g. iOS), system version (e.g. 17.0).",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This %1$@ on %2$@ %3$@ does not support Personal Voice.\n\nPersonal Voice is available on iPhone 12 and later with iOS 17 or later."
-          }
-        }
-      }
-    },
-    "personal_voices.empty_state.unsupported.title" : {
-      "comment" : "Title of the Personal Voices screen empty state when the device or OS does not support Personal Voice.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personal Voice Unsupported"
-          }
-        }
-      }
-    },
     "personal_voices.empty_state.not_authorized.button.title" : {
       "comment" : "Action button for the personal voices screen that will display a system prompt allowing access to their Personal Voice profiles stored on their device.",
       "localizations" : {
@@ -4501,6 +4479,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "個人語音訪問"
+          }
+        }
+      }
+    },
+    "personal_voices.empty_state.unsupported.description" : {
+      "comment" : "Empty state description when the device or OS does not support Personal Voice. Placeholders: device model (e.g. iPhone), system name (e.g. iOS), system version (e.g. 17.0).",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This %1$@ on %2$@ %3$@ does not support Personal Voice.\n\nPersonal Voice is available on iPhone 12/iPad Air (5th gen) and later with iOS 17 or later."
+          }
+        }
+      }
+    },
+    "personal_voices.empty_state.unsupported.title" : {
+      "comment" : "Title of the Personal Voices screen empty state when the device or OS does not support Personal Voice.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personal Voice Unsupported"
           }
         }
       }
