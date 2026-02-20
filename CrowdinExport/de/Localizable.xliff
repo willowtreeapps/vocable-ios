@@ -346,13 +346,13 @@ Der Hörmodus ist derzeit nur auf Englisch verfügbar und erfordert die Aktivier
           <context context-type="source">Action button for the personal voices screen allowing the user to open the system settings app to resolve an error.</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="13182" resname="personal_voices.empty_state.denied.description">
+      <trans-unit id="13182" resname="personal_voices.empty_state.denied.description" approved="yes">
         <source>Vocable needs permission to access Personal Voices on this device.
 
 You can enable access in %1$@ Settings. 
 
 Personal Voice is only available on iOS 17+ on iPhone 12+ or iPad (M1 or later)</source>
-        <target state="translated">Vocable benötigt die Berechtigung, um auf persönliche stimme auf diesem Gerät zuzugreifen.
+        <target state="final">Vocable benötigt die Berechtigung, um auf persönliche stimme auf diesem Gerät zuzugreifen.
 
 Sie können den Zugriff in %1$@ Einstellungen aktivieren. 
 
