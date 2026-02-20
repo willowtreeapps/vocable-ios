@@ -346,13 +346,17 @@ Listening Mode is currently only available in English and requires %4$@ to be en
           <context context-type="source">Action button for the personal voices screen allowing the user to open the system settings app to resolve an error.</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="12466" resname="personal_voices.empty_state.denied.description" approved="yes">
+      <trans-unit id="13182" resname="personal_voices.empty_state.denied.description">
         <source>Vocable needs permission to access Personal Voices on this device.
 
-You can enable access in %1$@ Settings.</source>
-        <target state="final">Vocable이 이 기기에서 개인 음성에 액세스하려면 권한이 필요합니다.
+You can enable access in %1$@ Settings. 
 
-%1$@ 설정에서 액세스를 활성화할 수 있습니다.</target>
+Personal Voice is only available on iOS 17+ on iPhone 12+ or iPad (M1 or later)</source>
+        <target state="translated">Vocable이 이 기기에서 개인 음성에 액세스하려면 권한이 필요합니다.
+
+%1$@ 설정에서 액세스를 활성화할 수 있습니다.
+
+개인 음성 기능은 iOS 17 이상이 설치된 iPhone 12 이상 또는 iPad(M1 이상)에서만 사용할 수 있습니다</target>
         <context-group purpose="information">
           <context context-type="source">Empty state description for when Personal Voice access has been denied by the user. It informs the user how to re-enable access by navigating to system settings. The placeholder is the device model (e.g. &quot;iPhone&quot; or &quot;iPad&quot;)</context>
         </context-group>
