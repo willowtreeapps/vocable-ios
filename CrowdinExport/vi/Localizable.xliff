@@ -346,6 +346,21 @@ Chế độ nghe hiện chỉ khả dụng bằng tiếng Anh và yêu cầu b�
           <context context-type="source">Action button for the personal voices screen allowing the user to open the system settings app to resolve an error.</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="13182" resname="personal_voices.empty_state.denied.description" approved="yes">
+        <source>Vocable needs permission to access Personal Voices on this device.
+
+You can enable access in %1$@ Settings. 
+
+Personal Voice is only available on iOS 17+ on iPhone 12+ or iPad (M1 or later)</source>
+        <target state="final">Vocable cần có quyền truy cập Giọng nói cá nhân trên thiết bị này.
+
+Bạn có thể kích hoạt quyền truy cập trong Cài đặt %1$@.
+
+Tính năng Giọng nói cá nhân chỉ khả dụng trên iOS 17 trở lên trên iPhone 12 trở lên hoặc iPad (M1 trở lên)</target>
+        <context-group purpose="information">
+          <context context-type="source">Empty state description for when Personal Voice access has been denied by the user. It informs the user how to re-enable access by navigating to system settings. The placeholder is the device model (e.g. &quot;iPhone&quot; or &quot;iPad&quot;)</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="12468" resname="personal_voices.empty_state.denied.title" approved="yes">
         <source>Personal Voice Access</source>
         <target state="final">Truy cập bằng giọng nói cá nhân</target>
