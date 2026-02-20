@@ -3926,7 +3926,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vocable needs permission to access Personal Voices on this device.\n\nYou can enable access in %1$@ Settings.  NOTE: Personal Voice is only available on iPhone 12 or later,  iPads with M1 chip or later, and with iOS 17 or later.   "
+            "value" : "Vocable needs permission to access Personal Voices on this device.\n\nYou can enable access in %1$@ Settings.  \n\nPersonal Voice is available on iOS 17+ on iPhone 12+ or iPad (M1 or later)."
           }
         },
         "es" : {
@@ -4489,7 +4489,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This %1$@ on %2$@ %3$@ does not support Personal Voice.\n\nPersonal Voice is available on iPhone 12 or iPads with M1 or later, or with iOS 17 or later."
+            "value" : "This %1$@ on %2$@ %3$@ does not support Personal Voice.\n\nPersonal Voice is available on iOS 17+ on iPhone 12+ or iPad (M1 or later).\n"
           }
         }
       }
