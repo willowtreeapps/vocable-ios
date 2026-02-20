@@ -3907,79 +3907,79 @@
       "localizations" : {
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "يحتاج Vocable إلى إذن للوصول إلى الأصوات الشخصية على هذا الجهاز.\n\nيمكنك تمكين الوصول في إعدادات %1$@."
           }
         },
         "da" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Vocable har brug for tilladelse til at tilgå personlige stemmer på denne enhed.\n\nDu kan aktivere adgang i %1$@ Indstillinger."
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Vocable benötigt die Berechtigung, um auf persönliche Stimmen auf diesem Gerät zuzugreifen.\n\nSie können den Zugriff in %1$@ Einstellungen aktivieren."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vocable needs permission to access Personal Voices on this device.\n\nYou can enable access in %1$@ Settings."
+            "value" : "Vocable needs permission to access Personal Voices on this device.\n\nYou can enable access in %1$@ Settings. \n\nPersonal Voice is only available on iOS 17+ on iPhone 12+ or iPad (M1 or later)"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Vocable necesita permiso para acceder a Voces Personales en este dispositivo.\n\nPuede habilitar el acceso en Ajustes %1$@."
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Vocable a besoin d'une autorisation pour accéder aux voix personnelles sur cet appareil.\n\nVous pouvez activer l'accès dans les paramètres de %1$@."
           }
         },
         "hi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "वोकेबल को इस डिवाइस पर व्यक्तिगत आवाज़ों तक पहुंचने के लिए अनुमति की आवश्यकता है।\n\nआप %1$@ सेटिंग्स में पहुंच सक्षम कर सकते हैं।"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Vocable ha bisogno di permessi per accedere alle Voci Personali su questo dispositivo.\n\nPuoi abilitare l'accesso nelle Impostazioni di %1$@."
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Vocable이 이 기기에서 개인 음성에 액세스하려면 권한이 필요합니다.\n\n%1$@ 설정에서 액세스를 활성화할 수 있습니다."
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Vocable требуется разрешение на доступ к Personal Voices на этом устройстве.\n\nВы можете включить доступ в настройках %1$@."
           }
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Vocable cần có quyền truy cập Giọng nói cá nhân trên thiết bị này.\n\nBạn có thể kích hoạt quyền truy cập trong Cài đặt %1$@."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Vocable 需要获得访问此设备上的个人语音的权限。\n\n您可以在%1$@ 设置中启用访问。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Vocable 需要獲得存取此裝置上的個人語音的權限。\n\n您可以在%1$@ 設定中啟用存取。"
           }
         }
