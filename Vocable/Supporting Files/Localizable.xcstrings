@@ -3907,20 +3907,20 @@
       "localizations" : {
         "ar" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "يحتاج Vocable إلى إذن للوصول إلى الأصوات الشخصية على هذا الجهاز.\n\nيمكنك تمكين الوصول في إعدادات %1$@."
+            "state" : "translated",
+            "value" : "يحتاج Vocable إلى إذن للوصول إلى الأصوات الشخصية على هذا الجهاز.\n\nيمكنك تمكين الوصول في إعدادات %1$@.\n\nتتوفر ميزة الصوت الشخصي فقط على نظام التشغيل iOS 17 أو أحدث وعلى iPhone 12 أو أحدث، أو iPad (M1 أو أحدث)"
           }
         },
         "da" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Vocable har brug for tilladelse til at tilgå personlige stemmer på denne enhed.\n\nDu kan aktivere adgang i %1$@ Indstillinger."
+            "state" : "translated",
+            "value" : "Vocable har brug for tilladelse til at tilgå personlige stemmer på denne enhed.\n\nDu kan aktivere adgang i %1$@ Indstillinger. \n\nPersonal Stemmer er kun tilgængelig på iOS 17+ på iPhone 12+ eller iPad (M1 eller senere)"
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Vocable benötigt die Berechtigung, um auf persönliche Stimmen auf diesem Gerät zuzugreifen.\n\nSie können den Zugriff in %1$@ Einstellungen aktivieren."
+            "state" : "translated",
+            "value" : "Vocable benötigt die Berechtigung, um auf persönliche stimme auf diesem Gerät zuzugreifen.\n\nSie können den Zugriff in %1$@ Einstellungen aktivieren. \n\nPersönliche Stimme ist nur auf iOS 17+ auf dem iPhone 12+ oder iPad (M1 oder neuer) verfügbar"
           }
         },
         "en" : {
@@ -3931,56 +3931,56 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Vocable necesita permiso para acceder a Voces Personales en este dispositivo.\n\nPuede habilitar el acceso en Ajustes %1$@."
+            "state" : "translated",
+            "value" : "Vocable necesita permiso para acceder a Votos Personales en este dispositivo.\n\nPuede habilitar el acceso en Ajustes %1$@. \n\nVoz personal solamente está disponible en iOS 17+ en iPhone 12+ o iPad (M1 o superior)"
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Vocable a besoin d'une autorisation pour accéder aux voix personnelles sur cet appareil.\n\nVous pouvez activer l'accès dans les paramètres de %1$@."
+            "state" : "translated",
+            "value" : "La fonction vocable nécessite l'autorisation d'accéder aux Voix personnelles sur cet appareil.\n\nVous pouvez activer l'accès dans les paramètres %1$@. \n\nLa Voix Personnelle n'est disponible que sur iOS 17+ sur iPhone 12+ ou iPad (M1 ou supérieur)"
           }
         },
         "hi" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "वोकेबल को इस डिवाइस पर व्यक्तिगत आवाज़ों तक पहुंचने के लिए अनुमति की आवश्यकता है।\n\nआप %1$@ सेटिंग्स में पहुंच सक्षम कर सकते हैं।"
+            "state" : "translated",
+            "value" : "वोकेबल को इस डिवाइस पर व्यक्तिगत आवाज़ों तक पहुंचने के लिए अनुमति की आवश्यकता है।\n\nआप %1$@ सेटिंग्स में पहुंच सक्षम कर सकते हैं।\n\nपर्सनल वॉइस सिर्फ़ iOS 17+ पर iPhone 12+ या iPad (M1 या बाद के वर्शन) पर उपलब्ध है"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Vocable ha bisogno di permessi per accedere alle Voci Personali su questo dispositivo.\n\nPuoi abilitare l'accesso nelle Impostazioni di %1$@."
+            "state" : "translated",
+            "value" : "Vocable ha bisogno di permessi per accedere alle Voci Personali su questo dispositivo.\n\nPuoi abilitare l'accesso nelle Impostazioni di %1$@. \n\nVoce personale è disponibile solo su iOS 17+ su iPhone 12+ o iPad (M1 o successivo)"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Vocable이 이 기기에서 개인 음성에 액세스하려면 권한이 필요합니다.\n\n%1$@ 설정에서 액세스를 활성화할 수 있습니다."
+            "state" : "translated",
+            "value" : "Vocable이 이 기기에서 개인 음성에 액세스하려면 권한이 필요합니다.\n\n%1$@ 설정에서 액세스를 활성화할 수 있습니다.\n\n개인 음성 기능은 iOS 17 이상이 설치된 iPhone 12 이상 또는 iPad(M1 이상)에서만 사용할 수 있습니다"
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Vocable требуется разрешение на доступ к Personal Voices на этом устройстве.\n\nВы можете включить доступ в настройках %1$@."
+            "state" : "translated",
+            "value" : "Vocable требуется разрешение на доступ к Personal Voices на этом устройстве.\n\nВы можете включить доступ в настройках %1$@.\n\nФункция «Персональный голос» доступна только на устройствах с iOS 17 и выше, таких как iPhone 12 и iPad (M1 или более поздние модели)"
           }
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Vocable cần có quyền truy cập Giọng nói cá nhân trên thiết bị này.\n\nBạn có thể kích hoạt quyền truy cập trong Cài đặt %1$@."
+            "state" : "translated",
+            "value" : "Vocable cần có quyền truy cập Giọng nói cá nhân trên thiết bị này.\n\nBạn có thể kích hoạt quyền truy cập trong Cài đặt %1$@.\n\nTính năng Giọng nói cá nhân chỉ khả dụng trên iOS 17 trở lên trên iPhone 12 trở lên hoặc iPad (M1 trở lên)"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Vocable 需要获得访问此设备上的个人语音的权限。\n\n您可以在%1$@ 设置中启用访问。"
+            "state" : "translated",
+            "value" : "Vocable 需要获得访问此设备上的个人语音的权限。\n\n您可以在%1$@ 设置中启用访问。\n\n个人语音功能仅适用于运行 iOS 17 及更高版本的 iPhone 12 及更高版本或 iPad（M1 或更新机型）"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Vocable 需要獲得存取此裝置上的個人語音的權限。\n\n您可以在%1$@ 設定中啟用存取。"
+            "state" : "translated",
+            "value" : "Vocable 需要獲得存取此裝置上的個人語音的權限。\n\n您可以在%1$@ 設定中啟用存取。\n\n個人語音功能僅適用於運行 iOS 17 及更高版本的 iPhone 12 及更高版本或 iPad（M1 或更新機型）"
           }
         }
       }
