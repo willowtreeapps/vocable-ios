@@ -23,7 +23,18 @@ class ListeningModeScreen: BaseScreen {
     /// The accessibility label set on the button when listening is paused.
     static let resumeAccessibilityLabel = "Resume listening"
 
-    // MARK: - Helpers
+    // MARK: - Navigation
+
+    /// Navigates to the Listening Mode category from the main screen by locating and selecting the
+    /// "Listen" category cell. Once selected, the `ListeningResponseViewController` is presented
+    /// which contains the pause/resume bar.
+    @discardableResult
+    static func navigateToListeningModeCategory(
+        file: StaticString = #file,
+        line: UInt = #line
+    ) -> Bool {
+        return MainScreen.locateAndSelectDestinationCategory(.listen)
+    }
 
     /// Navigates to the Listening Mode settings screen from the main screen.
     static func navigateToListeningModeSettings(
@@ -44,11 +55,11 @@ class ListeningModeScreen: BaseScreen {
 
     /// Returns true if the listening mode button is currently showing the "Pause" state.
     static var isInPauseState: Bool {
-        pauseResumeButton.accessibilityLabel == pauseAccessibilityLabel
+        pauseResumeButton.label == pauseAccessibilityLabel
     }
 
     /// Returns true if the listening mode button is currently showing the "Resume" state.
     static var isInResumeState: Bool {
-        pauseResumeButton.accessibilityLabel == resumeAccessibilityLabel
+        pauseResumeButton.label == resumeAccessibilityLabel
     }
 }
