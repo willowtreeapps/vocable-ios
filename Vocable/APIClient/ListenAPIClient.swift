@@ -33,12 +33,12 @@ enum ListenAPIClientError: Error {
     case unavailable
 }
 
-class ListenAPIClient {
+class ListenAPIClient: SmartAssistService {
     
     // MARK: - Properties
     
     private let session = URLSession(configuration: .default)
-    private var history: [Exchange] = []
+    private(set) var history: [Exchange] = []
     
     /// Storage for caching the availability check for the query API
     ///
@@ -138,6 +138,16 @@ class ListenAPIClient {
         }
     }
     
+    // MARK: - SmartAssistService
+
+    func checkAvailability() async -> Bool {
+        return await isAvailable()
+    }
+
+    func resetConversation() {
+        history = []
+    }
+
     func query(_ prompt: String) async throws -> [String] {
         guard await isAvailable() else {
             throw ListenAPIClientError.unavailable

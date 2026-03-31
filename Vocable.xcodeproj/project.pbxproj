@@ -29,6 +29,8 @@
 		2745402B2460DD490056EF98 /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2745402A2460DD490056EF98 /* Presets.swift */; };
 		2745402E2460DD760056EF98 /* presets.json in Resources */ = {isa = PBXBuildFile; fileRef = 2745402D2460DD760056EF98 /* presets.json */; };
 		30B979A524254CBC00309D7C /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B979A424254CBC00309D7C /* WarningView.swift */; };
+		3D5803A381815281A67BF385 /* FoundationModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F13099E92C28936DCFBF906 /* FoundationModelService.swift */; };
+		4CA05DA9B1B5CF42118BC059 /* SmartAssistServiceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EF9924A54CD798EC58EBEE /* SmartAssistServiceCoordinator.swift */; };
 		4E014DAA27EA53BC00561FC8 /* NSRange+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E014DA927EA53BC00561FC8 /* NSRange+.swift */; };
 		4E095237284E67770079381D /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E095236284E67770079381D /* View+.swift */; };
 		4E18DBF027FF49420043A019 /* DefaultGazeButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18DBEF27FF49420043A019 /* DefaultGazeButtonStyle.swift */; };
@@ -45,6 +47,7 @@
 		4EB382A0284160AB00320E10 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = 4EB3829F284160AB00320E10 /* Documentation.docc */; };
 		4EB6A59427FBF84B00F2BFB3 /* VocableGazeButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6A59327FBF84B00F2BFB3 /* VocableGazeButtonStyle.swift */; };
 		4EE2D2EC27FE2FCA00299A1A /* ContentHuggingHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE2D2EB27FE2FCA00299A1A /* ContentHuggingHostingController.swift */; };
+		57905A1AAD5E8B8CCD67AF08 /* SmartAssistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC87D24471EDBA0AD04028D5 /* SmartAssistService.swift */; };
 		622A6BFE283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622A6BFD283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift */; };
 		622A6BFF283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622A6BFD283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift */; };
 		622A6C00283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622A6BFD283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift */; };
@@ -318,6 +321,7 @@
 		B8DA9DF223F30BAF00FEBE19 /* Cell+NibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DF123F30BAF00FEBE19 /* Cell+NibLoading.swift */; };
 		B8DA9DF423F30BD200FEBE19 /* VectorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9DF323F30BD200FEBE19 /* VectorUtils.swift */; };
 		B8EB51D12409860A00F425A6 /* GazeableAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EB51CF2409860A00F425A6 /* GazeableAlertViewController.swift */; };
+		C49CE39628EB7EB098DA1903 /* SmartAssistResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD7E0265BC9AF9AA585A6DB /* SmartAssistResponse.swift */; };
 		CE12277624F586CB008F7866 /* CustomPhraseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12277524F586CB008F7866 /* CustomPhraseTests.swift */; };
 		CE12277824F58706008F7866 /* CustomCategoriesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12277724F58706008F7866 /* CustomCategoriesScreen.swift */; };
 		CE1406A224F3E8AD00C26225 /* SettingsScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1406A124F3E8AD00C26225 /* SettingsScreenTests.swift */; };
@@ -352,6 +356,7 @@
 
 /* Begin PBXFileReference section */
 		0E969127281C5F520097A3CC /* AccessibilityID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityID.swift; sourceTree = "<group>"; };
+		10EF9924A54CD798EC58EBEE /* SmartAssistServiceCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartAssistServiceCoordinator.swift; sourceTree = "<group>"; };
 		130C00B420D2AD2A007C3163 /* Vocable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vocable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		130C00B720D2AD2A007C3163 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		130C00C020D2AD2C007C3163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -516,6 +521,7 @@
 		71B856432416CEB600CB163B /* ToastView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToastView.xib; sourceTree = "<group>"; };
 		71DBE5EA240DE4D000BA8D01 /* WarningView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		71FA2854242406540051498A /* SelectionModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionModeViewController.swift; sourceTree = "<group>"; };
+		8F13099E92C28936DCFBF906 /* FoundationModelService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FoundationModelService.swift; sourceTree = "<group>"; };
 		9D15E0542271F0DC0058DF57 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		9DB58D4822666BC200E99C3B /* UIColor+AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppExtensions.swift"; sourceTree = "<group>"; };
 		A90D790427F205E90032254E /* VocableListCellPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocableListCellPrimaryButton.swift; sourceTree = "<group>"; };
@@ -564,6 +570,7 @@
 		A9E665A6241A785F00FE577A /* CarouselGridCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselGridCollectionViewController.swift; sourceTree = "<group>"; };
 		A9FD68A428008AD3006ABA3F /* AddPhraseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhraseCollectionViewCell.swift; sourceTree = "<group>"; };
 		A9FD68A628009646006ABA3F /* NSAttributedString+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Helpers.swift"; sourceTree = "<group>"; };
+		AAD7E0265BC9AF9AA585A6DB /* SmartAssistResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartAssistResponse.swift; sourceTree = "<group>"; };
 		B225D67B2C29B8110007D003 /* KeyboardLayoutEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutEnvironment.swift; sourceTree = "<group>"; };
 		B2458E5F2BFE4C35007AF53D /* HighlightableContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableContentCell.swift; sourceTree = "<group>"; };
 		B24F02332BEBEF4E003C6BF9 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/LaunchScreen.xcstrings; sourceTree = "<group>"; };
@@ -642,6 +649,7 @@
 		DCAF41472864B6F400502D7D /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		DCDF7E122832A3190009E75E /* PresetCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetCategoryTests.swift; sourceTree = "<group>"; };
 		DCF25CD42811AD2000DF766F /* PresetPhraseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetPhraseTests.swift; sourceTree = "<group>"; };
+		FC87D24471EDBA0AD04028D5 /* SmartAssistService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartAssistService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -786,6 +794,9 @@
 			children = (
 				220DDD4A2A53CAC30058C7A9 /* Models */,
 				220DDD542A53CAC30058C7A9 /* ListenAPIClient.swift */,
+				FC87D24471EDBA0AD04028D5 /* SmartAssistService.swift */,
+				10EF9924A54CD798EC58EBEE /* SmartAssistServiceCoordinator.swift */,
+				8F13099E92C28936DCFBF906 /* FoundationModelService.swift */,
 			);
 			path = APIClient;
 			sourceTree = "<group>";
@@ -796,6 +807,7 @@
 				220A558A2A8DD8E600612581 /* Reply.swift */,
 				220A558C2A8DD90900612581 /* Query.swift */,
 				220A558E2A8DDA2100612581 /* Exchange.swift */,
+				AAD7E0265BC9AF9AA585A6DB /* SmartAssistResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1810,6 +1822,10 @@
 				622A6BFE283EB15200F75011 /* AccessibilityID+Settings+EditCategoryDetails.swift in Sources */,
 				30B979A524254CBC00309D7C /* WarningView.swift in Sources */,
 				B291D1102C5AC894006E9FA6 /* KeyboardLayoutMode.swift in Sources */,
+				57905A1AAD5E8B8CCD67AF08 /* SmartAssistService.swift in Sources */,
+				4CA05DA9B1B5CF42118BC059 /* SmartAssistServiceCoordinator.swift in Sources */,
+				3D5803A381815281A67BF385 /* FoundationModelService.swift in Sources */,
+				C49CE39628EB7EB098DA1903 /* SmartAssistResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1916,7 +1932,7 @@
 		};
 		B277CDC32BFBDD68003BFACE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = B277CDC22BFBDD68003BFACE /* SwiftLintBuildToolPlugin */;
+			productRef = B277CDC22BFBDD68003BFACE /* plugin:SwiftLintBuildToolPlugin */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2490,7 +2506,7 @@
 			package = 6B8D3B712821C09200DDB9B7 /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
 			productName = Mixpanel;
 		};
-		B277CDC22BFBDD68003BFACE /* SwiftLintBuildToolPlugin */ = {
+		B277CDC22BFBDD68003BFACE /* plugin:SwiftLintBuildToolPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B277CDBA2BF502F2003BFACE /* XCRemoteSwiftPackageReference "SwiftLint" */;
 			productName = "plugin:SwiftLintBuildToolPlugin";

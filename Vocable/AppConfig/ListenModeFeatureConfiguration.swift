@@ -10,6 +10,10 @@ import Foundation
 import Combine
 import CoreData
 
+#if canImport(FoundationModels)
+import FoundationModels
+#endif
+
 final class ListenModeFeatureConfiguration: ObservableObject {
     
     static let shared = ListenModeFeatureConfiguration()
@@ -48,6 +52,15 @@ final class ListenModeFeatureConfiguration: ObservableObject {
     
     var smartAssistAvailable: Bool {
         true
+    }
+
+    var foundationModelsSupported: Bool {
+        #if canImport(FoundationModels)
+        if #available(iOS 26, *) {
+            return SystemLanguageModel.default.isAvailable
+        }
+        #endif
+        return false
     }
     
     private var cancellables = Set<AnyCancellable>()
