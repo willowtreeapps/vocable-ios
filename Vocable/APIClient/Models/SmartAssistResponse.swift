@@ -12,8 +12,8 @@ import FoundationModels
 @available(iOS 26, *)
 @Generable(description: "Suggested responses for an AAC user")
 struct SmartAssistResponse {
-    @Guide(description: "Short response phrases the user can select, under 10 words each",
-           .minimumCount(2), .maximumCount(5))
+    @Guide(description: "Short response phrases the user can select, preferring 1-3 words each",
+           .minimumCount(1), .maximumCount(14))
     var responses: [String]
 }
 #endif
