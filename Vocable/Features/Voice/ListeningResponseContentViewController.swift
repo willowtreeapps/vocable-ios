@@ -41,7 +41,7 @@ final class ListeningResponseContentViewController: PagingCarouselViewController
 
     var disposables = Set<AnyCancellable>()
     var synthesizedSpeechQueue: DispatchQueue!
-    var apiClient: ListenAPIClient?
+    var serviceCoordinator: SmartAssistServiceCoordinator?
     
     /// When listening mode was used to generate the `Content` displayed, set this to the prompt used to query the API.
     ///
@@ -91,9 +91,9 @@ final class ListeningResponseContentViewController: PagingCarouselViewController
         guard let utterance = diffableDataSource.itemIdentifier(for: indexPath) else { return }
         lastUtterance = utterance
 
-        if let apiClient,
+        if let serviceCoordinator,
            let trackingPrompt {
-            apiClient.userResponded(to: trackingPrompt, with: utterance)
+            serviceCoordinator.userResponded(to: trackingPrompt, with: utterance)
         }
         
         synthesizedSpeechQueue.async { [weak self] in

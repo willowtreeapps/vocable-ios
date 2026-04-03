@@ -89,7 +89,7 @@ final class ListeningResponseViewController: VocableViewController {
 
     private let synthesizedSpeechQueue = DispatchQueue(label: "speech_synthesis_queue", qos: .userInitiated)
     let classifier = VLClassifier()
-    let apiClient = ListenAPIClient()
+    let serviceCoordinator = SmartAssistServiceCoordinator(apiClient: ListenAPIClient())
 
     @PublishedValue private(set) var lastUtterance: String?
 
@@ -153,7 +153,7 @@ final class ListeningResponseViewController: VocableViewController {
 
         case .choices(let choices):
             let responseContentController = ListeningResponseContentViewController()
-            responseContentController.apiClient = apiClient
+            responseContentController.serviceCoordinator = serviceCoordinator
             responseContentController.content = choices
             responseContentController.trackingPrompt = trackingPrompt
             responseContentController.synthesizedSpeechQueue = synthesizedSpeechQueue
@@ -225,23 +225,15 @@ final class ListeningResponseViewController: VocableViewController {
                     self.delegate?.didUpdateSpeechResponse(transcription)
                 case .finalTranscription(let transcription):
                     self.delegate?.didUpdateSpeechResponse(transcription)
-                    
+
                     guard AppConfig.listeningMode.smartAssistAvailable,
-                          AppConfig.listeningMode.smartAssistEnabledPreference,
-                          apiClient.isAvailable != false
+                          AppConfig.listeningMode.smartAssistEnabledPreference
                     else {
                         self.classifier.classify(transcription)
                         return
                     }
-                    
-                    Task {
-                        let isAvailable = await self.apiClient.isAvailable()
-                        if isAvailable {
-                            self.fetchResponses(for: transcription)
-                        } else {
-                            self.classifier.classify(transcription)
-                        }
-                    }
+
+                    self.fetchResponses(for: transcription)
                     
                 default:
                     if self.speechRecognizerController.isListening {
@@ -254,10 +246,10 @@ final class ListeningResponseViewController: VocableViewController {
     private func fetchResponses(for prompt: String) {
         Task { @MainActor in
             do {
-                let responses = try await apiClient.query(prompt)
+                let responses = try await serviceCoordinator.query(prompt)
                 self.setContent(.choices(responses), trackingPrompt: prompt)
             } catch {
-                self.setContent(.empty(.vocableAPIFailure, action: .none))
+                self.classifier.classify(prompt)
             }
         }
     }
