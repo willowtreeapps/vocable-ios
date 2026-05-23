@@ -151,7 +151,34 @@ platform :ios do
       text = text.gsub('original="/[willowtreeapps.vocable-ios] develop/Vocable/', 'original="Vocable/')
       text = text.gsub(/<trans-unit id=".*?" resname="(.*?)"/, '<trans-unit id="\1"')
       File.open(xliff, "w") {|file| file.puts text }
-      run_with_retries(3, "xcodebuild -importLocalizations -localizationPath '#{xliff}' -project ./../Vocable.xcodeproj")
+      run_with_retries(3, "xcodebuild -importLocalizations -localizationPath '#{xliff}' -project ./../Vocable.xcodeproj -skipPackagePluginValidation -skipMacroValidation")
+    end
+  end
+
+  desc "Integrate latest xcstrings files from Crowdin"
+  lane :xcstrings_import do
+    # Define the expected xcstrings files
+    xcstrings_files = ['InfoPlist.xcstrings', 'Localizable.xcstrings', 'Presets.xcstrings']
+    
+    xcstrings_files.each do |filename|
+      # Look for the file in CrowdinExport (could be in any language subdirectory)
+      source_files = Dir.glob("./../CrowdinExport/**/#{filename}")
+      
+      if source_files.empty?
+        puts "⚠️  Warning: #{filename} not found in CrowdinExport, skipping"
+        next
+      end
+      
+      # Use the first match (they should all be the same multi-language file)
+      source_file = source_files.first
+      destination = "./../Vocable/Supporting Files/#{filename}"
+      
+      if File.exist?(destination)
+        FileUtils.cp(source_file, destination)
+        puts "✓ Updated: #{filename}"
+      else
+        puts "✗ Error: #{destination} not found in project"
+      end
     end
   end
   desc "Integrate latest xcstrings files from Crowdin"

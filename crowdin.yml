@@ -1,7 +1,8 @@
+"project_id_env": "CROWDIN_PROJECT_ID"
+"api_token_env": "CROWDIN_PERSONAL_TOKEN"
+
 files:
   - source: /Vocable/**/*.xcstrings
+    translation: /Vocable/**/%locale%/%original_file_name%
     ignore:
       - CrowdinExport
-    translation: /CrowdinExport/%osx_locale%/%file_name%.xliff
-bundles:
-  - 6
