@@ -10294,6 +10294,17 @@
           }
         }
       }
+    },
+    "settings.cell.use_builtin_keyboard.title" : {
+      "comment" : "Option within Selection Mode settings to enable or disable using the system built-in keyboard.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use Built-in Keyboard"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

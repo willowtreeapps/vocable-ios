@@ -12,6 +12,7 @@ extension AccessibilityID.settings {
     public struct selectionMode {
         public static let headTrackingToggle: AccessibilityID = "selection-mode-head-tracking-toggle"
         public static let compactQwertyToggle: AccessibilityID = "selection-mode-compact-qwerty-toggle"
+        public static let useBuiltInKeyboardToggle: AccessibilityID = "selection-mode-use-builtin-keyboard-toggle"
         private init() {}
     }
 }

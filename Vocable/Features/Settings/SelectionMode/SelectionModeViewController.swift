@@ -13,6 +13,7 @@ final class SelectionModeViewController: VocableCollectionViewController {
     private enum SelectionModeItem: Int {
         case headTrackingToggle
         case compactQWERTY
+        case useBuiltInKeyboard
     }
 
     private enum SupplementaryKind: String {
@@ -53,7 +54,7 @@ final class SelectionModeViewController: VocableCollectionViewController {
     private func updateDataSource(animated: Bool = false) {
         var snapshot = Snapshot()
         snapshot.appendSections([.headTracking])
-        snapshot.appendItems([.headTrackingToggle])
+        snapshot.appendItems([.headTrackingToggle, .useBuiltInKeyboard])
         if AppConfig.isHeadTrackingEnabled {
             snapshot.appendItems([.compactQWERTY])
         }
@@ -93,6 +94,14 @@ final class SelectionModeViewController: VocableCollectionViewController {
                     accessibilityIdentifier: .settings.selectionMode.compactQwertyToggle
                 ) { [weak self] in
                     self?.toggleCompactQwerty()
+                }
+            case .useBuiltInKeyboard:
+                cell.contentConfiguration = VocableListContentConfiguration.toggleCell(
+                    title: String(localized: "settings.cell.use_builtin_keyboard.title"),
+                    isOn: AppConfig.isBuiltInKeyboardEnabled,
+                    accessibilityIdentifier: .settings.selectionMode.useBuiltInKeyboardToggle
+                ) { [weak self] in
+                    self?.toggleUseBuiltInKeyboard()
                 }
             }
         }
@@ -192,7 +201,7 @@ final class SelectionModeViewController: VocableCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
             guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
             return switch item {
-            case .compactQWERTY: true
+            case .compactQWERTY, .useBuiltInKeyboard: true
             case .headTrackingToggle: AppConfig.isHeadTrackingSupported
             }
         }
@@ -200,7 +209,7 @@ final class SelectionModeViewController: VocableCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return false }
         return switch item {
-        case .compactQWERTY: true
+        case .compactQWERTY, .useBuiltInKeyboard: true
         case .headTrackingToggle: AppConfig.isHeadTrackingSupported
         }
     }
@@ -210,6 +219,11 @@ final class SelectionModeViewController: VocableCollectionViewController {
     private func toggleCompactQwerty() {
         AppConfig.isCompactQWERTYKeyboardEnabled.toggle()
         dataSource.reloadItem(.compactQWERTY, animated: false)
+    }
+
+    private func toggleUseBuiltInKeyboard() {
+        AppConfig.isBuiltInKeyboardEnabled.toggle()
+        dataSource.reloadItem(.useBuiltInKeyboard, animated: false)
     }
 
     private func toggleHeadTracking() {

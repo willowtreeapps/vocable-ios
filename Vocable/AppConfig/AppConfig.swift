@@ -20,6 +20,7 @@ extension UserDefaultsKey {
     static let dwellDuration: UserDefaultsKey = "dwellDuration"
     static let isHeadTrackingEnabled: UserDefaultsKey = "isHeadTrackingEnabled"
     static let isCompactQWERTYKeyboardEnabled: UserDefaultsKey = "isCompactQWERTYKeyboardEnabled"
+    static let isBuiltInKeyboardEnabled: UserDefaultsKey = "isBuiltInKeyboardEnabled"
     static let selectedVoiceIdentifier: UserDefaultsKey = "selectedVoiceIdentifier"
 }
 
@@ -54,6 +55,9 @@ struct AppConfig {
 
     @PublishedDefault(.isCompactQWERTYKeyboardEnabled)
     static var isCompactQWERTYKeyboardEnabled: Bool = false
+
+    @PublishedDefault(.isBuiltInKeyboardEnabled)
+    static var isBuiltInKeyboardEnabled: Bool = false
     
     @PublishedDefault(.selectedVoiceIdentifier)
     static var selectedVoiceIdentifier: String? = .none
