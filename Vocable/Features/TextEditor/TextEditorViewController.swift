@@ -43,7 +43,7 @@ class TextEditorViewController: VocableViewController, UICollectionViewDelegate,
     // Single source of truth for the state of edited text
     private var textTransaction = TextTransaction(text: "") {
         didSet {
-            if textView.attributedText?.string != textTransaction.attributedText.string {
+            if textView.attributedText != textTransaction.attributedText {
                 let selectedRange = textView.selectedRange
                 textView.attributedText = textTransaction.attributedText
                 textView.selectedRange = selectedRange
