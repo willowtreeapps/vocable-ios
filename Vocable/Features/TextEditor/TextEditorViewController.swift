@@ -43,7 +43,11 @@ class TextEditorViewController: VocableViewController, UICollectionViewDelegate,
     // Single source of truth for the state of edited text
     private var textTransaction = TextTransaction(text: "") {
         didSet {
-            textView.attributedText = textTransaction.attributedText
+            if textView.attributedText != textTransaction.attributedText {
+                let selectedRange = textView.selectedRange
+                textView.attributedText = textTransaction.attributedText
+                textView.selectedRange = selectedRange
+            }
             updateSuggestions(textTransaction)
             delegate?.textEditorViewController(self, textDidChange: self.text)
         }
@@ -118,17 +122,39 @@ class TextEditorViewController: VocableViewController, UICollectionViewDelegate,
         navigationBar.leftButton = leftButton
         navigationBar.rightButton = rightButton
 
+        configureKeyboardMode()
+
         setNeedsUpdateConfiguration()
+    }
+
+    private func configureKeyboardMode() {
+        if AppConfig.isBuiltInKeyboardEnabled {
+            keyboardView.isHidden = true
+            textView.isEditable = true
+            textView.isSelectable = true
+            textView.isUserInteractionEnabled = true
+            textView.delegate = self
+        } else {
+            keyboardView.isHidden = false
+            textView.isEditable = false
+            textView.isSelectable = false
+            textView.isUserInteractionEnabled = false
+            textView.delegate = nil
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configureKeyboardMode()
         textTransaction = TextTransaction(text: delegate?.textEditorViewControllerInitialValue(self) ?? "", intent: .lastCharacter)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         (view.window as? HeadGazeWindow)?.cancelActiveGazeTarget()
+        if AppConfig.isBuiltInKeyboardEnabled {
+            textView.becomeFirstResponder()
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -251,6 +277,17 @@ class TextEditorViewController: VocableViewController, UICollectionViewDelegate,
             }
         case .numberPad, .alphabet, .openModifierPicker, .closeModifierPicker, .beginModifier, .endModifier:
             break
+        }
+    }
+}
+
+extension TextEditorViewController: UITextViewDelegate {
+
+    func textViewDidChange(_ textView: UITextView) {
+        guard AppConfig.isBuiltInKeyboardEnabled else { return }
+        let newText = textView.text ?? ""
+        if newText != textTransaction.text {
+            textTransaction = TextTransaction(text: newText, intent: .lastCharacter)
         }
     }
 }
